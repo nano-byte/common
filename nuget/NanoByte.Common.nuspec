@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <version>1.0.0</version>
+    <authors>Bastian Eicher</authors>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://github.com/nano-byte/common/</projectUrl>
+    <dependencies>
+      <dependency id="LinqBridge" version="1.3.0" />
+    </dependencies>
+    <references>
+      <reference file="NanoByte.Common.dll" />
+    </references>
+    <id>NanoByte.Common</id>
+    <description>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</description>
+    <summary>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</summary>
+  </metadata>
+  <files>
+    <file src="..\build\Release\NanoByte.Common.dll" target="lib\net20\NanoByte.Common.dll" />
+    <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20\NanoByte.Common.pdb" />
+    <file src="..\build\Release\NanoByte.Common.xml" target="lib\net20\NanoByte.Common.xml" />
+    <file src="..\build\Release\de\NanoByte.Common.resources.dll" target="lib\net20\de\NanoByte.Common.resources.dll" />
+
+    <!-- Bundled dependencies -->
+    <file src="..\build\Release\ICSharpCode.SharpZipLib.dll" target="lib\net20\ICSharpCode.SharpZipLib.dll" />
+    <file src="..\build\Release\ICSharpCode.SharpZipLib.xml" target="lib\net20\ICSharpCode.SharpZipLib.xml" />
+  </files>
+</package>

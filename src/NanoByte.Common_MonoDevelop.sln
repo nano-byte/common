@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{81AF4FA5-44F7-4010-8769-B85B8B542FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.WinForms", "Common.WinForms\Common.WinForms.csproj", "{DACD1A8E-7734-458C-92B4-DA1F29940890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Gtk", "Common.Gtk\Common.Gtk.csproj", "{D602F86B-EF33-4DB3-8FD5-18DFBB98C306}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.UnitTests", "Common.UnitTests\Common.UnitTests.csproj", "{CA9D6092-4365-4385-9700-9570A98EF09D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81AF4FA5-44F7-4010-8769-B85B8B542FA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81AF4FA5-44F7-4010-8769-B85B8B542FA2}.Debug|x86.Build.0 = Debug|Any CPU
+		{81AF4FA5-44F7-4010-8769-B85B8B542FA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{81AF4FA5-44F7-4010-8769-B85B8B542FA2}.Release|x86.Build.0 = Release|Any CPU
+		{DACD1A8E-7734-458C-92B4-DA1F29940890}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DACD1A8E-7734-458C-92B4-DA1F29940890}.Debug|x86.Build.0 = Debug|Any CPU
+		{DACD1A8E-7734-458C-92B4-DA1F29940890}.Release|x86.ActiveCfg = Release|Any CPU
+		{DACD1A8E-7734-458C-92B4-DA1F29940890}.Release|x86.Build.0 = Release|Any CPU
+		{D602F86B-EF33-4DB3-8FD5-18DFBB98C306}.Debug|x86.ActiveCfg = Debug|x86
+		{D602F86B-EF33-4DB3-8FD5-18DFBB98C306}.Debug|x86.Build.0 = Debug|x86
+		{D602F86B-EF33-4DB3-8FD5-18DFBB98C306}.Release|x86.ActiveCfg = Release|x86
+		{D602F86B-EF33-4DB3-8FD5-18DFBB98C306}.Release|x86.Build.0 = Release|x86
+		{CA9D6092-4365-4385-9700-9570A98EF09D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CA9D6092-4365-4385-9700-9570A98EF09D}.Debug|x86.Build.0 = Debug|Any CPU
+		{CA9D6092-4365-4385-9700-9570A98EF09D}.Release|x86.ActiveCfg = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Central.Gtk\Central.Gtk.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

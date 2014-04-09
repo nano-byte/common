@@ -1,0 +1,16 @@
+build/
+*.VisualState.xml
+TestResult.xml
+*.bak
+*.cache
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.DotSettings
+*.resources
+obj/
+src/_ReSharper.*/
+src/_TeamCity.*/
+src/_dotTrace.*/
+src/packages/*/

@@ -1,0 +1,61 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which
+         assemblies to include from solution and project documentation
+         sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{65d8036c-990a-4e18-941f-0519659a4e6b}</ProjectGuid>
+    <SHFBSchemaVersion>1.9.0.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
+         Studio adds them anyway -->
+    <AssemblyName>API</AssemblyName>
+    <Name>API</Name>
+    <RootNamespace>API</RootNamespace>
+    <!-- SHFB properties -->
+    <OutputPath>..\build\Documentation\</OutputPath>
+    <HtmlHelpName>api</HtmlHelpName>
+    <HelpTitle>NanoByte.Common API Documentation</HelpTitle>
+    <KeepLogFile>False</KeepLogFile>
+    <NamingMethod>MemberName</NamingMethod>
+    <Language>en-US</Language>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <SyntaxFilters>CSharp, VisualBasic</SyntaxFilters>
+    <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
+    <PresentationStyle>vs2005</PresentationStyle>
+    <FeedbackEMailAddress>info%40nanobyte.de</FeedbackEMailAddress>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
+    <RootNamespaceTitle>Class Reference</RootNamespaceTitle>
+    <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
+    <VisibleItems>InheritedMembers, Protected, SealedProtected</VisibleItems>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\src\Common\Common.csproj" configuration="Debug" platform="AnyCPU" />
+      <DocumentationSource sourceFile="..\src\Common.WinForms\Common.WinForms.csproj" configuration="Debug" platform="AnyCPU" />
+      <DocumentationSource sourceFile="..\src\Common.SlimDX\Common.SlimDX.csproj" configuration="Debug" platform="x86" />
+      <DocumentationSource sourceFile="..\src\Common.Gtk\Common.Gtk.csproj" configuration="Debug" platform="x86" />
+    </DocumentationSources>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="NanoByte.Common" isDocumented="True">Contains generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Gtk" isDocumented="True">Contains generic utility classes, interfaces, controls, etc. for GTK# projects.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Cli" isDocumented="True">Contains helper methods for interacting with the user via the &lt;see cref="System.Console" /&gt;.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Collections" isDocumented="True">Contains specialized collection types supplementing &lt;see cref="System.Collections.Generic" /&gt;.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Controls" isDocumented="True">Contains &lt;see cref="System.Windows.Forms" /&gt; controls and forms designed to simplify common UI designs.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Dispatch" isDocumented="True">Provides double dispatch functionality.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Info" isDocumented="True">Contains data structures providing diagnostic information about the application, the operating system, etc..</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Storage" isDocumented="True">Contains classes for data storage and serialization (XML and binary).</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Storage.SlimDX" isDocumented="True">Contains classes for data storage and serialization with support for SlimDX data types.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Streams" isDocumented="True">Contains filter streams and utility classes with helper functions for stream handling.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.StructureEditor" isDocumented="True">A universal editor for hierarchical structures with undo support.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Tasks" isDocumented="True">Contains classes for tracking the progress of background tasks.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Undo" isDocumented="True">Contains base classes for an Undo-system based on the Command pattern.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Utils" isDocumented="True">Contains utility classes that provide helper functions for strings, files, etc.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Values" isDocumented="True">Contains data structures and helpers for Value Types.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="NanoByte.Common.Values.Design" isDocumented="True">Contains &lt;see cref="System.ComponentModel.TypeConverter" /&gt;s. These are used for serialization and to provide a better runtime experience when using &lt;see cref="System.Windows.Forms.PropertyGrid" /&gt;.</NamespaceSummaryItem>
+    </NamespaceSummaries>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+</Project>

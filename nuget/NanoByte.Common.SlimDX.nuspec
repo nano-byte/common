@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <version>1.0.0</version>
+    <authors>Bastian Eicher</authors>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://github.com/nano-byte/common/</projectUrl>
+    <dependencies>
+      <dependency id="NanoByte.Common" version="1.0.0" />
+      <dependency id="NanoByte.Common.WinForms" version="1.0.0" />
+      <dependency id="SlimDX" version="4.0.13.44" />
+    </dependencies>
+    <references>
+      <reference file="NanoByte.Common.SlimDX.dll" />
+    </references>
+    <id>NanoByte.Common.SlimDX</id>
+    <description>Generic utility classes, interfaces, controls, etc. for SlimDX projects.</description>
+    <summary>Generic utility classes, interfaces, controls, etc. for SlimDX projects.</summary>
+  </metadata>
+  <files>
+    <file src="..\build\Release\NanoByte.Common.SlimDX.dll" target="lib\net20\NanoByte.Common.SlimDX.dll" />
+    <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20\NanoByte.Common.SlimDX.pdb" />
+    <file src="..\build\Release\NanoByte.Common.SlimDX.xml" target="lib\net20\NanoByte.Common.SlimDX.xml" />
+  </files>
+</package>
