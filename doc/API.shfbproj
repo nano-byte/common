@@ -15,7 +15,7 @@
     <RootNamespace>API</RootNamespace>
     <!-- SHFB properties -->
     <OutputPath>..\build\Documentation\</OutputPath>
-    <HtmlHelpName>api</HtmlHelpName>
+    <HtmlHelpName>common-api</HtmlHelpName>
     <HelpTitle>NanoByte.Common API Documentation</HelpTitle>
     <KeepLogFile>False</KeepLogFile>
     <NamingMethod>MemberName</NamingMethod>
