@@ -10,6 +10,7 @@
     </dependencies>
     <references>
       <reference file="NanoByte.Common.dll" />
+      <reference file="ICSharpCode.SharpZipLib.dll" />
     </references>
     <id>NanoByte.Common</id>
     <description>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</description>

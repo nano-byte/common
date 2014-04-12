@@ -18,11 +18,6 @@ http://code.google.com/p/linqbridge/
 MIT license: http://opensource.org/licenses/mit-license
 NuGet package: LinqBridge
 
-Json.NET
-http://james.newtonking.com/json
-MIT license: http://opensource.org/licenses/mit-license
-NuGet package: Newtonsoft.Json
-
 TaskDialog
 http://www.codeproject.com/KB/vista/TaskDialogWinForms.aspx
 Public domain
