@@ -183,5 +183,41 @@ namespace NanoByte.Common.Controls
             labelStatus.Text = message;
         }
         #endregion
+
+        #region Undo control
+        /// <summary>
+        /// Clears the undo stack of the underlying text editor control.
+        /// </summary>
+        public void ClearUndoStack()
+        {
+            TextEditor.Document.UndoStack.ClearAll();
+        }
+
+        /// <summary>
+        /// Indicates whether <see cref="Undo"/> is currently available.
+        /// </summary>
+        public bool EnableUndo { get { return TextEditor.EnableUndo; } }
+
+        /// <summary>
+        /// Indicates whether <see cref="Redo"/> is currently available.
+        /// </summary>
+        public bool EnableRedo { get { return TextEditor.EnableRedo; } }
+
+        /// <summary>
+        /// Executes the undo method of the underlying text editor control.
+        /// </summary>
+        public void Undo()
+        {
+            TextEditor.Undo();
+        }
+
+        /// <summary>
+        /// Executes the redo method of the underlying text editor control.
+        /// </summary>
+        public void Redo()
+        {
+            TextEditor.Redo();
+        }
+        #endregion
     }
 }
