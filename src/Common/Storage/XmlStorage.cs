@@ -28,7 +28,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using ICSharpCode.SharpZipLib.Zip;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Utils;
 using Resources = NanoByte.Common.Properties.Resources;
@@ -37,6 +36,7 @@ using Resources = NanoByte.Common.Properties.Resources;
 using System.Drawing;
 using SlimDX;
 using NanoByte.Common.Collections;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace NanoByte.Common.Storage.SlimDX
 #else
@@ -318,8 +318,7 @@ namespace NanoByte.Common.Storage
         }
         #endregion
 
-        //--------------------//
-
+#if SLIMDX
         #region Load ZIP
         /// <summary>
         /// Loads an object from an XML file embedded in a ZIP archive.
@@ -468,5 +467,6 @@ namespace NanoByte.Common.Storage
             }
         }
         #endregion
+#endif
     }
 }

@@ -1,23 +1,24 @@
-<?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <version>1.0.0</version>
-    <authors>Bastian Eicher</authors>
-    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-    <projectUrl>http://github.com/nano-byte/common/</projectUrl>
-    <dependencies>
-      <dependency id="NanoByte.Common" version="1.0.0" />
-    </dependencies>
-    <references>
-      <reference file="NanoByte.Common.Gtk.dll" />
-    </references>
-    <id>NanoByte.Common.Gtk</id>
-    <description>Generic utility classes, interfaces, controls, etc. for GTK# projects.</description>
-    <summary>Generic utility classes, interfaces, controls, etc. for GTK# projects.</summary>
-  </metadata>
-  <files>
-    <file src="..\build\Release\NanoByte.Common.Gtk.dll" target="lib\net40\NanoByte.Common.Gtk.dll" />
-    <file src="..\build\Release\NanoByte.Common.Gtk.pdb" target="lib\net40\NanoByte.Common.Gtk.pdb" />
-    <file src="..\build\Release\NanoByte.Common.Gtk.xml" target="lib\net40\CNanoByte.ommon.Gtk.xml" />
-  </files>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>NanoByte.Common.Gtk</id>
+        <version>1.0.0</version>
+        <authors>Bastian Eicher</authors>
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>http://github.com/nano-byte/common</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Generic utility classes, interfaces, controls, etc. for GTK# projects.</description>
+        <summary>Generic utility classes, interfaces, controls, etc. for GTK# projects.</summary>
+        <dependencies>
+            <dependency id="NanoByte.Common" version="1.0.0" />
+        </dependencies>
+        <references>
+            <reference file="NanoByte.Common.Gtk.dll" />
+        </references>
+    </metadata>
+    <files>
+        <file src="..\build\Release\NanoByte.Common.Gtk.xml" target="lib\net40\CNanoByte.ommon.Gtk.xml" />
+        <file src="..\build\Release\NanoByte.Common.Gtk.dll" target="lib\net40\NanoByte.Common.Gtk.dll" />
+        <file src="..\build\Release\NanoByte.Common.Gtk.pdb" target="lib\net40\NanoByte.Common.Gtk.pdb" />
+    </files>
 </package>

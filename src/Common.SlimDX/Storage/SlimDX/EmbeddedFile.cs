@@ -23,10 +23,10 @@
 using System;
 using System.IO;
 
-namespace NanoByte.Common.Storage
+namespace NanoByte.Common.Storage.SlimDX
 {
     /// <summary>
-    /// Information about an additional file to be stored along side an ZIP archive using <see cref="XmlStorage"/> or <see cref="BinaryStorage"/>.
+    /// Information about an additional file to be stored along side an ZIP archive using <see cref="Storage.XmlStorage"/> or <see cref="BinaryStorage"/>.
     /// </summary>
     public struct EmbeddedFile
     {

@@ -191,9 +191,9 @@ namespace NanoByte.Common.Controls
                 Comments = commentBox.Text
             };
 
-            string reportPath = Path.Combine(Path.GetTempPath(), Application.ProductName + " Error Report.zip");
+            string reportPath = Path.Combine(Path.GetTempPath(), Application.ProductName + " Error Report.xml");
             if (File.Exists(reportPath)) File.Delete(reportPath);
-            crashInfo.SaveXmlZip(reportPath);
+            crashInfo.SaveXml(reportPath);
             return reportPath;
         }
         #endregion

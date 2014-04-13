@@ -56,9 +56,6 @@
       <HintPath>..\..\lib\Mono.Posix.dll</HintPath>
       <CopyToOutputDirectory>false</CopyToOutputDirectory>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Global.cs" />
@@ -132,7 +129,6 @@
     <Compile Include="PropertyPointer.cs" />
     <Compile Include="Storage\AtomicWrite.cs" />
     <Compile Include="Storage\BinaryStorage.cs" />
-    <Compile Include="Storage\EmbeddedFile.cs" />
     <Compile Include="Storage\Locations.cs" />
     <Compile Include="Storage\LocationsRedirect.cs" />
     <Compile Include="Storage\TemporaryDirectory.cs" />

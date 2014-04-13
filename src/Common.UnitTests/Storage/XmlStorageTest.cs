@@ -20,11 +20,16 @@
  * THE SOFTWARE.
  */
 
-using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 
+#if SLIMDX
+using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
+
+namespace NanoByte.Common.Storage.SlimDX
+#else
 namespace NanoByte.Common.Storage
+#endif
 {
     /// <summary>
     /// Contains test methods for <see cref="XmlStorage"/>.
@@ -79,9 +84,10 @@ namespace NanoByte.Common.Storage
             Assert.AreEqual(testData1.Data, testData2.Data);
         }
 
-        /// <summary>
-        /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with no password.
-        /// </summary>
+#if SLIMDX
+    /// <summary>
+    /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with no password.
+    /// </summary>
         [Test]
         public void TestZipNoPassword()
         {
@@ -140,5 +146,6 @@ namespace NanoByte.Common.Storage
 
             Assert.AreEqual(testData1.Data, testData2.Data);
         }
+#endif
     }
 }
