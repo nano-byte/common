@@ -69,6 +69,14 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
+        /// Prepends an element to a list.
+        /// </summary>
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> enumeration, T element)
+        {
+            return new[] {element}.Concat(enumeration);
+        }
+
+        /// <summary>
         /// Filters a sequence of elements to remove any <see langword="null"/> values.
         /// </summary>
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> collection)
