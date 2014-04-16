@@ -21,7 +21,10 @@
     </metadata>
     <files>
         <file src="..\build\Release\NanoByte.Common.SlimDX.dll" target="lib\net20\NanoByte.Common.SlimDX.dll" />
-        <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20\NanoByte.Common.SlimDX.pdb" />
         <file src="..\build\Release\NanoByte.Common.SlimDX.xml" target="lib\net20\NanoByte.Common.SlimDX.xml" />
+
+        <!-- Symbols and source code -->
+        <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20\NanoByte.Common.SlimDX.pdb" />
+        <file src="..\src\Common.SlimDX\**\*.cs" target="src" />
     </files>
 </package>

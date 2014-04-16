@@ -18,7 +18,10 @@
     </metadata>
     <files>
         <file src="..\build\Release\NanoByte.Common.Gtk.dll" target="lib\net40\NanoByte.Common.Gtk.dll" />
-        <file src="..\build\Release\NanoByte.Common.Gtk.pdb" target="lib\net40\NanoByte.Common.Gtk.pdb" />
         <file src="..\build\Release\NanoByte.Common.Gtk.xml" target="lib\net40\NanoByte.Common.Gtk.xml" />
+
+        <!-- Symbols and source code -->
+        <file src="..\build\Release\NanoByte.Common.Gtk.pdb" target="lib\net40\NanoByte.Common.Gtk.pdb" />
+        <file src="..\src\Common.Gtk\**\*.cs" target="src" />
     </files>
 </package>

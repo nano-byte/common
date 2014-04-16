@@ -18,8 +18,13 @@
     </metadata>
     <files>
         <file src="..\build\Release\NanoByte.Common.dll" target="lib\net20\NanoByte.Common.dll" />
-        <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20\NanoByte.Common.pdb" />
         <file src="..\build\Release\NanoByte.Common.xml" target="lib\net20\NanoByte.Common.xml" />
+
+        <!-- Satellite assemblies (translations) -->
         <file src="..\build\Release\de\NanoByte.Common.resources.dll" target="lib\net20\de\NanoByte.Common.resources.dll" />
+
+        <!-- Symbols and source code -->
+        <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20\NanoByte.Common.pdb" />
+        <file src="..\src\Common\**\*.cs" target="src" />
     </files>
 </package>
