@@ -2,16 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>NanoByte.Common.SlimDX</id>
-        <version>1.0.1</version>
+        <version>$version$</version>
         <authors>Bastian Eicher</authors>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>http://github.com/nano-byte/common</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Generic utility classes, interfaces, controls, etc. for SlimDX projects.</description>
-        <summary>Generic utility classes, interfaces, controls, etc. for SlimDX projects.</summary>
         <dependencies>
-            <dependency id="NanoByte.Common" version="1.0.1" />
-            <dependency id="NanoByte.Common.WinForms" version="1.0.1" />
+            <dependency id="NanoByte.Common" version="$version$" />
+            <dependency id="NanoByte.Common.WinForms" version="$version$" />
             <dependency id="ICSharpCode.SharpZipLib.Patched" version="0.86.1" />
             <dependency id="SlimDX" version="4.0.13.44" />
         </dependencies>
@@ -20,11 +19,11 @@
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.SlimDX.dll" target="lib\net20\NanoByte.Common.SlimDX.dll" />
-        <file src="..\build\Release\NanoByte.Common.SlimDX.xml" target="lib\net20\NanoByte.Common.SlimDX.xml" />
+        <file src="..\build\Release\NanoByte.Common.SlimDX.dll" target="lib\net20" />
+        <file src="..\build\Release\NanoByte.Common.SlimDX.xml" target="lib\net20" />
 
         <!-- Symbols and source code -->
-        <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20\NanoByte.Common.SlimDX.pdb" />
-        <file src="..\src\Common.SlimDX\**\*.cs" target="src" />
+        <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20" />
+        <file src="..\src\Common.SlimDX\**\*.cs" target="src\Common.SlimDX" />
     </files>
 </package>

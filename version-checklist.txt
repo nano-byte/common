@@ -1,3 +1,2 @@
 /VERSION
 /src/AssemblyInfo.Global.cs
-/nuget/*.nuspec

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>NanoByte.Common.WinForms</id>
+        <version>$version$</version>
+        <authors>Bastian Eicher</authors>
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>http://github.com/nano-byte/common</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Generic utility classes, interfaces, controls, etc. for WinForms projects.</description>
+        <dependencies>
+            <dependency id="NanoByte.Common" version="$version$" />
+        </dependencies>
+        <references>
+            <reference file="NanoByte.Common.WinForms.dll" />
+        </references>
+    </metadata>
+    <files>
+        <file src="..\build\Release\NanoByte.Common.WinForms.dll" target="lib\net20" />
+        <file src="..\build\Release\NanoByte.Common.WinForms.xml" target="lib\net20" />
+
+        <!-- Satellite assemblies (translations) -->
+        <file src="..\build\Release\de\NanoByte.Common.WinForms.resources.dll" target="lib\net20\de" />
+
+        <!-- Bundled dependencies -->
+        <file src="..\build\Release\ICSharpCode.TextEditor.dll" target="lib\net20" />
+        <file src="..\build\Release\ICSharpCode.TextEditor.xml" target="lib\net20" />
+        <file src="..\build\Release\TaskDialog.dll" target="lib\net20" />
+        <file src="..\build\Release\TaskDialog.xml" target="lib\net20" />
+
+        <!-- Symbols and source code -->
+        <file src="..\build\Release\NanoByte.Common.WinForms.pdb" target="lib\net20" />
+        <file src="..\src\Common.WinForms\**\*.cs" target="src\Common.WinForms" />
+    </files>
+</package>

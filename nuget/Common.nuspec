@@ -2,13 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>NanoByte.Common</id>
-        <version>1.0.1</version>
+        <version>$version$</version>
         <authors>Bastian Eicher</authors>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>http://github.com/nano-byte/common</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</description>
-        <summary>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</summary>
         <dependencies>
             <dependency id="LinqBridge" version="1.3.0" />
         </dependencies>
@@ -17,14 +16,14 @@
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.dll" target="lib\net20\NanoByte.Common.dll" />
-        <file src="..\build\Release\NanoByte.Common.xml" target="lib\net20\NanoByte.Common.xml" />
+        <file src="..\build\Release\NanoByte.Common.dll" target="lib\net20" />
+        <file src="..\build\Release\NanoByte.Common.xml" target="lib\net20" />
 
         <!-- Satellite assemblies (translations) -->
-        <file src="..\build\Release\de\NanoByte.Common.resources.dll" target="lib\net20\de\NanoByte.Common.resources.dll" />
+        <file src="..\build\Release\de\NanoByte.Common.resources.dll" target="lib\net20\de" />
 
         <!-- Symbols and source code -->
-        <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20\NanoByte.Common.pdb" />
-        <file src="..\src\Common\**\*.cs" target="src" />
+        <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20" />
+        <file src="..\src\Common\**\*.cs" target="src\Common" />
     </files>
 </package>
