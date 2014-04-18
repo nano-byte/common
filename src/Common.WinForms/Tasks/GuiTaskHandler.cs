@@ -58,7 +58,7 @@ namespace NanoByte.Common.Tasks
             using (var dialog = new TaskRunDialog(task, _cancellationTokenSource))
             {
                 dialog.ShowDialog(_owner);
-                if (dialog.Exception != null) throw dialog.Exception;
+                if (dialog.Exception != null) dialog.Exception.Rethrow();
             }
         }
 
