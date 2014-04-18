@@ -25,5 +25,6 @@
         <!-- Symbols and source code -->
         <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20" />
         <file src="..\src\Common.SlimDX\**\*.cs" target="src\Common.SlimDX" />
+        <file src="..\src\Common\Storage\XmlStorage.cs" target="src\Common\Storage" />
     </files>
 </package>
