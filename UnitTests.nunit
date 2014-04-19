@@ -1,7 +1,0 @@
-﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Debug" buildpathtype="Auto">
-    <assembly path="build/Debug/NanoByte.Common.UnitTests.dll" />
-    <assembly path="build/Debug/NanoByte.Common.SlimDX.UnitTests.dll" />
-  </Config>
-</NUnitProject>
