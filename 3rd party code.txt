@@ -15,7 +15,7 @@ NuGet package: Moq.Contrib
 
 LinqBridge
 http://code.google.com/p/linqbridge/
-MIT license: http://opensource.org/licenses/mit-license
+MIT license: http://opensource.org/licenses/MIT
 NuGet package: LinqBridge
 
 ICSharpCode.SharpZipLib 0.86-patched
@@ -25,7 +25,7 @@ NuGet package: ICSharpCode.SharpZipLib.Patched
 
 ICSharpCode.TextEditor
 http://www.icsharpcode.net/OpenSource/SD/
-GNU LGPL: http://www.gnu.org/copyleft/lesser.html
+GNU LGPL 2.1: http://opensource.org/licenses/LGPL-2.1
 Applied patches: ICSharpCode.TextEditor.*.patch
 Self-compiled managed DLL: ICSharpCode.TextEditor.dll
 
