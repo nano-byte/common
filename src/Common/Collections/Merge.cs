@@ -75,7 +75,11 @@ namespace NanoByte.Common.Collections
         public static void TwoWay<T, TAdded, TRemoved>(IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, TAdded, TRemoved
         {
+#if __MonoCS__
+            TwoWay(theirs, mine, x => added.Add(x), x => removed.Add(x));
+#else
             TwoWay(theirs, mine, added.Add, removed.Add);
+#endif
         }
 
         /// <summary>
@@ -141,7 +145,12 @@ namespace NanoByte.Common.Collections
         public static void ThreeWay<T, TAdded, TRemoved>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, IMergeable<T>, TAdded, TRemoved
         {
+
+#if __MonoCS__
+            ThreeWay(reference, theirs, mine, x => added.Add(x), x => removed.Add(x));
+#else
             ThreeWay(reference, theirs, mine, added.Add, removed.Add);
+#endif
         }
 
         /// <summary>
