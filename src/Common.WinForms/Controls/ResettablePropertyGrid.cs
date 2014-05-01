@@ -21,9 +21,13 @@
  */
 
 using System;
+using System.ComponentModel;
+using System.Drawing.Design;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Values.Design;
 
 namespace NanoByte.Common.Controls
 {
@@ -32,6 +36,13 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public class ResettablePropertyGrid : PropertyGrid
     {
+        static ResettablePropertyGrid()
+        {
+            // Inject custom WinForms type editors
+            TypeDescriptor.AddAttributes(typeof(TimeSpan), new EditorAttribute(typeof(TimeSpanEditor), typeof(UITypeEditor)));
+            TypeDescriptor.AddAttributes(typeof(LanguageSet), new EditorAttribute(typeof(LanguageSetEditor), typeof(UITypeEditor)));
+        }
+
         private readonly ToolStripMenuItem _menuReset = new ToolStripMenuItem {Text = Resources.ResetValue};
 
         public ResettablePropertyGrid()
