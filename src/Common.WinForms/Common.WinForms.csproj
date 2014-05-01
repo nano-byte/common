@@ -158,6 +158,13 @@
     <Compile Include="Controls\TaskProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TimeSpanControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TimeSpanControl.Designer.cs">
+      <DependentUpon>TimeSpanControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TouchEventArgs.cs" />
     <Compile Include="Controls\TouchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +207,11 @@
     <Compile Include="Undo\MultiPropertyChangedCommand.cs" />
     <Compile Include="Undo\MultiPropertyTracker.cs" />
     <Compile Include="Undo\PropertyChangedCommand.cs" />
+    <Compile Include="Utils\WinFormsUtils.Touch.cs" />
+    <Compile Include="Utils\WinFormsUtils.cs" />
+    <Compile Include="Utils\WinFormsUtils.NativeMethods.cs" />
+    <Compile Include="Values\Design\TimeSpanEditor.cs" />
+    <Compile Include="Values\Design\LanguageSetEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\ErrorReportForm.de.resx">

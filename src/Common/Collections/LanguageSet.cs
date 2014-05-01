@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Drawing.Design;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -38,7 +37,6 @@ namespace NanoByte.Common.Collections
     /// <remarks>Uses Unix-style language codes with an underscore (_) separator.</remarks>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "A Set is a special case of a Collection.")]
     [TypeConverter(typeof(StringConstructorConverter<LanguageSet>))]
-    [Editor(typeof(LanguageSetEditor), typeof(UITypeEditor))]
     public sealed class LanguageSet : SortedSet<CultureInfo>
     {
         #region Constants

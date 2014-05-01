@@ -28,10 +28,7 @@ using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Utils
 {
-    /// <summary>
-    /// Provides helper methods and API calls specific to the Windows platform.
-    /// </summary>
-    static partial class WindowsUtils
+    partial class WinFormsUtils
     {
         // Note: The following code is based on Windows API Code Pack for Microsoft .NET Framework 1.0.1
 
@@ -81,7 +78,7 @@ namespace NanoByte.Common.Utils
             if (control == null) throw new ArgumentNullException("control");
             #endregion
 
-            if (IsWindows7) SafeNativeMethods.RegisterTouchWindow(control.Handle, 0);
+            if (WindowsUtils.IsWindows7) SafeNativeMethods.RegisterTouchWindow(control.Handle, 0);
         }
 
 // ReSharper disable InconsistentNaming
@@ -99,7 +96,7 @@ namespace NanoByte.Common.Utils
         /// <param name="onTouchUp">The event handler to call for touch up events; may be <see langword="null"/>.</param>
         public static void HandleTouchMessage(ref Message m, object sender, EventHandler<TouchEventArgs> onTouchDown, EventHandler<TouchEventArgs> onTouchMove, EventHandler<TouchEventArgs> onTouchUp)
         {
-            if (!IsWindows7) return;
+            if (!WindowsUtils.IsWindows7) return;
             if (m.Msg != WM_TOUCHDOWN && m.Msg != WM_TOUCHMOVE && m.Msg != WM_TOUCHUP) return;
 
             // More than one touchinput may be associated with a touch message,

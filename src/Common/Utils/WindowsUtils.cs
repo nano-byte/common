@@ -22,11 +22,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Utils
@@ -247,22 +245,6 @@ namespace NanoByte.Common.Utils
         }
         #endregion
 
-        #region Foreground window
-        /// <summary>
-        /// Forces a window to the foreground or flashes the taskbar if another process has the focus.
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method operates only on windows and not on individual controls.")]
-        public static void SetForegroundWindow(Form form)
-        {
-            #region Sanity checks
-            if (form == null) throw new ArgumentNullException("form");
-            #endregion
-
-            if (!IsWindows) return;
-            UnsafeNativeMethods.SetForegroundWindow(form.Handle);
-        }
-        #endregion
-
         #region App ID
         /// <summary>
         /// Sets the current process' explicit application user model ID.
@@ -314,26 +296,6 @@ namespace NanoByte.Common.Utils
         #endregion
 
         #region Window messages
-        /// <summary>
-        /// Adds a UAC shield icon to a button. Does nothing if not running Windows Vista or newer.
-        /// </summary>
-        /// <remarks>This is purely cosmetic. UAC elevation is a separate concern.</remarks>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons.")]
-        public static void AddShieldIcon(Button button)
-        {
-            #region Sanity checks
-            if (button == null) throw new ArgumentNullException("button");
-            #endregion
-
-            // ReSharper disable InconsistentNaming
-            const int BCM_FIRST = 0x1600, BCM_SETSHIELD = 0x000C;
-            // ReSharper restore InconsistentNaming
-
-            if (!IsWindowsVista) return;
-            button.FlatStyle = FlatStyle.System;
-            UnsafeNativeMethods.SendMessage(button.Handle, BCM_FIRST + BCM_SETSHIELD, IntPtr.Zero, new IntPtr(1));
-        }
-
         /// <summary>
         /// Registers a new message type that can be sent to windows.
         /// </summary>

@@ -24,7 +24,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace NanoByte.Common.Utils
 {
@@ -82,10 +81,7 @@ namespace NanoByte.Common.Utils
     }
     #endregion
 
-    /// <summary>
-    /// Provides helper methods and API calls specific to the Windows platform.
-    /// </summary>
-    static partial class WindowsUtils
+    partial class WindowsUtils
     {
         #region Structures
         [StructLayout(LayoutKind.Sequential)]
@@ -117,16 +113,6 @@ namespace NanoByte.Common.Utils
                 }
                 return true; // Not supported on non-Windows OSes
             }
-        }
-
-        /// <summary>
-        /// Determines whether <paramref name="key"/> is pressed right now.
-        /// </summary>
-        /// <remarks>Will always return <see langword="false"/> on non-Windows OSes.</remarks>
-        public static bool IsKeyDown(Keys key)
-        {
-            if (IsWindows) return (SafeNativeMethods.GetAsyncKeyState((uint)key) & 0x8000) != 0;
-            return false; // Not supported on non-Windows OSes
         }
 
         /// <summary>

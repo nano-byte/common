@@ -54,9 +54,6 @@ namespace NanoByte.Common.Utils
             public static extern bool PeekMessage(out WinMessage msg, IntPtr hWnd, uint messageFilterMin, uint messageFilterMax, uint flags);
 
             [DllImport("user32", CharSet = CharSet.Auto)]
-            public static extern short GetAsyncKeyState(uint key);
-
-            [DllImport("user32", CharSet = CharSet.Auto)]
             public static extern int GetCaretBlinkTime();
 
 
@@ -68,30 +65,11 @@ namespace NanoByte.Common.Utils
             [DllImport("kernel32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool QueryPerformanceCounter(out long lpCounter);
-
-
-            // Touch
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool RegisterTouchWindow(IntPtr hWnd, uint ulFlags);
-
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetTouchInputInfo(IntPtr hTouchInput, int cInputs, [In, Out] TouchInput[] pInputs, int cbSize);
-
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern void CloseTouchInputHandle(IntPtr lParam);
         }
 
         [SuppressUnmanagedCodeSecurity]
         private static class UnsafeNativeMethods
         {
-            // Foreground window
-            [DllImport("user32", SetLastError = true)]
-            public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-
             // Command-line arguments
             [DllImport("kernel32")]
             public static extern IntPtr LocalFree(IntPtr hMem);
@@ -122,11 +100,11 @@ namespace NanoByte.Common.Utils
 
 
             // Shell and window messages
-            [DllImport("shell32", CharSet = CharSet.Auto, SetLastError = true)]
-            public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
-
             [DllImport("user32")]
             public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+
+            [DllImport("shell32", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
             [DllImport("user32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern IntPtr SendMessageTimeout(IntPtr hwnd, int msg, IntPtr wParam, string lParam, int flags, uint timeout, out IntPtr lpdwResult);

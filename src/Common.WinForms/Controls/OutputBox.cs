@@ -61,7 +61,7 @@ namespace NanoByte.Common.Controls
             {
                 outputBox.toolTip.SetToolTip(outputBox.labelTitle, outputBox.labelTitle.Text);
                 // ReSharper disable once AccessToDisposedClosure
-                outputBox.Shown += delegate { WindowsUtils.SetForegroundWindow(outputBox); };
+                outputBox.Shown += delegate { outputBox.SetForegroundWindow(); };
                 outputBox.ShowDialog();
             }
         }

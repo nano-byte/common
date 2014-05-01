@@ -58,13 +58,13 @@ namespace NanoByte.Common.Controls
         protected override void CreateHandle()
         {
             base.CreateHandle();
-            WindowsUtils.RegisterTouchWindow(this);
+            WinFormsUtils.RegisterTouchWindow(this);
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
-            WindowsUtils.HandleTouchMessage(ref m, this, TouchDown, TouchMove, TouchUp);
+            WinFormsUtils.HandleTouchMessage(ref m, this, TouchDown, TouchMove, TouchUp);
             base.WndProc(ref m);
         }
         #endregion

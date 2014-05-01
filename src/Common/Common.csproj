@@ -49,7 +49,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Posix" Condition=" '$(OS)' != 'Windows_NT' " />
     <Reference Include="Mono.Posix" Condition=" '$(OS)' == 'Windows_NT' ">
@@ -65,13 +64,6 @@
     <Compile Include="Cli\CliAppControl.cs" />
     <Compile Include="Cli\CliUtils.cs" />
     <Compile Include="Cli\ProgressBar.cs" />
-    <Compile Include="Collections\MonitoredCollection.cs" />
-    <Compile Include="Collections\MultiDictionary.cs" />
-    <Compile Include="Collections\XmlDictionary.cs" />
-    <Compile Include="Collections\XmlDictionaryEntry.cs" />
-    <Compile Include="Controls\TouchEventArgs.cs" />
-    <Compile Include="Dispatch\AggregateDispatcher.Action.cs" />
-    <Compile Include="Dispatch\AggregateDispatcher.Func.cs" />
     <Compile Include="Collections\Bucketizer.cs" />
     <Compile Include="Collections\BucketRule.cs" />
     <Compile Include="Collections\ComparableTuple.cs" />
@@ -84,22 +76,19 @@
     <Compile Include="Collections\LocalizableString.cs" />
     <Compile Include="Collections\LocalizableStringCollection.cs" />
     <Compile Include="Collections\Merge.cs" />
+    <Compile Include="Collections\MonitoredCollection.cs" />
+    <Compile Include="Collections\MultiDictionary.cs" />
     <Compile Include="Collections\NamedCollection.cs" />
-    <Compile Include="Dispatch\ModelViewSync.cs" />
-    <Compile Include="Dispatch\PerTypeDispatcher.Action.cs" />
-    <Compile Include="Dispatch\PerTypeDispatcher.Func.cs" />
     <Compile Include="Collections\RBTree.cs" />
     <Compile Include="Collections\SortedSet.cs" />
     <Compile Include="Collections\TransparentCache.cs" />
-    <Compile Include="Controls\TimeSpanControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TimeSpanControl.Designer.cs">
-      <DependentUpon>TimeSpanControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\WebClientTimeout.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Collections\XmlDictionary.cs" />
+    <Compile Include="Collections\XmlDictionaryEntry.cs" />
+    <Compile Include="Dispatch\AggregateDispatcher.Action.cs" />
+    <Compile Include="Dispatch\AggregateDispatcher.Func.cs" />
+    <Compile Include="Dispatch\ModelViewSync.cs" />
+    <Compile Include="Dispatch\PerTypeDispatcher.Action.cs" />
+    <Compile Include="Dispatch\PerTypeDispatcher.Func.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Future.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -192,15 +181,15 @@
     <Compile Include="Utils\WindowsUtils.Platform.cs" />
     <Compile Include="Utils\WindowsUtils.Properties.cs" />
     <Compile Include="Utils\WindowsUtils.Taskbar.cs" />
-    <Compile Include="Utils\WindowsUtils.Touch.cs" />
     <Compile Include="Utils\WindowsUtils.WindowMessages.cs" />
     <Compile Include="Values\Design\EnumDescriptionConverter.cs" />
     <Compile Include="Values\Design\EnumXmlConverter.cs" />
-    <Compile Include="Values\Design\LanguageSetEditor.cs" />
     <Compile Include="Values\Design\StringConstructorConverter.cs" />
     <Compile Include="Values\Design\StructConverter.cs" />
-    <Compile Include="Values\Design\TimeSpanEditor.cs" />
     <Compile Include="Values\EnumExtensions.cs" />
+    <Compile Include="WebClientTimeout.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\ImageResources.resx">
