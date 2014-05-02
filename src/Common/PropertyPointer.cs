@@ -49,6 +49,11 @@ namespace NanoByte.Common
         private readonly bool _needsEncoding;
 
         /// <summary>
+        /// <see langword="true"/> if <see cref="Value"/> is equal to <see cref="DefaultValue"/>.
+        /// </summary>
+        public bool IsDefaultValue { get { return Equals(Value, DefaultValue); } }
+
+        /// <summary>
         /// Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.
         /// </summary>
         public bool NeedsEncoding { get { return _needsEncoding; } }
