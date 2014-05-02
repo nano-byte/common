@@ -133,7 +133,7 @@ namespace NanoByte.Common.Utils
 
         #region Thread
         /// <summary>
-        /// Starts executing a delegate in a new thread suitable for <see cref="System.Windows.Forms"/>.
+        /// Starts executing a delegate in a new thread suitable for WinForms.
         /// </summary>
         /// <param name="execute">The delegate to execute.</param>
         /// <param name="name">A short name for the new thread.</param>
