@@ -25,5 +25,8 @@
 
         <!-- Source code -->
         <file src="..\src\Common\**\*.cs" target="src" />
+
+        <!-- Install script -->
+        <file src="install.net35.ps1" target="tools\net35\install.ps1" />
     </files>
 </package>
