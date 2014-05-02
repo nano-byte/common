@@ -54,6 +54,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Checks whether a flag is set.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
         public static bool HasFlag(this int enumRef, int flag)
         {
             return (enumRef & flag) == flag;

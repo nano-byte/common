@@ -34,6 +34,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Occurs when a property of interest has changed.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         event Action<TSender> Changed;
 
         /// <summary>

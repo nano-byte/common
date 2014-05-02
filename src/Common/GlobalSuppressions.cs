@@ -8,9 +8,6 @@
 // "In Project Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "NanoByte.Common.Cli.ProgressBar.#System.IDisposable.Dispose()", Justification = "IDisposable is only implemented here to support using() blocks.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "NanoByte.Common.Tasks.Progress`1.#Common.Tasks.IProgress`1<!0>.Report(!0)", Justification = "Enforces stronger reporter and reportee separation.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "NanoByte.Common.Cli.ProgressBar.#Common.Tasks.IProgress`1<Common.Tasks.TaskSnapshot>.Report(Common.Tasks.TaskSnapshot)", Justification = "Enforces stronger reporter and reportee separation.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsUtils+ShellLink", Justification = "Necessary to duplicate visibility issues.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsUtils+TaskbarProgressBarState", Justification = "Necessary to duplicate visibility issues.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Scope = "member", Target = "NanoByte.Common.Cli.ProgressBar.#System.IDisposable.Dispose()", Justification = "IDisposable is only implemented here to support using() blocks.")]

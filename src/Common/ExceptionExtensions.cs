@@ -36,6 +36,10 @@ namespace NanoByte.Common
         /// </summary>
         public static void Rethrow(this Exception exception)
         {
+            #region Sanity checks
+            if (exception == null) throw new ArgumentNullException("exception");
+            #endregion
+
             var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
             var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
             exception.GetObjectData(serializationInfo, streamingContext);

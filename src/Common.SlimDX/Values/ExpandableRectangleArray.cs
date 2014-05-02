@@ -161,6 +161,10 @@ namespace NanoByte.Common.Values
         /// <returns>An array containing the copyed data. Size will be trimmed if <paramref name="baseValues"/> is too small.</returns>
         public T[,] GetArray(Grid<T> baseValues)
         {
+            #region Sanity checks
+            if (baseValues == null) throw new ArgumentNullException("baseValues");
+            #endregion
+
             return GetArray(baseValues.Data);
         }
 

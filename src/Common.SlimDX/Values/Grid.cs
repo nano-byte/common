@@ -103,7 +103,6 @@ namespace NanoByte.Common.Values
             using (var memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Png);
-                bitmap.Dispose();
                 memory.CopyTo(stream);
             }
         }

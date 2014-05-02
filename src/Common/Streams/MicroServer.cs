@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -80,6 +81,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="resourceName">The HTTP resource name under which to provide the content.</param>
         /// <param name="fileContent">The content of the file to serve.</param>
+        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings")]
         public MicroServer(string resourceName, Stream fileContent)
         {
             _resourceName = resourceName;
