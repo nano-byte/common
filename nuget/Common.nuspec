@@ -17,13 +17,13 @@
     </metadata>
     <files>
         <file src="..\build\Release\NanoByte.Common.dll" target="lib\net20" />
+        <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20" />
         <file src="..\build\Release\NanoByte.Common.xml" target="lib\net20" />
 
         <!-- Satellite assemblies (translations) -->
         <file src="..\build\Release\de\NanoByte.Common.resources.dll" target="lib\net20\de" />
 
-        <!-- Symbols and source code -->
-        <file src="..\build\Release\NanoByte.Common.pdb" target="lib\net20" />
-        <file src="..\src\Common\**\*.cs" target="src\Common" />
+        <!-- Source code -->
+        <file src="..\src\Common\**\*.cs" target="src" />
     </files>
 </package>

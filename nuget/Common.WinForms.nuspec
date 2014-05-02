@@ -16,20 +16,16 @@
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.WinForms.dll" target="lib\net20" />
-        <file src="..\build\Release\NanoByte.Common.WinForms.xml" target="lib\net20" />
+        <file src="..\build\Release\NanoByte.Common.WinForms.*" target="lib\net20" />
 
         <!-- Satellite assemblies (translations) -->
         <file src="..\build\Release\de\NanoByte.Common.WinForms.resources.dll" target="lib\net20\de" />
 
         <!-- Bundled dependencies -->
-        <file src="..\build\Release\ICSharpCode.TextEditor.dll" target="lib\net20" />
-        <file src="..\build\Release\ICSharpCode.TextEditor.xml" target="lib\net20" />
-        <file src="..\build\Release\TaskDialog.dll" target="lib\net20" />
-        <file src="..\build\Release\TaskDialog.xml" target="lib\net20" />
+        <file src="..\lib\ICSharpCode.TextEditor.*" target="lib\net20" />
+        <file src="..\lib\TaskDialog.*" target="lib\net20" />
 
-        <!-- Symbols and source code -->
-        <file src="..\build\Release\NanoByte.Common.WinForms.pdb" target="lib\net20" />
-        <file src="..\src\Common.WinForms\**\*.cs" target="src\Common.WinForms" />
+        <!-- Source code -->
+        <file src="..\src\Common.WinForms\**\*.cs" target="src" />
     </files>
 </package>

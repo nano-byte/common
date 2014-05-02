@@ -19,11 +19,9 @@
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.SlimDX.dll" target="lib\net20" />
-        <file src="..\build\Release\NanoByte.Common.SlimDX.xml" target="lib\net20" />
+        <file src="..\build\Release\NanoByte.Common.SlimDX.*" target="lib\net20" />
 
-        <!-- Symbols and source code -->
-        <file src="..\build\Release\NanoByte.Common.SlimDX.pdb" target="lib\net20" />
+        <!-- Source code -->
         <file src="..\src\Common.SlimDX\**\*.cs" target="src\Common.SlimDX" />
         <file src="..\src\Common\Storage\XmlStorage.cs" target="src\Common\Storage" />
     </files>

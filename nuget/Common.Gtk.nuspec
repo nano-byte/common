@@ -16,11 +16,9 @@
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.Gtk.dll" target="lib\net40" />
-        <file src="..\build\Release\NanoByte.Common.Gtk.xml" target="lib\net40" />
+        <file src="..\build\Release\NanoByte.Common.Gtk.*" target="lib\net40" />
 
-        <!-- Symbols and source code -->
-        <file src="..\build\Release\NanoByte.Common.Gtk.pdb" target="lib\net40" />
-        <file src="..\src\Common.Gtk\**\*.cs" target="src\Common.Gtk" />
+        <!-- Source code -->
+        <file src="..\src\Common.Gtk\**\*.cs" target="src" />
     </files>
 </package>
