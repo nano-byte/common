@@ -41,7 +41,7 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         [MethodImpl(MethodImplOptions.Synchronized)] // Prevent multiple concurrent tasks
-        public void RunTask(ITask task)
+        public virtual void RunTask(ITask task)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
@@ -56,7 +56,7 @@ namespace NanoByte.Common.Tasks
         public bool Batch { get; set; }
 
         /// <inheritdoc/>
-        public bool AskQuestion(string question, string batchInformation = null)
+        public virtual bool AskQuestion(string question, string batchInformation = null)
         {
             if (Batch)
             {
@@ -84,7 +84,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public void Output(string title, string information)
+        public virtual void Output(string title, string information)
         {
             Console.WriteLine(information);
         }

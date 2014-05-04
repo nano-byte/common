@@ -27,36 +27,34 @@ using NanoByte.Common.Controls;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses <see cref="TaskRunDialog"/> to inform the user about the progress of tasks.
+    /// Uses simple dialog boxes to inform the user about the progress of tasks.
     /// </summary>
-    public sealed class GuiTaskHandler : MarshalNoTimeout, ITaskHandler
+    public class GuiTaskHandler : MarshalNoTimeout, ITaskHandler
     {
         private readonly IWin32Window _owner;
 
+        /// <summary>
+        /// Creates a new task handler.
+        /// </summary>
+        /// <param name="owner">The parent window for any dialogs created by the handler.</param>
         public GuiTaskHandler(IWin32Window owner = null)
         {
             _owner = owner;
         }
 
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>
-        public CancellationToken CancellationToken { get { return _cancellationTokenSource.Token; } }
+        public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
 
         /// <inheritdoc/>
-        public void Dispose()
-        {
-            _cancellationTokenSource.Dispose();
-        }
-
-        /// <inheritdoc/>
-        public void RunTask(ITask task)
+        public virtual void RunTask(ITask task)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
             #endregion
 
-            using (var dialog = new TaskRunDialog(task, _cancellationTokenSource))
+            using (var dialog = new TaskRunDialog(task, CancellationTokenSource))
             {
                 dialog.ShowDialog(_owner);
                 if (dialog.Exception != null) dialog.Exception.Rethrow();
@@ -66,13 +64,13 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Always returns 1. This ensures that information hidden by the GUI is at least retrievable from the log files.
         /// </summary>
-        public int Verbosity { get { return 1; } set { } }
+        public virtual int Verbosity { get { return 1; } set { } }
 
         /// <inheritdoc/>
         public bool Batch { get; set; }
 
         /// <inheritdoc/>
-        public bool AskQuestion(string question, string batchInformation = null)
+        public virtual bool AskQuestion(string question, string batchInformation = null)
         {
             if (Batch)
             {
@@ -84,9 +82,23 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public void Output(string title, string information)
+        public virtual void Output(string title, string information)
         {
             OutputBox.Show(title, information);
         }
+
+        #region Dispose
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing) CancellationTokenSource.Dispose();
+        }
+        #endregion
     }
 }
