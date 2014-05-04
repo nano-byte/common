@@ -9,7 +9,7 @@
     <ProjectGuid>{D602F86B-EF33-4DB3-8FD5-18DFBB98C306}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NanoByte.Common.Gtk</RootNamespace>
+    <RootNamespace>NanoByte.Common</RootNamespace>
     <AssemblyName>NanoByte.Common.Gtk</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SignAssembly>true</SignAssembly>
