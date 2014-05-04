@@ -144,6 +144,7 @@
     <Compile Include="Tasks\SilentTaskHandler.cs" />
     <Compile Include="Tasks\SimpleTask.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
+    <Compile Include="Tasks\TaskHandlerExtensions.cs" />
     <Compile Include="Tasks\TaskSnapshot.cs" />
     <Compile Include="Tasks\TaskStatus.cs" />
     <Compile Include="Tasks\WaitTask.cs" />
