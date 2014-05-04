@@ -22,6 +22,7 @@
 
 using System;
 using System.Windows.Forms;
+using NanoByte.Common.Controls;
 
 namespace NanoByte.Common.Tasks
 {
@@ -66,5 +67,26 @@ namespace NanoByte.Common.Tasks
         /// Always returns 1. This ensures that information hidden by the GUI is at least retrievable from the log files.
         /// </summary>
         public int Verbosity { get { return 1; } set { } }
+
+        /// <inheritdoc/>
+        public bool Batch { get; set; }
+
+        /// <inheritdoc/>
+        public bool AskQuestion(string question, string batchInformation = null)
+        {
+            if (Batch)
+            {
+                if (!string.IsNullOrEmpty(batchInformation)) Log.Warn(batchInformation);
+                return false;
+            }
+
+            return Msg.YesNo(_owner, question, MsgSeverity.Warn);
+        }
+
+        /// <inheritdoc/>
+        public void Output(string title, string information)
+        {
+            OutputBox.Show(title, information);
+        }
     }
 }

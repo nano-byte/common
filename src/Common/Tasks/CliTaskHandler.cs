@@ -52,6 +52,43 @@ namespace NanoByte.Common.Tasks
                 task.Run(CancellationToken, progressBar);
         }
 
+        /// <inheritdoc/>
+        public bool Batch { get; set; }
+
+        /// <inheritdoc/>
+        public bool AskQuestion(string question, string batchInformation = null)
+        {
+            if (Batch)
+            {
+                if (!string.IsNullOrEmpty(batchInformation)) Log.Warn(batchInformation);
+                return false;
+            }
+
+            Log.Info(question);
+
+            // Loop until the user has made a valid choice
+            while (true)
+            {
+                string input = CliUtils.ReadString("[Y/N]");
+                if (input == null) throw new OperationCanceledException();
+                switch (input.ToLower())
+                {
+                    case "y":
+                    case "yes":
+                        return true;
+                    case "n":
+                    case "no":
+                        return false;
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Output(string title, string information)
+        {
+            Console.WriteLine(information);
+        }
+
         #region Dispose
         /// <inheritdoc/>
         public void Dispose()

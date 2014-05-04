@@ -49,6 +49,23 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         public int Verbosity { get { return 0; } set { } }
 
+        /// <summary>
+        /// Always returns <see langword="true"/>.
+        /// </summary>
+        public virtual bool Batch { get { return true; } set { } }
+
+        /// <inheritdoc/>
+        public virtual bool AskQuestion(string question, string batchInformation = null)
+        {
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public virtual void Output(string title, string information)
+        {
+            // No UI, so nothing to do
+        }
+
         #region Dispose
         /// <inheritdoc/>
         public void Dispose()
