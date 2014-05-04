@@ -42,10 +42,6 @@ namespace NanoByte.Common
         /// <param name="severity">How severe/important the message is.</param>
         public static void Inform(IWin32Window owner, string text, MsgSeverity severity)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            #endregion
-
             #region Logging
             switch (severity)
             {
@@ -58,7 +54,6 @@ namespace NanoByte.Common
             }
             #endregion
 
-            // Use TaskDialog if possibe, otherwise fall back to MessageBox
             if (TaskDialog.TaskDialog.IsAvailable)
             {
                 try
@@ -92,7 +87,6 @@ namespace NanoByte.Common
         public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity, string option1, string option2)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
             #endregion
 
@@ -108,10 +102,8 @@ namespace NanoByte.Common
             }
             #endregion
 
-            // Use TaskDialog if possibe, otherwise fall back to MessageBox
             if (TaskDialog.TaskDialog.IsAvailable)
             {
-                #region TaskDialog
                 var taskDialog = GetTaskDialog(text, severity);
 
                 // Display default names with custom explanations
@@ -141,6 +133,7 @@ namespace NanoByte.Common
                 {
                     return ShowTaskDialog(taskDialog, owner) == DialogResult.OK;
                 }
+                    #region Error handling
                 catch (BadImageFormatException)
                 {
                     return ShowMesageBox(owner, text, severity, MessageBoxButtons.OKCancel) == DialogResult.OK;
@@ -151,8 +144,7 @@ namespace NanoByte.Common
                 }
                 #endregion
             }
-
-            return ShowMesageBox(owner, text, severity, MessageBoxButtons.OKCancel) == DialogResult.OK;
+            else return ShowMesageBox(owner, text, severity, MessageBoxButtons.OKCancel) == DialogResult.OK;
         }
         #endregion
 
@@ -170,7 +162,6 @@ namespace NanoByte.Common
         public static bool YesNo(IWin32Window owner, string text, MsgSeverity severity, string option1, string option2)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
             if (string.IsNullOrEmpty(option2)) throw new ArgumentNullException("option2");
             #endregion
@@ -187,10 +178,8 @@ namespace NanoByte.Common
             }
             #endregion
 
-            // Use TaskDialog if possibe, otherwise fall back to MessageBox
             if (TaskDialog.TaskDialog.IsAvailable)
             {
-                #region TaskDialog
                 var taskDialog = GetTaskDialog(text, severity);
 
                 // Display fully customized text
@@ -205,6 +194,7 @@ namespace NanoByte.Common
                 {
                     return (ShowTaskDialog(taskDialog, owner) == DialogResult.Yes);
                 }
+                    #region Error handling
                 catch (BadImageFormatException)
                 {
                     return (ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNo) == DialogResult.Yes);
@@ -215,8 +205,7 @@ namespace NanoByte.Common
                 }
                 #endregion
             }
-
-            return (ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNo) == DialogResult.Yes);
+            else return (ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNo) == DialogResult.Yes);
         }
 
         /// <summary>
@@ -247,7 +236,6 @@ namespace NanoByte.Common
         public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity, string option1, string option2)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
             if (string.IsNullOrEmpty(option2)) throw new ArgumentNullException("option2");
             #endregion
@@ -264,10 +252,8 @@ namespace NanoByte.Common
             }
             #endregion
 
-            // Use TaskDialog if possibe, otherwise fall back to MessageBox
             if (TaskDialog.TaskDialog.IsAvailable)
             {
-                #region TaskDialog
                 var taskDialog = GetTaskDialog(text, severity);
                 taskDialog.AllowDialogCancellation = true;
                 taskDialog.CommonButtons = TaskDialogCommonButtons.Cancel;
@@ -287,6 +273,7 @@ namespace NanoByte.Common
                 {
                     return ShowTaskDialog(taskDialog, owner);
                 }
+                    #region Error handling
                 catch (BadImageFormatException)
                 {
                     return ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNoCancel);
@@ -297,8 +284,7 @@ namespace NanoByte.Common
                 }
                 #endregion
             }
-
-            return ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNoCancel);
+            else return ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNoCancel);
         }
 
         /// <summary>
@@ -348,18 +334,20 @@ namespace NanoByte.Common
             }
 
             // Display MessageDialog
-            return MessageBox.Show(owner, text, Application.ProductName, buttons, icon, MessageBoxDefaultButton.Button1, localizedOptions);
+            return MessageBox.Show(owner, text ?? "", Application.ProductName, buttons, icon, MessageBoxDefaultButton.Button1, localizedOptions);
         }
         #endregion
 
         #region TaskDialog
-        /// <summary>Displays a message using a <see cref="TaskDialog"/>.</summary>
+        /// <summary>
+        /// Displays a message using a <see cref="TaskDialog"/>.
+        /// </summary>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
         private static TaskDialog.TaskDialog GetTaskDialog(string text, MsgSeverity severity)
         {
             // Split everything from the second line onwards off from the main text
-            string[] split = text.Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
+            string[] split = (text ?? "").Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
             var taskDialog = new TaskDialog.TaskDialog {MainInstruction = split[0], WindowTitle = Application.ProductName};
             if (split.Length == 2) taskDialog.Content = split[1];
 

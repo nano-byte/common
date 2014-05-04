@@ -20,8 +20,8 @@
  * THE SOFTWARE.
  */
 
-using System;
 using Gtk;
+using NanoByte.Common.Info;
 
 namespace NanoByte.Common
 {
@@ -34,15 +34,11 @@ namespace NanoByte.Common
         /// <summary>
         /// Displays a message to the user using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
         public static void Inform(Window owner, string text, MsgSeverity severity)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            #endregion
-
             #region Logging
             switch (severity)
             {
@@ -59,20 +55,16 @@ namespace NanoByte.Common
         }
         #endregion
 
-        #region Ask
+        #region OK/Cancel
         /// <summary>
-        /// Asks the user a OK/cancel-question using a <see cref="MessageDialog"/>.
+        /// Asks the user a OK/Cancel-question using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <returns><see langword="true"/> if Yes was selected, <see langword="false"/> if No was selected.</returns>
-        public static bool Ask(Window owner, string text, MsgSeverity severity)
+        /// <returns><see langword="true"/> if OK was selected, <see langword="false"/> if Cancel was selected.</returns>
+        public static bool OKCancel(Window owner, string text, MsgSeverity severity)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            #endregion
-
             #region Logging
             switch (severity)
             {
@@ -89,28 +81,16 @@ namespace NanoByte.Common
         }
         #endregion
 
-        #region Select
+        #region Yes/No
         /// <summary>
         /// Asks the user to choose between two options (yes/no) using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="allowCancel">Can the user also cancel / choose neither of the two?</param>
-        /// <param name="option1">The title and a short description (separated by a linebreak) of the <see cref="ResponseType.Yes"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="option2">The title and a short description (separated by a linebreak) of the <see cref="ResponseType.No"/> option; must not be <see langword="null"/>.</param>
-        /// <returns><see cref="ResponseType.Yes"/> if <paramref name="option1"/> was chosen,
-        /// <see cref="ResponseType.No"/> if <paramref name="option2"/> was chosen,
-        /// <see cref="ResponseType.Cancel"/> otherwise.</returns>
-        /// <remarks>If a <see cref="MessageDialog"/> is used, <paramref name="option1"/> and <paramref name="option2"/> are not display to the user, so don't rely on them!</remarks>
-        public static ResponseType Choose(Window owner, string text, MsgSeverity severity, bool allowCancel, string option1, string option2)
+        /// <returns><see langword="true"/> if Yes was chosen, <see langword="false"/> if No was chosen.</returns>
+        public static bool YesNo(Window owner, string text, MsgSeverity severity)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
-            if (string.IsNullOrEmpty(option2)) throw new ArgumentNullException("option2");
-            #endregion
-
             #region Logging
             switch (severity)
             {
@@ -124,7 +104,36 @@ namespace NanoByte.Common
             #endregion
 
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-            return ShowMessageDialog(owner, text, severity, allowCancel ? ButtonsType.YesNo | ButtonsType.Cancel : ButtonsType.YesNo);
+            return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo) == ResponseType.Yes;
+        }
+        #endregion
+
+        #region Yes/No/Cancel
+        /// <summary>
+        /// Asks the user to choose between three options (yes/no/cancel) using a <see cref="MessageDialog"/>.
+        /// </summary>
+        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="severity">How severe/important the message is.</param>
+        /// <returns><see cref="ResponseType.Yes"/> if Yes was chosen,
+        /// <see cref="ResponseType.No"/> if No was chosen,
+        /// <see cref="ResponseType.Cancel"/> otherwise.</returns>
+        public static ResponseType YesNoCancel(Window owner, string text, MsgSeverity severity)
+        {
+            #region Logging
+            switch (severity)
+            {
+                case MsgSeverity.Warn:
+                    Log.Warn(text);
+                    break;
+                case MsgSeverity.Error:
+                    Log.Error(text);
+                    break;
+            }
+            #endregion
+
+            // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
+            return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo | ButtonsType.Cancel);
         }
         #endregion
 
@@ -132,7 +141,7 @@ namespace NanoByte.Common
 
         #region MessageDialog
         /// <summary>Displays a message using a <see cref="MessageDialog"/>.</summary>
-        /// <param name="owner">The parent window the displayed window is modal to.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <param name="buttons">The buttons the user can click.</param>
@@ -156,8 +165,13 @@ namespace NanoByte.Common
             }
 
             // Display MessageDialog
-            using (var dialog = new MessageDialog(owner, DialogFlags.Modal, type, ButtonsType.YesNo, text))
-                return (ResponseType)dialog.Run();
+            using (var dialog = new MessageDialog(owner, DialogFlags.Modal, type, buttons, text ?? ""))
+            {
+                dialog.Title = AppInfo.Current.ProductName;
+                var response = (ResponseType)dialog.Run();
+                dialog.Destroy();
+                return response;
+            }
         }
         #endregion
     }
