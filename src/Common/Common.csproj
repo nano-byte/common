@@ -48,11 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
-    <Reference Include="Mono.Posix" Condition=" '$(OS)' != 'Windows_NT' " />
-    <Reference Include="Mono.Posix" Condition=" '$(OS)' == 'Windows_NT' ">
-      <CopyToOutputDirectory>false</CopyToOutputDirectory>
-      <HintPath>..\..\lib\Mono.Posix.dll</HintPath>
-    </Reference>
+    <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Global.cs" />

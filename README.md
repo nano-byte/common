@@ -15,7 +15,7 @@ Windows
 =======
 
 `build.cmd` will call build scripts in subdirectories to create a NuGet package in `build/Packages`.
-You need to install [GTK# for Windows](http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.21.msi) to able to compile all projects.
+You need to install [GTK# for Windows](http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.25.msi) to able to compile the code.
 
 `cleanup.cmd` will delete any temporary files created by the build process or Visual Studio.
 

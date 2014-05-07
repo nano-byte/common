@@ -31,9 +31,6 @@ Global
 		{CA9D6092-4365-4385-9700-9570A98EF09D}.Debug|x86.Build.0 = Debug|Any CPU
 		{CA9D6092-4365-4385-9700-9570A98EF09D}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Central.Gtk\Central.Gtk.csproj
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

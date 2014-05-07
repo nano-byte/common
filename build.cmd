@@ -7,7 +7,7 @@ if "%3"=="+doc" set BUILD_DOC=TRUE
 if "%4"=="+doc" set BUILD_DOC=TRUE
 
 echo.
-call "%~dp0src\build.cmd" ReleaseWithGtk
+call "%~dp0src\build.cmd" Release
 
 echo.
 call "%~dp0nuget\build.cmd" %*
@@ -15,7 +15,7 @@ call "%~dp0nuget\build.cmd" %*
 ::Optionally create debug build and documentation
 if "%BUILD_DOC%"=="TRUE" (
   echo.
-  call "%~dp0src\build.cmd" DebugWithGtk
+  call "%~dp0src\build.cmd" Debug
   echo.
   call "%~dp0doc\build.cmd"
 )
