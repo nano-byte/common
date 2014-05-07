@@ -21,11 +21,8 @@
  */
 
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
-using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Controls
 {
@@ -44,55 +41,23 @@ namespace NanoByte.Common.Controls
         /// </summary>
         public void Report(TaskSnapshot snapshot)
         {
+            Text = snapshot.ToString();
+
             switch (snapshot.Status)
             {
-                case TaskStatus.Ready:
-                case TaskStatus.Started:
-                    Text = "";
-                    ForeColor = SystemColors.ControlText;
-                    break;
-
-                case TaskStatus.Header:
-                    Text = Resources.StateHeader;
-                    ForeColor = SystemColors.ControlText;
-                    break;
-
-                case TaskStatus.Data:
-                    Text = GetDataText(snapshot);
+                default:
                     ForeColor = SystemColors.ControlText;
                     break;
 
                 case TaskStatus.Complete:
-                    Text = Resources.StateComplete;
                     ForeColor = Color.Green;
                     break;
 
                 case TaskStatus.WebError:
-                    Text = Resources.StateWebError;
-                    ForeColor = Color.Red;
-                    break;
-
                 case TaskStatus.IOError:
-                    Text = Resources.StateIOError;
                     ForeColor = Color.Red;
                     break;
             }
-        }
-
-        private static string GetDataText(TaskSnapshot snapshot)
-        {
-            if (snapshot.UnitsProcessed == 0 && snapshot.UnitsTotal == -1) return Resources.StateData;
-
-            string dataText = snapshot.UnitsByte
-                ? snapshot.UnitsProcessed.FormatBytes(CultureInfo.CurrentCulture)
-                : snapshot.UnitsProcessed.ToString(CultureInfo.CurrentCulture);
-            if (snapshot.UnitsTotal != -1)
-            {
-                return dataText + @" / " + (snapshot.UnitsByte
-                    ? snapshot.UnitsTotal.FormatBytes(CultureInfo.CurrentCulture)
-                    : snapshot.UnitsTotal.ToString(CultureInfo.CurrentCulture));
-            }
-            return dataText;
         }
     }
 }

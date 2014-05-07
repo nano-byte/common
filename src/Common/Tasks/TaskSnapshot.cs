@@ -21,6 +21,9 @@
  */
 
 using System;
+using System.Globalization;
+using NanoByte.Common.Properties;
+using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Tasks
 {
@@ -90,6 +93,44 @@ namespace NanoByte.Common.Tasks
                     default:
                         return _unitsProcessed / (double)_unitsTotal;
                 }
+            }
+        }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            switch (Status)
+            {
+                default:
+                case TaskStatus.Ready:
+                case TaskStatus.Started:
+                    return "";
+
+                case TaskStatus.Header:
+                    return Resources.StateHeader;
+
+                case TaskStatus.Data:
+                    if (UnitsProcessed == 0 && UnitsTotal == -1) return Resources.StateData;
+
+                    string dataText = UnitsByte
+                        ? UnitsProcessed.FormatBytes(CultureInfo.CurrentCulture)
+                        : UnitsProcessed.ToString(CultureInfo.CurrentCulture);
+                    if (UnitsTotal != -1)
+                    {
+                        return dataText + @" / " + (UnitsByte
+                            ? UnitsTotal.FormatBytes(CultureInfo.CurrentCulture)
+                            : UnitsTotal.ToString(CultureInfo.CurrentCulture));
+                    }
+                    return dataText;
+
+                case TaskStatus.Complete:
+                    return Resources.StateComplete;
+
+                case TaskStatus.WebError:
+                    return Resources.StateWebError;
+
+                case TaskStatus.IOError:
+                    return Resources.StateIOError;
             }
         }
     }

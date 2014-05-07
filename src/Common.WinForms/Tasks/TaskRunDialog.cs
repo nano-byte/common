@@ -42,7 +42,7 @@ namespace NanoByte.Common.Tasks
         /// Creates a new progress-tracking dialog.
         /// </summary>
         /// <param name="task">The trackable task to execute and display.</param>
-        /// <param name="cancellationTokenSource"></param>
+        /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
         public TaskRunDialog(ITask task, CancellationTokenSource cancellationTokenSource)
         {
             #region Sanity checks
@@ -60,11 +60,11 @@ namespace NanoByte.Common.Tasks
             _cancellationTokenSource = cancellationTokenSource;
         }
 
-        private void TrackingDialog_Shown(object sender, EventArgs e)
+        private void TaskRunDialog_Shown(object sender, EventArgs e)
         {
-            _progress.ProgressChanged += trackingProgressBar.Report;
-            _progress.ProgressChanged += labelProgress.Report;
-            _progress.ProgressChanged += progress => { if (progress.Status == TaskStatus.Complete) Close(); };
+            _progress.ProgressChanged += progressBarTask.Report;
+            _progress.ProgressChanged += labelTask.Report;
+            _progress.ProgressChanged += snapshot => { if (snapshot.Status == TaskStatus.Complete) Close(); };
 
             _taskThread.Start();
         }
@@ -88,7 +88,7 @@ namespace NanoByte.Common.Tasks
             }
         }
 
-        private void TrackingDialog_FormClosing(object sender, FormClosingEventArgs e)
+        private void TaskRunDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Only close the window if the task is no longer running
             if (!_taskThread.IsAlive || Exception != null) return;

@@ -47,7 +47,7 @@ namespace NanoByte.Common.Controls
         }
 
         /// <summary>
-        /// Creates a new tracking control.
+        /// Creates a new task tracking control.
         /// </summary>
         public TaskControl()
         {

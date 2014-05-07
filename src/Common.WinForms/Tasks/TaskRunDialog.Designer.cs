@@ -31,28 +31,28 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackingProgressBar = new Common.Controls.TaskProgressBar();
-            this.labelProgress = new Common.Controls.TaskLabel();
+            this.progressBarTask = new NanoByte.Common.Controls.TaskProgressBar();
+            this.labelTask = new NanoByte.Common.Controls.TaskLabel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // trackingProgressBar
+            // progressBarTask
             // 
-            this.trackingProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackingProgressBar.Location = new System.Drawing.Point(12, 12);
-            this.trackingProgressBar.Name = "trackingProgressBar";
-            this.trackingProgressBar.Size = new System.Drawing.Size(270, 23);
-            this.trackingProgressBar.TabIndex = 0;
-            this.trackingProgressBar.UseTaskbar = true;
+            this.progressBarTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBarTask.Location = new System.Drawing.Point(12, 12);
+            this.progressBarTask.Name = "progressBarTask";
+            this.progressBarTask.Size = new System.Drawing.Size(270, 23);
+            this.progressBarTask.TabIndex = 0;
+            this.progressBarTask.UseTaskbar = true;
             // 
-            // labelProgress
+            // labelTask
             // 
-            this.labelProgress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelProgress.AutoSize = true;
-            this.labelProgress.Location = new System.Drawing.Point(12, 38);
-            this.labelProgress.Name = "labelProgress";
-            this.labelProgress.Size = new System.Drawing.Size(0, 13);
-            this.labelProgress.TabIndex = 1;
+            this.labelTask.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelTask.AutoSize = true;
+            this.labelTask.Location = new System.Drawing.Point(12, 38);
+            this.labelTask.Name = "labelTask";
+            this.labelTask.Size = new System.Drawing.Size(0, 13);
+            this.labelTask.TabIndex = 1;
             // 
             // buttonCancel
             // 
@@ -65,23 +65,23 @@ namespace NanoByte.Common.Tasks
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // TrackingDialog
+            // TaskRunDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(294, 82);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.labelProgress);
-            this.Controls.Add(this.trackingProgressBar);
+            this.Controls.Add(this.labelTask);
+            this.Controls.Add(this.progressBarTask);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(120, 120);
-            this.Name = "TrackingDialog";
+            this.Name = "TaskRunDialog";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TrackingDialog_FormClosing);
-            this.Shown += new System.EventHandler(this.TrackingDialog_Shown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TaskRunDialog_FormClosing);
+            this.Shown += new System.EventHandler(this.TaskRunDialog_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,8 +89,8 @@ namespace NanoByte.Common.Tasks
 
         #endregion
 
-        private TaskProgressBar trackingProgressBar;
-        private Common.Controls.TaskLabel labelProgress;
+        private TaskProgressBar progressBarTask;
+        private Common.Controls.TaskLabel labelTask;
         private System.Windows.Forms.Button buttonCancel;
     }
 }
