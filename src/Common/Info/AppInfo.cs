@@ -42,6 +42,12 @@ namespace NanoByte.Common.Info
         public string Name { get; set; }
 
         /// <summary>
+        /// The name of the product the application is a part of.
+        /// </summary>
+        [XmlAttribute("product-name")]
+        public string ProductName { get; set; }
+
+        /// <summary>
         /// The version number of the application.
         /// </summary>
         [XmlIgnore]
@@ -101,6 +107,7 @@ namespace NanoByte.Common.Info
             return new AppInfo
             {
                 Name = assembly.GetAttributeValue((AssemblyTitleAttribute x) => x.Title) ?? assemblyInfo.Name,
+                ProductName = assembly.GetAttributeValue((AssemblyProductAttribute x) => x.Product) ?? assemblyInfo.Name,
                 Version = new Version(assemblyInfo.Version.Major, assemblyInfo.Version.Minor, assemblyInfo.Version.Build),
                 Description = assembly.GetAttributeValue((AssemblyDescriptionAttribute x) => x.Description),
                 Copyright = assembly.GetAttributeValue((AssemblyCopyrightAttribute x) => x.Copyright)
