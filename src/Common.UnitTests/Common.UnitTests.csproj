@@ -65,6 +65,7 @@
     <Compile Include="Collections\LanguageSetTest.cs" />
     <Compile Include="Collections\LocalizableStringCollectionTest.cs" />
     <Compile Include="Collections\MergeTest.cs" />
+    <Compile Include="Collections\NamedCollectionTest.cs" />
     <Compile Include="Collections\TransparentCacheTest.cs" />
     <Compile Include="Collections\XmlDictionaryTest.cs" />
     <Compile Include="Dispatch\AggregateDispatcherTest.cs" />

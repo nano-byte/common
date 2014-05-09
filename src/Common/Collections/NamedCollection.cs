@@ -29,9 +29,9 @@ using NanoByte.Common.Properties;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// A keyed collection (pseudo-dictionary) of <see cref="INamed{T}"/> objects. Elements are automatically maintained in an alphabetically sorted order. Suitable for XML serialization.
+    /// A keyed collection (pseudo-dictionary) of <see cref="INamed{T}"/> objects. Case-insensitive!
     /// </summary>
-    /// <remarks>Correct behavior with duplicate names or renaming without using the <see cref="Rename"/> method is not guaranteed!</remarks>
+    /// <remarks>Elements are automatically maintained in an alphabetically sorted order. Suitable for XML serialization.</remarks>
     public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable where T : INamed<T>
     {
         #region Events
@@ -39,7 +39,7 @@ namespace NanoByte.Common.Collections
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         public event Action<object> CollectionChanged;
 
-        private void OnAfterChanged()
+        private void OnCollectionChanged()
         {
             if (CollectionChanged != null) CollectionChanged(this);
         }
@@ -47,10 +47,19 @@ namespace NanoByte.Common.Collections
 
         #region Constructor
         /// <summary>
-        /// Creates a new case-insensitive named collection.
+        /// Creates a new named collection.
         /// </summary>
         public NamedCollection() : base(StringComparer.OrdinalIgnoreCase)
         {}
+
+        /// <summary>
+        /// Creates a new named collection pre-filled with elements.
+        /// </summary>
+        /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed{T}.Name"/>s!</param>
+        public NamedCollection(IEnumerable<T> elements) : this()
+        {
+            foreach (var element in elements) Add(element);
+        }
         #endregion
 
         //--------------------//
@@ -64,18 +73,23 @@ namespace NanoByte.Common.Collections
         #endregion
 
         #region Rename
-        /// <inheritdoc/>
-        public void Rename(T entry, string newName)
+        /// <summary>
+        /// Renames an element in the list. Renaming an element in the list directly (without using this method) will prevent lookups from working properly!
+        /// </summary>
+        /// <param name="element">The element to rename.</param>
+        /// <param name="newName">The new <see cref="INamed{T}.Name"/> for the element.</param>
+        /// <exception cref="KeyNotFoundException">The <paramref name="element"/> is not in the collection.</exception>
+        /// <exception cref="InvalidOperationException">The <paramref name="newName"/> is already taken by another element in the collection.</exception>
+        public void Rename(T element, string newName)
         {
-            if (entry.Name == newName) return;
+            if (!Contains(element)) throw new KeyNotFoundException();
+            if (element.Name == newName) return;
             if (Contains(newName)) throw new InvalidOperationException(Resources.KeyAlreadyPresent);
 
-            ChangeItemKey(entry, newName);
-            entry.Name = newName;
-
+            ChangeItemKey(element, newName);
+            element.Name = newName;
             Sort();
-
-            OnAfterChanged();
+            OnCollectionChanged();
         }
         #endregion
 
@@ -97,7 +111,7 @@ namespace NanoByte.Common.Collections
         {
             base.InsertItem(index, item);
             Sort();
-            OnAfterChanged();
+            OnCollectionChanged();
         }
 
         /// <inheritdoc/>
@@ -105,21 +119,21 @@ namespace NanoByte.Common.Collections
         {
             base.SetItem(index, item);
             Sort();
-            OnAfterChanged();
+            OnCollectionChanged();
         }
 
         /// <inheritdoc/>
         protected override void RemoveItem(int index)
         {
             base.RemoveItem(index);
-            OnAfterChanged();
+            OnCollectionChanged();
         }
 
         /// <inheritdoc/>
         protected override void ClearItems()
         {
             base.ClearItems();
-            OnAfterChanged();
+            OnCollectionChanged();
         }
         #endregion
 
@@ -132,10 +146,7 @@ namespace NanoByte.Common.Collections
         /// <returns>The cloned collection.</returns>
         public virtual NamedCollection<T> Clone()
         {
-            var newCollection = new NamedCollection<T>();
-            foreach (T entry in this)
-                newCollection.Add(entry);
-            return newCollection;
+            return new NamedCollection<T>(this);
         }
 
         object ICloneable.Clone()
