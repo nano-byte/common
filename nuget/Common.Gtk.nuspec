@@ -9,7 +9,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Generic utility classes, interfaces, controls, etc. for GTK# projects.</description>
         <dependencies>
-            <dependency id="NanoByte.Common" version="$version$" />
+            <dependency id="NanoByte.Common" version="[$version$]" />
         </dependencies>
         <references>
             <reference file="NanoByte.Common.Gtk.dll" />
