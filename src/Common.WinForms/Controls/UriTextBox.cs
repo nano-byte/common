@@ -91,9 +91,6 @@ namespace NanoByte.Common.Controls
         {
             // Use event instead of method override to ensure special handling of HintText works
             TextChanged += delegate { ForeColor = ValidateUri(Text) ? Color.Green : Color.Red; };
-            // ReSharper disable DoNotCallOverridableMethodsInConstructor
-            AllowDrop = true;
-            // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
         #endregion
 
