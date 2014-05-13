@@ -89,7 +89,7 @@ namespace NanoByte.Common.Dispatch
         }
 
         /// <summary>
-        /// Calls <see cref="Dispatch(TBase)"/> for every element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
+        /// Dispatches for each element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
         /// <returns>The values returned by the matching delegates.</returns>

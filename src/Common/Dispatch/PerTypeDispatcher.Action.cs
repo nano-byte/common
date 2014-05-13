@@ -82,7 +82,7 @@ namespace NanoByte.Common.Dispatch
         }
 
         /// <summary>
-        /// Calls <see cref="Dispatch(TBase)"/> for every element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
+        /// Dispatches for each element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
         /// <exception cref="KeyNotFoundException">Thrown if no delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
