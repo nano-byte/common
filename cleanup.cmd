@@ -25,5 +25,6 @@ del "%~dp0TestResult.xml" > NUL 2>&1
 
 rem JetBrains caches
 rd /s /q "%~dp0src\_ReSharper.NanoByte.Common" > NUL 2>&1
-rd /s /q "%~dp0src\_dotTrace.NanoByte.Common" > NUL 2>&1
 rd /s /q "%~dp0src\_TeamCity.NanoByte.Common" > NUL 2>&1
+rd /s /q "%~dp0src\_dotTrace.NanoByte.Common" > NUL 2>&1
+rd /s /q "%~dp0src\_dotMemory.NanoByte.Common" > NUL 2>&1
