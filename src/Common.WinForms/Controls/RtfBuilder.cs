@@ -58,6 +58,28 @@ namespace NanoByte.Common.Controls
             _builder.AppendLine("\\cf" + ((int)color + 1) + " " + text + "\\par\\par\n");
         }
 
+        /// <summary>
+        /// Appends a <see cref="Log"/> entry as a paragraph.
+        /// </summary>
+        public void AppendLogEntry(LogSeverity severity, string message)
+        {
+            switch (severity)
+            {
+                case LogSeverity.Info:
+                    AppendPar(message, RtfColor.Blue);
+                    break;
+                case LogSeverity.Warn:
+                    AppendPar(message, RtfColor.Orange);
+                    break;
+                case LogSeverity.Error:
+                    AppendPar(message, RtfColor.Red);
+                    break;
+                default:
+                    AppendPar(message, RtfColor.Black);
+                    break;
+            }
+        }
+
         /// <inheritdoc/>
         public override string ToString()
         {
