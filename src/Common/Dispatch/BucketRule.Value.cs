@@ -20,33 +20,39 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 
-namespace NanoByte.Common.Collections
+namespace NanoByte.Common.Dispatch
 {
     /// <summary>
-    /// Contains test methods for <see cref="Bucketizer{T}"/>.
+    /// A rule for <see cref="Bucketizer{TElement,TValue}"/>.
     /// </summary>
-    [TestFixture]
-    public class BucketizerTest
+    public class BucketRule<TElement, TValue>
     {
-        [Test]
-        public void TestBucketize()
-        {
-            var even = new List<int>();
-            var lessThanThree = new List<int>();
-            var rest = new List<int>();
-            new Bucketizer<int>
-            {
-                {x => x % 2 == 0, even},
-                {x => x < 3, lessThanThree},
-                {x => true, rest}
-            }.Bucketize(new[] {1, 2, 3, 4});
+        /// <summary>
+        /// A value to check elements against.
+        /// </summary>
+        public readonly TValue Value;
 
-            CollectionAssert.AreEqual(expected: new[] {2, 4}, actual: even);
-            CollectionAssert.AreEqual(expected: new[] {1}, actual: lessThanThree);
-            CollectionAssert.AreEqual(expected: new[] {3}, actual: rest);
+        /// <summary>
+        /// The collection elements are added to if they match the <see cref="Value"/>.
+        /// </summary>
+        public readonly ICollection<TElement> Bucket;
+
+        /// <summary>
+        /// Creates a new bucket rule.
+        /// </summary>
+        /// <param name="value">A value to compare with the result of the value retriever using <see cref="object.Equals(object,object)"/>.</param>
+        /// <param name="bucket">The collection elements are added to if they match the <paramref name="value"/>.</param>
+        public BucketRule(TValue value, ICollection<TElement> bucket)
+        {
+            #region Sanity checks
+            if (bucket == null) throw new ArgumentNullException("bucket");
+            #endregion
+
+            Value = value;
+            Bucket = bucket;
         }
     }
 }

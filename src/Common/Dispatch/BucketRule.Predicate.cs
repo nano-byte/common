@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NanoByte.Common.Collections
+namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// A rule for <see cref="Bucketizer{T}"/>.
