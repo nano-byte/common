@@ -8,3 +8,5 @@
 // "In Project Suppression File".
 // You do not need to add suppressions to this file manually.
 
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "iconRenderer", Scope = "member", Target = "Stetic.Gui.#Initialize(Gtk.Widget)", Justification = "Auto-generated")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "name", Scope = "member", Target = "Stetic.ActionGroups.#GetActionGroup(System.String)", Justification = "Auto-generated")]

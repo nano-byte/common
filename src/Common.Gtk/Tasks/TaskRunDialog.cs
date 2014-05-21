@@ -43,6 +43,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="task">The trackable task to execute and display.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
         /// <param name="parent">The parent window for this dialog, if any.</param>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Auto-generated")]
         public TaskRunDialog(ITask task, CancellationTokenSource cancellationTokenSource, Window parent = null)
         {
             #region Sanity checks

@@ -175,7 +175,6 @@
     <Compile Include="Controls\Wizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Msg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureEditor\ChildInfo.cs" />
@@ -210,6 +209,9 @@
     <Compile Include="Utils\WinFormsUtils.NativeMethods.cs" />
     <Compile Include="Values\Design\TimeSpanEditor.cs" />
     <Compile Include="Values\Design\LanguageSetEditor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\ErrorReportForm.de.resx">

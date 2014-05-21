@@ -58,6 +58,10 @@ namespace NanoByte.Common.Collections
         /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed{T}.Name"/>s!</param>
         public NamedCollection(IEnumerable<T> elements) : this()
         {
+            #region Sanity checks
+            if (elements == null) throw new ArgumentNullException("elements");
+            #endregion
+
             foreach (var element in elements) Add(element);
         }
         #endregion

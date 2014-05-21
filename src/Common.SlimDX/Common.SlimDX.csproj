@@ -112,6 +112,9 @@
     <Compile Include="Values\XColor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Common.WinForms\Common.WinForms.csproj">
       <Project>{DACD1A8E-7734-458C-92B4-DA1F29940890}</Project>
       <Name>Common.WinForms</Name>
