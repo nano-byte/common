@@ -67,20 +67,13 @@ namespace NanoByte.Common
     /// </summary>
     public static class Log
     {
-        #region Events
+        #region Properties
         /// <summary>
         /// Occurs whenever a new entry has been added to the log.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         public static event LogEntryEventHandler NewEntry;
-        #endregion
 
-        #region Variables
-        private static readonly StringBuilder _sessionContent = new StringBuilder();
-        private static readonly StreamWriter _fileWriter;
-        #endregion
-
-        #region Properties
         /// <summary>
         /// All data logged in this session so far as plain text.
         /// </summary>
@@ -94,6 +87,12 @@ namespace NanoByte.Common
                 }
             }
         }
+
+        /// <summary>
+        /// Set this to <see langword="true"/> to supress any <see cref="Console"/> usage.
+        /// <see cref="NewEntry"/> and <see cref="Content"/> will continue to work normally.
+        /// </summary>
+        public static bool DisableConsole { get; set; }
         #endregion
 
         #region Constructor
@@ -136,92 +135,7 @@ namespace NanoByte.Common
         }
         #endregion
 
-        //--------------------//
-
-        #region Add entry
-        /// <summary>
-        /// Adds a new entry to the log.
-        /// </summary>
-        /// <param name="severity">The type/severity of the entry.</param>
-        /// <param name="message">The actual message text of the entry.</param>
-        private static void AddEntry(LogSeverity severity, string message)
-        {
-            #region Sanity checks
-            if (message == null) throw new ArgumentNullException("message");
-            #endregion
-
-            // Create uniform line-breaks and indention
-            string[] lines = message.Trim().SplitMultilineText();
-            message = string.Join(Environment.NewLine + "\t", lines);
-
-            // Thread-safety: Only one log message is handled at a time
-            lock (_sessionContent)
-            {
-                try
-                {
-                    // Write the colored message to the console
-                    switch (severity)
-                    {
-                        case LogSeverity.Warn:
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            break;
-                        case LogSeverity.Error:
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            break;
-                    }
-                }
-                    #region Error handling
-                catch (InvalidOperationException)
-                {}
-                catch (IOException)
-                {}
-                #endregion
-
-                Console.Error.WriteLine(message);
-                try
-                {
-                    Console.ResetColor();
-                }
-                    #region Error handling
-                catch (InvalidOperationException)
-                {}
-                catch (IOException)
-                {}
-                #endregion
-
-                // Prepend severity and current time to message
-                string formatString;
-                switch (severity)
-                {
-                    case LogSeverity.Info:
-                        formatString = "[{0:T}] {1}";
-                        break;
-                    case LogSeverity.Warn:
-                        formatString = "[{0:T}] WARN: {1}";
-                        break;
-                    case LogSeverity.Error:
-                        formatString = "[{0:T}] ERROR: {1}";
-                        break;
-                    case LogSeverity.Echo:
-                    default:
-                        formatString = "{1}";
-                        break;
-                }
-                string fileMessage = string.Format(CultureInfo.InvariantCulture, formatString, DateTime.Now, message);
-
-                // Store message in RAM
-                _sessionContent.AppendLine(fileMessage);
-
-                // If possible write message to the log file
-                if (_fileWriter != null) _fileWriter.WriteLine(fileMessage);
-
-                // Raise event
-                if (NewEntry != null) NewEntry(severity, message);
-            }
-        }
-        #endregion
-
-        #region Access
+        #region Public interface
         /// <summary>
         /// Prints a message to the log as-is (no time stamp, etc.). Usually used for <see cref="Console"/> output.
         /// </summary>
@@ -272,6 +186,101 @@ namespace NanoByte.Common
             if (ex == null) return;
             Error(ex.Message);
             if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException);
+        }
+        #endregion
+
+        #region Internal
+        private static readonly StringBuilder _sessionContent = new StringBuilder();
+        private static readonly StreamWriter _fileWriter;
+
+        /// <summary>
+        /// Adds a new entry to the log.
+        /// </summary>
+        /// <param name="severity">The type/severity of the entry.</param>
+        /// <param name="message">The actual message text of the entry.</param>
+        private static void AddEntry(LogSeverity severity, string message)
+        {
+            #region Sanity checks
+            if (message == null) throw new ArgumentNullException("message");
+            #endregion
+
+            message = UnifyWhitespace(message);
+
+            lock (_sessionContent)
+            {
+                if (!DisableConsole) PrintToConsole(severity, message);
+
+                message = FormatMessage(severity, message);
+                _sessionContent.AppendLine(message);
+                if (_fileWriter != null) _fileWriter.WriteLine(message);
+                if (NewEntry != null) NewEntry(severity, message);
+            }
+        }
+
+        private static string UnifyWhitespace(string message)
+        {
+            string[] lines = message.Trim().SplitMultilineText();
+            message = string.Join(Environment.NewLine + "\t", lines);
+            return message;
+        }
+
+        private static string FormatMessage(LogSeverity severity, string message)
+        {
+            // Prepend severity and current time to message
+            string formatString;
+            switch (severity)
+            {
+                case LogSeverity.Info:
+                    formatString = "[{0:T}] {1}";
+                    break;
+                case LogSeverity.Warn:
+                    formatString = "[{0:T}] WARN: {1}";
+                    break;
+                case LogSeverity.Error:
+                    formatString = "[{0:T}] ERROR: {1}";
+                    break;
+                case LogSeverity.Echo:
+                default:
+                    formatString = "{1}";
+                    break;
+            }
+            string fileMessage = string.Format(CultureInfo.InvariantCulture, formatString, DateTime.Now, message);
+            return fileMessage;
+        }
+
+        private static void PrintToConsole(LogSeverity severity, string message)
+        {
+            try
+            {
+                // Write the colored message to the console
+                switch (severity)
+                {
+                    case LogSeverity.Warn:
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        break;
+                    case LogSeverity.Error:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                }
+            }
+                #region Error handling
+            catch (InvalidOperationException)
+            {}
+            catch (IOException)
+            {}
+            #endregion
+
+            Console.Error.WriteLine(message);
+            try
+            {
+                Console.ResetColor();
+            }
+                #region Error handling
+            catch (InvalidOperationException)
+            {}
+            catch (IOException)
+            {}
+            #endregion
         }
         #endregion
     }
