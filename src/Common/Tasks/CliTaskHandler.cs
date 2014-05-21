@@ -34,6 +34,9 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public int Verbosity { get; set; }
 
+        /// <summary>
+        /// Used to signal the <see cref="CancellationToken"/>.
+        /// </summary>
         protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>

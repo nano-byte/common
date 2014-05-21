@@ -29,6 +29,9 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class SilentTaskHandler : MarshalNoTimeout, ITaskHandler
     {
+        /// <summary>
+        /// Used to signal the <see cref="CancellationToken"/>.
+        /// </summary>
         protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>

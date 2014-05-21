@@ -41,6 +41,9 @@ namespace NanoByte.Common.Tasks
             _owner = owner;
         }
 
+        /// <summary>
+        /// Used to signal the <see cref="CancellationToken"/>.
+        /// </summary>
         protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>
