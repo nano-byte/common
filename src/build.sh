@@ -6,6 +6,6 @@ cd `dirname $0`
 export MONO_IOMAP=all
 
 #Restore NuGet packages
-mono --runtime=v4.0 .nuget/NuGet.exe restore NanoByte.Common_MonoDevelop.sln
+mono --runtime=v4.0 .nuget/NuGet.exe restore NanoByte.Common_Mono.sln
 
-xbuild NanoByte.Common_MonoDevelop.sln /nologo /v:q
+xbuild NanoByte.Common_Mono.sln /nologo /v:q

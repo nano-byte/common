@@ -2,6 +2,9 @@
 ::Compiles the Visual Studio solution.
 cd /d "%~dp0"
 
+rem Project settings
+set ProgSLN=NanoByte.Common.sln
+
 rem Determine VS version
 if defined VS120COMNTOOLS (
   ::Visual Studio 2013
@@ -28,7 +31,7 @@ if "%config%"=="" set config=Debug
 
 echo Compiling Visual Studio solution (%config%)...
 if exist ..\build\%config% rd /s /q ..\build\%config%
-msbuild "NanoByte.Common.sln" /nologo /v:q /t:Rebuild /p:Configuration=%config%
+msbuild "%ProgSLN%" /nologo /v:q /t:Rebuild /p:Configuration=%config%
 if errorlevel 1 pause
 goto end
 
