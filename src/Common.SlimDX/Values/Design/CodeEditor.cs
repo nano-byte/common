@@ -62,7 +62,7 @@ namespace NanoByte.Common.Values.Design
 
             editorService.ShowDialog(new Form
             {
-                Text = fileType + " Editor",
+                Text = fileType.FileType + " Editor",
                 FormBorderStyle = FormBorderStyle.SizableToolWindow, ShowInTaskbar = false,
                 Controls = {editorControl}
             });
