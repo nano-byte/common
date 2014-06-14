@@ -19,6 +19,9 @@ FOR /d %%D IN ("%~dp0src\*") DO (
   del "%%D\*.csproj.user" > NUL 2>&1
 )
 
+rem NuGet packages
+FOR /d %%D IN ("%~dp0src\packages\*") DO rd /s /q "%%D"
+
 rem NUnit logs
 del "%~dp0*.VisualState.xml" > NUL 2>&1
 del "%~dp0TestResult.xml" > NUL 2>&1
