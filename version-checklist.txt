@@ -1,2 +1,0 @@
-/VERSION
-/src/AssemblyInfo.Global.cs

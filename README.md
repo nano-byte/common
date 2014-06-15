@@ -7,7 +7,7 @@ Directory structure
 - The directory `build` contains the results of various compilation processes. It is created on first usage.
 
 `VERSION` contains the version numbers used by build scripts.
-Keep in sync with the version numbers in `src/AssemblyInfo.Global.cs` and `nuget/*.nuspec`!
+Keep in sync with the version numbers in `src/AssemblyInfo.Global.cs`!
 
 
 
