@@ -29,7 +29,7 @@ using System.Linq;
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
-    /// Splits collections into multiple buckets based on value-mapping.
+    /// Splits collections into multiple buckets based on value-mapping. Create with <see cref="Bucketizer.Bucketize{TElement,TValue}"/>.
     /// </summary>
     /// <typeparam name="TElement">The common base type of all objects to be bucketized.</typeparam>
     /// <typeparam name="TValue">The type of the values to be matched.</typeparam>
@@ -37,18 +37,22 @@ namespace NanoByte.Common.Dispatch
     public class Bucketizer<TElement, TValue> : IEnumerable<BucketRule<TElement, TValue>>
     {
         private readonly List<BucketRule<TElement, TValue>> _rules = new List<BucketRule<TElement, TValue>>();
+        private readonly IEnumerable<TElement> _elements;
         private readonly Func<TElement, TValue> _valueRetriever;
 
         /// <summary>
         /// Creates a new value-mapping bucketizer.
         /// </summary>
+        /// <param name="elements">The elements to be bucketized.</param>
         /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
-        public Bucketizer(Func<TElement, TValue> valueRetriever)
+        internal Bucketizer(IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever)
         {
             #region Sanity checks
+            if (elements == null) throw new ArgumentNullException("elements");
             if (valueRetriever == null) throw new ArgumentNullException("valueRetriever");
             #endregion
 
+            _elements = elements;
             _valueRetriever = valueRetriever;
         }
 
@@ -72,13 +76,9 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Adds each element to the first bucket with a matching value (if any). Set up with <see cref="Add"/> first.
         /// </summary>
-        public void Bucketize(IEnumerable<TElement> elements)
+        public void Run()
         {
-            #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
-            #endregion
-
-            foreach (var element in elements)
+            foreach (var element in _elements)
             {
                 var value = _valueRetriever(element);
 
@@ -98,5 +98,18 @@ namespace NanoByte.Common.Dispatch
             return _rules.GetEnumerator();
         }
         #endregion
+    }
+
+    public static partial class Bucketizer
+    {
+        /// <summary>
+        /// Creates a new value-mapping bucketizer.
+        /// </summary>
+        /// <param name="elements">The elements to be bucketized.</param>
+        /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
+        public static Bucketizer<TElement, TValue> Bucketize<TElement, TValue>(this IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever)
+        {
+            return new Bucketizer<TElement, TValue>(elements, valueRetriever);
+        }
     }
 }

@@ -37,12 +37,11 @@ namespace NanoByte.Common.Dispatch
             var even = new List<int>();
             var lessThanThree = new List<int>();
             var rest = new List<int>();
-            new Bucketizer<int>
-            {
-                {x => x % 2 == 0, even},
-                {x => x < 3, lessThanThree},
-                {x => true, rest}
-            }.Bucketize(new[] {1, 2, 3, 4});
+            new[] {1, 2, 3, 4}.Bucketize()
+                .Add(x => x % 2 == 0, even)
+                .Add(x => x < 3, lessThanThree)
+                .Add(x => true, rest)
+                .Run();
 
             CollectionAssert.AreEqual(expected: new[] {2, 4}, actual: even);
             CollectionAssert.AreEqual(expected: new[] {1}, actual: lessThanThree);
@@ -54,11 +53,10 @@ namespace NanoByte.Common.Dispatch
         {
             var a = new List<string>();
             var b = new List<string>();
-            new Bucketizer<string, char>(x => x[0])
-            {
-                {'a', a},
-                {'b', b}
-            }.Bucketize(new[] {"alfred", "beatrice", "arnold"});
+            new[] {"alfred", "beatrice", "arnold"}.Bucketize(x => x[0])
+                .Add('a', a)
+                .Add('b', b)
+                .Run();
 
             CollectionAssert.AreEqual(expected: new[] {"alfred", "arnold"}, actual: a);
             CollectionAssert.AreEqual(expected: new[] {"beatrice"}, actual: b);

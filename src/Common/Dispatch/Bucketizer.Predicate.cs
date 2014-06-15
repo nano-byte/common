@@ -29,13 +29,27 @@ using System.Linq;
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
-    /// Splits collections into multiple buckets based on predicate matching. The first matching predicate wins.
+    /// Splits collections into multiple buckets based on predicate matching. The first matching predicate wins. Create with <see cref="Bucketizer.Bucketize{T}"/>.
     /// </summary>
     /// <typeparam name="T">The common base type of all objects to be bucketized.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class Bucketizer<T> : IEnumerable<BucketRule<T>>
     {
+        private readonly IEnumerable<T> _elements;
         private readonly List<BucketRule<T>> _rules = new List<BucketRule<T>>();
+
+        /// <summary>
+        /// Creates a new predicate-matching bucketizer.
+        /// </summary>
+        /// <param name="elements">The elements to be bucketized.</param>
+        internal Bucketizer(IEnumerable<T> elements)
+        {
+            #region Sanity checks
+            if (elements == null) throw new ArgumentNullException("elements");
+            #endregion
+
+            _elements = elements;
+        }
 
         /// <summary>
         /// Adds a new bucket rule.
@@ -58,13 +72,9 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Adds each element to the first bucket with a matching predicate (if any). Set up with <see cref="Add"/> first.
         /// </summary>
-        public void Bucketize(IEnumerable<T> elements)
+        public void Run()
         {
-            #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
-            #endregion
-
-            foreach (var element in elements)
+            foreach (var element in _elements)
             {
                 // ReSharper disable once AccessToForEachVariableInClosure
                 var matchedRule = _rules.FirstOrDefault(rule => rule.Predicate(element));
@@ -83,5 +93,20 @@ namespace NanoByte.Common.Dispatch
             return _rules.GetEnumerator();
         }
         #endregion
+    }
+
+    /// <summary>
+    /// Contains extension methods for creating bucketizers.
+    /// </summary>
+    public static partial class Bucketizer
+    {
+        /// <summary>
+        /// Creates a new predicate-matching bucketizer.
+        /// </summary>
+        /// <param name="elements">The elements to be bucketized.</param>
+        public static Bucketizer<T> Bucketize<T>(this IEnumerable<T> elements)
+        {
+            return new Bucketizer<T>(elements);
+        }
     }
 }
