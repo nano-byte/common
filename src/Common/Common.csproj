@@ -63,11 +63,9 @@
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\HashPrimeNumbers.cs" />
     <Compile Include="Collections\HashSet.cs" />
-    <Compile Include="Collections\IMergeable.cs" />
     <Compile Include="Collections\LanguageSet.cs" />
     <Compile Include="Collections\LocalizableString.cs" />
     <Compile Include="Collections\LocalizableStringCollection.cs" />
-    <Compile Include="Collections\Merge.cs" />
     <Compile Include="Collections\MonitoredCollection.cs" />
     <Compile Include="Collections\MultiDictionary.cs" />
     <Compile Include="Collections\NamedCollection.cs" />
@@ -82,6 +80,8 @@
     <Compile Include="Dispatch\Bucketizer.Value.cs" />
     <Compile Include="Dispatch\BucketRule.Predicate.cs" />
     <Compile Include="Dispatch\BucketRule.Value.cs" />
+    <Compile Include="Dispatch\IMergeable.cs" />
+    <Compile Include="Dispatch\Merge.cs" />
     <Compile Include="Dispatch\ModelViewSync.cs" />
     <Compile Include="Dispatch\PerTypeDispatcher.Action.cs" />
     <Compile Include="Dispatch\PerTypeDispatcher.Func.cs" />

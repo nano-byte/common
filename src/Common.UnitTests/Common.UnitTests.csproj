@@ -63,12 +63,12 @@
     <Compile Include="Collections\EnumerableExtensionsTest.cs" />
     <Compile Include="Collections\LanguageSetTest.cs" />
     <Compile Include="Collections\LocalizableStringCollectionTest.cs" />
-    <Compile Include="Collections\MergeTest.cs" />
     <Compile Include="Collections\NamedCollectionTest.cs" />
     <Compile Include="Collections\TransparentCacheTest.cs" />
     <Compile Include="Collections\XmlDictionaryTest.cs" />
     <Compile Include="Dispatch\AggregateDispatcherTest.cs" />
     <Compile Include="Dispatch\BucketizerTest.cs" />
+    <Compile Include="Dispatch\MergeTest.cs" />
     <Compile Include="Dispatch\ModelViewSyncTest.cs" />
     <Compile Include="Dispatch\PerTypeDispatcherTest.cs" />
     <Compile Include="LogTest.cs" />

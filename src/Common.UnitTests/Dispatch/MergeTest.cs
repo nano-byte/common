@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace NanoByte.Common.Collections
+namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Contains test methods for <see cref="Merge"/>.
@@ -42,7 +42,7 @@ namespace NanoByte.Common.Collections
 
             public DateTime Timestamp { get; set; }
 
-            public static ICollection<MergeTestData> BuildList(params string[] mergeIDs)
+            public static IEnumerable<MergeTestData> BuildList(params string[] mergeIDs)
             {
                 return mergeIDs.Select(value => new MergeTestData {MergeID = value}).ToList();
             }

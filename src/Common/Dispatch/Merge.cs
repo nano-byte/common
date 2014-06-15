@@ -23,8 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NanoByte.Common.Collections;
 
-namespace NanoByte.Common.Collections
+namespace NanoByte.Common.Dispatch
 {
     // ReSharper disable PossibleMultipleEnumeration
     /// <summary>
