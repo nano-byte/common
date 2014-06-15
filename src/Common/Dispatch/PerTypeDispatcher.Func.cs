@@ -57,13 +57,16 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <typeparam name="TSpecific">The specific type to call the delegate for. Does not match subtypes.</typeparam>
         /// <param name="function">The delegate to call.</param>
-        public void Add<TSpecific>(Func<TSpecific, TResult> function) where TSpecific : TBase
+        /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
+        public PerTypeDispatcher<TBase, TResult> Add<TSpecific>(Func<TSpecific, TResult> function) where TSpecific : TBase
         {
             #region Sanity checks
             if (function == null) throw new ArgumentNullException("function");
             #endregion
 
             _map.Add(typeof(TSpecific), obj => function((TSpecific)obj));
+
+            return this;
         }
 
         /// <summary>

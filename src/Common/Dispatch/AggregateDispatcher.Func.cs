@@ -46,7 +46,8 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <typeparam name="TSpecific">The specific type to call the delegate for. Matches all subtypes as well.</typeparam>
         /// <param name="function">The delegate to call.</param>
-        public void Add<TSpecific>(Func<TSpecific, IEnumerable<TResult>> function) where TSpecific : class, TBase
+        /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
+        public AggregateDispatcher<TBase, TResult> Add<TSpecific>(Func<TSpecific, IEnumerable<TResult>> function) where TSpecific : class, TBase
         {
             #region Sanity checks
             if (function == null) throw new ArgumentNullException("function");
@@ -57,6 +58,8 @@ namespace NanoByte.Common.Dispatch
                 var specificValue = value as TSpecific;
                 return specificValue == null ? null : function(specificValue);
             });
+
+            return this;
         }
 
         /// <summary>

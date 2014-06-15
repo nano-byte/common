@@ -43,7 +43,8 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <typeparam name="TSpecific">The specific type to call the delegate for. Matches all subtypes as well.</typeparam>
         /// <param name="action">The delegate to call.</param>
-        public void Add<TSpecific>(Action<TSpecific> action) where TSpecific : class, TBase
+        /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
+        public AggregateDispatcher<TBase> Add<TSpecific>(Action<TSpecific> action) where TSpecific : class, TBase
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
@@ -54,13 +55,14 @@ namespace NanoByte.Common.Dispatch
                 var specificValue = value as TSpecific;
                 if (specificValue != null) action(specificValue);
             });
+
+            return this;
         }
 
         /// <summary>
         /// Dispatches an element to all delegates matching the type. Set up with <see cref="Add{TSpecific}"/> first.
         /// </summary>
         /// <param name="element">The element to be dispatched.</param>
-        /// <returns>The values returned by all matching delegates aggregated.</returns>
         public void Dispatch(TBase element)
         {
             #region Sanity checks

@@ -57,25 +57,28 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="value">A value to compare with the result of the value retriever using <see cref="object.Equals(object,object)"/>.</param>
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="value"/>.</param>
-        public void Add(TValue value, ICollection<TElement> bucket)
+        /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
+        public Bucketizer<TElement, TValue> Add(TValue value, ICollection<TElement> bucket)
         {
             #region Sanity checks
             if (bucket == null) throw new ArgumentNullException("bucket");
             #endregion
 
             _rules.Add(new BucketRule<TElement, TValue>(value, bucket));
+
+            return this;
         }
 
         /// <summary>
         /// Adds each element to the first bucket with a matching value (if any). Set up with <see cref="Add"/> first.
         /// </summary>
-        public void Bucketize(IEnumerable<TElement> enumerable)
+        public void Bucketize(IEnumerable<TElement> elements)
         {
             #region Sanity checks
-            if (enumerable == null) throw new ArgumentNullException("enumerable");
+            if (elements == null) throw new ArgumentNullException("elements");
             #endregion
 
-            foreach (var element in enumerable)
+            foreach (var element in elements)
             {
                 var value = _valueRetriever(element);
 

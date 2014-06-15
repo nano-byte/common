@@ -42,7 +42,8 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="predicate">A condition to check elements against.</param>
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="predicate"/>.</param>
-        public void Add(Predicate<T> predicate, ICollection<T> bucket)
+        /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
+        public Bucketizer<T> Add(Predicate<T> predicate, ICollection<T> bucket)
         {
             #region Sanity checks
             if (predicate == null) throw new ArgumentNullException("predicate");
@@ -50,18 +51,20 @@ namespace NanoByte.Common.Dispatch
             #endregion
 
             _rules.Add(new BucketRule<T>(predicate, bucket));
+
+            return this;
         }
 
         /// <summary>
         /// Adds each element to the first bucket with a matching predicate (if any). Set up with <see cref="Add"/> first.
         /// </summary>
-        public void Bucketize(IEnumerable<T> enumerable)
+        public void Bucketize(IEnumerable<T> elements)
         {
             #region Sanity checks
-            if (enumerable == null) throw new ArgumentNullException("enumerable");
+            if (elements == null) throw new ArgumentNullException("elements");
             #endregion
 
-            foreach (var element in enumerable)
+            foreach (var element in elements)
             {
                 // ReSharper disable once AccessToForEachVariableInClosure
                 var matchedRule = _rules.FirstOrDefault(rule => rule.Predicate(element));
