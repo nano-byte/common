@@ -96,6 +96,9 @@ namespace NanoByte.Common.Controls
             // Only execute this code once per process
             if (!Monitor.TryEnter(_monitoringLock)) return;
 
+            // Disable WinForm's built-in error handling
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException, threadScope: false);
+
             AppDomain.CurrentDomain.UnhandledException += delegate(object sender, UnhandledExceptionEventArgs e)
             {
                 Log.Error("AppDomain.CurrentDomain.UnhandledException raised");
