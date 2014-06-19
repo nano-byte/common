@@ -62,7 +62,7 @@ namespace NanoByte.Common.Tasks
         bool Batch { get; set; }
 
         /// <summary>
-        /// Asks the user a Yes/No/Cancel question (e.g., whether to trust a new GPG key).
+        /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
         /// <param name="batchInformation">Information to be displayed if the question was automatically answered with 'No' because <see cref="Batch"/> was set to <see langword="true"/>; may be <see langword="null"/>.</param>

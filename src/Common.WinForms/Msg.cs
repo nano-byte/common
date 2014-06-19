@@ -80,14 +80,14 @@ namespace NanoByte.Common
         /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="option1">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="option2">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; may be <see langword="null"/>.</param>
-        /// <returns><see langword="true"/> if <paramref name="option1"/> was selected, <see langword="false"/> if <paramref name="option2"/> was selected.</returns>
-        /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="option1"/> and <paramref name="option2"/> are not display to the user, so don't rely on them!</remarks>
-        public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity, string option1, string option2)
+        /// <param name="okCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option; must not be <see langword="null"/>.</param>
+        /// <param name="cancelCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; may be <see langword="null"/>.</param>
+        /// <returns><see langword="true"/> if <paramref name="okCaption"/> was selected, <see langword="false"/> if <paramref name="cancelCaption"/> was selected.</returns>
+        /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="okCaption"/> and <paramref name="cancelCaption"/> are not display to the user, so don't rely on them!</remarks>
+        public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity, string okCaption, string cancelCaption)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
+            if (string.IsNullOrEmpty(okCaption)) throw new ArgumentNullException("okCaption");
             #endregion
 
             #region Logging
@@ -109,11 +109,11 @@ namespace NanoByte.Common
                 // Display default names with custom explanations
                 taskDialog.UseCommandLinks = true;
 
-                if (string.IsNullOrEmpty(option2))
+                if (string.IsNullOrEmpty(cancelCaption))
                 { // Default cancel button
                     taskDialog.Buttons = new[]
                     {
-                        new TaskDialogButton((int)DialogResult.OK, option1.Replace("\r\n", "\n"))
+                        new TaskDialogButton((int)DialogResult.OK, okCaption.Replace("\r\n", "\n"))
                     };
                     taskDialog.CommonButtons = TaskDialogCommonButtons.Cancel;
                 }
@@ -121,8 +121,8 @@ namespace NanoByte.Common
                 { // Custom cancel button
                     taskDialog.Buttons = new[]
                     {
-                        new TaskDialogButton((int)DialogResult.OK, option1.Replace("\r\n", "\n")),
-                        new TaskDialogButton((int)DialogResult.Cancel, option2.Replace("\r\n", "\n"))
+                        new TaskDialogButton((int)DialogResult.OK, okCaption.Replace("\r\n", "\n")),
+                        new TaskDialogButton((int)DialogResult.Cancel, cancelCaption.Replace("\r\n", "\n"))
                     };
                 }
 
@@ -155,15 +155,15 @@ namespace NanoByte.Common
         /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="option1">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="option2">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; must not be <see langword="null"/>.</param>
-        /// <returns><see langword="true"/> if <paramref name="option1"/> was chosen, <see langword="false"/> if <paramref name="option2"/> was chosen.</returns>
-        /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="option1"/> and <paramref name="option2"/> are not display to the user, so don't rely on them!</remarks>
-        public static bool YesNo(IWin32Window owner, string text, MsgSeverity severity, string option1, string option2)
+        /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; must not be <see langword="null"/>.</param>
+        /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; must not be <see langword="null"/>.</param>
+        /// <returns><see langword="true"/> if <paramref name="yesCaption"/> was chosen, <see langword="false"/> if <paramref name="noCaption"/> was chosen.</returns>
+        /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
+        public static bool YesNo(IWin32Window owner, string text, MsgSeverity severity, string yesCaption, string noCaption)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
-            if (string.IsNullOrEmpty(option2)) throw new ArgumentNullException("option2");
+            if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
+            if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
             #endregion
 
             #region Logging
@@ -186,8 +186,8 @@ namespace NanoByte.Common
                 taskDialog.UseCommandLinks = true;
                 taskDialog.Buttons = new[]
                 {
-                    new TaskDialogButton((int)DialogResult.Yes, option1.Replace("\r\n", "\n")),
-                    new TaskDialogButton((int)DialogResult.No, option2.Replace("\r\n", "\n"))
+                    new TaskDialogButton((int)DialogResult.Yes, yesCaption.Replace("\r\n", "\n")),
+                    new TaskDialogButton((int)DialogResult.No, noCaption.Replace("\r\n", "\n"))
                 };
 
                 try
@@ -227,17 +227,17 @@ namespace NanoByte.Common
         /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="option1">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="option2">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; must not be <see langword="null"/>.</param>
-        /// <returns><see cref="DialogResult.Yes"/> if <paramref name="option1"/> was chosen,
-        /// <see cref="DialogResult.No"/> if <paramref name="option2"/> was chosen,
+        /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; must not be <see langword="null"/>.</param>
+        /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; must not be <see langword="null"/>.</param>
+        /// <returns><see cref="DialogResult.Yes"/> if <paramref name="yesCaption"/> was chosen,
+        /// <see cref="DialogResult.No"/> if <paramref name="noCaption"/> was chosen,
         /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
-        /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="option1"/> and <paramref name="option2"/> are not display to the user, so don't rely on them!</remarks>
-        public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity, string option1, string option2)
+        /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
+        public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity, string yesCaption, string noCaption)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(option1)) throw new ArgumentNullException("option1");
-            if (string.IsNullOrEmpty(option2)) throw new ArgumentNullException("option2");
+            if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
+            if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
             #endregion
 
             #region Logging
@@ -262,8 +262,8 @@ namespace NanoByte.Common
                 taskDialog.UseCommandLinks = true;
                 taskDialog.Buttons = new[]
                 {
-                    new TaskDialogButton((int)DialogResult.Yes, option1.Replace("\r\n", "\n")),
-                    new TaskDialogButton((int)DialogResult.No, option2.Replace("\r\n", "\n"))
+                    new TaskDialogButton((int)DialogResult.Yes, yesCaption.Replace("\r\n", "\n")),
+                    new TaskDialogButton((int)DialogResult.No, noCaption.Replace("\r\n", "\n"))
                 };
 
                 // Infos and Warnings (like Save) should default to yes

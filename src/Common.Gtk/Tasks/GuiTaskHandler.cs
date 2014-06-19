@@ -80,7 +80,16 @@ namespace NanoByte.Common.Tasks
                 return false;
             }
 
-            return Msg.OKCancel(_owner, question, MsgSeverity.Warn);
+            switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
+            {
+                case ResponseType.Yes:
+                    return true;
+                case ResponseType.No:
+                    return false;
+                case ResponseType.Cancel:
+                default:
+                    throw new OperationCanceledException();
+            }
         }
 
         /// <inheritdoc/>

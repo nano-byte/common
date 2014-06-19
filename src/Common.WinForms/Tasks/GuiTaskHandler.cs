@@ -81,7 +81,16 @@ namespace NanoByte.Common.Tasks
                 return false;
             }
 
-            return Msg.YesNo(_owner, question, MsgSeverity.Warn);
+            switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
+            {
+                case DialogResult.Yes:
+                    return true;
+                case DialogResult.No:
+                    return false;
+                case DialogResult.Cancel:
+                default:
+                    throw new OperationCanceledException();
+            }
         }
 
         /// <inheritdoc/>
