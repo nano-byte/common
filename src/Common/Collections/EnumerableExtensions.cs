@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Collections
 {
@@ -79,10 +80,20 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Filters a sequence of elements to remove any <see langword="null"/> values.
         /// </summary>
-        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> collection)
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumeration)
         {
             // ReSharper disable once CompareNonConstrainedGenericWithNull
-            return collection.Where(element => element != null);
+            return enumeration.Where(element => element != null);
+        }
+
+        /// <summary>
+        /// Filters a sequence of elements to remove any duplicates based on the equality of a key extracted from the elements.
+        /// </summary>
+        /// <param name="enumeration">The sequence of elements to filter.</param>
+        /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
+        public static IEnumerable<T> Distinct<T, TKey>(this IEnumerable<T> enumeration, Func<T, TKey> keySelector)
+        {
+            return enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
         }
         #endregion
 

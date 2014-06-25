@@ -184,6 +184,7 @@
     <Compile Include="Values\Design\StringConstructorConverter.cs" />
     <Compile Include="Values\Design\StructConverter.cs" />
     <Compile Include="Values\EnumExtensions.cs" />
+    <Compile Include="Values\KeyEqualityComparer.cs" />
     <Compile Include="WebClientTimeout.cs">
       <SubType>Component</SubType>
     </Compile>

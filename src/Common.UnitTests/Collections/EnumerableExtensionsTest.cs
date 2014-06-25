@@ -33,6 +33,16 @@ namespace NanoByte.Common.Collections
     [TestFixture]
     public class EnumerableExtensionsTest
     {
+        [Test]
+        public void TestDistinct()
+        {
+            var strings = new[] {"a123", "a234", "b123"};
+
+            CollectionAssert.AreEquivalent(
+                expected: new[] {"a123", "b123"},
+                actual: strings.Distinct(x => x[0]));
+        }
+
         #region Equality
         [Test]
         public void TestSequencedEqualsList()
