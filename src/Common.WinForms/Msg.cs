@@ -146,6 +146,19 @@ namespace NanoByte.Common
             }
             else return ShowMesageBox(owner, text, severity, MessageBoxButtons.OKCancel) == DialogResult.OK;
         }
+
+        /// <summary>
+        /// Asks the user a OK/Cancel-question using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
+        /// </summary>
+        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="severity">How severe/important the message is.</param>
+        /// <returns><see langword="true"/> if OK was selected, <see langword="false"/> if Cancel was selected.</returns>
+        /// <remarks>If a <see cref="MessageBox"/> is used, OK and Cancel are not display to the user, so don't rely on them!</remarks>
+        public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity)
+        {
+            return OkCancel(owner, text, severity, "OK", Resources.Cancel);
+        }
         #endregion
 
         #region Yes/No
