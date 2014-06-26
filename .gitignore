@@ -1,6 +1,10 @@
-build/
-*.VisualState.xml
-TestResult.xml
+/build/
+/src/packages/*/
+/src/_ReSharper.*/
+/src/_TeamCity.*/
+/src/_dotTrace.*/
+/src/_dotMemory.*/
+obj/
 *.bak
 *.cache
 *.pidb
@@ -9,9 +13,3 @@ TestResult.xml
 *.userprefs
 *.DotSettings
 *.resources
-obj/
-src/_ReSharper.*/
-src/_TeamCity.*/
-src/_dotTrace.*/
-src/_dotMemory.*/
-src/packages/*/
