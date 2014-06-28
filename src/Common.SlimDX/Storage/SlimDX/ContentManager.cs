@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
@@ -41,23 +42,41 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// The file extensions of content archives.
         /// </summary>
-        public const string FileExt = ".pk5";
+        public const string ArchiveFileExt = ".pk5";
+
+        /// <summary>
+        /// The name of an environment variable that can be used to configure the content manager externally.
+        /// </summary>
+        public const string
+            EnvVarNameBaseDir = "CONTENTMANAGER_BASE_DIR",
+            EnvVarNameBaseArchives = "CONTENTMANAGER_BASE_ARCHIVES",
+            EnvVarNameModDir = "CONTENTMANAGER_MOD_DIR",
+            EnvVarNamerModArchives = "CONTENTMANAGER_MOD_ARCHIVES";
         #endregion
 
         #region Variables
-        private static DirectoryInfo _baseDir = new DirectoryInfo(Path.Combine(Locations.InstallBase, "content"));
-        private static DirectoryInfo _modDir;
-        private static List<ZipFile> _baseArchives, _modArchives;
+        private static readonly string
+            _envVarBaseDir = Environment.GetEnvironmentVariable(EnvVarNameBaseDir),
+            _envVarBaseArchives = Environment.GetEnvironmentVariable(EnvVarNameBaseArchives),
+            _envVarModDir = Environment.GetEnvironmentVariable(EnvVarNameModDir),
+            _envVarModArchives = Environment.GetEnvironmentVariable(EnvVarNamerModArchives);
+
+        private static DirectoryInfo
+            _baseDir = new DirectoryInfo(_envVarBaseDir ?? Path.Combine(Locations.InstallBase, "content")),
+            _modDir = (_envVarModDir == null) ? null : new DirectoryInfo(_envVarModDir);
+
+        private static readonly List<ZipFile> _loadedArchives = new List<ZipFile>();
 
         private static readonly Dictionary<string, ContentArchiveEntry>
-            _baseArchiveData = new Dictionary<string, ContentArchiveEntry>(StringComparer.OrdinalIgnoreCase),
-            _modArchiveData = new Dictionary<string, ContentArchiveEntry>(StringComparer.OrdinalIgnoreCase);
+            _baseArchiveEntries = new Dictionary<string, ContentArchiveEntry>(StringComparer.OrdinalIgnoreCase),
+            _modArchiveEntries = new Dictionary<string, ContentArchiveEntry>(StringComparer.OrdinalIgnoreCase);
         #endregion
 
         #region Properties
         /// <summary>
         /// The base directory where all the content files are stored; should not be <see langword="null"/>.
         /// </summary>
+        /// <remarks>Can be set externally with <see cref="EnvVarNameBaseDir"/>.</remarks>
         /// <exception cref="DirectoryNotFoundException">Thrown when the specified directory could not be found.</exception>
         public static DirectoryInfo BaseDir
         {
@@ -73,6 +92,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// A directory overriding the base directory for creating mods; may be <see langword="null"/>.
         /// </summary>
+        /// <remarks>Can be set externally with <see cref="EnvVarNameModDir"/>.</remarks>
         /// <exception cref="DirectoryNotFoundException">Thrown when the specified directory could not be found.</exception>
         public static DirectoryInfo ModDir
         {
@@ -90,74 +110,74 @@ namespace NanoByte.Common.Storage.SlimDX
 
         #region Load archives
         /// <summary>
-        /// Loads content archives from the base directory into the <see cref="ContentManager"/>.
+        /// Loads any <see cref="ArchiveFileExt"/> archives in <see cref="BaseDir"/> and <see cref="ModDir"/> or specified by <see cref="EnvVarNameBaseArchives"/> or <see cref="EnvVarNamerModArchives"/>.
         /// </summary>
         public static void LoadArchives()
         {
-            if (_baseArchives != null) throw new InvalidOperationException(Resources.ContentArchivesAlreadyLoaded);
+            if (_loadedArchives.Count != 0) throw new InvalidOperationException(Resources.ContentArchivesAlreadyLoaded);
 
-            _baseArchives = LoadArchives(BaseDir, _baseArchiveData);
-            if (ModDir != null) _modArchives = LoadArchives(ModDir, _modArchiveData);
-        }
-
-        private static List<ZipFile> LoadArchives(DirectoryInfo directory, Dictionary<string, ContentArchiveEntry> dictionary)
-        {
-            FileInfo[] files = directory.GetFiles("*" + FileExt);
-            var archives = new List<ZipFile>(files.Length); // Use exact size for list capacity
-            foreach (FileInfo file in files)
+            if (_envVarBaseArchives != null)
             {
-                Log.Info("Load base data archive: " + file.Name);
-                var zipFile = new ZipFile(file.FullName);
-                foreach (ZipEntry zipEntry in zipFile)
-                    dictionary.Add(zipEntry, zipFile);
-                archives.Add(zipFile);
+                foreach (string path in _envVarBaseArchives.Split(Path.PathSeparator))
+                    LoadArchive(path, _baseArchiveEntries);
             }
-            return archives;
+            foreach (string path in BaseDir.GetFiles("*" + ArchiveFileExt).Select(x => x.FullName))
+                LoadArchive(path, _baseArchiveEntries);
+
+            if (_envVarModArchives != null)
+            {
+                foreach (string path in _envVarModArchives.Split(Path.PathSeparator))
+                    LoadArchive(path, _modArchiveEntries);
+            }
+            if (ModDir != null)
+            {
+                foreach (string path in ModDir.GetFiles("*" + ArchiveFileExt).Select(x => x.FullName))
+                    LoadArchive(path, _modArchiveEntries);
+            }
         }
 
-        private static void Add(this Dictionary<string, ContentArchiveEntry> dictionary, ZipEntry zipEntry, ZipFile zipFile)
+        private static void LoadArchive(string path, Dictionary<string, ContentArchiveEntry> archiveEntries)
+        {
+            Log.Info("Load data archive: " + path);
+            var zipFile = new ZipFile(path);
+            foreach (ZipEntry zipEntry in zipFile)
+                archiveEntries.AddEntry(zipEntry, zipFile);
+            _loadedArchives.Add(zipFile);
+        }
+
+        private static void AddEntry(this Dictionary<string, ContentArchiveEntry> dictionary, ZipEntry zipEntry, ZipFile zipFile)
         {
             if (!zipEntry.IsFile) return;
             string filename = FileUtils.UnifySlashes(zipEntry.Name);
 
             // Overwrite existing entries
-            if (dictionary.ContainsKey(filename)) _baseArchiveData.Remove(filename);
+            if (dictionary.ContainsKey(filename)) _baseArchiveEntries.Remove(filename);
             dictionary.Add(filename, new ContentArchiveEntry(zipFile, zipEntry));
         }
         #endregion
 
         #region Close archives
         /// <summary>
-        /// Closes the content archives loaded into the <see cref="ContentManager"/>.
+        /// Closes the content archives loaded by <see cref="LoadArchives"/>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Errors on shutdown because of an inconsistent state are useless and annoying")]
         public static void CloseArchives()
         {
-            if (_baseArchives != null)
-            {
-                _baseArchives.ForEach(CloseSafe);
-                _baseArchives = null;
-                _baseArchiveData.Clear();
-            }
+            _baseArchiveEntries.Clear();
+            _modArchiveEntries.Clear();
 
-            if (_modArchives != null)
+            foreach (var archive in _loadedArchives)
             {
-                _modArchives.ForEach(CloseSafe);
-                _modArchives = null;
-                _modArchiveData.Clear();
+                Log.Info("Close archive: " + archive.Name);
+                try
+                {
+                    archive.Close();
+                }
+                    // TODO: Catch only specifc exception types
+                catch
+                {}
             }
-        }
-
-        private static void CloseSafe(this ZipFile zipFile)
-        {
-            Log.Info("Close archive: " + zipFile.Name);
-            try
-            {
-                zipFile.Close();
-            }
-                // TODO: Catch only specifc exception types
-            catch
-            {}
+            _loadedArchives.Clear();
         }
         #endregion
 
@@ -234,7 +254,7 @@ namespace NanoByte.Common.Storage.SlimDX
                 return true;
             if (BaseDir != null && File.Exists(Path.Combine(BaseDir.FullName, fullID)))
                 return true;
-            return searchArchives && _baseArchiveData.ContainsKey(fullID);
+            return searchArchives && _baseArchiveEntries.ContainsKey(fullID);
         }
         #endregion
 
@@ -346,7 +366,7 @@ namespace NanoByte.Common.Storage.SlimDX
             }
 
             // Find files in archives
-            AddArchivesToList(files, type, extension, _baseArchiveData, false);
+            AddArchivesToList(files, type, extension, _baseArchiveEntries, false);
             #endregion
 
             if (ModDir != null)
@@ -360,7 +380,7 @@ namespace NanoByte.Common.Storage.SlimDX
                 }
 
                 // Find files in archives
-                AddArchivesToList(files, type, extension, _modArchiveData, true);
+                AddArchivesToList(files, type, extension, _modArchiveEntries, true);
                 #endregion
             }
 
@@ -439,13 +459,13 @@ namespace NanoByte.Common.Storage.SlimDX
                 if (File.Exists(path)) return File.OpenRead(path);
 
                 // Archive entry
-                if (_modArchiveData.ContainsKey(fullID))
+                if (_modArchiveEntries.ContainsKey(fullID))
                 {
                     // Copy from ZIP file to MemoryStream to provide seeking capability
                     Stream memoryStream = new MemoryStream();
                     try
                     {
-                        using (var inputStream = _modArchiveData[fullID].ZipFile.GetInputStream(_modArchiveData[fullID].ZipEntry))
+                        using (var inputStream = _modArchiveEntries[fullID].ZipFile.GetInputStream(_modArchiveEntries[fullID].ZipEntry))
                             inputStream.CopyTo(memoryStream);
                     }
                         #region Error handling
@@ -468,11 +488,11 @@ namespace NanoByte.Common.Storage.SlimDX
                 if (File.Exists(path)) return File.OpenRead(path);
 
                 // Archive entry
-                if (_baseArchiveData.ContainsKey(fullID))
+                if (_baseArchiveEntries.ContainsKey(fullID))
                 {
                     // Copy from ZIP file to MemoryStream to provide seeking capability
                     Stream memoryStream = new MemoryStream();
-                    using (var inputStream = _baseArchiveData[fullID].ZipFile.GetInputStream(_baseArchiveData[fullID].ZipEntry))
+                    using (var inputStream = _baseArchiveEntries[fullID].ZipFile.GetInputStream(_baseArchiveEntries[fullID].ZipEntry))
                         inputStream.CopyTo(memoryStream);
                     return memoryStream;
                 }

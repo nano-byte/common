@@ -29,7 +29,6 @@ namespace NanoByte.Common.Storage.SlimDX
     /// </summary>
     internal struct ContentArchiveEntry
     {
-        #region Properties
         private readonly ZipFile _zipFile;
 
         /// <summary>
@@ -43,9 +42,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// The actual content file.
         /// </summary>
         public ZipEntry ZipEntry { get { return _zipEntry; } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new content file representation
         /// </summary>
@@ -56,6 +53,5 @@ namespace NanoByte.Common.Storage.SlimDX
             _zipFile = zipFile;
             _zipEntry = zipEntry;
         }
-        #endregion
     }
 }
