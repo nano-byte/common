@@ -96,11 +96,11 @@ namespace NanoByte.Common
                     // Is the next element of the argument another command or an option?
                     if (i + 1 < args.Length && !IsCommand(args[i + 1]))
                     { // Command with an option (remove leading slash or hypen)
-                        _commands.Add(args[i].Remove(0, 1), args[++i]);
+                        _commands[args[i].Remove(0, 1)] = args[++i];
                     }
                     else
                     { // Command without an option (remove leading slash or hypen)
-                        _commands.Add(args[i].Remove(0, 1), null);
+                        _commands[args[i].Remove(0, 1)] = null;
                     }
                 }
                 else _files.Add(args[i]);
