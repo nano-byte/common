@@ -33,12 +33,12 @@ namespace NanoByte.Common.Tasks
     [Serializable]
     public struct TaskSnapshot
     {
-        private readonly TaskStatus _status;
+        private readonly TaskState _state;
 
         /// <summary>
-        /// The current status of the task.
+        /// The current State of the task.
         /// </summary>
-        public TaskStatus Status { get { return _status; } }
+        public TaskState State { get { return _state; } }
 
         private readonly bool _unitsByte;
 
@@ -65,13 +65,13 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Create a new progress snapshot.
         /// </summary>
-        /// <param name="status">The current status of the task.</param>
+        /// <param name="state">The current State of the task.</param>
         /// <param name="unitsByte"><see langword="true"/> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes; <see langword="false"/> if they are measured in generic units.</param>
         /// <param name="unitsProcessed">The number of units that have been processed so far.</param>
         /// <param name="unitsTotal">The total number of units that are to be processed; -1 for unknown.</param>
-        public TaskSnapshot(TaskStatus status, bool unitsByte, long unitsProcessed, long unitsTotal)
+        public TaskSnapshot(TaskState state, bool unitsByte, long unitsProcessed, long unitsTotal)
         {
-            _status = status;
+            _state = state;
             _unitsByte = unitsByte;
             _unitsProcessed = unitsProcessed;
             _unitsTotal = unitsTotal;
@@ -99,17 +99,17 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public override string ToString()
         {
-            switch (Status)
+            switch (State)
             {
                 default:
-                case TaskStatus.Ready:
-                case TaskStatus.Started:
+                case TaskState.Ready:
+                case TaskState.Started:
                     return "";
 
-                case TaskStatus.Header:
+                case TaskState.Header:
                     return Resources.StateHeader;
 
-                case TaskStatus.Data:
+                case TaskState.Data:
                     if (UnitsProcessed == 0 && UnitsTotal == -1) return Resources.StateData;
 
                     string dataText = UnitsByte
@@ -123,13 +123,13 @@ namespace NanoByte.Common.Tasks
                     }
                     return dataText;
 
-                case TaskStatus.Complete:
+                case TaskState.Complete:
                     return Resources.StateComplete;
 
-                case TaskStatus.WebError:
+                case TaskState.WebError:
                     return Resources.StateWebError;
 
-                case TaskStatus.IOError:
+                case TaskState.IOError:
                     return Resources.StateIOError;
             }
         }

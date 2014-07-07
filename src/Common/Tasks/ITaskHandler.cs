@@ -42,8 +42,8 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="task">The task to be run. (<see cref="ITask.Run"/> or equivalent is called on it.)</param>
         /// <exception cref="OperationCanceledException">Thrown if the user canceled the task.</exception>
-        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskStatus.IOError"/>.</exception>
-        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskStatus.WebError"/>.</exception>
+        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
+        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <remarks>
         /// This may be called multiple times concurrently but the concurrent calls must not depend on each other!
         /// The specific implementation of this method may chose whether to actually run the tasks concurrently or in sequence.

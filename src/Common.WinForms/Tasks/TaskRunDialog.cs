@@ -64,7 +64,7 @@ namespace NanoByte.Common.Tasks
         {
             _progress.ProgressChanged += progressBarTask.Report;
             _progress.ProgressChanged += labelTask.Report;
-            _progress.ProgressChanged += snapshot => { if (snapshot.Status == TaskStatus.Complete) Close(); };
+            _progress.ProgressChanged += snapshot => { if (snapshot.State == TaskState.Complete) Close(); };
 
             _taskThread.Start();
         }

@@ -25,8 +25,8 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Represents different states a (usually Web- or IO-related) task can be in.
     /// </summary>
-    /// <seealso cref="TaskSnapshot.Status"/>
-    public enum TaskStatus
+    /// <seealso cref="TaskSnapshot.State"/>
+    public enum TaskState
     {
         /// <summary>The task is ready to begin.</summary>
         Ready,

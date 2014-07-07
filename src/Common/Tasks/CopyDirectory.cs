@@ -96,18 +96,18 @@ namespace NanoByte.Common.Tasks
             }
             else _destination.Create();
 
-            Status = TaskStatus.Header;
+            State = TaskState.Header;
             var sourceDirectories = new List<DirectoryInfo>();
             var sourceFiles = new List<FileInfo>();
             _source.Walk(sourceDirectories.Add, sourceFiles.Add);
             UnitsTotal = sourceFiles.Sum(file => file.Length);
 
-            Status = TaskStatus.Data;
+            State = TaskState.Data;
             CopyDirectories(sourceDirectories);
             CopyFiles(sourceFiles);
             if (PreserveDirectoryTimestamps)
                 CopyDirectoryTimestamps(sourceDirectories);
-            Status = TaskStatus.Complete;
+            State = TaskState.Complete;
         }
 
         private void CopyDirectories(IEnumerable<DirectoryInfo> sourceDirectories)

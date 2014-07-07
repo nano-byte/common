@@ -75,7 +75,7 @@ namespace NanoByte.Common.Tasks
         {
             _work();
 
-            Status = TaskStatus.Complete;
+            State = TaskState.Complete;
         }
         #endregion
     }

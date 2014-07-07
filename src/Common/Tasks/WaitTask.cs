@@ -81,7 +81,7 @@ namespace NanoByte.Common.Tasks
                 Log.Warn(ex.Message);
             }
 
-            Status = TaskStatus.Complete;
+            State = TaskState.Complete;
         }
         #endregion
     }

@@ -65,23 +65,23 @@ namespace NanoByte.Common.Controls
         /// </summary>
         public void Report(TaskSnapshot snapshot)
         {
-            switch (snapshot.Status)
+            switch (snapshot.State)
             {
-                case TaskStatus.Ready:
-                    // When the status is complete the bar should always be empty
+                case TaskState.Ready:
+                    // When the State is complete the bar should always be empty
                     Style = ProgressBarStyle.Continuous;
                     Value = 0;
 
                     if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.NoProgress);
                     break;
 
-                case TaskStatus.Started:
-                case TaskStatus.Header:
+                case TaskState.Started:
+                case TaskState.Header:
                     Style = ProgressBarStyle.Marquee;
                     if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.Indeterminate);
                     break;
 
-                case TaskStatus.Data:
+                case TaskState.Data:
                     if (snapshot.UnitsTotal == -1)
                     {
                         Style = ProgressBarStyle.Marquee;
@@ -94,14 +94,14 @@ namespace NanoByte.Common.Controls
                     }
                     break;
 
-                case TaskStatus.IOError:
-                case TaskStatus.WebError:
+                case TaskState.IOError:
+                case TaskState.WebError:
                     Style = ProgressBarStyle.Continuous;
                     if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.Error);
                     break;
 
-                case TaskStatus.Complete:
-                    // When the status is complete the bar should always be full
+                case TaskState.Complete:
+                    // When the State is complete the bar should always be full
                     Style = ProgressBarStyle.Continuous;
                     Value = 100;
 
@@ -113,8 +113,8 @@ namespace NanoByte.Common.Controls
             if (currentValue < 0) currentValue = 0;
             else if (currentValue > 100) currentValue = 100;
 
-            // When the status is complete the bar should always be full
-            if (snapshot.Status == TaskStatus.Complete) currentValue = 100;
+            // When the State is complete the bar should always be full
+            if (snapshot.State == TaskState.Complete) currentValue = 100;
 
             Value = currentValue;
             IntPtr formHandle = ParentHandle;

@@ -44,14 +44,14 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// The URL the file is to be downloaded from.
         /// </summary>
-        /// <remarks>This value may change once <see cref="TaskStatus.Data"/> has been reached, based on HTTP redirections.</remarks>
+        /// <remarks>This value may change once <see cref="TaskState.Data"/> has been reached, based on HTTP redirections.</remarks>
         [Description("The URL the file is to be downloaded from.")]
         public Uri Source { get; private set; }
 
         /// <summary>
         /// The HTTP header data returned by the server for the download request. An empty collection in case of an FTP download.
         /// </summary>
-        /// <remarks>This value is always <see langword="null"/> until <see cref="TaskStatus.Data"/> has been reached.</remarks>
+        /// <remarks>This value is always <see langword="null"/> until <see cref="TaskState.Data"/> has been reached.</remarks>
         public WebHeaderCollection Headers { get; private set; }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Tasks
             // Open the target file for writing
             using (FileStream fileStream = File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write))
             {
-                Status = TaskStatus.Header;
+                State = TaskState.Header;
 
                 // ReSharper disable AssignNullToNotNullAttribute
                 var responseRequest = request.BeginGetResponse(null, null);
@@ -108,14 +108,14 @@ namespace NanoByte.Common.Tasks
                 {
                     CancellationToken.ThrowIfCancellationRequested();
                     ReadHeader(response);
-                    Status = TaskStatus.Data;
+                    State = TaskState.Data;
 
                     // Start writing data to the file
                     if (response != null) WriteStreamToTarget(response.GetResponseStream(), fileStream);
                 }
             }
 
-            Status = TaskStatus.Complete;
+            State = TaskState.Complete;
         }
         #endregion
 

@@ -81,7 +81,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override void Execute()
         {
-            Status = TaskStatus.Data;
+            State = TaskState.Data;
 
             foreach (var element in _target)
             {
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Tasks
                 UnitsProcessed++;
             }
 
-            Status = TaskStatus.Complete;
+            State = TaskState.Complete;
         }
         #endregion
     }

@@ -89,7 +89,7 @@ namespace NanoByte.Common.Tasks
 
         private void OnProgressChanged(TaskSnapshot snapshot)
         {
-            if (snapshot.Status == TaskStatus.Complete) OnClose();
+            if (snapshot.State == TaskState.Complete) OnClose();
             progressBarTask.Fraction = snapshot.Value;
             labelTask.Text = snapshot.ToString();
         }

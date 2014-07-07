@@ -43,18 +43,18 @@ namespace NanoByte.Common.Controls
         {
             Text = snapshot.ToString();
 
-            switch (snapshot.Status)
+            switch (snapshot.State)
             {
                 default:
                     ForeColor = SystemColors.ControlText;
                     break;
 
-                case TaskStatus.Complete:
+                case TaskState.Complete:
                     ForeColor = Color.Green;
                     break;
 
-                case TaskStatus.WebError:
-                case TaskStatus.IOError:
+                case TaskState.WebError:
+                case TaskState.IOError:
                     ForeColor = Color.Red;
                     break;
             }

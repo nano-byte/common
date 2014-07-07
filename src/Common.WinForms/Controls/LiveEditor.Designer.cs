@@ -51,7 +51,7 @@
             // 
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(47, 17);
-            this.labelStatus.Text = "(Status)";
+            this.labelStatus.Text = "(State)";
             // 
             // timer
             // 

@@ -42,11 +42,11 @@ namespace NanoByte.Common.Tasks
                 waitThread.Start();
 
                 Thread.Sleep(100);
-                Assert.AreEqual(TaskStatus.Started, task.Status);
+                Assert.AreEqual(TaskState.Started, task.State);
 
                 waitHandle.Set();
                 waitThread.Join();
-                Assert.AreEqual(TaskStatus.Complete, task.Status);
+                Assert.AreEqual(TaskState.Complete, task.State);
             }
         }
 
@@ -77,7 +77,7 @@ namespace NanoByte.Common.Tasks
                 cancellationTokenSource.Cancel();
                 waitThread.Join();
 
-                Assert.IsTrue(exceptionThrown, task.Status.ToString());
+                Assert.IsTrue(exceptionThrown, task.State.ToString());
             }
         }
     }

@@ -37,25 +37,25 @@ namespace NanoByte.Common.Cli
     public class ProgressBar : MarshalByRefObject, IProgress<TaskSnapshot>, IDisposable
     {
         #region Properties
-        private TaskStatus _status;
+        private TaskState _state;
 
         /// <summary>
-        /// The current status of the task.
+        /// The current State of the task.
         /// </summary>
-        [Description("The current status of the task.")]
-        public TaskStatus Status
+        [Description("The current State of the task.")]
+        public TaskState State
         {
-            get { return _status; }
+            get { return _state; }
             set
             {
                 #region Sanity checks
-                if (!Enum.IsDefined(typeof(TaskStatus), value))
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(TaskStatus));
+                if (!Enum.IsDefined(typeof(TaskState), value))
+                    throw new InvalidEnumArgumentException("value", (int)value, typeof(TaskState));
                 #endregion
 
                 try
                 {
-                    value.To(ref _status, Draw);
+                    value.To(ref _state, Draw);
                 }
                 catch (IOException)
                 {}
@@ -119,10 +119,10 @@ namespace NanoByte.Common.Cli
         // NOTE: No need for thread marshaling when writing to the console
         void IProgress<TaskSnapshot>.Report(TaskSnapshot snapshot)
         {
-            Status = snapshot.Status;
+            State = snapshot.State;
 
-            // When the status is complete the bar should always be full
-            if (Status == TaskStatus.Complete) Value = Maximum;
+            // When the State is complete the bar should always be full
+            if (State == TaskState.Complete) Value = Maximum;
 
             // Clamp the progress to values between 0 and 1
             double value = snapshot.Value;
@@ -174,29 +174,29 @@ namespace NanoByte.Common.Cli
 
         private void PrintStatus()
         {
-            switch (Status)
+            switch (State)
             {
-                case TaskStatus.Header:
+                case TaskState.Header:
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Error.Write(Resources.StateHeader);
                     break;
 
-                case TaskStatus.Data:
+                case TaskState.Data:
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Error.Write(Resources.StateData);
                     break;
 
-                case TaskStatus.Complete:
+                case TaskState.Complete:
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Error.Write(Resources.StateComplete);
                     break;
 
-                case TaskStatus.WebError:
+                case TaskState.WebError:
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Error.Write(Resources.StateWebError);
                     break;
 
-                case TaskStatus.IOError:
+                case TaskState.IOError:
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Error.Write(Resources.StateIOError);
                     break;

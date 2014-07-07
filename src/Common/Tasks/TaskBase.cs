@@ -67,7 +67,7 @@ namespace NanoByte.Common.Tasks
             CancellationToken = cancellationToken;
             _progress = progress;
 
-            Status = TaskStatus.Started;
+            State = TaskState.Started;
 
             try
             {
@@ -82,22 +82,22 @@ namespace NanoByte.Common.Tasks
                 #region Error handling
             catch (OperationCanceledException)
             {
-                Status = TaskStatus.Canceled;
+                State = TaskState.Canceled;
                 throw;
             }
             catch (IOException)
             {
-                Status = TaskStatus.IOError;
+                State = TaskState.IOError;
                 throw;
             }
             catch (UnauthorizedAccessException)
             {
-                Status = TaskStatus.IOError;
+                State = TaskState.IOError;
                 throw;
             }
             catch (WebException)
             {
-                Status = TaskStatus.WebError;
+                State = TaskState.WebError;
                 throw;
             }
             #endregion
@@ -105,10 +105,10 @@ namespace NanoByte.Common.Tasks
         #endregion
 
         #region Progress
-        private TaskStatus _status;
+        private TaskState _state;
 
-        /// <summary>The current status of the task.</summary>
-        protected internal TaskStatus Status { get { return _status; } protected set { value.To(ref _status, OnProgressChanged); } }
+        /// <summary>The current State of the task.</summary>
+        protected internal TaskState State { get { return _state; } protected set { value.To(ref _state, OnProgressChanged); } }
 
         /// <summary>
         /// <see langword="true"/> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
@@ -133,7 +133,7 @@ namespace NanoByte.Common.Tasks
         {
             if (_progress == null) return;
 
-            _progress.Report(new TaskSnapshot(_status, UnitsByte, _unitsProcessed, _unitsTotal));
+            _progress.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
         }
 
         private DateTime _lastProgress;
@@ -149,7 +149,7 @@ namespace NanoByte.Common.Tasks
             var now = DateTime.Now;
             if ((now - _lastProgress) < _progressRate) return;
 
-            _progress.Report(new TaskSnapshot(_status, UnitsByte, _unitsProcessed, _unitsTotal));
+            _progress.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
             _lastProgress = now;
         }
         #endregion
@@ -158,8 +158,8 @@ namespace NanoByte.Common.Tasks
         /// The actual code to be executed.
         /// </summary>
         /// <exception cref="OperationCanceledException">Thrown if the operation was canceled.</exception>
-        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskStatus.IOError"/>.</exception>
-        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskStatus.WebError"/>.</exception>
+        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
+        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
         protected abstract void Execute();
     }
 }
