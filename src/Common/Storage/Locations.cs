@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using NanoByte.Common.Properties;
@@ -355,6 +356,31 @@ namespace NanoByte.Common.Storage
                     if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
                         yield return Path.GetFullPath(path);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Tries to locate a file either in <see cref="InstallBase"/>, the location of the NanoByte.Common.dll or in the PATH.
+        /// </summary>
+        /// <param name="fileName">The file name of the file to search for.</param>
+        /// <returns>The fully qualified path of the first located instance of the file.</returns>
+        /// <exception cref="IOException">Thrown if the file could not be found.</exception>
+        public static string GetInstalledFilePath(string fileName)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException("fileName");
+            #endregion
+
+            try
+            {
+                return new[] {InstallBase, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}
+                    .Concat((Environment.GetEnvironmentVariable("PATH") ?? "").Split(Path.PathSeparator))
+                    .Select(x => Path.Combine(x, fileName))
+                    .First(File.Exists);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new IOException(string.Format(Resources.FileNotFound, fileName));
             }
         }
         #endregion
