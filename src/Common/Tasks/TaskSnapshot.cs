@@ -110,18 +110,10 @@ namespace NanoByte.Common.Tasks
                     return Resources.StateHeader;
 
                 case TaskState.Data:
-                    if (UnitsProcessed == 0 && UnitsTotal == -1) return Resources.StateData;
-
-                    string dataText = UnitsByte
-                        ? UnitsProcessed.FormatBytes(CultureInfo.CurrentCulture)
-                        : UnitsProcessed.ToString(CultureInfo.CurrentCulture);
-                    if (UnitsTotal != -1)
-                    {
-                        return dataText + @" / " + (UnitsByte
-                            ? UnitsTotal.FormatBytes(CultureInfo.CurrentCulture)
-                            : UnitsTotal.ToString(CultureInfo.CurrentCulture));
-                    }
-                    return dataText;
+                    if (UnitsTotal == -1)
+                        return (UnitsProcessed == 0) ? Resources.StateData : UnitsToString(UnitsProcessed);
+                    else
+                        return UnitsToString(UnitsProcessed) + @" / " + UnitsToString(UnitsTotal);
 
                 case TaskState.Complete:
                     return Resources.StateComplete;
@@ -132,6 +124,13 @@ namespace NanoByte.Common.Tasks
                 case TaskState.IOError:
                     return Resources.StateIOError;
             }
+        }
+
+        private string UnitsToString(long units)
+        {
+            return UnitsByte
+                ? units.FormatBytes(CultureInfo.CurrentCulture)
+                : units.ToString(CultureInfo.CurrentCulture);
         }
     }
 }
