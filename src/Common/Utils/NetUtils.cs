@@ -34,6 +34,23 @@ namespace NanoByte.Common.Utils
     public static class NetUtils
     {
         /// <summary>
+        /// Applies environment variable HTTP proxy server configuration if present.
+        /// </summary>
+        /// <remarks>Uses classic Linux environment variables: http_proxy, http_proxy_user, http_proxy_pass</remarks>
+        public static void ApplyProxy()
+        {
+            string httpProxy = Environment.GetEnvironmentVariable("http_proxy");
+            string httpProxyUser = Environment.GetEnvironmentVariable("http_proxy_user");
+            string httpProxyPass = Environment.GetEnvironmentVariable("http_proxy_pass");
+            if (!string.IsNullOrEmpty(httpProxy))
+            {
+                WebRequest.DefaultWebProxy = string.IsNullOrEmpty(httpProxyUser)
+                    ? new WebProxy(httpProxy)
+                    : new WebProxy(httpProxy) {Credentials = new NetworkCredential(httpProxyUser, httpProxyPass)};
+            }
+        }
+
+        /// <summary>
         /// Makes the SSL validation subsystem trust a set of certificates, even if their certificate chain is not trusted.
         /// </summary>
         /// <param name="publicKeys">The public keys of the certificates to trust.</param>
