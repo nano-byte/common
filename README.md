@@ -29,6 +29,4 @@ Linux
 `cleanup.sh` will delete any temporary files created by the xbuild build process.
 
 `test.sh` will run the unit tests using the NUnit console runner.
-Note: You must perform a Debug build first (using MonoDevelop or `src/build.sh`) before you can run the unit tests.
-
-**Important:** Activate *Compile projects using MSBuild/XBuild* in the MonoDevelop/Xamarin Studio preferences!
+Note: You must perform a Debug build first (using `src/build.sh`) before you can run the unit tests.
