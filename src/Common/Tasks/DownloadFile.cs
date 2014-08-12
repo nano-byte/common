@@ -88,7 +88,18 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override void Execute()
         {
-            var request = WebRequest.Create(Source);
+            WebRequest request;
+            try
+            {
+                request = WebRequest.Create(Source);
+            }
+                #region Sanity checks
+            catch (NotSupportedException ex)
+            {
+                // Wrap exception since only certain exception types are allowed
+                throw new WebException(ex.Message, ex);
+            }
+            #endregion
 
             // Open the target file for writing
             using (FileStream fileStream = File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write))
