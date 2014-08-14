@@ -65,7 +65,7 @@ namespace NanoByte.Common.Values.Design
                 listBox.Items.Add(language);
                 listBox.SetItemChecked(i++, true);
             }
-            foreach (var language in LanguageSet.KnownLanguages.Except(languages))
+            foreach (var language in Languages.AllKnown.Except(languages))
                 listBox.Items.Add(language);
 
             editorService.DropDownControl(listBox);

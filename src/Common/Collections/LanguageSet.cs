@@ -39,21 +39,6 @@ namespace NanoByte.Common.Collections
     [TypeConverter(typeof(StringConstructorConverter<LanguageSet>))]
     public sealed class LanguageSet : SortedSet<CultureInfo>
     {
-        #region Constants
-        /// <summary>
-        /// All known languages in alphabetical order.
-        /// </summary>
-        internal static readonly IEnumerable<CultureInfo> KnownLanguages;
-
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Data must be sorted before use.")]
-        static LanguageSet()
-        {
-            var cultures = CultureInfo.GetCultures(CultureTypes.NeutralCultures | CultureTypes.SpecificCultures);
-            Array.Sort(cultures, CultureComparer.Instance);
-            KnownLanguages = cultures.Skip(1);
-        }
-        #endregion
-
         #region Constructor
         /// <summary>
         /// Creates a new empty language collection.

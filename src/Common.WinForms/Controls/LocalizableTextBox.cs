@@ -27,6 +27,7 @@ using System.Drawing;
 using System.Globalization;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Undo;
+using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Controls
 {
@@ -69,7 +70,7 @@ namespace NanoByte.Common.Controls
         {
             var setLanguages = new List<CultureInfo>();
             var unsetLanguages = new List<CultureInfo>();
-            foreach (var language in LanguageSet.KnownLanguages)
+            foreach (var language in Languages.AllKnown)
             {
                 if (Target.ContainsExactLanguage(language)) setLanguages.Add(language);
                 else unsetLanguages.Add(language);
