@@ -28,8 +28,14 @@ namespace NanoByte.Common
     /// <summary>
     /// Compares <see cref="INamed{T}"/> objects based on their <see cref="INamed{T}.Name"/> in a case-insensitive way.
     /// </summary>
-    public class NamedComparer<T> : IComparer<T>, IEqualityComparer<T> where T : INamed<T>
+    public sealed class NamedComparer<T> : IComparer<T>, IEqualityComparer<T> where T : INamed<T>
     {
+        /// <summary>A singleton instance of the comparer.</summary>
+        public static readonly NamedComparer<T> Instance = new NamedComparer<T>();
+
+        private NamedComparer()
+        {}
+
         public int Compare(T x, T y)
         {
             return StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name);

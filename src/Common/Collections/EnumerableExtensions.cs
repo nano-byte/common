@@ -230,11 +230,17 @@ namespace NanoByte.Common.Collections
         public static T[] GetAddedElements<T>(this T[] newArray, T[] oldArray)
             where T : IComparable<T>, IEquatable<T>
         {
-            return GetAddedElements(newArray, oldArray, new DefaultComparer<T>());
+            return GetAddedElements(newArray, oldArray, DefaultComparer<T>.Instance);
         }
 
-        private class DefaultComparer<T> : IComparer<T> where T : IComparable<T>
+        private sealed class DefaultComparer<T> : IComparer<T> where T : IComparable<T>
         {
+            /// <summary>A singleton instance of the comparer.</summary>
+            public static readonly DefaultComparer<T> Instance = new DefaultComparer<T>();
+
+            private DefaultComparer()
+            {}
+
             public int Compare(T x, T y)
             {
                 return x.CompareTo(y);

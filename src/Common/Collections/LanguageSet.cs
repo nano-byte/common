@@ -49,7 +49,7 @@ namespace NanoByte.Common.Collections
         static LanguageSet()
         {
             var cultures = CultureInfo.GetCultures(CultureTypes.NeutralCultures | CultureTypes.SpecificCultures);
-            Array.Sort(cultures, new CultureComparer());
+            Array.Sort(cultures, CultureComparer.Instance);
             KnownLanguages = cultures.Skip(1);
         }
         #endregion
@@ -59,7 +59,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new empty language collection.
         /// </summary>
         public LanguageSet()
-            : base(new CultureComparer())
+            : base(CultureComparer.Instance)
         {}
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="collection"></param>
         public LanguageSet(IEnumerable<CultureInfo> collection)
-            : base(collection, new CultureComparer())
+            : base(collection, CultureComparer.Instance)
         {}
 
         /// <summary>
