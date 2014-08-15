@@ -133,13 +133,13 @@ namespace NanoByte.Common.Tasks
                         UnitsProcessed += sourceFile.Length;
                         continue;
                     }
-                    if (destinationFile.IsReadOnly) destinationFile.IsReadOnly = false;
+                    destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
                 }
 
                 CopyFile(sourceFile, destinationFile);
 
                 destinationFile.Refresh();
-                if (destinationFile.IsReadOnly) destinationFile.IsReadOnly = false;
+                destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
                 destinationFile.LastWriteTimeUtc = sourceFile.LastWriteTimeUtc;
 
                 UnitsProcessed += sourceFile.Length;
