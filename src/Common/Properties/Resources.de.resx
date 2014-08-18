@@ -159,6 +159,9 @@
   <data name="ErrorReportSent" xml:space="preserve">
     <value>Der Fehlerbericht wurde erfolgreich versendet.</value>
   </data>
+  <data name="FailedToDownload" xml:space="preserve">
+    <value>Download von {0} fehlgeschlagen.</value>
+  </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>Konnte '{0}' nicht rückgängig machen.</value>
   </data>

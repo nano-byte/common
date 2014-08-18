@@ -187,6 +187,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download {0}..
+        /// </summary>
+        internal static string FailedToDownload {
+            get {
+                return ResourceManager.GetString("FailedToDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to rollback &apos;{0}&apos;..
         /// </summary>
         internal static string FailedToRollback {

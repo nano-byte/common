@@ -34,7 +34,6 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class DownloadFile : TaskBase
     {
-        #region Properties
         /// <inheritdoc/>
         public override string Name { get { return string.Format(Resources.Downloading, Source); } }
 
@@ -59,9 +58,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         [Description("The local path to save the file to.")]
         public string Target { get; protected set; }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new download task.
         /// </summary>
@@ -80,11 +77,7 @@ namespace NanoByte.Common.Tasks
             Target = target;
             UnitsTotal = bytesTotal;
         }
-        #endregion
 
-        //--------------------//
-
-        #region Thread code
         /// <inheritdoc/>
         protected override void Execute()
         {
@@ -93,7 +86,7 @@ namespace NanoByte.Common.Tasks
             {
                 request = WebRequest.Create(Source);
             }
-                #region Sanity checks
+                #region Error handling
             catch (NotSupportedException ex)
             {
                 // Wrap exception since only certain exception types are allowed
@@ -115,22 +108,30 @@ namespace NanoByte.Common.Tasks
                     throw new OperationCanceledException();
 
                 // Process the response
-                using (WebResponse response = request.EndGetResponse(responseRequest))
+                try
                 {
-                    CancellationToken.ThrowIfCancellationRequested();
-                    ReadHeader(response);
-                    State = TaskState.Data;
+                    using (var response = request.EndGetResponse(responseRequest))
+                    {
+                        CancellationToken.ThrowIfCancellationRequested();
+                        ReadHeader(response);
+                        State = TaskState.Data;
 
-                    // Start writing data to the file
-                    if (response != null) WriteStreamToTarget(response.GetResponseStream(), fileStream);
+                        // Start writing data to the file
+                        if (response != null) WriteStreamToTarget(response.GetResponseStream(), fileStream);
+                    }
                 }
+                    #region Error handling
+                catch (WebException ex)
+                {
+                    // Rebuild exception to improve message
+                    throw new WebException(string.Format(Resources.FailedToDownload, Source) + "\n" + ex.Message, ex.InnerException, ex.Status, ex.Response);
+                }
+                #endregion
             }
 
             State = TaskState.Complete;
         }
-        #endregion
 
-        #region Helpers
         /// <summary>
         /// Reads the header information in the <paramref name="response"/> and stores it the object properties.
         /// </summary>
@@ -173,6 +174,5 @@ namespace NanoByte.Common.Tasks
                 }
             }
         }
-        #endregion
     }
 }
