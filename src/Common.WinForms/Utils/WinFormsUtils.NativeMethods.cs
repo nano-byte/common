@@ -31,7 +31,7 @@ namespace NanoByte.Common.Utils
         [SuppressUnmanagedCodeSecurity]
         private static class SafeNativeMethods
         {
-            [DllImport("user32", CharSet = CharSet.Auto)]
+            [DllImport("user32")]
             public static extern short GetAsyncKeyState(uint key);
 
 

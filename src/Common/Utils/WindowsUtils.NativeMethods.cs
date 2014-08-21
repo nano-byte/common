@@ -45,15 +45,15 @@ namespace NanoByte.Common.Utils
             public static extern bool IsWow64Process([In] IntPtr hProcess, [Out, MarshalAs(UnmanagedType.Bool)] out bool lpSystemInfo);
 
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern uint GetModuleFileName(IntPtr hModule, [Out]StringBuilder lpFilename, int nSize);
+            public static extern uint GetModuleFileName(IntPtr hModule, [Out] StringBuilder lpFilename, int nSize);
 
 
             // Window messages
-            [DllImport("user32", CharSet = CharSet.Auto)]
+            [DllImport("user32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool PeekMessage(out WinMessage msg, IntPtr hWnd, uint messageFilterMin, uint messageFilterMax, uint flags);
 
-            [DllImport("user32", CharSet = CharSet.Auto)]
+            [DllImport("user32")]
             public static extern int GetCaretBlinkTime();
 
 
@@ -95,7 +95,7 @@ namespace NanoByte.Common.Utils
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern IntPtr OpenMutex(UInt32 desiredAccess, bool inheritHandle, string name);
 
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            [DllImport("kernel32", SetLastError = true)]
             public static extern int CloseHandle(IntPtr hObject);
 
 
@@ -103,7 +103,7 @@ namespace NanoByte.Common.Utils
             [DllImport("user32")]
             public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
-            [DllImport("shell32", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport("shell32", SetLastError = true)]
             public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
             [DllImport("user32", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -147,10 +147,10 @@ namespace NanoByte.Common.Utils
 
 // ReSharper disable MemberHidesStaticFromOuterClass
             // Window messages
-            [DllImport("user32", CharSet = CharSet.Auto)]
+            [DllImport("user32")]
             public static extern IntPtr SetCapture(IntPtr handle);
 
-            [DllImport("user32", CharSet = CharSet.Auto)]
+            [DllImport("user32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool ReleaseCapture();
 // ReSharper restore MemberHidesStaticFromOuterClass

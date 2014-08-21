@@ -166,7 +166,7 @@ namespace NanoByte.Common.Utils
         #endregion
 
         #region Structures
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct ThumbnailButton
         {
             [MarshalAs(UnmanagedType.U4)]
