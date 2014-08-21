@@ -362,6 +362,16 @@ namespace NanoByte.Common.Utils
                 Assert.IsFalse(FileUtils.IsExecutable(tempFile), "File should no longer be executable");
             }
         }
+
+        [Test]
+        public void TestIsUnixFS()
+        {
+            using (var tempDir = new TemporaryDirectory("unit-tests"))
+            {
+                if (UnixUtils.IsUnix) Assert.IsTrue(FileUtils.IsUnifxFS(tempDir), "Temp dir should be on Unixoid filesystem on Unixoid OS");
+                else Assert.IsFalse(FileUtils.IsUnifxFS(tempDir), "No directory should be Unixoid on a non-Unixoid OS");
+            }
+        }
         #endregion
     }
 }

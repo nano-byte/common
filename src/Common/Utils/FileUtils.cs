@@ -120,6 +120,12 @@ namespace NanoByte.Common.Utils
         /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to write to the directory.</exception>
         public static int DetermineTimeAccuracy(string path)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            if (!Directory.Exists(path)) throw new DirectoryNotFoundException(string.Format(Resources.FileNotFound, path));
+
             // Prepare a file name and fake change time
             var referenceTime = new DateTime(2000, 1, 1, 0, 0, 1); // 1 second past mid-night on 1st of January 2000
             string tempFile = Path.Combine(path, Path.GetRandomFileName());
@@ -180,7 +186,7 @@ namespace NanoByte.Common.Utils
         /// Replaces one file with another. Rolls back in case of problems.
         /// </summary>
         /// <param name="sourcePath">The path of source directory.</param>
-        /// <param name="destinationPath">The path of the target directory. Must reside on the same file system as <paramref name="sourcePath"/>.</param>
+        /// <param name="destinationPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="sourcePath"/> and <paramref name="destinationPath"/> are equal.</exception>
         /// <exception cref="IOException">Thrown if the file could not be replaced.</exception>
         /// <exception cref="UnauthorizedAccessException">Thrown if the read or write access to the files was denied.</exception>
@@ -751,6 +757,53 @@ namespace NanoByte.Common.Utils
                 throw new IOException(Resources.UnixSubsystemFail, ex);
             }
             #endregion
+        }
+
+        /// <summary>
+        /// Checks whether a directory is located on a filesystem with support for Unixoid features such as executable bits.
+        /// </summary>
+        /// <return><see lang="true"/> if <paramref name="path"/> points to directory on a Unixoid filesystem; <see lang="false"/> otherwise.</return>
+        /// <remarks>Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
+        /// <exception cref="DirectoryNotFoundException">Thrown if the specified directory doesn't exist.</exception>
+        /// <exception cref="IOException">Thrown if writing to the directory fails.</exception>
+        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to write to the directory.</exception>
+        public static bool IsUnifxFS(string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            if (!Directory.Exists(path)) throw new DirectoryNotFoundException(string.Format(Resources.FileNotFound, path));
+            if (!UnixUtils.IsUnix) return false;
+
+            string testFile = Path.Combine(path, ".xbit_test_file");
+            File.Create(Path.Combine(path, ".xbit_test_file"));
+
+            try
+            {
+                UnixUtils.SetExecutable(testFile, false);
+                if (UnixUtils.IsExecutable(testFile)) return false;
+
+                UnixUtils.SetExecutable(testFile, true);
+                if (!UnixUtils.IsExecutable(testFile)) return false;
+
+                return true;
+            }
+                #region Error handling
+            catch (InvalidOperationException ex)
+            {
+                throw new IOException(Resources.UnixSubsystemFail, ex);
+            }
+            catch (IOException ex)
+            {
+                throw new IOException(Resources.UnixSubsystemFail, ex);
+            }
+                #endregion
+
+            finally
+            {
+                File.Delete(testFile);
+            }
         }
         #endregion
     }
