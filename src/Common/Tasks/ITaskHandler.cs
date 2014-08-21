@@ -27,7 +27,7 @@ using System.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Callback methods to inform the user about <see cref="ITask"/>s being run.
+    /// Used to execute and track <seealso cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
     /// </summary>
     /// <remarks>The methods may be called from a background thread. Implementations apply appropriate thread-synchronization to update UI elements.</remarks>
     public interface ITaskHandler : IDisposable
@@ -35,18 +35,19 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Used to signal when the user wishes to cancel the entire current process (and any <see cref="ITask"/>s it includes).
         /// </summary>
+        /// <remarks>Once this has been signalled this <seealso cref="ITaskHandler"/> cannot be reused, since any subsequently started <seealso cref="ITask"/>s will be cancelled immediatley.</remarks>
         CancellationToken CancellationToken { get; }
 
         /// <summary>
-        /// Runs and tracks an <see cref="ITask"/>. Returns once the task has been completed.
+        /// Runs an <see cref="ITask"/> and tracks its progress. Returns once the task has been completed. The task may be executed on a different thread.
         /// </summary>
         /// <param name="task">The task to be run. (<see cref="ITask.Run"/> or equivalent is called on it.)</param>
         /// <exception cref="OperationCanceledException">Thrown if the user canceled the task.</exception>
         /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <remarks>
-        /// This may be called multiple times concurrently but the concurrent calls must not depend on each other!
-        /// The specific implementation of this method may chose whether to actually run the tasks concurrently or in sequence.
+        /// This may be called multiple times concurrently but concurrent calls must not depend on each other.
+        /// The specific implementation of this method determines whether the tasks actually run concurrently or in sequence.
         /// </remarks>
         void RunTask(ITask task);
 

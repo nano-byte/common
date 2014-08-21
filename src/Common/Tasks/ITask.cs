@@ -28,19 +28,24 @@ using System.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// A task that can report its progess via events.
+    /// Represents an operation that can be cancelled and have its progress tracked.
     /// </summary>
+    /// <remarks>
+    /// Unlike System.Threading.Tasks.Task, these tasks do not provide any asynchrony by themselves.
+    /// They execute all their code on the same thread they are started on and rely on <seealso cref="ITaskHandler"/>s for scheduling on background threads.
+    /// </remarks>
+    /// <seealso cref="ITaskHandler"/>
     public interface ITask
     {
         /// <summary>
         /// Runs the task and blocks until it is complete.
         /// </summary>
-        /// <param name="cancellationToken">Used to signal when the user wishes to cancel the task execution.</param>
-        /// <param name="progress">Used to report back the task's progress.</param>
+        /// <param name="cancellationToken">Used to receive a signal (e.g. from another thread) when the user wishes to cancel the task execution.</param>
+        /// <param name="progress">Used to report back the task's progress (e.g. to another thread).</param>
         /// <exception cref="OperationCanceledException">Thrown if the task was canceled from another thread.</exception>
         /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
-        /// <remarks>Even though the task runs synchronously it may be still executed on a separate thread so it can be canceled from other threads.</remarks>
+        /// <seealso cref="ITaskHandler.RunTask"/>
         void Run(CancellationToken cancellationToken = default(CancellationToken), IProgress<TaskSnapshot> progress = null);
 
         /// <summary>
