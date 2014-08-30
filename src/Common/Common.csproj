@@ -173,6 +173,7 @@
     <Compile Include="Utils\UnixUtils.cs" />
     <Compile Include="Utils\UpdateUtils.cs" />
     <Compile Include="Utils\WindowsUtils.cs" />
+    <Compile Include="Utils\WindowsUtils.FileSystem.cs" />
     <Compile Include="Utils\WindowsUtils.NativeMethods.cs" />
     <Compile Include="Utils\WindowsUtils.Platform.cs" />
     <Compile Include="Utils\WindowsUtils.Properties.cs" />

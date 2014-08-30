@@ -70,6 +70,10 @@ namespace NanoByte.Common.Utils
         [SuppressUnmanagedCodeSecurity]
         private static class UnsafeNativeMethods
         {
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern int CloseHandle(IntPtr hObject);
+
+
             // Command-line arguments
             [DllImport("kernel32")]
             public static extern IntPtr LocalFree(IntPtr hMem);
@@ -95,9 +99,6 @@ namespace NanoByte.Common.Utils
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern IntPtr OpenMutex(UInt32 desiredAccess, bool inheritHandle, string name);
 
-            [DllImport("kernel32", SetLastError = true)]
-            public static extern int CloseHandle(IntPtr hObject);
-
 
             // Shell and window messages
             [DllImport("user32")]
@@ -117,6 +118,12 @@ namespace NanoByte.Common.Utils
 
 
             // Filesystem
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern IntPtr CreateFile(string lpFileName, [MarshalAs(UnmanagedType.U4)] FileAccess dwDesiredAccess, [MarshalAs(UnmanagedType.U4)] FileShare dwShareMode, IntPtr lpSecurityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode dwCreationDisposition, [MarshalAs(UnmanagedType.U4)] FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+            [DllImport("kernel32.dll", SetLastError = true)]
+            public static extern bool GetFileInformationByHandle(IntPtr handle, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
+
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern bool CreateHardLink(string lpFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
 
@@ -137,12 +144,6 @@ namespace NanoByte.Common.Utils
                 public uint FileIndexHigh;
                 public uint FileIndexLow;
             }
-
-            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern IntPtr CreateFile(string lpFileName, [MarshalAs(UnmanagedType.U4)] FileAccess dwDesiredAccess, [MarshalAs(UnmanagedType.U4)] FileShare dwShareMode, IntPtr lpSecurityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode dwCreationDisposition, [MarshalAs(UnmanagedType.U4)] FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
-
-            [DllImport("kernel32.dll", SetLastError = true)]
-            public static extern bool GetFileInformationByHandle(IntPtr handle, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
 
 
 // ReSharper disable MemberHidesStaticFromOuterClass
