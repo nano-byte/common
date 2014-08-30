@@ -373,5 +373,29 @@ namespace NanoByte.Common.Utils
             }
         }
         #endregion
+
+        #region Extended metadata
+        [Test]
+        public void TestWriteReadExtendedMetadata()
+        {
+            var data = new byte[] {0, 1, 2, 3, 4, 5, 6, 7};
+            using (var tempFile = new TemporaryFile("unit-tests"))
+            {
+                Assert.IsNull(FileUtils.ReadExtendedMetadata(tempFile, "test-stream"));
+
+                FileUtils.WriteExtendedMetadata(tempFile, "test-stream", data);
+                CollectionAssert.AreEqual(
+                    expected: data,
+                    actual: FileUtils.ReadExtendedMetadata(tempFile, "test-stream"));
+            }
+        }
+
+        [Test]
+        public void TestReadExtendedMetadataExceptionOnMissingBaseFile()
+        {
+            using (var tempDir = new TemporaryDirectory("unit-tests"))
+                Assert.Throws<FileNotFoundException>(() => FileUtils.ReadExtendedMetadata(Path.Combine(tempDir, "invalid"), "test-stream"));
+        }
+        #endregion
     }
 }

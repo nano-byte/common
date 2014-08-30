@@ -478,8 +478,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
-        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a system with no symbolic link support.</exception>
         /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to create the symbolic link.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a system with no symbolic link support.</exception>
         public static void CreateSymlink(string source, string target)
         {
             #region Sanity checks
@@ -525,8 +525,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The absolute path of the existing file to point to.</param>
-        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a system with no hard link support.</exception>
         /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to create the hard link.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a system with no hard link support.</exception>
         public static void CreateHardlink(string source, string target)
         {
             #region Sanity checks
@@ -734,8 +734,8 @@ namespace NanoByte.Common.Utils
         /// <param name="path">The file to mark as executable or not executable.</param>
         /// <param name="executable"><see lang="true"/> to mark the file as executable, <see lang="true"/> to mark it as not executable.</param>
         /// <exception cref="FileNotFoundException">Thrown if <paramref name="path"/> points to a file that does not exist or cannot be accessed.</exception>
-        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a non-Unixoid system.</exception>
         /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to change the file's properties.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a non-Unixoid system.</exception>
         public static void SetExecutable(string path, bool executable)
         {
             #region Sanity checks
@@ -804,6 +804,68 @@ namespace NanoByte.Common.Utils
             {
                 File.Delete(testFile);
             }
+        }
+        #endregion
+
+        #region Extended metadata
+        /// <summary>
+        /// Reads metadata from an NTFS Alternate Data Stream (Windows) or extended file attribute (Unixoid).
+        /// </summary>
+        /// <param name="path">The path of the file the Alternate Data Stream is associated with.</param>
+        /// <param name="name">The name of the metadata stream.</param>
+        /// <returns>The contents of the metadata stream; <see langword="null"/> if the file exists but the stream specified by <paramref name="name"/> does not.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file specified by <paramref name="path"/> does not exist.</exception>
+        /// <exception cref="IOException">Thrown if there was a problem reading the metadata stream.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if the current operating system provides no method for storing extended metadata.</exception>
+        public static byte[] ReadExtendedMetadata(string path, string name)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            #endregion
+
+            if (!File.Exists(path)) throw new FileNotFoundException(string.Format(Resources.FileNotFound, path), path);
+
+            if (WindowsUtils.IsWindowsNT) return WindowsUtils.ReadAllBytes(path + ":" + name);
+            else if (UnixUtils.IsUnix) return UnixUtils.GetXattr(path, "user." + name);
+            else throw new PlatformNotSupportedException();
+        }
+
+        /// <summary>
+        /// Writes metadata to an NTFS Alternate Data Stream (Windows) or extended file attribute (Unixoid).
+        /// </summary>
+        /// <param name="path">The path of the file to assoicate the metadata with.</param>
+        /// <param name="name">The name of the metadata stream.</param>
+        /// <param name="data">The data to write to the metadata stream.</param>
+        /// <exception cref="FileNotFoundException">Thrown if the file specified by <paramref name="path"/> does not exist.</exception>
+        /// <exception cref="IOException">Thrown if there was a problem writing the metadata stream.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if the current operating system provides no method for storing extended metadata.</exception>
+        public static void WriteExtendedMetadata(string path, string name, byte[] data)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            if (!File.Exists(path)) throw new FileNotFoundException(string.Format(Resources.FileNotFound, path), path);
+
+            if (WindowsUtils.IsWindowsNT)
+            {
+                try
+                {
+                    WindowsUtils.WriteAllBytes(path + ":" + name, data);
+                }
+                    #region Error handling
+                catch (Win32Exception ex)
+                {
+                    // Wrap exception since only certain exception types are allowed
+                    throw new IOException(ex.Message, ex);
+                }
+                #endregion
+            }
+            else if (UnixUtils.IsUnix) UnixUtils.SetXattr(path, "user." + name, data);
+            else throw new PlatformNotSupportedException();
         }
         #endregion
     }

@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Utils
@@ -32,12 +33,79 @@ namespace NanoByte.Common.Utils
     static partial class WindowsUtils
     {
         /// <summary>
+        /// Reads the entire contents of a file using the Win32 API.
+        /// </summary>
+        /// <param name="path">The path of the file to read.</param>
+        /// <returns>The contents of the file as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown when this method is called on a platform other than Windows.</exception>
+        /// <remarks>This method works like <see cref="File.ReadAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
+        public static byte[] ReadAllBytes(string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            var handle = UnsafeNativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Normal, IntPtr.Zero);
+            if (handle.ToInt32() == -1) return null;
+
+            try
+            {
+                uint size = UnsafeNativeMethods.GetFileSize(handle, IntPtr.Zero);
+                byte[] buffer = new byte[size];
+                uint read = uint.MinValue;
+                var lpOverlapped = new NativeOverlapped();
+                if (UnsafeNativeMethods.ReadFile(handle, buffer, size, ref read, ref lpOverlapped)) return buffer;
+                else return null;
+            }
+            finally
+            {
+                UnsafeNativeMethods.CloseHandle(handle);
+            }
+        }
+
+        /// <summary>
+        /// Writes the entire contents of a byte array to a file using the Win32 API. Existing files with the same name are overwritten.
+        /// </summary>
+        /// <param name="path">The path of the file to write to.</param>
+        /// <param name="data">The data to write to the file.</param>
+        /// <exception cref="Win32Exception">Thrown if there was a problem writing the file.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown when this method is called on a platform other than Windows.</exception>
+        /// <remarks>This method works like <see cref="File.WriteAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
+        public static void WriteAllBytes(string path, byte[] data)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            var handle = UnsafeNativeMethods.CreateFile(path, FileAccess.Write, FileShare.Write, IntPtr.Zero, FileMode.Create, 0, IntPtr.Zero);
+            var errrorCode = Marshal.GetLastWin32Error();
+            if (handle == new IntPtr(-1)) throw new Win32Exception(errrorCode);
+
+            try
+            {
+                uint bytesWritten = 0;
+                var lpOverlapped = new NativeOverlapped();
+                if (!UnsafeNativeMethods.WriteFile(handle, data, (uint)data.Length, ref bytesWritten, ref lpOverlapped))
+                    throw new Win32Exception(Marshal.GetLastWin32Error());
+            }
+            finally
+            {
+                UnsafeNativeMethods.CloseHandle(handle);
+            }
+        }
+
+        /// <summary>
         /// Creates a symbolic link for a file or directory.
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
-        /// <remarks>Only available on Windows Vista or newer.</remarks>
         /// <exception cref="Win32Exception">Thrown if the symbolic link creation failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown when this method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
         public static void CreateSymlink(string source, string target)
         {
             #region Sanity checks
@@ -45,7 +113,7 @@ namespace NanoByte.Common.Utils
             if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
             #endregion
 
-            if (!IsWindowsVista) throw new NotSupportedException(Resources.OnlyAvailableOnWindows);
+            if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             string targetAbsolute = Path.Combine(Path.GetDirectoryName(source) ?? Environment.CurrentDirectory, target);
             int retval = UnsafeNativeMethods.CreateSymbolicLink(source, target, Directory.Exists(targetAbsolute) ? 1 : 0);
@@ -59,6 +127,7 @@ namespace NanoByte.Common.Utils
         /// <param name="target">The absolute path of the existing file to point to.</param>
         /// <remarks>Only available on Windows 2000 or newer.</remarks>
         /// <exception cref="Win32Exception">Thrown if the hard link creation failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown when this method is called on a platform other than Windows NT.</exception>
         public static void CreateHardlink(string source, string target)
         {
             #region Sanity checks
@@ -66,7 +135,7 @@ namespace NanoByte.Common.Utils
             if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
             #endregion
 
-            if (!IsWindowsNT) throw new NotSupportedException(Resources.OnlyAvailableOnWindows);
+            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
             if (!UnsafeNativeMethods.CreateHardLink(source, target, IntPtr.Zero)) throw new Win32Exception();
         }
 
@@ -75,7 +144,7 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="path1">The path of the first file.</param>
         /// <param name="path2">The path of the second file.</param>
-        /// <remarks>Only available on Windows 2000 or newer.</remarks>
+        /// <exception cref="PlatformNotSupportedException">Thrown when this method is called on a platform other than Windows NT.</exception>
         public static bool AreHardlinked(string path1, string path2)
         {
             #region Sanity checks
@@ -83,7 +152,7 @@ namespace NanoByte.Common.Utils
             if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException("path2");
             #endregion
 
-            if (!IsWindowsNT) throw new NotSupportedException(Resources.OnlyAvailableOnWindows);
+            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
             return GetFileIndex(path1) == GetFileIndex(path2);
         }
 

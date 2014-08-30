@@ -25,6 +25,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
+using System.Threading;
 using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
 namespace NanoByte.Common.Utils
@@ -123,6 +124,15 @@ namespace NanoByte.Common.Utils
 
             [DllImport("kernel32.dll", SetLastError = true)]
             public static extern bool GetFileInformationByHandle(IntPtr handle, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
+
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern uint GetFileSize(IntPtr handle, IntPtr size);
+
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern bool ReadFile(IntPtr handle, byte[] buffer, uint byteToRead, ref uint bytesRead, [In] ref NativeOverlapped lpOverlapped);
+
+            [DllImport("kernel32.dll", SetLastError = true)]
+            public static extern bool WriteFile(IntPtr hFile, byte[] lpBuffer, uint nNumberOfBytesToWrite, ref uint lpNumberOfBytesWritten, [In] ref NativeOverlapped lpOverlapped);
 
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern bool CreateHardLink(string lpFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
