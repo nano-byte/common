@@ -132,10 +132,11 @@ namespace NanoByte.Common.Controls
         private readonly HashSet<T> _checkedEntries = new HashSet<T>();
 
         /// <summary>
-        /// Returns an array of all <see cref="INamed{T}"/> objects currently marked with a check box.
+        /// Returns a list of all <see cref="INamed{T}"/> objects currently marked with a check box.
         /// </summary>
+        /// <remarks>Does NOT create a defensive copy. Take care to only add valid elements when modifying. Call <see cref="UpdateList"/> after changing.</remarks>
         /// <see cref="CheckBoxes"/>
-        public ICollection<T> CheckedEntries { get { return _checkedEntries.ToList(); } }
+        public ICollection<T> CheckedEntries { get { return _checkedEntries; } }
 
         private char _separator = '.';
 
@@ -199,9 +200,10 @@ namespace NanoByte.Common.Controls
         }
 
         /// <summary>
-        /// Updates the filtered <see cref="TreeView"/> representation of <see cref="Nodes"/>
+        /// Updates the filtered <see cref="TreeView"/> representation of <see cref="Nodes"/>.
         /// </summary>
-        private void UpdateList(object sender = null)
+        /// <remarks>Called automatically internally.</remarks>
+        public void UpdateList(object sender = null)
         {
             // Suppress events to prevent infinite loops
             _supressEvents = true;
