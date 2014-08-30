@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Global.cs" />
     <Compile Include="AppMutex.cs" />
-    <Compile Include="Cli\ArgumentUtils.cs" />
     <Compile Include="Cli\BundledCliAppControl.cs" />
     <Compile Include="Cli\CliAppControl.cs" />
     <Compile Include="Cli\CliUtils.cs" />
@@ -164,6 +163,7 @@
     <Compile Include="Undo\SetValueCommand.cs" />
     <Compile Include="Undo\SimpleCommand.cs" />
     <Compile Include="Undo\SimpleCommandExecutor.cs" />
+    <Compile Include="Utils\ArgumentUtils.cs" />
     <Compile Include="Utils\AttributeUtils.cs" />
     <Compile Include="Utils\CompilerUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />

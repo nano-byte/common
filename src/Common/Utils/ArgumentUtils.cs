@@ -26,7 +26,7 @@ using System.IO;
 using System.Linq;
 using NanoByte.Common.Properties;
 
-namespace NanoByte.Common.Cli
+namespace NanoByte.Common.Utils
 {
     /// <summary>
     /// Provides helper methods for for parsing command-line arguments.
@@ -41,7 +41,7 @@ namespace NanoByte.Common.Cli
         /// <returns>Handles to all matching files that were found</returns>
         /// <exception cref="FileNotFoundException">Thrown if a file that was explicitly specified in <paramref name="args"/> (no wildcards) could not be found.</exception>
         /// <remarks><paramref name="args"/> are first interpreted as files, then as directories. Directories are searched using the <paramref name="defaultPattern"/>. * and ? characters are considered as wildcards.</remarks>
-        public static IList<FileInfo> GetFiles(IEnumerable<string> args, string defaultPattern)
+        public static IList<FileInfo> GetFiles(IEnumerable<string> args, string defaultPattern = "*")
         {
             #region Sanity checks
             if (args == null) throw new ArgumentNullException("args");
