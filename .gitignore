@@ -5,6 +5,7 @@
 /src/_dotTrace.*/
 /src/_dotMemory.*/
 obj/
+test-results/
 *.bak
 *.cache
 *.pidb
