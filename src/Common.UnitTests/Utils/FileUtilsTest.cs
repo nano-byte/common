@@ -204,13 +204,16 @@ namespace NanoByte.Common.Utils
                 Directory.CreateDirectory(subDirPath);
                 string filePath = Path.Combine(subDirPath, "file");
                 File.WriteAllText(filePath, "");
+                string symlinkPath = Path.Combine(tempDir, "symlink");
+                if (UnixUtils.IsUnix) UnixUtils.CreateSymlink(symlinkPath, ".");
+                else Directory.CreateDirectory(symlinkPath);
 
                 // Set up delegate mocks
                 var dirCallbackMock = new Mock<IActionSimulator<string>>(MockBehavior.Strict);
-                // ReSharper disable AccessToDisposedClosure
+                // ReSharper disable once AccessToDisposedClosure
                 dirCallbackMock.Setup(x => x.Execute(tempDir)).Verifiable();
-                // ReSharper restore AccessToDisposedClosure
                 dirCallbackMock.Setup(x => x.Execute(subDirPath)).Verifiable();
+                dirCallbackMock.Setup(x => x.Execute(symlinkPath)).Verifiable();
                 var fileCallbackMock = new Mock<IActionSimulator<string>>(MockBehavior.Strict);
                 fileCallbackMock.Setup(x => x.Execute(filePath)).Verifiable();
 

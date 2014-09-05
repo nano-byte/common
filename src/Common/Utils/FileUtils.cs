@@ -257,7 +257,8 @@ namespace NanoByte.Common.Utils
         /// <param name="directory">The directory to walk.</param>
         /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); may be <see langword="null"/>.</param>
         /// <param name="fileAction">The action to perform for every found file; may be <see langword="null"/>.</param>
-        public static void Walk(this DirectoryInfo directory, Action<DirectoryInfo> dirAction = null, Action<FileInfo> fileAction = null)
+        /// <param name="followDirSymlinks">If <see langword="true"/> recurse into directory symlinks; if <see langword="false"/> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
+        public static void Walk(this DirectoryInfo directory, Action<DirectoryInfo> dirAction = null, Action<FileInfo> fileAction = null, bool followDirSymlinks = false)
         {
             #region Sanity checks
             if (directory == null) throw new ArgumentNullException("directory");
@@ -273,7 +274,13 @@ namespace NanoByte.Common.Utils
             }
 
             foreach (var subDir in directory.GetDirectories())
-                Walk(subDir, dirAction, fileAction);
+            {
+                if (!followDirSymlinks && IsSymlink(subDir.FullName))
+                {
+                    if (dirAction != null) dirAction(subDir);
+                }
+                else Walk(subDir, dirAction, fileAction);
+            }
         }
         #endregion
 
