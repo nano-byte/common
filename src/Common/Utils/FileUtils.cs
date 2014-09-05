@@ -252,22 +252,6 @@ namespace NanoByte.Common.Utils
 
         #region Directories
         /// <summary>
-        /// Lists the paths of all subdirectories contained within a directory.
-        /// </summary>
-        /// <param name="path">The path of the directory to search for subdirectories.</param>
-        /// <returns>A C-sorted list of directory paths.</returns>
-        public static IEnumerable<string> GetDirectories(string path)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            #endregion
-
-            var paths = Directory.GetDirectories(path);
-            Array.Sort(paths, StringComparer.Ordinal);
-            return paths;
-        }
-
-        /// <summary>
         /// Walks a directory structure recursivley and performs an action for every directory and file encountered.
         /// </summary>
         /// <param name="directory">The directory to walk.</param>
