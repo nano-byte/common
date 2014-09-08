@@ -157,6 +157,33 @@ namespace NanoByte.Common.Tasks
             }
         }
 
+        /// <summary>
+        /// Ensures <see cref="CopyDirectory"/> correctly copies symlinks.
+        /// </summary>
+        [Test]
+        public void Symlinks()
+        {
+            if (!UnixUtils.IsUnix) Assert.Ignore("Can only test POSIX symlinks on Unixoid system");
+
+            string temp1 = CreateCopyTestTempDir();
+            string temp2 = FileUtils.GetTempDirectory("unit-tests");
+
+            try
+            {
+                FileUtils.CreateSymlink(source: Path.Combine(temp1, "symlink"), target: "target");
+
+                new CopyDirectory(temp1, temp2).Run();
+                string symlinkTarget;
+                Assert.IsTrue(FileUtils.IsSymlink(Path.Combine(temp2, "symlink"), out symlinkTarget));
+                Assert.AreEqual(expected: "target", actual: symlinkTarget);
+            }
+            finally
+            {
+                Directory.Delete(temp1, recursive: true);
+                Directory.Delete(temp2, recursive: true);
+            }
+        }
+
         private static string CreateCopyTestTempDir()
         {
             string tempPath = FileUtils.GetTempDirectory("unit-tests");

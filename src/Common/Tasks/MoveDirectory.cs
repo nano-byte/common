@@ -48,6 +48,7 @@ namespace NanoByte.Common.Tasks
             Directory.Delete(SourcePath, recursive: true);
         }
 
+        /// <inheritdoc/>
         protected override void CopyFile(FileInfo sourceFile, FileInfo destinationFile)
         {
             #region Sanity checks

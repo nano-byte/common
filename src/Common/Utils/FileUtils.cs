@@ -694,6 +694,23 @@ namespace NanoByte.Common.Utils
         }
 
         /// <summary>
+        /// Checks whether a file is a Unix symbolic link.
+        /// </summary>
+        /// <param name="item">The file to check.</param>
+        /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
+        /// <return><see lang="true"/> if <paramref name="item"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
+        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to query the file's properties.</exception>
+        public static bool IsSymlink(this FileSystemInfo item, out string target)
+        {
+            #region Sanity checks
+            if (item == null) throw new ArgumentNullException("item");
+            #endregion
+
+            return IsSymlink(item.FullName, out target);
+        }
+
+        /// <summary>
         /// Checks whether a file is marked as Unix-executable.
         /// </summary>
         /// <return><see lang="true"/> if <paramref name="path"/> points to an executable; <see lang="false"/> otherwise.</return>

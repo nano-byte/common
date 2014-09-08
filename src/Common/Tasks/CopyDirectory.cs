@@ -30,7 +30,7 @@ using NanoByte.Common.Utils;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Copies the content of a directory to a new location preserving the original file modification times.
+    /// Copies the content of a directory to a new location preserving the original file modification times and relative Unix symlinks.
     /// </summary>
     public class CopyDirectory : TaskBase
     {
@@ -115,7 +115,12 @@ namespace NanoByte.Common.Tasks
             foreach (var sourceDirectory in sourceDirectories)
             {
                 CancellationToken.ThrowIfCancellationRequested();
-                Directory.CreateDirectory(PathInDestination(sourceDirectory));
+
+                string symlinkTarget;
+                if (sourceDirectory.IsSymlink(out symlinkTarget))
+                    CreateSymlink(PathInDestination(sourceDirectory), symlinkTarget);
+                else
+                    Directory.CreateDirectory(PathInDestination(sourceDirectory));
             }
         }
 
@@ -146,16 +151,21 @@ namespace NanoByte.Common.Tasks
                     #endregion
                 }
 
-                CopyFile(sourceFile, destinationFile);
-
-                destinationFile.Refresh();
-                destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
-                destinationFile.LastWriteTimeUtc = sourceFile.LastWriteTimeUtc;
+                string symlinkTarget;
+                if (sourceFile.IsSymlink(out symlinkTarget))
+                    CreateSymlink(destinationFile.FullName, symlinkTarget);
+                else
+                    CopyFile(sourceFile, destinationFile);
 
                 UnitsProcessed += sourceFile.Length;
             }
         }
 
+        /// <summary>
+        /// Copies a single file from one location to another. Can be overridden to modify the copying behavior.
+        /// </summary>
+        /// <exception cref="IOException">Thrown if a problem occurred while copying the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the <paramref name="sourceFile"/> or write access to the <paramref name="destinationFile"/> is not permitted.</exception>
         protected virtual void CopyFile(FileInfo sourceFile, FileInfo destinationFile)
         {
             #region Sanity checks
@@ -164,6 +174,28 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             sourceFile.CopyTo(destinationFile.FullName, Overwrite);
+
+            destinationFile.Refresh();
+            destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
+            destinationFile.LastWriteTimeUtc = sourceFile.LastWriteTimeUtc;
+        }
+
+        /// <summary>
+        /// Creates a Unix symbolic link. Can be overridden to modify the symlinking behavior.
+        /// </summary>
+        /// <param name="linkPath">The path of the link to create.</param>
+        /// <param name="linkTarget">The path of the existing file or directory to point to (relative to <paramref name="linkPath"/>).</param>
+        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="IOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        protected virtual void CreateSymlink(string linkPath, string linkTarget)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(linkPath)) throw new ArgumentNullException("linkPath");
+            if (string.IsNullOrEmpty(linkTarget)) throw new ArgumentNullException("linkTarget");
+            #endregion
+
+            if (File.Exists(linkPath) && Overwrite) File.Delete(linkPath);
+            FileUtils.CreateSymlink(linkPath, linkTarget);
         }
 
         private void CopyDirectoryTimestamps(IEnumerable<DirectoryInfo> sourceDirectories)
