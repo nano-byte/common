@@ -74,23 +74,11 @@ namespace NanoByte.Common.Utils
             [DllImport("kernel32", SetLastError = true)]
             public static extern int CloseHandle(IntPtr hObject);
 
-
-            // Command-line arguments
-            [DllImport("kernel32")]
-            public static extern IntPtr LocalFree(IntPtr hMem);
-
-
-            // Taskbar
             [DllImport("shell32", SetLastError = true)]
             public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
 
-
-            // Properties
-            [DllImport("shell32", SetLastError = true)]
-            public static extern int SHGetPropertyStoreForWindow(IntPtr hwnd, ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out IPropertyStore propertyStore);
-
-            [DllImport("ole32", PreserveSig = false)]
-            internal extern static void PropVariantClear([In, Out] ref PropertyVariant pvar);
+            [DllImport("kernel32")]
+            public static extern IntPtr LocalFree(IntPtr hMem);
 
 
             // Mutex

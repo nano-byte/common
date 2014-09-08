@@ -72,32 +72,32 @@ namespace NanoByte.Common.Controls
                     Style = ProgressBarStyle.Continuous;
                     Value = 0;
 
-                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.NoProgress);
+                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.NoProgress);
                     break;
 
                 case TaskState.Started:
                 case TaskState.Header:
                     Style = ProgressBarStyle.Marquee;
-                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.Indeterminate);
+                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Indeterminate);
                     break;
 
                 case TaskState.Data:
                     if (snapshot.UnitsTotal == -1)
                     {
                         Style = ProgressBarStyle.Marquee;
-                        if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.Indeterminate);
+                        if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Indeterminate);
                     }
                     else
                     {
                         Style = ProgressBarStyle.Continuous;
-                        if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.Normal);
+                        if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Normal);
                     }
                     break;
 
                 case TaskState.IOError:
                 case TaskState.WebError:
                     Style = ProgressBarStyle.Continuous;
-                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.Error);
+                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Error);
                     break;
 
                 case TaskState.Complete:
@@ -105,7 +105,7 @@ namespace NanoByte.Common.Controls
                     Style = ProgressBarStyle.Continuous;
                     Value = 100;
 
-                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsUtils.SetProgressState(ParentHandle, WindowsUtils.TaskbarProgressBarState.NoProgress);
+                    if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.NoProgress);
                     break;
             }
 
@@ -118,7 +118,7 @@ namespace NanoByte.Common.Controls
 
             Value = currentValue;
             IntPtr formHandle = ParentHandle;
-            if (UseTaskbar && formHandle != IntPtr.Zero) WindowsUtils.SetProgressValue(formHandle, currentValue, 100);
+            if (UseTaskbar && formHandle != IntPtr.Zero) WindowsTaskbar.SetProgressValue(formHandle, currentValue, 100);
         }
     }
 }

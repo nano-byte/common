@@ -8,9 +8,8 @@
 // "In Project Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsUtils+ShellLink", Justification = "Necessary to duplicate visibility issues.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsUtils+TaskbarProgressBarState", Justification = "Necessary to duplicate visibility issues.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsTaskbar+ShellLink", Justification = "Necessary to duplicate visibility issues.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsTaskbar+TaskbarProgressBarState", Justification = "Necessary to duplicate visibility issues.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Scope = "member", Target = "NanoByte.Common.Cli.ProgressBar.#System.IDisposable.Dispose()", Justification = "IDisposable is only implemented here to support using() blocks.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Scope = "member", Target = "NanoByte.Common.Cli.ProgressBar.#System.IDisposable.Dispose()", Justification = "IDisposable is only implemented here to support using() blocks.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "canonicalized", Scope = "resource", Target = "NanoByte.Common.Properties.Resources.resources")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Scope = "type", Target = "NanoByte.Common.Utils.WindowsUtils+ShellLink")]

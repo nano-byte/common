@@ -63,12 +63,12 @@ namespace NanoByte.Common.Controls
         #region Event handlers
         private void AsyncWaitDialog_Shown(object sender, EventArgs e)
         {
-            WindowsUtils.SetProgressState(Handle, WindowsUtils.TaskbarProgressBarState.Indeterminate);
+            WindowsTaskbar.SetProgressState(Handle, WindowsTaskbar.ProgressBarState.Indeterminate);
         }
 
         private void AsyncWaitDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
-            WindowsUtils.SetProgressState(Handle, WindowsUtils.TaskbarProgressBarState.NoProgress);
+            WindowsTaskbar.SetProgressState(Handle, WindowsTaskbar.ProgressBarState.NoProgress);
         }
         #endregion
 

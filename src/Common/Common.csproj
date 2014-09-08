@@ -172,12 +172,12 @@
     <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="Utils\UnixUtils.cs" />
     <Compile Include="Utils\UpdateUtils.cs" />
+    <Compile Include="Utils\WindowsTaskbar.cs" />
+    <Compile Include="Utils\WindowsTaskbar.NativeMethods.cs" />
     <Compile Include="Utils\WindowsUtils.cs" />
     <Compile Include="Utils\WindowsUtils.FileSystem.cs" />
     <Compile Include="Utils\WindowsUtils.NativeMethods.cs" />
     <Compile Include="Utils\WindowsUtils.Platform.cs" />
-    <Compile Include="Utils\WindowsUtils.Properties.cs" />
-    <Compile Include="Utils\WindowsUtils.Taskbar.cs" />
     <Compile Include="Utils\WindowsUtils.WindowMessages.cs" />
     <Compile Include="Values\Design\EnumDescriptionConverter.cs" />
     <Compile Include="Values\Design\EnumXmlConverter.cs" />
