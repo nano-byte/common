@@ -21,7 +21,6 @@
  */
 
 using System;
-using System.Runtime.CompilerServices;
 using NanoByte.Common.Cli;
 
 namespace NanoByte.Common.Tasks
@@ -43,7 +42,6 @@ namespace NanoByte.Common.Tasks
         public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
 
         /// <inheritdoc/>
-        [MethodImpl(MethodImplOptions.Synchronized)] // Prevent multiple concurrent tasks
         public virtual void RunTask(ITask task)
         {
             #region Sanity checks
