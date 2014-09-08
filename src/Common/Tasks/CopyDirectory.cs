@@ -133,7 +133,17 @@ namespace NanoByte.Common.Tasks
                         UnitsProcessed += sourceFile.Length;
                         continue;
                     }
-                    destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
+                    try
+                    {
+                        destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
+                    }
+                        #region Error handling
+                    catch (ArgumentException ex)
+                    {
+                        // The .NET BCL implementation of FileSystemInfo.Attributes_set raises ArgumentException instead of UnauthorizedAccessException for ERROR_ACCESS_DENIED
+                        throw new UnauthorizedAccessException(ex.Message, ex);
+                    }
+                    #endregion
                 }
 
                 CopyFile(sourceFile, destinationFile);
