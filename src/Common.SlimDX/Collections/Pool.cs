@@ -95,7 +95,7 @@ namespace NanoByte.Common.Collections
         /// Adds an item to the beginning pool
         /// </summary>
         /// <param name="item">The object to add to the pool</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="item"/> is already in a pool</exception>
+        /// <exception cref="ArgumentException"><paramref name="item"/> is already in a pool.</exception>
         public void Add(T item)
         {
             #region Sanity checks

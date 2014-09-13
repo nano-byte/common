@@ -42,9 +42,9 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="cancellationToken">Used to receive a signal (e.g. from another thread) when the user wishes to cancel the task execution.</param>
         /// <param name="progress">Used to report back the task's progress (e.g. to another thread).</param>
-        /// <exception cref="OperationCanceledException">Thrown if the task was canceled from another thread.</exception>
-        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
-        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
+        /// <exception cref="OperationCanceledException">The task was canceled from another thread.</exception>
+        /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
+        /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <seealso cref="ITaskHandler.RunTask"/>
         void Run(CancellationToken cancellationToken = default(CancellationToken), IProgress<TaskSnapshot> progress = null);
 

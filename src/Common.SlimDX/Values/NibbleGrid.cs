@@ -45,8 +45,8 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Gets or sets a value in the grid.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException">Thrown when <paramref name="x"/> or <paramref name="y"/> are out of bounds.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when a value larger than 15 is set.</exception>
+        /// <exception cref="IndexOutOfRangeException"><paramref name="x"/> or <paramref name="y"/> are out of bounds.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">A value larger than 15 is set.</exception>
         public override byte this[int x, int y]
         {
             get { return Data[x, y]; }
@@ -60,7 +60,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Loads a grid from a PNG stream.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors in the imag  is not part of the classic 16 colors palette.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Any of the colors in the imag  is not part of the classic 16 colors palette.</exception>
         public static NibbleGrid Load(Stream stream)
         {
             #region Sanity checks
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="color">One of the classic 16 colors.</param>
         /// <returns>A number between 0 and 15.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="color"/> is not part of the classic 16 colors palette.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="color"/> is not part of the classic 16 colors palette.</exception>
         private static byte PaletteLookup(Color color)
         {
             if (color.EqualsIgnoreAlpha(Color.Black)) return 0; // (0,0,0)

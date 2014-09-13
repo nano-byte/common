@@ -42,9 +42,9 @@ namespace NanoByte.Common.Tasks
         /// Runs an <see cref="ITask"/> and tracks its progress. Returns once the task has been completed. The task may be executed on a different thread.
         /// </summary>
         /// <param name="task">The task to be run. (<see cref="ITask.Run"/> or equivalent is called on it.)</param>
-        /// <exception cref="OperationCanceledException">Thrown if the user canceled the task.</exception>
-        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
-        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
+        /// <exception cref="OperationCanceledException">The user canceled the task.</exception>
+        /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
+        /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <remarks>
         /// This may be called multiple times concurrently but concurrent calls must not depend on each other.
         /// The specific implementation of this method determines whether the tasks actually run concurrently or in sequence.
@@ -68,7 +68,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
         /// <param name="batchInformation">Information to be displayed if the question was automatically answered with 'No' because <see cref="Batch"/> was set to <see langword="true"/>; may be <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the user answered with 'Yes'; <see langword="false"/> if the user answered with 'No'.</returns>
-        /// <exception cref="OperationCanceledException">Thrown if the user selected 'Cancel'.</exception>
+        /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
         bool AskQuestion(string question, string batchInformation = null);
 
         /// <summary>

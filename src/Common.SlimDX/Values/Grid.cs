@@ -73,7 +73,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Gets or sets a value in the grid.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException">Thrown when <paramref name="x"/> or <paramref name="y"/> are out of bounds.</exception>
+        /// <exception cref="IndexOutOfRangeException"><paramref name="x"/> or <paramref name="y"/> are out of bounds.</exception>
         public virtual T this[int x, int y] { get { return Data[x, y]; } set { Data[x, y] = value; } }
 
         /// <summary>

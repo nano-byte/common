@@ -65,7 +65,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="source">The URL the file is to be downloaded from.</param>
         /// <param name="target">The local path to save the file to. A preexisting file will be overwritten.</param>
         /// <param name="bytesTotal">The number of bytes the file to be downloaded is long. The file will be rejected if it does not have this length. -1 if the size is unknown.</param>
-        /// <exception cref="NotSupportedException">Thrown if <paramref name="source"/> contains an unsupported protocol (usually should be HTTP or FTP).</exception>
+        /// <exception cref="NotSupportedException"><paramref name="source"/> contains an unsupported protocol (usually should be HTTP or FTP).</exception>
         public DownloadFile(Uri source, string target, long bytesTotal = -1)
         {
             #region Sanity checks

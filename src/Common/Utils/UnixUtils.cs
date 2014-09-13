@@ -89,8 +89,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void CreateSymlink(string source, string target)
         {
             #region Sanity checks
@@ -106,8 +106,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The absolute path of the existing file to point to.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void CreateHardlink(string source, string target)
         {
             #region Sanity checks
@@ -123,8 +123,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="path1">The path of the first file.</param>
         /// <param name="path2">The path of the second file.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool AreHardlinked(string path1, string path2)
         {
             #region Sanity checks
@@ -140,7 +140,7 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="sourcePath">The path of the file to rename.</param>
         /// <param name="destinationPath">The new path of the file. Must reside on the same file system as <paramref name="sourcePath"/>.</param>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void Rename(string sourcePath, string destinationPath)
         {
             #region Sanity checks
@@ -158,8 +158,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a regular file; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsRegularFile(string path)
         {
             #region Sanity checks
@@ -175,8 +175,8 @@ namespace NanoByte.Common.Utils
         /// <param name="path">The path of the file to check.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsSymlink(string path)
         {
             #region Sanity checks
@@ -193,8 +193,8 @@ namespace NanoByte.Common.Utils
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsSymlink(string path, out string target)
         {
             #region Sanity checks
@@ -220,8 +220,8 @@ namespace NanoByte.Common.Utils
         /// Removes write permissions for everyone on a filesystem object (file or directory).
         /// </summary>
         /// <param name="path">The filesystem object (file or directory) to make read-only.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void MakeReadOnly(string path)
         {
             #region Sanity checks
@@ -236,8 +236,8 @@ namespace NanoByte.Common.Utils
         /// Sets write permissions for the owner on a filesystem object (file or directory).
         /// </summary>
         /// <param name="path">The filesystem object (file or directory) to make writeable by the owner.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void MakeWritable(string path)
         {
             #region Sanity checks
@@ -256,8 +256,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="path">The file to check for executable rights.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to an executable; <see lang="false"/> otherwise.</return>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
         public static bool IsExecutable(string path)
         {
@@ -275,8 +275,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="path">The file to mark as executable or not executable.</param>
         /// <param name="executable"><see lang="true"/> to mark the file as executable, <see lang="true"/> to mark it as not executable.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void SetExecutable(string path, bool executable)
         {
             #region Sanity checks
@@ -314,7 +314,7 @@ namespace NanoByte.Common.Utils
         /// <param name="path">The path of the file to set the attribute for.</param>
         /// <param name="name">The name of the attribute to set.</param>
         /// <param name="data">The data to write to the attribute.</param>
-        /// <exception cref="UnixIOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void SetXattr(string path, string name, byte[] data)
         {
             #region Sanity checks

@@ -420,7 +420,7 @@ namespace NanoByte.Common.Utils
         /// <summary>
         /// Decodes a UTF-8 in base64 string.
         /// </summary>
-        /// <exception cref="FormatException">Thrown if <paramref name="value"/> is not a valid base 64 string.</exception>
+        /// <exception cref="FormatException"><paramref name="value"/> is not a valid base 64 string.</exception>
         public static string Base64Utf8Decode(this string value)
         {
             return value == null ? null : Encoding.UTF8.GetString(Convert.FromBase64String(value));

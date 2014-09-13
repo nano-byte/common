@@ -157,9 +157,9 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// The actual code to be executed.
         /// </summary>
-        /// <exception cref="OperationCanceledException">Thrown if the operation was canceled.</exception>
-        /// <exception cref="IOException">Thrown if the task ended with <see cref="TaskState.IOError"/>.</exception>
-        /// <exception cref="WebException">Thrown if the task ended with <see cref="TaskState.WebError"/>.</exception>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
+        /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
         protected abstract void Execute();
     }
 }

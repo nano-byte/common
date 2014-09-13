@@ -39,7 +39,7 @@ namespace NanoByte.Common.Utils
         /// <param name="args">The arguments to parse.</param>
         /// <param name="defaultPattern">The default pattern to use for finding files when a directory is specified.</param>
         /// <returns>Handles to all matching files that were found</returns>
-        /// <exception cref="FileNotFoundException">Thrown if a file that was explicitly specified in <paramref name="args"/> (no wildcards) could not be found.</exception>
+        /// <exception cref="FileNotFoundException">A file that was explicitly specified in <paramref name="args"/> (no wildcards) could not be found.</exception>
         /// <remarks><paramref name="args"/> are first interpreted as files, then as directories. Directories are searched using the <paramref name="defaultPattern"/>. * and ? characters are considered as wildcards.</remarks>
         public static IList<FileInfo> GetFiles(IEnumerable<string> args, string defaultPattern = "*")
         {

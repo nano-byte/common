@@ -49,8 +49,8 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="prefix">A short string the directory name should start with.</param>
         /// <returns>The full path of the newly created temporary directory.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a file in <see cref="System.IO.Path.GetTempPath"/>.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a file in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a file in <see cref="System.IO.Path.GetTempPath"/>.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a file in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
         public TemporaryFile(string prefix)
         {
             #region Sanity checks

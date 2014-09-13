@@ -74,7 +74,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="element">The element to be dispatched.</param>
         /// <returns>The value returned by the matching delegate.</returns>
-        /// <exception cref="KeyNotFoundException">Thrown if no delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
+        /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
         public TResult Dispatch(TBase element)
         {
             #region Sanity checks
@@ -96,7 +96,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
         /// <returns>The values returned by the matching delegates.</returns>
-        /// <exception cref="KeyNotFoundException">Thrown if no delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
+        /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
         public IEnumerable<TResult> Dispatch(IEnumerable<TBase> elements)
         {
             #region Sanity checks

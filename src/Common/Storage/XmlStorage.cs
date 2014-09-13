@@ -126,7 +126,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object the XML stream shall be converted into.</typeparam>
         /// <param name="stream">The stream to read the encoded XML data from.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the XML data.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T LoadXml<T>(Stream stream)
         {
@@ -158,9 +158,9 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object the XML stream shall be converted into.</typeparam>
         /// <param name="path">The path of the file to load.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while reading the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the file is not permitted.</exception>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the XML data.</exception>
+        /// <exception cref="IOException">A problem occurred while reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T LoadXml<T>(string path)
         {
@@ -188,7 +188,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object the XML string shall be converted into.</typeparam>
         /// <param name="data">The XML string to be parsed.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the XML data.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T FromXmlString<T>(string data)
         {
@@ -248,8 +248,8 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The path of the file to write.</param>
-        /// <exception cref="IOException">Thrown if a problem occurred while writing the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if write access to the file is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         public static void SaveXml<T>(this T data, string path)
         {
             #region Sanity checks
@@ -289,9 +289,9 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="path">The XML file to add the stylesheet instruction to.</param>
         /// <param name="stylesheetFile">The file name of the stylesheet to reference.</param>
-        /// <exception cref="FileNotFoundException">Thrown if the XML file to add the stylesheet reference to could not be found.</exception>
-        /// <exception cref="IOException">Thrown if the XML file to add the stylesheet reference to could not be read or written.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read or write access to the XML file is not permitted.</exception>
+        /// <exception cref="FileNotFoundException">The XML file to add the stylesheet reference to could not be found.</exception>
+        /// <exception cref="IOException">The XML file to add the stylesheet reference to could not be read or written.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read or write access to the XML file is not permitted.</exception>
         public static void AddStylesheet(string path, string stylesheetFile)
         {
             #region Sanity checks
@@ -328,8 +328,8 @@ namespace NanoByte.Common.Storage
         /// <param name="password">The password to use for decryption; <see langword="null"/> for no encryption.</param>
         /// <param name="additionalFiles">Additional files stored alongside the XML file in the ZIP archive to be read.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="ZipException">Thrown if a problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the XML data.</exception>
+        /// <exception cref="ZipException">A problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T LoadXmlZip<T>(Stream stream, string password = null, params EmbeddedFile[] additionalFiles)
         {
@@ -381,10 +381,10 @@ namespace NanoByte.Common.Storage
         /// <param name="password">The password to use for decryption; <see langword="null"/> for no encryption.</param>
         /// <param name="additionalFiles">Additional files stored alongside the XML file in the ZIP archive to be read.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while reading the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the file is not permitted.</exception>
-        /// <exception cref="ZipException">Thrown if a problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the XML data.</exception>
+        /// <exception cref="IOException">A problem occurred while reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
+        /// <exception cref="ZipException">A problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T LoadXmlZip<T>(string path, string password = null, params EmbeddedFile[] additionalFiles)
         {
@@ -450,8 +450,8 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The ZIP archive to be written.</param>
         /// <param name="password">The password to use for encryption; <see langword="null"/> for no encryption.</param>
         /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; may be <see langword="null"/>.</param>
-        /// <exception cref="IOException">Thrown if a problem occurred while writing the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if write access to the file is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         public static void SaveXmlZip<T>(this T data, string path, string password = null, params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks

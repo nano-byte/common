@@ -130,7 +130,7 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Looks up the Model element a View representation was created for.
         /// </summary>
-        /// <exception cref="KeyNotFoundException">Thrown if there is no match.</exception>
+        /// <exception cref="KeyNotFoundException">There is no match.</exception>
         public TModel Lookup(TView representation)
         {
             return _viewToModel[representation];

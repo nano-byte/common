@@ -77,7 +77,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// The base directory where all the content files are stored; should not be <see langword="null"/>.
         /// </summary>
         /// <remarks>Can be set externally with <see cref="EnvVarNameBaseDir"/>.</remarks>
-        /// <exception cref="DirectoryNotFoundException">Thrown when the specified directory could not be found.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
         public static DirectoryInfo BaseDir
         {
             get { return _baseDir; }
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// A directory overriding the base directory for creating mods; may be <see langword="null"/>.
         /// </summary>
         /// <remarks>Can be set externally with <see cref="EnvVarNameModDir"/>.</remarks>
-        /// <exception cref="DirectoryNotFoundException">Thrown when the specified directory could not be found.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
         public static DirectoryInfo ModDir
         {
             get { return _modDir; }
@@ -189,7 +189,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// </summary>
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <returns>The absolute path to the requested directory.</returns>
-        /// <exception cref="DirectoryNotFoundException">Thrown when the specified directory could not be found.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
         public static string CreateDirPath(string type)
         {
             #region Sanity checks
@@ -395,7 +395,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <param name="id">The file name of the content.</param>
         /// <returns>The absolute path to the requested content file</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the specified file could not be found.</exception>
+        /// <exception cref="FileNotFoundException">The specified file could not be found.</exception>
         public static string GetFilePath(string type, string id)
         {
             #region Sanity checks
@@ -431,9 +431,9 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <param name="id">The file name of the content.</param>
         /// <returns>The absolute path to the requested content file</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the specified file could not be found.</exception>
-        /// <exception cref="IOException">Thrown if there was an error reading the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the file is not permitted.</exception>
+        /// <exception cref="FileNotFoundException">The specified file could not be found.</exception>
+        /// <exception cref="IOException">There was an error reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         public static Stream GetFileStream(string type, string id)
         {
             #region Sanity checks
@@ -509,10 +509,10 @@ namespace NanoByte.Common.Storage.SlimDX
         /// </summary>
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <param name="id">The file name of the content.</param>
-        /// <exception cref="InvalidOperationException">Thrown if <see cref="ModDir"/> is not set.</exception>
-        /// <exception cref="FileNotFoundException">Thrown if the specified file could not be found.</exception>
-        /// <exception cref="IOException">Thrown if the specified file could not be deleted.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to delete the file.</exception>
+        /// <exception cref="InvalidOperationException"><see cref="ModDir"/> is not set.</exception>
+        /// <exception cref="FileNotFoundException">The specified file could not be found.</exception>
+        /// <exception cref="IOException">The specified file could not be deleted.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to delete the file.</exception>
         public static void DeleteModFile(string type, string id)
         {
             #region Sanity checks

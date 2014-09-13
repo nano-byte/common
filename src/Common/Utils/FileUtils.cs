@@ -115,9 +115,9 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="path">The path of the directory to check.</param>
         /// <returns>The accuracy in number of seconds. (i.e. 0 = perfect, 1 = may be off by up to one second)</returns>
-        /// <exception cref="DirectoryNotFoundException">Thrown if the specified directory doesn't exist.</exception>
-        /// <exception cref="IOException">Thrown if writing to the directory fails.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to write to the directory.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
+        /// <exception cref="IOException">Writing to the directory fails.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write to the directory.</exception>
         public static int DetermineTimeAccuracy(string path)
         {
             #region Sanity checks
@@ -145,8 +145,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="prefix">A short string the filename should start with.</param>
         /// <returns>The full path of the newly created temporary file.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a file in <see cref="Path.GetTempPath"/>.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a file in <see cref="Path.GetTempPath"/> is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a file in <see cref="Path.GetTempPath"/>.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a file in <see cref="Path.GetTempPath"/> is not permitted.</exception>
         /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
         public static string GetTempFile(string prefix)
         {
@@ -168,8 +168,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="prefix">A short string the filename should start with.</param>
         /// <returns>The full path of the newly created temporary directory.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a directory in <see cref="Path.GetTempPath"/>.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a directory in <see cref="Path.GetTempPath"/> is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="Path.GetTempPath"/>.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="Path.GetTempPath"/> is not permitted.</exception>
         /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Delivers a new value on each call")]
         public static string GetTempDirectory(string prefix)
@@ -187,9 +187,9 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="sourcePath">The path of source directory.</param>
         /// <param name="destinationPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="sourcePath"/> and <paramref name="destinationPath"/> are equal.</exception>
-        /// <exception cref="IOException">Thrown if the file could not be replaced.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if the read or write access to the files was denied.</exception>
+        /// <exception cref="ArgumentException"><paramref name="sourcePath"/> and <paramref name="destinationPath"/> are equal.</exception>
+        /// <exception cref="IOException">The file could not be replaced.</exception>
+        /// <exception cref="UnauthorizedAccessException">The read or write access to the files was denied.</exception>
         public static void Replace(string sourcePath, string destinationPath)
         {
             #region Sanity checks
@@ -236,8 +236,8 @@ namespace NanoByte.Common.Utils
         /// <param name="file">The file to read from.</param>
         /// <param name="encoding">The text encoding to use for reading.</param>
         /// <returns>The first line of text in the file; <see langword="null"/> if decoding does not work on the contents.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while reading the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the file is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         public static string ReadFirstLine(this FileInfo file, Encoding encoding)
         {
             #region Sanity checks
@@ -374,8 +374,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <remarks>May do nothing if the platform doesn't provide any known protection mechanisms.</remarks>
         /// <param name="path">The directory to protect.</param>
-        /// <exception cref="IOException">Thrown if there was a problem applying the write protection.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to apply the write protection.</exception>
+        /// <exception cref="IOException">There was a problem applying the write protection.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to apply the write protection.</exception>
         public static void EnableWriteProtection(string path)
         {
             #region Sanity checks
@@ -394,8 +394,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <remarks>May do nothing if the platform doesn't provide any known protection mechanisms.</remarks>
         /// <param name="path">The directory to unprotect.</param>
-        /// <exception cref="IOException">Thrown if there was a problem removing the write protection.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to remove the write protection.</exception>
+        /// <exception cref="IOException">There was a problem removing the write protection.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to remove the write protection.</exception>
         public static void DisableWriteProtection(string path)
         {
             #region Sanity checks
@@ -469,8 +469,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to create the symbolic link.</exception>
-        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a system with no symbolic link support.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a system with no symbolic link support.</exception>
         public static void CreateSymlink(string source, string target)
         {
             #region Sanity checks
@@ -516,8 +516,8 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="source">The path of the link to create.</param>
         /// <param name="target">The absolute path of the existing file to point to.</param>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to create the hard link.</exception>
-        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a system with no hard link support.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the hard link.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a system with no hard link support.</exception>
         public static void CreateHardlink(string source, string target)
         {
             #region Sanity checks
@@ -610,7 +610,7 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a regular file; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsRegularFile(string path)
         {
             if (!File.Exists(path)) return false;
@@ -640,7 +640,7 @@ namespace NanoByte.Common.Utils
         /// <param name="path">The path of the file to check.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsSymlink(string path)
         {
             if ((!File.Exists(path) && !Directory.Exists(path)) || !UnixUtils.IsUnix) return false;
@@ -668,7 +668,7 @@ namespace NanoByte.Common.Utils
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsSymlink(string path, out string target)
         {
             if ((!File.Exists(path) && !Directory.Exists(path)) || !UnixUtils.IsUnix)
@@ -700,7 +700,7 @@ namespace NanoByte.Common.Utils
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
         /// <return><see lang="true"/> if <paramref name="item"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsSymlink(this FileSystemInfo item, out string target)
         {
             #region Sanity checks
@@ -715,7 +715,7 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <return><see lang="true"/> if <paramref name="path"/> points to an executable; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsExecutable(string path)
         {
             if (!File.Exists(path) || !UnixUtils.IsUnix) return false;
@@ -741,9 +741,9 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <param name="path">The file to mark as executable or not executable.</param>
         /// <param name="executable"><see lang="true"/> to mark the file as executable, <see lang="true"/> to mark it as not executable.</param>
-        /// <exception cref="FileNotFoundException">Thrown if <paramref name="path"/> points to a file that does not exist or cannot be accessed.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to change the file's properties.</exception>
-        /// <exception cref="PlatformNotSupportedException">Thrown if this method is called on a non-Unixoid system.</exception>
+        /// <exception cref="FileNotFoundException"><paramref name="path"/> points to a file that does not exist or cannot be accessed.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to change the file's properties.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a non-Unixoid system.</exception>
         public static void SetExecutable(string path, bool executable)
         {
             #region Sanity checks
@@ -772,9 +772,9 @@ namespace NanoByte.Common.Utils
         /// </summary>
         /// <return><see lang="true"/> if <paramref name="path"/> points to directory on a Unixoid filesystem; <see lang="false"/> otherwise.</return>
         /// <remarks>Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="DirectoryNotFoundException">Thrown if the specified directory doesn't exist.</exception>
-        /// <exception cref="IOException">Thrown if writing to the directory fails.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if you have insufficient rights to write to the directory.</exception>
+        /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
+        /// <exception cref="IOException">Writing to the directory fails.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write to the directory.</exception>
         public static bool IsUnifxFS(string path)
         {
             #region Sanity checks
@@ -822,9 +822,9 @@ namespace NanoByte.Common.Utils
         /// <param name="path">The path of the file the Alternate Data Stream is associated with.</param>
         /// <param name="name">The name of the metadata stream.</param>
         /// <returns>The contents of the metadata stream; <see langword="null"/> if the file exists but the stream specified by <paramref name="name"/> does not.</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the file specified by <paramref name="path"/> does not exist.</exception>
-        /// <exception cref="IOException">Thrown if there was a problem reading the metadata stream.</exception>
-        /// <exception cref="PlatformNotSupportedException">Thrown if the current operating system provides no method for storing extended metadata.</exception>
+        /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>
+        /// <exception cref="IOException">There was a problem reading the metadata stream.</exception>
+        /// <exception cref="PlatformNotSupportedException">The current operating system provides no method for storing extended metadata.</exception>
         public static byte[] ReadExtendedMetadata(string path, string name)
         {
             #region Sanity checks
@@ -845,9 +845,9 @@ namespace NanoByte.Common.Utils
         /// <param name="path">The path of the file to assoicate the metadata with.</param>
         /// <param name="name">The name of the metadata stream.</param>
         /// <param name="data">The data to write to the metadata stream.</param>
-        /// <exception cref="FileNotFoundException">Thrown if the file specified by <paramref name="path"/> does not exist.</exception>
-        /// <exception cref="IOException">Thrown if there was a problem writing the metadata stream.</exception>
-        /// <exception cref="PlatformNotSupportedException">Thrown if the current operating system provides no method for storing extended metadata.</exception>
+        /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>
+        /// <exception cref="IOException">There was a problem writing the metadata stream.</exception>
+        /// <exception cref="PlatformNotSupportedException">The current operating system provides no method for storing extended metadata.</exception>
         public static void WriteExtendedMetadata(string path, string name, byte[] data)
         {
             #region Sanity checks

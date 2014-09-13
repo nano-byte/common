@@ -42,8 +42,8 @@ namespace NanoByte.Common.Utils
         /// <param name="assembly">The name of the assembly to launch (without the file extension).</param>
         /// <param name="arguments">The command-line arguments to pass to the assembly; may be <see langword="null"/>.</param>
         /// <returns>The newly created process.</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the assembly could not be located.</exception>
-        /// <exception cref="Win32Exception">Thrown if there was a problem launching the assembly.</exception>
+        /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
+        /// <exception cref="Win32Exception">There was a problem launching the assembly.</exception>
         public static Process LaunchAssembly(string assembly, string arguments = null)
         {
             return Process.Start(CreateAssemblyStartInfo(assembly, arguments));
@@ -55,7 +55,7 @@ namespace NanoByte.Common.Utils
         /// <param name="assembly">The name of the assembly to launch (without the file extension).</param>
         /// <param name="arguments">The command-line arguments to pass to the assembly; may be <see langword="null"/>.</param>
         /// <returns>The exit code of the target process.</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the assembly could not be located.</exception>
+        /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
         public static int RunAssembly(string assembly, string arguments = null)
         {
             try
@@ -76,8 +76,8 @@ namespace NanoByte.Common.Utils
         /// <param name="assembly">The name of the assembly to launch (without the file extension).</param>
         /// <param name="arguments">The command-line arguments to pass to the assembly; may be <see langword="null"/>.</param>
         /// <returns>The newly created process.</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the assembly could not be located.</exception>
-        /// <exception cref="Win32Exception">Thrown if there was a problem launching the assembly.</exception>
+        /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
+        /// <exception cref="Win32Exception">There was a problem launching the assembly.</exception>
         public static Process LaunchAssemblyAsAdmin(string assembly, string arguments = null)
         {
             return Process.Start(CreateAssemblyStartInfo(assembly, arguments, admin: true));
@@ -89,7 +89,7 @@ namespace NanoByte.Common.Utils
         /// <param name="assembly">The name of the assembly to launch (without the file extension).</param>
         /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
         /// <returns>The exit code of the target process.</returns>
-        /// <exception cref="FileNotFoundException">Thrown if the assembly could not be located.</exception>
+        /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
         public static int RunAssemblyAsAdmin(string assembly, string arguments = null)
         {
             try

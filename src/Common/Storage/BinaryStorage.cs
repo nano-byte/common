@@ -45,7 +45,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object the binary stream shall be converted into.</typeparam>
         /// <param name="stream">The binary file to be loaded.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the binary data.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T LoadBinary<T>(Stream stream)
         {
@@ -72,9 +72,9 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object the binary stream shall be converted into.</typeparam>
         /// <param name="path">The binary file to be loaded.</param>
         /// <returns>The loaded object.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while reading the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the file is not permitted.</exception>
-        /// <exception cref="InvalidDataException">Thrown if a problem occurred while deserializing the binary data.</exception>
+        /// <exception cref="IOException">A problem occurred while reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
+        /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         public static T LoadBinary<T>(string path)
         {
@@ -110,8 +110,8 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in a binary stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The binary file to be written.</param>
-        /// <exception cref="IOException">Thrown if a problem occurred while writing the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if write access to the file is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         public static void SaveBinary<T>(this T data, string path)
         {
             #region Sanity checks

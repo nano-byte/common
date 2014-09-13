@@ -42,7 +42,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The key object</param>
         /// <param name="value">The value</param>
-        /// <exception cref="ArgumentException">Thrown if the <paramref name="key"/> already exists in the dictionary.</exception>
+        /// <exception cref="ArgumentException">The <paramref name="key"/> already exists in the dictionary.</exception>
         public void Add(string key, string value)
         {
             if (!string.IsNullOrEmpty(key) && ContainsKey(key))
@@ -132,7 +132,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The key to look for.</param>
         /// <returns>The value associated to <paramref name="key"/>.</returns>
-        /// <exception cref="KeyNotFoundException">Thrown if <paramref name="key"/> was not found in the collection.</exception>
+        /// <exception cref="KeyNotFoundException"><paramref name="key"/> was not found in the collection.</exception>
         public string GetValue(string key)
         {
             foreach (XmlDictionaryEntry pair in this)

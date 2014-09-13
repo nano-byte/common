@@ -138,7 +138,7 @@ namespace NanoByte.Common.Cli
         /// Draws the progress-bar to <see cref="Console.Error"/>.
         /// </summary>
         /// <remarks>The current line is overwritten.</remarks>
-        /// <exception cref="IOException">Thrown if the progress bar could not be drawn to the <see cref="Console"/> (e.g. if it isn't a TTY).</exception>
+        /// <exception cref="IOException">The progress bar could not be drawn to the <see cref="Console"/> (e.g. if it isn't a TTY).</exception>
         public void Draw()
         {
             if (WindowsUtils.IsWindows) DrawWindows();

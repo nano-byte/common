@@ -396,8 +396,8 @@ namespace NanoByte.Common
         /// <param name="taskDialog">The <see cref="TaskDialog"/> to display.</param>
         /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
         /// <returns>Indicates the button the user pressed.</returns>
-        /// <exception cref="BadImageFormatException">Thrown if the task-dialog DLL could not be loaded.</exception>
-        /// <exception cref="EntryPointNotFoundException">Thrown if the task-dialog DLL routine could not be called.</exception>
+        /// <exception cref="BadImageFormatException">The task-dialog DLL could not be loaded.</exception>
+        /// <exception cref="EntryPointNotFoundException">The task-dialog DLL routine could not be called.</exception>
         private static DialogResult ShowTaskDialog(TaskDialog.TaskDialog taskDialog, IWin32Window owner)
         {
             // Note: If you get an EntryPointNotFoundException here, add this to your application manifest and test outside the IDE:

@@ -164,8 +164,8 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Copies a single file from one location to another. Can be overridden to modify the copying behavior.
         /// </summary>
-        /// <exception cref="IOException">Thrown if a problem occurred while copying the file.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if read access to the <paramref name="sourceFile"/> or write access to the <paramref name="destinationFile"/> is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while copying the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the <paramref name="sourceFile"/> or write access to the <paramref name="destinationFile"/> is not permitted.</exception>
         protected virtual void CopyFile(FileInfo sourceFile, FileInfo destinationFile)
         {
             #region Sanity checks
@@ -185,8 +185,8 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="linkPath">The path of the link to create.</param>
         /// <param name="linkTarget">The path of the existing file or directory to point to (relative to <paramref name="linkPath"/>).</param>
-        /// <exception cref="InvalidOperationException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <exception cref="IOException">Thrown if the underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         protected virtual void CreateSymlink(string linkPath, string linkTarget)
         {
             #region Sanity checks

@@ -190,8 +190,8 @@ namespace NanoByte.Common.Storage
         /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be stored.</param>
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a directory.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a directory is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
         public static string GetSaveConfigPath(string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
@@ -278,8 +278,8 @@ namespace NanoByte.Common.Storage
         /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be stored.</param>
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a directory.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a directory is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
         public static string GetSaveDataPath(string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
@@ -364,7 +364,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="fileName">The file name of the file to search for.</param>
         /// <returns>The fully qualified path of the first located instance of the file.</returns>
-        /// <exception cref="IOException">Thrown if the file could not be found.</exception>
+        /// <exception cref="IOException">The file could not be found.</exception>
         public static string GetInstalledFilePath(string fileName)
         {
             #region Sanity checks
@@ -393,8 +393,8 @@ namespace NanoByte.Common.Storage
         /// <param name="machineWide"><see langword="true"/> if the directory should be machine-wide.</param>
         /// <param name="resource">The directory name of the resource to be stored.</param>
         /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a directory.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a directory is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
         public static string GetCacheDirPath(string appName, bool machineWide, params string[] resource)
         {
             #region Sanity checks
@@ -441,8 +441,8 @@ namespace NanoByte.Common.Storage
         /// <param name="machineWide"><see langword="true"/> if the directory should be machine-wide and machine-specific instead of roaming with the user profile.</param>
         /// <param name="resource">The directory name of the resource to be stored.</param>
         /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
-        /// <exception cref="IOException">Thrown if a problem occurred while creating a directory.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown if creating a directory is not permitted.</exception>
+        /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
         /// <remarks>If a new directory is created with <paramref name="machineWide"/> set to <see langword="true"/> on Windows, ACLs are set to deny write access for non-Administrator users.</remarks>
         public static string GetIntegrationDirPath(string appName, bool machineWide, params string[] resource)
         {
@@ -495,7 +495,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Creates a directory with ACLs that block write-access for regular users.
         /// </summary>
-        /// <exception cref="NotAdminException">Thrown if a directory does not exist yet and the user is not an administrator.</exception>
+        /// <exception cref="NotAdminException">A directory does not exist yet and the user is not an administrator.</exception>
         private static void CreateSecureMachineWideDir(string path)
         {
             if (Directory.Exists(path)) return;
@@ -513,7 +513,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Applies ACLs to an existing directory that block write-access for regular users. Does nothing if the directory does not exist.
         /// </summary>
-        /// <exception cref="NotAdminException">Thrown if a directory exists and the user is not an administrator.</exception>
+        /// <exception cref="NotAdminException">A directory exists and the user is not an administrator.</exception>
         public static void SecureExistingMachineWideDir(string path)
         {
             if (!Directory.Exists(path)) return;
