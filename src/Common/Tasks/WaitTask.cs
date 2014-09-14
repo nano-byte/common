@@ -33,6 +33,9 @@ namespace NanoByte.Common.Tasks
         #region Variables
         /// <summary>The <see cref="WaitHandle"/> to wait for.</summary>
         private readonly WaitHandle _waitHandle;
+
+        /// <summary>The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely</summary>
+        private readonly int _millisecondsTimeout;
         #endregion
 
         #region Properties
@@ -51,7 +54,8 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="name">A name describing the task in human-readable form.</param>
         /// <param name="waitHandle">>The <see cref="WaitHandle"/> to wait for.</param>
-        public WaitTask(string name, WaitHandle waitHandle)
+        /// <param name="millisecondsTimeout">The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely.</param>
+        public WaitTask(string name, WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -60,6 +64,7 @@ namespace NanoByte.Common.Tasks
 
             _name = name;
             _waitHandle = waitHandle;
+            _millisecondsTimeout = millisecondsTimeout;
         }
         #endregion
 
@@ -71,17 +76,26 @@ namespace NanoByte.Common.Tasks
         {
             try
             {
-                // Wait for the target handle or a cancel request to arrive
-                if (WaitHandle.WaitAny(new[] {_waitHandle, CancellationToken.WaitHandle}) == 1)
-                    throw new OperationCanceledException();
+                switch (WaitHandle.WaitAny(new[] {_waitHandle, CancellationToken.WaitHandle}, _millisecondsTimeout, exitContext: false))
+                {
+                    case 0:
+                        State = TaskState.Complete;
+                        break;
+
+                    case 1:
+                        throw new OperationCanceledException();
+
+                    default:
+                    case WaitHandle.WaitTimeout:
+                        throw new TimeoutException();
+                }
             }
             catch (AbandonedMutexException ex)
             {
                 // Abandoned mutexes also get owned, but indicate something may have gone wrong elsewhere
                 Log.Warn(ex.Message);
+                State = TaskState.Complete;
             }
-
-            State = TaskState.Complete;
         }
         #endregion
     }
