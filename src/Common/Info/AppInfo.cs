@@ -59,6 +59,12 @@ namespace NanoByte.Common.Info
         public string VersionString { get { return (Version == null ? null : Version.ToString()); } set { Version = string.IsNullOrEmpty(value) ? null : new Version(value); } }
 
         /// <summary>
+        /// The <see cref="Name"/> and <see cref="Version"/> combined.
+        /// </summary>
+        [XmlIgnore]
+        public string NameVersion { get { return Name + " v" + Version; } }
+
+        /// <summary>
         /// The copyright information for the application.
         /// </summary>
         [XmlIgnore]

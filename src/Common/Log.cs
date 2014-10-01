@@ -129,7 +129,7 @@ namespace NanoByte.Common
 
             // Add session identification block to the file
             _fileWriter.WriteLine("");
-            _fileWriter.WriteLine("/// " + AppInfo.Current.Name + " v" + AppInfo.Current.Version);
+            _fileWriter.WriteLine("/// " + AppInfo.Current.NameVersion);
             _fileWriter.WriteLine("/// Log session started at: " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
             _fileWriter.WriteLine("");
         }
