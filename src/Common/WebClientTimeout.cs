@@ -22,6 +22,7 @@
 
 using System;
 using System.Net;
+using NanoByte.Common.Info;
 
 namespace NanoByte.Common
 {
@@ -54,9 +55,15 @@ namespace NanoByte.Common
 
         protected override WebRequest GetWebRequest(Uri address)
         {
-            var result = base.GetWebRequest(address);
-            if (result != null) result.Timeout = _timeout;
-            return result;
+            var request = base.GetWebRequest(address);
+            if (request != null)
+            {
+                request.Timeout = _timeout;
+
+                var httpRequest = request as HttpWebRequest;
+                if (httpRequest != null) httpRequest.UserAgent = AppInfo.Current.NameVersion;
+            }
+            return request;
         }
     }
 }

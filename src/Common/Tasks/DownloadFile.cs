@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading;
+using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Tasks
@@ -93,6 +94,9 @@ namespace NanoByte.Common.Tasks
                 throw new WebException(ex.Message, ex);
             }
             #endregion
+
+            var httpRequest = request as HttpWebRequest;
+            if (httpRequest != null) httpRequest.UserAgent = AppInfo.Current.NameVersion;
 
             // Open the target file for writing
             using (FileStream fileStream = File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write))
