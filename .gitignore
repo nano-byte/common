@@ -13,5 +13,5 @@ test-results/
 *.suo
 *.user
 *.userprefs
-*.DotSettings
+*.*proj.DotSettings
 *.resources
