@@ -772,19 +772,54 @@ namespace NanoByte.Common.Storage
         /// Checks whether a directory is located on a filesystem with support for Unixoid features such as executable bits.
         /// </summary>
         /// <return><see lang="true"/> if <paramref name="path"/> points to directory on a Unixoid filesystem; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
+        /// <remarks>
+        /// Will always return <see langword="false"/> on non-Unixoid systems.
+        /// Only requires read access on Linux to determine file system.
+        /// Requires write access on other Unixes (e.g. MacOS X).
+        /// </remarks>
         /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
-        /// <exception cref="IOException">Writing to the directory fails.</exception>
-        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write to the directory.</exception>
+        /// <exception cref="IOException">Checking the directory failed.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient right to stat to the directory.</exception>
         public static bool IsUnixFS(string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
             #endregion
 
+            if (!path.EndsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture))) path += Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
             if (!Directory.Exists(path)) throw new DirectoryNotFoundException(string.Format(Resources.FileNotFound, path));
             if (!UnixUtils.IsUnix) return false;
 
+            try
+            {
+                switch (UnixUtils.GetFileSystem(path))
+                {
+                    case "msdos": // FAT
+                    case "vfat": // FAT
+                    case "hpfs": // HPFS
+                    case "ntfs": // NTFS
+                    case "ntfs-3g": // NTFS
+                    case "smbfs": // Windows Network Share
+                    case "cifs": // Windows Network Share
+                    case "vboxsf": // VirtualBox Shared Folder
+                    case "vmhgfs": // VMware Shared Folder
+                        return false;
+
+                    default:
+                        return true;
+                }
+            }
+            catch (IOException)
+            {
+                return IsUnixFSFallback(path);
+            }
+        }
+
+        /// <summary>
+        /// Checks whether a directory is located on a filesystem with support for executable bits by setting and reading them back.
+        /// </summary>
+        private static bool IsUnixFSFallback(string path)
+        {
             string testFile = Path.Combine(path, ".xbit_test_file");
             File.Create(Path.Combine(path, ".xbit_test_file"));
 
@@ -807,12 +842,7 @@ namespace NanoByte.Common.Storage
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
             }
-                #endregion
-
-            finally
-            {
-                File.Delete(testFile);
-            }
+            #endregion
         }
         #endregion
 

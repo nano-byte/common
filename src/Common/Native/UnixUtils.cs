@@ -21,8 +21,10 @@
  */
 
 using System;
+using System.IO;
 using Mono.Unix;
 using Mono.Unix.Native;
+using NanoByte.Common.Cli;
 
 namespace NanoByte.Common.Native
 {
@@ -323,6 +325,57 @@ namespace NanoByte.Common.Native
             #endregion
 
             if (Syscall.setxattr(path, name, data) == -1) throw new UnixIOException(Stdlib.GetLastError());
+        }
+        #endregion
+
+        #region Mount point
+        private class Stat : CliAppControl
+        {
+            #region Singleton
+            public static readonly Stat Instance = new Stat();
+
+            private Stat()
+            {}
+            #endregion
+
+            protected override string AppBinary { get { return "stat"; } }
+
+            protected override string HandleStderr(string line)
+            {
+                throw new IOException(line);
+            }
+
+            public string FileSystem(string path)
+            {
+                return Execute("--file-system --printf=%T " + path.EscapeArgument()).TrimEnd('\n');
+            }
+
+            public string MountPoint(string path)
+            {
+                return Execute("--printf=%m " + path.EscapeArgument()).TrimEnd('\n');
+            }
+        }
+
+        /// <summary>
+        /// Determines the file system type a file or directory is stored on.
+        /// </summary>
+        /// <param name="path">The path of the file.</param>
+        /// <returns>The name of the file system in fstab format (e.g. ext3 or ntfs-3g).</returns>
+        /// <remarks>Only works on Linux, not on other Unixes (e.g. MacOS X).</remarks>
+        /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        public static string GetFileSystem(string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            string fileSystem = Stat.Instance.FileSystem(path);
+            if (fileSystem == "fuseblk")
+            { // FUSE mounts need to be looked up in /etc/fstab to determine actualy file system
+                var fstabData = Syscall.getfsfile(Stat.Instance.MountPoint(path));
+                if (fstabData != null) return fstabData.fs_vfstype;
+            }
+            return fileSystem;
         }
         #endregion
     }
