@@ -22,7 +22,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -209,13 +208,13 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The stream to write the encoded XML data to.</param>
-        public static void SaveXml<T>(this T data, Stream stream)
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; may be null.</param>
+        public static void SaveXml<T>(this T data, Stream stream, string stylesheet = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
             #endregion
 
-            var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings {Encoding = new UTF8Encoding(false), Indent = true, IndentChars = "\t", NewLineChars = "\n"});
 #if SLIMDX
             var serializer = _serializers[typeof(T)];
 #else
@@ -228,12 +227,24 @@ namespace NanoByte.Common.Storage
             var qualifiedNames = namespaceAttributes.Select(attr => attr.QualifiedName);
             if (rootAttribute != null) qualifiedNames = qualifiedNames.Concat(new[] {new XmlQualifiedName("", rootAttribute.Namespace)});
 
+            var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
+            {
+                Encoding = new UTF8Encoding(false),
+                Indent = true, IndentChars = "  ",
+                NewLineChars = "\n"
+            });
+
+            // Add stylesheet processor instruction
+            if (!string.IsNullOrEmpty(stylesheet))
+                xmlWriter.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet + "\"");
+
             // ReSharper disable PossibleMultipleEnumeration
             if (qualifiedNames.Any()) serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames.ToArray()));
             else serializer.Serialize(xmlWriter, data);
             // ReSharper restore PossibleMultipleEnumeration
 
             // End file with line break
+            xmlWriter.Flush();
             if (xmlWriter.Settings != null)
             {
                 var newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
@@ -248,9 +259,10 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The path of the file to write.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; may be null.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        public static void SaveXml<T>(this T data, string path)
+        public static void SaveXml<T>(this T data, string path, string stylesheet = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -259,7 +271,7 @@ namespace NanoByte.Common.Storage
             using (var atomic = new AtomicWrite(path))
             using (var fileStream = File.Create(atomic.WritePath))
             {
-                SaveXml(data, fileStream);
+                SaveXml(data, fileStream, stylesheet);
                 atomic.Commit();
             }
         }
@@ -269,51 +281,17 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <typeparam name="T">The type of object to be saved in an XML string.</typeparam>
         /// <param name="data">The object to be stored.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; may be null.</param>
         /// <returns>A string containing the XML code.</returns>
-        public static string ToXmlString<T>(this T data)
+        public static string ToXmlString<T>(this T data, string stylesheet = null)
         {
             using (var stream = new MemoryStream())
             {
                 // Write to a memory stream
-                SaveXml(data, stream);
+                SaveXml(data, stream, stylesheet);
 
                 // Copy the stream to a string
                 return stream.ReadToString();
-            }
-        }
-        #endregion
-
-        #region Stylesheet
-        /// <summary>
-        /// Adds an XSL stylesheet instruction to an existing XML file.
-        /// </summary>
-        /// <param name="path">The XML file to add the stylesheet instruction to.</param>
-        /// <param name="stylesheetFile">The file name of the stylesheet to reference.</param>
-        /// <exception cref="FileNotFoundException">The XML file to add the stylesheet reference to could not be found.</exception>
-        /// <exception cref="IOException">The XML file to add the stylesheet reference to could not be read or written.</exception>
-        /// <exception cref="UnauthorizedAccessException">Read or write access to the XML file is not permitted.</exception>
-        public static void AddStylesheet(string path, string stylesheetFile)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (string.IsNullOrEmpty(stylesheetFile)) throw new ArgumentNullException("stylesheetFile");
-            #endregion
-
-            // Loads the XML document
-            var dom = new XmlDocument();
-            dom.Load(path);
-
-            // Adds a new XSL stylesheet instruction to the DOM
-            var stylesheetInstruction = dom.CreateProcessingInstruction("xml-stylesheet", string.Format(CultureInfo.InvariantCulture, "type='text/xsl' href='{0}'", stylesheetFile));
-            dom.InsertAfter(stylesheetInstruction, dom.FirstChild);
-
-            // Writes back the modified XML document
-            using (var xmlWriter = XmlWriter.Create(path, new XmlWriterSettings {Encoding = new UTF8Encoding(false), Indent = true, IndentChars = "\t", NewLineChars = "\n"}))
-            {
-                dom.WriteTo(xmlWriter);
-
-                // End file with line break
-                if (xmlWriter.Settings != null) xmlWriter.WriteWhitespace(xmlWriter.Settings.NewLineChars);
             }
         }
         #endregion

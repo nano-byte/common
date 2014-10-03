@@ -106,7 +106,7 @@ namespace NanoByte.Common.StructureEditor
                         description: (description == null) ? null : description.Description,
                         target: pointer.Value,
                         getEditorControl: executor => CreateEditor(container, pointer.Value, executor),
-                        toXmlString: pointer.Value.ToXmlString,
+                        toXmlString: () => pointer.Value.ToXmlString(),
                         fromXmlString: xmlString =>
                         {
                             var newValue = XmlStorage.FromXmlString<TProperty>(xmlString);
