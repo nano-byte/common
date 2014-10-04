@@ -29,7 +29,6 @@ using NanoByte.Common.Controls;
 using NanoByte.Common.Dispatch;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Undo;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.StructureEditor
 {

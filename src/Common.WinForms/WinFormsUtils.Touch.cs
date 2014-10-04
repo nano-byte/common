@@ -24,9 +24,10 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using NanoByte.Common.Controls;
+using NanoByte.Common.Native;
 using NanoByte.Common.Values;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     partial class WinFormsUtils
     {

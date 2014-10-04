@@ -70,7 +70,7 @@
     <Compile Include="..\Common.UnitTests\Storage\XmlStorageTest.cs">
       <Link>Storage\SlimDX\XmlStorageTest.cs</Link>
     </Compile>
-    <Compile Include="Utils\MathUtilsTest.cs" />
+    <Compile Include="MathUtilsTest.cs" />
     <Compile Include="Values\ByteGridTest.cs" />
     <Compile Include="Values\ByteVector4GridTest.cs" />
     <Compile Include="Values\ExpandableRectangleArrayTest.cs" />

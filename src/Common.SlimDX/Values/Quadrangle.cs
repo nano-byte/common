@@ -25,7 +25,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
-using NanoByte.Common.Utils;
 using NanoByte.Common.Values.Design;
 using SlimDX;
 

@@ -24,10 +24,10 @@ using System;
 using System.IO;
 using System.Text;
 using Moq;
-using NanoByte.Common.Storage;
+using NanoByte.Common.Native;
 using NUnit.Framework;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// Contains test methods for <see cref="FileUtils"/>.

@@ -25,7 +25,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Values;
 using ICommandExecutor = NanoByte.Common.Undo.ICommandExecutor;
 
 namespace NanoByte.Common.Controls

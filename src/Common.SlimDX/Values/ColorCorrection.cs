@@ -24,7 +24,6 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Serialization;
-using NanoByte.Common.Utils;
 using NanoByte.Common.Values.Design;
 using SlimDX;
 

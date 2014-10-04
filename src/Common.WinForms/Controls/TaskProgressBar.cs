@@ -23,8 +23,8 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using NanoByte.Common.Native;
 using NanoByte.Common.Tasks;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Controls
 {

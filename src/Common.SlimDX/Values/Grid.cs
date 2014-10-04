@@ -25,7 +25,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using NanoByte.Common.Streams;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Values
 {

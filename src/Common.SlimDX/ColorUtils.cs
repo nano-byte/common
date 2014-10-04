@@ -22,7 +22,7 @@
 
 using System.Drawing;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Convert colors to different formats, interpolate, invert, ...

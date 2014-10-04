@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Tasks
 {

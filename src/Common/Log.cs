@@ -26,7 +26,6 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using NanoByte.Common.Info;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common
 {

@@ -24,7 +24,6 @@ using System;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Values.Design
 {

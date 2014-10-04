@@ -28,7 +28,7 @@ using System.IO;
 using Microsoft.CSharp;
 using NanoByte.Common.Storage;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides helper methods for compiling .NET code at runtime.

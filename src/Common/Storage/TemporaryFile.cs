@@ -22,7 +22,6 @@
 
 using System;
 using System.IO;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Storage
 {

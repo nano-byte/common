@@ -25,7 +25,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Xml.Serialization;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Info
 {

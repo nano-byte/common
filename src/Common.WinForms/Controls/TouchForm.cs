@@ -23,7 +23,7 @@
 using System;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {

@@ -24,7 +24,7 @@ using System;
 using System.Net;
 using NanoByte.Common.Info;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Adds a customizable timout to <see cref="WebClient"/>.

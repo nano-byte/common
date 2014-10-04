@@ -28,7 +28,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using NanoByte.Common.Streams;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Values;
 using Resources = NanoByte.Common.Properties.Resources;
 
 #if SLIMDX

@@ -204,11 +204,12 @@
     <Compile Include="Undo\MultiPropertyChangedCommand.cs" />
     <Compile Include="Undo\MultiPropertyTracker.cs" />
     <Compile Include="Undo\PropertyChangedCommand.cs" />
-    <Compile Include="Utils\WinFormsUtils.Touch.cs" />
-    <Compile Include="Utils\WinFormsUtils.cs" />
-    <Compile Include="Utils\WinFormsUtils.NativeMethods.cs" />
     <Compile Include="Values\Design\TimeSpanEditor.cs" />
     <Compile Include="Values\Design\LanguageSetEditor.cs" />
+    <Compile Include="WindowMessage.cs" />
+    <Compile Include="WinFormsUtils.Touch.cs" />
+    <Compile Include="WinFormsUtils.cs" />
+    <Compile Include="WinFormsUtils.NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />

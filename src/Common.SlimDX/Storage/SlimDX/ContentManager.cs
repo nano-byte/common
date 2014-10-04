@@ -29,7 +29,6 @@ using ICSharpCode.SharpZipLib.Zip;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Storage.SlimDX
 {

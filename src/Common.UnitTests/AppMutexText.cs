@@ -21,7 +21,7 @@
  */
 
 using System.IO;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Native;
 using NUnit.Framework;
 
 namespace NanoByte.Common

@@ -22,7 +22,7 @@
 
 using System;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Provides neat little code-shortcuts for updating properties.

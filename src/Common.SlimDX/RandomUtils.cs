@@ -25,7 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using SlimDX;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Provides helper methods for creating different types of variables with random content.

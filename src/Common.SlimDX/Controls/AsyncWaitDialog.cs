@@ -24,7 +24,7 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
 {

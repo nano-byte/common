@@ -28,8 +28,8 @@ using System.Linq;
 using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Storage
 {

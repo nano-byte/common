@@ -29,7 +29,7 @@ using System.Windows.Forms;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Undo;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Values;
 
 namespace NanoByte.Common.StructureEditor
 {

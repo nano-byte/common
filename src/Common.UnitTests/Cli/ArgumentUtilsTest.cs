@@ -24,7 +24,7 @@ using System.IO;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Cli
 {
     /// <summary>
     /// Contains test methods for <see cref="ArgumentUtils"/>.

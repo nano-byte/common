@@ -28,7 +28,7 @@ using System.Text;
 using System.Threading;
 using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     static partial class WindowsUtils
     {

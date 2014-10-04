@@ -24,9 +24,9 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Cli
 {

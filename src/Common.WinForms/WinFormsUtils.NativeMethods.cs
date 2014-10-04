@@ -24,7 +24,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     partial class WinFormsUtils
     {

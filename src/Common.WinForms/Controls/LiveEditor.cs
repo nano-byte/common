@@ -28,8 +28,8 @@ using System.IO;
 using System.Windows.Forms;
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
+using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Controls
 {

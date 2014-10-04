@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMutexText.cs" />
+    <Compile Include="Cli\ArgumentUtilsTest.cs" />
     <Compile Include="Collections\ComparableTupleTest.cs" />
     <Compile Include="Collections\EnumerableExtensionsTest.cs" />
     <Compile Include="Collections\LanguageSetTest.cs" />
@@ -71,9 +72,11 @@
     <Compile Include="Dispatch\ModelViewSyncTest.cs" />
     <Compile Include="Dispatch\PerTypeDispatcherTest.cs" />
     <Compile Include="LogTest.cs" />
+    <Compile Include="Storage\FileUtilsTest.cs" />
     <Compile Include="Storage\XmlStorageTest.cs" />
     <Compile Include="Streams\CircularBufferStreamTest.cs" />
     <Compile Include="Streams\StreamExtensionsTest.cs" />
+    <Compile Include="StringUtilsTest.cs" />
     <Compile Include="Tasks\CopyDirectoryTest.cs" />
     <Compile Include="Tasks\DownloadFileTest.cs" />
     <Compile Include="Tasks\ForEachTaskTest.cs" />
@@ -86,9 +89,6 @@
     <Compile Include="Undo\PreExecutedCompositeCommandTest.cs" />
     <Compile Include="Undo\ReplaceInListTest.cs" />
     <Compile Include="Undo\SetLocalizableStringTest.cs" />
-    <Compile Include="Utils\ArgumentUtilsTest.cs" />
-    <Compile Include="Utils\FileUtilsTest.cs" />
-    <Compile Include="Utils\StringUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

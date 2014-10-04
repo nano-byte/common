@@ -23,8 +23,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
+using NanoByte.Common.Native;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Provides helper methods and API calls specific to the <see cref="System.Windows.Forms"/> UI toolkit.

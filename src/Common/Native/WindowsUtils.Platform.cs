@@ -25,7 +25,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Text;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     static partial class WindowsUtils
     {

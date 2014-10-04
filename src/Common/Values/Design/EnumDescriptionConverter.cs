@@ -23,7 +23,6 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Values.Design
 {

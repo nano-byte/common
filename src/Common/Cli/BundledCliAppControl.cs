@@ -25,8 +25,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using NanoByte.Common.Native;
 using NanoByte.Common.Storage;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Cli
 {

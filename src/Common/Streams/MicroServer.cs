@@ -26,7 +26,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Streams
 {

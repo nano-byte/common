@@ -25,7 +25,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Values.Design
 {

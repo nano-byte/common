@@ -24,7 +24,7 @@ using System.Collections.Specialized;
 using System.Security.Cryptography;
 using NUnit.Framework;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Contains test methods for <see cref="StringUtils"/>.

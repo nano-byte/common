@@ -24,8 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common
 {

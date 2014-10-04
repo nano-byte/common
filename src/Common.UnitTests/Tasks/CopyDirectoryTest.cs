@@ -22,7 +22,8 @@
 
 using System;
 using System.IO;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Native;
+using NanoByte.Common.Storage;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Tasks

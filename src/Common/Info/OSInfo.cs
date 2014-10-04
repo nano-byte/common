@@ -23,7 +23,7 @@
 using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Info
 {

@@ -23,12 +23,11 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using NanoByte.Common.Properties;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     static partial class WindowsUtils
     {

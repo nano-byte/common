@@ -27,7 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Values
 {
     /// <summary>
     /// Provides helper methods for <see cref="Attribute"/>s.

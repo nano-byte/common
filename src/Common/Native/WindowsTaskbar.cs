@@ -26,7 +26,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows 7 or newer taskbar.

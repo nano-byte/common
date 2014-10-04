@@ -30,7 +30,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using NanoByte.Common.Collections;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Provides additional or simplified string functions.

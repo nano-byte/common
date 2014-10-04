@@ -27,7 +27,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using NanoByte.Common.Properties;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows platform.

@@ -25,7 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Security.Principal;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Tasks
 {

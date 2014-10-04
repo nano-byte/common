@@ -25,7 +25,7 @@ using NanoByte.Common.Values;
 using SlimDX;
 using Resources = NanoByte.Common.Properties.Resources;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common
 {
     /// <summary>
     /// Designed to keep other code clean of messy spaghetti code required for some math operations.

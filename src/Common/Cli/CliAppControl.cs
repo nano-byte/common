@@ -27,7 +27,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Cli
 {

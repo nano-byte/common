@@ -23,7 +23,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
-using NanoByte.Common.Utils;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Cli
 {

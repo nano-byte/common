@@ -25,7 +25,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Native
 {
     static partial class WindowsTaskbar
     {

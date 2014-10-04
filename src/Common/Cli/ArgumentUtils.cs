@@ -26,7 +26,7 @@ using System.IO;
 using System.Linq;
 using NanoByte.Common.Properties;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Cli
 {
     /// <summary>
     /// Provides helper methods for for parsing command-line arguments.

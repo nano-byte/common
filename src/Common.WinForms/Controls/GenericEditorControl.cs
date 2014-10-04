@@ -22,8 +22,8 @@
 
 using System.Drawing;
 using System.Windows.Forms;
+using NanoByte.Common.Native;
 using NanoByte.Common.Undo;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Controls
 {

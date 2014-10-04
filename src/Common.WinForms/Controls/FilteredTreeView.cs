@@ -29,7 +29,6 @@ using System.Linq;
 using System.Windows.Forms;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Controls
 {

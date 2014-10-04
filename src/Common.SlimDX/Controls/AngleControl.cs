@@ -23,7 +23,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using NanoByte.Common.Utils;
 using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Controls

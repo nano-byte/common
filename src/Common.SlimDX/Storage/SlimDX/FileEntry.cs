@@ -27,7 +27,6 @@ using System.IO;
 using System.Windows.Forms;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Storage.SlimDX
 {

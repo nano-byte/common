@@ -81,9 +81,9 @@
     <Compile Include="Storage\SlimDX\ContentManager.cs" />
     <Compile Include="Storage\SlimDX\EmbeddedFile.cs" />
     <Compile Include="Storage\SlimDX\FileEntry.cs" />
-    <Compile Include="Utils\ColorUtils.cs" />
-    <Compile Include="Utils\MathUtils.cs" />
-    <Compile Include="Utils\RandomUtils.cs" />
+    <Compile Include="ColorUtils.cs" />
+    <Compile Include="MathUtils.cs" />
+    <Compile Include="RandomUtils.cs" />
     <Compile Include="Values\Attenuation.cs" />
     <Compile Include="Values\ByteGrid.cs" />
     <Compile Include="Values\ByteVector4.cs" />

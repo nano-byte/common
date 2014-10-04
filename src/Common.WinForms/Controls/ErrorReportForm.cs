@@ -31,7 +31,6 @@ using System.Windows.Forms;
 using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
-using NanoByte.Common.Utils;
 
 namespace NanoByte.Common.Controls
 {

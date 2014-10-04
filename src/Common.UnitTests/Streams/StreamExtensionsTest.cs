@@ -23,7 +23,6 @@
 using System.IO;
 using System.Text;
 using NanoByte.Common.Storage;
-using NanoByte.Common.Utils;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Streams

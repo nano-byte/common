@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Global.cs" />
     <Compile Include="AppMutex.cs" />
+    <Compile Include="Cli\ArgumentUtils.cs" />
     <Compile Include="Cli\BundledCliAppControl.cs" />
     <Compile Include="Cli\CliAppControl.cs" />
     <Compile Include="Cli\CliUtils.cs" />
@@ -96,9 +97,23 @@
     <Compile Include="MsgSeverity.cs" />
     <Compile Include="MutexLock.cs" />
     <Compile Include="NamedComparer.cs" />
+    <Compile Include="Native\CompilerUtils.cs" />
+    <Compile Include="Native\UnixUtils.cs" />
+    <Compile Include="Native\WindowsTaskbar.cs" />
+    <Compile Include="Native\WindowsTaskbar.NativeMethods.cs" />
+    <Compile Include="Native\WindowsUtils.cs" />
+    <Compile Include="Native\WindowsUtils.FileSystem.cs" />
+    <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
+    <Compile Include="Native\WindowsUtils.Platform.cs" />
+    <Compile Include="Native\WindowsUtils.WindowMessages.cs" />
     <Compile Include="NeedGuiException.cs" />
+    <Compile Include="Net\NetUtils.cs" />
+    <Compile Include="Net\WebClientTimeout.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NotAdminException.cs" />
     <Compile Include="Parallel.cs" />
+    <Compile Include="ProcessUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\ImageResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -113,6 +128,7 @@
     <Compile Include="PropertyPointer.cs" />
     <Compile Include="Storage\AtomicWrite.cs" />
     <Compile Include="Storage\BinaryStorage.cs" />
+    <Compile Include="Storage\FileUtils.cs" />
     <Compile Include="Storage\Locations.cs" />
     <Compile Include="Storage\LocationsRedirect.cs" />
     <Compile Include="Storage\TemporaryDirectory.cs" />
@@ -125,6 +141,7 @@
     <Compile Include="Streams\DisposeWrapperStream.cs" />
     <Compile Include="Streams\MicroServer.cs" />
     <Compile Include="Streams\StreamExtensions.cs" />
+    <Compile Include="StringUtils.cs" />
     <Compile Include="Tasks\CancellationToken.cs" />
     <Compile Include="Tasks\CancellationTokenRegistration.cs" />
     <Compile Include="Tasks\CancellationTokenSource.cs" />
@@ -163,22 +180,8 @@
     <Compile Include="Undo\SetValueCommand.cs" />
     <Compile Include="Undo\SimpleCommand.cs" />
     <Compile Include="Undo\SimpleCommandExecutor.cs" />
-    <Compile Include="Utils\ArgumentUtils.cs" />
-    <Compile Include="Utils\AttributeUtils.cs" />
-    <Compile Include="Utils\CompilerUtils.cs" />
-    <Compile Include="Utils\FileUtils.cs" />
-    <Compile Include="Utils\NetUtils.cs" />
-    <Compile Include="Utils\ProcessUtils.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
-    <Compile Include="Utils\UnixUtils.cs" />
-    <Compile Include="Utils\UpdateUtils.cs" />
-    <Compile Include="Utils\WindowsTaskbar.cs" />
-    <Compile Include="Utils\WindowsTaskbar.NativeMethods.cs" />
-    <Compile Include="Utils\WindowsUtils.cs" />
-    <Compile Include="Utils\WindowsUtils.FileSystem.cs" />
-    <Compile Include="Utils\WindowsUtils.NativeMethods.cs" />
-    <Compile Include="Utils\WindowsUtils.Platform.cs" />
-    <Compile Include="Utils\WindowsUtils.WindowMessages.cs" />
+    <Compile Include="UpdateUtils.cs" />
+    <Compile Include="Values\AttributeUtils.cs" />
     <Compile Include="Values\Design\EnumDescriptionConverter.cs" />
     <Compile Include="Values\Design\EnumXmlConverter.cs" />
     <Compile Include="Values\Design\StringConstructorConverter.cs" />
@@ -186,9 +189,6 @@
     <Compile Include="Values\EnumExtensions.cs" />
     <Compile Include="Values\KeyEqualityComparer.cs" />
     <Compile Include="Values\Languages.cs" />
-    <Compile Include="WebClientTimeout.cs">
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />

@@ -26,7 +26,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace NanoByte.Common.Utils
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Provides helper methods for the <see cref="System.Net"/> subsystem.
