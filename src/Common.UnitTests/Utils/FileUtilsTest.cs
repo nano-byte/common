@@ -371,8 +371,8 @@ namespace NanoByte.Common.Utils
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
-                if (UnixUtils.IsUnix) Assert.IsTrue(FileUtils.IsUnifxFS(tempDir), "Temp dir should be on Unixoid filesystem on Unixoid OS");
-                else Assert.IsFalse(FileUtils.IsUnifxFS(tempDir), "No directory should be Unixoid on a non-Unixoid OS");
+                if (UnixUtils.IsUnix) Assert.IsTrue(FileUtils.IsUnixFS(tempDir), "Temp dir should be on Unixoid filesystem on Unixoid OS");
+                else Assert.IsFalse(FileUtils.IsUnixFS(tempDir), "No directory should be Unixoid on a non-Unixoid OS");
             }
         }
         #endregion

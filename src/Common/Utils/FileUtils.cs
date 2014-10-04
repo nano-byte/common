@@ -775,7 +775,7 @@ namespace NanoByte.Common.Utils
         /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
         /// <exception cref="IOException">Writing to the directory fails.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write to the directory.</exception>
-        public static bool IsUnifxFS(string path)
+        public static bool IsUnixFS(string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
