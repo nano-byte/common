@@ -62,6 +62,7 @@
     <Compile Include="Collections\ComparableTupleTest.cs" />
     <Compile Include="Collections\EnumerableExtensionsTest.cs" />
     <Compile Include="Collections\LanguageSetTest.cs" />
+    <Compile Include="Collections\ListExtensionsTest.cs" />
     <Compile Include="Collections\LocalizableStringCollectionTest.cs" />
     <Compile Include="Collections\NamedCollectionTest.cs" />
     <Compile Include="Collections\TransparentCacheTest.cs" />

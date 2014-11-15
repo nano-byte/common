@@ -30,7 +30,7 @@ using NanoByte.Common.Values;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// Provides helper methods for enumerable collections.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>s.
     /// </summary>
     public static class EnumerableExtensions
     {
@@ -383,70 +383,6 @@ namespace NanoByte.Common.Collections
                     else throw; // Rethrow exception if there are no more elements
                 }
             }
-        }
-        #endregion
-
-        #region List
-        /// <summary>
-        /// Adds multiple elements to the list.
-        /// </summary>
-        /// <remarks>This is a covariant wrapper for <see cref="List{T}.AddRange"/>.</remarks>
-        public static void AddRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
-            where TElements : TList
-        {
-            #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            #endregion
-
-            list.AddRange(elements.Cast<TList>());
-        }
-
-        /// <summary>
-        /// Removes multiple elements from the list.
-        /// </summary>
-        public static void RemoveRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
-            where TElements : TList
-        {
-            #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            if (elements == null) throw new ArgumentNullException("elements");
-            #endregion
-
-            foreach (var element in elements) list.Remove(element);
-        }
-
-        /// <summary>
-        /// Removes the last n elements from the list.
-        /// </summary>
-        /// <param name="list">The list to remove the elements from.</param>
-        /// <param name="number">The number of elements to remove.</param>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Specifically extends List<T>")]
-        public static void RemoveLast<T>(this List<T> list, int number = 1)
-        {
-            #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            if (number < 0) throw new ArgumentOutOfRangeException("number");
-            #endregion
-
-            list.RemoveRange(list.Count - number, number);
-        }
-        #endregion
-
-        #region Dictionary
-        /// <summary>
-        /// Adds multiple pairs to the dictionary in one go.
-        /// </summary>
-        public static void AddRange<TSourceKey, TSourceValue, TTargetKey, TTargetValue>(this IDictionary<TTargetKey, TTargetValue> target, IEnumerable<KeyValuePair<TSourceKey, TSourceValue>> source)
-            where TSourceKey : TTargetKey
-            where TSourceValue : TTargetValue
-        {
-            #region Sanity checks
-            if (target == null) throw new ArgumentNullException("target");
-            if (source == null) throw new ArgumentNullException("source");
-            #endregion
-
-            foreach (var pair in source)
-                target.Add(pair.Key, pair.Value);
         }
         #endregion
     }

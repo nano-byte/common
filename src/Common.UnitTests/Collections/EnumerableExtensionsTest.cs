@@ -161,20 +161,5 @@ namespace NanoByte.Common.Collections
             CollectionAssert.AreEqual(new[] {1, 2, 3}, actionCalledFor);
         }
         #endregion
-
-        #region List
-        /// <summary>
-        /// Ensures that <see cref="EnumerableExtensions.RemoveLast{T}"/> correctly removes the last n elements from a list.
-        /// </summary>
-        [Test]
-        public void TestRemoveLast()
-        {
-            var list = new List<string> {"a", "b", "c"};
-            list.RemoveLast(2);
-            CollectionAssert.AreEqual(new[] {"a"}, list);
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveLast(-1));
-        }
-        #endregion
     }
 }
