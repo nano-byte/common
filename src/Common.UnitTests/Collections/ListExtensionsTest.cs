@@ -33,6 +33,23 @@ namespace NanoByte.Common.Collections
     public class ListExtensionsTest
     {
         /// <summary>
+        /// Ensures that <see cref="ListExtensions.AddIfNew{T}"/> correctly detects pre-existing entries.
+        /// </summary>
+        [Test]
+        public void TestAddIfNew()
+        {
+            var list = new List<string> {"a", "b", "c"};
+
+            Assert.IsFalse(list.AddIfNew("b"));
+            CollectionAssert.AreEqual(new[] {"a", "b", "c"}, list);
+
+            Assert.IsTrue(list.AddIfNew("d"));
+            CollectionAssert.AreEqual(new[] {"a", "b", "c", "d"}, list);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveLast(-1));
+        }
+
+        /// <summary>
         /// Ensures that <see cref="ListExtensions.RemoveLast{T}"/> correctly removes the last n elements from a list.
         /// </summary>
         [Test]

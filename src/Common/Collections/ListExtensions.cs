@@ -47,6 +47,25 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
+        /// Adds an element to a <see cref="List{T}"/> if the list list does not already <see cref="List{T}.Contains"/> the element.
+        /// </summary>
+        /// <returns><see langword="true"/> if the element was added to the list; <see langword="true"/> if the list already contained the element.</returns>
+        /// <remarks>This makes it possible to use a <see cref="List{T}"/> with semantics similar to a <see cref="SortedSet{T}"/>, but without ordering.</remarks>
+        public static bool AddIfNew<T>(this List<T> list, T element)
+        {
+            #region Sanity checks
+            if (list == null) throw new ArgumentNullException("list");
+            #endregion
+
+            if (list.Contains(element)) return false;
+            else
+            {
+                list.Add(element);
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Removes multiple elements from the list.
         /// </summary>
         public static void RemoveRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
