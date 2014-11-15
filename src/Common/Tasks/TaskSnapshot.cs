@@ -23,6 +23,7 @@
 using System;
 using System.Globalization;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Tasks
 {

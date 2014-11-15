@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 using Moq;
@@ -69,6 +70,27 @@ namespace NanoByte.Common.Storage
                 Assert.AreEqual("a/b", new DirectoryInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")));
                 Assert.AreEqual("a/b", new DirectoryInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test/")));
             }
+        }
+
+        [Test]
+        public void TestExpandUnixVariables()
+        {
+            var variables = new StringDictionary
+            {
+                {"key1", "value1"},
+                {"key2", "value2"},
+                {"long key", "long value"}
+            };
+
+            Assert.AreEqual(
+                "value1value2/value1 value2 long value ",
+                FileUtils.ExpandUnixVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables));
+
+            Assert.AreEqual(
+                "value1-bla",
+                FileUtils.ExpandUnixVariables("$KEY1-bla", variables));
+
+            Assert.AreEqual("", FileUtils.ExpandUnixVariables("", variables));
         }
         #endregion
 

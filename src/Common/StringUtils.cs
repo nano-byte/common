@@ -22,12 +22,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common
@@ -540,47 +538,6 @@ namespace NanoByte.Common
 
             // Use base64 encoding without '=' padding and with '-' instead of 'l'
             return Convert.ToBase64String(array).Substring(0, length).Replace('l', '-');
-        }
-        #endregion
-
-        #region File size
-        /// <summary>
-        /// Formats a byte number in human-readable form (KB, MB, GB).
-        /// </summary>
-        /// <param name="value">The value in bytes.</param>
-        /// <param name="provider">Provides culture-specific formatting information.</param>
-        public static string FormatBytes(this long value, IFormatProvider provider)
-        {
-            if (value >= 1073741824)
-                return string.Format(provider, "{0:0.00}", value / 1073741824f) + " GB";
-            if (value >= 1048576)
-                return string.Format(provider, "{0:0.00}", value / 1048576f) + " MB";
-            if (value >= 1024)
-                return string.Format(provider, "{0:0.00}", value / 1024f) + " KB";
-            return value + " Bytes";
-        }
-        #endregion
-
-        #region Unix paths
-        /// <summary>
-        /// Expands/substitutes any Unix-style environment variables in the string.
-        /// </summary>
-        /// <param name="value">The string containing variables to be expanded.</param>
-        /// <param name="variables">The list of variables available for expansion.</param>
-        public static string ExpandUnixVariables(string value, StringDictionary variables)
-        {
-            #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (variables == null) throw new ArgumentNullException("variables");
-            #endregion
-
-            // Substitute ${VAR} for the value of VAR
-            value = new Regex(@"\${(.+)}").Replace(value, match => variables[match.Groups[1].Value]);
-
-            // Substitute $VAR for the value of VAR
-            value = new Regex(@"\$([^\$\s\\/-]+)").Replace(value, match => variables[match.Groups[1].Value]);
-
-            return value;
         }
         #endregion
     }
