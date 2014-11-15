@@ -95,6 +95,37 @@ namespace NanoByte.Common.Collections
         {
             return enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
         }
+
+        /// <summary>
+        /// Maps elements like <see cref="Enumerable.Select{TSource,TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TResult})"/>, but with exception handling.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the input elements.</typeparam>
+        /// <typeparam name="TResult">The type of the output elements.</typeparam>
+        /// <typeparam name="TException">The type of exceptions to ignore. Any other exceptions are passed through.</typeparam>
+        /// <param name="source">The elements to map.</param>
+        /// <param name="selector">The selector to execute for each <paramref name="source"/> element. When it throws <typeparamref name="TException"/> the element is skipped. Any other exceptions are passed through.</param>
+        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+            where TException : Exception
+        {
+            #region Sanity checks
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+            #endregion
+
+            foreach (var element in source)
+            {
+                TResult result;
+                try
+                {
+                    result = selector(element);
+                }
+                catch (TException)
+                {
+                    continue;
+                }
+                yield return result;
+            }
+        }
         #endregion
 
         #region Equality

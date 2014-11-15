@@ -43,6 +43,19 @@ namespace NanoByte.Common.Collections
                 actual: strings.Distinct(x => x[0]));
         }
 
+        [Test]
+        public void TestTrySelect()
+        {
+            var strings = new[] {"1", "2", "c", "4"};
+
+            CollectionAssert.AreEquivalent(
+                expected: new[] {1, 2, 4},
+                actual: strings.TrySelect<string, int, FormatException>(int.Parse));
+
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+            Assert.Throws<FormatException>(() => strings.TrySelect<string, int, ArgumentException>(int.Parse).ToList());
+        }
+
         #region Equality
         [Test]
         public void TestSequencedEqualsList()
