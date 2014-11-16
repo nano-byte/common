@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Controls
 {
@@ -66,7 +67,7 @@ namespace NanoByte.Common.Controls
         /// <exception cref="UriFormatException">Trying to read while <see cref="TextBox.Text"/> is not a well-formed <see cref="Uri"/>.</exception>
         /// <remarks>It is always safe to set this property. It is safe to read this property after validation has been performed.</remarks>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Uri Uri { get { return string.IsNullOrEmpty(Text) ? null : new Uri(Text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute); } set { Text = (value == null) ? null : value.ToString(); } }
+        public Uri Uri { get { return string.IsNullOrEmpty(Text) ? null : new Uri(Text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute); } set { Text = (value == null) ? null : value.ToStringRfc(); } }
 
         /// <summary>
         /// When set to <see langword="true"/> only URIs starting with "http:" or "https:" will be considered valid.

@@ -22,6 +22,7 @@
 
 using System;
 using System.Globalization;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common
 {
@@ -154,9 +155,9 @@ namespace NanoByte.Common
             #endregion
 
             return new PropertyPointer<string>(
-                getValue: () => (pointer.Value == null) ? null : pointer.Value.ToString(),
+                getValue: () => (pointer.Value == null) ? null : pointer.Value.ToStringRfc(),
                 setValue: value => pointer.Value = (value == null) ? null : new Uri(value),
-                defaultValue: (pointer.DefaultValue == null) ? null : pointer.DefaultValue.OriginalString);
+                defaultValue: (pointer.DefaultValue == null) ? null : pointer.DefaultValue.ToStringRfc());
         }
     }
 }

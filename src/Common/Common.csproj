@@ -110,6 +110,7 @@
     <Compile Include="Native\WindowsUtils.WindowMessages.cs" />
     <Compile Include="NeedGuiException.cs" />
     <Compile Include="Net\NetUtils.cs" />
+    <Compile Include="Net\UriExtensions.cs" />
     <Compile Include="Net\WebClientTimeout.cs">
       <SubType>Component</SubType>
     </Compile>
