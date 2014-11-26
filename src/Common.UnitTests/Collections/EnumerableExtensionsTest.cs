@@ -33,6 +33,7 @@ namespace NanoByte.Common.Collections
     [TestFixture]
     public class EnumerableExtensionsTest
     {
+        #region LINQ
         [Test]
         public void TestDistinct()
         {
@@ -48,13 +49,32 @@ namespace NanoByte.Common.Collections
         {
             var strings = new[] {"1", "2", "c", "4"};
 
-            CollectionAssert.AreEquivalent(
+            CollectionAssert.AreEqual(
                 expected: new[] {1, 2, 4},
                 actual: strings.TrySelect<string, int, FormatException>(int.Parse));
 
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             Assert.Throws<FormatException>(() => strings.TrySelect<string, int, ArgumentException>(int.Parse).ToList());
         }
+
+        [Test]
+        public void TestAppend()
+        {
+            var strings = new List<string> {"A", "B"};
+            CollectionAssert.AreEqual(
+                expected: new[] {"A", "B", "C"},
+                actual: strings.Append("C"));
+        }
+
+        [Test]
+        public void TestPrepend()
+        {
+            var strings = new List<string> {"B", "C"};
+            CollectionAssert.AreEqual(
+                expected: new[] {"A", "B", "C"},
+                actual: strings.Prepend("A"));
+        }
+        #endregion
 
         #region Equality
         [Test]
@@ -108,18 +128,6 @@ namespace NanoByte.Common.Collections
             Assert.AreEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"C", "B", "A"}.GetUnsequencedHashCode());
             Assert.AreNotEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"X", "Y", "Z"}.GetUnsequencedHashCode());
             Assert.AreNotEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"A", "B"}.GetUnsequencedHashCode());
-        }
-        #endregion
-
-        #region Added elements
-        /// <summary>
-        /// Ensures that <see cref="EnumerableExtensions.GetAddedElements{T}(T[],T[])"/> correctly detects elements added to an ordered collection.
-        /// </summary>
-        [Test]
-        public void TestGetAddedElements()
-        {
-            CollectionAssert.AreEqual(new[] {"B", "H"}, new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}));
-            CollectionAssert.AreEqual(new[] {"C"}, new[] {"C", "D"}.GetAddedElements(new[] {"A", "D"}));
         }
         #endregion
 

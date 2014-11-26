@@ -58,6 +58,7 @@
     <Compile Include="Cli\CliAppControl.cs" />
     <Compile Include="Cli\CliUtils.cs" />
     <Compile Include="Cli\ProgressBar.cs" />
+    <Compile Include="Collections\ArrayExtensions.cs" />
     <Compile Include="Collections\ComparableTuple.cs" />
     <Compile Include="Collections\CultureComparer.cs" />
     <Compile Include="Collections\DictionaryExtensions.cs" />
