@@ -38,7 +38,7 @@ namespace NanoByte.Common.Net
             if (uri == null) throw new ArgumentNullException("uri");
             #endregion
 
-            return uri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped);
+            return uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString;
         }
 
         /// <summary>
