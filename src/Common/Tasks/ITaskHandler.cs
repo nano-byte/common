@@ -74,9 +74,9 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Displays multi-line text to the user.
         /// </summary>
-        /// <param name="title">A title for the information. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
-        /// <param name="information">The information to display.</param>
+        /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
+        /// <param name="message">The string to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-        void Output(string title, string information);
+        void Output(string title, string message);
     }
 }

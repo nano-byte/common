@@ -36,7 +36,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Creates a new task handler.
         /// </summary>
-        /// <param name="owner">The parent window for any dialogs created by the handler.</param>
+        /// <param name="owner">The parent window for any dialogs created by the handler; may be <see langword="null"/>.</param>
         public GuiTaskHandler(IWin32Window owner = null)
         {
             _owner = owner;
@@ -75,6 +75,10 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public virtual bool AskQuestion(string question, string batchInformation = null)
         {
+            #region Sanity checks
+            if (question == null) throw new ArgumentNullException("question");
+            #endregion
+
             if (Batch)
             {
                 if (!string.IsNullOrEmpty(batchInformation)) Log.Warn(batchInformation);
@@ -94,9 +98,14 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output(string title, string information)
+        public virtual void Output(string title, string message)
         {
-            OutputBox.Show(title, information);
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException("title");
+            if (message == null) throw new ArgumentNullException("message");
+            #endregion
+
+            OutputBox.Show(title, message, _owner);
         }
 
         #region Dispose

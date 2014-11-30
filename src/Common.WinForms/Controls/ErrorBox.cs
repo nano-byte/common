@@ -22,30 +22,27 @@
 
 using System;
 using System.Windows.Forms;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {
     /// <summary>
     /// A dialog displaying an error message and details.
     /// </summary>
-    public partial class ErrorBox : Form
+    public sealed partial class ErrorBox : Form
     {
-        #region Constructor
         private ErrorBox()
         {
             InitializeComponent();
         }
-        #endregion
 
-        #region Static access
         /// <summary>
         /// Displays an error box with a message and details.
         /// </summary>
         /// <param name="message">The error message to display.</param>
         /// <param name="detailsRtf">The details formatted as RTF.</param>
+        /// <param name="owner">The parent window for the dialogs; may be <see langword="null"/>.</param>
         /// <returns>The text the user entered if he pressed OK; otherwise <see langword="null"/>.</returns>
-        public static void Show(string message, RtfBuilder detailsRtf)
+        public static void Show(string message, RtfBuilder detailsRtf, IWin32Window owner = null)
         {
             #region Sanity checks
             if (message == null) throw new ArgumentNullException("message");
@@ -62,9 +59,8 @@ namespace NanoByte.Common.Controls
                 errorBox.toolTip.SetToolTip(errorBox.labelMessage, errorBox.labelMessage.Text);
                 // ReSharper disable once AccessToDisposedClosure
                 errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
-                errorBox.ShowDialog();
+                errorBox.ShowDialog(owner);
             }
         }
-        #endregion
     }
 }

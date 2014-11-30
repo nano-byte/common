@@ -22,30 +22,27 @@
 
 using System;
 using System.Windows.Forms;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {
     /// <summary>
     /// A simple dialog displaying selectable multi-line text.
     /// </summary>
-    public partial class OutputBox : Form
+    public sealed partial class OutputBox : Form
     {
-        #region Constructor
         private OutputBox()
         {
             InitializeComponent();
         }
-        #endregion
 
-        #region Static access
         /// <summary>
         /// Displays an ouput box with some text.
         /// </summary>
         /// <param name="title">The text to display above the <paramref name="message"/>.</param>
         /// <param name="message">The selectable multi-line text to display to the user.</param>
+        /// <param name="owner">The parent window for the dialogs; may be <see langword="null"/>.</param>
         /// <returns>The text the user entered if he pressed OK; otherwise <see langword="null"/>.</returns>
-        public static void Show(string title, string message)
+        public static void Show(string title, string message, IWin32Window owner = null)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
@@ -62,9 +59,8 @@ namespace NanoByte.Common.Controls
                 outputBox.toolTip.SetToolTip(outputBox.labelTitle, outputBox.labelTitle.Text);
                 // ReSharper disable once AccessToDisposedClosure
                 outputBox.Shown += delegate { outputBox.SetForegroundWindow(); };
-                outputBox.ShowDialog();
+                outputBox.ShowDialog(owner);
             }
         }
-        #endregion
     }
 }

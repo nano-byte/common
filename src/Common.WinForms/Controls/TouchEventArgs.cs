@@ -25,8 +25,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace NanoByte.Common.Controls
 {
-
-    #region Enumerations
     /// <summary>
     /// Mask indicating which fields in <see cref="TouchEventArgs"/> are valid.
     /// </summary>
@@ -44,7 +42,6 @@ namespace NanoByte.Common.Controls
         /// <summary>TOUCHINPUTMASKF_CONTACTAREA</summary>
         ContactArea = 0x0004
     }
-    #endregion
 
     /// <summary>
     /// Event information about a touch event.

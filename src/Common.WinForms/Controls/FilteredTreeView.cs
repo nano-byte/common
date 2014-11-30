@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;

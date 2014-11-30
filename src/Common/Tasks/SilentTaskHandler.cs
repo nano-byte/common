@@ -64,7 +64,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output(string title, string information)
+        public virtual void Output(string title, string message)
         {
             // No UI, so nothing to do
         }

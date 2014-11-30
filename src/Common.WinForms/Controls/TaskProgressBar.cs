@@ -33,7 +33,6 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public sealed class TaskProgressBar : ProgressBar
     {
-        #region Properties
         /// <summary>
         /// Determines the handle of the <see cref="Form"/> containing this control.
         /// </summary>
@@ -53,7 +52,6 @@ namespace NanoByte.Common.Controls
         /// <remarks>Use only once per window. Only works on Windows 7 or newer.</remarks>
         [Description("Show the progress in the Windows taskbar."), DefaultValue(false)]
         public bool UseTaskbar { set; get; }
-        #endregion
 
         public TaskProgressBar()
         {

@@ -31,14 +31,11 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public sealed partial class InputBox : Form
     {
-        #region Constructor
         private InputBox()
         {
             InitializeComponent();
         }
-        #endregion
 
-        #region Static access
         /// <summary>
         /// Displays an input box asking the the user to input some text.
         /// </summary>
@@ -64,9 +61,7 @@ namespace NanoByte.Common.Controls
             })
                 return (inputBox.ShowDialog(owner) == DialogResult.OK) ? inputBox.textInput.Text : null;
         }
-        #endregion
 
-        #region Drag and drop handling
         private void InputBox_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -84,6 +79,5 @@ namespace NanoByte.Common.Controls
                 ? DragDropEffects.Copy
                 : DragDropEffects.None;
         }
-        #endregion
     }
 }

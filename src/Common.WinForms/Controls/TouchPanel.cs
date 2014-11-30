@@ -23,7 +23,6 @@
 using System;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {
@@ -32,7 +31,6 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public class TouchPanel : Panel, ITouchControl
     {
-        #region Events
         /// <inheritdoc/>
         public event EventHandler<TouchEventArgs> TouchDown;
 
@@ -41,9 +39,7 @@ namespace NanoByte.Common.Controls
 
         /// <inheritdoc/>
         public event EventHandler<TouchEventArgs> TouchMove;
-        #endregion
 
-        #region Message handling
         protected override CreateParams CreateParams
         {
             [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
@@ -67,6 +63,5 @@ namespace NanoByte.Common.Controls
             WinFormsUtils.HandleTouchMessage(ref m, this, TouchDown, TouchMove, TouchUp);
             base.WndProc(ref m);
         }
-        #endregion
     }
 }

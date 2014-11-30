@@ -32,7 +32,6 @@ namespace NanoByte.Common.Controls
     /// <typeparam name="T">The type of element to edit.</typeparam>
     public partial class EditorDialog<T> : OKCancelDialog, IEditorDialog<T> where T : class
     {
-        #region Constructor
         // Don't use WinForms designer for this, since it doesn't understand generics
         private readonly GenericEditorControl<T> _editor = new GenericEditorControl<T>
         {
@@ -49,7 +48,6 @@ namespace NanoByte.Common.Controls
 
             Load += delegate { Text = typeof(T).Name; };
         }
-        #endregion
 
         /// <inheritdoc/>
         public DialogResult ShowDialog(IWin32Window owner, T element)

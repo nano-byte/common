@@ -29,16 +29,11 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public partial class OKCancelDialog : Form
     {
-        #region Constructor
         public OKCancelDialog()
         {
             InitializeComponent();
         }
-        #endregion
 
-        //--------------------//
-
-        #region Event handling
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
             OnOKClicked();
@@ -48,9 +43,7 @@ namespace NanoByte.Common.Controls
         {
             OnCancelClicked();
         }
-        #endregion
 
-        #region Hooks
         /// <summary>
         /// This hook is called when the user clicks the OK button.
         /// </summary>
@@ -62,6 +55,5 @@ namespace NanoByte.Common.Controls
         /// </summary>
         protected virtual void OnCancelClicked()
         {}
-        #endregion
     }
 }

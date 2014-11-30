@@ -20,7 +20,6 @@
  * THE SOFTWARE.
  */
 
-using System.Collections.Specialized;
 using System.Security.Cryptography;
 using NUnit.Framework;
 

@@ -59,6 +59,10 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public virtual bool AskQuestion(string question, string batchInformation = null)
         {
+            #region Sanity checks
+            if (question == null) throw new ArgumentNullException("question");
+            #endregion
+
             if (Batch)
             {
                 if (!string.IsNullOrEmpty(batchInformation)) Log.Warn(batchInformation);
@@ -85,9 +89,14 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output(string title, string information)
+        public virtual void Output(string title, string message)
         {
-            Console.WriteLine(information);
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException("title");
+            if (message == null) throw new ArgumentNullException("message");
+            #endregion
+
+            Console.WriteLine(message);
         }
 
         #region Dispose
