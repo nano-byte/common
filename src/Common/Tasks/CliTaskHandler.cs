@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.IO;
 using NanoByte.Common.Cli;
 
 namespace NanoByte.Common.Tasks
@@ -30,6 +31,27 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class CliTaskHandler : MarshalNoTimeout, ITaskHandler
     {
+        /// <summary>
+        /// Sets up Ctrl+C capturing.
+        /// </summary>
+        public CliTaskHandler()
+        {
+            // Handle Ctrl+C
+            try
+            {
+                Console.TreatControlCAsInput = false;
+                Console.CancelKeyPress += delegate(object sender, ConsoleCancelEventArgs e)
+                {
+                    CancellationTokenSource.Cancel();
+                    e.Cancel = true;
+                };
+            }
+            catch (IOException)
+            {
+                // Ignore failures caused by non-standard terminal emulators
+            }
+        }
+
         /// <inheritdoc/>
         public int Verbosity { get; set; }
 
