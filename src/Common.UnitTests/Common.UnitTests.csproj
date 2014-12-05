@@ -68,6 +68,7 @@
     <Compile Include="Collections\NamedCollectionTest.cs" />
     <Compile Include="Collections\TransparentCacheTest.cs" />
     <Compile Include="Collections\XmlDictionaryTest.cs" />
+    <Compile Include="Controls\OutputGridBoxTest.cs" />
     <Compile Include="Dispatch\AggregateDispatcherTest.cs" />
     <Compile Include="Dispatch\BucketizerTest.cs" />
     <Compile Include="Dispatch\MergeTest.cs" />

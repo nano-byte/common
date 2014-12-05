@@ -21,7 +21,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NanoByte.Common.Cli;
 
 namespace NanoByte.Common.Tasks
@@ -119,6 +121,21 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Console.WriteLine(message);
+        }
+
+        /// <inheritdoc/>
+        public void Output<T>(string title, IEnumerable<T> data)
+        {
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException("title");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            foreach (string entry in data.Select(x => x.ToString()))
+            {
+                Console.WriteLine(entry);
+                if (entry.Contains("\n")) Console.WriteLine();
+            }
         }
 
         #region Dispose

@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace NanoByte.Common.Tasks
 {
@@ -65,6 +66,12 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         public virtual void Output(string title, string message)
+        {
+            // No UI, so nothing to do
+        }
+
+        /// <inheritdoc/>
+        public virtual void Output<T>(string title, IEnumerable<T> data)
         {
             // No UI, so nothing to do
         }

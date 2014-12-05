@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using NanoByte.Common.Controls;
 
@@ -106,6 +107,17 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             OutputBox.Show(title, message, _owner);
+        }
+
+        /// <inheritdoc/>
+        public virtual void Output<T>(string title, IEnumerable<T> data)
+        {
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException("title");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            OutputGridBox.Show(title, data, _owner);
         }
 
         #region Dispose

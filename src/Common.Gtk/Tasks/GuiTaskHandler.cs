@@ -21,6 +21,9 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Gtk;
 
 namespace NanoByte.Common.Tasks
@@ -105,6 +108,18 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Msg.Inform(_owner, title + Environment.NewLine + message, MsgSeverity.Warn);
+        }
+
+        /// <inheritdoc/>
+        public void Output<T>(string title, IEnumerable<T> data)
+        {
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException("title");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
+            Output(title, message);
         }
 
         #region Dispose

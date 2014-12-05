@@ -137,6 +137,12 @@
     <Compile Include="Controls\OutputBox.Designer.cs">
       <DependentUpon>OutputBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OutputGridBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\OutputGridBox.Designer.cs">
+      <DependentUpon>OutputGridBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ResettablePropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
