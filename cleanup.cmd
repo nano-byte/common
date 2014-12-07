@@ -27,9 +27,5 @@ rem NUnit logs
 del "%~dp0*.VisualState.xml" > NUL 2>&1
 del "%~dp0TestResult.xml" > NUL 2>&1
 
-rem JetBrains caches
-rd /s /q "%~dp0src\_ReSharper.NanoByte.Common" > NUL 2>&1
-rd /s /q "%~dp0src\_TeamCity.NanoByte.Common" > NUL 2>&1
-rd /s /q "%~dp0src\_dotTrace.NanoByte.Common" > NUL 2>&1
-rd /s /q "%~dp0src\_dotMemory.NanoByte.Common" > NUL 2>&1
-rd /s /q "%~dp0src\_dotCover.NanoByte.Common" > NUL 2>&1
+rem ReSharper caches
+for /D %%X in ("%~dp0src\_ReSharper*") do rd /s /q "%%X"
