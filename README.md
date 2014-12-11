@@ -1,3 +1,14 @@
+NuGet packages
+==============
+
+The recommended way for using NanoByte.Common in your own projects is [NuGet](http://www.nuget.org/). Choose one of the following packages:
+* [NanoByte.Common](http://www.nuget.org/packages/NanoByte.Common/) if your project has no GUI or is a library itself.
+* [NanoByte.Common.WinForms](http://www.nuget.org/packages/NanoByte.Common.WinForms/) if your project is [WinForms](http://msdn.microsoft.com/library/system.windows.forms)-based.
+* [NanoByte.Common.Gtk](http://www.nuget.org/packages/NanoByte.Common.Gtk/) if your project is [Gtk#](http://www.mono-project.com/GtkSharp/)-based.
+* [NanoByte.Common.SlimDX](http://www.nuget.org/packages/NanoByte.Common.SlimDx/) if your project uses [SlimDX](http://slimdx.org/).
+
+
+
 Directory structure
 ===================
 
