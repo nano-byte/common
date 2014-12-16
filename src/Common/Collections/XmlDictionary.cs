@@ -34,9 +34,9 @@ namespace NanoByte.Common.Collections
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization"),
      SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
+    [Serializable]
     public class XmlDictionary : BindingList<XmlDictionaryEntry>, ICloneable
     {
-        #region Add
         /// <summary>
         /// Adds a new value and links it to a key
         /// </summary>
@@ -63,9 +63,7 @@ namespace NanoByte.Common.Collections
 
             base.InsertItem(index, item);
         }
-        #endregion
 
-        #region Remove
         /// <summary>
         /// Removes all values assigned to this key.
         /// </summary>
@@ -84,9 +82,7 @@ namespace NanoByte.Common.Collections
             // Were any elements removed?
             return (pendingRemove.Count > 0);
         }
-        #endregion
 
-        #region Contains
         /// <summary>
         /// Checks whether this collection contains a certain key.
         /// </summary>
@@ -106,9 +102,7 @@ namespace NanoByte.Common.Collections
         {
             return this.Any(entry => entry.Value == value);
         }
-        #endregion
 
-        #region Sort
         /// <summary>
         /// Sorts all entries alphabetically by their key.
         /// </summary>
@@ -124,9 +118,7 @@ namespace NanoByte.Common.Collections
             // Let bound controls know they should refresh their views
             OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
         }
-        #endregion
 
-        #region Indexer
         /// <summary>
         /// Returns the value associated to a specific key.
         /// </summary>
@@ -139,7 +131,6 @@ namespace NanoByte.Common.Collections
                 if (pair.Key.Equals(key)) return pair.Value;
             throw new KeyNotFoundException();
         }
-        #endregion
 
         //--------------------//
 

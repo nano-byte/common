@@ -45,7 +45,6 @@ namespace NanoByte.Common.Collections
         }
         #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new named collection.
         /// </summary>
@@ -64,19 +63,7 @@ namespace NanoByte.Common.Collections
 
             foreach (var element in elements) Add(element);
         }
-        #endregion
 
-        //--------------------//
-
-        #region Key access
-        /// <inheritdoc/>
-        protected override string GetKeyForItem(T item)
-        {
-            return item.Name;
-        }
-        #endregion
-
-        #region Rename
         /// <summary>
         /// Renames an element in the list. Renaming an element in the list directly (without using this method) will prevent lookups from working properly!
         /// </summary>
@@ -95,9 +82,7 @@ namespace NanoByte.Common.Collections
             Sort();
             OnCollectionChanged();
         }
-        #endregion
 
-        #region Sort
         /// <summary>
         /// Sorts all elements alphabetically by their <see cref="INamed{T}.Name"/>.
         /// </summary>
@@ -107,9 +92,14 @@ namespace NanoByte.Common.Collections
             if (items != null)
                 items.Sort((x, y) => string.CompareOrdinal(x.Name, y.Name));
         }
-        #endregion
 
         #region Hooks
+        /// <inheritdoc/>
+        protected override string GetKeyForItem(T item)
+        {
+            return item.Name;
+        }
+
         /// <inheritdoc/>
         protected override void InsertItem(int index, T item)
         {

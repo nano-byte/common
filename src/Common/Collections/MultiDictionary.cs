@@ -34,31 +34,23 @@ namespace NanoByte.Common.Collections
     /// <typeparam name="TValue">The type to use as elements to store in the dictionary.</typeparam>
     /// <remarks>This structure internally uses hash maps, so most operations run in O(1).</remarks>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This class behaves mostly like a normal dictionary but cannot implement the usual interfaces since they are incompatible with the \"multiple values per key\" paradigm")]
+    [Serializable]
     public class MultiDictionary<TKey, TValue>
     {
-        #region Variables
-        /// <summary>A list of all values in the dictionary.</summary>
-        private HashSet<TValue> _values = new HashSet<TValue>();
-
-        /// <summary>The internal dictionary data-structure used for hash-based storage.</summary>
         private readonly Dictionary<TKey, HashSet<TValue>> _dictionary = new Dictionary<TKey, HashSet<TValue>>();
-        #endregion
 
-        #region Properties
         /// <summary>
-        /// Gets a collection containing the keys of the dictionary.
+        /// A collection containing the keys of the dictionary.
         /// </summary>
         public IEnumerable<TKey> Keys { get { return _dictionary.Keys; } }
 
+        private HashSet<TValue> _values = new HashSet<TValue>();
+
         /// <summary>
-        /// Gets a collection containing the values in the dictionary.
+        /// A collection containing the values in the dictionary.
         /// </summary>
         public IEnumerable<TValue> Values { get { return _values; } }
-        #endregion
 
-        //--------------------//
-
-        #region Add
         /// <summary>
         /// Adds an element with the provided key and value to the dictionary.
         /// </summary>
@@ -83,9 +75,7 @@ namespace NanoByte.Common.Collections
             // Add the value to the set for its key
             _dictionary[key].Add(value);
         }
-        #endregion
 
-        #region Remove
         /// <summary>
         /// Removes all elements with the specified key from the dictionary.
         /// </summary>
@@ -142,9 +132,7 @@ namespace NanoByte.Common.Collections
             // Remove the value from the values list
             return _values.Remove(value);
         }
-        #endregion
 
-        #region Contains
         /// <summary>
         /// Determines whether the dictionary contains an element with the specified key.
         /// </summary>
@@ -166,9 +154,7 @@ namespace NanoByte.Common.Collections
         {
             return _values.Contains(value);
         }
-        #endregion
 
-        #region Index accessor
         /// <summary>
         /// Gets a collection containing the values with the specified key.
         /// </summary>
@@ -182,6 +168,5 @@ namespace NanoByte.Common.Collections
                 return _dictionary.TryGetValue(key, out result) ? result : Enumerable.Empty<TValue>();
             }
         }
-        #endregion
     }
 }

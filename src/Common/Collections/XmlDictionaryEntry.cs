@@ -29,18 +29,16 @@ namespace NanoByte.Common.Collections
     /// <summary>
     /// A key-value string pair for <see ref="XmlCollection" />.
     /// </summary>
+    [Serializable]
     public sealed class XmlDictionaryEntry : IEquatable<XmlDictionaryEntry>, ICloneable
     {
-        #region Variables
         /// <summary>
         /// The collection that owns this entry - set to enable automatic duplicate detection!
         /// </summary>
         internal XmlDictionary Parent;
 
         private string _key;
-        #endregion
 
-        #region Properties
         /// <summary>
         /// The unique text key. Warning: If this is changed the <see cref="XmlDictionary"/> must be rebuilt in order to update its internal hash table.
         /// </summary>
@@ -62,9 +60,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [XmlText]
         public string Value { get; set; }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Base-constructor for XML serialization. Do not call manually!
         /// </summary>
@@ -81,7 +77,6 @@ namespace NanoByte.Common.Collections
             _key = key;
             Value = value;
         }
-        #endregion
 
         //--------------------//
 

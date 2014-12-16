@@ -30,6 +30,7 @@ namespace NanoByte.Common.Collections
     /// <summary>
     /// A string with an associated language that can be XML serialized to an element with an xml:lang tag.
     /// </summary>
+    [Serializable]
     public sealed class LocalizableString : IEquatable<LocalizableString>, ICloneable
     {
         #region Variables

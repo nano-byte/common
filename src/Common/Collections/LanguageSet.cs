@@ -36,10 +36,10 @@ namespace NanoByte.Common.Collections
     /// </summary>
     /// <remarks>Uses Unix-style language codes with an underscore (_) separator.</remarks>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "A Set is a special case of a Collection.")]
+    [Serializable]
     [TypeConverter(typeof(StringConstructorConverter<LanguageSet>))]
     public sealed class LanguageSet : SortedSet<CultureInfo>
     {
-        #region Constructor
         /// <summary>
         /// Creates a new empty language collection.
         /// </summary>
@@ -82,11 +82,7 @@ namespace NanoByte.Common.Collections
                 if (language != null) yield return language;
             }
         }
-        #endregion
 
-        //--------------------//
-
-        #region Add
         /// <summary>
         /// Adds a language identified by a string to the collection.
         /// </summary>
@@ -96,9 +92,7 @@ namespace NanoByte.Common.Collections
         {
             return Add(new CultureInfo(language));
         }
-        #endregion
 
-        #region Contains
         /// <summary>
         /// Determines whether this language set contains any of a set of target languages.
         /// Empty sets count as containing all languages.
@@ -111,11 +105,7 @@ namespace NanoByte.Common.Collections
 
             return Count == 0 || targets.Count == 0 || targets.Any(Contains);
         }
-        #endregion
 
-        //--------------------//
-
-        #region Conversion
         /// <summary>
         /// Serializes the list as a space-separated list of languages codes.
         /// </summary>
@@ -132,6 +122,5 @@ namespace NanoByte.Common.Collections
             // Return without trailing whitespaces
             return output.ToString().TrimEnd();
         }
-        #endregion
     }
 }
