@@ -159,15 +159,16 @@ namespace NanoByte.Common.Controls
                 int lineLength = ex.Message.LastIndexOf(',') - lineStart;
                 int charStart = ex.Message.LastIndexOf(' ') + 1;
                 int charLength = ex.Message.LastIndexOf(')') - charStart;
-                int lineNumber = int.Parse(ex.Message.Substring(lineStart, lineLength)) - 1;
-                int charNumber = int.Parse(ex.Message.Substring(charStart, charLength)) - 1;
+                int lineNumber, charNumber;
+                if (int.TryParse(ex.Message.Substring(lineStart, lineLength), out lineNumber) && int.TryParse(ex.Message.Substring(charStart, charLength), out charNumber))
+                {
+                    int lineOffset = TextEditor.Document.GetLineSegment(lineNumber - 1).Offset;
+                    TextEditor.Document.MarkerStrategy.AddMarker(
+                        new TextMarker(lineOffset + charNumber -1, 10, TextMarkerType.WaveLine) {ToolTip = ex.InnerException.Message});
+                    TextEditor.Refresh();
+                }
 
-                int lineOffset = TextEditor.Document.GetLineSegment(lineNumber).Offset;
-                TextEditor.Document.MarkerStrategy.AddMarker(
-                    new TextMarker(lineOffset + charNumber, 10, TextMarkerType.WaveLine) {ToolTip = ex.InnerException.Message});
-                TextEditor.Refresh();
-
-                SetStatus(ImageResources.Error, ex.Message);
+                SetStatus(ImageResources.Error, ex.InnerException.Message);
             }
             else
             {
