@@ -36,7 +36,7 @@ namespace NanoByte.Common.Controls
             this.commentLabel = new System.Windows.Forms.Label();
             this.buttonReport = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.commentBox = new Common.Controls.HintTextBox();
+            this.commentBox = new NanoByte.Common.Controls.HintTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
