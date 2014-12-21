@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace NanoByte.Common.Collections
@@ -51,7 +50,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><see langword="true"/> if the element was added to the list; <see langword="true"/> if the list already contained the element.</returns>
         /// <remarks>This makes it possible to use a <see cref="List{T}"/> with semantics similar to a <see cref="SortedSet{T}"/>, but without ordering.</remarks>
-        public static bool AddIfNew<T>(this List<T> list, T element)
+        public static bool AddIfNew<T>(this ICollection<T> list, T element)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException("list");
@@ -68,7 +67,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes multiple elements from the list.
         /// </summary>
-        public static void RemoveRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
+        public static void RemoveRange<TList, TElements>(this ICollection<TList> list, IEnumerable<TElements> elements)
             where TElements : TList
         {
             #region Sanity checks
@@ -84,7 +83,6 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="list">The list to remove the elements from.</param>
         /// <param name="number">The number of elements to remove.</param>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Specifically extends List<T>")]
         public static void RemoveLast<T>(this List<T> list, int number = 1)
         {
             #region Sanity checks
@@ -93,6 +91,22 @@ namespace NanoByte.Common.Collections
             #endregion
 
             list.RemoveRange(list.Count - number, number);
+        }
+
+        /// <summary>
+        /// Determines whether the list contains an element or is null.
+        /// </summary>
+        /// <param name="list">The list to check.</param>
+        /// <param name="element">The element to look for.</param>
+        /// <remarks>This is usefull e.g. for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
+        public static bool ContainsOrEmpty<T>(this ICollection<T> list, T element)
+        {
+            #region Sanity checks
+            if (list == null) throw new ArgumentNullException("list");
+            if (element == null) throw new ArgumentNullException("element");
+            #endregion
+
+            return (list.Count == 0) || list.Contains(element);
         }
     }
 }
