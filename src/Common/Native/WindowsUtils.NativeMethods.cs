@@ -71,11 +71,11 @@ namespace NanoByte.Common.Native
         [SuppressUnmanagedCodeSecurity]
         private static class UnsafeNativeMethods
         {
-            [DllImport("kernel32", SetLastError = true)]
-            public static extern int CloseHandle(IntPtr hObject);
-
             [DllImport("shell32", SetLastError = true)]
             public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
+
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern int CloseHandle(IntPtr hObject);
 
             [DllImport("kernel32")]
             public static extern IntPtr LocalFree(IntPtr hMem);

@@ -49,7 +49,7 @@ namespace NanoByte.Common.Storage
         // ReSharper restore MemberCanBePrivate.Global
 
         /// <summary>
-        /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly.
+        /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly.
         /// </summary>
         [Test]
         public void TestFile()
@@ -67,7 +67,7 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly with relative paths.
+        /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly with relative paths.
         /// </summary>
         [Test]
         public void TestFileRelative()

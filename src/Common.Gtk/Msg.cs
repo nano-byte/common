@@ -165,7 +165,7 @@ namespace NanoByte.Common
             }
 
             // Display MessageDialog
-            using (var dialog = new MessageDialog(owner, DialogFlags.Modal, type, buttons, text ?? ""))
+            using (var dialog = new MessageDialog(owner, DialogFlags.Modal, type, buttons, text))
             {
                 dialog.Title = AppInfo.Current.ProductName;
                 var response = (ResponseType)dialog.Run();

@@ -56,7 +56,6 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The object to use as the key of the element to add.</param>
         /// <param name="value">The object to use as the value of the element to add.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
         public void Add(TKey key, TValue value)
         {
             #region Sanity checks
@@ -82,7 +81,6 @@ namespace NanoByte.Common.Collections
         /// <returns><see langword="true"/> if any elements were successfully removed; otherwise, <see langword="false"/>.
         /// This method also returns <see langword="false"/> if <paramref name="key"/> was not found in the dictionary.</returns>
         /// <param name="key">The key of the element to remove.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see langword="null"/>.</exception>
         /// <remarks>Since the <see cref="Values"/> list needs to be rebuild by traversing all <see cref="Keys"/>, this operation is not O(1) efficient.</remarks>
         public bool RemoveKey(TKey key)
         {
@@ -107,7 +105,6 @@ namespace NanoByte.Common.Collections
         /// <returns><see langword="true"/> if the element was successfully removed; otherwise, <see langword="false"/>.
         /// This method also returns <see langword="false"/> if <paramref name="value"/> was not found in the dictionary.</returns>
         /// <param name="value">The value of the element to remove.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         public bool RemoveValue(TValue value)
         {
             #region Sanity checks
@@ -138,7 +135,6 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><see langword="true"/> if the dictionary contains an element with the key; otherwise, <see langword="false"/>.</returns>
         /// <param name="key">The key to locate in the dictionary.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see langword="null"/>.</exception>
         public bool ContainsKey(TKey key)
         {
             return _dictionary.ContainsKey(key);
@@ -149,7 +145,6 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><see langword="true"/> if the dictionary contains an element with the value; otherwise, <see langword="false"/>.</returns>
         /// <param name="value">The value to locate in the dictionary.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         public bool ContainsValue(TValue value)
         {
             return _values.Contains(value);

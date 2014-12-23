@@ -30,6 +30,7 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+// ReSharper disable All
 
 // SortedSet is basically implemented as a reduction of SortedDictionary<K, V>
 

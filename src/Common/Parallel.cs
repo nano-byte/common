@@ -36,6 +36,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using NanoByte.Common.Tasks;
+// ReSharper disable All
 
 namespace NanoByte.Common
 {

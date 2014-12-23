@@ -73,6 +73,11 @@ namespace NanoByte.Common.Collections
         /// <exception cref="InvalidOperationException">The <paramref name="newName"/> is already taken by another element in the collection.</exception>
         public void Rename(T element, string newName)
         {
+            #region Sanity checks
+            if (element == null) throw new ArgumentNullException("element");
+            if (string.IsNullOrEmpty(newName)) throw new ArgumentNullException("newName");
+            #endregion
+
             if (!Contains(element)) throw new KeyNotFoundException();
             if (element.Name == newName) return;
             if (Contains(newName)) throw new InvalidOperationException(Resources.KeyAlreadyPresent);

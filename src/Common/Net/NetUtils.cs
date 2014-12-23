@@ -57,6 +57,10 @@ namespace NanoByte.Common.Net
         /// <remarks>This method affects the global state of the <see cref="AppDomain"/>. Calling it more than once is not cumulative and will overwrite previous certificates. You should call this method exactly once near the beginning of your application.</remarks>
         public static void TrustCertificates(params string[] publicKeys)
         {
+            #region Sanity checks
+            if (publicKeys == null) throw new ArgumentNullException("publicKeys");
+            #endregion
+
             ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
             {
                 if (sslPolicyErrors == SslPolicyErrors.None) return true;

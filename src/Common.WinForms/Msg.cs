@@ -87,6 +87,7 @@ namespace NanoByte.Common
         public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity, string okCaption, string cancelCaption)
         {
             #region Sanity checks
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(okCaption)) throw new ArgumentNullException("okCaption");
             #endregion
 
@@ -249,6 +250,7 @@ namespace NanoByte.Common
         public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity, string yesCaption, string noCaption)
         {
             #region Sanity checks
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
             if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
             #endregion

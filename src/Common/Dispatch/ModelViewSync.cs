@@ -48,6 +48,11 @@ namespace NanoByte.Common.Dispatch
         /// <param name="view">The View that is to be automatically updated to reflect changes in the Model.</param>
         public ModelViewSync(MonitoredCollection<TModel> model, ICollection<TView> view)
         {
+            #region Sanity checks
+            if (model == null) throw new ArgumentNullException("model");
+            if (view == null) throw new ArgumentNullException("view");
+            #endregion
+
             _model = model;
             _view = view;
         }
@@ -149,6 +154,10 @@ namespace NanoByte.Common.Dispatch
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
         {
+            #region Sanity checks
+            if (create == null) throw new ArgumentNullException("create");
+            #endregion
+
             _createDispatcher.Add<TSpecificModel>(element => create(element).OfType<TView>());
             if (update != null)
             {
@@ -169,6 +178,10 @@ namespace NanoByte.Common.Dispatch
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
         {
+            #region Sanity checks
+            if (create == null) throw new ArgumentNullException("create");
+            #endregion
+
             RegisterMultiple(element => new[] {create(element)}, update);
         }
     }

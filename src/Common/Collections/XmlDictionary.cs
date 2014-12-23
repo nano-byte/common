@@ -73,8 +73,8 @@ namespace NanoByte.Common.Collections
         {
             // Build a list of elements to remove
             var pendingRemove = new LinkedList<XmlDictionaryEntry>();
-            foreach (XmlDictionaryEntry pair in this)
-                if (pair.Key.Equals(key)) pendingRemove.AddLast(pair);
+            foreach (XmlDictionaryEntry pair in this.Where(pair => pair.Key.Equals(key)))
+                pendingRemove.AddLast(pair);
 
             // Remove the elements one-by-one
             foreach (XmlDictionaryEntry pair in pendingRemove) Remove(pair);
@@ -127,8 +127,8 @@ namespace NanoByte.Common.Collections
         /// <exception cref="KeyNotFoundException"><paramref name="key"/> was not found in the collection.</exception>
         public string GetValue(string key)
         {
-            foreach (XmlDictionaryEntry pair in this)
-                if (pair.Key.Equals(key)) return pair.Value;
+            foreach (XmlDictionaryEntry pair in this.Where(pair => pair.Key.Equals(key)))
+                return pair.Value;
             throw new KeyNotFoundException();
         }
 

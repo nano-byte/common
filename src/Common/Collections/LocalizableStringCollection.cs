@@ -118,7 +118,7 @@ namespace NanoByte.Common.Collections
                 return entry.Value;
 
             // Try to find same language with neutral culture
-            foreach (LocalizableString entry in this.Where(entry => entry.Language != null && language.TwoLetterISOLanguageName == entry.Language.TwoLetterISOLanguageName && entry.Language.IsNeutralCulture))
+            foreach (LocalizableString entry in this.Where(entry => language.TwoLetterISOLanguageName == entry.Language.TwoLetterISOLanguageName && entry.Language.IsNeutralCulture))
                 return entry.Value;
 
             // Try to find "en"

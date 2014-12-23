@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+// ReSharper disable All
 
 // HashSet is basically implemented as a reduction of Dictionary<K, V>
 

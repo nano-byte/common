@@ -53,8 +53,8 @@ namespace NanoByte.Common.Undo
         {
             #region Sanity checks
             if (targets == null) throw new ArgumentNullException("targets");
-            if (oldValues == null) throw new ArgumentNullException("oldValues");
             if (property == null) throw new ArgumentNullException("property");
+            if (oldValues == null) throw new ArgumentNullException("oldValues");
             if (targets.Length != oldValues.Length) throw new ArgumentException(Resources.TargetsOldValuesLength, "targets");
             #endregion
 
@@ -86,10 +86,10 @@ namespace NanoByte.Common.Undo
         /// </summary>
         protected override void OnRedo()
         {
-            for (int i = 0; i < _targets.Length; i++)
+            foreach (object target in _targets)
             {
                 // Use refelction to get the specific property for each object and set the new value everywhere
-                _targets[i].GetType().GetProperty(_property.Name).SetValue(_targets[i], _newValue, null);
+                target.GetType().GetProperty(_property.Name).SetValue(target, _newValue, null);
             }
         }
 

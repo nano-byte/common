@@ -27,6 +27,7 @@
 
 using System;
 using System.CodeDom.Compiler;
+// ReSharper disable All
 
 namespace NanoByte.Common.Collections
 {

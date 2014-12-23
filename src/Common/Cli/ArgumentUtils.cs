@@ -45,6 +45,7 @@ namespace NanoByte.Common.Cli
         {
             #region Sanity checks
             if (args == null) throw new ArgumentNullException("args");
+            if (string.IsNullOrEmpty(defaultPattern)) throw new ArgumentNullException("defaultPattern");
             #endregion
 
             var result = new List<FileInfo>();

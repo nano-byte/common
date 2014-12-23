@@ -99,7 +99,7 @@ namespace NanoByte.Common.Collections
         /// <inheritdoc/>
         public override string ToString()
         {
-            return (Language == null) ? Value : Value + " (" + Language + ")";
+            return Value + " (" + Language + ")";
         }
         #endregion
 

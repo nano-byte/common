@@ -51,6 +51,10 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
         public TemporaryDirectory(string prefix)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
+            #endregion
+
             Path = FileUtils.GetTempDirectory(prefix);
         }
         #endregion

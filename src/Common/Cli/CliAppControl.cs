@@ -47,7 +47,8 @@ namespace NanoByte.Common.Cli
         /// <param name="inputCallback">Callback allow you to write to the application's stdin-stream right after startup; <see langword="null"/> for none.</param>
         /// <returns>The application's complete output to the stdout-stream.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
-        protected virtual string Execute(string arguments, Action<StreamWriter> inputCallback = null)        {
+        protected virtual string Execute(string arguments, Action<StreamWriter> inputCallback = null)
+        {
             Process process;
             try
             {

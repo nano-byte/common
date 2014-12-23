@@ -308,13 +308,10 @@ namespace NanoByte.Common.Storage.SlimDX
                 AddFileToList(files, type, prefix + file.Name, flagAsMod);
 
             // Recursively call this method for all sub-directories
-            foreach (DirectoryInfo subDir in directory.GetDirectories())
-            {
+            foreach (DirectoryInfo subDir in directory.GetDirectories()
                 // Don't add dot directories (e.g. .svn)
-                if (subDir.Name.StartsWith(".")) continue;
-
+                .Where(subDir => !subDir.Name.StartsWith(".")))
                 AddDirectoryToList(files, type, extension, subDir, prefix + subDir.Name + Path.DirectorySeparatorChar, flagAsMod);
-            }
         }
 
         /// <summary>
@@ -327,13 +324,12 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="flagAsMod">Set to <see langword="true"/> when handling mod files to detect added and changed files.</param>
         private static void AddArchivesToList(NamedCollection<FileEntry> files, string type, string extension, IEnumerable<KeyValuePair<string, ContentArchiveEntry>> archiveData, bool flagAsMod)
         {
-            foreach (var pair in archiveData)
+            foreach (var pair in archiveData
+                .Where(pair => pair.Key.StartsWith(type, StringComparison.OrdinalIgnoreCase) &&
+                               pair.Key.EndsWith(extension, StringComparison.OrdinalIgnoreCase)))
             {
-                if (pair.Key.StartsWith(type, StringComparison.OrdinalIgnoreCase) && pair.Key.EndsWith(extension, StringComparison.OrdinalIgnoreCase))
-                {
-                    // Cut away the type part of the path
-                    AddFileToList(files, type, pair.Key.Substring(type.Length + 1), flagAsMod);
-                }
+                // Cut away the type part of the path
+                AddFileToList(files, type, pair.Key.Substring(type.Length + 1), flagAsMod);
             }
         }
         #endregion

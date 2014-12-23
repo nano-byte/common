@@ -31,6 +31,7 @@ using System;
 using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
+// ReSharper disable All
 
 namespace NanoByte.Common.Collections
 {

@@ -41,7 +41,7 @@ namespace NanoByte.Common.Controls
             // Remove the hint when entering the TextBox
             HideHintText();
 
-            base.OnGotFocus(e);
+            OnGotFocus(e);
         }
 
         /// <inheritdoc/>

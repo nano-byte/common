@@ -40,6 +40,7 @@ namespace NanoByte.Common.Collections
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException("list");
+            if (elements == null) throw new ArgumentNullException("elements");
             #endregion
 
             list.AddRange(elements.Cast<TList>());

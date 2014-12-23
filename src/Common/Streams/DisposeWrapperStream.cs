@@ -40,6 +40,11 @@ namespace NanoByte.Common.Streams
         /// <param name="disposeHandler">Executed before <paramref name="baseStream"/> is disposed.</param>
         public DisposeWarpperStream(Stream baseStream, Action disposeHandler)
         {
+            #region Sanity checks
+            if (baseStream == null) throw new ArgumentNullException("baseStream");
+            if (disposeHandler == null) throw new ArgumentNullException("disposeHandler");
+            #endregion
+
             _baseStream = baseStream;
             _disposeHandler = disposeHandler;
         }

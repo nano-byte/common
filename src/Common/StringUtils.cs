@@ -138,7 +138,7 @@ namespace NanoByte.Common
             if (value == null) throw new ArgumentNullException("value");
             #endregion
 
-            string[] words = value.Split(new[] {' '});
+            string[] words = value.Split(' ');
             return words.Length > 0 ? words[words.Length - 1].TrimEnd('.') : value.TrimEnd('.');
         }
 
