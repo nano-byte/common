@@ -24,6 +24,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Undo
@@ -49,7 +50,7 @@ namespace NanoByte.Common.Undo
         /// <param name="property">The property that was changed.</param>
         /// <param name="oldValues">The property's old values.</param>
         /// <param name="newValue">The property's current value.</param>
-        public MultiPropertyChangedCommand(object[] targets, PropertyDescriptor property, object[] oldValues, object newValue)
+        public MultiPropertyChangedCommand([NotNull] object[] targets, [NotNull] PropertyDescriptor property, [NotNull] object[] oldValues, object newValue)
         {
             #region Sanity checks
             if (targets == null) throw new ArgumentNullException("targets");
@@ -72,7 +73,8 @@ namespace NanoByte.Common.Undo
         /// <param name="oldValues">The property's old values.</param>
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "The arguments are passed on to a different overload of the constructor")]
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Justification = "This is simply a comfort wrapper for extracting values from the event arguments")]
-        public MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object[] oldValues)
+        public MultiPropertyChangedCommand([NotNull] object[] targets, [NotNull] GridItem gridItem, [NotNull] object[] oldValues)
+            // ReSharper disable once AssignNullToNotNullAttribute
             : this(targets, gridItem.PropertyDescriptor, oldValues, gridItem.Value)
         {}
         #endregion
@@ -80,7 +82,6 @@ namespace NanoByte.Common.Undo
         //--------------------//
 
         #region Undo / Redo
-        // ReSharper disable ForCanBeConvertedToForeach
         /// <summary>
         /// Set the changed property value again.
         /// </summary>
@@ -104,8 +105,6 @@ namespace NanoByte.Common.Undo
                 _targets[i].GetType().GetProperty(_property.Name).SetValue(_targets[i], _oldValues[i], null);
             }
         }
-
-        // ReSharper restore ForCanBeConvertedToForeach
         #endregion
     }
 }

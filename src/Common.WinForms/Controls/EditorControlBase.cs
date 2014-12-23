@@ -152,7 +152,6 @@ namespace NanoByte.Common.Controls
                 #endregion
             };
 
-            // ReSharper disable once RedundantCheckBeforeAssignment
             OnRefresh += () => { if (control.Text != pointer.Value) control.Text = pointer.Value; };
         }
 

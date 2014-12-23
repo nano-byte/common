@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Values
 {
@@ -68,7 +69,7 @@ namespace NanoByte.Common.Values
         /// <param name="start">The top-left coordinates of the area to insert the array into.</param>
         /// <param name="array">The array to insert. Do not modify this array after calling this method!</param>
         /// <returns>Values in negative areas are clipped away.</returns>
-        public void AddFirst(Point start, T[,] array)
+        public void AddFirst(Point start, [NotNull] T[,] array)
         {
             #region Sanity checks
             if (array == null) throw new ArgumentNullException("array");
@@ -84,7 +85,7 @@ namespace NanoByte.Common.Values
         /// <param name="start">The top-left coordinates of the area to insert the array into.</param>
         /// <param name="array">The array to insert. Do not modify this array after calling this method!</param>
         /// <returns>Values in negative areas are clipped away.</returns>
-        public void AddLast(Point start, T[,] array)
+        public void AddLast(Point start, [NotNull] T[,] array)
         {
             #region Sanity checks
             if (array == null) throw new ArgumentNullException("array");
@@ -134,7 +135,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="baseValues">An array to query for values to fill the blanks left between subsets.</param>
         /// <returns>An array containing the copyed data. Size will be trimmed if <paramref name="baseValues"/> is too small.</returns>
-        public T[,] GetArray(T[,] baseValues)
+        public T[,] GetArray([NotNull] T[,] baseValues)
         {
             #region Sanity checks
             if (baseValues == null) throw new ArgumentNullException("baseValues");
@@ -159,7 +160,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="baseValues">An array to query for values to fill the blanks left between subsets.</param>
         /// <returns>An array containing the copyed data. Size will be trimmed if <paramref name="baseValues"/> is too small.</returns>
-        public T[,] GetArray(Grid<T> baseValues)
+        public T[,] GetArray([NotNull] Grid<T> baseValues)
         {
             #region Sanity checks
             if (baseValues == null) throw new ArgumentNullException("baseValues");

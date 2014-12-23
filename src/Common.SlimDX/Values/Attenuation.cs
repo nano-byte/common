@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Xml.Serialization;
 using NanoByte.Common.Values.Design;
@@ -101,11 +102,10 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
         public bool Equals(Attenuation other)
         {
-            // ReSharper disable CompareOfFloatsByEqualityOperator
             return other.Constant == Constant && other.Linear == Linear && other.Quadratic == Quadratic;
-            // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
         /// <inheritdoc/>

@@ -22,6 +22,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -35,12 +36,13 @@ namespace NanoByte.Common.Storage
         public TemporaryFlagFile(string prefix) : base(prefix)
         {}
 
-        #region Properties
         /// <summary>
         /// The fully qualified path of the flag file.
         /// </summary>
+        [NotNull]
         public new string Path { get { return System.IO.Path.Combine(base.Path, "flag"); } }
 
+        [ContractAnnotation("null => null; notnull => notnull")]
         public static implicit operator string(TemporaryFlagFile dir)
         {
             return (dir == null) ? null : dir.Path;
@@ -58,6 +60,5 @@ namespace NanoByte.Common.Storage
                 else File.Delete(Path);
             }
         }
-        #endregion
     }
 }

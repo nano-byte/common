@@ -21,10 +21,12 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Properties;
 
@@ -110,16 +112,8 @@ namespace NanoByte.Common.Storage.SlimDX
         /// </summary>
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <param name="name">The relative file path.</param>
-        internal FileEntry(string type, string name) : this(type, name, FileEntryType.Normal)
-        {}
-
-        /// <summary>
-        /// Creates a new file entry.
-        /// </summary>
-        /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
-        /// <param name="name">The relative file path.</param>
         /// <param name="entryType">The kind of file entry this is (in relation to its mod status).</param>
-        internal FileEntry(string type, string name, FileEntryType entryType)
+        internal FileEntry([NotNull] string type, [NotNull, Localizable(false)] string name, FileEntryType entryType = FileEntryType.Normal)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -136,7 +130,7 @@ namespace NanoByte.Common.Storage.SlimDX
 
         #region Context menu
         /// <summary>
-        /// Returns the context menu for this file entry. May be <see langword="null"/>.
+        /// Returns the context menu for this file entry; can be <see langword="null"/>.
         /// </summary>
         public ContextMenu GetContextMenu()
         {

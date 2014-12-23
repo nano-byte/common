@@ -144,7 +144,6 @@ namespace NanoByte.Common.Native
             }
 
 
-// ReSharper disable MemberHidesStaticFromOuterClass
             // Window messages
             [DllImport("user32")]
             public static extern IntPtr SetCapture(IntPtr handle);
@@ -152,7 +151,6 @@ namespace NanoByte.Common.Native
             [DllImport("user32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool ReleaseCapture();
-// ReSharper restore MemberHidesStaticFromOuterClass
         }
     }
 }

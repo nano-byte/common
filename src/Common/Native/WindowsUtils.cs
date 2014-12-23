@@ -22,9 +22,11 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Native
@@ -32,6 +34,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows platform.
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static partial class WindowsUtils
     {
         #region .NET Framework
@@ -53,8 +56,12 @@ namespace NanoByte.Common.Native
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns><see langword="true"/> if the specified version is available, <see langword="false"/> otherwise.</returns>
         /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <see langword="true"/>.</remarks>
-        public static bool HasNetFxVersion(string version)
+        public static bool HasNetFxVersion([NotNull] string version)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(version)) throw new ArgumentNullException("version");
+            #endregion
+
             return Directory.Exists(GetNetFxDirectory(version));
         }
 
@@ -64,14 +71,18 @@ namespace NanoByte.Common.Native
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns>The path to the .NET Framework root directory.</returns>
         /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <see langword="true"/>.</remarks>
-        public static string GetNetFxDirectory(string version)
+        [NotNull]
+        public static string GetNetFxDirectory([NotNull] string version)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(version)) throw new ArgumentNullException("version");
+            #endregion
+
             return new[] {Environment.GetEnvironmentVariable("windir"), "Microsoft.NET", (Is64BitProcess ? "Framework64" : "Framework"), version}.Aggregate(Path.Combine);
         }
         #endregion
 
         #region Command-line arguments
-        // ReSharper disable ReturnTypeCanBeEnumerable.Global
         /// <summary>
         /// Tries to split a command-line into individual arguments.
         /// </summary>
@@ -80,7 +91,8 @@ namespace NanoByte.Common.Native
         /// An array of individual arguments.
         /// Will return the entire command-line as one argument when not running on Windows or if splitting failed for some other reason.
         /// </returns>
-        public static string[] SplitArgs(string commandLine)
+        [NotNull, ItemNotNull]
+        public static string[] SplitArgs([CanBeNull] string commandLine)
         {
             if (string.IsNullOrEmpty(commandLine)) return new string[0];
             if (!IsWindows) return new[] {commandLine};
@@ -102,8 +114,6 @@ namespace NanoByte.Common.Native
                 UnsafeNativeMethods.LocalFree(ptrToSplitArgs);
             }
         }
-
-        // ReSharper restore ReturnTypeCanBeEnumerable.Global
         #endregion
 
         #region Mutex
@@ -119,7 +129,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>The mutex will automatically be released once the process terminates.</remarks>
-        public static bool CreateMutex(string name, out IntPtr handle)
+        public static bool CreateMutex([NotNull, Localizable(false)] string name, out IntPtr handle)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -171,7 +181,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
-        public static bool OpenMutex(string name)
+        public static bool OpenMutex([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -206,7 +216,7 @@ namespace NanoByte.Common.Native
         /// <returns><see langword="true"/> if an existing mutex was found; <see langword="false"/> if none existed.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        public static bool ProbeMutex(string name)
+        public static bool ProbeMutex([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -266,7 +276,6 @@ namespace NanoByte.Common.Native
         #endregion
 
         #region Shell
-        // ReSharper disable InconsistentNaming
         /// <summary>
         /// Informs the Windows shell that changes were made to the file association data in the registry.
         /// </summary>
@@ -294,8 +303,6 @@ namespace NanoByte.Common.Native
             IntPtr result;
             UnsafeNativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out result);
         }
-
-        // ReSharper restore InconsistentNaming
         #endregion
 
         #region Window messages

@@ -24,6 +24,7 @@ using System;
 using System.Threading;
 using System.Diagnostics.CodeAnalysis;
 using Gtk;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -42,9 +43,9 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="task">The trackable task to execute and display.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
-        /// <param name="parent">The parent window for this dialog, if any.</param>
+        /// <param name="parent">The parent window for this dialog; can be <see langword="null"/>.</param>
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Auto-generated")]
-        public TaskRunDialog(ITask task, CancellationTokenSource cancellationTokenSource, Window parent = null)
+        public TaskRunDialog([NotNull] ITask task, CancellationTokenSource cancellationTokenSource, [CanBeNull] Widget parent = null)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");

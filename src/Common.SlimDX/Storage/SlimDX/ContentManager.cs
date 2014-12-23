@@ -22,10 +22,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
+using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
@@ -41,11 +44,13 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// The file extensions of content archives.
         /// </summary>
+        [PublicAPI]
         public const string ArchiveFileExt = ".pk5";
 
         /// <summary>
         /// The name of an environment variable that can be used to configure the content manager externally.
         /// </summary>
+        [PublicAPI]
         public const string
             EnvVarNameBaseDir = "CONTENTMANAGER_BASE_DIR",
             EnvVarNameBaseArchives = "CONTENTMANAGER_BASE_ARCHIVES",
@@ -89,7 +94,7 @@ namespace NanoByte.Common.Storage.SlimDX
         }
 
         /// <summary>
-        /// A directory overriding the base directory for creating mods; may be <see langword="null"/>.
+        /// A directory overriding the base directory for creating mods; can be <see langword="null"/>.
         /// </summary>
         /// <remarks>Can be set externally with <see cref="EnvVarNameModDir"/>.</remarks>
         /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
@@ -147,6 +152,7 @@ namespace NanoByte.Common.Storage.SlimDX
         private static void AddEntry(this Dictionary<string, ContentArchiveEntry> dictionary, ZipEntry zipEntry, ZipFile zipFile)
         {
             if (!zipEntry.IsFile) return;
+            Debug.Assert(zipEntry.Name != null);
             string filename = FileUtils.UnifySlashes(zipEntry.Name);
 
             // Overwrite existing entries
@@ -189,7 +195,8 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <returns>The absolute path to the requested directory.</returns>
         /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
-        public static string CreateDirPath(string type)
+        [NotNull]
+        public static string CreateDirPath([NotNull, Localizable(false)] string type)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -217,7 +224,8 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <param name="id">The file name of the content.</param>
         /// <returns>The absolute path to the requested content file.</returns>
-        public static string CreateFilePath(string type, string id)
+        [NotNull]
+        public static string CreateFilePath([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -238,7 +246,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="id">The file name of the content.</param>
         /// <param name="searchArchives">Whether to search for the file in archives as well.</param>
         /// <returns><see langword="true"/> if the requested content file exists.</returns>
-        public static bool FileExists(string type, string id, bool searchArchives = true)
+        public static bool FileExists([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id, bool searchArchives = true)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -340,7 +348,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="type">The type of files you want (e.g. Textures, Sounds, ...)</param>
         /// <param name="extension">The file extension to so search for</param>
         /// <returns>An collection of strings with file IDs</returns>
-        public static NamedCollection<FileEntry> GetFileList(string type, string extension)
+        public static NamedCollection<FileEntry> GetFileList([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string extension)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -391,7 +399,8 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="id">The file name of the content.</param>
         /// <returns>The absolute path to the requested content file</returns>
         /// <exception cref="FileNotFoundException">The specified file could not be found.</exception>
-        public static string GetFilePath(string type, string id)
+        [NotNull]
+        public static string GetFilePath([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -429,7 +438,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <exception cref="FileNotFoundException">The specified file could not be found.</exception>
         /// <exception cref="IOException">There was an error reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
-        public static Stream GetFileStream(string type, string id)
+        public static Stream GetFileStream([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -508,7 +517,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <exception cref="FileNotFoundException">The specified file could not be found.</exception>
         /// <exception cref="IOException">The specified file could not be deleted.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to delete the file.</exception>
-        public static void DeleteModFile(string type, string id)
+        public static void DeleteModFile([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");

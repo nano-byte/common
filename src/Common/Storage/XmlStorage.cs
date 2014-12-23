@@ -21,12 +21,14 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Values;
 using Resources = NanoByte.Common.Properties.Resources;
@@ -107,7 +109,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Configures a set of members of a type to be serialized as XML attributes.
         /// </summary>
-        private static void MembersAsAttributes<T>(XmlAttributeOverrides overrides, params string[] members)
+        private static void MembersAsAttributes<T>(XmlAttributeOverrides overrides, [NotNull, ItemNotNull] params string[] members)
         {
             Type type = typeof(T);
             foreach (string memeber in members)
@@ -127,7 +129,8 @@ namespace NanoByte.Common.Storage
         /// <returns>The loaded object.</returns>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T LoadXml<T>(Stream stream)
+        [NotNull]
+        public static T LoadXml<T>([NotNull] Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -161,7 +164,8 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T LoadXml<T>(string path)
+        [NotNull]
+        public static T LoadXml<T>([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -189,7 +193,8 @@ namespace NanoByte.Common.Storage
         /// <returns>The loaded object.</returns>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T FromXmlString<T>(string data)
+        [NotNull]
+        public static T FromXmlString<T>([NotNull, Localizable(false)] string data)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException("data");
@@ -208,8 +213,8 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The stream to write the encoded XML data to.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; may be null.</param>
-        public static void SaveXml<T>(this T data, Stream stream, string stylesheet = null)
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <see langword="null"/>.</param>
+        public static void SaveXml<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -259,10 +264,10 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The path of the file to write.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; may be null.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <see langword="null"/>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        public static void SaveXml<T>(this T data, string path, string stylesheet = null)
+        public static void SaveXml<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -281,9 +286,9 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <typeparam name="T">The type of object to be saved in an XML string.</typeparam>
         /// <param name="data">The object to be stored.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; may be null.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <see langword="null"/>.</param>
         /// <returns>A string containing the XML code.</returns>
-        public static string ToXmlString<T>(this T data, string stylesheet = null)
+        public static string ToXmlString<T>([NotNull] this T data, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             using (var stream = new MemoryStream())
             {
@@ -309,7 +314,8 @@ namespace NanoByte.Common.Storage
         /// <exception cref="ZipException">A problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T LoadXmlZip<T>(Stream stream, string password = null, params EmbeddedFile[] additionalFiles)
+        [NotNull]
+        public static T LoadXmlZip<T>([NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -364,7 +370,8 @@ namespace NanoByte.Common.Storage
         /// <exception cref="ZipException">A problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T LoadXmlZip<T>(string path, string password = null, params EmbeddedFile[] additionalFiles)
+        [NotNull]
+        public static T LoadXmlZip<T>([NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -384,8 +391,8 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The ZIP archive to be written.</param>
         /// <param name="password">The password to use for encryption; <see langword="null"/> for no encryption.</param>
-        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; may be <see langword="null"/>.</param>
-        public static void SaveXmlZip<T>(this T data, Stream stream, string password = null, params EmbeddedFile[] additionalFiles)
+        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <see langword="null"/>.</param>
+        public static void SaveXmlZip<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -427,10 +434,10 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The ZIP archive to be written.</param>
         /// <param name="password">The password to use for encryption; <see langword="null"/> for no encryption.</param>
-        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; may be <see langword="null"/>.</param>
+        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <see langword="null"/>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        public static void SaveXmlZip<T>(this T data, string path, string password = null, params EmbeddedFile[] additionalFiles)
+        public static void SaveXmlZip<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");

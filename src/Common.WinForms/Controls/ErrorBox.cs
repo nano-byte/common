@@ -21,7 +21,9 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -40,9 +42,9 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="message">The error message to display.</param>
         /// <param name="detailsRtf">The details formatted as RTF.</param>
-        /// <param name="owner">The parent window for the dialogs; may be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
         /// <returns>The text the user entered if he pressed OK; otherwise <see langword="null"/>.</returns>
-        public static void Show(string message, RtfBuilder detailsRtf, IWin32Window owner = null)
+        public static void Show([NotNull, Localizable(true)] string message, [NotNull] RtfBuilder detailsRtf, [CanBeNull] IWin32Window owner = null)
         {
             #region Sanity checks
             if (message == null) throw new ArgumentNullException("message");

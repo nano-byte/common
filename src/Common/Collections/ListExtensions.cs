@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -35,7 +36,7 @@ namespace NanoByte.Common.Collections
         /// Adds multiple elements to the list.
         /// </summary>
         /// <remarks>This is a covariant wrapper for <see cref="List{T}.AddRange"/>.</remarks>
-        public static void AddRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
+        public static void AddRange<TList, TElements>([NotNull] this List<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
             where TElements : TList
         {
             #region Sanity checks
@@ -51,7 +52,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><see langword="true"/> if the element was added to the list; <see langword="true"/> if the list already contained the element.</returns>
         /// <remarks>This makes it possible to use a <see cref="List{T}"/> with semantics similar to a <see cref="SortedSet{T}"/>, but without ordering.</remarks>
-        public static bool AddIfNew<T>(this ICollection<T> list, T element)
+        public static bool AddIfNew<T>([NotNull] this ICollection<T> list, T element)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException("list");
@@ -68,7 +69,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes multiple elements from the list.
         /// </summary>
-        public static void RemoveRange<TList, TElements>(this ICollection<TList> list, IEnumerable<TElements> elements)
+        public static void RemoveRange<TList, TElements>([NotNull] this ICollection<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
             where TElements : TList
         {
             #region Sanity checks
@@ -84,7 +85,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="list">The list to remove the elements from.</param>
         /// <param name="number">The number of elements to remove.</param>
-        public static void RemoveLast<T>(this List<T> list, int number = 1)
+        public static void RemoveLast<T>([NotNull] this List<T> list, int number = 1)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException("list");
@@ -100,7 +101,7 @@ namespace NanoByte.Common.Collections
         /// <param name="list">The list to check.</param>
         /// <param name="element">The element to look for.</param>
         /// <remarks>This is usefull e.g. for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
-        public static bool ContainsOrEmpty<T>(this ICollection<T> list, T element)
+        public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> list, T element)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException("list");

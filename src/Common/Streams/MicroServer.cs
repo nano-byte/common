@@ -21,11 +21,13 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Streams
 {
@@ -54,16 +56,19 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// The URL under which the server root can be reached. Usually you should use <see cref="FileUri"/> instead.
         /// </summary>
+        [NotNull]
         public Uri ServerUri { get; private set; }
 
         /// <summary>
         /// The complete URL under which the server provides its file.
         /// </summary>
+        [NotNull]
         public Uri FileUri { get; private set; }
 
         /// <summary>
         /// The content of the file to be served under <see cref="FileUri"/>.
         /// </summary>
+        [NotNull]
         public Stream FileContent { get; private set; }
 
         /// <summary>
@@ -81,7 +86,7 @@ namespace NanoByte.Common.Streams
         /// <param name="resourceName">The HTTP resource name under which to provide the content.</param>
         /// <param name="fileContent">The content of the file to serve.</param>
         [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings")]
-        public MicroServer(string resourceName, Stream fileContent)
+        public MicroServer([NotNull, Localizable(false)] string resourceName, [NotNull] Stream fileContent)
         {
             _resourceName = resourceName;
             FileContent = fileContent;

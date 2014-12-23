@@ -21,7 +21,9 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Threading;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -55,7 +57,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="name">A name describing the task in human-readable form.</param>
         /// <param name="waitHandle">>The <see cref="WaitHandle"/> to wait for.</param>
         /// <param name="millisecondsTimeout">The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely.</param>
-        public WaitTask(string name, WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
+        public WaitTask([NotNull, Localizable(true)] string name, [NotNull] WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");

@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -30,14 +31,11 @@ namespace NanoByte.Common.Native
     static partial class WindowsTaskbar
     {
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local"), SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
         private struct PropertyKey
         {
-            // ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
-            // ReSharper disable FieldCanBeMadeReadOnly.Local
             private Guid formatID;
             private Int32 propertyID;
-            // ReSharper restore FieldCanBeMadeReadOnly.Local
-            // ReSharper restore PrivateFieldCanBeConvertedToLocalVariable
 
             public PropertyKey(Guid formatID, int propertyID)
             {

@@ -25,6 +25,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Dispatch
@@ -47,7 +48,8 @@ namespace NanoByte.Common.Dispatch
         /// <typeparam name="TSpecific">The specific type to call the delegate for. Matches all subtypes as well.</typeparam>
         /// <param name="function">The delegate to call.</param>
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
-        public AggregateDispatcher<TBase, TResult> Add<TSpecific>(Func<TSpecific, IEnumerable<TResult>> function) where TSpecific : class, TBase
+        [PublicAPI]
+        public AggregateDispatcher<TBase, TResult> Add<TSpecific>([NotNull] Func<TSpecific, IEnumerable<TResult>> function) where TSpecific : class, TBase
         {
             #region Sanity checks
             if (function == null) throw new ArgumentNullException("function");
@@ -67,7 +69,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="element">The element to be dispatched.</param>
         /// <returns>The values returned by all matching delegates aggregated.</returns>
-        public IEnumerable<TResult> Dispatch(TBase element)
+        public IEnumerable<TResult> Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
             if (element == null) throw new ArgumentNullException("element");
@@ -81,7 +83,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
         /// <returns>The values returned by the matching delegates.</returns>
-        public IEnumerable<TResult> Dispatch(IEnumerable<TBase> elements)
+        public IEnumerable<TResult> Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException("elements");

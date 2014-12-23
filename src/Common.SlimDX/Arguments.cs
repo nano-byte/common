@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -60,7 +61,8 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="command">The command to get the options for.</param>
         /// <returns>The options for <paramref name="command"/> if any; null otherwise.</returns>
-        public string this[string command] { get { return _commands[command]; } }
+        [CanBeNull]
+        public string this[[NotNull] string command] { get { return _commands[command]; } }
         #endregion
 
         #region Constructor
@@ -77,7 +79,7 @@ namespace NanoByte.Common
         /// Creates a new arguments instance based on the argument array from a Main method.
         /// </summary>
         /// <param name="args">The array of arguments.</param>
-        public Arguments(string[] args)
+        public Arguments([NotNull] string[] args)
         {
             #region Sanity checks
             if (args == null) throw new ArgumentNullException("args");

@@ -25,6 +25,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Dispatch
@@ -58,7 +59,8 @@ namespace NanoByte.Common.Dispatch
         /// <typeparam name="TSpecific">The specific type to call the delegate for. Does not match subtypes.</typeparam>
         /// <param name="function">The delegate to call.</param>
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
-        public PerTypeDispatcher<TBase, TResult> Add<TSpecific>(Func<TSpecific, TResult> function) where TSpecific : TBase
+        [PublicAPI]
+        public PerTypeDispatcher<TBase, TResult> Add<TSpecific>([NotNull] Func<TSpecific, TResult> function) where TSpecific : TBase
         {
             #region Sanity checks
             if (function == null) throw new ArgumentNullException("function");
@@ -75,7 +77,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="element">The element to be dispatched.</param>
         /// <returns>The value returned by the matching delegate.</returns>
         /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
-        public TResult Dispatch(TBase element)
+        public TResult Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
             if (element == null) throw new ArgumentNullException("element");
@@ -97,7 +99,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="elements">The elements to be dispatched.</param>
         /// <returns>The values returned by the matching delegates.</returns>
         /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
-        public IEnumerable<TResult> Dispatch(IEnumerable<TBase> elements)
+        public IEnumerable<TResult> Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException("elements");

@@ -25,6 +25,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Storage;
 
@@ -44,6 +45,7 @@ namespace NanoByte.Common.Cli
         /// Otherwise we try to locate the directory within the "bundled" directory (parallel to "src").
         /// Finally try the working directory.
         /// </remarks>
+        [NotNull]
         public static string GetBundledDirectory(string name)
         {
             string path = Path.Combine(Locations.InstallBase, name); // Subdir of installation directory

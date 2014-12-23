@@ -21,9 +21,11 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using JetBrains.Annotations;
 using NanoByte.Common.Streams;
 
 namespace NanoByte.Common.Values
@@ -38,6 +40,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// The internal array containing the values.
         /// </summary>
+        [NotNull]
         protected internal readonly T[,] Data;
 
         /// <summary>
@@ -86,7 +89,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Saves the grid to a PNG file.
         /// </summary>
-        public void Save(string path)
+        public void Save([NotNull, Localizable(false)] string path)
         {
             using (var bitmap = GenerateBitmap())
                 bitmap.Save(path, ImageFormat.Png);
@@ -95,7 +98,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Saves the grid to a PNG stream.
         /// </summary>
-        public void Save(Stream stream)
+        public void Save([NotNull] Stream stream)
         {
             // NOTE: Use intermediate RAM buffer because writing a PNG directly to a ZIP won't work
             using (var bitmap = GenerateBitmap())

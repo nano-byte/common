@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
@@ -107,7 +108,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="page">The page to display and add.</param>
         /// <seealso cref="IWizardPage"/>
-        protected void PushPage(UserControl page)
+        protected void PushPage([NotNull] UserControl page)
         {
             #region Sanity checks
             if (page == null) throw new ArgumentNullException("page");
@@ -137,6 +138,7 @@ namespace NanoByte.Common.Controls
         {
             page.Focus();
 
+            // ReSharper disable once SuspiciousTypeConversion.Global
             var wizardPage = page as IWizardPage;
             if (wizardPage != null) wizardPage.OnPageShow();
         }

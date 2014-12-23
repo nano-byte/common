@@ -21,7 +21,9 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.IO;
+using JetBrains.Annotations;
 using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Cli;
@@ -46,6 +48,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// The operating system name as reported by the "uname" system call.
         /// </summary>
+        [NotNull]
         public static string OSName
         {
             get
@@ -59,6 +62,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// The CPU type as reported by the "uname" system call (after applying some normalization).
         /// </summary>
+        [NotNull]
         public static string CpuType
         {
             get
@@ -93,7 +97,7 @@ namespace NanoByte.Common.Native
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void CreateSymlink(string source, string target)
+        public static void CreateSymlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
@@ -110,7 +114,7 @@ namespace NanoByte.Common.Native
         /// <param name="target">The absolute path of the existing file to point to.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void CreateHardlink(string source, string target)
+        public static void CreateHardlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
@@ -127,7 +131,7 @@ namespace NanoByte.Common.Native
         /// <param name="path2">The path of the second file.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static bool AreHardlinked(string path1, string path2)
+        public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
@@ -140,17 +144,17 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Renames a file. Atomically replaces the destination if present.
         /// </summary>
-        /// <param name="sourcePath">The path of the file to rename.</param>
-        /// <param name="destinationPath">The new path of the file. Must reside on the same file system as <paramref name="sourcePath"/>.</param>
+        /// <param name="source">The path of the file to rename.</param>
+        /// <param name="destination">The new path of the file. Must reside on the same file system as <paramref name="source"/>.</param>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void Rename(string sourcePath, string destinationPath)
+        public static void Rename([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string destination)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException("destinationPath");
+            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
+            if (string.IsNullOrEmpty(destination)) throw new ArgumentNullException("destination");
             #endregion
 
-            if (Stdlib.rename(sourcePath, destinationPath) != 0) throw new UnixIOException(Stdlib.GetLastError());
+            if (Stdlib.rename(source, destination) != 0) throw new UnixIOException(Stdlib.GetLastError());
         }
         #endregion
 
@@ -162,7 +166,7 @@ namespace NanoByte.Common.Native
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static bool IsRegularFile(string path)
+        public static bool IsRegularFile([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -179,7 +183,7 @@ namespace NanoByte.Common.Native
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static bool IsSymlink(string path)
+        public static bool IsSymlink([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -197,7 +201,7 @@ namespace NanoByte.Common.Native
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static bool IsSymlink(string path, out string target)
+        public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -224,7 +228,7 @@ namespace NanoByte.Common.Native
         /// <param name="path">The filesystem object (file or directory) to make read-only.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void MakeReadOnly(string path)
+        public static void MakeReadOnly([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -240,7 +244,7 @@ namespace NanoByte.Common.Native
         /// <param name="path">The filesystem object (file or directory) to make writeable by the owner.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void MakeWritable(string path)
+        public static void MakeWritable([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -261,7 +265,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
-        public static bool IsExecutable(string path)
+        public static bool IsExecutable([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -279,7 +283,7 @@ namespace NanoByte.Common.Native
         /// <param name="executable"><see lang="true"/> to mark the file as executable, <see lang="true"/> to mark it as not executable.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void SetExecutable(string path, bool executable)
+        public static void SetExecutable([NotNull, Localizable(false)] string path, bool executable)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -298,7 +302,8 @@ namespace NanoByte.Common.Native
         /// <param name="path">The path of the file to read the attribute from.</param>
         /// <param name="name">The name of the attribute to read.</param>
         /// <returns>The contents of the attribute as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
-        public static byte[] GetXattr(string path, string name)
+        [CanBeNull]
+        public static byte[] GetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -317,7 +322,7 @@ namespace NanoByte.Common.Native
         /// <param name="name">The name of the attribute to set.</param>
         /// <param name="data">The data to write to the attribute.</param>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void SetXattr(string path, string name, byte[] data)
+        public static void SetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name, [NotNull] byte[] data)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -363,7 +368,8 @@ namespace NanoByte.Common.Native
         /// <returns>The name of the file system in fstab format (e.g. ext3 or ntfs-3g).</returns>
         /// <remarks>Only works on Linux, not on other Unixes (e.g. MacOS X).</remarks>
         /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static string GetFileSystem(string path)
+        [NotNull]
+        public static string GetFileSystem([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");

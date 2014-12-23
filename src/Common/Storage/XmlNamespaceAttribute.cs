@@ -23,6 +23,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -31,6 +32,7 @@ namespace NanoByte.Common.Storage
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "Values set in constructor are available via QualifiedName")]
+    [PublicAPI]
     public sealed class XmlNamespaceAttribute : Attribute
     {
         /// <summary>

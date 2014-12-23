@@ -21,8 +21,10 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Streams
@@ -40,7 +42,7 @@ namespace NanoByte.Common.Streams
         /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
         /// <param name="cancellationToken">Used to signal when the user wishes to cancel the task execution.</param>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of <paramref name="source"/>.</remarks>
-        public static void CopyTo(this Stream source, Stream destination, long bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken))
+        public static void CopyTo([NotNull] this Stream source, [NotNull] Stream destination, long bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken))
         {
             #region Sanity checks
             if (source == null) throw new ArgumentNullException("source");
@@ -67,7 +69,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="path">The path of the file to write.</param>
-        public static void WriteTo(this Stream stream, string path)
+        public static void WriteTo([NotNull] this Stream stream, [NotNull, Localizable(false)] string path)
         {
             using (var fileStream = File.Create(path))
                 stream.CopyTo(fileStream);
@@ -77,7 +79,7 @@ namespace NanoByte.Common.Streams
         /// Compares two streams for bit-wise equality.
         /// </summary>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of both streams.</remarks>
-        public static bool ContentEquals(this Stream stream1, Stream stream2)
+        public static bool ContentEquals([NotNull] this Stream stream1, [NotNull] Stream stream2)
         {
             #region Sanity checks
             if (stream1 == null) throw new ArgumentNullException("stream1");
@@ -101,7 +103,8 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="data">The data to fill the stream with.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
-        public static MemoryStream ToStream(this string data)
+        [NotNull]
+        public static MemoryStream ToStream([NotNull] this string data)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException("data");
@@ -117,7 +120,8 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <returns>A entire content of the stream.</returns>
-        public static string ReadToString(this Stream stream)
+        [NotNull]
+        public static string ReadToString([NotNull] this Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -133,7 +137,8 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <returns>A entire content of the stream.</returns>
-        public static byte[] ReadToArray(this Stream stream)
+        [NotNull]
+        public static byte[] ReadToArray([NotNull] this Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");

@@ -95,6 +95,7 @@
     <Compile Include="Info\AppInfo.cs" />
     <Compile Include="Info\ExceptionInfo.cs" />
     <Compile Include="Info\OSInfo.cs" />
+    <Compile Include="JetBrains.Annotations.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MarshalNoTimeout.cs" />
     <Compile Include="MsgSeverity.cs" />

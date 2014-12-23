@@ -32,6 +32,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Values;
@@ -47,16 +48,19 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
         /// </summary>
-        public static string UnifySlashes(string value)
+        [Pure, ContractAnnotation("null => null; notnull => notnull")]
+        public static string UnifySlashes([CanBeNull] string value)
         {
             if (value == null) return null;
+
             return value.Replace('/', Path.DirectorySeparatorChar);
         }
 
         /// <summary>
         /// Determines whether a path might escape its parent directory (by being absolute or using ..).
         /// </summary>
-        public static bool IsBreakoutPath(string path)
+        [Pure]
+        public static bool IsBreakoutPath([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (path == null) throw new ArgumentNullException("path");
@@ -69,7 +73,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a relative path pointing to <paramref name="targetPath"/> from <paramref name="basePath"/> using Unix-style directory separators.
         /// </summary>
-        public static string RelativeTo(this FileSystemInfo targetPath, FileSystemInfo basePath)
+        [Pure, NotNull]
+        public static string RelativeTo([NotNull] this FileSystemInfo targetPath, [NotNull] FileSystemInfo basePath)
         {
             #region Sanity checks
             if (targetPath == null) throw new ArgumentNullException("targetPath");
@@ -86,7 +91,8 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="value">The string containing variables to be expanded.</param>
         /// <param name="variables">The list of variables available for expansion.</param>
-        public static string ExpandUnixVariables(string value, StringDictionary variables)
+        [NotNull]
+        public static string ExpandUnixVariables([NotNull] string value, [NotNull] StringDictionary variables)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException("value");
@@ -107,11 +113,15 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Like <see cref="File.Exists"/> but case-sensitive, even on Windows.
         /// </summary>
-        public static bool ExistsCaseSensitive(string path)
+        public static bool ExistsCaseSensitive([NotNull, Localizable(false)] string path)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
             return File.Exists(path) &&
                    // Make sure the file found is a string-exact match
-                   Directory.GetFiles(Path.GetDirectoryName(path) ?? Environment.CurrentDirectory, Path.GetFileName(path) ?? "").Contains(path);
+                   Directory.GetFiles(Path.GetDirectoryName(path) ?? Environment.CurrentDirectory, Path.GetFileName(path)).Contains(path);
         }
         #endregion
 
@@ -119,6 +129,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Converts a <see cref="DateTime"/> into the number of seconds since the Unix epoch (1970-1-1).
         /// </summary>
+        [Pure]
         public static long ToUnixTime(this DateTime time)
         {
             TimeSpan timespan = (time - new DateTime(1970, 1, 1));
@@ -128,6 +139,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Converts a number of seconds since the Unix epoch (1970-1-1) into a <see cref="DateTime"/>.
         /// </summary>
+        [Pure]
         public static DateTime FromUnixTime(long time)
         {
             TimeSpan timespan = TimeSpan.FromSeconds(time);
@@ -142,7 +154,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
         /// <exception cref="IOException">Writing to the directory fails.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write to the directory.</exception>
-        public static int DetermineTimeAccuracy(string path)
+        public static int DetermineTimeAccuracy([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -169,6 +181,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="value">The value in bytes.</param>
         /// <param name="provider">Provides culture-specific formatting information.</param>
+        [NotNull]
         public static string FormatBytes(this long value, IFormatProvider provider)
         {
             if (value >= 1073741824)
@@ -190,8 +203,13 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while creating a file in <see cref="Path.GetTempPath"/>.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a file in <see cref="Path.GetTempPath"/> is not permitted.</exception>
         /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
-        public static string GetTempFile(string prefix)
+        [NotNull]
+        public static string GetTempFile([NotNull, Localizable(false)] string prefix)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
+            #endregion
+
             // Make sure there are no name collisions
             string path;
             do
@@ -214,8 +232,13 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="Path.GetTempPath"/> is not permitted.</exception>
         /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Delivers a new value on each call")]
-        public static string GetTempDirectory(string prefix)
+        [NotNull]
+        public static string GetTempDirectory([NotNull, Localizable(false)] string prefix)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
+            #endregion
+
             string tempDir = GetTempFile(prefix);
             File.Delete(tempDir);
             Directory.CreateDirectory(tempDir);
@@ -228,43 +251,43 @@ namespace NanoByte.Common.Storage
         /// Replaces one file with another. Rolls back in case of problems.
         /// </summary>
         /// <param name="sourcePath">The path of source directory.</param>
-        /// <param name="destinationPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
-        /// <exception cref="ArgumentException"><paramref name="sourcePath"/> and <paramref name="destinationPath"/> are equal.</exception>
+        /// <param name="targetPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
+        /// <exception cref="ArgumentException"><paramref name="sourcePath"/> and <paramref name="targetPath"/> are equal.</exception>
         /// <exception cref="IOException">The file could not be replaced.</exception>
         /// <exception cref="UnauthorizedAccessException">The read or write access to the files was denied.</exception>
-        public static void Replace(string sourcePath, string destinationPath)
+        public static void Replace([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException("destinationPath");
-            if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (sourcePath == targetPath) throw new ArgumentException(Resources.SourceDestinationEqual);
             #endregion
 
             // Prepend random string for temp file name
-            string directory = Path.GetDirectoryName(Path.GetFullPath(destinationPath));
-            string backupPath = directory + Path.DirectorySeparatorChar + "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath);
+            string directory = Path.GetDirectoryName(Path.GetFullPath(targetPath));
+            string backupPath = directory + Path.DirectorySeparatorChar + "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(targetPath);
 
             if (WindowsUtils.IsWindowsNT)
             {
-                if (File.Exists(destinationPath))
+                if (File.Exists(targetPath))
                 {
-                    File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
+                    File.Replace(sourcePath, targetPath, backupPath, ignoreMetadataErrors: true);
                     File.Delete(backupPath);
                 }
-                else File.Move(sourcePath, destinationPath);
+                else File.Move(sourcePath, targetPath);
             }
-            else if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
+            else if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, targetPath);
             else
             {
-                if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
+                if (File.Exists(targetPath)) File.Move(targetPath, backupPath);
                 try
                 {
-                    File.Move(sourcePath, destinationPath);
+                    File.Move(sourcePath, targetPath);
                     if (File.Exists(backupPath)) File.Delete(backupPath);
                 }
                 catch
                 { // Rollback
-                    if (File.Exists(backupPath)) File.Move(backupPath, destinationPath);
+                    if (File.Exists(backupPath)) File.Move(backupPath, targetPath);
                     throw;
                 }
             }
@@ -280,7 +303,8 @@ namespace NanoByte.Common.Storage
         /// <returns>The first line of text in the file; <see langword="null"/> if decoding does not work on the contents.</returns>
         /// <exception cref="IOException">A problem occurred while reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
-        public static string ReadFirstLine(this FileInfo file, Encoding encoding)
+        [CanBeNull]
+        public static string ReadFirstLine([NotNull] this FileInfo file, [NotNull] Encoding encoding)
         {
             #region Sanity checks
             if (file == null) throw new ArgumentNullException("file");
@@ -297,10 +321,10 @@ namespace NanoByte.Common.Storage
         /// Walks a directory structure recursivley and performs an action for every directory and file encountered.
         /// </summary>
         /// <param name="directory">The directory to walk.</param>
-        /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); may be <see langword="null"/>.</param>
-        /// <param name="fileAction">The action to perform for every found file; may be <see langword="null"/>.</param>
+        /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); can be <see langword="null"/>.</param>
+        /// <param name="fileAction">The action to perform for every found file; can be <see langword="null"/>.</param>
         /// <param name="followDirSymlinks">If <see langword="true"/> recurse into directory symlinks; if <see langword="false"/> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
-        public static void Walk(this DirectoryInfo directory, Action<DirectoryInfo> dirAction = null, Action<FileInfo> fileAction = null, bool followDirSymlinks = false)
+        public static void Walk([NotNull] this DirectoryInfo directory, [CanBeNull, InstantHandle] Action<DirectoryInfo> dirAction = null, [CanBeNull, InstantHandle] Action<FileInfo> fileAction = null, bool followDirSymlinks = false)
         {
             #region Sanity checks
             if (directory == null) throw new ArgumentNullException("directory");
@@ -330,7 +354,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Removes any custom ACLs a user may have set, restores ACL inheritance and sets the Administrators group as the owner.
         /// </summary>
-        public static void ResetAcl(this DirectoryInfo directoryInfo)
+        public static void ResetAcl([NotNull] this DirectoryInfo directoryInfo)
         {
             directoryInfo.Walk(
                 dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl),
@@ -359,7 +383,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Fixes ACLs that are not canonical (not ordered correctly).
         /// </summary>
-        public static void CanonicalizeAcl(this ObjectSecurity objectSecurity)
+        public static void CanonicalizeAcl([NotNull] this ObjectSecurity objectSecurity)
         {
             #region Sanity checks
             if (objectSecurity == null) throw new ArgumentNullException("objectSecurity");
@@ -418,7 +442,7 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The directory to protect.</param>
         /// <exception cref="IOException">There was a problem applying the write protection.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to apply the write protection.</exception>
-        public static void EnableWriteProtection(string path)
+        public static void EnableWriteProtection([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -438,7 +462,7 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The directory to unprotect.</param>
         /// <exception cref="IOException">There was a problem removing the write protection.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to remove the write protection.</exception>
-        public static void DisableWriteProtection(string path)
+        public static void DisableWriteProtection([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -465,7 +489,7 @@ namespace NanoByte.Common.Storage
         }
 
         #region Helpers
-        private static void ToggleWriteProtectionUnix(this DirectoryInfo directory, bool enable)
+        private static void ToggleWriteProtectionUnix([NotNull] this DirectoryInfo directory, bool enable)
         {
             try
             {
@@ -486,7 +510,7 @@ namespace NanoByte.Common.Storage
 
         private static readonly FileSystemAccessRule _denyEveryoneWrite = new FileSystemAccessRule(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
 
-        private static void ToggleWriteProtectionWinNT(this DirectoryInfo directory, bool enable)
+        private static void ToggleWriteProtectionWinNT([NotNull] this DirectoryInfo directory, bool enable)
         {
             try
             {
@@ -513,7 +537,7 @@ namespace NanoByte.Common.Storage
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a system with no symbolic link support.</exception>
-        public static void CreateSymlink(string source, string target)
+        public static void CreateSymlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
@@ -560,7 +584,7 @@ namespace NanoByte.Common.Storage
         /// <param name="target">The absolute path of the existing file to point to.</param>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the hard link.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a system with no hard link support.</exception>
-        public static void CreateHardlink(string source, string target)
+        public static void CreateHardlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
@@ -605,7 +629,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="path1">The path of the first file.</param>
         /// <param name="path2">The path of the second file.</param>
-        public static bool AreHardlinked(string path1, string path2)
+        public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
@@ -653,7 +677,7 @@ namespace NanoByte.Common.Storage
         /// <return><see lang="true"/> if <paramref name="path"/> points to a regular file; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
-        public static bool IsRegularFile(string path)
+        public static bool IsRegularFile([NotNull, Localizable(false)] string path)
         {
             if (!File.Exists(path)) return false;
 
@@ -683,7 +707,7 @@ namespace NanoByte.Common.Storage
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
-        public static bool IsSymlink(string path)
+        public static bool IsSymlink([NotNull, Localizable(false)] string path)
         {
             if ((!File.Exists(path) && !Directory.Exists(path)) || !UnixUtils.IsUnix) return false;
 
@@ -711,7 +735,7 @@ namespace NanoByte.Common.Storage
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
-        public static bool IsSymlink(string path, out string target)
+        public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
         {
             if ((!File.Exists(path) && !Directory.Exists(path)) || !UnixUtils.IsUnix)
             {
@@ -743,7 +767,7 @@ namespace NanoByte.Common.Storage
         /// <return><see lang="true"/> if <paramref name="item"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
-        public static bool IsSymlink(this FileSystemInfo item, out string target)
+        public static bool IsSymlink([NotNull] this FileSystemInfo item, out string target)
         {
             #region Sanity checks
             if (item == null) throw new ArgumentNullException("item");
@@ -758,7 +782,7 @@ namespace NanoByte.Common.Storage
         /// <return><see lang="true"/> if <paramref name="path"/> points to an executable; <see lang="false"/> otherwise.</return>
         /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
-        public static bool IsExecutable(string path)
+        public static bool IsExecutable([NotNull, Localizable(false)] string path)
         {
             if (!File.Exists(path) || !UnixUtils.IsUnix) return false;
 
@@ -786,7 +810,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="FileNotFoundException"><paramref name="path"/> points to a file that does not exist or cannot be accessed.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to change the file's properties.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a non-Unixoid system.</exception>
-        public static void SetExecutable(string path, bool executable)
+        public static void SetExecutable([NotNull, Localizable(false)] string path, bool executable)
         {
             #region Sanity checks
             if (!File.Exists(path)) throw new FileNotFoundException("", path);
@@ -821,7 +845,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
         /// <exception cref="IOException">Checking the directory failed.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient right to stat to the directory.</exception>
-        public static bool IsUnixFS(string path)
+        public static bool IsUnixFS([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -859,7 +883,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Checks whether a directory is located on a filesystem with support for executable bits by setting and reading them back.
         /// </summary>
-        private static bool IsUnixFSFallback(string path)
+        private static bool IsUnixFSFallback([NotNull, Localizable(false)] string path)
         {
             string testFile = Path.Combine(path, ".xbit_test_file");
             File.Create(Path.Combine(path, ".xbit_test_file"));
@@ -897,7 +921,8 @@ namespace NanoByte.Common.Storage
         /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>
         /// <exception cref="IOException">There was a problem reading the metadata stream.</exception>
         /// <exception cref="PlatformNotSupportedException">The current operating system provides no method for storing extended metadata.</exception>
-        public static byte[] ReadExtendedMetadata(string path, string name)
+        [CanBeNull]
+        public static byte[] ReadExtendedMetadata([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -920,7 +945,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>
         /// <exception cref="IOException">There was a problem writing the metadata stream.</exception>
         /// <exception cref="PlatformNotSupportedException">The current operating system provides no method for storing extended metadata.</exception>
-        public static void WriteExtendedMetadata(string path, string name, byte[] data)
+        public static void WriteExtendedMetadata([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name, [NotNull] byte[] data)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");

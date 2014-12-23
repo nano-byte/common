@@ -23,6 +23,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common
@@ -30,13 +31,14 @@ namespace NanoByte.Common
     /// <summary>
     /// Provides helper methods and API calls specific to the <see cref="System.Windows.Forms"/> UI toolkit.
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static partial class WinFormsUtils
     {
         /// <summary>
         /// Forces a window to the foreground or flashes the taskbar if another process has the focus.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method operates only on windows and not on individual controls.")]
-        public static void SetForegroundWindow(this Form form)
+        public static void SetForegroundWindow([NotNull] this Form form)
         {
             #region Sanity checks
             if (form == null) throw new ArgumentNullException("form");
@@ -51,15 +53,13 @@ namespace NanoByte.Common
         /// </summary>
         /// <remarks>This is purely cosmetic. UAC elevation is a separate concern.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons.")]
-        public static void AddShieldIcon(this Button button)
+        public static void AddShieldIcon([NotNull] this Button button)
         {
             #region Sanity checks
             if (button == null) throw new ArgumentNullException("button");
             #endregion
 
-            // ReSharper disable InconsistentNaming
             const int BCM_FIRST = 0x1600, BCM_SETSHIELD = 0x000C;
-            // ReSharper restore InconsistentNaming
 
             if (!WindowsUtils.IsWindowsVista) return;
             button.FlatStyle = FlatStyle.System;

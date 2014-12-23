@@ -24,6 +24,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using SlimDX;
 
 namespace NanoByte.Common.Values
@@ -108,6 +109,7 @@ namespace NanoByte.Common.Values
         }
 
         // Convert Direct3D.Color4 into EasyColor
+        [Pure]
         public static XColor FromColorValue(Color4 color)
         {
             return new XColor(color.Red, color.Green, color.Blue, color.Alpha);

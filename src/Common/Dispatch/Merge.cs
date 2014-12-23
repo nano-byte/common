@@ -22,15 +22,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using NanoByte.Common.Collections;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
-    // ReSharper disable PossibleMultipleEnumeration
     /// <summary>
     /// Provides utility methods for merging <see cref="ICollection{T}"/>s.
     /// </summary>
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static class Merge
     {
         /// <summary>
@@ -40,11 +41,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="mine">The local list that shall be updated with foreign changes.</param>
         /// <param name="added">Called for every element that should be added to <paramref name="mine"/>.</param>
         /// <param name="removed">Called for every element that should be removed from <paramref name="mine"/>.</param>
-        /// <remarks>
-        /// <paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.
-        /// <see langword="null"/> elements are completely ignored.
-        /// </remarks>
-        public static void TwoWay<T>(IEnumerable<T> theirs, IEnumerable<T> mine, Action<T> added, Action<T> removed)
+        /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
+        public static void TwoWay<T>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull, InstantHandle] Action<T> added, [NotNull, InstantHandle] Action<T> removed)
         {
             #region Sanity checks
             if (theirs == null) throw new ArgumentNullException("theirs");
@@ -54,11 +52,11 @@ namespace NanoByte.Common.Dispatch
             #endregion
 
             // Entry in mine, but not in theirs
-            foreach (var mineElement in mine.WhereNotNull().Where(mineElement => !theirs.Contains(mineElement)))
+            foreach (var mineElement in mine.Where(mineElement => !theirs.Contains(mineElement)))
                 removed(mineElement);
 
             // Entry in theirs, but not in mine
-            foreach (var theirsElement in theirs.WhereNotNull().Where(theirsElement => !mine.Contains(theirsElement)))
+            foreach (var theirsElement in theirs.Where(theirsElement => !mine.Contains(theirsElement)))
                 added(theirsElement);
         }
 
@@ -69,11 +67,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="mine">The local list that shall be updated with foreign changes.</param>
         /// <param name="added">All elements that should be added to <paramref name="mine"/> are added to this list.</param>
         /// <param name="removed">All elements that should be removed from <paramref name="mine"/> are added to this list.</param>
-        /// <remarks>
-        /// <paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.
-        /// <see langword="null"/> elements are completely ignored.
-        /// </remarks>
-        public static void TwoWay<T, TAdded, TRemoved>(IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
+        /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
+        public static void TwoWay<T, TAdded, TRemoved>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull] ICollection<TAdded> added, [NotNull] ICollection<TRemoved> removed)
             where T : class, TAdded, TRemoved
         {
 #if __MonoCS__
@@ -91,11 +86,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="mine">The local list that shall be updated with foreign changes.</param>
         /// <param name="added">Called for every element that should be added to <paramref name="mine"/>.</param>
         /// <param name="removed">Called for every element that should be removed from <paramref name="mine"/>.</param>
-        /// <remarks>
-        /// Modified elements are handled by calling <paramref name="removed"/> for the old state and <paramref name="added"/> for the new state.
-        /// <see langword="null"/> elements are completely ignored.
-        /// </remarks>
-        public static void ThreeWay<T>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, Action<T> added, Action<T> removed)
+        /// <remarks>Modified elements are handled by calling <paramref name="removed"/> for the old state and <paramref name="added"/> for the new state.</remarks>
+        public static void ThreeWay<T>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> reference, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull, InstantHandle] Action<T> added, [NotNull, InstantHandle] Action<T> removed)
             where T : class, IMergeable<T>
         {
             #region Sanity checks
@@ -107,13 +99,11 @@ namespace NanoByte.Common.Dispatch
             #endregion
 
             // Entry in theirsList, but not in mineList
-            foreach (var theirsElement in theirs.WhereNotNull().Where(theirsElement => FindMergeID(mine, theirsElement.MergeID) == null && !reference.Contains(theirsElement)))
+            foreach (var theirsElement in theirs.Where(theirsElement => FindMergeID(mine, theirsElement.MergeID) == null && !reference.Contains(theirsElement)))
                 added(theirsElement); // Added in theirsList
 
             foreach (var mineElement in mine)
             {
-                if (mineElement == null) continue;
-
                 var matchingTheirs = FindMergeID(theirs, mineElement.MergeID);
                 if (matchingTheirs == null)
                 { // Entry in mineList, but not in theirsList
@@ -139,11 +129,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="mine">The local list that shall be updated with foreign changes.</param>
         /// <param name="added">All elements that should be added to <paramref name="mine"/> are added to this list.</param>
         /// <param name="removed">All elements that should be removed from <paramref name="mine"/> are added to this list.</param>
-        /// <remarks>
-        /// Modified elements are handled by adding to <paramref name="removed"/> for the old state and to <paramref name="added"/> for the new state.
-        /// <see langword="null"/> elements are completely ignored.
-        /// </remarks>
-        public static void ThreeWay<T, TAdded, TRemoved>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
+        /// <remarks>Modified elements are handled by adding to <paramref name="removed"/> for the old state and to <paramref name="added"/> for the new state.</remarks>
+        public static void ThreeWay<T, TAdded, TRemoved>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> reference, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull] ICollection<TAdded> added, [NotNull] ICollection<TRemoved> removed)
             where T : class, IMergeable<T>, TAdded, TRemoved
         {
 
@@ -163,6 +150,4 @@ namespace NanoByte.Common.Dispatch
             return elements.FirstOrDefault(element => element != null && element.MergeID == id);
         }
     }
-
-    // ReSharper restore PossibleMultipleEnumeration
 }

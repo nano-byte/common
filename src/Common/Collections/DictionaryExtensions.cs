@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -33,7 +34,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Adds multiple pairs to the dictionary in one go.
         /// </summary>
-        public static void AddRange<TSourceKey, TSourceValue, TTargetKey, TTargetValue>(this IDictionary<TTargetKey, TTargetValue> target, IEnumerable<KeyValuePair<TSourceKey, TSourceValue>> source)
+        public static void AddRange<TSourceKey, TSourceValue, TTargetKey, TTargetValue>([NotNull] this IDictionary<TTargetKey, TTargetValue> target, [NotNull, ItemNotNull, InstantHandle] IEnumerable<KeyValuePair<TSourceKey, TSourceValue>> source)
             where TSourceKey : TTargetKey
             where TSourceValue : TTargetValue
         {

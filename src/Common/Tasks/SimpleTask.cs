@@ -21,8 +21,10 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -55,7 +57,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="name">A name describing the task in human-readable form.</param>
         /// <param name="work">The code to be executed by the task. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
-        public SimpleTask(string name, Action work)
+        public SimpleTask([NotNull, Localizable(true)] string name, [NotNull] Action work)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");

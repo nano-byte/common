@@ -22,12 +22,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -45,6 +47,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The directory the application binaries are located in without a trailing directory separator charachter.
         /// </summary>
+        [PublicAPI, NotNull]
         public static readonly string InstallBase = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 
         /// <summary>
@@ -69,18 +72,21 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The directory used for storing files if <see cref="IsPortable"/> is <see langword="true"/>. Defaults to <see cref="InstallBase"/>.
         /// </summary>
+        [PublicAPI, NotNull]
         public static string PortableBase { get { return _portableBase; } set { _portableBase = value; } }
 
         #region Per-user directories
         /// <summary>
         /// The home directory of the current user.
         /// </summary>
+        [PublicAPI, NotNull]
         public static string HomeDir { get { return Environment.GetFolderPath(Environment.SpecialFolder.Personal); } }
 
         /// <summary>
         /// The directory to store per-user settings (can roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%appdata%</c>, on Linux it usually is <c>~/.config</c>.</remarks>
+        [PublicAPI, NotNull]
         public static string UserConfigDir
         {
             get
@@ -95,6 +101,7 @@ namespace NanoByte.Common.Storage
         /// The directory to store per-user data files (should not roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.local/share</c>.</remarks>
+        [PublicAPI, NotNull]
         public static string UserDataDir
         {
             get
@@ -109,6 +116,7 @@ namespace NanoByte.Common.Storage
         /// The directory to store per-user non-essential data (should not roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.cache</c>.</remarks>
+        [PublicAPI, NotNull]
         public static string UserCacheDir
         {
             get
@@ -126,6 +134,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/etc/xdg</c>.</remarks>
+        [PublicAPI, NotNull]
         public static string SystemConfigDirs
         {
             get
@@ -141,6 +150,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/usr/local/share:/usr/share</c>.</remarks>
+        [PublicAPI, NotNull]
         public static string SystemDataDirs
         {
             get
@@ -155,6 +165,7 @@ namespace NanoByte.Common.Storage
         /// The directory to store machine-wide non-essential data.
         /// </summary>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it is <c>/var/cache</c>.</remarks>
+        [PublicAPI, NotNull]
         public static string SystemCacheDir
         {
             get
@@ -192,7 +203,8 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        public static string GetSaveConfigPath(string appName, bool isFile, params string[] resource)
+        [PublicAPI, NotNull]
+        public static string GetSaveConfigPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
@@ -232,7 +244,8 @@ namespace NanoByte.Common.Storage
         /// A list of fully qualified paths to use to load the resource sorted by decreasing importance.
         /// This list will always reflect the current state in the filesystem and can not be modified! It may be empty.
         /// </returns>
-        public static IEnumerable<string> GetLoadConfigPaths(string appName, bool isFile, params string[] resource)
+        [PublicAPI, NotNull]
+        public static IEnumerable<string> GetLoadConfigPaths([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
@@ -280,7 +293,8 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        public static string GetSaveDataPath(string appName, bool isFile, params string[] resource)
+        [PublicAPI, NotNull]
+        public static string GetSaveDataPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
@@ -320,7 +334,8 @@ namespace NanoByte.Common.Storage
         /// A list of fully qualified paths to use to load the resource sorted by decreasing importance.
         /// This list will always reflect the current state in the filesystem and can not be modified! It may be empty.
         /// </returns>
-        public static IEnumerable<string> GetLoadDataPaths(string appName, bool isFile, params string[] resource)
+        [PublicAPI, NotNull]
+        public static IEnumerable<string> GetLoadDataPaths([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
@@ -365,7 +380,8 @@ namespace NanoByte.Common.Storage
         /// <param name="fileName">The file name of the file to search for.</param>
         /// <returns>The fully qualified path of the first located instance of the file.</returns>
         /// <exception cref="IOException">The file could not be found.</exception>
-        public static string GetInstalledFilePath(string fileName)
+        [PublicAPI, NotNull]
+        public static string GetInstalledFilePath([NotNull, Localizable(false)] string fileName)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException("fileName");
@@ -395,7 +411,8 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        public static string GetCacheDirPath(string appName, bool machineWide, params string[] resource)
+        [PublicAPI, NotNull]
+        public static string GetCacheDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
@@ -444,7 +461,8 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
         /// <remarks>If a new directory is created with <paramref name="machineWide"/> set to <see langword="true"/> on Windows, ACLs are set to deny write access for non-Administrator users.</remarks>
-        public static string GetIntegrationDirPath(string appName, bool machineWide, params string[] resource)
+        [PublicAPI, NotNull]
+        public static string GetIntegrationDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
@@ -496,7 +514,7 @@ namespace NanoByte.Common.Storage
         /// Creates a directory with ACLs that block write-access for regular users.
         /// </summary>
         /// <exception cref="NotAdminException">A directory does not exist yet and the user is not an administrator.</exception>
-        private static void CreateSecureMachineWideDir(string path)
+        private static void CreateSecureMachineWideDir([NotNull, Localizable(false)] string path)
         {
             if (Directory.Exists(path)) return;
 
@@ -514,7 +532,8 @@ namespace NanoByte.Common.Storage
         /// Applies ACLs to an existing directory that block write-access for regular users. Does nothing if the directory does not exist.
         /// </summary>
         /// <exception cref="NotAdminException">A directory exists and the user is not an administrator.</exception>
-        public static void SecureExistingMachineWideDir(string path)
+        [PublicAPI]
+        public static void SecureExistingMachineWideDir([NotNull, Localizable(false)] string path)
         {
             if (!Directory.Exists(path)) return;
 

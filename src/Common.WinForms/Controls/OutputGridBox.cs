@@ -22,8 +22,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -43,8 +45,8 @@ namespace NanoByte.Common.Controls
         /// <typeparam name="T">The type of the data elements to display.</typeparam>
         /// <param name="title">A title for the data.</param>
         /// <param name="data">The data to display.</param>
-        /// <param name="owner">The parent window for the dialogs; may be <see langword="null"/>.</param>
-        public static void Show<T>(string title, IEnumerable<T> data, IWin32Window owner = null)
+        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
+        public static void Show<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data, [CanBeNull] IWin32Window owner = null)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");

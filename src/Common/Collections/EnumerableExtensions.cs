@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Values;
 
@@ -39,7 +40,8 @@ namespace NanoByte.Common.Collections
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,bool})"/>.
         /// </summary>
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, Func<T, bool> predicate)
+        [NotNull, LinqTunnel]
+        public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, bool> predicate)
         {
             return enumeration.Where(x => !predicate(x));
         }
@@ -47,7 +49,8 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Filters a sequence of elements to remove any that are equal to <paramref name="element"/>.
         /// </summary>
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, T element)
+        [NotNull, LinqTunnel]
+        public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, T element)
         {
             return enumeration.Except(new[] {element});
         }
@@ -55,16 +58,18 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Flattens a list of lists.
         /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> enumeration)
+        [NotNull, LinqTunnel]
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        public static IEnumerable<T> Flatten<T>([NotNull] this IEnumerable<IEnumerable<T>> enumeration)
         {
-            // ReSharper disable once PossibleMultipleEnumeration
             return enumeration.SelectMany(x => x);
         }
 
         /// <summary>
         /// Appends an element to a list.
         /// </summary>
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumeration, T element)
+        [NotNull, LinqTunnel]
+        public static IEnumerable<T> Append<T>([NotNull] this IEnumerable<T> enumeration, T element)
         {
             return enumeration.Concat(new[] {element});
         }
@@ -72,7 +77,8 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Prepends an element to a list.
         /// </summary>
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> enumeration, T element)
+        [NotNull, LinqTunnel]
+        public static IEnumerable<T> Prepend<T>([NotNull] this IEnumerable<T> enumeration, T element)
         {
             return new[] {element}.Concat(enumeration);
         }
@@ -80,9 +86,9 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Filters a sequence of elements to remove any <see langword="null"/> values.
         /// </summary>
-        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumeration)
+        [NotNull, ItemNotNull, LinqTunnel]
+        public static IEnumerable<T> WhereNotNull<T>([NotNull] this IEnumerable<T> enumeration)
         {
-            // ReSharper disable once CompareNonConstrainedGenericWithNull
             return enumeration.Where(element => element != null);
         }
 
@@ -91,7 +97,8 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="enumeration">The sequence of elements to filter.</param>
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
-        public static IEnumerable<T> Distinct<T, TKey>(this IEnumerable<T> enumeration, Func<T, TKey> keySelector)
+        [NotNull, LinqTunnel]
+        public static IEnumerable<T> Distinct<T, TKey>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, TKey> keySelector)
         {
             return enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
         }
@@ -104,7 +111,8 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TException">The type of exceptions to ignore. Any other exceptions are passed through.</typeparam>
         /// <param name="source">The elements to map.</param>
         /// <param name="selector">The selector to execute for each <paramref name="source"/> element. When it throws <typeparamref name="TException"/> the element is skipped. Any other exceptions are passed through.</param>
-        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        [NotNull, LinqTunnel]
+        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>([NotNull] this IEnumerable<TSource> source, [NotNull] Func<TSource, TResult> selector)
             where TException : Exception
         {
             #region Sanity checks
@@ -135,7 +143,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        public static bool SequencedEquals<T>(this ICollection<T> first, ICollection<T> second, IEqualityComparer<T> comparer = null)
+        public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException("first");
@@ -149,34 +157,12 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Determines whether two arrays contain the same elements in the same order.
-        /// </summary>
-        /// <param name="first">The first of the two collections to compare.</param>
-        /// <param name="second">The first of the two collections to compare.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        public static bool SequencedEquals<T>(this T[] first, T[] second, IEqualityComparer<T> comparer = null)
-        {
-            #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
-            #endregion
-
-            if (first.Length != second.Length) return false;
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
-
-            // ReSharper disable once LoopCanBeConvertedToQuery
-            for (int i = 0; i < first.Length; i++)
-                if (!comparer.Equals(first[i], second[i])) return false;
-            return true;
-        }
-
-        /// <summary>
         /// Determines whether two collections contain the same elements disregarding the order they are in.
         /// </summary>
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        public static bool UnsequencedEquals<T>(this ICollection<T> first, ICollection<T> second, IEqualityComparer<T> comparer = null)
+        public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException("first");
@@ -196,8 +182,7 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The collection to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
         /// <seealso cref="SequencedEquals{T}(System.Collections.Generic.ICollection{T},System.Collections.Generic.ICollection{T},System.Collections.Generic.IEqualityComparer{T})"/>
-        /// <seealso cref="SequencedEquals{T}(T[],T[],System.Collections.Generic.IEqualityComparer{T})"/>
-        public static int GetSequencedHashCode<T>(this IEnumerable<T> collection, IEqualityComparer<T> comparer = null)
+        public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this IEnumerable<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException("collection");
@@ -221,7 +206,7 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The collection to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
         /// <seealso cref="UnsequencedEquals{T}"/>
-        public static int GetUnsequencedHashCode<T>(this IEnumerable<T> collection, IEqualityComparer<T> comparer = null)
+        public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this IEnumerable<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException("collection");
@@ -244,7 +229,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Calls <see cref="ICloneable.Clone"/> for every element in a collection and returns the results as a new collection.
         /// </summary>
-        public static IEnumerable<T> CloneElements<T>(this IEnumerable<T> enumerable) where T : ICloneable
+        public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable
         {
             return enumerable.Select(entry => (T)entry.Clone());
         }
@@ -263,7 +248,7 @@ namespace NanoByte.Common.Collections
         /// After rollback is complete the exception is passed on.
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place")]
-        public static void ApplyWithRollback<T>(this IEnumerable<T> elements, Action<T> apply, Action<T> rollback)
+        public static void ApplyWithRollback<T>([NotNull, InstantHandle] this IEnumerable<T> elements, [NotNull, InstantHandle] Action<T> apply, [NotNull, InstantHandle] Action<T> rollback)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException("elements");
@@ -311,7 +296,7 @@ namespace NanoByte.Common.Collections
         /// <param name="action">The action to apply to an element.</param>
         /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
-        public static void Try<T>(this IEnumerable<T> elements, Action<T> action)
+        public static void Try<T>([NotNull, InstantHandle] this IEnumerable<T> elements, [NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException("elements");

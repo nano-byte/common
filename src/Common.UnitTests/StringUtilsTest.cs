@@ -54,7 +54,6 @@ namespace NanoByte.Common
         [Test]
         public void TestCountOccurences()
         {
-            Assert.AreEqual(0, StringUtils.CountOccurences(null, '/'));
             Assert.AreEqual(0, "abc".CountOccurences('/'));
             Assert.AreEqual(1, "ab/c".CountOccurences('/'));
             Assert.AreEqual(2, "ab/c/".CountOccurences('/'));
@@ -137,7 +136,6 @@ namespace NanoByte.Common
         [Test]
         public void TestBase64Utf8Encode()
         {
-            Assert.AreEqual(null, StringUtils.Base64Utf8Encode(null));
             Assert.AreEqual("", "".Base64Utf8Encode());
             Assert.AreEqual("dGVzdA==", "test".Base64Utf8Encode());
         }
@@ -145,7 +143,6 @@ namespace NanoByte.Common
         [Test]
         public void TestBase64Utf8Decode()
         {
-            Assert.AreEqual(null, StringUtils.Base64Utf8Decode(null));
             Assert.AreEqual("", "".Base64Utf8Decode());
             Assert.AreEqual("test", "dGVzdA==".Base64Utf8Decode());
         }

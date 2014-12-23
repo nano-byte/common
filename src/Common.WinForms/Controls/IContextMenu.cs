@@ -22,6 +22,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -32,9 +33,10 @@ namespace NanoByte.Common.Controls
     public interface IContextMenu
     {
         /// <summary>
-        /// Returns the context menu for this object. May be <see langword="null"/>.
+        /// Returns the context menu for this object; can be <see langword="null"/>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Creates a new object on each call")]
+        [CanBeNull]
         ContextMenu GetContextMenu();
     }
 }

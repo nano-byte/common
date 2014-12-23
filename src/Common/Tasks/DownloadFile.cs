@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading;
+using JetBrains.Annotations;
 using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 
@@ -46,18 +47,22 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <remarks>This value may change once <see cref="TaskState.Data"/> has been reached, based on HTTP redirections.</remarks>
         [Description("The URL the file is to be downloaded from.")]
+        [NotNull]
         public Uri Source { get; private set; }
 
         /// <summary>
         /// The HTTP header data returned by the server for the download request. An empty collection in case of an FTP download.
         /// </summary>
         /// <remarks>This value is always <see langword="null"/> until <see cref="TaskState.Data"/> has been reached.</remarks>
+        [Browsable(false)]
+        [CanBeNull]
         public WebHeaderCollection Headers { get; private set; }
 
         /// <summary>
         /// The local path to save the file to.
         /// </summary>
         [Description("The local path to save the file to.")]
+        [NotNull]
         public string Target { get; protected set; }
 
         /// <summary>
@@ -67,7 +72,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="target">The local path to save the file to. A preexisting file will be overwritten.</param>
         /// <param name="bytesTotal">The number of bytes the file to be downloaded is long. The file will be rejected if it does not have this length. -1 if the size is unknown.</param>
         /// <exception cref="NotSupportedException"><paramref name="source"/> contains an unsupported protocol (usually should be HTTP or FTP).</exception>
-        public DownloadFile(Uri source, string target, long bytesTotal = -1)
+        public DownloadFile([NotNull] Uri source, [NotNull, Localizable(false)] string target, long bytesTotal = -1)
         {
             #region Sanity checks
             if (source == null) throw new ArgumentNullException("source");

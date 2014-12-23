@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -33,11 +34,13 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// A condition to check elements against.
         /// </summary>
+        [NotNull]
         public readonly Predicate<T> Predicate;
 
         /// <summary>
         /// The collection elements are added to if they match the <see cref="Predicate"/>.
         /// </summary>
+        [NotNull]
         public readonly ICollection<T> Bucket;
 
         /// <summary>
@@ -45,7 +48,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="predicate">A condition to check elements against.</param>
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="predicate"/>.</param>
-        public BucketRule(Predicate<T> predicate, ICollection<T> bucket)
+        public BucketRule([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
         {
             #region Sanity checks
             if (predicate == null) throw new ArgumentNullException("predicate");

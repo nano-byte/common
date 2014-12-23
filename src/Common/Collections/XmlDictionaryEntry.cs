@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
 using NanoByte.Common.Properties;
 
@@ -119,6 +120,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <inheritdoc/>
+        [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
         public override int GetHashCode()
         {
             unchecked

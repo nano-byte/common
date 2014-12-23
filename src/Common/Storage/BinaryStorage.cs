@@ -21,10 +21,12 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -47,7 +49,8 @@ namespace NanoByte.Common.Storage
         /// <returns>The loaded object.</returns>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T LoadBinary<T>(Stream stream)
+        [NotNull]
+        public static T LoadBinary<T>([NotNull] Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -76,7 +79,8 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        public static T LoadBinary<T>(string path)
+        [NotNull]
+        public static T LoadBinary<T>([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -94,7 +98,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in a binary stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The binary file to be written.</param>
-        public static void SaveBinary<T>(this T data, Stream stream)
+        public static void SaveBinary<T>([NotNull] this T data, [NotNull] Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -112,7 +116,7 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The binary file to be written.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        public static void SaveBinary<T>(this T data, string path)
+        public static void SaveBinary<T>([NotNull] this T data, [NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");

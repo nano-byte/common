@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 
 namespace NanoByte.Common.Tasks
@@ -37,8 +38,8 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Creates a new task handler.
         /// </summary>
-        /// <param name="owner">The parent window for any dialogs created by the handler; may be <see langword="null"/>.</param>
-        public GuiTaskHandler(IWin32Window owner = null)
+        /// <param name="owner">The parent window for any dialogs created by the handler; can be <see langword="null"/>.</param>
+        public GuiTaskHandler([CanBeNull] IWin32Window owner = null)
         {
             _owner = owner;
         }

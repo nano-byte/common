@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -56,7 +57,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The object to use as the key of the element to add.</param>
         /// <param name="value">The object to use as the value of the element to add.</param>
-        public void Add(TKey key, TValue value)
+        public void Add([NotNull] TKey key, [NotNull] TValue value)
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull
@@ -82,7 +83,8 @@ namespace NanoByte.Common.Collections
         /// This method also returns <see langword="false"/> if <paramref name="key"/> was not found in the dictionary.</returns>
         /// <param name="key">The key of the element to remove.</param>
         /// <remarks>Since the <see cref="Values"/> list needs to be rebuild by traversing all <see cref="Keys"/>, this operation is not O(1) efficient.</remarks>
-        public bool RemoveKey(TKey key)
+        [PublicAPI]
+        public bool RemoveKey([NotNull] TKey key)
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull
@@ -105,7 +107,7 @@ namespace NanoByte.Common.Collections
         /// <returns><see langword="true"/> if the element was successfully removed; otherwise, <see langword="false"/>.
         /// This method also returns <see langword="false"/> if <paramref name="value"/> was not found in the dictionary.</returns>
         /// <param name="value">The value of the element to remove.</param>
-        public bool RemoveValue(TValue value)
+        public bool RemoveValue([NotNull] TValue value)
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull
@@ -135,7 +137,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><see langword="true"/> if the dictionary contains an element with the key; otherwise, <see langword="false"/>.</returns>
         /// <param name="key">The key to locate in the dictionary.</param>
-        public bool ContainsKey(TKey key)
+        public bool ContainsKey([NotNull] TKey key)
         {
             return _dictionary.ContainsKey(key);
         }
@@ -145,7 +147,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><see langword="true"/> if the dictionary contains an element with the value; otherwise, <see langword="false"/>.</returns>
         /// <param name="value">The value to locate in the dictionary.</param>
-        public bool ContainsValue(TValue value)
+        public bool ContainsValue([NotNull] TValue value)
         {
             return _values.Contains(value);
         }

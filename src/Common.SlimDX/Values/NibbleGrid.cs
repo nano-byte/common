@@ -24,6 +24,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Values
@@ -38,7 +39,7 @@ namespace NanoByte.Common.Values
         {}
 
         /// <inheritdoc/>
-        public NibbleGrid(byte[,] data) : base(data)
+        public NibbleGrid([NotNull] byte[,] data) : base(data)
         {}
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace NanoByte.Common.Values
         /// Loads a grid from a PNG stream.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Any of the colors in the imag  is not part of the classic 16 colors palette.</exception>
-        public static NibbleGrid Load(Stream stream)
+        public static NibbleGrid Load([NotNull] Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");

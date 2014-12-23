@@ -21,7 +21,9 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -30,26 +32,25 @@ namespace NanoByte.Common.Storage
     /// </summary>
     public class TemporaryDirectory : IDisposable
     {
-        #region Properties
         /// <summary>
         /// The fully qualified path of the temporary directory.
         /// </summary>
+        [NotNull]
         public string Path { get; private set; }
 
+        [ContractAnnotation("null => null; notnull => notnull")]
         public static implicit operator string(TemporaryDirectory dir)
         {
             return (dir == null) ? null : dir.Path;
         }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a uniquely named, empty temporary directory on disk.
         /// </summary>
         /// <param name="prefix">A short string the directory name should start with.</param>
         /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="System.IO.Path.GetTempPath"/>.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
-        public TemporaryDirectory(string prefix)
+        public TemporaryDirectory([NotNull, Localizable(false)] string prefix)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
@@ -57,9 +58,7 @@ namespace NanoByte.Common.Storage
 
             Path = FileUtils.GetTempDirectory(prefix);
         }
-        #endregion
 
-        #region Dispose
         /// <summary>
         /// Deletes the temporary directory.
         /// </summary>
@@ -106,6 +105,5 @@ namespace NanoByte.Common.Storage
 #endif
             }
         }
-        #endregion
     }
 }

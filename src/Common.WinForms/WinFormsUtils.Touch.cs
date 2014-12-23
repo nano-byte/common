@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using NanoByte.Common.Controls;
@@ -29,6 +30,7 @@ using NanoByte.Common.Values;
 
 namespace NanoByte.Common
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     partial class WinFormsUtils
     {
         // Note: The following code is based on Windows API Code Pack for Microsoft .NET Framework 1.0.1
@@ -49,6 +51,7 @@ namespace NanoByte.Common
 
         #region Structures
         [StructLayout(LayoutKind.Sequential)]
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
         private struct TouchInput
         {
             public int x, y;
@@ -63,6 +66,7 @@ namespace NanoByte.Common
         }
 
         [StructLayout(LayoutKind.Sequential)]
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
         private struct Points
         {
             public short x, y;
@@ -82,9 +86,7 @@ namespace NanoByte.Common
             if (WindowsUtils.IsWindows7) SafeNativeMethods.RegisterTouchWindow(control.Handle, 0);
         }
 
-// ReSharper disable InconsistentNaming
         private const int WM_TOUCHMOVE = 0x0240, WM_TOUCHDOWN = 0x0241, WM_TOUCHUP = 0x0242;
-// ReSharper restore InconsistentNaming
         private static readonly int _touchInputSize = Marshal.SizeOf(new TouchInput());
 
         /// <summary>
@@ -92,9 +94,9 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="m">The message to handle.</param>
         /// <param name="sender">The object to send possible events from.</param>
-        /// <param name="onTouchDown">The event handler to call for touch down events; may be <see langword="null"/>.</param>
-        /// <param name="onTouchMove">The event handler to call for touch move events; may be <see langword="null"/>.</param>
-        /// <param name="onTouchUp">The event handler to call for touch up events; may be <see langword="null"/>.</param>
+        /// <param name="onTouchDown">The event handler to call for touch down events; can be <see langword="null"/>.</param>
+        /// <param name="onTouchMove">The event handler to call for touch move events; can be <see langword="null"/>.</param>
+        /// <param name="onTouchUp">The event handler to call for touch up events; can be <see langword="null"/>.</param>
         public static void HandleTouchMessage(ref Message m, object sender, EventHandler<TouchEventArgs> onTouchDown, EventHandler<TouchEventArgs> onTouchMove, EventHandler<TouchEventArgs> onTouchUp)
         {
             if (!WindowsUtils.IsWindows7) return;

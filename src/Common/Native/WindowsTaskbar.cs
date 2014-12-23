@@ -22,19 +22,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows 7 or newer taskbar.
     /// </summary>
+    [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global"), SuppressMessage("ReSharper", "UnusedMember.Local"), SuppressMessage("ReSharper", "EmptyGeneralCatchClause")]
     public static partial class WindowsTaskbar
     {
         #region Enumerations
-        // ReSharper disable UnusedMember.Global
         /// <summary>
         /// Represents the thumbnail progress bar state.
         /// </summary>
@@ -67,9 +69,6 @@ namespace NanoByte.Common.Native
             Paused = 0x8
         }
 
-        // ReSharper restore UnusedMember.Global
-
-        // ReSharper disable UnusedMember.Local
         private enum ThumbnailMask
         {
             Bitmap = 0x1,
@@ -104,8 +103,6 @@ namespace NanoByte.Common.Native
             Frequent = 1,
             Recent
         }
-
-        // ReSharper restore UnusedMember.Local
         #endregion
 
         #region Structures
@@ -115,15 +112,19 @@ namespace NanoByte.Common.Native
         public struct ShellLink
         {
             /// <summary>The title/name of the task link.</summary>
+            [NotNull]
             public readonly string Title;
 
             /// <summary>The target path the link shall point to.</summary>
+            [NotNull]
             public readonly string Path;
 
-            /// <summary>Additional arguments for <see cref="Title"/>; may be <see langword="null"/>.</summary>
+            /// <summary>Additional arguments for <see cref="Title"/>; can be <see langword="null"/>.</summary>
+            [CanBeNull]
             public readonly string Arguments;
 
             /// <summary>The path of the icon for the link.</summary>
+            [NotNull]
             public readonly string IconPath;
 
             /// <summary>The resouce index within the file specified by <see cref="IconPath"/>.</summary>
@@ -134,8 +135,9 @@ namespace NanoByte.Common.Native
             /// </summary>
             /// <param name="title">The title/name of the task link.</param>
             /// <param name="path">The target path the link shall point to and to get the icon from.</param>
-            /// <param name="arguments">Additional arguments for <paramref name="title"/>; may be <see langword="null"/>.</param>
-            public ShellLink(string title, string path, string arguments = null)
+            /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <see langword="null"/>.</param>
+            [PublicAPI]
+            public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string arguments = null)
             {
                 #region Sanity checks
                 if (string.IsNullOrEmpty(title)) throw new ArgumentNullException("title");
@@ -153,14 +155,16 @@ namespace NanoByte.Common.Native
             /// </summary>
             /// <param name="title">The title/name of the task link.</param>
             /// <param name="path">The target path the link shall point to.</param>
-            /// <param name="arguments">Additional arguments for <paramref name="title"/>; may be <see langword="null"/>.</param>
+            /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <see langword="null"/>.</param>
             /// <param name="iconPath">The path of the icon for the link.</param>
             /// <param name="iconIndex">The resouce index within the file specified by <paramref name="iconPath"/>.</param>
-            public ShellLink(string title, string path, string arguments, string iconPath, int iconIndex)
+            [PublicAPI]
+            public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string arguments, [NotNull, Localizable(false)] string iconPath, int iconIndex)
             {
                 #region Sanity checks
                 if (string.IsNullOrEmpty(title)) throw new ArgumentNullException("title");
                 if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+                if (string.IsNullOrEmpty(iconPath)) throw new ArgumentNullException("iconPath");
                 #endregion
 
                 Title = title;
@@ -172,6 +176,7 @@ namespace NanoByte.Common.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
         private struct ThumbnailButton
         {
             [MarshalAs(UnmanagedType.U4)]
@@ -366,7 +371,6 @@ namespace NanoByte.Common.Native
                 lock (_taskbarList)
                     _taskbarList.SetProgressState(handle, state);
             }
-                // ReSharper disable once EmptyGeneralCatchClause
             catch
             {}
         }
@@ -386,7 +390,6 @@ namespace NanoByte.Common.Native
                 lock (_taskbarList)
                     _taskbarList.SetProgressValue(handle, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
             }
-                // ReSharper disable once EmptyGeneralCatchClause
             catch
             {}
         }
@@ -396,12 +399,12 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="hwnd">A handle to the window to set the ID for.</param>
         /// <param name="appID">The application ID to set.</param>
-        /// <param name="relaunchCommand">The command to use for relaunching this specific window if it was pinned to the taskbar; may be <see langword="null"/>.</param>
-        /// <param name="relaunchIcon">The icon to use for pinning this specific window to the taskbar (written as Path,ResourceIndex); may be <see langword="null"/>.</param>
-        /// <param name="relaunchName">The user-friendly name to associate with <paramref name="relaunchCommand"/>; may be <see langword="null"/>.</param>
+        /// <param name="relaunchCommand">The command to use for relaunching this specific window if it was pinned to the taskbar; can be <see langword="null"/>.</param>
+        /// <param name="relaunchIcon">The icon to use for pinning this specific window to the taskbar (written as Path,ResourceIndex); can be <see langword="null"/>.</param>
+        /// <param name="relaunchName">The user-friendly name to associate with <paramref name="relaunchCommand"/>; can be <see langword="null"/>.</param>
         /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-        public static void SetWindowAppID(IntPtr hwnd, string appID, string relaunchCommand = null, string relaunchIcon = null, string relaunchName = null)
+        public static void SetWindowAppID(IntPtr hwnd, [NotNull, Localizable(false)] string appID, [CanBeNull, Localizable(false)] string relaunchCommand = null, [CanBeNull, Localizable(false)] string relaunchIcon = null, [CanBeNull, Localizable(true)] string relaunchName = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
@@ -421,7 +424,6 @@ namespace NanoByte.Common.Native
 
                 Marshal.ReleaseComObject(propertyStore);
             }
-                // ReSharper disable once EmptyGeneralCatchClause
             catch
             {}
         }
@@ -432,7 +434,7 @@ namespace NanoByte.Common.Native
         /// <param name="appID">The application ID of the jumplist to add the task to.</param>
         /// <param name="links">The links to add to the jumplist.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-        public static void AddTaskLinks(string appID, IEnumerable<ShellLink> links)
+        public static void AddTaskLinks([NotNull, Localizable(false)] string appID, [NotNull, ItemNotNull] IEnumerable<ShellLink> links)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
@@ -458,7 +460,6 @@ namespace NanoByte.Common.Native
                 customDestinationList.AddUserTasks((IObjectArray)taskContent);
                 customDestinationList.CommitList();
             }
-                // ReSharper disable once EmptyGeneralCatchClause
             catch
             {}
         }

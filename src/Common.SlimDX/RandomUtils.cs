@@ -23,6 +23,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using JetBrains.Annotations;
 using SlimDX;
 
 namespace NanoByte.Common
@@ -46,6 +47,7 @@ namespace NanoByte.Common
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int")]
+        [Pure]
         public static int GetRandomInt(int min, int max)
         {
             return _randomGenerator.Next(min, max);
@@ -57,6 +59,7 @@ namespace NanoByte.Common
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float")]
+        [Pure]
         public static float GetRandomFloat(float min, float max)
         {
             return (float)_randomGenerator.NextDouble() * (max - min) + min;
@@ -70,6 +73,7 @@ namespace NanoByte.Common
         /// <param name="step">The step size (all returned values are multiples of this)</param>
         /// <returns>A random multiple of <paramref name="step"/> between <paramref name="min"/> and <paramref name="max"/>.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float")]
+        [Pure]
         public static double GetRandomFloatRange(double min, double max, double step)
         {
             return GetRandomInt((int)(min / step), (int)(max / step)) * step;
@@ -80,6 +84,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
+        [Pure]
         public static double GetRandomDouble(float min, float max)
         {
             return _randomGenerator.NextDouble() * (max - min) + min;
@@ -92,6 +97,7 @@ namespace NanoByte.Common
         /// <param name="max">The maximum value</param>
         /// <param name="step">The step size (all returned values are multiples of this)</param>
         /// <returns>A random multiple of <paramref name="step"/> between <paramref name="min"/> and <paramref name="max"/>.</returns>
+        [Pure]
         public static double GetRandomDouble(double min, double max, double step)
         {
             return GetRandomInt((int)(min / step), (int)(max / step)) * step;
@@ -102,6 +108,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
+        [Pure]
         public static byte GetRandomByte(byte min, byte max)
         {
             return (byte)(_randomGenerator.Next(min, max));
@@ -114,6 +121,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="min">minimum for each component</param>
         /// <param name="max">maximum for each component</param>
+        [Pure]
         public static Vector2 GetRandomVector2(Vector2 min, Vector2 max)
         {
             return new Vector2(GetRandomFloat(min.X, max.X), GetRandomFloat(min.Y, max.Y));
@@ -124,6 +132,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="min">minimum for each component</param>
         /// <param name="max">maximum for each component</param>
+        [Pure]
         public static Vector3 GetRandomVector3(Vector3 min, Vector3 max)
         {
             return new Vector3(
@@ -137,6 +146,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="limit1">One limit for the color values</param>
         /// <param name="limit2">The other limit for the color values</param>
+        [Pure]
         public static Color GetRandomColor(Color limit1, Color limit2)
         {
             return ColorUtils.Interpolate(GetRandomFloat(0, 1), limit1, limit2);

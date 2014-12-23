@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
 {
@@ -39,7 +40,7 @@ namespace NanoByte.Common.Undo
         /// Creates a new composite command.
         /// </summary>
         /// <param name="commands">The commands to be contained inside the transaction.</param>
-        public PreExecutedCompositeCommand(IEnumerable<IUndoCommand> commands)
+        public PreExecutedCompositeCommand([NotNull] IEnumerable<IUndoCommand> commands)
         {
             #region Sanity checks
             if (commands == null) throw new ArgumentNullException("commands");

@@ -54,9 +54,8 @@ namespace NanoByte.Common.Controls
                 OnPropertyValueChanged(new PropertyValueChangedEventArgs(SelectedGridItem, oldValue));
             };
 
-            // ReSharper disable DoNotCallOverridableMethodsInConstructor
+            // ReSharper disable once DoNotCallOverridableMethodsInConstructor
             ContextMenuStrip = new ContextMenuStrip {Items = {_menuReset}};
-            // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]

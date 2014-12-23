@@ -21,6 +21,7 @@
  */
 
 using System;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
 {
@@ -47,7 +48,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
         /// <param name="newValue">The new value to be set.</param>
-        public SetValueCommand(PropertyPointer<T> pointer, T newValue)
+        public SetValueCommand([NotNull] PropertyPointer<T> pointer, T newValue)
         {
             #region Sanity checks
             if (pointer == null) throw new ArgumentNullException("pointer");
@@ -63,7 +64,7 @@ namespace NanoByte.Common.Undo
         /// <param name="getValue">A delegate that returns the current value.</param>
         /// <param name="setValue">A delegate that sets the valuel.</param>
         /// <param name="newValue">The new value to be set.</param>
-        public SetValueCommand(Func<T> getValue, Action<T> setValue, T newValue) :
+        public SetValueCommand([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue) :
             this(new PropertyPointer<T>(getValue, setValue), newValue)
         {}
         #endregion

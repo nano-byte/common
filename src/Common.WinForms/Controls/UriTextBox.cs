@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Controls
@@ -34,6 +35,7 @@ namespace NanoByte.Common.Controls
     /// </summary>
     /// <remarks>Will turn red for invalid input and green for valid input. Will not allow focus to be lost for invalid input.</remarks>
     [Description("A HintTextBox designed specifically for entering URIs.")]
+    [PublicAPI]
     public class UriTextBox : HintTextBox
     {
         #region Events

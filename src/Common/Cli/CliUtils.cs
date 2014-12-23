@@ -21,8 +21,11 @@
  */
 
 using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Cli
@@ -33,6 +36,7 @@ namespace NanoByte.Common.Cli
     public static class CliUtils
     {
         [SuppressUnmanagedCodeSecurity]
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private static class SafeNativeMethods
         {
             #region Stream redirect
@@ -65,7 +69,8 @@ namespace NanoByte.Common.Cli
         /// </summary>
         /// <param name="prompt">The prompt to display to the user on <see cref="Console.Error"/>.</param>
         /// <returns>The string the user entered; <see cref="string.Empty"/> if none; <see langword="null"/> if the input stream has been closed.</returns>
-        public static string ReadString(string prompt)
+        [CanBeNull]
+        public static string ReadString([NotNull, Localizable(true)] string prompt)
         {
             Console.Error.Write(prompt + " ");
             return Console.ReadLine();
@@ -78,6 +83,7 @@ namespace NanoByte.Common.Cli
         /// </summary>
         /// <param name="prompt">The prompt to display to the user on <see cref="Console.Error"/>.</param>
         /// <returns>The password the user entered; <see cref="string.Empty"/> if none.</returns>
+        [NotNull]
         public static string ReadPassword(string prompt)
         {
             Console.Error.Write(prompt + " ");

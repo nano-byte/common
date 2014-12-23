@@ -22,8 +22,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -50,7 +52,7 @@ namespace NanoByte.Common.Tasks
         /// This may be called multiple times concurrently but concurrent calls must not depend on each other.
         /// The specific implementation of this method determines whether the tasks actually run concurrently or in sequence.
         /// </remarks>
-        void RunTask(ITask task);
+        void RunTask([NotNull] ITask task);
 
         /// <summary>
         /// The detail level of messages printed to the console or log file.
@@ -67,10 +69,10 @@ namespace NanoByte.Common.Tasks
         /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="batchInformation">Information to be displayed if the question was automatically answered with 'No' because <see cref="Batch"/> was set to <see langword="true"/>; may be <see langword="null"/>.</param>
+        /// <param name="batchInformation">Information to be displayed if the question was automatically answered with 'No' because <see cref="Batch"/> was set to <see langword="true"/>; can be <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the user answered with 'Yes'; <see langword="false"/> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
-        bool AskQuestion(string question, string batchInformation = null);
+        bool AskQuestion([NotNull, Localizable(true)] string question, [CanBeNull, Localizable(true)] string batchInformation = null);
 
         /// <summary>
         /// Displays multi-line text to the user.
@@ -78,7 +80,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
         /// <param name="message">The string to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-        void Output(string title, string message);
+        void Output([NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message);
 
         /// <summary>
         /// Displays tabular data to the user.
@@ -86,6 +88,6 @@ namespace NanoByte.Common.Tasks
         /// <param name="title">A title for the data. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-        void Output<T>(string title, IEnumerable<T> data);
+        void Output<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data);
     }
 }

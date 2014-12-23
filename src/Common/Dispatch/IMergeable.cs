@@ -35,6 +35,7 @@ namespace NanoByte.Common.Dispatch
         /// A unique identifier used when comparing for merging. Should always remain the same, even when the element is modified.
         /// </summary>
         [DefaultValue(0)]
+        [Localizable(false)]
         string MergeID { get; }
 
         /// <summary>

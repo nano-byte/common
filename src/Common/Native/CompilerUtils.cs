@@ -23,8 +23,10 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using JetBrains.Annotations;
 using Microsoft.CSharp;
 using NanoByte.Common.Storage;
 
@@ -41,7 +43,7 @@ namespace NanoByte.Common.Native
         /// <param name="compilerParameters">The compiler configuration (e.g. output file path).</param>
         /// <param name="code">The C# code to compile.</param>
         /// <param name="manifest">The contents of the Win32 manifest to apply to the output file. Will only be applied if a C# 3.0 or newer compiler is available.</param>
-        public static void CompileCSharp(this CompilerParameters compilerParameters, string code, string manifest)
+        public static void CompileCSharp([NotNull] this CompilerParameters compilerParameters, [NotNull, Localizable(false)] string code, [NotNull, Localizable(false)] string manifest)
         {
             #region Sanity checks
             if (compilerParameters == null) throw new ArgumentNullException("compilerParameters");

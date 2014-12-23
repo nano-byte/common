@@ -32,13 +32,11 @@ namespace NanoByte.Common.Native
         [StructLayout(LayoutKind.Sequential)]
         private struct WinMessage
         {
-// ReSharper disable InconsistentNaming
             public IntPtr hWnd;
             public IntPtr wParam;
             public IntPtr lParam;
             public uint time;
             public Point p;
-// ReSharper restore InconsistentNaming
         }
         #endregion
 

@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -225,11 +226,10 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
         public bool Equals(DoubleVector3 other)
         {
-            // ReSharper disable CompareOfFloatsByEqualityOperator
             return other.X == X && other.Y == Y && other.Z == Z;
-            // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
         /// <inheritdoc/>

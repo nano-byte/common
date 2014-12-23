@@ -21,6 +21,7 @@
  */
 
 using System.Drawing;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -43,6 +44,7 @@ namespace NanoByte.Common
         /// <param name="factor">The proportion of the two colors between 0 (only first color) and 1 (only second color)</param>
         /// <param name="color1">The first color value</param>
         /// <param name="color2">The second color value</param>
+        [Pure]
         public static Color Interpolate(float factor, Color color1, Color color2)
         {
             factor = factor.Clamp();

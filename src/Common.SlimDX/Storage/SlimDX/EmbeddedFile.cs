@@ -22,6 +22,7 @@
 
 using System;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage.SlimDX
 {
@@ -40,6 +41,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// The filename in the archive
         /// </summary>
+        [NotNull]
         public string Filename { get { return _filename; } }
 
         /// <summary>
@@ -50,6 +52,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// The delegate to be called when the data is ready to be read/written to/form a stream
         /// </summary>
+        [NotNull]
         public Action<Stream> StreamDelegate { get { return _streamDelegate; } }
         #endregion
 
@@ -59,8 +62,13 @@ namespace NanoByte.Common.Storage.SlimDX
         /// </summary>
         /// <param name="filename">The filename in the archive</param>
         /// <param name="readDelegate">The delegate to be called when the data is ready to be read</param>
-        public EmbeddedFile(string filename, Action<Stream> readDelegate)
+        public EmbeddedFile([NotNull] string filename, [NotNull] Action<Stream> readDelegate)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
+            if (readDelegate == null) throw new ArgumentNullException("readDelegate");
+            #endregion
+
             _filename = filename;
             _compressionLevel = 0;
             _streamDelegate = readDelegate;
@@ -72,8 +80,13 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="filename">The filename in the archive</param>
         /// <param name="compressionLevel">The level of compression (0-9) to apply to this entry</param>
         /// <param name="writeDelegate">The delegate to be called when the data is ready to be written</param>
-        public EmbeddedFile(string filename, int compressionLevel, Action<Stream> writeDelegate)
+        public EmbeddedFile([NotNull] string filename, int compressionLevel, [NotNull] Action<Stream> writeDelegate)
         {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
+            if (writeDelegate == null) throw new ArgumentNullException("writeDelegate");
+            #endregion
+
             _filename = filename;
             _compressionLevel = compressionLevel;
             _streamDelegate = writeDelegate;

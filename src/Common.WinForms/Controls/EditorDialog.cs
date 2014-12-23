@@ -23,6 +23,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -50,7 +51,7 @@ namespace NanoByte.Common.Controls
         }
 
         /// <inheritdoc/>
-        public DialogResult ShowDialog(IWin32Window owner, T element)
+        public DialogResult ShowDialog([NotNull] IWin32Window owner, [NotNull] T element)
         {
             #region Sanity checks
             if (owner == null) throw new ArgumentNullException("owner");
@@ -67,7 +68,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="element">The element to be edited.</param>
         /// <returns>Save changes if <see cref="DialogResult.OK"/>; discard changes if <see cref="DialogResult.Cancel"/>.</returns>
-        public DialogResult ShowDialog(T element)
+        public DialogResult ShowDialog([NotNull] T element)
         {
             #region Sanity checks
             if (element == null) throw new ArgumentNullException("element");

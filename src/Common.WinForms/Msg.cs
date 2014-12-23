@@ -21,8 +21,10 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 using TaskDialog;
 
@@ -37,10 +39,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Displays a message to the user using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        public static void Inform(IWin32Window owner, string text, MsgSeverity severity)
+        public static void Inform([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             #region Logging
             switch (severity)
@@ -77,14 +79,14 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user a OK/Cancel-question using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="okCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="cancelCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; may be <see langword="null"/>.</param>
+        /// <param name="okCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option.</param>
+        /// <param name="cancelCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; can be <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if <paramref name="okCaption"/> was selected, <see langword="false"/> if <paramref name="cancelCaption"/> was selected.</returns>
         /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="okCaption"/> and <paramref name="cancelCaption"/> are not display to the user, so don't rely on them!</remarks>
-        public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity, string okCaption, string cancelCaption)
+        public static bool OkCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, [NotNull, Localizable(true)] string okCaption, [CanBeNull, Localizable(true)] string cancelCaption = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
@@ -151,12 +153,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user a OK/Cancel-question using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <returns><see langword="true"/> if OK was selected, <see langword="false"/> if Cancel was selected.</returns>
         /// <remarks>If a <see cref="MessageBox"/> is used, OK and Cancel are not display to the user, so don't rely on them!</remarks>
-        public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity)
+        public static bool OkCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             return OkCancel(owner, text, severity, "OK", Resources.Cancel);
         }
@@ -166,16 +168,17 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between two options (yes/no) using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; must not be <see langword="null"/>.</param>
+        /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option.</param>
+        /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option.</param>
         /// <returns><see langword="true"/> if <paramref name="yesCaption"/> was chosen, <see langword="false"/> if <paramref name="noCaption"/> was chosen.</returns>
         /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
-        public static bool YesNo(IWin32Window owner, string text, MsgSeverity severity, string yesCaption, string noCaption)
+        public static bool YesNo([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, [NotNull, Localizable(true)] string yesCaption, [NotNull, Localizable(true)] string noCaption)
         {
             #region Sanity checks
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
             if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
             #endregion
@@ -225,10 +228,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between two options (yes/no) using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        public static bool YesNo(IWin32Window owner, string text, MsgSeverity severity)
+        public static bool YesNo([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             return YesNo(owner, text, severity, Resources.Yes, Resources.No);
         }
@@ -238,16 +241,16 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between three options (yes/no/cancel) using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; must not be <see langword="null"/>.</param>
-        /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; must not be <see langword="null"/>.</param>
+        /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option.</param>
+        /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option.</param>
         /// <returns><see cref="DialogResult.Yes"/> if <paramref name="yesCaption"/> was chosen,
         /// <see cref="DialogResult.No"/> if <paramref name="noCaption"/> was chosen,
         /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
         /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
-        public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity, string yesCaption, string noCaption)
+        public static DialogResult YesNoCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, [NotNull, Localizable(true)] string yesCaption, [NotNull, Localizable(true)] string noCaption)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
@@ -305,13 +308,13 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between three options (yes/no/cancel) using a <see cref="MessageBox"/> or <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <returns><see cref="DialogResult.Yes"/> if Yes was chosen,
         /// <see cref="DialogResult.No"/> if No was chosen,
         /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
-        public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity)
+        public static DialogResult YesNoCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             return YesNoCancel(owner, text, severity, Resources.Yes, Resources.No);
         }
@@ -321,11 +324,11 @@ namespace NanoByte.Common
 
         #region MessageBox
         /// <summary>Displays a message using a <see cref="MessageBox"/>.</summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <param name="buttons">The buttons the user can click.</param>
-        private static DialogResult ShowMesageBox(IWin32Window owner, string text, MsgSeverity severity, MessageBoxButtons buttons)
+        private static DialogResult ShowMesageBox([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, MessageBoxButtons buttons)
         {
             // Handle RTL systems
             MessageBoxOptions localizedOptions;
@@ -349,7 +352,7 @@ namespace NanoByte.Common
             }
 
             // Display MessageDialog
-            return MessageBox.Show(owner, text ?? "", Application.ProductName, buttons, icon, MessageBoxDefaultButton.Button1, localizedOptions);
+            return MessageBox.Show(owner, text, Application.ProductName, buttons, icon, MessageBoxDefaultButton.Button1, localizedOptions);
         }
         #endregion
 
@@ -357,12 +360,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Displays a message using a <see cref="TaskDialog"/>.
         /// </summary>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        private static TaskDialog.TaskDialog GetTaskDialog(string text, MsgSeverity severity)
+        private static TaskDialog.TaskDialog GetTaskDialog([NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             // Split everything from the second line onwards off from the main text
-            string[] split = (text ?? "").Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
+            string[] split = text.Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
             var taskDialog = new TaskDialog.TaskDialog {MainInstruction = split[0], WindowTitle = Application.ProductName};
             if (split.Length == 2) taskDialog.Content = split[1];
 
@@ -396,11 +399,11 @@ namespace NanoByte.Common
         /// Displays a <see cref="TaskDialog"/>.
         /// </summary>
         /// <param name="taskDialog">The <see cref="TaskDialog"/> to display.</param>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
         /// <returns>Indicates the button the user pressed.</returns>
         /// <exception cref="BadImageFormatException">The task-dialog DLL could not be loaded.</exception>
         /// <exception cref="EntryPointNotFoundException">The task-dialog DLL routine could not be called.</exception>
-        private static DialogResult ShowTaskDialog(TaskDialog.TaskDialog taskDialog, IWin32Window owner)
+        private static DialogResult ShowTaskDialog([NotNull] TaskDialog.TaskDialog taskDialog, [CanBeNull] IWin32Window owner)
         {
             // Note: If you get an EntryPointNotFoundException here, add this to your application manifest and test outside the IDE:
             // <dependency>

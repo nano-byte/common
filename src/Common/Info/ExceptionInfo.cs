@@ -22,6 +22,7 @@
 
 using System;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Info
 {
@@ -72,8 +73,7 @@ namespace NanoByte.Common.Info
         /// Creates an exception information based on an exception.
         /// </summary>
         /// <param name="ex">The exception whose information to extract.</param>
-        public ExceptionInfo(Exception ex)
-            : this()
+        public ExceptionInfo([NotNull] Exception ex) : this()
         {
             #region Sanity checks
             if (ex == null) throw new ArgumentNullException("ex");

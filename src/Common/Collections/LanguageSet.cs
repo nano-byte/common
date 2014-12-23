@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Values.Design;
 
 namespace NanoByte.Common.Collections
@@ -97,7 +98,7 @@ namespace NanoByte.Common.Collections
         /// Determines whether this language set contains any of a set of target languages.
         /// Empty sets count as containing all languages.
         /// </summary>
-        public bool ContainsAny(ICollection<CultureInfo> targets)
+        public bool ContainsAny([NotNull] ICollection<CultureInfo> targets)
         {
             #region Sanity checks
             if (targets == null) throw new ArgumentNullException("targets");

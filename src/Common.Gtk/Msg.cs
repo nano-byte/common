@@ -20,7 +20,9 @@
  * THE SOFTWARE.
  */
 
+using System.ComponentModel;
 using Gtk;
+using JetBrains.Annotations;
 using NanoByte.Common.Info;
 
 namespace NanoByte.Common
@@ -34,10 +36,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Displays a message to the user using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        public static void Inform(Window owner, string text, MsgSeverity severity)
+        public static void Inform([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             #region Logging
             switch (severity)
@@ -59,11 +61,11 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user a OK/Cancel-question using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <returns><see langword="true"/> if OK was selected, <see langword="false"/> if Cancel was selected.</returns>
-        public static bool OKCancel(Window owner, string text, MsgSeverity severity)
+        public static bool OKCancel([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             #region Logging
             switch (severity)
@@ -85,11 +87,11 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between two options (yes/no) using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <returns><see langword="true"/> if Yes was chosen, <see langword="false"/> if No was chosen.</returns>
-        public static bool YesNo(Window owner, string text, MsgSeverity severity)
+        public static bool YesNo([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             #region Logging
             switch (severity)
@@ -103,7 +105,6 @@ namespace NanoByte.Common
             }
             #endregion
 
-            // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
             return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo) == ResponseType.Yes;
         }
         #endregion
@@ -112,13 +113,13 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between three options (yes/no/cancel) using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <returns><see cref="ResponseType.Yes"/> if Yes was chosen,
         /// <see cref="ResponseType.No"/> if No was chosen,
         /// <see cref="ResponseType.Cancel"/> otherwise.</returns>
-        public static ResponseType YesNoCancel(Window owner, string text, MsgSeverity severity)
+        public static ResponseType YesNoCancel([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             #region Logging
             switch (severity)
@@ -141,11 +142,11 @@ namespace NanoByte.Common
 
         #region MessageDialog
         /// <summary>Displays a message using a <see cref="MessageDialog"/>.</summary>
-        /// <param name="owner">The parent window the displayed window is modal to; may be <see langword="null"/>.</param>
-        /// <param name="text">The message to be displayed; must not be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <param name="buttons">The buttons the user can click.</param>
-        private static ResponseType ShowMessageDialog(Window owner, string text, MsgSeverity severity, ButtonsType buttons)
+        private static ResponseType ShowMessageDialog([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, ButtonsType buttons)
         {
             // Select icon based on message severity
             MessageType type;
@@ -159,7 +160,6 @@ namespace NanoByte.Common
                     break;
                 default:
                 case MsgSeverity.Info:
-                    // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
                     type = buttons.HasFlag(ButtonsType.YesNo) ? MessageType.Question : MessageType.Info;
                     break;
             }

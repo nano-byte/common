@@ -25,6 +25,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -45,7 +46,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
         /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
-        internal Bucketizer(IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever)
+        internal Bucketizer([NotNull] IEnumerable<TElement> elements, [NotNull] Func<TElement, TValue> valueRetriever)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException("elements");
@@ -62,7 +63,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="value">A value to compare with the result of the value retriever using <see cref="object.Equals(object,object)"/>.</param>
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="value"/>.</param>
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
-        public Bucketizer<TElement, TValue> Add(TValue value, ICollection<TElement> bucket)
+        public Bucketizer<TElement, TValue> Add(TValue value, [NotNull] ICollection<TElement> bucket)
         {
             #region Sanity checks
             if (bucket == null) throw new ArgumentNullException("bucket");
@@ -107,7 +108,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
         /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
-        public static Bucketizer<TElement, TValue> Bucketize<TElement, TValue>(this IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever)
+        public static Bucketizer<TElement, TValue> Bucketize<TElement, TValue>([NotNull] this IEnumerable<TElement> elements, [NotNull] Func<TElement, TValue> valueRetriever)
         {
             return new Bucketizer<TElement, TValue>(elements, valueRetriever);
         }

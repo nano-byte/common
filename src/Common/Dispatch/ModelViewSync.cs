@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Dispatch
@@ -46,7 +47,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="model">The Model that can change on its own accord.</param>
         /// <param name="view">The View that is to be automatically updated to reflect changes in the Model.</param>
-        public ModelViewSync(MonitoredCollection<TModel> model, ICollection<TView> view)
+        public ModelViewSync([NotNull] MonitoredCollection<TModel> model, [NotNull] ICollection<TView> view)
         {
             #region Sanity checks
             if (model == null) throw new ArgumentNullException("model");
@@ -149,8 +150,8 @@ namespace NanoByte.Common.Dispatch
         /// Registers a mapping rule for a specific type of Model element.
         /// </summary>
         /// <param name="create">Callback that creates a set of 0..n View representations for a given Model element.</param>
-        /// <param name="update">Callback that updates a specific View representation based on the state of a given Model element.</param>
-        public void RegisterMultiple<TSpecificModel, TSpecificView>(Func<TSpecificModel, IEnumerable<TSpecificView>> create, Action<TSpecificModel, TSpecificView> update = null)
+        /// <param name="update">Callback that updates a specific View representation based on the state of a given Model element; can be <see langword="null"/>.</param>
+        public void RegisterMultiple<TSpecificModel, TSpecificView>([NotNull] Func<TSpecificModel, IEnumerable<TSpecificView>> create, [CanBeNull] Action<TSpecificModel, TSpecificView> update = null)
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
         {
@@ -173,8 +174,8 @@ namespace NanoByte.Common.Dispatch
         /// Registers a mapping rule for a specific type of Model element.
         /// </summary>
         /// <param name="create">Callback that creates a View representation for a given Model element.</param>
-        /// <param name="update">Callback that updates a View representation based on the state of a given Model element.</param>
-        public void Register<TSpecificModel, TSpecificView>(Func<TSpecificModel, TSpecificView> create, Action<TSpecificModel, TSpecificView> update = null)
+        /// <param name="update">Callback that updates a View representation based on the state of a given Model element; can be <see langword="null"/>.</param>
+        public void Register<TSpecificModel, TSpecificView>([NotNull] Func<TSpecificModel, TSpecificView> create, [CanBeNull] Action<TSpecificModel, TSpecificView> update = null)
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
         {

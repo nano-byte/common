@@ -41,6 +41,7 @@ namespace NanoByte.Common.Values.Design
     {
         private static object GetEnumFromString(string stringValue)
         {
+            // ReSharper disable once LoopCanBePartlyConvertedToQuery
             foreach (var field in typeof(T).GetFields())
             {
                 var attributes = (XmlEnumAttribute[])field.GetCustomAttributes(typeof(XmlEnumAttribute), inherit: false);
@@ -84,9 +85,7 @@ namespace NanoByte.Common.Values.Design
             return true;
         }
 
-        // ReSharper disable StaticFieldInGenericType
         private static readonly string[] _values = (from T value in Enum.GetValues(typeof(T)) select value.ConvertToString()).ToArray();
-        // ReSharper restore StaticFieldInGenericType
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {

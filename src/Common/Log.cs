@@ -25,6 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Info;
 
 namespace NanoByte.Common
@@ -71,11 +72,13 @@ namespace NanoByte.Common
         /// Occurs whenever a new entry has been added to the log.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        [CanBeNull]
         public static event LogEntryEventHandler NewEntry;
 
         /// <summary>
         /// All data logged in this session so far as plain text.
         /// </summary>
+        [NotNull]
         public static string Content
         {
             get
@@ -138,7 +141,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Prints a message to the log as-is (no time stamp, etc.). Usually used for <see cref="Console"/> output.
         /// </summary>
-        public static void Echo(string message)
+        public static void Echo([NotNull] string message)
         {
             AddEntry(LogSeverity.Echo, message);
         }
@@ -146,7 +149,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes nice-to-know information to the log.
         /// </summary>
-        public static void Info(string message)
+        public static void Info([NotNull] string message)
         {
             AddEntry(LogSeverity.Info, message);
         }
@@ -154,7 +157,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes a warning that doesn't have to be acted upon immediately to the log.
         /// </summary>
-        public static void Warn(string message)
+        public static void Warn([NotNull] string message)
         {
             AddEntry(LogSeverity.Warn, message);
         }
@@ -162,9 +165,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes an exception as a <see cref="Warn(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
         /// </summary>
-        public static void Warn(Exception ex)
+        public static void Warn([NotNull] Exception ex)
         {
-            if (ex == null) return;
+            #region Sanity checks
+            if (ex == null) throw new ArgumentNullException("ex");
+            #endregion
+
             Warn(ex.Message);
             if (ex.InnerException != null) Warn(ex.InnerException);
         }
@@ -172,7 +178,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes a critical error that should be attended to to the log.
         /// </summary>
-        public static void Error(string message)
+        public static void Error([NotNull] string message)
         {
             AddEntry(LogSeverity.Error, message);
         }
@@ -180,9 +186,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes an exception as an <see cref="Error(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
         /// </summary>
-        public static void Error(Exception ex)
+        public static void Error([NotNull] Exception ex)
         {
-            if (ex == null) return;
+            #region Sanity checks
+            if (ex == null) throw new ArgumentNullException("ex");
+            #endregion
+
             Error(ex.Message);
             if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException);
         }

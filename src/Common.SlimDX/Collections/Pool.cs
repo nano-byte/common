@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Collections
@@ -70,7 +71,7 @@ namespace NanoByte.Common.Collections
         /// Performs the specified action on each element of the pool
         /// </summary>
         /// <param name="action">A delegate to perform on each element of the pool</param>
-        public void ForEach(Action<T> action)
+        public void ForEach([NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
@@ -96,7 +97,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="item">The object to add to the pool</param>
         /// <exception cref="ArgumentException"><paramref name="item"/> is already in a pool.</exception>
-        public void Add(T item)
+        public void Add([NotNull] T item)
         {
             #region Sanity checks
             if (item == null) throw new ArgumentNullException("item");
@@ -118,7 +119,7 @@ namespace NanoByte.Common.Collections
         /// <param name="item">The object to remove from the pool</param>
         /// <returns><see langword="true"/> if <paramref name="item" /> was successfully removed from the buffer list; otherwise, false. This method also returns <see langword="false"/> if <paramref name="item" /> is not found in the original pool</returns>
         /// <remarks>Not all too fast, try to avoid using this</remarks>
-        public bool Remove(T item)
+        public bool Remove([NotNull] T item)
         {
             #region Sanity checks
             if (item == null) throw new ArgumentNullException("item");
@@ -167,7 +168,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="item">The object to locate in the pool</param>
         /// <returns><see langword="true"/> if <paramref name="item" /> is found in the pool; otherwise, false.</returns>
-        public bool Contains(T item)
+        public bool Contains([NotNull] T item)
         {
             #region Sanity checks
             if (item == null) throw new ArgumentNullException("item");
@@ -198,7 +199,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="action">A delegate that is executed right after an item is removed.</param>
         /// <remarks>Ideal for moving all elements to a new data structure.</remarks>
-        public void RemoveAll(Action<T> action)
+        public void RemoveAll([NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
@@ -232,7 +233,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="predicate">A delegate that defines the condition to check for.</param>
         /// <remarks>Ideal for selectively picking all suitable elements from the pool.</remarks>
-        public void RemoveWhere(Predicate<T> predicate)
+        public void RemoveWhere([NotNull, InstantHandle] Predicate<T> predicate)
         {
             #region Sanity checks
             if (predicate == null) throw new ArgumentNullException("predicate");
@@ -277,7 +278,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="predicate">A delegate that defines the condition to check for.</param>
         /// <remarks>Ideal for selectively picking the first suitable element from the pool.</remarks>
-        public void RemoveFirst(Predicate<T> predicate)
+        public void RemoveFirst([NotNull, InstantHandle] Predicate<T> predicate)
         {
             #region Sanity checks
             if (predicate == null) throw new ArgumentNullException("predicate");

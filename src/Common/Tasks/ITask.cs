@@ -24,6 +24,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -52,11 +53,13 @@ namespace NanoByte.Common.Tasks
         /// A name describing the task in human-readable form.
         /// </summary>
         [Description("A name describing the task in human-readable form.")]
+        [NotNull, Localizable(true)]
         string Name { get; }
 
         /// <summary>
-        /// An object used to associate the task with a specific process; may be <see langword="null"/>.
+        /// An object used to associate the task with a specific process; can be <see langword="null"/>.
         /// </summary>
+        [CanBeNull]
         object Tag { get; set; }
 
         /// <summary>

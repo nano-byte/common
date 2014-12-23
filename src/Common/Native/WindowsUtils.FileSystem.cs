@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Native
@@ -38,7 +39,8 @@ namespace NanoByte.Common.Native
         /// <returns>The contents of the file as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>This method works like <see cref="File.ReadAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
-        public static byte[] ReadAllBytes(string path)
+        [CanBeNull]
+        public static byte[] ReadAllBytes([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -72,7 +74,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="Win32Exception">There was a problem writing the file.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>This method works like <see cref="File.WriteAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
-        public static void WriteAllBytes(string path, byte[] data)
+        public static void WriteAllBytes([NotNull, Localizable(false)] string path, [NotNull] byte[] data)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
@@ -105,7 +107,7 @@ namespace NanoByte.Common.Native
         /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
         /// <exception cref="Win32Exception">The symbolic link creation failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
-        public static void CreateSymlink(string source, string target)
+        public static void CreateSymlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
@@ -127,7 +129,7 @@ namespace NanoByte.Common.Native
         /// <remarks>Only available on Windows 2000 or newer.</remarks>
         /// <exception cref="Win32Exception">The hard link creation failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
-        public static void CreateHardlink(string source, string target)
+        public static void CreateHardlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
@@ -144,7 +146,7 @@ namespace NanoByte.Common.Native
         /// <param name="path1">The path of the first file.</param>
         /// <param name="path2">The path of the second file.</param>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
-        public static bool AreHardlinked(string path1, string path2)
+        public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
@@ -155,7 +157,7 @@ namespace NanoByte.Common.Native
             return GetFileIndex(path1) == GetFileIndex(path2);
         }
 
-        private static ulong GetFileIndex(string path)
+        private static ulong GetFileIndex([NotNull, Localizable(false)] string path)
         {
             var handle = UnsafeNativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
             if (handle == IntPtr.Zero) throw new Win32Exception();

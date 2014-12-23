@@ -21,6 +21,8 @@
  */
 
 using System;
+using System.ComponentModel;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -32,7 +34,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Calls <see cref="ITaskHandler.Output"/> only when <see cref="ITaskHandler.Batch"/> is <see langword="false"/>.
         /// </summary>
-        public static void OutputLow(this ITaskHandler handler, string title, string message)
+        public static void OutputLow([NotNull] this ITaskHandler handler, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message)
         {
             #region Sanity checks
             if (handler == null) throw new ArgumentNullException("handler");

@@ -35,6 +35,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using JetBrains.Annotations;
 using NanoByte.Common.Tasks;
 // ReSharper disable All
 
@@ -611,7 +612,7 @@ namespace NanoByte.Common
     /// </code>
     /// If <c>Parallel.ThreadCount</c> is exactly <c>1</c>, no threads are spawned.
     /// </remarks>
-    public static void For(int start, int stop, Action<int> loopBody, CancellationToken cancellationToken = default(CancellationToken))
+    public static void For(int start, int stop, [NotNull, InstantHandle] Action<int> loopBody, CancellationToken cancellationToken = default(CancellationToken))
     {
       if (loopBody == null) throw new ArgumentNullException("loopBody");
       if (Parallel.threadCount == 1)
@@ -657,7 +658,7 @@ namespace NanoByte.Common
     /// </code>
     /// If <c>Parallel.ThreadCount</c> is exactly <c>1</c>, no threads are spawned.
     /// </remarks>
-    public static void ForEach<T>(IEnumerable<T> items, Action<T> loopBody)
+    public static void ForEach<T>(IEnumerable<T> items, [NotNull, InstantHandle] Action<T> loopBody)
     {
       if (items == null) throw new ArgumentNullException("items");
       if (loopBody == null) throw new ArgumentNullException("loopBody");

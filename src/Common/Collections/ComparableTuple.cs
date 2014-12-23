@@ -21,6 +21,7 @@
  */
 
 using System;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -35,11 +36,13 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// The first element of the tuple.
         /// </summary>
+        [NotNull]
         public readonly T Key;
 
         /// <summary>
         /// The second element of the tuple.
         /// </summary>
+        [NotNull]
         public readonly T Value;
         #endregion
 
@@ -47,9 +50,9 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Creates a new comparable tuple.
         /// </summary>
-        /// <param name="key">The first element of the tuple; may not be <see langword="null"/>!</param>
-        /// <param name="value">The second element of the tuple; may not be <see langword="null"/>!</param>
-        public ComparableTuple(T key, T value)
+        /// <param name="key">The first element of the tuple.</param>
+        /// <param name="value">The second element of the tuple.</param>
+        public ComparableTuple([NotNull] T key, [NotNull] T value)
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull

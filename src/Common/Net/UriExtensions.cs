@@ -21,6 +21,7 @@
  */
 
 using System;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Net
 {
@@ -32,7 +33,8 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// An alternate version of <see cref="Uri.ToString"/> that produces results escaped according to RFC 2396.
         /// </summary>
-        public static string ToStringRfc(this Uri uri)
+        [Pure, NotNull]
+        public static string ToStringRfc([NotNull] this Uri uri)
         {
             #region Sanity checks
             if (uri == null) throw new ArgumentNullException("uri");
@@ -44,7 +46,8 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Adds a trailing slash to the URI if it does not already have one.
         /// </summary>
-        public static Uri EnsureTrailingSlash(this Uri uri)
+        [Pure, NotNull]
+        public static Uri EnsureTrailingSlash([NotNull] this Uri uri)
         {
             #region Sanity checks
             if (uri == null) throw new ArgumentNullException("uri");
@@ -56,9 +59,9 @@ namespace NanoByte.Common.Net
 
         /// <summary>
         /// Reparses a URI (generated via conversion) to ensure it is a valid absolute URI.
-        /// Transparently handles <see langword="null"/> values.
         /// </summary>
-        public static Uri ReparseAsAbsolute(this Uri uri)
+        [Pure, ContractAnnotation("null => null; notnull => notnull")]
+        public static Uri ReparseAsAbsolute([CanBeNull] this Uri uri)
         {
             return (uri == null) ? null : new Uri(uri.OriginalString, UriKind.Absolute);
         }

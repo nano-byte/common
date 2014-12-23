@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Values
@@ -36,6 +37,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// All known languages in alphabetical order.
         /// </summary>
+        [NotNull]
         public static readonly IEnumerable<CultureInfo> AllKnown = GetAllKnown();
 
         private static IEnumerable<CultureInfo> GetAllKnown()

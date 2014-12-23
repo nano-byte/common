@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Cli
@@ -47,13 +48,14 @@ namespace NanoByte.Common.Cli
         /// <param name="inputCallback">Callback allow you to write to the application's stdin-stream right after startup; <see langword="null"/> for none.</param>
         /// <returns>The application's complete output to the stdout-stream.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
-        protected virtual string Execute(string arguments, Action<StreamWriter> inputCallback = null)
+        [NotNull]
+        protected virtual string Execute(string arguments, [CanBeNull] Action<StreamWriter> inputCallback = null)
         {
             Process process;
             try
             {
                 process = Process.Start(GetStartInfo(arguments, hidden: true));
-                if (process == null) return null;
+                Debug.Assert(process != null);
             }
                 #region Error handling
             catch (Win32Exception ex)
@@ -152,7 +154,8 @@ namespace NanoByte.Common.Cli
         /// </summary>
         /// <param name="line">The error line written to stderr.</param>
         /// <returns>The response to write to stdin; <see langword="null"/> for none.</returns>
-        protected virtual string HandleStderr(string line)
+        [CanBeNull]
+        protected virtual string HandleStderr([NotNull, Localizable(false)] string line)
         {
             Log.Warn(line);
             return null;

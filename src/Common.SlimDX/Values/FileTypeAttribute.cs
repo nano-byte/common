@@ -21,6 +21,7 @@
  */
 
 using System;
+using JetBrains.Annotations;
 using NanoByte.Common.Values.Design;
 
 namespace NanoByte.Common.Values
@@ -30,6 +31,7 @@ namespace NanoByte.Common.Values
     /// Controls the behaviour of <see cref="CodeEditor"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    [PublicAPI]
     public sealed class FileTypeAttribute : Attribute
     {
         private readonly string _fileType;
@@ -43,7 +45,7 @@ namespace NanoByte.Common.Values
         /// Creates a new file type attribute.
         /// </summary>
         /// <param name="fileType">The name of the file type (e.g. XML, JavaScript, Lua).</param>
-        public FileTypeAttribute(string fileType)
+        public FileTypeAttribute([NotNull] string fileType)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(fileType)) throw new ArgumentNullException("fileType");

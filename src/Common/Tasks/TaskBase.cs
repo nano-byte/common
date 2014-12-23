@@ -25,6 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Security.Principal;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Tasks
@@ -61,7 +62,7 @@ namespace NanoByte.Common.Tasks
         private IProgress<TaskSnapshot> _progress;
 
         /// <inheritdoc/>
-        public void Run(CancellationToken cancellationToken = default(CancellationToken), IProgress<TaskSnapshot> progress = null)
+        public void Run(CancellationToken cancellationToken = default(CancellationToken), [CanBeNull] IProgress<TaskSnapshot> progress = null)
         {
             cancellationToken.ThrowIfCancellationRequested();
             CancellationToken = cancellationToken;

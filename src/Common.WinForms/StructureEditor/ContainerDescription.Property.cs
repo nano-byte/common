@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Undo;
@@ -76,6 +77,7 @@ namespace NanoByte.Common.StructureEditor
         /// <param name="name">The name of the property.</param>
         /// <param name="getPointer">A function to retrieve a pointer to property in the container.</param>
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
+        [PublicAPI]
         public ContainerDescription<TContainer> AddProperty<TProperty>(string name, Func<TContainer, PropertyPointer<TProperty>> getPointer)
             where TProperty : class, IEquatable<TProperty>, new()
         {

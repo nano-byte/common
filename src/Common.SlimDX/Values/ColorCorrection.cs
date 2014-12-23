@@ -22,8 +22,10 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using NanoByte.Common.Values.Design;
 using SlimDX;
 
@@ -101,7 +103,8 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length.</param>
         /// <param name="values">The value checkpoints.</param>
-        public static ColorCorrection SinusInterpolate(float factor, params ColorCorrection[] values)
+        [Pure]
+        public static ColorCorrection SinusInterpolate(float factor, [NotNull] params ColorCorrection[] values)
         {
             #region Sanity checks
             if (values == null) throw new ArgumentNullException("values");
@@ -141,11 +144,10 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
         public bool Equals(ColorCorrection other)
         {
-            // ReSharper disable CompareOfFloatsByEqualityOperator
             return other.Brightness == Brightness && other.Contrast == Contrast && other.Saturation == Saturation && other.Hue == Hue;
-            // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
         /// <inheritdoc/>
@@ -168,6 +170,7 @@ namespace NanoByte.Common.Values
         }
 
         /// <inheritdoc/>
+        [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
         public override int GetHashCode()
         {
             unchecked

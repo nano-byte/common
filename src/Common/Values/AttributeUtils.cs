@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Values
 {
@@ -39,6 +40,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <returns>Falls back to <see cref="object.ToString"/> if the attribute is missing.</returns>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [NotNull, ItemNotNull]
         public static IEnumerable<TAttribute> GetAttributes<TAttribute, TTarget>() where TAttribute : Attribute
         {
             var attributes = typeof(TTarget).GetCustomAttributes(typeof(TAttribute), inherit: true);
@@ -50,7 +52,8 @@ namespace NanoByte.Common.Values
         /// Then retrieves a value from the attribute using <paramref name="valueRetriever"/>.
         /// </summary>
         /// <returns>Falls back to <see cref="object.ToString"/> if the attribute is missing.</returns>
-        public static string GetEnumAttributeValue<TAttribute>(this Enum target, Converter<TAttribute, string> valueRetriever) where TAttribute : Attribute
+        [NotNull]
+        public static string GetEnumAttributeValue<TAttribute>([NotNull] this Enum target, [NotNull] Converter<TAttribute, string> valueRetriever) where TAttribute : Attribute
         {
             #region Sanity checks
             if (target == null) throw new ArgumentNullException("target");
@@ -66,7 +69,8 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Uses the type converter for <typeparamref name="TType"/> (set by <see cref="TypeConverterAttribute"/>) to parse a string.
         /// </summary>
-        public static TType ConvertFromString<TType>(this string value)
+        [CanBeNull]
+        public static TType ConvertFromString<TType>([NotNull] this string value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException("value");
@@ -78,7 +82,8 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Uses the type converter for <typeparamref name="TType"/> (set by <see cref="TypeConverterAttribute"/>) to generate a string.
         /// </summary>
-        public static string ConvertToString<TType>(this TType value)
+        [NotNull]
+        public static string ConvertToString<TType>([NotNull] this TType value)
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull
@@ -86,7 +91,7 @@ namespace NanoByte.Common.Values
             // ReSharper restore CompareNonConstrainedGenericWithNull
             #endregion
 
-            return TypeDescriptor.GetConverter(typeof(TType)).ConvertToInvariantString(value);
+            return TypeDescriptor.GetConverter(typeof(TType)).ConvertToInvariantString(value) ?? "";
         }
 
         /// <summary>
@@ -97,7 +102,8 @@ namespace NanoByte.Common.Values
         /// <param name="assembly">The <see cref="Assembly"/> to retrieve the <typeparamref name="TAttribute"/> from.</param>
         /// <param name="valueRetrieval">A callback used to retrieve a <typeparamref name="TValue"/> from a <typeparamref name="TAttribute"/>.</param>
         /// <returns>The retrieved value or <see langword="null"/> if no <typeparamref name="TAttribute"/> was found.</returns>
-        public static TValue GetAttributeValue<TAttribute, TValue>(this Assembly assembly, Func<TAttribute, TValue> valueRetrieval)
+        [NotNull]
+        public static TValue GetAttributeValue<TAttribute, TValue>([NotNull] this Assembly assembly, [NotNull, InstantHandle] Func<TAttribute, TValue> valueRetrieval)
             where TAttribute : Attribute
         {
             #region Sanity checks

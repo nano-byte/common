@@ -22,6 +22,7 @@
 
 using System;
 using System.Text;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -39,6 +40,7 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// Helps build an RTF-formated string.
     /// </summary>
+    [PublicAPI]
     public sealed class RtfBuilder
     {
         private readonly StringBuilder _builder = new StringBuilder();
@@ -48,7 +50,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="text">The text in the paragraph.</param>
         /// <param name="color">The color of the text.</param>
-        public void AppendPar(string text, RtfColor color)
+        public void AppendPar([NotNull] string text, RtfColor color)
         {
             #region Sanity checks
             if (text == null) throw new ArgumentNullException("text");

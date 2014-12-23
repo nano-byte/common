@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -33,7 +34,6 @@ namespace NanoByte.Common
     /// Provides a cross-process object allowing easy dection of application instances (e.g., for use by installers and update tools).
     /// </summary>
     /// <remarks><see cref="System.Threading.Mutex"/> is intended for synchronizing access to shared resources while this class is intended to detect application instances.</remarks>
-    // ReSharper disable UnusedMethodReturnValue.Global
     public sealed class AppMutex
     {
         #region Handles
@@ -63,7 +63,7 @@ namespace NanoByte.Common
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
         /// <remarks>The mutex will automatically be released once the process terminates. You can check the return value to prevent multiple instances from running.</remarks>
-        public static bool Create(string name)
+        public static bool Create([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -100,7 +100,8 @@ namespace NanoByte.Common
         /// <param name="mutex">A pointer to the mutex.</param>
         /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
         /// <remarks>The mutex will automatically be released once the process terminates or you call <see cref="Close"/> on <paramref name="mutex"/>.</remarks>
-        public static bool Create(string name, out AppMutex mutex)
+        [PublicAPI]
+        public static bool Create([NotNull, Localizable(false)] string name, out AppMutex mutex)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -142,7 +143,7 @@ namespace NanoByte.Common
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if none existed.</returns>
         /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
-        public static bool Open(string name)
+        public static bool Open([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -176,7 +177,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><see langword="true"/> if an existing mutex was found; <see langword="false"/> if none existed.</returns>
-        public static bool Probe(string name)
+        public static bool Probe([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -205,6 +206,4 @@ namespace NanoByte.Common
             return result;
         }
     }
-
-    // ReSharper restore UnusedMethodReturnValue.Global
 }

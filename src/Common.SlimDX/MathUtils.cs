@@ -21,6 +21,7 @@
  */
 
 using System;
+using JetBrains.Annotations;
 using NanoByte.Common.Values;
 using SlimDX;
 using Resources = NanoByte.Common.Properties.Resources;
@@ -49,6 +50,7 @@ namespace NanoByte.Common
         /// <param name="min">The minimum number to return</param>
         /// <param name="max">The maximum number to return</param>
         /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+        [Pure]
         public static decimal Clamp(this decimal value, decimal min = 0, decimal max = 1)
         {
             #region Sanity checks
@@ -69,6 +71,7 @@ namespace NanoByte.Common
         /// <param name="min">The minimum number to return</param>
         /// <param name="max">The maximum number to return</param>
         /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+        [Pure]
         public static double Clamp(this double value, double min = 0, double max = 1)
         {
             #region Sanity checks
@@ -89,6 +92,7 @@ namespace NanoByte.Common
         /// <param name="min">The minimum number to return</param>
         /// <param name="max">The maximum number to return</param>
         /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+        [Pure]
         public static float Clamp(this float value, float min = 0, float max = 1)
         {
             #region Sanity checks
@@ -109,6 +113,7 @@ namespace NanoByte.Common
         /// <param name="min">The minimum number to return</param>
         /// <param name="max">The maximum number to return</param>
         /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+        [Pure]
         public static int Clamp(this int value, int min = 0, int max = 1)
         {
             #region Sanity checks
@@ -127,6 +132,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Calculates a modulus (always positive).
         /// </summary>
+        [Pure]
         public static double Modulo(this double dividend, double divisor)
         {
             double result = dividend % divisor;
@@ -137,6 +143,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Calculates a modulus (always positive).
         /// </summary>
+        [Pure]
         public static float Modulo(this float dividend, float divisor)
         {
             float result = dividend % divisor;
@@ -147,6 +154,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Calculates a modulus (always positive).
         /// </summary>
+        [Pure]
         public static int Modulo(this int dividend, int divisor)
         {
             int result = dividend % divisor;
@@ -161,6 +169,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The angle in degrees</param>
         /// <returns>The angle in radians</returns>
+        [Pure]
         public static float DegreeToRadian(this float value)
         {
             return value * ((float)Math.PI / 180);
@@ -171,6 +180,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The angle in degrees</param>
         /// <returns>The angle in radians</returns>
+        [Pure]
         public static double DegreeToRadian(this double value)
         {
             return value * (Math.PI / 180);
@@ -181,6 +191,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The angle in radians</param>
         /// <returns>The angle in degrees</returns>
+        [Pure]
         public static float RadianToDegree(this float value)
         {
             return value * (180 / (float)Math.PI);
@@ -191,6 +202,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The angle in radians</param>
         /// <returns>The angle in degrees</returns>
+        [Pure]
         public static double RadianToDegree(this double value)
         {
             return value * (180 / Math.PI);
@@ -203,6 +215,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="inclination">Angle away from positive Z axis in radians. Values from 0 to Pi.</param>
         /// <param name="azimuth">Angle away from from positive X axis in radians. Values from 0 to 2*Pi.</param>
+        [Pure]
         public static Vector3 UnitVector(double inclination, double azimuth)
         {
             return new Vector3(
@@ -216,6 +229,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Maps a 0°-180° angle in radians to a 0-255 byte value.
         /// </summary>
+        [Pure]
         public static byte AngleToByte(this double angle)
         {
             return (byte)(angle.Clamp(0, Math.PI) / Math.PI * 255);
@@ -224,6 +238,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Maps a 0-255 byte value to a 0°-180° angle in radians.
         /// </summary>
+        [Pure]
         public static double ByteToAngle(this byte b)
         {
             return b / 255.0 * Math.PI;
@@ -232,6 +247,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Maps a vector of 0-255 byte values to a vector of 0°-180° angles in radians.
         /// </summary>
+        [Pure]
         public static Vector4 ByteToAngle(this ByteVector4 vector)
         {
             return new Vector4(
@@ -250,7 +266,8 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length</param>
         /// <param name="values">The value checkpoints</param>
-        public static double InterpolateTrigonometric(double factor, params double[] values)
+        [Pure]
+        public static double InterpolateTrigonometric(double factor, [NotNull] params double[] values)
         {
             #region Sanity checks
             if (values == null) throw new ArgumentNullException("values");
@@ -278,7 +295,8 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length</param>
         /// <param name="values">The value checkpoints</param>
-        public static float InterpolateTrigonometric(this float factor, params float[] values)
+        [Pure]
+        public static float InterpolateTrigonometric(this float factor, [NotNull] params float[] values)
         {
             #region Sanity checks
             if (values == null) throw new ArgumentNullException("values");
@@ -306,7 +324,8 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length</param>
         /// <param name="values">The value checkpoints</param>
-        public static Vector4 InterpolateTrigonometric(float factor, params Vector4[] values)
+        [Pure]
+        public static Vector4 InterpolateTrigonometric(float factor, [NotNull] params Vector4[] values)
         {
             #region Sanity checks
             if (values == null) throw new ArgumentNullException("values");
@@ -343,6 +362,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="n">A value between 0 and 32768</param>
         /// <remarks>Values between n=0 and n=16 have been pre-calculated and are therefor very fast</remarks>
+        [Pure]
         public static double Factorial(int n)
         {
             #region Sanity checks
@@ -359,6 +379,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="n">A value between 0 and 32768</param>
         /// <param name="k">An integer</param>
+        [Pure]
         public static double BinomCoeff(int n, int k)
         {
             #region Sanity checks
@@ -384,7 +405,8 @@ namespace NanoByte.Common
         /// <param name="controlPoints">An array of control points; the curve will pass through the first and the last entry</param>
         /// <param name="resolution">The desired number of output points</param>
         /// <returns>An array of <paramref name="resolution"/> points on the curve</returns>
-        public static Vector2[] Bezier(int resolution, params Vector2[] controlPoints)
+        [Pure]
+        public static Vector2[] Bezier(int resolution, [NotNull] params Vector2[] controlPoints)
         {
             #region Sanity checks
             if (controlPoints == null) throw new ArgumentNullException("controlPoints");
@@ -420,7 +442,8 @@ namespace NanoByte.Common
         /// <param name="resolution">The desired number of output points</param>
         /// <param name="controlPoints">An array of control points; the curve will pass through the first and the last entry</param>
         /// <returns>An array of <paramref name="resolution"/> points on the curve</returns>
-        public static DoubleVector3[] Bezier(int resolution, params DoubleVector3[] controlPoints)
+        [Pure]
+        public static DoubleVector3[] Bezier(int resolution, [NotNull] params DoubleVector3[] controlPoints)
         {
             #region Sanity checks
             if (controlPoints == null) throw new ArgumentNullException("controlPoints");
@@ -458,6 +481,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="sigma">The standard deviation of the Gaussian distribution.</param>
         /// <param name="kernelSize">The size of the kernel. Should be an uneven number.</param>
+        [Pure]
         public static double[] GaussKernel(double sigma, int kernelSize)
         {
             var kernel = new double[kernelSize];
@@ -480,6 +504,7 @@ namespace NanoByte.Common
 
         #region High/low values
         [CLSCompliant(false)]
+        [Pure]
         public static short LoWord(uint l)
         {
             unchecked
@@ -489,6 +514,7 @@ namespace NanoByte.Common
         }
 
         [CLSCompliant(false)]
+        [Pure]
         public static short LoWord(int l)
         {
             unchecked
@@ -498,6 +524,7 @@ namespace NanoByte.Common
         }
 
         [CLSCompliant(false)]
+        [Pure]
         public static short HiWord(uint l)
         {
             unchecked
@@ -507,6 +534,7 @@ namespace NanoByte.Common
         }
 
         [CLSCompliant(false)]
+        [Pure]
         public static short HiWord(int l)
         {
             unchecked
@@ -515,6 +543,7 @@ namespace NanoByte.Common
             }
         }
 
+        [Pure]
         public static int HiByte(byte b)
         {
             unchecked
@@ -523,6 +552,7 @@ namespace NanoByte.Common
             }
         }
 
+        [Pure]
         public static int LoByte(byte b)
         {
             unchecked
@@ -531,6 +561,7 @@ namespace NanoByte.Common
             }
         }
 
+        [Pure]
         public static byte CombineHiLoByte(int high, int low)
         {
             return (byte)((high << 4) + low);
@@ -546,6 +577,7 @@ namespace NanoByte.Common
         /// <param name="view">The view vector</param>
         /// <param name="roll">The roll value</param>
         /// <returns>A normalized quaternion</returns>
+        [Pure]
         public static Quaternion ViewQuaternion(this Vector3 view, float roll)
         {
             return Quaternion.Normalize(new Quaternion(view.X, view.Y, view.Z, roll));
@@ -559,6 +591,7 @@ namespace NanoByte.Common
         /// <param name="value">The original vector.</param>
         /// <param name="rotation">The angle to rotate by in degrees.</param>
         /// <returns>The rotated <see cref="Vector2"/>.</returns>
+        [Pure]
         public static Vector2 Rotate(this Vector2 value, float rotation)
         {
             double phi = DegreeToRadian(rotation);
@@ -575,6 +608,7 @@ namespace NanoByte.Common
         /// <param name="box">The bounding box to apply the transform to.</param>
         /// <param name="matrix">The transformation matrix to apply.</param>
         /// <returns>The transformed bounding box.</returns>
+        [Pure]
         public static BoundingBox Transform(this BoundingBox box, Matrix matrix)
         {
             float[] inputMin = new float[3], inputMax = new float[3];
@@ -637,6 +671,7 @@ namespace NanoByte.Common
         /// <param name="sphere">The bounding sphere to apply the transform to.</param>
         /// <param name="matrix">The transformation matrix to apply.</param>
         /// <returns>The transformed bounding sphere.</returns>
+        [Pure]
         public static BoundingSphere Transform(this BoundingSphere sphere, Matrix matrix)
         {
             // Extract translation data from the matrix

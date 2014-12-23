@@ -23,6 +23,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Security;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -34,7 +35,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Throws a previously thrown exception again, preserving the existing stack trace if possible.
         /// </summary>
-        public static void Rethrow(this Exception exception)
+        public static void Rethrow([NotNull] this Exception exception)
         {
             #region Sanity checks
             if (exception == null) throw new ArgumentNullException("exception");

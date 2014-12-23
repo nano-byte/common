@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Dispatch
@@ -56,7 +57,8 @@ namespace NanoByte.Common.Dispatch
         /// <typeparam name="TSpecific">The specific type to call the delegate for. Does not match subtypes</typeparam>
         /// <param name="action">The delegate to call.</param>
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
-        public PerTypeDispatcher<TBase> Add<TSpecific>(Action<TSpecific> action) where TSpecific : TBase
+        [PublicAPI]
+        public PerTypeDispatcher<TBase> Add<TSpecific>([NotNull] Action<TSpecific> action) where TSpecific : TBase
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
@@ -72,7 +74,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="element">The element to be dispatched.</param>
         /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
-        public void Dispatch(TBase element)
+        public void Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
             if (element == null) throw new ArgumentNullException("element");
@@ -89,7 +91,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
         /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
-        public void Dispatch(IEnumerable<TBase> elements)
+        public void Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException("elements");

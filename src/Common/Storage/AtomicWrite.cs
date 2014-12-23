@@ -21,7 +21,9 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -41,11 +43,13 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The file path of the final target.
         /// </summary>
+        [NotNull]
         public string TargetPath { get; private set; }
 
         /// <summary>
         /// The temporary file path to write to.
         /// </summary>
+        [NotNull]
         public string WritePath { get; private set; }
 
         /// <summary>
@@ -59,7 +63,7 @@ namespace NanoByte.Common.Storage
         /// Prepares a atomic write operation.
         /// </summary>
         /// <param name="path">The file path of the final target.</param>
-        public AtomicWrite(string path)
+        public AtomicWrite([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");

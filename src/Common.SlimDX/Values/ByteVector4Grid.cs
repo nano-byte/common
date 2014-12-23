@@ -24,6 +24,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Values
@@ -38,13 +39,13 @@ namespace NanoByte.Common.Values
         {}
 
         /// <inheritdoc/>
-        public ByteVector4Grid(ByteVector4[,] data) : base(data)
+        public ByteVector4Grid([NotNull] ByteVector4[,] data) : base(data)
         {}
 
         /// <summary>
         /// Loads a grid from a PNG stream.
         /// </summary>
-        public static ByteVector4Grid Load(Stream stream)
+        public static ByteVector4Grid Load([NotNull] Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");

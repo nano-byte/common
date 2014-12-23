@@ -21,9 +21,11 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
@@ -45,8 +47,8 @@ namespace NanoByte.Common.Controls
         /// Creates a new asynchrnous waiting dialog.
         /// </summary>
         /// <param name="title">The title of th dialog to display.</param>
-        /// <param name="icon">The icon for the dialog to display in the task bar; may be <see langword="null"/>.</param>
-        public AsyncWaitDialog(string title, Icon icon = null)
+        /// <param name="icon">The icon for the dialog to display in the task bar; can be <see langword="null"/>.</param>
+        public AsyncWaitDialog([NotNull, Localizable(true)] string title, [CanBeNull] Icon icon = null)
         {
             InitializeComponent();
 
