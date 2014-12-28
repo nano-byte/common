@@ -172,7 +172,7 @@ namespace NanoByte.Common.Tasks
 
             try
             {
-                FileUtils.CreateSymlink(source: Path.Combine(temp1, "symlink"), target: "target");
+                FileUtils.CreateSymlink(sourcePath: Path.Combine(temp1, "symlink"), targetPath: "target");
 
                 new CopyDirectory(temp1, temp2).Run();
                 string symlinkTarget;

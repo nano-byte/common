@@ -251,43 +251,43 @@ namespace NanoByte.Common.Storage
         /// Replaces one file with another. Rolls back in case of problems.
         /// </summary>
         /// <param name="sourcePath">The path of source directory.</param>
-        /// <param name="targetPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
-        /// <exception cref="ArgumentException"><paramref name="sourcePath"/> and <paramref name="targetPath"/> are equal.</exception>
+        /// <param name="destinationPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
+        /// <exception cref="ArgumentException"><paramref name="sourcePath"/> and <paramref name="destinationPath"/> are equal.</exception>
         /// <exception cref="IOException">The file could not be replaced.</exception>
         /// <exception cref="UnauthorizedAccessException">The read or write access to the files was denied.</exception>
-        public static void Replace([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
+        public static void Replace([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
-            if (sourcePath == targetPath) throw new ArgumentException(Resources.SourceDestinationEqual);
+            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException("destinationPath");
+            if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
             #endregion
 
             // Prepend random string for temp file name
-            string directory = Path.GetDirectoryName(Path.GetFullPath(targetPath));
-            string backupPath = directory + Path.DirectorySeparatorChar + "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(targetPath);
+            string directory = Path.GetDirectoryName(Path.GetFullPath(destinationPath));
+            string backupPath = directory + Path.DirectorySeparatorChar + "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath);
 
             if (WindowsUtils.IsWindowsNT)
             {
-                if (File.Exists(targetPath))
+                if (File.Exists(destinationPath))
                 {
-                    File.Replace(sourcePath, targetPath, backupPath, ignoreMetadataErrors: true);
+                    File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
                     File.Delete(backupPath);
                 }
-                else File.Move(sourcePath, targetPath);
+                else File.Move(sourcePath, destinationPath);
             }
-            else if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, targetPath);
+            else if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
             else
             {
-                if (File.Exists(targetPath)) File.Move(targetPath, backupPath);
+                if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
                 try
                 {
-                    File.Move(sourcePath, targetPath);
+                    File.Move(sourcePath, destinationPath);
                     if (File.Exists(backupPath)) File.Delete(backupPath);
                 }
                 catch
                 { // Rollback
-                    if (File.Exists(backupPath)) File.Move(backupPath, targetPath);
+                    if (File.Exists(backupPath)) File.Move(backupPath, destinationPath);
                     throw;
                 }
             }
@@ -533,22 +533,22 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Creates a new symbolic link to a file or directory.
         /// </summary>
-        /// <param name="source">The path of the link to create.</param>
-        /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a system with no symbolic link support.</exception>
-        public static void CreateSymlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
+        public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
             #endregion
 
             if (UnixUtils.IsUnix)
             {
                 try
                 {
-                    UnixUtils.CreateSymlink(source, target);
+                    UnixUtils.CreateSymlink(sourcePath, targetPath);
                 }
                     #region Error handling
                 catch (InvalidOperationException ex)
@@ -565,7 +565,7 @@ namespace NanoByte.Common.Storage
             {
                 try
                 {
-                    WindowsUtils.CreateSymlink(source, target);
+                    WindowsUtils.CreateSymlink(sourcePath, targetPath);
                 }
                     #region Error handling
                 catch (Win32Exception ex)
@@ -580,22 +580,22 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Creates a new hard link between two files.
         /// </summary>
-        /// <param name="source">The path of the link to create.</param>
-        /// <param name="target">The absolute path of the existing file to point to.</param>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The absolute path of the existing file to point to.</param>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the hard link.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a system with no hard link support.</exception>
-        public static void CreateHardlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
+        public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
             #endregion
 
             if (UnixUtils.IsUnix)
             {
                 try
                 {
-                    UnixUtils.CreateHardlink(source, target);
+                    UnixUtils.CreateHardlink(sourcePath, targetPath);
                 }
                     #region Error handling
                 catch (InvalidOperationException ex)
@@ -612,7 +612,7 @@ namespace NanoByte.Common.Storage
             {
                 try
                 {
-                    WindowsUtils.CreateHardlink(source, target);
+                    WindowsUtils.CreateHardlink(sourcePath, targetPath);
                 }
                     #region Error handling
                 catch (Win32Exception ex)

@@ -93,35 +93,35 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Creates a new Unix symbolic link to a file or directory.
         /// </summary>
-        /// <param name="source">The path of the link to create.</param>
-        /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void CreateSymlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
+        public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
             #endregion
 
-            new UnixSymbolicLinkInfo(source).CreateSymbolicLinkTo(target);
+            new UnixSymbolicLinkInfo(sourcePath).CreateSymbolicLinkTo(targetPath);
         }
 
         /// <summary>
         /// Creates a new Unix hard link between two files.
         /// </summary>
-        /// <param name="source">The path of the link to create.</param>
-        /// <param name="target">The absolute path of the existing file to point to.</param>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The absolute path of the existing file to point to.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        public static void CreateHardlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
+        public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
             #endregion
 
-            new UnixFileInfo(target).CreateLink(source);
+            new UnixFileInfo(targetPath).CreateLink(sourcePath);
         }
 
         /// <summary>

@@ -103,41 +103,41 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Creates a symbolic link for a file or directory.
         /// </summary>
-        /// <param name="source">The path of the link to create.</param>
-        /// <param name="target">The path of the existing file or directory to point to (relative to <paramref name="source"/>).</param>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
         /// <exception cref="Win32Exception">The symbolic link creation failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
-        public static void CreateSymlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
+        public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
             #endregion
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            string targetAbsolute = Path.Combine(Path.GetDirectoryName(source) ?? Environment.CurrentDirectory, target);
-            int retval = UnsafeNativeMethods.CreateSymbolicLink(source, target, Directory.Exists(targetAbsolute) ? 1 : 0);
+            string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Environment.CurrentDirectory, targetPath);
+            int retval = UnsafeNativeMethods.CreateSymbolicLink(sourcePath, targetPath, Directory.Exists(targetAbsolute) ? 1 : 0);
             if (retval != 1) throw new Win32Exception(Marshal.GetLastWin32Error());
         }
 
         /// <summary>
         /// Creates a hard link between two files.
         /// </summary>
-        /// <param name="source">The path of the link to create.</param>
-        /// <param name="target">The absolute path of the existing file to point to.</param>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The absolute path of the existing file to point to.</param>
         /// <remarks>Only available on Windows 2000 or newer.</remarks>
         /// <exception cref="Win32Exception">The hard link creation failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
-        public static void CreateHardlink([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string target)
+        public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
             #endregion
 
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-            if (!UnsafeNativeMethods.CreateHardLink(source, target, IntPtr.Zero)) throw new Win32Exception();
+            if (!UnsafeNativeMethods.CreateHardLink(sourcePath, targetPath, IntPtr.Zero)) throw new Win32Exception();
         }
 
         /// <summary>

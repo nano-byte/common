@@ -28,7 +28,7 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Storage
 {
     /// <summary>
-    /// Provides a temporary path to write to and atomically inserts it at the target location on disposal (if <see cref="Commit"/> was called).
+    /// Provides a temporary path to write to and atomically inserts it at the destination location on disposal (if <see cref="Commit"/> was called).
     /// </summary>
     /// <example><code>
     /// using (var atomic = new AtomicWrite(filePath))
@@ -41,10 +41,10 @@ namespace NanoByte.Common.Storage
     {
         #region Properties
         /// <summary>
-        /// The file path of the final target.
+        /// The file path of the final destination.
         /// </summary>
         [NotNull]
-        public string TargetPath { get; private set; }
+        public string DestinationPath { get; private set; }
 
         /// <summary>
         /// The temporary file path to write to.
@@ -62,14 +62,14 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Prepares a atomic write operation.
         /// </summary>
-        /// <param name="path">The file path of the final target.</param>
+        /// <param name="path">The file path of the final destination.</param>
         public AtomicWrite([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
             #endregion
 
-            TargetPath = path;
+            DestinationPath = path;
 
             // Make sure the containing directory exists
             string directory = Path.GetDirectoryName(Path.GetFullPath(path));
@@ -92,13 +92,13 @@ namespace NanoByte.Common.Storage
 
         #region Dispose
         /// <summary>
-        /// Replaces <see cref="TargetPath"/> with the contents of <see cref="WritePath"/>.
+        /// Replaces <see cref="DestinationPath"/> with the contents of <see cref="WritePath"/>.
         /// </summary>
         public void Dispose()
         {
             try
             {
-                if (File.Exists(WritePath) && IsCommited) FileUtils.Replace(WritePath, TargetPath);
+                if (File.Exists(WritePath) && IsCommited) FileUtils.Replace(WritePath, DestinationPath);
             }
             finally
             {
