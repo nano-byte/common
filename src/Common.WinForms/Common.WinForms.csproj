@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Global.cs" />
+    <Compile Include="AsyncFormWrapper.cs" />
     <Compile Include="Controls\EditorControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
