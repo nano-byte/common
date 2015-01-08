@@ -35,13 +35,16 @@ namespace NanoByte.Common.Native
     public static partial class WindowsUtils
     {
         #region .NET Framework
-        /// <summary>The full version number of the .NET Framework 2.0.</summary>
+        /// <summary>The full version number of the .NET Framework 2.0. This release contains a new compiler and CLR.</summary>
         public const string NetFx20 = "v2.0.50727";
 
-        /// <summary>The full version number of the .NET Framework 3.5.</summary>
+        /// <summary>The full version number of the .NET Framework 3.0.</summary>
+        public const string NetFx30 = "v3.0";
+
+        /// <summary>The full version number of the .NET Framework 3.5. This release contains a new compiler.</summary>
         public const string NetFx35 = "v3.5";
 
-        /// <summary>The full version number of the .NET Framework 4.0.</summary>
+        /// <summary>The full version number of the .NET Framework 4.0. This release contains a new compiler and CLR.</summary>
         public const string NetFx40 = "v4.0.30319";
 
         /// <summary>
