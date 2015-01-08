@@ -70,6 +70,11 @@ namespace NanoByte.Common.Controls
             buttonCancel.Location = new Point(
                 ClientSize.Width - buttonCancel.Width - 12,
                 ClientSize.Height - buttonCancel.Height - 12);
+            buttonCancel.Click += delegate
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            };
             Controls.Add(buttonCancel);
             CancelButton = buttonCancel;
 
