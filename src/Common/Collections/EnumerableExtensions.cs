@@ -87,7 +87,7 @@ namespace NanoByte.Common.Collections
         /// Filters a sequence of elements to remove any <see langword="null"/> values.
         /// </summary>
         [NotNull, ItemNotNull, LinqTunnel]
-        public static IEnumerable<T> WhereNotNull<T>([NotNull] this IEnumerable<T> enumeration)
+        public static IEnumerable<T> WhereNotNull<T>([NotNull, ItemCanBeNull] this IEnumerable<T> enumeration)
         {
             return enumeration.Where(element => element != null);
         }

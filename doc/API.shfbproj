@@ -36,6 +36,7 @@
       <DocumentationSource sourceFile="..\src\Common.Gtk\Common.Gtk.csproj" configuration="Debug" platform="x86" />
     </DocumentationSources>
     <NamespaceSummaries>
+      <NamespaceSummaryItem name="JetBrains.Annotations" isDocumented="True">Code annotations used by JetBrains ReSharper for analyzing code flow and detecting issues such as unintended null references.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="NanoByte.Common" isDocumented="True">Generic utility classes, interfaces, etc. that are applicable to a wide range of different applications.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="NanoByte.Common.Cli" isDocumented="True">Classes for interacting with the user via the &lt;see cref="System.Console" /&gt; and for controlling external command-line applications.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="NanoByte.Common.Collections" isDocumented="True">Specialized collection types supplementing &lt;see cref="System.Collections.Generic" /&gt;.</NamespaceSummaryItem>

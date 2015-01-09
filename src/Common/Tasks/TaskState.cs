@@ -31,7 +31,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>The task is ready to begin.</summary>
         Ready,
 
-        /// <summary>The thread has just been started.</summary>
+        /// <summary>The task has just been started.</summary>
         Started,
 
         /// <summary>Handling the header.</summary>
@@ -40,7 +40,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>Handling the actual data.</summary>
         Data,
 
-        /// <summary>The task has been completed sucessfully.</summary>
+        /// <summary>The task has been completed successfully.</summary>
         Complete,
 
         /// <summary>An error occurred during the task.</summary>
