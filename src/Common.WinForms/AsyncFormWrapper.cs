@@ -247,10 +247,7 @@ namespace NanoByte.Common
         /// <inheritdoc/>
         public void Dispose()
         {
-            lock (_lock)
-            {
-                if (_form != null) _form.Dispose();
-            }
+            Close();
         }
     }
 }
