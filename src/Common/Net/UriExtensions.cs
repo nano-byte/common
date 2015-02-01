@@ -40,7 +40,9 @@ namespace NanoByte.Common.Net
             if (uri == null) throw new ArgumentNullException("uri");
             #endregion
 
-            return uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString;
+            return (uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString).
+                // Leave { and } unescaped for templating support
+                Replace("%7B", "{").Replace("%7D", "}");
         }
 
         /// <summary>
