@@ -35,13 +35,33 @@ namespace NanoByte.Common.Collections
     {
         #region LINQ
         [Test]
-        public void TestDistinct()
+        public void TestMaxBy()
+        {
+            var strings = new[] {"abc", "a", "abcd", "ab"};
+
+            Assert.AreEqual(
+                expected: "abcd",
+                actual: strings.MaxBy(x => x.Length));
+        }
+
+        [Test]
+        public void TestMinBy()
+        {
+            var strings = new[] { "abc", "a", "abcd", "ab" };
+
+            Assert.AreEqual(
+                expected: "a",
+                actual: strings.MinBy(x => x.Length));
+        }
+
+        [Test]
+        public void TestDistinctBy()
         {
             var strings = new[] {"a123", "a234", "b123"};
 
             CollectionAssert.AreEquivalent(
                 expected: new[] {"a123", "b123"},
-                actual: strings.Distinct(x => x[0]));
+                actual: strings.DistinctBy(x => x[0]));
         }
 
         [Test]

@@ -93,12 +93,118 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
+        /// Determines the element in a list that maximizes a specified expression.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements.</typeparam>
+        /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
+        /// <param name="enumeration">The elements to check.</param>
+        /// <param name="expression">The expression to maximize.</param>
+        /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
+        [CanBeNull]
+        public static T MaxBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression)
+        {
+            return enumeration.MaxBy(expression, Comparer<TValue>.Default);
+        }
+
+        /// <summary>
+        /// Determines the element in a list that maximizes a specified expression.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements.</typeparam>
+        /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
+        /// <param name="enumeration">The elements to check.</param>
+        /// <param name="expression">The expression to maximize.</param>
+        /// <param name="comparer">A comprarer used to compare values of <paramref name="expression"/>.</param>
+        /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
+        [CanBeNull]
+        public static T MaxBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [NotNull] IComparer<TValue> comparer)
+        {
+            #region Sanity checks
+            if (enumeration == null) throw new ArgumentNullException("enumeration");
+            if (expression == null) throw new ArgumentNullException("expression");
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            #endregion
+
+            using (var enumerator = enumeration.GetEnumerator())
+            {
+                if (!enumerator.MoveNext()) return default(T);
+                T maxElement = enumerator.Current;
+                TValue maxValue = expression(maxElement);
+
+                while (enumerator.MoveNext())
+                {
+                    var candidate = enumerator.Current;
+                    var candidateValue = expression(candidate);
+                    if (comparer.Compare(candidateValue, maxValue) > 0)
+                    {
+                        maxElement = candidate;
+                        maxValue = candidateValue;
+                    }
+                }
+
+                return maxElement;
+            }
+        }
+
+        /// <summary>
+        /// Determines the element in a list that minimizes a specified expression.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements.</typeparam>
+        /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
+        /// <param name="enumeration">The elements to check.</param>
+        /// <param name="expression">The expression to minimize.</param>
+        /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
+        [CanBeNull]
+        public static T MinBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression)
+        {
+            return enumeration.MinBy(expression, Comparer<TValue>.Default);
+        }
+
+        /// <summary>
+        /// Determines the element in a list that minimizes a specified expression.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements.</typeparam>
+        /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
+        /// <param name="enumeration">The elements to check.</param>
+        /// <param name="expression">The expression to minimize.</param>
+        /// <param name="comparer">A comprarer used to compare values of <paramref name="expression"/>.</param>
+        /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
+        [CanBeNull]
+        public static T MinBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [NotNull] IComparer<TValue> comparer)
+        {
+            #region Sanity checks
+            if (enumeration == null) throw new ArgumentNullException("enumeration");
+            if (expression == null) throw new ArgumentNullException("expression");
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            #endregion
+
+            using (var enumerator = enumeration.GetEnumerator())
+            {
+                if (!enumerator.MoveNext()) return default(T);
+                T minElement = enumerator.Current;
+                TValue minValue = expression(minElement);
+
+                while (enumerator.MoveNext())
+                {
+                    var candidate = enumerator.Current;
+                    var candidateValue = expression(candidate);
+                    if (comparer.Compare(candidateValue, minValue) < 0)
+                    {
+                        minElement = candidate;
+                        minValue = candidateValue;
+                    }
+                }
+
+                return minElement;
+            }
+        }
+
+        /// <summary>
         /// Filters a sequence of elements to remove any duplicates based on the equality of a key extracted from the elements.
         /// </summary>
         /// <param name="enumeration">The sequence of elements to filter.</param>
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
         [NotNull, LinqTunnel]
-        public static IEnumerable<T> Distinct<T, TKey>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, TKey> keySelector)
+        public static IEnumerable<T> DistinctBy<T, TKey>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, TKey> keySelector)
         {
             return enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
         }
