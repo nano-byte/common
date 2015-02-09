@@ -23,6 +23,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 using JetBrains.Annotations;
@@ -120,7 +121,7 @@ namespace NanoByte.Common
             }
         }
 
-        private static ProcessStartInfo CreateAssemblyStartInfo(string assembly,string arguments, bool admin = false)
+        private static ProcessStartInfo CreateAssemblyStartInfo(string assembly, string arguments, bool admin = false)
         {
             string appPath = Path.Combine(Locations.InstallBase, assembly + ".exe");
             if (!File.Exists(appPath)) throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, assembly), appPath);
@@ -169,6 +170,37 @@ namespace NanoByte.Common
             var thread = new Thread(execute) {Name = name, IsBackground = true};
             thread.Start();
             return thread;
+        }
+
+        /// <summary>
+        /// Executes a delegate in a new <see cref="ApartmentState.STA"/> thread. Blocks the caller until the execution completes.
+        /// </summary>
+        /// <returns>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</returns>
+        /// <param name="execute">The delegate to execute.</param>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
+        public static void RunSta([NotNull] ThreadStart execute)
+        {
+            #region Sanity checks
+            if (execute == null) throw new ArgumentNullException("execute");
+            #endregion
+
+            Exception error = null;
+            var thread = new Thread(new ThreadStart(delegate
+            {
+                try
+                {
+                    execute();
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+            }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            thread.Join();
+
+            if (error != null) error.Rethrow();
         }
         #endregion
     }
