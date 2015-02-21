@@ -84,7 +84,7 @@ namespace NanoByte.Common
         private readonly object _lock = new object();
 
         /// <summary>
-        /// Starts the message loop if it is not runnning yet and executes an action on its thread waiting for it to complete.
+        /// Starts the message loop if it is not running yet and executes an action on its thread waiting for it to complete.
         /// </summary>
         /// <param name="action">A delegate that is passed the <see cref="Form"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
@@ -116,7 +116,7 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Starts the message loop if it is not runnning yet and executes an action on its thread waiting for it to complete.
+        /// Starts the message loop if it is not running yet and executes an action on its thread waiting for it to complete.
         /// </summary>
         /// <typeparam name="TResult">The type of the result returned by <paramref name="action"/>.</typeparam>
         /// <param name="action">A delegate that is passed the <see cref="Form"/> instance and returns a result.</param>
@@ -150,7 +150,7 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Starts the message loop if it is not runnning yet and executes an action on its thread without waiting for it to complete.
+        /// Starts the message loop if it is not running yet and executes an action on its thread without waiting for it to complete.
         /// </summary>
         /// <param name="action">A delegate that is passed the <see cref="Form"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>

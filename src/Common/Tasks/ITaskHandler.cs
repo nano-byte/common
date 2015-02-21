@@ -69,7 +69,7 @@ namespace NanoByte.Common.Tasks
         /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="batchInformation">Information to be displayed if the question was automatically answered with 'No' because <see cref="Batch"/> was set to <see langword="true"/>; can be <see langword="null"/>.</param>
+        /// <param name="batchInformation">Information to be displayed instead of the question in <see cref="Batch"/>. Questions will automatically be answered with 'No' in this case. Leave <see langword="null"/> to ask the question even in <see cref="Batch"/> mode.</param>
         /// <returns><see langword="true"/> if the user answered with 'Yes'; <see langword="false"/> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
         bool AskQuestion([NotNull, Localizable(true)] string question, [CanBeNull, Localizable(true)] string batchInformation = null);
