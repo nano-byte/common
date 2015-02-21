@@ -285,9 +285,6 @@
   <data name="UnableToDelete" xml:space="preserve">
     <value>Die Datei konnte nicht gelöscht werden.</value>
   </data>
-  <data name="UnableToGenerateErrorReportFile" xml:space="preserve">
-    <value>Konnte Fehlerberichtdatei nicht erstellen. Bitte senden Sie die technischen Details per E-Mail.</value>
-  </data>
   <data name="UnableToLaunchBundled" xml:space="preserve">
     <value>Die mitgelieferte {0}-Installation konnte nicht gestartet werden. Bitte installieren Sie die Anwendung neu.</value>
   </data>

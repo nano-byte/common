@@ -26,6 +26,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using NanoByte.Common.Info;
@@ -145,7 +146,6 @@ namespace NanoByte.Common.Controls
         //--------------------//
 
         #region Buttons
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "A final exception handler may never throw exceptions itself")]
         private void buttonReport_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
@@ -156,21 +156,23 @@ namespace NanoByte.Common.Controls
             if (components == null) components = new Container();
             components.Add(webClient);
 
-            webClient.UploadFileCompleted += delegate(object uploadSender, UploadFileCompletedEventArgs uploadEventArgs)
-            {
-                Cursor = Cursors.Default;
-                if (uploadEventArgs.Error == null)
-                {
-                    Msg.Inform(this, Resources.ErrorReportSent, MsgSeverity.Info);
-                    Close();
-                }
-                else
-                {
-                    Msg.Inform(this, Resources.UnableToGenerateErrorReportFile + "\n" + uploadEventArgs.Error.Message, MsgSeverity.Error);
-                    commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
-                }
-            };
+            webClient.UploadFileCompleted += OnUploadFileCompleted;
             webClient.UploadFileAsync(_uploadUri, GenerateReportFile());
+        }
+
+        private void OnUploadFileCompleted(object uploadSender, UploadFileCompletedEventArgs uploadEventArgs)
+        {
+            Cursor = Cursors.Default;
+            if (uploadEventArgs.Error == null)
+            {
+                Msg.Inform(this, Resources.ErrorReportSent + "\n" + Encoding.UTF8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
+                Close();
+            }
+            else
+            {
+                Msg.Inform(this, uploadEventArgs.Error.Message, MsgSeverity.Error);
+                commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
