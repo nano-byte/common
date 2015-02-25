@@ -67,6 +67,20 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
+        /// Adds multiple elements to the list.
+        /// </summary>
+        public static void AddRange<TList, TElements>([NotNull] this ICollection<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
+            where TElements : TList
+        {
+            #region Sanity checks
+            if (list == null) throw new ArgumentNullException("list");
+            if (elements == null) throw new ArgumentNullException("elements");
+            #endregion
+
+            foreach (var element in elements) list.Add(element);
+        }
+
+        /// <summary>
         /// Removes multiple elements from the list.
         /// </summary>
         public static void RemoveRange<TList, TElements>([NotNull] this ICollection<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
