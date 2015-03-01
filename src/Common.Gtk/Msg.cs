@@ -28,7 +28,7 @@ using NanoByte.Common.Info;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides easier access to typical <see cref="MessageDialog"/> configurations and automatically logs error messages.
+    /// Provides easier access to typical <see cref="MessageDialog"/> configurations.
     /// </summary>
     public static class Msg
     {
@@ -41,18 +41,6 @@ namespace NanoByte.Common
         /// <param name="severity">How severe/important the message is.</param>
         public static void Inform([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
-            #endregion
-
             ShowMessageDialog(owner, text, severity, ButtonsType.Ok);
         }
         #endregion
@@ -67,18 +55,6 @@ namespace NanoByte.Common
         /// <returns><see langword="true"/> if OK was selected, <see langword="false"/> if Cancel was selected.</returns>
         public static bool OKCancel([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
-            #endregion
-
             return ShowMessageDialog(owner, text, severity, ButtonsType.OkCancel) == ResponseType.Ok;
         }
         #endregion
@@ -93,18 +69,6 @@ namespace NanoByte.Common
         /// <returns><see langword="true"/> if Yes was chosen, <see langword="false"/> if No was chosen.</returns>
         public static bool YesNo([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
-            #endregion
-
             return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo) == ResponseType.Yes;
         }
         #endregion
@@ -121,18 +85,6 @@ namespace NanoByte.Common
         /// <see cref="ResponseType.Cancel"/> otherwise.</returns>
         public static ResponseType YesNoCancel([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
-            #endregion
-
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
             return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo | ButtonsType.Cancel);
         }

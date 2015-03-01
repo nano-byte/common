@@ -31,7 +31,7 @@ using TaskDialog;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides easier access to typical <see cref="MessageBox"/> configurations and automatically logs error messages.
+    /// Provides easier access to typical <see cref="MessageBox"/> configurations and automatically upgrades to TaskDialogs when avialable.
     /// </summary>
     public static class Msg
     {
@@ -44,18 +44,6 @@ namespace NanoByte.Common
         /// <param name="severity">How severe/important the message is.</param>
         public static void Inform([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
-            #endregion
-
             if (TaskDialog.TaskDialog.IsAvailable)
             {
                 try
@@ -91,18 +79,6 @@ namespace NanoByte.Common
             #region Sanity checks
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(okCaption)) throw new ArgumentNullException("okCaption");
-            #endregion
-
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
             #endregion
 
             if (TaskDialog.TaskDialog.IsAvailable)
@@ -183,18 +159,6 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
             #endregion
 
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
-            #endregion
-
             if (TaskDialog.TaskDialog.IsAvailable)
             {
                 var taskDialog = GetTaskDialog(text, severity);
@@ -256,18 +220,6 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
             if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
-            #endregion
-
-            #region Logging
-            switch (severity)
-            {
-                case MsgSeverity.Warn:
-                    Log.Warn(text);
-                    break;
-                case MsgSeverity.Error:
-                    Log.Error(text);
-                    break;
-            }
             #endregion
 
             if (TaskDialog.TaskDialog.IsAvailable)
