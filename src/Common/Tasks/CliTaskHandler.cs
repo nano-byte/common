@@ -55,7 +55,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public int Verbosity { get; set; }
+        public Verbosity Verbosity { get; set; }
 
         /// <summary>
         /// Used to signal the <see cref="CancellationToken"/>.
@@ -72,26 +72,22 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException("task");
             #endregion
 
-            Log.Info(task.Name + "...");
-            using (var progressBar = new ProgressBar())
-                task.Run(CancellationToken, progressBar);
+            if (Verbosity <= Verbosity.Batch)
+                task.Run(CancellationToken);
+            else
+            {
+                Log.Info(task.Name + "...");
+                using (var progressBar = new ProgressBar())
+                    task.Run(CancellationToken, progressBar);
+            }
         }
 
         /// <inheritdoc/>
-        public bool Batch { get; set; }
-
-        /// <inheritdoc/>
-        public virtual bool AskQuestion(string question, string batchInformation = null)
+        public virtual bool Ask(string question)
         {
             #region Sanity checks
             if (question == null) throw new ArgumentNullException("question");
             #endregion
-
-            if (Batch)
-            {
-                if (!string.IsNullOrEmpty(batchInformation)) Log.Warn(batchInformation);
-                return false;
-            }
 
             Log.Info(question);
 

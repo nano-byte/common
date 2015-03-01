@@ -29,6 +29,22 @@ using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
+    /// <seealso cref="ITaskHandler.Verbosity"/>
+    public enum Verbosity
+    {
+        /// <summary>Print no progress bars on command-line. Automatically answer questions with defaults when possible.</summary>
+        Batch = -1,
+
+        /// <summary>Normal interactive operation.</summary>
+        Normal = 0,
+
+        /// <summary>Display additional information for troubleshooting.</summary>
+        Verbose = 1,
+
+        /// <summary>Display detailed information for debugging.</summary>
+        Debug = 2
+    }
+
     /// <summary>
     /// Used to execute and track <seealso cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
     /// </summary>
@@ -55,24 +71,17 @@ namespace NanoByte.Common.Tasks
         void RunTask([NotNull] ITask task);
 
         /// <summary>
-        /// The detail level of messages printed to the console or log file.
-        /// 0 = normal, 1 = verbose, 2 = very verbose
+        /// The detail level of messages displayed to the user.
         /// </summary>
-        int Verbosity { get; set; }
-
-        /// <summary>
-        /// Do not show progress reports, questions or messages (except for non-intrusive background messages like tray icons) unless a critical error occurs.
-        /// </summary>
-        bool Batch { get; set; }
+        Verbosity Verbosity { get; set; }
 
         /// <summary>
         /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="batchInformation">Information to be displayed instead of the question in <see cref="Batch"/>. Questions will automatically be answered with 'No' in this case. Leave <see langword="null"/> to ask the question even in <see cref="Batch"/> mode.</param>
         /// <returns><see langword="true"/> if the user answered with 'Yes'; <see langword="false"/> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
-        bool AskQuestion([NotNull, Localizable(true)] string question, [CanBeNull, Localizable(true)] string batchInformation = null);
+        bool Ask([NotNull, Localizable(true)] string question);
 
         /// <summary>
         /// Displays multi-line text to the user.

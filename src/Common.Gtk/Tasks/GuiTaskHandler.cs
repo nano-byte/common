@@ -65,26 +65,15 @@ namespace NanoByte.Common.Tasks
             }
         }
 
-        /// <summary>
-        /// Always returns 1. This ensures that information hidden by the GUI is at least retrievable from the log files.
-        /// </summary>
-        public virtual int Verbosity { get { return 1; } set {} }
+        /// <inheritdoc/>
+        public Verbosity Verbosity { get; set; }
 
         /// <inheritdoc/>
-        public bool Batch { get; set; }
-
-        /// <inheritdoc/>
-        public virtual bool AskQuestion(string question, string batchInformation = null)
+        public virtual bool Ask(string question)
         {
             #region Sanity checks
             if (question == null) throw new ArgumentNullException("question");
             #endregion
-
-            if (Batch)
-            {
-                if (!string.IsNullOrEmpty(batchInformation)) Log.Warn(batchInformation);
-                return false;
-            }
 
             switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
             {

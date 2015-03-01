@@ -49,17 +49,14 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <summary>
-        /// Always returns 0.
+        /// Always returns <seealso cref="Tasks.Verbosity.Batch"/>.
         /// </summary>
-        public int Verbosity { get { return 0; } set { } }
+        public virtual Verbosity Verbosity { get { return Verbosity.Batch; } set { } }
 
         /// <summary>
-        /// Always returns <see langword="true"/>.
+        /// Always returns <see langword="false"/>.
         /// </summary>
-        public virtual bool Batch { get { return true; } set { } }
-
-        /// <inheritdoc/>
-        public virtual bool AskQuestion(string question, string batchInformation = null)
+        public virtual bool Ask(string question)
         {
             return false;
         }
