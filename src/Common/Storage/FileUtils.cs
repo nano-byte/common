@@ -248,13 +248,13 @@ namespace NanoByte.Common.Storage
 
         #region Replace
         /// <summary>
-        /// Replaces one file with another. Rolls back in case of problems.
+        /// Replaces one file with another. Rolls back in case of problems. If the destination file does not exist yet, this acts like a simple rename.
         /// </summary>
         /// <param name="sourcePath">The path of source directory.</param>
         /// <param name="destinationPath">The path of the target directory. Must reside on the same filesystem as <paramref name="sourcePath"/>.</param>
         /// <exception cref="ArgumentException"><paramref name="sourcePath"/> and <paramref name="destinationPath"/> are equal.</exception>
         /// <exception cref="IOException">The file could not be replaced.</exception>
-        /// <exception cref="UnauthorizedAccessException">The read or write access to the files was denied.</exception>
+        /// <exception cref="UnauthorizedAccessException">The read or write access to one of the files was denied.</exception>
         public static void Replace([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath)
         {
             #region Sanity checks
@@ -263,33 +263,59 @@ namespace NanoByte.Common.Storage
             if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
             #endregion
 
-            // Prepend random string for temp file name
-            string directory = Path.GetDirectoryName(Path.GetFullPath(destinationPath));
-            string backupPath = directory + Path.DirectorySeparatorChar + "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath);
+            if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
+            else if (WindowsUtils.IsWindowsNT) ReplaceNT(sourcePath, destinationPath);
+            else ReplaceSimple(sourcePath, destinationPath);
+        }
 
-            if (WindowsUtils.IsWindowsNT)
+        private static void ReplaceNT(string sourcePath, string destinationPath)
+        {
+            if (!File.Exists(destinationPath))
             {
-                if (File.Exists(destinationPath))
-                {
-                    File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
-                    File.Delete(backupPath);
-                }
-                else File.Move(sourcePath, destinationPath);
+                // File.Replace() fails if destinationPath does not exist yet
+                File.Move(sourcePath, destinationPath);
+                return;
             }
-            else if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
-            else
+
+            // ReSharper disable once AssignNullToNotNullAttribute
+            string backupPath = Path.Combine(
+                Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
+                "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
+
+            try
             {
-                if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
-                try
-                {
-                    File.Move(sourcePath, destinationPath);
-                    if (File.Exists(backupPath)) File.Delete(backupPath);
-                }
-                catch
-                { // Rollback
-                    if (File.Exists(backupPath)) File.Move(backupPath, destinationPath);
-                    throw;
-                }
+                File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
+            }
+            catch (IOException)
+            {
+                ReplaceSimple(sourcePath, destinationPath);
+            }
+            finally
+            {
+                if (File.Exists(backupPath)) File.Delete(backupPath);
+            }
+        }
+
+        private static void ReplaceSimple(string sourcePath, string destinationPath)
+        {
+            // ReSharper disable once AssignNullToNotNullAttribute
+            string backupPath = Path.Combine(
+                Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
+                "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
+
+            if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
+            try
+            {
+                File.Move(sourcePath, destinationPath);
+            }
+            catch
+            {
+                if (File.Exists(backupPath)) File.Move(backupPath, destinationPath);
+                throw;
+            }
+            finally
+            {
+                if (File.Exists(backupPath)) File.Delete(backupPath);
             }
         }
         #endregion
