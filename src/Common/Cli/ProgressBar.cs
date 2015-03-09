@@ -134,6 +134,8 @@ namespace NanoByte.Common.Cli
         #endregion
 
         #region Draw
+        private static readonly bool _drawPretty = WindowsUtils.IsWindows && !CliUtils.StandardErrorRedirected;
+
         /// <summary>
         /// Draws the progress-bar to <see cref="Console.Error"/>.
         /// </summary>
@@ -141,15 +143,12 @@ namespace NanoByte.Common.Cli
         /// <exception cref="IOException">The progress bar could not be drawn to the <see cref="Console"/> (e.g. if it isn't a TTY).</exception>
         public void Draw()
         {
-            if (WindowsUtils.IsWindows) DrawWindows();
+            if (_drawPretty) DrawPretty();
             else DrawSimple();
         }
 
-        private void DrawWindows()
+        private void DrawPretty()
         {
-            // Don't draw to console if the stream has been redirected
-            if (CliUtils.StandardOutputRedirected || CliUtils.StandardErrorRedirected) return;
-
             // Draw start of progress bar
             Console.CursorLeft = 0;
             Console.Error.Write('[');
@@ -221,8 +220,7 @@ namespace NanoByte.Common.Cli
         /// </summary>
         public virtual void Done()
         {
-            if (!CliUtils.StandardOutputRedirected && !CliUtils.StandardErrorRedirected)
-                Console.Error.WriteLine();
+            Console.Error.WriteLine();
         }
 
         /// <summary>
