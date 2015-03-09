@@ -382,9 +382,22 @@ namespace NanoByte.Common.Storage
         /// </summary>
         public static void ResetAcl([NotNull] this DirectoryInfo directoryInfo)
         {
-            directoryInfo.Walk(
-                dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl),
-                file => ResetAcl(file.GetAccessControl, file.SetAccessControl));
+            try
+            {
+                directoryInfo.Walk(
+                    dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl),
+                    file => ResetAcl(file.GetAccessControl, file.SetAccessControl));
+            }
+                #region Error handling
+            catch (ArgumentException ex)
+            {
+                Log.Error(ex);
+            }
+            catch (IdentityNotMappedException ex)
+            {
+                Log.Error(ex);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -546,10 +559,16 @@ namespace NanoByte.Common.Storage
                 else acl.RemoveAccessRule(_denyEveryoneWrite);
                 directory.SetAccessControl(acl);
             }
-            catch (ArgumentException)
+                #region Error handling
+            catch (ArgumentException ex)
             {
-                // WORKAROUND: .NET API glitch
+                Log.Error(ex);
             }
+            catch (IdentityNotMappedException ex)
+            {
+                Log.Error(ex);
+            }
+            #endregion
         }
         #endregion
 
