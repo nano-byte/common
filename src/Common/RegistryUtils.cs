@@ -41,6 +41,7 @@ namespace NanoByte.Common
         /// <param name="keyName">The full path of the key to read from.</param>
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
         public static int GetDword([NotNull] string keyName, [CanBeNull] string valueName, int defaultValue = 0)
         {
             #region Sanity checks
@@ -66,6 +67,7 @@ namespace NanoByte.Common
         /// <param name="keyName">The full path of the key to write to.</param>
         /// <param name="valueName">The name of the value to write.</param>
         /// <param name="value">The value to write.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
         public static void SetDword([NotNull] string keyName, [CanBeNull] string valueName, int value)
         {
@@ -94,6 +96,7 @@ namespace NanoByte.Common
         /// <param name="keyName">The full path of the key to read from.</param>
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
         [ContractAnnotation("defaultValue:notnull => notnull")]
         public static string GetString([NotNull] string keyName, [CanBeNull] string valueName, [CanBeNull] string defaultValue = null)
         {
@@ -120,6 +123,7 @@ namespace NanoByte.Common
         /// <param name="keyName">The full path of the key to write to.</param>
         /// <param name="valueName">The name of the value to write.</param>
         /// <param name="value">The value to write.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
         public static void SetString([NotNull] string keyName, [CanBeNull] string valueName, [NotNull] string value)
         {
@@ -152,6 +156,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
         [ContractAnnotation("defaultValue:notnull => notnull")]
         public static string GetSoftwareString([NotNull] string subkeyName, [CanBeNull] string valueName, [CanBeNull] string defaultValue = null)
         {
@@ -172,6 +177,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to write.</param>
         /// <param name="value">The value to write.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
         public static void SetSoftwareString([NotNull] string subkeyName, [CanBeNull] string valueName, [NotNull] string value)
         {
@@ -197,6 +203,7 @@ namespace NanoByte.Common
         /// <param name="key">The root key to look within.</param>
         /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
         /// <returns>A list of value names; an empty array if the key does not exist.</returns>
+        /// <exception cref="IOException">Registry access failed.</exception>
         [NotNull, ItemNotNull]
         public static string[] GetValueNames([NotNull] this RegistryKey key, [NotNull] string subkeyName)
         {
@@ -225,6 +232,7 @@ namespace NanoByte.Common
         /// <param name="key">The root key to look within.</param>
         /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
         /// <returns>A list of key names; an empty array if the key does not exist.</returns>
+        /// <exception cref="IOException">Registry access failed.</exception>
         [NotNull, ItemNotNull]
         public static string[] GetSubKeyNames([NotNull] RegistryKey key, [NotNull] string subkeyName)
         {
