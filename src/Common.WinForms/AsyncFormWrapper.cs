@@ -240,6 +240,10 @@ namespace NanoByte.Common
                 {
                     // Remoting exceptions on clean-up are not critical
                 }
+                catch (NullReferenceException)
+                {
+                    // Rare .NET bug
+                }
                 #endregion
             }
         }
