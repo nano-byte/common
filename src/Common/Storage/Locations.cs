@@ -485,12 +485,6 @@ namespace NanoByte.Common.Storage
 
         #region ACL Security
         /// <summary>
-        /// The name of the flag file whose existence indicates that a directory has been secured with ACLs to prevent non-admins from writing there.
-        /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
-        public const string SecuredFlagName = "_secured";
-
-        /// <summary>
         /// ACL that gives normal users read and execute access and admins and the the system full access.
         /// </summary>
         private static readonly DirectorySecurity _secureSharedAcl;
@@ -517,35 +511,12 @@ namespace NanoByte.Common.Storage
         private static void CreateSecureMachineWideDir([NotNull, Localizable(false)] string path)
         {
             if (Directory.Exists(path)) return;
-
             if (WindowsUtils.IsWindowsNT)
             {
                 if (!WindowsUtils.IsAdministrator) throw new NotAdminException();
-
                 Directory.CreateDirectory(path, _secureSharedAcl);
-                File.Create(Path.Combine(path, SecuredFlagName));
             }
             else Directory.CreateDirectory(path);
-        }
-
-        /// <summary>
-        /// Applies ACLs to an existing directory that block write-access for regular users. Does nothing if the directory does not exist.
-        /// </summary>
-        /// <exception cref="NotAdminException">A directory exists and the user is not an administrator.</exception>
-        [PublicAPI]
-        public static void SecureExistingMachineWideDir([NotNull, Localizable(false)] string path)
-        {
-            if (!Directory.Exists(path)) return;
-
-            if (WindowsUtils.IsWindowsNT)
-            {
-                if (!WindowsUtils.IsAdministrator) throw new NotAdminException();
-
-                var directory = new DirectoryInfo(path);
-                directory.ResetAcl();
-                directory.SetAccessControl(_secureSharedAcl);
-                File.Create(Path.Combine(path, SecuredFlagName));
-            }
         }
         #endregion
     }
