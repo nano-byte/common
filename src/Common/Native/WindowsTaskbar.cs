@@ -347,12 +347,22 @@ namespace NanoByte.Common.Native
         private static readonly ITaskbarList4 _taskbarList;
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Must perform COM call during init")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
         static WindowsTaskbar()
         {
             if (WindowsUtils.IsWindows7)
             {
-                _taskbarList = (ITaskbarList4)new CTaskbarList();
-                _taskbarList.HrInit();
+                try
+                {
+                    _taskbarList = (ITaskbarList4)new CTaskbarList();
+                    _taskbarList.HrInit();
+                }
+                    #region Error handling
+                catch (Exception ex)
+                {
+                    Log.Warn(ex);
+                }
+                #endregion
             }
         }
         #endregion
@@ -365,14 +375,19 @@ namespace NanoByte.Common.Native
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
         public static void SetProgressState(IntPtr handle, ProgressBarState state)
         {
-            if (!WindowsUtils.IsWindows7) return;
+            if (_taskbarList == null) return;
+
             try
             {
                 lock (_taskbarList)
                     _taskbarList.SetProgressState(handle, state);
             }
-            catch
-            {}
+                #region Error handling
+            catch (Exception ex)
+            {
+                Log.Warn(ex);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -384,14 +399,19 @@ namespace NanoByte.Common.Native
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
         public static void SetProgressValue(IntPtr handle, int currentValue, int maximumValue)
         {
-            if (!WindowsUtils.IsWindows7) return;
+            if (_taskbarList == null) return;
+
             try
             {
                 lock (_taskbarList)
                     _taskbarList.SetProgressValue(handle, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
             }
-            catch
-            {}
+                #region Error handling
+            catch (Exception ex)
+            {
+                Log.Warn(ex);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -424,8 +444,12 @@ namespace NanoByte.Common.Native
 
                 Marshal.ReleaseComObject(propertyStore);
             }
-            catch
-            {}
+                #region Error handling
+            catch (Exception ex)
+            {
+                Log.Warn(ex);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -460,8 +484,12 @@ namespace NanoByte.Common.Native
                 customDestinationList.AddUserTasks((IObjectArray)taskContent);
                 customDestinationList.CommitList();
             }
-            catch
-            {}
+                #region Error handling
+            catch (Exception ex)
+            {
+                Log.Warn(ex);
+            }
+            #endregion
         }
 
         /// <summary>
@@ -478,7 +506,7 @@ namespace NanoByte.Common.Native
 
             nativeShellLink.SetShowCmd(1); // Normal window state
 
-            SetPropertyValue(nativePropertyStore, new PropertyKey(new Guid("{F29F85E0-4FF9-1068-AB91-08002B27B3D9}"), 2), shellLink.Title);
+            SetPropertyValue(nativePropertyStore, new PropertyKey(new Guid("F29F85E0-4FF9-1068-AB91-08002B27B3D9"), 2), shellLink.Title);
             nativePropertyStore.Commit();
 
             return nativeShellLink;
