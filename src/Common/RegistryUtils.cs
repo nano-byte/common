@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Security;
 using JetBrains.Annotations;
@@ -42,7 +43,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-        public static int GetDword([NotNull] string keyName, [CanBeNull] string valueName, int defaultValue = 0)
+        public static int GetDword([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, int defaultValue = 0)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
@@ -69,7 +70,7 @@ namespace NanoByte.Common
         /// <param name="value">The value to write.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
-        public static void SetDword([NotNull] string keyName, [CanBeNull] string valueName, int value)
+        public static void SetDword([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, int value)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
@@ -98,7 +99,7 @@ namespace NanoByte.Common
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         [ContractAnnotation("defaultValue:notnull => notnull")]
-        public static string GetString([NotNull] string keyName, [CanBeNull] string valueName, [CanBeNull] string defaultValue = null)
+        public static string GetString([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, [CanBeNull, Localizable(false)] string defaultValue = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
@@ -125,7 +126,7 @@ namespace NanoByte.Common
         /// <param name="value">The value to write.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
-        public static void SetString([NotNull] string keyName, [CanBeNull] string valueName, [NotNull] string value)
+        public static void SetString([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
@@ -158,7 +159,7 @@ namespace NanoByte.Common
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         [ContractAnnotation("defaultValue:notnull => notnull")]
-        public static string GetSoftwareString([NotNull] string subkeyName, [CanBeNull] string valueName, [CanBeNull] string defaultValue = null)
+        public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [CanBeNull, Localizable(false)] string defaultValue = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
@@ -179,7 +180,7 @@ namespace NanoByte.Common
         /// <param name="value">The value to write.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
-        public static void SetSoftwareString([NotNull] string subkeyName, [CanBeNull] string valueName, [NotNull] string value)
+        public static void SetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
@@ -205,7 +206,7 @@ namespace NanoByte.Common
         /// <returns>A list of value names; an empty array if the key does not exist.</returns>
         /// <exception cref="IOException">Registry access failed.</exception>
         [NotNull, ItemNotNull]
-        public static string[] GetValueNames([NotNull] this RegistryKey key, [NotNull] string subkeyName)
+        public static string[] GetValueNames([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
             if (key == null) throw new ArgumentNullException("key");
@@ -234,7 +235,7 @@ namespace NanoByte.Common
         /// <returns>A list of key names; an empty array if the key does not exist.</returns>
         /// <exception cref="IOException">Registry access failed.</exception>
         [NotNull, ItemNotNull]
-        public static string[] GetSubKeyNames([NotNull] RegistryKey key, [NotNull] string subkeyName)
+        public static string[] GetSubKeyNames([NotNull, Localizable(false)] RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
             if (key == null) throw new ArgumentNullException("key");
@@ -267,7 +268,7 @@ namespace NanoByte.Common
         /// <exception cref="IOException">Failed to open the key.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the key is not permitted.</exception>
         [NotNull]
-        public static RegistryKey OpenSubKeyChecked([NotNull] this RegistryKey key, [NotNull] string subkeyName, bool writable = false)
+        public static RegistryKey OpenSubKeyChecked([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName, bool writable = false)
         {
             #region Sanity checks
             if (key == null) throw new ArgumentNullException("key");
@@ -298,7 +299,7 @@ namespace NanoByte.Common
         /// <exception cref="IOException">Failed to create the key.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
         [NotNull]
-        public static RegistryKey CreateSubKeyChecked([NotNull] this RegistryKey key, [NotNull] string subkeyName)
+        public static RegistryKey CreateSubKeyChecked([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
             if (key == null) throw new ArgumentNullException("key");
@@ -329,7 +330,7 @@ namespace NanoByte.Common
         /// <exception cref="IOException">Failed to open the key.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the key is not permitted.</exception>
         [NotNull]
-        public static RegistryKey OpenHklmKey([NotNull] string subkeyName, out bool x64)
+        public static RegistryKey OpenHklmKey([NotNull, Localizable(false)] string subkeyName, out bool x64)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
