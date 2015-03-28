@@ -35,20 +35,6 @@ namespace NanoByte.Common
         private readonly EventWaitHandle _waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
 
         /// <summary>
-        /// Creates a future waiting for a result.
-        /// </summary>
-        public Future()
-        {}
-
-        /// <summary>
-        /// Creates a future with the result already set.
-        /// </summary>
-        public Future(T result)
-        {
-            Set(result);
-        }
-
-        /// <summary>
         /// Sets the result and signals anyone waiting for it.
         /// </summary>
         public void Set(T result)
@@ -64,6 +50,16 @@ namespace NanoByte.Common
         {
             _waitHandle.WaitOne();
             return _result;
+        }
+
+        /// <summary>
+        /// Creates a future with the result already set.
+        /// </summary>
+        public static implicit operator Future<T>(T value)
+        {
+            var future = new Future<T>();
+            future.Set(value);
+            return future;
         }
 
         /// <inheritdoc/>
