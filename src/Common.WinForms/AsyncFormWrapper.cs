@@ -84,6 +84,18 @@ namespace NanoByte.Common
         private readonly object _lock = new object();
 
         /// <summary>
+        /// Indicates whether the message loop is running and the underlying form is enabled.
+        /// </summary>
+        public bool IsReady
+        {
+            get
+            {
+                lock (_lock)
+                    return (_form != null) && _form.Enabled;
+            }
+        }
+
+        /// <summary>
         /// Starts the message loop if it is not running yet and executes an action on its thread waiting for it to complete.
         /// </summary>
         /// <param name="action">A delegate that is passed the <see cref="Form"/> instance.</param>
@@ -245,6 +257,8 @@ namespace NanoByte.Common
                     // Rare .NET bug
                 }
                 #endregion
+
+                _form = null;
             }
         }
 
