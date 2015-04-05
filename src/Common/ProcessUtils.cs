@@ -47,11 +47,14 @@ namespace NanoByte.Common
         /// <returns>The newly created process.</returns>
         /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
         /// <exception cref="Win32Exception">There was a problem launching the assembly.</exception>
+        [PublicAPI]
         public static Process LaunchAssembly([NotNull, Localizable(false)] string assembly, [CanBeNull, Localizable(false)] string arguments = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(assembly)) throw new ArgumentNullException("assembly");
             #endregion
+
+            Log.Debug("Launch assembly: " + assembly + " " + arguments);
 
             return Process.Start(CreateAssemblyStartInfo(assembly, arguments));
         }
@@ -63,11 +66,14 @@ namespace NanoByte.Common
         /// <param name="arguments">The command-line arguments to pass to the assembly; can be <see langword="null"/>.</param>
         /// <returns>The exit code of the target process.</returns>
         /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
+        [PublicAPI]
         public static int RunAssembly([NotNull, Localizable(false)] string assembly, [CanBeNull, Localizable(false)] string arguments = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(assembly)) throw new ArgumentNullException("assembly");
             #endregion
+
+            Log.Debug("Run assembly: " + assembly + " " + arguments);
 
             try
             {
@@ -90,11 +96,14 @@ namespace NanoByte.Common
         /// <returns>The newly created process.</returns>
         /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
         /// <exception cref="Win32Exception">There was a problem launching the assembly.</exception>
+        [PublicAPI]
         public static Process LaunchAssemblyAsAdmin([NotNull, Localizable(false)] string assembly, [CanBeNull, Localizable(false)] string arguments = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(assembly)) throw new ArgumentNullException("assembly");
             #endregion
+
+            Log.Debug("Launch assembly as admin: " + assembly + " " + arguments);
 
             return Process.Start(CreateAssemblyStartInfo(assembly, arguments, admin: true));
         }
@@ -106,8 +115,11 @@ namespace NanoByte.Common
         /// <param name="arguments">The command-line arguments to pass to the assembly; can be <see langword="null"/>.</param>
         /// <returns>The exit code of the target process.</returns>
         /// <exception cref="FileNotFoundException">The assembly could not be located.</exception>
+        [PublicAPI]
         public static int RunAssemblyAsAdmin([NotNull, Localizable(false)] string assembly, [CanBeNull, Localizable(false)] string arguments = null)
         {
+            Log.Debug("Run assembly as admin: " + assembly + " " + arguments);
+
             try
             {
                 var process = Process.Start(CreateAssemblyStartInfo(assembly, arguments, admin: true));
@@ -143,11 +155,14 @@ namespace NanoByte.Common
         /// <param name="execute">The delegate to execute.</param>
         /// <param name="name">A short name for the new thread; can be <see langword="null"/>.</param>
         /// <returns>The newly launched thread.</returns>
+        [PublicAPI]
         public static Thread RunAsync([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException("execute");
             #endregion
+
+            Log.Debug("Run async thread: " + name);
 
             var thread = new Thread(execute) {Name = name};
             thread.SetApartmentState(ApartmentState.STA); // Make COM work
@@ -161,11 +176,14 @@ namespace NanoByte.Common
         /// <param name="execute">The delegate to execute.</param>
         /// <param name="name">A short name for the new thread; can be <see langword="null"/>.</param>
         /// <returns>The newly launched thread.</returns>
+        [PublicAPI]
         public static Thread RunBackground([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException("execute");
             #endregion
+
+            Log.Debug("Run background thread: " + name);
 
             var thread = new Thread(execute) {Name = name, IsBackground = true};
             thread.Start();
@@ -178,11 +196,14 @@ namespace NanoByte.Common
         /// <returns>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</returns>
         /// <param name="execute">The delegate to execute.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
+        [PublicAPI]
         public static void RunSta([NotNull] ThreadStart execute)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException("execute");
             #endregion
+
+            Log.Debug("Run STA thread");
 
             Exception error = null;
             var thread = new Thread(new ThreadStart(delegate

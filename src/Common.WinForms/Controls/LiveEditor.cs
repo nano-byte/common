@@ -143,9 +143,9 @@ namespace NanoByte.Common.Controls
             string warning = null;
             LogEntryEventHandler handleLogEntry = (severity, message) => { if (severity >= LogSeverity.Warn) warning = message; };
 
-            Log.NewEntry += handleLogEntry;
+            Log.Handler += handleLogEntry;
             ContentChanged(TextEditor.Text);
-            Log.NewEntry -= handleLogEntry;
+            Log.Handler -= handleLogEntry;
 
             if (warning == null) SetStatus(ImageResources.Info, "OK");
             else SetStatus(ImageResources.Error, warning);

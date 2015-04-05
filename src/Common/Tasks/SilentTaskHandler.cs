@@ -45,6 +45,7 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException("task");
             #endregion
 
+            Log.Debug("Task: " + task.Name);
             task.Run(CancellationToken);
         }
 
@@ -58,6 +59,8 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         public virtual bool Ask(string question)
         {
+            Log.Debug("Question: " + question);
+            Log.Debug("Silent answer: No");
             return false;
         }
 

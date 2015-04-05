@@ -21,25 +21,25 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Info;
 
 namespace NanoByte.Common
 {
-
-    #region Enumerations
     /// <summary>
     /// Describes how severe/important a <see cref="Log"/> entry is.
     /// </summary>
     /// <seealso cref="LogEntryEventHandler"/>
     public enum LogSeverity
     {
-        /// <summary>A message printed as-is (no time stamp, etc.). Usually used for <see cref="Console"/> output.</summary>
-        Echo,
+        /// <summary>Information to help developers diagnose problems.</summary>
+        Debug,
 
         /// <summary>A nice-to-know piece of information.</summary>
         Info,
@@ -50,54 +50,24 @@ namespace NanoByte.Common
         /// <summary>A critical error that should be attended to.</summary>
         Error
     }
-    #endregion
 
-    #region Delegates
     /// <summary>
     /// Describes an event relating to an entry in the <see cref="Log"/>.
     /// </summary>
     /// <param name="severity">The type/severity of the entry.</param>
-    /// <param name="message">The actual message text of the entry.</param>
-    /// <seealso cref="Log.NewEntry"/>
+    /// <param name="message">The message text of the entry.</param>
+    /// <seealso cref="Log.Handler"/>
     public delegate void LogEntryEventHandler(LogSeverity severity, string message);
-    #endregion
 
     /// <summary>
-    /// Writes log messages to the <see cref="Console"/> and maintains copies in memory and in a plain text file.
+    /// Sends log messages to custom handlers or the <see cref="Console"/>.
+    /// Additionally writes to <see cref="Debug"/>, an in-memory buffer and a plain text file.
     /// </summary>
     public static class Log
     {
-        #region Properties
-        /// <summary>
-        /// Occurs whenever a new entry has been added to the log.
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
-        [CanBeNull]
-        public static event LogEntryEventHandler NewEntry;
-
-        /// <summary>
-        /// All data logged in this session so far as plain text.
-        /// </summary>
-        [NotNull]
-        public static string Content
-        {
-            get
-            {
-                lock (_sessionContent)
-                {
-                    return _sessionContent.ToString();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Set this to <see langword="true"/> to supress any <see cref="Console"/> usage.
-        /// <see cref="NewEntry"/> and <see cref="Content"/> will continue to work normally.
-        /// </summary>
-        public static bool DisableConsole { get; set; }
-        #endregion
-
         #region Constructor
+        private static readonly StreamWriter _fileWriter;
+
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "The static constructor is used to add an identification header to the log file")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Any kind of problems writing the log file should be ignored")]
         static Log()
@@ -137,18 +107,45 @@ namespace NanoByte.Common
         }
         #endregion
 
-        #region Public interface
+        private static readonly List<LogEntryEventHandler> _handlers = new List<LogEntryEventHandler> {PrintToConsole};
+
         /// <summary>
-        /// Prints a message to the log as-is (no time stamp, etc.). Usually used for <see cref="Console"/> output.
+        /// Invoked when a new entry is added to the log.
+        /// Only the newest (last) registered handler is invoked.
+        /// <see cref="Console"/> output is used as a fallback if no handlers are registered.
         /// </summary>
-        public static void Echo([NotNull] string message)
+        [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        [CanBeNull, PublicAPI]
+        public static event LogEntryEventHandler Handler { add { lock (_lock) _handlers.Add(value); } remove { lock (_lock) _handlers.Remove(value); } }
+
+        private static readonly StringBuilder _sessionContent = new StringBuilder();
+
+        /// <summary>
+        /// Collects all log entries from this application session.
+        /// </summary>
+        [NotNull]
+        public static string Content
         {
-            AddEntry(LogSeverity.Echo, message);
+            get
+            {
+                lock (_lock)
+                    return _sessionContent.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Writes information to help developers diagnose problems to the log.
+        /// </summary>
+        [PublicAPI]
+        public static void Debug([NotNull] string message)
+        {
+            AddEntry(LogSeverity.Debug, message);
         }
 
         /// <summary>
         /// Writes nice-to-know information to the log.
         /// </summary>
+        [PublicAPI]
         public static void Info([NotNull] string message)
         {
             AddEntry(LogSeverity.Info, message);
@@ -157,6 +154,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes a warning that doesn't have to be acted upon immediately to the log.
         /// </summary>
+        [PublicAPI]
         public static void Warn([NotNull] string message)
         {
             AddEntry(LogSeverity.Warn, message);
@@ -165,6 +163,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes an exception as a <see cref="Warn(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
         /// </summary>
+        [PublicAPI]
         public static void Warn([NotNull] Exception ex)
         {
             #region Sanity checks
@@ -178,6 +177,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes a critical error that should be attended to to the log.
         /// </summary>
+        [PublicAPI]
         public static void Error([NotNull] string message)
         {
             AddEntry(LogSeverity.Error, message);
@@ -186,6 +186,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes an exception as an <see cref="Error(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
         /// </summary>
+        [PublicAPI]
         public static void Error([NotNull] Exception ex)
         {
             #region Sanity checks
@@ -195,74 +196,29 @@ namespace NanoByte.Common
             Error(ex.Message);
             if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException);
         }
-        #endregion
-
-        #region Internal
-        private static readonly StringBuilder _sessionContent = new StringBuilder();
-        private static readonly StreamWriter _fileWriter;
 
         /// <summary>
-        /// Adds a new entry to the log.
+        /// Prints a log entry to the <see cref="Console"/>.
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
-        /// <param name="message">The actual message text of the entry.</param>
-        private static void AddEntry(LogSeverity severity, string message)
+        /// <param name="message">The message text of the entry.</param>
+        [PublicAPI]
+        public static void PrintToConsole(LogSeverity severity, [NotNull] string message)
         {
             #region Sanity checks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            message = UnifyWhitespace(message);
-
-            lock (_sessionContent)
-            {
-                if (!DisableConsole) PrintToConsole(severity, message);
-
-                message = FormatMessage(severity, message);
-                _sessionContent.AppendLine(message);
-                if (_fileWriter != null) _fileWriter.WriteLine(message);
-                if (NewEntry != null) NewEntry(severity, message);
-            }
-        }
-
-        private static string UnifyWhitespace(string message)
-        {
-            string[] lines = message.Trim().SplitMultilineText();
-            message = string.Join(Environment.NewLine + "\t", lines);
-            return message;
-        }
-
-        private static string FormatMessage(LogSeverity severity, string message)
-        {
-            // Prepend severity and current time to message
-            string formatString;
-            switch (severity)
-            {
-                case LogSeverity.Info:
-                    formatString = "[{0:T}] {1}";
-                    break;
-                case LogSeverity.Warn:
-                    formatString = "[{0:T}] WARN: {1}";
-                    break;
-                case LogSeverity.Error:
-                    formatString = "[{0:T}] ERROR: {1}";
-                    break;
-                case LogSeverity.Echo:
-                default:
-                    formatString = "{1}";
-                    break;
-            }
-            string fileMessage = string.Format(CultureInfo.InvariantCulture, formatString, DateTime.Now, message);
-            return fileMessage;
-        }
-
-        private static void PrintToConsole(LogSeverity severity, string message)
-        {
             try
             {
-                // Write the colored message to the console
                 switch (severity)
                 {
+                    case LogSeverity.Debug:
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
+                    case LogSeverity.Info:
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
                     case LogSeverity.Warn:
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         break;
@@ -289,6 +245,51 @@ namespace NanoByte.Common
             catch (IOException)
             {}
             #endregion
+        }
+
+        #region Helpers
+        private static readonly object _lock = new object();
+
+        private static void AddEntry(LogSeverity severity, string message)
+        {
+            #region Sanity checks
+            if (message == null) throw new ArgumentNullException("message");
+            #endregion
+
+            message = UnifyWhitespace(message);
+            string formattedMessage = FormatMessage(severity, message);
+
+            lock (_lock)
+            {
+                System.Diagnostics.Debug.Print(formattedMessage);
+                _sessionContent.AppendLine(formattedMessage);
+                if (_fileWriter != null) _fileWriter.WriteLine(formattedMessage);
+                _handlers.Last()(severity, message);
+            }
+        }
+
+        private static string UnifyWhitespace(string message)
+        {
+            string[] lines = message.Trim().SplitMultilineText();
+            message = string.Join(Environment.NewLine + "\t", lines);
+            return message;
+        }
+
+        private static string FormatMessage(LogSeverity severity, string message)
+        {
+            switch (severity)
+            {
+                case LogSeverity.Debug:
+                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] DEBUG: {1}", DateTime.Now, message);
+                case LogSeverity.Info:
+                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] INFO: {1}", DateTime.Now, message);
+                case LogSeverity.Warn:
+                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] WARN: {1}", DateTime.Now, message);
+                case LogSeverity.Error:
+                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] ERROR: {1}", DateTime.Now, message);
+                default:
+                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] UNKNOWN: {1}", DateTime.Now, message);
+            }
         }
         #endregion
     }

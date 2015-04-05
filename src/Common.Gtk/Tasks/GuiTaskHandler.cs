@@ -58,6 +58,7 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException("task");
             #endregion
 
+            Log.Debug("Task: " + task.Name);
             using (var dialog = new TaskRunDialog(task, CancellationTokenSource, _owner))
             {
                 dialog.Execute();
@@ -75,14 +76,18 @@ namespace NanoByte.Common.Tasks
             if (question == null) throw new ArgumentNullException("question");
             #endregion
 
+            Log.Debug("Question: " + question);
             switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
             {
                 case ResponseType.Yes:
+                    Log.Debug("Answer: Yes");
                     return true;
                 case ResponseType.No:
+                    Log.Debug("Answer: No");
                     return false;
                 case ResponseType.Cancel:
                 default:
+                    Log.Debug("Answer: Cancel");
                     throw new OperationCanceledException();
             }
         }

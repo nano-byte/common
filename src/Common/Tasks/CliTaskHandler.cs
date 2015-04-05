@@ -34,7 +34,7 @@ namespace NanoByte.Common.Tasks
     public class CliTaskHandler : MarshalNoTimeout, ITaskHandler
     {
         /// <summary>
-        /// Sets up Ctrl+C capturing.
+        /// Sets up Ctrl+C capturing and console <see cref="Log"/> output.
         /// </summary>
         public CliTaskHandler()
         {
@@ -51,6 +51,30 @@ namespace NanoByte.Common.Tasks
             catch (IOException)
             {
                 // Ignore failures caused by non-standard terminal emulators
+            }
+
+            Log.Handler += LogHandler;
+        }
+
+        /// <summary>
+        /// Prints <see cref="Log"/> messages to the <see cref="Console"/> based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
+        /// </summary>
+        /// <param name="severity">The type/severity of the entry.</param>
+        /// <param name="message">The message text of the entry.</param>
+        protected virtual void LogHandler(LogSeverity severity, string message)
+        {
+            switch (severity)
+            {
+                case LogSeverity.Debug:
+                    if (Verbosity >= Verbosity.Debug) Log.PrintToConsole(severity, message);
+                    break;
+                case LogSeverity.Info:
+                    if (Verbosity >= Verbosity.Verbose) Log.PrintToConsole(severity, message);
+                    break;
+                case LogSeverity.Warn:
+                case LogSeverity.Error:
+                    Log.PrintToConsole(severity, message);
+                    break;
             }
         }
 
@@ -76,7 +100,8 @@ namespace NanoByte.Common.Tasks
                 task.Run(CancellationToken);
             else
             {
-                Log.Info(task.Name + "...");
+                Log.Debug("Task: " + task.Name);
+                Console.WriteLine(task.Name + @"...");
                 using (var progressBar = new ProgressBar())
                     task.Run(CancellationToken, progressBar);
             }
@@ -89,20 +114,23 @@ namespace NanoByte.Common.Tasks
             if (question == null) throw new ArgumentNullException("question");
             #endregion
 
-            Log.Info(question);
+            Log.Debug("Question: " + question);
+            Console.WriteLine(question);
 
             // Loop until the user has made a valid choice
             while (true)
             {
-                string input = CliUtils.ReadString("[Y/N]");
+                string input = CliUtils.ReadString(@"[Y/N]");
                 if (input == null) throw new OperationCanceledException();
                 switch (input.ToLower())
                 {
                     case "y":
                     case "yes":
+                        Log.Debug("Answer: Yes");
                         return true;
                     case "n":
                     case "no":
+                        Log.Debug("Answer: No");
                         return false;
                 }
             }
@@ -144,7 +172,11 @@ namespace NanoByte.Common.Tasks
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing) CancellationTokenSource.Dispose();
+            if (disposing)
+            {
+                Log.Handler -= LogHandler;
+                CancellationTokenSource.Dispose();
+            }
         }
         #endregion
     }

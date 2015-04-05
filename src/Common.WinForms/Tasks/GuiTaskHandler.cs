@@ -36,13 +36,46 @@ namespace NanoByte.Common.Tasks
         private readonly IWin32Window _owner;
 
         /// <summary>
-        /// Creates a new task handler.
+        /// Starts <see cref="Log"/> recording.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler; can be <see langword="null"/>.</param>
         public GuiTaskHandler([CanBeNull] IWin32Window owner = null)
         {
             _owner = owner;
+
+            Log.Handler += LogHandler;
         }
+
+        /// <summary>
+        /// Records <see cref="Log"/> messages in <see cref="ErrorLog"/> based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
+        /// </summary>
+        /// <param name="severity">The type/severity of the entry.</param>
+        /// <param name="message">The message text of the entry.</param>
+        protected virtual void LogHandler(LogSeverity severity, string message)
+        {
+            switch (severity)
+            {
+                case LogSeverity.Debug:
+                    if (Verbosity >= Verbosity.Debug) _errorLog.AppendPar(message, RtfColor.Green);
+                    break;
+                case LogSeverity.Info:
+                    if (Verbosity >= Verbosity.Verbose) _errorLog.AppendPar(message, RtfColor.Blue);
+                    break;
+                case LogSeverity.Warn:
+                    _errorLog.AppendPar(message, RtfColor.Orange);
+                    break;
+                case LogSeverity.Error:
+                    _errorLog.AppendPar(message, RtfColor.Red);
+                    break;
+            }
+        }
+
+        private readonly RtfBuilder _errorLog = new RtfBuilder();
+
+        /// <summary>
+        /// Collects <see cref="Log"/> entries with color-coded formatting.
+        /// </summary>
+        public RtfBuilder ErrorLog { get { return _errorLog; } }
 
         /// <summary>
         /// Used to signal the <see cref="CancellationToken"/>.
@@ -59,6 +92,7 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException("task");
             #endregion
 
+            Log.Debug("Task: " + task.Name);
             using (var dialog = new TaskRunDialog(task, CancellationTokenSource))
             {
                 dialog.ShowDialog(_owner);
@@ -76,14 +110,18 @@ namespace NanoByte.Common.Tasks
             if (question == null) throw new ArgumentNullException("question");
             #endregion
 
+            Log.Debug("Question: " + question);
             switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
             {
                 case DialogResult.Yes:
+                    Log.Debug("Answer: Yes");
                     return true;
                 case DialogResult.No:
+                    Log.Debug("Answer: No");
                     return false;
                 case DialogResult.Cancel:
                 default:
+                    Log.Debug("Answer: Cancel");
                     throw new OperationCanceledException();
             }
         }
@@ -120,7 +158,11 @@ namespace NanoByte.Common.Tasks
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing) CancellationTokenSource.Dispose();
+            if (disposing)
+            {
+                Log.Handler -= LogHandler;
+                CancellationTokenSource.Dispose();
+            }
         }
         #endregion
     }
