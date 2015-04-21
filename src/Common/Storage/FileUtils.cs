@@ -125,6 +125,16 @@ namespace NanoByte.Common.Storage
         }
         #endregion
 
+        #region Touch
+        /// <summary>
+        /// Sets the "last modified" timestamp for a file to now. Creates a new empty file if it does not exist yet.
+        /// </summary>
+        public static void Touch([NotNull, Localizable(false)] string path)
+        {
+            File.Open(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete).Dispose();
+        }
+        #endregion
+
         #region Time
         /// <summary>
         /// Converts a <see cref="DateTime"/> into the number of seconds since the Unix epoch (1970-1-1).

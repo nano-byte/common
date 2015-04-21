@@ -132,6 +132,27 @@ namespace NanoByte.Common.Storage
         }
         #endregion
 
+        #region Touch
+        /// <summary>
+        /// Ensures <see cref="FileUtils.Touch"/> correctly handles both missing and existing files.
+        /// </summary>
+        [Test]
+        public void TestTouch()
+        {
+            using (var tempDir = new TemporaryDirectory("unit-tests"))
+            {
+                string testFile = Path.Combine(tempDir, "test");
+                Assert.IsFalse(File.Exists(testFile));
+
+                FileUtils.Touch(testFile);
+                Assert.IsTrue(File.Exists(testFile));
+
+                FileUtils.Touch(testFile);
+                Assert.IsTrue(File.Exists(testFile));
+            }
+        }
+        #endregion
+
         #region Temp
         /// <summary>
         /// Creates a temporary fileusing <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
