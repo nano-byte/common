@@ -921,8 +921,6 @@ namespace NanoByte.Common.Storage
                     case "ntfs-3g": // NTFS
                     case "smbfs": // Windows Network Share
                     case "cifs": // Windows Network Share
-                    case "vboxsf": // VirtualBox Shared Folder
-                    case "vmhgfs": // VMware Shared Folder
                         return false;
 
                     default:
