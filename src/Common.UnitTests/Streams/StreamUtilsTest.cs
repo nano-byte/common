@@ -28,13 +28,13 @@ using NUnit.Framework;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Contains test methods for <see cref="StreamExtensions"/>.
+    /// Contains test methods for <see cref="StreamUtils"/>.
     /// </summary>
     [TestFixture]
-    public class StreamExtensionsTest
+    public class StreamUtilsTest
     {
         /// <summary>
-        /// Ensures <see cref="StreamExtensions.ContentEquals"/> works correctly.
+        /// Ensures <see cref="StreamUtils.ContentEquals"/> works correctly.
         /// </summary>
         [Test]
         public void TestContentEquals()
@@ -46,7 +46,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Ensures <see cref="StreamExtensions.ToStream"/> and <see cref="StreamExtensions.ReadToString"/> work correctly.
+        /// Ensures <see cref="StreamUtils.ToStream"/> and <see cref="StreamUtils.ReadToString"/> work correctly.
         /// </summary>
         [Test]
         public void TestString()
@@ -57,7 +57,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Ensures <see cref="StreamExtensions.WriteTo(System.IO.Stream,System.String)"/> correctly writes streams to files.
+        /// Ensures <see cref="StreamUtils.WriteTo(System.IO.Stream,System.String)"/> correctly writes streams to files.
         /// </summary>
         [Test]
         public void TestWriteToFile()

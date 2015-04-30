@@ -30,9 +30,9 @@ using NanoByte.Common.Tasks;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Provides extension methods for <see cref="Stream"/>s.
+    /// Provides <see cref="Stream"/>-related helper methods.
     /// </summary>
-    public static class StreamExtensions
+    public static class StreamUtils
     {
         /// <summary>
         /// Copies the content of one stream to another.
