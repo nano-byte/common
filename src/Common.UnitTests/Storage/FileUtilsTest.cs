@@ -268,6 +268,29 @@ namespace NanoByte.Common.Storage
                 fileCallbackMock.Verify();
             }
         }
+
+        [Test]
+        public void TestWalkThroughPrefix()
+        {
+            using (var tempDir = new TemporaryDirectory("unit-tests"))
+            {
+                string dotFile = Path.Combine(tempDir, ".something");
+                string prefix1 = Path.Combine(tempDir, "prefix1");
+                string prefix2 = Path.Combine(prefix1, "prefix2");
+                string sub = Path.Combine(prefix2, "sub");
+                string file = Path.Combine(prefix2, "file");
+
+                FileUtils.Touch(dotFile);
+                Directory.CreateDirectory(prefix1);
+                Directory.CreateDirectory(prefix2);
+                Directory.CreateDirectory(sub);
+                FileUtils.Touch(file);
+
+                Assert.AreEqual(
+                    expected: prefix2,
+                    actual: new DirectoryInfo(tempDir).WalkThroughPrefix().FullName);
+            }
+        }
         #endregion
 
         #region Links

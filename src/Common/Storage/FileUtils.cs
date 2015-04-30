@@ -384,6 +384,23 @@ namespace NanoByte.Common.Storage
                 else Walk(subDir, dirAction, fileAction);
             }
         }
+
+        /// <summary>
+        /// Skips through any directories that only contain a single subdirectory and no files.
+        /// </summary>
+        /// <remarks>Ignores files that start with a dot.</remarks>
+        public static DirectoryInfo WalkThroughPrefix(this DirectoryInfo directory)
+        {
+            #region Sanity checks
+            if (directory == null) throw new ArgumentNullException("directory");
+            #endregion
+
+            var subdirectories = directory.GetDirectories();
+            var files = directory.GetFiles().Where(x => !x.Name.StartsWith("."));
+
+            if (subdirectories.Length == 1 && !files.Any()) return WalkThroughPrefix(subdirectories[0]);
+            else return directory;
+        }
         #endregion
 
         #region ACLs
