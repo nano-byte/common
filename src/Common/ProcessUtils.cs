@@ -54,7 +54,7 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(assembly)) throw new ArgumentNullException("assembly");
             #endregion
 
-            Log.Debug("Launch assembly: " + assembly + " " + arguments);
+            Log.Debug("Launching assembly: " + assembly.EscapeArgument() + " " + arguments);
 
             return Process.Start(CreateAssemblyStartInfo(assembly, arguments));
         }
@@ -73,7 +73,7 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(assembly)) throw new ArgumentNullException("assembly");
             #endregion
 
-            Log.Debug("Run assembly: " + assembly + " " + arguments);
+            Log.Debug("Running assembly: " + assembly + " " + arguments);
 
             try
             {
@@ -103,7 +103,7 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(assembly)) throw new ArgumentNullException("assembly");
             #endregion
 
-            Log.Debug("Launch assembly as admin: " + assembly + " " + arguments);
+            Log.Debug("Launching assembly as admin: " + assembly + " " + arguments);
 
             return Process.Start(CreateAssemblyStartInfo(assembly, arguments, admin: true));
         }
@@ -118,7 +118,7 @@ namespace NanoByte.Common
         [PublicAPI]
         public static int RunAssemblyAsAdmin([NotNull, Localizable(false)] string assembly, [CanBeNull, Localizable(false)] string arguments = null)
         {
-            Log.Debug("Run assembly as admin: " + assembly + " " + arguments);
+            Log.Debug("Running assembly as admin: " + assembly + " " + arguments);
 
             try
             {
@@ -162,7 +162,7 @@ namespace NanoByte.Common
             if (execute == null) throw new ArgumentNullException("execute");
             #endregion
 
-            Log.Debug("Run async thread: " + name);
+            Log.Debug("Running async thread: " + name);
 
             var thread = new Thread(execute) {Name = name};
             thread.SetApartmentState(ApartmentState.STA); // Make COM work
@@ -183,7 +183,7 @@ namespace NanoByte.Common
             if (execute == null) throw new ArgumentNullException("execute");
             #endregion
 
-            Log.Debug("Run background thread: " + name);
+            Log.Debug("Running background thread: " + name);
 
             var thread = new Thread(execute) {Name = name, IsBackground = true};
             thread.Start();
@@ -203,7 +203,7 @@ namespace NanoByte.Common
             if (execute == null) throw new ArgumentNullException("execute");
             #endregion
 
-            Log.Debug("Run STA thread");
+            Log.Debug("Running STA thread");
 
             Exception error = null;
             var thread = new Thread(new ThreadStart(delegate

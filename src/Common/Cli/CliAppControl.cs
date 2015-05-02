@@ -77,7 +77,7 @@ namespace NanoByte.Common.Cli
                     // No locking since the data will only be read at the end
                     stdoutBuffer.AppendLine(process.StandardOutput.ReadLine());
                 }
-            }, name: "CliAppControl.stdout");
+            }, name: GetType().Name + ".stdout");
 
             // Asynchronously buffer all stderr messages
             var stderrList = new Queue<string>();
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Cli
                     if (!string.IsNullOrEmpty(data))
                         lock (stderrList) stderrList.Enqueue(data);
                 }
-            }, name: "CliAppControl.stderr");
+            }, name: GetType().Name + ".stderr");
 
             // Use callback to send data into external process
             if (inputCallback != null) inputCallback(process.StandardInput);

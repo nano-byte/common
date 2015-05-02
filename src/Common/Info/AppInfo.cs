@@ -62,7 +62,7 @@ namespace NanoByte.Common.Info
         /// The <see cref="Name"/> and <see cref="Version"/> combined.
         /// </summary>
         [XmlIgnore]
-        public string NameVersion { get { return Name + " v" + Version; } }
+        public string NameVersion { get { return Name + " " + Version; } }
 
         /// <summary>
         /// The copyright information for the application.
@@ -98,6 +98,7 @@ namespace NanoByte.Common.Info
         private static AppInfo Load()
         {
             var appInfo = Load(Assembly.GetEntryAssembly());
+            if (appInfo.Name == null || appInfo.Name.Length < 2) appInfo.Name = "Hosted";
             appInfo.Arguments = Environment.GetCommandLineArgs();
             return appInfo;
         }

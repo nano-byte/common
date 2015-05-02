@@ -31,9 +31,35 @@ namespace NanoByte.Common
     public class LogTest
     {
         [Test]
-        public void TestLogInfo()
+        public void TestContent()
         {
-            Log.Info("Running unit tests");
+            Log.Info("Log Unit Test Token");
+            Assert.IsTrue(Log.Content.Contains("Log Unit Test Token"));
+        }
+
+        [Test]
+        public void TestHandler()
+        {
+            LogSeverity reportedSeverity = (LogSeverity)(-1);
+            string reportedMessage = null;
+            LogEntryEventHandler handler = (severity, message) =>
+            {
+                reportedSeverity = severity;
+                reportedMessage = message;
+            };
+
+            Log.Handler += handler;
+            try
+            {
+                Log.Info("Log Unit Test Token");
+
+                Assert.AreEqual(expected: LogSeverity.Info, actual: reportedSeverity);
+                Assert.AreEqual(expected: "Log Unit Test Token", actual: reportedMessage);
+            }
+            finally
+            {
+                Log.Handler -= handler;
+            }
         }
     }
 }

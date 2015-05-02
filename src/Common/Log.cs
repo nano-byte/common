@@ -29,6 +29,7 @@ using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Info;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common
 {
@@ -61,7 +62,7 @@ namespace NanoByte.Common
 
     /// <summary>
     /// Sends log messages to custom handlers or the <see cref="Console"/>.
-    /// Additionally writes to <see cref="Debug"/>, an in-memory buffer and a plain text file.
+    /// Additionally writes to <see cref="System.Diagnostics.Debug"/>, an in-memory buffer and a plain text file.
     /// </summary>
     public static class Log
     {
@@ -102,12 +103,18 @@ namespace NanoByte.Common
             // Add session identification block to the file
             _fileWriter.WriteLine("");
             _fileWriter.WriteLine("/// " + AppInfo.Current.NameVersion);
+            _fileWriter.WriteLine("/// Install base: " + Locations.InstallBase);
+            _fileWriter.WriteLine("/// Command-line args: " + Environment.GetCommandLineArgs().JoinEscapeArguments());
             _fileWriter.WriteLine("/// Log session started at: " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
             _fileWriter.WriteLine("");
         }
         #endregion
 
-        private static readonly List<LogEntryEventHandler> _handlers = new List<LogEntryEventHandler> {PrintToConsole};
+        private static readonly List<LogEntryEventHandler> _handlers = new List<LogEntryEventHandler>
+        {
+            // Default handler
+            (severity, message) => { if (severity >= LogSeverity.Info) PrintToConsole(severity, message); }
+        };
 
         /// <summary>
         /// Invoked when a new entry is added to the log.
@@ -143,6 +150,19 @@ namespace NanoByte.Common
         }
 
         /// <summary>
+        /// Writes an exception as an <see cref="Debug(string)"/>.
+        /// </summary>
+        [PublicAPI]
+        public static void Debug([NotNull] Exception ex)
+        {
+            #region Sanity checks
+            if (ex == null) throw new ArgumentNullException("ex");
+            #endregion
+
+            Debug(ex.ToString());
+        }
+
+        /// <summary>
         /// Writes nice-to-know information to the log.
         /// </summary>
         [PublicAPI]
@@ -161,8 +181,9 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Writes an exception as a <see cref="Warn(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
+        /// Writes an exception's message as a <see cref="Warn(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
         /// </summary>
+        /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
         [PublicAPI]
         public static void Warn([NotNull] Exception ex)
         {
@@ -171,7 +192,9 @@ namespace NanoByte.Common
             #endregion
 
             Warn(ex.Message);
-            if (ex.InnerException != null) Warn(ex.InnerException);
+            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Warn(ex.InnerException.Message);
+
+            Debug(ex);
         }
 
         /// <summary>
@@ -184,8 +207,9 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Writes an exception as an <see cref="Error(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
+        /// Writes an exception's message as an <see cref="Error(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
         /// </summary>
+        /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
         [PublicAPI]
         public static void Error([NotNull] Exception ex)
         {
@@ -194,7 +218,9 @@ namespace NanoByte.Common
             #endregion
 
             Error(ex.Message);
-            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException);
+            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException.Message);
+
+            Debug(ex);
         }
 
         /// <summary>
@@ -214,10 +240,10 @@ namespace NanoByte.Common
                 switch (severity)
                 {
                     case LogSeverity.Debug:
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         break;
                     case LogSeverity.Info:
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.ForegroundColor = ConsoleColor.Green;
                         break;
                     case LogSeverity.Warn:
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
