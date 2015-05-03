@@ -19,12 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+ 
+ using System;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
     /// Defines a provider for progress updates.
     /// </summary>
+    /// <remarks>Implementations should derive from <see cref="MarshalByRefObject"/>.</remarks>
     /// <typeparam name="T">The type of progress update value.</typeparam>
     public interface IProgress<T>
     {

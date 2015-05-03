@@ -33,6 +33,7 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class GuiTaskHandler : MarshalNoTimeout, ITaskHandler
     {
+        [CanBeNull]
         private readonly IWin32Window _owner;
 
         /// <summary>

@@ -48,7 +48,10 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Used to execute and track <seealso cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
     /// </summary>
-    /// <remarks>The methods may be called from a background thread. Implementations apply appropriate thread-synchronization to update UI elements.</remarks>
+    /// <remarks>
+    /// The methods may be called from a background thread. Implementations need to apply appropriate thread-synchronization to update UI elements.
+    /// Implementations should derive from <see cref="MarshalNoTimeout"/>.
+    /// </remarks>
     public interface ITaskHandler : IDisposable
     {
         /// <summary>

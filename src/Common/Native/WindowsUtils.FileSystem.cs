@@ -84,8 +84,8 @@ namespace NanoByte.Common.Native
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             var handle = UnsafeNativeMethods.CreateFile(path, FileAccess.Write, FileShare.Write, IntPtr.Zero, FileMode.Create, 0, IntPtr.Zero);
-            var errrorCode = Marshal.GetLastWin32Error();
-            if (handle == new IntPtr(-1)) throw new Win32Exception(errrorCode);
+            int errno = Marshal.GetLastWin32Error();
+            if (handle == new IntPtr(-1)) throw new Win32Exception(errno);
 
             try
             {
@@ -117,8 +117,8 @@ namespace NanoByte.Common.Native
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Environment.CurrentDirectory, targetPath);
-            int retval = UnsafeNativeMethods.CreateSymbolicLink(sourcePath, targetPath, Directory.Exists(targetAbsolute) ? 1 : 0);
-            if (retval != 1) throw new Win32Exception(Marshal.GetLastWin32Error());
+            if (!UnsafeNativeMethods.CreateSymbolicLink(sourcePath, targetPath, Directory.Exists(targetAbsolute) ? 1 : 0))
+                throw new Win32Exception(Marshal.GetLastWin32Error());
         }
 
         /// <summary>
@@ -137,7 +137,8 @@ namespace NanoByte.Common.Native
             #endregion
 
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-            if (!UnsafeNativeMethods.CreateHardLink(sourcePath, targetPath, IntPtr.Zero)) throw new Win32Exception();
+            if (!UnsafeNativeMethods.CreateHardLink(sourcePath, targetPath, IntPtr.Zero))
+                throw new Win32Exception(Marshal.GetLastWin32Error());
         }
 
         /// <summary>
@@ -160,12 +161,13 @@ namespace NanoByte.Common.Native
         private static ulong GetFileIndex([NotNull, Localizable(false)] string path)
         {
             var handle = UnsafeNativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
-            if (handle == IntPtr.Zero) throw new Win32Exception();
+            if (handle == IntPtr.Zero) throw new Win32Exception(Marshal.GetLastWin32Error());
 
             try
             {
                 UnsafeNativeMethods.BY_HANDLE_FILE_INFORMATION fileInfo;
-                if (!UnsafeNativeMethods.GetFileInformationByHandle(handle, out fileInfo)) throw new Win32Exception();
+                if (!UnsafeNativeMethods.GetFileInformationByHandle(handle, out fileInfo))
+                    throw new Win32Exception(Marshal.GetLastWin32Error());
                 return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
             }
             finally

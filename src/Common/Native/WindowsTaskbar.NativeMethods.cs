@@ -100,7 +100,6 @@ namespace NanoByte.Common.Native
         [SuppressUnmanagedCodeSecurity]
         private static class UnsafeNativeMethods
         {
-            // Properties
             [DllImport("shell32", SetLastError = true)]
             public static extern int SHGetPropertyStoreForWindow(IntPtr hwnd, ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out IPropertyStore propertyStore);
 

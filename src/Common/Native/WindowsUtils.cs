@@ -82,6 +82,27 @@ namespace NanoByte.Common.Native
         }
         #endregion
 
+        #region Window messages
+        /// <summary>
+        /// Registers a new message type that can be sent to windows.
+        /// </summary>
+        /// <param name="message">A unique string used to identify the message type session-wide.</param>
+        /// <returns>A unique ID number used to identify the message type session-wide.</returns>
+        public static int RegisterWindowMessage(string message)
+        {
+            return IsWindows ? UnsafeNativeMethods.RegisterWindowMessage(message) : 0;
+        }
+
+        /// <summary>
+        /// Sends a message of a specific type to all windows in the current session.
+        /// </summary>
+        /// <param name="messageID">A unique ID number used to identify the message type session-wide.</param>
+        public static void BroadcastMessage(int messageID)
+        {
+            if (IsWindows) UnsafeNativeMethods.PostMessage(HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
+        }
+        #endregion
+
         #region Command-line arguments
         /// <summary>
         /// Tries to split a command-line into individual arguments.
@@ -113,6 +134,51 @@ namespace NanoByte.Common.Native
             {
                 UnsafeNativeMethods.LocalFree(ptrToSplitArgs);
             }
+        }
+        #endregion
+
+        #region Shell
+        /// <summary>
+        /// Sets the current process' explicit application user model ID.
+        /// </summary>
+        /// <param name="appID">The application ID to set.</param>
+        /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
+        public static void SetCurrentProcessAppID(string appID)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
+            #endregion
+
+            if (!IsWindows7) return;
+            UnsafeNativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
+        }
+
+        /// <summary>
+        /// Informs the Windows shell that changes were made to the file association data in the registry.
+        /// </summary>
+        /// <remarks>This should be called immediatley after the changes in order to trigger a refresh of the Explorer UI.</remarks>
+        public static void NotifyAssocChanged()
+        {
+            if (!IsWindows) return;
+
+            const uint SHCNE_ASSOCCHANGED = 0x08000000;
+            const uint SHCNF_IDLIST = 0;
+            UnsafeNativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
+
+        /// <summary>
+        /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
+        /// </summary>
+        public static void NotifyEnvironmentChanged()
+        {
+            if (!IsWindows) return;
+
+            const int WM_SETTINGCHANGE = 0x001A;
+            const int SMTO_ABORTIFHUNG = 0x0002;
+            IntPtr result;
+            UnsafeNativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out result);
         }
         #endregion
 
@@ -255,74 +321,6 @@ namespace NanoByte.Common.Native
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             UnsafeNativeMethods.CloseHandle(handle);
-        }
-        #endregion
-
-        #region App ID
-        /// <summary>
-        /// Sets the current process' explicit application user model ID.
-        /// </summary>
-        /// <param name="appID">The application ID to set.</param>
-        /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
-        public static void SetCurrentProcessAppID(string appID)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
-            #endregion
-
-            if (!IsWindows7) return;
-            UnsafeNativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
-        }
-        #endregion
-
-        #region Shell
-        /// <summary>
-        /// Informs the Windows shell that changes were made to the file association data in the registry.
-        /// </summary>
-        /// <remarks>This should be called immediatley after the changes in order to trigger a refresh of the Explorer UI.</remarks>
-        public static void NotifyAssocChanged()
-        {
-            if (!IsWindows) return;
-
-            const uint SHCNE_ASSOCCHANGED = 0x08000000;
-            const uint SHCNF_IDLIST = 0;
-            UnsafeNativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
-        }
-
-        private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
-
-        /// <summary>
-        /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
-        /// </summary>
-        public static void NotifyEnvironmentChanged()
-        {
-            if (!IsWindows) return;
-
-            const int WM_SETTINGCHANGE = 0x001A;
-            const int SMTO_ABORTIFHUNG = 0x0002;
-            IntPtr result;
-            UnsafeNativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out result);
-        }
-        #endregion
-
-        #region Window messages
-        /// <summary>
-        /// Registers a new message type that can be sent to windows.
-        /// </summary>
-        /// <param name="message">A unique string used to identify the message type session-wide.</param>
-        /// <returns>A unique ID number used to identify the message type session-wide.</returns>
-        public static int RegisterWindowMessage(string message)
-        {
-            return IsWindows ? UnsafeNativeMethods.RegisterWindowMessage(message) : 0;
-        }
-
-        /// <summary>
-        /// Sends a message of a specific type to all windows in the current session.
-        /// </summary>
-        /// <param name="messageID">A unique ID number used to identify the message type session-wide.</param>
-        public static void BroadcastMessage(int messageID)
-        {
-            if (IsWindows) UnsafeNativeMethods.PostMessage(HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
         }
         #endregion
     }

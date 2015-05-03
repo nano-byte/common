@@ -102,7 +102,7 @@ namespace NanoByte.Common.Values
         /// <param name="assembly">The <see cref="Assembly"/> to retrieve the <typeparamref name="TAttribute"/> from.</param>
         /// <param name="valueRetrieval">A callback used to retrieve a <typeparamref name="TValue"/> from a <typeparamref name="TAttribute"/>.</param>
         /// <returns>The retrieved value or <see langword="null"/> if no <typeparamref name="TAttribute"/> was found.</returns>
-        [NotNull]
+        [CanBeNull]
         public static TValue GetAttributeValue<TAttribute, TValue>([NotNull] this Assembly assembly, [NotNull, InstantHandle] Func<TAttribute, TValue> valueRetrieval)
             where TAttribute : Attribute
         {

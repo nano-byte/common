@@ -35,21 +35,6 @@ namespace NanoByte.Common.Native
         [SuppressUnmanagedCodeSecurity]
         private static class SafeNativeMethods
         {
-            // Command-line arguments
-            [DllImport("shell32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern IntPtr CommandLineToArgvW([MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
-
-
-            // Platform
-            [DllImport("kernel32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool IsWow64Process([In] IntPtr hProcess, [Out, MarshalAs(UnmanagedType.Bool)] out bool lpSystemInfo);
-
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern uint GetModuleFileName(IntPtr hModule, [Out] StringBuilder lpFilename, int nSize);
-
-
-            // Window messages
             [DllImport("user32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool PeekMessage(out WinMessage msg, IntPtr hWnd, uint messageFilterMin, uint messageFilterMax, uint flags);
@@ -57,8 +42,16 @@ namespace NanoByte.Common.Native
             [DllImport("user32")]
             public static extern int GetCaretBlinkTime();
 
+            [DllImport("shell32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern IntPtr CommandLineToArgvW([MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
 
-            // Performance counters
+            [DllImport("kernel32")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool IsWow64Process([In] IntPtr hProcess, [Out, MarshalAs(UnmanagedType.Bool)] out bool lpSystemInfo);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern uint GetModuleFileName(IntPtr hModule, [Out] StringBuilder lpFilename, int nSize);
+
             [DllImport("kernel32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool QueryPerformanceFrequency(out long lpFrequency);
@@ -71,25 +64,6 @@ namespace NanoByte.Common.Native
         [SuppressUnmanagedCodeSecurity]
         private static class UnsafeNativeMethods
         {
-            [DllImport("shell32", SetLastError = true)]
-            public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
-
-            [DllImport("kernel32", SetLastError = true)]
-            public static extern int CloseHandle(IntPtr hObject);
-
-            [DllImport("kernel32")]
-            public static extern IntPtr LocalFree(IntPtr hMem);
-
-
-            // Mutex
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern IntPtr CreateMutex(IntPtr lpMutexAttributes, bool bInitialOwner, string lpName);
-
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern IntPtr OpenMutex(UInt32 desiredAccess, bool inheritHandle, string name);
-
-
-            // Shell and window messages
             [DllImport("user32")]
             public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
@@ -105,28 +79,30 @@ namespace NanoByte.Common.Native
             [DllImport("user32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern int RegisterWindowMessage(string message);
 
+            [DllImport("user32")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool ReleaseCapture();
 
-            // Filesystem
-            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+            [DllImport("user32")]
+            public static extern IntPtr SetCapture(IntPtr handle);
+
+            [DllImport("shell32", SetLastError = true)]
+            public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
+
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern int CloseHandle(IntPtr hObject);
+
+            [DllImport("kernel32")]
+            public static extern IntPtr LocalFree(IntPtr hMem);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern IntPtr CreateMutex(IntPtr lpMutexAttributes, bool bInitialOwner, string lpName);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern IntPtr OpenMutex(UInt32 desiredAccess, bool inheritHandle, string name);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern IntPtr CreateFile(string lpFileName, [MarshalAs(UnmanagedType.U4)] FileAccess dwDesiredAccess, [MarshalAs(UnmanagedType.U4)] FileShare dwShareMode, IntPtr lpSecurityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode dwCreationDisposition, [MarshalAs(UnmanagedType.U4)] FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
-
-            [DllImport("kernel32.dll", SetLastError = true)]
-            public static extern bool GetFileInformationByHandle(IntPtr handle, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
-
-            [DllImport("kernel32", SetLastError = true)]
-            public static extern uint GetFileSize(IntPtr handle, IntPtr size);
-
-            [DllImport("kernel32", SetLastError = true)]
-            public static extern bool ReadFile(IntPtr handle, byte[] buffer, uint byteToRead, ref uint bytesRead, [In] ref NativeOverlapped lpOverlapped);
-
-            [DllImport("kernel32.dll", SetLastError = true)]
-            public static extern bool WriteFile(IntPtr hFile, byte[] lpBuffer, uint nNumberOfBytesToWrite, ref uint lpNumberOfBytesWritten, [In] ref NativeOverlapped lpOverlapped);
-
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern bool CreateHardLink(string lpFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
-
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern int CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, int dwFlags);
 
             [StructLayout(LayoutKind.Sequential)]
             public struct BY_HANDLE_FILE_INFORMATION
@@ -143,14 +119,23 @@ namespace NanoByte.Common.Native
                 public uint FileIndexLow;
             }
 
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern bool GetFileInformationByHandle(IntPtr handle, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
 
-            // Window messages
-            [DllImport("user32")]
-            public static extern IntPtr SetCapture(IntPtr handle);
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern uint GetFileSize(IntPtr handle, IntPtr size);
 
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool ReleaseCapture();
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern bool ReadFile(IntPtr handle, byte[] buffer, uint byteToRead, ref uint bytesRead, [In] ref NativeOverlapped lpOverlapped);
+
+            [DllImport("kernel32", SetLastError = true)]
+            public static extern bool WriteFile(IntPtr hFile, byte[] lpBuffer, uint nNumberOfBytesToWrite, ref uint lpNumberOfBytesWritten, [In] ref NativeOverlapped lpOverlapped);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern bool CreateHardLink(string lpFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, int dwFlags);
         }
     }
 }

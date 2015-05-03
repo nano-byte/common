@@ -69,7 +69,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="unitsByte"><see langword="true"/> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes; <see langword="false"/> if they are measured in generic units.</param>
         /// <param name="unitsProcessed">The number of units that have been processed so far.</param>
         /// <param name="unitsTotal">The total number of units that are to be processed; -1 for unknown.</param>
-        public TaskSnapshot(TaskState state, bool unitsByte, long unitsProcessed, long unitsTotal)
+        public TaskSnapshot(TaskState state, bool unitsByte = false, long unitsProcessed = 0, long unitsTotal = -1)
         {
             _state = state;
             _unitsByte = unitsByte;
