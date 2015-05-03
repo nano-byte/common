@@ -52,79 +52,71 @@ namespace NanoByte.Common
             _init = init;
         }
 
+        private readonly object _lock = new object();
+
         private T _form;
 
         [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "handle", Justification = "Need to retrieve value from Form.Handle to force window handle creation")]
         [SuppressMessage("ReSharper", "UnusedVariable", MessageId = "handle", Justification = "Need to retrieve value from Form.Handle to force window handle creation")]
         [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
-        private void InitializeForm()
+        private T InitializeForm()
         {
-            if (_form != null) return;
-
-            using (var handleCreatedEvent = new ManualResetEvent(false))
+            lock (_lock)
             {
-                ProcessUtils.RunAsync(() =>
+                if (_form != null) return _form;
+
+                T form = null;
+                using (var handleCreatedEvent = new ManualResetEvent(false))
                 {
-                    _form = _init();
+                    ProcessUtils.RunAsync(() =>
+                    {
+                        form = _init();
 
-                    // Force creation of handle without showing the form
-                    var handle = _form.Handle;
+                        // Force creation of handle without showing the form
+                        var handle = form.Handle;
 
-                    // Signal the calling thread the form is ready
-                    handleCreatedEvent.Set();
+                        // Signal the calling thread the form is ready
+                        handleCreatedEvent.Set();
 
-                    // Run message loop (will take ownership of the form)
-                    Application.Run();
-                }, "AsyncFormWrapper");
+                        // Run message loop (will take ownership of the form)
+                        Application.Run();
+                    }, "AsyncFormWrapper");
 
-                handleCreatedEvent.WaitOne();
-            }
-        }
-
-        private readonly object _lock = new object();
-
-        /// <summary>
-        /// Indicates whether the message loop is running and the underlying form is enabled.
-        /// </summary>
-        public bool IsReady
-        {
-            get
-            {
-                lock (_lock)
-                    return (_form != null) && _form.Enabled;
+                    handleCreatedEvent.WaitOne();
+                }
+                return _form = form;
             }
         }
 
         /// <summary>
         /// Starts the message loop if it is not running yet and executes an action on its thread waiting for it to complete.
         /// </summary>
-        /// <param name="action">A delegate that is passed the <see cref="Form"/> instance.</param>
+        /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
+        [PublicAPI]
         public void Post([NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
             #endregion
 
-            lock (_lock)
+            var form = InitializeForm();
+            try
             {
-                InitializeForm();
-
-                try
-                {
-                    _form.Invoke(action, _form);
-                }
-                    #region Sanity checks
-                catch (InvalidOperationException)
-                {
-                    throw new OperationCanceledException();
-                }
-                catch (InvalidAsynchronousStateException)
-                {
-                    throw new OperationCanceledException();
-                }
-                #endregion
+                form.Invoke(action, form);
             }
+                #region Sanity checks
+            catch (InvalidOperationException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            catch (InvalidAsynchronousStateException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            #endregion
         }
 
         /// <summary>
@@ -134,132 +126,142 @@ namespace NanoByte.Common
         /// <param name="action">A delegate that is passed the <see cref="Form"/> instance and returns a result.</param>
         /// <returns>The result returned by <paramref name="action"/>.</returns>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
+        [PublicAPI]
         public TResult Post<TResult>([NotNull, InstantHandle] Func<T, TResult> action)
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
             #endregion
 
-            lock (_lock)
+            var form = InitializeForm();
+            try
             {
-                InitializeForm();
-
-                try
-                {
-                    return (TResult)_form.Invoke(action, _form);
-                }
-                    #region Sanity checks
-                catch (InvalidOperationException)
-                {
-                    throw new OperationCanceledException();
-                }
-                catch (InvalidAsynchronousStateException)
-                {
-                    throw new OperationCanceledException();
-                }
-                #endregion
+                return (TResult)form.Invoke(action, form);
             }
+                #region Sanity checks
+            catch (InvalidOperationException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            catch (InvalidAsynchronousStateException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            #endregion
         }
 
         /// <summary>
         /// Starts the message loop if it is not running yet and executes an action on its thread without waiting for it to complete.
         /// </summary>
-        /// <param name="action">A delegate that is passed the <see cref="Form"/> instance.</param>
+        /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
+        [PublicAPI]
         public void Send([NotNull] Action<T> action)
         {
             #region Sanity checks
             if (action == null) throw new ArgumentNullException("action");
             #endregion
 
-            lock (_lock)
+            var form = InitializeForm();
+            try
             {
-                InitializeForm();
-
-                try
-                {
-                    _form.BeginInvoke(action, _form);
-                }
-                    #region Sanity checks
-                catch (InvalidOperationException)
-                {
-                    throw new OperationCanceledException();
-                }
-                catch (InvalidAsynchronousStateException)
-                {
-                    throw new OperationCanceledException();
-                }
-                #endregion
+                form.BeginInvoke(action, form);
             }
+                #region Sanity checks
+            catch (InvalidOperationException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            catch (InvalidAsynchronousStateException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            #endregion
         }
 
         /// <summary>
-        /// Sets <see cref="Control.Enabled"/> for the <see cref="Form"/> to <see langword="false"/> if it was already created.
+        /// Executes an action on the message loop thread without waiting for it to complete.
         /// </summary>
         /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
+        /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
-        public void Disable()
+        [PublicAPI]
+        public void SendLow([NotNull] Action<T> action)
         {
-            lock (_lock)
-            {
-                if (_form == null) return;
+            #region Sanity checks
+            if (action == null) throw new ArgumentNullException("action");
+            #endregion
 
-                try
-                {
-                    _form.Invoke(new Action(() => { _form.Enabled = false; }));
-                }
-                    #region Sanity checks
-                catch (InvalidOperationException)
-                {
-                    throw new OperationCanceledException();
-                }
-                catch (InvalidAsynchronousStateException)
-                {
-                    throw new OperationCanceledException();
-                }
-                #endregion
+            var form = _form;
+            if (form == null) return;
+
+            try
+            {
+                form.BeginInvoke(action, form);
             }
+                #region Sanity checks
+            catch (InvalidOperationException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            catch (InvalidAsynchronousStateException ex)
+            {
+                Log.Debug(ex);
+                throw new OperationCanceledException();
+            }
+            #endregion
         }
 
         /// <summary>
         /// Closes the <see cref="Form"/> and stops the message loop.
         /// </summary>
         /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
+        [PublicAPI]
         public void Close()
         {
+            T form;
             lock (_lock)
             {
                 if (_form == null) return;
-
-                try
-                {
-                    _form.Invoke(new Action(() =>
-                    {
-                        Application.ExitThread();
-                        _form.Dispose();
-                    }));
-                }
-                    #region Sanity checks
-                catch (InvalidOperationException)
-                {
-                    // Don't worry if the form was already closing
-                }
-                catch (InvalidAsynchronousStateException)
-                {
-                    // Don't worry if the form was already closing
-                }
-                catch (RemotingException)
-                {
-                    // Remoting exceptions on clean-up are not critical
-                }
-                catch (NullReferenceException)
-                {
-                    // Rare .NET bug
-                }
-                #endregion
-
+                form = _form;
                 _form = null;
             }
+
+            try
+            {
+                form.Invoke(new Action(() =>
+                {
+                    Application.ExitThread();
+                    form.Dispose();
+                }));
+            }
+                #region Sanity checks
+            catch (InvalidOperationException ex)
+            {
+                // Don't worry if the form was already closing
+                Log.Debug(ex);
+            }
+            catch (InvalidAsynchronousStateException ex)
+            {
+                // Don't worry if the form was already closing
+                Log.Debug(ex);
+            }
+            catch (RemotingException ex)
+            {
+                // Remoting exceptions on clean-up are not critical
+                Log.Debug(ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                // Rare .NET bug
+                Log.Debug(ex);
+            }
+            #endregion
         }
 
         /// <inheritdoc/>
