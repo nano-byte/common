@@ -45,10 +45,15 @@ namespace NanoByte.Common.Storage
     public static class Locations
     {
         /// <summary>
-        /// The directory the application binaries are located in without a trailing directory separator charachter.
+        /// The directory the application binaries are located in.
         /// </summary>
+        /// <remarks>
+        /// Uses the location of the NanoByte.Common DLL, not the calling EXE.
+        /// Works with ngened and shadow copied assemblies.
+        /// Does not work with GACed assemblies.
+        /// </remarks>
         [PublicAPI, NotNull]
-        public static readonly string InstallBase = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
+        public static readonly string InstallBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath) ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 
         /// <summary>
         /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <see langword="true"/>.
