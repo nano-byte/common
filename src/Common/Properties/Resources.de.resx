@@ -279,9 +279,6 @@
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Length von targets muss gleich Length von oldValues sein</value>
   </data>
-  <data name="UnableToCreateMutex" xml:space="preserve">
-    <value>Konnte Mutex nicht erstellen.</value>
-  </data>
   <data name="UnableToDelete" xml:space="preserve">
     <value>Die Datei konnte nicht gelöscht werden.</value>
   </data>

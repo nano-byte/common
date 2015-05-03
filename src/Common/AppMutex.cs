@@ -26,7 +26,6 @@ using System.ComponentModel;
 using System.Linq;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common
 {
@@ -63,34 +62,15 @@ namespace NanoByte.Common
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
         /// <remarks>The mutex will automatically be released once the process terminates. You can check the return value to prevent multiple instances from running.</remarks>
+        [PublicAPI]
         public static bool Create([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             #endregion
 
-            if (!WindowsUtils.IsWindowsNT) return false;
-
-            // Always create the mutex both in the local session and globally and report if any instance already existed
-            bool result = false;
-            IntPtr handle;
-            try
-            {
-                result = WindowsUtils.CreateMutex("Global\\" + name, out handle);
-            }
-            catch (Win32Exception)
-            {}
-            try
-            {
-                result |= WindowsUtils.CreateMutex(name, out handle);
-            }
-            catch (Win32Exception ex)
-            {
-                Log.Warn(Resources.UnableToCreateMutex);
-                Log.Warn(ex);
-            }
-
-            return result;
+            AppMutex mutex;
+            return Create(name, out mutex);
         }
 
         /// <summary>
@@ -113,28 +93,43 @@ namespace NanoByte.Common
                 return false;
             }
 
-            // Always create the mutex both in the local session and globally and report if any instance already existed
-            bool result = false;
+            bool existingMutex = false;
+
             IntPtr handle1 = IntPtr.Zero, handle2 = IntPtr.Zero;
             try
             {
-                result = WindowsUtils.CreateMutex("Global\\" + name, out handle1);
+                if (WindowsUtils.CreateMutex("Global\\" + name, out handle1))
+                {
+                    existingMutex = true;
+                    Log.Debug("Opened existing global mutex: " + name);
+                }
+                else Log.Debug("Created global mutex: " + name);
             }
+                #region Error handling
             catch (Win32Exception ex)
             {
                 Log.Warn(ex.Message);
             }
+            #endregion
+
             try
             {
-                result |= WindowsUtils.CreateMutex(name, out handle2);
+                if (WindowsUtils.CreateMutex(name, out handle2))
+                {
+                    existingMutex = true;
+                    Log.Debug("Opened existing local mutex: " + name);
+                }
+                else Log.Debug("Created local mutex: " + name);
             }
+                #region Error handling
             catch (Win32Exception ex)
             {
                 Log.Warn(ex.Message);
             }
+            #endregion
 
             mutex = new AppMutex(new[] {handle1, handle2});
-            return result;
+            return existingMutex;
         }
 
         /// <summary>
@@ -143,6 +138,7 @@ namespace NanoByte.Common
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if none existed.</returns>
         /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
+        [PublicAPI]
         public static bool Open([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
@@ -151,32 +147,47 @@ namespace NanoByte.Common
 
             if (!WindowsUtils.IsWindowsNT) return false;
 
-            // Always create the mutex both in the local session and globally and report if any instance already existed
-            bool result = false;
+            bool existingMutex = false;
+
             try
             {
-                result = WindowsUtils.OpenMutex("Global\\" + name);
+                if (WindowsUtils.OpenMutex("Global\\" + name))
+                {
+                    existingMutex = true;
+                    Log.Debug("Opened existing global mutex: " + name);
+                }
             }
+                #region Error handling
             catch (Win32Exception ex)
             {
                 Log.Warn(ex.Message);
             }
+            #endregion
+
             try
             {
-                result |= WindowsUtils.OpenMutex(name);
+                if (WindowsUtils.OpenMutex(name))
+                {
+                    existingMutex = true;
+                    Log.Debug("Opened existing local mutex: " + name);
+                }
             }
+                #region Error handling
             catch (Win32Exception ex)
             {
                 Log.Warn(ex.Message);
             }
-            return result;
+            #endregion
+
+            return existingMutex;
         }
 
         /// <summary>
-        /// Checks whether a specific mutex exists (local or global) without openining a lasting handle.
+        /// Checks whether a specific mutex exists (local or global) without opening a lasting handle.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><see langword="true"/> if an existing mutex was found; <see langword="false"/> if none existed.</returns>
+        [PublicAPI]
         public static bool Probe([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
@@ -185,25 +196,39 @@ namespace NanoByte.Common
 
             if (!WindowsUtils.IsWindowsNT) return false;
 
-            // Always check for the mutex both in the local session and globally and report if any instance already existed
-            bool result = false;
+            bool existingMutex = false;
+
             try
             {
-                result = WindowsUtils.ProbeMutex("Global\\" + name);
+                if (WindowsUtils.ProbeMutex("Global\\" + name))
+                {
+                    existingMutex = true;
+                    Log.Debug("Found existing global mutex: " + name);
+                }
             }
+                #region Error handling
             catch (Win32Exception ex)
             {
                 Log.Warn(ex.Message);
             }
+            #endregion
+
             try
             {
-                result |= WindowsUtils.ProbeMutex(name);
+                if (WindowsUtils.ProbeMutex(name))
+                {
+                    existingMutex = true;
+                    Log.Debug("Found existing local mutex: " + name);
+                }
             }
+                #region Error handling
             catch (Win32Exception ex)
             {
                 Log.Warn(ex.Message);
             }
-            return result;
+            #endregion
+
+            return existingMutex;
         }
     }
 }

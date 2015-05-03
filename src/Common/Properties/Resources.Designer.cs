@@ -547,15 +547,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to create mutex..
-        /// </summary>
-        internal static string UnableToCreateMutex {
-            get {
-                return ResourceManager.GetString("UnableToCreateMutex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The file could not be deleted..
         /// </summary>
         internal static string UnableToDelete {
