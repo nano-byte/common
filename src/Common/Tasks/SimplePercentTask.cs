@@ -29,17 +29,24 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// A delegate-driven task. Only completion is reported, no intermediate progress.
+    /// A callback to be called by a workload to report its progress in percent.
     /// </summary>
-    public sealed class SimpleTask : TaskBase
+    /// <param name="percent">The workload's progress in percent.</param>
+    [CLSCompliant(false)]
+    public delegate void PercentProgressCallback(uint percent);
+
+    /// <summary>
+    /// A delegate-driven task. Progress is reported in percent.
+    /// </summary>
+    public sealed class SimplePercentTask : TaskBase
     {
         private readonly string _name;
 
         /// <inheritdoc/>
         public override string Name { get { return _name; } }
 
-        /// <summary>The code to be executed by the task. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
-        private readonly Action _work;
+        /// <summary>The code to be executed by the task. Is given a callback to report progress in percent. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
+        private readonly Action<PercentProgressCallback> _work;
 
         /// <summary>A callback to be called when cancellation is requested via a <see cref="CancellationToken"/>.</summary>
         private readonly Action _cancelationCallback;
@@ -54,9 +61,9 @@ namespace NanoByte.Common.Tasks
         /// Creates a new simple task.
         /// </summary>
         /// <param name="name">A name describing the task in human-readable form.</param>
-        /// <param name="work">The code to be executed by the task. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
+        /// <param name="work">The code to be executed by the task. Is given a callback to report progress in percent. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
         /// <param name="cancellationCallback">A callback to be called when cancellation is requested via a <see cref="CancellationToken"/>.</param>
-        public SimpleTask([NotNull, Localizable(true)] string name, [NotNull] Action work, [CanBeNull] Action cancellationCallback = null)
+        public SimplePercentTask([NotNull, Localizable(true)] string name, [NotNull] Action<PercentProgressCallback> work, [CanBeNull] Action cancellationCallback = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
@@ -72,11 +79,12 @@ namespace NanoByte.Common.Tasks
         protected override void Execute()
         {
             State = TaskState.Started;
-            if (_cancelationCallback == null) _work();
+            UnitsTotal = 100;
+            if (_cancelationCallback == null) _work(percent => UnitsProcessed = percent);
             else
             {
                 using (CancellationToken.Register(_cancelationCallback))
-                    _work();
+                    _work(percent => UnitsProcessed = percent);
             }
             State = TaskState.Complete;
         }

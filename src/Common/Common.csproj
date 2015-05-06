@@ -104,6 +104,8 @@
     <Compile Include="NamedComparer.cs" />
     <Compile Include="Native\CompilerUtils.cs" />
     <Compile Include="Native\UnixUtils.cs" />
+    <Compile Include="Native\WindowsRestartManager.cs" />
+    <Compile Include="Native\WindowsRestartManager.NativeMethods.cs" />
     <Compile Include="Native\WindowsTaskbar.cs" />
     <Compile Include="Native\WindowsTaskbar.NativeMethods.cs" />
     <Compile Include="Native\WindowsUtils.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Tasks\MoveDirectory.cs" />
     <Compile Include="Tasks\Progress.cs" />
     <Compile Include="Tasks\SilentTaskHandler.cs" />
+    <Compile Include="Tasks\SimplePercentTask.cs" />
     <Compile Include="Tasks\SimpleTask.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
     <Compile Include="Tasks\TaskHandlerExtensions.cs" />
