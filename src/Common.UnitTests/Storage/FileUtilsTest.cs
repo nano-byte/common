@@ -230,7 +230,7 @@ namespace NanoByte.Common.Storage
         }
         #endregion
 
-        #region Directory walking
+        #region Directory
         // Interfaces used for mocking delegates
         // ReSharper disable once MemberCanBePrivate.Global
         public interface IActionSimulator<in T>
@@ -289,6 +289,25 @@ namespace NanoByte.Common.Storage
                 Assert.AreEqual(
                     expected: prefix2,
                     actual: new DirectoryInfo(tempDir).WalkThroughPrefix().FullName);
+            }
+        }
+
+        [Test]
+        public void TestGetFilesRecursive()
+        {
+            using (var tempDir = new TemporaryDirectory("unit-tests"))
+            {
+                string file1 = Path.Combine(tempDir, "file1");
+                string sub = Path.Combine(tempDir, "sub");
+                string file2 = Path.Combine(sub, "file2");
+
+                FileUtils.Touch(file1);
+                Directory.CreateDirectory(sub);
+                FileUtils.Touch(file2);
+
+                CollectionAssert.AreEqual(
+                    expected: new[] {file1, file2},
+                    actual: FileUtils.GetFilesRecursive(tempDir));
             }
         }
         #endregion

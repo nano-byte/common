@@ -401,6 +401,21 @@ namespace NanoByte.Common.Storage
             if (subdirectories.Length == 1 && !files.Any()) return WalkThroughPrefix(subdirectories[0]);
             else return directory;
         }
+
+        /// <summary>
+        /// Returns the full paths of all files in a directory and its subdirectories.
+        /// </summary>
+        /// <param name="path">The path of the directory to search for files.</param>
+        public static string[] GetFilesRecursive([NotNull] string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            var paths = new List<string>();
+            new DirectoryInfo(path).Walk(fileAction: file => paths.Add(file.FullName));
+            return paths.ToArray();
+        }
         #endregion
 
         #region ACLs
