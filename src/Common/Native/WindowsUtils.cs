@@ -323,5 +323,34 @@ namespace NanoByte.Common.Native
             UnsafeNativeMethods.CloseHandle(handle);
         }
         #endregion
+
+        #region Restart Manager
+        /// <summary>
+        /// Registers the current application for automatic restart after updates or crashes.
+        /// </summary>
+        /// <param name="arguments">The command-line arguments to pass to the application on restart. Must not be empty!</param>
+        public static void RegisterApplicationRestart([NotNull] string arguments)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(arguments)) throw new ArgumentNullException("arguments");
+            #endregion
+
+            if (!IsWindowsVista) return;
+
+            int retval = UnsafeNativeMethods.RegisterApplicationRestart(arguments, UnsafeNativeMethods.RestartFlags.NONE);
+            if (retval != 0) throw new Win32Exception(retval);
+        }
+
+        /// <summary>
+        /// Unregisters the current application for automatic restart after updates or crashes.
+        /// </summary>
+        public static void UnregisterApplicationRestart()
+        {
+            if (!IsWindowsVista) return;
+
+            int retval = UnsafeNativeMethods.UnregisterApplicationRestart();
+            if (retval != 0) throw new Win32Exception(retval);
+        }
+        #endregion
     }
 }

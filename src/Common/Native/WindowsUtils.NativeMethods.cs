@@ -136,6 +136,25 @@ namespace NanoByte.Common.Native
 
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, int dwFlags);
+
+            [Flags]
+            public enum RestartFlags
+            {
+                NONE = 0,
+                RESTART_CYCLICAL = 1,
+                RESTART_NOTIFY_SOLUTION = 2,
+                RESTART_NOTIFY_FAULT = 4,
+                RESTART_NO_CRASH = 8,
+                RESTART_NO_HANG = 16,
+                RESTART_NO_PATCH = 32,
+                RESTART_NO_REBOOT = 64
+            }
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode)]
+            public static extern int RegisterApplicationRestart(string pwzCommandLine, RestartFlags dwFlags);
+
+            [DllImport("kernel32")]
+            public static extern int UnregisterApplicationRestart();
         }
     }
 }

@@ -240,6 +240,9 @@
   <data name="ResetValue" xml:space="preserve">
     <value>Wert &amp;zurücksetzen</value>
   </data>
+  <data name="RestartingApps" xml:space="preserve">
+    <value>Starte Anwendungen neu</value>
+  </data>
   <data name="Revert" xml:space="preserve">
     <value>Zurücksetzen</value>
   </data>
@@ -248,6 +251,9 @@
   </data>
   <data name="ShowDetails" xml:space="preserve">
     <value>Details anzeigen</value>
+  </data>
+  <data name="ShuttingDownApps" xml:space="preserve">
+    <value>Beende Anwendungen</value>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Quelle und Ziel sind gleich.</value>

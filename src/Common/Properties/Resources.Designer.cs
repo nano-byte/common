@@ -430,6 +430,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restarting applications.
+        /// </summary>
+        internal static string RestartingApps {
+            get {
+                return ResourceManager.GetString("RestartingApps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Revert.
         /// </summary>
         internal static string Revert {
@@ -453,6 +462,15 @@ namespace NanoByte.Common.Properties {
         internal static string ShowDetails {
             get {
                 return ResourceManager.GetString("ShowDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutting down applications.
+        /// </summary>
+        internal static string ShuttingDownApps {
+            get {
+                return ResourceManager.GetString("ShuttingDownApps", resourceCulture);
             }
         }
         

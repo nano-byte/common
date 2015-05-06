@@ -75,6 +75,7 @@
     <Compile Include="Dispatch\ModelViewSyncTest.cs" />
     <Compile Include="Dispatch\PerTypeDispatcherTest.cs" />
     <Compile Include="LogTest.cs" />
+    <Compile Include="Native\WindowsRestartManagerTest.cs" />
     <Compile Include="Net\UriExtensionsTest.cs" />
     <Compile Include="Storage\FileUtilsTest.cs" />
     <Compile Include="Storage\XmlStorageTest.cs" />

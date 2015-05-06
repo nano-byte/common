@@ -240,6 +240,9 @@
   <data name="ResetValue" xml:space="preserve">
     <value>&amp;Reset value</value>
   </data>
+  <data name="RestartingApps" xml:space="preserve">
+    <value>Restarting applications</value>
+  </data>
   <data name="Revert" xml:space="preserve">
     <value>Revert</value>
   </data>
@@ -248,6 +251,9 @@
   </data>
   <data name="ShowDetails" xml:space="preserve">
     <value>Show details</value>
+  </data>
+  <data name="ShuttingDownApps" xml:space="preserve">
+    <value>Shutting down applications</value>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Source and destination are equal.</value>
