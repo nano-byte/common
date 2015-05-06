@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -32,13 +33,14 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class GuiTaskHandler : MarshalNoTimeout, ITaskHandler
     {
+        [CanBeNull]
         private readonly Window _owner;
 
         /// <summary>
         /// Creates a new task handler.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler.</param>
-        public GuiTaskHandler(Window owner = null)
+        public GuiTaskHandler([CanBeNull] Window owner = null)
         {
             _owner = owner;
         }
@@ -59,11 +61,14 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            using (var dialog = new TaskRunDialog(task, CancellationTokenSource, _owner))
+            Invoke(() =>
             {
-                dialog.Execute();
-                if (dialog.Exception != null) dialog.Exception.Rethrow();
-            }
+                using (var dialog = new TaskRunDialog(task, CancellationTokenSource, _owner))
+                {
+                    dialog.Execute();
+                    if (dialog.Exception != null) dialog.Exception.Rethrow();
+                }
+            });
         }
 
         /// <inheritdoc/>
@@ -77,7 +82,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Question: " + question);
-            switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
+            switch (Invoke(() => Msg.YesNoCancel(_owner, question, MsgSeverity.Warn)))
             {
                 case ResponseType.Yes:
                     Log.Debug("Answer: Yes");
@@ -100,11 +105,11 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            Msg.Inform(_owner, title + Environment.NewLine + message, MsgSeverity.Warn);
+            Invoke(() => Msg.Inform(_owner, title + Environment.NewLine + message, MsgSeverity.Info));
         }
 
         /// <inheritdoc/>
-        public void Output<T>(string title, IEnumerable<T> data)
+        public virtual void Output<T>(string title, IEnumerable<T> data)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
@@ -113,6 +118,23 @@ namespace NanoByte.Common.Tasks
 
             string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
             Output(title, message);
+        }
+
+        private void Invoke(System.Action action)
+        {
+            if (_owner == null) action();
+            else Application.Invoke((sender, args) => action());
+        }
+
+        private T Invoke<T>(Func<T> action)
+        {
+            if (_owner == null) return action();
+            else
+            {
+                T result = default(T);
+                Application.Invoke((sender, args) => { result = action(); });
+                return result;
+            }
         }
 
         #region Dispose

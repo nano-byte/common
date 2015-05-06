@@ -34,13 +34,13 @@ namespace NanoByte.Common.Tasks
     public class GuiTaskHandler : MarshalNoTimeout, ITaskHandler
     {
         [CanBeNull]
-        private readonly IWin32Window _owner;
+        private readonly Control _owner;
 
         /// <summary>
         /// Starts <see cref="Log"/> recording.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler; can be <see langword="null"/>.</param>
-        public GuiTaskHandler([CanBeNull] IWin32Window owner = null)
+        public GuiTaskHandler([CanBeNull] Control owner = null)
         {
             _owner = owner;
 
@@ -94,11 +94,14 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            using (var dialog = new TaskRunDialog(task, CancellationTokenSource))
+            Invoke(() =>
             {
-                dialog.ShowDialog(_owner);
-                if (dialog.Exception != null) dialog.Exception.Rethrow();
-            }
+                using (var dialog = new TaskRunDialog(task, CancellationTokenSource))
+                {
+                    dialog.ShowDialog(_owner);
+                    if (dialog.Exception != null) dialog.Exception.Rethrow();
+                }
+            });
         }
 
         /// <inheritdoc/>
@@ -112,7 +115,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Question: " + question);
-            switch (Msg.YesNoCancel(_owner, question, MsgSeverity.Warn))
+            switch (Invoke(() => Msg.YesNoCancel(_owner, question, MsgSeverity.Warn)))
             {
                 case DialogResult.Yes:
                     Log.Debug("Answer: Yes");
@@ -135,7 +138,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            OutputBox.Show(title, message, _owner);
+            Invoke(() => OutputBox.Show(title, message, _owner));
         }
 
         /// <inheritdoc/>
@@ -146,7 +149,19 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException("data");
             #endregion
 
-            OutputGridBox.Show(title, data, _owner);
+            Invoke(() => OutputGridBox.Show(title, data, _owner));
+        }
+
+        private void Invoke(Action action)
+        {
+            if (_owner == null) action();
+            else _owner.Invoke(action);
+        }
+
+        private T Invoke<T>(Func<T> action)
+        {
+            if (_owner == null) return action();
+            else return (T)_owner.Invoke(action);
         }
 
         #region Dispose
