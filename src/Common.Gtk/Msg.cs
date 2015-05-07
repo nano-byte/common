@@ -86,7 +86,7 @@ namespace NanoByte.Common
         public static ResponseType YesNoCancel([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-            return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo | ButtonsType.Cancel);
+            return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo, addCancel: true);
         }
         #endregion
 
@@ -98,7 +98,8 @@ namespace NanoByte.Common
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <param name="buttons">The buttons the user can click.</param>
-        private static ResponseType ShowMessageDialog([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, ButtonsType buttons)
+        /// <param name="addCancel">Add an additional "Cancel" button.</param>
+        private static ResponseType ShowMessageDialog([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, ButtonsType buttons, bool addCancel = false)
         {
             // Select icon based on message severity
             MessageType type;
@@ -119,6 +120,7 @@ namespace NanoByte.Common
             // Display MessageDialog
             using (var dialog = new MessageDialog(owner, DialogFlags.Modal, type, buttons, text))
             {
+                if (addCancel) dialog.AddButton(Stock.Cancel, 2);
                 dialog.Title = AppInfo.Current.ProductName;
                 var response = (ResponseType)dialog.Run();
                 dialog.Destroy();
