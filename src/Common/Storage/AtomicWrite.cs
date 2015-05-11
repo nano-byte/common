@@ -39,7 +39,6 @@ namespace NanoByte.Common.Storage
     /// </code></example>
     public sealed class AtomicWrite : IDisposable
     {
-        #region Properties
         /// <summary>
         /// The file path of the final destination.
         /// </summary>
@@ -56,9 +55,7 @@ namespace NanoByte.Common.Storage
         /// <see langword="true"/> if <see cref="Commit"/> has been called.
         /// </summary>
         public bool IsCommited { get; private set; }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Prepares a atomic write operation.
         /// </summary>
@@ -78,9 +75,7 @@ namespace NanoByte.Common.Storage
             // Prepend random string for temp file name
             WritePath = directory + Path.DirectorySeparatorChar + "temp." + Path.GetRandomFileName() + "." + Path.GetFileName(path);
         }
-        #endregion
 
-        #region Commit
         /// <summary>
         /// Allows the new file to be deployed upon <see cref="Dispose"/>.
         /// </summary>
@@ -88,9 +83,7 @@ namespace NanoByte.Common.Storage
         {
             IsCommited = true;
         }
-        #endregion
 
-        #region Dispose
         /// <summary>
         /// Replaces <see cref="DestinationPath"/> with the contents of <see cref="WritePath"/>.
         /// </summary>
@@ -105,6 +98,5 @@ namespace NanoByte.Common.Storage
                 if (File.Exists(WritePath)) File.Delete(WritePath);
             }
         }
-        #endregion
     }
 }

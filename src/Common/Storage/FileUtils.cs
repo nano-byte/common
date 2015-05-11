@@ -296,8 +296,10 @@ namespace NanoByte.Common.Storage
             {
                 File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
             }
-            catch (IOException)
+            catch (IOException ex)
             {
+                Log.Debug("File.Replace() failed. Falling back to simple 'delete and move' in case we are running on a Windows version that does not support File.Replace() (e.g. Windows Azure).");
+                Log.Debug(ex);
                 ReplaceSimple(sourcePath, destinationPath);
             }
             finally

@@ -32,7 +32,7 @@ using NanoByte.Common.Properties;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Downloads a file from a specific internet address to a local file (optionally as a background task).
+    /// Downloads a file from a specific internet address to a local file.
     /// </summary>
     public class DownloadFile : TaskBase
     {

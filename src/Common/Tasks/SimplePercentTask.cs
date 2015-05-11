@@ -38,6 +38,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// A delegate-driven task. Progress is reported in percent.
     /// </summary>
+    [CLSCompliant(false)]
     public sealed class SimplePercentTask : TaskBase
     {
         private readonly string _name;
@@ -78,14 +79,16 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override void Execute()
         {
-            State = TaskState.Started;
             UnitsTotal = 100;
+            State = TaskState.Started;
+
             if (_cancelationCallback == null) _work(percent => UnitsProcessed = percent);
             else
             {
                 using (CancellationToken.Register(_cancelationCallback))
                     _work(percent => UnitsProcessed = percent);
             }
+
             State = TaskState.Complete;
         }
     }
