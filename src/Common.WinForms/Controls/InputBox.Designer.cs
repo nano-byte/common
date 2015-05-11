@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputBox));
             this.labelPrompt = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -37,37 +36,57 @@
             // 
             // labelPrompt
             // 
-            resources.ApplyResources(this.labelPrompt, "labelPrompt");
+            this.labelPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPrompt.AutoEllipsis = true;
             this.labelPrompt.BackColor = System.Drawing.SystemColors.Control;
+            this.labelPrompt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.labelPrompt.Location = new System.Drawing.Point(12, 12);
             this.labelPrompt.Name = "labelPrompt";
+            this.labelPrompt.Size = new System.Drawing.Size(244, 69);
+            this.labelPrompt.TabIndex = 0;
+            this.labelPrompt.Text = "(Prompt)";
             // 
             // buttonOK
             // 
-            resources.ApplyResources(this.buttonOK, "buttonOK");
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonOK.Location = new System.Drawing.Point(262, 12);
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(70, 24);
+            this.buttonOK.TabIndex = 2;
+            this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(262, 42);
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(70, 24);
+            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // textInput
             // 
-            resources.ApplyResources(this.textInput, "textInput");
+            this.textInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textInput.Location = new System.Drawing.Point(12, 84);
             this.textInput.Name = "textInput";
+            this.textInput.Size = new System.Drawing.Size(320, 20);
+            this.textInput.TabIndex = 1;
             // 
             // InputBox
             // 
             this.AcceptButton = this.buttonOK;
             this.AllowDrop = true;
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(344, 120);
             this.ControlBox = false;
             this.Controls.Add(this.textInput);
             this.Controls.Add(this.buttonCancel);
@@ -75,7 +94,10 @@
             this.Controls.Add(this.labelPrompt);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(260, 155);
             this.Name = "InputBox";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "(Title)";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.InputBox_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.InputBox_DragEnter);
             this.ResumeLayout(false);

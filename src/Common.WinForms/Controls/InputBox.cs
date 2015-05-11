@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using JetBrains.Annotations;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {
@@ -36,6 +37,8 @@ namespace NanoByte.Common.Controls
         private InputBox()
         {
             InitializeComponent();
+            buttonOK.Text = Resources.OK;
+            buttonCancel.Text = Resources.Cancel;
         }
 
         /// <summary>

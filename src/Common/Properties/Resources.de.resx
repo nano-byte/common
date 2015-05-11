@@ -228,6 +228,9 @@
   <data name="NoXmlDataInZip" xml:space="preserve">
     <value>Es wurden keine XML Daten in der ZIP Datei gefunden.</value>
   </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Diese Methode steht nur unter Windows zur Verfügung.</value>
   </data>

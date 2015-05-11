@@ -21,6 +21,7 @@
  */
 
 using System.Windows.Forms;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {
@@ -32,6 +33,8 @@ namespace NanoByte.Common.Controls
         public OKCancelDialog()
         {
             InitializeComponent();
+            buttonOK.Text = Resources.OK;
+            buttonCancel.Text = Resources.Cancel;
         }
 
         private void buttonOK_Click(object sender, System.EventArgs e)
