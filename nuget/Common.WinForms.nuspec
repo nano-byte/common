@@ -19,7 +19,7 @@
         <file src="..\build\Release\NanoByte.Common.WinForms.*" target="lib\net20" />
 
         <!-- Satellite assemblies (translations) -->
-        <file src="..\build\Release\de\NanoByte.Common.WinForms.resources.dll" target="lib\net20\de" />
+        <file src="..\build\Release\**\NanoByte.Common.WinForms.resources.dll" target="lib\net20" />
 
         <!-- Bundled dependencies -->
         <file src="..\lib\ICSharpCode.TextEditor.*" target="lib\net20" />
