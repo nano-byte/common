@@ -82,9 +82,9 @@ namespace NanoByte.Common.Native
                 arrayLength = arrayLengthNeeded;
                 processInfo = new UnsafeNativeMethods.RM_PROCESS_INFO[arrayLength];
                 ret = UnsafeNativeMethods.RmGetList(_sessionHandle, out arrayLengthNeeded, ref arrayLength, processInfo, out rebootReasons);
-            } while (ret == UnsafeNativeMethods.ERROR_MORE_DATA);
+            } while (ret == WindowsUtils.Win32MoreData);
 
-            if (ret == UnsafeNativeMethods.ERROR_CANCELLED) throw new OperationCanceledException();
+            if (ret == WindowsUtils.Win32Cancelled) throw new OperationCanceledException();
             else if (ret != 0) throw new Win32Exception(ret);
 
             var names = new string[arrayLength];
@@ -114,7 +114,7 @@ namespace NanoByte.Common.Native
                     {
                         case 0:
                             break;
-                        case UnsafeNativeMethods.ERROR_CANCELLED:
+                        case WindowsUtils.Win32Cancelled:
                             throw new OperationCanceledException();
                         case UnsafeNativeMethods.ERROR_FAIL_NOACTION_REBOOT:
                         case UnsafeNativeMethods.ERROR_FAIL_SHUTDOWN:
@@ -147,7 +147,7 @@ namespace NanoByte.Common.Native
                     {
                         case 0:
                             break;
-                        case UnsafeNativeMethods.ERROR_CANCELLED:
+                        case WindowsUtils.Win32Cancelled:
                             throw new OperationCanceledException();
                         case UnsafeNativeMethods.ERROR_FAIL_RESTART:
                             throw new UnauthorizedAccessException(new Win32Exception(ret).Message);

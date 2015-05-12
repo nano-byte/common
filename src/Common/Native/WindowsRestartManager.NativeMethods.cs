@@ -33,7 +33,7 @@ namespace NanoByte.Common.Native
         [SuppressUnmanagedCodeSecurity]
         private static class UnsafeNativeMethods
         {
-            public const int ERROR_MORE_DATA = 234, ERROR_FAIL_NOACTION_REBOOT = 350, ERROR_FAIL_SHUTDOWN = 351, ERROR_FAIL_RESTART = 352, ERROR_CANCELLED = 1223;
+            public const int ERROR_FAIL_NOACTION_REBOOT = 350, ERROR_FAIL_SHUTDOWN = 351, ERROR_FAIL_RESTART = 352;
 
             [DllImport("rstrtmgr", CharSet = CharSet.Unicode)]
             public static extern int RmStartSession(out IntPtr pSessionHandle, int dwSessionFlags, string strSessionKey);

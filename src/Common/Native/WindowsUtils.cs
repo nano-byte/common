@@ -37,6 +37,24 @@ namespace NanoByte.Common.Native
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static partial class WindowsUtils
     {
+        #region Win32 Error Codes
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that more data is available and the query should be repeated with a larger output buffer/array.
+        /// </summary>
+        public const int Win32MoreData = 234;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation was cancelled by the user.
+        /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
+        public const int Win32Cancelled = 1223;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that the requested application needs UAC elevation.
+        /// </summary>
+        public const int Win32RequestedOperationRequiresElevation = 740;
+        #endregion
+
         #region .NET Framework
         /// <summary>The full version number of the .NET Framework 2.0. This release contains a new compiler and CLR.</summary>
         public const string NetFx20 = "v2.0.50727";
