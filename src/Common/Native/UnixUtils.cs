@@ -23,6 +23,7 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Mono.Unix;
 using Mono.Unix.Native;
@@ -51,6 +52,7 @@ namespace NanoByte.Common.Native
         [NotNull]
         public static string OSName
         {
+            [MethodImpl(MethodImplOptions.NoInlining)]
             get
             {
                 Utsname buffer;
@@ -65,6 +67,7 @@ namespace NanoByte.Common.Native
         [NotNull]
         public static string CpuType
         {
+            [MethodImpl(MethodImplOptions.NoInlining)]
             get
             {
                 Utsname buffer;
@@ -97,6 +100,7 @@ namespace NanoByte.Common.Native
         /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
@@ -114,6 +118,7 @@ namespace NanoByte.Common.Native
         /// <param name="targetPath">The absolute path of the existing file to point to.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
@@ -131,6 +136,7 @@ namespace NanoByte.Common.Native
         /// <param name="path2">The path of the second file.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
@@ -147,6 +153,7 @@ namespace NanoByte.Common.Native
         /// <param name="source">The path of the file to rename.</param>
         /// <param name="destination">The new path of the file. Must reside on the same file system as <paramref name="source"/>.</param>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void Rename([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string destination)
         {
             #region Sanity checks
@@ -303,6 +310,7 @@ namespace NanoByte.Common.Native
         /// <param name="name">The name of the attribute to read.</param>
         /// <returns>The contents of the attribute as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
         [CanBeNull]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static byte[] GetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
@@ -322,6 +330,7 @@ namespace NanoByte.Common.Native
         /// <param name="name">The name of the attribute to set.</param>
         /// <param name="data">The data to write to the attribute.</param>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void SetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name, [NotNull] byte[] data)
         {
             #region Sanity checks
@@ -369,6 +378,7 @@ namespace NanoByte.Common.Native
         /// <remarks>Only works on Linux, not on other Unixes (e.g. MacOS X).</remarks>
         /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         [NotNull]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetFileSystem([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
