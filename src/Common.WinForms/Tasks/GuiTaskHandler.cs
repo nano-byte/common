@@ -94,14 +94,16 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
+            Exception ex = null;
             Invoke(() =>
             {
                 using (var dialog = new TaskRunDialog(task, CancellationTokenSource))
                 {
                     dialog.ShowDialog(_owner);
-                    if (dialog.Exception != null) dialog.Exception.Rethrow();
+                    ex = dialog.Exception;
                 }
             });
+            if (ex != null) ex.Rethrow();
         }
 
         /// <inheritdoc/>
