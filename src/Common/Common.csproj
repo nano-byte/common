@@ -88,7 +88,7 @@
     <Compile Include="Dispatch\ModelViewSync.cs" />
     <Compile Include="Dispatch\PerTypeDispatcher.Action.cs" />
     <Compile Include="Dispatch\PerTypeDispatcher.Func.cs" />
-    <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ExceptionUtils.cs" />
     <Compile Include="Future.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IChangeNotify.cs" />

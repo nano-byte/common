@@ -33,7 +33,6 @@ namespace NanoByte.Common.Collections
     [TestFixture]
     public class EnumerableExtensionsTest
     {
-        #region LINQ
         [Test]
         public void TestMaxBy()
         {
@@ -94,9 +93,7 @@ namespace NanoByte.Common.Collections
                 expected: new[] {"A", "B", "C"},
                 actual: strings.Prepend("A"));
         }
-        #endregion
 
-        #region Equality
         [Test]
         public void TestSequencedEqualsList()
         {
@@ -149,58 +146,5 @@ namespace NanoByte.Common.Collections
             Assert.AreNotEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"X", "Y", "Z"}.GetUnsequencedHashCode());
             Assert.AreNotEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"A", "B"}.GetUnsequencedHashCode());
         }
-        #endregion
-
-        #region Transactions
-        /// <summary>
-        /// Ensures that <see cref="EnumerableExtensions.ApplyWithRollback{T}"/> correctly performs rollbacks on exceptions.
-        /// </summary>
-        [Test]
-        public void TestApplyWithRollback()
-        {
-            var applyCalledFor = new List<int>();
-            var rollbackCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.ApplyWithRollback(value =>
-            {
-                applyCalledFor.Add(value);
-                if (value == 2) throw new ArgumentException("Test exception");
-            }, rollbackCalledFor.Add), "Exceptions should be passed through after rollback.");
-
-            CollectionAssert.AreEqual(new[] {1, 2}, applyCalledFor);
-            CollectionAssert.AreEqual(new[] {2, 1}, rollbackCalledFor);
-        }
-
-        /// <summary>
-        /// Ensures that <see cref="EnumerableExtensions.Try{T}"/> correctly handles fail conditions followed by success conditions.
-        /// </summary>
-        [Test]
-        public void TestTrySucceed()
-        {
-            var actionCalledFor = new List<int>();
-            new[] {1, 2, 3}.Try(value =>
-            {
-                actionCalledFor.Add(value);
-                if (value == 1) throw new ArgumentException("Test exception");
-            });
-
-            CollectionAssert.AreEqual(new[] {1, 2}, actionCalledFor);
-        }
-
-        /// <summary>
-        /// Ensures that <see cref="EnumerableExtensions.Try{T}"/> correctly handles pure fail conditions.
-        /// </summary>
-        [Test]
-        public void TestTryFail()
-        {
-            var actionCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.Try(value =>
-            {
-                actionCalledFor.Add(value);
-                throw new ArgumentException("Test exception");
-            }), "Last exceptions should be passed through.");
-
-            CollectionAssert.AreEqual(new[] {1, 2, 3}, actionCalledFor);
-        }
-        #endregion
     }
 }
