@@ -171,8 +171,11 @@ namespace NanoByte.Common.Native
 
         private void ShutdownAppsWork(PercentProgressCallback progressCallback)
         {
-            int ret = UnsafeNativeMethods.RmShutdown(_sessionHandle, UnsafeNativeMethods.RM_SHUTDOWN_TYPE.RmForceShutdown, progressCallback);
-            if (ret != 0) throw BuildException(ret);
+            ExceptionUtils.Retry<IOException>(lastAttempt =>
+            {
+                int ret = UnsafeNativeMethods.RmShutdown(_sessionHandle, lastAttempt ? UnsafeNativeMethods.RM_SHUTDOWN_TYPE.RmForceShutdown : 0, progressCallback);
+                if (ret != 0) throw BuildException(ret);
+            }, maxRetries: 3);
         }
         #endregion
 

@@ -25,11 +25,19 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Security;
+using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common
 {
+    /// <summary>
+    /// Delegate used by <seealso cref="ExceptionUtils.Retry{TException}"/>.
+    /// </summary>
+    /// <param name="lastAttempt">Indicates whether this retry run is the last attempt before giving up and passing the exception through.</param>
+    /// <seealso cref="ExceptionUtils.Retry{TException}"/>
+    public delegate void RetryAction(bool lastAttempt);
+
     /// <summary>
     /// Provides helper methods related to <see cref="Exception"/>s.
     /// </summary>
@@ -144,6 +152,45 @@ namespace NanoByte.Common
                 {
                     if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
                     else throw; // Rethrow exception if there are no more elements
+                }
+            }
+        }
+
+        private static readonly Random _random = new Random();
+
+        /// <summary>
+        /// Executes a delegate and automatically retries it using exponential backoff if a specifc type of exception was raised.
+        /// </summary>
+        /// <typeparam name="TException">The type of exception to triger a retry.</typeparam>
+        /// <param name="action">The action to execute.</param>
+        /// <param name="maxRetries">The maximum number of retries to attempt.</param>
+        public static void Retry<TException>([NotNull, InstantHandle] RetryAction action, int maxRetries = 2)
+            where TException : Exception
+        {
+            #region Sanity checks
+            if (action == null) throw new ArgumentNullException("action");
+            #endregion
+
+            int retryCounter = 0;
+            Retry:
+            if (retryCounter >= maxRetries)
+                action(lastAttempt: true);
+            else
+            {
+                try
+                {
+                    action(lastAttempt: false);
+                }
+                catch (TException ex)
+                {
+                    Log.Info(ex);
+
+                    int delay = _random.Next(50, 1000 * (1 << retryCounter));
+                    Log.Info("Retrying in " + delay + " milliseconds");
+                    Thread.Sleep(delay);
+
+                    retryCounter++;
+                    goto Retry;
                 }
             }
         }

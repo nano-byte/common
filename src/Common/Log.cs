@@ -172,6 +172,23 @@ namespace NanoByte.Common
         }
 
         /// <summary>
+        /// Writes an exception's message as a <see cref="Info(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
+        /// </summary>
+        /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
+        [PublicAPI]
+        public static void Info([NotNull] Exception ex)
+        {
+            #region Sanity checks
+            if (ex == null) throw new ArgumentNullException("ex");
+            #endregion
+
+            Info(ex.Message);
+            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Info(ex.InnerException.Message);
+
+            Debug(ex);
+        }
+
+        /// <summary>
         /// Writes a warning that doesn't have to be acted upon immediately to the log.
         /// </summary>
         [PublicAPI]

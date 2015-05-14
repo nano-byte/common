@@ -91,7 +91,8 @@ namespace NanoByte.Common.Storage
         {
             try
             {
-                if (File.Exists(WritePath) && IsCommited) FileUtils.Replace(WritePath, DestinationPath);
+                if (File.Exists(WritePath) && IsCommited)
+                    ExceptionUtils.Retry<IOException>(delegate { FileUtils.Replace(WritePath, DestinationPath); });
             }
             finally
             {

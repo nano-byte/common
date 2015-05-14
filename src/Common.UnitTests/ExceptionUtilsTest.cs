@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -96,6 +97,26 @@ namespace NanoByte.Common
             }), "Last exceptions should be passed through.");
 
             CollectionAssert.AreEqual(new[] {1, 2, 3}, actionCalledFor);
+        }
+
+        [Test]
+        public void TestRetryPassOnLastAttmpt()
+        {
+            ExceptionUtils.Retry<InvalidOperationException>(lastAttempt => { if (!lastAttempt) throw new InvalidOperationException("Test exception"); });
+        }
+
+        [Test]
+        public void TestRetryDoubleFail()
+        {
+            Assert.Throws<InvalidOperationException>(() => ExceptionUtils.Retry<InvalidOperationException>(
+                delegate { throw new InvalidOperationException("Test exception"); }, maxRetries: 1));
+        }
+
+        [Test]
+        public void TestRetryOtherExceptionType()
+        {
+            Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
+                delegate { throw new IOException("Test exception"); }, maxRetries: 1));
         }
     }
 }
