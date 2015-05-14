@@ -43,10 +43,10 @@ namespace NanoByte.Common.Controls
         /// Displays an ouput dialog with tabular data.
         /// </summary>
         /// <typeparam name="T">The type of the data elements to display.</typeparam>
+        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
         /// <param name="title">A title for the data.</param>
         /// <param name="data">The data to display.</param>
-        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
-        public static void Show<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data, [CanBeNull] IWin32Window owner = null)
+        public static void Show<T>([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");

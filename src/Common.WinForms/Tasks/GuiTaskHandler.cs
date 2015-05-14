@@ -140,7 +140,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            Invoke(() => OutputBox.Show(title, message, _owner));
+            Invoke(() => OutputBox.Show(_owner, title, message));
         }
 
         /// <inheritdoc/>
@@ -151,7 +151,7 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException("data");
             #endregion
 
-            Invoke(() => OutputGridBox.Show(title, data, _owner));
+            Invoke(() => OutputGridBox.Show(_owner, title, data));
         }
 
         private void Invoke(Action action)

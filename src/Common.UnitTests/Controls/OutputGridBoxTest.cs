@@ -51,21 +51,21 @@ namespace NanoByte.Common.Controls
                 new TestData {Name = "A", Uri = new Uri("http://test/1"), Internal = "abc"},
                 new TestData {Name = "B", Uri = new Uri("http://test/2"), Internal = "xyz"}
             };
-            OutputGridBox.Show("Title", data.Select(x => x));
+            OutputGridBox.Show(null, "Title", data.Select(x => x));
         }
 
         [Test]
         public void TestOutputStrings()
         {
             var data = new[] {"a", "b", "c"};
-            OutputGridBox.Show("Title", data.Select(x => x));
+            OutputGridBox.Show(null, "Title", data.Select(x => x));
         }
 
         [Test]
         public void TestOutputUris()
         {
             var data = new[] {new Uri("http://a/"), new Uri("http://b/")};
-            OutputGridBox.Show("Title", data.Select(x => x));
+            OutputGridBox.Show(null, "Title", data.Select(x => x));
         }
     }
 }

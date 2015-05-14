@@ -40,11 +40,10 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Displays an ouput box with some text.
         /// </summary>
+        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
         /// <param name="title">The text to display above the <paramref name="message"/>.</param>
         /// <param name="message">The selectable multi-line text to display to the user.</param>
-        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
-        /// <returns>The text the user entered if he pressed OK; otherwise <see langword="null"/>.</returns>
-        public static void Show([NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message, [CanBeNull] IWin32Window owner = null)
+        public static void Show([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
