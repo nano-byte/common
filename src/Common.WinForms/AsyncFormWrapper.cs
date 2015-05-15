@@ -68,7 +68,7 @@ namespace NanoByte.Common
                 T form = null;
                 using (var handleCreatedEvent = new ManualResetEvent(false))
                 {
-                    ProcessUtils.RunAsync(() =>
+                    ThreadUtils.StartAsync(() =>
                     {
                         form = _init();
 

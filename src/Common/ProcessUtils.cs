@@ -23,9 +23,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
@@ -38,7 +36,6 @@ namespace NanoByte.Common
     /// </summary>
     public static class ProcessUtils
     {
-        #region Assembly
         /// <summary>
         /// Launches a .NET assembly located in the application's base directory.
         /// </summary>
@@ -146,83 +143,5 @@ namespace NanoByte.Common
             if (admin && WindowsUtils.IsWindowsNT) startInfo.Verb = "runas";
             return startInfo;
         }
-        #endregion
-
-        #region Thread
-        /// <summary>
-        /// Starts executing a delegate in a new thread suitable for WinForms.
-        /// </summary>
-        /// <param name="execute">The delegate to execute.</param>
-        /// <param name="name">A short name for the new thread; can be <see langword="null"/>.</param>
-        /// <returns>The newly launched thread.</returns>
-        [PublicAPI]
-        public static Thread RunAsync([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
-        {
-            #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
-            #endregion
-
-            Log.Debug("Running async thread: " + name);
-
-            var thread = new Thread(execute) {Name = name};
-            thread.SetApartmentState(ApartmentState.STA); // Make COM work
-            thread.Start();
-            return thread;
-        }
-
-        /// <summary>
-        /// Starts executing a delegate in a new background thread (automatically terminated when application exits).
-        /// </summary>
-        /// <param name="execute">The delegate to execute.</param>
-        /// <param name="name">A short name for the new thread; can be <see langword="null"/>.</param>
-        /// <returns>The newly launched thread.</returns>
-        [PublicAPI]
-        public static Thread RunBackground([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
-        {
-            #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
-            #endregion
-
-            Log.Debug("Running background thread: " + name);
-
-            var thread = new Thread(execute) {Name = name, IsBackground = true};
-            thread.Start();
-            return thread;
-        }
-
-        /// <summary>
-        /// Executes a delegate in a new <see cref="ApartmentState.STA"/> thread. Blocks the caller until the execution completes.
-        /// </summary>
-        /// <returns>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</returns>
-        /// <param name="execute">The delegate to execute.</param>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
-        [PublicAPI]
-        public static void RunSta([NotNull] ThreadStart execute)
-        {
-            #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
-            #endregion
-
-            Log.Debug("Running STA thread");
-
-            Exception error = null;
-            var thread = new Thread(new ThreadStart(delegate
-            {
-                try
-                {
-                    execute();
-                }
-                catch (Exception ex)
-                {
-                    error = ex;
-                }
-            }));
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-            thread.Join();
-
-            if (error != null) error.Rethrow();
-        }
-        #endregion
     }
 }

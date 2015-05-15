@@ -94,7 +94,7 @@ namespace NanoByte.Common.Streams
             ServerUri = new Uri(StartListening());
             FileUri = new Uri(ServerUri, resourceName);
 
-            ProcessUtils.RunBackground(Listen, name: "MicroServer.Listen");
+            ThreadUtils.StartBackground(Listen, name: "MicroServer.Listen");
         }
 
         /// <summary>

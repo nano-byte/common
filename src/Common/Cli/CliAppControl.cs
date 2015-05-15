@@ -70,7 +70,7 @@ namespace NanoByte.Common.Cli
 
             // Asynchronously buffer all stdout data
             var stdoutBuffer = new StringBuilder();
-            var stdoutThread = ProcessUtils.RunBackground(() =>
+            var stdoutThread = ThreadUtils.StartBackground(() =>
             {
                 while (!process.StandardOutput.EndOfStream)
                 {
@@ -81,7 +81,7 @@ namespace NanoByte.Common.Cli
 
             // Asynchronously buffer all stderr messages
             var stderrList = new Queue<string>();
-            var stderrThread = ProcessUtils.RunBackground(() =>
+            var stderrThread = ThreadUtils.StartBackground(() =>
             {
                 while (!process.StandardError.EndOfStream)
                 {
