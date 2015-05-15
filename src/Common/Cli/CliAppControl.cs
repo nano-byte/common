@@ -54,11 +54,11 @@ namespace NanoByte.Common.Cli
             Process process;
             try
             {
-                process = Process.Start(GetStartInfo(arguments, hidden: true));
+                process = GetStartInfo(arguments, hidden: true).Start();
                 Debug.Assert(process != null);
             }
                 #region Error handling
-            catch (Win32Exception ex)
+            catch (IOException ex)
             {
                 throw new IOException(string.Format(Resources.UnableToLaunchBundled, AppBinary), ex);
             }
