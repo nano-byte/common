@@ -212,7 +212,7 @@ namespace NanoByte.Common.Tasks
 
         private string PathInDestination(FileSystemInfo element)
         {
-            return Path.Combine(DestinationPath, element.RelativeTo(_source).Replace('/', Path.DirectorySeparatorChar));
+            return Path.Combine(DestinationPath, element.RelativeTo(_source));
         }
     }
 }

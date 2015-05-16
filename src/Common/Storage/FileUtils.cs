@@ -71,19 +71,26 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Returns a relative path pointing to <paramref name="targetPath"/> from <paramref name="basePath"/> using Unix-style directory separators.
+        /// Returns a relative path pointing to <paramref name="target"/> from <paramref name="baseRef"/> using Unix/Uri-style directory separators.
         /// </summary>
         [Pure, NotNull]
-        public static string RelativeTo([NotNull] this FileSystemInfo targetPath, [NotNull] FileSystemInfo basePath)
+        public static string RelativeTo([NotNull] this FileSystemInfo target, [NotNull] FileSystemInfo baseRef)
         {
             #region Sanity checks
-            if (targetPath == null) throw new ArgumentNullException("targetPath");
-            if (basePath == null) throw new ArgumentNullException("basePath");
+            if (target == null) throw new ArgumentNullException("target");
+            if (baseRef == null) throw new ArgumentNullException("baseRef");
             #endregion
 
-            string trimmed = targetPath.FullName.Substring(basePath.FullName.Length);
-            if (trimmed.StartsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture))) trimmed = trimmed.Substring(1);
-            return trimmed.Replace(Path.DirectorySeparatorChar, '/');
+            string basePath = baseRef.FullName;
+            if (baseRef is DirectoryInfo && !basePath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                basePath += Path.DirectorySeparatorChar;
+
+            string targetPath = target.FullName;
+            if (target is DirectoryInfo && !targetPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                targetPath += Path.DirectorySeparatorChar;
+
+            var relativeUri = new Uri(basePath).MakeRelativeUri(new Uri(targetPath));
+            return Uri.UnescapeDataString(relativeUri.ToString()).TrimEnd('/');
         }
 
         /// <summary>

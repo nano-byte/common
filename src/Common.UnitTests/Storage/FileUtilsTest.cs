@@ -62,13 +62,15 @@ namespace NanoByte.Common.Storage
         {
             if (WindowsUtils.IsWindows)
             {
-                Assert.AreEqual("a/b", new DirectoryInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")));
-                Assert.AreEqual("a/b", new DirectoryInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test\")));
+                Assert.AreEqual("a/b", new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")));
+                Assert.AreEqual("test/a/b", new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\x")));
+                Assert.AreEqual("../test1", new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")));
             }
             else
             {
-                Assert.AreEqual("a/b", new DirectoryInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")));
-                Assert.AreEqual("a/b", new DirectoryInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test/")));
+                Assert.AreEqual("a/b", new FileInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")));
+                Assert.AreEqual("test/a/b", new FileInfo("/test/a/b").RelativeTo(new FileInfo("/x")));
+                Assert.AreEqual("../test1", new DirectoryInfo("/test1").RelativeTo(new DirectoryInfo("/test2")));
             }
         }
 
