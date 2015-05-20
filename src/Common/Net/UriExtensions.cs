@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.IO;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Net
@@ -70,6 +71,23 @@ namespace NanoByte.Common.Net
             #endregion
 
             return new Uri(uri.OriginalString, UriKind.Absolute);
+        }
+
+        /// <summary>
+        /// Extracts the file-name portion of an URI and ensures it is a valid file-name on the local OS.
+        /// </summary>
+        [PublicAPI, Pure, NotNull]
+        public static string GetLocalFileName([NotNull] this Uri uri)
+        {
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException("uri");
+            #endregion
+
+            string fileName = Path.GetFileName(uri.LocalPath).StripCharacters(Path.GetInvalidFileNameChars());
+            if (string.IsNullOrEmpty(fileName)) fileName = Path.GetFileName(Path.GetDirectoryName(uri.LocalPath)).StripCharacters(Path.GetInvalidFileNameChars());
+            if (string.IsNullOrEmpty(fileName)) fileName = "file.ext";
+
+            return fileName;
         }
     }
 }

@@ -58,5 +58,19 @@ namespace NanoByte.Common.Net
                 expected: new Uri("http://test/test/"),
                 actual: new Uri("http://test/test").EnsureTrailingSlash());
         }
+
+        [Test]
+        public void TestGetLocalFilePath()
+        {
+            Assert.AreEqual(
+                expected: "my file.ext",
+                actual: new Uri("http://test/test/my%20file.ext").GetLocalFileName());
+            Assert.AreEqual(
+                expected: "my file.ext",
+                actual: new Uri("file:///test/my%20file.ext").GetLocalFileName());
+            Assert.AreEqual(
+                expected: "test",
+                actual: new Uri("file:///test/").GetLocalFileName());
+        }
     }
 }
