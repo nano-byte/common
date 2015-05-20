@@ -57,7 +57,7 @@ namespace NanoByte.Common.Collections
         {}
 
         /// <summary>
-        /// Deserializes a space-separated list of languages codes (in the same format as used by the $LANG environment variable).
+        /// Deserializes a space-separated list of languages codes (in the same format as used by the LANG environment variable).
         /// </summary>
         public LanguageSet(string value)
             : this(ParseString(value))
@@ -73,8 +73,7 @@ namespace NanoByte.Common.Collections
                 CultureInfo language = null;
                 try
                 {
-                    // Handle Unix-style language codes (even though they are not actually valid in XML)
-                    language = new CultureInfo(langCode.Replace('_', '-'));
+                    language = Languages.FromString(langCode);
                 }
                 catch (ArgumentException)
                 {
@@ -87,11 +86,12 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Adds a language identified by a string to the collection.
         /// </summary>
-        /// <param name="language">The string identifying the language to add.</param>
+        /// <param name="langCode">The string identifying the language to add.</param>
         /// <returns><see langword="true"/> if the language could be added, <see langword="false"/> otherwise.</returns>
-        public bool Add(string language)
+        /// <exception cref="ArgumentException"><paramref name="langCode"/> is not a valid language code.</exception>
+        public bool Add(string langCode)
         {
-            return Add(new CultureInfo(language));
+            return Add(Languages.FromString(langCode));
         }
 
         /// <summary>
