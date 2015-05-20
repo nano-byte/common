@@ -28,6 +28,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using NanoByte.Common.Values;
 using NanoByte.Common.Values.Design;
 
 namespace NanoByte.Common.Collections
@@ -52,7 +53,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new language collection pre-filled with a set of languages.
         /// </summary>
         /// <param name="collection"></param>
-        public LanguageSet(IEnumerable<CultureInfo> collection)
+        public LanguageSet([NotNull] IEnumerable<CultureInfo> collection)
             : base(collection, CultureComparer.Instance)
         {}
 
@@ -96,15 +97,22 @@ namespace NanoByte.Common.Collections
 
         /// <summary>
         /// Determines whether this language set contains any of a set of target languages.
-        /// Empty sets count as containing all languages.
         /// </summary>
-        public bool ContainsAny([NotNull] ICollection<CultureInfo> targets)
+        /// <param name="targets">The language set to match against.</param>
+        /// <param name="ignoreCountry"><see langword="true"/> to compare only the two-letter language name; <see langword="false"/> to also compare the country code.</param>
+        public bool ContainsAny([NotNull, ItemNotNull] ICollection<CultureInfo> targets, bool ignoreCountry = false)
         {
             #region Sanity checks
             if (targets == null) throw new ArgumentNullException("targets");
             #endregion
 
-            return Count == 0 || targets.Count == 0 || targets.Any(Contains);
+            if (ignoreCountry)
+            {
+                var targetWeakNames = targets.Select(x => x.TwoLetterISOLanguageName);
+                var thisWeakNames = this.Select(x => x.TwoLetterISOLanguageName);
+                return targetWeakNames.Any(thisWeakNames.Contains);
+            }
+            else return targets.Any(Contains);
         }
 
         /// <summary>

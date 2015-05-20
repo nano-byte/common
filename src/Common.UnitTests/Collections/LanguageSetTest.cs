@@ -52,16 +52,35 @@ namespace NanoByte.Common.Collections
         }
 
         [Test]
-        public void TestIsCompatible()
+        public void TestContainsAny()
         {
             Assert.IsTrue(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}));
             Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}));
 
-            Assert.IsTrue(new LanguageSet().ContainsAny(new LanguageSet {"de"}));
-            Assert.IsTrue(new LanguageSet {"de"}.ContainsAny(new LanguageSet()));
+            Assert.IsFalse(new LanguageSet().ContainsAny(new LanguageSet {"de"}));
+            Assert.IsFalse(new LanguageSet { "de" }.ContainsAny(new LanguageSet()));
+
+            Assert.IsFalse(new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}));
+            Assert.IsFalse(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}));
 
             Assert.IsFalse(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}));
             Assert.IsFalse(new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}));
+        }
+
+        [Test]
+        public void TestContainsAnyIgnoreCountry()
+        {
+            Assert.IsTrue(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true));
+            Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true));
+
+            Assert.IsFalse(new LanguageSet().ContainsAny(new LanguageSet {"de"}, ignoreCountry: true));
+            Assert.IsFalse(new LanguageSet { "de" }.ContainsAny(new LanguageSet(), ignoreCountry: true));
+
+            Assert.IsTrue(new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true));
+            Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}, ignoreCountry: true));
+
+            Assert.IsFalse(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}, ignoreCountry: true));
+            Assert.IsFalse(new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true));
         }
     }
 }
