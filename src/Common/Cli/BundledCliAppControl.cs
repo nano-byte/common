@@ -45,7 +45,7 @@ namespace NanoByte.Common.Cli
         /// Otherwise we try to locate the directory within the "bundled" directory (parallel to "src").
         /// Finally try the working directory.
         /// </remarks>
-        [NotNull]
+        [PublicAPI, NotNull]
         public static string GetBundledDirectory(string name)
         {
             string path = Path.Combine(Locations.InstallBase, name); // Subdir of installation directory
@@ -67,9 +67,9 @@ namespace NanoByte.Common.Cli
         protected abstract string AppDirName { get; }
 
         /// <inheritdoc/>
-        protected override ProcessStartInfo GetStartInfo(string arguments, bool hidden = false)
+        protected override ProcessStartInfo GetStartInfo(params string[] arguments)
         {
-            var startInfo = base.GetStartInfo(arguments, hidden);
+            var startInfo = base.GetStartInfo(arguments);
 
             // Try to use bundled version of the application when running on Windows
             var appDirectory = GetBundledDirectory(AppDirName);

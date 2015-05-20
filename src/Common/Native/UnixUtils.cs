@@ -377,12 +377,12 @@ namespace NanoByte.Common.Native
 
             public string FileSystem(string path)
             {
-                return Execute("--file-system --printf=%T " + path.EscapeArgument()).TrimEnd('\n');
+                return Execute("--file-system", "--printf", "%T", path).TrimEnd('\n');
             }
 
             public string MountPoint(string path)
             {
-                return Execute("--printf=%m " + path.EscapeArgument()).TrimEnd('\n');
+                return Execute("--printf", "%m", path).TrimEnd('\n');
             }
         }
 

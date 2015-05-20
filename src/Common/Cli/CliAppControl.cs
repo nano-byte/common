@@ -21,13 +21,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Streams;
 
 namespace NanoByte.Common.Cli
 {
@@ -42,19 +40,41 @@ namespace NanoByte.Common.Cli
         protected abstract string AppBinary { get; }
 
         /// <summary>
+        /// Runs the external application interactivley instead of processing its output.
+        /// </summary>
+        /// <param name="arguments">Command-line arguments to launch the application with.</param>
+        /// <returns>The newly launched process; <see langword="null"/> if an existing process was reused.</returns>
+        /// <exception cref="IOException">The external application could not be launched.</exception>
+        public Process StartInteractive([NotNull] params string[] arguments)
+        {
+            #region Sanity checks
+            if (arguments == null) throw new ArgumentNullException("arguments");
+            #endregion
+
+            return new ProcessStartInfo
+            {
+                FileName = AppBinary,
+                Arguments = arguments.JoinEscapeArguments()
+            }.Start();
+        }
+
+        /// <summary>
         /// Runs the external application, processes its output and waits until it has terminated.
         /// </summary>
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
-        /// <param name="inputCallback">Callback allow you to write to the application's stdin-stream right after startup; <see langword="null"/> for none.</param>
-        /// <returns>The application's complete output to the stdout-stream.</returns>
+        /// <returns>The application's complete stdout output.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
         [NotNull]
-        protected virtual string Execute(string arguments, [CanBeNull] Action<StreamWriter> inputCallback = null)
+        public virtual string Execute([NotNull] params string[] arguments)
         {
+            #region Sanity checks
+            if (arguments == null) throw new ArgumentNullException("arguments");
+            #endregion
+
             Process process;
             try
             {
-                process = GetStartInfo(arguments, hidden: true).Start();
+                process = GetStartInfo(arguments).Start();
                 Debug.Assert(process != null);
             }
                 #region Error handling
@@ -62,102 +82,82 @@ namespace NanoByte.Common.Cli
             {
                 throw new IOException(string.Format(Resources.UnableToLaunchBundled, AppBinary), ex);
             }
-            catch (BadImageFormatException ex)
-            {
-                throw new IOException(string.Format(Resources.UnableToLaunchBundled, AppBinary), ex);
-            }
             #endregion
 
-            // Asynchronously buffer all stdout data
-            var stdoutBuffer = new StringBuilder();
-            var stdoutThread = ThreadUtils.StartBackground(() =>
-            {
-                while (!process.StandardOutput.EndOfStream)
-                {
-                    // No locking since the data will only be read at the end
-                    stdoutBuffer.AppendLine(process.StandardOutput.ReadLine());
-                }
-            }, name: GetType().Name + ".stdout");
+            var stdout = new StreamConsumer(process.StandardOutput);
+            var stderr = new StreamConsumer(process.StandardError);
+            var stdin = process.StandardInput;
 
-            // Asynchronously buffer all stderr messages
-            var stderrList = new Queue<string>();
-            var stderrThread = ThreadUtils.StartBackground(() =>
-            {
-                while (!process.StandardError.EndOfStream)
-                {
-                    // Locking for thread-safe producer-consumer-behaviour
-                    var data = process.StandardError.ReadLine();
-                    if (!string.IsNullOrEmpty(data))
-                        lock (stderrList) stderrList.Enqueue(data);
-                }
-            }, name: GetType().Name + ".stderr");
-
-            // Use callback to send data into external process
-            if (inputCallback != null) inputCallback(process.StandardInput);
-
-            // Start handling messages to stderr
+            InitStdin(stdin);
             do
             {
-                // Locking for thread-safe producer-consumer-behaviour
-                lock (stderrList)
-                {
-                    while (stderrList.Count > 0)
-                    {
-                        string result = HandleStderr(stderrList.Dequeue());
-                        if (!string.IsNullOrEmpty(result)) process.StandardInput.WriteLine(result);
-                    }
-                }
+                HandlePending(stderr, stdin);
             } while (!process.WaitForExit(50));
+            stdout.WaitForEnd();
+            stderr.WaitForEnd();
+            HandlePending(stderr, stdin);
 
-            // Finish any pending async operations
-            stdoutThread.Join();
-            stderrThread.Join();
-            process.Close();
-
-            // Handle any left over stderr messages
-            while (stderrList.Count > 0)
-            {
-                string result = HandleStderr(stderrList.Dequeue());
-                if (!string.IsNullOrEmpty(result)) process.StandardInput.WriteLine(result);
-            }
-
-            return stdoutBuffer.ToString();
+            return stdout.ToString();
         }
 
         /// <summary>
-        /// Creates the <see cref="ProcessStartInfo"/> used by <see cref="Execute"/> to launch the external application.
+        /// Creates the <see cref="ProcessStartInfo"/> used by <see cref="Execute"/> to launch the external application and redirect its input/output.
         /// </summary>
         /// <param name="arguments">The arguments to pass to the process at startup.</param>
-        /// <param name="hidden">Set to <see langword="true"/> to show no window and redirect all input and output for the process.</param>
-        protected virtual ProcessStartInfo GetStartInfo(string arguments, bool hidden = false)
+        [NotNull]
+        protected virtual ProcessStartInfo GetStartInfo([NotNull] params string[] arguments)
         {
+            #region Sanity checks
+            if (arguments == null) throw new ArgumentNullException("arguments");
+            #endregion
+
             var startInfo = new ProcessStartInfo
             {
                 FileName = AppBinary,
-                Arguments = arguments,
+                Arguments = arguments.JoinEscapeArguments(),
                 UseShellExecute = false,
-                CreateNoWindow = hidden,
-                RedirectStandardInput = hidden,
-                RedirectStandardOutput = hidden,
-                RedirectStandardError = hidden,
+                CreateNoWindow = true,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
                 ErrorDialog = false,
             };
 
             // Suppress localization to enable programatic parsing of output
-            if (hidden) startInfo.EnvironmentVariables["LANG"] = "C";
+            startInfo.EnvironmentVariables["LANG"] = "C";
 
             return startInfo;
         }
 
         /// <summary>
+        /// A hook method for writing to the application's stdin right after startup.
+        /// </summary>
+        /// <param name="writer">The stream writer providing access to stdin.</param>
+        protected virtual void InitStdin([NotNull] StreamWriter writer)
+        {}
+
+        /// <summary>
+        /// Reads all currently pending <paramref name="stderr"/> lines and sends responses to <paramref name="stdin"/>.
+        /// </summary>
+        private void HandlePending([NotNull] StreamConsumer stderr, [NotNull] StreamWriter stdin)
+        {
+            string line;
+            while ((line = stderr.ReadLine()) != null)
+            {
+                string response = HandleStderr(line);
+                if (response != null) stdin.WriteLine(response);
+            }
+        }
+
+        /// <summary>
         /// A hook method for handling stderr messages from the CLI application.
         /// </summary>
-        /// <param name="line">The error line written to stderr.</param>
+        /// <param name="line">The line written to stderr.</param>
         /// <returns>The response to write to stdin; <see langword="null"/> for none.</returns>
         [CanBeNull]
-        protected virtual string HandleStderr([NotNull, Localizable(false)] string line)
+        protected virtual string HandleStderr([NotNull] string line)
         {
-            Log.Warn(line);
+            Log.Warn(AppBinary + ": " + line);
             return null;
         }
     }
