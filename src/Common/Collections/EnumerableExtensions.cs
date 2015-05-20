@@ -39,7 +39,7 @@ namespace NanoByte.Common.Collections
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,bool})"/>.
         /// </summary>
-        [NotNull, LinqTunnel]
+        [NotNull, Pure, LinqTunnel]
         public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, bool> predicate)
         {
             return enumeration.Where(x => !predicate(x));
@@ -48,7 +48,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Filters a sequence of elements to remove any that are equal to <paramref name="element"/>.
         /// </summary>
-        [NotNull, LinqTunnel]
+        [NotNull, Pure, LinqTunnel]
         public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, T element)
         {
             return enumeration.Except(new[] {element});
@@ -57,7 +57,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Flattens a list of lists.
         /// </summary>
-        [NotNull, LinqTunnel]
+        [NotNull, Pure]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<T> Flatten<T>([NotNull] this IEnumerable<IEnumerable<T>> enumeration)
         {
@@ -67,7 +67,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Appends an element to a list.
         /// </summary>
-        [NotNull, LinqTunnel]
+        [NotNull, Pure]
         public static IEnumerable<T> Append<T>([NotNull] this IEnumerable<T> enumeration, T element)
         {
             return enumeration.Concat(new[] {element});
@@ -76,7 +76,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Prepends an element to a list.
         /// </summary>
-        [NotNull, LinqTunnel]
+        [NotNull, Pure]
         public static IEnumerable<T> Prepend<T>([NotNull] this IEnumerable<T> enumeration, T element)
         {
             return new[] {element}.Concat(enumeration);
@@ -85,7 +85,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Filters a sequence of elements to remove any <see langword="null"/> values.
         /// </summary>
-        [NotNull, ItemNotNull, LinqTunnel]
+        [NotNull, ItemNotNull, Pure, LinqTunnel]
         public static IEnumerable<T> WhereNotNull<T>([NotNull, ItemCanBeNull] this IEnumerable<T> enumeration)
         {
             return enumeration.Where(element => element != null);
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Collections
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to maximize.</param>
         /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
-        [CanBeNull]
+        [CanBeNull, Pure, LinqTunnel]
         public static T MaxBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression)
         {
             return enumeration.MaxBy(expression, Comparer<TValue>.Default);
@@ -114,7 +114,7 @@ namespace NanoByte.Common.Collections
         /// <param name="expression">The expression to maximize.</param>
         /// <param name="comparer">A comprarer used to compare values of <paramref name="expression"/>.</param>
         /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
-        [CanBeNull]
+        [CanBeNull, Pure, LinqTunnel]
         public static T MaxBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [NotNull] IComparer<TValue> comparer)
         {
             #region Sanity checks
@@ -152,7 +152,7 @@ namespace NanoByte.Common.Collections
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to minimize.</param>
         /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
-        [CanBeNull]
+        [CanBeNull, Pure, LinqTunnel]
         public static T MinBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression)
         {
             return enumeration.MinBy(expression, Comparer<TValue>.Default);
@@ -167,7 +167,7 @@ namespace NanoByte.Common.Collections
         /// <param name="expression">The expression to minimize.</param>
         /// <param name="comparer">A comprarer used to compare values of <paramref name="expression"/>.</param>
         /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
-        [CanBeNull]
+        [CanBeNull, Pure, LinqTunnel]
         public static T MinBy<T, TValue>([NotNull, ItemNotNull] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [NotNull] IComparer<TValue> comparer)
         {
             #region Sanity checks
@@ -202,7 +202,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="enumeration">The sequence of elements to filter.</param>
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
-        [NotNull, LinqTunnel]
+        [NotNull, Pure, LinqTunnel]
         public static IEnumerable<T> DistinctBy<T, TKey>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, TKey> keySelector)
         {
             return enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
@@ -248,6 +248,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        [Pure]
         public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
@@ -267,6 +268,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        [Pure]
         public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
@@ -287,6 +289,7 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The collection to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
         /// <seealso cref="SequencedEquals{T}(System.Collections.Generic.ICollection{T},System.Collections.Generic.ICollection{T},System.Collections.Generic.IEqualityComparer{T})"/>
+        [Pure]
         public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this IEnumerable<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
@@ -311,6 +314,7 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The collection to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
         /// <seealso cref="UnsequencedEquals{T}"/>
+        [Pure]
         public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this IEnumerable<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
@@ -334,6 +338,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Calls <see cref="ICloneable.Clone"/> for every element in a collection and returns the results as a new collection.
         /// </summary>
+        [NotNull, Pure]
         public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable
         {
             return enumerable.Select(entry => (T)entry.Clone());
