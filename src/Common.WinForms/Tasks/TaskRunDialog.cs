@@ -64,7 +64,14 @@ namespace NanoByte.Common.Tasks
         {
             _progress.ProgressChanged += progressBarTask.Report;
             _progress.ProgressChanged += labelTask.Report;
-            _progress.ProgressChanged += snapshot => { if (snapshot.State == TaskState.Complete) Close(); };
+            _progress.ProgressChanged += snapshot =>
+            {
+                if (snapshot.State == TaskState.Complete)
+                {
+                    _allowClose = true;
+                    Close();
+                }
+            };
 
             _taskThread.Start();
         }
@@ -84,22 +91,28 @@ namespace NanoByte.Common.Tasks
             catch (Exception ex)
             {
                 Exception = ex;
-                Invoke(new Action(Close));
+                _allowClose = true;
+                BeginInvoke(new Action(() =>
+                {
+                    _allowClose = true;
+                    Close();
+                }));
             }
         }
 
+        private bool _allowClose;
+
         private void TaskRunDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Only close the window if the task is no longer running
-            if (!_taskThread.IsAlive || Exception != null) return;
-
-            if (_task.CanCancel)
+            if (!_allowClose)
             {
-                buttonCancel.Enabled = false; // Don't tempt user to press Cancel again
-                _cancellationTokenSource.Cancel();
+                if (_task.CanCancel)
+                {
+                    buttonCancel.Enabled = false; // Don't tempt user to press Cancel more than once
+                    _cancellationTokenSource.Cancel();
+                }
+                e.Cancel = true;
             }
-
-            e.Cancel = true; // Window cannot be closed yet
         }
     }
 }
