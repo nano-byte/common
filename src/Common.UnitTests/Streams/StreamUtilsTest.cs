@@ -33,9 +33,32 @@ namespace NanoByte.Common.Streams
     [TestFixture]
     public class StreamUtilsTest
     {
-        /// <summary>
-        /// Ensures <see cref="StreamUtils.ContentEquals"/> works correctly.
-        /// </summary>
+        [Test]
+        public void TestRead()
+        {
+            Assert.AreEqual(
+                expected: new byte[] {1, 2, 3},
+                actual: new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3));
+        }
+
+        [Test]
+        public void TestReadAll()
+        {
+            var stream = new MemoryStream(new byte[] {1, 2, 3});
+            Assert.AreEqual(expected: new byte[] {1, 2, 3}, actual: stream.ReadAll());
+        }
+
+        [Test]
+        public static void TestWrite()
+        {
+            var stream = new MemoryStream();
+            stream.Write(new byte[] {1, 2, 3});
+
+            Assert.AreEqual(
+                expected: new byte[] {1, 2, 3},
+                actual: stream.ReadAll());
+        }
+
         [Test]
         public void TestContentEquals()
         {
@@ -45,9 +68,6 @@ namespace NanoByte.Common.Streams
             Assert.IsFalse("abc".ToStream().ContentEquals("".ToStream()));
         }
 
-        /// <summary>
-        /// Ensures <see cref="StreamUtils.ToStream"/> and <see cref="StreamUtils.ReadToString"/> work correctly.
-        /// </summary>
         [Test]
         public void TestString()
         {
@@ -56,9 +76,6 @@ namespace NanoByte.Common.Streams
                 Assert.AreEqual(test, stream.ReadToString());
         }
 
-        /// <summary>
-        /// Ensures <see cref="StreamUtils.WriteTo(System.IO.Stream,System.String)"/> correctly writes streams to files.
-        /// </summary>
         [Test]
         public void TestWriteToFile()
         {

@@ -36,7 +36,104 @@ namespace NanoByte.Common.Streams
     public static class StreamUtils
     {
         /// <summary>
-        /// Copies the content of one stream to another.
+        /// Reads a fixed number of bytes from a stream starting from the current offset.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="count">The number of bytes to read.</param>
+        /// <param name="throwOnEnd">Controls whether the method throws an exception when the end of the stream is reached instead of returning <see langword="null"/>.</param>
+        /// <returns>The bytes read from the stream; may be <see langword="null"/> if <paramref name="throwOnEnd"/> is <see langword="false"/>.</returns>
+        /// <exception cref="IOException">The desired number of bytes could not be read from the stream and <paramref name="throwOnEnd"/> is <see langword="true"/>.</exception>
+        [ContractAnnotation("throwOnEnd:true => notnull; throwOnEnd:false => canbenull")]
+        public static byte[] Read([NotNull] this Stream stream, int count, bool throwOnEnd = true)
+        {
+            var buffer = new byte[count];
+            int offset = 0;
+
+            while (offset < count)
+            {
+                int read = stream.Read(buffer, offset, count);
+                if (read == 0) break;
+                offset += read;
+            }
+
+            if (offset == count) return buffer;
+            else
+            {
+                if (throwOnEnd) throw new IOException("The desired number of bytes could not be read from the stream.");
+                else return null;
+            }
+        }
+
+        /// <summary>
+        /// Reads the entire content of a stream to an array. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <returns>A entire content of the stream.</returns>
+        [NotNull]
+        public static byte[] ReadAll([NotNull] this Stream stream)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            #endregion
+
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="encoding">The encoding of the string; leave <see langword="null"/> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <returns>A entire content of the stream.</returns>
+        [NotNull]
+        public static string ReadToString([NotNull] this Stream stream, [CanBeNull] Encoding encoding = null)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            #endregion
+
+            if (stream.CanSeek) stream.Position = 0;
+            var reader = new StreamReader(stream, encoding ?? new UTF8Encoding(false));
+            return reader.ReadToEnd();
+        }
+
+        /// <summary>
+        /// Writes the entire contents of an array to a stream.
+        /// </summary>
+        /// <param name="stream">The stream to write to.</param>
+        /// <param name="data">The array containing the bytes to write.</param>
+        public static void Write([NotNull] this Stream stream, [NotNull] byte[] data)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            stream.Write(data, 0, data.Length);
+        }
+
+        /// <summary>
+        /// Writes the entire content of a stream to a file.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="path">The path of the file to write.</param>
+        public static void WriteTo([NotNull] this Stream stream, [NotNull, Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            using (var fileStream = File.Create(path))
+                stream.CopyTo(fileStream);
+        }
+
+        /// <summary>
+        /// Copies the content of one stream to another. Seeks to the beginning of the <paramref name="source"/> stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="source">The source stream to copy from.</param>
         /// <param name="destination">The destination stream to copy to.</param>
@@ -66,23 +163,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Writes the entire content of a stream to a file.
-        /// </summary>
-        /// <param name="stream">The stream to read from.</param>
-        /// <param name="path">The path of the file to write.</param>
-        public static void WriteTo([NotNull] this Stream stream, [NotNull, Localizable(false)] string path)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            #endregion
-
-            using (var fileStream = File.Create(path))
-                stream.CopyTo(fileStream);
-        }
-
-        /// <summary>
-        /// Compares two streams for bit-wise equality.
+        /// Compares two streams for bit-wise equality. Seeks to the beginnings of the streams if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of both streams.</remarks>
         public static bool ContentEquals([NotNull] this Stream stream1, [NotNull] Stream stream2)
@@ -105,57 +186,21 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Creates a new <see cref="MemoryStream"/> and fills it with UTF-8 encoded string data.
+        /// Creates a new <see cref="MemoryStream"/> and fills it with string data.
         /// </summary>
         /// <param name="data">The data to fill the stream with.</param>
+        /// <param name="encoding">The encoding of the string; leave <see langword="null"/> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
         [NotNull]
-        public static MemoryStream ToStream([NotNull] this string data)
+        public static MemoryStream ToStream([NotNull] this string data, [CanBeNull] Encoding encoding = null)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException("data");
             #endregion
 
-            byte[] byteArray = Encoding.UTF8.GetBytes(data);
+            byte[] byteArray = (encoding ?? new UTF8Encoding(false)).GetBytes(data);
             var stream = new MemoryStream(byteArray);
             return stream;
-        }
-
-        /// <summary>
-        /// Reads the entire content of a stream as string data (will seek from zero to end).
-        /// </summary>
-        /// <param name="stream">The stream to read from.</param>
-        /// <param name="encoding">The encoding of the string; leave <see langword="null"/> to default to <see cref="UTF8Encoding"/>.</param>
-        /// <returns>A entire content of the stream.</returns>
-        [NotNull]
-        public static string ReadToString([NotNull] this Stream stream, [CanBeNull] Encoding encoding = null)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            #endregion
-
-            if (stream.CanSeek) stream.Position = 0;
-            var reader = new StreamReader(stream, encoding ?? new UTF8Encoding(false));
-            return reader.ReadToEnd();
-        }
-
-        /// <summary>
-        /// Reads the entire content of a stream to a byte array (will seek from zero to end).
-        /// </summary>
-        /// <param name="stream">The stream to read from.</param>
-        /// <returns>A entire content of the stream.</returns>
-        [NotNull]
-        public static byte[] ReadToArray([NotNull] this Stream stream)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            #endregion
-
-            using (var memoryStream = new MemoryStream())
-            {
-                stream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
         }
 
         /// <summary>
@@ -179,13 +224,14 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Returns an embedded UTF-8 encoded resource/file as a string.
+        /// Returns an embedded resource/file as a string.
         /// </summary>
         /// <param name="type">A type that is stored in the same namespace as the embedded resource.</param>
         /// <param name="name">The file name of the embedded resource.</param>
+        /// <param name="encoding">The encoding of the string; leave <see langword="null"/> to default to <see cref="UTF8Encoding"/>.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
         [NotNull]
-        public static string GetEmbeddedString([NotNull] this Type type, [NotNull, Localizable(false)] string name)
+        public static string GetEmbeddedString([NotNull] this Type type, [NotNull, Localizable(false)] string name, [CanBeNull] Encoding encoding = null)
         {
             #region Sanity checks
             if (type == null) throw new ArgumentNullException("type");
@@ -193,7 +239,7 @@ namespace NanoByte.Common.Streams
             #endregion
 
             using (var stream = type.GetEmbeddedStream(name))
-                return stream.ReadToString();
+                return stream.ReadToString(encoding);
         }
 
         /// <summary>
