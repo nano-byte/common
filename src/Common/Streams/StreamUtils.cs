@@ -46,6 +46,10 @@ namespace NanoByte.Common.Streams
         [ContractAnnotation("throwOnEnd:true => notnull; throwOnEnd:false => canbenull")]
         public static byte[] Read([NotNull] this Stream stream, int count, bool throwOnEnd = true)
         {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            #endregion
+
             var buffer = new byte[count];
             int offset = 0;
 

@@ -24,13 +24,13 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Native;
 using NanoByte.Common.Values;
 
 namespace NanoByte.Common
 {
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     partial class WinFormsUtils
     {
         // Note: The following code is based on Windows API Code Pack for Microsoft .NET Framework 1.0.1
@@ -66,7 +66,7 @@ namespace NanoByte.Common
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local"), UsedImplicitly]
         private struct Points
         {
             public short x, y;
@@ -83,9 +83,10 @@ namespace NanoByte.Common
             if (control == null) throw new ArgumentNullException("control");
             #endregion
 
-            if (WindowsUtils.IsWindows7) SafeNativeMethods.RegisterTouchWindow(control.Handle, 0);
+            if (WindowsUtils.IsWindows7) NativeMethods.RegisterTouchWindow(control.Handle, 0);
         }
 
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         private const int WM_TOUCHMOVE = 0x0240, WM_TOUCHDOWN = 0x0241, WM_TOUCHUP = 0x0242;
         private static readonly int _touchInputSize = Marshal.SizeOf(new TouchInput());
 

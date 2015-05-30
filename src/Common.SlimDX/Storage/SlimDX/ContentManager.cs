@@ -165,7 +165,8 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// Closes the content archives loaded by <see cref="LoadArchives"/>.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Errors on shutdown because of an inconsistent state are useless and annoying")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Errors on shutdown because of an inconsistent state are useless and annoying"), SuppressMessage("ReSharper", "EmptyGeneralCatchClause")]
+        [PublicAPI]
         public static void CloseArchives()
         {
             _baseArchiveEntries.Clear();
@@ -178,7 +179,6 @@ namespace NanoByte.Common.Storage.SlimDX
                 {
                     archive.Close();
                 }
-                    // TODO: Catch only specifc exception types
                 catch
                 {}
             }

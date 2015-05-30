@@ -31,7 +31,6 @@ namespace NanoByte.Common
     /// <summary>
     /// Provides helper methods and API calls specific to the <see cref="System.Windows.Forms"/> UI toolkit.
     /// </summary>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static partial class WinFormsUtils
     {
         /// <summary>
@@ -52,7 +51,7 @@ namespace NanoByte.Common
         /// Adds a UAC shield icon to a button. Does nothing if not running Windows Vista or newer.
         /// </summary>
         /// <remarks>This is purely cosmetic. UAC elevation is a separate concern.</remarks>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons.")]
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons."), SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void AddShieldIcon([NotNull] this Button button)
         {
             #region Sanity checks
