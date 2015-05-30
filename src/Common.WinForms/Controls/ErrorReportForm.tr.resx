@@ -124,7 +124,7 @@
     <value>&amp;Raporla</value>
   </data>
   <data name="commentBox.HintText" xml:space="preserve">
-    <value>İstiyorsanız bu alanı bize daha fazla bilgi vermek için örneğin bu hata oluştuğunda ne yaptığınızı ve ne beklediğinizi açıklayarak, bize sorunu çözümleme konusunda daha fazla yardımcı olabilirsiniz.</value>
+    <value>Dilerseniz, bu alanı sorunu daha hızlı çözümleyebilmemiz için bize daha fazla bilgi vermek amacıyla kullanabilirsiniz.</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Raporla&amp;ma</value>
