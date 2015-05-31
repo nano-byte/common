@@ -631,6 +631,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="sourcePath">The path of the link to create.</param>
         /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
+        /// <exception cref="IOException">Creating the symbolic link failed.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a system with no symbolic link support.</exception>
         public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
@@ -666,6 +667,7 @@ namespace NanoByte.Common.Storage
                     #region Error handling
                 catch (Win32Exception ex)
                 {
+                    // Wrap exception since only certain exception types are allowed
                     throw new IOException(ex.Message, ex);
                 }
                 #endregion
@@ -678,6 +680,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="sourcePath">The path of the link to create.</param>
         /// <param name="targetPath">The absolute path of the existing file to point to.</param>
+        /// <exception cref="IOException">Creating the hard link failed.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the hard link.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a system with no hard link support.</exception>
         public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
@@ -713,6 +716,7 @@ namespace NanoByte.Common.Storage
                     #region Error handling
                 catch (Win32Exception ex)
                 {
+                    // Wrap exception since only certain exception types are allowed
                     throw new IOException(ex.Message, ex);
                 }
                 #endregion
@@ -721,10 +725,12 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Determines whether to files are hardlinked.
+        /// Determines whether two files are hardlinked.
         /// </summary>
         /// <param name="path1">The path of the first file.</param>
         /// <param name="path2">The path of the second file.</param>
+        /// <exception cref="IOException">Creating the files failed.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
         public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
@@ -758,6 +764,7 @@ namespace NanoByte.Common.Storage
                     #region Error handling
                 catch (Win32Exception ex)
                 {
+                    // Wrap exception since only certain exception types are allowed
                     throw new IOException(ex.Message, ex);
                 }
                 #endregion
@@ -1038,6 +1045,7 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The data to write to the metadata stream.</param>
         /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>
         /// <exception cref="IOException">There was a problem writing the metadata stream.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write the metadata.</exception>
         /// <exception cref="PlatformNotSupportedException">The current operating system provides no method for storing extended metadata.</exception>
         public static void WriteExtendedMetadata([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name, [NotNull] byte[] data)
         {

@@ -114,7 +114,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="list">The list to check.</param>
         /// <param name="element">The element to look for.</param>
-        /// <remarks>This is usefull e.g. for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
+        /// <remarks>Useful for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
         public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> list, T element)
         {
             #region Sanity checks

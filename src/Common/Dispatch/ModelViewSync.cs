@@ -30,11 +30,13 @@ namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Keeps two collections of different types in sync based on mapping rules.
-    /// Usefull for maintining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
     /// </summary>
     /// <typeparam name="TModel">The common base type of elements in the model.</typeparam>
     /// <typeparam name="TView">The common base type of representations in the view.</typeparam>
-    /// <remarks>Generated View representations will automatically be disposed on removal, if they implement <see cref="IDisposable"/>.</remarks>
+    /// <remarks>
+    /// Useful for maintining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
+    /// Generated View representations will automatically be disposed on removal, if they implement <see cref="IDisposable"/>.
+    /// </remarks>
     public sealed class ModelViewSync<TModel, TView> : IDisposable
         where TModel : class, IChangeNotify<TModel>
         where TView : class
