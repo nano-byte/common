@@ -466,6 +466,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Searching for open file references.
+        /// </summary>
+        internal static string SearchingFileReferences {
+            get {
+                return ResourceManager.GetString("SearchingFileReferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show details.
         /// </summary>
         internal static string ShowDetails {

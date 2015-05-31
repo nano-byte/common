@@ -22,7 +22,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Security;
 using NanoByte.Common.Tasks;
 using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
@@ -30,11 +29,8 @@ namespace NanoByte.Common.Native
 {
     partial class WindowsRestartManager
     {
-        [SuppressUnmanagedCodeSecurity]
-        private static class UnsafeNativeMethods
+        private static class NativeMethods
         {
-            public const int ERROR_FAIL_NOACTION_REBOOT = 350, ERROR_FAIL_SHUTDOWN = 351, ERROR_FAIL_RESTART = 352;
-
             [DllImport("rstrtmgr", CharSet = CharSet.Unicode)]
             public static extern int RmStartSession(out IntPtr pSessionHandle, int dwSessionFlags, string strSessionKey);
 

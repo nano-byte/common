@@ -252,6 +252,9 @@
   <data name="Search" xml:space="preserve">
     <value>Αναζήτηση</value>
   </data>
+  <data name="SearchingFileReferences" xml:space="preserve">
+    <value>Ψάχνοντας για ανοικτές αναφορές αρχείου</value>
+  </data>
   <data name="ShowDetails" xml:space="preserve">
     <value>Εμφάνιση λεπτομερειών</value>
   </data>

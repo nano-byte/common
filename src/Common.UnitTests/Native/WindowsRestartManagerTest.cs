@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using NanoByte.Common.Tasks;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Native
@@ -38,7 +39,7 @@ namespace NanoByte.Common.Native
             using (var restartManager = new WindowsRestartManager())
             {
                 restartManager.RegisterResources(@"C:\Windows\explorer.exe");
-                restartManager.ListApps();
+                restartManager.ListApps(new SilentTaskHandler());
             }
         }
     }

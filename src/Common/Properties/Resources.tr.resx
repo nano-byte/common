@@ -252,6 +252,9 @@
   <data name="Search" xml:space="preserve">
     <value>Arama</value>
   </data>
+  <data name="SearchingFileReferences" xml:space="preserve">
+    <value>Dosyayı açacak uygulamalar aranıyor</value>
+  </data>
   <data name="ShowDetails" xml:space="preserve">
     <value>Ayrıntıları görüntüle</value>
   </data>
