@@ -121,6 +121,20 @@ namespace NanoByte.Common.Native
             public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, int dwFlags);
 
             [Flags]
+            public enum MoveFileFlags
+            {
+                NONE = 0,
+                MOVEFILE_REPLACE_EXISTING = 1,
+                MOVEFILE_COPY_ALLOWED = 2,
+                MOVEFILE_DELAY_UNTIL_REBOOT = 4,
+                MOVEFILE_WRITE_THROUGH = 8
+            }
+
+            [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool MoveFileEx(string lpExistingFileName, string lpNewFileName, MoveFileFlags dwFlags);
+
+            [Flags]
             public enum RestartFlags
             {
                 NONE = 0,

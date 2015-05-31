@@ -457,6 +457,22 @@ namespace NanoByte.Common.Native
                 NativeMethods.CloseHandle(handle);
             }
         }
+
+        /// <summary>
+        /// Moves a file on the next reboot of the OS. Replaces existing files.
+        /// </summary>
+        /// <param name="sourcePath">The source path to move the file from.</param>
+        /// <param name="destinationPath">The destination path to move the file to. <see langword="null"/> to delete the file instead of moving it.</param>
+        /// <remarks>Useful for replacing in-use files.</remarks>
+        public static void MoveFileOnReboot([NotNull] string sourcePath, [CanBeNull] string destinationPath)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            #endregion
+
+            if (!NativeMethods.MoveFileEx(sourcePath, destinationPath, NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING | NativeMethods.MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT))
+                throw BuildException(Marshal.GetLastWin32Error());
+        }
         #endregion
 
         #region Shell
