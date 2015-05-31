@@ -22,9 +22,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using System.Security;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
@@ -33,37 +30,8 @@ namespace NanoByte.Common.Cli
     /// <summary>
     /// Provides helper methods for communication with the user via the <see cref="Console"/>.
     /// </summary>
-    public static class CliUtils
+    public static partial class CliUtils
     {
-        [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
-        private static class SafeNativeMethods
-        {
-            #region Stream redirect
-            public enum StdHandle
-            {
-                Stdin = -10,
-                Stdout = -11,
-                Stderr = -12
-            };
-
-            public enum FileType
-            {
-                Unknown = 0,
-                Disk = 1,
-                Char = 2,
-                Pipe = 3
-            }
-
-            [DllImport("kernel32.dll")]
-            public static extern FileType GetFileType(IntPtr hdl);
-
-            [DllImport("kernel32.dll")]
-            public static extern IntPtr GetStdHandle(StdHandle std);
-            #endregion
-        }
-
-        #region Read string
         /// <summary>
         /// Asks the user to input a string.
         /// </summary>
@@ -75,9 +43,7 @@ namespace NanoByte.Common.Cli
             Console.Error.Write(prompt + " ");
             return Console.ReadLine();
         }
-        #endregion
 
-        #region Read password
         /// <summary>
         /// Asks the user to input a password without echoing it.
         /// </summary>
@@ -106,9 +72,7 @@ namespace NanoByte.Common.Cli
 
             return password;
         }
-        #endregion
 
-        #region Stream redirect
         /// <summary>
         /// Indicates whether the stdout stream has been redirected.
         /// </summary>
@@ -147,6 +111,5 @@ namespace NanoByte.Common.Cli
                 return SafeNativeMethods.FileType.Char != SafeNativeMethods.GetFileType(SafeNativeMethods.GetStdHandle(SafeNativeMethods.StdHandle.Stderr));
             }
         }
-        #endregion
     }
 }

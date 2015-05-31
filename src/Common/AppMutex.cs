@@ -50,7 +50,7 @@ namespace NanoByte.Common
         {
             foreach (var handle in _handles.Where(handle => handle != IntPtr.Zero).ToList())
             {
-                WindowsUtils.CloseMutex(handle);
+                WindowsMutex.Close(handle);
                 _handles.Remove(handle);
             }
         }
@@ -98,7 +98,7 @@ namespace NanoByte.Common
             IntPtr handle1 = IntPtr.Zero, handle2 = IntPtr.Zero;
             try
             {
-                if (WindowsUtils.CreateMutex("Global\\" + name, out handle1))
+                if (WindowsMutex.Create("Global\\" + name, out handle1))
                 {
                     existingMutex = true;
                     Log.Debug("Opened existing global mutex: " + name);
@@ -114,7 +114,7 @@ namespace NanoByte.Common
 
             try
             {
-                if (WindowsUtils.CreateMutex(name, out handle2))
+                if (WindowsMutex.Create(name, out handle2))
                 {
                     existingMutex = true;
                     Log.Debug("Opened existing local mutex: " + name);
@@ -151,7 +151,7 @@ namespace NanoByte.Common
 
             try
             {
-                if (WindowsUtils.OpenMutex("Global\\" + name))
+                if (WindowsMutex.Open("Global\\" + name))
                 {
                     existingMutex = true;
                     Log.Debug("Opened existing global mutex: " + name);
@@ -166,7 +166,7 @@ namespace NanoByte.Common
 
             try
             {
-                if (WindowsUtils.OpenMutex(name))
+                if (WindowsMutex.Open(name))
                 {
                     existingMutex = true;
                     Log.Debug("Opened existing local mutex: " + name);
@@ -200,7 +200,7 @@ namespace NanoByte.Common
 
             try
             {
-                if (WindowsUtils.ProbeMutex("Global\\" + name))
+                if (WindowsMutex.Probe("Global\\" + name))
                 {
                     existingMutex = true;
                     Log.Debug("Found existing global mutex: " + name);
@@ -215,7 +215,7 @@ namespace NanoByte.Common
 
             try
             {
-                if (WindowsUtils.ProbeMutex(name))
+                if (WindowsMutex.Probe(name))
                 {
                     existingMutex = true;
                     Log.Debug("Found existing local mutex: " + name);

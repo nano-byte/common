@@ -60,11 +60,11 @@ namespace NanoByte.Common
             {
                 switch (ex.NativeErrorCode)
                 {
-                    case WindowsUtils.Win32Cancelled:
+                    case WindowsUtils.Win32ErrorCancelled:
                         throw new OperationCanceledException();
 
-                    case WindowsUtils.Win32RequestedOperationRequiresElevation:
-                        throw new NotAdminException(string.Format("'{0}' requires Administrator privileges.", startInfo.FileName));
+                    case WindowsUtils.Win32ErrorRequestedOperationRequiresElevation:
+                        throw new NotAdminException(string.Format("Launching '{0}' requires Administrator privileges.", startInfo.FileName));
 
                     default:
                         throw new IOException(ex.Message, ex);

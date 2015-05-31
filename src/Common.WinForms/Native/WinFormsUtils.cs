@@ -24,9 +24,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using JetBrains.Annotations;
-using NanoByte.Common.Native;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides helper methods and API calls specific to the <see cref="System.Windows.Forms"/> UI toolkit.
@@ -44,7 +43,7 @@ namespace NanoByte.Common
             #endregion
 
             if (!WindowsUtils.IsWindows) return;
-            UnsafeNativeMethods.SetForegroundWindow(form.Handle);
+            NativeMethods.SetForegroundWindow(form.Handle);
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace NanoByte.Common
 
             if (!WindowsUtils.IsWindowsVista) return;
             button.FlatStyle = FlatStyle.System;
-            UnsafeNativeMethods.SendMessage(button.Handle, BCM_FIRST + BCM_SETSHIELD, IntPtr.Zero, new IntPtr(1));
+            NativeMethods.SendMessage(button.Handle, BCM_FIRST + BCM_SETSHIELD, IntPtr.Zero, new IntPtr(1));
         }
 
         /// <summary>
@@ -71,8 +70,59 @@ namespace NanoByte.Common
         /// <remarks>Will always return <see langword="false"/> on non-Windows OSes.</remarks>
         public static bool IsKeyDown(Keys key)
         {
-            if (WindowsUtils.IsWindows) return (SafeNativeMethods.GetAsyncKeyState((uint)key) & 0x8000) != 0;
-            return false; // Not supported on non-Windows OSes
+            if (!WindowsUtils.IsWindows) return false;
+            return (SafeNativeMethods.GetAsyncKeyState((uint)key) & 0x8000) != 0;
+        }
+
+        /// <summary>
+        /// Determines whether this application is currently idle.
+        /// </summary>
+        /// <returns><see langword="true"/> if idle, <see langword="false"/> if handling window events.</returns>
+        /// <remarks>Will always return <see langword="true"/> on non-Windows OSes.</remarks>
+        public static bool AppIdle
+        {
+            get
+            {
+                if (!WindowsUtils.IsWindows) return true;
+                NativeMethods.WinMessage msg;
+                return !NativeMethods.PeekMessage(out msg, IntPtr.Zero, 0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        /// Text-box caret blink time in seconds.
+        /// </summary>
+        public static float CaretBlinkTime
+        {
+            get
+            {
+                return WindowsUtils.IsWindows
+                    ? SafeNativeMethods.GetCaretBlinkTime() / 1000f
+                    : 0.5f; // Default to 0.5 seconds on non-Windows OSes
+            }
+        }
+
+        /// <summary>
+        /// Prevents the mouse cursor from leaving a specific window.
+        /// </summary>
+        /// <param name="handle">The handle to the window to lock the mouse cursor into.</param>
+        /// <returns>A handle to the window that had previously captured the mouse.</returns>
+        /// <remarks>Will do nothing on non-Windows OSes.</remarks>
+        public static IntPtr SetCapture(IntPtr handle)
+        {
+            if (!WindowsUtils.IsWindows) return IntPtr.Zero;
+            return NativeMethods.SetCapture(handle);
+        }
+
+        /// <summary>
+        /// Releases the mouse cursor after it was locked by <see cref="SetCapture"/>.
+        /// </summary>
+        /// <returns><see langword="true"/> if successful; <see langword="false"/> otherwise.</returns>
+        /// <remarks>Will always return <see langword="false"/> on non-Windows OSes.</remarks>
+        public static bool ReleaseCapture()
+        {
+            if (!WindowsUtils.IsWindows) return false;
+            return NativeMethods.ReleaseCapture();
         }
     }
 }

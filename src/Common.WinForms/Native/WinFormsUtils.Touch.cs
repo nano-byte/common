@@ -24,54 +24,14 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Controls;
-using NanoByte.Common.Native;
 using NanoByte.Common.Values;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Native
 {
     partial class WinFormsUtils
     {
         // Note: The following code is based on Windows API Code Pack for Microsoft .NET Framework 1.0.1
-
-        #region Enumerations
-        [Flags]
-        private enum TouchEvents
-        {
-            Move = 0x0001, // TOUCHEVENTF_MOVE
-            Down = 0x0002, // TOUCHEVENTF_DOWN
-            Up = 0x0004, // TOUCHEVENTF_UP
-            InRange = 0x0008, // TOUCHEVENTF_INRANGE
-            Primary = 0x0010, // TOUCHEVENTF_PRIMARY
-            NoCoalesce = 0x0020, // TOUCHEVENTF_NOCOALESCE
-            Palm = 0x0080 // TOUCHEVENTF_PALM
-        }
-        #endregion
-
-        #region Structures
-        [StructLayout(LayoutKind.Sequential)]
-        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
-        private struct TouchInput
-        {
-            public int x, y;
-            public IntPtr hSource;
-            public int dwID;
-            public TouchEvents dwFlags;
-            public TouchEventMask dwMask;
-            public int dwTime;
-            public IntPtr dwExtraInfo;
-            public int cxContact;
-            public int cyContact;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local"), UsedImplicitly]
-        private struct Points
-        {
-            public short x, y;
-        }
-        #endregion
 
         /// <summary>
         /// Registers a control as a receiver for touch events.
@@ -86,9 +46,7 @@ namespace NanoByte.Common
             if (WindowsUtils.IsWindows7) NativeMethods.RegisterTouchWindow(control.Handle, 0);
         }
 
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
-        private const int WM_TOUCHMOVE = 0x0240, WM_TOUCHDOWN = 0x0241, WM_TOUCHUP = 0x0242;
-        private static readonly int _touchInputSize = Marshal.SizeOf(new TouchInput());
+        private static readonly int _touchInputSize = Marshal.SizeOf(new NativeMethods.TouchInput());
 
         /// <summary>
         /// Handles touch-related <see cref="Control.WndProc"/> <see cref="Message"/>s.
@@ -98,8 +56,11 @@ namespace NanoByte.Common
         /// <param name="onTouchDown">The event handler to call for touch down events; can be <see langword="null"/>.</param>
         /// <param name="onTouchMove">The event handler to call for touch move events; can be <see langword="null"/>.</param>
         /// <param name="onTouchUp">The event handler to call for touch up events; can be <see langword="null"/>.</param>
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void HandleTouchMessage(ref Message m, object sender, EventHandler<TouchEventArgs> onTouchDown, EventHandler<TouchEventArgs> onTouchMove, EventHandler<TouchEventArgs> onTouchUp)
         {
+            const int WM_TOUCHMOVE = 0x0240, WM_TOUCHDOWN = 0x0241, WM_TOUCHUP = 0x0242;
+
             if (!WindowsUtils.IsWindows7) return;
             if (m.Msg != WM_TOUCHDOWN && m.Msg != WM_TOUCHMOVE && m.Msg != WM_TOUCHUP) return;
 
@@ -108,12 +69,12 @@ namespace NanoByte.Common
             short inputCount = (short)(m.WParam.ToInt32() & 0xffff); // Number of touch inputs, actual per-contact messages
 
             if (inputCount < 0) return;
-            var inputs = new TouchInput[inputCount];
+            var inputs = new NativeMethods.TouchInput[inputCount];
 
             // Unpack message parameters into the array of TOUCHINPUT structures, each
             // representing a message for one single contact.
             //Exercise2-Task1-Step3
-            if (!SafeNativeMethods.GetTouchInputInfo(m.LParam, inputCount, inputs, _touchInputSize))
+            if (!NativeMethods.GetTouchInputInfo(m.LParam, inputCount, inputs, _touchInputSize))
                 return;
 
             // For each contact, dispatch the message to the appropriate message
@@ -124,13 +85,13 @@ namespace NanoByte.Common
             // and up & down notifications will never come in the same message
             for (int i = 0; i < inputCount; i++)
             {
-                TouchInput ti = inputs[i];
+                NativeMethods.TouchInput ti = inputs[i];
 
                 // Assign a handler to this message.
-                EventHandler<TouchEventArgs> handler = null;     // Touch event handler
-                if (ti.dwFlags.HasFlag(TouchEvents.Down)) handler = onTouchDown;
-                else if (ti.dwFlags.HasFlag(TouchEvents.Up)) handler = onTouchUp;
-                else if (ti.dwFlags.HasFlag(TouchEvents.Move)) handler = onTouchMove;
+                EventHandler<TouchEventArgs> handler = null; // Touch event handler
+                if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Down)) handler = onTouchDown;
+                else if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Up)) handler = onTouchUp;
+                else if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Move)) handler = onTouchMove;
 
                 // Convert message parameters into touch event arguments and handle the event.
                 if (handler != null)
@@ -146,10 +107,10 @@ namespace NanoByte.Common
                         LocationY = ti.y / 100,
                         Time = ti.dwTime,
                         Mask = ti.dwMask,
-                        InRange = ti.dwFlags.HasFlag(TouchEvents.InRange),
-                        Primary = ti.dwFlags.HasFlag(TouchEvents.Primary),
-                        NoCoalesce = ti.dwFlags.HasFlag(TouchEvents.NoCoalesce),
-                        Palm = ti.dwFlags.HasFlag(TouchEvents.Palm)
+                        InRange = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.InRange),
+                        Primary = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Primary),
+                        NoCoalesce = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.NoCoalesce),
+                        Palm = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Palm)
                     };
 
                     handler(sender, te);
@@ -158,7 +119,7 @@ namespace NanoByte.Common
                 }
             }
 
-            SafeNativeMethods.CloseTouchInputHandle(m.LParam);
+            NativeMethods.CloseTouchInputHandle(m.LParam);
         }
     }
 }

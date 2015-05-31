@@ -57,6 +57,7 @@
     <Compile Include="Cli\BundledCliAppControl.cs" />
     <Compile Include="Cli\CliAppControl.cs" />
     <Compile Include="Cli\CliUtils.cs" />
+    <Compile Include="Cli\CliUtils.NativeMethods.cs" />
     <Compile Include="Cli\ProgressBar.cs" />
     <Compile Include="Collections\ArrayExtensions.cs" />
     <Compile Include="Collections\ComparableTuple.cs" />
@@ -104,15 +105,14 @@
     <Compile Include="NamedComparer.cs" />
     <Compile Include="Native\CompilerUtils.cs" />
     <Compile Include="Native\UnixUtils.cs" />
+    <Compile Include="Native\WindowsMutex.cs" />
+    <Compile Include="Native\WindowsMutex.NativeMethods.cs" />
     <Compile Include="Native\WindowsRestartManager.cs" />
     <Compile Include="Native\WindowsRestartManager.NativeMethods.cs" />
     <Compile Include="Native\WindowsTaskbar.cs" />
     <Compile Include="Native\WindowsTaskbar.NativeMethods.cs" />
     <Compile Include="Native\WindowsUtils.cs" />
-    <Compile Include="Native\WindowsUtils.FileSystem.cs" />
     <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
-    <Compile Include="Native\WindowsUtils.Platform.cs" />
-    <Compile Include="Native\WindowsUtils.WindowMessages.cs" />
     <Compile Include="NeedGuiException.cs" />
     <Compile Include="Net\NetUtils.cs" />
     <Compile Include="Net\UriExtensions.cs" />

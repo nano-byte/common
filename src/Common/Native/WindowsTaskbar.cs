@@ -520,7 +520,7 @@ namespace NanoByte.Common.Native
         {
             IPropertyStore propStore;
             var guid = new Guid(PropertyStoreGuid);
-            int rc = UnsafeNativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out propStore);
+            int rc = NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out propStore);
             if (rc != 0) throw Marshal.GetExceptionForHR(rc);
             return propStore;
         }

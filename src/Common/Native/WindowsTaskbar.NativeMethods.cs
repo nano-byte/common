@@ -24,7 +24,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security;
 
 namespace NanoByte.Common.Native
 {
@@ -65,7 +64,7 @@ namespace NanoByte.Common.Native
             public void Dispose()
             {
                 PropertyVariant var = this;
-                UnsafeNativeMethods.PropVariantClear(ref var);
+                NativeMethods.PropVariantClear(ref var);
 
                 valueType = (ushort)VarEnum.VT_EMPTY;
                 wReserved1 = wReserved2 = wReserved3 = 0;
@@ -97,14 +96,13 @@ namespace NanoByte.Common.Native
             uint Commit();
         }
 
-        [SuppressUnmanagedCodeSecurity]
-        private static class UnsafeNativeMethods
+        private static class NativeMethods
         {
             [DllImport("shell32", SetLastError = true)]
             public static extern int SHGetPropertyStoreForWindow(IntPtr hwnd, ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out IPropertyStore propertyStore);
 
             [DllImport("ole32", PreserveSig = false)]
-            internal static extern void PropVariantClear([In, Out] ref PropertyVariant pvar);
+            public static extern void PropVariantClear([In, Out] ref PropertyVariant pvar);
         }
     }
 }

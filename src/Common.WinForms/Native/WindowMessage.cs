@@ -22,7 +22,7 @@
 
 using System.Windows.Forms;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Values for <see cref="Message.Msg"/>.

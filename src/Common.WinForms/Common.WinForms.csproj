@@ -183,6 +183,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Msg.cs" />
+    <Compile Include="Native\WindowMessage.cs" />
+    <Compile Include="Native\WinFormsUtils.Touch.cs" />
+    <Compile Include="Native\WinFormsUtils.cs" />
+    <Compile Include="Native\WinFormsUtils.NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureEditor\ChildInfo.cs" />
     <Compile Include="StructureEditor\ContainerDescription.cs" />
@@ -213,10 +217,6 @@
     <Compile Include="Undo\PropertyChangedCommand.cs" />
     <Compile Include="Values\Design\TimeSpanEditor.cs" />
     <Compile Include="Values\Design\LanguageSetEditor.cs" />
-    <Compile Include="WindowMessage.cs" />
-    <Compile Include="WinFormsUtils.Touch.cs" />
-    <Compile Include="WinFormsUtils.cs" />
-    <Compile Include="WinFormsUtils.NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />

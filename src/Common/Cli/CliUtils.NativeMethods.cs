@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2006-2014 Bastian Eicher
+ * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,44 +21,38 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Cli
 {
-    partial class WinFormsUtils
+    partial class CliUtils
     {
         [SuppressUnmanagedCodeSecurity]
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private static class SafeNativeMethods
         {
-            [DllImport("user32")]
-            public static extern short GetAsyncKeyState(uint key);
+            public enum StdHandle
+            {
+                Stdin = -10,
+                Stdout = -11,
+                Stderr = -12
+            };
 
+            [DllImport("kernel32")]
+            public static extern IntPtr GetStdHandle(StdHandle nStdHandle);
 
-            // Touch
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool RegisterTouchWindow(IntPtr hWnd, uint ulFlags);
+            public enum FileType
+            {
+                Unknown = 0,
+                Disk = 1,
+                Char = 2,
+                Pipe = 3
+            }
 
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetTouchInputInfo(IntPtr hTouchInput, int cInputs, [In, Out] TouchInput[] pInputs, int cbSize);
-
-            [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern void CloseTouchInputHandle(IntPtr lParam);
-        }
-
-        [SuppressUnmanagedCodeSecurity]
-        private static class UnsafeNativeMethods
-        {
-            // Foreground window
-            [DllImport("user32", SetLastError = true)]
-            public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-            // Shell and window messages
-            [DllImport("user32")]
-            public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+            [DllImport("kernel32")]
+            public static extern FileType GetFileType(IntPtr hFile);
         }
     }
 }

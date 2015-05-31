@@ -22,10 +22,14 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
+using System.Text;
+using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
@@ -39,20 +43,159 @@ namespace NanoByte.Common.Native
     {
         #region Win32 Error Codes
         /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that a file was not found.
+        /// </summary>
+        internal const int Win32ErrorFileNotFound = 2;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that access to a resource was denied.
+        /// </summary>
+        internal const int Win32ErrorAccessDenied = 5;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that write access to a resource failed.
+        /// </summary>
+        internal const int Win32ErrorWriteFault = 29;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation timed out.
+        /// </summary>
+        internal const int Win32ErrorSemTimeout = 121;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an element (e.g. a file) already exists.
+        /// </summary>
+        internal const int Win32ErrorAlreadyExists = 183;
+
+        /// <summary>
         /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that more data is available and the query should be repeated with a larger output buffer/array.
         /// </summary>
-        public const int Win32MoreData = 234;
+        internal const int Win32ErrorMoreData = 234;
+
+        /// <summary>
+        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that the requested application needs UAC elevation.
+        /// </summary>
+        internal const int Win32ErrorRequestedOperationRequiresElevation = 740;
 
         /// <summary>
         /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation was cancelled by the user.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
-        public const int Win32Cancelled = 1223;
+        internal const int Win32ErrorCancelled = 1223;
 
         /// <summary>
-        /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that the requested application needs UAC elevation.
+        /// Builds a suitable <see cref="Exception"/> for a given <see cref="Win32Exception.NativeErrorCode"/>.
         /// </summary>
-        public const int Win32RequestedOperationRequiresElevation = 740;
+        internal static Exception BuildException(int error)
+        {
+            var ex = new Win32Exception(error);
+            switch (error)
+            {
+                case Win32ErrorAlreadyExists:
+                case Win32ErrorWriteFault:
+                    return new IOException(ex.Message, ex);
+
+                case Win32ErrorFileNotFound:
+                    return new FileNotFoundException(ex.Message, ex);
+
+                case Win32ErrorAccessDenied:
+                    return new UnauthorizedAccessException(ex.Message, ex);
+
+                case Win32ErrorRequestedOperationRequiresElevation:
+                    return new NotAdminException(ex.Message, ex);
+
+                case Win32ErrorSemTimeout:
+                    return new TimeoutException();
+
+                case Win32ErrorCancelled:
+                    return new OperationCanceledException();
+
+                default:
+                    return ex;
+            }
+        }
+        #endregion
+
+        #region OS
+        /// <summary>
+        /// <see langword="true"/> if the current operating system is Windows (9x- or NT-based); <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool IsWindows { get { return Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT; } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current operating system is a modern Windows version (NT-based); <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool IsWindowsNT { get { return Environment.OSVersion.Platform == PlatformID.Win32NT; } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current operating system is Windows Vista or newer; <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool IsWindowsVista { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 0); } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current operating system is Windows 7 or newer; <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool IsWindows7 { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 1); } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current operating system is Windows 8 or newer; <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool IsWindows8 { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 2); } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current operating system is 64-bit capable; <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool Is64BitOperatingSystem { get { return Is64BitProcess || Is32BitProcessOn64BitOperatingSystem; } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current process is 64-bit; <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool Is64BitProcess { get { return IntPtr.Size == 8; } }
+
+        /// <summary>
+        /// <see langword="true"/> if the current process is 32-bit but the operating system is 64-bit capable; <see langword="false"/> otherwise.
+        /// </summary>
+        /// <remarks>Can only detect WOW on Windows XP and newer</remarks>
+        public static bool Is32BitProcessOn64BitOperatingSystem
+        {
+            get
+            {
+                // Can only detect WOW on Windows XP or newer
+                if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version < new Version(5, 1)) return false;
+
+                bool retVal;
+                SafeNativeMethods.IsWow64Process(Process.GetCurrentProcess().Handle, out retVal);
+                return retVal;
+            }
+        }
+
+        /// <summary>
+        /// Indicates whether the current user is an administrator. Always returns <see langword="true"/> on non-Windows systems.
+        /// </summary>
+        public static bool IsAdministrator
+        {
+            get
+            {
+                if (!IsWindowsNT) return true;
+                var identity = WindowsIdentity.GetCurrent();
+                if (identity == null) return true;
+
+                return new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+
+        /// <summary>
+        /// Determines the path of the executable the current process was launched from.
+        /// </summary>
+        public static string CurrentProcessPath
+        {
+            get
+            {
+                var fileName = new StringBuilder(255);
+                SafeNativeMethods.GetModuleFileName(IntPtr.Zero, fileName, fileName.Capacity);
+                return fileName.ToString();
+            }
+        }
         #endregion
 
         #region .NET Framework
@@ -100,27 +243,6 @@ namespace NanoByte.Common.Native
         }
         #endregion
 
-        #region Window messages
-        /// <summary>
-        /// Registers a new message type that can be sent to windows.
-        /// </summary>
-        /// <param name="message">A unique string used to identify the message type session-wide.</param>
-        /// <returns>A unique ID number used to identify the message type session-wide.</returns>
-        public static int RegisterWindowMessage(string message)
-        {
-            return IsWindows ? UnsafeNativeMethods.RegisterWindowMessage(message) : 0;
-        }
-
-        /// <summary>
-        /// Sends a message of a specific type to all windows in the current session.
-        /// </summary>
-        /// <param name="messageID">A unique ID number used to identify the message type session-wide.</param>
-        public static void BroadcastMessage(int messageID)
-        {
-            if (IsWindows) UnsafeNativeMethods.PostMessage(HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
-        }
-        #endregion
-
         #region Command-line arguments
         /// <summary>
         /// Tries to split a command-line into individual arguments.
@@ -150,7 +272,189 @@ namespace NanoByte.Common.Native
             }
             finally
             {
-                UnsafeNativeMethods.LocalFree(ptrToSplitArgs);
+                NativeMethods.LocalFree(ptrToSplitArgs);
+            }
+        }
+        #endregion
+
+        #region Performance counter
+        private static long _performanceFrequency;
+
+        /// <summary>
+        /// A time index in seconds that continuously increases.
+        /// </summary>
+        /// <remarks>Depending on the operating system this may be the time of the system clock or the time since the system booted.</remarks>
+        public static double AbsoluteTime
+        {
+            get
+            {
+                // Use high-accuracy kernel timing methods on NT
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    if (_performanceFrequency == 0)
+                        SafeNativeMethods.QueryPerformanceFrequency(out _performanceFrequency);
+
+                    long time;
+                    SafeNativeMethods.QueryPerformanceCounter(out time);
+                    return time / (double)_performanceFrequency;
+                }
+
+                return Environment.TickCount / 1000f;
+            }
+        }
+        #endregion
+
+        #region File system
+        /// <summary>
+        /// Reads the entire contents of a file using the Win32 API.
+        /// </summary>
+        /// <param name="path">The path of the file to read.</param>
+        /// <returns>The contents of the file as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
+        /// <remarks>This method works like <see cref="File.ReadAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
+        [CanBeNull]
+        public static byte[] ReadAllBytes([NotNull, Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Normal, IntPtr.Zero);
+            if (handle.ToInt32() == -1) return null;
+
+            try
+            {
+                uint size = NativeMethods.GetFileSize(handle, IntPtr.Zero);
+                byte[] buffer = new byte[size];
+                uint read = uint.MinValue;
+                var lpOverlapped = new NativeOverlapped();
+                if (NativeMethods.ReadFile(handle, buffer, size, ref read, ref lpOverlapped)) return buffer;
+                else return null;
+            }
+            finally
+            {
+                NativeMethods.CloseHandle(handle);
+            }
+        }
+
+        /// <summary>
+        /// Writes the entire contents of a byte array to a file using the Win32 API. Existing files with the same name are overwritten.
+        /// </summary>
+        /// <param name="path">The path of the file to write to.</param>
+        /// <param name="data">The data to write to the file.</param>
+        /// <exception cref="IOException">There was an IO problem writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file was denied.</exception>
+        /// <exception cref="Win32Exception">There was a problem writing the file.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
+        /// <remarks>This method works like <see cref="File.WriteAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
+        public static void WriteAllBytes([NotNull, Localizable(false)] string path, [NotNull] byte[] data)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            var handle = NativeMethods.CreateFile(path, FileAccess.Write, FileShare.Write, IntPtr.Zero, FileMode.Create, 0, IntPtr.Zero);
+            int error = Marshal.GetLastWin32Error();
+            if (handle == new IntPtr(-1)) throw BuildException(error);
+
+            try
+            {
+                uint bytesWritten = 0;
+                var lpOverlapped = new NativeOverlapped();
+                if (!NativeMethods.WriteFile(handle, data, (uint)data.Length, ref bytesWritten, ref lpOverlapped))
+                    throw BuildException(Marshal.GetLastWin32Error());
+            }
+            finally
+            {
+                NativeMethods.CloseHandle(handle);
+            }
+        }
+
+        /// <summary>
+        /// Creates a symbolic link for a file or directory.
+        /// </summary>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
+        /// <exception cref="IOException">There was an IO problem creating the symlink.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
+        /// <exception cref="Win32Exception">The symbolic link creation failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
+        public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            #endregion
+
+            if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Environment.CurrentDirectory, targetPath);
+            if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, Directory.Exists(targetAbsolute) ? 1 : 0))
+                throw BuildException(Marshal.GetLastWin32Error());
+        }
+
+        /// <summary>
+        /// Creates a hard link between two files.
+        /// </summary>
+        /// <param name="sourcePath">The path of the link to create.</param>
+        /// <param name="targetPath">The absolute path of the existing file to point to.</param>
+        /// <remarks>Only available on Windows 2000 or newer.</remarks>
+        /// <exception cref="IOException">There was an IO problem creating the hard link.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the hard link.</exception>
+        /// <exception cref="Win32Exception">The hard link creation failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+        public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            #endregion
+
+            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+            if (!NativeMethods.CreateHardLink(sourcePath, targetPath, IntPtr.Zero))
+                throw BuildException(Marshal.GetLastWin32Error());
+        }
+
+        /// <summary>
+        /// Determines whether to files are hardlinked.
+        /// </summary>
+        /// <param name="path1">The path of the first file.</param>
+        /// <param name="path2">The path of the second file.</param>
+        /// <exception cref="IOException">There was an IO problem checking the files.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
+        /// <exception cref="Win32Exception">Checking the files failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+        public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
+            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException("path2");
+            #endregion
+
+            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+            return GetFileIndex(path1) == GetFileIndex(path2);
+        }
+
+        private static ulong GetFileIndex([NotNull, Localizable(false)] string path)
+        {
+            var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
+            if (handle == IntPtr.Zero) throw BuildException(Marshal.GetLastWin32Error());
+
+            try
+            {
+                NativeMethods.BY_HANDLE_FILE_INFORMATION fileInfo;
+                if (!NativeMethods.GetFileInformationByHandle(handle, out fileInfo))
+                    throw BuildException(Marshal.GetLastWin32Error());
+                return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
+            }
+            finally
+            {
+                NativeMethods.CloseHandle(handle);
             }
         }
         #endregion
@@ -168,7 +472,7 @@ namespace NanoByte.Common.Native
             #endregion
 
             if (!IsWindows7) return;
-            UnsafeNativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
+            NativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
         }
 
         /// <summary>
@@ -181,7 +485,7 @@ namespace NanoByte.Common.Native
 
             const uint SHCNE_ASSOCCHANGED = 0x08000000;
             const uint SHCNF_IDLIST = 0;
-            UnsafeNativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+            NativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
         }
 
         private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
@@ -196,149 +500,28 @@ namespace NanoByte.Common.Native
             const int WM_SETTINGCHANGE = 0x001A;
             const int SMTO_ABORTIFHUNG = 0x0002;
             IntPtr result;
-            UnsafeNativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out result);
+            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out result);
         }
         #endregion
 
-        #region Mutex
-        private const int ErrorSuccess = 0, ErrorFileNotFound = 2, ErrorAccessDenied = 5, ErrorAlreadyExists = 183;
-        private const UInt32 Synchronize = 0x00100000;
-
+        #region Window messages
         /// <summary>
-        /// Creates or opens a mutex.
+        /// Registers a new message type that can be sent to windows.
         /// </summary>
-        /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <param name="handle">The handle created for the mutex. Can be used to close it before the process ends.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
-        /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
-        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        /// <remarks>The mutex will automatically be released once the process terminates.</remarks>
-        public static bool CreateMutex([NotNull, Localizable(false)] string name, out IntPtr handle)
+        /// <param name="message">A unique string used to identify the message type session-wide.</param>
+        /// <returns>A unique ID number used to identify the message type session-wide.</returns>
+        public static int RegisterWindowMessage(string message)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            #endregion
-
-            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-
-            // Create new or open existing mutex
-            handle = UnsafeNativeMethods.CreateMutex(IntPtr.Zero, false, name);
-
-            int error = Marshal.GetLastWin32Error();
-            switch (error)
-            {
-                case ErrorSuccess:
-                    // New mutex created, handle passed out
-                    return false;
-                case ErrorAlreadyExists:
-                    // Existing mutex opened, handle passed out
-                    return true;
-                case ErrorAccessDenied:
-                    // Try to open existing mutex
-                    handle = UnsafeNativeMethods.OpenMutex(Synchronize, false, name);
-
-                    if (handle == IntPtr.Zero)
-                    {
-                        error = Marshal.GetLastWin32Error();
-                        switch (error)
-                        {
-                            case ErrorFileNotFound:
-                                // No existing mutex found
-                                return false;
-                            default:
-                                throw new Win32Exception(error);
-                        }
-                    }
-
-                    // Existing mutex opened, handle passed out
-                    return true;
-                default:
-                    throw new Win32Exception(error);
-            }
+            return IsWindows ? NativeMethods.RegisterWindowMessage(message) : 0;
         }
 
         /// <summary>
-        /// Tries to open an existing mutex.
+        /// Sends a message of a specific type to all windows in the current session.
         /// </summary>
-        /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if none existed.</returns>
-        /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
-        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
-        public static bool OpenMutex([NotNull, Localizable(false)] string name)
+        /// <param name="messageID">A unique ID number used to identify the message type session-wide.</param>
+        public static void BroadcastMessage(int messageID)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            #endregion
-
-            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-
-            // Try to open existing mutex
-            var handle = UnsafeNativeMethods.OpenMutex(Synchronize, false, name);
-
-            if (handle == IntPtr.Zero)
-            {
-                int error = Marshal.GetLastWin32Error();
-                switch (error)
-                {
-                    case ErrorFileNotFound:
-                        // No existing mutex found
-                        return false;
-                    default:
-                        throw new Win32Exception(error);
-                }
-            }
-
-            // Existing mutex opened, handle remains until process terminates
-            return true;
-        }
-
-        /// <summary>
-        /// Checks whether a specific mutex exists without openining a lasting handle.
-        /// </summary>
-        /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was found; <see langword="false"/> if none existed.</returns>
-        /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
-        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        public static bool ProbeMutex([NotNull, Localizable(false)] string name)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            #endregion
-
-            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-
-            // Try to open existing mutex
-            var handle = UnsafeNativeMethods.OpenMutex(Synchronize, false, name);
-
-            if (handle == IntPtr.Zero)
-            {
-                int error = Marshal.GetLastWin32Error();
-                switch (error)
-                {
-                    case ErrorFileNotFound:
-                        // No existing mutex found
-                        return false;
-                    default:
-                        throw new Win32Exception(error);
-                }
-            }
-
-            // Existing mutex opened, close handle again
-            UnsafeNativeMethods.CloseHandle(handle);
-            return true;
-        }
-
-        /// <summary>
-        /// Closes an existing mutex handle. The mutex is destroyed if this is the last handle.
-        /// </summary>
-        /// <param name="handle">The mutex handle to be closed.</param>
-        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        public static void CloseMutex(IntPtr handle)
-        {
-            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-
-            UnsafeNativeMethods.CloseHandle(handle);
+            if (IsWindows) NativeMethods.PostMessage(HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
         }
         #endregion
 
@@ -347,6 +530,7 @@ namespace NanoByte.Common.Native
         /// Registers the current application for automatic restart after updates or crashes.
         /// </summary>
         /// <param name="arguments">The command-line arguments to pass to the application on restart. Must not be empty!</param>
+        /// <exception cref="ArgumentException"><paramref name="arguments"/> is too long.</exception>
         public static void RegisterApplicationRestart([NotNull] string arguments)
         {
             #region Sanity checks
@@ -355,8 +539,8 @@ namespace NanoByte.Common.Native
 
             if (!IsWindowsVista) return;
 
-            int retval = UnsafeNativeMethods.RegisterApplicationRestart(arguments, UnsafeNativeMethods.RestartFlags.NONE);
-            if (retval != 0) throw new Win32Exception(retval);
+            int ret = NativeMethods.RegisterApplicationRestart(arguments, NativeMethods.RestartFlags.NONE);
+            if (ret != 0) throw new ArgumentException("arguments are too long", "arguments");
         }
 
         /// <summary>
@@ -366,8 +550,7 @@ namespace NanoByte.Common.Native
         {
             if (!IsWindowsVista) return;
 
-            int retval = UnsafeNativeMethods.UnregisterApplicationRestart();
-            if (retval != 0) throw new Win32Exception(retval);
+            NativeMethods.UnregisterApplicationRestart();
         }
         #endregion
     }

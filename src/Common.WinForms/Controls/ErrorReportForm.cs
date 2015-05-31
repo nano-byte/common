@@ -30,6 +30,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using NanoByte.Common.Info;
+using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
 
@@ -103,9 +104,6 @@ namespace NanoByte.Common.Controls
 
             AppDomain.CurrentDomain.UnhandledException += delegate(object sender, UnhandledExceptionEventArgs e)
             {
-                Log.Error("AppDomain.CurrentDomain.UnhandledException raised");
-
-                HideForms();
                 Report((e.ExceptionObject as Exception) ?? new Exception("Unknown error"), uploadUri);
                 Process.GetCurrentProcess().Kill();
             };

@@ -24,6 +24,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using JetBrains.Annotations;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
 {
