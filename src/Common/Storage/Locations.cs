@@ -56,6 +56,12 @@ namespace NanoByte.Common.Storage
         public static readonly string InstallBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath) ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 
         /// <summary>
+        /// Indicates whether the application is installed in a user-specific location.
+        /// </summary>
+        [PublicAPI]
+        public static bool IsInstalledPerUser { get { return InstallBase.StartsWith(HomeDir); } }
+
+        /// <summary>
         /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <see langword="true"/>.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
@@ -82,10 +88,10 @@ namespace NanoByte.Common.Storage
 
         #region Per-user directories
         /// <summary>
-        /// The home directory of the current user.
+        /// The home/profile directory of the current user.
         /// </summary>
         [PublicAPI, NotNull]
-        public static string HomeDir { get { return Environment.GetFolderPath(Environment.SpecialFolder.Personal); } }
+        public static string HomeDir { get { return Environment.GetEnvironmentVariable(WindowsUtils.IsWindows ? "userprofile" : "HOME") ?? ""; } }
 
         /// <summary>
         /// The directory to store per-user settings (can roam across different machines).
