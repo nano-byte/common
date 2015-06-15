@@ -48,7 +48,7 @@ namespace NanoByte.Common
 
             Log.Debug("Starting async thread: " + name);
 
-            var thread = new Thread(execute) { Name = name };
+            var thread = new Thread(execute) {Name = name};
             thread.SetApartmentState(ApartmentState.STA); // Make COM work
             thread.Start();
             return thread;
@@ -69,7 +69,7 @@ namespace NanoByte.Common
 
             Log.Debug("Starting background thread: " + name);
 
-            var thread = new Thread(execute) { Name = name, IsBackground = true };
+            var thread = new Thread(execute) {Name = name, IsBackground = true};
             thread.Start();
             return thread;
         }
@@ -77,11 +77,11 @@ namespace NanoByte.Common
         /// <summary>
         /// Executes a delegate in a new <see cref="ApartmentState.STA"/> thread. Blocks the caller until the execution completes.
         /// </summary>
-        /// <returns>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</returns>
         /// <param name="execute">The delegate to execute.</param>
+        /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
         [PublicAPI]
-        public static void RunSta([NotNull] ThreadStart execute)
+        public static void RunSta([NotNull] Action execute)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException("execute");
@@ -106,6 +106,44 @@ namespace NanoByte.Common
             thread.Join();
 
             if (error != null) error.Rethrow();
+        }
+
+        /// <summary>
+        /// Executes a delegate in a new <see cref="ApartmentState.STA"/> thread. Blocks the caller until the execution completes.
+        /// </summary>
+        /// <typeparam name="T">The type of the return value of <paramref name="execute"/>.</typeparam>
+        /// <param name="execute">The delegate to execute.</param>
+        /// <returns>The return value of <paramref name="execute"/></returns>
+        /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
+        [PublicAPI]
+        public static T RunSta<T>([NotNull] Func<T> execute)
+        {
+            #region Sanity checks
+            if (execute == null) throw new ArgumentNullException("execute");
+            #endregion
+
+            Log.Debug("Running STA thread");
+
+            T result = default(T);
+            Exception error = null;
+            var thread = new Thread(new ThreadStart(delegate
+            {
+                try
+                {
+                    result = execute();
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                }
+            }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            thread.Join();
+
+            if (error != null) error.Rethrow();
+            return result;
         }
     }
 }

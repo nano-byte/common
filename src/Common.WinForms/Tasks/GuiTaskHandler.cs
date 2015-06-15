@@ -156,13 +156,13 @@ namespace NanoByte.Common.Tasks
 
         private void Invoke(Action action)
         {
-            if (_owner == null) action();
+            if (_owner == null) ThreadUtils.RunSta(action);
             else _owner.Invoke(action);
         }
 
         private T Invoke<T>(Func<T> action)
         {
-            if (_owner == null) return action();
+            if (_owner == null) return ThreadUtils.RunSta(action);
             else return (T)_owner.Invoke(action);
         }
 
