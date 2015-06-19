@@ -143,6 +143,8 @@ namespace NanoByte.Common
         /// <summary>
         /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows.
         /// </summary>
+        /// <exception cref="PlatformNotSupportedException">The current OS is not Windows NT-based or UAC is disabled.</exception>
+        /// <remarks>Uses the "Run as" dialog on Windows 2000, XP and 2003.</remarks>
         [PublicAPI, NotNull]
         public static ProcessStartInfo AsAdmin([NotNull] this ProcessStartInfo startInfo)
         {
@@ -150,11 +152,11 @@ namespace NanoByte.Common
             if (startInfo == null) throw new ArgumentNullException("startInfo");
             #endregion
 
-            if (WindowsUtils.IsWindowsNT)
-            {
-                startInfo.Verb = "runas";
-                startInfo.UseShellExecute = true;
-            }
+            if (!WindowsUtils.IsWindowsNT || RegistryUtils.GetDword(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", defaultValue: 1) == 0)
+                throw new PlatformNotSupportedException();
+
+            startInfo.Verb = "runas";
+            startInfo.UseShellExecute = true;
             return startInfo;
         }
     }
