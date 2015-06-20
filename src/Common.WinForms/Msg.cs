@@ -318,7 +318,12 @@ namespace NanoByte.Common
         {
             // Split everything from the second line onwards off from the main text
             string[] split = text.Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
-            var taskDialog = new TaskDialog.TaskDialog {MainInstruction = split[0], WindowTitle = Application.ProductName};
+            var taskDialog = new TaskDialog.TaskDialog
+            {
+                PositionRelativeToWindow = true,
+                WindowTitle = Application.ProductName,
+                MainInstruction = split[0]
+            };
             if (split.Length == 2) taskDialog.Content = split[1];
 
             // Handle RTL systems
