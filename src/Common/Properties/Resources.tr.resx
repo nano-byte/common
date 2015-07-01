@@ -169,7 +169,7 @@
     <value>&apos;{0}&apos; geri alınamadı.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt olması gerekirken {2} bayt.</value>
+    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
   </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>&quot;{0}&quot; dosyası bulunamadı.</value>
