@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -180,6 +181,26 @@ namespace NanoByte.Common.Native
                 {
                     // ReSharper disable once AssignNullToNotNullAttribute
                     return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+                }
+                catch (SecurityException)
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Indicates whether the current process is running in an interactive session (rather than, e.g. as a service). Always returns <see langword="true"/> on non-Windows NT systems.
+        /// </summary>
+        public static bool IsInteractive
+        {
+            get
+            {
+                if (!IsWindowsNT) return true;
+                try
+                {
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(new SecurityIdentifier(WellKnownSidType.InteractiveSid, null));
                 }
                 catch (SecurityException)
                 {
