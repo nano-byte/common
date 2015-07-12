@@ -127,9 +127,7 @@ namespace NanoByte.Common.Tasks
             // Loop until the user has made a valid choice
             while (true)
             {
-                string input = CliUtils.ReadString(@"[Y/N]");
-                if (input == null) throw new OperationCanceledException();
-                switch (input.ToLower())
+                switch (CliUtils.ReadString(@"[Y/N]").ToLower())
                 {
                     case "y":
                     case "yes":

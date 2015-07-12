@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.IO;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
@@ -36,12 +37,15 @@ namespace NanoByte.Common.Cli
         /// Asks the user to input a string.
         /// </summary>
         /// <param name="prompt">The prompt to display to the user on <see cref="Console.Error"/>.</param>
-        /// <returns>The string the user entered; <see cref="string.Empty"/> if none; <see langword="null"/> if the input stream has been closed.</returns>
-        [CanBeNull]
+        /// <returns>The string the user entered.</returns>
+        /// <exception cref="IOException">The <see cref="Console.In"/> stream has been closed.</exception>
+        [NotNull]
         public static string ReadString([NotNull, Localizable(true)] string prompt)
         {
             Console.Error.Write(prompt + " ");
-            return Console.ReadLine();
+            string line = Console.ReadLine();
+            if (line == null) throw new IOException("stdin stream closed, unable to get user input");
+            return line;
         }
 
         /// <summary>
