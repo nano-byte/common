@@ -50,13 +50,13 @@ namespace NanoByte.Common.Cli
         /// <param name="prompt">The prompt to display to the user on <see cref="Console.Error"/>.</param>
         /// <returns>The password the user entered; <see cref="string.Empty"/> if none.</returns>
         [NotNull]
-        public static string ReadPassword(string prompt)
+        public static string ReadPassword([NotNull, Localizable(true)] string prompt)
         {
             Console.Error.Write(prompt + " ");
 
             string password = "";
 
-            ConsoleKeyInfo key = Console.ReadKey(true);
+            var key = Console.ReadKey(intercept: true);
             while (key.Key != ConsoleKey.Enter)
             {
                 if (key.Key == ConsoleKey.Backspace)
@@ -77,12 +77,12 @@ namespace NanoByte.Common.Cli
         /// Indicates whether the stdout stream has been redirected.
         /// </summary>
         /// <remarks>This only works on Windows systems. On other operating systems it always returns <see langword="false"/>.</remarks>
-        public static bool StandardOutputRedirected
+        public static bool StandardInputRedirected
         {
             get
             {
                 if (!WindowsUtils.IsWindows) return false;
-                return SafeNativeMethods.FileType.Char != SafeNativeMethods.GetFileType(SafeNativeMethods.GetStdHandle(SafeNativeMethods.StdHandle.Stdout));
+                return SafeNativeMethods.FileType.Char != SafeNativeMethods.GetFileType(SafeNativeMethods.GetStdHandle(SafeNativeMethods.StdHandle.Stdin));
             }
         }
 
@@ -90,12 +90,12 @@ namespace NanoByte.Common.Cli
         /// Indicates whether the stdout stream has been redirected.
         /// </summary>
         /// <remarks>This only works on Windows systems. On other operating systems it always returns <see langword="false"/>.</remarks>
-        public static bool StandardInputRedirected
+        public static bool StandardOutputRedirected
         {
             get
             {
                 if (!WindowsUtils.IsWindows) return false;
-                return SafeNativeMethods.FileType.Char != SafeNativeMethods.GetFileType(SafeNativeMethods.GetStdHandle(SafeNativeMethods.StdHandle.Stdin));
+                return SafeNativeMethods.FileType.Char != SafeNativeMethods.GetFileType(SafeNativeMethods.GetStdHandle(SafeNativeMethods.StdHandle.Stdout));
             }
         }
 

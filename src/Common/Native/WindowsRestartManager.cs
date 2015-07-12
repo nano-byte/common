@@ -134,8 +134,12 @@ namespace NanoByte.Common.Native
         /// <exception cref="TimeoutException">The Restart Manager could not obtain a Registry write mutex in the allotted time. A system restart is recommended.</exception>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
         [NotNull, PublicAPI]
-        public string[] ListApps(ITaskHandler handler)
+        public string[] ListApps([NotNull] ITaskHandler handler)
         {
+            #region Sanity checks
+            if (handler == null) throw new ArgumentNullException("handler");
+            #endregion
+
             string[] names = null;
             handler.RunTask(new SimplePercentTask(Resources.SearchingFileReferences, delegate
             {

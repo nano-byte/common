@@ -38,7 +38,6 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows platform.
     /// </summary>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static partial class WindowsUtils
     {
         #region Win32 Error Codes
@@ -170,17 +169,22 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
-        /// Indicates whether the current user is an administrator. Always returns <see langword="true"/> on non-Windows systems.
+        /// Indicates whether the current user is an administrator. Always returns <see langword="true"/> on non-Windows NT systems.
         /// </summary>
         public static bool IsAdministrator
         {
             get
             {
                 if (!IsWindowsNT) return true;
-                var identity = WindowsIdentity.GetCurrent();
-                if (identity == null) return true;
-
-                return new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator);
+                try
+                {
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+                }
+                catch (SecurityException)
+                {
+                    return false;
+                }
             }
         }
 
@@ -495,6 +499,7 @@ namespace NanoByte.Common.Native
         /// Informs the Windows shell that changes were made to the file association data in the registry.
         /// </summary>
         /// <remarks>This should be called immediatley after the changes in order to trigger a refresh of the Explorer UI.</remarks>
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyAssocChanged()
         {
             if (!IsWindows) return;
@@ -504,11 +509,13 @@ namespace NanoByte.Common.Native
             NativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
         }
 
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
 
         /// <summary>
         /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
         /// </summary>
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyEnvironmentChanged()
         {
             if (!IsWindows) return;

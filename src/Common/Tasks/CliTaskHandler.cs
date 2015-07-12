@@ -172,11 +172,8 @@ namespace NanoByte.Common.Tasks
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                Log.Handler -= LogHandler;
-                CancellationTokenSource.Dispose();
-            }
+            Log.Handler -= LogHandler;
+            if (disposing) CancellationTokenSource.Dispose();
         }
         #endregion
     }
