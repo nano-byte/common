@@ -34,26 +34,33 @@ namespace NanoByte.Common.Tasks
     public class CliTaskHandler : MarshalNoTimeout, ITaskHandler
     {
         /// <summary>
-        /// Sets up Ctrl+C capturing and console <see cref="Log"/> output.
+        /// Sets up Ctrl+C handling and console <see cref="Log"/> output.
         /// </summary>
         public CliTaskHandler()
         {
-            // Handle Ctrl+C
             try
             {
-                Console.TreatControlCAsInput = false;
-                Console.CancelKeyPress += delegate(object sender, ConsoleCancelEventArgs e)
-                {
-                    CancellationTokenSource.Cancel();
-                    e.Cancel = true;
-                };
+                Console.CancelKeyPress += CancelKeyPressHandler;
             }
+                #region Error handler
             catch (IOException)
             {
                 // Ignore failures caused by non-standard terminal emulators
             }
+            #endregion
 
             Log.Handler += LogHandler;
+        }
+
+        /// <summary>
+        /// Handles Ctrl+C key presses.
+        /// </summary>
+        private void CancelKeyPressHandler(object sender, ConsoleCancelEventArgs e)
+        {
+            CancellationTokenSource.Cancel();
+
+            // Allow the application to finish cleanup rather than terminating immediately
+            e.Cancel = true;
         }
 
         /// <summary>
@@ -173,6 +180,7 @@ namespace NanoByte.Common.Tasks
         protected virtual void Dispose(bool disposing)
         {
             Log.Handler -= LogHandler;
+            Console.CancelKeyPress -= CancelKeyPressHandler;
             if (disposing) CancellationTokenSource.Dispose();
         }
         #endregion
