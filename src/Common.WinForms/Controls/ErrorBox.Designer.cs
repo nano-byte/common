@@ -34,7 +34,9 @@
             this.textDetails = new System.Windows.Forms.RichTextBox();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
+            this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -50,15 +52,16 @@
             // 
             // labelMessage
             // 
-            this.labelMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelMessage.AutoEllipsis = true;
+            this.labelMessage.AutoSize = true;
             this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMessage.Location = new System.Drawing.Point(70, 9);
+            this.labelMessage.Location = new System.Drawing.Point(3, 0);
+            this.labelMessage.MinimumSize = new System.Drawing.Size(48, 48);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(402, 48);
+            this.labelMessage.Padding = new System.Windows.Forms.Padding(52, 0, 0, 0);
+            this.labelMessage.Size = new System.Drawing.Size(136, 48);
             this.labelMessage.TabIndex = 0;
-            this.labelMessage.Text = "(Title)";
+            this.labelMessage.Text = "(Message)";
             // 
             // textDetails
             // 
@@ -66,12 +69,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textDetails.Location = new System.Drawing.Point(16, 60);
+            this.textDetails.Location = new System.Drawing.Point(3, 51);
             this.textDetails.Name = "textDetails";
             this.textDetails.ReadOnly = true;
-            this.textDetails.Size = new System.Drawing.Size(456, 150);
+            this.textDetails.Size = new System.Drawing.Size(454, 144);
             this.textDetails.TabIndex = 3;
-            this.textDetails.Text = "(Message)";
+            this.textDetails.Text = "(Details)";
             // 
             // pictureBoxIcon
             // 
@@ -83,6 +86,24 @@
             this.pictureBoxIcon.TabIndex = 5;
             this.pictureBoxIcon.TabStop = false;
             // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Controls.Add(this.labelMessage, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.textDetails, 0, 1);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(460, 198);
+            this.tableLayoutPanel.TabIndex = 4;
+            // 
             // ErrorBox
             // 
             this.AcceptButton = this.buttonOK;
@@ -92,8 +113,7 @@
             this.ClientSize = new System.Drawing.Size(484, 252);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBoxIcon);
-            this.Controls.Add(this.textDetails);
-            this.Controls.Add(this.labelMessage);
+            this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.buttonOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -102,6 +122,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Error box";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -113,5 +135,6 @@
         private System.Windows.Forms.RichTextBox textDetails;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
     }
 }
