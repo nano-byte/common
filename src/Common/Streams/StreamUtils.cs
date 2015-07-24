@@ -111,25 +111,27 @@ namespace NanoByte.Common.Streams
         /// <param name="source">The source stream to copy from.</param>
         /// <param name="destination">The destination stream to copy to.</param>
         /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
-        /// <param name="cancellationToken">Used to signal when the user wishes to cancel the task execution.</param>
+        /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
+        /// <param name="progress">Used to report back the number of bytes that have been copied so far.</param>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of <paramref name="source"/>.</remarks>
-        public static void CopyTo([NotNull] this Stream source, [NotNull] Stream destination, long bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken))
+        public static void CopyTo([NotNull] this Stream source, [NotNull] Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), IProgress<long> progress = null)
         {
             #region Sanity checks
             if (source == null) throw new ArgumentNullException("source");
             if (destination == null) throw new ArgumentNullException("destination");
             #endregion
 
-            var buffer = new byte[bufferSize];
-            int read;
-
             if (source.CanSeek) source.Position = 0;
 
+            var buffer = new byte[bufferSize];
+            int read;
+            long sum = 0;
             do
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                read = source.Read(buffer, 0, buffer.Length);
+                sum += read = source.Read(buffer, 0, buffer.Length);
                 destination.Write(buffer, 0, read);
+                if (progress != null) progress.Report(sum);
             } while (read != 0);
 
             if (destination.CanSeek) destination.Position = 0;
@@ -140,7 +142,10 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="path">The path of the file to write.</param>
-        public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path)
+        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
+        /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
+        /// <param name="progress">Used to report back the number of bytes that have been copied so far. Callbacks are rate limited to once every 250ms.</param>
+        public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), IProgress<long> progress = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -148,7 +153,7 @@ namespace NanoByte.Common.Streams
             #endregion
 
             using (var fileStream = File.Create(path))
-                stream.CopyTo(fileStream);
+                stream.CopyTo(fileStream, bufferSize, cancellationToken, progress);
         }
 
         /// <summary>
