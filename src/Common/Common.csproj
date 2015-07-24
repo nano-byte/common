@@ -115,6 +115,8 @@
     <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
     <Compile Include="NeedGuiException.cs" />
     <Compile Include="Net\DownloadFile.cs" />
+    <Compile Include="Net\DownloadMemory.cs" />
+    <Compile Include="Net\DownloadTask.cs" />
     <Compile Include="Net\NetUtils.cs" />
     <Compile Include="Net\UriExtensions.cs" />
     <Compile Include="Net\WebClientTimeout.cs">

@@ -21,44 +21,44 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.IO;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Downloads a file from a specific internet address to a local file.
+    /// Downloads a file from a specific internet address to an in-memory array.
     /// </summary>
-    public class DownloadFile : DownloadTask
+    public class DownloadMemory : DownloadTask
     {
-        /// <summary>
-        /// The local path to save the file to.
-        /// </summary>
-        [Description("The local path to save the file to.")]
-        [NotNull]
-        public string Target { get; protected set; }
-
         /// <summary>
         /// Creates a new download task.
         /// </summary>
         /// <param name="source">The URL the file is to be downloaded from.</param>
-        /// <param name="target">The local path to save the file to. A preexisting file will be overwritten.</param>
         /// <param name="bytesTotal">The number of bytes the file to be downloaded is long. The file will be rejected if it does not have this length. -1 if the size is unknown.</param>
-        public DownloadFile([NotNull] Uri source, [NotNull, Localizable(false)] string target, long bytesTotal = -1)
+        public DownloadMemory(Uri source, long bytesTotal = -1)
             : base(source, bytesTotal)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
-            #endregion
+        {}
 
-            Target = target;
-        }
+        [CanBeNull]
+        private MemoryStream _targetStream;
 
         /// <inheritdoc/>
         protected override Stream CreateTargetStream()
         {
-            return File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write);
+            return _targetStream = new MemoryStream();
+        }
+
+        /// <summary>
+        /// Returns the downloaded data.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">The download is not finished yet.</exception>
+        [NotNull]
+        public byte[] GetData()
+        {
+            if (_targetStream == null) throw new InvalidOperationException();
+
+            return _targetStream.ToArray();
         }
     }
 }
