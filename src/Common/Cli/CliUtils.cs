@@ -44,7 +44,7 @@ namespace NanoByte.Common.Cli
         {
             Console.Error.Write(prompt + " ");
             string line = Console.ReadLine();
-            if (line == null) throw new IOException("stdin stream closed, unable to get user input");
+            if (line == null) throw new IOException("input stream closed, unable to get user input");
             return line;
         }
 

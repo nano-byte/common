@@ -30,7 +30,7 @@ namespace NanoByte.Common.Net
     /// Contains test methods for <see cref="UriExtensions"/>.
     /// </summary>
     [TestFixture]
-    public class UriExtensions
+    public class UriExtensionsTest
     {
         [Test]
         public void TestToStringRfc()
