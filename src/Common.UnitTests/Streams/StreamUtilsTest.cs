@@ -42,10 +42,10 @@ namespace NanoByte.Common.Streams
         }
 
         [Test]
-        public void TestReadAll()
+        public void TestToArray()
         {
             var stream = new MemoryStream(new byte[] {1, 2, 3});
-            Assert.AreEqual(expected: new byte[] {1, 2, 3}, actual: stream.ReadAll());
+            Assert.AreEqual(expected: new byte[] {1, 2, 3}, actual: StreamUtils.ToArray(stream));
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace NanoByte.Common.Streams
 
             Assert.AreEqual(
                 expected: new byte[] {1, 2, 3},
-                actual: stream.ReadAll());
+                actual: StreamUtils.ToArray(stream));
         }
 
         [Test]
@@ -77,11 +77,11 @@ namespace NanoByte.Common.Streams
         }
 
         [Test]
-        public void TestWriteToFile()
+        public void TestCopyToFile()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
-                "abc".ToStream().WriteTo(tempFile);
+                "abc".ToStream().CopyToFile(tempFile);
                 Assert.AreEqual("abc", new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8));
             }
         }

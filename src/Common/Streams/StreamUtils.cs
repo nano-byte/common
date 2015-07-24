@@ -74,7 +74,7 @@ namespace NanoByte.Common.Streams
         /// <param name="stream">The stream to read from.</param>
         /// <returns>A entire content of the stream.</returns>
         [NotNull]
-        public static byte[] ReadAll([NotNull] this Stream stream)
+        public static byte[] ToArray([NotNull] this Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException("stream");
@@ -106,37 +106,6 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Writes the entire contents of an array to a stream.
-        /// </summary>
-        /// <param name="stream">The stream to write to.</param>
-        /// <param name="data">The array containing the bytes to write.</param>
-        public static void Write([NotNull] this Stream stream, [NotNull] byte[] data)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (data == null) throw new ArgumentNullException("data");
-            #endregion
-
-            stream.Write(data, 0, data.Length);
-        }
-
-        /// <summary>
-        /// Writes the entire content of a stream to a file.
-        /// </summary>
-        /// <param name="stream">The stream to read from.</param>
-        /// <param name="path">The path of the file to write.</param>
-        public static void WriteTo([NotNull] this Stream stream, [NotNull, Localizable(false)] string path)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            #endregion
-
-            using (var fileStream = File.Create(path))
-                stream.CopyTo(fileStream);
-        }
-
-        /// <summary>
         /// Copies the content of one stream to another. Seeks to the beginning of the <paramref name="source"/> stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="source">The source stream to copy from.</param>
@@ -164,6 +133,37 @@ namespace NanoByte.Common.Streams
             } while (read != 0);
 
             if (destination.CanSeek) destination.Position = 0;
+        }
+
+        /// <summary>
+        /// Writes the entire content of a stream to a file.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="path">The path of the file to write.</param>
+        public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            #endregion
+
+            using (var fileStream = File.Create(path))
+                stream.CopyTo(fileStream);
+        }
+
+        /// <summary>
+        /// Writes the entire contents of an array to a stream.
+        /// </summary>
+        /// <param name="stream">The stream to write to.</param>
+        /// <param name="data">The array containing the bytes to write.</param>
+        public static void Write([NotNull] this Stream stream, [NotNull] byte[] data)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException("stream");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            stream.Write(data, 0, data.Length);
         }
 
         /// <summary>
