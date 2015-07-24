@@ -22,12 +22,14 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Streams;
 
 namespace NanoByte.Common.Tasks
 {
@@ -56,6 +58,7 @@ namespace NanoByte.Common.Tasks
         /// <remarks>This value is always <see langword="null"/> until <see cref="TaskState.Data"/> has been reached.</remarks>
         [Browsable(false)]
         [CanBeNull]
+        [PublicAPI]
         public WebHeaderCollection Headers { get; private set; }
 
         /// <summary>
@@ -103,40 +106,47 @@ namespace NanoByte.Common.Tasks
             var httpRequest = request as HttpWebRequest;
             if (httpRequest != null) httpRequest.UserAgent = AppInfo.Current.NameVersion;
 
-            // Open the target file for writing
-            using (FileStream fileStream = File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write))
+            // Start HTTP request
+            State = TaskState.Header;
+            // ReSharper disable AssignNullToNotNullAttribute
+            var responseRequest = request.BeginGetResponse(null, null);
+            // ReSharper restore AssignNullToNotNullAttribute
+
+            // Wait for the download request to complete or a cancel request to arrive
+            if (WaitHandle.WaitAny(new[] {responseRequest.AsyncWaitHandle, CancellationToken.WaitHandle}) == 1)
+                throw new OperationCanceledException();
+
+            // Process the response
+            try
             {
-                State = TaskState.Header;
-
-                // ReSharper disable AssignNullToNotNullAttribute
-                var responseRequest = request.BeginGetResponse(null, null);
-                // ReSharper restore AssignNullToNotNullAttribute
-
-                // Wait for the download request to complete or a cancel request to arrive
-                if (WaitHandle.WaitAny(new[] {responseRequest.AsyncWaitHandle, CancellationToken.WaitHandle}) == 1)
-                    throw new OperationCanceledException();
-
-                // Process the response
-                try
+                using (var response = request.EndGetResponse(responseRequest))
                 {
-                    using (var response = request.EndGetResponse(responseRequest))
-                    {
-                        CancellationToken.ThrowIfCancellationRequested();
-                        ReadHeader(response);
-                        State = TaskState.Data;
+                    CancellationToken.ThrowIfCancellationRequested();
+                    ReadHeader(response);
+                    State = TaskState.Data;
 
-                        // Start writing data to the file
-                        if (response != null) WriteStreamToTarget(response.GetResponseStream(), fileStream);
+                    // Write data to file
+                    if (response != null)
+                    {
+                        using (var sourceStream = response.GetResponseStream())
+                        using (var targetStream = File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write))
+                        {
+                            Debug.Assert(sourceStream != null);
+                            sourceStream.CopyTo(targetStream,
+                                bufferSize: 8 * 1024,
+                                cancellationToken: CancellationToken,
+                                progress: new Progress<long>(x => UnitsProcessed = x).LimitRate());
+                        }
                     }
                 }
-                    #region Error handling
-                catch (WebException ex)
-                {
-                    // Rebuild exception to improve message
-                    throw new WebException(string.Format(Resources.FailedToDownload, Source) + "\n" + ex.Message, ex.InnerException, ex.Status, ex.Response);
-                }
-                #endregion
             }
+                #region Error handling
+            catch (WebException ex)
+            {
+                // Wrap exception to add context
+                throw new WebException(string.Format(Resources.FailedToDownload, Source), ex.InnerException, ex.Status, ex.Response);
+            }
+            #endregion
 
             State = TaskState.Complete;
         }
@@ -156,32 +166,6 @@ namespace NanoByte.Common.Tasks
             if (UnitsTotal == -1 || response.ContentLength == -1) UnitsTotal = response.ContentLength;
             else if (UnitsTotal != response.ContentLength)
                 throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, UnitsTotal, response.ContentLength));
-        }
-
-        /// <summary>
-        /// Writes the content of <paramref name="webStream"/> to <paramref name="fileStream"/>.
-        /// </summary>
-        private void WriteStreamToTarget(Stream webStream, Stream fileStream)
-        {
-            var buffer = new byte[8 * 1024];
-            long bytesDownloaded = 0;
-            var lastProgressReport = new DateTime();
-
-            // Write the response data to the file, allowing for cancellation
-            int length;
-            while ((length = webStream.Read(buffer, 0, buffer.Length)) > 0)
-            {
-                fileStream.Write(buffer, 0, length);
-                bytesDownloaded += length;
-                CancellationToken.ThrowIfCancellationRequested();
-
-                // Only report progress once every 250ms
-                if (DateTime.UtcNow - lastProgressReport >= new TimeSpan(0, 0, 0, 0, 250))
-                {
-                    lastProgressReport = DateTime.UtcNow;
-                    UnitsProcessed = bytesDownloaded;
-                }
-            }
         }
     }
 }

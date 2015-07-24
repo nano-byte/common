@@ -38,12 +38,12 @@ namespace NanoByte.Common.Tasks
     {
         private MicroServer _server;
         private TemporaryFile _tempFile;
-        private const string TestFileContent = "abc";
+        private readonly Stream _testFileContent = "abc".ToStream();
 
         [SetUp]
         public void SetUp()
         {
-            _server = new MicroServer("file", TestFileContent.ToStream());
+            _server = new MicroServer("file", _testFileContent);
 
             _tempFile = new TemporaryFile("unit-tests");
         }
@@ -64,11 +64,11 @@ namespace NanoByte.Common.Tasks
             download.Run();
 
             // Read the file
-            string fileContent = File.ReadAllText(_tempFile);
+            var fileContent = File.ReadAllBytes(_tempFile);
 
             // Ensure the download was successful and the file is identical
             Assert.AreEqual(TaskState.Complete, download.State);
-            Assert.AreEqual(TestFileContent, fileContent, "Downloaded file doesn't match original");
+            CollectionAssert.AreEqual(_testFileContent.ToArray(), fileContent, "Downloaded file doesn't match original");
         }
 
         [Test(Description = "Starts downloading a small file using Run() and stops again right away using Cancel().")]
