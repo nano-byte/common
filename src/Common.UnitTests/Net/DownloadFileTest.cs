@@ -26,9 +26,11 @@ using System.Net;
 using System.Threading;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Streams;
+using NanoByte.Common.Tasks;
 using NUnit.Framework;
+using CancellationTokenSource = NanoByte.Common.Tasks.CancellationTokenSource;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Contains test methods for <see cref="DownloadFile"/>.

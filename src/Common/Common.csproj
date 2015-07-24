@@ -114,6 +114,7 @@
     <Compile Include="Native\WindowsUtils.cs" />
     <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
     <Compile Include="NeedGuiException.cs" />
+    <Compile Include="Net\DownloadFile.cs" />
     <Compile Include="Net\NetUtils.cs" />
     <Compile Include="Net\UriExtensions.cs" />
     <Compile Include="Net\WebClientTimeout.cs">
@@ -137,9 +138,11 @@
     <Compile Include="RegistryUtils.cs" />
     <Compile Include="Storage\AtomicWrite.cs" />
     <Compile Include="Storage\BinaryStorage.cs" />
+    <Compile Include="Storage\CopyDirectory.cs" />
     <Compile Include="Storage\FileUtils.cs" />
     <Compile Include="Storage\Locations.cs" />
     <Compile Include="Storage\LocationsRedirect.cs" />
+    <Compile Include="Storage\MoveDirectory.cs" />
     <Compile Include="Storage\TemporaryDirectory.cs" />
     <Compile Include="Storage\TemporaryFile.cs" />
     <Compile Include="Storage\TemporaryFlagFile.cs" />
@@ -156,13 +159,10 @@
     <Compile Include="Tasks\CancellationTokenRegistration.cs" />
     <Compile Include="Tasks\CancellationTokenSource.cs" />
     <Compile Include="Tasks\CliTaskHandler.cs" />
-    <Compile Include="Tasks\CopyDirectory.cs" />
-    <Compile Include="Tasks\DownloadFile.cs" />
     <Compile Include="Tasks\ForEachTask.cs" />
     <Compile Include="Tasks\IProgress.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Tasks\ITaskHandler.cs" />
-    <Compile Include="Tasks\MoveDirectory.cs" />
     <Compile Include="Tasks\Progress.cs" />
     <Compile Include="Tasks\ProgressExtensions.cs" />
     <Compile Include="Tasks\SilentTaskHandler.cs" />

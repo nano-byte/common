@@ -30,8 +30,9 @@ using JetBrains.Annotations;
 using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
+using NanoByte.Common.Tasks;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Downloads a file from a specific internet address to a local file.

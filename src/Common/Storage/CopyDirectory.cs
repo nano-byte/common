@@ -27,9 +27,9 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Storage;
+using NanoByte.Common.Tasks;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// Copies the content of a directory to a new location preserving the original file modification times and relative Unix symlinks.

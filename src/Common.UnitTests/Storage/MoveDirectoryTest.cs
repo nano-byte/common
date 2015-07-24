@@ -22,10 +22,9 @@
 
 using System;
 using System.IO;
-using NanoByte.Common.Storage;
 using NUnit.Framework;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// Contains test methods for <see cref="MoveDirectory"/>.
