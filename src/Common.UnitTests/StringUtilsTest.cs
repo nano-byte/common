@@ -125,6 +125,7 @@ namespace NanoByte.Common
         [Test]
         public void TestEscapeArgument()
         {
+            Assert.AreEqual("\"\"", "".EscapeArgument(), "Empty strings need to be escaped in order not to vanish");
             Assert.AreEqual("test", "test".EscapeArgument(), "Simple strings shouldn't be modified");
             Assert.AreEqual("\"test1 test2\"", "test1 test2".EscapeArgument(), "Strings with whitespaces should be encapsulated");
             Assert.AreEqual("\"test1 test2\\\\\"", "test1 test2\\".EscapeArgument(), "Trailing backslashes should be escaped");

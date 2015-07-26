@@ -384,6 +384,8 @@ namespace NanoByte.Common
             if (value == null) throw new ArgumentNullException("value");
             #endregion
 
+            if (value.Length == 0) return "\"\"";
+
             // Add leading quotation mark if there are whitespaces
             bool containsWhitespace = ContainsWhitespace(value);
             var result = containsWhitespace ? new StringBuilder("\"", value.Length + 2) : new StringBuilder(value.Length);
