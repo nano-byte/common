@@ -21,10 +21,12 @@
  */
 
 using System;
-using System.ComponentModel;
+using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {
@@ -42,28 +44,50 @@ namespace NanoByte.Common.Controls
         /// Displays an error box with a message and details.
         /// </summary>
         /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
-        /// <param name="message">The error message to display.</param>
-        /// <param name="detailsRtf">The details formatted as RTF.</param>
+        /// <param name="exception">The error message to display.</param>
+        /// <param name="logRtf">The details formatted as RTF.</param>
         /// <returns>The text the user entered if he pressed OK; otherwise <see langword="null"/>.</returns>
-        public static void Show([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string message, [NotNull] RtfBuilder detailsRtf)
+        public static void Show([CanBeNull] IWin32Window owner, [NotNull] Exception exception, [NotNull] RtfBuilder logRtf)
         {
             #region Sanity checks
-            if (message == null) throw new ArgumentNullException("message");
-            if (detailsRtf == null) throw new ArgumentNullException("detailsRtf");
+            if (exception == null) throw new ArgumentNullException("exception");
+            if (logRtf == null) throw new ArgumentNullException("logRtf");
             #endregion
+
+            Log.Error(exception);
 
             using (var errorBox = new ErrorBox
             {
                 Text = Application.ProductName,
-                labelMessage = {Text = message},
-                textDetails = {Rtf = detailsRtf.ToString()}
+                labelMessage = {Text = exception.Message},
+                labelInnerMessage = {Text = GetInnerMessage(exception)},
+                textLog = {Rtf = logRtf.ToString()}
             })
             {
-                errorBox.toolTip.SetToolTip(errorBox.labelMessage, errorBox.labelMessage.Text);
                 // ReSharper disable once AccessToDisposedClosure
                 errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
                 errorBox.ShowDialog(owner);
             }
+        }
+
+        private static string GetInnerMessage(Exception exception)
+        {
+            var builder = new StringBuilder();
+            while (exception.InnerException != null && exception.InnerException.Message != exception.Message)
+            {
+                exception = exception.InnerException;
+                builder.AppendLine(exception.Message);
+            }
+            return builder.ToString();
+        }
+
+        private void label_Click(object sender, EventArgs e)
+        {
+            var control = (Control)sender;
+            new ContextMenu(new[]
+            {
+                new MenuItem(Resources.CopyToClipboard, delegate { Clipboard.SetText(control.Text); })
+            }).Show(control, new Point());
         }
     }
 }

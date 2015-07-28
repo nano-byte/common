@@ -150,6 +150,9 @@
   <data name="CopyFiles" xml:space="preserve">
     <value>Dosyalar kopyalanıyor</value>
   </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Panoya kopyala</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Sil</value>
   </data>

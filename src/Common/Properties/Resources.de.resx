@@ -147,6 +147,9 @@
   <data name="CopyFiles" xml:space="preserve">
     <value>Kopiere Dateien</value>
   </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>In Zwischenablage &amp;kopieren</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Löschen</value>
   </data>

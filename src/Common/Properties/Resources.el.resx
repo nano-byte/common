@@ -150,6 +150,9 @@
   <data name="CopyFiles" xml:space="preserve">
     <value>Αντιγραφή αρχείων</value>
   </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Αντιγραφή στο Πρόχειρο</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Διαγραφή</value>
   </data>

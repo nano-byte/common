@@ -150,6 +150,9 @@
   <data name="CopyFiles" xml:space="preserve">
     <value>Copying files</value>
   </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>&amp;Copy to clipboard</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>

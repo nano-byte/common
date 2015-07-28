@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
-            this.textDetails = new System.Windows.Forms.RichTextBox();
+            this.textLog = new System.Windows.Forms.RichTextBox();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.labelInnerMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -62,19 +61,20 @@
             this.labelMessage.Size = new System.Drawing.Size(136, 48);
             this.labelMessage.TabIndex = 0;
             this.labelMessage.Text = "(Message)";
+            this.labelMessage.Click += new System.EventHandler(this.label_Click);
             // 
-            // textDetails
+            // textLog
             // 
-            this.textDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.textLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textDetails.Location = new System.Drawing.Point(3, 51);
-            this.textDetails.Name = "textDetails";
-            this.textDetails.ReadOnly = true;
-            this.textDetails.Size = new System.Drawing.Size(454, 144);
-            this.textDetails.TabIndex = 3;
-            this.textDetails.Text = "(Details)";
+            this.textLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textLog.Location = new System.Drawing.Point(3, 70);
+            this.textLog.Name = "textLog";
+            this.textLog.ReadOnly = true;
+            this.textLog.Size = new System.Drawing.Size(454, 125);
+            this.textLog.TabIndex = 2;
+            this.textLog.Text = "(Log)";
             // 
             // pictureBoxIcon
             // 
@@ -93,16 +93,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.ColumnCount = 1;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.Controls.Add(this.labelMessage, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.textDetails, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.textLog, 0, 2);
+            this.tableLayoutPanel.Controls.Add(this.labelInnerMessage, 0, 1);
             this.tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowCount = 3;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(460, 198);
             this.tableLayoutPanel.TabIndex = 4;
+            // 
+            // labelInnerMessage
+            // 
+            this.labelInnerMessage.AutoSize = true;
+            this.labelInnerMessage.Location = new System.Drawing.Point(3, 48);
+            this.labelInnerMessage.Name = "labelInnerMessage";
+            this.labelInnerMessage.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.labelInnerMessage.Size = new System.Drawing.Size(82, 19);
+            this.labelInnerMessage.TabIndex = 1;
+            this.labelInnerMessage.Text = "(Inner message)";
+            this.labelInnerMessage.Click += new System.EventHandler(this.label_Click);
             // 
             // ErrorBox
             // 
@@ -132,9 +144,9 @@
 
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label labelMessage;
-        private System.Windows.Forms.RichTextBox textDetails;
+        private System.Windows.Forms.RichTextBox textLog;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
-        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.Label labelInnerMessage;
     }
 }
