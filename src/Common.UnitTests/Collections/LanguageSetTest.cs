@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using System.Globalization;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -58,7 +59,7 @@ namespace NanoByte.Common.Collections
             Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}));
 
             Assert.IsFalse(new LanguageSet().ContainsAny(new LanguageSet {"de"}));
-            Assert.IsFalse(new LanguageSet { "de" }.ContainsAny(new LanguageSet()));
+            Assert.IsFalse(new LanguageSet {"de"}.ContainsAny(new LanguageSet()));
 
             Assert.IsFalse(new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}));
             Assert.IsFalse(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}));
@@ -74,13 +75,21 @@ namespace NanoByte.Common.Collections
             Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true));
 
             Assert.IsFalse(new LanguageSet().ContainsAny(new LanguageSet {"de"}, ignoreCountry: true));
-            Assert.IsFalse(new LanguageSet { "de" }.ContainsAny(new LanguageSet(), ignoreCountry: true));
+            Assert.IsFalse(new LanguageSet {"de"}.ContainsAny(new LanguageSet(), ignoreCountry: true));
 
             Assert.IsTrue(new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true));
             Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}, ignoreCountry: true));
 
             Assert.IsFalse(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}, ignoreCountry: true));
             Assert.IsFalse(new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true));
+        }
+
+        [Test]
+        public void TestInvalidCultureInSet()
+        {
+            Assert.AreEqual(
+                expected: new LanguageSet{CultureInfo.InvariantCulture, new CultureInfo("en")}, 
+                actual: new LanguageSet("invalid en"));
         }
     }
 }

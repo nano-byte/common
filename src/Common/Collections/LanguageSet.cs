@@ -58,8 +58,10 @@ namespace NanoByte.Common.Collections
         {}
 
         /// <summary>
-        /// Deserializes a space-separated list of languages codes (in the same format as used by the LANG environment variable).
+        /// Deserializes a space-separated list of languages codes.
         /// </summary>
+        /// <param name="value">A space-separated list of languages codes (in the same format as used by the LANG environment variable).</param>
+        /// <remarks>Unknown language codes in <paramref name="value"/> are replaced with <see cref="CultureInfo.InvariantCulture"/> rather than raising an <see cref="ArgumentException"/>.</remarks>
         public LanguageSet(string value)
             : this(ParseString(value))
         {}
@@ -78,7 +80,8 @@ namespace NanoByte.Common.Collections
                 }
                 catch (ArgumentException)
                 {
-                    Log.Error("Ignoring unknown language code: " + language);
+                    Log.Warn("Unknown language code: " + language);
+                    language = CultureInfo.InvariantCulture;
                 }
                 if (language != null) yield return language;
             }
