@@ -156,7 +156,8 @@ namespace NanoByte.Common
             }
         }
 
-        private static readonly Random _random = new Random();
+        [ThreadStatic]
+        private static Random _random;
 
         /// <summary>
         /// Executes a delegate and automatically retries it using exponential backoff if a specifc type of exception was raised.
@@ -185,6 +186,7 @@ namespace NanoByte.Common
                 {
                     Log.Info(ex);
 
+                    if (_random == null) _random = new Random();
                     int delay = _random.Next(50, 1000 * (1 << retryCounter));
                     Log.Info("Retrying in " + delay + " milliseconds");
                     Thread.Sleep(delay);
