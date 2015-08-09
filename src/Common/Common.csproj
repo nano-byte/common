@@ -154,6 +154,7 @@
     <Compile Include="Streams\CircularBufferStream.cs" />
     <Compile Include="Streams\DisposeWrapperStream.cs" />
     <Compile Include="Streams\MicroServer.cs" />
+    <Compile Include="Streams\OffsetStream.cs" />
     <Compile Include="Streams\StreamConsumer.cs" />
     <Compile Include="Streams\StreamUtils.cs" />
     <Compile Include="StringUtils.cs" />
