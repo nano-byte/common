@@ -133,7 +133,6 @@ namespace NanoByte.Common.Dispatch
         public static void ThreeWay<T, TAdded, TRemoved>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> reference, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull] ICollection<TAdded> added, [NotNull] ICollection<TRemoved> removed)
             where T : class, IMergeable<T>, TAdded, TRemoved
         {
-
 #if __MonoCS__
             ThreeWay(reference, theirs, mine, x => added.Add(x), x => removed.Add(x));
 #else

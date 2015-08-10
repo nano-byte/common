@@ -49,18 +49,12 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <see langword="true"/> if the current operating system is MacOS X.
         /// </summary>
-        public static bool IsMacOSX
-        {
-            get { return IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework"); }
-        }
+        public static bool IsMacOSX { get { return IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework"); } }
 
         /// <summary>
         /// <see langword="true"/> if there is an X Server running or the current operating system is MacOS X.
         /// </summary>
-        public static bool HasGui
-        {
-            get { return IsMacOSX || (IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))); }
-        }
+        public static bool HasGui { get { return IsMacOSX || (IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))); } }
 
         /// <summary>
         /// The operating system name as reported by the "uname" system call.

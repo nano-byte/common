@@ -46,7 +46,7 @@ namespace NanoByte.Common.Values
         public int GetHashCode(T obj)
         {
             var key = _keySelector(obj);
-            return (key == null) ? 0: _keySelector(obj).GetHashCode();
+            return (key == null) ? 0 : _keySelector(obj).GetHashCode();
         }
     }
 }

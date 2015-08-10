@@ -114,7 +114,6 @@ namespace NanoByte.Common
             return process.ExitCode;
         }
 
-
         /// <summary>
         /// Creates a <see cref="ProcessStartInfo"/> for launching an assembly located in <see cref="Locations.InstallBase"/>.
         /// </summary>
@@ -135,7 +134,6 @@ namespace NanoByte.Common
             var startInfo = WindowsUtils.IsWindows
                 ? new ProcessStartInfo(appPath, arguments.JoinEscapeArguments())
                 : new ProcessStartInfo("mono", appPath.EscapeArgument() + " " + arguments.JoinEscapeArguments());
-
 
             return startInfo;
         }
