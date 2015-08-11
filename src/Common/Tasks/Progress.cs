@@ -27,7 +27,7 @@ using System.Threading;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Reports progress updates using events. Automatically handles thread- and IPC-marshaling.
+    /// Reports progress updates using callbacks/events. Performs the callbacks using the synchronization context of the original caller.
     /// </summary>
     public class Progress<T> : MarshalByRefObject, IProgress<T>
     {

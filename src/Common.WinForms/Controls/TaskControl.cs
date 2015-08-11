@@ -29,7 +29,7 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// Combines a <see cref="TaskProgressBar"/> and a <see cref="TaskLabel"/>.
     /// </summary>
-    public sealed partial class TaskControl : UserControl
+    public sealed partial class TaskControl : UserControl, IProgress<TaskSnapshot>
     {
         /// <summary>
         /// The name of the task being tracked.
@@ -55,13 +55,11 @@ namespace NanoByte.Common.Controls
             CreateHandle();
         }
 
-        /// <summary>
-        /// Sets the current progress to be displayed.
-        /// </summary>
-        public void Report(TaskSnapshot snapshot)
+        /// <inheritdoc/>
+        public void Report(TaskSnapshot value)
         {
-            progressBar.Report(snapshot);
-            progressLabel.Report(snapshot);
+            progressBar.Report(value);
+            progressLabel.Report(value);
         }
     }
 }

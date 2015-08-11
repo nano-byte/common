@@ -31,7 +31,7 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// A progress bar that takes <see cref="TaskSnapshot"/> inputs.
     /// </summary>
-    public sealed class TaskProgressBar : ProgressBar
+    public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
     {
         /// <summary>
         /// Determines the handle of the <see cref="Form"/> containing this control.
@@ -58,12 +58,17 @@ namespace NanoByte.Common.Controls
             CreateHandle();
         }
 
-        /// <summary>
-        /// Sets the current progress to be displayed.
-        /// </summary>
-        public void Report(TaskSnapshot snapshot)
+        /// <inheritdoc/>
+        public void Report(TaskSnapshot value)
         {
-            switch (snapshot.State)
+            // Ensure execution on GUI thread
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<TaskSnapshot>(Report), value);
+                return;
+            }
+
+            switch (value.State)
             {
                 case TaskState.Ready:
                     // When the State is complete the bar should always be empty
@@ -80,7 +85,7 @@ namespace NanoByte.Common.Controls
                     break;
 
                 case TaskState.Data:
-                    if (snapshot.UnitsTotal == -1)
+                    if (value.UnitsTotal == -1)
                     {
                         Style = ProgressBarStyle.Marquee;
                         if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Indeterminate);
@@ -107,12 +112,12 @@ namespace NanoByte.Common.Controls
                     break;
             }
 
-            var currentValue = (int)(snapshot.Value * 100);
+            var currentValue = (int)(value.Value * 100);
             if (currentValue < 0) currentValue = 0;
             else if (currentValue > 100) currentValue = 100;
 
             // When the State is complete the bar should always be full
-            if (snapshot.State == TaskState.Complete) currentValue = 100;
+            if (value.State == TaskState.Complete) currentValue = 100;
 
             Value = currentValue;
             IntPtr formHandle = ParentHandle;

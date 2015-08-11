@@ -24,6 +24,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Tasks
@@ -39,11 +40,11 @@ namespace NanoByte.Common.Tasks
         private readonly Progress<TaskSnapshot> _progress = new Progress<TaskSnapshot>();
 
         /// <summary>
-        /// Creates a new progress-tracking dialog.
+        /// Creates a new task tracking dialog.
         /// </summary>
         /// <param name="task">The trackable task to execute and display.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
-        public TaskRunDialog(ITask task, CancellationTokenSource cancellationTokenSource)
+        public TaskRunDialog([NotNull] ITask task, CancellationTokenSource cancellationTokenSource)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
@@ -62,18 +63,20 @@ namespace NanoByte.Common.Tasks
 
         private void TaskRunDialog_Shown(object sender, EventArgs e)
         {
-            _progress.ProgressChanged += progressBarTask.Report;
-            _progress.ProgressChanged += labelTask.Report;
-            _progress.ProgressChanged += snapshot =>
-            {
-                if (snapshot.State == TaskState.Complete)
-                {
-                    _allowClose = true;
-                    Close();
-                }
-            };
-
+            _progress.ProgressChanged += OnProgressChanged;
             _taskThread.Start();
+        }
+
+        private void OnProgressChanged(TaskSnapshot snapshot)
+        {
+            progressBarTask.Report(snapshot);
+            labelTask.Report(snapshot);
+
+            if (snapshot.State == TaskState.Complete)
+            {
+                _allowClose = true;
+                Close();
+            }
         }
 
         /// <summary>

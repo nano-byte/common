@@ -1,67 +1,16 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Cli
 {
     /// <summary>
     /// A progress bar rendered on the <see cref="Console"/>.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
-    public class ProgressBar : MarshalByRefObject, IProgress<TaskSnapshot>, IDisposable
+    public class ProgressBar : MarshalByRefObject, IDisposable
     {
-        #region Properties
-        private TaskState _state;
-
-        /// <summary>
-        /// The current State of the task.
-        /// </summary>
-        [Description("The current State of the task.")]
-        public TaskState State
-        {
-            get { return _state; }
-            set
-            {
-                #region Sanity checks
-                if (!Enum.IsDefined(typeof(TaskState), value))
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(TaskState));
-                #endregion
-
-                try
-                {
-                    value.To(ref _state, Draw);
-                }
-                catch (IOException)
-                {}
-            }
-        }
-
         private int _maximum = 20;
 
         /// <summary>
@@ -113,27 +62,8 @@ namespace NanoByte.Common.Cli
                 {}
             }
         }
-        #endregion
 
-        #region IProgress
-        // NOTE: No need for thread marshaling when writing to the console
-        void IProgress<TaskSnapshot>.Report(TaskSnapshot snapshot)
-        {
-            State = snapshot.State;
 
-            // When the State is complete the bar should always be full
-            if (State == TaskState.Complete) Value = Maximum;
-
-            // Clamp the progress to values between 0 and 1
-            double value = snapshot.Value;
-            if (value < 0) value = 0;
-            else if (value > 1) value = 1;
-
-            Value = (int)(value * Maximum);
-        }
-        #endregion
-
-        #region Draw
         private static readonly bool _drawPretty = WindowsUtils.IsWindows && !CliUtils.StandardErrorRedirected;
 
         /// <summary>
@@ -147,7 +77,7 @@ namespace NanoByte.Common.Cli
             else DrawSimple();
         }
 
-        private void DrawPretty()
+        protected virtual void DrawPretty()
         {
             // Draw start of progress bar
             Console.CursorLeft = 0;
@@ -162,45 +92,6 @@ namespace NanoByte.Common.Cli
             // Draw end of progress bar
             Console.CursorLeft = Maximum + 1;
             Console.Error.Write(']');
-
-            Console.Error.Write(' ');
-            PrintStatus();
-
-            // Blanks at the end to overwrite any excess
-            Console.Error.Write(@"          ");
-            Console.CursorLeft -= 10;
-        }
-
-        private void PrintStatus()
-        {
-            switch (State)
-            {
-                case TaskState.Header:
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Error.Write(Resources.StateHeader);
-                    break;
-
-                case TaskState.Data:
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Error.Write(Resources.StateData);
-                    break;
-
-                case TaskState.Complete:
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Error.Write(Resources.StateComplete);
-                    break;
-
-                case TaskState.WebError:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Error.Write(Resources.StateWebError);
-                    break;
-
-                case TaskState.IOError:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Error.Write(Resources.StateIOError);
-                    break;
-            }
-            Console.ResetColor();
         }
 
         private int _lastValue;
@@ -212,9 +103,7 @@ namespace NanoByte.Common.Cli
 
             _lastValue = Value;
         }
-        #endregion
 
-        #region Dispose
         /// <summary>
         /// Stops the progress bar by writing a line break to the <see cref="Console"/>.
         /// </summary>
@@ -230,6 +119,5 @@ namespace NanoByte.Common.Cli
         {
             Done();
         }
-        #endregion
     }
 }

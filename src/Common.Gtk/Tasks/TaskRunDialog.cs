@@ -21,8 +21,8 @@
  */
 
 using System;
-using System.Threading;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Gtk;
 using JetBrains.Annotations;
 
@@ -51,15 +51,16 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException("task");
             #endregion
 
-            _task = task;
-            _taskThread = new Thread(RunTask);
-            _cancellationTokenSource = cancellationTokenSource;
-
             Parent = parent;
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
             Build();
+
             Title = task.Name;
             buttonCancel.Sensitive = task.CanCancel;
+
+            _task = task;
+            _taskThread = new Thread(RunTask);
+            _cancellationTokenSource = cancellationTokenSource;
         }
 
         /// <summary>
@@ -68,7 +69,6 @@ namespace NanoByte.Common.Tasks
         public void Execute()
         {
             _progress.ProgressChanged += OnProgressChanged;
-
             _taskThread.Start();
 
             Run();
@@ -90,9 +90,11 @@ namespace NanoByte.Common.Tasks
 
         private void OnProgressChanged(TaskSnapshot snapshot)
         {
-            if (snapshot.State == TaskState.Complete) OnClose();
             progressBarTask.Fraction = snapshot.Value;
             labelTask.Text = snapshot.ToString();
+
+            if (snapshot.State == TaskState.Complete)
+                OnClose();
         }
 
         /// <summary>

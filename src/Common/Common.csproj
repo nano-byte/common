@@ -59,6 +59,7 @@
     <Compile Include="Cli\CliUtils.cs" />
     <Compile Include="Cli\CliUtils.NativeMethods.cs" />
     <Compile Include="Cli\ProgressBar.cs" />
+    <Compile Include="Cli\TaskProgressBar.cs" />
     <Compile Include="Collections\ArrayExtensions.cs" />
     <Compile Include="Collections\ComparableTuple.cs" />
     <Compile Include="Collections\CultureComparer.cs" />
@@ -167,10 +168,10 @@
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Tasks\ITaskHandler.cs" />
     <Compile Include="Tasks\Progress.cs" />
-    <Compile Include="Tasks\ProgressExtensions.cs" />
     <Compile Include="Tasks\SilentTaskHandler.cs" />
     <Compile Include="Tasks\SimplePercentTask.cs" />
     <Compile Include="Tasks\SimpleTask.cs" />
+    <Compile Include="Tasks\SynchronousProgress.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
     <Compile Include="Tasks\TaskHandlerExtensions.cs" />
     <Compile Include="Tasks\TaskSnapshot.cs" />

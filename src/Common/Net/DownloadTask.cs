@@ -115,7 +115,6 @@ namespace NanoByte.Common.Net
                     ReadHeader(response);
                     State = TaskState.Data;
 
-                    // Write data to file
                     if (response != null)
                     {
                         using (var sourceStream = response.GetResponseStream())
@@ -125,7 +124,7 @@ namespace NanoByte.Common.Net
                             sourceStream.CopyTo(targetStream,
                                 bufferSize: 8 * 1024,
                                 cancellationToken: CancellationToken,
-                                progress: new Progress<long>(x => UnitsProcessed = x).LimitRate());
+                                progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
                         }
                     }
                 }

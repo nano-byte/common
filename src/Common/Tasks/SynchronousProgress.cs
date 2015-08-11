@@ -21,21 +21,38 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Defines a provider for progress updates.
+    /// Reports progress updates using callbacks/events. Performs the callbacks immediately on the same thread.
     /// </summary>
-    /// <remarks>Implementations should derive from <see cref="MarshalByRefObject"/>.</remarks>
-    /// <typeparam name="T">The type of progress update value.</typeparam>
-    public interface IProgress<T>
+    public class SynchronousProgress<T> : MarshalByRefObject, IProgress<T>
     {
         /// <summary>
-        /// Reports a progress update.
+        /// Raised for each reported progress value.
         /// </summary>
-        /// <param name="value">The value of the updated progress.</param>
-        /// <remarks>May be called from background/worker threads. Callee must perform thread marshaling as needed.</remarks>
-        void Report(T value);
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        public event Action<T> ProgressChanged;
+
+        /// <summary>
+        /// Captures the current synchronization context for callbacks.
+        /// </summary>
+        public SynchronousProgress(Action<T> callback = null)
+        {
+            if (callback != null) ProgressChanged += callback;
+        }
+
+        void IProgress<T>.Report(T value)
+        {
+            OnReport(value);
+        }
+
+        protected virtual void OnReport(T value)
+        {
+            var callback = ProgressChanged;
+            if (callback != null) callback(value);
+        }
     }
 }

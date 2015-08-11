@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using NanoByte.Common.Tasks;
@@ -29,21 +30,26 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// A progress label that takes <see cref="TaskSnapshot"/> inputs.
     /// </summary>
-    public sealed class TaskLabel : Label
+    public sealed class TaskLabel : Label, IProgress<TaskSnapshot>
     {
         public TaskLabel()
         {
             CreateHandle();
         }
 
-        /// <summary>
-        /// Sets the current progress to be displayed.
-        /// </summary>
-        public void Report(TaskSnapshot snapshot)
+        /// <inheritdoc/>
+        public void Report(TaskSnapshot value)
         {
-            Text = snapshot.ToString();
+            // Ensure execution on GUI thread
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<TaskSnapshot>(Report), value);
+                return;
+            }
 
-            switch (snapshot.State)
+            Text = value.ToString();
+
+            switch (value.State)
             {
                 default:
                     ForeColor = SystemColors.ControlText;
