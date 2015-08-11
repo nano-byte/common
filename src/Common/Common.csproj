@@ -77,6 +77,7 @@
     <Compile Include="Collections\RBTree.cs" />
     <Compile Include="Collections\SortedSet.cs" />
     <Compile Include="Collections\TransparentCache.cs" />
+    <Compile Include="Collections\TransparentCacheBase.cs" />
     <Compile Include="Collections\XmlDictionary.cs" />
     <Compile Include="Collections\XmlDictionaryEntry.cs" />
     <Compile Include="Dispatch\AggregateDispatcher.Action.cs" />

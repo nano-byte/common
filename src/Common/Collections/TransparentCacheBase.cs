@@ -21,33 +21,55 @@
  */
 
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// Transparently caches retrieval requests, passed through to a callback on first request.
+    /// Transparently caches retrieval requests, passed through to a template method on first request.
     /// </summary>
     /// <remarks>This class is thread-safe.</remarks>
     /// <typeparam name="TKey">The type of keys used to request values.</typeparam>
     /// <typeparam name="TValue">The type of values returned.</typeparam>
-    public sealed class TransparentCache<TKey, TValue> : TransparentCacheBase<TKey, TValue>
+    public abstract class TransparentCacheBase<TKey, TValue>
     {
-        private readonly Func<TKey, TValue> _retriever;
+        private readonly Dictionary<TKey, TValue> _lookup = new Dictionary<TKey, TValue>();
+        private readonly object _lock = new object();
 
         /// <summary>
-        /// Creates a new transparent cache.
+        /// Retrieves a value from the cache.
         /// </summary>
-        /// <param name="retriever">The callback used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.</param>
-        public TransparentCache([NotNull] Func<TKey, TValue> retriever)
+        public TValue this[[NotNull] TKey key]
         {
-            _retriever = retriever;
+            get
+            {
+                #region Sanity checks
+                if (key == null) throw new ArgumentNullException("key");
+                #endregion
+
+                lock (_lock)
+                {
+                    TValue result;
+                    if (!_lookup.TryGetValue(key, out result))
+                        _lookup.Add(key, result = Retrieve(key));
+                    return result;
+                }
+            }
         }
 
-        /// <inheritdoc/>
-        protected override TValue Retrieve(TKey key)
+        /// <summary>
+        /// The template method used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.
+        /// </summary>
+        protected abstract TValue Retrieve([NotNull] TKey key);
+
+        /// <summary>
+        /// Removes all entries from the cache.
+        /// </summary>
+        public void Clear()
         {
-            return _retriever(key);
+            lock (_lock)
+                _lookup.Clear();
         }
     }
 }
