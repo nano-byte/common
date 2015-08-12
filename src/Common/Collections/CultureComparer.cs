@@ -42,8 +42,8 @@ namespace NanoByte.Common.Collections
         public int Compare([NotNull] CultureInfo x, [NotNull] CultureInfo y)
         {
             #region Sanity checks
-            if (x == null) throw new ArgumentNullException("x");
-            if (y == null) throw new ArgumentNullException("y");
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             #endregion
 
             // ReSharper disable once PossibleUnintendedReferenceComparison

@@ -42,7 +42,7 @@ namespace NanoByte.Common.Tasks
         public static void OutputLow([NotNull] this ITaskHandler handler, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message)
         {
             #region Sanity checks
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
             if (handler.Verbosity >= Verbosity.Normal) handler.Output(title, message);
@@ -58,7 +58,7 @@ namespace NanoByte.Common.Tasks
         public static void OutputLow<T>([NotNull] this ITaskHandler handler, [NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data)
         {
             #region Sanity checks
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
             if (handler.Verbosity >= Verbosity.Normal) handler.Output(title, data);
@@ -76,7 +76,7 @@ namespace NanoByte.Common.Tasks
         public static bool Ask([NotNull] this ITaskHandler handler, [NotNull, Localizable(true)] string question, bool defaultAnswer, [CanBeNull, Localizable(true)] string alternateMessage = null)
         {
             #region Sanity checks
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
             if (handler.Verbosity <= Verbosity.Batch)

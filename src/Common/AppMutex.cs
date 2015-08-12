@@ -66,7 +66,7 @@ namespace NanoByte.Common
         public static bool Create([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             AppMutex mutex;
@@ -84,7 +84,7 @@ namespace NanoByte.Common
         public static bool Create([NotNull, Localizable(false)] string name, out AppMutex mutex)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             if (!WindowsUtils.IsWindowsNT)
@@ -142,7 +142,7 @@ namespace NanoByte.Common
         public static bool Open([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             if (!WindowsUtils.IsWindowsNT) return false;
@@ -191,7 +191,7 @@ namespace NanoByte.Common
         public static bool Probe([NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             if (!WindowsUtils.IsWindowsNT) return false;

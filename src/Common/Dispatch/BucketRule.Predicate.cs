@@ -51,8 +51,8 @@ namespace NanoByte.Common.Dispatch
         public BucketRule([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
         {
             #region Sanity checks
-            if (predicate == null) throw new ArgumentNullException("predicate");
-            if (bucket == null) throw new ArgumentNullException("bucket");
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
             #endregion
 
             Predicate = predicate;

@@ -43,7 +43,7 @@ namespace NanoByte.Common.Controls
         protected override void OnDragEnter(DragEventArgs drgevent)
         {
             #region Sanity checks
-            if (drgevent == null) throw new ArgumentNullException("drgevent");
+            if (drgevent == null) throw new ArgumentNullException(nameof(drgevent));
             #endregion
 
             drgevent.Effect = ValidateUri(GetDropText(drgevent))

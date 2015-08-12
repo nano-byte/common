@@ -61,8 +61,8 @@ namespace NanoByte.Common.Values.Design
         protected override DoubleVector3 GetObject(string[] values, CultureInfo culture)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
             #endregion
 
             return new DoubleVector3(Convert.ToDouble(values[0], culture), Convert.ToDouble(values[1], culture), Convert.ToDouble(values[2], culture));
@@ -72,7 +72,7 @@ namespace NanoByte.Common.Values.Design
         protected override DoubleVector3 GetObject(IDictionary propertyValues)
         {
             #region Sanity checks
-            if (propertyValues == null) throw new ArgumentNullException("propertyValues");
+            if (propertyValues == null) throw new ArgumentNullException(nameof(propertyValues));
             #endregion
 
             return new DoubleVector3((double)propertyValues["X"], (double)propertyValues["Y"], (double)propertyValues["Z"]);

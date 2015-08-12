@@ -48,7 +48,7 @@ namespace NanoByte.Common.Streams
         public static byte[] Read([NotNull] this Stream stream, int count, bool throwOnEnd = true)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             var buffer = new byte[count];
@@ -78,7 +78,7 @@ namespace NanoByte.Common.Streams
         public static byte[] ToArray([NotNull] this Stream stream)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             using (var memoryStream = new MemoryStream())
@@ -98,7 +98,7 @@ namespace NanoByte.Common.Streams
         public static string ReadToString([NotNull] this Stream stream, [CanBeNull] Encoding encoding = null)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             if (stream.CanSeek) stream.Position = 0;
@@ -119,8 +119,8 @@ namespace NanoByte.Common.Streams
         public static void CopyToEx([NotNull] this Stream source, [NotNull] Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), Tasks.IProgress<long> progress = null)
         {
             #region Sanity checks
-            if (source == null) throw new ArgumentNullException("source");
-            if (destination == null) throw new ArgumentNullException("destination");
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
             #endregion
 
             if (source.CanSeek) source.Position = 0;
@@ -148,8 +148,8 @@ namespace NanoByte.Common.Streams
         public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), Tasks.IProgress<long> progress = null)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             using (var fileStream = File.Create(path))
@@ -164,8 +164,8 @@ namespace NanoByte.Common.Streams
         public static void Write([NotNull] this Stream stream, [NotNull] byte[] data)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (data == null) throw new ArgumentNullException("data");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             stream.Write(data, 0, data.Length);
@@ -178,8 +178,8 @@ namespace NanoByte.Common.Streams
         public static bool ContentEquals([NotNull] this Stream stream1, [NotNull] Stream stream2)
         {
             #region Sanity checks
-            if (stream1 == null) throw new ArgumentNullException("stream1");
-            if (stream2 == null) throw new ArgumentNullException("stream2");
+            if (stream1 == null) throw new ArgumentNullException(nameof(stream1));
+            if (stream2 == null) throw new ArgumentNullException(nameof(stream2));
             #endregion
 
             if (stream1.CanSeek) stream1.Position = 0;
@@ -204,7 +204,7 @@ namespace NanoByte.Common.Streams
         public static MemoryStream ToStream([NotNull] this string data, [CanBeNull] Encoding encoding = null)
         {
             #region Sanity checks
-            if (data == null) throw new ArgumentNullException("data");
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             byte[] byteArray = (encoding ?? new UTF8Encoding(false)).GetBytes(data);
@@ -222,13 +222,13 @@ namespace NanoByte.Common.Streams
         public static Stream GetEmbeddedStream([NotNull] this Type type, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             var assembly = Assembly.GetAssembly(type);
             var stream = assembly.GetManifestResourceStream(type, name);
-            if (stream == null) throw new ArgumentException(string.Format("Embedded resource '{0}' not found.", name), "name");
+            if (stream == null) throw new ArgumentException(string.Format("Embedded resource '{0}' not found.", name), nameof(name));
             return stream;
         }
 
@@ -242,8 +242,8 @@ namespace NanoByte.Common.Streams
         public static byte[] GetEmbeddedBytes([NotNull] this Type type, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             return type.GetEmbeddedStream(name).ToArray();
@@ -260,8 +260,8 @@ namespace NanoByte.Common.Streams
         public static string GetEmbeddedString([NotNull] this Type type, [NotNull, Localizable(false)] string name, [CanBeNull] Encoding encoding = null)
         {
             #region Sanity checks
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             using (var stream = type.GetEmbeddedStream(name))
@@ -278,8 +278,8 @@ namespace NanoByte.Common.Streams
         public static void CopyEmbeddedToFile([NotNull] this Type type, [NotNull, Localizable(false)] string name, [NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             using (var stream = type.GetEmbeddedStream( name))

@@ -137,7 +137,7 @@ namespace NanoByte.Common
         public static void Debug([NotNull] Exception ex)
         {
             #region Sanity checks
-            if (ex == null) throw new ArgumentNullException("ex");
+            if (ex == null) throw new ArgumentNullException(nameof(ex));
             #endregion
 
             Debug(ex.ToString());
@@ -160,7 +160,7 @@ namespace NanoByte.Common
         public static void Info([NotNull] Exception ex)
         {
             #region Sanity checks
-            if (ex == null) throw new ArgumentNullException("ex");
+            if (ex == null) throw new ArgumentNullException(nameof(ex));
             #endregion
 
             Info(ex.Message);
@@ -186,7 +186,7 @@ namespace NanoByte.Common
         public static void Warn([NotNull] Exception ex)
         {
             #region Sanity checks
-            if (ex == null) throw new ArgumentNullException("ex");
+            if (ex == null) throw new ArgumentNullException(nameof(ex));
             #endregion
 
             Warn(ex.Message);
@@ -212,7 +212,7 @@ namespace NanoByte.Common
         public static void Error([NotNull] Exception ex)
         {
             #region Sanity checks
-            if (ex == null) throw new ArgumentNullException("ex");
+            if (ex == null) throw new ArgumentNullException(nameof(ex));
             #endregion
 
             Error(ex.Message);
@@ -230,7 +230,7 @@ namespace NanoByte.Common
         public static void PrintToConsole(LogSeverity severity, [NotNull] string message)
         {
             #region Sanity checks
-            if (message == null) throw new ArgumentNullException("message");
+            if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
             try
@@ -277,7 +277,7 @@ namespace NanoByte.Common
         private static void AddEntry(LogSeverity severity, string message)
         {
             #region Sanity checks
-            if (message == null) throw new ArgumentNullException("message");
+            if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
             message = UnifyWhitespace(message);

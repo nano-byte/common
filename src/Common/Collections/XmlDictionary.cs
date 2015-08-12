@@ -46,7 +46,7 @@ namespace NanoByte.Common.Collections
         public void Add(string key, string value)
         {
             if (!string.IsNullOrEmpty(key) && ContainsKey(key))
-                throw new ArgumentException(Resources.KeyAlreadyPresent, "key");
+                throw new ArgumentException(Resources.KeyAlreadyPresent, nameof(key));
             Add(new XmlDictionaryEntry(key, value));
         }
 
@@ -54,11 +54,11 @@ namespace NanoByte.Common.Collections
         protected override void InsertItem(int index, XmlDictionaryEntry item)
         {
             #region Sanity checks
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
             #endregion
 
             if (!string.IsNullOrEmpty(item.Key) && ContainsKey(item.Key))
-                throw new ArgumentException(Resources.KeyAlreadyPresent, "item");
+                throw new ArgumentException(Resources.KeyAlreadyPresent, nameof(item));
             item.Parent = this;
 
             base.InsertItem(index, item);

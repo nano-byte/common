@@ -63,7 +63,7 @@ namespace NanoByte.Common.Dispatch
         public PerTypeDispatcher<TBase, TResult> Add<TSpecific>([NotNull] Func<TSpecific, TResult> function) where TSpecific : TBase
         {
             #region Sanity checks
-            if (function == null) throw new ArgumentNullException("function");
+            if (function == null) throw new ArgumentNullException(nameof(function));
             #endregion
 
             _map.Add(typeof(TSpecific), obj => function((TSpecific)obj));
@@ -80,7 +80,7 @@ namespace NanoByte.Common.Dispatch
         public TResult Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
-            if (element == null) throw new ArgumentNullException("element");
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             var type = element.GetType();
@@ -102,7 +102,7 @@ namespace NanoByte.Common.Dispatch
         public IEnumerable<TResult> Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             return elements.Select(Dispatch);

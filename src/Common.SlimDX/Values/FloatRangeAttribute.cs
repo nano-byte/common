@@ -55,7 +55,7 @@ namespace NanoByte.Common.Values
         public FloatRangeAttribute(float minimum, float maximum)
         {
             #region Sanity checks
-            if (minimum > maximum) throw new ArgumentException(Resources.MinLargerMax, "minimum");
+            if (minimum > maximum) throw new ArgumentException(Resources.MinLargerMax, nameof(minimum));
             #endregion
 
             _minimum = minimum;

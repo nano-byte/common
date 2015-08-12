@@ -72,8 +72,8 @@ namespace NanoByte.Common.Storage
         public CopyDirectory([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath, bool preserveDirectoryTimestamps = true, bool overwrite = false)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException("destinationPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException(nameof(destinationPath));
             if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
             #endregion
 
@@ -171,8 +171,8 @@ namespace NanoByte.Common.Storage
         protected virtual void CopyFile([NotNull] FileInfo sourceFile, [NotNull] FileInfo destinationFile)
         {
             #region Sanity checks
-            if (sourceFile == null) throw new ArgumentNullException("sourceFile");
-            if (destinationFile == null) throw new ArgumentNullException("destinationFile");
+            if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
+            if (destinationFile == null) throw new ArgumentNullException(nameof(destinationFile));
             #endregion
 
             sourceFile.CopyTo(destinationFile.FullName, Overwrite);
@@ -192,8 +192,8 @@ namespace NanoByte.Common.Storage
         protected virtual void CreateSymlink([NotNull, Localizable(false)] string linkPath, [NotNull, Localizable(false)] string linkTarget)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(linkPath)) throw new ArgumentNullException("linkPath");
-            if (string.IsNullOrEmpty(linkTarget)) throw new ArgumentNullException("linkTarget");
+            if (string.IsNullOrEmpty(linkPath)) throw new ArgumentNullException(nameof(linkPath));
+            if (string.IsNullOrEmpty(linkTarget)) throw new ArgumentNullException(nameof(linkTarget));
             #endregion
 
             if (File.Exists(linkPath) && Overwrite) File.Delete(linkPath);

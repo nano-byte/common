@@ -63,7 +63,7 @@ namespace NanoByte.Common
         public static Exception PreserveStack([NotNull] this Exception exception)
         {
             #region Sanity checks
-            if (exception == null) throw new ArgumentNullException("exception");
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
             var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
@@ -100,9 +100,9 @@ namespace NanoByte.Common
         public static void ApplyWithRollback<T>([NotNull, InstantHandle] this IEnumerable<T> elements, [NotNull, InstantHandle] Action<T> apply, [NotNull, InstantHandle] Action<T> rollback)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
-            if (apply == null) throw new ArgumentNullException("apply");
-            if (rollback == null) throw new ArgumentNullException("rollback");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            if (apply == null) throw new ArgumentNullException(nameof(apply));
+            if (rollback == null) throw new ArgumentNullException(nameof(rollback));
             #endregion
 
             var rollbackJournal = new LinkedList<T>();
@@ -148,8 +148,8 @@ namespace NanoByte.Common
         public static void TryAny<T>([NotNull, InstantHandle] this IEnumerable<T> elements, [NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
-            if (action == null) throw new ArgumentNullException("action");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             var enumerator = elements.GetEnumerator();
@@ -181,7 +181,7 @@ namespace NanoByte.Common
             where TException : Exception
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             int retryCounter = 0;
@@ -283,8 +283,8 @@ namespace NanoByte.Common
         public static async Task TryAnyAsync<T>([NotNull] this IEnumerable<T> elements, [NotNull] Func<T, Task> action)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
-            if (action == null) throw new ArgumentNullException("action");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             var enumerator = elements.GetEnumerator();
@@ -316,7 +316,7 @@ namespace NanoByte.Common
             where TException : Exception
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             int retryCounter = 0;

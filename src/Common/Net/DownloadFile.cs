@@ -49,7 +49,7 @@ namespace NanoByte.Common.Net
             : base(source, bytesTotal)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
             #endregion
 
             Target = target;

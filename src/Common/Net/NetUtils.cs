@@ -59,7 +59,7 @@ namespace NanoByte.Common.Net
         public static void TrustCertificates([NotNull, ItemNotNull] params string[] publicKeys)
         {
             #region Sanity checks
-            if (publicKeys == null) throw new ArgumentNullException("publicKeys");
+            if (publicKeys == null) throw new ArgumentNullException(nameof(publicKeys));
             #endregion
 
             ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)

@@ -46,7 +46,7 @@ namespace NanoByte.Common.Dispatch
         internal Bucketizer([NotNull] IEnumerable<T> elements)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             _elements = elements;
@@ -61,8 +61,8 @@ namespace NanoByte.Common.Dispatch
         public Bucketizer<T> Add([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
         {
             #region Sanity checks
-            if (predicate == null) throw new ArgumentNullException("predicate");
-            if (bucket == null) throw new ArgumentNullException("bucket");
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
             #endregion
 
             _rules.Add(new BucketRule<T>(predicate, bucket));

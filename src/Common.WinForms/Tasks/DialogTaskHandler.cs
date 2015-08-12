@@ -49,7 +49,7 @@ namespace NanoByte.Common.Tasks
         public override void RunTask(ITask task)
         {
             #region Sanity checks
-            if (task == null) throw new ArgumentNullException("task");
+            if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
             Log.Debug("Task: " + task.Name);
@@ -69,7 +69,7 @@ namespace NanoByte.Common.Tasks
         public override bool Ask(string question)
         {
             #region Sanity checks
-            if (question == null) throw new ArgumentNullException("question");
+            if (question == null) throw new ArgumentNullException(nameof(question));
             #endregion
 
             Log.Debug("Question: " + question);
@@ -92,8 +92,8 @@ namespace NanoByte.Common.Tasks
         public override void Output(string title, string message)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (message == null) throw new ArgumentNullException("message");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
             _owner.Invoke(() => OutputBox.Show(_owner, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
@@ -103,8 +103,8 @@ namespace NanoByte.Common.Tasks
         public override void Output<T>(string title, IEnumerable<T> data)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (data == null) throw new ArgumentNullException("data");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             _owner.Invoke(() => OutputGridBox.Show(_owner, title, data));
@@ -113,7 +113,7 @@ namespace NanoByte.Common.Tasks
         public override void Error(Exception exception)
         {
             #region Sanity checks
-            if (exception == null) throw new ArgumentNullException("exception");
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
             _owner.Invoke(() => ErrorBox.Show(_owner, exception, LogRtf));

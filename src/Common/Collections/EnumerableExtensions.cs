@@ -108,8 +108,8 @@ namespace NanoByte.Common.Collections
         public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
         {
             #region Sanity checks
-            if (enumeration == null) throw new ArgumentNullException("enumeration");
-            if (expression == null) throw new ArgumentNullException("expression");
+            if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
             #endregion
 
             if (comparer == null) comparer = Comparer<TValue>.Default;
@@ -148,8 +148,8 @@ namespace NanoByte.Common.Collections
         public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
         {
             #region Sanity checks
-            if (enumeration == null) throw new ArgumentNullException("enumeration");
-            if (expression == null) throw new ArgumentNullException("expression");
+            if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
             #endregion
 
             if (comparer == null) comparer = Comparer<TValue>.Default;
@@ -199,8 +199,8 @@ namespace NanoByte.Common.Collections
             where TException : Exception
         {
             #region Sanity checks
-            if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
             #endregion
 
             foreach (var element in source)
@@ -225,7 +225,7 @@ namespace NanoByte.Common.Collections
         public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable
         {
             #region Sanity checks
-            if (enumerable == null) throw new ArgumentNullException("enumerable");
+            if (enumerable == null) throw new ArgumentNullException(nameof(enumerable));
             #endregion
 
             return enumerable.Select(entry => (T)entry.Clone());
@@ -240,8 +240,8 @@ namespace NanoByte.Common.Collections
         public static IEnumerable<T> TopologicalSort<T>([NotNull] this IEnumerable<T> nodes, [NotNull, InstantHandle] Func<T, IEnumerable<T>> getDependencies)
         {
             #region Sanity checks
-            if (nodes == null) throw new ArgumentNullException("nodes");
-            if (getDependencies == null) throw new ArgumentNullException("getDependencies");
+            if (nodes == null) throw new ArgumentNullException(nameof(nodes));
+            if (getDependencies == null) throw new ArgumentNullException(nameof(getDependencies));
             #endregion
 
             var sorted = new List<T>();

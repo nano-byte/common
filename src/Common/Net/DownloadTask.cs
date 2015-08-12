@@ -75,7 +75,7 @@ namespace NanoByte.Common.Net
         protected DownloadTask(Uri source, long bytesTotal = -1)
         {
             #region Sanity checks
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
             #endregion
 
             Source = source;

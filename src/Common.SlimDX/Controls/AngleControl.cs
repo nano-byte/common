@@ -57,7 +57,7 @@ namespace NanoByte.Common.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             // Draw background
@@ -86,7 +86,7 @@ namespace NanoByte.Common.Controls
         protected override void OnMouseDown(MouseEventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             if (e.Button == MouseButtons.Left) UpdateAngle(e.Location);
@@ -95,7 +95,7 @@ namespace NanoByte.Common.Controls
         protected override void OnMouseMove(MouseEventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             if (e.Button == MouseButtons.Left) UpdateAngle(e.Location);

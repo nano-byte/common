@@ -57,9 +57,9 @@ namespace NanoByte.Common.Tasks
         public ForEachTask([NotNull, Localizable(true)] string name, [NotNull] IEnumerable<T> target, [NotNull] Action<T> work)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (target == null) throw new ArgumentNullException("target");
-            if (work == null) throw new ArgumentNullException("work");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (work == null) throw new ArgumentNullException(nameof(work));
             #endregion
 
             _name = name;

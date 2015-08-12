@@ -111,7 +111,7 @@ namespace NanoByte.Common.Collections
         public bool ContainsAny([NotNull, ItemNotNull] ICollection<CultureInfo> targets, bool ignoreCountry = false)
         {
             #region Sanity checks
-            if (targets == null) throw new ArgumentNullException("targets");
+            if (targets == null) throw new ArgumentNullException(nameof(targets));
             #endregion
 
             if (ignoreCountry)

@@ -51,8 +51,8 @@ namespace NanoByte.Common.Controls
         public static void Show([CanBeNull] IWin32Window owner, [NotNull] Exception exception, [NotNull] RtfBuilder logRtf)
         {
             #region Sanity checks
-            if (exception == null) throw new ArgumentNullException("exception");
-            if (logRtf == null) throw new ArgumentNullException("logRtf");
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (logRtf == null) throw new ArgumentNullException(nameof(logRtf));
             #endregion
 
             Log.Error(exception);

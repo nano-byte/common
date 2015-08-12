@@ -53,7 +53,7 @@ namespace NanoByte.Common.Collections
         public void ForEach([NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             // Get the first element
@@ -78,8 +78,8 @@ namespace NanoByte.Common.Collections
         public void Add([NotNull] T item)
         {
             #region Sanity checks
-            if (item == null) throw new ArgumentNullException("item");
-            if (item.NextElement != null) throw new ArgumentException(Resources.ItemAlreadyInPool, "item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
+            if (item.NextElement != null) throw new ArgumentException(Resources.ItemAlreadyInPool, nameof(item));
             #endregion
 
             // Add the new item as the first element and hook in the previous items after that
@@ -100,7 +100,7 @@ namespace NanoByte.Common.Collections
         public bool Remove([NotNull] T item)
         {
             #region Sanity checks
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
             #endregion
 
             // Get the first element and the object pointing to it
@@ -149,7 +149,7 @@ namespace NanoByte.Common.Collections
         public bool Contains([NotNull] T item)
         {
             #region Sanity checks
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
             #endregion
 
             // Get the first element
@@ -178,7 +178,7 @@ namespace NanoByte.Common.Collections
         public void RemoveAll([NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             // Get the first element and remove the pointer to it
@@ -212,7 +212,7 @@ namespace NanoByte.Common.Collections
         public void RemoveWhere([NotNull, InstantHandle] Predicate<T> predicate)
         {
             #region Sanity checks
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             #endregion
 
             // Get the first element and the object pointing to it
@@ -257,7 +257,7 @@ namespace NanoByte.Common.Collections
         public void RemoveFirst([NotNull, InstantHandle] Predicate<T> predicate)
         {
             #region Sanity checks
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
             #endregion
 
             // Get the first element and the object pointing to it

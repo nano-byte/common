@@ -133,7 +133,7 @@ namespace NanoByte.Common.Storage
         public static T LoadXml<T>([NotNull] Stream stream)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             if (stream.CanSeek) stream.Position = 0;
@@ -168,7 +168,7 @@ namespace NanoByte.Common.Storage
         public static T LoadXml<T>([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             try
@@ -197,7 +197,7 @@ namespace NanoByte.Common.Storage
         public static T FromXmlString<T>([NotNull, Localizable(false)] string data)
         {
             #region Sanity checks
-            if (data == null) throw new ArgumentNullException("data");
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             // Copy string to a stream and then parse
@@ -217,7 +217,7 @@ namespace NanoByte.Common.Storage
         public static void SaveXml<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
 #if SLIMDX
@@ -270,7 +270,7 @@ namespace NanoByte.Common.Storage
         public static void SaveXml<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             using (var atomic = new AtomicWrite(path))
@@ -318,8 +318,8 @@ namespace NanoByte.Common.Storage
         public static T LoadXmlZip<T>([NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (additionalFiles == null) throw new ArgumentNullException("additionalFiles");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (additionalFiles == null) throw new ArgumentNullException(nameof(additionalFiles));
             #endregion
 
             bool xmlFound = false;
@@ -374,8 +374,8 @@ namespace NanoByte.Common.Storage
         public static T LoadXmlZip<T>([NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (additionalFiles == null) throw new ArgumentNullException("additionalFiles");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (additionalFiles == null) throw new ArgumentNullException(nameof(additionalFiles));
             #endregion
 
             using (var fileStream = File.OpenRead(path))
@@ -395,8 +395,8 @@ namespace NanoByte.Common.Storage
         public static void SaveXmlZip<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (additionalFiles == null) throw new ArgumentNullException("additionalFiles");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (additionalFiles == null) throw new ArgumentNullException(nameof(additionalFiles));
             #endregion
 
             if (stream.CanSeek) stream.Position = 0;
@@ -440,8 +440,8 @@ namespace NanoByte.Common.Storage
         public static void SaveXmlZip<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (additionalFiles == null) throw new ArgumentNullException("additionalFiles");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (additionalFiles == null) throw new ArgumentNullException(nameof(additionalFiles));
             #endregion
 
             using (var atomic = new AtomicWrite(path))

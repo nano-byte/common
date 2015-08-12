@@ -101,8 +101,8 @@ namespace NanoByte.Common.Native
             public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string arguments = null)
             {
                 #region Sanity checks
-                if (string.IsNullOrEmpty(title)) throw new ArgumentNullException("title");
-                if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+                if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
+                if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
                 #endregion
 
                 Title = title;
@@ -123,9 +123,9 @@ namespace NanoByte.Common.Native
             public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string arguments, [NotNull, Localizable(false)] string iconPath, int iconIndex)
             {
                 #region Sanity checks
-                if (string.IsNullOrEmpty(title)) throw new ArgumentNullException("title");
-                if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-                if (string.IsNullOrEmpty(iconPath)) throw new ArgumentNullException("iconPath");
+                if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
+                if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+                if (string.IsNullOrEmpty(iconPath)) throw new ArgumentNullException(nameof(iconPath));
                 #endregion
 
                 Title = title;
@@ -196,7 +196,7 @@ namespace NanoByte.Common.Native
         public static void SetWindowAppID(IntPtr hwnd, [NotNull, Localizable(false)] string appID, [CanBeNull, Localizable(false)] string relaunchCommand = null, [CanBeNull, Localizable(false)] string relaunchIcon = null, [CanBeNull, Localizable(true)] string relaunchName = null)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
+            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
             #endregion
 
             if (!WindowsUtils.IsWindows7) return;
@@ -230,8 +230,8 @@ namespace NanoByte.Common.Native
         public static void AddTaskLinks([NotNull, Localizable(false)] string appID, [NotNull, ItemNotNull] IEnumerable<ShellLink> links)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
-            if (links == null) throw new ArgumentNullException("links");
+            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
+            if (links == null) throw new ArgumentNullException(nameof(links));
             #endregion
 
             if (!WindowsUtils.IsWindows7) return;

@@ -26,7 +26,7 @@ namespace NanoByte.Common.Cli
             {
                 #region Sanity checks
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException("value", Resources.ArgMustBeGreaterThanZero);
+                    throw new ArgumentOutOfRangeException(nameof(value), Resources.ArgMustBeGreaterThanZero);
                 #endregion
 
                 try
@@ -53,7 +53,7 @@ namespace NanoByte.Common.Cli
             {
                 #region Sanity checks
                 if (value < -1 || value > Maximum)
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 #endregion
 
                 try

@@ -50,7 +50,7 @@ namespace NanoByte.Common
         public static Process Start([NotNull] this ProcessStartInfo startInfo)
         {
             #region Sanity checks
-            if (startInfo == null) throw new ArgumentNullException("startInfo");
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
             #endregion
 
             Log.Debug("Launching process: " + startInfo.FileName.EscapeArgument() + " " + startInfo.Arguments);
@@ -88,8 +88,8 @@ namespace NanoByte.Common
         public static Process Start([NotNull] string fileName, [NotNull] params string[] arguments)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException("fileName");
-            if (arguments == null) throw new ArgumentNullException("arguments");
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));
+            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
             return new ProcessStartInfo(fileName, arguments.JoinEscapeArguments()).Start();
@@ -107,7 +107,7 @@ namespace NanoByte.Common
         public static int Run([NotNull] this ProcessStartInfo startInfo)
         {
             #region Sanity checks
-            if (startInfo == null) throw new ArgumentNullException("startInfo");
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
             #endregion
 
             var process = Start(startInfo);
@@ -125,8 +125,8 @@ namespace NanoByte.Common
         public static ProcessStartInfo Assembly([NotNull] string name, [NotNull] params string[] arguments)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (arguments == null) throw new ArgumentNullException("arguments");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
             string appPath = Path.Combine(Locations.InstallBase, name + ".exe");
@@ -148,7 +148,7 @@ namespace NanoByte.Common
         public static ProcessStartInfo AsAdmin([NotNull] this ProcessStartInfo startInfo)
         {
             #region Sanity checks
-            if (startInfo == null) throw new ArgumentNullException("startInfo");
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
             #endregion
 
             if (!WindowsUtils.HasUac) throw new PlatformNotSupportedException("The current operating system does not support UAC or it is disabled.");

@@ -52,7 +52,7 @@ namespace NanoByte.Common.Values
             get { return Data[x, y]; }
             set
             {
-                if (value > 15) throw new ArgumentOutOfRangeException("value");
+                if (value > 15) throw new ArgumentOutOfRangeException(nameof(value));
                 Data[x, y] = value;
             }
         }
@@ -64,7 +64,7 @@ namespace NanoByte.Common.Values
         public static NibbleGrid Load([NotNull] Stream stream)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             try
@@ -112,7 +112,7 @@ namespace NanoByte.Common.Values
             if (color.EqualsIgnoreAlpha(Color.Fuchsia)) return 13; // (255,0,255)
             if (color.EqualsIgnoreAlpha(Color.Aqua)) return 14; // (0,255,255)
             if (color.EqualsIgnoreAlpha(Color.White)) return 15; // (255,255,255)
-            throw new ArgumentOutOfRangeException("color");
+            throw new ArgumentOutOfRangeException(nameof(color));
         }
 
         /// <inheritdoc/>

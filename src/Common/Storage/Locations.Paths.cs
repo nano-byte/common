@@ -46,8 +46,8 @@ namespace NanoByte.Common.Storage
         public static string GetSaveConfigPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             string resourceCombined = FileUtils.PathCombine(resource);
@@ -86,8 +86,8 @@ namespace NanoByte.Common.Storage
         public static string GetSaveSystemConfigPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             if (_isPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
@@ -128,8 +128,8 @@ namespace NanoByte.Common.Storage
         public static IEnumerable<string> GetLoadConfigPaths([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             string resourceCombined = FileUtils.PathCombine(resource);
@@ -177,8 +177,8 @@ namespace NanoByte.Common.Storage
         public static string GetSaveDataPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             string resourceCombined = FileUtils.PathCombine(resource);
@@ -218,8 +218,8 @@ namespace NanoByte.Common.Storage
         public static IEnumerable<string> GetLoadDataPaths([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             string resourceCombined = FileUtils.PathCombine(resource);
@@ -264,7 +264,7 @@ namespace NanoByte.Common.Storage
         public static string GetInstalledFilePath([NotNull, Localizable(false)] string fileName)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException("fileName");
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));
             #endregion
 
             try

@@ -56,8 +56,8 @@ namespace NanoByte.Common.Controls
         private ErrorReportForm(Exception exception, Uri uploadUri)
         {
             #region Sanity checks
-            if (exception == null) throw new ArgumentNullException("exception");
-            if (uploadUri == null) throw new ArgumentNullException("uploadUri");
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (uploadUri == null) throw new ArgumentNullException(nameof(uploadUri));
             #endregion
 
             InitializeComponent();
@@ -94,7 +94,7 @@ namespace NanoByte.Common.Controls
         public static void SetupMonitoring(Uri uploadUri)
         {
             #region Sanity checks
-            if (uploadUri == null) throw new ArgumentNullException("uploadUri");
+            if (uploadUri == null) throw new ArgumentNullException(nameof(uploadUri));
             #endregion
 
             // Only execute this code once per process

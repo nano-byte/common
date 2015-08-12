@@ -41,7 +41,7 @@ namespace NanoByte.Common.Values.Design
         protected override float EditValue(float value, IWindowsFormsEditorService editorService)
         {
             #region Sanity checks
-            if (editorService == null) throw new ArgumentNullException("editorService");
+            if (editorService == null) throw new ArgumentNullException(nameof(editorService));
             #endregion
 
             var angleControl = new AngleControl {Angle = value};
@@ -53,8 +53,8 @@ namespace NanoByte.Common.Values.Design
         protected override float EditValue(float value, FloatRangeAttribute range, IWindowsFormsEditorService editorService)
         {
             #region Sanity checks
-            if (editorService == null) throw new ArgumentNullException("editorService");
-            if (range == null) throw new ArgumentNullException("range");
+            if (editorService == null) throw new ArgumentNullException(nameof(editorService));
+            if (range == null) throw new ArgumentNullException(nameof(range));
             #endregion
 
             var angleControl = new AngleControl {Angle = value, Range = range};
@@ -72,7 +72,7 @@ namespace NanoByte.Common.Values.Design
         public override void PaintValue(PaintValueEventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             // Draw background

@@ -79,7 +79,7 @@ namespace NanoByte.Common.Storage
         public static bool IsBreakoutPath([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (path == null) throw new ArgumentNullException("path");
+            if (path == null) throw new ArgumentNullException(nameof(path));
             #endregion
 
             path = UnifySlashes(path);
@@ -93,8 +93,8 @@ namespace NanoByte.Common.Storage
         public static string RelativeTo([NotNull] this FileSystemInfo target, [NotNull] FileSystemInfo baseRef)
         {
             #region Sanity checks
-            if (target == null) throw new ArgumentNullException("target");
-            if (baseRef == null) throw new ArgumentNullException("baseRef");
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (baseRef == null) throw new ArgumentNullException(nameof(baseRef));
             #endregion
 
             string basePath = baseRef.FullName;
@@ -118,8 +118,8 @@ namespace NanoByte.Common.Storage
         public static string ExpandUnixVariables([NotNull] string value, [NotNull] StringDictionary variables)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (variables == null) throw new ArgumentNullException("variables");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (variables == null) throw new ArgumentNullException(nameof(variables));
             #endregion
 
             // Substitute ${VAR} for the value of VAR
@@ -139,7 +139,7 @@ namespace NanoByte.Common.Storage
         public static bool ExistsCaseSensitive([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             return File.Exists(path) &&
@@ -190,7 +190,7 @@ namespace NanoByte.Common.Storage
         public static int DetermineTimeAccuracy([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             if (!Directory.Exists(path)) throw new DirectoryNotFoundException(string.Format(Resources.FileNotFound, path));
@@ -240,7 +240,7 @@ namespace NanoByte.Common.Storage
         public static string GetTempFile([NotNull, Localizable(false)] string prefix)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
+            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
             #endregion
 
             // Make sure there are no name collisions
@@ -269,7 +269,7 @@ namespace NanoByte.Common.Storage
         public static string GetTempDirectory([NotNull, Localizable(false)] string prefix)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
+            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
             #endregion
 
             string tempDir = GetTempFile(prefix);
@@ -291,8 +291,8 @@ namespace NanoByte.Common.Storage
         public static void Replace([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException("destinationPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException(nameof(destinationPath));
             if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
             #endregion
 
@@ -368,8 +368,8 @@ namespace NanoByte.Common.Storage
         public static string ReadFirstLine([NotNull] this FileInfo file, [NotNull] Encoding encoding)
         {
             #region Sanity checks
-            if (file == null) throw new ArgumentNullException("file");
-            if (encoding == null) throw new ArgumentNullException("encoding");
+            if (file == null) throw new ArgumentNullException(nameof(file));
+            if (encoding == null) throw new ArgumentNullException(nameof(encoding));
             #endregion
 
             using (var stream = file.OpenRead())
@@ -388,7 +388,7 @@ namespace NanoByte.Common.Storage
         public static void Walk([NotNull] this DirectoryInfo directory, [CanBeNull, InstantHandle] Action<DirectoryInfo> dirAction = null, [CanBeNull, InstantHandle] Action<FileInfo> fileAction = null, bool followDirSymlinks = false)
         {
             #region Sanity checks
-            if (directory == null) throw new ArgumentNullException("directory");
+            if (directory == null) throw new ArgumentNullException(nameof(directory));
             if (!directory.Exists) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
@@ -417,7 +417,7 @@ namespace NanoByte.Common.Storage
         public static DirectoryInfo WalkThroughPrefix(this DirectoryInfo directory)
         {
             #region Sanity checks
-            if (directory == null) throw new ArgumentNullException("directory");
+            if (directory == null) throw new ArgumentNullException(nameof(directory));
             #endregion
 
             var subdirectories = directory.GetDirectories();
@@ -434,7 +434,7 @@ namespace NanoByte.Common.Storage
         public static string[] GetFilesRecursive([NotNull] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             var paths = new List<string>();
@@ -492,7 +492,7 @@ namespace NanoByte.Common.Storage
         public static void CanonicalizeAcl([NotNull] this ObjectSecurity objectSecurity)
         {
             #region Sanity checks
-            if (objectSecurity == null) throw new ArgumentNullException("objectSecurity");
+            if (objectSecurity == null) throw new ArgumentNullException(nameof(objectSecurity));
             #endregion
 
             if (objectSecurity.AreAccessRulesCanonical) return;
@@ -551,7 +551,7 @@ namespace NanoByte.Common.Storage
         public static void EnableWriteProtection([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             if (!Directory.Exists(path)) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
@@ -571,7 +571,7 @@ namespace NanoByte.Common.Storage
         public static void DisableWriteProtection([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             if (!Directory.Exists(path)) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
@@ -653,8 +653,8 @@ namespace NanoByte.Common.Storage
         public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
             #endregion
 
             if (UnixUtils.IsUnix)
@@ -702,8 +702,8 @@ namespace NanoByte.Common.Storage
         public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
             #endregion
 
             if (UnixUtils.IsUnix)
@@ -750,8 +750,8 @@ namespace NanoByte.Common.Storage
         public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
-            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException("path2");
+            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
+            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException(nameof(path2));
             #endregion
 
             if (UnixUtils.IsUnix)
@@ -895,7 +895,7 @@ namespace NanoByte.Common.Storage
         public static bool IsSymlink([NotNull] this FileSystemInfo item, out string target)
         {
             #region Sanity checks
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
             #endregion
 
             return IsSymlink(item.FullName, out target);
@@ -973,7 +973,7 @@ namespace NanoByte.Common.Storage
         public static bool IsUnixFS([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             if (!path.EndsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture))) path += Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
@@ -1053,8 +1053,8 @@ namespace NanoByte.Common.Storage
         public static byte[] ReadExtendedMetadata([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             if (!File.Exists(path)) throw new FileNotFoundException(string.Format(Resources.FileNotFound, path), path);
@@ -1077,9 +1077,9 @@ namespace NanoByte.Common.Storage
         public static void WriteExtendedMetadata([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name, [NotNull] byte[] data)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (data == null) throw new ArgumentNullException("data");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             if (!File.Exists(path)) throw new FileNotFoundException(string.Format(Resources.FileNotFound, path), path);

@@ -71,8 +71,8 @@ namespace NanoByte.Common.Values.Design
         protected override Vector2Ray GetObject(string[] values, CultureInfo culture)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
             #endregion
 
             return new Vector2Ray(
@@ -84,7 +84,7 @@ namespace NanoByte.Common.Values.Design
         protected override Vector2Ray GetObject(IDictionary propertyValues)
         {
             #region Sanity checks
-            if (propertyValues == null) throw new ArgumentNullException("propertyValues");
+            if (propertyValues == null) throw new ArgumentNullException(nameof(propertyValues));
             #endregion
 
             return new Vector2Ray((Vector2)propertyValues["Point"], (Vector2)propertyValues["Direction"]);

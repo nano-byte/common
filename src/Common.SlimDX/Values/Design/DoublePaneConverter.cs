@@ -74,8 +74,8 @@ namespace NanoByte.Common.Values.Design
         protected override DoublePlane GetObject(string[] values, CultureInfo culture)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
             #endregion
 
             return new DoublePlane(
@@ -87,7 +87,7 @@ namespace NanoByte.Common.Values.Design
         protected override DoublePlane GetObject(IDictionary propertyValues)
         {
             #region Sanity checks
-            if (propertyValues == null) throw new ArgumentNullException("propertyValues");
+            if (propertyValues == null) throw new ArgumentNullException(nameof(propertyValues));
             #endregion
 
             return new DoublePlane((DoubleVector3)propertyValues["Point"], (Vector3)propertyValues["Normal"]);

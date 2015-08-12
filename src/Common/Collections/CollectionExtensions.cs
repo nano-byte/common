@@ -40,8 +40,8 @@ namespace NanoByte.Common.Collections
             where TElements : TList
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             list.AddRange(elements.Cast<TList>());
@@ -55,7 +55,7 @@ namespace NanoByte.Common.Collections
         public static bool AddIfNew<T>([NotNull] this ICollection<T> collection, T element)
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
             #endregion
 
             if (collection.Contains(element)) return false;
@@ -74,8 +74,8 @@ namespace NanoByte.Common.Collections
             where TElements : TCollection
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             foreach (var element in elements) collection.Add(element);
@@ -89,8 +89,8 @@ namespace NanoByte.Common.Collections
             where TElements : TCollection
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             foreach (var element in elements) collection.Remove(element);
@@ -105,8 +105,8 @@ namespace NanoByte.Common.Collections
             [NotNull] Func<T, bool> condition)
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            if (condition == null) throw new ArgumentNullException("condition");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (condition == null) throw new ArgumentNullException(nameof(condition));
             #endregion
 
             bool removedAny = false;
@@ -126,8 +126,8 @@ namespace NanoByte.Common.Collections
         public static void RemoveLast<T>([NotNull] this List<T> list, int number = 1)
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            if (number < 0) throw new ArgumentOutOfRangeException("number");
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            if (number < 0) throw new ArgumentOutOfRangeException(nameof(number));
             #endregion
 
             list.RemoveRange(list.Count - number, number);
@@ -143,9 +143,9 @@ namespace NanoByte.Common.Collections
         public static bool AddOrReplace<T, TKey>([NotNull] this List<T> list, [NotNull] T element, [NotNull, InstantHandle] Func<T, TKey> keySelector)
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            if (element == null) throw new ArgumentNullException("element");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            if (element == null) throw new ArgumentNullException(nameof(element));
+            if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
             #endregion
 
             int index = list.FindIndex(x => Equals(keySelector(x), keySelector(element)));
@@ -172,8 +172,8 @@ namespace NanoByte.Common.Collections
         public static bool AddOrReplace<T>(this List<T> list, T element)
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
-            if (element == null) throw new ArgumentNullException("element");
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             return list.AddOrReplace(element, x => x);
@@ -188,8 +188,8 @@ namespace NanoByte.Common.Collections
         public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> collection, [NotNull] T element)
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            if (element == null) throw new ArgumentNullException("element");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             return (collection.Count == 0) || collection.Contains(element);
@@ -206,8 +206,8 @@ namespace NanoByte.Common.Collections
         public static bool ContainsAny<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
             #endregion
 
             var set = new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
@@ -224,8 +224,8 @@ namespace NanoByte.Common.Collections
         public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
             #endregion
 
             if (first.Count != second.Count) return false;
@@ -242,8 +242,8 @@ namespace NanoByte.Common.Collections
         public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
             #endregion
 
             if (first.Count != second.Count) return false;
@@ -261,7 +261,7 @@ namespace NanoByte.Common.Collections
         public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
             #endregion
 
             if (comparer == null) comparer = EqualityComparer<T>.Default;
@@ -285,7 +285,7 @@ namespace NanoByte.Common.Collections
         public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
             #endregion
 
             if (comparer == null) comparer = EqualityComparer<T>.Default;

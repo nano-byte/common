@@ -43,8 +43,8 @@ namespace NanoByte.Common.Collections
             where TSourceValue : TTargetValue
         {
             #region Sanity checks
-            if (target == null) throw new ArgumentNullException("target");
-            if (source == null) throw new ArgumentNullException("source");
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (source == null) throw new ArgumentNullException(nameof(source));
             #endregion
 
             foreach (var pair in source)
@@ -58,9 +58,9 @@ namespace NanoByte.Common.Collections
         public static TValue GetOrAdd<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull, InstantHandle] Func<TValue> valueFactory)
         {
             #region Sanity checks
-            if (dictionary == null) throw new ArgumentNullException("dictionary");
-            if (key == null) throw new ArgumentNullException("key");
-            if (valueFactory == null) throw new ArgumentNullException("valueFactory");
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (valueFactory == null) throw new ArgumentNullException(nameof(valueFactory));
             #endregion
 
             TValue value;
@@ -77,8 +77,8 @@ namespace NanoByte.Common.Collections
             where TValue : new()
         {
             #region Sanity checks
-            if (dictionary == null) throw new ArgumentNullException("dictionary");
-            if (key == null) throw new ArgumentNullException("key");
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            if (key == null) throw new ArgumentNullException(nameof(key));
             #endregion
 
             return dictionary.GetOrAdd(key, () => new TValue());

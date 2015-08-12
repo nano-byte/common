@@ -38,7 +38,7 @@ namespace NanoByte.Common.Net
         public static string ToStringRfc([NotNull] this Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             return (uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString).
@@ -53,7 +53,7 @@ namespace NanoByte.Common.Net
         public static Uri EnsureTrailingSlash([NotNull] this Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             string escapedString = uri.ToStringRfc();
@@ -69,7 +69,7 @@ namespace NanoByte.Common.Net
         public static Uri ReparseAsAbsolute([NotNull] this Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             return new Uri(uri.OriginalString, UriKind.Absolute);
@@ -82,7 +82,7 @@ namespace NanoByte.Common.Net
         public static string GetLocalFileName([NotNull] this Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             string fileName = Path.GetFileName(uri.LocalPath).StripCharacters(Path.GetInvalidFileNameChars());
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Net
         public static Uri GetBaseUri([NotNull] this Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             return new Uri(

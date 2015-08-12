@@ -256,7 +256,7 @@ namespace NanoByte.Common.Native
         public static string GetNetFxDirectory([NotNull] string version)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(version)) throw new ArgumentNullException("version");
+            if (string.IsNullOrEmpty(version)) throw new ArgumentNullException(nameof(version));
             #endregion
 
             return FileUtils.PathCombine(
@@ -349,7 +349,7 @@ namespace NanoByte.Common.Native
         public static byte[] ReadAllBytes([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
@@ -385,8 +385,8 @@ namespace NanoByte.Common.Native
         public static void WriteAllBytes([NotNull, Localizable(false)] string path, [NotNull] byte[] data)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (data == null) throw new ArgumentNullException("data");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
@@ -420,8 +420,8 @@ namespace NanoByte.Common.Native
         public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
             #endregion
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
@@ -444,8 +444,8 @@ namespace NanoByte.Common.Native
         public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
             #endregion
 
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
@@ -465,8 +465,8 @@ namespace NanoByte.Common.Native
         public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
-            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException("path2");
+            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
+            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException(nameof(path2));
             #endregion
 
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
@@ -500,7 +500,7 @@ namespace NanoByte.Common.Native
         public static void MoveFileOnReboot([NotNull] string sourcePath, [CanBeNull] string destinationPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
             #endregion
 
             if (!NativeMethods.MoveFileEx(sourcePath, destinationPath, NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING | NativeMethods.MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT))
@@ -517,7 +517,7 @@ namespace NanoByte.Common.Native
         public static void SetCurrentProcessAppID(string appID)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException("appID");
+            if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
             #endregion
 
             if (!IsWindows7) return;
@@ -586,13 +586,13 @@ namespace NanoByte.Common.Native
         public static void RegisterApplicationRestart([NotNull] string arguments)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(arguments)) throw new ArgumentNullException("arguments");
+            if (string.IsNullOrEmpty(arguments)) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
             if (!IsWindowsVista) return;
 
             int ret = NativeMethods.RegisterApplicationRestart(arguments, NativeMethods.RestartFlags.NONE);
-            if (ret != 0) throw new ArgumentException("arguments are too long", "arguments");
+            if (ret != 0) throw new ArgumentException("arguments are too long", nameof(arguments));
         }
 
         /// <summary>

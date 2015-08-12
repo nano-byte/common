@@ -46,7 +46,7 @@ namespace NanoByte.Common
         public static int GetDword([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, int defaultValue = 0)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
+            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException(nameof(keyName));
             #endregion
 
             try
@@ -73,7 +73,7 @@ namespace NanoByte.Common
         public static void SetDword([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, int value)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
+            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException(nameof(keyName));
             #endregion
 
             try
@@ -102,7 +102,7 @@ namespace NanoByte.Common
         public static string GetString([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, [CanBeNull, Localizable(false)] string defaultValue = null)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
+            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException(nameof(keyName));
             #endregion
 
             try
@@ -129,7 +129,7 @@ namespace NanoByte.Common
         public static void SetString([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException("keyName");
+            if (string.IsNullOrEmpty(keyName)) throw new ArgumentNullException(nameof(keyName));
             #endregion
 
             try
@@ -163,7 +163,7 @@ namespace NanoByte.Common
         public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [CanBeNull, Localizable(false)] string defaultValue = null)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             return
@@ -183,7 +183,7 @@ namespace NanoByte.Common
         public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, bool machineWide)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             return machineWide
@@ -204,7 +204,7 @@ namespace NanoByte.Common
         public static void SetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value, bool machineWide = false)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             if (machineWide)
@@ -226,8 +226,8 @@ namespace NanoByte.Common
         public static void DeleteSoftwareValue([NotNull, Localizable(false)] string subkeyName, [NotNull, Localizable(false)] string valueName, bool machineWide)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
-            if (string.IsNullOrEmpty(valueName)) throw new ArgumentNullException("valueName");
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+            if (string.IsNullOrEmpty(valueName)) throw new ArgumentNullException(nameof(valueName));
             #endregion
 
             if (machineWide)
@@ -258,8 +258,8 @@ namespace NanoByte.Common
         public static string[] GetValueNames([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
-            if (key == null) throw new ArgumentNullException("key");
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             try
@@ -287,8 +287,8 @@ namespace NanoByte.Common
         public static string[] GetSubKeyNames([NotNull, Localizable(false)] RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
-            if (key == null) throw new ArgumentNullException("key");
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             try
@@ -320,8 +320,8 @@ namespace NanoByte.Common
         public static RegistryKey OpenSubKeyChecked([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName, bool writable = false)
         {
             #region Sanity checks
-            if (key == null) throw new ArgumentNullException("key");
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             try
@@ -351,8 +351,8 @@ namespace NanoByte.Common
         public static RegistryKey CreateSubKeyChecked([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
-            if (key == null) throw new ArgumentNullException("key");
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             try
@@ -382,7 +382,7 @@ namespace NanoByte.Common
         public static RegistryKey OpenHklmKey([NotNull, Localizable(false)] string subkeyName, out bool x64)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
             if (WindowsUtils.Is64BitProcess)

@@ -54,8 +54,8 @@ namespace NanoByte.Common.Controls
         public static string Show([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string prompt, [CanBeNull, Localizable(true)] string defaultText = null, bool password = false)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(title)) throw new ArgumentNullException("title");
-            if (string.IsNullOrEmpty(prompt)) throw new ArgumentNullException("prompt");
+            if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
+            if (string.IsNullOrEmpty(prompt)) throw new ArgumentNullException(nameof(prompt));
             #endregion
 
             using (var inputBox = new InputBox

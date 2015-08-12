@@ -49,8 +49,8 @@ namespace NanoByte.Common.Values.Design
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             #region Sanity checks
-            if (context == null) throw new ArgumentNullException("context");
-            if (provider == null) throw new ArgumentNullException("provider");
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
             #endregion
 
             var editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));

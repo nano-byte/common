@@ -51,8 +51,8 @@ namespace NanoByte.Common.Controls
         public static void Show<T>([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (data == null) throw new ArgumentNullException("data");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             using (var dialog = new OutputGridBox())

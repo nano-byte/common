@@ -118,7 +118,7 @@ namespace NanoByte.Common.Native
         public void RegisterResources([NotNull, ItemNotNull] params string[] files)
         {
             #region Sanity checks
-            if (files == null) throw new ArgumentNullException("files");
+            if (files == null) throw new ArgumentNullException(nameof(files));
             #endregion
 
             int ret = NativeMethods.RmRegisterResources(_sessionHandle, (uint)files.Length, files, 0, new NativeMethods.RM_UNIQUE_PROCESS[0], 0, new string[0]);
@@ -137,7 +137,7 @@ namespace NanoByte.Common.Native
         public string[] ListApps([NotNull] ITaskHandler handler)
         {
             #region Sanity checks
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
             string[] names = null;
@@ -208,7 +208,7 @@ namespace NanoByte.Common.Native
         public void ShutdownApps([NotNull] ITaskHandler handler)
         {
             #region Sanity checks
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
             handler.RunTask(new SimplePercentTask(Resources.ShuttingDownApps, ShutdownAppsWork, CancellationCallback));
@@ -235,7 +235,7 @@ namespace NanoByte.Common.Native
         public void RestartApps([NotNull] ITaskHandler handler)
         {
             #region Sanity checks
-            if (handler == null) throw new ArgumentNullException("handler");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
             handler.RunTask(new SimplePercentTask(Resources.RestartingApps, RestartAppsWork, CancellationCallback));

@@ -45,10 +45,10 @@ namespace NanoByte.Common.Dispatch
         public static void TwoWay<T>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull, InstantHandle] Action<T> added, [NotNull, InstantHandle] Action<T> removed)
         {
             #region Sanity checks
-            if (theirs == null) throw new ArgumentNullException("theirs");
-            if (mine == null) throw new ArgumentNullException("mine");
-            if (added == null) throw new ArgumentNullException("added");
-            if (removed == null) throw new ArgumentNullException("removed");
+            if (theirs == null) throw new ArgumentNullException(nameof(theirs));
+            if (mine == null) throw new ArgumentNullException(nameof(mine));
+            if (added == null) throw new ArgumentNullException(nameof(added));
+            if (removed == null) throw new ArgumentNullException(nameof(removed));
             #endregion
 
             // Entry in mine, but not in theirs
@@ -91,11 +91,11 @@ namespace NanoByte.Common.Dispatch
             where T : class, IMergeable<T>
         {
             #region Sanity checks
-            if (reference == null) throw new ArgumentNullException("reference");
-            if (theirs == null) throw new ArgumentNullException("theirs");
-            if (mine == null) throw new ArgumentNullException("mine");
-            if (added == null) throw new ArgumentNullException("added");
-            if (removed == null) throw new ArgumentNullException("removed");
+            if (reference == null) throw new ArgumentNullException(nameof(reference));
+            if (theirs == null) throw new ArgumentNullException(nameof(theirs));
+            if (mine == null) throw new ArgumentNullException(nameof(mine));
+            if (added == null) throw new ArgumentNullException(nameof(added));
+            if (removed == null) throw new ArgumentNullException(nameof(removed));
             #endregion
 
             // Entry in theirsList, but not in mineList

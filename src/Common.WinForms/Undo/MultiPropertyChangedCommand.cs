@@ -53,10 +53,10 @@ namespace NanoByte.Common.Undo
         public MultiPropertyChangedCommand([NotNull] object[] targets, [NotNull] PropertyDescriptor property, [NotNull] object[] oldValues, object newValue)
         {
             #region Sanity checks
-            if (targets == null) throw new ArgumentNullException("targets");
-            if (property == null) throw new ArgumentNullException("property");
-            if (oldValues == null) throw new ArgumentNullException("oldValues");
-            if (targets.Length != oldValues.Length) throw new ArgumentException(Resources.TargetsOldValuesLength, "targets");
+            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (property == null) throw new ArgumentNullException(nameof(property));
+            if (oldValues == null) throw new ArgumentNullException(nameof(oldValues));
+            if (targets.Length != oldValues.Length) throw new ArgumentException(Resources.TargetsOldValuesLength, nameof(targets));
             #endregion
 
             _targets = targets;

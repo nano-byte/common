@@ -44,7 +44,7 @@ namespace NanoByte.Common.Streams
         public OffsetStream([NotNull] Stream baseStream, long offset)
         {
             #region Sanity checks
-            if (baseStream == null) throw new ArgumentNullException("baseStream");
+            if (baseStream == null) throw new ArgumentNullException(nameof(baseStream));
             #endregion
 
             _baseStream = baseStream;

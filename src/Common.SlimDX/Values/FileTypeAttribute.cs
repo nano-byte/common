@@ -48,7 +48,7 @@ namespace NanoByte.Common.Values
         public FileTypeAttribute([NotNull] string fileType)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(fileType)) throw new ArgumentNullException("fileType");
+            if (string.IsNullOrEmpty(fileType)) throw new ArgumentNullException(nameof(fileType));
             #endregion
 
             _fileType = fileType;

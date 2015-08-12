@@ -44,7 +44,7 @@ namespace NanoByte.Common.Collections
         public void Add([NotNull, Localizable(false)] string language, [CanBeNull] string value)
         {
             #region Sanity checks
-            if (language == null) throw new ArgumentNullException("language");
+            if (language == null) throw new ArgumentNullException(nameof(language));
             #endregion
 
             Add(new LocalizableString {LanguageString = language, Value = value});
@@ -69,7 +69,7 @@ namespace NanoByte.Common.Collections
         public bool ContainsExactLanguage([NotNull] CultureInfo language)
         {
             #region Sanity checks
-            if (language == null) throw new ArgumentNullException("language");
+            if (language == null) throw new ArgumentNullException(nameof(language));
             #endregion
 
             return this.Any(entry => Equals(language, entry.Language));
@@ -85,7 +85,7 @@ namespace NanoByte.Common.Collections
         public string GetExactLanguage([NotNull] CultureInfo language)
         {
             #region Sanity checks
-            if (language == null) throw new ArgumentNullException("language");
+            if (language == null) throw new ArgumentNullException(nameof(language));
             #endregion
 
             var match = this.FirstOrDefault(entry => Equals(language, entry.Language));
@@ -109,7 +109,7 @@ namespace NanoByte.Common.Collections
         public string GetBestLanguage([NotNull] CultureInfo language)
         {
             #region Sanity checks
-            if (language == null) throw new ArgumentNullException("language");
+            if (language == null) throw new ArgumentNullException(nameof(language));
             #endregion
 
             // Try to find exact match
@@ -142,7 +142,7 @@ namespace NanoByte.Common.Collections
         public void Set([NotNull] CultureInfo language, [CanBeNull] string value)
         {
             #region Sanity checks
-            if (language == null) throw new ArgumentNullException("language");
+            if (language == null) throw new ArgumentNullException(nameof(language));
             #endregion
 
             RemoveAll(entry => language.Equals(entry.Language));

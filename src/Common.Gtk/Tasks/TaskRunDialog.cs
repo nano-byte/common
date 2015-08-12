@@ -51,7 +51,7 @@ namespace NanoByte.Common.Tasks
         public TaskRunDialog([NotNull] ITask task, ICredentialProvider credentialProvider, CancellationTokenSource cancellationTokenSource, [CanBeNull] Widget parent = null)
         {
             #region Sanity checks
-            if (task == null) throw new ArgumentNullException("task");
+            if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
             Parent = parent;

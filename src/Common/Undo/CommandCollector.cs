@@ -42,7 +42,7 @@ namespace NanoByte.Common.Undo
         public void Execute(IUndoCommand command)
         {
             #region Sanity checks
-            if (command == null) throw new ArgumentNullException("command");
+            if (command == null) throw new ArgumentNullException(nameof(command));
             #endregion
 
             command.Execute();

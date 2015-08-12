@@ -47,9 +47,9 @@ namespace NanoByte.Common.Native
         public static void CompileCSharp([NotNull] this CompilerParameters compilerParameters, [NotNull, Localizable(false)] string code, [NotNull, Localizable(false)] string manifest)
         {
             #region Sanity checks
-            if (compilerParameters == null) throw new ArgumentNullException("compilerParameters");
-            if (string.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
-            if (string.IsNullOrEmpty(manifest)) throw new ArgumentNullException("manifest");
+            if (compilerParameters == null) throw new ArgumentNullException(nameof(compilerParameters));
+            if (string.IsNullOrEmpty(code)) throw new ArgumentNullException(nameof(code));
+            if (string.IsNullOrEmpty(manifest)) throw new ArgumentNullException(nameof(manifest));
             #endregion
 
             // Make sure the containing directory exists

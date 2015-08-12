@@ -42,8 +42,8 @@ namespace NanoByte.Common.Streams
         public DisposeWarpperStream([NotNull] Stream baseStream, [NotNull] Action disposeHandler)
         {
             #region Sanity checks
-            if (baseStream == null) throw new ArgumentNullException("baseStream");
-            if (disposeHandler == null) throw new ArgumentNullException("disposeHandler");
+            if (baseStream == null) throw new ArgumentNullException(nameof(baseStream));
+            if (disposeHandler == null) throw new ArgumentNullException(nameof(disposeHandler));
             #endregion
 
             _baseStream = baseStream;

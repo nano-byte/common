@@ -63,7 +63,7 @@ namespace NanoByte.Common.Storage
         public AtomicWrite([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             DestinationPath = path;

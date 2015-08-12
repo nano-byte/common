@@ -39,8 +39,8 @@ namespace NanoByte.Common.Collections
         public static void PopEach<T>([NotNull] this Stack<T> stack, [NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
-            if (stack == null) throw new ArgumentNullException("stack");
-            if (action == null) throw new ArgumentNullException("action");
+            if (stack == null) throw new ArgumentNullException(nameof(stack));
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             while (stack.Count != 0)

@@ -38,7 +38,7 @@ namespace NanoByte.Common.Collections
         public static T[] Append<T>([NotNull] this T[] array, T element)
         {
             #region Sanity checks
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             #endregion
 
             var result = new T[array.LongLength + 1];
@@ -54,7 +54,7 @@ namespace NanoByte.Common.Collections
         public static T[] Prepend<T>([NotNull] this T[] array, T element)
         {
             #region Sanity checks
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             #endregion
 
             var result = new T[array.LongLength + 1];
@@ -73,8 +73,8 @@ namespace NanoByte.Common.Collections
         public static bool SequencedEquals<T>([NotNull] this T[] first, [NotNull] T[] second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
             #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
             #endregion
 
             if (first.Length != second.Length) return false;
@@ -126,7 +126,7 @@ namespace NanoByte.Common.Collections
         public static T[] GetAddedElements<T>([CanBeNull] this T[] newArray, [CanBeNull] T[] oldArray, [NotNull] IComparer<T> comparer)
         {
             #region Sanity checks
-            if (comparer == null) throw new ArgumentNullException("comparer");
+            if (comparer == null) throw new ArgumentNullException(nameof(comparer));
             #endregion
 
             if (newArray == null) return new T[0];

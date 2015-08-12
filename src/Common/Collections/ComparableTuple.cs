@@ -53,8 +53,8 @@ namespace NanoByte.Common.Collections
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull
-            if (key == null) throw new ArgumentNullException("key");
-            if (value == null) throw new ArgumentNullException("value");
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             // ReSharper restore CompareNonConstrainedGenericWithNull
             #endregion
 

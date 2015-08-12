@@ -82,7 +82,7 @@ namespace NanoByte.Common
         public Arguments([NotNull] string[] args)
         {
             #region Sanity checks
-            if (args == null) throw new ArgumentNullException("args");
+            if (args == null) throw new ArgumentNullException(nameof(args));
             #endregion
 
             _args = string.Concat(args);

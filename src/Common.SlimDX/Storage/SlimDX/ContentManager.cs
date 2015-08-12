@@ -199,7 +199,7 @@ namespace NanoByte.Common.Storage.SlimDX
         public static string CreateDirPath([NotNull, Localizable(false)] string type)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
             #endregion
 
             type = FileUtils.UnifySlashes(type);
@@ -228,8 +228,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public static string CreateFilePath([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException("id");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
             #endregion
 
             type = FileUtils.UnifySlashes(type);
@@ -249,8 +249,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public static bool FileExists([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id, bool searchArchives = true)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException("id");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
             #endregion
 
             type = FileUtils.UnifySlashes(type);
@@ -351,8 +351,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public static NamedCollection<FileEntry> GetFileList([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string extension)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(extension)) throw new ArgumentNullException("extension");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(extension)) throw new ArgumentNullException(nameof(extension));
             #endregion
 
             type = FileUtils.UnifySlashes(type);
@@ -403,8 +403,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public static string GetFilePath([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException("id");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
             #endregion
 
             type = FileUtils.UnifySlashes(type);
@@ -441,8 +441,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public static Stream GetFileStream([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException("id");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
             #endregion
 
             type = FileUtils.UnifySlashes(type);
@@ -520,8 +520,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public static void DeleteModFile([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException("id");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
             #endregion
 
             // Ensure there is an active mod

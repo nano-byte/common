@@ -110,9 +110,9 @@ namespace NanoByte.Common.Streams
         public override int Read(byte[] buffer, int offset, int count)
         {
             #region Sanity checks
-            if (buffer == null) throw new ArgumentNullException("buffer");
-            if (offset < 0 || offset > buffer.Length) throw new ArgumentOutOfRangeException("offset");
-            if (count + offset > buffer.Length) throw new ArgumentOutOfRangeException("count");
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0 || offset > buffer.Length) throw new ArgumentOutOfRangeException(nameof(offset));
+            if (count + offset > buffer.Length) throw new ArgumentOutOfRangeException(nameof(count));
             #endregion
 
             // Bytes copied to target buffer so far
@@ -189,9 +189,9 @@ namespace NanoByte.Common.Streams
         public override void Write(byte[] buffer, int offset, int count)
         {
             #region Sanity checks
-            if (buffer == null) throw new ArgumentNullException("buffer");
-            if (offset < 0 || offset > buffer.Length) throw new ArgumentOutOfRangeException("offset");
-            if (count + offset > buffer.Length) throw new ArgumentOutOfRangeException("count");
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0 || offset > buffer.Length) throw new ArgumentOutOfRangeException(nameof(offset));
+            if (count + offset > buffer.Length) throw new ArgumentOutOfRangeException(nameof(count));
             #endregion
 
             // Bytes copied to internal buffer so far

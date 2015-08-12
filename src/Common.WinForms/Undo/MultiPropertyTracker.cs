@@ -46,7 +46,7 @@ namespace NanoByte.Common.Undo
         public MultiPropertyTracker(PropertyGrid propertyGrid)
         {
             #region Sanity checks
-            if (propertyGrid == null) throw new ArgumentNullException("propertyGrid");
+            if (propertyGrid == null) throw new ArgumentNullException(nameof(propertyGrid));
             #endregion
 
             _propertyGrid = propertyGrid;

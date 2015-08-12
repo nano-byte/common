@@ -61,7 +61,7 @@ namespace NanoByte.Common.Collections
             set
             {
                 #region Sanity checks
-                if (value == null) throw new ArgumentNullException("value");
+                if (value == null) throw new ArgumentNullException(nameof(value));
                 #endregion
 
                 _language = value.Equals(CultureInfo.InvariantCulture) ? DefaultLanguage : value;

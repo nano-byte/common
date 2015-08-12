@@ -52,7 +52,7 @@ namespace NanoByte.Common.Controls
         public void AppendPar([NotNull] string text, RtfColor color)
         {
             #region Sanity checks
-            if (text == null) throw new ArgumentNullException("text");
+            if (text == null) throw new ArgumentNullException(nameof(text));
             #endregion
 
             text = text.Replace(@"\", @"\\").Replace(Environment.NewLine, "\\par\n");

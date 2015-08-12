@@ -111,7 +111,7 @@ namespace NanoByte.Common.Controls
         protected void PushPage([NotNull] UserControl page)
         {
             #region Sanity checks
-            if (page == null) throw new ArgumentNullException("page");
+            if (page == null) throw new ArgumentNullException(nameof(page));
             #endregion
 
             if (PageStack.Count != 0) _panelPage.Controls.Remove(PageStack.Peek());

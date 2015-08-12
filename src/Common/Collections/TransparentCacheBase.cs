@@ -45,7 +45,7 @@ namespace NanoByte.Common.Collections
             get
             {
                 #region Sanity checks
-                if (key == null) throw new ArgumentNullException("key");
+                if (key == null) throw new ArgumentNullException(nameof(key));
                 #endregion
 
                 lock (_lock)

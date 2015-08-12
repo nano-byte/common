@@ -70,8 +70,8 @@ namespace NanoByte.Common
         public PropertyPointer([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default(T), bool needsEncoding = false)
         {
             #region Sanity checks
-            if (getValue == null) throw new ArgumentNullException("getValue");
-            if (setValue == null) throw new ArgumentNullException("setValue");
+            if (getValue == null) throw new ArgumentNullException(nameof(getValue));
+            if (setValue == null) throw new ArgumentNullException(nameof(setValue));
             #endregion
 
             _getValue = getValue;
@@ -92,7 +92,7 @@ namespace NanoByte.Common
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<bool> pointer)
         {
             #region Sanity checks
-            if (pointer == null) throw new ArgumentNullException("pointer");
+            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
             #endregion
 
             return new PropertyPointer<string>(
@@ -107,7 +107,7 @@ namespace NanoByte.Common
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<int> pointer)
         {
             #region Sanity checks
-            if (pointer == null) throw new ArgumentNullException("pointer");
+            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
             #endregion
 
             return new PropertyPointer<string>(
@@ -122,7 +122,7 @@ namespace NanoByte.Common
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<long> pointer)
         {
             #region Sanity checks
-            if (pointer == null) throw new ArgumentNullException("pointer");
+            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
             #endregion
 
             return new PropertyPointer<string>(
@@ -137,7 +137,7 @@ namespace NanoByte.Common
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<TimeSpan> pointer)
         {
             #region Sanity checks
-            if (pointer == null) throw new ArgumentNullException("pointer");
+            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
             #endregion
 
             return new PropertyPointer<string>(
@@ -152,7 +152,7 @@ namespace NanoByte.Common
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<Uri> pointer)
         {
             #region Sanity checks
-            if (pointer == null) throw new ArgumentNullException("pointer");
+            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
             #endregion
 
             return new PropertyPointer<string>(

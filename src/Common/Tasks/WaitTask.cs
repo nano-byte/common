@@ -55,8 +55,8 @@ namespace NanoByte.Common.Tasks
         public WaitTask([NotNull, Localizable(true)] string name, [NotNull] WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (waitHandle == null) throw new ArgumentNullException("waitHandle");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (waitHandle == null) throw new ArgumentNullException(nameof(waitHandle));
             #endregion
 
             _name = name;

@@ -58,7 +58,7 @@ namespace NanoByte.Common.Tasks
         public void RunTask(ITask task)
         {
             #region Sanity checks
-            if (task == null) throw new ArgumentNullException("task");
+            if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
             Log.Debug("Task: " + task.Name);

@@ -116,8 +116,8 @@ namespace NanoByte.Common.Storage.SlimDX
         internal FileEntry([NotNull] string type, [NotNull, Localizable(false)] string name, FileEntryType entryType = FileEntryType.Normal)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(type)) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             _name = name;

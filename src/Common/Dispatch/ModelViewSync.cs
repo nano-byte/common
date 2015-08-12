@@ -52,8 +52,8 @@ namespace NanoByte.Common.Dispatch
         public ModelViewSync([NotNull] MonitoredCollection<TModel> model, [NotNull] ICollection<TView> view)
         {
             #region Sanity checks
-            if (model == null) throw new ArgumentNullException("model");
-            if (view == null) throw new ArgumentNullException("view");
+            if (model == null) throw new ArgumentNullException(nameof(model));
+            if (view == null) throw new ArgumentNullException(nameof(view));
             #endregion
 
             _model = model;
@@ -158,7 +158,7 @@ namespace NanoByte.Common.Dispatch
             where TSpecificView : class, TView
         {
             #region Sanity checks
-            if (create == null) throw new ArgumentNullException("create");
+            if (create == null) throw new ArgumentNullException(nameof(create));
             #endregion
 
 #if NET20 || NET35
@@ -186,7 +186,7 @@ namespace NanoByte.Common.Dispatch
             where TSpecificView : class, TView
         {
             #region Sanity checks
-            if (create == null) throw new ArgumentNullException("create");
+            if (create == null) throw new ArgumentNullException(nameof(create));
             #endregion
 
             RegisterMultiple(element => new[] {create(element)}, update);

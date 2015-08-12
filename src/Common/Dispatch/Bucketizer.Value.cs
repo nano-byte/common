@@ -49,8 +49,8 @@ namespace NanoByte.Common.Dispatch
         internal Bucketizer([NotNull] IEnumerable<TElement> elements, [NotNull] Func<TElement, TValue> valueRetriever)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
-            if (valueRetriever == null) throw new ArgumentNullException("valueRetriever");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            if (valueRetriever == null) throw new ArgumentNullException(nameof(valueRetriever));
             #endregion
 
             _elements = elements;
@@ -66,7 +66,7 @@ namespace NanoByte.Common.Dispatch
         public Bucketizer<TElement, TValue> Add(TValue value, [NotNull] ICollection<TElement> bucket)
         {
             #region Sanity checks
-            if (bucket == null) throw new ArgumentNullException("bucket");
+            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
             #endregion
 
             _rules.Add(new BucketRule<TElement, TValue>(value, bucket));

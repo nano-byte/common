@@ -59,8 +59,8 @@ namespace NanoByte.Common.Tasks
         public SimpleTask([NotNull, Localizable(true)] string name, [NotNull] Action work, [CanBeNull] Action cancellationCallback = null)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (work == null) throw new ArgumentNullException("work");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (work == null) throw new ArgumentNullException(nameof(work));
             #endregion
 
             _name = name;

@@ -77,8 +77,8 @@ namespace NanoByte.Common
         public static bool OkCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, [NotNull, Localizable(true)] string okCaption, [CanBeNull, Localizable(true)] string cancelCaption = null)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            if (string.IsNullOrEmpty(okCaption)) throw new ArgumentNullException("okCaption");
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
+            if (string.IsNullOrEmpty(okCaption)) throw new ArgumentNullException(nameof(okCaption));
             #endregion
 
             if (TaskDialog.TaskDialog.IsAvailable)
@@ -154,9 +154,9 @@ namespace NanoByte.Common
         public static bool YesNo([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, [NotNull, Localizable(true)] string yesCaption, [NotNull, Localizable(true)] string noCaption)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
-            if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
+            if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException(nameof(yesCaption));
+            if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException(nameof(noCaption));
             #endregion
 
             if (TaskDialog.TaskDialog.IsAvailable)
@@ -217,9 +217,9 @@ namespace NanoByte.Common
         public static DialogResult YesNoCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity, [NotNull, Localizable(true)] string yesCaption, [NotNull, Localizable(true)] string noCaption)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException("yesCaption");
-            if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException("noCaption");
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
+            if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException(nameof(yesCaption));
+            if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException(nameof(noCaption));
             #endregion
 
             if (TaskDialog.TaskDialog.IsAvailable)

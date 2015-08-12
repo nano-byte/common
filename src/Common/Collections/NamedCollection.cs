@@ -60,7 +60,7 @@ namespace NanoByte.Common.Collections
         public NamedCollection([NotNull, ItemNotNull] IEnumerable<T> elements) : this()
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             foreach (var element in elements) Add(element);
@@ -76,8 +76,8 @@ namespace NanoByte.Common.Collections
         public void Rename([NotNull] T element, [NotNull, Localizable(false)] string newName)
         {
             #region Sanity checks
-            if (element == null) throw new ArgumentNullException("element");
-            if (string.IsNullOrEmpty(newName)) throw new ArgumentNullException("newName");
+            if (element == null) throw new ArgumentNullException(nameof(element));
+            if (string.IsNullOrEmpty(newName)) throw new ArgumentNullException(nameof(newName));
             #endregion
 
             if (!Contains(element)) throw new KeyNotFoundException();

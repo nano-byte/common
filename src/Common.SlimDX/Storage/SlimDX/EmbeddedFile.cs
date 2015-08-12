@@ -65,8 +65,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public EmbeddedFile([NotNull] string filename, [NotNull] Action<Stream> readDelegate)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
-            if (readDelegate == null) throw new ArgumentNullException("readDelegate");
+            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException(nameof(filename));
+            if (readDelegate == null) throw new ArgumentNullException(nameof(readDelegate));
             #endregion
 
             _filename = filename;
@@ -83,8 +83,8 @@ namespace NanoByte.Common.Storage.SlimDX
         public EmbeddedFile([NotNull] string filename, int compressionLevel, [NotNull] Action<Stream> writeDelegate)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
-            if (writeDelegate == null) throw new ArgumentNullException("writeDelegate");
+            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException(nameof(filename));
+            if (writeDelegate == null) throw new ArgumentNullException(nameof(writeDelegate));
             #endregion
 
             _filename = filename;

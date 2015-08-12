@@ -47,7 +47,7 @@ namespace NanoByte.Common.Tasks
         public override void RunTask(ITask task)
         {
             #region Sanity checks
-            if (task == null) throw new ArgumentNullException("task");
+            if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
             Log.Debug("Task: " + task.Name);
@@ -65,7 +65,7 @@ namespace NanoByte.Common.Tasks
         public override bool Ask(string question)
         {
             #region Sanity checks
-            if (question == null) throw new ArgumentNullException("question");
+            if (question == null) throw new ArgumentNullException(nameof(question));
             #endregion
 
             Log.Debug("Question: " + question);
@@ -88,8 +88,8 @@ namespace NanoByte.Common.Tasks
         public override void Output(string title, string message)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (message == null) throw new ArgumentNullException("message");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
             ApplicationUtils.Invoke(() => Msg.Inform(_owner, title + Environment.NewLine + message, MsgSeverity.Info));
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Tasks
         public override void Error(Exception exception)
         {
             #region Sanity checks
-            if (exception == null) throw new ArgumentNullException("exception");
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
             Log.Error(exception);

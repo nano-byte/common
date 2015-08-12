@@ -76,7 +76,7 @@ namespace NanoByte.Common.Info
         public ExceptionInfo([NotNull] Exception ex) : this()
         {
             #region Sanity checks
-            if (ex == null) throw new ArgumentNullException("ex");
+            if (ex == null) throw new ArgumentNullException(nameof(ex));
             #endregion
 
             ExceptionType = ex.GetType().ToString();

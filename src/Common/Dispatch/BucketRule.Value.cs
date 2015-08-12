@@ -50,7 +50,7 @@ namespace NanoByte.Common.Dispatch
         public BucketRule(TValue value, [NotNull] ICollection<TElement> bucket)
         {
             #region Sanity checks
-            if (bucket == null) throw new ArgumentNullException("bucket");
+            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
             #endregion
 
             Value = value;

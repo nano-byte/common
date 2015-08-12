@@ -50,7 +50,7 @@ namespace NanoByte.Common.Storage
         public static T LoadBinary<T>([NotNull] Stream stream)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             if (stream.CanSeek) stream.Position = 0;
@@ -80,7 +80,7 @@ namespace NanoByte.Common.Storage
         public static T LoadBinary<T>([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             using (var fileStream = File.OpenRead(path))
@@ -96,7 +96,7 @@ namespace NanoByte.Common.Storage
         public static void SaveBinary<T>([NotNull] this T data, [NotNull] Stream stream)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             _serializer.Serialize(stream, data);
@@ -114,7 +114,7 @@ namespace NanoByte.Common.Storage
         public static void SaveBinary<T>([NotNull] this T data, [NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             using (var atomic = new AtomicWrite(path))

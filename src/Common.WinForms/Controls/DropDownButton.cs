@@ -160,7 +160,7 @@ namespace NanoByte.Common.Controls
         protected override void OnGotFocus(EventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
@@ -170,7 +170,7 @@ namespace NanoByte.Common.Controls
         protected override void OnKeyDown(KeyEventArgs kevent)
         {
             #region Sanity checks
-            if (kevent == null) throw new ArgumentNullException("kevent");
+            if (kevent == null) throw new ArgumentNullException(nameof(kevent));
             #endregion
 
             if (kevent.KeyCode.Equals(Keys.Down) && !_isDropDownMenuVisible)
@@ -185,7 +185,7 @@ namespace NanoByte.Common.Controls
         protected override void OnKeyUp(KeyEventArgs kevent)
         {
             #region Sanity checks
-            if (kevent == null) throw new ArgumentNullException("kevent");
+            if (kevent == null) throw new ArgumentNullException(nameof(kevent));
             #endregion
 
             if (kevent.KeyCode.Equals(Keys.Space))
@@ -234,7 +234,7 @@ namespace NanoByte.Common.Controls
         protected override void OnMouseDown(MouseEventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             //handle ContextMenu re-clicking the drop-down region to close the menu
@@ -250,7 +250,7 @@ namespace NanoByte.Common.Controls
         protected override void OnMouseUp(MouseEventArgs mevent)
         {
             #region Sanity checks
-            if (mevent == null) throw new ArgumentNullException("mevent");
+            if (mevent == null) throw new ArgumentNullException(nameof(mevent));
             #endregion
 
             // if the right button was released inside the button
@@ -268,7 +268,7 @@ namespace NanoByte.Common.Controls
         protected override void OnPaint(PaintEventArgs pevent)
         {
             #region Sanity checks
-            if (pevent == null) throw new ArgumentNullException("pevent");
+            if (pevent == null) throw new ArgumentNullException(nameof(pevent));
             #endregion
 
             base.OnPaint(pevent);

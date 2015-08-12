@@ -118,7 +118,7 @@ namespace NanoByte.Common
         public static void To<T>(this T value, ref T original, [NotNull, InstantHandle] Action updated) where T : struct
         {
             #region Sanity checks
-            if (updated == null) throw new ArgumentNullException("updated");
+            if (updated == null) throw new ArgumentNullException(nameof(updated));
             #endregion
 
             // If the values already match, nothing needs to be done
@@ -154,7 +154,7 @@ namespace NanoByte.Common
         public static void To(this string value, ref string original, [NotNull, InstantHandle] Action updated)
         {
             #region Sanity checks
-            if (updated == null) throw new ArgumentNullException("updated");
+            if (updated == null) throw new ArgumentNullException(nameof(updated));
             #endregion
 
             // If the values already match, nothing needs to be done

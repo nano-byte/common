@@ -100,7 +100,7 @@ namespace NanoByte.Common.Values
         public static ColorCorrection SinusInterpolate(float factor, [NotNull] params ColorCorrection[] values)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
+            if (values == null) throw new ArgumentNullException(nameof(values));
             #endregion
 
             // Cast to Vector4 for interpolating...

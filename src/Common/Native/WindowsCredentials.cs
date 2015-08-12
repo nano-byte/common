@@ -42,7 +42,7 @@ namespace NanoByte.Common.Native
         public static bool IsCredentialStored([NotNull] string target)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
             #endregion
 
             if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();
@@ -67,7 +67,7 @@ namespace NanoByte.Common.Native
         public static NetworkCredential PromptDialog([NotNull] string target, WindowsCredentialsFlags flags, [CanBeNull] string title = null, [CanBeNull] string message = null, IntPtr owner = default(IntPtr))
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
             #endregion
 
             if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Native
         public static NetworkCredential PromptCli([NotNull] string target, WindowsCredentialsFlags flags)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException("target");
+            if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
             #endregion
 
             if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();

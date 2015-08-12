@@ -32,7 +32,7 @@ namespace NanoByte.Common.Net
         public void ReportInvalid(Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             lock (_invalidList)

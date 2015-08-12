@@ -142,8 +142,8 @@ namespace NanoByte.Common.Storage
         public static string GetCacheDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             string resourceCombined = FileUtils.PathCombine(resource);
@@ -192,8 +192,8 @@ namespace NanoByte.Common.Storage
         public static string GetIntegrationDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
-            if (resource == null) throw new ArgumentNullException("resource");
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
+            if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
             string resourceCombined = FileUtils.PathCombine(resource);

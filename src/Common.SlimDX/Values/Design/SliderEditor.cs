@@ -43,8 +43,8 @@ namespace NanoByte.Common.Values.Design
         protected override float EditValue(float value, FloatRangeAttribute range, IWindowsFormsEditorService editorService)
         {
             #region Sanity checks
-            if (editorService == null) throw new ArgumentNullException("editorService");
-            if (range == null) throw new ArgumentNullException("range");
+            if (editorService == null) throw new ArgumentNullException(nameof(editorService));
+            if (range == null) throw new ArgumentNullException(nameof(range));
             #endregion
 
             // Scale up by factor 40 and clamp within [minimum,maximum]

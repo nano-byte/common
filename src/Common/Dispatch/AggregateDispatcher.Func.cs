@@ -52,7 +52,7 @@ namespace NanoByte.Common.Dispatch
         public AggregateDispatcher<TBase, TResult> Add<TSpecific>([NotNull] Func<TSpecific, IEnumerable<TResult>> function) where TSpecific : class, TBase
         {
             #region Sanity checks
-            if (function == null) throw new ArgumentNullException("function");
+            if (function == null) throw new ArgumentNullException(nameof(function));
             #endregion
 
             _delegates.Add(value =>
@@ -72,7 +72,7 @@ namespace NanoByte.Common.Dispatch
         public IEnumerable<TResult> Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
-            if (element == null) throw new ArgumentNullException("element");
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             return _delegates.Select(del => del(element)).WhereNotNull().Flatten();
@@ -86,7 +86,7 @@ namespace NanoByte.Common.Dispatch
         public IEnumerable<TResult> Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             return elements.SelectMany(Dispatch);

@@ -33,8 +33,8 @@ namespace NanoByte.Common.Controls
         public static void Invoke(this Control control, Action action)
         {
             #region Sanity checks
-            if (control == null) throw new ArgumentNullException("control");
-            if (action == null) throw new ArgumentNullException("action");
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             control.Invoke(action);
@@ -43,8 +43,8 @@ namespace NanoByte.Common.Controls
         public static T Invoke<T>(this Control control, Func<T> action)
         {
             #region Sanity checks
-            if (control == null) throw new ArgumentNullException("control");
-            if (action == null) throw new ArgumentNullException("action");
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             return (T)control.Invoke(action);

@@ -47,7 +47,7 @@ namespace NanoByte.Common.Streams
         public StreamConsumer([NotNull] StreamReader reader)
         {
             #region Sanity checks
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
             #endregion
 
             _reader = reader;

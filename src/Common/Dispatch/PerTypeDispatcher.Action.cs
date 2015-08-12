@@ -61,7 +61,7 @@ namespace NanoByte.Common.Dispatch
         public PerTypeDispatcher<TBase> Add<TSpecific>([NotNull] Action<TSpecific> action) where TSpecific : TBase
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             _map.Add(typeof(TSpecific), obj => action((TSpecific)obj));
@@ -77,7 +77,7 @@ namespace NanoByte.Common.Dispatch
         public void Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
-            if (element == null) throw new ArgumentNullException("element");
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             var type = element.GetType();
@@ -94,7 +94,7 @@ namespace NanoByte.Common.Dispatch
         public void Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks
-            if (elements == null) throw new ArgumentNullException("elements");
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
             foreach (var element in elements)

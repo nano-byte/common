@@ -98,8 +98,8 @@ namespace NanoByte.Common.Tasks
         public virtual void Output<T>(string title, IEnumerable<T> data)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (data == null) throw new ArgumentNullException("data");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));

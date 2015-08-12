@@ -43,7 +43,7 @@ namespace NanoByte.Common.Net
         public override NetworkCredential GetCredential(Uri uri, string authType)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             if (!Interactive) return null;

@@ -54,8 +54,8 @@ namespace NanoByte.Common.Controls
         public DialogResult ShowDialog([NotNull] IWin32Window owner, [NotNull] T element)
         {
             #region Sanity checks
-            if (owner == null) throw new ArgumentNullException("owner");
-            if (element == null) throw new ArgumentNullException("element");
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             _editor.Target = element;
@@ -71,7 +71,7 @@ namespace NanoByte.Common.Controls
         public DialogResult ShowDialog([NotNull] T element)
         {
             #region Sanity checks
-            if (element == null) throw new ArgumentNullException("element");
+            if (element == null) throw new ArgumentNullException(nameof(element));
             #endregion
 
             _editor.Target = element;

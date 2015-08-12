@@ -73,8 +73,8 @@ namespace NanoByte.Common
         public static bool ContainsIgnoreCase([NotNull] this string value, [NotNull] string text)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (text == null) throw new ArgumentNullException("text");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (text == null) throw new ArgumentNullException(nameof(text));
             #endregion
 
             return value.ToUpperInvariant().Contains(text.ToUpperInvariant());
@@ -87,7 +87,7 @@ namespace NanoByte.Common
         public static bool ContainsWhitespace([NotNull] this string value)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return value.Contains(" ") || value.Contains("\t") || value.Contains("\n") || value.Contains("\r");
@@ -114,8 +114,8 @@ namespace NanoByte.Common
         public static bool StartsWithIgnoreCase([NotNull] this string text, [NotNull] string value)
         {
             #region Sanity checks
-            if (text == null) throw new ArgumentNullException("text");
-            if (value == null) throw new ArgumentNullException("value");
+            if (text == null) throw new ArgumentNullException(nameof(text));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return text.StartsWith(value, StringComparison.OrdinalIgnoreCase);
@@ -128,8 +128,8 @@ namespace NanoByte.Common
         public static bool EndsWithIgnoreCase([NotNull] this string text, [NotNull] string value)
         {
             #region Sanity checks
-            if (text == null) throw new ArgumentNullException("text");
-            if (value == null) throw new ArgumentNullException("value");
+            if (text == null) throw new ArgumentNullException(nameof(text));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return text.EndsWith(value, StringComparison.OrdinalIgnoreCase);
@@ -144,7 +144,7 @@ namespace NanoByte.Common
         public static string StripCharacters([CanBeNull] this string value, [NotNull] IEnumerable<char> characters)
         {
             #region Sanity checks
-            if (characters == null) throw new ArgumentNullException("characters");
+            if (characters == null) throw new ArgumentNullException(nameof(characters));
             #endregion
 
             if (value == null) return null;
@@ -158,7 +158,7 @@ namespace NanoByte.Common
         public static string StripFromEnd([NotNull] this string value, int count)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return value.Substring(0, value.Length - count);
@@ -173,7 +173,7 @@ namespace NanoByte.Common
         public static string[] SplitMultilineText([NotNull] this string value)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             var result = new List<string>();
@@ -205,8 +205,8 @@ namespace NanoByte.Common
         public static string Join([NotNull] string separator, [NotNull, ItemNotNull] IEnumerable<string> parts)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(separator)) throw new ArgumentNullException("separator");
-            if (parts == null) throw new ArgumentNullException("parts");
+            if (string.IsNullOrEmpty(separator)) throw new ArgumentNullException(nameof(separator));
+            if (parts == null) throw new ArgumentNullException(nameof(parts));
             #endregion
 
             var output = new StringBuilder();
@@ -230,7 +230,7 @@ namespace NanoByte.Common
         public static string GetLeftPartAtFirstOccurrence([NotNull] this string value, char ch)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             int index = value.IndexOf(ch);
@@ -244,7 +244,7 @@ namespace NanoByte.Common
         public static string GetRightPartAtFirstOccurrence([NotNull] this string value, char ch)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             int index = value.IndexOf(ch);
@@ -258,7 +258,7 @@ namespace NanoByte.Common
         public static string GetLeftPartAtLastOccurrence([NotNull] this string value, char ch)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             int index = value.LastIndexOf(ch);
@@ -272,7 +272,7 @@ namespace NanoByte.Common
         public static string GetRightPartAtLastOccurrence([NotNull] this string value, char ch)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             int index = value.LastIndexOf(ch);
@@ -286,8 +286,8 @@ namespace NanoByte.Common
         public static string GetLeftPartAtFirstOccurrence([NotNull] this string value, [NotNull] string str)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException("str");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException(nameof(str));
             #endregion
 
             int index = value.IndexOf(str, StringComparison.Ordinal);
@@ -301,8 +301,8 @@ namespace NanoByte.Common
         public static string GetRightPartAtFirstOccurrence([NotNull] this string value, [NotNull] string str)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException("str");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException(nameof(str));
             #endregion
 
             int index = value.IndexOf(str, StringComparison.Ordinal);
@@ -316,8 +316,8 @@ namespace NanoByte.Common
         public static string GetLeftPartAtLastOccurrence([NotNull] this string value, [NotNull] string str)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException("str");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException(nameof(str));
             #endregion
 
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
@@ -331,8 +331,8 @@ namespace NanoByte.Common
         public static string GetRightPartAtLastOccurrence([NotNull] this string value, [NotNull] string str)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException("str");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrEmpty(str)) throw new ArgumentNullException(nameof(str));
             #endregion
 
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
@@ -353,7 +353,7 @@ namespace NanoByte.Common
         public static string EscapeArgument([NotNull] this string value)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             if (value.Length == 0) return "\"\"";
@@ -397,7 +397,7 @@ namespace NanoByte.Common
         public static string JoinEscapeArguments([NotNull, ItemNotNull] this IEnumerable<string> parts)
         {
             #region Sanity checks
-            if (parts == null) throw new ArgumentNullException("parts");
+            if (parts == null) throw new ArgumentNullException(nameof(parts));
             #endregion
 
             var output = new StringBuilder();
@@ -423,7 +423,7 @@ namespace NanoByte.Common
         public static string Base64Utf8Encode([NotNull] this string value)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
@@ -437,7 +437,7 @@ namespace NanoByte.Common
         public static string Base64Utf8Decode([NotNull] this string value)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return Encoding.UTF8.GetString(Convert.FromBase64String(value));
@@ -455,7 +455,7 @@ namespace NanoByte.Common
         public static string Base32Encode([NotNull] this byte[] data)
         {
             #region Sanity checks
-            if (data == null) throw new ArgumentNullException("data");
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             if (data.Length == 0) return "";
@@ -505,7 +505,7 @@ namespace NanoByte.Common
         public static string Base16Encode([NotNull] this byte[] data)
         {
             #region Sanity checks
-            if (data == null) throw new ArgumentNullException("data");
+            if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
             if (data.Length == 0) return "";
@@ -520,7 +520,7 @@ namespace NanoByte.Common
         public static byte[] Base16Decode([NotNull] this string encoded)
         {
             #region Sanity checks
-            if (encoded == null) throw new ArgumentNullException("encoded");
+            if (encoded == null) throw new ArgumentNullException(nameof(encoded));
             #endregion
 
             var result = new byte[encoded.Length / 2];
@@ -541,8 +541,8 @@ namespace NanoByte.Common
         public static string Hash([NotNull] this string value, [NotNull] HashAlgorithm algorithm)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
-            if (algorithm == null) throw new ArgumentNullException("algorithm");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (algorithm == null) throw new ArgumentNullException(nameof(algorithm));
             #endregion
 
             var hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(value));

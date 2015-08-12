@@ -55,7 +55,7 @@ namespace NanoByte.Common.Values
         public static CultureInfo FromString(string langCode)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(langCode)) throw new ArgumentNullException("langCode");
+            if (string.IsNullOrEmpty(langCode)) throw new ArgumentNullException(nameof(langCode));
             #endregion
 
             return new CultureInfo(langCode.Replace('_', '-'));
@@ -68,7 +68,7 @@ namespace NanoByte.Common.Values
         public static void SetUI([NotNull] CultureInfo culture)
         {
             #region Sanity checks
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
             #endregion
 
             var type = typeof(CultureInfo);

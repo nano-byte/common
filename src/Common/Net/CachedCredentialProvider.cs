@@ -47,7 +47,7 @@ namespace NanoByte.Common.Net
         public CachedCredentialProvider([NotNull] ICredentialProvider inner)
         {
             #region Sanity checks
-            if (inner == null) throw new ArgumentNullException("inner");
+            if (inner == null) throw new ArgumentNullException(nameof(inner));
             #endregion
 
             _inner = inner;
@@ -58,7 +58,7 @@ namespace NanoByte.Common.Net
         public NetworkCredential GetCredential(Uri uri, string authType)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             return _cache[uri.GetBaseUri()];
@@ -68,7 +68,7 @@ namespace NanoByte.Common.Net
         public void ReportInvalid(Uri uri)
         {
             #region Sanity checks
-            if (uri == null) throw new ArgumentNullException("uri");
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
             uri = uri.GetBaseUri();

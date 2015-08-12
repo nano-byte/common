@@ -114,8 +114,8 @@ namespace NanoByte.Common.Native
         public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
             #endregion
 
             new UnixSymbolicLinkInfo(sourcePath).CreateSymbolicLinkTo(targetPath);
@@ -132,8 +132,8 @@ namespace NanoByte.Common.Native
         public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException("sourcePath");
-            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException("targetPath");
+            if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+            if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
             #endregion
 
             new UnixFileInfo(targetPath).CreateLink(sourcePath);
@@ -150,8 +150,8 @@ namespace NanoByte.Common.Native
         public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException("path1");
-            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException("path2");
+            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
+            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException(nameof(path2));
             #endregion
 
             return UnixFileSystemInfo.GetFileSystemEntry(path1).Inode == UnixFileSystemInfo.GetFileSystemEntry(path2).Inode;
@@ -167,8 +167,8 @@ namespace NanoByte.Common.Native
         public static void Rename([NotNull, Localizable(false)] string source, [NotNull, Localizable(false)] string destination)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException("source");
-            if (string.IsNullOrEmpty(destination)) throw new ArgumentNullException("destination");
+            if (string.IsNullOrEmpty(source)) throw new ArgumentNullException(nameof(source));
+            if (string.IsNullOrEmpty(destination)) throw new ArgumentNullException(nameof(destination));
             #endregion
 
             if (Stdlib.rename(source, destination) != 0) throw new UnixIOException(Stdlib.GetLastError());
@@ -186,7 +186,7 @@ namespace NanoByte.Common.Native
         public static bool IsRegularFile([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             return UnixFileSystemInfo.GetFileSystemEntry(path).IsRegularFile;
@@ -203,7 +203,7 @@ namespace NanoByte.Common.Native
         public static bool IsSymlink([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             return UnixFileSystemInfo.GetFileSystemEntry(path).IsSymbolicLink;
@@ -220,7 +220,7 @@ namespace NanoByte.Common.Native
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             bool result = IsSymlink(path);
@@ -247,7 +247,7 @@ namespace NanoByte.Common.Native
         public static void MakeReadOnly([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             var fileSysInfo = UnixFileSystemInfo.GetFileSystemEntry(path);
@@ -263,7 +263,7 @@ namespace NanoByte.Common.Native
         public static void MakeWritable([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             var fileSysInfo = UnixFileSystemInfo.GetFileSystemEntry(path);
@@ -284,7 +284,7 @@ namespace NanoByte.Common.Native
         public static bool IsExecutable([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             // Check if any execution rights are set
@@ -302,7 +302,7 @@ namespace NanoByte.Common.Native
         public static void SetExecutable([NotNull, Localizable(false)] string path, bool executable)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             var fileInfo = UnixFileSystemInfo.GetFileSystemEntry(path);
@@ -323,8 +323,8 @@ namespace NanoByte.Common.Native
         public static byte[] GetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             byte[] data;
@@ -343,8 +343,8 @@ namespace NanoByte.Common.Native
         public static void SetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name, [NotNull] byte[] data)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
             if (Syscall.setxattr(path, name, data) == -1) throw new UnixIOException(Stdlib.GetLastError());
@@ -391,7 +391,7 @@ namespace NanoByte.Common.Native
         public static string GetFileSystem([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             string fileSystem = Stat.Instance.FileSystem(path);

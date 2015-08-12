@@ -39,7 +39,7 @@ namespace NanoByte.Common.Native
         public static void SetForegroundWindow([NotNull] this Form form)
         {
             #region Sanity checks
-            if (form == null) throw new ArgumentNullException("form");
+            if (form == null) throw new ArgumentNullException(nameof(form));
             #endregion
 
             if (!WindowsUtils.IsWindows) return;
@@ -53,7 +53,7 @@ namespace NanoByte.Common.Native
         public static void EnableWindowDrag([NotNull] this Control control)
         {
             #region Sanity checks
-            if (control == null) throw new ArgumentNullException("control");
+            if (control == null) throw new ArgumentNullException(nameof(control));
             #endregion
 
             if (!WindowsUtils.IsWindows) return;
@@ -80,7 +80,7 @@ namespace NanoByte.Common.Native
         public static void AddShieldIcon([NotNull] this Button button)
         {
             #region Sanity checks
-            if (button == null) throw new ArgumentNullException("button");
+            if (button == null) throw new ArgumentNullException(nameof(button));
             #endregion
 
             const int BCM_FIRST = 0x1600, BCM_SETSHIELD = 0x000C;

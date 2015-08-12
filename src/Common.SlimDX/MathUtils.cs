@@ -56,7 +56,7 @@ namespace NanoByte.Common
             #region Sanity checks
             if (value < min) return min;
             if (value > max) return max;
-            if (min > max) throw new ArgumentException(Resources.MinLargerMax, "min");
+            if (min > max) throw new ArgumentException(Resources.MinLargerMax, nameof(min));
             #endregion
 
             if (value < min) return min;
@@ -77,7 +77,7 @@ namespace NanoByte.Common
             #region Sanity checks
             if (value < min) return min;
             if (value > max) return max;
-            if (min > max) throw new ArgumentException(Resources.MinLargerMax, "min");
+            if (min > max) throw new ArgumentException(Resources.MinLargerMax, nameof(min));
             #endregion
 
             if (value < min) return min;
@@ -98,7 +98,7 @@ namespace NanoByte.Common
             #region Sanity checks
             if (value < min) return min;
             if (value > max) return max;
-            if (min > max) throw new ArgumentException(Resources.MinLargerMax, "min");
+            if (min > max) throw new ArgumentException(Resources.MinLargerMax, nameof(min));
             #endregion
 
             if (value < min) return min;
@@ -119,7 +119,7 @@ namespace NanoByte.Common
             #region Sanity checks
             if (value < min) return min;
             if (value > max) return max;
-            if (min > max) throw new ArgumentException(Resources.MinLargerMax, "min");
+            if (min > max) throw new ArgumentException(Resources.MinLargerMax, nameof(min));
             #endregion
 
             if (value < min) return min;
@@ -270,7 +270,7 @@ namespace NanoByte.Common
         public static double InterpolateTrigonometric(double factor, [NotNull] params double[] values)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
+            if (values == null) throw new ArgumentNullException(nameof(values));
             if (values.Length < 2) throw new ArgumentException(Resources.AtLeast2Values);
             #endregion
 
@@ -299,7 +299,7 @@ namespace NanoByte.Common
         public static float InterpolateTrigonometric(this float factor, [NotNull] params float[] values)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
+            if (values == null) throw new ArgumentNullException(nameof(values));
             if (values.Length < 2) throw new ArgumentException(Resources.AtLeast2Values);
             #endregion
 
@@ -328,7 +328,7 @@ namespace NanoByte.Common
         public static Vector4 InterpolateTrigonometric(float factor, [NotNull] params Vector4[] values)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
+            if (values == null) throw new ArgumentNullException(nameof(values));
             if (values.Length < 2) throw new ArgumentException(Resources.AtLeast2Values);
             #endregion
 
@@ -366,7 +366,7 @@ namespace NanoByte.Common
         public static double Factorial(int n)
         {
             #region Sanity checks
-            if (n < 0) throw new ArgumentException(Resources.ArgMustNotBeNegative, "n");
+            if (n < 0) throw new ArgumentException(Resources.ArgMustNotBeNegative, nameof(n));
             #endregion
 
             // Use the lookup-table when possible, otherwise use recursion
@@ -383,7 +383,7 @@ namespace NanoByte.Common
         public static double BinomCoeff(int n, int k)
         {
             #region Sanity checks
-            if (n < 0) throw new ArgumentException(Resources.ArgMustNotBeNegative, "n");
+            if (n < 0) throw new ArgumentException(Resources.ArgMustNotBeNegative, nameof(n));
             #endregion
 
             return Factorial(n) / (Factorial(k) * Factorial(n - k));
@@ -409,7 +409,7 @@ namespace NanoByte.Common
         public static Vector2[] Bezier(int resolution, [NotNull] params Vector2[] controlPoints)
         {
             #region Sanity checks
-            if (controlPoints == null) throw new ArgumentNullException("controlPoints");
+            if (controlPoints == null) throw new ArgumentNullException(nameof(controlPoints));
             #endregion
 
             var output = new Vector2[resolution];
@@ -446,7 +446,7 @@ namespace NanoByte.Common
         public static DoubleVector3[] Bezier(int resolution, [NotNull] params DoubleVector3[] controlPoints)
         {
             #region Sanity checks
-            if (controlPoints == null) throw new ArgumentNullException("controlPoints");
+            if (controlPoints == null) throw new ArgumentNullException(nameof(controlPoints));
             #endregion
 
             var output = new DoubleVector3[resolution];

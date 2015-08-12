@@ -47,8 +47,8 @@ namespace NanoByte.Common.Cli
         public static IList<FileInfo> GetFiles([NotNull, ItemNotNull] IEnumerable<string> args, [NotNull, Localizable(false)] string defaultPattern = "*")
         {
             #region Sanity checks
-            if (args == null) throw new ArgumentNullException("args");
-            if (string.IsNullOrEmpty(defaultPattern)) throw new ArgumentNullException("defaultPattern");
+            if (args == null) throw new ArgumentNullException(nameof(args));
+            if (string.IsNullOrEmpty(defaultPattern)) throw new ArgumentNullException(nameof(defaultPattern));
             #endregion
 
             var result = new List<FileInfo>();

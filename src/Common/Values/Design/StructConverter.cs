@@ -77,7 +77,7 @@ namespace NanoByte.Common.Values.Design
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
 
             if (destinationType == typeof(InstanceDescriptor))
                 return new InstanceDescriptor(GetConstructor(), GetArguments((T)value));
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Values.Design
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
 
             var sValue = value as string;
             if (sValue == null) return base.ConvertFrom(context, culture, value);
@@ -122,7 +122,7 @@ namespace NanoByte.Common.Values.Design
         protected virtual string GetElementSeparator(CultureInfo culture)
         {
             #region Sanity checks
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
             #endregion
 
             return culture.TextInfo.ListSeparator;

@@ -48,8 +48,8 @@ namespace NanoByte.Common.Controls
         public static void Show([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (message == null) throw new ArgumentNullException("message");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
             using (var outputBox = new OutputBox

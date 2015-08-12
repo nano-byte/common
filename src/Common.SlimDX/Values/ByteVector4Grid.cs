@@ -48,7 +48,7 @@ namespace NanoByte.Common.Values
         public static ByteVector4Grid Load([NotNull] Stream stream)
         {
             #region Sanity checks
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
             try

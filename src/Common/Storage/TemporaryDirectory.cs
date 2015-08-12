@@ -53,7 +53,7 @@ namespace NanoByte.Common.Storage
         public TemporaryDirectory([NotNull, Localizable(false)] string prefix)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException("prefix");
+            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
             #endregion
 
             Path = FileUtils.GetTempDirectory(prefix);

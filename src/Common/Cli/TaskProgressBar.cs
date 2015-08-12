@@ -48,7 +48,7 @@ namespace NanoByte.Common.Cli
             {
                 #region Sanity checks
                 if (!Enum.IsDefined(typeof(TaskState), value))
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(TaskState));
+                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(TaskState));
                 #endregion
 
                 try

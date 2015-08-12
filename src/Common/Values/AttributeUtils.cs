@@ -56,8 +56,8 @@ namespace NanoByte.Common.Values
         public static string GetEnumAttributeValue<TAttribute>([NotNull] this Enum target, [NotNull] Converter<TAttribute, string> valueRetriever) where TAttribute : Attribute
         {
             #region Sanity checks
-            if (target == null) throw new ArgumentNullException("target");
-            if (valueRetriever == null) throw new ArgumentNullException("valueRetriever");
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (valueRetriever == null) throw new ArgumentNullException(nameof(valueRetriever));
             #endregion
 
             FieldInfo fieldInfo = target.GetType().GetField(target.ToString());
@@ -73,7 +73,7 @@ namespace NanoByte.Common.Values
         public static TType ConvertFromString<TType>([NotNull] this string value)
         {
             #region Sanity checks
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             #endregion
 
             return (TType)(TypeDescriptor.GetConverter(typeof(TType)).ConvertFromInvariantString(value));
@@ -87,7 +87,7 @@ namespace NanoByte.Common.Values
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             // ReSharper restore CompareNonConstrainedGenericWithNull
             #endregion
 
@@ -107,8 +107,8 @@ namespace NanoByte.Common.Values
             where TAttribute : Attribute
         {
             #region Sanity checks
-            if (assembly == null) throw new ArgumentNullException("assembly");
-            if (valueRetrieval == null) throw new ArgumentNullException("valueRetrieval");
+            if (assembly == null) throw new ArgumentNullException(nameof(assembly));
+            if (valueRetrieval == null) throw new ArgumentNullException(nameof(valueRetrieval));
             #endregion
 
             var attributes = assembly.GetCustomAttributes(typeof(TAttribute), inherit: false);

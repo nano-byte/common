@@ -62,7 +62,7 @@ namespace NanoByte.Common.Controls
         protected override void OnSelectedGridItemChanged(SelectedGridItemChangedEventArgs e)
         {
             #region Sanity checks
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
 
             _menuReset.Enabled =

@@ -40,7 +40,7 @@ namespace NanoByte.Common.Undo
         public CompositeCommand([NotNull] params IUndoCommand[] commands)
         {
             #region Sanity checks
-            if (commands == null) throw new ArgumentNullException("commands");
+            if (commands == null) throw new ArgumentNullException(nameof(commands));
             #endregion
 
             // Defensive copy

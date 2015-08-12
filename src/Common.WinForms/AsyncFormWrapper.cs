@@ -46,7 +46,7 @@ namespace NanoByte.Common
         public AsyncFormWrapper([NotNull] Func<T> init)
         {
             #region Sanity checks
-            if (init == null) throw new ArgumentNullException("init");
+            if (init == null) throw new ArgumentNullException(nameof(init));
             #endregion
 
             _init = init;
@@ -97,7 +97,7 @@ namespace NanoByte.Common
         public void Post([NotNull, InstantHandle] Action<T> action)
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             var form = InitializeForm();
@@ -130,7 +130,7 @@ namespace NanoByte.Common
         public TResult Post<TResult>([NotNull, InstantHandle] Func<T, TResult> action)
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             var form = InitializeForm();
@@ -161,7 +161,7 @@ namespace NanoByte.Common
         public void Send([NotNull] Action<T> action)
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             var form = InitializeForm();
@@ -193,7 +193,7 @@ namespace NanoByte.Common
         public void SendLow([NotNull] Action<T> action)
         {
             #region Sanity checks
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
             var form = _form;

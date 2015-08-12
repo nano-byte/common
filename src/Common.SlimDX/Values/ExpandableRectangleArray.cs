@@ -63,7 +63,7 @@ namespace NanoByte.Common.Values
         public void AddFirst(Point start, [NotNull] T[,] array)
         {
             #region Sanity checks
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             #endregion
 
             _subsets.AddFirst(new Subset(start, array));
@@ -79,7 +79,7 @@ namespace NanoByte.Common.Values
         public void AddLast(Point start, [NotNull] T[,] array)
         {
             #region Sanity checks
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             #endregion
 
             _subsets.AddLast(new Subset(start, array));
@@ -127,7 +127,7 @@ namespace NanoByte.Common.Values
         public T[,] GetArray([NotNull] T[,] baseValues)
         {
             #region Sanity checks
-            if (baseValues == null) throw new ArgumentNullException("baseValues");
+            if (baseValues == null) throw new ArgumentNullException(nameof(baseValues));
             #endregion
 
             // Build the result array and fill it with base values if possible
@@ -152,7 +152,7 @@ namespace NanoByte.Common.Values
         public T[,] GetArray([NotNull] Grid<T> baseValues)
         {
             #region Sanity checks
-            if (baseValues == null) throw new ArgumentNullException("baseValues");
+            if (baseValues == null) throw new ArgumentNullException(nameof(baseValues));
             #endregion
 
             return GetArray(baseValues.Data);

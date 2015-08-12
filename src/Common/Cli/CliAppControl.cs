@@ -48,7 +48,7 @@ namespace NanoByte.Common.Cli
         public Process StartInteractive([NotNull] params string[] arguments)
         {
             #region Sanity checks
-            if (arguments == null) throw new ArgumentNullException("arguments");
+            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
             return new ProcessStartInfo
@@ -68,7 +68,7 @@ namespace NanoByte.Common.Cli
         public virtual string Execute([NotNull] params string[] arguments)
         {
             #region Sanity checks
-            if (arguments == null) throw new ArgumentNullException("arguments");
+            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
             Process process;
@@ -108,7 +108,7 @@ namespace NanoByte.Common.Cli
         protected virtual ProcessStartInfo GetStartInfo([NotNull] params string[] arguments)
         {
             #region Sanity checks
-            if (arguments == null) throw new ArgumentNullException("arguments");
+            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
             ProcessUtils.SanitizeEnvironmentVariables();

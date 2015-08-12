@@ -108,7 +108,7 @@ namespace NanoByte.Common.Tasks
         public override void RunTask(ITask task)
         {
             #region Sanity checks
-            if (task == null) throw new ArgumentNullException("task");
+            if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
             if (Verbosity <= Verbosity.Batch)
@@ -126,7 +126,7 @@ namespace NanoByte.Common.Tasks
         public override bool Ask(string question)
         {
             #region Sanity checks
-            if (question == null) throw new ArgumentNullException("question");
+            if (question == null) throw new ArgumentNullException(nameof(question));
             #endregion
 
             Log.Debug("Question: " + question);
@@ -153,8 +153,8 @@ namespace NanoByte.Common.Tasks
         public override void Output(string title, string message)
         {
             #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (message == null) throw new ArgumentNullException("message");
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
             if (message.EndsWith("\n")) Console.Write(message);

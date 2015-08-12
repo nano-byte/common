@@ -43,7 +43,7 @@ namespace NanoByte.Common.Native
         public static void RegisterTouchWindow(Control control)
         {
             #region Sanity checks
-            if (control == null) throw new ArgumentNullException("control");
+            if (control == null) throw new ArgumentNullException(nameof(control));
             #endregion
 
             if (WindowsUtils.IsWindows7) NativeMethods.RegisterTouchWindow(control.Handle, 0);

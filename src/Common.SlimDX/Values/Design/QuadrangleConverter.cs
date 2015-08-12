@@ -75,8 +75,8 @@ namespace NanoByte.Common.Values.Design
         protected override Quadrangle GetObject(string[] values, CultureInfo culture)
         {
             #region Sanity checks
-            if (values == null) throw new ArgumentNullException("values");
-            if (culture == null) throw new ArgumentNullException("culture");
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (culture == null) throw new ArgumentNullException(nameof(culture));
             #endregion
 
             return new Quadrangle(
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Values.Design
         protected override Quadrangle GetObject(IDictionary propertyValues)
         {
             #region Sanity checks
-            if (propertyValues == null) throw new ArgumentNullException("propertyValues");
+            if (propertyValues == null) throw new ArgumentNullException(nameof(propertyValues));
             #endregion
 
             return new Quadrangle(

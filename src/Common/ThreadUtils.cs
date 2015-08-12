@@ -43,7 +43,7 @@ namespace NanoByte.Common
         public static Thread StartAsync([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
         {
             #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
+            if (execute == null) throw new ArgumentNullException(nameof(execute));
             #endregion
 
             Log.Debug("Starting async thread: " + name);
@@ -64,7 +64,7 @@ namespace NanoByte.Common
         public static Thread StartBackground([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
         {
             #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
+            if (execute == null) throw new ArgumentNullException(nameof(execute));
             #endregion
 
             Log.Debug("Starting background thread: " + name);
@@ -84,7 +84,7 @@ namespace NanoByte.Common
         public static void RunSta([NotNull, InstantHandle] Action execute)
         {
             #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
+            if (execute == null) throw new ArgumentNullException(nameof(execute));
             #endregion
 
             Log.Debug("Running STA thread");
@@ -120,7 +120,7 @@ namespace NanoByte.Common
         public static T RunSta<T>([NotNull, InstantHandle] Func<T> execute)
         {
             #region Sanity checks
-            if (execute == null) throw new ArgumentNullException("execute");
+            if (execute == null) throw new ArgumentNullException(nameof(execute));
             #endregion
 
             Log.Debug("Running STA thread");
