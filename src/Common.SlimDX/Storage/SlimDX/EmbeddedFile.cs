@@ -42,18 +42,18 @@ namespace NanoByte.Common.Storage.SlimDX
         /// The filename in the archive
         /// </summary>
         [NotNull]
-        public string Filename { get { return _filename; } }
+        public string Filename => _filename;
 
         /// <summary>
         /// The level of compression (0-9) to apply to this entry
         /// </summary>
-        public int CompressionLevel { get { return _compressionLevel; } }
+        public int CompressionLevel => _compressionLevel;
 
         /// <summary>
         /// The delegate to be called when the data is ready to be read/written to/form a stream
         /// </summary>
         [NotNull]
-        public Action<Stream> StreamDelegate { get { return _streamDelegate; } }
+        public Action<Stream> StreamDelegate => _streamDelegate;
         #endregion
 
         #region Constructor

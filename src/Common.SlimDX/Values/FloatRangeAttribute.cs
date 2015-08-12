@@ -38,14 +38,14 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// The minimum value the field or property may have.
         /// </summary>
-        public float Minimum { get { return _minimum; } }
+        public float Minimum => _minimum;
 
         private readonly float _maximum;
 
         /// <summary>
         /// The maximum value the field or property may have.
         /// </summary>
-        public float Maximum { get { return _maximum; } }
+        public float Maximum => _maximum;
 
         /// <summary>
         /// Creates a new float range attribute.

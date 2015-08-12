@@ -84,7 +84,7 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// Information about the current operating system.
         /// </summary>
-        public static OSInfo Current { get { return _current; } }
+        public static OSInfo Current => _current;
 
         private static OSInfo Load()
         {

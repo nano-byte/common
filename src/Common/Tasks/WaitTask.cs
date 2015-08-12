@@ -41,10 +41,10 @@ namespace NanoByte.Common.Tasks
         private readonly string _name;
 
         /// <inheritdoc/>
-        public override string Name { get { return _name; } }
+        public override string Name => _name;
 
         /// <inheritdoc/>
-        protected override bool UnitsByte { get { return false; } }
+        protected override bool UnitsByte => false;
 
         /// <summary>
         /// Creates a new handle-waiting task.

@@ -118,15 +118,9 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Text-box caret blink time in seconds.
         /// </summary>
-        public static float CaretBlinkTime
-        {
-            get
-            {
-                return WindowsUtils.IsWindows
-                    ? SafeNativeMethods.GetCaretBlinkTime() / 1000f
-                    : 0.5f; // Default to 0.5 seconds on non-Windows OSes
-            }
-        }
+        public static float CaretBlinkTime => WindowsUtils.IsWindows
+            ? SafeNativeMethods.GetCaretBlinkTime() / 1000f
+            : 0.5f;
 
         /// <summary>
         /// Prevents the mouse cursor from leaving a specific window.

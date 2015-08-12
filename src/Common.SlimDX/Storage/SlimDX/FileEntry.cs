@@ -64,7 +64,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// The type of file (e.g. Textures, Sounds, ...).
         /// </summary>
         /// <remarks>This is only used for file operations and not for sorting!</remarks>
-        public string FileType { get { return _type; } }
+        public string FileType => _type;
 
         private readonly string _name;
 

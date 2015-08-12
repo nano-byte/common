@@ -31,7 +31,7 @@ namespace NanoByte.Common.Values.Design
     internal class AttenuationConverter : ValueTypeConverter<Attenuation>
     {
         /// <inheritdoc/>
-        protected override int NoArguments { get { return 3; } }
+        protected override int NoArguments => 3;
 
         /// <inheritdoc/>
         protected override ConstructorInfo GetConstructor()

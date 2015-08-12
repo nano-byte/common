@@ -40,10 +40,10 @@ namespace NanoByte.Common.Net
     public abstract class DownloadTask : TaskBase
     {
         /// <inheritdoc/>
-        public override string Name { get { return string.Format(Resources.Downloading, Source); } }
+        public override string Name => string.Format(Resources.Downloading, Source);
 
         /// <inheritdoc/>
-        protected override bool UnitsByte { get { return true; } }
+        protected override bool UnitsByte => true;
 
         /// <summary>
         /// The URL the file is to be downloaded from.

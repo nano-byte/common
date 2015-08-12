@@ -36,7 +36,7 @@ namespace NanoByte.Common.Undo
         private T _oldValue;
 
         /// <inheritdoc/>
-        public object Value { get { return _newValue; } }
+        public object Value => _newValue;
 
         /// <summary>
         /// Creates a new value-setting command.

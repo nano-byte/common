@@ -37,10 +37,10 @@ namespace NanoByte.Common.Tasks
         protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>
-        public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
+        public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
         /// <inheritdoc/>
-        public ICredentialProvider CredentialProvider { get { return null; } }
+        public ICredentialProvider CredentialProvider => null;
 
         /// <inheritdoc/>
         public void Dispose()

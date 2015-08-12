@@ -32,7 +32,7 @@ namespace NanoByte.Common.Values.Design
     internal class Vector2RayConverter : ValueTypeConverter<Vector2Ray>
     {
         /// <inheritdoc/>
-        protected override int NoArguments { get { return 4; } }
+        protected override int NoArguments => 4;
 
         /// <inheritdoc/>
         protected override ConstructorInfo GetConstructor()

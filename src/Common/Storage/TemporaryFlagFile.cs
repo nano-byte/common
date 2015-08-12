@@ -40,7 +40,7 @@ namespace NanoByte.Common.Storage
         /// The fully qualified path of the flag file.
         /// </summary>
         [NotNull]
-        public new string Path { get { return System.IO.Path.Combine(base.Path, "flag"); } }
+        public new string Path => System.IO.Path.Combine(base.Path, "flag");
 
         [ContractAnnotation("null => null; notnull => notnull")]
         public static implicit operator string(TemporaryFlagFile dir)

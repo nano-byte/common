@@ -61,7 +61,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Indicates whether cancellation has been requested.
         /// </summary>
-        public bool IsCancellationRequested { get { return (_source != null) && _source.IsCancellationRequested; } }
+        public bool IsCancellationRequested => (_source != null) && _source.IsCancellationRequested;
 
         /// <summary>
         /// Throws an <see cref="OperationCanceledException"/> if cancellation has been requested.
@@ -75,7 +75,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Gets a wait handle that is signaled when cancellation has been requested.
         /// </summary>
-        public WaitHandle WaitHandle { get { return _source == null ? new ManualResetEvent(false) : _source.WaitHandle; } }
+        public WaitHandle WaitHandle => _source == null ? new ManualResetEvent(false) : _source.WaitHandle;
 
         /// <inheritdoc/>
         public override string ToString()

@@ -46,19 +46,19 @@ namespace NanoByte.Common
         /// <summary>
         /// The default value of the property.
         /// </summary>
-        public T DefaultValue { get { return _defaultValue; } }
+        public T DefaultValue => _defaultValue;
 
         private readonly bool _needsEncoding;
 
         /// <summary>
         /// <c>true</c> if <see cref="Value"/> is equal to <see cref="DefaultValue"/>.
         /// </summary>
-        public bool IsDefaultValue { get { return Equals(Value, DefaultValue); } }
+        public bool IsDefaultValue => Equals(Value, DefaultValue);
 
         /// <summary>
         /// Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.
         /// </summary>
-        public bool NeedsEncoding { get { return _needsEncoding; } }
+        public bool NeedsEncoding => _needsEncoding;
 
         /// <summary>
         /// Creates a property pointer.

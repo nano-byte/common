@@ -47,14 +47,14 @@ namespace NanoByte.Common
         /// <summary>
         /// A list of all file names in the arguments.
         /// </summary>
-        public IEnumerable<string> Files { get { return _files; } }
+        public IEnumerable<string> Files => _files;
 
         private readonly Dictionary<string, string> _commands = new Dictionary<string, string>();
 
         /// <summary>
         /// A list of all commands without leading slash or hyphen in the arguments.
         /// </summary>
-        public IEnumerable<string> Commands { get { return _commands.Keys; } }
+        public IEnumerable<string> Commands => _commands.Keys;
 
         /// <summary>
         /// Gets the options for a specific command in the arguments.
@@ -62,7 +62,7 @@ namespace NanoByte.Common
         /// <param name="command">The command to get the options for.</param>
         /// <returns>The options for <paramref name="command"/> if any; null otherwise.</returns>
         [CanBeNull]
-        public string this[[NotNull] string command] { get { return _commands[command]; } }
+        public string this[[NotNull] string command] => _commands[command];
         #endregion
 
         #region Constructor

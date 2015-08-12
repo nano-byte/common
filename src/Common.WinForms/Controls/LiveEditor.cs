@@ -197,12 +197,12 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Indicates whether <see cref="Undo"/> is currently available.
         /// </summary>
-        public bool EnableUndo { get { return TextEditor.EnableUndo; } }
+        public bool EnableUndo => TextEditor.EnableUndo;
 
         /// <summary>
         /// Indicates whether <see cref="Redo"/> is currently available.
         /// </summary>
-        public bool EnableRedo { get { return TextEditor.EnableRedo; } }
+        public bool EnableRedo => TextEditor.EnableRedo;
 
         /// <summary>
         /// Executes the undo method of the underlying text editor control.

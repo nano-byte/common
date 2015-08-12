@@ -39,7 +39,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// The name of the file type (e.g. XML, JavaScript, Lua).
         /// </summary>
-        public string FileType { get { return _fileType; } }
+        public string FileType => _fileType;
 
         /// <summary>
         /// Creates a new file type attribute.

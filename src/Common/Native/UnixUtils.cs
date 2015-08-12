@@ -44,17 +44,17 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
-        public static bool IsUnix { get { return Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128; } }
+        public static bool IsUnix => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128;
 
         /// <summary>
         /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
-        public static bool IsMacOSX { get { return IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework"); } }
+        public static bool IsMacOSX => IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework");
 
         /// <summary>
         /// <c>true</c> if there is an X Server running or the current operating system is MacOS X.
         /// </summary>
-        public static bool HasGui { get { return IsMacOSX || (IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))); } }
+        public static bool HasGui => IsMacOSX || (IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY")));
 
         /// <summary>
         /// The operating system name as reported by the "uname" system call.
@@ -361,7 +361,7 @@ namespace NanoByte.Common.Native
             {}
             #endregion
 
-            protected override string AppBinary { get { return "stat"; } }
+            protected override string AppBinary => "stat";
 
             protected override string HandleStderr(string line)
             {

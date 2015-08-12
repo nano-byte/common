@@ -44,7 +44,7 @@ namespace NanoByte.Common.Tasks
         private readonly string _name;
 
         /// <inheritdoc/>
-        public override string Name { get { return _name; } }
+        public override string Name => _name;
 
         /// <summary>The code to be executed by the task. Is given a callback to report progress in percent. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
         private readonly Action<PercentProgressCallback> _work;
@@ -53,10 +53,10 @@ namespace NanoByte.Common.Tasks
         private readonly Action _cancelationCallback;
 
         /// <inheritdoc/>
-        public override bool CanCancel { get { return (_cancelationCallback != null); } }
+        public override bool CanCancel => (_cancelationCallback != null);
 
         /// <inheritdoc/>
-        protected override bool UnitsByte { get { return false; } }
+        protected override bool UnitsByte => false;
 
         /// <summary>
         /// Creates a new simple task.

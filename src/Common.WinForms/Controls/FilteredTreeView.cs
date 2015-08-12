@@ -136,7 +136,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <remarks>Does NOT create a defensive copy. Take care to only add valid elements when modifying. Call <see cref="UpdateList"/> after changing.</remarks>
         /// <see cref="CheckBoxes"/>
-        public ICollection<T> CheckedEntries { get { return _checkedEntries; } }
+        public ICollection<T> CheckedEntries => _checkedEntries;
 
         private char _separator = '.';
 

@@ -39,16 +39,16 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// The maximum number of bytes the buffer can hold at any time.
         /// </summary>
-        public int BufferSize { get { return _buffer.Length; } }
+        public int BufferSize => _buffer.Length;
 
         /// <inheritdoc/>
-        public override bool CanRead { get { return true; } }
+        public override bool CanRead => true;
 
         /// <inheritdoc/>
-        public override bool CanWrite { get { return true; } }
+        public override bool CanWrite => true;
 
         /// <inheritdoc/>
-        public override bool CanSeek { get { return false; } }
+        public override bool CanSeek => false;
 
         private long _positionRead;
 
@@ -62,14 +62,14 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Indicates how many bytes have been written to this buffer so far in total.
         /// </summary>
-        public long PositionWrite { get { return _positionWrite; } }
+        public long PositionWrite => _positionWrite;
 
         private long _length = -1;
 
         /// <summary>
         /// The estimated number of bytes that will run through this buffer in total; -1 for unknown.
         /// </summary>
-        public override long Length { get { return _length; } }
+        public override long Length => _length;
 
         /// <summary>
         /// Indicates that this stream has been closed.

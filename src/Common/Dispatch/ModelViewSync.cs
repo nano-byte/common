@@ -96,7 +96,7 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// All View representations created by the synchronizer.
         /// </summary>
-        public IEnumerable<TView> Representations { get { return _modelToView.Values; } }
+        public IEnumerable<TView> Representations => _modelToView.Values;
 
         private void OnAdded(TModel element)
         {

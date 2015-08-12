@@ -35,52 +35,34 @@ namespace NanoByte.Common.Storage
         /// The home/profile directory of the current user.
         /// </summary>
         [PublicAPI, NotNull]
-        public static string HomeDir { get { return Environment.GetEnvironmentVariable(WindowsUtils.IsWindows ? "userprofile" : "HOME") ?? ""; } }
+        public static string HomeDir => Environment.GetEnvironmentVariable(WindowsUtils.IsWindows ? "userprofile" : "HOME") ?? "";
 
         /// <summary>
         /// The directory to store per-user settings (can roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%appdata%</c>, on Linux it usually is <c>~/.config</c>.</remarks>
         [PublicAPI, NotNull]
-        public static string UserConfigDir
-        {
-            get
-            {
-                return GetEnvironmentVariable("XDG_CONFIG_HOME", WindowsUtils.IsWindows
-                    ? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                    : Path.Combine(HomeDir, ".config"));
-            }
-        }
+        public static string UserConfigDir => GetEnvironmentVariable("XDG_CONFIG_HOME", WindowsUtils.IsWindows
+            ? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+            : Path.Combine(HomeDir, ".config"));
 
         /// <summary>
         /// The directory to store per-user data files (should not roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.local/share</c>.</remarks>
         [PublicAPI, NotNull]
-        public static string UserDataDir
-        {
-            get
-            {
-                return GetEnvironmentVariable("XDG_DATA_HOME", WindowsUtils.IsWindows
-                    ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
-                    : Path.Combine(HomeDir, ".local/share"));
-            }
-        }
+        public static string UserDataDir => GetEnvironmentVariable("XDG_DATA_HOME", WindowsUtils.IsWindows
+            ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+            : Path.Combine(HomeDir, ".local/share"));
 
         /// <summary>
         /// The directory to store per-user non-essential data (should not roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.cache</c>.</remarks>
         [PublicAPI, NotNull]
-        public static string UserCacheDir
-        {
-            get
-            {
-                return GetEnvironmentVariable("XDG_CACHE_HOME", WindowsUtils.IsWindows
-                    ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
-                    : Path.Combine(HomeDir, ".cache"));
-            }
-        }
+        public static string UserCacheDir => GetEnvironmentVariable("XDG_CACHE_HOME", WindowsUtils.IsWindows
+            ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+            : Path.Combine(HomeDir, ".cache"));
 
         /// <summary>
         /// The directories to store machine-wide settings.
@@ -88,15 +70,9 @@ namespace NanoByte.Common.Storage
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/etc/xdg</c>.</remarks>
         [PublicAPI, NotNull]
-        public static string SystemConfigDirs
-        {
-            get
-            {
-                return GetEnvironmentVariable("XDG_CONFIG_DIRS", WindowsUtils.IsWindows
-                    ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                    : "/etc/xdg");
-            }
-        }
+        public static string SystemConfigDirs => GetEnvironmentVariable("XDG_CONFIG_DIRS", WindowsUtils.IsWindows
+            ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            : "/etc/xdg");
 
         /// <summary>
         /// The directories to store machine-wide data files (should not roam across different machines).
@@ -104,30 +80,18 @@ namespace NanoByte.Common.Storage
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/usr/local/share:/usr/share</c>.</remarks>
         [PublicAPI, NotNull]
-        public static string SystemDataDirs
-        {
-            get
-            {
-                return GetEnvironmentVariable("XDG_DATA_DIRS", WindowsUtils.IsWindows
-                    ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                    : "/usr/local/share" + Path.PathSeparator + "/usr/share");
-            }
-        }
+        public static string SystemDataDirs => GetEnvironmentVariable("XDG_DATA_DIRS", WindowsUtils.IsWindows
+            ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            : "/usr/local/share" + Path.PathSeparator + "/usr/share");
 
         /// <summary>
         /// The directory to store machine-wide non-essential data.
         /// </summary>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it is <c>/var/cache</c>.</remarks>
         [PublicAPI, NotNull]
-        public static string SystemCacheDir
-        {
-            get
-            {
-                return WindowsUtils.IsWindows
-                    ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                    : "/var/cache";
-            }
-        }
+        public static string SystemCacheDir => WindowsUtils.IsWindows
+            ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            : "/var/cache";
 
         /// <summary>
         /// Returns a path for a cache directory (should not roam across different machines).

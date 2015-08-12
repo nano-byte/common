@@ -86,7 +86,7 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Indicates whether the currently entered text is a valid URI.
         /// </summary>
-        public bool IsValid { get { return ValidateUri(Text); } }
+        public bool IsValid => ValidateUri(Text);
         #endregion
 
         #region Constructor

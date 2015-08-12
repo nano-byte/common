@@ -43,14 +43,14 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// A collection containing the keys of the dictionary.
         /// </summary>
-        public IEnumerable<TKey> Keys { get { return _dictionary.Keys; } }
+        public IEnumerable<TKey> Keys => _dictionary.Keys;
 
         private HashSet<TValue> _values = new HashSet<TValue>();
 
         /// <summary>
         /// A collection containing the values in the dictionary.
         /// </summary>
-        public IEnumerable<TValue> Values { get { return _values; } }
+        public IEnumerable<TValue> Values => _values;
 
         /// <summary>
         /// Adds an element with the provided key and value to the dictionary.

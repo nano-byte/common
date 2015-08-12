@@ -40,7 +40,7 @@ namespace NanoByte.Common.Collections
         /// Gets the number of elements contained in the pool
         /// </summary>
         /// <returns>The number of elements contained in the pool</returns>
-        public int Count { get { return _count; } }
+        public int Count => _count;
 
         private T _firstElement;
 

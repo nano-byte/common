@@ -130,9 +130,9 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        private bool IsSplitLineVisible { get { return _showSplit && (State == PushButtonState.Hot || State == PushButtonState.Pressed || !Application.RenderWithVisualStyles); } }
+        private bool IsSplitLineVisible => _showSplit && (State == PushButtonState.Hot || State == PushButtonState.Pressed || !Application.RenderWithVisualStyles);
 
-        private Rectangle EffectiveDropDownRectangle { get { return _showSplit ? _dropDownRectangle : ClientRectangle; } }
+        private Rectangle EffectiveDropDownRectangle => _showSplit ? _dropDownRectangle : ClientRectangle;
 
         private PushButtonState State
         {

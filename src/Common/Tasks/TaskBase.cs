@@ -43,7 +43,7 @@ namespace NanoByte.Common.Tasks
         public object Tag { get; set; }
 
         /// <inheritdoc/>
-        public virtual bool CanCancel { get { return true; } }
+        public virtual bool CanCancel => true;
 
         protected TaskBase()
         {

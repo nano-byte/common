@@ -37,7 +37,7 @@ namespace NanoByte.Common.Undo
         private readonly T _newElement;
 
         /// <inheritdoc/>
-        public object Value { get { return _newElement; } }
+        public object Value => _newElement;
 
         /// <summary>
         /// Creates a new replace in list command.

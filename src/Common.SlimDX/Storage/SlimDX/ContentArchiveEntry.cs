@@ -34,14 +34,14 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// The archive containing the file.
         /// </summary>
-        public ZipFile ZipFile { get { return _zipFile; } }
+        public ZipFile ZipFile => _zipFile;
 
         private readonly ZipEntry _zipEntry;
 
         /// <summary>
         /// The actual content file.
         /// </summary>
-        public ZipEntry ZipEntry { get { return _zipEntry; } }
+        public ZipEntry ZipEntry => _zipEntry;
 
         /// <summary>
         /// Creates a new content file representation

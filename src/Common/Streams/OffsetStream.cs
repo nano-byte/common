@@ -52,16 +52,16 @@ namespace NanoByte.Common.Streams
         }
 
         /// <inheritdoc/>
-        public override bool CanRead { get { return _baseStream.CanRead; } }
+        public override bool CanRead => _baseStream.CanRead;
 
         /// <inheritdoc/>
-        public override bool CanWrite { get { return _baseStream.CanWrite; } }
+        public override bool CanWrite => _baseStream.CanWrite;
 
         /// <inheritdoc/>
-        public override bool CanSeek { get { return _baseStream.CanSeek; } }
+        public override bool CanSeek => _baseStream.CanSeek;
 
         /// <inheritdoc/>
-        public override long Length { get { return _baseStream.Length - _offset; } }
+        public override long Length => _baseStream.Length - _offset;
 
         /// <inheritdoc/>
         public override long Position { get { return _baseStream.Position - _offset; } set { _baseStream.Position = value + _offset; } }

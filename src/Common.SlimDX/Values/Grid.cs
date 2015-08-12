@@ -46,12 +46,12 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// The width of the grid (number of values along the X axis).
         /// </summary>
-        public int Width { get { return Data.GetLength(0); } }
+        public int Width => Data.GetLength(0);
 
         /// <summary>
         /// The height of the grid (number of values along the Y axis).
         /// </summary>
-        public int Height { get { return Data.GetLength(1); } }
+        public int Height => Data.GetLength(1);
 
         /// <summary>
         /// Creates a new empty grid.

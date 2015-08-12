@@ -38,7 +38,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// The current State of the task.
         /// </summary>
-        public TaskState State { get { return _state; } }
+        public TaskState State => _state;
 
         private readonly bool _unitsByte;
 
@@ -46,21 +46,21 @@ namespace NanoByte.Common.Tasks
         /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
         /// <c>false</c> if they are measured in generic units.
         /// </summary>
-        public bool UnitsByte { get { return _unitsByte; } }
+        public bool UnitsByte => _unitsByte;
 
         private readonly long _unitsProcessed;
 
         /// <summary>
         /// The number of units that have been processed so far.
         /// </summary>
-        public long UnitsProcessed { get { return _unitsProcessed; } }
+        public long UnitsProcessed => _unitsProcessed;
 
         private readonly long _unitsTotal;
 
         /// <summary>
         /// The total number of units that are to be processed; -1 for unknown.
         /// </summary>
-        public long UnitsTotal { get { return _unitsTotal; } }
+        public long UnitsTotal => _unitsTotal;
 
         /// <summary>
         /// Create a new progress snapshot.

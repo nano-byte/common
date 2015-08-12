@@ -32,7 +32,7 @@ namespace NanoByte.Common.Values.Design
     internal class DoublePlaneConverter : ValueTypeConverter<DoublePlane>
     {
         /// <inheritdoc/>
-        protected override int NoArguments { get { return 6; } }
+        protected override int NoArguments => 6;
 
         /// <inheritdoc/>
         protected override ConstructorInfo GetConstructor()

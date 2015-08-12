@@ -34,7 +34,7 @@ namespace NanoByte.Common.Undo
         private readonly T _oldElement, _newElement;
 
         /// <inheritdoc/>
-        public object Value { get { return _newElement; } }
+        public object Value => _newElement;
 
         /// <summary>
         /// Creates a new set in list command.

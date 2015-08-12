@@ -63,7 +63,7 @@ namespace NanoByte.Common.Info
         /// The <see cref="Name"/> and <see cref="Version"/> combined.
         /// </summary>
         [XmlIgnore]
-        public string NameVersion { get { return Name + " " + Version; } }
+        public string NameVersion => Name + " " + Version;
 
         /// <summary>
         /// The copyright information for the application.

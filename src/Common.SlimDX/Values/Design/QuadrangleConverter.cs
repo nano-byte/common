@@ -32,7 +32,7 @@ namespace NanoByte.Common.Values.Design
     internal class QuadrangleConverter : ValueTypeConverter<Quadrangle>
     {
         /// <inheritdoc/>
-        protected override int NoArguments { get { return 8; } }
+        protected override int NoArguments => 8;
 
         /// <inheritdoc/>
         protected override ConstructorInfo GetConstructor()

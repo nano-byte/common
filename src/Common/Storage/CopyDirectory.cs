@@ -37,10 +37,10 @@ namespace NanoByte.Common.Storage
     public class CopyDirectory : TaskBase
     {
         /// <inheritdoc/>
-        public override string Name { get { return Resources.CopyFiles; } }
+        public override string Name => Resources.CopyFiles;
 
         /// <inheritdoc/>
-        protected override bool UnitsByte { get { return true; } }
+        protected override bool UnitsByte => true;
 
         /// <summary>
         /// The path of source directory. Must exist!

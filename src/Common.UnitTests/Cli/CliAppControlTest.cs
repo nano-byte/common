@@ -42,7 +42,7 @@ namespace NanoByte.Common.Cli
 
         private class DummyControl : CliAppControl
         {
-            protected override string AppBinary { get { return WindowsUtils.IsWindows ? "help" : "ls"; } }
+            protected override string AppBinary => WindowsUtils.IsWindows ? "help" : "ls";
         }
     }
 }

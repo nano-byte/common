@@ -44,7 +44,7 @@ namespace NanoByte.Common.Undo
 
         #region Properties
         /// <inheritdoc/>
-        public object Value { get { return Element; } }
+        public object Value => Element;
         #endregion
 
         #region Constructor

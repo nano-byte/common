@@ -64,22 +64,22 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// The edge from <see cref="P1"/> to <see cref="P2"/>.
         /// </summary>
-        public Vector2Ray Edge1 { get { return new Vector2Ray(P1, P2 - P1); } }
+        public Vector2Ray Edge1 => new Vector2Ray(P1, P2 - P1);
 
         /// <summary>
         /// The edge from <see cref="P2"/> to <see cref="P3"/>.
         /// </summary>
-        public Vector2Ray Edge2 { get { return new Vector2Ray(P2, P3 - P2); } }
+        public Vector2Ray Edge2 => new Vector2Ray(P2, P3 - P2);
 
         /// <summary>
         /// The edge from <see cref="P3"/> to <see cref="P4"/>.
         /// </summary>
-        public Vector2Ray Edge3 { get { return new Vector2Ray(P3, P4 - P3); } }
+        public Vector2Ray Edge3 => new Vector2Ray(P3, P4 - P3);
 
         /// <summary>
         /// The edge from <see cref="P4"/> to <see cref="P1"/>.
         /// </summary>
-        public Vector2Ray Edge4 { get { return new Vector2Ray(P4, P1 - P4); } }
+        public Vector2Ray Edge4 => new Vector2Ray(P4, P1 - P4);
         #endregion
 
         #region Constructor

@@ -49,7 +49,7 @@ namespace NanoByte.Common.Tasks
         protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>
-        public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
+        public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
         private ICredentialProvider _credentialProvider;
 

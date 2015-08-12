@@ -225,7 +225,7 @@ namespace NanoByte.Common.StructureEditor
         private object _editingTarget;
         private object _xmlTarget;
 
-        private Node SelectedNode { get { return (Node)treeView.SelectedNode; } }
+        private Node SelectedNode => (Node)treeView.SelectedNode;
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {

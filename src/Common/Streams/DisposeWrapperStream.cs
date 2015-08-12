@@ -66,16 +66,16 @@ namespace NanoByte.Common.Streams
 
         #region Pass-through
         /// <inheritdoc/>
-        public override bool CanRead { get { return _baseStream.CanRead; } }
+        public override bool CanRead => _baseStream.CanRead;
 
         /// <inheritdoc/>
-        public override bool CanSeek { get { return _baseStream.CanSeek; } }
+        public override bool CanSeek => _baseStream.CanSeek;
 
         /// <inheritdoc/>
-        public override bool CanWrite { get { return _baseStream.CanWrite; } }
+        public override bool CanWrite => _baseStream.CanWrite;
 
         /// <inheritdoc/>
-        public override long Length { get { return _baseStream.Length; } }
+        public override long Length => _baseStream.Length;
 
         /// <inheritdoc/>
         public override long Position { get { return _baseStream.Position; } set { _baseStream.Position = value; } }
