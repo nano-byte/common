@@ -66,7 +66,7 @@ namespace NanoByte.Common
                         throw new OperationCanceledException();
 
                     case WindowsUtils.Win32ErrorRequestedOperationRequiresElevation:
-                        throw new NotAdminException(string.Format("Launching '{0}' requires Administrator privileges.", startInfo.FileName));
+                        throw new NotAdminException($"Launching '{startInfo.FileName}' requires Administrator privileges.");
 
                     default:
                         throw new IOException(ex.Message, ex);

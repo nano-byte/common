@@ -228,7 +228,7 @@ namespace NanoByte.Common.Streams
 
             var assembly = Assembly.GetAssembly(type);
             var stream = assembly.GetManifestResourceStream(type, name);
-            if (stream == null) throw new ArgumentException(string.Format("Embedded resource '{0}' not found.", name), nameof(name));
+            if (stream == null) throw new ArgumentException($"Embedded resource '{name}' not found.", nameof(name));
             return stream;
         }
 
