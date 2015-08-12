@@ -133,6 +133,7 @@ namespace NanoByte.Common.Cli
         /// A hook method for writing to the application's stdin right after startup.
         /// </summary>
         /// <param name="writer">The stream writer providing access to stdin.</param>
+        [PublicAPI]
         protected virtual void InitStdin([NotNull] StreamWriter writer)
         {}
 

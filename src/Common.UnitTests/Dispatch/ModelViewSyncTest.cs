@@ -51,7 +51,7 @@ namespace NanoByte.Common.Dispatch
 
             public void Rebuild()
             {
-                ChangedRebuild(this);
+                if (ChangedRebuild != null) ChangedRebuild(this);
             }
 
             public event Action<ModelBase> Changed;

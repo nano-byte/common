@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using NanoByte.Common.Tasks;
 using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
@@ -29,6 +30,7 @@ namespace NanoByte.Common.Native
 {
     partial class WindowsRestartManager
     {
+        [SuppressMessage("ReSharper", "InconsistentNaming"), SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
         private static class NativeMethods
         {
             [DllImport("rstrtmgr", CharSet = CharSet.Unicode)]

@@ -55,7 +55,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// <see langword="true"/> to preserve the modification times for directories as well; <see langword="false"/> to preserve only the file modification times.
         /// </summary>
-        public bool PreserveDirectoryTimestamps { get; set; }
+        public bool PreserveDirectoryTimestamps { get; private set; }
 
         /// <summary>
         /// Overwrite exisiting files and directories at the <see cref="DestinationPath"/>. This will even replace read-only files!
