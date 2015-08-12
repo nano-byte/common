@@ -36,7 +36,7 @@ namespace NanoByte.Common.Storage
         /// The fully qualified path of the temporary file.
         /// </summary>
         [NotNull]
-        public string Path { get; private set; }
+        public string Path { get; }
 
         [ContractAnnotation("null => null; notnull => notnull")]
         public static implicit operator string(TemporaryFile file)

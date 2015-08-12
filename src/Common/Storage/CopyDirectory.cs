@@ -45,22 +45,22 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The path of source directory. Must exist!
         /// </summary>
-        public string SourcePath { get; private set; }
+        public string SourcePath { get; }
 
         /// <summary>
         /// The path of the target directory. May exist. Must be empty if <see cref="Overwrite"/> is <c>false</c>.
         /// </summary>
-        public string DestinationPath { get; private set; }
+        public string DestinationPath { get; }
 
         /// <summary>
         /// <c>true</c> to preserve the modification times for directories as well; <c>false</c> to preserve only the file modification times.
         /// </summary>
-        public bool PreserveDirectoryTimestamps { get; private set; }
+        public bool PreserveDirectoryTimestamps { get; }
 
         /// <summary>
         /// Overwrite exisiting files and directories at the <see cref="DestinationPath"/>. This will even replace read-only files!
         /// </summary>
-        public bool Overwrite { get; private set; }
+        public bool Overwrite { get; }
 
         /// <summary>
         /// Creates a new directory copy task.

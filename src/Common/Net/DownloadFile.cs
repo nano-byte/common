@@ -37,7 +37,7 @@ namespace NanoByte.Common.Net
         /// </summary>
         [Description("The local path to save the file to.")]
         [NotNull]
-        public string Target { get; private set; }
+        public string Target { get; }
 
         /// <summary>
         /// Creates a new download task.

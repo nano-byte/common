@@ -41,46 +41,44 @@ namespace NanoByte.Common.Values
     [StructLayout(LayoutKind.Sequential)]
     public struct XColor
     {
-        private byte _a, _r, _g, _b;
+        [XmlAttribute]
+        public byte A { get; set; }
 
         [XmlAttribute]
-        public byte A { get { return _a; } set { _a = value; } }
+        public byte R { get; set; }
 
         [XmlAttribute]
-        public byte R { get { return _r; } set { _r = value; } }
+        public byte G { get; set; }
 
         [XmlAttribute]
-        public byte G { get { return _g; } set { _g = value; } }
-
-        [XmlAttribute]
-        public byte B { get { return _b; } set { _b = value; } }
+        public byte B { get; set; }
 
         [XmlIgnore]
-        public float Red { get { return (float)_r / 255; } set { _r = (byte)(value * 255); } }
+        public float Red { get { return (float)R / 255; } set { R = (byte)(value * 255); } }
 
         [XmlIgnore]
-        public float Green { get { return (float)_g / 255; } set { _g = (byte)(value * 255); } }
+        public float Green { get { return (float)G / 255; } set { G = (byte)(value * 255); } }
 
         [XmlIgnore]
-        public float Blue { get { return (float)_b / 255; } set { _b = (byte)(value * 255); } }
+        public float Blue { get { return (float)B / 255; } set { B = (byte)(value * 255); } }
 
         [XmlIgnore]
-        public float Alpha { get { return (float)_a / 255; } set { _a = (byte)(value * 255); } }
+        public float Alpha { get { return (float)A / 255; } set { A = (byte)(value * 255); } }
 
         public XColor(float red, float green, float blue, float alpha)
         {
-            _r = (byte)(red * 255);
-            _g = (byte)(green * 255);
-            _b = (byte)(blue * 255);
-            _a = (byte)(alpha * 255);
+            R = (byte)(red * 255);
+            G = (byte)(green * 255);
+            B = (byte)(blue * 255);
+            A = (byte)(alpha * 255);
         }
 
         public XColor(byte a, byte r, byte g, byte b)
         {
-            _a = a;
-            _r = r;
-            _g = g;
-            _b = b;
+            A = a;
+            R = r;
+            G = g;
+            B = b;
         }
 
         #region Conversion

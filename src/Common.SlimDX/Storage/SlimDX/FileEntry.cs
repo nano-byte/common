@@ -58,13 +58,11 @@ namespace NanoByte.Common.Storage.SlimDX
     public sealed class FileEntry : INamed<FileEntry>, IHighlightColor, IContextMenu, IEquatable<FileEntry>
     {
         #region Properties
-        private readonly string _type;
-
         /// <summary>
         /// The type of file (e.g. Textures, Sounds, ...).
         /// </summary>
         /// <remarks>This is only used for file operations and not for sorting!</remarks>
-        public string FileType => _type;
+        public string FileType { get; }
 
         private readonly string _name;
 
@@ -121,7 +119,7 @@ namespace NanoByte.Common.Storage.SlimDX
             #endregion
 
             _name = name;
-            _type = type;
+            FileType = type;
             EntryType = entryType;
         }
         #endregion
@@ -147,7 +145,7 @@ namespace NanoByte.Common.Storage.SlimDX
 
                 try
                 {
-                    ContentManager.DeleteModFile(_type, _name);
+                    ContentManager.DeleteModFile(FileType, _name);
                 }
                     #region Error handling
                 catch (IOException)

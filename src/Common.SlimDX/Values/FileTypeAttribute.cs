@@ -34,12 +34,10 @@ namespace NanoByte.Common.Values
     [PublicAPI]
     public sealed class FileTypeAttribute : Attribute
     {
-        private readonly string _fileType;
-
         /// <summary>
         /// The name of the file type (e.g. XML, JavaScript, Lua).
         /// </summary>
-        public string FileType => _fileType;
+        public string FileType { get; }
 
         /// <summary>
         /// Creates a new file type attribute.
@@ -51,7 +49,7 @@ namespace NanoByte.Common.Values
             if (string.IsNullOrEmpty(fileType)) throw new ArgumentNullException(nameof(fileType));
             #endregion
 
-            _fileType = fileType;
+            FileType = fileType;
         }
     }
 }

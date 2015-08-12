@@ -38,10 +38,8 @@ namespace NanoByte.Common.Tasks
         /// <summary>The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely</summary>
         private readonly int _millisecondsTimeout;
 
-        private readonly string _name;
-
         /// <inheritdoc/>
-        public override string Name => _name;
+        public override string Name { get; }
 
         /// <inheritdoc/>
         protected override bool UnitsByte => false;
@@ -59,7 +57,7 @@ namespace NanoByte.Common.Tasks
             if (waitHandle == null) throw new ArgumentNullException(nameof(waitHandle));
             #endregion
 
-            _name = name;
+            Name = name;
             _waitHandle = waitHandle;
             _millisecondsTimeout = millisecondsTimeout;
         }

@@ -34,13 +34,12 @@ namespace NanoByte.Common.Collections
     /// <typeparam name="T">The type of items to store in the pool.</typeparam>
     public sealed class Pool<T> : IPoolable<T> where T : class, IPoolable<T>
     {
-        private int _count;
 
         /// <summary>
         /// Gets the number of elements contained in the pool
         /// </summary>
         /// <returns>The number of elements contained in the pool</returns>
-        public int Count => _count;
+        public int Count { get; private set; }
 
         private T _firstElement;
 
@@ -86,7 +85,7 @@ namespace NanoByte.Common.Collections
             item.NextElement = _firstElement;
             _firstElement = item;
 
-            _count++;
+            Count++;
         }
         #endregion
 
@@ -114,7 +113,7 @@ namespace NanoByte.Common.Collections
                 {
                     // Pull up the next entry
                     previousElement.NextElement = currentElement.NextElement;
-                    _count--;
+                    Count--;
 
                     // Remove linkage from item and exit
                     item.NextElement = null;
@@ -136,7 +135,7 @@ namespace NanoByte.Common.Collections
         public void Clear()
         {
             _firstElement = null;
-            _count = 0;
+            Count = 0;
         }
         #endregion
 
@@ -230,7 +229,7 @@ namespace NanoByte.Common.Collections
                 {
                     // Pull up the next entry
                     previousElement.NextElement = nextElement;
-                    _count--;
+                    Count--;
 
                     // Move on to the next element (previous handle stays the same)
                     currentElement = nextElement;
@@ -275,7 +274,7 @@ namespace NanoByte.Common.Collections
                 {
                     // Pull up the next entry
                     previousElement.NextElement = nextElement;
-                    _count--;
+                    Count--;
 
                     // Exit after first removal
                     return;

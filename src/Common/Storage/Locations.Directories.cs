@@ -121,8 +121,8 @@ namespace NanoByte.Common.Storage
                 }
                 else
                 {
-                    appPath = _isPortable
-                        ? Path.Combine(_portableBase, "cache")
+                    appPath = IsPortable
+                        ? Path.Combine(PortableBase, "cache")
                         : Path.Combine(UserCacheDir, appName);
                 }
             }

@@ -49,7 +49,7 @@ namespace NanoByte.Common.Net
         /// The URL under which the server root can be reached. Usually you should use <see cref="FileUri"/> instead.
         /// </summary>
         [NotNull]
-        public Uri ServerUri { get; private set; }
+        public Uri ServerUri { get; }
 
         /// <summary>
         /// The complete URL under which the server provides its file.

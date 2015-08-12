@@ -41,25 +41,25 @@ namespace NanoByte.Common.Values
         /// The coordinates of the first point; counter-clockwise ordering recommended.
         /// </summary>
         [Description("The coordinates of the first point; counter-clockwise ordering recommended.")]
-        public Vector2 P1 { get; set; }
+        public Vector2 P1 { get; }
 
         /// <summary>
         /// The coordinates of the second point; counter-clockwise ordering recommended.
         /// </summary>
         [Description("The coordinates of the second point; counter-clockwise ordering recommended.")]
-        public Vector2 P2 { get; set; }
+        public Vector2 P2 { get; }
 
         /// <summary>
         /// The coordinates of the third point; counter-clockwise ordering recommended.
         /// </summary>
         [Description("The coordinates of the third point; counter-clockwise ordering recommended.")]
-        public Vector2 P3 { get; set; }
+        public Vector2 P3 { get; }
 
         /// <summary>
         /// The coordinates of the fourth point; counter-clockwise ordering recommended.
         /// </summary>
         [Description("The coordinates of the fourth point; counter-clockwise ordering recommended.")]
-        public Vector2 P4 { get; set; }
+        public Vector2 P4 { get; }
 
         /// <summary>
         /// The edge from <see cref="P1"/> to <see cref="P2"/>.

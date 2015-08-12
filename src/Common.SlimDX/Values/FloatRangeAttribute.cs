@@ -33,19 +33,15 @@ namespace NanoByte.Common.Values
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public sealed class FloatRangeAttribute : Attribute
     {
-        private readonly float _minimum;
-
         /// <summary>
         /// The minimum value the field or property may have.
         /// </summary>
-        public float Minimum => _minimum;
-
-        private readonly float _maximum;
+        public float Minimum { get; }
 
         /// <summary>
         /// The maximum value the field or property may have.
         /// </summary>
-        public float Maximum => _maximum;
+        public float Maximum { get; }
 
         /// <summary>
         /// Creates a new float range attribute.
@@ -58,8 +54,8 @@ namespace NanoByte.Common.Values
             if (minimum > maximum) throw new ArgumentException(Resources.MinLargerMax, nameof(minimum));
             #endregion
 
-            _minimum = minimum;
-            _maximum = maximum;
+            Minimum = minimum;
+            Maximum = maximum;
         }
     }
 }

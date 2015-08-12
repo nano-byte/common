@@ -33,34 +33,26 @@ namespace NanoByte.Common.Tasks
     [Serializable]
     public struct TaskSnapshot
     {
-        private readonly TaskState _state;
-
         /// <summary>
         /// The current State of the task.
         /// </summary>
-        public TaskState State => _state;
-
-        private readonly bool _unitsByte;
+        public TaskState State { get; }
 
         /// <summary>
         /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
         /// <c>false</c> if they are measured in generic units.
         /// </summary>
-        public bool UnitsByte => _unitsByte;
-
-        private readonly long _unitsProcessed;
+        public bool UnitsByte { get; }
 
         /// <summary>
         /// The number of units that have been processed so far.
         /// </summary>
-        public long UnitsProcessed => _unitsProcessed;
-
-        private readonly long _unitsTotal;
+        public long UnitsProcessed { get; }
 
         /// <summary>
         /// The total number of units that are to be processed; -1 for unknown.
         /// </summary>
-        public long UnitsTotal => _unitsTotal;
+        public long UnitsTotal { get; }
 
         /// <summary>
         /// Create a new progress snapshot.
@@ -71,10 +63,10 @@ namespace NanoByte.Common.Tasks
         /// <param name="unitsTotal">The total number of units that are to be processed; -1 for unknown.</param>
         public TaskSnapshot(TaskState state, bool unitsByte = false, long unitsProcessed = 0, long unitsTotal = -1)
         {
-            _state = state;
-            _unitsByte = unitsByte;
-            _unitsProcessed = unitsProcessed;
-            _unitsTotal = unitsTotal;
+            State = state;
+            UnitsByte = unitsByte;
+            UnitsProcessed = unitsProcessed;
+            UnitsTotal = unitsTotal;
         }
 
         /// <summary>
@@ -91,7 +83,7 @@ namespace NanoByte.Common.Tasks
                     case 0:
                         return 1;
                     default:
-                        return _unitsProcessed / (double)_unitsTotal;
+                        return UnitsProcessed / (double)UnitsTotal;
                 }
             }
         }

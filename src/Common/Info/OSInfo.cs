@@ -79,12 +79,10 @@ namespace NanoByte.Common.Info
         }
 
         #region Static
-        private static readonly OSInfo _current = Load();
-
         /// <summary>
         /// Information about the current operating system.
         /// </summary>
-        public static OSInfo Current => _current;
+        public static OSInfo Current { get; } = Load();
 
         private static OSInfo Load()
         {

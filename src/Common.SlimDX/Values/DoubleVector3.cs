@@ -39,25 +39,23 @@ namespace NanoByte.Common.Values
     public struct DoubleVector3 : IEquatable<DoubleVector3>
     {
         #region Properties
-        private double _x, _y, _z;
-
         /// <summary>
         /// Gets or sets the X component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the X component of the vector.")]
-        public double X { get { return _x; } set { _x = value; } }
+        public double X { get; set; }
 
         /// <summary>
         /// Gets or sets the Y component of the vector. 
         /// </summary>
         [XmlAttribute, Description("Gets or sets the Y component of the vector.")]
-        public double Y { get { return _y; } set { _y = value; } }
+        public double Y { get; set; }
 
         /// <summary>
         /// Gets or sets the Z component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the Z component of the vector.")]
-        public double Z { get { return _z; } set { _z = value; } }
+        public double Z { get; set; }
         #endregion
 
         #region Constructor
@@ -69,9 +67,9 @@ namespace NanoByte.Common.Values
         /// <param name="z">The Z component.</param>
         public DoubleVector3(double x, double y, double z)
         {
-            _x = x;
-            _y = y;
-            _z = z;
+            X = x;
+            Y = y;
+            Z = z;
         }
         #endregion
 
@@ -107,13 +105,13 @@ namespace NanoByte.Common.Values
         /// <summary>Add <see cref="DoubleVector3"/> to <see cref="DoubleVector3"/></summary>
         public static DoubleVector3 operator +(DoubleVector3 vector1, DoubleVector3 vector2)
         {
-            return new DoubleVector3(vector1._x + vector2._x, vector1._y + vector2._y, vector1._z + vector2._z);
+            return new DoubleVector3(vector1.X + vector2.X, vector1.Y + vector2.Y, vector1.Z + vector2.Z);
         }
 
         /// <summary>Subtract <see cref="DoubleVector3"/> from <see cref="DoubleVector3"/></summary>
         public static DoubleVector3 operator -(DoubleVector3 vector1, DoubleVector3 vector2)
         {
-            return new DoubleVector3(vector1._x - vector2._x, vector1._y - vector2._y, vector1._z - vector2._z);
+            return new DoubleVector3(vector1.X - vector2.X, vector1.Y - vector2.Y, vector1.Z - vector2.Z);
         }
 
         /// <summary>
@@ -134,9 +132,9 @@ namespace NanoByte.Common.Values
         public Vector3 ApplyOffset(DoubleVector3 offset)
         {
             return new Vector3(
-                (float)(_x - offset._x),
-                (float)(_y - offset._y),
-                (float)(_z - offset._z));
+                (float)(X - offset.X),
+                (float)(Y - offset.Y),
+                (float)(Z - offset.Z));
         }
         #endregion
 
@@ -145,28 +143,28 @@ namespace NanoByte.Common.Values
         public static DoubleVector3 operator *(DoubleVector3 vector, double scalar)
         {
             var decScalar = scalar;
-            return new DoubleVector3(vector._x * decScalar, vector._y * decScalar, vector._z * decScalar);
+            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
         }
 
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="double"/></summary>
         public static DoubleVector3 operator *(double scalar, DoubleVector3 vector)
         {
             var decScalar = scalar;
-            return new DoubleVector3(vector._x * decScalar, vector._y * decScalar, vector._z * decScalar);
+            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
         }
 
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="float"/></summary>
         public static DoubleVector3 operator *(float scalar, DoubleVector3 vector)
         {
             var decScalar = scalar;
-            return new DoubleVector3(vector._x * decScalar, vector._y * decScalar, vector._z * decScalar);
+            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
         }
 
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="float"/></summary>
         public static DoubleVector3 operator *(DoubleVector3 vector, float scalar)
         {
             var decScalar = scalar;
-            return new DoubleVector3(vector._x * decScalar, vector._y * decScalar, vector._z * decScalar);
+            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
         }
         #endregion
 
@@ -188,7 +186,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         public double Length()
         {
-            return Math.Sqrt(_x * _x + _y * _y + _z * _z);
+            return Math.Sqrt(X * X + Y * Y + Z * Z);
         }
         #endregion
 
@@ -220,7 +218,7 @@ namespace NanoByte.Common.Values
         /// <summary>Convert <see cref="DoubleVector3"/> into <see cref="Vector3"/></summary>
         public static explicit operator Vector3(DoubleVector3 vector)
         {
-            return new Vector3((float)vector._x, (float)vector._y, (float)vector._z);
+            return new Vector3((float)vector.X, (float)vector.Y, (float)vector.Z);
         }
         #endregion
 

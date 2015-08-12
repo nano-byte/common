@@ -40,10 +40,8 @@ namespace NanoByte.Common.Tasks
         /// <summary>The code to be executed once per element in <see cref="_target"/>. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
         private readonly Action<T> _work;
 
-        private readonly string _name;
-
         /// <inheritdoc/>
-        public override string Name => _name;
+        public override string Name { get; }
 
         /// <inheritdoc/>
         protected override bool UnitsByte => false;
@@ -62,7 +60,7 @@ namespace NanoByte.Common.Tasks
             if (work == null) throw new ArgumentNullException(nameof(work));
             #endregion
 
-            _name = name;
+            Name = name;
             _work = work;
             _target = target;
 

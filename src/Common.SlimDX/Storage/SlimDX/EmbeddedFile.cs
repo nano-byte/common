@@ -32,9 +32,6 @@ namespace NanoByte.Common.Storage.SlimDX
     public struct EmbeddedFile
     {
         #region Variables
-        private readonly string _filename;
-        private readonly int _compressionLevel;
-        private readonly Action<Stream> _streamDelegate;
         #endregion
 
         #region Properties
@@ -42,18 +39,18 @@ namespace NanoByte.Common.Storage.SlimDX
         /// The filename in the archive
         /// </summary>
         [NotNull]
-        public string Filename => _filename;
+        public string Filename { get; }
 
         /// <summary>
         /// The level of compression (0-9) to apply to this entry
         /// </summary>
-        public int CompressionLevel => _compressionLevel;
+        public int CompressionLevel { get; }
 
         /// <summary>
         /// The delegate to be called when the data is ready to be read/written to/form a stream
         /// </summary>
         [NotNull]
-        public Action<Stream> StreamDelegate => _streamDelegate;
+        public Action<Stream> StreamDelegate { get; }
         #endregion
 
         #region Constructor
@@ -69,9 +66,9 @@ namespace NanoByte.Common.Storage.SlimDX
             if (readDelegate == null) throw new ArgumentNullException(nameof(readDelegate));
             #endregion
 
-            _filename = filename;
-            _compressionLevel = 0;
-            _streamDelegate = readDelegate;
+            Filename = filename;
+            CompressionLevel = 0;
+            StreamDelegate = readDelegate;
         }
 
         /// <summary>
@@ -87,9 +84,9 @@ namespace NanoByte.Common.Storage.SlimDX
             if (writeDelegate == null) throw new ArgumentNullException(nameof(writeDelegate));
             #endregion
 
-            _filename = filename;
-            _compressionLevel = compressionLevel;
-            _streamDelegate = writeDelegate;
+            Filename = filename;
+            CompressionLevel = compressionLevel;
+            StreamDelegate = writeDelegate;
         }
         #endregion
     }

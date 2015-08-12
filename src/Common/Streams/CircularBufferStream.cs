@@ -57,12 +57,10 @@ namespace NanoByte.Common.Streams
         /// </summary>
         public override long Position { get { return _positionRead; } set { throw new NotSupportedException(); } }
 
-        private long _positionWrite;
-
         /// <summary>
         /// Indicates how many bytes have been written to this buffer so far in total.
         /// </summary>
-        public long PositionWrite => _positionWrite;
+        public long PositionWrite { get; private set; }
 
         private long _length = -1;
 
@@ -230,7 +228,7 @@ namespace NanoByte.Common.Streams
 
                     // Update counters
                     bytesCopied += bytesToCopy;
-                    _positionWrite += bytesToCopy;
+                    PositionWrite += bytesToCopy;
                     _dataLength += bytesToCopy;
 
                     // Start blocking when buffer becomes full

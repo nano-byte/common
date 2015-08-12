@@ -97,7 +97,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// The maximum number of elements; 0 for no limit.
         /// </summary>
-        public int MaxElements { get; private set; }
+        public int MaxElements { get; }
         #endregion
 
         #region Constructor

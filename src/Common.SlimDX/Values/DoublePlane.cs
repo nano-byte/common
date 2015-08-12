@@ -38,7 +38,7 @@ namespace NanoByte.Common.Values
         /// A point that lies along the plane.
         /// </summary>
         [Description("A point that lies along the plane.")]
-        public DoubleVector3 Point { get; set; }
+        public DoubleVector3 Point { get; }
 
         private Vector3 _normal;
 

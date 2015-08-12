@@ -38,7 +38,7 @@ namespace NanoByte.Common.Values
         /// Specifies the location of the ray's origin.
         /// </summary>
         [Description("Specifies the location of the ray's origin.")]
-        public Vector2 Position { get; set; }
+        public Vector2 Position { get; }
 
         private Vector2 _direction;
 

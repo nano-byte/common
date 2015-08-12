@@ -33,10 +33,8 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public sealed class SimpleTask : TaskBase
     {
-        private readonly string _name;
-
         /// <inheritdoc/>
-        public override string Name => _name;
+        public override string Name { get; }
 
         /// <summary>The code to be executed by the task. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
         private readonly Action _work;
@@ -63,7 +61,7 @@ namespace NanoByte.Common.Tasks
             if (work == null) throw new ArgumentNullException(nameof(work));
             #endregion
 
-            _name = name;
+            Name = name;
             _work = work;
             _cancelationCallback = cancellationCallback;
         }

@@ -47,19 +47,19 @@ namespace NanoByte.Common.Values
         /// A constant factor multiplied with the color.
         /// </summary>
         [XmlAttribute, Description("A constant factor multiplied with the color.")]
-        public float Constant { get; set; }
+        public float Constant { get; }
 
         /// <summary>
         /// A constant factor multiplied with the color and the inverse distance.
         /// </summary>
         [XmlAttribute, Description("A constant factor multiplied with the color and the inverse distance.")]
-        public float Linear { get; set; }
+        public float Linear { get; }
 
         /// <summary>
         /// A constant factor multiplied with the color and the inverse distance squared.
         /// </summary>
         [XmlAttribute, Description("A constant factor multiplied with the color and the inverse distance squared.")]
-        public float Quadratic { get; set; }
+        public float Quadratic { get; }
 
         /// <summary>
         /// Creates a new attenuation structure

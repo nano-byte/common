@@ -34,31 +34,29 @@ namespace NanoByte.Common.Values
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteVector4 : IEquatable<ByteVector4>
     {
-        private byte _x, _y, _z, _w;
-
         /// <summary>
         /// Gets or sets the X component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the X component of the vector.")]
-        public byte X { get { return _x; } set { _x = value; } }
+        public byte X { get; set; }
 
         /// <summary>
         /// Gets or sets the Y component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the Y component of the vector.")]
-        public byte Y { get { return _y; } set { _y = value; } }
+        public byte Y { get; set; }
 
         /// <summary>
         /// Gets or sets the Z component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the Z component of the vector.")]
-        public byte Z { get { return _z; } set { _z = value; } }
+        public byte Z { get; set; }
 
         /// <summary>
         /// Gets or sets the W component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the W component of the vector.")]
-        public byte W { get { return _w; } set { _w = value; } }
+        public byte W { get; set; }
 
         /// <summary>
         /// Creates a new vector.
@@ -69,10 +67,10 @@ namespace NanoByte.Common.Values
         /// <param name="w">The W component.</param>
         public ByteVector4(byte x, byte y, byte z, byte w)
         {
-            _x = x;
-            _y = y;
-            _z = z;
-            _w = w;
+            X = x;
+            Y = y;
+            Z = z;
+            W = w;
         }
 
         #region Conversion

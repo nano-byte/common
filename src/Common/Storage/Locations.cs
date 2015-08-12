@@ -70,8 +70,6 @@ namespace NanoByte.Common.Storage
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
         public const string PortableFlagName = "_portable";
 
-        private static bool _isPortable = File.Exists(Path.Combine(InstallBase, PortableFlagName));
-
         /// <summary>
         /// Indicates whether the application is currently operating in portable mode.
         /// </summary>
@@ -79,15 +77,13 @@ namespace NanoByte.Common.Storage
         ///   <para>Portable mode is activated by placing a file named <see cref="PortableFlagName"/> in <see cref="InstallBase"/>.</para>
         ///   <para>When portable mode is active files are stored and loaded from <see cref="PortableBase"/> instead of the user profile and sysem directories.</para>
         /// </remarks>
-        public static bool IsPortable { get { return _isPortable; } set { _isPortable = value; } }
-
-        private static string _portableBase = InstallBase;
+        public static bool IsPortable { get; set; } = File.Exists(Path.Combine(InstallBase, PortableFlagName));
 
         /// <summary>
         /// The directory used for storing files if <see cref="IsPortable"/> is <c>true</c>. Defaults to <see cref="InstallBase"/>.
         /// </summary>
         [PublicAPI, NotNull]
-        public static string PortableBase { get { return _portableBase; } set { _portableBase = value; } }
+        public static string PortableBase { get; set; } = InstallBase;
 
         /// <summary>
         /// Returns the value of an environment variable or a default value if it isn't set.

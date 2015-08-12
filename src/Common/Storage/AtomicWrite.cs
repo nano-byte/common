@@ -43,13 +43,13 @@ namespace NanoByte.Common.Storage
         /// The file path of the final destination.
         /// </summary>
         [NotNull]
-        public string DestinationPath { get; private set; }
+        public string DestinationPath { get; }
 
         /// <summary>
         /// The temporary file path to write to.
         /// </summary>
         [NotNull]
-        public string WritePath { get; private set; }
+        public string WritePath { get; }
 
         /// <summary>
         /// <c>true</c> if <see cref="Commit"/> has been called.

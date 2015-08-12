@@ -38,7 +38,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The <see cref="XmlQualifiedName"/>.
         /// </summary>
-        public XmlQualifiedName QualifiedName { get; private set; }
+        public XmlQualifiedName QualifiedName { get; }
 
         /// <summary>
         /// Specified a <see cref="XmlQualifiedName"/> (namespace short-name) for <see cref="XmlStorage"/> to use.

@@ -41,10 +41,8 @@ namespace NanoByte.Common.Tasks
     [CLSCompliant(false)]
     public sealed class SimplePercentTask : TaskBase
     {
-        private readonly string _name;
-
         /// <inheritdoc/>
-        public override string Name => _name;
+        public override string Name { get; }
 
         /// <summary>The code to be executed by the task. Is given a callback to report progress in percent. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
         private readonly Action<PercentProgressCallback> _work;
@@ -71,7 +69,7 @@ namespace NanoByte.Common.Tasks
             if (work == null) throw new ArgumentNullException(nameof(work));
             #endregion
 
-            _name = name;
+            Name = name;
             _work = work;
             _cancelationCallback = cancellationCallback;
         }

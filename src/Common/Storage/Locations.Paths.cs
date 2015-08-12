@@ -90,7 +90,7 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
-            if (_isPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
+            if (IsPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
 
             string systemConfigDir = SystemConfigDirs.Split(Path.PathSeparator).Last();
             string resourceCombined = FileUtils.PathCombine(resource);
@@ -134,7 +134,7 @@ namespace NanoByte.Common.Storage
 
             string resourceCombined = FileUtils.PathCombine(resource);
             string path;
-            if (_isPortable)
+            if (IsPortable)
             {
                 // Check in portable base directory
                 path = FileUtils.PathCombine(PortableBase, "config", resourceCombined);
@@ -224,7 +224,7 @@ namespace NanoByte.Common.Storage
 
             string resourceCombined = FileUtils.PathCombine(resource);
             string path;
-            if (_isPortable)
+            if (IsPortable)
             {
                 // Check in portable base directory
                 path = FileUtils.PathCombine(PortableBase, "data", resourceCombined);
