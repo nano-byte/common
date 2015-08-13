@@ -67,7 +67,7 @@ namespace NanoByte.Common.Undo
             private set
             {
                 _undoEnabled = value;
-                if (UndoEnabledChanged != null) UndoEnabledChanged();
+                UndoEnabledChanged?.Invoke();
             }
         }
 
@@ -82,7 +82,7 @@ namespace NanoByte.Common.Undo
             private set
             {
                 _redoEnabled = value;
-                if (RedoEnabledChanged != null) RedoEnabledChanged();
+                RedoEnabledChanged?.Invoke();
             }
         }
         #endregion
@@ -108,7 +108,7 @@ namespace NanoByte.Common.Undo
 
         protected void OnUpdated()
         {
-            if (Updated != null) Updated();
+            Updated?.Invoke();
         }
         #endregion
 

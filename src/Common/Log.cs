@@ -287,7 +287,7 @@ namespace NanoByte.Common
             {
                 System.Diagnostics.Debug.Print(formattedMessage);
                 _sessionContent.AppendLine(formattedMessage);
-                if (_fileWriter != null) _fileWriter.WriteLine(formattedMessage);
+                _fileWriter?.WriteLine(formattedMessage);
                 _handlers.Last()(severity, message);
             }
         }

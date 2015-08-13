@@ -51,7 +51,7 @@ namespace NanoByte.Common.Controls
 
         private void OnSelectedEntryChanged()
         {
-            if (!_supressEvents && Visible && SelectedEntryChanged != null) SelectedEntryChanged(this, EventArgs.Empty);
+            if (!_supressEvents && Visible) SelectedEntryChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace NanoByte.Common.Controls
 
         private void OnCheckedEntriesChanged()
         {
-            if (!_supressEvents && Visible && CheckedEntriesChanged != null) CheckedEntriesChanged(this, EventArgs.Empty);
+            if (!_supressEvents && Visible) CheckedEntriesChanged?.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -279,12 +279,9 @@ namespace NanoByte.Common.Controls
 
             #region Context menu
             var contextMenuProvider = entry as IContextMenu;
-            if (contextMenuProvider != null)
-            {
-                // Attach the context menu if one is set
-                var contextMenu = contextMenuProvider.GetContextMenu();
-                if (contextMenu != null) finalNode.ContextMenu = contextMenu;
-            }
+            // Attach the context menu if one is set
+            var contextMenu = contextMenuProvider?.GetContextMenu();
+            if (contextMenu != null) finalNode.ContextMenu = contextMenu;
             #endregion
 
             return finalNode;

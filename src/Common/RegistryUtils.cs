@@ -265,7 +265,7 @@ namespace NanoByte.Common
             try
             {
                 using (var subkey = key.OpenSubKey(subkeyName))
-                    return (subkey == null) ? new string[0] : subkey.GetValueNames();
+                    return subkey?.GetValueNames() ?? new string[0];
             }
                 #region Error handling
             catch (SecurityException ex)
@@ -294,7 +294,7 @@ namespace NanoByte.Common
             try
             {
                 using (var subkey = key.OpenSubKey(subkeyName))
-                    return (subkey == null) ? new string[0] : subkey.GetSubKeyNames();
+                    return subkey?.GetSubKeyNames() ?? new string[0];
             }
                 #region Error handling
             catch (SecurityException ex)

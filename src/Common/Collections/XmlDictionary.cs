@@ -112,8 +112,7 @@ namespace NanoByte.Common.Collections
             var items = Items as List<XmlDictionaryEntry>;
 
             // Apply the sorting algorithms, if items are sortable
-            if (items != null)
-                items.Sort((x, y) => string.Compare(x.Key, y.Key, StringComparison.OrdinalIgnoreCase));
+            items?.Sort((x, y) => string.Compare(x.Key, y.Key, StringComparison.OrdinalIgnoreCase));
 
             // Let bound controls know they should refresh their views
             OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));

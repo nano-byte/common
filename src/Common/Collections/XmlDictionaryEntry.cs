@@ -123,7 +123,7 @@ namespace NanoByte.Common.Collections
         {
             unchecked
             {
-                return ((Value != null ? Value.GetHashCode() : 0) * 397) ^ (_key != null ? _key.GetHashCode() : 0);
+                return ((Value?.GetHashCode() ?? 0) * 397) ^ (_key?.GetHashCode() ?? 0);
             }
         }
         #endregion

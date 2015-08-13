@@ -43,7 +43,7 @@ namespace NanoByte.Common.Collections
 
         private void OnCollectionChanged()
         {
-            if (CollectionChanged != null) CollectionChanged(this);
+            CollectionChanged?.Invoke(this);
         }
         #endregion
 
@@ -96,8 +96,7 @@ namespace NanoByte.Common.Collections
         private void Sort()
         {
             var items = Items as List<T>;
-            if (items != null)
-                items.Sort((x, y) => string.CompareOrdinal(x.Name, y.Name));
+            items?.Sort((x, y) => string.CompareOrdinal(x.Name, y.Name));
         }
 
         #region Hooks

@@ -84,7 +84,7 @@ namespace NanoByte.Common.Dispatch
                 var value = _valueRetriever(element);
 
                 var matchedRule = _rules.FirstOrDefault(rule => Equals(rule.Value, value));
-                if (matchedRule != null) matchedRule.Bucket.Add(element);
+                matchedRule?.Bucket.Add(element);
             }
         }
 

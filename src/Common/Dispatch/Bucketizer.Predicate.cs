@@ -79,7 +79,7 @@ namespace NanoByte.Common.Dispatch
             {
                 // ReSharper disable once AccessToForEachVariableInClosure
                 var matchedRule = _rules.FirstOrDefault(rule => rule.Predicate(element));
-                if (matchedRule != null) matchedRule.Bucket.Add(element);
+                matchedRule?.Bucket.Add(element);
             }
         }
 

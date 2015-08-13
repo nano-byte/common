@@ -85,7 +85,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         protected virtual void OnClearButtonClicked(EventArgs e)
         {
-            if (ClearButtonClicked != null) ClearButtonClicked(this, e);
+            ClearButtonClicked?.Invoke(this, e);
         }
         #endregion
 

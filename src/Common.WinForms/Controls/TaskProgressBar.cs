@@ -42,7 +42,7 @@ namespace NanoByte.Common.Controls
             get
             {
                 Form parent = FindForm();
-                return (parent == null ? IntPtr.Zero : parent.Handle);
+                return parent?.Handle ?? IntPtr.Zero;
             }
         }
 

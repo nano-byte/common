@@ -41,7 +41,7 @@ namespace NanoByte.Common.Storage
         [ContractAnnotation("null => null; notnull => notnull")]
         public static implicit operator string(TemporaryFile file)
         {
-            return (file == null) ? null : file.Path;
+            return file?.Path;
         }
 
         /// <summary>

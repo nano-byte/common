@@ -67,9 +67,7 @@ namespace NanoByte.Common.Storage
         [Pure, ContractAnnotation("null => null; notnull => notnull")]
         public static string UnifySlashes([CanBeNull] string value)
         {
-            if (value == null) return null;
-
-            return value.Replace('/', Path.DirectorySeparatorChar);
+            return value?.Replace('/', Path.DirectorySeparatorChar);
         }
 
         /// <summary>
@@ -392,7 +390,7 @@ namespace NanoByte.Common.Storage
             if (!directory.Exists) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
-            if (dirAction != null) dirAction(directory);
+            dirAction?.Invoke(directory);
 
             if (fileAction != null)
             {
@@ -403,9 +401,7 @@ namespace NanoByte.Common.Storage
             foreach (var subDir in directory.GetDirectories())
             {
                 if (!followDirSymlinks && IsSymlink(subDir.FullName))
-                {
-                    if (dirAction != null) dirAction(subDir);
-                }
+                    dirAction?.Invoke(subDir);
                 else Walk(subDir, dirAction, fileAction);
             }
         }

@@ -46,13 +46,13 @@ namespace NanoByte.Common.Dispatch
                 set
                 {
                     _id = value;
-                    if (Changed != null) Changed(this);
+                    Changed?.Invoke(this);
                 }
             }
 
             public void Rebuild()
             {
-                if (ChangedRebuild != null) ChangedRebuild(this);
+                ChangedRebuild?.Invoke(this);
             }
 
             public event Action<ModelBase> Changed;

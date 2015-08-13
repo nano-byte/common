@@ -133,7 +133,7 @@ namespace NanoByte.Common.Streams
                 cancellationToken.ThrowIfCancellationRequested();
                 sum += read = source.Read(buffer, 0, buffer.Length);
                 destination.Write(buffer, 0, read);
-                if (progress != null) progress.Report(sum);
+                progress?.Report(sum);
             } while (read != 0);
         }
 

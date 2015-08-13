@@ -47,7 +47,7 @@ namespace NanoByte.Common.Controls
             set
             {
                 _target = value;
-                if (TargetChanged != null) TargetChanged();
+                TargetChanged?.Invoke();
                 Refresh();
             }
         }
@@ -68,7 +68,7 @@ namespace NanoByte.Common.Controls
             set
             {
                 _commandExecutor = value;
-                if (CommandExecutorChanged != null) CommandExecutorChanged();
+                CommandExecutorChanged?.Invoke();
             }
         }
 
@@ -117,7 +117,7 @@ namespace NanoByte.Common.Controls
 
         public override void Refresh()
         {
-            if (OnRefresh != null) OnRefresh();
+            OnRefresh?.Invoke();
             base.Refresh();
         }
         #endregion

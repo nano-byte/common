@@ -125,7 +125,7 @@ namespace NanoByte.Common.Dispatch
                 _viewToModel.Remove(representation);
 
                 var disposable = representation as IDisposable;
-                if (disposable != null) disposable.Dispose();
+                disposable?.Dispose();
             }
             _modelToView.RemoveKey(element);
         }

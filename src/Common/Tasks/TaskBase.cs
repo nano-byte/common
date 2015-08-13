@@ -136,9 +136,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         private void OnProgressChanged()
         {
-            if (_progress == null) return;
-
-            _progress.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
+            _progress?.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
         }
 
         private DateTime _lastProgress;

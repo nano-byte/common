@@ -52,7 +52,7 @@ namespace NanoByte.Common.Tasks
         protected virtual void OnReport(T value)
         {
             var callback = ProgressChanged;
-            if (callback != null) callback(value);
+            callback?.Invoke(value);
         }
     }
 }

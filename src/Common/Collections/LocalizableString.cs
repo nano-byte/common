@@ -136,7 +136,7 @@ namespace NanoByte.Common.Collections
             unchecked
             {
                 int result = Language.GetHashCode();
-                if (Value != null) result = (result * 397) ^ Value.GetHashCode();
+                result = (result * 397) ^ Value?.GetHashCode() ?? 0;
                 return result;
             }
         }

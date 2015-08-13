@@ -84,7 +84,7 @@ namespace NanoByte.Common.StructureEditor
                     return list.OfType<TElement>().Select(element =>
                         new EntryInfo(
                             name: _name,
-                            description: (description == null) ? null : description.Description,
+                            description: description?.Description,
                             target: element,
                             getEditorControl: executor => CreateEditor(container, element, executor),
                             toXmlString: () => element.ToXmlString(),
@@ -106,7 +106,7 @@ namespace NanoByte.Common.StructureEditor
                     var description = AttributeUtils.GetAttributes<DescriptionAttribute, TElement>().FirstOrDefault();
                     return new ChildInfo(
                         name: _name,
-                        description: (description == null) ? null : description.Description,
+                        description: description?.Description,
                         create: () => new AddToCollection<TList>(list, new TElement()));
                 }
             }

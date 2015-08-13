@@ -89,7 +89,7 @@ namespace NanoByte.Common.Collections
             #endregion
 
             var match = this.FirstOrDefault(entry => Equals(language, entry.Language));
-            return match == null ? null : match.Value;
+            return match?.Value;
         }
 
         /// <summary>

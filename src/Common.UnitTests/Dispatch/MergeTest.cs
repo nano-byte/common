@@ -72,7 +72,7 @@ namespace NanoByte.Common.Dispatch
             {
                 unchecked
                 {
-                    return ((MergeID != null ? MergeID.GetHashCode() : 0) * 397) ^ (Data != null ? Data.GetHashCode() : 0);
+                    return ((MergeID?.GetHashCode() ?? 0) * 397) ^ (Data?.GetHashCode() ?? 0);
                 }
             }
             #endregion

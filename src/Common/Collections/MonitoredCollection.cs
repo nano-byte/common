@@ -67,23 +67,23 @@ namespace NanoByte.Common.Collections
 
         private void OnChanged()
         {
-            if (!_dontRaiseEvents && Changed != null) Changed();
+            if (!_dontRaiseEvents) Changed?.Invoke();
         }
 
         private void OnAdded(T item)
         {
-            if (!_dontRaiseEvents && Added != null) Added(item);
+            if (!_dontRaiseEvents) Added?.Invoke(item);
         }
 
         private void OnRemoving(T item)
         {
             // Note: This event cannot be blocked!
-            if (Removing != null) Removing(item);
+            Removing?.Invoke(item);
         }
 
         private void OnRemoved(T item)
         {
-            if (!_dontRaiseEvents && Removed != null) Removed(item);
+            if (!_dontRaiseEvents) Removed?.Invoke(item);
         }
         #endregion
 

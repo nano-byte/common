@@ -423,7 +423,7 @@ namespace NanoByte.Common.Controls
         {
             Size retSize = Size.Empty;
             Size textSize = TextRenderer.MeasureText(Text, Font);
-            Size imageSize = Image == null ? Size.Empty : Image.Size;
+            Size imageSize = Image?.Size ?? Size.Empty;
 
             // Pad the text size
             if (Text.Length != 0)
@@ -509,7 +509,7 @@ namespace NanoByte.Common.Controls
         private void CalculateButtonTextAndImageLayout(ref Rectangle contentRect, out Rectangle textRectangle, out Rectangle imageRectangle)
         {
             Size textSize = TextRenderer.MeasureText(Text, Font, contentRect.Size, _textFormatFlags);
-            Size imageSize = Image == null ? Size.Empty : Image.Size;
+            Size imageSize = Image?.Size ?? Size.Empty;
 
             textRectangle = Rectangle.Empty;
             imageRectangle = Rectangle.Empty;

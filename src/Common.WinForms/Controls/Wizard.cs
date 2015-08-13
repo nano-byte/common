@@ -139,8 +139,7 @@ namespace NanoByte.Common.Controls
             page.Focus();
 
             // ReSharper disable once SuspiciousTypeConversion.Global
-            var wizardPage = page as IWizardPage;
-            if (wizardPage != null) wizardPage.OnPageShow();
+            (page as IWizardPage)?.OnPageShow();
         }
         #endregion
     }

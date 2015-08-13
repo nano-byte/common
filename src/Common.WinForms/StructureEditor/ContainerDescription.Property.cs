@@ -105,7 +105,7 @@ namespace NanoByte.Common.StructureEditor
                     var description = AttributeUtils.GetAttributes<DescriptionAttribute, TProperty>().FirstOrDefault();
                     yield return new EntryInfo(
                         name: _name,
-                        description: (description == null) ? null : description.Description,
+                        description: description?.Description,
                         target: pointer.Value,
                         getEditorControl: executor => CreateEditor(container, pointer.Value, executor),
                         toXmlString: () => pointer.Value.ToXmlString(),
@@ -130,7 +130,7 @@ namespace NanoByte.Common.StructureEditor
                 {
                     new ChildInfo(
                         name: _name,
-                        description: (description == null) ? null : description.Description,
+                        description: description?.Description,
                         create: () => new SetValueCommand<TProperty>(_getPointer(container), new TProperty()))
                 };
             }

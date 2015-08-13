@@ -64,20 +64,10 @@ namespace NanoByte.Common.Controls
             if (UnixUtils.IsUnix)
             { // WORKAROUND: e.OldValue is not reliable on Mono, use MultiPropertyTracker instead
                 var tracker = new MultiPropertyTracker(propertyGrid);
-                propertyGrid.PropertyValueChanged += delegate(object sender, PropertyValueChangedEventArgs e)
-                {
-                    if (CommandExecutor != null)
-                        CommandExecutor.Execute(tracker.GetCommand(e.ChangedItem));
-                };
+                propertyGrid.PropertyValueChanged += (sender, e) => CommandExecutor?.Execute(tracker.GetCommand(e.ChangedItem));
             }
             else
-            {
-                propertyGrid.PropertyValueChanged += delegate(object sender, PropertyValueChangedEventArgs e)
-                {
-                    if (CommandExecutor != null)
-                        CommandExecutor.Execute(new PropertyChangedCommand(Target, e));
-                };
-            }
+                propertyGrid.PropertyValueChanged += (sender, e) => CommandExecutor?.Execute(new PropertyChangedCommand(Target, e));
         }
     }
 }
