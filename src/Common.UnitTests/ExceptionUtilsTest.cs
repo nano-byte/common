@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -117,6 +118,35 @@ namespace NanoByte.Common
         {
             Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
                 delegate { throw new IOException("Test exception"); }, maxRetries: 1));
+        }
+
+        [Test]
+        public void RetryStressTest()
+        {
+            var exceptions = new Exception[10];
+            var threads = new Thread[10];
+            for (int i = 0; i < threads.Length; i++)
+            {
+                var x = i;
+                threads[i] = new Thread(() =>
+                {
+                    try
+                    {
+                        ExceptionUtils.Retry<IOException>(
+                            delegate { throw new IOException("Test exception"); });
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions[x] = ex;
+                    }
+                });
+                threads[i].Start();
+            }
+
+            foreach (var thread in threads)
+                thread.Join();
+            foreach (var exception in exceptions)
+                Assert.IsInstanceOf<IOException>(exception);
         }
     }
 }

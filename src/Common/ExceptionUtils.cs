@@ -22,7 +22,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing.Design;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Threading;
@@ -156,9 +158,6 @@ namespace NanoByte.Common
             }
         }
 
-        [ThreadStatic]
-        private static Random _random;
-
         /// <summary>
         /// Executes a delegate and automatically retries it using exponential backoff if a specifc type of exception was raised.
         /// </summary>
@@ -186,8 +185,18 @@ namespace NanoByte.Common
                 {
                     Log.Info(ex);
 
-                    if (_random == null) _random = new Random();
-                    int delay = _random.Next(50, 1000 * (1 << retryCounter));
+                    Random random;
+                    try
+                    {
+                        // Use process ID as a seed to ensure we get different values than other competing processes on the same machine
+                        random = new Random(Process.GetCurrentProcess().Id);
+                    }
+                    catch (Exception)
+                    {
+                        random = new Random();
+                    }
+
+                    int delay = random.Next(50, 1000 * (1 << retryCounter));
                     Log.Info("Retrying in " + delay + " milliseconds");
                     Thread.Sleep(delay);
 
