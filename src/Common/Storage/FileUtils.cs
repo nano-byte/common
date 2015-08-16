@@ -986,16 +986,16 @@ namespace NanoByte.Common.Storage
         /// </summary>
         private static bool IsUnixFSFallback([NotNull, Localizable(false)] string path)
         {
-            string testFile = Path.Combine(path, ".xbit_test_file");
-            File.Create(Path.Combine(path, ".xbit_test_file"));
+            string probeFile = Path.Combine(path, ".unixfs_probe_" + Path.GetTempFileName());
+            Touch(probeFile);
 
             try
             {
-                UnixUtils.SetExecutable(testFile, false);
-                if (UnixUtils.IsExecutable(testFile)) return false;
+                UnixUtils.SetExecutable(probeFile, false);
+                if (UnixUtils.IsExecutable(probeFile)) return false;
 
-                UnixUtils.SetExecutable(testFile, true);
-                if (!UnixUtils.IsExecutable(testFile)) return false;
+                UnixUtils.SetExecutable(probeFile, true);
+                if (!UnixUtils.IsExecutable(probeFile)) return false;
 
                 return true;
             }
@@ -1008,7 +1008,12 @@ namespace NanoByte.Common.Storage
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
             }
-            #endregion
+                #endregion
+
+            finally
+            {
+                File.Delete(probeFile);
+            }
         }
         #endregion
 
