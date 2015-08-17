@@ -142,7 +142,7 @@
     <value>Bir koleksiyon kendi içine eklenemez.</value>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Bilgi kaybına neden olabileceğinden DACL tekleştirilemez.</value>
+    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
   </data>
   <data name="ContentArchivesAlreadyLoaded" xml:space="preserve">
     <value>İçerik arşivleri zaten yüklenmiş</value>
@@ -277,7 +277,7 @@
     <value>Veri işleniyor</value>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Üst bilgiler alınıyor</value>
+    <value>Başlıklar alınıyor</value>
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>Giriş çıkış hatası</value>
