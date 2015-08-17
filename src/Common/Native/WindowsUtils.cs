@@ -554,7 +554,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="message">A unique string used to identify the message type session-wide.</param>
         /// <returns>A unique ID number used to identify the message type session-wide.</returns>
-        public static int RegisterWindowMessage(string message)
+        public static int RegisterWindowMessage([Localizable(false)] string message)
         {
             return IsWindows ? NativeMethods.RegisterWindowMessage(message) : 0;
         }
