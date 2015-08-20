@@ -20,7 +20,8 @@ Source directory structure
 - The directory `build` contains the results of various compilation processes. It is created on first usage.
 
 `VERSION` contains the version numbers used by build scripts.
-Keep in sync with the version numbers in `src/AssemblyInfo.Global.cs`!
+Use `Set-Version.ps1 X.Y.Z` to change the version number. This ensures that the version also gets set in other locations (e.g. AssemblyInfo).
+`Get-Version.cmd` and `Get-Version.sh` read the current version number to the console and environment variables. This is used by our build server.
 
 
 Building on Windows

@@ -1,5 +1,5 @@
 @echo off
-::Sets the current version number as an environment variable
+::Reads the current version number to the console and an environment variable
 
 set /p version= < "%~dp0VERSION"
 
