@@ -29,6 +29,14 @@ Building on Windows
 `build.cmd` will call build scripts in subdirectories to create a NuGet package in `build/Packages`.
 You need to install [GTK# for Windows](http://download.xamarin.com/GTKforWindows/Windows/gtk-sharp-2.12.25.msi) to able to compile the code.
 
+If you wish to add an AuthentiCode signature to the compiled binaries set the `signing_cert_path` environment variable to the certificate's file path and `signing_cert_pass` to the password used to decrypt the file before executing the build scripts.
+For example:
+```
+set signing_cert_path=C:\mycert.pfx
+set signing_cert_pass=mypass
+build.cmd
+```
+
 `cleanup.cmd` will delete any temporary files created by the build process or Visual Studio.
 
 
