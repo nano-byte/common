@@ -56,12 +56,6 @@ namespace NanoByte.Common.Storage
         public static readonly string InstallBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath) ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 
         /// <summary>
-        /// Indicates whether the application is installed in a user-specific location.
-        /// </summary>
-        [PublicAPI]
-        public static bool IsInstalledPerUser { get { return InstallBase.StartsWith(HomeDir); } }
-
-        /// <summary>
         /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <see langword="true"/>.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
