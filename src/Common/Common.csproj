@@ -68,7 +68,7 @@
     <Compile Include="Collections\HashPrimeNumbers.cs" />
     <Compile Include="Collections\HashSet.cs" />
     <Compile Include="Collections\LanguageSet.cs" />
-    <Compile Include="Collections\ListExtensions.cs" />
+    <Compile Include="Collections\CollectionExtensions.cs" />
     <Compile Include="Collections\LocalizableString.cs" />
     <Compile Include="Collections\LocalizableStringCollection.cs" />
     <Compile Include="Collections\MonitoredCollection.cs" />

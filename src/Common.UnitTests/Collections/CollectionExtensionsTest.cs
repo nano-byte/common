@@ -27,13 +27,13 @@ using NUnit.Framework;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// Contains test methods for <see cref="ListExtensions"/>.
+    /// Contains test methods for <see cref="CollectionExtensions"/>.
     /// </summary>
     [TestFixture]
-    public class ListExtensionsTest
+    public class CollectionExtensionsTest
     {
         /// <summary>
-        /// Ensures that <see cref="ListExtensions.AddIfNew{T}"/> correctly detects pre-existing entries.
+        /// Ensures that <see cref="CollectionExtensions.AddIfNew{T}"/> correctly detects pre-existing entries.
         /// </summary>
         [Test]
         public void TestAddIfNew()
@@ -50,7 +50,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Ensures that <see cref="ListExtensions.RemoveLast{T}"/> correctly removes the last n elements from a list.
+        /// Ensures that <see cref="CollectionExtensions.RemoveLast{T}"/> correctly removes the last n elements from a list.
         /// </summary>
         [Test]
         public void TestRemoveLast()
@@ -60,6 +60,17 @@ namespace NanoByte.Common.Collections
             CollectionAssert.AreEqual(new[] {"a"}, list);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveLast(-1));
+        }
+
+        /// <summary>
+        /// Ensures that <see cref="CollectionExtensions.FindIndex{T}"/> correctly determines the index of an element in a list.
+        /// </summary>
+        [Test]
+        public void TestFindIndex()
+        {
+            Assert.AreEqual(
+                expected: 1,
+                actual: new List<string> {"a", "b", "c"}.FindIndex("b"));
         }
     }
 }

@@ -28,9 +28,9 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// Provides extension methods for <see cref="List{T}"/>s.
+    /// Provides extension methods for <see cref="ICollection{T}"/>s and <see cref="List{T}"/>s.
     /// </summary>
-    public static class ListExtensions
+    public static class CollectionExtensions
     {
         /// <summary>
         /// Adds multiple elements to the list.
@@ -83,6 +83,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes multiple elements from the list.
         /// </summary>
+        /// <seealso cref="List{T}.RemoveRange"/>
         public static void RemoveRange<TList, TElements>([NotNull] this ICollection<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
             where TElements : TList
         {
@@ -92,6 +93,28 @@ namespace NanoByte.Common.Collections
             #endregion
 
             foreach (var element in elements) list.Remove(element);
+        }
+
+        /// <summary>
+        /// Removes all items from a <paramref name="collection"/> that match a specific <paramref name="condition"/>.
+        /// </summary>
+        /// <returns><see langword="true"/> if any elements where removed.</returns>
+        /// <seealso cref="List{T}.RemoveAll"/>
+        public static bool RemoveAll<T>([NotNull, InstantHandle] this ICollection<T> collection,
+            [NotNull] Func<T, bool> condition)
+        {
+            #region Sanity checks
+            if (collection == null) throw new ArgumentNullException("collection");
+            if (condition == null) throw new ArgumentNullException("condition");
+            #endregion
+
+            bool removedAny = false;
+            foreach (var item in collection.Where(condition).ToList())
+            {
+                collection.Remove(item);
+                removedAny = true;
+            }
+            return removedAny;
         }
 
         /// <summary>
@@ -123,6 +146,18 @@ namespace NanoByte.Common.Collections
             #endregion
 
             return (list.Count == 0) || list.Contains(element);
+        }
+
+        /// <summary>
+        /// Finds the index of a specific <paramref name="element"/> in a <paramref name="collection"/>.
+        /// </summary>
+        public static int FindIndex<T>([NotNull, InstantHandle] this List<T> collection, [CanBeNull] T element)
+        {
+            #region Sanity checks
+            if (collection == null) throw new ArgumentNullException("collection");
+            #endregion
+
+            return collection.FindIndex(x => Equals(x, element));
         }
     }
 }
