@@ -21,7 +21,6 @@ Source directory structure
 
 `VERSION` contains the version numbers used by build scripts.
 Use `Set-Version.ps1 X.Y.Z` to change the version number. This ensures that the version also gets set in other locations (e.g. AssemblyInfo).
-`Get-Version.cmd` and `Get-Version.sh` read the current version number to the console and environment variables. This is used by our build server.
 
 
 Building on Windows
