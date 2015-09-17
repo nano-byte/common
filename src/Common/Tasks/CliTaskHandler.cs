@@ -108,7 +108,7 @@ namespace NanoByte.Common.Tasks
             else
             {
                 Log.Debug("Task: " + task.Name);
-                Console.WriteLine(task.Name + @"...");
+                Console.Error.WriteLine(task.Name + @"...");
                 using (var progressBar = new TaskProgressBar())
                     task.Run(CancellationToken, progressBar);
             }
@@ -122,7 +122,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Question: " + question);
-            Console.WriteLine(question);
+            Console.Error.WriteLine(question);
 
             // Loop until the user has made a valid choice
             while (true)
