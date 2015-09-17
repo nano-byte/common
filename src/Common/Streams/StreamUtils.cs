@@ -133,8 +133,6 @@ namespace NanoByte.Common.Streams
                 destination.Write(buffer, 0, read);
                 if (progress != null) progress.Report(sum);
             } while (read != 0);
-
-            if (destination.CanSeek) destination.Position = 0;
         }
 
         /// <summary>
