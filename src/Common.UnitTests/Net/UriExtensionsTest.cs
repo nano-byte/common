@@ -42,7 +42,6 @@ namespace NanoByte.Common.Net
                 expected: "relative%20path",
                 actual: new Uri("relative%20path", UriKind.Relative).ToStringRfc());
 
-
             Assert.AreEqual(
                 expected: WindowsUtils.IsWindows ? "file:///C:/absolute%20path" : "file:///absolute%20path",
                 actual: new Uri(WindowsUtils.IsWindows ? @"C:\absolute path" : "/absolute path").ToStringRfc());
@@ -52,11 +51,19 @@ namespace NanoByte.Common.Net
         }
 
         [Test]
-        public void TestEnsureTrailingSlash()
+        public void TestEnsureTrailingSlashAbsolute()
         {
             Assert.AreEqual(
-                expected: new Uri("http://test/test/"),
-                actual: new Uri("http://test/test").EnsureTrailingSlash());
+                expected: new Uri("http://test/test/", UriKind.Absolute),
+                actual: new Uri("http://test/test", UriKind.Absolute).EnsureTrailingSlash());
+        }
+
+        [Test]
+        public void TestEnsureTrailingSlashRelative()
+        {
+            Assert.AreEqual(
+                expected: new Uri("test/", UriKind.Relative),
+                actual: new Uri("test", UriKind.Relative).EnsureTrailingSlash());
         }
 
         [Test]
