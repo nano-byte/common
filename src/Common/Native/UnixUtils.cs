@@ -215,7 +215,6 @@ namespace NanoByte.Common.Native
         /// <param name="path">The path of the file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)

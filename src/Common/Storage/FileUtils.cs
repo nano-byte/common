@@ -804,62 +804,68 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Checks whether a file is a Unix symbolic link.
+        /// Checks whether a file is a symbolic link.
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="IOException">There was an IO problem reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path)
         {
-            if ((!File.Exists(path) && !Directory.Exists(path)) || !UnixUtils.IsUnix) return false;
-
-            try
+            if (UnixUtils.IsUnix)
             {
-                return UnixUtils.IsSymlink(path);
+                try
+                {
+                    return UnixUtils.IsSymlink(path);
+                }
+                    #region Error handling
+                catch (InvalidOperationException ex)
+                {
+                    throw new IOException(Resources.UnixSubsystemFail, ex);
+                }
+                catch (IOException ex)
+                {
+                    throw new IOException(Resources.UnixSubsystemFail, ex);
+                }
+                #endregion
             }
-                #region Error handling
-            catch (InvalidOperationException ex)
-            {
-                throw new IOException(Resources.UnixSubsystemFail, ex);
-            }
-            catch (IOException ex)
-            {
-                throw new IOException(Resources.UnixSubsystemFail, ex);
-            }
-            #endregion
+            // TODO: Detect NTFS symlinks
+            else return false;
         }
 
         /// <summary>
-        /// Checks whether a file is a Unix symbolic link.
+        /// Checks whether a file is a symbolic link.
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
         /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="IOException">There was an IO problem reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
         {
-            if ((!File.Exists(path) && !Directory.Exists(path)) || !UnixUtils.IsUnix)
+            if (UnixUtils.IsUnix)
+            {
+                try
+                {
+                    return UnixUtils.IsSymlink(path, out target);
+                }
+                    #region Error handling
+                catch (InvalidOperationException ex)
+                {
+                    throw new IOException(Resources.UnixSubsystemFail, ex);
+                }
+                catch (IOException ex)
+                {
+                    throw new IOException(Resources.UnixSubsystemFail, ex);
+                }
+                #endregion
+            }
+            // TODO: Detect NTFS symlinks
+            else
             {
                 target = null;
                 return false;
             }
-
-            try
-            {
-                return UnixUtils.IsSymlink(path, out target);
-            }
-                #region Error handling
-            catch (InvalidOperationException ex)
-            {
-                throw new IOException(Resources.UnixSubsystemFail, ex);
-            }
-            catch (IOException ex)
-            {
-                throw new IOException(Resources.UnixSubsystemFail, ex);
-            }
-            #endregion
         }
 
         /// <summary>
@@ -868,8 +874,8 @@ namespace NanoByte.Common.Storage
         /// <param name="item">The file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
         /// <return><see lang="true"/> if <paramref name="item"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
-        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
+        /// <exception cref="IOException">There was an IO problem reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull] this FileSystemInfo item, out string target)
         {
             #region Sanity checks
