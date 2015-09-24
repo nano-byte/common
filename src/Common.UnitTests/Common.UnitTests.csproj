@@ -78,6 +78,7 @@
     <Compile Include="Dispatch\PerTypeDispatcherTest.cs" />
     <Compile Include="ExceptionUtilsTest.cs" />
     <Compile Include="LogTest.cs" />
+    <Compile Include="Native\CygwinUtilsTest.cs" />
     <Compile Include="Native\WindowsRestartManagerTest.cs" />
     <Compile Include="Net\DownloadFileTest.cs" />
     <Compile Include="Net\DownloadMemoryTest.cs" />
