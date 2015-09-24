@@ -21,6 +21,7 @@
  */
 
 using System.IO;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -53,10 +54,10 @@ namespace NanoByte.Common.Cli
                     Path.Combine(tempDir, "d.nfo"), // Specifc file
                     subdirPath // Directory with implict default wildcard
                 }, "*.txt");
-                Assert.AreEqual(result[0].FullName, Path.Combine(tempDir, "a.txt"));
-                Assert.AreEqual(result[1].FullName, Path.Combine(tempDir, "b.txt"));
-                Assert.AreEqual(result[2].FullName, Path.Combine(tempDir, "d.nfo"));
-                Assert.AreEqual(result[3].FullName, Path.Combine(subdirPath, "1.txt"));
+                result[0].FullName.Should().Be(Path.Combine(tempDir, "a.txt"));
+                result[1].FullName.Should().Be(Path.Combine(tempDir, "b.txt"));
+                result[2].FullName.Should().Be(Path.Combine(tempDir, "d.nfo"));
+                result[3].FullName.Should().Be(Path.Combine(subdirPath, "1.txt"));
             }
         }
 
@@ -81,10 +82,10 @@ namespace NanoByte.Common.Cli
                     "d.nfo", // Specifc file
                     subdirPath // Directory with implict default wildcard
                 }, "*.txt");
-                Assert.AreEqual(result[0].FullName, Path.Combine(tempDir, "a.txt"));
-                Assert.AreEqual(result[1].FullName, Path.Combine(tempDir, "b.txt"));
-                Assert.AreEqual(result[2].FullName, Path.Combine(tempDir, "d.nfo"));
-                Assert.AreEqual(result[3].FullName, Path.Combine(Path.Combine(tempDir, subdirPath), "1.txt"));
+                result[0].FullName.Should().Be(Path.Combine(tempDir, "a.txt"));
+                result[1].FullName.Should().Be(Path.Combine(tempDir, "b.txt"));
+                result[2].FullName.Should().Be(Path.Combine(tempDir, "d.nfo"));
+                Path.Combine(Path.Combine(tempDir, subdirPath), "1.txt").Should().Be(result[3].FullName);
             }
         }
     }

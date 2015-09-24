@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Dispatch
@@ -91,8 +92,8 @@ namespace NanoByte.Common.Dispatch
                 mine: new[] {1, 2, 4},
                 added: toAdd.Add, removed: toRemove.Add);
 
-            CollectionAssert.AreEqual(new[] {16, 8}, toAdd);
-            CollectionAssert.AreEqual(new[] {1, 2}, toRemove);
+            toAdd.Should().Equal(16, 8);
+            toRemove.Should().Equal(1, 2);
         }
 
         /// <summary>
@@ -122,8 +123,8 @@ namespace NanoByte.Common.Dispatch
                 mine: MergeTestData.BuildList("a", "c", "e"),
                 added: toAdd, removed: toRemove);
 
-            CollectionAssert.AreEqual(MergeTestData.BuildList("d"), toAdd);
-            CollectionAssert.AreEqual(MergeTestData.BuildList("c"), toRemove);
+            toAdd.Should().Equal(MergeTestData.BuildList("d"));
+            toRemove.Should().Equal(MergeTestData.BuildList("c"));
         }
 
         /// <summary>
@@ -154,8 +155,8 @@ namespace NanoByte.Common.Dispatch
             ICollection<MergeTestData> toAdd = new List<MergeTestData>();
             Merge.ThreeWay(reference, theirs, mine, toAdd, toRemove);
 
-            CollectionAssert.AreEqual(new[] {mine[1], mine[4]}, toRemove);
-            CollectionAssert.AreEqual(new[] {theirs[1], theirs[4]}, toAdd);
+            toRemove.Should().Equal(mine[1], mine[4]);
+            toAdd.Should().Equal(theirs[1], theirs[4]);
         }
     }
 }

@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using NanoByte.Common.Collections;
 using NUnit.Framework;
 
@@ -87,8 +88,8 @@ namespace NanoByte.Common.Dispatch
                 sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
                 sync.Initialize();
 
-                Assert.IsInstanceOf<SpecificView>(view[0]);
-                Assert.AreEqual("abc", view[0].ID);
+                view[0].Should().BeOfType<SpecificView>();
+                view[0].ID.Should().Be("abc");
             }
         }
 
@@ -102,8 +103,9 @@ namespace NanoByte.Common.Dispatch
                 sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
                 sync.Initialize();
 
-                Assert.AreSame(model[0], sync.Lookup(view[0]));
-                Assert.Throws<KeyNotFoundException>(() => sync.Lookup(new SpecificView()));
+                sync.Lookup(view[0]).Should().BeSameAs(model[0]);
+                sync.Invoking(x => x.Lookup(new SpecificView()))
+                    .ShouldThrow<KeyNotFoundException>();
             }
         }
 
@@ -117,7 +119,7 @@ namespace NanoByte.Common.Dispatch
                 sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
                 sync.Initialize();
 
-                Assert.AreSame(view[0], sync.Representations.First());
+                sync.Representations.First().Should().BeSameAs(view[0]);
             }
         }
 
@@ -133,8 +135,8 @@ namespace NanoByte.Common.Dispatch
 
                 model.Add(new SpecificModel {ID = "abc"});
 
-                Assert.IsInstanceOf<SpecificView>(view[0]);
-                Assert.AreEqual("abc", view[0].ID);
+                view[0].Should().BeOfType<SpecificView>();
+                view[0].ID.Should().Be("abc");
             }
         }
 
@@ -151,8 +153,8 @@ namespace NanoByte.Common.Dispatch
                 var originalRepresentation = view[0];
                 model.RemoveAt(0);
 
-                CollectionAssert.IsEmpty(view);
-                Assert.IsTrue(originalRepresentation.Disposed);
+                view.Should().BeEmpty();
+                originalRepresentation.Disposed.Should().BeTrue();
             }
         }
 
@@ -168,7 +170,7 @@ namespace NanoByte.Common.Dispatch
 
                 model[0].ID = "xyz";
 
-                Assert.AreEqual("xyz", view[0].ID);
+                view[0].ID.Should().Be("xyz");
             }
         }
 
@@ -184,7 +186,7 @@ namespace NanoByte.Common.Dispatch
 
                 var originalRepresentation = view[0];
                 model[0].Rebuild();
-                Assert.AreNotSame(originalRepresentation, view[0]);
+                view[0].Should().NotBeSameAs(originalRepresentation);
             }
         }
 
@@ -198,7 +200,7 @@ namespace NanoByte.Common.Dispatch
                 sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
                 sync.Initialize();
             }
-            CollectionAssert.IsEmpty(view);
+            view.Should().BeEmpty();
         }
     }
 }

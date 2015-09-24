@@ -21,6 +21,7 @@
  */
 
 using System;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -46,8 +47,8 @@ namespace NanoByte.Common.Collections
             var dictionary2 = XmlStorage.FromXmlString<XmlDictionary>(data);
 
             // Ensure data stayed the same
-            Assert.AreEqual(dictionary1, dictionary2, "Serialized objects should be equal.");
-            Assert.IsFalse(ReferenceEquals(dictionary1, dictionary2), "Serialized objects should not return the same reference.");
+            dictionary2.Should().Equal(dictionary1, because: "Serialized objects should be equal.");
+            ReferenceEquals(dictionary1, dictionary2).Should().BeFalse(because: "Serialized objects should not return the same reference.");
         }
 
         [Test]
@@ -57,8 +58,8 @@ namespace NanoByte.Common.Collections
             {
                 {"key1", "value1"}
             };
-            Assert.IsTrue(dictionary.ContainsKey("key1"));
-            Assert.IsFalse(dictionary.ContainsKey("key2"));
+            dictionary.ContainsKey("key1").Should().BeTrue();
+            dictionary.ContainsKey("key2").Should().BeFalse();
         }
 
         [Test]
@@ -68,8 +69,8 @@ namespace NanoByte.Common.Collections
             {
                 {"key1", "value1"}
             };
-            Assert.IsTrue(dictionary.ContainsValue("value1"));
-            Assert.IsFalse(dictionary.ContainsValue("value2"));
+            dictionary.ContainsValue("value1").Should().BeTrue();
+            dictionary.ContainsValue("value2").Should().BeFalse();
         }
 
         [Test]
@@ -80,7 +81,7 @@ namespace NanoByte.Common.Collections
                 {"key1", "value1"},
                 {"key2", "value2"}
             };
-            Assert.AreEqual("value1", dictionary.GetValue("key1"));
+            dictionary.GetValue("key1").Should().Be("value1");
         }
 
         [Test]
@@ -93,12 +94,12 @@ namespace NanoByte.Common.Collections
             };
 
             // Check for duplicate keys when adding new entries
-            Assert.Throws<ArgumentException>(() => dictionary.Add("key1", "newValue1"));
+            dictionary.Invoking(x => x.Add("key1", "newValue1")).ShouldThrow<ArgumentException>();
 
             // Check for duplicate keys when modifying existing entries
             var entry = new XmlDictionaryEntry("key3", "value3");
             dictionary.Add(entry);
-            Assert.Throws<InvalidOperationException>(() => entry.Key = "key1");
+            entry.Invoking(x => x.Key = "key1").ShouldThrow<InvalidOperationException>();
         }
     }
 }

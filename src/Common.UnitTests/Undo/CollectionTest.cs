@@ -21,6 +21,7 @@
  */
 
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Undo
@@ -38,10 +39,10 @@ namespace NanoByte.Common.Undo
             var command = new AddToCollection<string>(collection, "d");
 
             command.Execute();
-            CollectionAssert.Contains(collection, "d");
+            collection.Should().Contain("d");
 
             command.Undo();
-            CollectionAssert.DoesNotContain(collection, "d");
+            collection.Should().NotContain("d");
         }
 
         [Test]
@@ -51,14 +52,14 @@ namespace NanoByte.Common.Undo
             var command = new RemoveFromCollection<string>(collection, "b");
 
             command.Execute();
-            CollectionAssert.Contains(collection, "a");
-            CollectionAssert.DoesNotContain(collection, "b");
-            CollectionAssert.Contains(collection, "c");
+            collection.Should().Contain("a");
+            collection.Should().NotContain("b");
+            collection.Should().Contain("c");
 
             command.Undo();
-            CollectionAssert.Contains(collection, "a");
-            CollectionAssert.Contains(collection, "b");
-            CollectionAssert.Contains(collection, "c");
+            collection.Should().Contain("a");
+            collection.Should().Contain("b");
+            collection.Should().Contain("c");
         }
     }
 }

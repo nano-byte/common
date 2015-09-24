@@ -21,6 +21,7 @@
  */
 
 using System.Globalization;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -35,61 +36,59 @@ namespace NanoByte.Common.Collections
         public void TestToString()
         {
             var collection = new LanguageSet {"en-US", "de"};
-            Assert.AreEqual("de en_US", collection.ToString());
+            collection.ToString().Should().Be("de en_US");
         }
 
         [Test]
         public void TestFromString()
         {
-            CollectionAssert.AreEquivalent(new LanguageSet {"de", "en-US"}, new LanguageSet("en_US de"));
+            new LanguageSet("en_US de").Should().BeEquivalentTo(new LanguageSet {"de", "en-US"});
         }
 
         [Test]
         public void TestDuplicateDetection()
         {
             var collection = new LanguageSet("en_US");
-            Assert.IsFalse(collection.Add("en-US"));
-            CollectionAssert.AreEquivalent(new LanguageSet {"en-US"}, collection);
+            collection.Add("en-US").Should().BeFalse();
+            collection.Should().BeEquivalentTo(new LanguageSet {"en-US"});
         }
 
         [Test]
         public void TestContainsAny()
         {
-            Assert.IsTrue(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}));
-            Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}));
+            new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}).Should().BeTrue();
+            new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}).Should().BeTrue();
 
-            Assert.IsFalse(new LanguageSet().ContainsAny(new LanguageSet {"de"}));
-            Assert.IsFalse(new LanguageSet {"de"}.ContainsAny(new LanguageSet()));
+            new LanguageSet().ContainsAny(new LanguageSet {"de"}).Should().BeFalse();
+            new LanguageSet {"de"}.ContainsAny(new LanguageSet()).Should().BeFalse();
 
-            Assert.IsFalse(new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}));
-            Assert.IsFalse(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}));
+            new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}).Should().BeFalse();
+            new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}).Should().BeFalse();
 
-            Assert.IsFalse(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}));
-            Assert.IsFalse(new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}));
+            new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}).Should().BeFalse();
+            new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}).Should().BeFalse();
         }
 
         [Test]
         public void TestContainsAnyIgnoreCountry()
         {
-            Assert.IsTrue(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true));
-            Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true));
+            new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true).Should().BeTrue();
+            new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true).Should().BeTrue();
 
-            Assert.IsFalse(new LanguageSet().ContainsAny(new LanguageSet {"de"}, ignoreCountry: true));
-            Assert.IsFalse(new LanguageSet {"de"}.ContainsAny(new LanguageSet(), ignoreCountry: true));
+            new LanguageSet().ContainsAny(new LanguageSet {"de"}, ignoreCountry: true).Should().BeFalse();
+            new LanguageSet {"de"}.ContainsAny(new LanguageSet(), ignoreCountry: true).Should().BeFalse();
 
-            Assert.IsTrue(new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true));
-            Assert.IsTrue(new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}, ignoreCountry: true));
+            new LanguageSet {"de", "en-US"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true).Should().BeTrue();
+            new LanguageSet {"en", "fr"}.ContainsAny(new LanguageSet {"de", "en-US"}, ignoreCountry: true).Should().BeTrue();
 
-            Assert.IsFalse(new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}, ignoreCountry: true));
-            Assert.IsFalse(new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true));
+            new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"fr"}, ignoreCountry: true).Should().BeFalse();
+            new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true).Should().BeFalse();
         }
 
         [Test]
         public void TestInvalidCultureInSet()
         {
-            Assert.AreEqual(
-                expected: new LanguageSet{CultureInfo.InvariantCulture, new CultureInfo("en")}, 
-                actual: new LanguageSet("invalid en"));
+            new LanguageSet("invalid en").Should().Equal(new LanguageSet{CultureInfo.InvariantCulture, new CultureInfo("en")});
         }
     }
 }

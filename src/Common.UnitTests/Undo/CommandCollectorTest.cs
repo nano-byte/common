@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Undo
@@ -55,17 +56,17 @@ namespace NanoByte.Common.Undo
 
             var command1 = new MockCommand();
             collector.Execute(command1);
-            Assert.IsTrue(command1.Executed, "Should execute while collecting");
+            command1.Executed.Should().BeTrue(because: "Should execute while collecting");
             var command2 = new MockCommand();
             collector.Execute(command2);
-            Assert.IsTrue(command2.Executed, "Should execute while collecting");
+            command2.Executed.Should().BeTrue(because: "Should execute while collecting");
 
             var composite = collector.BuildComposite();
             composite.Execute();
             composite.Undo();
-            Assert.IsFalse(command1.Executed, "Should undo as part of composite");
+            command1.Executed.Should().BeFalse(because: "Should undo as part of composite");
             // ReSharper disable once HeuristicUnreachableCode
-            Assert.IsFalse(command2.Executed, "Should undo as part of composite");
+            command2.Executed.Should().BeFalse(because: "Should undo as part of composite");
         }
     }
 }

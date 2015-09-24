@@ -22,6 +22,7 @@
 
 using System;
 using System.IO;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Storage
@@ -45,17 +46,13 @@ namespace NanoByte.Common.Storage
             try
             {
                 new MoveDirectory(temp1, temp2).Run();
-                Assert.IsTrue(File.Exists(Path.Combine(Path.Combine(temp2, "subdir"), "file")));
-                Assert.AreEqual(
-                    expected: new DateTime(2000, 1, 1),
-                    actual: Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir")),
-                    message: "Last-write time for copied directory is invalid");
-                Assert.AreEqual(
-                    expected: new DateTime(2000, 1, 1),
-                    actual: File.GetLastWriteTimeUtc(Path.Combine(Path.Combine(temp2, "subdir"), "file")),
-                    message: "Last-write time for copied file is invalid");
+                File.Exists(Path.Combine(Path.Combine(temp2, "subdir"), "file")).Should().BeTrue();
+                Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
+                    .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
+                File.GetLastWriteTimeUtc(Path.Combine(Path.Combine(temp2, "subdir"), "file"))
+                    .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
 
-                Assert.IsFalse(Directory.Exists(temp1), "Original directory should be gone after move");
+                Directory.Exists(temp1).Should().BeFalse(because: "Original directory should be gone after move");
             }
             finally
             {

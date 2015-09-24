@@ -23,6 +23,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Tasks
@@ -42,14 +43,18 @@ namespace NanoByte.Common.Tasks
             var task = new ForEachTask<string>("Test task", target, calledFor.Add);
             task.Run();
 
-            CollectionAssert.AreEqual(target, calledFor);
+            calledFor.Should().Equal(target);
         }
 
         [Test(Description = "Ensures exceptions from the work delegate get correctly passed through.")]
         public void TestExceptionPassing()
         {
-            Assert.Throws<IOException>(() => new ForEachTask<string>("Test task", new[] {""}, delegate { throw new IOException("Test exception"); }).Run());
-            Assert.Throws<WebException>(() => new ForEachTask<string>("Test task", new[] {""}, delegate { throw new WebException("Test exception"); }).Run());
+            new ForEachTask<string>("Test task", new[] {""}, delegate { throw new IOException("Test exception"); })
+                .Invoking(x => x.Run())
+                .ShouldThrow<IOException>();
+            new ForEachTask<string>("Test task", new[] {""}, delegate { throw new WebException("Test exception"); })
+                .Invoking(x => x.Run())
+                .ShouldThrow<WebException>();
         }
     }
 }

@@ -23,6 +23,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Streams
@@ -51,7 +52,7 @@ namespace NanoByte.Common.Streams
 
             var result = new byte[5];
             _stream.Read(result, 1, 3);
-            CollectionAssert.AreEqual(new byte[] {0, 1, 2, 3, 0}, result);
+            result.Should().Equal(0, 1, 2, 3, 0);
         }
 
         /// <summary>
@@ -66,18 +67,18 @@ namespace NanoByte.Common.Streams
             _stream.WriteByte(3);
             _stream.WriteByte(4);
             _stream.WriteByte(5);
-            Assert.AreEqual(0, _stream.ReadByte());
-            Assert.AreEqual(1, _stream.ReadByte());
-            Assert.AreEqual(2, _stream.ReadByte());
+            _stream.ReadByte().Should().Be(0);
+            _stream.ReadByte().Should().Be(1);
+            _stream.ReadByte().Should().Be(2);
             _stream.WriteByte(6);
             _stream.WriteByte(7);
             _stream.WriteByte(8);
-            Assert.AreEqual(3, _stream.ReadByte());
-            Assert.AreEqual(4, _stream.ReadByte());
-            Assert.AreEqual(5, _stream.ReadByte());
-            Assert.AreEqual(6, _stream.ReadByte());
-            Assert.AreEqual(7, _stream.ReadByte());
-            Assert.AreEqual(8, _stream.ReadByte());
+            _stream.ReadByte().Should().Be(3);
+            _stream.ReadByte().Should().Be(4);
+            _stream.ReadByte().Should().Be(5);
+            _stream.ReadByte().Should().Be(6);
+            _stream.ReadByte().Should().Be(7);
+            _stream.ReadByte().Should().Be(8);
         }
 
         /// <summary>
@@ -90,13 +91,13 @@ namespace NanoByte.Common.Streams
 
             var result = new byte[2];
             _stream.Read(result, 0, 2);
-            CollectionAssert.AreEqual(new byte[] {0, 1}, result);
+            result.Should().Equal(0, 1);
 
             _stream.Write(new byte[] {4, 5, 6, 7}, 0, 4);
 
             result = new byte[6];
             _stream.Read(result, 0, 6);
-            CollectionAssert.AreEqual(new byte[] {2, 3, 4, 5, 6, 7}, result);
+            result.Should().Equal(2, 3, 4, 5, 6, 7);
         }
 
         /// <summary>
@@ -117,7 +118,7 @@ namespace NanoByte.Common.Streams
             consumerThread.Start();
             consumerThread.Join();
 
-            CollectionAssert.AreEqual(producerData, consumerData);
+            consumerData.Should().Equal(producerData);
         }
 
         /// <summary>
@@ -143,12 +144,12 @@ namespace NanoByte.Common.Streams
             consumerThread.Start();
             consumerThread.Join();
 
-            Assert.AreEqual(producerData.Length, readBytes);
+            readBytes.Should().Be(producerData.Length);
 
-            // consumerData was intentionally too large; now trim it down to actual data size for comparison 
+            // consumerData was intentionally too large; now trim it down to actual data size for comparison
             var trimmedConsumerData = new byte[producerData.Length];
             Buffer.BlockCopy(consumerData, 0, trimmedConsumerData, 0, trimmedConsumerData.Length);
-            CollectionAssert.AreEqual(producerData, trimmedConsumerData);
+            trimmedConsumerData.Should().Equal(producerData);
         }
 
         /// <summary>

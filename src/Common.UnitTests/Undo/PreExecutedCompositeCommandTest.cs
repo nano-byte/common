@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Undo
@@ -66,13 +67,13 @@ namespace NanoByte.Common.Undo
             });
 
             command.Execute();
-            CollectionAssert.AreEqual(new int[] {}, executeCalls, "First execution should do nothing");
+            executeCalls.Should().BeEmpty(because: "First execution should do nothing");
 
             command.Undo();
-            CollectionAssert.AreEqual(new[] {2, 1, 0}, undoCalls, "Child commands should be undone in descending order");
+            undoCalls.Should().Equal(new[] {2, 1, 0}, because: "Child commands should be undone in descending order");
 
             command.Execute();
-            CollectionAssert.AreEqual(new[] {0, 1, 2}, executeCalls, "Child commands should be executed in ascending order");
+            executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
         }
     }
 }

@@ -21,6 +21,7 @@
  */
 
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Dispatch
@@ -55,17 +56,21 @@ namespace NanoByte.Common.Dispatch
             };
 
             dispatcher.Dispatch(sub1Orig);
-            Assert.AreSame(sub1Orig, sub1Dispatched);
+            sub1Dispatched.Should().BeSameAs(sub1Orig);
 
             dispatcher.Dispatch(sub2Orig);
-            Assert.AreSame(sub2Orig, sub2Dispatched);
+            sub2Dispatched.Should().BeSameAs(sub2Orig);
         }
 
         [Test]
         public void TestDispatchActionExceptions()
         {
-            Assert.Throws<KeyNotFoundException>(() => new PerTypeDispatcher<Base>(false) {(Sub1 sub1) => { }}.Dispatch(new Sub2()));
-            Assert.DoesNotThrow(() => new PerTypeDispatcher<Base>(true) {(Sub1 sub1) => { }}.Dispatch(new Sub2()));
+            new PerTypeDispatcher<Base>(false) {(Sub1 sub1) => { }}
+                .Invoking(x => x.Dispatch(new Sub2()))
+                .ShouldThrow<KeyNotFoundException>();
+            new PerTypeDispatcher<Base>(true) {(Sub1 sub1) => { }}
+                .Invoking(x => x.Dispatch(new Sub2()))
+                .ShouldNotThrow<KeyNotFoundException>();
         }
 
         [Test]
@@ -80,15 +85,19 @@ namespace NanoByte.Common.Dispatch
                 (Sub2 sub2) => sub2
             };
 
-            Assert.AreSame(sub1Orig, dispatcher.Dispatch(sub1Orig));
-            Assert.AreSame(sub2Orig, dispatcher.Dispatch(sub2Orig));
+            dispatcher.Dispatch(sub1Orig).Should().BeSameAs(sub1Orig);
+            dispatcher.Dispatch(sub2Orig).Should().BeSameAs(sub2Orig);
         }
 
         [Test]
         public void TestDispatchFuncExceptions()
         {
-            Assert.Throws<KeyNotFoundException>(() => new PerTypeDispatcher<Base, Base>(false) {(Sub1 sub1) => sub1}.Dispatch(new Sub2()));
-            Assert.DoesNotThrow(() => new PerTypeDispatcher<Base, Base>(true) {(Sub1 sub1) => sub1}.Dispatch(new Sub2()));
+            new PerTypeDispatcher<Base, Base>(false) {(Sub1 sub1) => sub1}
+                .Invoking(x => x.Dispatch(new Sub2()))
+                .ShouldThrow<KeyNotFoundException>();
+            new PerTypeDispatcher<Base, Base>(true) {(Sub1 sub1) => sub1}
+                .Invoking(x => x.Dispatch(new Sub2()))
+                .ShouldNotThrow<KeyNotFoundException>();
         }
     }
 }

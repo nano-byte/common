@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -34,25 +35,21 @@ namespace NanoByte.Common.Collections
         public void TestAppend()
         {
             var strings = new[] {"A", "B"};
-            CollectionAssert.AreEqual(
-                expected: new[] {"A", "B", "C"},
-                actual: strings.Append("C"));
+            strings.Append("C").Should().Equal("A", "B", "C");
         }
 
         [Test]
         public void TestPrepend()
         {
             var strings = new[] {"B", "C"};
-            CollectionAssert.AreEqual(
-                expected: new[] {"A", "B", "C"},
-                actual: strings.Prepend("A"));
+            strings.Prepend("A").Should().Equal("A", "B", "C");
         }
 
         [Test]
         public void TestGetAddedElements()
         {
-            CollectionAssert.AreEqual(new[] {"B", "H"}, new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}));
-            CollectionAssert.AreEqual(new[] {"C"}, new[] {"C", "D"}.GetAddedElements(new[] {"A", "D"}));
+            new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}).Should().Equal("B", "H");
+            new[] {"C", "D"}.GetAddedElements(new[] {"A", "D"}).Should().Equal("C");
         }
     }
 }

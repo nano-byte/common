@@ -21,6 +21,7 @@
  */
 
 using System.IO;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -47,10 +48,10 @@ namespace NanoByte.Common.Values
                 using (var stream = File.OpenRead(tempFile))
                     grid = ByteVector4Grid.Load(stream);
 
-                Assert.AreEqual(new ByteVector4(0, 1, 2, 3), grid[0, 0]);
-                Assert.AreEqual(new ByteVector4(3, 2, 1, 0), grid[0, 1]);
-                Assert.AreEqual(new ByteVector4(0, 10, 20, 30), grid[1, 0]);
-                Assert.AreEqual(new ByteVector4(30, 20, 10, 0), grid[1, 1]);
+                grid[0, 0].Should().Be(new ByteVector4(0, 1, 2, 3));
+                grid[0, 1].Should().Be(new ByteVector4(3, 2, 1, 0));
+                grid[1, 0].Should().Be(new ByteVector4(0, 10, 20, 30));
+                grid[1, 1].Should().Be(new ByteVector4(30, 20, 10, 0));
             }
         }
     }

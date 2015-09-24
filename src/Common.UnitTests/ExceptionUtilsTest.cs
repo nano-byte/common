@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -47,7 +48,7 @@ namespace NanoByte.Common
                 caught = ex;
             }
 
-            Assert.Throws<InvalidOperationException>(() => caught.Rethrow());
+            caught.Invoking(x => x.Rethrow()).ShouldThrow<InvalidOperationException>();
         }
 
         /// <summary>
@@ -64,8 +65,8 @@ namespace NanoByte.Common
                 if (value == 2) throw new ArgumentException("Test exception");
             }, rollbackCalledFor.Add), "Exceptions should be passed through after rollback.");
 
-            CollectionAssert.AreEqual(new[] {1, 2}, applyCalledFor);
-            CollectionAssert.AreEqual(new[] {2, 1}, rollbackCalledFor);
+            applyCalledFor.Should().Equal(1, 2);
+            rollbackCalledFor.Should().Equal(2, 1);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace NanoByte.Common
                 if (value == 1) throw new ArgumentException("Test exception");
             });
 
-            CollectionAssert.AreEqual(new[] {1, 2}, actionCalledFor);
+            actionCalledFor.Should().Equal(1, 2);
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace NanoByte.Common
                 throw new ArgumentException("Test exception");
             }), "Last exceptions should be passed through.");
 
-            CollectionAssert.AreEqual(new[] {1, 2, 3}, actionCalledFor);
+            actionCalledFor.Should().Equal(1, 2, 3);
         }
 
         [Test]
@@ -146,7 +147,7 @@ namespace NanoByte.Common
             foreach (var thread in threads)
                 thread.Join();
             foreach (var exception in exceptions)
-                Assert.IsInstanceOf<IOException>(exception);
+                exception.Should().BeOfType<IOException>();
         }
     }
 }

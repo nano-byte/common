@@ -23,6 +23,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -47,10 +48,10 @@ namespace NanoByte.Common.Native
                 string normalFile = Path.Combine(tempDir, "normal");
                 FileUtils.Touch(normalFile);
 
-                Assert.IsFalse(CygwinUtils.IsSymlink(normalFile));
+                CygwinUtils.IsSymlink(normalFile).Should().BeFalse();
 
                 string target;
-                Assert.IsFalse(CygwinUtils.IsSymlink(normalFile, out target));
+                CygwinUtils.IsSymlink(normalFile, out target).Should().BeFalse();
             }
         }
 
@@ -63,11 +64,11 @@ namespace NanoByte.Common.Native
                 File.WriteAllBytes(symlinkFile, _symlinkBytes);
                 File.SetAttributes(symlinkFile, FileAttributes.System);
 
-                Assert.IsTrue(CygwinUtils.IsSymlink(symlinkFile));
+                CygwinUtils.IsSymlink(symlinkFile).Should().BeTrue();
 
                 string target;
-                Assert.IsTrue(CygwinUtils.IsSymlink(symlinkFile, out target));
-                Assert.AreEqual(expected: "target", actual: target);
+                CygwinUtils.IsSymlink(symlinkFile, out target).Should().BeTrue();
+                target.Should().Be("target");
             }
         }
 
@@ -81,7 +82,7 @@ namespace NanoByte.Common.Native
                 string symlinkFile = Path.Combine(tempDir, "symlink");
                 CygwinUtils.CreateSymlink(symlinkFile, "target");
 
-                Assert.IsTrue(File.Exists(symlinkFile));
+                File.Exists(symlinkFile).Should().BeTrue();
                 CollectionAssert.AreEqual(expected: _symlinkBytes, actual: File.ReadAllBytes(symlinkFile));
             }
         }

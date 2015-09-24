@@ -21,6 +21,7 @@
  */
 
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Dispatch
@@ -43,9 +44,9 @@ namespace NanoByte.Common.Dispatch
                 .Add(x => true, rest)
                 .Run();
 
-            CollectionAssert.AreEqual(expected: new[] {2, 4}, actual: even);
-            CollectionAssert.AreEqual(expected: new[] {1}, actual: lessThanThree);
-            CollectionAssert.AreEqual(expected: new[] {3}, actual: rest);
+            even.Should().Equal(2, 4);
+            lessThanThree.Should().Equal(1);
+            rest.Should().Equal(3);
         }
 
         [Test]
@@ -58,8 +59,8 @@ namespace NanoByte.Common.Dispatch
                 .Add('b', b)
                 .Run();
 
-            CollectionAssert.AreEqual(expected: new[] {"alfred", "arnold"}, actual: a);
-            CollectionAssert.AreEqual(expected: new[] {"beatrice"}, actual: b);
+            a.Should().Equal("alfred", "arnold");
+            b.Should().Equal("beatrice");
         }
     }
 }

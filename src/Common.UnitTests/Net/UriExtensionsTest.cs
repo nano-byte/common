@@ -21,6 +21,7 @@
  */
 
 using System;
+using FluentAssertions;
 using NanoByte.Common.Native;
 using NUnit.Framework;
 
@@ -35,49 +36,35 @@ namespace NanoByte.Common.Net
         [Test]
         public void TestToStringRfc()
         {
-            Assert.AreEqual(
-                expected: "http://test/absolute%20path",
-                actual: new Uri("http://test/absolute path").ToStringRfc());
-            Assert.AreEqual(
-                expected: "relative%20path",
-                actual: new Uri("relative%20path", UriKind.Relative).ToStringRfc());
+            new Uri("http://test/absolute path").ToStringRfc().Should().Be("http://test/absolute%20path");
+            new Uri("relative%20path", UriKind.Relative).ToStringRfc().Should().Be("relative%20path");
 
-            Assert.AreEqual(
-                expected: WindowsUtils.IsWindows ? "file:///C:/absolute%20path" : "file:///absolute%20path",
-                actual: new Uri(WindowsUtils.IsWindows ? @"C:\absolute path" : "/absolute path").ToStringRfc());
-            Assert.AreEqual(
-                expected: "relative path",
-                actual: new Uri("relative path", UriKind.Relative).ToStringRfc());
+            new Uri(WindowsUtils.IsWindows ? @"C:\absolute path" : "/absolute path").ToStringRfc().Should().Be(
+                WindowsUtils.IsWindows ? "file:///C:/absolute%20path" : "file:///absolute%20path");
+            new Uri("relative path", UriKind.Relative).ToStringRfc().Should().Be(
+                "relative path");
         }
 
         [Test]
         public void TestEnsureTrailingSlashAbsolute()
         {
-            Assert.AreEqual(
-                expected: new Uri("http://test/test/", UriKind.Absolute),
-                actual: new Uri("http://test/test", UriKind.Absolute).EnsureTrailingSlash());
+            new Uri("http://test/test", UriKind.Absolute).EnsureTrailingSlash().Should().Be(
+                new Uri("http://test/test/", UriKind.Absolute));
         }
 
         [Test]
         public void TestEnsureTrailingSlashRelative()
         {
-            Assert.AreEqual(
-                expected: new Uri("test/", UriKind.Relative),
-                actual: new Uri("test", UriKind.Relative).EnsureTrailingSlash());
+            new Uri("test", UriKind.Relative).EnsureTrailingSlash().Should().Be(
+                new Uri("test/", UriKind.Relative));
         }
 
         [Test]
         public void TestGetLocalFilePath()
         {
-            Assert.AreEqual(
-                expected: "my file.ext",
-                actual: new Uri("http://test/test/my%20file.ext").GetLocalFileName());
-            Assert.AreEqual(
-                expected: "my file.ext",
-                actual: new Uri("file:///test/my%20file.ext").GetLocalFileName());
-            Assert.AreEqual(
-                expected: "test",
-                actual: new Uri("file:///test/").GetLocalFileName());
+            new Uri("http://test/test/my%20file.ext").GetLocalFileName().Should().Be("my file.ext");
+            new Uri("file:///test/my%20file.ext").GetLocalFileName().Should().Be("my file.ext");
+            new Uri("file:///test/").GetLocalFileName().Should().Be("test");
         }
     }
 }

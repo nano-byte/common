@@ -21,6 +21,7 @@
  */
 
 using System.IO;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -43,19 +44,19 @@ namespace NanoByte.Common.Values
                 using (var stream = File.OpenRead(tempFile))
                     grid = ByteGrid.Load(stream);
 
-                Assert.AreEqual(10, grid[0, 0]);
-                Assert.AreEqual(20, grid[0, 1]);
-                Assert.AreEqual(100, grid[1, 0]);
-                Assert.AreEqual(200, grid[1, 1]);
+                grid[0, 0].Should().Be(10);
+                grid[0, 1].Should().Be(20);
+                grid[1, 0].Should().Be(100);
+                grid[1, 1].Should().Be(200);
             }
         }
 
         [Test]
         public void TestSampledRead()
         {
-            Assert.AreEqual(5, new ByteGrid(new byte[,] {{10}, {0}}).SampledRead(0.5f, 0));
-            Assert.AreEqual(5, new ByteGrid(new byte[,] {{10, 0}}).SampledRead(0.5f, 0.5f));
-            Assert.AreEqual(3.75f, new ByteGrid(new byte[,] {{10, 5}, {0, 0}}).SampledRead(0.5f, 0.5f));
+            new ByteGrid(new byte[,] {{10}, {0}}).SampledRead(0.5f, 0).Should().Be(5);
+            new ByteGrid(new byte[,] {{10, 0}}).SampledRead(0.5f, 0.5f).Should().Be(5);
+            new ByteGrid(new byte[,] {{10, 5}, {0, 0}}).SampledRead(0.5f, 0.5f).Should().Be(3.75f);
         }
     }
 }

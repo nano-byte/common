@@ -21,6 +21,7 @@
  */
 
 using System.Security.Cryptography;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -34,143 +35,143 @@ namespace NanoByte.Common
         [Test]
         public void TestCompare()
         {
-            Assert.IsTrue(StringUtils.EqualsIgnoreCase("abc", "abc"));
-            Assert.IsTrue(StringUtils.EqualsIgnoreCase("abc", "ABC"));
+            StringUtils.EqualsIgnoreCase("abc", "abc").Should().BeTrue();
+            StringUtils.EqualsIgnoreCase("abc", "ABC").Should().BeTrue();
 
-            Assert.IsFalse(StringUtils.EqualsIgnoreCase("abc", "123"));
-            Assert.IsFalse(StringUtils.EqualsIgnoreCase("abc", "abc "));
+            StringUtils.EqualsIgnoreCase("abc", "123").Should().BeFalse();
+            StringUtils.EqualsIgnoreCase("abc", "abc ").Should().BeFalse();
         }
 
         [Test]
         public void TestContains()
         {
-            Assert.IsTrue("This is a test.".ContainsIgnoreCase("TEST"));
-            Assert.IsTrue("This is a test.".ContainsIgnoreCase("test"));
+            "This is a test.".ContainsIgnoreCase("TEST").Should().BeTrue();
+            "This is a test.".ContainsIgnoreCase("test").Should().BeTrue();
 
-            Assert.IsFalse("abc".ContainsIgnoreCase("123"));
-            Assert.IsFalse("test".ContainsIgnoreCase("This is a test."));
+            "abc".ContainsIgnoreCase("123").Should().BeFalse();
+            "test".ContainsIgnoreCase("This is a test.").Should().BeFalse();
         }
 
         [Test]
         public void TestCountOccurences()
         {
-            Assert.AreEqual(0, "abc".CountOccurences('/'));
-            Assert.AreEqual(1, "ab/c".CountOccurences('/'));
-            Assert.AreEqual(2, "ab/c/".CountOccurences('/'));
+            "abc".CountOccurences('/').Should().Be(0);
+            "ab/c".CountOccurences('/').Should().Be(1);
+            "ab/c/".CountOccurences('/').Should().Be(2);
         }
 
         [Test]
         public void TestGetLastWord()
         {
-            Assert.AreEqual("sentence", "This is a sentence.".GetLastWord());
-            Assert.AreEqual("words", "some words".GetLastWord());
+            "This is a sentence.".GetLastWord().Should().Be("sentence");
+            "some words".GetLastWord().Should().Be("words");
         }
 
         [Test]
         public void TestSplitMultilineText()
         {
-            CollectionAssert.AreEqual(new[] {"123", "abc"}, "123\nabc".SplitMultilineText(), "Should split Linux-stlye linebreaks");
-            CollectionAssert.AreEqual(new[] {"123", "abc"}, "123\rabc".SplitMultilineText(), "Should split old Mac-stlye linebreaks");
-            CollectionAssert.AreEqual(new[] {"123", "abc"}, "123\r\nabc".SplitMultilineText(), "Should split Windows-stlye linebreaks");
+            "123\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Linux-stlye linebreaks");
+            "123\rabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split old Mac-stlye linebreaks");
+            "123\r\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Windows-stlye linebreaks");
         }
 
         [Test]
         public void TestJoin()
         {
-            Assert.AreEqual("part1", StringUtils.Join(" ", new[] {"part1"}));
-            Assert.AreEqual("part1 part2", StringUtils.Join(" ", new[] {"part1", "part2"}));
-            Assert.AreEqual("\"part1 part2\" part3", new[] {"part1 part2", "part3"}.JoinEscapeArguments());
+            StringUtils.Join(" ", new[] {"part1"}).Should().Be("part1");
+            StringUtils.Join(" ", new[] {"part1", "part2"}).Should().Be("part1 part2");
+            new[] {"part1 part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 part2\" part3");
         }
 
         [Test]
         public void TestJoinEscapeArguments()
         {
-            Assert.AreEqual("part1", new[] {"part1"}.JoinEscapeArguments());
-            Assert.AreEqual("part1 part2", new[] {"part1", "part2"}.JoinEscapeArguments());
-            Assert.AreEqual("\"part1 \\\" part2\" part3", new[] {"part1 \" part2", "part3"}.JoinEscapeArguments());
+            new[] {"part1"}.JoinEscapeArguments().Should().Be("part1");
+            new[] {"part1", "part2"}.JoinEscapeArguments().Should().Be("part1 part2");
+            new[] {"part1 \" part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 \\\" part2\" part3");
         }
 
         [Test]
         public void TestGetLeftRightPartChar()
         {
             const string testString = "text1 text2 text3";
-            Assert.AreEqual("text1", testString.GetLeftPartAtFirstOccurrence(' '));
-            Assert.AreEqual("text2 text3", testString.GetRightPartAtFirstOccurrence(' '));
-            Assert.AreEqual("text1 text2", testString.GetLeftPartAtLastOccurrence(' '));
-            Assert.AreEqual("text3", testString.GetRightPartAtLastOccurrence(' '));
+            testString.GetLeftPartAtFirstOccurrence(' ').Should().Be("text1");
+            testString.GetRightPartAtFirstOccurrence(' ').Should().Be("text2 text3");
+            testString.GetLeftPartAtLastOccurrence(' ').Should().Be("text1 text2");
+            testString.GetRightPartAtLastOccurrence(' ').Should().Be("text3");
         }
 
         [Test]
         public void TestGetLeftRightPartString()
         {
             const string testString = "text1 - text2 - text3";
-            Assert.AreEqual("text1", testString.GetLeftPartAtFirstOccurrence(" - "));
-            Assert.AreEqual("text2 - text3", testString.GetRightPartAtFirstOccurrence(" - "));
-            Assert.AreEqual("text1 - text2", testString.GetLeftPartAtLastOccurrence(" - "));
-            Assert.AreEqual("text3", testString.GetRightPartAtLastOccurrence(" - "));
+            testString.GetLeftPartAtFirstOccurrence(" - ").Should().Be("text1");
+            testString.GetRightPartAtFirstOccurrence(" - ").Should().Be("text2 - text3");
+            testString.GetLeftPartAtLastOccurrence(" - ").Should().Be("text1 - text2");
+            testString.GetRightPartAtLastOccurrence(" - ").Should().Be("text3");
         }
 
         [Test]
         public void TestRemoveAll()
         {
-            Assert.AreEqual("ac", "abcd".RemoveAll("bd"));
+            "abcd".RemoveAll("bd").Should().Be("ac");
         }
 
         [Test]
         public void TestStripCharacters()
         {
-            Assert.AreEqual("ab", "a!b?".StripCharacters(new[] {'!', '?'}));
+            "a!b?".StripCharacters(new[] {'!', '?'}).Should().Be("ab");
         }
 
         [Test]
         public void TestEscapeArgument()
         {
-            Assert.AreEqual("\"\"", "".EscapeArgument(), "Empty strings need to be escaped in order not to vanish");
-            Assert.AreEqual("test", "test".EscapeArgument(), "Simple strings shouldn't be modified");
-            Assert.AreEqual("\"test1 test2\"", "test1 test2".EscapeArgument(), "Strings with whitespaces should be encapsulated");
-            Assert.AreEqual("\"test1 test2\\\\\"", "test1 test2\\".EscapeArgument(), "Trailing backslashes should be escaped");
-            Assert.AreEqual("test1\\\"test2", "test1\"test2".EscapeArgument(), "Quotation marks should be escaped");
-            Assert.AreEqual("test1\\\\test2", "test1\\\\test2".EscapeArgument(), "Consecutive slashes without quotation marks should not be escaped");
-            Assert.AreEqual("test1\\\\\\\"test2", "test1\\\"test2".EscapeArgument(), "Slashes with quotation marks should be escaped");
+            "".EscapeArgument().Should().Be("\"\"", because: "Empty strings need to be escaped in order not to vanish");
+            "test".EscapeArgument().Should().Be("test", because: "Simple strings shouldn't be modified");
+            "test1 test2".EscapeArgument().Should().Be("\"test1 test2\"", because: "Strings with whitespaces should be encapsulated");
+            "test1 test2\\".EscapeArgument().Should().Be("\"test1 test2\\\\\"", because: "Trailing backslashes should be escaped");
+            "test1\"test2".EscapeArgument().Should().Be("test1\\\"test2", because: "Quotation marks should be escaped");
+            "test1\\\\test2".EscapeArgument().Should().Be("test1\\\\test2", because: "Consecutive slashes without quotation marks should not be escaped");
+            "test1\\\"test2".EscapeArgument().Should().Be("test1\\\\\\\"test2", because: "Slashes with quotation marks should be escaped");
         }
 
         [Test]
         public void TestBase64Utf8Encode()
         {
-            Assert.AreEqual("", "".Base64Utf8Encode());
-            Assert.AreEqual("dGVzdA==", "test".Base64Utf8Encode());
+            "".Base64Utf8Encode().Should().Be("");
+            "test".Base64Utf8Encode().Should().Be("dGVzdA==");
         }
 
         [Test]
         public void TestBase64Utf8Decode()
         {
-            Assert.AreEqual("", "".Base64Utf8Decode());
-            Assert.AreEqual("test", "dGVzdA==".Base64Utf8Decode());
+            "".Base64Utf8Decode().Should().Be("");
+            "dGVzdA==".Base64Utf8Decode().Should().Be("test");
         }
 
         [Test]
         public void TestBase32Encode()
         {
-            Assert.AreEqual("IFBA", new byte[] {65, 66}.Base32Encode());
+            new byte[] {65, 66}.Base32Encode().Should().Be("IFBA");
         }
 
         [Test]
         public void TestBase16Encode()
         {
-            Assert.AreEqual("4142", new byte[] {65, 66}.Base16Encode());
+            new byte[] {65, 66}.Base16Encode().Should().Be("4142");
         }
 
         [Test]
         public void TestBase16Decode()
         {
-            Assert.AreEqual(new byte[] {65, 66}, "4142".Base16Decode());
+            "4142".Base16Decode().Should().Equal(65, 66);
         }
 
         [Test]
         public void TestHash()
         {
             const string sha1ForEmptyString = "da39a3ee5e6b4b0d3255bfef95601890afd80709";
-            Assert.AreEqual(sha1ForEmptyString, "".Hash(SHA1.Create()));
+            "".Hash(SHA1.Create()).Should().Be(sha1ForEmptyString);
         }
 
         [Test]
@@ -179,9 +180,8 @@ namespace NanoByte.Common
             for (int i = 0; i < 128; i++)
             {
                 string result = StringUtils.GeneratePassword(i);
-                Assert.That(result, Is.Not.StringContaining("="));
-                Assert.That(result, Is.Not.StringContaining("l"));
-                Assert.AreEqual(result.Length, i);
+                result.Should().NotContain("=").And.NotContain("l");
+                result.Length.Should().Be(i);
             }
         }
     }

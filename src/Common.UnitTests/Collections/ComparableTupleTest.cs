@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -37,12 +38,12 @@ namespace NanoByte.Common.Collections
             var tuple2 = new ComparableTuple<int>(1, 2);
             var tuple3 = new ComparableTuple<int>(2, 1);
 
-            Assert.AreEqual(tuple1, tuple1);
+            tuple1.Should().Be(tuple1);
 
-            Assert.That(tuple1, Is.LessThan(tuple2));
-            Assert.That(tuple2, Is.LessThan(tuple3));
-            Assert.That(tuple3, Is.GreaterThan(tuple2));
-            Assert.That(tuple2, Is.GreaterThan(tuple1));
+            tuple1.Should().BeLessThan(tuple2);
+            tuple2.Should().BeLessThan(tuple3);
+            tuple3.Should().BeGreaterThan(tuple2);
+            tuple2.Should().BeGreaterThan(tuple1);
         }
     }
 }

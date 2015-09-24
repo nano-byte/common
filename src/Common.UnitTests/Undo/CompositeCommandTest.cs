@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Undo
@@ -66,10 +67,10 @@ namespace NanoByte.Common.Undo
             });
 
             command.Execute();
-            CollectionAssert.AreEqual(new[] {0, 1, 2}, executeCalls, "Child commands should be executed in ascending order");
+            executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
 
             command.Undo();
-            CollectionAssert.AreEqual(new[] {2, 1, 0}, undoCalls, "Child commands should be undone in descending order");
+            undoCalls.Should().Equal(new[] {2, 1, 0}, because: "Child commands should be undone in descending order");
         }
 
         [Test(Description = "Makes sure exceptions while executing cause rollbacks to occur.")]
@@ -85,8 +86,8 @@ namespace NanoByte.Common.Undo
             });
 
             Assert.Throws<OperationCanceledException>(command.Execute, "Exceptions should be passed through after rollback");
-            CollectionAssert.AreEqual(new[] {0, 1}, executeCalls, "After an exception the rest of the commands should not be executed");
-            CollectionAssert.AreEqual(new[] {1, 0}, undoCalls, "After an exception all successful executions should be undone");
+            executeCalls.Should().Equal(new[] {0, 1}, because: "After an exception the rest of the commands should not be executed");
+            undoCalls.Should().Equal(new[] {1, 0}, because: "After an exception all successful executions should be undone");
         }
 
         [Test(Description = "Makes sure exceptions while undoing cause rollbacks to occur.")]
@@ -102,12 +103,12 @@ namespace NanoByte.Common.Undo
             });
 
             command.Execute();
-            CollectionAssert.AreEqual(new[] {0, 1, 2}, executeCalls, "Child commands should be executed in ascending order");
+            executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
 
             executeCalls.Clear();
             Assert.Throws<OperationCanceledException>(command.Undo, "Exceptions should be passed through after rollback");
-            CollectionAssert.AreEqual(new[] {2, 1}, undoCalls, "After an exception the rest of the undoes should not be performed");
-            CollectionAssert.AreEqual(new[] {1, 2}, executeCalls, "After an exception all successful undoes should be re-executed");
+            undoCalls.Should().Equal(new[] {2, 1}, because: "After an exception the rest of the undoes should not be performed");
+            executeCalls.Should().Equal(new[] {1, 2}, because: "After an exception all successful undoes should be re-executed");
         }
 
         [Test(Description = "Makes sure a correct order of calling Execute() and Undo() is enforced.")]

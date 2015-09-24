@@ -21,6 +21,7 @@
  */
 
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Undo
@@ -41,10 +42,10 @@ namespace NanoByte.Common.Undo
             var command = new ReplaceInList<string>(list, "b", "x");
 
             command.Execute();
-            CollectionAssert.AreEqual(new[] {"a", "x", "c"}, list);
+            list.Should().Equal("a", "x", "c");
 
             command.Undo();
-            CollectionAssert.AreEqual(new[] {"a", "b", "c"}, list);
+            list.Should().Equal("a", "b", "c");
         }
     }
 }

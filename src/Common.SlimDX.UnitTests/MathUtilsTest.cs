@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -33,43 +34,43 @@ namespace NanoByte.Common
         [Test]
         public void TestModuloDouble()
         {
-            Assert.AreEqual(expected: 2, actual: 5.0.Modulo(3));
-            Assert.AreEqual(expected: 1, actual: 4.0.Modulo(3));
-            Assert.AreEqual(expected: 0, actual: 3.0.Modulo(3));
-            Assert.AreEqual(expected: 2, actual: 2.0.Modulo(3));
-            Assert.AreEqual(expected: 1, actual: 1.0.Modulo(3));
-            Assert.AreEqual(expected: 0, actual: 0.0.Modulo(3));
-            Assert.AreEqual(expected: 2, actual: (-1.0).Modulo(3));
-            Assert.AreEqual(expected: 1, actual: (-2.0).Modulo(3));
-            Assert.AreEqual(expected: 0, actual: (-3.0).Modulo(3));
+            5.0.Modulo(3).Should().Be(2);
+            4.0.Modulo(3).Should().Be(1);
+            3.0.Modulo(3).Should().Be(0);
+            2.0.Modulo(3).Should().Be(2);
+            1.0.Modulo(3).Should().Be(1);
+            0.0.Modulo(3).Should().Be(0);
+            (-1.0).Modulo(3).Should().Be(2);
+            (-2.0).Modulo(3).Should().Be(1);
+            (-3.0).Modulo(3).Should().Be(0);
         }
 
         [Test]
         public void TestModuloFloat()
         {
-            Assert.AreEqual(expected: 2, actual: 5f.Modulo(3));
-            Assert.AreEqual(expected: 1, actual: 4f.Modulo(3));
-            Assert.AreEqual(expected: 0, actual: 3f.Modulo(3));
-            Assert.AreEqual(expected: 2, actual: 2f.Modulo(3));
-            Assert.AreEqual(expected: 1, actual: 1f.Modulo(3));
-            Assert.AreEqual(expected: 0, actual: 0f.Modulo(3));
-            Assert.AreEqual(expected: 2, actual: (-1f).Modulo(3));
-            Assert.AreEqual(expected: 1, actual: (-2f).Modulo(3));
-            Assert.AreEqual(expected: 0, actual: (-3f).Modulo(3));
+            5f.Modulo(3).Should().Be(2);
+            4f.Modulo(3).Should().Be(1);
+            3f.Modulo(3).Should().Be(0);
+            2f.Modulo(3).Should().Be(2);
+            1f.Modulo(3).Should().Be(1);
+            0f.Modulo(3).Should().Be(0);
+            (-1f).Modulo(3).Should().Be(2);
+            (-2f).Modulo(3).Should().Be(1);
+            (-3f).Modulo(3).Should().Be(0);
         }
 
         [Test]
         public void TestModuloInt()
         {
-            Assert.AreEqual(expected: 2, actual: 5.Modulo(3));
-            Assert.AreEqual(expected: 1, actual: 4.Modulo(3));
-            Assert.AreEqual(expected: 0, actual: 3.Modulo(3));
-            Assert.AreEqual(expected: 2, actual: 2.Modulo(3));
-            Assert.AreEqual(expected: 1, actual: 1.Modulo(3));
-            Assert.AreEqual(expected: 0, actual: 0.Modulo(3));
-            Assert.AreEqual(expected: 2, actual: (-1).Modulo(3));
-            Assert.AreEqual(expected: 1, actual: (-2).Modulo(3));
-            Assert.AreEqual(expected: 0, actual: (-3).Modulo(3));
+            5.Modulo(3).Should().Be(2);
+            4.Modulo(3).Should().Be(1);
+            3.Modulo(3).Should().Be(0);
+            2.Modulo(3).Should().Be(2);
+            1.Modulo(3).Should().Be(1);
+            0.Modulo(3).Should().Be(0);
+            (-1).Modulo(3).Should().Be(2);
+            (-2).Modulo(3).Should().Be(1);
+            (-3).Modulo(3).Should().Be(0);
         }
     }
 }

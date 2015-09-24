@@ -24,6 +24,7 @@ using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
+using FluentAssertions;
 using Moq;
 using NanoByte.Common.Native;
 using NUnit.Framework;
@@ -40,21 +41,21 @@ namespace NanoByte.Common.Storage
         [Test]
         public void TestUnifySlashes()
         {
-            Assert.AreEqual("a" + Path.DirectorySeparatorChar + "b", FileUtils.UnifySlashes("a/b"));
+            FileUtils.UnifySlashes("a/b").Should().Be("a" + Path.DirectorySeparatorChar + "b");
         }
 
         [Test]
         public void TestIsBreakoutPath()
         {
-            Assert.IsTrue(FileUtils.IsBreakoutPath(WindowsUtils.IsWindows ? @"C:\test" : "/test"), "Should detect absolute paths");
+            FileUtils.IsBreakoutPath(WindowsUtils.IsWindows ? @"C:\test" : "/test").Should().BeTrue(because: "Should detect absolute paths");
 
             foreach (string path in new[] {"..", "/..", "../", "/../", "a/../b", "../a", "a/.."})
-                Assert.IsTrue(FileUtils.IsBreakoutPath(path), "Should detect parent directory references");
+                FileUtils.IsBreakoutPath(path).Should().BeTrue(because: "Should detect parent directory references");
 
             foreach (string path in new[] {"..a", "a/..a", "a..", "a/a.."})
-                Assert.IsFalse(FileUtils.IsBreakoutPath(path), "Should not trip on '..' as a part of file/directory names");
+                FileUtils.IsBreakoutPath(path).Should().BeFalse(because: "Should not trip on '..' as a part of file/directory names");
 
-            Assert.IsFalse(FileUtils.IsBreakoutPath(""));
+            FileUtils.IsBreakoutPath("").Should().BeFalse();
         }
 
         [Test]
@@ -62,15 +63,15 @@ namespace NanoByte.Common.Storage
         {
             if (WindowsUtils.IsWindows)
             {
-                Assert.AreEqual("a/b", new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")));
-                Assert.AreEqual("test/a/b", new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\x")));
-                Assert.AreEqual("../test1", new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")));
+                new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")).Should().Be("a/b");
+                new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\x")).Should().Be("test/a/b");
+                new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")).Should().Be("../test1");
             }
             else
             {
-                Assert.AreEqual("a/b", new FileInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")));
-                Assert.AreEqual("test/a/b", new FileInfo("/test/a/b").RelativeTo(new FileInfo("/x")));
-                Assert.AreEqual("../test1", new DirectoryInfo("/test1").RelativeTo(new DirectoryInfo("/test2")));
+                new FileInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")).Should().Be("a/b");
+                new FileInfo("/test/a/b").RelativeTo(new FileInfo("/x")).Should().Be("test/a/b");
+                new DirectoryInfo("/test1").RelativeTo(new DirectoryInfo("/test2")).Should().Be("../test1");
             }
         }
 
@@ -79,20 +80,14 @@ namespace NanoByte.Common.Storage
         {
             var variables = new StringDictionary
             {
-                {"key1", "value1"},
-                {"key2", "value2"},
-                {"long key", "long value"}
+                {"key1", "value1"}, {"key2", "value2"}, {"long key", "long value"}
             };
 
-            Assert.AreEqual(
-                "value1value2/value1 value2 long value ",
-                FileUtils.ExpandUnixVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables));
+            FileUtils.ExpandUnixVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables).Should().Be("value1value2/value1 value2 long value ");
 
-            Assert.AreEqual(
-                "value1-bla",
-                FileUtils.ExpandUnixVariables("$KEY1-bla", variables));
+            FileUtils.ExpandUnixVariables("$KEY1-bla", variables).Should().Be("value1-bla");
 
-            Assert.AreEqual("", FileUtils.ExpandUnixVariables("", variables));
+            FileUtils.ExpandUnixVariables("", variables).Should().Be("");
         }
         #endregion
 
@@ -104,7 +99,7 @@ namespace NanoByte.Common.Storage
         public void TestToUnixTime()
         {
             // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
-            Assert.AreEqual(1095292800, new DateTime(2004, 09, 16).ToUnixTime());
+            new DateTime(2004, 09, 16).ToUnixTime().Should().Be(1095292800);
         }
 
         /// <summary>
@@ -114,7 +109,7 @@ namespace NanoByte.Common.Storage
         public void TestFromUnixTime()
         {
             // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
-            Assert.AreEqual(new DateTime(2004, 09, 16), FileUtils.FromUnixTime(1095292800));
+            FileUtils.FromUnixTime(1095292800).Should().Be(new DateTime(2004, 09, 16));
         }
         #endregion
 
@@ -128,8 +123,8 @@ namespace NanoByte.Common.Storage
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
                 File.WriteAllText(Path.Combine(tempDir, "test"), "");
-                Assert.IsTrue(FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "test")));
-                Assert.IsFalse(FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "Test")));
+                FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "test")).Should().BeTrue();
+                FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "Test")).Should().BeFalse();
             }
         }
         #endregion
@@ -144,13 +139,13 @@ namespace NanoByte.Common.Storage
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
                 string testFile = Path.Combine(tempDir, "test");
-                Assert.IsFalse(File.Exists(testFile));
+                File.Exists(testFile).Should().BeFalse();
 
                 FileUtils.Touch(testFile);
-                Assert.IsTrue(File.Exists(testFile));
+                File.Exists(testFile).Should().BeTrue();
 
                 FileUtils.Touch(testFile);
-                Assert.IsTrue(File.Exists(testFile));
+                File.Exists(testFile).Should().BeTrue();
             }
         }
         #endregion
@@ -163,9 +158,9 @@ namespace NanoByte.Common.Storage
         public void TestGetTempFile()
         {
             string path = FileUtils.GetTempFile("unit-tests");
-            Assert.IsNotNullOrEmpty(path);
-            Assert.IsTrue(File.Exists(path));
-            Assert.AreEqual("", File.ReadAllText(path));
+            path.Should().NotBeNullOrEmpty();
+            File.Exists(path).Should().BeTrue();
+            File.ReadAllText(path).Should().Be("");
             File.Delete(path);
         }
 
@@ -176,9 +171,9 @@ namespace NanoByte.Common.Storage
         public void TestGetTempDirectory()
         {
             string path = FileUtils.GetTempDirectory("unit-tests");
-            Assert.IsNotNullOrEmpty(path);
-            Assert.IsTrue(Directory.Exists(path));
-            Assert.IsEmpty(Directory.GetFileSystemEntries(path));
+            path.Should().NotBeNullOrEmpty();
+            Directory.Exists(path).Should().BeTrue();
+            Directory.GetFileSystemEntries(path).Should().BeEmpty();
             Directory.Delete(path);
         }
         #endregion
@@ -198,7 +193,7 @@ namespace NanoByte.Common.Storage
                 File.WriteAllText(sourcePath, @"source");
                 File.WriteAllText(targetPath, @"target");
                 FileUtils.Replace(sourcePath, targetPath);
-                Assert.AreEqual("source", File.ReadAllText(targetPath));
+                File.ReadAllText(targetPath).Should().Be("source");
             }
         }
 
@@ -215,7 +210,7 @@ namespace NanoByte.Common.Storage
 
                 File.WriteAllText(sourcePath, @"source");
                 FileUtils.Replace(sourcePath, targetPath);
-                Assert.AreEqual("source", File.ReadAllText(targetPath));
+                File.ReadAllText(targetPath).Should().Be("source");
             }
         }
         #endregion
@@ -227,7 +222,7 @@ namespace NanoByte.Common.Storage
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
                 File.WriteAllText(tempFile, "line1\nline2");
-                Assert.AreEqual("line1", new FileInfo(tempFile).ReadFirstLine(Encoding.ASCII));
+                new FileInfo(tempFile).ReadFirstLine(Encoding.ASCII).Should().Be("line1");
             }
         }
         #endregion
@@ -288,9 +283,7 @@ namespace NanoByte.Common.Storage
                 Directory.CreateDirectory(sub);
                 FileUtils.Touch(file);
 
-                Assert.AreEqual(
-                    expected: prefix2,
-                    actual: new DirectoryInfo(tempDir).WalkThroughPrefix().FullName);
+                new DirectoryInfo(tempDir).WalkThroughPrefix().FullName.Should().Be(prefix2);
             }
         }
 
@@ -307,9 +300,7 @@ namespace NanoByte.Common.Storage
                 Directory.CreateDirectory(sub);
                 FileUtils.Touch(file2);
 
-                CollectionAssert.AreEqual(
-                    expected: new[] {file1, file2},
-                    actual: FileUtils.GetFilesRecursive(tempDir));
+                FileUtils.GetFilesRecursive(tempDir).Should().Equal(file1, file2);
             }
         }
         #endregion
@@ -326,13 +317,13 @@ namespace NanoByte.Common.Storage
                 string sourcePath = Path.Combine(tempDir, "symlink");
                 FileUtils.CreateSymlink(sourcePath, "target");
 
-                Assert.IsTrue(File.Exists(sourcePath), "Symlink should look like file");
-                Assert.AreEqual("data", File.ReadAllText(sourcePath), "Symlinked file contents should be equal");
+                File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
+                File.ReadAllText(sourcePath).Should().Be("data", because: "Symlinked file contents should be equal");
 
                 string target;
-                Assert.IsTrue(FileUtils.IsSymlink(sourcePath, out target), "Should detect symlink as such");
-                Assert.AreEqual(target, "target", "Should retrieve relative link target");
-                Assert.IsFalse(FileUtils.IsRegularFile(sourcePath), "Should not detect symlink as regular file");
+                FileUtils.IsSymlink(sourcePath, out target).Should().BeTrue(because: "Should detect symlink as such");
+                "target".Should().Be(target, because: "Should retrieve relative link target");
+                FileUtils.IsRegularFile(sourcePath).Should().BeFalse(because: "Should not detect symlink as regular file");
             }
         }
 
@@ -347,11 +338,11 @@ namespace NanoByte.Common.Storage
                 string sourcePath = Path.Combine(tempDir, "symlink");
                 FileUtils.CreateSymlink(sourcePath, "target");
 
-                Assert.IsTrue(Directory.Exists(sourcePath), "Symlink should look like directory");
+                Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
 
                 string contents;
-                Assert.IsTrue(FileUtils.IsSymlink(sourcePath, out contents), "Should detect symlink as such");
-                Assert.AreEqual(contents, "target", "Should retrieve relative link target");
+                FileUtils.IsSymlink(sourcePath, out contents).Should().BeTrue(because: "Should detect symlink as such");
+                "target".Should().Be(contents, because: "Should retrieve relative link target");
             }
         }
 
@@ -367,8 +358,8 @@ namespace NanoByte.Common.Storage
                 string sourcePath = Path.Combine(tempDir, "symlink");
                 FileUtils.CreateSymlink(sourcePath, "target");
 
-                Assert.IsTrue(File.Exists(sourcePath), "Symlink should look like file");
-                Assert.AreEqual("data", File.ReadAllText(sourcePath), "Symlinked file contents should be equal");
+                File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
+                File.ReadAllText(sourcePath).Should().Be("data", because: "Symlinked file contents should be equal");
             }
         }
 
@@ -384,7 +375,7 @@ namespace NanoByte.Common.Storage
                 string sourcePath = Path.Combine(tempDir, "symlink");
                 FileUtils.CreateSymlink(sourcePath, "target");
 
-                Assert.IsTrue(Directory.Exists(sourcePath), "Symlink should look like directory");
+                Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
             }
         }
 
@@ -399,12 +390,12 @@ namespace NanoByte.Common.Storage
 
                 File.WriteAllText(destinationPath, @"data");
                 FileUtils.CreateHardlink(sourcePath, destinationPath);
-                Assert.IsTrue(File.Exists(sourcePath), "Hardlink should look like regular file");
-                Assert.AreEqual("data", File.ReadAllText(sourcePath), "Hardlinked file contents should be equal");
-                Assert.IsTrue(FileUtils.AreHardlinked(sourcePath, destinationPath));
+                File.Exists(sourcePath).Should().BeTrue(because: "Hardlink should look like regular file");
+                File.ReadAllText(sourcePath).Should().Be("data", because: "Hardlinked file contents should be equal");
+                FileUtils.AreHardlinked(sourcePath, destinationPath).Should().BeTrue();
 
                 File.Copy(sourcePath, copyPath);
-                Assert.IsFalse(FileUtils.AreHardlinked(sourcePath, copyPath));
+                FileUtils.AreHardlinked(sourcePath, copyPath).Should().BeFalse();
             }
         }
         #endregion
@@ -414,7 +405,7 @@ namespace NanoByte.Common.Storage
         public void TestIsRegularFile()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
-                Assert.IsTrue(FileUtils.IsRegularFile(tempFile), "Regular file should be detected as such");
+                FileUtils.IsRegularFile(tempFile).Should().BeTrue(because: "Regular file should be detected as such");
         }
 
         [Test]
@@ -423,8 +414,8 @@ namespace NanoByte.Common.Storage
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
                 string contents;
-                Assert.IsFalse(FileUtils.IsSymlink(tempFile, out contents), "File was incorrectly identified as symlink");
-                Assert.IsNull(contents);
+                FileUtils.IsSymlink(tempFile, out contents).Should().BeFalse(because: "File was incorrectly identified as symlink");
+                contents.Should().BeNull();
             }
         }
 
@@ -432,7 +423,7 @@ namespace NanoByte.Common.Storage
         public void TestIsExecutable()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
-                Assert.IsFalse(FileUtils.IsExecutable(tempFile), "File was incorrectly identified as executable");
+                FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File was incorrectly identified as executable");
         }
 
         [Test]
@@ -442,14 +433,14 @@ namespace NanoByte.Common.Storage
 
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
-                Assert.IsFalse(FileUtils.IsExecutable(tempFile), "File should not be executable yet");
+                FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File should not be executable yet");
 
                 FileUtils.SetExecutable(tempFile, true);
-                Assert.IsTrue(FileUtils.IsExecutable(tempFile), "File should now be executable");
-                Assert.IsTrue(FileUtils.IsRegularFile(tempFile), "File should still be considered a regular file");
+                FileUtils.IsExecutable(tempFile).Should().BeTrue(because: "File should now be executable");
+                FileUtils.IsRegularFile(tempFile).Should().BeTrue(because: "File should still be considered a regular file");
 
                 FileUtils.SetExecutable(tempFile, false);
-                Assert.IsFalse(FileUtils.IsExecutable(tempFile), "File should no longer be executable");
+                FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File should no longer be executable");
             }
         }
 
@@ -458,8 +449,8 @@ namespace NanoByte.Common.Storage
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
-                if (UnixUtils.IsUnix) Assert.IsTrue(FileUtils.IsUnixFS(tempDir), "Temp dir should be on Unixoid filesystem on Unixoid OS");
-                else Assert.IsFalse(FileUtils.IsUnixFS(tempDir), "No directory should be Unixoid on a non-Unixoid OS");
+                if (UnixUtils.IsUnix) FileUtils.IsUnixFS(tempDir).Should().BeTrue(because: "Temp dir should be on Unixoid filesystem on Unixoid OS");
+                else FileUtils.IsUnixFS(tempDir).Should().BeFalse(because: "No directory should be Unixoid on a non-Unixoid OS");
             }
         }
         #endregion
@@ -471,12 +462,10 @@ namespace NanoByte.Common.Storage
             var data = new byte[] {0, 1, 2, 3, 4, 5, 6, 7};
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
-                Assert.IsNull(FileUtils.ReadExtendedMetadata(tempFile, "test-stream"));
+                FileUtils.ReadExtendedMetadata(tempFile, "test-stream").Should().BeNull();
 
                 FileUtils.WriteExtendedMetadata(tempFile, "test-stream", data);
-                CollectionAssert.AreEqual(
-                    expected: data,
-                    actual: FileUtils.ReadExtendedMetadata(tempFile, "test-stream"));
+                FileUtils.ReadExtendedMetadata(tempFile, "test-stream").Should().Equal(data);
             }
         }
 

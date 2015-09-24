@@ -21,6 +21,7 @@
  */
 
 using System.Globalization;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -50,9 +51,9 @@ namespace NanoByte.Common.Collections
             var collection2 = XmlStorage.FromXmlString<LocalizableStringCollection>(data);
 
             // Ensure data stayed the same
-            Assert.AreEqual(collection1, collection2, "Serialized objects should be equal.");
-            Assert.AreEqual(collection1.GetSequencedHashCode(), collection2.GetSequencedHashCode(), "Serialized objects' hashes should be equal.");
-            Assert.IsFalse(ReferenceEquals(collection1, collection2), "Serialized objects should not return the same reference.");
+            collection2.Should().Equal(collection1, because: "Serialized objects should be equal.");
+            collection2.GetSequencedHashCode().Should().Be(collection1.GetSequencedHashCode(), because: "Serialized objects' hashes should be equal.");
+            ReferenceEquals(collection1, collection2).Should().BeFalse(because: "Serialized objects should not return the same reference.");
         }
 
         [Test]
@@ -60,15 +61,14 @@ namespace NanoByte.Common.Collections
         {
             var dictionary = new LocalizableStringCollection
             {
-                "neutralValue",
-                {"de-DE", "germanyValue"}
+                "neutralValue", {"de-DE", "germanyValue"}
             };
 
-            Assert.IsTrue(dictionary.ContainsExactLanguage(LocalizableString.DefaultLanguage), "Unspecified language should default to English generic");
-            Assert.IsTrue(dictionary.ContainsExactLanguage(new CultureInfo("de-DE")));
-            Assert.IsFalse(dictionary.ContainsExactLanguage(new CultureInfo("de")));
-            Assert.IsFalse(dictionary.ContainsExactLanguage(new CultureInfo("de-AT")));
-            Assert.IsFalse(dictionary.ContainsExactLanguage(new CultureInfo("en-US")));
+            dictionary.ContainsExactLanguage(LocalizableString.DefaultLanguage).Should().BeTrue(because: "Unspecified language should default to English generic");
+            dictionary.ContainsExactLanguage(new CultureInfo("de-DE")).Should().BeTrue();
+            dictionary.ContainsExactLanguage(new CultureInfo("de")).Should().BeFalse();
+            dictionary.ContainsExactLanguage(new CultureInfo("de-AT")).Should().BeFalse();
+            dictionary.ContainsExactLanguage(new CultureInfo("en-US")).Should().BeFalse();
         }
 
         [Test]
@@ -76,17 +76,15 @@ namespace NanoByte.Common.Collections
         {
             var dictionary = new LocalizableStringCollection
             {
-                "neutralValue",
-                {"de-DE", "germanyValue"},
+                "neutralValue", {"de-DE", "germanyValue"},
                 // Intential duplicates (should be ignored)
-                "neutralValue",
-                {"de-DE", "germanyValue"}
+                "neutralValue", {"de-DE", "germanyValue"}
             };
 
             dictionary.Set(LocalizableString.DefaultLanguage, null);
-            Assert.IsFalse(dictionary.ContainsExactLanguage(LocalizableString.DefaultLanguage), "Unspecified language should default to English generic");
+            dictionary.ContainsExactLanguage(LocalizableString.DefaultLanguage).Should().BeFalse(because: "Unspecified language should default to English generic");
             dictionary.Set(new CultureInfo("de-DE"), null);
-            Assert.IsFalse(dictionary.ContainsExactLanguage(new CultureInfo("de-DE")));
+            dictionary.ContainsExactLanguage(new CultureInfo("de-DE")).Should().BeFalse();
         }
 
         [Test]
@@ -104,8 +102,8 @@ namespace NanoByte.Common.Collections
             dictionary.Set(LocalizableString.DefaultLanguage, "neutralValue2");
             dictionary.Set(new CultureInfo("de-DE"), "germanyValue2");
 
-            Assert.AreEqual("neutralValue2", dictionary.GetExactLanguage(LocalizableString.DefaultLanguage));
-            Assert.AreEqual("germanyValue2", dictionary.GetExactLanguage(new CultureInfo("de-DE")));
+            dictionary.GetExactLanguage(LocalizableString.DefaultLanguage).Should().Be("neutralValue2");
+            dictionary.GetExactLanguage(new CultureInfo("de-DE")).Should().Be("germanyValue2");
         }
 
         [Test]
@@ -120,13 +118,13 @@ namespace NanoByte.Common.Collections
                 {"de-DE", "germanyValue"}
             };
 
-            Assert.AreEqual("neutralValue", dictionary.GetExactLanguage(LocalizableString.DefaultLanguage), "Unspecified language should default to English generic");
-            Assert.AreEqual("americaValue", dictionary.GetExactLanguage(new CultureInfo("en-US")));
-            Assert.IsNull(dictionary.GetExactLanguage(new CultureInfo("en-CA")));
-            Assert.AreEqual("gbValue", dictionary.GetExactLanguage(new CultureInfo("en-GB")));
-            Assert.AreEqual("germanValue", dictionary.GetExactLanguage(new CultureInfo("de")));
-            Assert.AreEqual("germanyValue", dictionary.GetExactLanguage(new CultureInfo("de-DE")));
-            Assert.IsNull(dictionary.GetExactLanguage(new CultureInfo("de-AT")));
+            dictionary.GetExactLanguage(LocalizableString.DefaultLanguage).Should().Be("neutralValue", because: "Unspecified language should default to English generic");
+            dictionary.GetExactLanguage(new CultureInfo("en-US")).Should().Be("americaValue");
+            dictionary.GetExactLanguage(new CultureInfo("en-CA")).Should().BeNull();
+            dictionary.GetExactLanguage(new CultureInfo("en-GB")).Should().Be("gbValue");
+            dictionary.GetExactLanguage(new CultureInfo("de")).Should().Be("germanValue");
+            dictionary.GetExactLanguage(new CultureInfo("de-DE")).Should().Be("germanyValue");
+            dictionary.GetExactLanguage(new CultureInfo("de-AT")).Should().BeNull();
         }
 
         [Test]
@@ -141,20 +139,20 @@ namespace NanoByte.Common.Collections
                 "neutralValue"
             };
 
-            Assert.AreEqual("neutralValue", dictionary.GetBestLanguage(LocalizableString.DefaultLanguage), "Unspecified language should default to English generic");
-            Assert.AreEqual("americaValue", dictionary.GetBestLanguage(new CultureInfo("en-US")));
-            Assert.AreEqual("neutralValue", dictionary.GetBestLanguage(new CultureInfo("en-CA")), "No exact match, should fall back to English generic");
-            Assert.AreEqual("gbValue", dictionary.GetBestLanguage(new CultureInfo("en-GB")));
-            Assert.AreEqual("germanValue", dictionary.GetBestLanguage(new CultureInfo("de")));
-            Assert.AreEqual("germanyValue", dictionary.GetBestLanguage(new CultureInfo("de-DE")), "No exact match, should fall back to German generic");
-            Assert.AreEqual("germanValue", dictionary.GetBestLanguage(new CultureInfo("de-AT")), "No exact match, should fall back to German generic");
-            Assert.AreEqual("neutralValue", dictionary.GetBestLanguage(new CultureInfo("es-ES")), "No match, should fall back to English generic");
+            dictionary.GetBestLanguage(LocalizableString.DefaultLanguage).Should().Be("neutralValue", because: "Unspecified language should default to English generic");
+            dictionary.GetBestLanguage(new CultureInfo("en-US")).Should().Be("americaValue");
+            dictionary.GetBestLanguage(new CultureInfo("en-CA")).Should().Be("neutralValue", because: "No exact match, should fall back to English generic");
+            dictionary.GetBestLanguage(new CultureInfo("en-GB")).Should().Be("gbValue");
+            dictionary.GetBestLanguage(new CultureInfo("de")).Should().Be("germanValue");
+            dictionary.GetBestLanguage(new CultureInfo("de-DE")).Should().Be("germanyValue", because: "No exact match, should fall back to German generic");
+            dictionary.GetBestLanguage(new CultureInfo("de-AT")).Should().Be("germanValue", because: "No exact match, should fall back to German generic");
+            dictionary.GetBestLanguage(new CultureInfo("es-ES")).Should().Be("neutralValue", because: "No match, should fall back to English generic");
 
             dictionary.Set(LocalizableString.DefaultLanguage, null);
-            Assert.AreEqual("americaValue", dictionary.GetBestLanguage(new CultureInfo("es-ES")), "No English generic, should fall back to English US");
+            dictionary.GetBestLanguage(new CultureInfo("es-ES")).Should().Be("americaValue", because: "No English generic, should fall back to English US");
 
             dictionary.Set(new CultureInfo("en-US"), null);
-            Assert.AreEqual("germanValue", dictionary.GetBestLanguage(new CultureInfo("es-ES")), "No English US, should fall back to first entry in collection");
+            dictionary.GetBestLanguage(new CultureInfo("es-ES")).Should().Be("germanValue", because: "No English US, should fall back to first entry in collection");
         }
     }
 }

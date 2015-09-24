@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NanoByte.Common.Native;
 using NUnit.Framework;
 
@@ -36,7 +37,7 @@ namespace NanoByte.Common.Cli
         {
             var control = new DummyControl();
             string output = control.Execute();
-            Assert.That(output.Length, Is.GreaterThan(1));
+            output.Length.Should().BeGreaterThan(1);
         }
 
         private class DummyControl : CliAppControl

@@ -22,6 +22,7 @@
 
 using System;
 using System.Threading;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Tasks
@@ -42,11 +43,11 @@ namespace NanoByte.Common.Tasks
                 waitThread.Start();
 
                 Thread.Sleep(100);
-                Assert.AreEqual(TaskState.Started, task.State);
+                task.State.Should().Be(TaskState.Started);
 
                 waitHandle.Set();
                 waitThread.Join();
-                Assert.AreEqual(TaskState.Complete, task.State);
+                task.State.Should().Be(TaskState.Complete);
             }
         }
 
@@ -77,7 +78,7 @@ namespace NanoByte.Common.Tasks
                 cancellationTokenSource.Cancel();
                 waitThread.Join();
 
-                Assert.IsTrue(exceptionThrown, task.State.ToString());
+                exceptionThrown.Should().BeTrue(because: task.State.ToString());
             }
         }
     }

@@ -24,6 +24,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
+using FluentAssertions;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NUnit.Framework;
@@ -60,8 +61,8 @@ namespace NanoByte.Common.Net
             download.Run();
 
             // Ensure the download was successful and the file is identical
-            Assert.AreEqual(TaskState.Complete, download.State);
-            CollectionAssert.AreEqual(_testFileContent.ToArray(), download.GetData(), "Downloaded file doesn't match original");
+            download.State.Should().Be(TaskState.Complete);
+            download.GetData().Should().Equal(_testFileContent.ToArray());
         }
 
         [Test(Description = "Starts downloading a small file using Run() and stops again right away using Cancel().")]
@@ -90,21 +91,21 @@ namespace NanoByte.Common.Net
             cancellationTokenSource.Cancel();
             downloadThread.Join();
 
-            Assert.IsTrue(exceptionThrown, message: "Should throw OperationCanceledException");
+            exceptionThrown.Should().BeTrue(because: "Should throw OperationCanceledException");
         }
 
         [Test(Description = "Ensure files with an incorrect size are rejected.")]
         public void TestFileMissing()
         {
             var download = new DownloadMemory(new Uri(_server.ServerUri, "wrong"));
-            Assert.Throws<WebException>(() => download.Run());
+            download.Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
 
         [Test(Description = "Ensure files with an incorrect size are rejected.")]
         public void TestIncorrectSize()
         {
             var download = new DownloadMemory(_server.FileUri, bytesTotal: 1024);
-            Assert.Throws<WebException>(() => download.Run());
+            download.Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
     }
 }

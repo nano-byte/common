@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Dispatch
@@ -48,15 +49,15 @@ namespace NanoByte.Common.Dispatch
                 (Sub2 sub2) => new[] {"sub2"}
             };
 
-            CollectionAssert.AreEqual(new[] {"sub1"}, dispatcher.Dispatch(new Sub1()));
-            CollectionAssert.AreEqual(new[] {"sub1", "sub2"}, dispatcher.Dispatch(new Sub2()));
+            dispatcher.Dispatch(new Sub1()).Should().Equal("sub1");
+            dispatcher.Dispatch(new Sub2()).Should().Equal("sub1", "sub2");
         }
 
         [Test]
         public void UnknownType()
         {
             var dispatcher = new AggregateDispatcher<Base, string>();
-            Assert.IsEmpty(dispatcher.Dispatch(new Sub1()));
+            dispatcher.Dispatch(new Sub1()).Should().BeEmpty();
         }
     }
 }

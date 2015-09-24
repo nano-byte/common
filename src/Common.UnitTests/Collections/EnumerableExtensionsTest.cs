@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -36,31 +37,22 @@ namespace NanoByte.Common.Collections
         [Test]
         public void TestMaxBy()
         {
-            var strings = new[] {"abc", "a", "abcd", "ab"};
-
-            Assert.AreEqual(
-                expected: "abcd",
-                actual: strings.MaxBy(x => x.Length));
+            new[] {"abc", "a", "abcd", "ab"}.MaxBy(x => x.Length)
+                .Should().Be("abcd");
         }
 
         [Test]
         public void TestMinBy()
         {
-            var strings = new[] { "abc", "a", "abcd", "ab" };
-
-            Assert.AreEqual(
-                expected: "a",
-                actual: strings.MinBy(x => x.Length));
+            new[] {"abc", "a", "abcd", "ab"}.MinBy(x => x.Length)
+                .Should().Be("a");
         }
 
         [Test]
         public void TestDistinctBy()
         {
-            var strings = new[] {"a123", "a234", "b123"};
-
-            CollectionAssert.AreEquivalent(
-                expected: new[] {"a123", "b123"},
-                actual: strings.DistinctBy(x => x[0]));
+            new[] {"a123", "a234", "b123"}.DistinctBy(x => x[0])
+                .Should().BeEquivalentTo("a123", "b123");
         }
 
         [Test]
@@ -68,83 +60,79 @@ namespace NanoByte.Common.Collections
         {
             var strings = new[] {"1", "2", "c", "4"};
 
-            CollectionAssert.AreEqual(
-                expected: new[] {1, 2, 4},
-                actual: strings.TrySelect<string, int, FormatException>(int.Parse));
+            strings.TrySelect<string, int, FormatException>(int.Parse)
+                .Should().Equal(1, 2, 4);
 
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-            Assert.Throws<FormatException>(() => strings.TrySelect<string, int, ArgumentException>(int.Parse).ToList());
+            strings.Invoking(x => x.TrySelect<string, int, ArgumentException>(int.Parse).ToList())
+                .ShouldThrow<FormatException>();
         }
 
         [Test]
         public void TestAppend()
         {
             var strings = new List<string> {"A", "B"};
-            CollectionAssert.AreEqual(
-                expected: new[] {"A", "B", "C"},
-                actual: strings.Append("C"));
+            strings.Append("C").Should().Equal("A", "B", "C");
         }
 
         [Test]
         public void TestPrepend()
         {
             var strings = new List<string> {"B", "C"};
-            CollectionAssert.AreEqual(
-                expected: new[] {"A", "B", "C"},
-                actual: strings.Prepend("A"));
+            strings.Prepend("A").Should().Equal("A", "B", "C");
         }
 
         [Test]
         public void TestSequencedEqualsList()
         {
-            Assert.IsTrue(new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B", "C"}));
-            Assert.IsTrue(new string[0].ToList().SequencedEquals(new string[0]));
-            Assert.IsFalse(new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"C", "B", "A"}));
-            Assert.IsFalse(new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"X", "Y", "Z"}));
-            Assert.IsFalse(new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B"}));
-            Assert.IsFalse(new[] {new object()}.ToList().SequencedEquals(new[] {new object()}));
+            new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
+            new string[0].ToList().SequencedEquals(new string[0]).Should().BeTrue();
+            new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"C", "B", "A"}).Should().BeFalse();
+            new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
+            new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B"}).Should().BeFalse();
+            new[] {new object()}.ToList().SequencedEquals(new[] {new object()}).Should().BeFalse();
         }
 
         [Test]
         public void TestSequencedEqualsArray()
         {
-            Assert.IsTrue(new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B", "C"}));
-            Assert.IsTrue(new string[0].SequencedEquals(new string[0]));
-            Assert.IsFalse(new[] {"A", "B", "C"}.SequencedEquals(new[] {"C", "B", "A"}));
-            Assert.IsFalse(new[] {"A", "B", "C"}.SequencedEquals(new[] {"X", "Y", "Z"}));
-            Assert.IsFalse(new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B"}));
-            Assert.IsFalse(new[] {new object()}.SequencedEquals(new[] {new object()}));
+            new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
+            new string[0].SequencedEquals(new string[0]).Should().BeTrue();
+            new[] {"A", "B", "C"}.SequencedEquals(new[] {"C", "B", "A"}).Should().BeFalse();
+            new[] {"A", "B", "C"}.SequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
+            new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B"}).Should().BeFalse();
+            new[] {new object()}.SequencedEquals(new[] {new object()}).Should().BeFalse();
         }
 
         [Test]
         public void TestUnsequencedEquals()
         {
-            Assert.IsTrue(new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B", "C"}));
-            Assert.IsTrue(new string[0].UnsequencedEquals(new string[0]));
-            Assert.IsTrue(new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"C", "B", "A"}));
-            Assert.IsFalse(new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"X", "Y", "Z"}));
-            Assert.IsFalse(new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B"}));
-            Assert.IsFalse(new[] {new object()}.UnsequencedEquals(new[] {new object()}));
+            new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
+            new string[0].UnsequencedEquals(new string[0]).Should().BeTrue();
+            new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"C", "B", "A"}).Should().BeTrue();
+            new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
+            new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B"}).Should().BeFalse();
+            new[] {new object()}.UnsequencedEquals(new[] {new object()}).Should().BeFalse();
         }
 
         [Test]
         public void TestGetSequencedHashCode()
         {
-            Assert.AreEqual(new[] {"A", "B", "C"}.GetSequencedHashCode(), new[] {"A", "B", "C"}.GetSequencedHashCode());
-            Assert.AreEqual(new string[0].GetSequencedHashCode(), new string[0].GetSequencedHashCode());
-            Assert.AreNotEqual(new[] {"A", "B", "C"}.GetSequencedHashCode(), new[] {"C", "B", "A"}.GetSequencedHashCode());
-            Assert.AreNotEqual(new[] {"A", "B", "C"}.GetSequencedHashCode(), new[] {"X", "Y", "Z"}.GetSequencedHashCode());
-            Assert.AreNotEqual(new[] {"A", "B", "C"}.GetSequencedHashCode(), new[] {"A", "B"}.GetSequencedHashCode());
+            new[] {"A", "B", "C"}.GetSequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetSequencedHashCode());
+            new string[0].GetSequencedHashCode().Should().Be(new string[0].GetSequencedHashCode());
+            new[] {"C", "B", "A"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
+            new[] {"X", "Y", "Z"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
+            new[] {"A", "B"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
         }
 
         [Test]
         public void TestGetUnsequencedHashCode()
         {
-            Assert.AreEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"A", "B", "C"}.GetUnsequencedHashCode());
-            Assert.AreEqual(new string[0].GetUnsequencedHashCode(), new string[0].GetUnsequencedHashCode());
-            Assert.AreEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"C", "B", "A"}.GetUnsequencedHashCode());
-            Assert.AreNotEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"X", "Y", "Z"}.GetUnsequencedHashCode());
-            Assert.AreNotEqual(new[] {"A", "B", "C"}.GetUnsequencedHashCode(), new[] {"A", "B"}.GetUnsequencedHashCode());
+            new[] {"A", "B", "C"}.GetUnsequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
+            new string[0].GetUnsequencedHashCode().Should().Be(new string[0].GetUnsequencedHashCode());
+            new[] {"C", "B", "A"}.GetUnsequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
+            new[] {"X", "Y", "Z"}.GetUnsequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
+            new[] {"A", "B"}.GetUnsequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
         }
     }
 }

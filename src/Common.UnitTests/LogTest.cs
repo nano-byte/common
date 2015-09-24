@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -34,7 +35,7 @@ namespace NanoByte.Common
         public void TestContent()
         {
             Log.Info("Log Unit Test Token");
-            Assert.IsTrue(Log.Content.Contains("Log Unit Test Token"));
+            Log.Content.Contains("Log Unit Test Token").Should().BeTrue();
         }
 
         [Test]
@@ -53,8 +54,8 @@ namespace NanoByte.Common
             {
                 Log.Info("Log Unit Test Token");
 
-                Assert.AreEqual(expected: LogSeverity.Info, actual: reportedSeverity);
-                Assert.AreEqual(expected: "Log Unit Test Token", actual: reportedMessage);
+                reportedSeverity.Should().Be(LogSeverity.Info);
+                reportedMessage.Should().Be("Log Unit Test Token");
             }
             finally
             {

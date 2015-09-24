@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 #if SLIMDX
@@ -63,7 +64,7 @@ namespace NanoByte.Common.Storage
             }
 
             // Ensure data stayed the same
-            Assert.AreEqual(testData1.Data, testData2.Data);
+            testData2.Data.Should().Be(testData1.Data);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace NanoByte.Common.Storage
             }
 
             // Ensure data stayed the same
-            Assert.AreEqual(testData1.Data, testData2.Data);
+            testData2.Data.Should().Be(testData1.Data);
         }
 
 #if SLIMDX
@@ -99,7 +100,7 @@ namespace NanoByte.Common.Storage
             var testData2 = XmlStorage.LoadXmlZip<TestData>(tempStream);
 
             // Ensure data stayed the same
-            Assert.AreEqual(testData1.Data, testData2.Data);
+            testData2.Data.Should().Be(testData1.Data);
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace NanoByte.Common.Storage
             var testData2 = XmlStorage.LoadXmlZip<TestData>(tempStream, password: "Test password");
 
             // Ensure data stayed the same
-            Assert.AreEqual(testData1.Data, testData2.Data);
+            testData2.Data.Should().Be(testData1.Data);
         }
 
         /// <summary>
@@ -144,7 +145,7 @@ namespace NanoByte.Common.Storage
             string xml = testData1.ToXmlString();
             var testData2 = XmlStorage.FromXmlString<TestData>(xml);
 
-            Assert.AreEqual(testData1.Data, testData2.Data);
+            testData2.Data.Should().Be(testData1.Data);
         }
 #endif
     }

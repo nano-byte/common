@@ -22,6 +22,7 @@
 
 using System.IO;
 using System.Text;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -36,16 +37,14 @@ namespace NanoByte.Common.Streams
         [Test]
         public void TestRead()
         {
-            Assert.AreEqual(
-                expected: new byte[] {1, 2, 3},
-                actual: new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3));
+            new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
         }
 
         [Test]
         public void TestToArray()
         {
             var stream = new MemoryStream(new byte[] {1, 2, 3});
-            Assert.AreEqual(expected: new byte[] {1, 2, 3}, actual: StreamUtils.ToArray(stream));
+            StreamUtils.ToArray(stream).Should().Equal(1, 2, 3);
         }
 
         [Test]
@@ -54,18 +53,16 @@ namespace NanoByte.Common.Streams
             var stream = new MemoryStream();
             stream.Write(new byte[] {1, 2, 3});
 
-            Assert.AreEqual(
-                expected: new byte[] {1, 2, 3},
-                actual: StreamUtils.ToArray(stream));
+            StreamUtils.ToArray(stream).Should().Equal(1, 2, 3);
         }
 
         [Test]
         public void TestContentEquals()
         {
-            Assert.IsTrue("abc".ToStream().ContentEquals("abc".ToStream()));
-            Assert.IsFalse("ab".ToStream().ContentEquals("abc".ToStream()));
-            Assert.IsFalse("abc".ToStream().ContentEquals("ab".ToStream()));
-            Assert.IsFalse("abc".ToStream().ContentEquals("".ToStream()));
+            "abc".ToStream().ContentEquals("abc".ToStream()).Should().BeTrue();
+            "ab".ToStream().ContentEquals("abc".ToStream()).Should().BeFalse();
+            "abc".ToStream().ContentEquals("ab".ToStream()).Should().BeFalse();
+            "abc".ToStream().ContentEquals("".ToStream()).Should().BeFalse();
         }
 
         [Test]
@@ -73,7 +70,7 @@ namespace NanoByte.Common.Streams
         {
             const string test = "Test";
             using (var stream = test.ToStream())
-                Assert.AreEqual(test, stream.ReadToString());
+                stream.ReadToString().Should().Be(test);
         }
 
         [Test]
@@ -82,7 +79,7 @@ namespace NanoByte.Common.Streams
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
                 "abc".ToStream().CopyToFile(tempFile);
-                Assert.AreEqual("abc", new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8));
+                new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8).Should().Be("abc");
             }
         }
     }

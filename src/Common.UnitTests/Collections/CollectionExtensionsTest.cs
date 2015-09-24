@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -40,13 +41,13 @@ namespace NanoByte.Common.Collections
         {
             var list = new List<string> {"a", "b", "c"};
 
-            Assert.IsFalse(list.AddIfNew("b"));
-            CollectionAssert.AreEqual(new[] {"a", "b", "c"}, list);
+            list.AddIfNew("b").Should().BeFalse();
+            list.Should().Equal("a", "b", "c");
 
-            Assert.IsTrue(list.AddIfNew("d"));
-            CollectionAssert.AreEqual(new[] {"a", "b", "c", "d"}, list);
+            list.AddIfNew("d").Should().BeTrue();
+            list.Should().Equal("a", "b", "c", "d");
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveLast(-1));
+            list.Invoking(x => x.RemoveLast(-1)).ShouldThrow<ArgumentOutOfRangeException>();
         }
 
         /// <summary>
@@ -57,9 +58,9 @@ namespace NanoByte.Common.Collections
         {
             var list = new List<string> {"a", "b", "c"};
             list.RemoveLast(2);
-            CollectionAssert.AreEqual(new[] {"a"}, list);
+            list.Should().Equal("a");
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveLast(-1));
+            list.Invoking(x => x.RemoveLast(-1)).ShouldThrow<ArgumentOutOfRangeException>();
         }
 
         /// <summary>
@@ -68,9 +69,7 @@ namespace NanoByte.Common.Collections
         [Test]
         public void TestFindIndex()
         {
-            Assert.AreEqual(
-                expected: 1,
-                actual: new List<string> {"a", "b", "c"}.FindIndex("b"));
+            new List<string> {"a", "b", "c"}.FindIndex("b").Should().Be(1);
         }
     }
 }

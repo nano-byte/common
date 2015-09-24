@@ -22,6 +22,7 @@
 
 using System.IO;
 using System.Net;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Tasks
@@ -40,14 +41,16 @@ namespace NanoByte.Common.Tasks
             var task = new SimpleTask("Test task", () => called = true);
             task.Run();
 
-            Assert.IsTrue(called);
+            called.Should().BeTrue();
         }
 
         [Test(Description = "Ensures exceptions from the work delegate get correctly passed through.")]
         public void TestExceptionPassing()
         {
-            Assert.Throws<IOException>(() => new SimpleTask("Test task", delegate { throw new IOException("Test exception"); }).Run());
-            Assert.Throws<WebException>(() => new SimpleTask("Test task", delegate { throw new WebException("Test exception"); }).Run());
+            new SimpleTask("Test task", delegate { throw new IOException("Test exception"); })
+                .Invoking(x => x.Run()).ShouldThrow<IOException>();
+            new SimpleTask("Test task", delegate { throw new WebException("Test exception"); })
+                .Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
     }
 }

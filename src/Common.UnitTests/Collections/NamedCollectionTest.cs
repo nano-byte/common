@@ -10,13 +10,14 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using System;
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -42,9 +43,7 @@ namespace NanoByte.Common.Collections
         {
             var collection = new NamedCollection<TestElement> {new TestElement {Name = "c"}, new TestElement {Name = "b"}, new TestElement {Name = "a"}};
 
-            CollectionAssert.AreEqual(
-                expected: new[] {"a", "b", "c"},
-                actual: collection.Select(x => x.Name));
+            collection.Select(x => x.Name).Should().Equal("a", "b", "c");
         }
 
         [Test]
@@ -53,11 +52,11 @@ namespace NanoByte.Common.Collections
             var element = new TestElement {Name = "Name1"};
 
             var collection = new NamedCollection<TestElement> {element};
-            Assert.AreSame(element, collection["Name1"]);
+            collection["Name1"].Should().BeSameAs(element);
 
             collection.Rename(element, "Name2");
-            Assert.AreEqual("Name2", element.Name);
-            Assert.AreSame(element, collection["Name2"]);
+            element.Name.Should().Be("Name2");
+            collection["Name2"].Should().BeSameAs(element);
         }
     }
 }

@@ -21,6 +21,7 @@
  */
 
 using System.IO;
+using FluentAssertions;
 using NanoByte.Common.Storage;
 using NUnit.Framework;
 
@@ -43,10 +44,10 @@ namespace NanoByte.Common.Values
                 using (var stream = File.OpenRead(tempFile))
                     grid = NibbleGrid.Load(stream);
 
-                Assert.AreEqual(2, grid[0, 0]);
-                Assert.AreEqual(4, grid[0, 1]);
-                Assert.AreEqual(5, grid[1, 0]);
-                Assert.AreEqual(10, grid[1, 1]);
+                grid[0, 0].Should().Be(2);
+                grid[0, 1].Should().Be(4);
+                grid[1, 0].Should().Be(5);
+                grid[1, 1].Should().Be(10);
             }
         }
     }

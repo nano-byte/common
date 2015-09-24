@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace NanoByte.Common.Collections
@@ -40,11 +41,11 @@ namespace NanoByte.Common.Collections
                 return input + "X";
             });
 
-            Assert.AreEqual("inputX", cache["input"]);
-            Assert.AreEqual(1, callCounter, "Should call retriever callback on first request");
+            cache["input"].Should().Be("inputX");
+            callCounter.Should().Be(1, because: "Should call retriever callback on first request");
 
-            Assert.AreEqual("inputX", cache["input"]);
-            Assert.AreEqual(1, callCounter, "Should not call retriever callback again on subsequent requests");
+            cache["input"].Should().Be("inputX");
+            callCounter.Should().Be(1, because: "Should not call retriever callback again on subsequent requests");
         }
     }
 }

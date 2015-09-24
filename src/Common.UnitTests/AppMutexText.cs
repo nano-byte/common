@@ -21,6 +21,7 @@
  */
 
 using System.IO;
+using FluentAssertions;
 using NanoByte.Common.Native;
 using NUnit.Framework;
 
@@ -42,12 +43,12 @@ namespace NanoByte.Common
             if (!WindowsUtils.IsWindowsNT) Assert.Ignore("AppMutexes are only available on the Windows NT platform.");
 
             string mutexName = "unit-tests-" + Path.GetRandomFileName();
-            Assert.IsFalse(AppMutex.Probe(mutexName));
+            AppMutex.Probe(mutexName).Should().BeFalse();
             AppMutex mutex;
             AppMutex.Create(mutexName, out mutex);
-            Assert.IsTrue(AppMutex.Probe(mutexName));
+            AppMutex.Probe(mutexName).Should().BeTrue();
             mutex.Close();
-            Assert.IsFalse(AppMutex.Probe(mutexName));
+            AppMutex.Probe(mutexName).Should().BeFalse();
         }
     }
 }
