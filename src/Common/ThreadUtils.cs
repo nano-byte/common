@@ -81,7 +81,7 @@ namespace NanoByte.Common
         /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
         [PublicAPI]
-        public static void RunSta([NotNull] Action execute)
+        public static void RunSta([NotNull, InstantHandle] Action execute)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException("execute");
@@ -117,7 +117,7 @@ namespace NanoByte.Common
         /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
         [PublicAPI]
-        public static T RunSta<T>([NotNull] Func<T> execute)
+        public static T RunSta<T>([NotNull, InstantHandle] Func<T> execute)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException("execute");

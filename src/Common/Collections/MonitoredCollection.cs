@@ -185,7 +185,7 @@ namespace NanoByte.Common.Collections
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException("collection");
-            if (collection == this) throw new ArgumentException(Resources.CannotAddCollectionToSelf, "collection");
+            if (ReferenceEquals(collection, this)) throw new ArgumentException(Resources.CannotAddCollectionToSelf, "collection");
             #endregion
 
             // Create separate collection to be able to dispatch events afterwards
@@ -207,7 +207,7 @@ namespace NanoByte.Common.Collections
 
         /// <summary>
         /// Adds all the items in <paramref name="collection"/> to the collection that weren't already there and
-        /// removes all items in the collection that are not in <paramref name="collection"/>. 
+        /// removes all items in the collection that are not in <paramref name="collection"/>.
         /// </summary>
         /// <param name="collection">A collection of items to add to the collection.</param>
         /// <remarks>
