@@ -21,7 +21,7 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
@@ -32,7 +32,7 @@ namespace NanoByte.Common.Undo
     public class CompositeCommand : SimpleCommand
     {
         #region Variables
-        private readonly List<IUndoCommand> _commands;
+        private readonly IUndoCommand[] _commands;
         #endregion
 
         #region Constructor
@@ -40,14 +40,14 @@ namespace NanoByte.Common.Undo
         /// Creates a new composite command.
         /// </summary>
         /// <param name="commands">The commands to be contained inside the transaction.</param>
-        public CompositeCommand([NotNull] IEnumerable<IUndoCommand> commands)
+        public CompositeCommand([NotNull] params IUndoCommand[] commands)
         {
             #region Sanity checks
             if (commands == null) throw new ArgumentNullException("commands");
             #endregion
 
             // Defensive copy
-            _commands = new List<IUndoCommand>(commands);
+            _commands = commands.ToArray();
         }
         #endregion
 
@@ -62,7 +62,7 @@ namespace NanoByte.Common.Undo
             int countExecute = 0;
             try
             { // Try to execute all commands
-                for (countExecute = 0; countExecute < _commands.Count; countExecute++)
+                for (countExecute = 0; countExecute < _commands.Length; countExecute++)
                     _commands[countExecute].Execute();
             }
             catch
@@ -81,12 +81,12 @@ namespace NanoByte.Common.Undo
             int countUndo = 0;
             try
             { // Try to undo all commands
-                for (countUndo = _commands.Count - 1; countUndo >= 0; countUndo--)
+                for (countUndo = _commands.Length - 1; countUndo >= 0; countUndo--)
                     _commands[countUndo].Undo();
             }
             catch
             { // Rollback before reporting exception
-                for (int countExecute = countUndo + 1; countExecute < _commands.Count; countExecute++)
+                for (int countExecute = countUndo + 1; countExecute < _commands.Length; countExecute++)
                     _commands[countExecute].Execute();
                 throw;
             }

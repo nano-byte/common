@@ -59,12 +59,10 @@ namespace NanoByte.Common.Undo
         {
             var executeCalls = new List<int>(3);
             var undoCalls = new List<int>(3);
-            var command = new CompositeCommand(new IUndoCommand[]
-            {
+            var command = new CompositeCommand(
                 new MockCommand(() => executeCalls.Add(0), () => undoCalls.Add(0)),
                 new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
-                new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2))
-            });
+                new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2)));
 
             command.Execute();
             executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
@@ -78,12 +76,10 @@ namespace NanoByte.Common.Undo
         {
             var executeCalls = new List<int>(3);
             var undoCalls = new List<int>(3);
-            var command = new CompositeCommand(new IUndoCommand[]
-            {
+            var command = new CompositeCommand(
                 new MockCommand(() => executeCalls.Add(0), () => undoCalls.Add(0)),
                 new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
-                new MockCommand(() => { throw new OperationCanceledException(); }, () => undoCalls.Add(2))
-            });
+                new MockCommand(() => { throw new OperationCanceledException(); }, () => undoCalls.Add(2)));
 
             Assert.Throws<OperationCanceledException>(command.Execute, "Exceptions should be passed through after rollback");
             executeCalls.Should().Equal(new[] {0, 1}, because: "After an exception the rest of the commands should not be executed");
@@ -95,12 +91,10 @@ namespace NanoByte.Common.Undo
         {
             var executeCalls = new List<int>(3);
             var undoCalls = new List<int>(3);
-            var command = new CompositeCommand(new IUndoCommand[]
-            {
+            var command = new CompositeCommand(
                 new MockCommand(() => executeCalls.Add(0), () => { throw new OperationCanceledException(); }),
                 new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
-                new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2))
-            });
+                new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2)));
 
             command.Execute();
             executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
@@ -114,7 +108,7 @@ namespace NanoByte.Common.Undo
         [Test(Description = "Makes sure a correct order of calling Execute() and Undo() is enforced.")]
         public void TestWrongOrder()
         {
-            var command = new CompositeCommand(new IUndoCommand[0]);
+            var command = new CompositeCommand();
             Assert.Throws<InvalidOperationException>(command.Undo, "Should not allow Undo before Execute");
 
             command.Execute();
