@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
@@ -9,6 +10,7 @@ namespace NanoByte.Common.Cli
     /// <summary>
     /// A progress bar rendered on the <see cref="Console"/>.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is used as a convenience wrapper around Done()")]
     public class ProgressBar : MarshalByRefObject, IDisposable
     {
         private int _maximum = 20;

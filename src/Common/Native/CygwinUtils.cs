@@ -91,8 +91,8 @@ namespace NanoByte.Common.Native
                 stream.Read(header, 0, SymlinkCookie.Length);
                 if (header.SequencedEquals(SymlinkCookie))
                 {
-                    using (var reader = new StreamReader(stream, detectEncodingFromByteOrderMarks: true))
-                        target = reader.ReadToEnd().TrimEnd('\0');
+                    target = new StreamReader(stream, detectEncodingFromByteOrderMarks: true)
+                        .ReadToEnd().TrimEnd('\0');
                     return true;
                 }
                 else

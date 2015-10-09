@@ -163,6 +163,7 @@ namespace NanoByte.Common
         /// <typeparam name="TException">The type of exception to triger a retry.</typeparam>
         /// <param name="action">The action to execute.</param>
         /// <param name="maxRetries">The maximum number of retries to attempt.</param>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
         public static void Retry<TException>([NotNull, InstantHandle] RetryAction action, int maxRetries = 2)
             where TException : Exception
         {
