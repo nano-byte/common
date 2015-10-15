@@ -29,22 +29,6 @@ using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
-    /// <seealso cref="ITaskHandler.Verbosity"/>
-    public enum Verbosity
-    {
-        /// <summary>Print no progress bars on command-line. Automatically answer questions with defaults when possible.</summary>
-        Batch = -1,
-
-        /// <summary>Normal interactive operation.</summary>
-        Normal = 0,
-
-        /// <summary>Display additional information for troubleshooting.</summary>
-        Verbose = 1,
-
-        /// <summary>Display detailed information for debugging.</summary>
-        Debug = 2
-    }
-
     /// <summary>
     /// Used to execute and track <seealso cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
     /// </summary>

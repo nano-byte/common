@@ -101,6 +101,7 @@
     <Compile Include="Info\OSInfo.cs" />
     <Compile Include="JetBrains.Annotations.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="LogSeverity.cs" />
     <Compile Include="MarshalNoTimeout.cs" />
     <Compile Include="MsgSeverity.cs" />
     <Compile Include="MutexLock.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Tasks\TaskHandlerExtensions.cs" />
     <Compile Include="Tasks\TaskSnapshot.cs" />
     <Compile Include="Tasks\TaskState.cs" />
+    <Compile Include="Tasks\Verbosity.cs" />
     <Compile Include="Tasks\WaitTask.cs" />
     <Compile Include="ThreadUtils.cs" />
     <Compile Include="TimedLogEvent.cs" />
