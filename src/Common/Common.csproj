@@ -109,6 +109,9 @@
     <Compile Include="Native\CompilerUtils.cs" />
     <Compile Include="Native\CygwinUtils.cs" />
     <Compile Include="Native\UnixUtils.cs" />
+    <Compile Include="Native\WindowsCredentials.cs" />
+    <Compile Include="Native\WindowsCredentials.NativeMethods.cs" />
+    <Compile Include="Native\WindowsCredentialsFlags.cs" />
     <Compile Include="Native\WindowsMutex.cs" />
     <Compile Include="Native\WindowsMutex.NativeMethods.cs" />
     <Compile Include="Native\WindowsRestartManager.cs" />

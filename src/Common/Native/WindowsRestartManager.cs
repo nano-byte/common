@@ -31,7 +31,7 @@ using NanoByte.Common.Tasks;
 namespace NanoByte.Common.Native
 {
     /// <summary>
-    /// Provides an interface to the Windows Restart Manager. Supported on Windows Vista or better.
+    /// Provides an interface to the Windows Restart Manager. Supported on Windows Vista or newer.
     /// </summary>
     /// <remarks>
     /// See https://msdn.microsoft.com/en-us/library/windows/desktop/cc948910
@@ -72,7 +72,7 @@ namespace NanoByte.Common.Native
         /// Starts a new Restart Manager session.
         /// </summary>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        /// <exception cref="PlatformNotSupportedException">The current platform does not support the Restart Manager. Needs Windows Vista or better.</exception>
+        /// <exception cref="PlatformNotSupportedException">The current platform does not support the Restart Manager. Needs Windows Vista or newer.</exception>
         public WindowsRestartManager()
         {
             if (!WindowsUtils.IsWindowsVista) throw new PlatformNotSupportedException();
