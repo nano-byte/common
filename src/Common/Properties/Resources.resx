@@ -183,6 +183,9 @@
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>The configuration directory '{0}' is probably invalid.</value>
   </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>The login credentials for {0} are incorrect.</value>
+  </data>
   <data name="ItemAlreadyInPool" xml:space="preserve">
     <value>The item is already in a pool. It can not be added to more than one pool.</value>
   </data>
@@ -239,6 +242,12 @@
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>This method is only available on Windows.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="PleasEnterCredentials" xml:space="preserve">
+    <value>Please enter login credentials for {0}:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
     <value>There was a problem loading '{0}'.</value>
@@ -314,6 +323,9 @@
   </data>
   <data name="UserCancel" xml:space="preserve">
     <value>The user has chosen to cancel the operation.</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User name:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

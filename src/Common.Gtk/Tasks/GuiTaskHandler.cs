@@ -120,6 +120,12 @@ namespace NanoByte.Common.Tasks
             Output(title, message);
         }
 
+        /// <inheritdoc/>
+        public virtual ICredentialProvider BuildCredentialProvider()
+        {
+            return null;
+        }
+
         private void Invoke(System.Action action)
         {
             if (_owner == null) action();

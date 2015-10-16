@@ -46,7 +46,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            task.Run(CancellationToken);
+            task.Run(CancellationToken, credentialProvider: BuildCredentialProvider());
         }
 
         /// <summary>
@@ -74,6 +74,12 @@ namespace NanoByte.Common.Tasks
         public virtual void Output<T>(string title, IEnumerable<T> data)
         {
             // No UI, so nothing to do
+        }
+
+        /// <inheritdoc/>
+        public virtual ICredentialProvider BuildCredentialProvider()
+        {
+            return null;
         }
 
         #region Dispose

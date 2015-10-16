@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NanoByte.Common.Cli;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Tasks
 {
@@ -104,13 +105,13 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             if (Verbosity <= Verbosity.Batch)
-                task.Run(CancellationToken);
+                task.Run(CancellationToken, credentialProvider: BuildCredentialProvider());
             else
             {
                 Log.Debug("Task: " + task.Name);
                 Console.Error.WriteLine(task.Name + @"...");
                 using (var progressBar = new TaskProgressBar())
-                    task.Run(CancellationToken, progressBar);
+                    task.Run(CancellationToken, progressBar, BuildCredentialProvider());
             }
         }
 
@@ -165,6 +166,14 @@ namespace NanoByte.Common.Tasks
                 Console.WriteLine(entry);
                 if (entry.Contains("\n")) Console.WriteLine();
             }
+        }
+
+        /// <inheritdoc/>
+        public virtual ICredentialProvider BuildCredentialProvider()
+        {
+            bool silent = (Verbosity == Verbosity.Batch);
+            if (WindowsUtils.IsWindowsNT) return new WindowsCliCredentialProvider(silent);
+            else return (silent ? null : new CliCredentialProvider());
         }
 
         #region Dispose

@@ -58,15 +58,19 @@ namespace NanoByte.Common.Tasks
         /// <summary>Signaled when the user wishes to cancel the task execution.</summary>
         protected CancellationToken CancellationToken;
 
-        /// <summary>>Used to report back the task's progress.</summary>
+        /// <summary>Used to report back the task's progress.</summary>
         private IProgress<TaskSnapshot> _progress;
 
+        /// <summary>Used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</summary>
+        protected ICredentialProvider CredentialProvider;
+
         /// <inheritdoc/>
-        public void Run(CancellationToken cancellationToken = default(CancellationToken), [CanBeNull] IProgress<TaskSnapshot> progress = null)
+        public void Run(CancellationToken cancellationToken = default(CancellationToken), IProgress<TaskSnapshot> progress = null, ICredentialProvider credentialProvider = null)
         {
             cancellationToken.ThrowIfCancellationRequested();
             CancellationToken = cancellationToken;
             _progress = progress;
+            CredentialProvider = credentialProvider;
 
             State = TaskState.Started;
 

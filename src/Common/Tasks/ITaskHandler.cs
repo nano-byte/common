@@ -85,5 +85,12 @@ namespace NanoByte.Common.Tasks
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data);
+
+        /// <summary>
+        /// Builds an object used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <see langword="null"/>.
+        /// </summary>
+        /// <remarks>Use one instance per remote resource.</remarks>
+        [CanBeNull]
+        ICredentialProvider BuildCredentialProvider();
     }
 }

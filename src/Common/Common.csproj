@@ -168,8 +168,10 @@
     <Compile Include="Tasks\CancellationToken.cs" />
     <Compile Include="Tasks\CancellationTokenRegistration.cs" />
     <Compile Include="Tasks\CancellationTokenSource.cs" />
+    <Compile Include="Tasks\CliCredentialProvider.cs" />
     <Compile Include="Tasks\CliTaskHandler.cs" />
     <Compile Include="Tasks\ForEachTask.cs" />
+    <Compile Include="Tasks\ICredentialProvider.cs" />
     <Compile Include="Tasks\IProgress.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Tasks\ITaskHandler.cs" />
@@ -184,6 +186,9 @@
     <Compile Include="Tasks\TaskState.cs" />
     <Compile Include="Tasks\Verbosity.cs" />
     <Compile Include="Tasks\WaitTask.cs" />
+    <Compile Include="Tasks\WindowsCliCredentialProvider.cs" />
+    <Compile Include="Tasks\WindowsCredentialProvider.cs" />
+    <Compile Include="Tasks\WindowsDialogCredentialProvider.cs" />
     <Compile Include="ThreadUtils.cs" />
     <Compile Include="TimedLogEvent.cs" />
     <Compile Include="Undo\AddToCollection.cs" />

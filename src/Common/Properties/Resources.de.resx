@@ -183,6 +183,9 @@
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>Das Konfigurationsverzeichnis '{0}' ist vermutlich ungültig.</value>
   </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Die Anmeldedaten für {0} sind ungültig.</value>
+  </data>
   <data name="ItemAlreadyInPool" xml:space="preserve">
     <value>Dieses Element befindet sich bereits in einem Pool. Es kann maxmimal einem Pool hinzugefügt werden.</value>
   </data>
@@ -239,6 +242,12 @@
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Diese Methode steht nur unter Windows zur Verfügung.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort:</value>
+  </data>
+  <data name="PleasEnterCredentials" xml:space="preserve">
+    <value>Bitte geben Sie Anmeldedaten für {0} ein:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
     <value>Es gab ein Problem beim Laden von '{0}'.</value>
@@ -314,6 +323,9 @@
   </data>
   <data name="UserCancel" xml:space="preserve">
     <value>Der Benutzer hat sich entschieden den Vorgang abzubrechen.</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Benutzername:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>

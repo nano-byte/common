@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 using NanoByte.Common.Controls;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Tasks
 {
@@ -152,6 +153,14 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Invoke(() => OutputGridBox.Show(_owner, title, data));
+        }
+
+        /// <inheritdoc/>
+        public virtual ICredentialProvider BuildCredentialProvider()
+        {
+            bool silent = (Verbosity == Verbosity.Batch);
+            if (WindowsUtils.IsWindowsNT) return new WindowsDialogCredentialProvider(silent);
+            else return null;
         }
 
         private void Invoke(Action action)

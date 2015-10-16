@@ -135,9 +135,6 @@
   <data name="Cancel" xml:space="preserve">
     <value>İptal</value>
   </data>
-  <data name="OK" xml:space="preserve">
-    <value>Tamam</value>
-  </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>Bir koleksiyon kendi içine eklenemez.</value>
   </data>
@@ -186,6 +183,9 @@
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>Büyük olasılıkla &apos;{0}&apos; yapılandırma dizini geçersiz.</value>
   </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
+  </data>
   <data name="ItemAlreadyInPool" xml:space="preserve">
     <value>Öğe zaten havuzda. Bir öğe havuza bir kereden fazla eklenemez.</value>
   </data>
@@ -219,6 +219,9 @@
   <data name="NoModActive" xml:space="preserve">
     <value>Şu anda etkin kip kullanılmıyor.</value>
   </data>
+  <data name="NoSystemConfigInPortableMode" xml:space="preserve">
+    <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
+  </data>
   <data name="NotAnImage" xml:space="preserve">
     <value>Dosya geçerli bir görsel dosyası değil.</value>
   </data>
@@ -234,8 +237,17 @@
   <data name="NoXmlDataInZip" xml:space="preserve">
     <value>ZIP dosyası içinde XML verisi bulunamadı.</value>
   </data>
+  <data name="OK" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Bu yöntem yalnız Windows üzerinde kullanılabilir.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Parola:</value>
+  </data>
+  <data name="PleasEnterCredentials" xml:space="preserve">
+    <value>Lütfen {0} için oturum açma kimlik bilgilerinizi yazın:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
     <value>&apos;{0}&apos; yüklenirken bir sorun oluştu.</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="UserCancel" xml:space="preserve">
     <value>Kullanıcı işlemi iptal etti.</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Kullanıcı adı:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Evet</value>

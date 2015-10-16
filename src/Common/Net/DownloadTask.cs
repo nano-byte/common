@@ -80,6 +80,7 @@ namespace NanoByte.Common.Net
         /// <inheritdoc/>
         protected override void Execute()
         {
+            Retry:
             WebRequest request;
             try
             {
@@ -94,7 +95,11 @@ namespace NanoByte.Common.Net
             #endregion
 
             var httpRequest = request as HttpWebRequest;
-            if (httpRequest != null) httpRequest.UserAgent = AppInfo.Current.NameVersion;
+            if (httpRequest != null)
+            {
+                httpRequest.UserAgent = AppInfo.Current.NameVersion;
+                httpRequest.Credentials = CredentialProvider;
+            }
 
             // Start HTTP request
             State = TaskState.Header;
@@ -132,6 +137,21 @@ namespace NanoByte.Common.Net
                 #region Error handling
             catch (WebException ex)
             {
+                if (ex.Status == WebExceptionStatus.RequestCanceled) throw new OperationCanceledException();
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = ex.Response as HttpWebResponse;
+                    if (response != null && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
+                    {
+                        if (CredentialProvider.RequestRetry()) goto Retry;
+                        else
+                        {
+                            // Wrap exception to add context
+                            throw new WebException(string.Format(Resources.InvalidCredentials, Source), ex.InnerException, ex.Status, ex.Response);
+                        }
+                    }
+                }
+
                 // Wrap exception to add context
                 throw new WebException(string.Format(Resources.FailedToDownload, Source), ex.InnerException, ex.Status, ex.Response);
             }

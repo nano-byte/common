@@ -259,6 +259,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The login credentials for {0} are incorrect..
+        /// </summary>
+        internal static string InvalidCredentials {
+            get {
+                return ResourceManager.GetString("InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The item is already in a pool. It can not be added to more than one pool..
         /// </summary>
         internal static string ItemAlreadyInPool {
@@ -426,6 +435,24 @@ namespace NanoByte.Common.Properties {
         internal static string OnlyAvailableOnWindows {
             get {
                 return ResourceManager.GetString("OnlyAvailableOnWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter login credentials for {0}:.
+        /// </summary>
+        internal static string PleasEnterCredentials {
+            get {
+                return ResourceManager.GetString("PleasEnterCredentials", resourceCulture);
             }
         }
         
@@ -651,6 +678,15 @@ namespace NanoByte.Common.Properties {
         internal static string UserCancel {
             get {
                 return ResourceManager.GetString("UserCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name:.
+        /// </summary>
+        internal static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

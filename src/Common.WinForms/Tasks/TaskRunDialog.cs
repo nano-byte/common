@@ -89,7 +89,7 @@ namespace NanoByte.Common.Tasks
         {
             try
             {
-                _task.Run(_cancellationTokenSource.Token, _progress);
+                _task.Run(_cancellationTokenSource.Token, _progress, new WindowsDialogCredentialProvider());
             }
             catch (Exception ex)
             {
