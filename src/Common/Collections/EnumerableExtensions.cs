@@ -36,6 +36,17 @@ namespace NanoByte.Common.Collections
     {
         #region LINQ
         /// <summary>
+        /// Determines whether a sequence of elements contains any of the specified <paramref name="targets"/>.
+        /// </summary>
+        /// <returns><see langword="true"/> if <paramref name="enumeration"/> contains any element from <paramref name="targets"/>. <see langword="false"/> if <paramref name="enumeration"/> or <paramref name="targets"/> is empty.</returns>
+        [Pure]
+        public static bool ContainsAny<T>([NotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] IEnumerable<T> targets)
+        {
+            var set = new HashSet<T>(enumeration);
+            return targets.Any(set.Contains);
+        }
+
+        /// <summary>
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(IEnumerable{TSource},Func{TSource,bool})"/>.
         /// </summary>

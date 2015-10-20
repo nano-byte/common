@@ -35,6 +35,16 @@ namespace NanoByte.Common.Collections
     public class EnumerableExtensionsTest
     {
         [Test]
+        public void TestContainsAny()
+        {
+            new[] {1, 2}.ContainsAny(new[] {2}).Should().BeTrue();
+            new[] {1, 2}.ContainsAny(new[] {2, 3}).Should().BeTrue();
+            new[] {1, 2}.ContainsAny(new[] {3}).Should().BeFalse();
+            new int[0].ContainsAny(new[] {2}).Should().BeFalse();
+            new[] {1, 2}.ContainsAny(new int[0]).Should().BeFalse();
+        }
+
+        [Test]
         public void TestMaxBy()
         {
             new[] {"abc", "a", "abcd", "ab"}.MaxBy(x => x.Length)
