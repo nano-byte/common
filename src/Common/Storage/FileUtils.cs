@@ -281,7 +281,7 @@ namespace NanoByte.Common.Storage
             #endregion
 
             if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
-            else if (WindowsUtils.IsWindowsNT) ReplaceNT(sourcePath, destinationPath);
+            else if (WindowsUtils.IsWindowsXP) ReplaceNT(sourcePath, destinationPath);
             else ReplaceSimple(sourcePath, destinationPath);
         }
 

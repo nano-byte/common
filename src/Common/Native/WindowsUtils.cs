@@ -128,6 +128,11 @@ namespace NanoByte.Common.Native
         public static bool IsWindowsNT { get { return Environment.OSVersion.Platform == PlatformID.Win32NT; } }
 
         /// <summary>
+        /// <see langword="true"/> if the current operating system is Windows XP or newer; <see langword="false"/> otherwise.
+        /// </summary>
+        public static bool IsWindowsXP { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(5, 1); } }
+
+        /// <summary>
         /// <see langword="true"/> if the current operating system is Windows Vista or newer; <see langword="false"/> otherwise.
         /// </summary>
         public static bool IsWindowsVista { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 0); } }

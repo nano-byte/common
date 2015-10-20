@@ -150,7 +150,7 @@ namespace NanoByte.Common
             if (startInfo == null) throw new ArgumentNullException("startInfo");
             #endregion
 
-            if (!WindowsUtils.IsWindowsNT || RegistryUtils.GetDword(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", defaultValue: 1) == 0)
+            if (!WindowsUtils.IsWindowsVista || RegistryUtils.GetDword(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", defaultValue: 1) == 0)
                 throw new PlatformNotSupportedException();
 
             startInfo.Verb = "runas";
