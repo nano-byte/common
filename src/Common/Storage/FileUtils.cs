@@ -107,10 +107,10 @@ namespace NanoByte.Common.Storage
             #endregion
 
             // Substitute ${VAR} for the value of VAR
-            value = new Regex(@"\${(.+)}").Replace(value, match => variables[match.Groups[1].Value]);
+            value = Regex.Replace(value, @"\${(.+)}", match => variables[match.Groups[1].Value]);
 
             // Substitute $VAR for the value of VAR
-            value = new Regex(@"\$([^\$\s\\/-]+)").Replace(value, match => variables[match.Groups[1].Value]);
+            value = Regex.Replace(value, @"\$([^\$\s\\/-]+)", match => variables[match.Groups[1].Value]);
 
             return value;
         }

@@ -43,7 +43,7 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Displays an error box with a message and details.
         /// </summary>
-        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window for the dialog; can be <see langword="null"/>.</param>
         /// <param name="exception">The error message to display.</param>
         /// <param name="logRtf">The details formatted as RTF.</param>
         /// <returns>The text the user entered if he pressed OK; otherwise <see langword="null"/>.</returns>
