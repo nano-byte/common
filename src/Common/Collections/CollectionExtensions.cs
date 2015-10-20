@@ -147,17 +147,5 @@ namespace NanoByte.Common.Collections
 
             return (list.Count == 0) || list.Contains(element);
         }
-
-        /// <summary>
-        /// Finds the index of a specific <paramref name="element"/> in a <paramref name="collection"/>.
-        /// </summary>
-        public static int FindIndex<T>([NotNull, InstantHandle] this List<T> collection, [CanBeNull] T element)
-        {
-            #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            #endregion
-
-            return collection.FindIndex(x => Equals(x, element));
-        }
     }
 }

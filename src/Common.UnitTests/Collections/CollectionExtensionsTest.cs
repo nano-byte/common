@@ -62,14 +62,5 @@ namespace NanoByte.Common.Collections
 
             list.Invoking(x => x.RemoveLast(-1)).ShouldThrow<ArgumentOutOfRangeException>();
         }
-
-        /// <summary>
-        /// Ensures that <see cref="CollectionExtensions.FindIndex{T}"/> correctly determines the index of an element in a list.
-        /// </summary>
-        [Test]
-        public void TestFindIndex()
-        {
-            new List<string> {"a", "b", "c"}.FindIndex("b").Should().Be(1);
-        }
     }
 }
