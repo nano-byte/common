@@ -135,7 +135,7 @@ namespace NanoByte.Common.Storage
 
         #region Machine-wide directories
         /// <summary>
-        /// The directories to store machine-wide settings (can roam across different machines).
+        /// The directories to store machine-wide settings.
         /// </summary>
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/etc/xdg</c>.</remarks>
@@ -240,7 +240,48 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Returns a list of paths for loading a configuration resource (can roam across different machines).
+        /// Returns a path for storing a system-wide configuration resource.
+        /// </summary>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
+        /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
+        /// <param name="resource">The path elements (directory and/or file names) of the resource to be stored.</param>
+        /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
+        /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
+        /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
+        [PublicAPI, NotNull]
+        public static string GetSaveSystemConfigPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException("appName");
+            if (resource == null) throw new ArgumentNullException("resource");
+            #endregion
+
+            if (_isPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
+
+            string systemConfigDir = SystemConfigDirs.Split(Path.PathSeparator).Last();
+            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string path;
+            try
+            {
+                path = (new[] {systemConfigDir, appName, resourceCombined}).Aggregate(Path.Combine);
+            }
+                #region Error handling
+            catch (ArgumentException ex)
+            {
+                // Wrap exception to add context information
+                throw new IOException(string.Format(Resources.InvalidConfigDir, systemConfigDir) + "\n" + ex.Message, ex);
+            }
+            #endregion
+
+            // Ensure the directory part of the path exists
+            string dirPath = isFile ? (Path.GetDirectoryName(path) ?? path) : path;
+            CreateSecureMachineWideDir(dirPath);
+
+            return Path.GetFullPath(path);
+        }
+
+        /// <summary>
+        /// Returns a list of paths for loading a configuration resource.
         /// </summary>
         /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
         /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>

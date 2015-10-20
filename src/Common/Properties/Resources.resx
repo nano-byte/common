@@ -135,9 +135,6 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>The collection cannot be added to itself.</value>
   </data>
@@ -219,6 +216,9 @@
   <data name="NoModActive" xml:space="preserve">
     <value>There is currently no active mod.</value>
   </data>
+  <data name="NoSystemConfigInPortableMode" xml:space="preserve">
+    <value>System configuration cannot be edited in portable mode.</value>
+  </data>
   <data name="NotAnImage" xml:space="preserve">
     <value>The file is not a valid image.</value>
   </data>
@@ -233,6 +233,9 @@
   </data>
   <data name="NoXmlDataInZip" xml:space="preserve">
     <value>There was no XML data found in the ZIP file.</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>This method is only available on Windows.</value>

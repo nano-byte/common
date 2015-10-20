@@ -216,6 +216,9 @@
   <data name="NoModActive" xml:space="preserve">
     <value>Derzeit ist kein Mod aktiv.</value>
   </data>
+  <data name="NoSystemConfigInPortableMode" xml:space="preserve">
+    <value>Systemkonfiguration kann im Portable-Modus nicht bearbeitet werden.</value>
+  </data>
   <data name="NotAnImage" xml:space="preserve">
     <value>Die Datei ist kein gültiges Bild.</value>
   </data>
