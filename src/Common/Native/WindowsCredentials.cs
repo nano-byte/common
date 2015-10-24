@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -62,6 +63,7 @@ namespace NanoByte.Common.Native
         /// <param name="message">The message to display in the dialog.</param>
         /// <param name="owner">The parent window for the dialog; can be <see langword="null"/>.</param>
         /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
         public static NetworkCredential PromptDialog([NotNull] string target, WindowsCredentialsFlags flags, [CanBeNull] string title = null, [CanBeNull] string message = null, IntPtr owner = default(IntPtr))
         {
             #region Sanity checks
@@ -87,6 +89,7 @@ namespace NanoByte.Common.Native
         /// <param name="target">A string uniquely identifying the target the credentials are intended for.</param>
         /// <param name="flags">Flags for configuring the prompt.</param>
         /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
         public static NetworkCredential PromptCli([NotNull] string target, WindowsCredentialsFlags flags)
         {
             #region Sanity checks

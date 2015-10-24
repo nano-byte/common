@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
@@ -70,6 +71,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="target">A string uniquely identifying the target the credentials are intended for.</param>
         /// <param name="flags">Flags for configuring the prompt.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
         protected abstract NetworkCredential Prompt(string target, WindowsCredentialsFlags flags);
 
         /// <inheritdoc/>
