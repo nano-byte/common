@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -139,50 +138,10 @@ namespace NanoByte.Common
 
         #region Extraction
         /// <summary>
-        /// Gets the last word in a string.
-        /// </summary>
-        [Pure, ContractAnnotation("null => null; notnull => notnull")]
-        public static string GetLastWord(this string value)
-        {
-            if (value == null) return null;
-
-            string[] words = value.Split(' ');
-            return words.Length > 0 ? words[words.Length - 1].TrimEnd('.') : value.TrimEnd('.');
-        }
-
-        /// <summary>
-        /// Removes the last word in a string.
-        /// </summary>
-        [Pure, ContractAnnotation("null => null; notnull => notnull")]
-        public static string RemoveLastWord(this string value)
-        {
-            if (value == null) return null;
-
-            string lastWord = GetLastWord(value);
-            if (value == lastWord) return "";
-            if (lastWord.Length == 0 || value.Length == 0 || value.Length - lastWord.Length - 1 <= 0) return value;
-            return value.Substring(0, value.Length - lastWord.Length - 1);
-        }
-
-        /// <summary>
-        /// Removes all occurences of a set of characters from a string.
-        /// </summary>
-        [Pure, ContractAnnotation("value:null => null; value:notnull => notnull")]
-        public static string RemoveAll([CanBeNull] this string value, [NotNull] IEnumerable<char> toRemove)
-        {
-            #region Sanity checks
-            if (toRemove == null) throw new ArgumentNullException("toRemove");
-            #endregion
-
-            if (value == null) return null;
-            return toRemove.Aggregate(value, (acc, target) => acc.Replace(target.ToString(CultureInfo.InvariantCulture), ""));
-        }
-
-        /// <summary>
         /// Removes all occurences of a specific set of characters from a string.
         /// </summary>
         [Pure, ContractAnnotation("value:null => null; value:notnull => notnull")]
-        public static string StripCharacters([CanBeNull] this string value, [NotNull] char[] characters)
+        public static string StripCharacters([CanBeNull] this string value, [NotNull] IEnumerable<char> characters)
         {
             #region Sanity checks
             if (characters == null) throw new ArgumentNullException("characters");
@@ -190,6 +149,19 @@ namespace NanoByte.Common
 
             if (value == null) return null;
             return new string(value.Except(characters.Contains).ToArray());
+        }
+
+        /// <summary>
+        /// Returns a string with <paramref name="count"/> characters removed from the end.
+        /// </summary>
+        [Pure, NotNull]
+        public static string StripFromEnd([NotNull] this string value, int count)
+        {
+            #region Sanity checks
+            if (value == null) throw new ArgumentNullException("value");
+            #endregion
+
+            return value.Substring(0, value.Length - count);
         }
         #endregion
 
@@ -213,7 +185,7 @@ namespace NanoByte.Common
             {
                 // Never add any \r or \n to the single lines
                 if (s.EndsWithIgnoreCase("\r") || s.EndsWithIgnoreCase("\n"))
-                    result.Add(s.Substring(0, s.Length - 1));
+                    result.Add(s.StripFromEnd(count: 1));
                 else if (s.StartsWithIgnoreCase("\n") || s.StartsWithIgnoreCase("\r"))
                     result.Add(s.Substring(1));
                 else
@@ -262,7 +234,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(ch);
-            return index == -1 ? value : value.Substring(0, index);
+            return (index == -1) ? value : value.Substring(0, index);
         }
 
         /// <summary>
@@ -276,7 +248,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(ch);
-            return index == -1 ? "" : value.Substring(index + 1);
+            return (index == -1) ? "" : value.Substring(index + 1);
         }
 
         /// <summary>
@@ -290,7 +262,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.LastIndexOf(ch);
-            return index == -1 ? value : value.Substring(0, index);
+            return (index == -1) ? value : value.Substring(0, index);
         }
 
         /// <summary>
@@ -304,7 +276,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.LastIndexOf(ch);
-            return index == -1 ? value : value.Substring(index + 1);
+            return (index == -1) ? value : value.Substring(index + 1);
         }
 
         /// <summary>
@@ -319,7 +291,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(str, StringComparison.Ordinal);
-            return index == -1 ? value : value.Substring(0, index);
+            return (index == -1) ? value : value.Substring(0, index);
         }
 
         /// <summary>
@@ -334,7 +306,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(str, StringComparison.Ordinal);
-            return index == -1 ? "" : value.Substring(index + str.Length);
+            return (index == -1) ? "" : value.Substring(index + str.Length);
         }
 
         /// <summary>
@@ -349,7 +321,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
-            return index == -1 ? value : value.Substring(0, index);
+            return (index == -1) ? value : value.Substring(0, index);
         }
 
         /// <summary>
@@ -365,7 +337,7 @@ namespace NanoByte.Common
 
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
 
-            return index == -1 ? "" : value.Substring(index + str.Length);
+            return (index == -1) ? "" : value.Substring(index + str.Length);
         }
         #endregion
 

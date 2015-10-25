@@ -66,7 +66,7 @@ namespace NanoByte.Common.Cli
                 if (key.Key == ConsoleKey.Backspace)
                 {
                     if (!string.IsNullOrEmpty(password))
-                        password = password.Substring(0, password.Length - 1);
+                        password = password.StripFromEnd(count: 1);
                 }
                 else password += key.KeyChar;
 

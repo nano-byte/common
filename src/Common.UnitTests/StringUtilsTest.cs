@@ -61,13 +61,6 @@ namespace NanoByte.Common
         }
 
         [Test]
-        public void TestGetLastWord()
-        {
-            "This is a sentence.".GetLastWord().Should().Be("sentence");
-            "some words".GetLastWord().Should().Be("words");
-        }
-
-        [Test]
         public void TestSplitMultilineText()
         {
             "123\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Linux-stlye linebreaks");
@@ -112,15 +105,15 @@ namespace NanoByte.Common
         }
 
         [Test]
-        public void TestRemoveAll()
+        public void TestStripCharacters()
         {
-            "abcd".RemoveAll("bd").Should().Be("ac");
+            "a!b?".StripCharacters("!?").Should().Be("ab");
         }
 
         [Test]
-        public void TestStripCharacters()
+        public void TestStripFromEnd()
         {
-            "a!b?".StripCharacters(new[] {'!', '?'}).Should().Be("ab");
+            "abc".StripFromEnd(count: 1).Should().Be("ab");
         }
 
         [Test]
