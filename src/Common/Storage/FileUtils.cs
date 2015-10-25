@@ -992,7 +992,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         private static bool IsUnixFSFallback([NotNull, Localizable(false)] string path)
         {
-            string probeFile = Path.Combine(path, ".unixfs_probe_" + Path.GetTempFileName());
+            string probeFile = Path.Combine(path, ".unixfs_probe_" + Path.GetRandomFileName());
             Touch(probeFile);
 
             try
