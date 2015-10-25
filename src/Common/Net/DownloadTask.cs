@@ -153,7 +153,7 @@ namespace NanoByte.Common.Net
                 }
 
                 // Wrap exception to add context
-                throw new WebException(string.Format(Resources.FailedToDownload, Source), ex.InnerException, ex.Status, ex.Response);
+                throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
             }
             #endregion
 
