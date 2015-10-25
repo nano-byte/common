@@ -34,7 +34,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// An alternate version of <see cref="Uri.ToString"/> that produces results escaped according to RFC 2396.
         /// </summary>
-        [PublicAPI, Pure, NotNull]
+        [Pure, NotNull]
         public static string ToStringRfc([NotNull] this Uri uri)
         {
             #region Sanity checks
@@ -49,7 +49,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Adds a trailing slash to the URI if it does not already have one.
         /// </summary>
-        [PublicAPI, Pure, NotNull]
+        [Pure, NotNull]
         public static Uri EnsureTrailingSlash([NotNull] this Uri uri)
         {
             #region Sanity checks
@@ -65,7 +65,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Reparses a URI (generated via conversion) to ensure it is a valid absolute URI.
         /// </summary>
-        [PublicAPI, Pure, NotNull]
+        [Pure, NotNull]
         public static Uri ReparseAsAbsolute([NotNull] this Uri uri)
         {
             #region Sanity checks
@@ -78,7 +78,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Extracts the file-name portion of an URI and ensures it is a valid file-name on the local OS.
         /// </summary>
-        [PublicAPI, Pure, NotNull]
+        [Pure, NotNull]
         public static string GetLocalFileName([NotNull] this Uri uri)
         {
             #region Sanity checks
@@ -90,6 +90,21 @@ namespace NanoByte.Common.Net
             if (string.IsNullOrEmpty(fileName)) fileName = "file.ext";
 
             return fileName;
+        }
+
+        /// <summary>
+        /// Extracts the base part of an URI, i.e., the part that is used for resolving relative URIs.
+        /// </summary>
+        [Pure, NotNull]
+        public static Uri GetBaseUri([NotNull] this Uri uri)
+        {
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException("uri");
+            #endregion
+
+            return new Uri(
+                new Uri(uri, "-").ToStringRfc().StripFromEnd(count: 1),
+                uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
         }
     }
 }
