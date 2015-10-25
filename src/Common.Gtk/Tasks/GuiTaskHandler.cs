@@ -31,7 +31,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Uses simple dialog boxes to inform the user about the progress of tasks.
     /// </summary>
-    public class GuiTaskHandler : MarshalNoTimeout, ITaskHandler
+    public class GuiTaskHandler : TaskHandlerBase
     {
         [CanBeNull]
         private readonly Window _owner;
@@ -45,16 +45,14 @@ namespace NanoByte.Common.Tasks
             _owner = owner;
         }
 
-        /// <summary>
-        /// Used to signal the <see cref="CancellationToken"/>.
-        /// </summary>
-        protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+        /// <inheritdoc/>
+        protected override void LogHandler(LogSeverity severity, string message)
+        {
+            // TODO: Implement
+        }
 
         /// <inheritdoc/>
-        public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
-
-        /// <inheritdoc/>
-        public virtual void RunTask(ITask task)
+        public override void RunTask(ITask task)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
@@ -72,10 +70,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public Verbosity Verbosity { get; set; }
-
-        /// <inheritdoc/>
-        public virtual bool Ask(string question)
+        public override bool Ask(string question)
         {
             #region Sanity checks
             if (question == null) throw new ArgumentNullException("question");
@@ -98,7 +93,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output(string title, string message)
+        public override void Output(string title, string message)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
@@ -109,7 +104,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output<T>(string title, IEnumerable<T> data)
+        public override void Output<T>(string title, IEnumerable<T> data)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
@@ -142,19 +137,5 @@ namespace NanoByte.Common.Tasks
                 return result;
             }
         }
-
-        #region Dispose
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing) CancellationTokenSource.Dispose();
-        }
-        #endregion
     }
 }

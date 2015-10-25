@@ -39,6 +39,18 @@ namespace NanoByte.Common.Tasks
         public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
 
         /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing) CancellationTokenSource.Dispose();
+        }
+
+        /// <inheritdoc/>
         public void RunTask(ITask task)
         {
             #region Sanity checks
@@ -81,19 +93,5 @@ namespace NanoByte.Common.Tasks
         {
             return null;
         }
-
-        #region Dispose
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing) CancellationTokenSource.Dispose();
-        }
-        #endregion
     }
 }

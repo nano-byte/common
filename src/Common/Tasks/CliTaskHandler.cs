@@ -32,7 +32,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Uses the stderr stream to inform the user about the progress of tasks.
     /// </summary>
-    public class CliTaskHandler : MarshalNoTimeout, ITaskHandler
+    public class CliTaskHandler : TaskHandlerBase
     {
         /// <summary>
         /// Sets up Ctrl+C handling and console <see cref="Log"/> output.
@@ -50,7 +50,6 @@ namespace NanoByte.Common.Tasks
             }
             #endregion
 
-            Log.Handler += LogHandler;
         }
 
         /// <summary>
@@ -64,12 +63,24 @@ namespace NanoByte.Common.Tasks
             e.Cancel = true;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                Console.CancelKeyPress -= CancelKeyPressHandler;
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+
         /// <summary>
         /// Prints <see cref="Log"/> messages to the <see cref="Console"/> based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
-        protected virtual void LogHandler(LogSeverity severity, string message)
+        protected override void LogHandler(LogSeverity severity, string message)
         {
             switch (severity)
             {
@@ -87,18 +98,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public Verbosity Verbosity { get; set; }
-
-        /// <summary>
-        /// Used to signal the <see cref="CancellationToken"/>.
-        /// </summary>
-        protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
-
-        /// <inheritdoc/>
-        public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
-
-        /// <inheritdoc/>
-        public virtual void RunTask(ITask task)
+        public override void RunTask(ITask task)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
@@ -116,7 +116,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual bool Ask(string question)
+        public override bool Ask(string question)
         {
             #region Sanity checks
             if (question == null) throw new ArgumentNullException("question");
@@ -143,7 +143,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output(string title, string message)
+        public override void Output(string title, string message)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
@@ -154,7 +154,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public void Output<T>(string title, IEnumerable<T> data)
+        public override void Output<T>(string title, IEnumerable<T> data)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException("title");
@@ -175,21 +175,5 @@ namespace NanoByte.Common.Tasks
             if (WindowsUtils.IsWindowsNT) return new WindowsCliCredentialProvider(silent);
             else return (silent ? null : new CliCredentialProvider());
         }
-
-        #region Dispose
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            Log.Handler -= LogHandler;
-            Console.CancelKeyPress -= CancelKeyPressHandler;
-            if (disposing) CancellationTokenSource.Dispose();
-        }
-        #endregion
     }
 }
