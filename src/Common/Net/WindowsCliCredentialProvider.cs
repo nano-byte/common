@@ -23,26 +23,29 @@
 using System;
 using System.Net;
 using NanoByte.Common.Native;
+using NanoByte.Common.Properties;
+using NanoByte.Common.Values;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials.PromptDialog"/>.
+    /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials.PromptCli"/>.
     /// </summary>
-    /// <remarks>Use one instance per remote resource.</remarks>
-    public class WindowsDialogCredentialProvider : WindowsCredentialProvider
+    public class WindowsCliCredentialProvider : WindowsCredentialProvider
     {
         /// <summary>
-        /// Creates a new credential provider.
+        /// Creates a new Windows command-line credential provider.
         /// </summary>
-        /// <param name="silent">Set to <see langword="true"/> to serve persisted credentials but not show any UI asking for new credentials.</param>
-        public WindowsDialogCredentialProvider(bool silent = false) : base(silent)
+        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
+        public WindowsCliCredentialProvider(bool interactive) : base(interactive)
         {}
 
         /// <inheritdoc/>
         protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
         {
-            return WindowsCredentials.PromptDialog(target, flags);
+            if (flags.HasFlag(WindowsCredentialsFlags.IncorrectPassword))
+                Log.Error(string.Format(Resources.InvalidCredentials, target));
+            return WindowsCredentials.PromptCli(target, flags);
         }
     }
 }

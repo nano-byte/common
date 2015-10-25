@@ -121,14 +121,21 @@
     <Compile Include="Native\WindowsUtils.cs" />
     <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
     <Compile Include="NeedGuiException.cs" />
+    <Compile Include="Net\CachedCredentialProvider.cs" />
+    <Compile Include="Net\CliCredentialProvider.cs" />
+    <Compile Include="Net\CredentialProviderBase.cs" />
     <Compile Include="Net\DownloadFile.cs" />
     <Compile Include="Net\DownloadMemory.cs" />
     <Compile Include="Net\DownloadTask.cs" />
+    <Compile Include="Net\ICredentialProvider.cs" />
     <Compile Include="Net\NetUtils.cs" />
     <Compile Include="Net\UriExtensions.cs" />
     <Compile Include="Net\WebClientTimeout.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Net\WindowsCliCredentialProvider.cs" />
+    <Compile Include="Net\WindowsCredentialProvider.cs" />
+    <Compile Include="Net\WindowsDialogCredentialProvider.cs" />
     <Compile Include="NotAdminException.cs" />
     <Compile Include="Parallel.cs" />
     <Compile Include="ProcessUtils.cs" />
@@ -168,11 +175,9 @@
     <Compile Include="Tasks\CancellationToken.cs" />
     <Compile Include="Tasks\CancellationTokenRegistration.cs" />
     <Compile Include="Tasks\CancellationTokenSource.cs" />
-    <Compile Include="Tasks\CliCredentialProvider.cs" />
     <Compile Include="Tasks\CliTaskHandler.cs" />
     <Compile Include="Tasks\TaskHandlerBase.cs" />
     <Compile Include="Tasks\ForEachTask.cs" />
-    <Compile Include="Tasks\ICredentialProvider.cs" />
     <Compile Include="Tasks\IProgress.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Tasks\ITaskHandler.cs" />
@@ -187,9 +192,6 @@
     <Compile Include="Tasks\TaskState.cs" />
     <Compile Include="Tasks\Verbosity.cs" />
     <Compile Include="Tasks\WaitTask.cs" />
-    <Compile Include="Tasks\WindowsCliCredentialProvider.cs" />
-    <Compile Include="Tasks\WindowsCredentialProvider.cs" />
-    <Compile Include="Tasks\WindowsDialogCredentialProvider.cs" />
     <Compile Include="ThreadUtils.cs" />
     <Compile Include="TimedLogEvent.cs" />
     <Compile Include="Undo\AddToCollection.cs" />

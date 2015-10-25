@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using JetBrains.Annotations;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -43,6 +44,12 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <remarks>Once this has been signalled this <seealso cref="ITaskHandler"/> cannot be reused, since any subsequently started <seealso cref="ITask"/>s will be cancelled immediatley.</remarks>
         CancellationToken CancellationToken { get; }
+
+        /// <summary>
+        /// Used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <see langword="null"/>.
+        /// </summary>
+        [CanBeNull]
+        ICredentialProvider CredentialProvider { get; }
 
         /// <summary>
         /// Runs an <see cref="ITask"/> and tracks its progress. Returns once the task has been completed. The task may be executed on a different thread.
@@ -85,12 +92,5 @@ namespace NanoByte.Common.Tasks
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data);
-
-        /// <summary>
-        /// Builds an object used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <see langword="null"/>.
-        /// </summary>
-        /// <remarks>Use one instance per remote resource.</remarks>
-        [CanBeNull]
-        ICredentialProvider BuildCredentialProvider();
     }
 }

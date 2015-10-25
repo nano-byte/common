@@ -22,41 +22,26 @@
 
 using System;
 using System.Net;
-using NanoByte.Common.Cli;
-using NanoByte.Common.Net;
-using NanoByte.Common.Properties;
+using NanoByte.Common.Native;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Asks the user for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using a command-line prompt.
+    /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials.PromptDialog"/>.
     /// </summary>
-    /// <remarks>Use one instance per remote resource.</remarks>
-    public class CliCredentialProvider : ICredentialProvider
+    public class WindowsDialogCredentialProvider : WindowsCredentialProvider
     {
-        /// <summary>Used to signal that the next <see cref="GetCredential"/> call will be a retry due to incorrect credentials.</summary>
-        private bool _retry;
+        /// <summary>
+        /// Creates a new Windows GUI credential provider.
+        /// </summary>
+        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
+        public WindowsDialogCredentialProvider(bool interactive) : base(interactive)
+        {}
 
         /// <inheritdoc/>
-        public NetworkCredential GetCredential(Uri uri, string authType)
+        protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
         {
-            Log.Debug("Prompt for credentials on command-line: " + uri.ToStringRfc());
-            if (_retry)
-            {
-                Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
-                _retry = false;
-            }
-            Console.Error.WriteLine(Resources.PleasEnterCredentials, uri.ToStringRfc());
-            return new NetworkCredential(
-                CliUtils.ReadString(Resources.UserName),
-                CliUtils.ReadPassword(Resources.Password));
-        }
-
-        /// <inheritdoc/>
-        public bool RequestRetry()
-        {
-            _retry = true;
-            return true;
+            return WindowsCredentials.PromptDialog(target, flags);
         }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="LogTest.cs" />
     <Compile Include="Native\CygwinUtilsTest.cs" />
     <Compile Include="Native\WindowsRestartManagerTest.cs" />
+    <Compile Include="Net\CachedCredentialProviderTest.cs" />
     <Compile Include="Net\DownloadFileTest.cs" />
     <Compile Include="Net\DownloadMemoryTest.cs" />
     <Compile Include="Net\UriExtensionsTest.cs" />

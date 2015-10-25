@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using JetBrains.Annotations;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -50,6 +50,37 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
 
+        private ICredentialProvider _credentialProvider;
+
+        private readonly object _credentialProviderLock = new object();
+
+        /// <inheritdoc/>
+        public ICredentialProvider CredentialProvider
+        {
+            get
+            {
+                // Double-checked locking
+                if (_credentialProvider == null)
+                {
+                    lock (_credentialProviderLock)
+                    {
+                        if (_credentialProvider == null)
+                        {
+                            var provider = BuildCrendentialProvider();
+                            if (provider != null) _credentialProvider = new CachedCredentialProvider(provider);
+                        }
+                    }
+                }
+                return _credentialProvider;
+            }
+        }
+
+        /// <summary>
+        /// Template method for building an <see cref="ICredentialProvider"/>. Called on first use of <see cref="CredentialProvider"/>.
+        /// </summary>
+        [CanBeNull]
+        protected abstract ICredentialProvider BuildCrendentialProvider();
+
         /// <inheritdoc/>
         public virtual Verbosity Verbosity { get; set; }
 
@@ -64,8 +95,5 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         public abstract void Output<T>(string title, IEnumerable<T> data);
-
-        /// <inheritdoc/>
-        public abstract ICredentialProvider BuildCredentialProvider();
     }
 }

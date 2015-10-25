@@ -22,18 +22,24 @@
 
 using System;
 using System.Net;
+using JetBrains.Annotations;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Asks the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s.
     /// </summary>
+    /// <remarks>Implementations of this interface are thread-safe.</remarks>
     public interface ICredentialProvider : ICredentials
     {
         /// <summary>
-        /// Indicate that the last <see cref="NetworkCredential"/>s that were retrieved were incorrect and requests a retry on the next <see cref="ICredentials.GetCredential"/> call to get correct credentials.
+        /// Indicates whether the credential provider is interactive, i.e., can ask the user for input.
         /// </summary>
-        /// <returns><see langword="true"/> if the provider is now ready for a retry; <see langword="false"/> if the provider does not support retrys, e.g., because it is non-interactive.</returns>
-        bool RequestRetry();
+        bool Interactive { get; }
+
+        /// <summary>
+        /// Report that the credentials that were retrieved for <paramref name="uri"/> were incorrect.
+        /// </summary>
+        void ReportInvalid([NotNull] Uri uri);
     }
 }

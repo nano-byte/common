@@ -143,12 +143,8 @@ namespace NanoByte.Common.Net
                     var response = ex.Response as HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
                     {
-                        if (CredentialProvider.RequestRetry()) goto Retry;
-                        else
-                        {
-                            // Wrap exception to add context
-                            throw new WebException(string.Format(Resources.InvalidCredentials, Source), ex.InnerException, ex.Status, ex.Response);
-                        }
+                        CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
+                        if (CredentialProvider.Interactive) goto Retry;
                     }
                 }
 

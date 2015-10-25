@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using JetBrains.Annotations;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -42,13 +43,13 @@ namespace NanoByte.Common.Tasks
         /// Runs the task and blocks until it is complete.
         /// </summary>
         /// <param name="cancellationToken">Used to receive a signal (e.g. from another thread) when the user wishes to cancel the task execution.</param>
-        /// <param name="progress">Used to report back the task's progress (e.g. to another thread).</param>
         /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</param>
+        /// <param name="progress">Used to report back the task's progress (e.g. to another thread).</param>
         /// <exception cref="OperationCanceledException">The task was canceled from another thread.</exception>
         /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <seealso cref="ITaskHandler.RunTask"/>
-        void Run(CancellationToken cancellationToken = default(CancellationToken), [CanBeNull] IProgress<TaskSnapshot> progress = null, [CanBeNull] ICredentialProvider credentialProvider = null);
+        void Run(CancellationToken cancellationToken = default(CancellationToken), [CanBeNull] ICredentialProvider credentialProvider = null, [CanBeNull] IProgress<TaskSnapshot> progress = null);
 
         /// <summary>
         /// A name describing the task in human-readable form.

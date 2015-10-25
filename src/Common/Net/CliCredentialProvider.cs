@@ -22,31 +22,39 @@
 
 using System;
 using System.Net;
-using NanoByte.Common.Native;
+using NanoByte.Common.Cli;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Values;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials.PromptCli"/>.
+    /// Asks the user for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using a command-line prompt.
     /// </summary>
-    /// <remarks>Use one instance per remote resource.</remarks>
-    public class WindowsCliCredentialProvider : WindowsCredentialProvider
+    public class CliCredentialProvider : CredentialProviderBase
     {
         /// <summary>
         /// Creates a new command-line credential provider.
         /// </summary>
-        /// <param name="silent">Set to <see langword="true"/> to serve persisted credentials but not show any UI asking for new credentials.</param>
-        public WindowsCliCredentialProvider(bool silent = false) : base(silent)
+        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
+        public CliCredentialProvider(bool interactive) : base(interactive)
         {}
 
         /// <inheritdoc/>
-        protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
+        public override NetworkCredential GetCredential(Uri uri, string authType)
         {
-            if (flags.HasFlag(WindowsCredentialsFlags.IncorrectPassword))
-                Log.Error(string.Format(Resources.InvalidCredentials, target));
-            return WindowsCredentials.PromptCli(target, flags);
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException("uri");
+            #endregion
+
+            if (!Interactive) return null;
+
+            Log.Debug("Prompt for credentials on command-line: " + uri.ToStringRfc());
+            if (WasReportedInvalid(uri))
+                Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
+            Console.Error.WriteLine(Resources.PleasEnterCredentials, uri.ToStringRfc());
+            return new NetworkCredential(
+                CliUtils.ReadString(Resources.UserName),
+                CliUtils.ReadPassword(Resources.Password));
         }
     }
 }

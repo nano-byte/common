@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -37,6 +38,9 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         public CancellationToken CancellationToken { get { return CancellationTokenSource.Token; } }
+
+        /// <inheritdoc/>
+        public ICredentialProvider CredentialProvider { get { return null; } }
 
         /// <inheritdoc/>
         public void Dispose()
@@ -58,7 +62,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            task.Run(CancellationToken, credentialProvider: BuildCredentialProvider());
+            task.Run(CancellationToken);
         }
 
         /// <summary>
@@ -86,12 +90,6 @@ namespace NanoByte.Common.Tasks
         public virtual void Output<T>(string title, IEnumerable<T> data)
         {
             // No UI, so nothing to do
-        }
-
-        /// <inheritdoc/>
-        public virtual ICredentialProvider BuildCredentialProvider()
-        {
-            return null;
         }
     }
 }

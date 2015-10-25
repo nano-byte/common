@@ -25,6 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Gtk;
 using JetBrains.Annotations;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -35,6 +36,7 @@ namespace NanoByte.Common.Tasks
     {
         private readonly ITask _task;
         private readonly Thread _taskThread;
+        private readonly ICredentialProvider _credentialProvider;
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly Progress<TaskSnapshot> _progress = new Progress<TaskSnapshot>();
 
@@ -42,10 +44,11 @@ namespace NanoByte.Common.Tasks
         /// Creates a new task tracking dialog.
         /// </summary>
         /// <param name="task">The trackable task to execute and display.</param>
+        /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
         /// <param name="parent">The parent window for this dialog; can be <see langword="null"/>.</param>
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Auto-generated")]
-        public TaskRunDialog([NotNull] ITask task, CancellationTokenSource cancellationTokenSource, [CanBeNull] Widget parent = null)
+        public TaskRunDialog([NotNull] ITask task, ICredentialProvider credentialProvider, CancellationTokenSource cancellationTokenSource, [CanBeNull] Widget parent = null)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
@@ -61,6 +64,7 @@ namespace NanoByte.Common.Tasks
             _task = task;
             _taskThread = new Thread(RunTask);
             _cancellationTokenSource = cancellationTokenSource;
+            _credentialProvider = credentialProvider;
         }
 
         /// <summary>
@@ -107,7 +111,7 @@ namespace NanoByte.Common.Tasks
         {
             try
             {
-                _task.Run(_cancellationTokenSource.Token, _progress);
+                _task.Run(_cancellationTokenSource.Token, _credentialProvider, _progress);
             }
             catch (Exception ex)
             {

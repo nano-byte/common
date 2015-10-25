@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using NanoByte.Common.Cli;
 using NanoByte.Common.Native;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -49,7 +50,6 @@ namespace NanoByte.Common.Tasks
                 // Ignore failures caused by non-standard terminal emulators
             }
             #endregion
-
         }
 
         /// <summary>
@@ -98,6 +98,13 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
+        protected override ICredentialProvider BuildCrendentialProvider()
+        {
+            if (WindowsUtils.IsWindowsNT) return new WindowsCliCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
+            else return new CliCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
+        }
+
+        /// <inheritdoc/>
         public override void RunTask(ITask task)
         {
             #region Sanity checks
@@ -105,13 +112,13 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             if (Verbosity <= Verbosity.Batch)
-                task.Run(CancellationToken, credentialProvider: BuildCredentialProvider());
+                task.Run(CancellationToken, CredentialProvider);
             else
             {
                 Log.Debug("Task: " + task.Name);
                 Console.Error.WriteLine(task.Name + @"...");
                 using (var progressBar = new TaskProgressBar())
-                    task.Run(CancellationToken, progressBar, BuildCredentialProvider());
+                    task.Run(CancellationToken, CredentialProvider, progressBar);
             }
         }
 
@@ -166,14 +173,6 @@ namespace NanoByte.Common.Tasks
                 Console.WriteLine(entry);
                 if (entry.Contains("\n")) Console.WriteLine();
             }
-        }
-
-        /// <inheritdoc/>
-        public virtual ICredentialProvider BuildCredentialProvider()
-        {
-            bool silent = (Verbosity == Verbosity.Batch);
-            if (WindowsUtils.IsWindowsNT) return new WindowsCliCredentialProvider(silent);
-            else return (silent ? null : new CliCredentialProvider());
         }
     }
 }

@@ -26,6 +26,7 @@ using System.Windows.Forms;
 using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Native;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -44,7 +45,6 @@ namespace NanoByte.Common.Tasks
         public GuiTaskHandler([CanBeNull] Control owner = null)
         {
             _owner = owner;
-
         }
 
         /// <summary>
@@ -79,6 +79,13 @@ namespace NanoByte.Common.Tasks
         public RtfBuilder ErrorLog { get { return _errorLog; } }
 
         /// <inheritdoc/>
+        protected override ICredentialProvider BuildCrendentialProvider()
+        {
+            if (WindowsUtils.IsWindowsNT) return new WindowsDialogCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
+            else return null;
+        }
+
+        /// <inheritdoc/>
         public override void RunTask(ITask task)
         {
             #region Sanity checks
@@ -89,7 +96,7 @@ namespace NanoByte.Common.Tasks
             Exception ex = null;
             Invoke(() =>
             {
-                using (var dialog = new TaskRunDialog(task, CancellationTokenSource))
+                using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource))
                 {
                     dialog.ShowDialog(_owner);
                     ex = dialog.Exception;
@@ -141,14 +148,6 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Invoke(() => OutputGridBox.Show(_owner, title, data));
-        }
-
-        /// <inheritdoc/>
-        public virtual ICredentialProvider BuildCredentialProvider()
-        {
-            bool silent = (Verbosity == Verbosity.Batch);
-            if (WindowsUtils.IsWindowsNT) return new WindowsDialogCredentialProvider(silent);
-            else return null;
         }
 
         private void Invoke(Action action)

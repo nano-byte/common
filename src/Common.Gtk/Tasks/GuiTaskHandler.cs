@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 using JetBrains.Annotations;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -52,6 +53,13 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
+        protected override ICredentialProvider BuildCrendentialProvider()
+        {
+            // TODO: Implement
+            return null;
+        }
+
+        /// <inheritdoc/>
         public override void RunTask(ITask task)
         {
             #region Sanity checks
@@ -61,7 +69,7 @@ namespace NanoByte.Common.Tasks
             Log.Debug("Task: " + task.Name);
             Invoke(() =>
             {
-                using (var dialog = new TaskRunDialog(task, CancellationTokenSource, _owner))
+                using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource, _owner))
                 {
                     dialog.Execute();
                     if (dialog.Exception != null) dialog.Exception.Rethrow();
@@ -113,12 +121,6 @@ namespace NanoByte.Common.Tasks
 
             string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
             Output(title, message);
-        }
-
-        /// <inheritdoc/>
-        public virtual ICredentialProvider BuildCredentialProvider()
-        {
-            return null;
         }
 
         private void Invoke(System.Action action)

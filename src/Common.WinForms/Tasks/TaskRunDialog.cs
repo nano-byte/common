@@ -25,6 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
 using JetBrains.Annotations;
+using NanoByte.Common.Net;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Tasks
@@ -36,6 +37,7 @@ namespace NanoByte.Common.Tasks
     {
         private readonly ITask _task;
         private readonly Thread _taskThread;
+        private readonly ICredentialProvider _credentialProvider;
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly Progress<TaskSnapshot> _progress = new Progress<TaskSnapshot>();
 
@@ -43,8 +45,9 @@ namespace NanoByte.Common.Tasks
         /// Creates a new task tracking dialog.
         /// </summary>
         /// <param name="task">The trackable task to execute and display.</param>
+        /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
-        public TaskRunDialog([NotNull] ITask task, CancellationTokenSource cancellationTokenSource)
+        public TaskRunDialog([NotNull] ITask task, [CanBeNull] ICredentialProvider credentialProvider, CancellationTokenSource cancellationTokenSource)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException("task");
@@ -59,6 +62,7 @@ namespace NanoByte.Common.Tasks
             _task = task;
             _taskThread = new Thread(RunTask);
             _cancellationTokenSource = cancellationTokenSource;
+            _credentialProvider = credentialProvider;
         }
 
         private void TaskRunDialog_Shown(object sender, EventArgs e)
@@ -89,7 +93,7 @@ namespace NanoByte.Common.Tasks
         {
             try
             {
-                _task.Run(_cancellationTokenSource.Token, _progress, new WindowsDialogCredentialProvider());
+                _task.Run(_cancellationTokenSource.Token, _credentialProvider, _progress);
             }
             catch (Exception ex)
             {

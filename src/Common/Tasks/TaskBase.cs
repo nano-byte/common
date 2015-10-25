@@ -27,6 +27,7 @@ using System.Net;
 using System.Security.Principal;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
+using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
@@ -65,7 +66,7 @@ namespace NanoByte.Common.Tasks
         protected ICredentialProvider CredentialProvider;
 
         /// <inheritdoc/>
-        public void Run(CancellationToken cancellationToken = default(CancellationToken), IProgress<TaskSnapshot> progress = null, ICredentialProvider credentialProvider = null)
+        public void Run(CancellationToken cancellationToken = default(CancellationToken), ICredentialProvider credentialProvider = null, IProgress<TaskSnapshot> progress = null)
         {
             cancellationToken.ThrowIfCancellationRequested();
             CancellationToken = cancellationToken;

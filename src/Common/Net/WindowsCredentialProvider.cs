@@ -24,44 +24,36 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using NanoByte.Common.Native;
-using NanoByte.Common.Net;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials"/>.
     /// </summary>
-    /// <remarks>Use one instance per remote resource.</remarks>
-    public abstract class WindowsCredentialProvider : ICredentialProvider
+    public abstract class WindowsCredentialProvider : CredentialProviderBase
     {
-        private readonly bool _silent;
-
         /// <summary>
-        /// Creates a new GUI credential provider.
+        /// Creates a new Windows credential provider.
         /// </summary>
-        /// <param name="silent">Set to <see langword="true"/> to serve persisted credentials but not show any UI asking for new credentials.</param>
-        protected WindowsCredentialProvider(bool silent)
-        {
-            _silent = silent;
-        }
-
-        /// <summary>Used to signal that the next <see cref="GetCredential"/> call will be a retry due to incorrect credentials.</summary>
-        private bool _retry;
+        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
+        protected WindowsCredentialProvider(bool interactive) : base(interactive)
+        {}
 
         /// <inheritdoc/>
-        public NetworkCredential GetCredential(Uri uri, string authType)
+        public override NetworkCredential GetCredential(Uri uri, string authType)
         {
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException("uri");
+            #endregion
+
             string target = uri.ToStringRfc();
 
-            if (_silent && !WindowsCredentials.IsCredentialStored(target))
+            if (!Interactive && !WindowsCredentials.IsCredentialStored(target))
                 return null;
 
-            var flags = WindowsCredentialsFlags.GenericCredentials | WindowsCredentialsFlags.ExcludeCertificates | WindowsCredentialsFlags.Persist;
-            if (_retry)
-            {
-                _retry = false;
+            var flags = WindowsCredentialsFlags.GenericCredentials | WindowsCredentialsFlags.ExcludeCertificates | WindowsCredentialsFlags.ShowSaveCheckBox;
+            if (WasReportedInvalid(uri))
                 flags |= WindowsCredentialsFlags.IncorrectPassword | WindowsCredentialsFlags.AlwaysShowUI;
-            }
 
             return Prompt(target, flags);
         }
@@ -73,12 +65,5 @@ namespace NanoByte.Common.Tasks
         /// <param name="flags">Flags for configuring the prompt.</param>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
         protected abstract NetworkCredential Prompt(string target, WindowsCredentialsFlags flags);
-
-        /// <inheritdoc/>
-        public bool RequestRetry()
-        {
-            _retry = true;
-            return !_silent;
-        }
     }
 }
