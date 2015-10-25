@@ -64,6 +64,16 @@ namespace NanoByte.Common.Collections
         protected abstract TValue Retrieve([NotNull] TKey key);
 
         /// <summary>
+        /// Removes the the entry with the specified <paramref name="key"/> from the cache.
+        /// </summary>
+        /// <returns><see langword="true"/> if a matching entry was found and removed; <see langword="false"/> if no matching entry was in the cache.</returns>
+        public bool Remove([NotNull] TKey key)
+        {
+            lock (_lock)
+                return _lookup.Remove(key);
+        }
+
+        /// <summary>
         /// Removes all entries from the cache.
         /// </summary>
         public void Clear()
