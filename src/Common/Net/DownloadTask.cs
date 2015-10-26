@@ -54,6 +54,11 @@ namespace NanoByte.Common.Net
         public Uri Source { get; private set; }
 
         /// <summary>
+        /// Set to <see langword="true"/> to add a No-Cache header to the request for any intermediate proxy servers.
+        /// </summary>
+        public bool NoCache { get; set; }
+
+        /// <summary>
         /// The HTTP header data returned by the server for the download request. An empty collection in case of an FTP download.
         /// </summary>
         /// <remarks>This value is always <see langword="null"/> until <see cref="TaskState.Data"/> has been reached.</remarks>
@@ -99,6 +104,7 @@ namespace NanoByte.Common.Net
             {
                 httpRequest.UserAgent = AppInfo.Current.NameVersion;
                 httpRequest.Credentials = CredentialProvider;
+                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             }
 
             // Start HTTP request
