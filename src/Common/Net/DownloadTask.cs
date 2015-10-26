@@ -60,7 +60,7 @@ namespace NanoByte.Common.Net
         [Browsable(false)]
         [CanBeNull]
         [PublicAPI]
-        public WebHeaderCollection Headers { get; private set; }
+        public WebHeaderCollection ResponseHeaders { get; private set; }
 
         /// <summary>
         /// Creates a new download task.
@@ -168,7 +168,7 @@ namespace NanoByte.Common.Net
         /// <returns><see langword="true"/> if everything is ok; <see langword="false"/> if there was an error.</returns>
         private void ReadHeader(WebResponse response)
         {
-            Headers = response.Headers;
+            ResponseHeaders = response.Headers;
 
             // Update the source URL to reflect changes made by HTTP redirection
             Source = response.ResponseUri;
