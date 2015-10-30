@@ -34,18 +34,6 @@ namespace NanoByte.Common.Collections
     /// </summary>
     public static class EnumerableExtensions
     {
-        #region LINQ
-        /// <summary>
-        /// Determines whether a sequence of elements contains any of the specified <paramref name="targets"/>.
-        /// </summary>
-        /// <returns><see langword="true"/> if <paramref name="enumeration"/> contains any element from <paramref name="targets"/>. <see langword="false"/> if <paramref name="enumeration"/> or <paramref name="targets"/> is empty.</returns>
-        [Pure]
-        public static bool ContainsAny<T>([NotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] IEnumerable<T> targets)
-        {
-            var set = new HashSet<T>(enumeration);
-            return targets.Any(set.Contains);
-        }
-
         /// <summary>
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(IEnumerable{TSource},Func{TSource,bool})"/>.
@@ -109,30 +97,17 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to maximize.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
         /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
         [CanBeNull, Pure]
-        public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression)
-        {
-            return enumeration.MaxBy(expression, Comparer<TValue>.Default);
-        }
-
-        /// <summary>
-        /// Determines the element in a list that maximizes a specified expression.
-        /// </summary>
-        /// <typeparam name="T">The type of the elements.</typeparam>
-        /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
-        /// <param name="enumeration">The elements to check.</param>
-        /// <param name="expression">The expression to maximize.</param>
-        /// <param name="comparer">A comprarer used to compare values of <paramref name="expression"/>.</param>
-        /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
-        [CanBeNull, Pure]
-        public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [NotNull] IComparer<TValue> comparer)
+        public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
         {
             #region Sanity checks
             if (enumeration == null) throw new ArgumentNullException("enumeration");
             if (expression == null) throw new ArgumentNullException("expression");
-            if (comparer == null) throw new ArgumentNullException("comparer");
             #endregion
+
+            if (comparer == null) comparer = Comparer<TValue>.Default;
 
             using (var enumerator = enumeration.GetEnumerator())
             {
@@ -162,30 +137,17 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to minimize.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
         /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
         [CanBeNull, Pure]
-        public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression)
-        {
-            return enumeration.MinBy(expression, Comparer<TValue>.Default);
-        }
-
-        /// <summary>
-        /// Determines the element in a list that minimizes a specified expression.
-        /// </summary>
-        /// <typeparam name="T">The type of the elements.</typeparam>
-        /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
-        /// <param name="enumeration">The elements to check.</param>
-        /// <param name="expression">The expression to minimize.</param>
-        /// <param name="comparer">A comprarer used to compare values of <paramref name="expression"/>.</param>
-        /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
-        [CanBeNull, Pure,]
-        public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [NotNull] IComparer<TValue> comparer)
+        public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
         {
             #region Sanity checks
             if (enumeration == null) throw new ArgumentNullException("enumeration");
             if (expression == null) throw new ArgumentNullException("expression");
-            if (comparer == null) throw new ArgumentNullException("comparer");
             #endregion
+
+            if (comparer == null) comparer = Comparer<TValue>.Default;
 
             using (var enumerator = enumeration.GetEnumerator())
             {
@@ -250,102 +212,7 @@ namespace NanoByte.Common.Collections
                 yield return result;
             }
         }
-        #endregion
 
-        #region Equality
-        /// <summary>
-        /// Determines whether two collections contain the same elements in the same order.
-        /// </summary>
-        /// <param name="first">The first of the two collections to compare.</param>
-        /// <param name="second">The first of the two collections to compare.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        [Pure]
-        public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
-        {
-            #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
-            #endregion
-
-            if (first.Count != second.Count) return false;
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
-
-            return first.SequenceEqual(second, comparer);
-        }
-
-        /// <summary>
-        /// Determines whether two collections contain the same elements disregarding the order they are in.
-        /// </summary>
-        /// <param name="first">The first of the two collections to compare.</param>
-        /// <param name="second">The first of the two collections to compare.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        [Pure]
-        public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
-        {
-            #region Sanity checks
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
-            #endregion
-
-            if (first.Count != second.Count) return false;
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
-
-            if (first.GetUnsequencedHashCode(comparer) != second.GetUnsequencedHashCode(comparer)) return false;
-            return first.All(x => second.Contains(x, comparer));
-        }
-
-        /// <summary>
-        /// Generates a hash code for the contents of a collection. Changing the elements' order will change the hash.
-        /// </summary>
-        /// <param name="collection">The collection to generate the hash for.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        /// <seealso cref="SequencedEquals{T}(ICollection{T},ICollection{T},IEqualityComparer{T})"/>
-        [Pure]
-        public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this IEnumerable<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
-        {
-            #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            #endregion
-
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
-
-            unchecked
-            {
-                int result = 397;
-                // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T unknown in collection.WhereNotNull())
-                    result = (result * 397) ^ comparer.GetHashCode(unknown);
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Generates a hash code for the contents of a collection. Changing the elements' order will not change the hash.
-        /// </summary>
-        /// <param name="collection">The collection to generate the hash for.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        /// <seealso cref="UnsequencedEquals{T}"/>
-        [Pure]
-        public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this IEnumerable<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)
-        {
-            #region Sanity checks
-            if (collection == null) throw new ArgumentNullException("collection");
-            #endregion
-
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
-
-            unchecked
-            {
-                int result = 397;
-                // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T unknown in collection.WhereNotNull())
-                    result = result ^ comparer.GetHashCode(unknown);
-                return result;
-            }
-        }
-        #endregion
-
-        #region Clone
         /// <summary>
         /// Calls <see cref="ICloneable.Clone"/> for every element in a collection and returns the results as a new collection.
         /// </summary>
@@ -354,6 +221,5 @@ namespace NanoByte.Common.Collections
         {
             return enumerable.Select(entry => (T)entry.Clone());
         }
-        #endregion
     }
 }

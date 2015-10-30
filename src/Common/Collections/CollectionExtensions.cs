@@ -48,51 +48,52 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Adds an element to a <see cref="List{T}"/> if the list list does not already <see cref="List{T}.Contains"/> the element.
+        /// Adds an element to the collection if it does not already <see cref="ICollection{T}.Contains"/> the element.
         /// </summary>
-        /// <returns><see langword="true"/> if the element was added to the list; <see langword="true"/> if the list already contained the element.</returns>
-        /// <remarks>This makes it possible to use a <see cref="List{T}"/> with semantics similar to a <see cref="SortedSet{T}"/>, but without ordering.</remarks>
-        public static bool AddIfNew<T>([NotNull] this ICollection<T> list, T element)
+        /// <returns><see langword="true"/> if the element was added to the collection; <see langword="true"/> if the collection already contained the element.</returns>
+        /// <remarks>This makes it possible to use a <see cref="ICollection{T}"/> with semantics similar to a <see cref="HashSet{T}"/>.</remarks>
+        public static bool AddIfNew<T>([NotNull] this ICollection<T> collection, T element)
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
+            if (collection == null) throw new ArgumentNullException("collection");
             #endregion
 
-            if (list.Contains(element)) return false;
+            if (collection.Contains(element)) return false;
             else
             {
-                list.Add(element);
+                collection.Add(element);
                 return true;
             }
         }
 
         /// <summary>
-        /// Adds multiple elements to the list.
+        /// Adds multiple elements to the collection.
         /// </summary>
-        public static void AddRange<TList, TElements>([NotNull] this ICollection<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
-            where TElements : TList
+        /// <seealso cref="List{T}.AddRange"/>
+        public static void AddRange<TCollection, TElements>([NotNull] this ICollection<TCollection> collection, [NotNull, InstantHandle] IEnumerable<TElements> elements)
+            where TElements : TCollection
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
+            if (collection == null) throw new ArgumentNullException("collection");
             if (elements == null) throw new ArgumentNullException("elements");
             #endregion
 
-            foreach (var element in elements) list.Add(element);
+            foreach (var element in elements) collection.Add(element);
         }
 
         /// <summary>
-        /// Removes multiple elements from the list.
+        /// Removes multiple elements from the collection.
         /// </summary>
         /// <seealso cref="List{T}.RemoveRange"/>
-        public static void RemoveRange<TList, TElements>([NotNull] this ICollection<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
-            where TElements : TList
+        public static void RemoveRange<TCollection, TElements>([NotNull] this ICollection<TCollection> collection, [NotNull, InstantHandle] IEnumerable<TElements> elements)
+            where TElements : TCollection
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
+            if (collection == null) throw new ArgumentNullException("collection");
             if (elements == null) throw new ArgumentNullException("elements");
             #endregion
 
-            foreach (var element in elements) list.Remove(element);
+            foreach (var element in elements) collection.Remove(element);
         }
 
         /// <summary>
@@ -133,19 +134,123 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Determines whether the list contains an element or is null.
+        /// Determines whether the collection contains an element or is null.
         /// </summary>
-        /// <param name="list">The list to check.</param>
+        /// <param name="collection">The list to check.</param>
         /// <param name="element">The element to look for.</param>
         /// <remarks>Useful for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
-        public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> list, T element)
+        public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> collection, T element)
         {
             #region Sanity checks
-            if (list == null) throw new ArgumentNullException("list");
+            if (collection == null) throw new ArgumentNullException("collection");
             if (element == null) throw new ArgumentNullException("element");
             #endregion
 
-            return (list.Count == 0) || list.Contains(element);
+            return (collection.Count == 0) || collection.Contains(element);
+        }
+
+        /// <summary>
+        /// Determines whether one collection of elements contains any of the elements in another.
+        /// </summary>
+        /// <param name="first">The first of the two collections to compare.</param>
+        /// <param name="second">The first of the two collections to compare.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <returns><see langword="true"/> if <paramref name="first"/> contains any element from <paramref name="second"/>. <see langword="false"/> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
+        [Pure]
+        public static bool ContainsAny<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            #endregion
+
+            var set = new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
+            return second.Any(set.Contains);
+        }
+
+        /// <summary>
+        /// Determines whether two collections contain the same elements in the same order.
+        /// </summary>
+        /// <param name="first">The first of the two collections to compare.</param>
+        /// <param name="second">The first of the two collections to compare.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        [Pure]
+        public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            #endregion
+
+            if (first.Count != second.Count) return false;
+            return first.SequenceEqual(second, comparer ?? EqualityComparer<T>.Default);
+        }
+
+        /// <summary>
+        /// Determines whether two collections contain the same elements disregarding the order they are in.
+        /// </summary>
+        /// <param name="first">The first of the two collections to compare.</param>
+        /// <param name="second">The first of the two collections to compare.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        [Pure]
+        public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException("first");
+            if (second == null) throw new ArgumentNullException("second");
+            #endregion
+
+            if (first.Count != second.Count) return false;
+            var set = new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
+            return second.All(set.Contains);
+        }
+
+        /// <summary>
+        /// Generates a hash code for the contents of the collection. Changing the elements' order will change the hash.
+        /// </summary>
+        /// <param name="collection">The collection to generate the hash for.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <seealso cref="SequencedEquals{T}(ICollection{T},ICollection{T},IEqualityComparer{T})"/>
+        [Pure]
+        public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
+        {
+            #region Sanity checks
+            if (collection == null) throw new ArgumentNullException("collection");
+            #endregion
+
+            if (comparer == null) comparer = EqualityComparer<T>.Default;
+            unchecked
+            {
+                int result = 397;
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (T unknown in collection.WhereNotNull())
+                    result = (result * 397) ^ comparer.GetHashCode(unknown);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Generates a hash code for the contents of the collection. Changing the elements' order will not change the hash.
+        /// </summary>
+        /// <param name="collection">The collection to generate the hash for.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <seealso cref="UnsequencedEquals{T}"/>
+        [Pure]
+        public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)
+        {
+            #region Sanity checks
+            if (collection == null) throw new ArgumentNullException("collection");
+            #endregion
+
+            if (comparer == null) comparer = EqualityComparer<T>.Default;
+            unchecked
+            {
+                int result = 397;
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (T unknown in collection.WhereNotNull())
+                    result = result ^ comparer.GetHashCode(unknown);
+                return result;
+            }
         }
     }
 }
