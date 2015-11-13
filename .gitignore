@@ -9,6 +9,5 @@ test-results/
 *.suo
 *.user
 *.userprefs
-*.*proj.DotSettings
 *.resources
 *.filtered.resx
