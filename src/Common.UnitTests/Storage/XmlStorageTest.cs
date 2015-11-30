@@ -36,6 +36,9 @@ namespace NanoByte.Common.Storage
     /// Contains test methods for <see cref="XmlStorage"/>.
     /// </summary>
     [TestFixture]
+#if SLIMDX
+    [Ignore]
+#endif
     public class XmlStorageTest
     {
         // ReSharper disable MemberCanBePrivate.Global
