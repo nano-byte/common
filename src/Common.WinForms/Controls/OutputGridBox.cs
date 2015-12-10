@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using JetBrains.Annotations;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
 {
@@ -37,6 +38,7 @@ namespace NanoByte.Common.Controls
         private OutputGridBox()
         {
             InitializeComponent();
+            HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
         }
 
         /// <summary>

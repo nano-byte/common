@@ -36,6 +36,7 @@ namespace NanoByte.Common.Controls
         private OutputBox()
         {
             InitializeComponent();
+            HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
         }
 
         /// <summary>

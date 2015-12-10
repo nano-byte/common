@@ -61,6 +61,7 @@ namespace NanoByte.Common.Controls
             #endregion
 
             InitializeComponent();
+            HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
             Shown += delegate { this.SetForegroundWindow(); };
 
             _exception = exception;

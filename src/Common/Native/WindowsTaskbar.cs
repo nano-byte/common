@@ -262,6 +262,32 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
+        /// Prevents a specific window from being pinned to the taskbar.
+        /// </summary>
+        /// <param name="hwnd">A handle to the window to prevent from being pinned.</param>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
+        public static void PreventPinning(IntPtr hwnd)
+        {
+            if (!WindowsUtils.IsWindows7) return;
+
+            try
+            {
+                IPropertyStore propertyStore = GetWindowPropertyStore(hwnd);
+
+                var preventPinningProperty = new PropertyKey(new Guid("9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3"), 9);
+                SetPropertyValue(propertyStore, preventPinningProperty, "1");
+
+                Marshal.ReleaseComObject(propertyStore);
+            }
+                #region Error handling
+            catch (Exception ex)
+            {
+                Log.Warn(ex);
+            }
+            #endregion
+        }
+
+        /// <summary>
         /// Converts a managed shell link structure to a COM object.
         /// </summary>
         private static IShellLinkW ConvertShellLink(ShellLink shellLink)

@@ -38,6 +38,7 @@ namespace NanoByte.Common.Controls
         private ErrorBox()
         {
             InitializeComponent();
+            HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
         }
 
         /// <summary>
