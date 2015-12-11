@@ -27,6 +27,7 @@ using System.Security;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 using NanoByte.Common.Native;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common
 {
@@ -152,8 +153,9 @@ namespace NanoByte.Common
         private const string HkcuSoftwareKey = @"HKEY_CURRENT_USER\SOFTWARE\";
 
         /// <summary>
-        /// Reads a string value from one of the SOFTWARE keys in the registry. Checks HKLM\SOFTWARE, HKLM\SOFTWARE\Wow6432Node and HKCU\SOFTWARE.
+        /// Reads a string value from one of the SOFTWARE keys in the registry.
         /// </summary>
+        /// <remarks>Checks HKLM\SOFTWARE, HKLM\SOFTWARE\Wow6432Node and HKCU\SOFTWARE in that order.</remarks>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
@@ -172,28 +174,26 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Sets a string value in one or more of the SOFTWARE keys in the registry. Checks HKLM\SOFTWARE, HKLM\SOFTWARE\Wow6432Node and HKCU\SOFTWARE.
+        /// Sets a string value in one or more of the SOFTWARE keys in the registry.
         /// </summary>
-        /// <remarks>Will only write to HKLM if <see cref="WindowsUtils.IsAdministrator"/>. Will only write to HKCU if there is no corresponding HKLM entry yet.</remarks>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to write.</param>
         /// <param name="value">The value to write.</param>
+        /// <param name="machineWide"><see langword="true"/> to write to HKLM\SOFTWARE (and HKLM\SOFTWARE\Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <see langword="false"/> to write to HCKU\SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
-        public static void SetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value)
+        public static void SetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value, bool machineWide = false)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
             #endregion
 
-            if (WindowsUtils.IsAdministrator)
+            if (machineWide)
             {
                 SetString(HklmSoftwareKey + subkeyName, valueName, value);
                 if (WindowsUtils.Is64BitProcess) SetString(HklmWowSoftwareKey + subkeyName, valueName, value);
             }
-
-            if (GetString(HklmSoftwareKey + subkeyName, valueName) != value)
-                SetString(HkcuSoftwareKey + subkeyName, valueName, value);
+            else SetString(HkcuSoftwareKey + subkeyName, valueName, value);
         }
         #endregion
 
