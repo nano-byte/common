@@ -132,8 +132,8 @@ namespace NanoByte.Common
 
             // Only Windows can directly launch .NET executables, other platforms must run through Mono
             var startInfo = WindowsUtils.IsWindows
-                ? new ProcessStartInfo(appPath, arguments.JoinEscapeArguments())
-                : new ProcessStartInfo("mono", appPath.EscapeArgument() + " " + arguments.JoinEscapeArguments());
+                ? new ProcessStartInfo(appPath, arguments.JoinEscapeArguments()) {UseShellExecute = false}
+                : new ProcessStartInfo("mono", appPath.EscapeArgument() + " " + arguments.JoinEscapeArguments()) {UseShellExecute = false};
 
             return startInfo;
         }
