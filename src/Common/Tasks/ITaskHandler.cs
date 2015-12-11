@@ -92,5 +92,11 @@ namespace NanoByte.Common.Tasks
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data);
+
+        /// <summary>
+        /// Displays an error message to the user.
+        /// </summary>
+        /// <param name="exception">The exception representing the error that occurred.</param>
+        void Error([NotNull] Exception exception);
     }
 }

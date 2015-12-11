@@ -174,5 +174,11 @@ namespace NanoByte.Common.Tasks
                 if (entry.Contains("\n")) Console.WriteLine();
             }
         }
+
+        /// <inheritdoc/>
+        public override void Error(Exception exception)
+        {
+            Log.Error(exception);
+        }
     }
 }

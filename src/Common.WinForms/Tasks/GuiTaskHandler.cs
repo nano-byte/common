@@ -48,7 +48,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <summary>
-        /// Records <see cref="Log"/> messages in <see cref="ErrorLog"/> based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
+        /// Records <see cref="Log"/> messages in an internal log based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
@@ -72,11 +72,6 @@ namespace NanoByte.Common.Tasks
         }
 
         private readonly RtfBuilder _errorLog = new RtfBuilder();
-
-        /// <summary>
-        /// Collects <see cref="Log"/> entries with color-coded formatting.
-        /// </summary>
-        public RtfBuilder ErrorLog { get { return _errorLog; } }
 
         /// <inheritdoc/>
         protected override ICredentialProvider BuildCrendentialProvider()
@@ -148,6 +143,15 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Invoke(() => OutputGridBox.Show(_owner, title, data));
+        }
+
+        public override void Error(Exception exception)
+        {
+            #region Sanity checks
+            if (exception == null) throw new ArgumentNullException("exception");
+            #endregion
+
+            Invoke(() => ErrorBox.Show(_owner, exception, _errorLog));
         }
 
         private void Invoke(Action action)

@@ -46,7 +46,7 @@ namespace NanoByte.Common.Controls
         public OSInfo OS { get; set; }
 
         /// <summary>
-        /// Information about the exception that occured.
+        /// Information about the exception that occurred.
         /// </summary>
         [XmlElement("exception")]
         public ExceptionInfo Exception { get; set; }

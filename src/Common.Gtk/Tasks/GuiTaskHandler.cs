@@ -123,6 +123,13 @@ namespace NanoByte.Common.Tasks
             Output(title, message);
         }
 
+        /// <inheritdoc/>
+        public override void Error(Exception exception)
+        {
+            Log.Error(exception);
+            Msg.Inform(null, exception.Message, MsgSeverity.Error);
+        }
+
         private void Invoke(System.Action action)
         {
             if (_owner == null) action();

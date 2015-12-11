@@ -91,5 +91,11 @@ namespace NanoByte.Common.Tasks
         {
             // No UI, so nothing to do
         }
+
+        /// <inheritdoc/>
+        public void Error(Exception exception)
+        {
+            // No UI, so nothing to do
+        }
     }
 }

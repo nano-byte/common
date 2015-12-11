@@ -95,5 +95,8 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         public abstract void Output<T>(string title, IEnumerable<T> data);
+
+        /// <inheritdoc/>
+        public abstract void Error(Exception exception);
     }
 }
