@@ -27,7 +27,6 @@ using System.Security;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 using NanoByte.Common.Native;
-using NanoByte.Common.Storage;
 
 namespace NanoByte.Common
 {
@@ -174,6 +173,26 @@ namespace NanoByte.Common
         }
 
         /// <summary>
+        /// Reads a string value from one of the SOFTWARE keys in the registry.
+        /// </summary>
+        /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
+        /// <param name="valueName">The name of the value to read.</param>
+        /// <param name="machineWide"><see langword="true"/> to read from HKLM\SOFTWARE (and HKLM\SOFTWARE\Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <see langword="false"/> to read from HCKU\SOFTWARE.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
+        [CanBeNull]
+        public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, bool machineWide)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            #endregion
+
+            return machineWide
+                ? GetString(HklmSoftwareKey + subkeyName, valueName,
+                    GetString(HklmWowSoftwareKey + subkeyName, valueName))
+                : GetString(HkcuSoftwareKey + subkeyName, valueName);
+        }
+
+        /// <summary>
         /// Sets a string value in one or more of the SOFTWARE keys in the registry.
         /// </summary>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
@@ -194,6 +213,36 @@ namespace NanoByte.Common
                 if (WindowsUtils.Is64BitProcess) SetString(HklmWowSoftwareKey + subkeyName, valueName, value);
             }
             else SetString(HkcuSoftwareKey + subkeyName, valueName, value);
+        }
+
+        /// <summary>
+        /// Deletes a value from one of the SOFTWARE keys in the registry.
+        /// </summary>
+        /// <remarks>Does not throw an exception for missing keys or values.</remarks>
+        /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
+        /// <param name="valueName">The name of the value to delete.</param>
+        /// <param name="machineWide"><see langword="true"/> to delete from HKLM\SOFTWARE (and HKLM\SOFTWARE\Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <see langword="false"/> to delete from HCKU\SOFTWARE.</param>
+        /// <exception cref="IOException">Registry access failed.</exception>
+        public static void DeleteSoftwareValue([NotNull, Localizable(false)] string subkeyName, [NotNull, Localizable(false)] string valueName, bool machineWide)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException("subkeyName");
+            if (string.IsNullOrEmpty(valueName)) throw new ArgumentNullException("valueName");
+            #endregion
+
+            if (machineWide)
+            {
+                DeleteValue(Registry.LocalMachine, @"SOFTWARE\" + subkeyName, valueName);
+                if (WindowsUtils.Is64BitProcess) DeleteValue(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\" + subkeyName, valueName);
+            }
+            else
+                DeleteValue(Registry.CurrentUser, @"SOFTWARE\" + subkeyName, valueName);
+        }
+
+        private static void DeleteValue(RegistryKey root, string subkeyName, string valueName)
+        {
+            var key = root.OpenSubKey(subkeyName, writable: true);
+            if (key != null) key.DeleteValue(valueName, throwOnMissingValue: false);
         }
         #endregion
 
