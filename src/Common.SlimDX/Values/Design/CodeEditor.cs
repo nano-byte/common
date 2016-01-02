@@ -57,15 +57,22 @@ namespace NanoByte.Common.Values.Design
             if (editorService == null) return value;
 
             var editorControl = new TextEditorControl {Text = value as string, Dock = DockStyle.Fill};
-            var fileType = context.PropertyDescriptor.Attributes.OfType<FileTypeAttribute>().FirstOrDefault();
-            if (fileType != null) editorControl.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy(fileType.FileType);
-
-            editorService.ShowDialog(new Form
+            var form = new Form
             {
-                Text = fileType.FileType + " Editor",
-                FormBorderStyle = FormBorderStyle.SizableToolWindow, ShowInTaskbar = false,
+                FormBorderStyle = FormBorderStyle.SizableToolWindow,
+                ShowInTaskbar = false,
                 Controls = {editorControl}
-            });
+            };
+
+            var fileType = context.PropertyDescriptor.Attributes.OfType<FileTypeAttribute>().FirstOrDefault();
+            if (fileType != null)
+            {
+                editorControl.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy(fileType.FileType);
+                form.Text = fileType.FileType + " Editor";
+            }
+            else form.Text = "Editor";
+
+            editorService.ShowDialog(form);
             return editorControl.Text;
         }
     }
