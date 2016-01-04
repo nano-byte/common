@@ -31,7 +31,7 @@ using NanoByte.Common.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Used to execute and track <seealso cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
+    /// Used to execute and track <see cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
     /// </summary>
     /// <remarks>
     /// The methods may be called from a background thread. Implementations need to apply appropriate thread-synchronization to update UI elements.
@@ -42,11 +42,11 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Used to signal when the user wishes to cancel the entire current process (and any <see cref="ITask"/>s it includes).
         /// </summary>
-        /// <remarks>Once this has been signalled this <seealso cref="ITaskHandler"/> cannot be reused, since any subsequently started <seealso cref="ITask"/>s will be cancelled immediatley.</remarks>
+        /// <remarks>Once this has been signalled this <see cref="ITaskHandler"/> cannot be reused, since any subsequently started <see cref="ITask"/>s will be cancelled immediatley.</remarks>
         CancellationToken CancellationToken { get; }
 
         /// <summary>
-        /// Used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <see langword="null"/>.
+        /// Used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <c>null</c>.
         /// </summary>
         [CanBeNull]
         ICredentialProvider CredentialProvider { get; }
@@ -73,7 +73,7 @@ namespace NanoByte.Common.Tasks
         /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <returns><see langword="true"/> if the user answered with 'Yes'; <see langword="false"/> if the user answered with 'No'.</returns>
+        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
         bool Ask([NotNull, Localizable(true)] string question);
 

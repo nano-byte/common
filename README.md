@@ -16,11 +16,11 @@ Source directory structure
 --------------------------
 - The directory `src` contains the Visual Studio solution with the actual source code.
 - The directory `lib` contains pre-compiled 3rd party libraries which are not available via NuGet.
-- The directory `doc` contains scripts for generating source code and developer documentation.
+- The directory `doc` contains scripts for generating source code documentation.
 - The directory `build` contains the results of various compilation processes. It is created on first usage.
 
 `VERSION` contains the version numbers used by build scripts.
-Use `Set-Version.ps1 X.Y.Z` to change the version number. This ensures that the version also gets set in other locations (e.g. AssemblyInfo).
+Use `.\Set-Version.ps1 "X.Y.Z"` in PowerShall to change the version number. This ensures that the version also gets set in other locations (e.g. AssemblyInfo).
 
 
 Building on Windows

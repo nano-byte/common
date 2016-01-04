@@ -117,7 +117,7 @@ namespace NanoByte.Common.Collections
         /// Removes the first occurrence of a specific object from the pool
         /// </summary>
         /// <param name="item">The object to remove from the pool</param>
-        /// <returns><see langword="true"/> if <paramref name="item" /> was successfully removed from the buffer list; otherwise, false. This method also returns <see langword="false"/> if <paramref name="item" /> is not found in the original pool</returns>
+        /// <returns><c>true</c> if <paramref name="item" /> was successfully removed from the buffer list; otherwise, false. This method also returns <c>false</c> if <paramref name="item" /> is not found in the original pool</returns>
         /// <remarks>Not all too fast, try to avoid using this</remarks>
         public bool Remove([NotNull] T item)
         {
@@ -167,7 +167,7 @@ namespace NanoByte.Common.Collections
         /// Determines whether the pool contains a specific value.
         /// </summary>
         /// <param name="item">The object to locate in the pool</param>
-        /// <returns><see langword="true"/> if <paramref name="item" /> is found in the pool; otherwise, false.</returns>
+        /// <returns><c>true</c> if <paramref name="item" /> is found in the pool; otherwise, false.</returns>
         public bool Contains([NotNull] T item)
         {
             #region Sanity checks

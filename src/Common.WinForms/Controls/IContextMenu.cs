@@ -33,7 +33,7 @@ namespace NanoByte.Common.Controls
     public interface IContextMenu
     {
         /// <summary>
-        /// Returns the context menu for this object; can be <see langword="null"/>.
+        /// Returns the context menu for this object; can be <c>null</c>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Creates a new object on each call")]
         [CanBeNull]

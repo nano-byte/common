@@ -79,8 +79,8 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes all elements with the specified key from the dictionary.
         /// </summary>
-        /// <returns><see langword="true"/> if any elements were successfully removed; otherwise, <see langword="false"/>.
-        /// This method also returns <see langword="false"/> if <paramref name="key"/> was not found in the dictionary.</returns>
+        /// <returns><c>true</c> if any elements were successfully removed; otherwise, <c>false</c>.
+        /// This method also returns <c>false</c> if <paramref name="key"/> was not found in the dictionary.</returns>
         /// <param name="key">The key of the element to remove.</param>
         /// <remarks>Since the <see cref="Values"/> list needs to be rebuild by traversing all <see cref="Keys"/>, this operation is not O(1) efficient.</remarks>
         [PublicAPI]
@@ -104,8 +104,8 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes an element with a specific value from the dictionary.
         /// </summary>
-        /// <returns><see langword="true"/> if the element was successfully removed; otherwise, <see langword="false"/>.
-        /// This method also returns <see langword="false"/> if <paramref name="value"/> was not found in the dictionary.</returns>
+        /// <returns><c>true</c> if the element was successfully removed; otherwise, <c>false</c>.
+        /// This method also returns <c>false</c> if <paramref name="value"/> was not found in the dictionary.</returns>
         /// <param name="value">The value of the element to remove.</param>
         public bool RemoveValue([NotNull] TValue value)
         {
@@ -135,7 +135,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Determines whether the dictionary contains an element with the specified key.
         /// </summary>
-        /// <returns><see langword="true"/> if the dictionary contains an element with the key; otherwise, <see langword="false"/>.</returns>
+        /// <returns><c>true</c> if the dictionary contains an element with the key; otherwise, <c>false</c>.</returns>
         /// <param name="key">The key to locate in the dictionary.</param>
         public bool ContainsKey([NotNull] TKey key)
         {
@@ -145,7 +145,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Determines whether the dictionary contains an element with the specified value.
         /// </summary>
-        /// <returns><see langword="true"/> if the dictionary contains an element with the value; otherwise, <see langword="false"/>.</returns>
+        /// <returns><c>true</c> if the dictionary contains an element with the value; otherwise, <c>false</c>.</returns>
         /// <param name="value">The value to locate in the dictionary.</param>
         public bool ContainsValue([NotNull] TValue value)
         {

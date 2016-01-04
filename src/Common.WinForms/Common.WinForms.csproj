@@ -182,6 +182,7 @@
     <Compile Include="Controls\Wizard.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Controls\_Namespace.cs" />
     <Compile Include="Msg.cs" />
     <Compile Include="Native\WindowMessage.cs" />
     <Compile Include="Native\WinFormsUtils.Touch.cs" />
@@ -205,6 +206,7 @@
       <DependentUpon>StructureEditorControl.cs</DependentUpon>
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="StructureEditor\_Namespace.cs" />
     <Compile Include="Tasks\GuiTaskHandler.cs" />
     <Compile Include="Tasks\TaskRunDialog.cs">
       <SubType>Form</SubType>

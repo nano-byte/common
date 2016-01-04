@@ -213,7 +213,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The stream to write the encoded XML data to.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <see langword="null"/>.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         public static void SaveXml<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             #region Sanity checks
@@ -264,7 +264,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The path of the file to write.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <see langword="null"/>.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         public static void SaveXml<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string stylesheet = null)
@@ -286,7 +286,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <typeparam name="T">The type of object to be saved in an XML string.</typeparam>
         /// <param name="data">The object to be stored.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <see langword="null"/>.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         /// <returns>A string containing the XML code.</returns>
         public static string ToXmlString<T>([NotNull] this T data, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
@@ -308,7 +308,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <typeparam name="T">The type of object the XML stream shall be converted into.</typeparam>
         /// <param name="stream">The ZIP archive to load.</param>
-        /// <param name="password">The password to use for decryption; <see langword="null"/> for no encryption.</param>
+        /// <param name="password">The password to use for decryption; <c>null</c> for no encryption.</param>
         /// <param name="additionalFiles">Additional files stored alongside the XML file in the ZIP archive to be read.</param>
         /// <returns>The loaded object.</returns>
         /// <exception cref="ZipException">A problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
@@ -362,7 +362,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <typeparam name="T">The type of object the XML stream shall be converted into.</typeparam>
         /// <param name="path">The ZIP archive to load.</param>
-        /// <param name="password">The password to use for decryption; <see langword="null"/> for no encryption.</param>
+        /// <param name="password">The password to use for decryption; <c>null</c> for no encryption.</param>
         /// <param name="additionalFiles">Additional files stored alongside the XML file in the ZIP archive to be read.</param>
         /// <returns>The loaded object.</returns>
         /// <exception cref="IOException">A problem occurred while reading the file.</exception>
@@ -390,8 +390,8 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The ZIP archive to be written.</param>
-        /// <param name="password">The password to use for encryption; <see langword="null"/> for no encryption.</param>
-        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <see langword="null"/>.</param>
+        /// <param name="password">The password to use for encryption; <c>null</c> for no encryption.</param>
+        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <c>null</c>.</param>
         public static void SaveXmlZip<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
@@ -433,8 +433,8 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="path">The ZIP archive to be written.</param>
-        /// <param name="password">The password to use for encryption; <see langword="null"/> for no encryption.</param>
-        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <see langword="null"/>.</param>
+        /// <param name="password">The password to use for encryption; <c>null</c> for no encryption.</param>
+        /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <c>null</c>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         public static void SaveXmlZip<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)

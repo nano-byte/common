@@ -43,8 +43,8 @@ namespace NanoByte.Common.Tasks
         private readonly bool _unitsByte;
 
         /// <summary>
-        /// <see langword="true"/> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
-        /// <see langword="false"/> if they are measured in generic units.
+        /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
+        /// <c>false</c> if they are measured in generic units.
         /// </summary>
         public bool UnitsByte { get { return _unitsByte; } }
 
@@ -66,7 +66,7 @@ namespace NanoByte.Common.Tasks
         /// Create a new progress snapshot.
         /// </summary>
         /// <param name="state">The current State of the task.</param>
-        /// <param name="unitsByte"><see langword="true"/> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes; <see langword="false"/> if they are measured in generic units.</param>
+        /// <param name="unitsByte"><c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes; <c>false</c> if they are measured in generic units.</param>
         /// <param name="unitsProcessed">The number of units that have been processed so far.</param>
         /// <param name="unitsTotal">The total number of units that are to be processed; -1 for unknown.</param>
         public TaskSnapshot(TaskState state, bool unitsByte = false, long unitsProcessed = 0, long unitsTotal = -1)

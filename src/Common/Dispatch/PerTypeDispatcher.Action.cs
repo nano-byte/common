@@ -39,13 +39,13 @@ namespace NanoByte.Common.Dispatch
     {
         private readonly Dictionary<Type, Action<object>> _map = new Dictionary<Type, Action<object>>();
 
-        /// <summary><see langword="true"/> to silently ignore dispatch attempts on unknown types; <see langword="false"/> to throw exceptions.</summary>
+        /// <summary><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</summary>
         private readonly bool _ignoreMissing;
 
         /// <summary>
         /// Creates a new dispatcher.
         /// </summary>
-        /// <param name="ignoreMissing"><see langword="true"/> to silently ignore dispatch attempts on unknown types; <see langword="false"/> to throw exceptions.</param>
+        /// <param name="ignoreMissing"><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</param>
         public PerTypeDispatcher(bool ignoreMissing)
         {
             _ignoreMissing = ignoreMissing;
@@ -73,7 +73,7 @@ namespace NanoByte.Common.Dispatch
         /// Dispatches an element to the delegate matching the type. Set up with <see cref="Add{TSpecific}"/> first.
         /// </summary>
         /// <param name="element">The element to be dispatched.</param>
-        /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
+        /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <c>false</c>.</exception>
         public void Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Dispatch
         /// Dispatches for each element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
-        /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <see langword="false"/>.</exception>
+        /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <c>false</c>.</exception>
         public void Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks

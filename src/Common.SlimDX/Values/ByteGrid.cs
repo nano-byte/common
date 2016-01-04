@@ -62,7 +62,7 @@ namespace NanoByte.Common.Values
         }
 
         /// <summary>
-        /// Returns <see langword="true"/> if the specified coordinates are within the bounds of the grid.
+        /// Returns <c>true</c> if the specified coordinates are within the bounds of the grid.
         /// </summary>
         public bool IsInRange(float x, float y)
         {

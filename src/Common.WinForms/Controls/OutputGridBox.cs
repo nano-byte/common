@@ -45,7 +45,7 @@ namespace NanoByte.Common.Controls
         /// Displays an ouput dialog with tabular data.
         /// </summary>
         /// <typeparam name="T">The type of the data elements to display.</typeparam>
-        /// <param name="owner">The parent window for the dialogs; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window for the dialogs; can be <c>null</c>.</param>
         /// <param name="title">A title for the data.</param>
         /// <param name="data">The data to display.</param>
         public static void Show<T>([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data)

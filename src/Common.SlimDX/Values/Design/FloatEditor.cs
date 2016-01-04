@@ -31,7 +31,7 @@ using System.Windows.Forms.Design;
 namespace NanoByte.Common.Values.Design
 {
     /// <summary>
-    /// Abstract base class for drop-down <see cref="PropertyGrid"/> editors that can be associated with <see langword="float"/> properties.
+    /// Abstract base class for drop-down <see cref="PropertyGrid"/> editors that can be associated with <c>float</c> properties.
     /// </summary>
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public abstract class FloatEditor : UITypeEditor
@@ -63,7 +63,7 @@ namespace NanoByte.Common.Values.Design
         }
 
         /// <summary>
-        /// Displays the UI to edit the <see langword="float"/> value.
+        /// Displays the UI to edit the <c>float</c> value.
         /// </summary>
         /// <param name="value">The current value.</param>
         /// <param name="editorService">The editor service used to display the dropdown control.</param>
@@ -71,7 +71,7 @@ namespace NanoByte.Common.Values.Design
         protected abstract float EditValue(float value, IWindowsFormsEditorService editorService);
 
         /// <summary>
-        /// Displays the UI to edit the <see langword="float"/> value.
+        /// Displays the UI to edit the <c>float</c> value.
         /// </summary>
         /// <param name="value">The current value.</param>
         /// <param name="range">The range of valid values the user can select.</param>

@@ -36,7 +36,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Displays a message to the user using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         public static void Inform([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
@@ -49,10 +49,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user a OK/Cancel-question using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <returns><see langword="true"/> if OK was selected, <see langword="false"/> if Cancel was selected.</returns>
+        /// <returns><c>true</c> if OK was selected, <c>false</c> if Cancel was selected.</returns>
         public static bool OKCancel([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             return ShowMessageDialog(owner, text, severity, ButtonsType.OkCancel) == ResponseType.Ok;
@@ -63,10 +63,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between two options (yes/no) using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
-        /// <returns><see langword="true"/> if Yes was chosen, <see langword="false"/> if No was chosen.</returns>
+        /// <returns><c>true</c> if Yes was chosen, <c>false</c> if No was chosen.</returns>
         public static bool YesNo([CanBeNull] Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
         {
             return ShowMessageDialog(owner, text, severity, ButtonsType.YesNo) == ResponseType.Yes;
@@ -77,7 +77,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Asks the user to choose between three options (yes/no/cancel) using a <see cref="MessageDialog"/>.
         /// </summary>
-        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <returns><see cref="ResponseType.Yes"/> if Yes was chosen,
@@ -94,7 +94,7 @@ namespace NanoByte.Common
 
         #region MessageDialog
         /// <summary>Displays a message using a <see cref="MessageDialog"/>.</summary>
-        /// <param name="owner">The parent window the displayed window is modal to; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         /// <param name="buttons">The buttons the user can click.</param>

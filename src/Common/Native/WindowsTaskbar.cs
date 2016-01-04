@@ -80,7 +80,7 @@ namespace NanoByte.Common.Native
             [NotNull]
             public readonly string Path;
 
-            /// <summary>Additional arguments for <see cref="Title"/>; can be <see langword="null"/>.</summary>
+            /// <summary>Additional arguments for <see cref="Title"/>; can be <c>null</c>.</summary>
             [CanBeNull]
             public readonly string Arguments;
 
@@ -96,7 +96,7 @@ namespace NanoByte.Common.Native
             /// </summary>
             /// <param name="title">The title/name of the task link.</param>
             /// <param name="path">The target path the link shall point to and to get the icon from.</param>
-            /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <see langword="null"/>.</param>
+            /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <c>null</c>.</param>
             [PublicAPI]
             public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string arguments = null)
             {
@@ -116,7 +116,7 @@ namespace NanoByte.Common.Native
             /// </summary>
             /// <param name="title">The title/name of the task link.</param>
             /// <param name="path">The target path the link shall point to.</param>
-            /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <see langword="null"/>.</param>
+            /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <c>null</c>.</param>
             /// <param name="iconPath">The path of the icon for the link.</param>
             /// <param name="iconIndex">The resouce index within the file specified by <paramref name="iconPath"/>.</param>
             [PublicAPI]
@@ -188,9 +188,9 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="hwnd">A handle to the window to set the ID for.</param>
         /// <param name="appID">The application ID to set.</param>
-        /// <param name="relaunchCommand">The command to use for relaunching this specific window if it was pinned to the taskbar; can be <see langword="null"/>.</param>
-        /// <param name="relaunchIcon">The icon to use for pinning this specific window to the taskbar (written as Path,ResourceIndex); can be <see langword="null"/>.</param>
-        /// <param name="relaunchName">The user-friendly name to associate with <paramref name="relaunchCommand"/>; can be <see langword="null"/>.</param>
+        /// <param name="relaunchCommand">The command to use for relaunching this specific window if it was pinned to the taskbar; can be <c>null</c>.</param>
+        /// <param name="relaunchIcon">The icon to use for pinning this specific window to the taskbar (written as Path,ResourceIndex); can be <c>null</c>.</param>
+        /// <param name="relaunchName">The user-friendly name to associate with <paramref name="relaunchCommand"/>; can be <c>null</c>.</param>
         /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
         public static void SetWindowAppID(IntPtr hwnd, [NotNull, Localizable(false)] string appID, [CanBeNull, Localizable(false)] string relaunchCommand = null, [CanBeNull, Localizable(false)] string relaunchIcon = null, [CanBeNull, Localizable(true)] string relaunchName = null)

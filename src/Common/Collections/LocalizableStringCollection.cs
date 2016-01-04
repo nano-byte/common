@@ -52,7 +52,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Adds a new <code>en</code> string to the collection.
+        /// Adds a new <c>en</c> string to the collection.
         /// </summary>
         /// <param name="value">The actual string value to store.</param>
         [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo")]
@@ -67,7 +67,7 @@ namespace NanoByte.Common.Collections
         /// Checks if the collection contains an entry exactly matching the specified language.
         /// </summary>
         /// <param name="language">The exact language to look for.</param>
-        /// <returns><see langword="true"/> if an element with the specified language exists in the collection; <see langword="false"/> otherwise.</returns>
+        /// <returns><c>true</c> if an element with the specified language exists in the collection; <c>false</c> otherwise.</returns>
         /// <seealso cref="GetExactLanguage"/>
         public bool ContainsExactLanguage([NotNull] CultureInfo language)
         {
@@ -84,7 +84,7 @@ namespace NanoByte.Common.Collections
         /// Returns the first string in the collection exactly matching the specified language.
         /// </summary>
         /// <param name="language">The exact language to look for.</param>
-        /// <returns>The string value found in the collection; <see langword="null"/> if none was found.</returns>
+        /// <returns>The string value found in the collection; <c>null</c> if none was found.</returns>
         /// <seealso cref="ContainsExactLanguage"/>
         [CanBeNull]
         public string GetExactLanguage([NotNull] CultureInfo language)
@@ -101,7 +101,7 @@ namespace NanoByte.Common.Collections
         /// Returns the best-fitting string in the collection for the specified language.
         /// </summary>
         /// <param name="language">The language to look for.</param>
-        /// <returns>The best-fitting string value found in the collection; <see langword="null"/> if the collection is empty.</returns>
+        /// <returns>The best-fitting string value found in the collection; <c>null</c> if the collection is empty.</returns>
         /// <remarks>
         /// Language preferences in decreasing order:<br/>
         /// 1. exact match<br/>
@@ -145,7 +145,7 @@ namespace NanoByte.Common.Collections
         /// Adds a new string with an associated language to the collection. Preexisting entries with the same language are removed.
         /// </summary>
         /// <param name="language">The language of the <paramref name="value"/>.</param>
-        /// <param name="value">The actual string value to store; <see langword="null"/> to remove existing entries.</param>
+        /// <param name="value">The actual string value to store; <c>null</c> to remove existing entries.</param>
         public void Set([NotNull] CultureInfo language, [CanBeNull] string value)
         {
             #region Sanity checks

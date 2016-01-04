@@ -54,14 +54,14 @@ namespace NanoByte.Common.Net
         public Uri Source { get; private set; }
 
         /// <summary>
-        /// Set to <see langword="true"/> to add a No-Cache header to the request for any intermediate proxy servers.
+        /// Set to <c>true</c> to add a No-Cache header to the request for any intermediate proxy servers.
         /// </summary>
         public bool NoCache { get; set; }
 
         /// <summary>
         /// The HTTP header data returned by the server for the download request. An empty collection in case of an FTP download.
         /// </summary>
-        /// <remarks>This value is always <see langword="null"/> until <see cref="TaskState.Data"/> has been reached.</remarks>
+        /// <remarks>This value is always <c>null</c> until <see cref="TaskState.Data"/> has been reached.</remarks>
         [Browsable(false)]
         [CanBeNull]
         [PublicAPI]
@@ -171,7 +171,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Reads the header information in the <paramref name="response"/> and stores it the object properties.
         /// </summary>
-        /// <returns><see langword="true"/> if everything is ok; <see langword="false"/> if there was an error.</returns>
+        /// <returns><c>true</c> if everything is ok; <c>false</c> if there was an error.</returns>
         private void ReadHeader(WebResponse response)
         {
             ResponseHeaders = response.Headers;

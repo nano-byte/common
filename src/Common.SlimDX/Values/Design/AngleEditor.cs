@@ -31,7 +31,7 @@ using NanoByte.Common.Controls;
 namespace NanoByte.Common.Values.Design
 {
     /// <summary>
-    /// An editor that can be associated with <see langword="float"/> properties representing angles between 0 and 360 degrees. Uses <see cref="AngleControl"/>.
+    /// An editor that can be associated with <c>float</c> properties representing angles between 0 and 360 degrees. Uses <see cref="AngleControl"/>.
     /// </summary>
     /// <seealso cref="FloatRangeAttribute"/>
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]

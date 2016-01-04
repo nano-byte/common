@@ -68,7 +68,7 @@ namespace NanoByte.Common
         #region Constructor
 
         #region Helper
-        /// <returns><see langword="true"/> if <paramref name="value"/> starts with a slash or a hyphen.</returns>
+        /// <returns><c>true</c> if <paramref name="value"/> starts with a slash or a hyphen.</returns>
         private static bool IsCommand(string value)
         {
             return value.StartsWith("/", StringComparison.Ordinal) || value.StartsWith("-", StringComparison.Ordinal);

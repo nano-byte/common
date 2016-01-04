@@ -39,11 +39,11 @@ namespace NanoByte.Common
         /// <summary>
         /// Starts a new <see cref="Process"/> and runs it in parallel with this one. Handles and wraps <see cref="Win32Exception"/>s.
         /// </summary>
-        /// <returns>The newly launched process; <see langword="null"/> if an existing process was reused.</returns>
+        /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="IOException">There was a problem launching the executable.</exception>
-        /// <exception cref="NotAdminException">The target process requires elevation but UAC is not available because <see cref="ProcessStartInfo.UseShellExecute"/> is <see langword="false"/>.</exception>
+        /// <exception cref="NotAdminException">The target process requires elevation but UAC is not available because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         [PublicAPI, CanBeNull]
         public static Process Start([NotNull] this ProcessStartInfo startInfo)
         {
@@ -77,11 +77,11 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="fileName">The path of the file to open or executable to launch.</param>
         /// <param name="arguments">The command-line arguments to pass to the executable.</param>
-        /// <returns>The newly launched process; <see langword="null"/> if an existing process was reused.</returns>
+        /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="IOException">There was a problem launching the executable.</exception>
-        /// <exception cref="NotAdminException">The target process requires elevation but UAC is not available because <see cref="ProcessStartInfo.UseShellExecute"/> is <see langword="false"/>.</exception>
+        /// <exception cref="NotAdminException">The target process requires elevation but UAC is not available because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         [PublicAPI, CanBeNull]
         public static Process Start([NotNull] string fileName, [NotNull] params string[] arguments)
         {
@@ -100,7 +100,7 @@ namespace NanoByte.Common
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="IOException">There was a problem launching the executable.</exception>
-        /// <exception cref="NotAdminException">The target process requires elevation but UAC is not available because <see cref="ProcessStartInfo.UseShellExecute"/> is <see langword="false"/>.</exception>
+        /// <exception cref="NotAdminException">The target process requires elevation but UAC is not available because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         [PublicAPI]
         public static int Run([NotNull] this ProcessStartInfo startInfo)
         {

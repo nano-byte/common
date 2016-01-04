@@ -37,7 +37,7 @@ namespace NanoByte.Common
         /// Starts executing a delegate in a new thread suitable for WinForms.
         /// </summary>
         /// <param name="execute">The delegate to execute.</param>
-        /// <param name="name">A short name for the new thread; can be <see langword="null"/>.</param>
+        /// <param name="name">A short name for the new thread; can be <c>null</c>.</param>
         /// <returns>The newly launched thread.</returns>
         [PublicAPI, NotNull]
         public static Thread StartAsync([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
@@ -58,7 +58,7 @@ namespace NanoByte.Common
         /// Starts executing a delegate in a new background thread (automatically terminated when application exits).
         /// </summary>
         /// <param name="execute">The delegate to execute.</param>
-        /// <param name="name">A short name for the new thread; can be <see langword="null"/>.</param>
+        /// <param name="name">A short name for the new thread; can be <c>null</c>.</param>
         /// <returns>The newly launched thread.</returns>
         [PublicAPI, NotNull]
         public static Thread StartBackground([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)

@@ -72,13 +72,13 @@ namespace NanoByte.Common.Controls
         public Uri Uri { get { return string.IsNullOrEmpty(Text) ? null : new Uri(Text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute); } set { Text = (value == null) ? null : value.ToStringRfc(); } }
 
         /// <summary>
-        /// When set to <see langword="true"/> only URIs starting with "http:" or "https:" will be considered valid.
+        /// When set to <c>true</c> only URIs starting with "http:" or "https:" will be considered valid.
         /// </summary>
         [DefaultValue(false), Description("When set to true only URIs starting with \"http:\" or \"https:\" will be considered valid."), Category("Behavior")]
         public bool HttpOnly { get; set; }
 
         /// <summary>
-        /// When set to <see langword="true"/> relative URIs are accepted.
+        /// When set to <c>true</c> relative URIs are accepted.
         /// </summary>
         [DefaultValue(false), Description("When set to true relative URIs are accepted."), Category("Behavior")]
         public bool AllowRelative { get; set; }

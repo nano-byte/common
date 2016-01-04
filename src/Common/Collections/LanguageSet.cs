@@ -91,7 +91,7 @@ namespace NanoByte.Common.Collections
         /// Adds a language identified by a string to the collection.
         /// </summary>
         /// <param name="langCode">The string identifying the language to add.</param>
-        /// <returns><see langword="true"/> if the language could be added, <see langword="false"/> otherwise.</returns>
+        /// <returns><c>true</c> if the language could be added, <c>false</c> otherwise.</returns>
         /// <exception cref="ArgumentException"><paramref name="langCode"/> is not a valid language code.</exception>
         public bool Add(string langCode)
         {
@@ -102,7 +102,7 @@ namespace NanoByte.Common.Collections
         /// Determines whether this language set contains any of a set of target languages.
         /// </summary>
         /// <param name="targets">The language set to match against.</param>
-        /// <param name="ignoreCountry"><see langword="true"/> to compare only the two-letter language name; <see langword="false"/> to also compare the country code.</param>
+        /// <param name="ignoreCountry"><c>true</c> to compare only the two-letter language name; <c>false</c> to also compare the country code.</param>
         public bool ContainsAny([NotNull, ItemNotNull] ICollection<CultureInfo> targets, bool ignoreCountry = false)
         {
             #region Sanity checks

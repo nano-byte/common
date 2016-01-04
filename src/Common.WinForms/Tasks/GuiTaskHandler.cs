@@ -41,7 +41,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Starts <see cref="Log"/> recording.
         /// </summary>
-        /// <param name="owner">The parent window for any dialogs created by the handler; can be <see langword="null"/>.</param>
+        /// <param name="owner">The parent window for any dialogs created by the handler; can be <c>null</c>.</param>
         public GuiTaskHandler([CanBeNull] Control owner = null)
         {
             _owner = owner;

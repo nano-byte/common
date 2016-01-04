@@ -1,0 +1,20 @@
+﻿PROJECT_NAME = "NanoByte.Common"
+PROJECT_NUMBER = "1.2.9"
+
+INPUT = ../src
+STRIP_FROM_PATH = ../src
+RECURSIVE = YES
+EXCLUDE_PATTERNS = */*.UnitTests/* */Properties/* *.NativeMethods.cs */obj/* */gtk-gui/* */JetBrains.Annotations.cs
+
+OUTPUT_DIRECTORY = ../build/Documentation
+GENERATE_TAGFILE = ../build/Documentation/common.tag
+HTML_OUTPUT = .
+
+GENERATE_LATEX = NO
+CASE_SENSE_NAMES = NO
+
+EXTRACT_PACKAGE = YES
+EXTRACT_STATIC = YES
+AUTOLINK_SUPPORT = NO
+WARN_IF_UNDOCUMENTED = NO
+QUIET = YES

@@ -130,7 +130,7 @@ namespace NanoByte.Common.Storage.SlimDX
 
         #region Context menu
         /// <summary>
-        /// Returns the context menu for this file entry; can be <see langword="null"/>.
+        /// Returns the context menu for this file entry; can be <c>null</c>.
         /// </summary>
         public ContextMenu GetContextMenu()
         {

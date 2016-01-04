@@ -52,7 +52,7 @@ namespace NanoByte.Common.Storage
         public string WritePath { get; private set; }
 
         /// <summary>
-        /// <see langword="true"/> if <see cref="Commit"/> has been called.
+        /// <c>true</c> if <see cref="Commit"/> has been called.
         /// </summary>
         public bool IsCommited { get; private set; }
 

@@ -28,7 +28,7 @@ using System.Windows.Forms.Design;
 namespace NanoByte.Common.Values.Design
 {
     /// <summary>
-    /// An editor that can be associated with <see langword="float"/> properties with values between 0 and 3 to provide a <see cref="TrackBar"/> interface.
+    /// An editor that can be associated with <c>float</c> properties with values between 0 and 3 to provide a <see cref="TrackBar"/> interface.
     /// </summary>
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public class SliderEditor : FloatEditor

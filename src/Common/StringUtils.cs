@@ -55,7 +55,7 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Compare strings using case sensitive, invariant culture comparison and considering <see langword="null"/> and <see cref="string.Empty"/> equal.
+        /// Compare strings using case sensitive, invariant culture comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
         /// </summary>
         [Pure]
         public static bool EqualsEmptyNull([CanBeNull] string s1, [CanBeNull] string s2)
@@ -343,10 +343,10 @@ namespace NanoByte.Common
 
         #region Arguments escaping
         /// <summary>
-        /// Escapes a string for use as a Windows command-line argument, making sure it is encapsulated within <code>"</code> if it contains whitespace characters.
+        /// Escapes a string for use as a Windows command-line argument, making sure it is encapsulated within <c>"</c> if it contains whitespace characters.
         /// </summary>
         /// <remarks>
-        /// This coressponds to Windows' handling of command-line arguments as specified in:
+        /// This corresponds to Windows' handling of command-line arguments as specified in:
         /// http://msdn.microsoft.com/library/17w5ykft
         /// </remarks>
         [Pure, NotNull]

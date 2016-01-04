@@ -32,7 +32,7 @@ namespace NanoByte.Common.Undo
         /// <inheritdoc/>
         public string Path { get; set; }
 
-        /// <intheritdoc/>
+        /// <inheritdoc/>
         public void Execute(IUndoCommand command)
         {
             #region Sanity checks

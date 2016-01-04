@@ -154,7 +154,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Reads a string value from one of the SOFTWARE keys in the registry.
         /// </summary>
-        /// <remarks>Checks HKLM\SOFTWARE, HKLM\SOFTWARE\Wow6432Node and HKCU\SOFTWARE in that order.</remarks>
+        /// <remarks>Checks HKLM/SOFTWARE, HKLM/SOFTWARE/Wow6432Node and HKCU/SOFTWARE in that order.</remarks>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
@@ -177,7 +177,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to read.</param>
-        /// <param name="machineWide"><see langword="true"/> to read from HKLM\SOFTWARE (and HKLM\SOFTWARE\Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <see langword="false"/> to read from HCKU\SOFTWARE.</param>
+        /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <c>false</c> to read from HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         [CanBeNull]
         public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, bool machineWide)
@@ -198,7 +198,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to write.</param>
         /// <param name="value">The value to write.</param>
-        /// <param name="machineWide"><see langword="true"/> to write to HKLM\SOFTWARE (and HKLM\SOFTWARE\Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <see langword="false"/> to write to HCKU\SOFTWARE.</param>
+        /// <param name="machineWide"><c>true</c> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <c>false</c> to write to HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
         public static void SetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [NotNull, Localizable(false)] string value, bool machineWide = false)
@@ -221,7 +221,7 @@ namespace NanoByte.Common
         /// <remarks>Does not throw an exception for missing keys or values.</remarks>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to delete.</param>
-        /// <param name="machineWide"><see langword="true"/> to delete from HKLM\SOFTWARE (and HKLM\SOFTWARE\Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <see langword="false"/> to delete from HCKU\SOFTWARE.</param>
+        /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <c>false</c> to delete from HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         public static void DeleteSoftwareValue([NotNull, Localizable(false)] string subkeyName, [NotNull, Localizable(false)] string valueName, bool machineWide)
         {
@@ -308,11 +308,11 @@ namespace NanoByte.Common
 
         #region Keys
         /// <summary>
-        /// Like <see cref="RegistryKey.OpenSubKey(string,bool)"/> but with no <see langword="null"/> return values.
+        /// Like <see cref="RegistryKey.OpenSubKey(string,bool)"/> but with no <c>null</c> return values.
         /// </summary>
         /// <param name="key">The key to open a subkey in.</param>
         /// <param name="subkeyName">The name of the subkey to open.</param>
-        /// <param name="writable"><see langword="true"/> for write-access to the key.</param>
+        /// <param name="writable"><c>true</c> for write-access to the key.</param>
         /// <returns>The newly created subkey.</returns>
         /// <exception cref="IOException">Failed to open the key.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the key is not permitted.</exception>
@@ -340,7 +340,7 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Like <see cref="RegistryKey.CreateSubKey(string)"/> but with no <see langword="null"/> return values.
+        /// Like <see cref="RegistryKey.CreateSubKey(string)"/> but with no <c>null</c> return values.
         /// </summary>
         /// <param name="key">The key to create a subkey in.</param>
         /// <param name="subkeyName">The name of the subkey to create.</param>
@@ -375,7 +375,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="subkeyName">The path to the key below HKEY_LOCAL_MACHINE.</param>
         /// <param name="x64">Indicates whether a 64-bit key was opened.</param>
-        /// <returns>The opened registry key or <see langword="null"/> if it could not found.</returns>
+        /// <returns>The opened registry key or <c>null</c> if it could not found.</returns>
         /// <exception cref="IOException">Failed to open the key.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the key is not permitted.</exception>
         [NotNull]

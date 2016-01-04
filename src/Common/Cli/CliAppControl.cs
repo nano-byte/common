@@ -43,7 +43,7 @@ namespace NanoByte.Common.Cli
         /// Runs the external application interactivley instead of processing its output.
         /// </summary>
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
-        /// <returns>The newly launched process; <see langword="null"/> if an existing process was reused.</returns>
+        /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
         public Process StartInteractive([NotNull] params string[] arguments)
         {
@@ -154,7 +154,7 @@ namespace NanoByte.Common.Cli
         /// A hook method for handling stderr messages from the CLI application.
         /// </summary>
         /// <param name="line">The line written to stderr.</param>
-        /// <returns>The response to write to stdin; <see langword="null"/> for none.</returns>
+        /// <returns>The response to write to stdin; <c>null</c> for none.</returns>
         [CanBeNull]
         protected virtual string HandleStderr([NotNull] string line)
         {

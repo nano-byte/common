@@ -40,7 +40,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <param name="handle">The handle created for the mutex. Can be used to close it before the process ends.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
+        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if a new one was created.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>The mutex will automatically be released once the process terminates.</remarks>
@@ -95,7 +95,7 @@ namespace NanoByte.Common.Native
         /// Tries to open an existing mutex.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if none existed.</returns>
+        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if none existed.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
@@ -132,7 +132,7 @@ namespace NanoByte.Common.Native
         /// Checks whether a specific mutex exists without openining a lasting handle.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was found; <see langword="false"/> if none existed.</returns>
+        /// <returns><c>true</c> if an existing mutex was found; <c>false</c> if none existed.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         public static bool Probe([NotNull, Localizable(false)] string name)

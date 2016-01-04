@@ -260,7 +260,7 @@ namespace NanoByte.Common.StructureEditor
         }
 
         /// <summary>
-        /// Returns the XML representation fo the <seealso cref="SelectedNode"/>.
+        /// Returns the XML representation of the <see cref="SelectedNode"/>.
         /// </summary>
         protected virtual string ToXmlString()
         {

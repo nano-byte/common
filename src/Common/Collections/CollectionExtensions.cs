@@ -50,7 +50,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Adds an element to the collection if it does not already <see cref="ICollection{T}.Contains"/> the element.
         /// </summary>
-        /// <returns><see langword="true"/> if the element was added to the collection; <see langword="true"/> if the collection already contained the element.</returns>
+        /// <returns><c>true</c> if the element was added to the collection; <c>true</c> if the collection already contained the element.</returns>
         /// <remarks>This makes it possible to use a <see cref="ICollection{T}"/> with semantics similar to a <see cref="HashSet{T}"/>.</remarks>
         public static bool AddIfNew<T>([NotNull] this ICollection<T> collection, T element)
         {
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes all items from a <paramref name="collection"/> that match a specific <paramref name="condition"/>.
         /// </summary>
-        /// <returns><see langword="true"/> if any elements where removed.</returns>
+        /// <returns><c>true</c> if any elements where removed.</returns>
         /// <seealso cref="List{T}.RemoveAll"/>
         public static bool RemoveAll<T>([NotNull, InstantHandle] this ICollection<T> collection,
             [NotNull] Func<T, bool> condition)
@@ -154,8 +154,8 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
-        /// <returns><see langword="true"/> if <paramref name="first"/> contains any element from <paramref name="second"/>. <see langword="false"/> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+        /// <returns><c>true</c> if <paramref name="first"/> contains any element from <paramref name="second"/>. <c>false</c> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
         [Pure]
         public static bool ContainsAny<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
@@ -173,7 +173,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         [Pure]
         public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
@@ -191,7 +191,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         [Pure]
         public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
         {
@@ -209,7 +209,7 @@ namespace NanoByte.Common.Collections
         /// Generates a hash code for the contents of the collection. Changing the elements' order will change the hash.
         /// </summary>
         /// <param name="collection">The collection to generate the hash for.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="SequencedEquals{T}(ICollection{T},ICollection{T},IEqualityComparer{T})"/>
         [Pure]
         public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
@@ -233,7 +233,7 @@ namespace NanoByte.Common.Collections
         /// Generates a hash code for the contents of the collection. Changing the elements' order will not change the hash.
         /// </summary>
         /// <param name="collection">The collection to generate the hash for.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="UnsequencedEquals{T}"/>
         [Pure]
         public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)

@@ -82,7 +82,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Filters a sequence of elements to remove any <see langword="null"/> values.
+        /// Filters a sequence of elements to remove any <c>null</c> values.
         /// </summary>
         [NotNull, ItemNotNull, Pure, LinqTunnel]
         public static IEnumerable<T> WhereNotNull<T>([NotNull, ItemCanBeNull] this IEnumerable<T> enumeration)
@@ -97,7 +97,7 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to maximize.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
         [CanBeNull, Pure]
         public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
@@ -137,7 +137,7 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TValue">The type of the <paramref name="expression"/>.</typeparam>
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to minimize.</param>
-        /// <param name="comparer">Controls how to compare elements; leave <see langword="null"/> for default comparer.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
         [CanBeNull, Pure]
         public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)

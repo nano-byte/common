@@ -62,7 +62,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>Used to report back the task's progress.</summary>
         private IProgress<TaskSnapshot> _progress;
 
-        /// <summary>Used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</summary>
+        /// <summary>Used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <c>null</c>.</summary>
         protected ICredentialProvider CredentialProvider;
 
         /// <inheritdoc/>
@@ -117,8 +117,8 @@ namespace NanoByte.Common.Tasks
         protected internal TaskState State { get { return _state; } protected set { value.To(ref _state, OnProgressChanged); } }
 
         /// <summary>
-        /// <see langword="true"/> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
-        /// <see langword="false"/> if they are measured in generic units.
+        /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
+        /// <c>false</c> if they are measured in generic units.
         /// </summary>
         protected abstract bool UnitsByte { get; }
 

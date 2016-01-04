@@ -345,7 +345,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="file">The file to read from.</param>
         /// <param name="encoding">The text encoding to use for reading.</param>
-        /// <returns>The first line of text in the file; <see langword="null"/> if decoding does not work on the contents.</returns>
+        /// <returns>The first line of text in the file; <c>null</c> if decoding does not work on the contents.</returns>
         /// <exception cref="IOException">A problem occurred while reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         [CanBeNull]
@@ -366,9 +366,9 @@ namespace NanoByte.Common.Storage
         /// Walks a directory structure recursivley and performs an action for every directory and file encountered.
         /// </summary>
         /// <param name="directory">The directory to walk.</param>
-        /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); can be <see langword="null"/>.</param>
-        /// <param name="fileAction">The action to perform for every found file; can be <see langword="null"/>.</param>
-        /// <param name="followDirSymlinks">If <see langword="true"/> recurse into directory symlinks; if <see langword="false"/> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
+        /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); can be <c>null</c>.</param>
+        /// <param name="fileAction">The action to perform for every found file; can be <c>null</c>.</param>
+        /// <param name="followDirSymlinks">If <c>true</c> recurse into directory symlinks; if <c>false</c> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
         public static void Walk([NotNull] this DirectoryInfo directory, [CanBeNull, InstantHandle] Action<DirectoryInfo> dirAction = null, [CanBeNull, InstantHandle] Action<FileInfo> fileAction = null, bool followDirSymlinks = false)
         {
             #region Sanity checks
@@ -777,8 +777,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Checks whether a file is a regular file (i.e. not a device file, symbolic link, etc.).
         /// </summary>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a regular file; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a regular file; <c>false</c> otherwise.</returns>
+        /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsRegularFile([NotNull, Localizable(false)] string path)
         {
@@ -807,7 +807,7 @@ namespace NanoByte.Common.Storage
         /// Checks whether a file is a symbolic link.
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path)
@@ -838,7 +838,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
@@ -873,7 +873,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="item">The file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
-        /// <return><see lang="true"/> if <paramref name="item"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="item"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull] this FileSystemInfo item, out string target)
@@ -888,8 +888,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Checks whether a file is marked as Unix-executable.
         /// </summary>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to an executable; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files. Will always return <see langword="false"/> on non-Unixoid systems.</remarks>
+        /// <returns><c>true</c> if <paramref name="path"/> points to an executable; <c>false</c> otherwise.</returns>
+        /// <remarks>Will return <c>false</c> for non-existing files. Will always return <c>false</c> on non-Unixoid systems.</remarks>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to query the file's properties.</exception>
         public static bool IsExecutable([NotNull, Localizable(false)] string path)
         {
@@ -915,7 +915,7 @@ namespace NanoByte.Common.Storage
         /// Marks a file as Unix-executable or not Unix-executable. Only works on Unixoid systems!
         /// </summary>
         /// <param name="path">The file to mark as executable or not executable.</param>
-        /// <param name="executable"><see lang="true"/> to mark the file as executable, <see lang="true"/> to mark it as not executable.</param>
+        /// <param name="executable"><c>true</c> to mark the file as executable, <c>true</c> to mark it as not executable.</param>
         /// <exception cref="FileNotFoundException"><paramref name="path"/> points to a file that does not exist or cannot be accessed.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to change the file's properties.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a non-Unixoid system.</exception>
@@ -945,9 +945,9 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Checks whether a directory is located on a filesystem with support for Unixoid features such as executable bits.
         /// </summary>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to directory on a Unixoid filesystem; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to directory on a Unixoid filesystem; <c>false</c> otherwise.</returns>
         /// <remarks>
-        /// Will always return <see langword="false"/> on non-Unixoid systems.
+        /// Will always return <c>false</c> on non-Unixoid systems.
         /// Only requires read access on Linux to determine file system.
         /// Requires write access on other Unixes (e.g. MacOS X).
         /// </remarks>
@@ -1029,7 +1029,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="path">The path of the file the Alternate Data Stream is associated with.</param>
         /// <param name="name">The name of the metadata stream.</param>
-        /// <returns>The contents of the metadata stream; <see langword="null"/> if the file exists but the stream specified by <paramref name="name"/> does not.</returns>
+        /// <returns>The contents of the metadata stream; <c>null</c> if the file exists but the stream specified by <paramref name="name"/> does not.</returns>
         /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>
         /// <exception cref="IOException">There was a problem reading the metadata stream.</exception>
         /// <exception cref="PlatformNotSupportedException">The current operating system provides no method for storing extended metadata.</exception>

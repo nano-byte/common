@@ -28,7 +28,7 @@ using NanoByte.Common.Properties;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// A key-value string pair for <see ref="XmlCollection" />.
+    /// A key-value string pair for <see cref="XmlDictionary"/>.
     /// </summary>
     [Serializable]
     public sealed class XmlDictionaryEntry : IEquatable<XmlDictionaryEntry>, ICloneable
@@ -69,7 +69,7 @@ namespace NanoByte.Common.Collections
         {}
 
         /// <summary>
-        /// Creates a new entry for <see ref="XmlCollection" />.
+        /// Creates a new entry for <see cref="XmlDictionary"/>.
         /// </summary>
         /// <param name="key">The unique text key.</param>
         /// <param name="value">The text value.</param>

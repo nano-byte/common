@@ -56,7 +56,7 @@ namespace NanoByte.Common.Storage
         public static readonly string InstallBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath) ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 
         /// <summary>
-        /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <see langword="true"/>.
+        /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <c>true</c>.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
         public const string PortableFlagName = "_portable";
@@ -75,7 +75,7 @@ namespace NanoByte.Common.Storage
         private static string _portableBase = InstallBase;
 
         /// <summary>
-        /// The directory used for storing files if <see cref="IsPortable"/> is <see langword="true"/>. Defaults to <see cref="InstallBase"/>.
+        /// The directory used for storing files if <see cref="IsPortable"/> is <c>true</c>. Defaults to <see cref="InstallBase"/>.
         /// </summary>
         [PublicAPI, NotNull]
         public static string PortableBase { get { return _portableBase; } set { _portableBase = value; } }
@@ -202,8 +202,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a path for storing a configuration resource (can roam across different machines).
         /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
-        /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <c>true</c>.</param>
+        /// <param name="isFile"><c>true</c> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be stored.</param>
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
@@ -242,8 +242,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a path for storing a system-wide configuration resource.
         /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
-        /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <c>true</c>.</param>
+        /// <param name="isFile"><c>true</c> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be stored.</param>
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
@@ -283,8 +283,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a list of paths for loading a configuration resource.
         /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
-        /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <c>true</c>.</param>
+        /// <param name="isFile"><c>true</c> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be loaded.</param>
         /// <returns>
         /// A list of fully qualified paths to use to load the resource sorted by decreasing importance.
@@ -333,8 +333,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a path for storing a data resource (should not roam across different machines).
         /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
-        /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <c>true</c>.</param>
+        /// <param name="isFile"><c>true</c> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be stored.</param>
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
@@ -373,8 +373,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a list of paths for loading a data resource (should not roam across different machines).
         /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
-        /// <param name="isFile"><see langword="true"/> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <c>true</c>.</param>
+        /// <param name="isFile"><c>true</c> if the last part of <paramref name="resource"/> refers to a file instead of a directory.</param>
         /// <param name="resource">The path elements (directory and/or file names) of the resource to be loaded.</param>
         /// <returns>
         /// A list of fully qualified paths to use to load the resource sorted by decreasing importance.
@@ -451,8 +451,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a path for a cache directory (should not roam across different machines).
         /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <see langword="true"/>.</param>
-        /// <param name="machineWide"><see langword="true"/> if the directory should be machine-wide.</param>
+        /// <param name="appName">The name of application. Used as part of the path, unless <see cref="IsPortable"/> is <c>true</c>.</param>
+        /// <param name="machineWide"><c>true</c> if the directory should be machine-wide.</param>
         /// <param name="resource">The directory name of the resource to be stored.</param>
         /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
@@ -501,12 +501,12 @@ namespace NanoByte.Common.Storage
         /// Returns a path for a directory that can safley be used for desktop integration. It ignores <see cref="IsPortable"/>.
         /// </summary>
         /// <param name="appName">The name of application. Used as part of the path.</param>
-        /// <param name="machineWide"><see langword="true"/> if the directory should be machine-wide and machine-specific instead of roaming with the user profile.</param>
+        /// <param name="machineWide"><c>true</c> if the directory should be machine-wide and machine-specific instead of roaming with the user profile.</param>
         /// <param name="resource">The directory name of the resource to be stored.</param>
         /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        /// <remarks>If a new directory is created with <paramref name="machineWide"/> set to <see langword="true"/> on Windows, ACLs are set to deny write access for non-Administrator users.</remarks>
+        /// <remarks>If a new directory is created with <paramref name="machineWide"/> set to <c>true</c> on Windows, ACLs are set to deny write access for non-Administrator users.</remarks>
         [PublicAPI, NotNull]
         public static string GetIntegrationDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
         {

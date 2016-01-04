@@ -152,7 +152,7 @@ namespace NanoByte.Common.Dispatch
         /// Registers a mapping rule for a specific type of Model element.
         /// </summary>
         /// <param name="create">Callback that creates a set of 0..n View representations for a given Model element.</param>
-        /// <param name="update">Callback that updates a specific View representation based on the state of a given Model element; can be <see langword="null"/>.</param>
+        /// <param name="update">Callback that updates a specific View representation based on the state of a given Model element; can be <c>null</c>.</param>
         public void RegisterMultiple<TSpecificModel, TSpecificView>([NotNull] Func<TSpecificModel, IEnumerable<TSpecificView>> create, [CanBeNull] Action<TSpecificModel, TSpecificView> update = null)
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
@@ -176,7 +176,7 @@ namespace NanoByte.Common.Dispatch
         /// Registers a mapping rule for a specific type of Model element.
         /// </summary>
         /// <param name="create">Callback that creates a View representation for a given Model element.</param>
-        /// <param name="update">Callback that updates a View representation based on the state of a given Model element; can be <see langword="null"/>.</param>
+        /// <param name="update">Callback that updates a View representation based on the state of a given Model element; can be <c>null</c>.</param>
         public void Register<TSpecificModel, TSpecificView>([NotNull] Func<TSpecificModel, TSpecificView> create, [CanBeNull] Action<TSpecificModel, TSpecificView> update = null)
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView

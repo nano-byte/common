@@ -65,7 +65,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Returns the next pending line; <see langword="null"/> if there are no pending lines.
+        /// Returns the next pending line; <c>null</c> if there are no pending lines.
         /// </summary>
         [CanBeNull]
         public string ReadLine()

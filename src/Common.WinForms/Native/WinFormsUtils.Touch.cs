@@ -53,9 +53,9 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="m">The message to handle.</param>
         /// <param name="sender">The object to send possible events from.</param>
-        /// <param name="onTouchDown">The event handler to call for touch down events; can be <see langword="null"/>.</param>
-        /// <param name="onTouchMove">The event handler to call for touch move events; can be <see langword="null"/>.</param>
-        /// <param name="onTouchUp">The event handler to call for touch up events; can be <see langword="null"/>.</param>
+        /// <param name="onTouchDown">The event handler to call for touch down events; can be <c>null</c>.</param>
+        /// <param name="onTouchMove">The event handler to call for touch move events; can be <c>null</c>.</param>
+        /// <param name="onTouchUp">The event handler to call for touch up events; can be <c>null</c>.</param>
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void HandleTouchMessage(ref Message m, object sender, EventHandler<TouchEventArgs> onTouchDown, EventHandler<TouchEventArgs> onTouchMove, EventHandler<TouchEventArgs> onTouchUp)
         {

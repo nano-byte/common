@@ -35,24 +35,24 @@ namespace NanoByte.Common.Native
     /// Provides helper methods for Unix-specific features of the Mono library.
     /// </summary>
     /// <remarks>
-    /// This class has a dependency on <code>Mono.Posix</code>.
+    /// This class has a dependency on <c>Mono.Posix</c>.
     /// Make sure to check <see cref="IsUnix"/> before calling any other methods in this class to avoid missing assembly exceptions.
     /// </remarks>
     public static class UnixUtils
     {
         #region OS
         /// <summary>
-        /// <see langword="true"/> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
+        /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
         public static bool IsUnix { get { return Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128; } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is MacOS X.
+        /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
         public static bool IsMacOSX { get { return IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework"); } }
 
         /// <summary>
-        /// <see langword="true"/> if there is an X Server running or the current operating system is MacOS X.
+        /// <c>true</c> if there is an X Server running or the current operating system is MacOS X.
         /// </summary>
         public static bool HasGui { get { return IsMacOSX || (IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))); } }
 
@@ -179,8 +179,8 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Checks whether a file is a regular file (i.e. not a device file, symbolic link, etc.).
         /// </summary>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a regular file; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a regular file; <c>false</c> otherwise.</returns>
+        /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsRegularFile([NotNull, Localizable(false)] string path)
@@ -196,8 +196,8 @@ namespace NanoByte.Common.Native
         /// Checks whether a file is a Unix symbolic link.
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
-        /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
+        /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path)
@@ -214,7 +214,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
@@ -277,10 +277,10 @@ namespace NanoByte.Common.Native
         /// Checks whether a file is marked as Unix-executable.
         /// </summary>
         /// <param name="path">The file to check for executable rights.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to an executable; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to an executable; <c>false</c> otherwise.</returns>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        /// <remarks>Will return <see langword="false"/> for non-existing files.</remarks>
+        /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
         public static bool IsExecutable([NotNull, Localizable(false)] string path)
         {
             #region Sanity checks
@@ -296,7 +296,7 @@ namespace NanoByte.Common.Native
         /// Marks a file as Unix-executable or not Unix-executable.
         /// </summary>
         /// <param name="path">The file to mark as executable or not executable.</param>
-        /// <param name="executable"><see lang="true"/> to mark the file as executable, <see lang="true"/> to mark it as not executable.</param>
+        /// <param name="executable"><c>true</c> to mark the file as executable, <c>true</c> to mark it as not executable.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void SetExecutable([NotNull, Localizable(false)] string path, bool executable)
@@ -317,7 +317,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="path">The path of the file to read the attribute from.</param>
         /// <param name="name">The name of the attribute to read.</param>
-        /// <returns>The contents of the attribute as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
+        /// <returns>The contents of the attribute as a byte array; <c>null</c> if there was a problem reading the file.</returns>
         [CanBeNull]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static byte[] GetXattr([NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string name)

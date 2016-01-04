@@ -78,7 +78,7 @@ namespace NanoByte.Common.Storage.SlimDX
 
         #region Properties
         /// <summary>
-        /// The base directory where all the content files are stored; should not be <see langword="null"/>.
+        /// The base directory where all the content files are stored; should not be <c>null</c>.
         /// </summary>
         /// <remarks>Can be set externally with <see cref="EnvVarNameBaseDir"/>.</remarks>
         /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
@@ -94,7 +94,7 @@ namespace NanoByte.Common.Storage.SlimDX
         }
 
         /// <summary>
-        /// A directory overriding the base directory for creating mods; can be <see langword="null"/>.
+        /// A directory overriding the base directory for creating mods; can be <c>null</c>.
         /// </summary>
         /// <remarks>Can be set externally with <see cref="EnvVarNameModDir"/>.</remarks>
         /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
@@ -245,7 +245,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="type">The type of file (e.g. Textures, Sounds, ...).</param>
         /// <param name="id">The file name of the content.</param>
         /// <param name="searchArchives">Whether to search for the file in archives as well.</param>
-        /// <returns><see langword="true"/> if the requested content file exists.</returns>
+        /// <returns><c>true</c> if the requested content file exists.</returns>
         public static bool FileExists([NotNull, Localizable(false)] string type, [NotNull, Localizable(false)] string id, bool searchArchives = true)
         {
             #region Sanity checks
@@ -274,7 +274,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="files">The collection to add the file to.</param>
         /// <param name="type">The type-subdirectory the file belongs to.</param>
         /// <param name="name">The file name to be added to the list.</param>
-        /// <param name="flagAsMod">Set to <see langword="true"/> when handling mod files to detect added and changed files.</param>
+        /// <param name="flagAsMod">Set to <c>true</c> when handling mod files to detect added and changed files.</param>
         private static void AddFileToList(NamedCollection<FileEntry> files, string type, string name, bool flagAsMod)
         {
             if (flagAsMod)
@@ -308,7 +308,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="extension">The file extension to look for.</param>
         /// <param name="directory">The directory to look in.</param>
         /// <param name="prefix">A prefix to add before the file name in the list (used to indicate current sub-directory).</param>
-        /// <param name="flagAsMod">Set to <see langword="true"/> when handling mod files to detect added and changed files.</param>
+        /// <param name="flagAsMod">Set to <c>true</c> when handling mod files to detect added and changed files.</param>
         private static void AddDirectoryToList(NamedCollection<FileEntry> files, string type, string extension, DirectoryInfo directory, string prefix, bool flagAsMod)
         {
             // Add the files in this directory to the list
@@ -329,7 +329,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="extension">The file extension to look for.</param>
         /// <param name="type">The type-subdirectory to look in.</param>
         /// <param name="archiveData">The archive data list to look in.</param>
-        /// <param name="flagAsMod">Set to <see langword="true"/> when handling mod files to detect added and changed files.</param>
+        /// <param name="flagAsMod">Set to <c>true</c> when handling mod files to detect added and changed files.</param>
         private static void AddArchivesToList(NamedCollection<FileEntry> files, string type, string extension, IEnumerable<KeyValuePair<string, ContentArchiveEntry>> archiveData, bool flagAsMod)
         {
             foreach (var pair in archiveData

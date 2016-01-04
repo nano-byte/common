@@ -67,7 +67,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Determines whether <paramref name="key"/> is pressed right now.
         /// </summary>
-        /// <remarks>Will always return <see langword="false"/> on non-Windows OSes.</remarks>
+        /// <remarks>Will always return <c>false</c> on non-Windows OSes.</remarks>
         public static bool IsKeyDown(Keys key)
         {
             if (!WindowsUtils.IsWindows) return false;
@@ -77,8 +77,8 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Determines whether this application is currently idle.
         /// </summary>
-        /// <returns><see langword="true"/> if idle, <see langword="false"/> if handling window events.</returns>
-        /// <remarks>Will always return <see langword="true"/> on non-Windows OSes.</remarks>
+        /// <returns><c>true</c> if idle, <c>false</c> if handling window events.</returns>
+        /// <remarks>Will always return <c>true</c> on non-Windows OSes.</remarks>
         public static bool AppIdle
         {
             get
@@ -117,8 +117,8 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Releases the mouse cursor after it was locked by <see cref="SetCapture"/>.
         /// </summary>
-        /// <returns><see langword="true"/> if successful; <see langword="false"/> otherwise.</returns>
-        /// <remarks>Will always return <see langword="false"/> on non-Windows OSes.</remarks>
+        /// <returns><c>true</c> if successful; <c>false</c> otherwise.</returns>
+        /// <remarks>Will always return <c>false</c> on non-Windows OSes.</remarks>
         public static bool ReleaseCapture()
         {
             if (!WindowsUtils.IsWindows) return false;

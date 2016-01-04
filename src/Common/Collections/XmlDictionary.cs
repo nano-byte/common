@@ -68,7 +68,7 @@ namespace NanoByte.Common.Collections
         /// Removes all values assigned to this key.
         /// </summary>
         /// <param name="key">The key to look for.</param>
-        /// <returns><see langword="true"/> if one or more elements were removed; otherwise, <see langword="false"/>.</returns>
+        /// <returns><c>true</c> if one or more elements were removed; otherwise, <c>false</c>.</returns>
         public bool Remove(string key)
         {
             // Build a list of elements to remove
@@ -87,7 +87,7 @@ namespace NanoByte.Common.Collections
         /// Checks whether this collection contains a certain key.
         /// </summary>
         /// <param name="key">The key to look for.</param>
-        /// <returns><see langword="true"/> if the key was found.</returns>
+        /// <returns><c>true</c> if the key was found.</returns>
         public bool ContainsKey(string key)
         {
             return this.Any(entry => entry.Key == key);
@@ -97,7 +97,7 @@ namespace NanoByte.Common.Collections
         /// Checks whether this collection contains a certain value.
         /// </summary>
         /// <param name="value">The value to look for.</param>
-        /// <returns><see langword="true"/> if the value was found.</returns>
+        /// <returns><c>true</c> if the value was found.</returns>
         public bool ContainsValue(string value)
         {
             return this.Any(entry => entry.Value == value);

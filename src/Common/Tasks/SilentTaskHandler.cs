@@ -66,12 +66,12 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <summary>
-        /// Always returns <seealso cref="Tasks.Verbosity.Batch"/>.
+        /// Always returns <see cref="Tasks.Verbosity.Batch"/>.
         /// </summary>
         public virtual Verbosity Verbosity { get { return Verbosity.Batch; } set { } }
 
         /// <summary>
-        /// Always returns <see langword="false"/>.
+        /// Always returns <c>false</c>.
         /// </summary>
         public virtual bool Ask(string question)
         {

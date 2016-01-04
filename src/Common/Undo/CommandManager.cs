@@ -47,7 +47,7 @@ namespace NanoByte.Common.Undo
         public abstract T Target { get; set; }
 
         /// <summary>
-        /// The path of the file the <see cref="Target"/> was loaded from. <see langword="null"/> if none.
+        /// The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.
         /// </summary>
         public string Path { get; protected set; }
 

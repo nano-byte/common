@@ -46,7 +46,7 @@ namespace NanoByte.Common.Native
         /// Checks whether a file is a Cygwin symbolic link (http://cygwin.com/cygwin-ug-net/using.html#pathnames-symlinks).
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path)
@@ -70,7 +70,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="path">The path of the file to check.</param>
         /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
-        /// <return><see lang="true"/> if <paramref name="path"/> points to a symbolic link; <see lang="false"/> otherwise.</return>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
@@ -105,7 +105,7 @@ namespace NanoByte.Common.Native
 
         /// <summary>
         /// Checks whether a file has the <see cref="FileAttributes.System"/> attribute set.
-        /// Always <see langword="true"/> on non-Windows systems since they do not expose this attribute, so we assume it might be set.
+        /// Always <c>true</c> on non-Windows systems since they do not expose this attribute, so we assume it might be set.
         /// </summary>
         private static bool HasSystemAttribute(string path)
         {

@@ -60,7 +60,7 @@ namespace NanoByte.Common
         /// Creates or opens a mutex (local and global) to signal that an application is running.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
+        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if a new one was created.</returns>
         /// <remarks>The mutex will automatically be released once the process terminates. You can check the return value to prevent multiple instances from running.</remarks>
         [PublicAPI]
         public static bool Create([NotNull, Localizable(false)] string name)
@@ -78,7 +78,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <param name="mutex">A pointer to the mutex.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if a new one was created.</returns>
+        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if a new one was created.</returns>
         /// <remarks>The mutex will automatically be released once the process terminates or you call <see cref="Close"/> on <paramref name="mutex"/>.</remarks>
         [PublicAPI]
         public static bool Create([NotNull, Localizable(false)] string name, out AppMutex mutex)
@@ -136,7 +136,7 @@ namespace NanoByte.Common
         /// Tries to open an existing mutex (local and global) signaling that an application is running.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was opened; <see langword="false"/> if none existed.</returns>
+        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if none existed.</returns>
         /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
         [PublicAPI]
         public static bool Open([NotNull, Localizable(false)] string name)
@@ -186,7 +186,7 @@ namespace NanoByte.Common
         /// Checks whether a specific mutex exists (local or global) without opening a lasting handle.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><see langword="true"/> if an existing mutex was found; <see langword="false"/> if none existed.</returns>
+        /// <returns><c>true</c> if an existing mutex was found; <c>false</c> if none existed.</returns>
         [PublicAPI]
         public static bool Probe([NotNull, Localizable(false)] string name)
         {

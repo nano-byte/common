@@ -33,7 +33,7 @@ using NanoByte.Common.Properties;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Delegate used by <seealso cref="ExceptionUtils.Retry{TException}"/>.
+    /// Delegate used by <see cref="ExceptionUtils.Retry{TException}"/>.
     /// </summary>
     /// <param name="lastAttempt">Indicates whether this retry run is the last attempt before giving up and passing the exception through.</param>
     /// <seealso cref="ExceptionUtils.Retry{TException}"/>

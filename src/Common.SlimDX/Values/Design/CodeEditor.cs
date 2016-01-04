@@ -33,7 +33,7 @@ using ICSharpCode.TextEditor.Document;
 namespace NanoByte.Common.Values.Design
 {
     /// <summary>
-    /// An editor that can be associated with <see langword="string"/> properties. Uses <see cref="TextEditorControl"/>.
+    /// An editor that can be associated with <c>string</c> properties. Uses <see cref="TextEditorControl"/>.
     /// </summary>
     /// <seealso cref="FileTypeAttribute"/>
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]

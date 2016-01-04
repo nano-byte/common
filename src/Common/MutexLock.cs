@@ -29,8 +29,8 @@ namespace NanoByte.Common
     /// Provides a wrapper around <see cref="Mutex"/> that automatically acquires on creating and releases on <see cref="Dispose"/>
     /// </summary>
     /// <example>
-    /// Instead of <code>lock (_object) { code(); }</code> for per-process locking use
-    /// <code>using (new MutexLock("name") { code(); }</code> for inter-process locking.
+    /// Instead of <c>lock (_object) { code(); }</c> for per-process locking use
+    /// <c>using (new MutexLock("name") { code(); }</c> for inter-process locking.
     /// </example>
     public sealed class MutexLock : IDisposable
     {

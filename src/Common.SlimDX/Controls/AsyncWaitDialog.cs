@@ -47,7 +47,7 @@ namespace NanoByte.Common.Controls
         /// Creates a new asynchrnous waiting dialog.
         /// </summary>
         /// <param name="title">The title of th dialog to display.</param>
-        /// <param name="icon">The icon for the dialog to display in the task bar; can be <see langword="null"/>.</param>
+        /// <param name="icon">The icon for the dialog to display in the task bar; can be <c>null</c>.</param>
         public AsyncWaitDialog([NotNull, Localizable(true)] string title, [CanBeNull] Icon icon = null)
         {
             InitializeComponent();

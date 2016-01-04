@@ -66,7 +66,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes the the entry with the specified <paramref name="key"/> from the cache.
         /// </summary>
-        /// <returns><see langword="true"/> if a matching entry was found and removed; <see langword="false"/> if no matching entry was in the cache.</returns>
+        /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
         public bool Remove([NotNull] TKey key)
         {
             lock (_lock)

@@ -84,6 +84,7 @@
     <Compile Include="ColorUtils.cs" />
     <Compile Include="MathUtils.cs" />
     <Compile Include="RandomUtils.cs" />
+    <Compile Include="Storage\SlimDX\_Namespace.cs" />
     <Compile Include="Values\Attenuation.cs" />
     <Compile Include="Values\ByteGrid.cs" />
     <Compile Include="Values\ByteVector4.cs" />

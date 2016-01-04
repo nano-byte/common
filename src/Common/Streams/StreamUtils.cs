@@ -40,9 +40,9 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="count">The number of bytes to read.</param>
-        /// <param name="throwOnEnd">Controls whether the method throws an exception when the end of the stream is reached instead of returning <see langword="null"/>.</param>
-        /// <returns>The bytes read from the stream; may be <see langword="null"/> if <paramref name="throwOnEnd"/> is <see langword="false"/>.</returns>
-        /// <exception cref="IOException">The desired number of bytes could not be read from the stream and <paramref name="throwOnEnd"/> is <see langword="true"/>.</exception>
+        /// <param name="throwOnEnd">Controls whether the method throws an exception when the end of the stream is reached instead of returning <c>null</c>.</param>
+        /// <returns>The bytes read from the stream; may be <c>null</c> if <paramref name="throwOnEnd"/> is <c>false</c>.</returns>
+        /// <exception cref="IOException">The desired number of bytes could not be read from the stream and <paramref name="throwOnEnd"/> is <c>true</c>.</exception>
         [ContractAnnotation("throwOnEnd:true => notnull; throwOnEnd:false => canbenull")]
         public static byte[] Read([NotNull] this Stream stream, int count, bool throwOnEnd = true)
         {
@@ -91,7 +91,7 @@ namespace NanoByte.Common.Streams
         /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
-        /// <param name="encoding">The encoding of the string; leave <see langword="null"/> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A entire content of the stream.</returns>
         [NotNull]
         public static string ReadToString([NotNull] this Stream stream, [CanBeNull] Encoding encoding = null)
@@ -196,7 +196,7 @@ namespace NanoByte.Common.Streams
         /// Creates a new <see cref="MemoryStream"/> and fills it with string data.
         /// </summary>
         /// <param name="data">The data to fill the stream with.</param>
-        /// <param name="encoding">The encoding of the string; leave <see langword="null"/> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
         [NotNull]
         public static MemoryStream ToStream([NotNull] this string data, [CanBeNull] Encoding encoding = null)

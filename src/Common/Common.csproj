@@ -60,6 +60,7 @@
     <Compile Include="Cli\CliUtils.NativeMethods.cs" />
     <Compile Include="Cli\ProgressBar.cs" />
     <Compile Include="Cli\TaskProgressBar.cs" />
+    <Compile Include="Cli\_Namespace.cs" />
     <Compile Include="Collections\ArrayExtensions.cs" />
     <Compile Include="Collections\ComparableTuple.cs" />
     <Compile Include="Collections\CultureComparer.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Collections\TransparentCacheBase.cs" />
     <Compile Include="Collections\XmlDictionary.cs" />
     <Compile Include="Collections\XmlDictionaryEntry.cs" />
+    <Compile Include="Collections\_Namespace.cs" />
     <Compile Include="Dispatch\AggregateDispatcher.Action.cs" />
     <Compile Include="Dispatch\AggregateDispatcher.Func.cs" />
     <Compile Include="Dispatch\Bucketizer.Predicate.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Dispatch\ModelViewSync.cs" />
     <Compile Include="Dispatch\PerTypeDispatcher.Action.cs" />
     <Compile Include="Dispatch\PerTypeDispatcher.Func.cs" />
+    <Compile Include="Dispatch\_Namespace.cs" />
     <Compile Include="ExceptionUtils.cs" />
     <Compile Include="Future.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Info\AppInfo.cs" />
     <Compile Include="Info\ExceptionInfo.cs" />
     <Compile Include="Info\OSInfo.cs" />
+    <Compile Include="Info\_Namespace.cs" />
     <Compile Include="JetBrains.Annotations.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="LogSeverity.cs" />
@@ -120,6 +124,7 @@
     <Compile Include="Native\WindowsTaskbar.NativeMethods.cs" />
     <Compile Include="Native\WindowsUtils.cs" />
     <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
+    <Compile Include="Native\_Namespace.cs" />
     <Compile Include="NeedGuiException.cs" />
     <Compile Include="Net\CachedCredentialProvider.cs" />
     <Compile Include="Net\CliCredentialProvider.cs" />
@@ -136,6 +141,7 @@
     <Compile Include="Net\WindowsCliCredentialProvider.cs" />
     <Compile Include="Net\WindowsCredentialProvider.cs" />
     <Compile Include="Net\WindowsDialogCredentialProvider.cs" />
+    <Compile Include="Net\_Namespace.cs" />
     <Compile Include="NotAdminException.cs" />
     <Compile Include="Parallel.cs" />
     <Compile Include="ProcessUtils.cs" />
@@ -165,12 +171,14 @@
     <Compile Include="Storage\TemporaryWorkingDirectory.cs" />
     <Compile Include="Storage\XmlNamespaceAttribute.cs" />
     <Compile Include="Storage\XmlStorage.cs" />
+    <Compile Include="Storage\_Namespace.cs" />
     <Compile Include="Streams\CircularBufferStream.cs" />
     <Compile Include="Streams\DisposeWrapperStream.cs" />
     <Compile Include="Streams\MicroServer.cs" />
     <Compile Include="Streams\OffsetStream.cs" />
     <Compile Include="Streams\StreamConsumer.cs" />
     <Compile Include="Streams\StreamUtils.cs" />
+    <Compile Include="Streams\_Namespace.cs" />
     <Compile Include="StringUtils.cs" />
     <Compile Include="Tasks\CancellationToken.cs" />
     <Compile Include="Tasks\CancellationTokenRegistration.cs" />
@@ -192,6 +200,7 @@
     <Compile Include="Tasks\TaskState.cs" />
     <Compile Include="Tasks\Verbosity.cs" />
     <Compile Include="Tasks\WaitTask.cs" />
+    <Compile Include="Tasks\_Namespace.cs" />
     <Compile Include="ThreadUtils.cs" />
     <Compile Include="TimedLogEvent.cs" />
     <Compile Include="Undo\AddToCollection.cs" />
@@ -212,15 +221,19 @@
     <Compile Include="Undo\SetValueCommand.cs" />
     <Compile Include="Undo\SimpleCommand.cs" />
     <Compile Include="Undo\SimpleCommandExecutor.cs" />
+    <Compile Include="Undo\_Namespace.cs" />
     <Compile Include="UpdateUtils.cs" />
     <Compile Include="Values\AttributeUtils.cs" />
     <Compile Include="Values\Design\EnumDescriptionConverter.cs" />
     <Compile Include="Values\Design\EnumXmlConverter.cs" />
     <Compile Include="Values\Design\StringConstructorConverter.cs" />
     <Compile Include="Values\Design\StructConverter.cs" />
+    <Compile Include="Values\Design\_Namespace.cs" />
     <Compile Include="Values\EnumExtensions.cs" />
     <Compile Include="Values\KeyEqualityComparer.cs" />
     <Compile Include="Values\Languages.cs" />
+    <Compile Include="Values\_Namespace.cs" />
+    <Compile Include="_Namespace.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />

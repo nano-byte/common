@@ -88,7 +88,7 @@ namespace NanoByte.Common.Collections
         #endregion
 
         #region Variables
-        /// <summary>Do not raise the <see cref="Added"/> and <see cref="Removed"/> events while <see langword="true"/>.
+        /// <summary>Do not raise the <see cref="Added"/> and <see cref="Removed"/> events while <c>true</c>.
         /// <see cref="Removing"/> cannot be blocked!</summary>
         private bool _dontRaiseEvents;
         #endregion

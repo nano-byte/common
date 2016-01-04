@@ -33,7 +33,7 @@ namespace NanoByte.Common.Tasks
     public static class TaskHandlerExtensions
     {
         /// <summary>
-        /// Displays multi-line text to the user only when <see cref="ITaskHandler.Verbosity"/> is <seealso cref="Verbosity.Normal"/> or higher.
+        /// Displays multi-line text to the user only when <see cref="ITaskHandler.Verbosity"/> is <see cref="Verbosity.Normal"/> or higher.
         /// </summary>
         /// <param name="handler">Used for the underlying <see cref="ITaskHandler.Output"/>.</param>
         /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
@@ -49,7 +49,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <summary>
-        /// Displays tabular data to the user only when <see cref="ITaskHandler.Verbosity"/> is <seealso cref="Verbosity.Normal"/> or higher.
+        /// Displays tabular data to the user only when <see cref="ITaskHandler.Verbosity"/> is <see cref="Verbosity.Normal"/> or higher.
         /// </summary>
         /// <param name="handler">Used for the underlying <see cref="ITaskHandler.Output"/>.</param>
         /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
@@ -69,9 +69,9 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="handler">Used for the underlying <see cref="ITaskHandler.Ask"/>.</param>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="defaultAnswer">The answer to automatically use when <see cref="ITaskHandler.Verbosity"/> is <seealso cref="Verbosity.Batch"/> or lower.</param>
+        /// <param name="defaultAnswer">The answer to automatically use when <see cref="ITaskHandler.Verbosity"/> is <see cref="Verbosity.Batch"/> or lower.</param>
         /// <param name="alternateMessage">A message to output with <see cref="Log.Warn(string)"/> when the <paramref name="defaultAnswer"/> is used instead of asking the user.</param>
-        /// <returns><see langword="true"/> if the user answered with 'Yes'; <see langword="false"/> if the user answered with 'No'.</returns>
+        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
         public static bool Ask([NotNull] this ITaskHandler handler, [NotNull, Localizable(true)] string question, bool defaultAnswer, [CanBeNull, Localizable(true)] string alternateMessage = null)
         {

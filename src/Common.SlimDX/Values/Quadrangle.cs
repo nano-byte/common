@@ -155,7 +155,7 @@ namespace NanoByte.Common.Values
         /// If the points are stored counter-clockwise and form a convex polygon, this will test if a point lies inside it.
         /// </summary>
         /// <param name="point">The point to test for intersection.</param>
-        /// <returns><see langword="true"/> if <paramref name="point"/> lies within the quadrangle.</returns>
+        /// <returns><c>true</c> if <paramref name="point"/> lies within the quadrangle.</returns>
         public bool IntersectWith(Vector2 point)
         {
             // Check if the point lies on the outside of any of the lines
@@ -174,7 +174,7 @@ namespace NanoByte.Common.Values
         /// If the points are stored counter-clockwise and form a convex polygon, this will test if a rectangle lies inside it.
         /// </summary>
         /// <param name="rectangle">The rectangle to test for intersection.</param>
-        /// <returns><see langword="true"/> if <paramref name="rectangle"/> lies within the quadrangle.</returns>
+        /// <returns><c>true</c> if <paramref name="rectangle"/> lies within the quadrangle.</returns>
         public bool IntersectWith(RectangleF rectangle)
         {
             // Check if any corner of the quadrangle lies within the rectangle
@@ -202,7 +202,7 @@ namespace NanoByte.Common.Values
         /// This will test if two quadrangles intersect with each other. Only works if both quadrangles are counter-clockwise and form a convex polygon.
         /// </summary>
         /// <param name="quadrangle">The other quadrangle to test for intersection.</param>
-        /// <returns><see langword="true"/> if <paramref name="quadrangle"/> intersects with this quadrangle.</returns>
+        /// <returns><c>true</c> if <paramref name="quadrangle"/> intersects with this quadrangle.</returns>
         public bool IntersectWith(Quadrangle quadrangle)
         {
             // ToDo: Optimize
@@ -219,7 +219,7 @@ namespace NanoByte.Common.Values
         /// If the points are stored counter-clockwise and form a convex polygon, this will test if a circle with the origin (0;0) lies inside it.
         /// </summary>
         /// <param name="radius">The rectangle to test for intersection.</param>
-        /// <returns><see langword="true"/> if the circle lies within the quadrangle.</returns>
+        /// <returns><c>true</c> if the circle lies within the quadrangle.</returns>
         public bool IntersectCircle(float radius)
         {
             // Check if a part of the circle lies within the quadrangle

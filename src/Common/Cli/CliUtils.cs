@@ -80,7 +80,7 @@ namespace NanoByte.Common.Cli
         /// <summary>
         /// Indicates whether the stdout stream has been redirected.
         /// </summary>
-        /// <remarks>This only works on Windows systems. On other operating systems it always returns <see langword="false"/>.</remarks>
+        /// <remarks>This only works on Windows systems. On other operating systems it always returns <c>false</c>.</remarks>
         public static bool StandardInputRedirected
         {
             get
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Cli
         /// <summary>
         /// Indicates whether the stdout stream has been redirected.
         /// </summary>
-        /// <remarks>This only works on Windows systems. On other operating systems it always returns <see langword="false"/>.</remarks>
+        /// <remarks>This only works on Windows systems. On other operating systems it always returns <c>false</c>.</remarks>
         public static bool StandardOutputRedirected
         {
             get
@@ -106,7 +106,7 @@ namespace NanoByte.Common.Cli
         /// <summary>
         /// Indicates whether the stdout stream has been redirected.
         /// </summary>
-        /// <remarks>This only works on Windows systems. On other operating systems it always returns <see langword="false"/>.</remarks>
+        /// <remarks>This only works on Windows systems. On other operating systems it always returns <c>false</c>.</remarks>
         public static bool StandardErrorRedirected
         {
             get

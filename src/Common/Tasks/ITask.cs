@@ -34,7 +34,7 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     /// <remarks>
     /// Unlike System.Threading.Tasks.Task, these tasks do not provide any asynchrony by themselves.
-    /// They execute all their code on the same thread they are started on and rely on <seealso cref="ITaskHandler"/>s for scheduling on background threads.
+    /// They execute all their code on the same thread they are started on and rely on <see cref="ITaskHandler"/>s for scheduling on background threads.
     /// </remarks>
     /// <seealso cref="ITaskHandler"/>
     public interface ITask
@@ -43,7 +43,7 @@ namespace NanoByte.Common.Tasks
         /// Runs the task and blocks until it is complete.
         /// </summary>
         /// <param name="cancellationToken">Used to receive a signal (e.g. from another thread) when the user wishes to cancel the task execution.</param>
-        /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</param>
+        /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <c>null</c>.</param>
         /// <param name="progress">Used to report back the task's progress (e.g. to another thread).</param>
         /// <exception cref="OperationCanceledException">The task was canceled from another thread.</exception>
         /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
@@ -59,7 +59,7 @@ namespace NanoByte.Common.Tasks
         string Name { get; }
 
         /// <summary>
-        /// An object used to associate the task with a specific process; can be <see langword="null"/>.
+        /// An object used to associate the task with a specific process; can be <c>null</c>.
         /// </summary>
         [CanBeNull]
         object Tag { get; set; }

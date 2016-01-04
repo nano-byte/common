@@ -51,7 +51,7 @@ namespace NanoByte.Common
         private readonly bool _needsEncoding;
 
         /// <summary>
-        /// <see langword="true"/> if <see cref="Value"/> is equal to <see cref="DefaultValue"/>.
+        /// <c>true</c> if <see cref="Value"/> is equal to <see cref="DefaultValue"/>.
         /// </summary>
         public bool IsDefaultValue { get { return Equals(Value, DefaultValue); } }
 

@@ -114,7 +114,7 @@ namespace NanoByte.Common.Controls
         private T _selectedEntry;
 
         /// <summary>
-        /// The <see cref="INamed{T}"/> object currently selected in the <see cref="TreeView"/>; <see langword="null"/> for no selection.
+        /// The <see cref="INamed{T}"/> object currently selected in the <see cref="TreeView"/>; <c>null</c> for no selection.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public T SelectedEntry

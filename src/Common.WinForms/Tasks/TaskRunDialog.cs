@@ -45,7 +45,7 @@ namespace NanoByte.Common.Tasks
         /// Creates a new task tracking dialog.
         /// </summary>
         /// <param name="task">The trackable task to execute and display.</param>
-        /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <see langword="null"/>.</param>
+        /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <c>null</c>.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
         public TaskRunDialog([NotNull] ITask task, [CanBeNull] ICredentialProvider credentialProvider, CancellationTokenSource cancellationTokenSource)
         {

@@ -31,7 +31,7 @@ namespace NanoByte.Common.Undo
     public interface ICommandExecutor
     {
         /// <summary>
-        /// The path of the file the data structure being modified was loaded from. <see langword="null"/> if none.
+        /// The path of the file the data structure being modified was loaded from. <c>null</c> if none.
         /// </summary>
         [CanBeNull, Localizable(false)]
         string Path { get; }

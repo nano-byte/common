@@ -48,12 +48,12 @@ namespace NanoByte.Common.Storage
         public string SourcePath { get; private set; }
 
         /// <summary>
-        /// The path of the target directory. May exist. Must be empty if <see cref="Overwrite"/> is <see langword="false"/>.
+        /// The path of the target directory. May exist. Must be empty if <see cref="Overwrite"/> is <c>false</c>.
         /// </summary>
         public string DestinationPath { get; private set; }
 
         /// <summary>
-        /// <see langword="true"/> to preserve the modification times for directories as well; <see langword="false"/> to preserve only the file modification times.
+        /// <c>true</c> to preserve the modification times for directories as well; <c>false</c> to preserve only the file modification times.
         /// </summary>
         public bool PreserveDirectoryTimestamps { get; private set; }
 
@@ -66,8 +66,8 @@ namespace NanoByte.Common.Storage
         /// Creates a new directory copy task.
         /// </summary>
         /// <param name="sourcePath">The path of source directory. Must exist!</param>
-        /// <param name="destinationPath">The path of the target directory. May exist. Must be empty if <paramref name="overwrite"/> is <see langword="false"/>.</param>
-        /// <param name="preserveDirectoryTimestamps"><see langword="true"/> to preserve the modification times for directories as well; <see langword="false"/> to preserve only the file modification times.</param>
+        /// <param name="destinationPath">The path of the target directory. May exist. Must be empty if <paramref name="overwrite"/> is <c>false</c>.</param>
+        /// <param name="preserveDirectoryTimestamps"><c>true</c> to preserve the modification times for directories as well; <c>false</c> to preserve only the file modification times.</param>
         /// <param name="overwrite">Overwrite exisiting files and directories at the <paramref name="destinationPath"/>. This will even replace read-only files!</param>
         public CopyDirectory([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath, bool preserveDirectoryTimestamps = true, bool overwrite = false)
         {

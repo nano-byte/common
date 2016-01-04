@@ -118,47 +118,47 @@ namespace NanoByte.Common.Native
 
         #region OS
         /// <summary>
-        /// <see langword="true"/> if the current operating system is Windows (9x- or NT-based); <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is Windows (9x- or NT-based); <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindows { get { return Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT; } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is a modern Windows version (NT-based); <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is a modern Windows version (NT-based); <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindowsNT { get { return Environment.OSVersion.Platform == PlatformID.Win32NT; } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is Windows XP or newer; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is Windows XP or newer; <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindowsXP { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(5, 1); } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is Windows Vista or newer; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is Windows Vista or newer; <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindowsVista { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 0); } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is Windows 7 or newer; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is Windows 7 or newer; <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindows7 { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 1); } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is Windows 8 or newer; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is Windows 8 or newer; <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindows8 { get { return IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 2); } }
 
         /// <summary>
-        /// <see langword="true"/> if the current operating system is 64-bit capable; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitOperatingSystem { get { return Is64BitProcess || Is32BitProcessOn64BitOperatingSystem; } }
 
         /// <summary>
-        /// <see langword="true"/> if the current process is 64-bit; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current process is 64-bit; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitProcess { get { return IntPtr.Size == 8; } }
 
         /// <summary>
-        /// <see langword="true"/> if the current process is 32-bit but the operating system is 64-bit capable; <see langword="false"/> otherwise.
+        /// <c>true</c> if the current process is 32-bit but the operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         /// <remarks>Can only detect WOW on Windows XP and newer</remarks>
         public static bool Is32BitProcessOn64BitOperatingSystem
@@ -175,7 +175,7 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
-        /// Indicates whether the current user is an administrator. Always returns <see langword="true"/> on non-Windows NT systems.
+        /// Indicates whether the current user is an administrator. Always returns <c>true</c> on non-Windows NT systems.
         /// </summary>
         public static bool IsAdministrator
         {
@@ -195,7 +195,7 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
-        /// Indicates whether the current process is running in an interactive session (rather than, e.g. as a service). Always returns <see langword="true"/> on non-Windows NT systems.
+        /// Indicates whether the current process is running in an interactive session (rather than, e.g. as a service). Always returns <c>true</c> on non-Windows NT systems.
         /// </summary>
         public static bool IsInteractive
         {
@@ -245,8 +245,8 @@ namespace NanoByte.Common.Native
         /// Determines whether a specific version of the .NET framework is available.
         /// </summary>
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
-        /// <returns><see langword="true"/> if the specified version is available, <see langword="false"/> otherwise.</returns>
-        /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <see langword="true"/>.</remarks>
+        /// <returns><c>true</c> if the specified version is available, <c>false</c> otherwise.</returns>
+        /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <c>true</c>.</remarks>
         public static bool HasNetFxVersion([NotNull] string version)
         {
             #region Sanity checks
@@ -261,7 +261,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns>The path to the .NET Framework root directory.</returns>
-        /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <see langword="true"/>.</remarks>
+        /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <c>true</c>.</remarks>
         [NotNull]
         public static string GetNetFxDirectory([NotNull] string version)
         {
@@ -339,7 +339,7 @@ namespace NanoByte.Common.Native
         /// Reads the entire contents of a file using the Win32 API.
         /// </summary>
         /// <param name="path">The path of the file to read.</param>
-        /// <returns>The contents of the file as a byte array; <see langword="null"/> if there was a problem reading the file.</returns>
+        /// <returns>The contents of the file as a byte array; <c>null</c> if there was a problem reading the file.</returns>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>This method works like <see cref="File.ReadAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
         [CanBeNull]
@@ -492,7 +492,7 @@ namespace NanoByte.Common.Native
         /// Moves a file on the next reboot of the OS. Replaces existing files.
         /// </summary>
         /// <param name="sourcePath">The source path to move the file from.</param>
-        /// <param name="destinationPath">The destination path to move the file to. <see langword="null"/> to delete the file instead of moving it.</param>
+        /// <param name="destinationPath">The destination path to move the file to. <c>null</c> to delete the file instead of moving it.</param>
         /// <remarks>Useful for replacing in-use files.</remarks>
         public static void MoveFileOnReboot([NotNull] string sourcePath, [CanBeNull] string destinationPath)
         {
