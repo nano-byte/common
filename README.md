@@ -1,15 +1,8 @@
 NanoByte.Common
-==============
-Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications available under the MIT license.
+===============
+Utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, OS integration and task progress UIs.
 
-
-NuGet packages
---------------
-The recommended way for using NanoByte.Common in your own projects is NuGet. Choose one of the following packages:
-* [NanoByte.Common](http://www.nuget.org/packages/NanoByte.Common/) if your project has no GUI or is a library itself.
-* [NanoByte.Common.WinForms](http://www.nuget.org/packages/NanoByte.Common.WinForms/) if your project is [WinForms](http://msdn.microsoft.com/library/system.windows.forms)-based.
-* [NanoByte.Common.Gtk](http://www.nuget.org/packages/NanoByte.Common.Gtk/) if your project is [Gtk#](http://www.mono-project.com/GtkSharp/)-based.
-* [NanoByte.Common.SlimDX](http://www.nuget.org/packages/NanoByte.Common.SlimDx/) if your project uses [SlimDX](http://slimdx.org/).
+**[Website / Documentation](http://nano-byte.de/common/)**
 
 
 Source directory structure
@@ -20,7 +13,7 @@ Source directory structure
 - The directory `build` contains the results of various compilation processes. It is created on first usage.
 
 `VERSION` contains the version numbers used by build scripts.
-Use `.\Set-Version.ps1 "X.Y.Z"` in PowerShall to change the version number. This ensures that the version also gets set in other locations (e.g. AssemblyInfo).
+Use `.\Set-Version.ps1 "X.Y.Z"` in PowerShall to change the version number. This ensures that the version also gets set in other locations (e.g. `AssemblyInfo`).
 
 
 Building on Windows
