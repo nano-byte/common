@@ -5,9 +5,10 @@
         <version>$version$</version>
         <authors>Bastian Eicher</authors>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-        <projectUrl>http://github.com/nano-byte/common</projectUrl>
+        <projectUrl>http://nano-byte.de/common/</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.</description>
+        <description>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.
+API documentation: http://nano-byte.de/common/api/</description>
         <dependencies>
             <dependency id="LinqBridge" version="1.3.0" />
         </dependencies>

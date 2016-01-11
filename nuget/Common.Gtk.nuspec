@@ -5,9 +5,10 @@
         <version>$version$</version>
         <authors>Bastian Eicher</authors>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-        <projectUrl>http://github.com/nano-byte/common</projectUrl>
+        <projectUrl>http://nano-byte.de/common/</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Generic utility classes, interfaces, controls, etc. for GTK# projects.</description>
+        <description>Generic utility classes, interfaces, controls, etc. for GTK# projects.
+API documentation: http://nano-byte.de/common/api/</description>
         <dependencies>
             <dependency id="NanoByte.Common" version="[$version$]" />
         </dependencies>
