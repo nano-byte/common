@@ -52,7 +52,7 @@ namespace NanoByte.Common.Undo
         }
 
         /// <summary>
-        /// Hook to perform the desired action.
+        /// Template method to perform the desired action.
         /// </summary>
         protected abstract void OnExecute();
         #endregion
@@ -73,7 +73,7 @@ namespace NanoByte.Common.Undo
         }
 
         /// <summary>
-        /// Hook to undo the changes made by <see cref="OnExecute"/>.
+        /// Template method to undo the changes made by <see cref="OnExecute"/>.
         /// </summary>
         protected abstract void OnUndo();
         #endregion

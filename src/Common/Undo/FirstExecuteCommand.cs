@@ -54,12 +54,12 @@ namespace NanoByte.Common.Undo
         }
 
         /// <summary>
-        /// Hook to perform the desired action the first time.
+        /// Template method to perform the desired action the first time.
         /// </summary>
         protected abstract void OnFirstExecute();
 
         /// <summary>
-        /// Hook to perform the desired action again.
+        /// Template method to perform the desired action again.
         /// </summary>
         protected abstract void OnRedo();
         #endregion
@@ -80,7 +80,7 @@ namespace NanoByte.Common.Undo
         }
 
         /// <summary>
-        /// Hook to undo the changes made by <see cref="OnFirstExecute"/> or <see cref="OnRedo"/>.
+        /// Template method to undo the changes made by <see cref="OnFirstExecute"/> or <see cref="OnRedo"/>.
         /// </summary>
         protected abstract void OnUndo();
         #endregion

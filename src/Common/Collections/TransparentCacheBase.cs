@@ -59,7 +59,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// The template method used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.
+        /// Template method used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.
         /// </summary>
         protected abstract TValue Retrieve([NotNull] TKey key);
 
