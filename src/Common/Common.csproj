@@ -159,6 +159,7 @@
     </Compile>
     <Compile Include="PropertyPointer.cs" />
     <Compile Include="RegistryUtils.cs" />
+    <Compile Include="StagedOperation.cs" />
     <Compile Include="Storage\AtomicWrite.cs" />
     <Compile Include="Storage\BinaryStorage.cs" />
     <Compile Include="Storage\CopyDirectory.cs" />
