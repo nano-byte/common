@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using JetBrains.Annotations;
@@ -97,6 +98,7 @@ namespace NanoByte.Common.Tasks
         /// Displays an error message to the user.
         /// </summary>
         /// <param name="exception">The exception representing the error that occurred.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Error")]
         void Error([NotNull] Exception exception);
     }
 }

@@ -103,7 +103,7 @@ namespace NanoByte.Common.Net
             #endregion
 
             return new Uri(
-                new Uri(uri, "-").ToStringRfc().StripFromEnd(count: 1),
+                new Uri(uri, new Uri("-", UriKind.Relative)).ToStringRfc().StripFromEnd(count: 1),
                 uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
         }
     }
