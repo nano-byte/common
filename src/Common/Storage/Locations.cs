@@ -48,12 +48,24 @@ namespace NanoByte.Common.Storage
         /// The directory the application binaries are located in.
         /// </summary>
         /// <remarks>
-        /// Uses the location of the NanoByte.Common DLL, not the calling EXE.
-        /// Works with ngened and shadow copied assemblies.
-        /// Does not work with GACed assemblies.
+        /// Uses the location of the NanoByte.Common DLL, not the calling EXE. Walks up one directory level if placed within a dir called "lib".
+        /// Works with ngened and shadow copied assemblies. Does not work with GACed assemblies.
         /// </remarks>
         [PublicAPI, NotNull]
-        public static readonly string InstallBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath) ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
+        public static readonly string InstallBase = GetInstallBase();
+
+        private static string GetInstallBase()
+        {
+            string codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+            if (codeBase == null) return AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
+            else
+            {
+                string libsSuffix = Path.DirectorySeparatorChar + "lib";
+                return codeBase.EndsWithIgnoreCase(libsSuffix)
+                    ? codeBase.StripFromEnd(libsSuffix.Length)
+                    : codeBase;
+            }
+        }
 
         /// <summary>
         /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <c>true</c>.
