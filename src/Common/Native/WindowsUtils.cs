@@ -273,7 +273,7 @@ namespace NanoByte.Common.Native
         }
         #endregion
 
-        #region Command-line arguments
+        #region Command-line
         /// <summary>
         /// Tries to split a command-line into individual arguments.
         /// </summary>
@@ -304,6 +304,15 @@ namespace NanoByte.Common.Native
             {
                 NativeMethods.LocalFree(ptrToSplitArgs);
             }
+        }
+
+        /// <summary>
+        /// Tries to attach to a command-line console owned by the parent process.
+        /// </summary>
+        /// <returns><c>true</c> if the console was successfully attached; <c>false</c> if the parent process did not own a console.</returns>
+        public static bool AttachConsole()
+        {
+            return IsWindowsNT && NativeMethods.AttachConsole(uint.MaxValue);
         }
         #endregion
 

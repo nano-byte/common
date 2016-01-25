@@ -73,6 +73,9 @@ namespace NanoByte.Common.Native
             public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
 
             [DllImport("kernel32", SetLastError = true)]
+            public static extern bool AttachConsole(uint dwProcessId);
+
+            [DllImport("kernel32", SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool CloseHandle(IntPtr hObject);
 
