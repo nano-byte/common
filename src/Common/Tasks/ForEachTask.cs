@@ -96,4 +96,21 @@ namespace NanoByte.Common.Tasks
         }
         #endregion
     }
+
+    /// <summary>
+    /// Provides a static factory method for <seealso cref="ForEachTask{T}"/> as an alternative to calling the constructor to exploit type inference.
+    /// </summary>
+    public static class ForEachTask
+    {
+        /// <summary>
+        /// Creates a new for-each task.
+        /// </summary>
+        /// <param name="name">A name describing the task in human-readable form.</param>
+        /// <param name="target">A list of objects to execute work for. Cancellation is possible between two elements.</param>
+        /// <param name="work">The code to be executed once per element in <paramref name="target"/>. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
+        public static ForEachTask<T> Create<T>([NotNull, Localizable(true)] string name, [NotNull] IEnumerable<T> target, [NotNull] Action<T> work)
+        {
+            return new ForEachTask<T>(name, target, work);
+        }
+    }
 }
