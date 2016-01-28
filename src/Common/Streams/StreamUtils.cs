@@ -55,7 +55,7 @@ namespace NanoByte.Common.Streams
 
             while (offset < count)
             {
-                int read = stream.Read(buffer, offset, count);
+                int read = stream.Read(buffer, offset, count - offset);
                 if (read == 0) break;
                 offset += read;
             }
