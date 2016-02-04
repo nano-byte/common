@@ -197,7 +197,6 @@ namespace NanoByte.Common.Controls
             };
 
             string reportPath = Path.Combine(Path.GetTempPath(), Application.ProductName + " Error Report.xml");
-            if (File.Exists(reportPath)) File.Delete(reportPath);
             crashInfo.SaveXml(reportPath);
             return reportPath;
         }
