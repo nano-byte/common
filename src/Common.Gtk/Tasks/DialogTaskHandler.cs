@@ -21,18 +21,15 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Gtk;
 using JetBrains.Annotations;
-using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses simple dialog boxes to inform the user about the progress of tasks.
+    /// Uses simple GTK# dialog boxes to inform the user about the progress of tasks.
     /// </summary>
-    public class GuiTaskHandler : TaskHandlerBase
+    public class DialogTaskHandler : GuiTaskHandlerBase
     {
         [CanBeNull]
         private readonly Window _owner;
@@ -41,22 +38,13 @@ namespace NanoByte.Common.Tasks
         /// Creates a new task handler.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler.</param>
-        public GuiTaskHandler([CanBeNull] Window owner = null)
+        public DialogTaskHandler([CanBeNull] Window owner = null)
         {
+            #region Sanity checks
+            if (owner == null) throw new ArgumentNullException("owner");
+            #endregion
+
             _owner = owner;
-        }
-
-        /// <inheritdoc/>
-        protected override void LogHandler(LogSeverity severity, string message)
-        {
-            // TODO: Implement
-        }
-
-        /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider()
-        {
-            // TODO: Implement
-            return null;
         }
 
         /// <inheritdoc/>
@@ -67,7 +55,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            Invoke(() =>
+            ApplicationUtils.Invoke(() =>
             {
                 using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource, _owner))
                 {
@@ -85,7 +73,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Question: " + question);
-            switch (Invoke(() => Msg.YesNoCancel(_owner, question, MsgSeverity.Warn)))
+            switch (ApplicationUtils.Invoke(() => Msg.YesNoCancel(_owner, question, MsgSeverity.Warn)))
             {
                 case ResponseType.Yes:
                     Log.Debug("Answer: Yes");
@@ -108,43 +96,14 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            Invoke(() => Msg.Inform(_owner, title + Environment.NewLine + message, MsgSeverity.Info));
-        }
-
-        /// <inheritdoc/>
-        public override void Output<T>(string title, IEnumerable<T> data)
-        {
-            #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (data == null) throw new ArgumentNullException("data");
-            #endregion
-
-            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
-            Output(title, message);
+            ApplicationUtils.Invoke(() => Msg.Inform(_owner, title + Environment.NewLine + message, MsgSeverity.Info));
         }
 
         /// <inheritdoc/>
         public override void Error(Exception exception)
         {
             Log.Error(exception);
-            Msg.Inform(null, exception.Message, MsgSeverity.Error);
-        }
-
-        private void Invoke(System.Action action)
-        {
-            if (_owner == null) action();
-            else Application.Invoke((sender, args) => action());
-        }
-
-        private T Invoke<T>(Func<T> action)
-        {
-            if (_owner == null) return action();
-            else
-            {
-                T result = default(T);
-                Application.Invoke((sender, args) => { result = action(); });
-                return result;
-            }
+            Msg.Inform(_owner, exception.Message, MsgSeverity.Error);
         }
     }
 }

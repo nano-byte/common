@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using NanoByte.Common.Net;
 
@@ -94,7 +95,16 @@ namespace NanoByte.Common.Tasks
         public abstract void Output(string title, string message);
 
         /// <inheritdoc/>
-        public abstract void Output<T>(string title, IEnumerable<T> data);
+        public virtual void Output<T>(string title, IEnumerable<T> data)
+        {
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException("title");
+            if (data == null) throw new ArgumentNullException("data");
+            #endregion
+
+            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
+            Output(title, message);
+        }
 
         /// <inheritdoc/>
         public abstract void Error(Exception exception);

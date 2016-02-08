@@ -25,59 +25,24 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 using NanoByte.Common.Controls;
-using NanoByte.Common.Native;
-using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses simple dialog boxes to inform the user about the progress of tasks.
+    /// Uses simple WinForms dialog boxes to inform the user about the progress of tasks.
     /// </summary>
-    public class GuiTaskHandler : TaskHandlerBase
+    public class DialogTaskHandler : GuiTaskHandlerBase
     {
-        [CanBeNull]
+        [NotNull]
         private readonly Control _owner;
 
         /// <summary>
-        /// Starts <see cref="Log"/> recording.
+        /// Creates a new task handler.
         /// </summary>
-        /// <param name="owner">The parent window for any dialogs created by the handler; can be <c>null</c>.</param>
-        public GuiTaskHandler([CanBeNull] Control owner = null)
+        /// <param name="owner">The parent window for any dialogs created by the handler.</param>
+        public DialogTaskHandler([NotNull] Control owner)
         {
             _owner = owner;
-        }
-
-        /// <summary>
-        /// Records <see cref="Log"/> messages in an internal log based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
-        /// </summary>
-        /// <param name="severity">The type/severity of the entry.</param>
-        /// <param name="message">The message text of the entry.</param>
-        protected override void LogHandler(LogSeverity severity, string message)
-        {
-            switch (severity)
-            {
-                case LogSeverity.Debug:
-                    if (Verbosity >= Verbosity.Debug) _errorLog.AppendPar(message, RtfColor.Blue);
-                    break;
-                case LogSeverity.Info:
-                    if (Verbosity >= Verbosity.Verbose) _errorLog.AppendPar(message, RtfColor.Green);
-                    break;
-                case LogSeverity.Warn:
-                    _errorLog.AppendPar(message, RtfColor.Orange);
-                    break;
-                case LogSeverity.Error:
-                    _errorLog.AppendPar(message, RtfColor.Red);
-                    break;
-            }
-        }
-
-        private readonly RtfBuilder _errorLog = new RtfBuilder();
-
-        /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider()
-        {
-            if (WindowsUtils.IsWindowsNT) return new WindowsDialogCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
-            else return null;
         }
 
         /// <inheritdoc/>
@@ -89,7 +54,7 @@ namespace NanoByte.Common.Tasks
 
             Log.Debug("Task: " + task.Name);
             Exception ex = null;
-            Invoke(() =>
+            _owner.Invoke(() =>
             {
                 using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource))
                 {
@@ -108,7 +73,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Question: " + question);
-            switch (Invoke(() => Msg.YesNoCancel(_owner, question, MsgSeverity.Warn)))
+            switch (_owner.Invoke(() => Msg.YesNoCancel(_owner, question, MsgSeverity.Warn)))
             {
                 case DialogResult.Yes:
                     Log.Debug("Answer: Yes");
@@ -131,7 +96,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            Invoke(() => OutputBox.Show(_owner, title, message));
+            _owner.Invoke(() => OutputBox.Show(_owner, title, message));
         }
 
         /// <inheritdoc/>
@@ -142,7 +107,7 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException("data");
             #endregion
 
-            Invoke(() => OutputGridBox.Show(_owner, title, data));
+            _owner.Invoke(() => OutputGridBox.Show(_owner, title, data));
         }
 
         public override void Error(Exception exception)
@@ -151,19 +116,7 @@ namespace NanoByte.Common.Tasks
             if (exception == null) throw new ArgumentNullException("exception");
             #endregion
 
-            Invoke(() => ErrorBox.Show(_owner, exception, _errorLog));
-        }
-
-        private void Invoke(Action action)
-        {
-            if (_owner == null) ThreadUtils.RunSta(action);
-            else _owner.Invoke(action);
-        }
-
-        private T Invoke<T>(Func<T> action)
-        {
-            if (_owner == null) return ThreadUtils.RunSta(action);
-            else return (T)_owner.Invoke(action);
+            _owner.Invoke(() => ErrorBox.Show(_owner, exception, LogRtf));
         }
     }
 }

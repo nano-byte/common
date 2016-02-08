@@ -161,21 +161,6 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override void Output<T>(string title, IEnumerable<T> data)
-        {
-            #region Sanity checks
-            if (title == null) throw new ArgumentNullException("title");
-            if (data == null) throw new ArgumentNullException("data");
-            #endregion
-
-            foreach (string entry in data.Select(x => x.ToString()))
-            {
-                Console.WriteLine(entry);
-                if (entry.Contains("\n")) Console.WriteLine();
-            }
-        }
-
-        /// <inheritdoc/>
         public override void Error(Exception exception)
         {
             Log.Error(exception);

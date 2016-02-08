@@ -75,7 +75,8 @@
     <Compile Include="gtk-gui\NanoByte.Common.Tasks.TaskRunDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Msg.cs" />
-    <Compile Include="Tasks\GuiTaskHandler.cs" />
+    <Compile Include="Tasks\DialogTaskHandler.cs" />
+    <Compile Include="Tasks\GuiTaskHandlerBase.cs" />
     <Compile Include="Tasks\TaskRunDialog.cs" />
   </ItemGroup>
   <ItemGroup>

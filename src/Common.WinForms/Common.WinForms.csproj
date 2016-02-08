@@ -208,7 +208,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="StructureEditor\_Namespace.cs" />
-    <Compile Include="Tasks\GuiTaskHandler.cs" />
+    <Compile Include="Tasks\DialogTaskHandler.cs" />
+    <Compile Include="Tasks\GuiTaskHandlerBase.cs" />
     <Compile Include="Tasks\TaskRunDialog.cs">
       <SubType>Form</SubType>
     </Compile>
