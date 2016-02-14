@@ -47,6 +47,32 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
+        /// Configures a control to move the entire window when clicked and dragged.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method operates only on windows and not on individual controls.")]
+        public static void EnableWindowDrag([NotNull] this Control control)
+        {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException("control");
+            #endregion
+
+            if (!WindowsUtils.IsWindows) return;
+            control.MouseDown += (sender, args) =>
+            {
+                if (args.Button == MouseButtons.Left)
+                {
+                    NativeMethods.ReleaseCapture();
+
+                    var target = control;
+                    while (target.Parent != null)
+                        target = target.Parent;
+
+                    NativeMethods.SendMessage(target.Handle, NativeMethods.MessageButtonDown, new IntPtr(NativeMethods.Caption), IntPtr.Zero);
+                }
+            };
+        }
+
+        /// <summary>
         /// Adds a UAC shield icon to a button. Does nothing if not running Windows Vista or newer.
         /// </summary>
         /// <remarks>This is purely cosmetic. UAC elevation is a separate concern.</remarks>
