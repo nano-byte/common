@@ -165,6 +165,8 @@
     <Compile Include="Storage\CopyDirectory.cs" />
     <Compile Include="Storage\FileUtils.cs" />
     <Compile Include="Storage\Locations.cs" />
+    <Compile Include="Storage\Locations.Directories.cs" />
+    <Compile Include="Storage\Locations.Paths.cs" />
     <Compile Include="Storage\LocationsRedirect.cs" />
     <Compile Include="Storage\MoveDirectory.cs" />
     <Compile Include="Storage\TemporaryDirectory.cs" />
