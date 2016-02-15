@@ -32,7 +32,6 @@ namespace NanoByte.Common.Collections
     public struct ComparableTuple<T> : IEquatable<ComparableTuple<T>>, IComparable<ComparableTuple<T>>
         where T : IEquatable<T>, IComparable<T>
     {
-        #region Variables
         /// <summary>
         /// The first element of the tuple.
         /// </summary>
@@ -44,9 +43,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [NotNull]
         public readonly T Value;
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new comparable tuple.
         /// </summary>
@@ -64,9 +61,6 @@ namespace NanoByte.Common.Collections
             Key = key;
             Value = value;
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <summary>

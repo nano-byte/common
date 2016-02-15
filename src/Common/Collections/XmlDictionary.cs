@@ -131,9 +131,7 @@ namespace NanoByte.Common.Collections
                 return pair.Value;
             throw new KeyNotFoundException();
         }
-
-        //--------------------//
-
+        
         #region Conversion
         /// <summary>
         /// Convert this <see cref="XmlDictionary"/> to a <see cref="Dictionary{TKey,TValue}"/> for better lookup-performance.

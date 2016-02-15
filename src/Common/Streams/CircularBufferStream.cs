@@ -33,33 +33,9 @@ namespace NanoByte.Common.Streams
     /// <remarks>Do not use more than one producer or consumer thread simultaneously!</remarks>
     public sealed class CircularBufferStream : Stream
     {
-        #region Variables
         /// <summary>The byte array used as a circular buffer storage.</summary>
         private readonly byte[] _buffer;
 
-        /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
-        private readonly object _lock = new object();
-
-        /// <summary>The index of the first byte currently store in the <see cref="_buffer"/>.</summary>
-        private int _dataStart;
-
-        /// <summary>The number of bytes currently stored in the <see cref="_buffer"/>.</summary>
-        private int _dataLength; // Invariant: _positionWrite - _positionRead <= _dataLength <= _buffer.Length
-
-        /// <summary>Indicates that the producer has finished and no new data will be added.</summary>
-        private bool _doneWriting;
-
-        /// <summary>Exceptions sent to <see cref="Read"/>ers via <see cref="RelayErrorToReader"/>.</summary>
-        private Exception _relayedException;
-
-        /// <summary>A barrier that blocks threads until new data is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _dataAvailable = new ManualResetEvent(false);
-
-        /// <summary>A barrier that blocks threads until empty space is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _spaceAvailable = new ManualResetEvent(true);
-        #endregion
-
-        #region Properties
         /// <summary>
         /// The maximum number of bytes the buffer can hold at any time.
         /// </summary>
@@ -99,9 +75,7 @@ namespace NanoByte.Common.Streams
         /// Indicates that this stream has been closed.
         /// </summary>
         public bool IsDisposed { get; private set; }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new circular buffer.
         /// </summary>
@@ -110,11 +84,28 @@ namespace NanoByte.Common.Streams
         {
             _buffer = new byte[bufferSize];
         }
-        #endregion
 
-        //--------------------//
+        /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
+        private readonly object _lock = new object();
 
-        #region Read
+        /// <summary>The index of the first byte currently store in the <see cref="_buffer"/>.</summary>
+        private int _dataStart;
+
+        /// <summary>The number of bytes currently stored in the <see cref="_buffer"/>.</summary>
+        private int _dataLength; // Invariant: _positionWrite - _positionRead <= _dataLength <= _buffer.Length
+
+        /// <summary>Indicates that the producer has finished and no new data will be added.</summary>
+        private bool _doneWriting;
+
+        /// <summary>Exceptions sent to <see cref="Read"/>ers via <see cref="RelayErrorToReader"/>.</summary>
+        private Exception _relayedException;
+
+        /// <summary>A barrier that blocks threads until new data is available in the <see cref="_buffer"/>.</summary>
+        private readonly ManualResetEvent _dataAvailable = new ManualResetEvent(false);
+
+        /// <summary>A barrier that blocks threads until empty space is available in the <see cref="_buffer"/>.</summary>
+        private readonly ManualResetEvent _spaceAvailable = new ManualResetEvent(true);
+
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -191,9 +182,7 @@ namespace NanoByte.Common.Streams
             // Stop waiting for data that will never come
             _dataAvailable.Set();
         }
-        #endregion
 
-        #region Write
         /// <inheritdoc/>
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -260,9 +249,7 @@ namespace NanoByte.Common.Streams
             // Stop waiting for data that will never come
             _dataAvailable.Set();
         }
-        #endregion
 
-        #region Set length
         /// <summary>
         /// Sets the estimated number of bytes that will run through this buffer in total; -1 for unknown.
         /// </summary>
@@ -270,7 +257,6 @@ namespace NanoByte.Common.Streams
         {
             _length = value;
         }
-        #endregion
 
         #region Unsupported operations
         /// <inheritdoc/>
@@ -283,8 +269,6 @@ namespace NanoByte.Common.Streams
         public override void Flush()
         {}
         #endregion
-
-        //--------------------//
 
         #region Dispose
         /// <inheritdoc/>

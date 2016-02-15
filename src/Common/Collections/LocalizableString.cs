@@ -34,14 +34,11 @@ namespace NanoByte.Common.Collections
     [Serializable]
     public sealed class LocalizableString : IEquatable<LocalizableString>, ICloneable
     {
-        #region Variables
         /// <summary>
         /// The default language: english with an invariant country.
         /// </summary>
         public static readonly CultureInfo DefaultLanguage = new CultureInfo("en");
-        #endregion
 
-        #region Properties
         /// <summary>
         /// The actual string value to store.
         /// </summary>
@@ -95,9 +92,6 @@ namespace NanoByte.Common.Collections
                 }
             }
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>

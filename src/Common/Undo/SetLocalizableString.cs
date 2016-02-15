@@ -30,7 +30,6 @@ namespace NanoByte.Common.Undo
     /// </summary>
     public sealed class SetLocalizableString : SimpleCommand
     {
-        #region Variables
         /// <summary>
         /// The collection to be modified.
         /// </summary>
@@ -41,10 +40,6 @@ namespace NanoByte.Common.Undo
         /// </summary>
         private readonly LocalizableString _entry;
 
-        private string _previousValue;
-        #endregion
-
-        #region Constructor
         /// <summary>
         /// Creates a new localizable string command.
         /// </summary>
@@ -55,11 +50,9 @@ namespace NanoByte.Common.Undo
             _collection = collection;
             _entry = element;
         }
-        #endregion
 
-        //--------------------//
+        private string _previousValue;
 
-        #region Execute
         /// <summary>
         /// Sets the entry in the collection.
         /// </summary>
@@ -73,9 +66,7 @@ namespace NanoByte.Common.Undo
             {}
             _collection.Set(_entry.Language, _entry.Value);
         }
-        #endregion
 
-        #region Undo
         /// <summary>
         /// Restores the original entry in the collection.
         /// </summary>
@@ -83,6 +74,5 @@ namespace NanoByte.Common.Undo
         {
             _collection.Set(_entry.Language, _previousValue);
         }
-        #endregion
     }
 }

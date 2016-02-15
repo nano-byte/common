@@ -66,6 +66,7 @@
       <Link>Storage\SlimDX\XmlStorage.cs</Link>
     </Compile>
     <Compile Include="Arguments.cs" />
+    <Compile Include="Collections\IPoolable.cs" />
     <Compile Include="Collections\Pool.cs" />
     <Compile Include="Controls\AngleControl.cs">
       <SubType>UserControl</SubType>

@@ -30,13 +30,8 @@ namespace NanoByte.Common.Undo
     /// </summary>
     public abstract class SimpleCommand : IUndoCommand
     {
-        #region Variables
         private bool _undoAvailable;
-        #endregion
 
-        //--------------------//
-
-        #region Execute
         /// <summary>
         /// Performs the desired action.
         /// </summary>
@@ -55,9 +50,7 @@ namespace NanoByte.Common.Undo
         /// Template method to perform the desired action.
         /// </summary>
         protected abstract void OnExecute();
-        #endregion
 
-        #region Undo
         /// <summary>
         /// Undoes the changes made by <see cref="Execute"/>.
         /// </summary>
@@ -76,6 +69,5 @@ namespace NanoByte.Common.Undo
         /// Template method to undo the changes made by <see cref="OnExecute"/>.
         /// </summary>
         protected abstract void OnUndo();
-        #endregion
     }
 }

@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
@@ -31,11 +32,8 @@ namespace NanoByte.Common.Undo
     /// </summary>
     public class PreExecutedCompositeCommand : PreExecutedCommand
     {
-        #region Variables
         private readonly List<IUndoCommand> _commands;
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new composite command.
         /// </summary>
@@ -47,13 +45,9 @@ namespace NanoByte.Common.Undo
             #endregion
 
             // Defensive copy
-            _commands = new List<IUndoCommand>(commands);
+            _commands = commands.ToList();
         }
-        #endregion
 
-        //--------------------//
-
-        #region Undo / Redo
         /// <summary>
         /// Executes all the contained <see cref="IUndoCommand"/>s in order.
         /// </summary>
@@ -91,6 +85,5 @@ namespace NanoByte.Common.Undo
                 throw;
             }
         }
-        #endregion
     }
 }

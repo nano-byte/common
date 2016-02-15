@@ -34,15 +34,12 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public sealed class ForEachTask<T> : TaskBase
     {
-        #region Variables
         /// <summary>A list of objects to execute work for. Cancellation is possible between two elements.</summary>
         private readonly IEnumerable<T> _target;
 
         /// <summary>The code to be executed once per element in <see cref="_target"/>. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</summary>
         private readonly Action<T> _work;
-        #endregion
 
-        #region Properties
         private readonly string _name;
 
         /// <inheritdoc/>
@@ -50,9 +47,7 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         protected override bool UnitsByte { get { return false; } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new for-each task.
         /// </summary>
@@ -75,11 +70,7 @@ namespace NanoByte.Common.Tasks
             var collection = target as ICollection<T>;
             if (collection != null) UnitsTotal = collection.Count;
         }
-        #endregion
 
-        //--------------------//
-
-        #region Thread code
         /// <inheritdoc/>
         protected override void Execute()
         {
@@ -94,7 +85,6 @@ namespace NanoByte.Common.Tasks
 
             State = TaskState.Complete;
         }
-        #endregion
     }
 
     /// <summary>

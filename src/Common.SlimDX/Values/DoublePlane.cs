@@ -34,7 +34,6 @@ namespace NanoByte.Common.Values
     [TypeConverter(typeof(DoublePlaneConverter))]
     public struct DoublePlane : IEquatable<DoublePlane>
     {
-        #region Properties
         /// <summary>
         /// A point that lies along the plane.
         /// </summary>
@@ -48,9 +47,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         [Description("The normal vector of the plane.")]
         public Vector3 Normal { get { return _normal; } set { _normal = Vector3.Normalize(value); } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new plane.
         /// </summary>
@@ -61,11 +58,7 @@ namespace NanoByte.Common.Values
             Point = point;
             Normal = normal;
         }
-        #endregion
 
-        //--------------------//
-
-        #region Offset
         /// <summary>
         /// Returns a single-precision standard <see cref="Plane"/> after subtracting an offset value.
         /// </summary>
@@ -75,9 +68,6 @@ namespace NanoByte.Common.Values
         {
             return new Plane(Point.ApplyOffset(offset), _normal);
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>

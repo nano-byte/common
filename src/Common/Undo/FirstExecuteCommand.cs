@@ -30,13 +30,8 @@ namespace NanoByte.Common.Undo
     /// </summary>
     public abstract class FirstExecuteCommand : IUndoCommand
     {
-        #region Variables
         private bool _actionPerformed, _undoPerformed;
-        #endregion
 
-        //--------------------//
-
-        #region Execute
         /// <summary>
         /// Performs the desired action.
         /// </summary>
@@ -62,9 +57,7 @@ namespace NanoByte.Common.Undo
         /// Template method to perform the desired action again.
         /// </summary>
         protected abstract void OnRedo();
-        #endregion
 
-        #region Undo
         /// <summary>
         /// Undoes the changes made by <see cref="Execute"/>.
         /// </summary>
@@ -83,6 +76,5 @@ namespace NanoByte.Common.Undo
         /// Template method to undo the changes made by <see cref="OnFirstExecute"/> or <see cref="OnRedo"/>.
         /// </summary>
         protected abstract void OnUndo();
-        #endregion
     }
 }

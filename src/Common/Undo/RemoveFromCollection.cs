@@ -32,7 +32,6 @@ namespace NanoByte.Common.Undo
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "The complete name is not ambiguous.")]
     public sealed class RemoveFromCollection<T> : CollectionCommand<T>
     {
-        #region Constructor
         /// <summary>
         /// Creates a new remove from collection command.
         /// </summary>
@@ -40,11 +39,7 @@ namespace NanoByte.Common.Undo
         /// <param name="element">The element to be removed from <paramref name="collection"/>.</param>
         public RemoveFromCollection(ICollection<T> collection, T element) : base(collection, element)
         {}
-        #endregion
 
-        //--------------------//
-
-        #region Execute
         /// <summary>
         /// Removes the element from the collection.
         /// </summary>
@@ -52,9 +47,7 @@ namespace NanoByte.Common.Undo
         {
             Collection.Remove(Element);
         }
-        #endregion
 
-        #region Undo
         /// <summary>
         /// Adds the element to the collection.
         /// </summary>
@@ -62,6 +55,5 @@ namespace NanoByte.Common.Undo
         {
             Collection.Add(Element);
         }
-        #endregion
     }
 }

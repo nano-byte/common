@@ -34,7 +34,6 @@ namespace NanoByte.Common.Values
     [TypeConverter(typeof(Vector2RayConverter))]
     public struct Vector2Ray : IEquatable<Vector2Ray>
     {
-        #region Properties
         /// <summary>
         /// Specifies the location of the ray's origin.
         /// </summary>
@@ -48,9 +47,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         [Description("A unit vector specifying the direction in which the ray is pointing.")]
         public Vector2 Direction { get { return _direction; } set { _direction = Vector2.Normalize(value); } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new ray
         /// </summary>
@@ -61,9 +58,6 @@ namespace NanoByte.Common.Values
             Position = point;
             Direction = direction;
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>

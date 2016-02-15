@@ -37,14 +37,13 @@ namespace NanoByte.Common.Values
     [TypeConverter(typeof(ColorCorrectionConverter))]
     public struct ColorCorrection : IEquatable<ColorCorrection>
     {
-        #region Variables
+        #region Constants
         /// <summary>
         /// No color change.
         /// </summary>
         public static readonly ColorCorrection Default = new ColorCorrection(brightness: 1);
         #endregion
 
-        #region Properties
         private float _brightness;
 
         /// <summary>
@@ -76,9 +75,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         [XmlAttribute, DefaultValue(0f), Description("The color hue rotation of the picture - values between 0 and 360.")]
         public float Hue { get { return _hue; } set { _hue = value.Clamp(0, 360); } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new color correction structure.
         /// </summary>
@@ -93,11 +90,7 @@ namespace NanoByte.Common.Values
             Saturation = saturation;
             Hue = hue;
         }
-        #endregion
 
-        //--------------------//
-
-        #region Interpolate
         /// <summary>
         /// Performs smooth (sinus-based) interpolation between two or more value sets.
         /// </summary>
@@ -118,9 +111,6 @@ namespace NanoByte.Common.Values
             // ... and then cast back
             return (ColorCorrection)MathUtils.InterpolateTrigonometric(factor, vectorValues);
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>

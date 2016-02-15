@@ -34,7 +34,11 @@ namespace NanoByte.Common.Values
     public class ExpandableRectangleArray<T>
         where T : struct
     {
-        #region Structures
+        /// <summary>
+        /// The total area the rectangle currently encompasses.
+        /// </summary>
+        public Rectangle TotalArea { get; private set; }
+
         private struct Subset
         {
             public readonly Point Start;
@@ -46,23 +50,10 @@ namespace NanoByte.Common.Values
                 Array = array;
             }
         }
-        #endregion
 
-        #region Variables
         /// <summary>Maintains a list of all <see cref="Subset"/>s inserted so far.</summary>
         private readonly LinkedList<Subset> _subsets = new LinkedList<Subset>();
-        #endregion
 
-        #region Properties
-        /// <summary>
-        /// The total area the rectangle currently encompasses.
-        /// </summary>
-        public Rectangle TotalArea { get; private set; }
-        #endregion
-
-        //--------------------//
-
-        #region Add
         /// <summary>
         /// Insert a new subset array before any existing entries growing the rectangle as necessary.
         /// </summary>
@@ -114,9 +105,7 @@ namespace NanoByte.Common.Values
 
             TotalArea = (TotalArea == default(Rectangle)) ? subsetArea : Rectangle.Union(TotalArea, subsetArea);
         }
-        #endregion
 
-        #region Get array
         /// <summary>
         /// Returns the smallest possible array that encompasses all inserted subsets. Blanks between subsets are filled with the default value for <typeparamref name="T"/>.
         /// </summary>
@@ -186,6 +175,5 @@ namespace NanoByte.Common.Values
                 }
             }
         }
-        #endregion
     }
 }

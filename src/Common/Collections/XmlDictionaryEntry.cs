@@ -79,8 +79,6 @@ namespace NanoByte.Common.Collections
             Value = value;
         }
 
-        //--------------------//
-
         #region Conversion
         /// <inheritdoc/>
         public override string ToString()

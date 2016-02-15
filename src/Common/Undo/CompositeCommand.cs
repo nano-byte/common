@@ -31,11 +31,8 @@ namespace NanoByte.Common.Undo
     /// </summary>
     public class CompositeCommand : SimpleCommand
     {
-        #region Variables
         private readonly IUndoCommand[] _commands;
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new composite command.
         /// </summary>
@@ -49,11 +46,7 @@ namespace NanoByte.Common.Undo
             // Defensive copy
             _commands = commands.ToArray();
         }
-        #endregion
 
-        //--------------------//
-
-        #region Undo / Redo
         /// <summary>
         /// Executes all the contained <see cref="IUndoCommand"/>s in order.
         /// </summary>
@@ -91,6 +84,5 @@ namespace NanoByte.Common.Undo
                 throw;
             }
         }
-        #endregion
     }
 }

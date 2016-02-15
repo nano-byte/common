@@ -30,17 +30,12 @@ namespace NanoByte.Common.Undo
     /// <typeparam name="T">The type of elements the list contains.</typeparam>
     public sealed class SetInList<T> : SimpleCommand, IValueCommand
     {
-        #region Variables
         private readonly IList<T> _list;
         private readonly T _oldElement, _newElement;
-        #endregion
 
-        #region Properties
         /// <inheritdoc/>
         public object Value { get { return _newElement; } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new set in list command.
         /// </summary>
@@ -53,11 +48,7 @@ namespace NanoByte.Common.Undo
             _oldElement = oldElement;
             _newElement = newElement;
         }
-        #endregion
 
-        //--------------------//
-
-        #region Undo / Redo
         /// <summary>
         /// Sets the new entry in the list.
         /// </summary>
@@ -73,6 +64,5 @@ namespace NanoByte.Common.Undo
         {
             _list[_list.IndexOf(_newElement)] = _oldElement;
         }
-        #endregion
     }
 }

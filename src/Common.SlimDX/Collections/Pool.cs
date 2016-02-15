@@ -27,21 +27,6 @@ using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Collections
 {
-
-    #region Helper interface
-    /// <summary>
-    /// An interface items must implement to be addable to <see cref="Pool{T}"/>. Poolable items directly store a reference to their successor.
-    /// </summary>
-    /// <typeparam name="T">The type of items to store in <see cref="Pool{T}"/>.</typeparam>
-    public interface IPoolable<T> where T : class, IPoolable<T>
-    {
-        /// <summary>
-        /// A reference to the next element in the <see cref="Pool{T}"/> chain.
-        /// </summary>
-        T NextElement { get; set; }
-    }
-    #endregion
-
     /// <summary>
     /// A very fast pseudo-collection (it does not implement <see cref="IEnumerable{T}"/>) that supports fast adding at the beginning.
     /// </summary>
@@ -49,24 +34,18 @@ namespace NanoByte.Common.Collections
     /// <typeparam name="T">The type of items to store in the pool.</typeparam>
     public sealed class Pool<T> : IPoolable<T> where T : class, IPoolable<T>
     {
-        #region Variables
         private int _count;
-        private T _firstElement;
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets the number of elements contained in the pool
         /// </summary>
         /// <returns>The number of elements contained in the pool</returns>
         public int Count { get { return _count; } }
 
+        private T _firstElement;
+
         T IPoolable<T>.NextElement { get { return _firstElement; } set { _firstElement = value; } }
-        #endregion
 
-        //--------------------//
-
-        #region ForEach
         /// <summary>
         /// Performs the specified action on each element of the pool
         /// </summary>
@@ -89,7 +68,6 @@ namespace NanoByte.Common.Collections
                 currentElement = currentElement.NextElement;
             }
         }
-        #endregion
 
         #region Add
         /// <summary>
@@ -190,8 +168,6 @@ namespace NanoByte.Common.Collections
             return false;
         }
         #endregion
-
-        //--------------------//
 
         #region Remove all
         /// <summary>

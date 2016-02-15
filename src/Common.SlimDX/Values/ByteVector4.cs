@@ -34,7 +34,6 @@ namespace NanoByte.Common.Values
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteVector4 : IEquatable<ByteVector4>
     {
-        #region Properties
         private byte _x, _y, _z, _w;
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace NanoByte.Common.Values
         public byte X { get { return _x; } set { _x = value; } }
 
         /// <summary>
-        /// Gets or sets the Y component of the vector. 
+        /// Gets or sets the Y component of the vector.
         /// </summary>
         [XmlAttribute, Description("Gets or sets the Y component of the vector.")]
         public byte Y { get { return _y; } set { _y = value; } }
@@ -60,9 +59,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         [XmlAttribute, Description("Gets or sets the W component of the vector.")]
         public byte W { get { return _w; } set { _w = value; } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new vector.
         /// </summary>
@@ -77,9 +74,6 @@ namespace NanoByte.Common.Values
             _z = z;
             _w = w;
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>

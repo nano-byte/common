@@ -38,9 +38,6 @@ namespace NanoByte.Common.Storage
     {
         private static readonly BinaryFormatter _serializer = new BinaryFormatter();
 
-        //--------------------//
-
-        #region Load plain
         /// <summary>
         /// Loads an object from a binary file.
         /// </summary>
@@ -89,9 +86,7 @@ namespace NanoByte.Common.Storage
             using (var fileStream = File.OpenRead(path))
                 return LoadBinary<T>(fileStream);
         }
-        #endregion
 
-        #region Save plain
         /// <summary>
         /// Saves an object in a binary stream.
         /// </summary>
@@ -129,6 +124,5 @@ namespace NanoByte.Common.Storage
                 atomic.Commit();
             }
         }
-        #endregion
     }
 }

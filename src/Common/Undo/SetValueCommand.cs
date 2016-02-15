@@ -31,18 +31,13 @@ namespace NanoByte.Common.Undo
     /// <typeparam name="T"></typeparam>
     public class SetValueCommand<T> : SimpleCommand, IValueCommand
     {
-        #region Variables
         private readonly PropertyPointer<T> _pointer;
         private readonly T _newValue;
         private T _oldValue;
-        #endregion
 
-        #region Properties
         /// <inheritdoc/>
         public object Value { get { return _newValue; } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new value-setting command.
         /// </summary>
@@ -67,11 +62,7 @@ namespace NanoByte.Common.Undo
         public SetValueCommand([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue) :
             this(new PropertyPointer<T>(getValue, setValue), newValue)
         {}
-        #endregion
 
-        //--------------------//
-
-        #region Undo / Redo
         /// <summary>
         /// Sets the new value in the model.
         /// </summary>
@@ -88,6 +79,5 @@ namespace NanoByte.Common.Undo
         {
             _pointer.Value = _oldValue;
         }
-        #endregion
     }
 }

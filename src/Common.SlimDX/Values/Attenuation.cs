@@ -36,14 +36,13 @@ namespace NanoByte.Common.Values
     [TypeConverter(typeof(AttenuationConverter))]
     public struct Attenuation : IEquatable<Attenuation>
     {
-        #region Variables
+        #region Constants
         /// <summary>
         /// Value for no attenuation over distance.
         /// </summary>
         public static readonly Attenuation None = new Attenuation(1, 0, 0);
         #endregion
 
-        #region Properties
         /// <summary>
         /// A constant factor multiplied with the color.
         /// </summary>
@@ -61,9 +60,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         [XmlAttribute, Description("A constant factor multiplied with the color and the inverse distance squared.")]
         public float Quadratic { get; set; }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new attenuation structure
         /// </summary>
@@ -76,9 +73,6 @@ namespace NanoByte.Common.Values
             Linear = linear;
             Quadratic = quadratic;
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>

@@ -32,15 +32,12 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public sealed class WaitTask : TaskBase
     {
-        #region Variables
         /// <summary>The <see cref="WaitHandle"/> to wait for.</summary>
         private readonly WaitHandle _waitHandle;
 
         /// <summary>The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely</summary>
         private readonly int _millisecondsTimeout;
-        #endregion
 
-        #region Properties
         private readonly string _name;
 
         /// <inheritdoc/>
@@ -48,9 +45,7 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         protected override bool UnitsByte { get { return false; } }
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new handle-waiting task.
         /// </summary>
@@ -68,11 +63,7 @@ namespace NanoByte.Common.Tasks
             _waitHandle = waitHandle;
             _millisecondsTimeout = millisecondsTimeout;
         }
-        #endregion
 
-        //--------------------//
-
-        #region Thread code
         /// <inheritdoc/>
         protected override void Execute()
         {
@@ -99,6 +90,5 @@ namespace NanoByte.Common.Tasks
                 State = TaskState.Complete;
             }
         }
-        #endregion
     }
 }

@@ -36,7 +36,6 @@ namespace NanoByte.Common.Collections
     [Serializable]
     public class LocalizableStringCollection : List<LocalizableString>, ICloneable
     {
-        #region Add
         /// <summary>
         /// Adds a new string with an associated language to the collection.
         /// </summary>
@@ -60,9 +59,7 @@ namespace NanoByte.Common.Collections
         {
             Add(new LocalizableString {Value = value});
         }
-        #endregion
 
-        #region Contains
         /// <summary>
         /// Checks if the collection contains an entry exactly matching the specified language.
         /// </summary>
@@ -77,9 +74,7 @@ namespace NanoByte.Common.Collections
 
             return this.Any(entry => Equals(language, entry.Language));
         }
-        #endregion
 
-        #region Get
         /// <summary>
         /// Returns the first string in the collection exactly matching the specified language.
         /// </summary>
@@ -138,9 +133,7 @@ namespace NanoByte.Common.Collections
             // Try to find first entry in collection
             return Count == 0 ? null : this[0].Value;
         }
-        #endregion
 
-        #region Set
         /// <summary>
         /// Adds a new string with an associated language to the collection. Preexisting entries with the same language are removed.
         /// </summary>
@@ -155,9 +148,6 @@ namespace NanoByte.Common.Collections
             RemoveAll(entry => language.Equals(entry.Language));
             if (value != null) Add(new LocalizableString {Language = language, Value = value});
         }
-        #endregion
-
-        //--------------------//
 
         #region Clone
         /// <summary>

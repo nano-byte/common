@@ -41,7 +41,6 @@ namespace NanoByte.Common.Values
     [StructLayout(LayoutKind.Sequential)]
     public struct XColor
     {
-        #region Properties
         private byte _a, _r, _g, _b;
 
         [XmlAttribute]
@@ -67,9 +66,7 @@ namespace NanoByte.Common.Values
 
         [XmlIgnore]
         public float Alpha { get { return (float)_a / 255; } set { _a = (byte)(value * 255); } }
-        #endregion
 
-        #region Constructor
         public XColor(float red, float green, float blue, float alpha)
         {
             _r = (byte)(red * 255);
@@ -85,9 +82,6 @@ namespace NanoByte.Common.Values
             _g = g;
             _b = b;
         }
-        #endregion
-
-        //--------------------//
 
         #region Conversion
         /// <inheritdoc/>
