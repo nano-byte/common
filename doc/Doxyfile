@@ -4,7 +4,7 @@ PROJECT_NUMBER = "1.3.0"
 INPUT = ../src
 STRIP_FROM_PATH = ../src
 RECURSIVE = YES
-EXCLUDE_PATTERNS = */*.UnitTests/* */Properties/* *.NativeMethods.cs */obj/* */gtk-gui/* */JetBrains.Annotations.cs
+EXCLUDE_PATTERNS = */*.UnitTests/* */Properties/* *.NativeMethods.cs */obj/* */Common.Gtk/* */JetBrains.Annotations.cs
 
 OUTPUT_DIRECTORY = ../build/Documentation
 GENERATE_TAGFILE = ../build/Documentation/common.tag
