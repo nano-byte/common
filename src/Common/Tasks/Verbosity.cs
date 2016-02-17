@@ -25,7 +25,7 @@ namespace NanoByte.Common.Tasks
     /// <seealso cref="ITaskHandler.Verbosity"/>
     public enum Verbosity
     {
-        /// <summary>Print no progress bars on command-line. Automatically answer questions with defaults when possible.</summary>
+        /// <summary>Automatically answer questions with defaults when possible. Avoid unnecessary console output (e.g. progress bars).</summary>
         Batch = -1,
 
         /// <summary>Normal interactive operation.</summary>
