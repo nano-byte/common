@@ -134,6 +134,7 @@
     <Compile Include="Net\DownloadMemory.cs" />
     <Compile Include="Net\DownloadTask.cs" />
     <Compile Include="Net\ICredentialProvider.cs" />
+    <Compile Include="Net\MicroServer.cs" />
     <Compile Include="Net\NetUtils.cs" />
     <Compile Include="Net\UriExtensions.cs" />
     <Compile Include="Net\WebClientTimeout.cs">
@@ -178,7 +179,6 @@
     <Compile Include="Storage\_Namespace.cs" />
     <Compile Include="Streams\CircularBufferStream.cs" />
     <Compile Include="Streams\DisposeWrapperStream.cs" />
-    <Compile Include="Streams\MicroServer.cs" />
     <Compile Include="Streams\OffsetStream.cs" />
     <Compile Include="Streams\StreamConsumer.cs" />
     <Compile Include="Streams\StreamUtils.cs" />

@@ -28,8 +28,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using JetBrains.Annotations;
+using NanoByte.Common.Streams;
 
-namespace NanoByte.Common.Streams
+namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Provides a minimalistic HTTP webserver that can provide only a single file. Useful for testing download code.
@@ -44,15 +45,6 @@ namespace NanoByte.Common.Streams
         private const int MaxmimumPort = 50734;
         #endregion
 
-        #region Variables
-        /// <summary>A global port counter used to make sure no two instances of the server are listening on the same port.</summary>
-        private static int _port = MinimumPort;
-
-        private HttpListener _listener;
-        private readonly string _resourceName;
-        #endregion
-
-        #region Properties
         /// <summary>
         /// The URL under which the server root can be reached. Usually you should use <see cref="FileUri"/> instead.
         /// </summary>
@@ -75,11 +67,9 @@ namespace NanoByte.Common.Streams
         /// Wait for twenty seconds every time before finishing a response.
         /// </summary>
         public bool Slow { get; set; }
-        #endregion
 
-        //--------------------//
+        private readonly string _resourceName;
 
-        #region Constructor
         /// <summary>
         /// Starts a HTTP webserver that listens on a random port.
         /// </summary>
@@ -94,44 +84,40 @@ namespace NanoByte.Common.Streams
             ServerUri = new Uri(StartListening());
             FileUri = new Uri(ServerUri, resourceName);
 
-            ThreadUtils.StartBackground(Listen, name: "MicroServer.Listen");
+            ThreadUtils.StartBackground(ListenLoop, name: "MicroServer.Listen");
         }
+
+        private HttpListener _listener;
 
         /// <summary>
         /// Starts listening and returns the URL prefix under which the content is reachable.
         /// </summary>
         private string StartListening()
         {
-            try
-            {
-                string prefix = "http://localhost:" + _port++ + "/";
-                _listener = new HttpListener();
-                _listener.Prefixes.Add(prefix);
-                _listener.Start();
-                return prefix;
-            }
-                #region Error handling
-            catch (HttpListenerException)
-            {
-                // Prevent endless looping
-                if (_port > MaxmimumPort) throw;
+            int port = MinimumPort;
 
-                // Try again with a higher port number
-                return StartListening();
-            }
-            catch (SocketException)
+            // Keep incremeting port number until we find a free one
+            while (true)
             {
-                // Prevent endless looping
-                if (_port > MaxmimumPort) throw;
-
-                // Try again with a higher port number
-                return StartListening();
+                try
+                {
+                    string prefix = "http://localhost:" + port++ + "/";
+                    _listener = new HttpListener();
+                    _listener.Prefixes.Add(prefix);
+                    _listener.Start();
+                    return prefix;
+                }
+                catch (HttpListenerException)
+                {
+                    if (port > MaxmimumPort) throw;
+                }
+                catch (SocketException)
+                {
+                    if (port > MaxmimumPort) throw;
+                }
             }
-            #endregion
         }
-        #endregion
 
-        #region Thread control
         /// <summary>
         /// Stops listening for incoming HTTP connections.
         /// </summary>
@@ -139,13 +125,11 @@ namespace NanoByte.Common.Streams
         {
             _listener.Close();
         }
-        #endregion
 
-        #region Thread code
         /// <summary>
         /// Waits for HTTP requests and responds to them if they ask for "file".
         /// </summary>
-        private void Listen()
+        private void ListenLoop()
         {
             while (_listener.IsListening)
             {
@@ -197,6 +181,5 @@ namespace NanoByte.Common.Streams
                     break;
             }
         }
-        #endregion
     }
 }
