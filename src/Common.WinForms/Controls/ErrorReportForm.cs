@@ -164,7 +164,7 @@ namespace NanoByte.Common.Controls
             Cursor = Cursors.Default;
             if (uploadEventArgs.Error == null)
             {
-                Msg.Inform(this, Resources.ErrorReportSent + "\n" + Encoding.UTF8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
+                Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + Encoding.UTF8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
                 Close();
             }
             else

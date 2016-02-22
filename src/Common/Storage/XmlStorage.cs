@@ -180,7 +180,7 @@ namespace NanoByte.Common.Storage
             catch (InvalidDataException ex)
             {
                 // Change exception message to add context information
-                throw new InvalidDataException(string.Format(Resources.ProblemLoading, path) + "\n" + ex.Message, ex.InnerException);
+                throw new InvalidDataException(string.Format(Resources.ProblemLoading, path) + Environment.NewLine + ex.Message, ex.InnerException);
             }
             #endregion
         }

@@ -88,7 +88,7 @@ namespace NanoByte.Common.Storage.SlimDX
             set
             {
                 if (value != null && !value.Exists)
-                    throw new DirectoryNotFoundException(Resources.NotFoundGameContentDir + "\n" + value.FullName);
+                    throw new DirectoryNotFoundException(Resources.NotFoundGameContentDir + Environment.NewLine + value.FullName);
                 _baseDir = value;
             }
         }
@@ -104,7 +104,7 @@ namespace NanoByte.Common.Storage.SlimDX
             set
             {
                 if (value != null && !value.Exists)
-                    throw new DirectoryNotFoundException(Resources.NotFoundModContentDir + "\n" + value.FullName);
+                    throw new DirectoryNotFoundException(Resources.NotFoundModContentDir + Environment.NewLine + value.FullName);
                 _modDir = value;
             }
         }
@@ -424,7 +424,7 @@ namespace NanoByte.Common.Storage.SlimDX
                 if (File.Exists(path)) return path;
             }
 
-            throw new FileNotFoundException(Resources.NotFoundGameContentFile + "\n" + Path.Combine(type, id), Path.Combine(type, id));
+            throw new FileNotFoundException(Resources.NotFoundGameContentFile + Environment.NewLine + Path.Combine(type, id), Path.Combine(type, id));
         }
         #endregion
 
@@ -503,7 +503,7 @@ namespace NanoByte.Common.Storage.SlimDX
             }
             #endregion
 
-            throw new FileNotFoundException(Resources.NotFoundGameContentFile + "\n" + Path.Combine(type, id), Path.Combine(type, id));
+            throw new FileNotFoundException(Resources.NotFoundGameContentFile + Environment.NewLine + Path.Combine(type, id), Path.Combine(type, id));
         }
         #endregion
 

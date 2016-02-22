@@ -79,7 +79,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            ThreadUtils.RunSta(() => OutputBox.Show(null, title, message));
+            ThreadUtils.RunSta(() => OutputBox.Show(null, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
         }
 
         /// <inheritdoc/>

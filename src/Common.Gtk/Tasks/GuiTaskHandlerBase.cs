@@ -53,7 +53,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            Msg.Inform(null, title + Environment.NewLine + message, MsgSeverity.Info);
+            Msg.Inform(null, title + Environment.NewLine + message.TrimEnd(Environment.NewLine.ToCharArray()), MsgSeverity.Info);
         }
 
         /// <inheritdoc/>

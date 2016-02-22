@@ -82,7 +82,7 @@ namespace NanoByte.Common.Tasks
         /// Displays multi-line text to the user.
         /// </summary>
         /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
-        /// <param name="message">The string to display.</param>
+        /// <param name="message">The string to display. Trailing linebreaks are appropriately handled or ignored.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output([NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message);
 

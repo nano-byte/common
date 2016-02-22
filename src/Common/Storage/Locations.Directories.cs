@@ -167,7 +167,7 @@ namespace NanoByte.Common.Storage
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
-                throw new IOException(string.Format(Resources.InvalidConfigDir, UserCacheDir) + "\n" + ex.Message, ex);
+                throw new IOException(string.Format(Resources.InvalidConfigDir, UserCacheDir) + Environment.NewLine + ex.Message, ex);
             }
             #endregion
 

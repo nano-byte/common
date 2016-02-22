@@ -96,7 +96,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            _owner.Invoke(() => OutputBox.Show(_owner, title, message));
+            _owner.Invoke(() => OutputBox.Show(_owner, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
         }
 
         /// <inheritdoc/>

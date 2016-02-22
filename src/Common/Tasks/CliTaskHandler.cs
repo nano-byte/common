@@ -157,7 +157,8 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException("message");
             #endregion
 
-            Console.WriteLine(message);
+            if (message.EndsWith("\n")) Console.Write(message);
+            else Console.WriteLine(message);
         }
 
         /// <inheritdoc/>

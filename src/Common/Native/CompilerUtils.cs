@@ -66,7 +66,7 @@ namespace NanoByte.Common.Native
                 {
                     var error = compilerResults.Errors[0];
                     if (error.ErrorNumber == "CS0016") throw new IOException(error.ErrorText);
-                    else throw new InvalidOperationException("Compilation error " + error.ErrorNumber + " in line " + error.Line + "\n" + error.ErrorText);
+                    else throw new InvalidOperationException("Compilation error " + error.ErrorNumber + " in line " + error.Line + Environment.NewLine + error.ErrorText);
                 }
             }
         }

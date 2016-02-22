@@ -174,7 +174,7 @@ namespace NanoByte.Common.Controls
             {
                 SetStatus(ImageResources.Error, ex.InnerException == null
                     ? ex.Message
-                    : ex.Message + "\n" + ex.InnerException.Message);
+                    : ex.Message + Environment.NewLine + ex.InnerException.Message);
             }
         }
 

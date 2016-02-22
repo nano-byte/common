@@ -62,7 +62,7 @@ namespace NanoByte.Common.Storage
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
-                throw new IOException(string.Format(Resources.InvalidConfigDir, UserConfigDir) + "\n" + ex.Message, ex);
+                throw new IOException(string.Format(Resources.InvalidConfigDir, UserConfigDir) + Environment.NewLine + ex.Message, ex);
             }
             #endregion
 
@@ -103,7 +103,7 @@ namespace NanoByte.Common.Storage
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
-                throw new IOException(string.Format(Resources.InvalidConfigDir, systemConfigDir) + "\n" + ex.Message, ex);
+                throw new IOException(string.Format(Resources.InvalidConfigDir, systemConfigDir) + Environment.NewLine + ex.Message, ex);
             }
             #endregion
 
@@ -154,7 +154,7 @@ namespace NanoByte.Common.Storage
                     catch (ArgumentException ex)
                     {
                         // Wrap exception to add context information
-                        throw new IOException(string.Format(Resources.InvalidConfigDir, dirPath) + "\n" + ex.Message, ex);
+                        throw new IOException(string.Format(Resources.InvalidConfigDir, dirPath) + Environment.NewLine + ex.Message, ex);
                     }
                     #endregion
 
@@ -193,7 +193,7 @@ namespace NanoByte.Common.Storage
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
-                throw new IOException(string.Format(Resources.InvalidConfigDir, UserDataDir) + "\n" + ex.Message, ex);
+                throw new IOException(string.Format(Resources.InvalidConfigDir, UserDataDir) + Environment.NewLine + ex.Message, ex);
             }
             #endregion
 
@@ -244,7 +244,7 @@ namespace NanoByte.Common.Storage
                     catch (ArgumentException ex)
                     {
                         // Wrap exception to add context information
-                        throw new IOException(string.Format(Resources.InvalidConfigDir, dirPath) + "\n" + ex.Message, ex);
+                        throw new IOException(string.Format(Resources.InvalidConfigDir, dirPath) + Environment.NewLine + ex.Message, ex);
                     }
                     #endregion
 
