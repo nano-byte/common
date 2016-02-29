@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.Global.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs" />
     <Compile Include="..\Common\Storage\XmlStorage.cs">
       <Link>Storage\SlimDX\XmlStorage.cs</Link>
     </Compile>

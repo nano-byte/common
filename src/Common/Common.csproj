@@ -51,7 +51,7 @@
     <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.Global.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs" />
     <Compile Include="AppMutex.cs" />
     <Compile Include="Cli\ArgumentUtils.cs" />
     <Compile Include="Cli\BundledCliAppControl.cs" />

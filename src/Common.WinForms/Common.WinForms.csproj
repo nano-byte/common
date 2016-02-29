@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.Global.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs" />
     <Compile Include="AsyncFormWrapper.cs" />
     <Compile Include="Controls\ControlExtensions.cs" />
     <Compile Include="Controls\EditorControlBase.cs">
