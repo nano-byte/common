@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>NanoByte.Common.Gtk</id>
-        <version>$version$</version>
+        <version>$version$$VersionSuffix$</version>
         <authors>Bastian Eicher</authors>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>http://nano-byte.de/common/</projectUrl>
@@ -10,7 +10,7 @@
         <description>Generic utility classes, interfaces, controls, etc. for GTK# projects.
 API documentation: http://nano-byte.de/common/api/</description>
         <dependencies>
-            <dependency id="NanoByte.Common" version="[$version$]" />
+            <dependency id="NanoByte.Common" version="[$version$$VersionSuffix$]" />
         </dependencies>
         <references>
             <reference file="NanoByte.Common.Gtk.dll" />
