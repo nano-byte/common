@@ -24,6 +24,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using NanoByte.Common.Values;
 
@@ -83,24 +84,26 @@ namespace NanoByte.Common.Info
         [XmlElement("arg")]
         public string[] Arguments { get; set; }
 
-        #region Load
-        private static readonly AppInfo _current = Load();
-
         /// <summary>
-        /// Information about the currently running application.
+        /// Information about the currently running application (looks at the entry assembly).
         /// </summary>
-        public static AppInfo Current { get { return _current; } }
-
-        /// <summary>
-        /// Loads application information for the currently running application.
-        /// </summary>
-        /// <returns></returns>
-        private static AppInfo Load()
+        public static AppInfo Current
         {
-            var appInfo = Load(Assembly.GetEntryAssembly());
-            if (appInfo.Name == null || appInfo.Name.Length < 2) appInfo.Name = "Hosted";
-            appInfo.Arguments = Environment.GetCommandLineArgs();
-            return appInfo;
+            get
+            {
+                var appInfo = Load(Assembly.GetEntryAssembly());
+                if (appInfo.Name == null || appInfo.Name.Length < 2) appInfo.Name = "Hosted";
+                appInfo.Arguments = Environment.GetCommandLineArgs();
+                return appInfo;
+            }
+        }
+
+        /// <summary>
+        /// Information about the currently running library (looks at the calling assembly).
+        /// </summary>
+        public static AppInfo CurrentLibrary
+        {
+            [MethodImpl(MethodImplOptions.NoInlining)] get { return Load(Assembly.GetCallingAssembly()); }
         }
 
         /// <summary>
@@ -120,6 +123,5 @@ namespace NanoByte.Common.Info
                 Copyright = assembly.GetAttributeValue((AssemblyCopyrightAttribute x) => x.Copyright)
             };
         }
-        #endregion
     }
 }
