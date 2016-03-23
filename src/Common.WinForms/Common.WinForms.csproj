@@ -60,6 +60,9 @@
     <Compile Include="..\GlobalAssemblyInfo.cs" />
     <Compile Include="AsyncFormWrapper.cs" />
     <Compile Include="Controls\ControlExtensions.cs" />
+    <Compile Include="Controls\DropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\EditorControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,9 +152,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\RtfBuilder.cs" />
-    <Compile Include="Controls\SplitButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\TaskControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

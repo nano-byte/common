@@ -1,16 +1,16 @@
 ﻿/*
  * Copyright (c) 2010, wyDay
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * * Redistributions of source code must retain the above copyright notice,
  *   this list of conditions and the following disclaimer.
  * * Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -21,9 +21,9 @@
  * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * Original code from: http://wyday.com/splitbutton/
- * Modified by: Bastian Eicher, 2011
+ * Modified by: Bastian Eicher, 2011-2016
  */
 
 using System;
@@ -39,7 +39,7 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// A <see cref="Button"/> with an additional drop-down menu.
     /// </summary>
-    public class SplitButton : Button
+    public class DropDownButton : Button
     {
         #region Variables
         private const int SplitSectionWidth = 18;
@@ -48,19 +48,19 @@ namespace NanoByte.Common.Controls
         private Rectangle _dropDownRectangle;
         private bool _isMouseEntered;
 
-        private bool _isSplitMenuVisible;
+        private bool _isDropDownMenuVisible;
 
         private bool _showSplit;
         private bool _skipNextOpen;
-        private ContextMenu _splitMenu;
-        private ContextMenuStrip _splitMenuStrip;
+        private ContextMenu _dropDownMenu;
+        private ContextMenuStrip _dropDownMenuStrip;
         private PushButtonState _state;
 
         private TextFormatFlags _textFormatFlags = TextFormatFlags.Default;
         #endregion
 
         #region Constructor
-        public SplitButton()
+        public DropDownButton()
         {
             AutoSize = true;
         }
@@ -68,59 +68,55 @@ namespace NanoByte.Common.Controls
 
         #region Properties
         [Browsable(false)]
-        public override ContextMenuStrip ContextMenuStrip { get { return SplitMenuStrip; } set { SplitMenuStrip = value; } }
+        public override ContextMenuStrip ContextMenuStrip { get { return DropDownMenuStrip; } set { DropDownMenuStrip = value; } }
 
         [DefaultValue(null)]
-        public ContextMenu SplitMenu
+        public ContextMenu DropDownMenu
         {
-            get { return _splitMenu; }
+            get { return _dropDownMenu; }
             set
             {
-                //remove the event handlers for the old SplitMenu
-                if (_splitMenu != null)
-                    _splitMenu.Popup -= SplitMenu_Popup;
+                //remove the event handlers for the old DropDownMenu
+                if (_dropDownMenu != null)
+                    _dropDownMenu.Popup -= DropDownMenu_Popup;
 
-                //add the event handlers for the new SplitMenu
+                //add the event handlers for the new DropDownMenu
                 if (value != null)
-                {
-                    ShowSplit = true;
-                    value.Popup += SplitMenu_Popup;
-                }
-                else
-                    ShowSplit = false;
+                    value.Popup += DropDownMenu_Popup;
 
-                _splitMenu = value;
+                _dropDownMenu = value;
             }
         }
 
         [DefaultValue(null)]
-        public ContextMenuStrip SplitMenuStrip
+        public ContextMenuStrip DropDownMenuStrip
         {
-            get { return _splitMenuStrip; }
+            get { return _dropDownMenuStrip; }
             set
             {
-                //remove the event handlers for the old SplitMenuStrip
-                if (_splitMenuStrip != null)
+                //remove the event handlers for the old DropDownMenuStrip
+                if (_dropDownMenuStrip != null)
                 {
-                    _splitMenuStrip.Closing -= SplitMenuStrip_Closing;
-                    _splitMenuStrip.Opening -= SplitMenuStrip_Opening;
+                    _dropDownMenuStrip.Closing -= DropDownMenuStrip_Closing;
+                    _dropDownMenuStrip.Opening -= DropDownMenuStrip_Opening;
                 }
 
-                //add the event handlers for the new SplitMenuStrip
+                //add the event handlers for the new DropDownMenuStrip
                 if (value != null)
                 {
-                    ShowSplit = true;
-                    value.Closing += SplitMenuStrip_Closing;
-                    value.Opening += SplitMenuStrip_Opening;
+                    value.Closing += DropDownMenuStrip_Closing;
+                    value.Opening += DropDownMenuStrip_Opening;
                 }
-                else
-                    ShowSplit = false;
 
-                _splitMenuStrip = value;
+                _dropDownMenuStrip = value;
             }
         }
 
+        /// <summary>
+        /// Splits the button into a conventional "button" part and a "drop down" part rather than treating the entire button as a "drop down" button.
+        /// </summary>
         [DefaultValue(false)]
+        [Description("Splits the button into a conventional \"button\" part and a \"drop down\" part rather than treating the entire button as a \"drop down\" button.")]
         public bool ShowSplit
         {
             get { return _showSplit; }
@@ -130,12 +126,13 @@ namespace NanoByte.Common.Controls
                 {
                     _showSplit = value;
                     Invalidate();
-
-                    if (Parent != null)
-                        Parent.PerformLayout();
                 }
             }
         }
+
+        private bool IsSplitLineVisible { get { return _showSplit && (State == PushButtonState.Hot || State == PushButtonState.Pressed || !Application.RenderWithVisualStyles); } }
+
+        private Rectangle EffectiveDropDownRectangle { get { return _showSplit ? _dropDownRectangle : ClientRectangle; } }
 
         private PushButtonState State
         {
@@ -149,14 +146,12 @@ namespace NanoByte.Common.Controls
                 }
             }
         }
-
-        public override sealed bool AutoSize { get { return base.AutoSize; } set { base.AutoSize = value; } }
         #endregion Properties
 
         #region Event handlers
         protected override bool IsInputKey(Keys keyData)
         {
-            if (keyData.Equals(Keys.Down) && _showSplit)
+            if (keyData.Equals(Keys.Down))
                 return true;
 
             return base.IsInputKey(keyData);
@@ -168,12 +163,6 @@ namespace NanoByte.Common.Controls
             if (e == null) throw new ArgumentNullException("e");
             #endregion
 
-            if (!_showSplit)
-            {
-                base.OnGotFocus(e);
-                return;
-            }
-
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
                 State = PushButtonState.Default;
         }
@@ -184,14 +173,11 @@ namespace NanoByte.Common.Controls
             if (kevent == null) throw new ArgumentNullException("kevent");
             #endregion
 
-            if (_showSplit)
-            {
-                if (kevent.KeyCode.Equals(Keys.Down) && !_isSplitMenuVisible)
-                    ShowContextMenuStrip();
+            if (kevent.KeyCode.Equals(Keys.Down) && !_isDropDownMenuVisible)
+                ShowDropDownMenu();
 
-                else if (kevent.KeyCode.Equals(Keys.Space) && kevent.Modifiers == Keys.None)
-                    State = PushButtonState.Pressed;
-            }
+            else if (kevent.KeyCode.Equals(Keys.Space) && kevent.Modifiers == Keys.None)
+                State = PushButtonState.Pressed;
 
             base.OnKeyDown(kevent);
         }
@@ -209,8 +195,8 @@ namespace NanoByte.Common.Controls
             }
             else if (kevent.KeyCode.Equals(Keys.Apps))
             {
-                if (MouseButtons == MouseButtons.None && !_isSplitMenuVisible)
-                    ShowContextMenuStrip();
+                if (MouseButtons == MouseButtons.None && !_isDropDownMenuVisible)
+                    ShowDropDownMenu();
             }
 
             base.OnKeyUp(kevent);
@@ -225,24 +211,12 @@ namespace NanoByte.Common.Controls
 
         protected override void OnLostFocus(EventArgs e)
         {
-            if (!_showSplit)
-            {
-                base.OnLostFocus(e);
-                return;
-            }
-
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
                 State = PushButtonState.Normal;
         }
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            if (!_showSplit)
-            {
-                base.OnMouseEnter(e);
-                return;
-            }
-
             _isMouseEntered = true;
 
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
@@ -251,12 +225,6 @@ namespace NanoByte.Common.Controls
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            if (!_showSplit)
-            {
-                base.OnMouseLeave(e);
-                return;
-            }
-
             _isMouseEntered = false;
 
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
@@ -269,18 +237,12 @@ namespace NanoByte.Common.Controls
             if (e == null) throw new ArgumentNullException("e");
             #endregion
 
-            if (!_showSplit)
-            {
-                base.OnMouseDown(e);
-                return;
-            }
-
             //handle ContextMenu re-clicking the drop-down region to close the menu
-            if (_splitMenu != null && e.Button == MouseButtons.Left && !_isMouseEntered)
+            if (_dropDownMenu != null && e.Button == MouseButtons.Left && !_isMouseEntered)
                 _skipNextOpen = true;
 
-            if (_dropDownRectangle.Contains(e.Location) && !_isSplitMenuVisible && e.Button == MouseButtons.Left)
-                ShowContextMenuStrip();
+            if (EffectiveDropDownRectangle.Contains(e.Location) && !_isDropDownMenuVisible && e.Button == MouseButtons.Left)
+                ShowDropDownMenu();
             else
                 State = PushButtonState.Pressed;
         }
@@ -291,20 +253,14 @@ namespace NanoByte.Common.Controls
             if (mevent == null) throw new ArgumentNullException("mevent");
             #endregion
 
-            if (!_showSplit)
-            {
-                base.OnMouseUp(mevent);
-                return;
-            }
-
             // if the right button was released inside the button
-            if (mevent.Button == MouseButtons.Right && ClientRectangle.Contains(mevent.Location) && !_isSplitMenuVisible)
-                ShowContextMenuStrip();
-            else if (_splitMenuStrip == null && _splitMenu == null || !_isSplitMenuVisible)
+            if (mevent.Button == MouseButtons.Right && ClientRectangle.Contains(mevent.Location) && !_isDropDownMenuVisible)
+                ShowDropDownMenu();
+            else if (_dropDownMenuStrip == null && _dropDownMenu == null || !_isDropDownMenuVisible)
             {
                 SetButtonDrawState();
 
-                if (ClientRectangle.Contains(mevent.Location) && !_dropDownRectangle.Contains(mevent.Location))
+                if (_showSplit && ClientRectangle.Contains(mevent.Location) && !_dropDownRectangle.Contains(mevent.Location))
                     OnClick(new EventArgs());
             }
         }
@@ -316,9 +272,6 @@ namespace NanoByte.Common.Controls
             #endregion
 
             base.OnPaint(pevent);
-
-            if (!_showSplit)
-                return;
 
             Graphics g = pevent.Graphics;
             Rectangle bounds = ClientRectangle;
@@ -343,17 +296,15 @@ namespace NanoByte.Common.Controls
             var focusRect =
                 new Rectangle(internalBorder - 1,
                     internalBorder - 1,
-                    bounds.Width - _dropDownRectangle.Width - internalBorder,
+                    bounds.Width - (_showSplit ? _dropDownRectangle.Width : 2) - internalBorder,
                     bounds.Height - (internalBorder * 2) + 2);
 
-            bool drawSplitLine = (State == PushButtonState.Hot || State == PushButtonState.Pressed || !Application.RenderWithVisualStyles);
-
-            if (RightToLeft == RightToLeft.Yes)
+            if (RightToLeft == RightToLeft.Yes && _showSplit)
             {
                 _dropDownRectangle.X = bounds.Left + 1;
                 focusRect.X = _dropDownRectangle.Right;
 
-                if (drawSplitLine)
+                if (IsSplitLineVisible)
                 {
                     // draw two lines at the edge of the dropdown button
                     g.DrawLine(SystemPens.ButtonShadow, bounds.Left + SplitSectionWidth, _borderSize, bounds.Left + SplitSectionWidth, bounds.Bottom - _borderSize);
@@ -362,7 +313,7 @@ namespace NanoByte.Common.Controls
             }
             else
             {
-                if (drawSplitLine)
+                if (IsSplitLineVisible)
                 {
                     // draw two lines at the edge of the dropdown button
                     g.DrawLine(SystemPens.ButtonShadow, bounds.Right - SplitSectionWidth, _borderSize, bounds.Right - SplitSectionWidth, bounds.Bottom - _borderSize);
@@ -374,7 +325,7 @@ namespace NanoByte.Common.Controls
             PaintArrow(g, _dropDownRectangle);
 
             //paint the image and text in the "button" part of the splitButton
-            PaintTextandImage(g, new Rectangle(0, 0, ClientRectangle.Width - SplitSectionWidth, ClientRectangle.Height));
+            PaintTextAndImage(g, new Rectangle(0, 0, ClientRectangle.Width - SplitSectionWidth, ClientRectangle.Height));
 
             // draw the focus rectangle.
             if (State != PushButtonState.Pressed && Focused && ShowFocusCues)
@@ -388,7 +339,7 @@ namespace NanoByte.Common.Controls
             if (m.Msg == 0x0212)
             {
                 //this message is only sent when a ContextMenu is closed (not a ContextMenuStrip)
-                _isSplitMenuVisible = false;
+                _isDropDownMenuVisible = false;
                 SetButtonDrawState();
             }
 
@@ -397,7 +348,7 @@ namespace NanoByte.Common.Controls
         #endregion
 
         #region Paint
-        private void PaintTextandImage(Graphics g, Rectangle bounds)
+        private void PaintTextAndImage(Graphics g, Rectangle bounds)
         {
             // Figure out where our text and image should go
             Rectangle textRectangle;
@@ -414,7 +365,7 @@ namespace NanoByte.Common.Controls
                     ControlPaint.DrawImageDisabled(g, Image, imageRectangle.X, imageRectangle.Y, BackColor);
             }
 
-            // If we dont' use mnemonic, set formatFlag to NoPrefix as this will show ampersand.
+            // If we don't use mnemonic, set formatFlag to NoPrefix as this will show ampersand.
             if (!UseMnemonic)
                 _textFormatFlags = _textFormatFlags | TextFormatFlags.NoPrefix;
             else if (!ShowKeyboardCues)
@@ -459,14 +410,11 @@ namespace NanoByte.Common.Controls
             Size preferredSize = base.GetPreferredSize(proposedSize);
 
             //autosize correctly for splitbuttons
-            if (_showSplit)
-            {
-                if (AutoSize)
-                    return CalculateButtonAutoSize();
+            if (AutoSize)
+                return CalculateButtonAutoSize();
 
-                if (!string.IsNullOrEmpty(Text) && TextRenderer.MeasureText(Text, Font).Width + SplitSectionWidth > preferredSize.Width)
-                    return preferredSize + new Size(SplitSectionWidth + _borderSize * 2, 0);
-            }
+            if (!string.IsNullOrEmpty(Text) && TextRenderer.MeasureText(Text, Font).Width + SplitSectionWidth > preferredSize.Width)
+                return preferredSize + new Size(SplitSectionWidth + _borderSize * 2, 0);
 
             return preferredSize;
         }
@@ -507,15 +455,14 @@ namespace NanoByte.Common.Controls
             retSize.Width += (Padding.Horizontal + 6);
 
             //pad the splitButton arrow region
-            if (_showSplit)
-                retSize.Width += SplitSectionWidth;
+            retSize.Width += SplitSectionWidth;
 
             return retSize;
         }
         #endregion
 
-        #region SplitMenu
-        private void ShowContextMenuStrip()
+        #region DropDownMenu
+        public void ShowDropDownMenu()
         {
             if (_skipNextOpen)
             {
@@ -527,36 +474,36 @@ namespace NanoByte.Common.Controls
 
             State = PushButtonState.Pressed;
 
-            if (_splitMenu != null)
-                _splitMenu.Show(this, new Point(0, Height));
-            else if (_splitMenuStrip != null)
-                _splitMenuStrip.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
+            if (_dropDownMenu != null)
+                _dropDownMenu.Show(this, new Point(0, Height));
+            else if (_dropDownMenuStrip != null)
+                _dropDownMenuStrip.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
         }
 
-        private void SplitMenuStrip_Opening(object sender, CancelEventArgs e)
+        private void DropDownMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            _isSplitMenuVisible = true;
+            _isDropDownMenuVisible = true;
         }
 
-        private void SplitMenuStrip_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        private void DropDownMenuStrip_Closing(object sender, ToolStripDropDownClosingEventArgs e)
         {
-            _isSplitMenuVisible = false;
+            _isDropDownMenuVisible = false;
 
             SetButtonDrawState();
 
             if (e.CloseReason == ToolStripDropDownCloseReason.AppClicked)
-                _skipNextOpen = (_dropDownRectangle.Contains(PointToClient(Cursor.Position))) && MouseButtons == MouseButtons.Left;
+                _skipNextOpen = (EffectiveDropDownRectangle.Contains(PointToClient(Cursor.Position))) && MouseButtons == MouseButtons.Left;
         }
 
-        private void SplitMenu_Popup(object sender, EventArgs e)
+        private void DropDownMenu_Popup(object sender, EventArgs e)
         {
-            _isSplitMenuVisible = true;
+            _isDropDownMenuVisible = true;
         }
         #endregion
 
         #region Button Layout Calculations
-        //The following layout functions were taken from Mono's Windows.Forms 
-        //implementation, specifically "ThemeWin32Classic.cs", 
+        //The following layout functions were taken from Mono's Windows.Forms
+        //implementation, specifically "ThemeWin32Classic.cs",
         //then modified to fit the context of this splitButton
 
         private void CalculateButtonTextAndImageLayout(ref Rectangle contentRect, out Rectangle textRectangle, out Rectangle imageRectangle)
