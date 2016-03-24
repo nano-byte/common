@@ -149,7 +149,7 @@ namespace NanoByte.Common.Storage
         [Pure]
         public static long ToUnixTime(this DateTime time)
         {
-            TimeSpan timespan = (time - new DateTime(1970, 1, 1));
+            TimeSpan timespan = (time.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
             return (long)timespan.TotalSeconds;
         }
 
@@ -160,7 +160,7 @@ namespace NanoByte.Common.Storage
         public static DateTime FromUnixTime(long time)
         {
             TimeSpan timespan = TimeSpan.FromSeconds(time);
-            return new DateTime(1970, 1, 1) + timespan;
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc) + timespan;
         }
 
         /// <summary>

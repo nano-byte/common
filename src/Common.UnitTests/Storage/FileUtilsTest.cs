@@ -99,7 +99,7 @@ namespace NanoByte.Common.Storage
         public void TestToUnixTime()
         {
             // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
-            new DateTime(2004, 09, 16).ToUnixTime().Should().Be(1095292800);
+            new DateTime(2004, 09, 16, 0, 0, 0, DateTimeKind.Utc).ToUnixTime().Should().Be(1095292800);
         }
 
         /// <summary>
