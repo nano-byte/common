@@ -2,6 +2,7 @@
 /src/packages/*/
 /src/_ReSharper*/
 obj/
+bin/
 test-results/
 *.bak
 *.cache

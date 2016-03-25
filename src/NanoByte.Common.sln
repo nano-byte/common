@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.SlimDX", "Common.Sli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.SlimDX.UnitTests", "Common.SlimDX.UnitTests\Common.SlimDX.UnitTests.csproj", "{9A31FAC8-32D1-422E-8C03-37218F847AAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.WinForms.Sample", "Common.WinForms.Sample\Common.WinForms.Sample.csproj", "{AC3E5EC9-759A-4B54-A1D6-B75B13184343}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{56CE7F69-0351-4D5B-93BF-C3F6C8EFC5C7}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -50,6 +52,10 @@ Global
 		{9A31FAC8-32D1-422E-8C03-37218F847AAA}.Debug|x86.ActiveCfg = Debug|x86
 		{9A31FAC8-32D1-422E-8C03-37218F847AAA}.Debug|x86.Build.0 = Debug|x86
 		{9A31FAC8-32D1-422E-8C03-37218F847AAA}.Release|x86.ActiveCfg = Debug|x86
+		{AC3E5EC9-759A-4B54-A1D6-B75B13184343}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC3E5EC9-759A-4B54-A1D6-B75B13184343}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC3E5EC9-759A-4B54-A1D6-B75B13184343}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC3E5EC9-759A-4B54-A1D6-B75B13184343}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
