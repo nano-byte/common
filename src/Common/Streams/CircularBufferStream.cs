@@ -101,10 +101,10 @@ namespace NanoByte.Common.Streams
         private Exception _relayedException;
 
         /// <summary>A barrier that blocks threads until new data is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _dataAvailable = new ManualResetEvent(false);
+        private readonly ManualResetEvent _dataAvailable = new ManualResetEvent(initialState: false);
 
         /// <summary>A barrier that blocks threads until empty space is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _spaceAvailable = new ManualResetEvent(true);
+        private readonly ManualResetEvent _spaceAvailable = new ManualResetEvent(initialState: true);
 
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)
@@ -133,6 +133,8 @@ namespace NanoByte.Common.Streams
 
                 // Block while buffer is empty
                 _dataAvailable.WaitOne();
+
+                if (IsDisposed) throw new ObjectDisposedException("CircularBufferStream");
 
                 lock (_lock)
                 {
@@ -202,6 +204,8 @@ namespace NanoByte.Common.Streams
 
                 // Block while buffer is full
                 _spaceAvailable.WaitOne();
+
+                if (IsDisposed) throw new ObjectDisposedException("CircularBufferStream");
 
                 lock (_lock)
                 {
@@ -274,14 +278,19 @@ namespace NanoByte.Common.Streams
         /// <inheritdoc/>
         protected override void Dispose(bool disposing)
         {
+            IsDisposed = true;
+
             try
             {
+                // Signal all to prevent livelocks
+                _dataAvailable.Set();
+                _spaceAvailable.Set();
+
                 _dataAvailable.Close();
                 _spaceAvailable.Close();
             }
             finally
             {
-                IsDisposed = true;
                 base.Dispose(disposing);
             }
         }

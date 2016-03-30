@@ -109,10 +109,10 @@ namespace NanoByte.Common.Streams
             var producerData = new byte[128];
             for (byte i = 0; i < producerData.Length; i++)
                 producerData[i] = i;
-            var producerThread = new Thread(() => _stream.Write(producerData, 0, producerData.Length));
+            var producerThread = new Thread(() => _stream.Write(producerData));
 
-            var consumerData = new byte[128];
-            var consumerThread = new Thread(() => _stream.Read(consumerData, 0, consumerData.Length));
+            byte[] consumerData = null;
+            var consumerThread = new Thread(() => consumerData = _stream.Read(128));
 
             producerThread.Start();
             consumerThread.Start();
@@ -132,7 +132,7 @@ namespace NanoByte.Common.Streams
                 producerData[i] = i;
             var producerThread = new Thread(() =>
             {
-                _stream.Write(producerData, 0, producerData.Length);
+                _stream.Write(producerData);
                 _stream.DoneWriting();
             });
 
@@ -166,8 +166,26 @@ namespace NanoByte.Common.Streams
             }).Start();
 
             // Catch exception on consumer thread
-            var consumerData = new byte[2];
-            Assert.Throws<InvalidDataException>(() => _stream.Read(consumerData, 0, consumerData.Length));
+            _stream.Invoking(x => x.Read(2)).ShouldThrow<InvalidDataException>();
+        }
+
+        /// <summary>
+        /// Ensures blocked writers terminate when the stream is disposed.
+        /// </summary>
+        [Test]
+        public void TestDisposeBeforeComplete()
+        {
+            var data = new byte[_stream.BufferSize];
+            _stream.Write(data);
+
+            // Dispose on consumer thread after a short delay
+            new Thread(() =>
+            {
+                Thread.Sleep(50);
+                _stream.Dispose();
+            }).Start();
+
+            _stream.Invoking(x => x.Write(data)).ShouldThrow<ObjectDisposedException>();
         }
     }
 }
