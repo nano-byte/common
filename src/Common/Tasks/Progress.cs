@@ -29,6 +29,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Reports progress updates using callbacks/events. Performs the callbacks using the synchronization context of the original caller.
     /// </summary>
+    /// <remarks>Unlike the built-in Progress type of .NET the NanoByte.Common variant supports remoting.</remarks>
     public class Progress<T> : MarshalByRefObject, IProgress<T>
     {
         /// <summary>

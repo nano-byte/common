@@ -1,4 +1,5 @@
-﻿// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Collections/HashPrimeNumbers.cs
+﻿#if NET20
+// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Collections/HashPrimeNumbers.cs
 //
 // Author:
 //   Sergey Chaban (serge@wildwestsoftware.com)
@@ -12,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,51 +26,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
 using System.CodeDom.Compiler;
-// ReSharper disable All
 
-namespace NanoByte.Common.Collections
+// ReSharper disable All
+namespace System.Collections.Generic
 {
     [GeneratedCode("Mono BCL", "3.2")] // ignore in code analysis
     internal static class HashPrimeNumbers
     {
         static readonly int[] primeTbl = {
-			11,
-			19,
-			37,
-			73,
-			109,
-			163,
-			251,
-			367,
-			557,
-			823,
-			1237,
-			1861,
-			2777,
-			4177,
-			6247,
-			9371,
-			14057,
-			21089,
-			31627,
-			47431,
-			71143,
-			106721,
-			160073,
-			240101,
-			360163,
-			540217,
-			810343,
-			1215497,
-			1823231,
-			2734867,
-			4102283,
-			6153409,
-			9230113,
-			13845163
-		};
+            11,
+            19,
+            37,
+            73,
+            109,
+            163,
+            251,
+            367,
+            557,
+            823,
+            1237,
+            1861,
+            2777,
+            4177,
+            6247,
+            9371,
+            14057,
+            21089,
+            31627,
+            47431,
+            71143,
+            106721,
+            160073,
+            240101,
+            360163,
+            540217,
+            810343,
+            1215497,
+            1823231,
+            2734867,
+            4102283,
+            6153409,
+            9230113,
+            13845163
+        };
 
 
         //
@@ -113,3 +113,4 @@ namespace NanoByte.Common.Collections
 
     }
 }
+#endif

@@ -17,7 +17,11 @@ API documentation: http://nano-byte.de/common/api/</description>
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.Gtk.*" target="lib\net40" />
+        <!-- .NET 4.5 binaries -->
+        <file src="..\build\Release\NanoByte.Common.Gtk.*" target="lib\net45" />
+
+        <!-- .NET 4.0 binaries -->
+        <file src="..\build\ReleaseNet40\NanoByte.Common.Gtk.*" target="lib\net40-client" />
 
         <!-- Source code -->
         <file src="..\src\Common.Gtk\**\*.cs" target="src" />

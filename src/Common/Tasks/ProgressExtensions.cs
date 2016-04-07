@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2006-2015 Bastian Eicher
+ * Copyright 2006-2016 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,50 +20,29 @@
  * THE SOFTWARE.
  */
 
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using NanoByte.Common.Tasks;
-
-namespace NanoByte.Common.Controls
+#if NET45
+namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// A progress label that takes <see cref="TaskSnapshot"/> inputs.
+    /// Provides extension methods for <see cref="IProgress{T}"/>s.
     /// </summary>
-    public sealed class TaskLabel : Label, Tasks.IProgress<TaskSnapshot>
+    public static class ProgressExtensions
     {
-        public TaskLabel()
+        /// <summary>
+        /// Converts a NanoByte.Common progress handler to a regular .NET progress handler.
+        /// </summary>
+        public static System.IProgress<T> ToSystem<T>(IProgress<T> progress)
         {
-            CreateHandle();
+            return new System.Progress<T>(progress.Report);
         }
 
-        /// <inheritdoc/>
-        public void Report(TaskSnapshot value)
+        /// <summary>
+        /// Converts a regular .NET progress handler to a NanoByte.Common progress handler.
+        /// </summary>
+        public static IProgress<T> ToNanoByte<T>(System.IProgress<T> progress)
         {
-            // Ensure execution on GUI thread
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action<TaskSnapshot>(Report), value);
-                return;
-            }
-
-            Text = value.ToString();
-
-            switch (value.State)
-            {
-                default:
-                    ForeColor = SystemColors.ControlText;
-                    break;
-
-                case TaskState.Complete:
-                    ForeColor = Color.Green;
-                    break;
-
-                case TaskState.WebError:
-                case TaskState.IOError:
-                    ForeColor = Color.Red;
-                    break;
-            }
+            return new Progress<T>(progress.Report);
         }
     }
 }
+#endif

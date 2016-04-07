@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +30,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Signals to <see cref="CancellationToken"/>s that they should be canceled.
     /// </summary>
+    /// <remarks>Unlike the built-in CancellationToken type of .NET the NanoByte.Common variant supports remoting.</remarks>
     public sealed class CancellationTokenSource : MarshalNoTimeout, IDisposable
     {
         /// <summary>

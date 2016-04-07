@@ -3,6 +3,9 @@
 
 echo.
 call "%~dp0src\build.cmd" Release
+call "%~dp0src\build.cmd" ReleaseNet40
+call "%~dp0src\build.cmd" ReleaseNet35
+call "%~dp0src\build.cmd" ReleaseNet20
 if errorlevel 1 pause
 
 if defined signing_cert_path (

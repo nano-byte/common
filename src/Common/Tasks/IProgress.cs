@@ -28,8 +28,14 @@ namespace NanoByte.Common.Tasks
     /// Defines a provider for progress updates.
     /// </summary>
     /// <remarks>Implementations should derive from <see cref="MarshalByRefObject"/>.</remarks>
+    /// <remarks>Unlike the built-in Progress type of .NET implementations of the NanoByte.Common variant should derive from <see cref="MarshalByRefObject"/> to support remoting.</remarks>
     /// <typeparam name="T">The type of progress update value.</typeparam>
-    public interface IProgress<T>
+    public interface IProgress
+#if NET40
+        <in T>
+#else
+        <T>
+#endif
     {
         /// <summary>
         /// Reports a progress update.

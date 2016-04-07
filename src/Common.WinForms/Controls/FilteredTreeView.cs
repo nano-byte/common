@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 using NanoByte.Common.Collections;
@@ -38,7 +39,7 @@ namespace NanoByte.Common.Controls
     /// </summary>
     /// <typeparam name="T">The type of <see cref="INamed{T}"/> object to list.
     /// Special support for types implementing <see cref="IHighlightColor"/> and/or <see cref="IContextMenu"/>.</typeparam>
-    [Description("Displays a list of INamed in a TreeView with incremental search."), System.Runtime.InteropServices.GuidAttribute("5065F310-D0B3-4AD3-BBE5-B41D00D5F036")]
+    [Description("Displays a list of INamed in a TreeView with incremental search."), Guid("5065F310-D0B3-4AD3-BBE5-B41D00D5F036")]
     public sealed partial class FilteredTreeView<T> : UserControl where T : class, INamed<T>
     {
         #region Events
@@ -219,10 +220,10 @@ namespace NanoByte.Common.Controls
                         _selectedEntry = entry; // Fix problems that might arrise from using clones
                         treeView.SelectedNode = AddTreeNode(entry);
                     }
-                        // List all nodes if there is no filter
+                    // List all nodes if there is no filter
                     else if (string.IsNullOrEmpty(textSearch.Text))
                         AddTreeNode(entry);
-                        // Only list nodes that match the filter
+                    // Only list nodes that match the filter
                     else if (entry.Name.ContainsIgnoreCase(textSearch.Text))
                         AddTreeNode(entry);
                 }

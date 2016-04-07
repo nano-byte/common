@@ -25,7 +25,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Security.Principal;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
 

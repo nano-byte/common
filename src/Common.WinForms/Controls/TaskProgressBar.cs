@@ -31,7 +31,7 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// A progress bar that takes <see cref="TaskSnapshot"/> inputs.
     /// </summary>
-    public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
+    public sealed class TaskProgressBar : ProgressBar, Tasks.IProgress<TaskSnapshot>
     {
         /// <summary>
         /// Determines the handle of the <see cref="Form"/> containing this control.

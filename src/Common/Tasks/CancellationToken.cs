@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,6 +29,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Propagates notification that operations should be canceled.
     /// </summary>
+    /// <remarks>Unlike the built-in CancellationToken type of .NET the NanoByte.Common variant supports remoting.</remarks>
     [Serializable]
     public struct CancellationToken
     {
@@ -81,5 +82,27 @@ namespace NanoByte.Common.Tasks
         {
             return "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
         }
+
+#if NET40 || NET45
+        /// <summary>
+        /// Converts a NanoByte.Common cancellation token to a regular .NET cancellation token.
+        /// </summary>
+        public static implicit operator System.Threading.CancellationToken(CancellationToken token)
+        {
+            var tokenSource = new System.Threading.CancellationTokenSource();
+            token.Register(tokenSource.Cancel);
+            return tokenSource.Token;
+        }
+
+        /// <summary>
+        /// Converts a regular .NET cancellation token to a NanoByte.Common cancellation token.
+        /// </summary>
+        public static implicit operator CancellationToken(System.Threading.CancellationToken token)
+        {
+            var tokenSource = new CancellationTokenSource();
+            token.Register(tokenSource.Cancel);
+            return tokenSource.Token;
+        }
+#endif
     }
 }

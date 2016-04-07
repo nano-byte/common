@@ -20,7 +20,17 @@ API documentation: http://nano-byte.de/common/api/</description>
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.SlimDX.*" target="lib\net20" />
+        <!-- .NET 4.5 binaries -->
+        <file src="..\build\Release\NanoByte.Common.SlimDX.*" target="lib\net45" />
+
+        <!-- .NET 4.0 binaries -->
+        <file src="..\build\ReleaseNet40\NanoByte.Common.SlimDX.*" target="lib\net40-client" />
+
+        <!-- .NET 3.5 binaries -->
+        <file src="..\build\ReleaseNet35\NanoByte.Common.SlimDX.*" target="lib\net35-client" />
+
+        <!-- .NET 2.0 binaries -->
+        <file src="..\build\ReleaseNet20\NanoByte.Common.SlimDX.*" target="lib\net20" />
 
         <!-- Source code -->
         <file src="..\src\Common.SlimDX\**\*.cs" target="src\Common.SlimDX" />

@@ -33,7 +33,7 @@ namespace NanoByte.Common.Cli
     /// A progress bar rendered on the <see cref="Console"/> that takes <see cref="TaskSnapshot"/> inputs.
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
-    public class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
+    public class TaskProgressBar : ProgressBar, Tasks.IProgress<TaskSnapshot>
     {
         private TaskState _state;
 

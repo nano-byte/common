@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using JetBrains.Annotations;
-using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Net
 {

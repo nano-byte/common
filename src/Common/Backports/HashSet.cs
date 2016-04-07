@@ -1,4 +1,5 @@
-﻿// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/System.Core/System.Collections.Generic/HashSet.cs
+﻿#if NET20
+// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/System.Core/System.Collections.Generic/HashSet.cs
 //
 // Authors:
 //  Jb Evain  <jbevain@novell.com>
@@ -25,19 +26,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
 using System.CodeDom.Compiler;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+
 // ReSharper disable All
-
-// HashSet is basically implemented as a reduction of Dictionary<K, V>
-
-namespace NanoByte.Common.Collections
+namespace System.Collections.Generic
 {
+    /// <summary>
+    /// Backport of <c>System.Collections.Generic.HashSet{T}</c>.
+    /// </summary>
     [GeneratedCode("Mono BCL", "3.2")] // ignore in code analysis
     [Serializable]
     [DebuggerDisplay("Count={Count}")]
@@ -726,3 +725,6 @@ namespace NanoByte.Common.Collections
         }
     }
 }
+#else
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.Generic.HashSet<>))]
+#endif

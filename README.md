@@ -11,6 +11,10 @@ Source directory structure
 - The directory `lib` contains pre-compiled 3rd party libraries which are not available via NuGet.
 - The directory `doc` contains scripts for generating source code documentation.
 - The directory `build` contains the results of various compilation processes. It is created on first usage.
+  - `Debug`|`DebugNet40`|`DebugNet35`|`DebugNet35`: Contains Debug builds targeting the .NET Framework 4.5, 4.0, 3.5 and 2.0 respectively.
+  - `Release`|`ReleaseNet40`|`ReleaseNet35`|`ReleaseNet35`: Contains Release builds targeting the .NET Framework 4.5, 4.0, 3.5 and 2.0 respectively.
+  - `Packages`: Contains the generated NuGet packages.
+  - `Documentation`: Contains the generated source code documentation.
 
 `VERSION` contains the version numbers used by build scripts.
 Use `.\Set-Version.ps1 "X.Y.Z"` in PowerShall to change the version number. This ensures that the version also gets set in other locations (e.g. `AssemblyInfo`).

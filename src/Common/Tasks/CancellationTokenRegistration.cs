@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,6 +28,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Represents a callback delegate that has been registered with a <see cref="CancellationToken"/>.
     /// </summary>
+    /// <remarks>Unlike the built-in CancellationToken type of .NET the NanoByte.Common variant supports remoting.</remarks>
     [Serializable]
     public struct CancellationTokenRegistration : IDisposable
     {

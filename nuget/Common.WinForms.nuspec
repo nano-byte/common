@@ -17,12 +17,27 @@ API documentation: http://nano-byte.de/common/api/</description>
         </references>
     </metadata>
     <files>
-        <file src="..\build\Release\NanoByte.Common.WinForms.*" target="lib\net20" />
+        <!-- .NET 4.5 binaries -->
+        <file src="..\build\Release\NanoByte.Common.WinForms.*" target="lib\net45" />
+        <file src="..\build\Release\**\NanoByte.Common.WinForms.resources.dll" target="lib\net45" />
+        <file src="..\lib\ICSharpCode.TextEditor.*" target="lib\net45" />
+        <file src="..\lib\TaskDialog.*" target="lib\net45" />
 
-        <!-- Satellite assemblies (translations) -->
-        <file src="..\build\Release\**\NanoByte.Common.WinForms.resources.dll" target="lib\net20" />
+        <!-- .NET 4.0 binaries -->
+        <file src="..\build\ReleaseNet40\NanoByte.Common.WinForms.*" target="lib\net40-client" />
+        <file src="..\build\ReleaseNet40\**\NanoByte.Common.WinForms.resources.dll" target="lib\net40-client" />
+        <file src="..\lib\ICSharpCode.TextEditor.*" target="lib\net40-client" />
+        <file src="..\lib\TaskDialog.*" target="lib\net40-client" />
 
-        <!-- Bundled dependencies -->
+        <!-- .NET 3.5 binaries -->
+        <file src="..\build\ReleaseNet35\NanoByte.Common.WinForms.*" target="lib\net35-client" />
+        <file src="..\build\ReleaseNet35\**\NanoByte.Common.WinForms.resources.dll" target="lib\net35-client" />
+        <file src="..\lib\ICSharpCode.TextEditor.*" target="lib\net35-client" />
+        <file src="..\lib\TaskDialog.*" target="lib\net35-client" />
+
+        <!-- .NET 2.0 binaries -->
+        <file src="..\build\ReleaseNet20\NanoByte.Common.WinForms.*" target="lib\net20" />
+        <file src="..\build\ReleaseNet20\**\NanoByte.Common.WinForms.resources.dll" target="lib\net20" />
         <file src="..\lib\ICSharpCode.TextEditor.*" target="lib\net20" />
         <file src="..\lib\TaskDialog.*" target="lib\net20" />
 
