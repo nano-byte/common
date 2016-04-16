@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="infoLabel.Text" xml:space="preserve">
-    <value>Bu uygulamada beklenmeyen bir hata oluştu. Bize rapor göndererek sorunu çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, raporunuz gönderildikten hemen sonra görüntülenecektir.</value>
+    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bize rapor göndererek sorunu gidermemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, raporunuz gönderildikten hemen sonra görüntülenir.</value>
   </data>
   <data name="buttonReport.Text" xml:space="preserve">
     <value>&amp;Raporla</value>
   </data>
   <data name="commentBox.HintText" xml:space="preserve">
-    <value>Dilerseniz, bu alanı sorunu daha hızlı çözümleyebilmemiz için bize daha fazla bilgi vermek amacıyla kullanabilirsiniz.</value>
+    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Raporla&amp;ma</value>

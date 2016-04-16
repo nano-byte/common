@@ -250,7 +250,7 @@
     <value>Lütfen {0} için oturum açma kimlik bilgilerinizi yazın:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>&apos;{0}&apos; yüklenirken bir sorun oluştu.</value>
+    <value>&apos;{0}&apos; yüklenirken bir sorun çıktı.</value>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
