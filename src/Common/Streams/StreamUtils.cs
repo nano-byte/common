@@ -211,13 +211,13 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Returns an embedded resource/file as a stream.
+        /// Returns an embedded resource as a stream.
         /// </summary>
-        /// <param name="type">A type that is stored in the same namespace as the embedded resource.</param>
-        /// <param name="name">The file name of the embedded resource.</param>
+        /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
+        /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
         [NotNull]
-        public static Stream GetEmbedded([NotNull] this Type type, [NotNull, Localizable(false)] string name)
+        public static Stream GetEmbeddedStream([NotNull] this Type type, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
             if (type == null) throw new ArgumentNullException("type");
@@ -231,20 +231,57 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Returns an embedded resource/file as a stream.
+        /// Returns an embedded resource as a byte array.
         /// </summary>
-        /// <param name="reference">An object used as a reference to determine a type that is stored in the same namespace as the embedded resource.</param>
-        /// <param name="name">The file name of the embedded resource.</param>
+        /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
+        /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
         [NotNull]
-        public static Stream GetEmbedded([NotNull] this object reference, [NotNull, Localizable(false)] string name)
+        public static byte[] GetEmbeddedBytes([NotNull] this Type type, [NotNull, Localizable(false)] string name)
         {
             #region Sanity checks
-            if (reference == null) throw new ArgumentNullException("reference");
+            if (type == null) throw new ArgumentNullException("type");
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             #endregion
 
-            return reference.GetType().GetEmbedded(name);
+            return type.GetEmbeddedStream(name).ToArray();
+        }
+
+        /// <summary>
+        /// Returns an embedded resource as a string.
+        /// </summary>
+        /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
+        /// <param name="name">The name of the embedded resource.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [NotNull]
+        public static string GetEmbeddedString([NotNull] this Type type, [NotNull, Localizable(false)] string name, [CanBeNull] Encoding encoding = null)
+        {
+            #region Sanity checks
+            if (type == null) throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            #endregion
+
+            using (var stream = type.GetEmbeddedStream(name))
+                return stream.ReadToString(encoding);
+        }
+
+        /// <summary>
+        /// Copies an embedded resource to a file.
+        /// </summary>
+        /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
+        /// <param name="name">The name of the embedded resource.</param>
+        /// <param name="path">The path of the file to write.</param>
+        /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        public static void CopyEmbeddedToFile([NotNull] this Type type, [NotNull, Localizable(false)] string name, [NotNull, Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (type == null) throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            #endregion
+
+            using (var stream = type.GetEmbeddedStream( name))
+                stream.CopyToFile(path);
         }
     }
 }
