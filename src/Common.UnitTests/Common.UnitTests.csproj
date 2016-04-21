@@ -86,6 +86,7 @@
     <Compile Include="Net\CachedCredentialProviderTest.cs" />
     <Compile Include="Net\DownloadFileTest.cs" />
     <Compile Include="Net\DownloadMemoryTest.cs" />
+    <Compile Include="Net\DownloadTestBase.cs" />
     <Compile Include="Net\UriExtensionsTest.cs" />
     <Compile Include="Storage\CopyDirectoryTest.cs" />
     <Compile Include="Storage\FileUtilsTest.cs" />

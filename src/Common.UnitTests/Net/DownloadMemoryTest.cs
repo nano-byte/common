@@ -21,11 +21,9 @@
  */
 
 using System;
-using System.IO;
 using System.Net;
 using System.Threading;
 using FluentAssertions;
-using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NUnit.Framework;
 using CancellationTokenSource = NanoByte.Common.Tasks.CancellationTokenSource;
@@ -36,41 +34,26 @@ namespace NanoByte.Common.Net
     /// Contains test methods for <see cref="DownloadMemory"/>.
     /// </summary>
     [TestFixture]
-    public class DownloadMemoryTest
+    public class DownloadMemoryTest : DownloadTestBase
     {
-        private MicroServer _server;
-        private readonly Stream _testFileContent = "abc".ToStream();
-
-        [SetUp]
-        public void SetUp()
-        {
-            _server = new MicroServer("file", _testFileContent);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _server.Dispose();
-        }
-
         [Test(Description = "Downloads a small file using Run().")]
         public void TestRun()
         {
             // Download the file
-            var download = new DownloadMemory(_server.FileUri);
+            var download = new DownloadMemory(Server.FileUri);
             download.Run();
 
             // Ensure the download was successful and the file is identical
             download.State.Should().Be(TaskState.Complete);
-            download.GetData().Should().Equal(_testFileContent.ToArray());
+            download.GetData().Should().Equal(GetTestFileStream().ToArray());
         }
 
         [Test(Description = "Starts downloading a small file using Run() and stops again right away using Cancel().")]
         public void TestCancel()
         {
             // Prepare a very slow download of the file and monitor for a cancellation exception
-            _server.Slow = true;
-            var download = new DownloadMemory(_server.FileUri);
+            Server.Slow = true;
+            var download = new DownloadMemory(Server.FileUri);
             bool exceptionThrown = false;
             var cancellationTokenSource = new CancellationTokenSource();
             var downloadThread = new Thread(() =>
@@ -97,14 +80,14 @@ namespace NanoByte.Common.Net
         [Test(Description = "Ensure files with an incorrect size are rejected.")]
         public void TestFileMissing()
         {
-            var download = new DownloadMemory(new Uri(_server.ServerUri, "wrong"));
+            var download = new DownloadMemory(new Uri(Server.ServerUri, "wrong"));
             download.Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
 
         [Test(Description = "Ensure files with an incorrect size are rejected.")]
         public void TestIncorrectSize()
         {
-            var download = new DownloadMemory(_server.FileUri, bytesTotal: 1024);
+            var download = new DownloadMemory(Server.FileUri, bytesTotal: 1024);
             download.Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
     }
