@@ -470,7 +470,7 @@ namespace NanoByte.Common.Storage.SlimDX
                     try
                     {
                         using (var inputStream = _modArchiveEntries[fullID].ZipFile.GetInputStream(_modArchiveEntries[fullID].ZipEntry))
-                            inputStream.CopyTo(memoryStream);
+                            inputStream.CopyToEx(memoryStream);
                     }
                         #region Error handling
                     catch (ZipException ex)
@@ -497,7 +497,7 @@ namespace NanoByte.Common.Storage.SlimDX
                     // Copy from ZIP file to MemoryStream to provide seeking capability
                     Stream memoryStream = new MemoryStream();
                     using (var inputStream = _baseArchiveEntries[fullID].ZipFile.GetInputStream(_baseArchiveEntries[fullID].ZipEntry))
-                        inputStream.CopyTo(memoryStream);
+                        inputStream.CopyToEx(memoryStream);
                     return memoryStream;
                 }
             }

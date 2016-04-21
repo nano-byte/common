@@ -43,7 +43,7 @@ namespace NanoByte.Common.Streams
         [Test]
         public void TestToArray()
         {
-            var stream = new MemoryStream(new byte[] {1, 2, 3});
+            Stream stream = new MemoryStream(new byte[] {1, 2, 3});
             StreamUtils.ToArray(stream).Should().Equal(1, 2, 3);
         }
 
@@ -53,7 +53,7 @@ namespace NanoByte.Common.Streams
             var stream = new MemoryStream();
             stream.Write(new byte[] {1, 2, 3});
 
-            StreamUtils.ToArray(stream).Should().Equal(1, 2, 3);
+            stream.ToArray().Should().Equal(1, 2, 3);
         }
 
         [Test]

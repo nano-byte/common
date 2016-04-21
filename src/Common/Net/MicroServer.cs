@@ -168,12 +168,12 @@ namespace NanoByte.Common.Net
             {
                 case "GET":
                     context.Response.ContentLength64 = FileContent.Length;
-                    FileContent.CopyTo(context.Response.OutputStream);
+                    FileContent.CopyToEx(context.Response.OutputStream);
                     break;
 
                 case "PUT":
                     FileContent = new MemoryStream();
-                    context.Request.InputStream.CopyTo(FileContent);
+                    context.Request.InputStream.CopyToEx(FileContent);
                     break;
 
                 default:

@@ -132,7 +132,7 @@ namespace NanoByte.Common.Net
                         using (var targetStream = CreateTargetStream())
                         {
                             Debug.Assert(sourceStream != null);
-                            sourceStream.CopyTo(targetStream,
+                            sourceStream.CopyToEx(targetStream,
                                 bufferSize: 8 * 1024,
                                 cancellationToken: CancellationToken,
                                 progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
