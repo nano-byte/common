@@ -40,10 +40,6 @@ namespace NanoByte.Common.Tasks
         /// <param name="owner">The parent window for any dialogs created by the handler.</param>
         public DialogTaskHandler([CanBeNull] Window owner = null)
         {
-            #region Sanity checks
-            if (owner == null) throw new ArgumentNullException("owner");
-            #endregion
-
             _owner = owner;
         }
 
