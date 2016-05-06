@@ -158,6 +158,11 @@ namespace NanoByte.Common.Native
         public static bool Is64BitProcess { get { return IntPtr.Size == 8; } }
 
         /// <summary>
+        /// <c>true</c> if the current operating system supports UAC and it is enabled; <c>false</c> otherwise.
+        /// </summary>
+        public static bool HasUac { get { return IsWindowsVista && RegistryUtils.GetDword(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", defaultValue: 1) == 1; } }
+
+        /// <summary>
         /// <c>true</c> if the current process is 32-bit but the operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         /// <remarks>Can only detect WOW on Windows XP and newer</remarks>
