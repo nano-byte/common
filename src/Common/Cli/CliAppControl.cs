@@ -111,6 +111,8 @@ namespace NanoByte.Common.Cli
             if (arguments == null) throw new ArgumentNullException("arguments");
             #endregion
 
+            ProcessUtils.SanitizeEnvironmentVariables();
+
             var startInfo = new ProcessStartInfo
             {
                 FileName = AppBinary,
