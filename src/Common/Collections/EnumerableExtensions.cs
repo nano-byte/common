@@ -219,6 +219,10 @@ namespace NanoByte.Common.Collections
         [NotNull, Pure]
         public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable
         {
+            #region Sanity checks
+            if (enumerable == null) throw new ArgumentNullException("enumerable");
+            #endregion
+
             return enumerable.Select(entry => (T)entry.Clone());
         }
     }

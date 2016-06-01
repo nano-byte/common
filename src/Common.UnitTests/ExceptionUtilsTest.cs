@@ -59,11 +59,14 @@ namespace NanoByte.Common
         {
             var applyCalledFor = new List<int>();
             var rollbackCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.ApplyWithRollback(value =>
-            {
-                applyCalledFor.Add(value);
-                if (value == 2) throw new ArgumentException("Test exception");
-            }, rollbackCalledFor.Add), "Exceptions should be passed through after rollback.");
+            Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.ApplyWithRollback(
+                apply: value =>
+                {
+                    applyCalledFor.Add(value);
+                    if (value == 2) throw new ArgumentException("Test exception");
+                },
+                rollback: rollbackCalledFor.Add),
+                message: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);

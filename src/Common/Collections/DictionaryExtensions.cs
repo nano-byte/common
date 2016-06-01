@@ -34,7 +34,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Adds multiple pairs to the dictionary in one go.
         /// </summary>
-        public static void AddRange<TSourceKey, TSourceValue, TTargetKey, TTargetValue>([NotNull] this IDictionary<TTargetKey, TTargetValue> target, [NotNull, ItemNotNull, InstantHandle] IEnumerable<KeyValuePair<TSourceKey, TSourceValue>> source)
+        public static void AddRange<TSourceKey, TSourceValue, TTargetKey, TTargetValue>([NotNull] this IDictionary<TTargetKey, TTargetValue> target, [NotNull, InstantHandle] IEnumerable<KeyValuePair<TSourceKey, TSourceValue>> source)
             where TSourceKey : TTargetKey
             where TSourceValue : TTargetValue
         {

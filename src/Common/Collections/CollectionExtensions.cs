@@ -139,7 +139,7 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The list to check.</param>
         /// <param name="element">The element to look for.</param>
         /// <remarks>Useful for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
-        public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> collection, T element)
+        public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> collection, [NotNull] T element)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException("collection");
