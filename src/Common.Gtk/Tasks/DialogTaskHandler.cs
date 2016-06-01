@@ -98,6 +98,10 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public override void Error(Exception exception)
         {
+            #region Sanity checks
+            if (exception == null) throw new ArgumentNullException("exception");
+            #endregion
+
             Log.Error(exception);
             Msg.Inform(_owner, exception.Message, MsgSeverity.Error);
         }

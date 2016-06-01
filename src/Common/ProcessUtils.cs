@@ -151,7 +151,7 @@ namespace NanoByte.Common
             if (startInfo == null) throw new ArgumentNullException("startInfo");
             #endregion
 
-            if (!WindowsUtils.HasUac) throw new PlatformNotSupportedException("The current operating system does not suport UAC or it is disabled.");
+            if (!WindowsUtils.HasUac) throw new PlatformNotSupportedException("The current operating system does not support UAC or it is disabled.");
 
             startInfo.Verb = "runas";
             startInfo.UseShellExecute = true;

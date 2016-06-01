@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Values;
@@ -40,7 +41,7 @@ namespace NanoByte.Common.Collections
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "A Set is a special case of a Collection.")]
     [Serializable]
     [TypeConverter(typeof(StringConstructorConverter<LanguageSet>))]
-    public sealed class LanguageSet : SortedSet<CultureInfo>
+    public class LanguageSet : SortedSet<CultureInfo>
     {
         /// <summary>
         /// Creates a new empty language collection.
@@ -64,6 +65,10 @@ namespace NanoByte.Common.Collections
         /// <remarks>Unknown language codes in <paramref name="value"/> are replaced with <see cref="CultureInfo.InvariantCulture"/> rather than raising an <see cref="ArgumentException"/>.</remarks>
         public LanguageSet(string value)
             : this(ParseString(value))
+        {}
+
+        protected LanguageSet(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {}
 
         private static IEnumerable<CultureInfo> ParseString(string value)

@@ -32,11 +32,21 @@ namespace NanoByte.Common.Controls
     {
         public static void Invoke(this Control control, Action action)
         {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException("control");
+            if (action == null) throw new ArgumentNullException("action");
+            #endregion
+
             control.Invoke(action);
         }
 
         public static T Invoke<T>(this Control control, Func<T> action)
         {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException("control");
+            if (action == null) throw new ArgumentNullException("action");
+            #endregion
+
             return (T)control.Invoke(action);
         }
     }

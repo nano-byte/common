@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -114,6 +115,7 @@ namespace NanoByte.Common.Streams
         /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
         /// <param name="progress">Used to report back the number of bytes that have been copied so far.</param>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of <paramref name="source"/>.</remarks>
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
         public static void CopyToEx([NotNull] this Stream source, [NotNull] Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), Tasks.IProgress<long> progress = null)
         {
             #region Sanity checks
