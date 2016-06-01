@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -94,6 +95,36 @@ namespace NanoByte.Common.Collections
         {
             var strings = new List<string> {"B", "C"};
             strings.Prepend("A").Should().Equal("A", "B", "C");
+        }
+
+        private class Element
+        {
+            public readonly List<Element> Children = new List<Element>();
+        }
+
+        [Test]
+        public void TestTopologicalSort()
+        {
+            var b = new Element();
+            var c = new Element {Children = {b}};
+            var a = new Element {Children = {c}};
+            var list = new List<Element> {a, b, c};
+
+            list.TopologicalSort(getDependencies: x => x.Children)
+                .Should().Equal(b, c, a);
+        }
+
+        [Test]
+        public async Task TestForEachAsync()
+        {
+            int runningTasksCount = 0;
+            await new List<int> {1, 2, 3, 4, 5, 6}.ForEachAsync(async x =>
+            {
+                runningTasksCount++;
+                await Task.Delay(500);
+                runningTasksCount.Should().BeLessOrEqualTo(2);
+                runningTasksCount--;
+            }, maxParallel: 2);
         }
     }
 }

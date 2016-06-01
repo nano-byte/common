@@ -23,9 +23,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using NanoByte.Common.Values;
+
+#if NET45
+using System.Threading.Tasks;
+#endif
 
 namespace NanoByte.Common.Collections
 {
@@ -225,5 +230,69 @@ namespace NanoByte.Common.Collections
 
             return enumerable.Select(entry => (T)entry.Clone());
         }
+
+        /// <summary>
+        /// Performs a topological sort of an object graph.
+        /// </summary>
+        /// <param name="nodes">The set of nodes to sort.</param>
+        /// <param name="getDependencies">A function that retrieves all dependencies of a node.</param>
+        /// <exception cref="InvalidDataException">Cyclic dependency found.</exception>
+        public static IEnumerable<T> TopologicalSort<T>([NotNull] this IEnumerable<T> nodes, [NotNull, InstantHandle] Func<T, IEnumerable<T>> getDependencies)
+        {
+            #region Sanity checks
+            if (nodes == null) throw new ArgumentNullException("nodes");
+            if (getDependencies == null) throw new ArgumentNullException("getDependencies");
+            #endregion
+
+            var sorted = new List<T>();
+            var visited = new HashSet<T>();
+
+            foreach (var item in nodes)
+                TopologicalSortVisit(item, visited, sorted, getDependencies);
+
+            return sorted;
+        }
+
+        private static void TopologicalSortVisit<T>(T node, HashSet<T> visited, ICollection<T> sorted, Func<T, IEnumerable<T>> getDependencies)
+        {
+            if (!visited.Contains(node))
+            {
+                visited.Add(node);
+
+                foreach (var dep in getDependencies(node))
+                    TopologicalSortVisit(dep, visited, sorted, getDependencies);
+
+                sorted.Add(node);
+            }
+            else
+            {
+                if (!sorted.Contains(node))
+                    throw new InvalidDataException("Cyclic dependency found.");
+            }
+        }
+
+#if NET45
+        /// <summary>
+        /// Runs asynchronous operations for each element in an enumeration. Performs automatic interleaving/parallelization.
+        /// </summary>
+        /// <param name="enumerable">The input elements to enumerate over.</param>
+        /// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
+        /// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
+        [NotNull]
+        public static async Task ForEachAsync<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, Task> taskFactory, int maxParallel = 0)
+        {
+            var activeTasks = new List<Task>(maxParallel);
+            foreach (var task in enumerable.Select(taskFactory))
+            {
+                activeTasks.Add(task);
+                if (activeTasks.Count == maxParallel)
+                {
+                    await Task.WhenAny(activeTasks.ToArray());
+                    activeTasks.RemoveAll(x => x.IsCompleted);
+                }
+            }
+            await Task.WhenAll(activeTasks.ToArray());
+        }
+#endif
     }
 }
