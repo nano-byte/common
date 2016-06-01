@@ -138,6 +138,31 @@ namespace NanoByte.Common
         }
 
         /// <summary>
+        /// Ensures that <see cref="ExceptionUtils.ApplyWithRollbackAsync{T}"/> correctly performs rollbacks on exceptions.
+        /// </summary>
+        [Test]
+        public void TestApplyWithRollbackAsync()
+        {
+            var applyCalledFor = new List<int>();
+            var rollbackCalledFor = new List<int>();
+            Assert.Throws<ArgumentException>(async () => await new[] {1, 2, 3}.ApplyWithRollbackAsync(
+                apply: async value =>
+                {
+                    await Task.Yield();
+                    applyCalledFor.Add(value);
+                    if (value == 2) throw new ArgumentException("Test exception");
+                }, rollback: async x =>
+                {
+                    await Task.Yield();
+                    rollbackCalledFor.Add(x);
+                }),
+                message: "Exceptions should be passed through after rollback.");
+
+            applyCalledFor.Should().Equal(1, 2);
+            rollbackCalledFor.Should().Equal(2, 1);
+        }
+
+        /// <summary>
         /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles fail conditions followed by success conditions.
         /// </summary>
         [Test]
