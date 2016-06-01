@@ -1,5 +1,5 @@
 ﻿#if NET20 || NET35
-// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/System/System.Collections.Generic/RBTree.cs
+// Taken and adapted from: https://github.com/mono/mono/blob/mono-3.12.1/mcs/class/System/System.Collections.Generic/RBTree.cs
 //
 // Authors:
 //   Raja R Harinath <rharinath@novell.com>
@@ -31,7 +31,7 @@ using System.CodeDom.Compiler;
 // ReSharper disable All
 namespace System.Collections.Generic
 {
-    [GeneratedCode("Mono BCL", "3.2")] // ignore in code analysis
+    [GeneratedCode("Mono BCL", "3.12.1")] // ignore in code analysis
     [Serializable]
     internal class RBTree : IEnumerable, IEnumerable<RBTree.Node>
     {
@@ -582,7 +582,7 @@ namespace System.Collections.Generic
         // Pre-condition: current != null
         static Node right_most(Node current, Node sibling, List<Node> path)
         {
-            for (; ; )
+            for (;;)
             {
                 path.Add(sibling);
                 path.Add(current);
@@ -682,11 +682,10 @@ namespace System.Collections.Generic
             internal void check_current()
             {
                 check_version();
-                if (pennants == null)
-                    throw new InvalidOperationException("state invalid before the first MoveNext()");
+                if (pennants == null || pennants.Count == 0)
+                    throw new InvalidOperationException("Enumerator is before the first element or after the last element");
             }
         }
     }
 }
-
 #endif

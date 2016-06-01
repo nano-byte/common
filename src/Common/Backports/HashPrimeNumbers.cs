@@ -1,5 +1,5 @@
 ﻿#if NET20
-// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Collections/HashPrimeNumbers.cs
+// Taken and adapted from: https://github.com/mono/mono/blob/mono-3.12.1/mcs/class/corlib/System.Collections/HashPrimeNumbers.cs
 //
 // Author:
 //   Sergey Chaban (serge@wildwestsoftware.com)
@@ -31,7 +31,7 @@ using System.CodeDom.Compiler;
 // ReSharper disable All
 namespace System.Collections.Generic
 {
-    [GeneratedCode("Mono BCL", "3.2")] // ignore in code analysis
+    [GeneratedCode("Mono BCL", "3.12.1")] // ignore in code analysis
     internal static class HashPrimeNumbers
     {
         static readonly int[] primeTbl = {

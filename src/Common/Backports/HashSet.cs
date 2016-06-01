@@ -1,5 +1,5 @@
 ﻿#if NET20
-// Taken and adapted from: https://github.com/mono/mono/blob/master/mcs/class/System.Core/System.Collections.Generic/HashSet.cs
+// Taken and adapted from: https://github.com/mono/mono/blob/mono-3.12.1/mcs/class/System.Core/System.Collections.Generic/HashSet.cs
 //
 // Authors:
 //  Jb Evain  <jbevain@novell.com>
@@ -99,8 +99,7 @@ namespace System.Collections.Generic
             Init(INITIAL_SIZE, comparer);
         }
 
-        public HashSet(IEnumerable<T> collection)
-            : this(collection, null)
+        public HashSet(IEnumerable<T> collection) : this(collection, null)
         {
         }
 
@@ -198,9 +197,9 @@ namespace System.Collections.Generic
             }
         }
 
-        void Resize()
+        void Resize(int size)
         {
-            int newSize = HashPrimeNumbers.ToPrime((table.Length << 1) | 1);
+            int newSize = HashPrimeNumbers.ToPrime(size);
 
             // allocate new hash table and link slots array
             var newTable = new int[newSize];
@@ -252,7 +251,7 @@ namespace System.Collections.Generic
 
             if (++count > threshold)
             {
-                Resize();
+                Resize((table.Length << 1) | 1);
                 index = (hashCode & int.MaxValue) % table.Length;
             }
 
@@ -375,7 +374,7 @@ namespace System.Collections.Generic
 
         public void TrimExcess()
         {
-            Resize();
+            Resize(count);
         }
 
         // set operations
