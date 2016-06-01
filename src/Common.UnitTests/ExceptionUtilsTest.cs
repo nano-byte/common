@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -76,7 +77,7 @@ namespace NanoByte.Common
         /// Ensures that <see cref="ExceptionUtils.TryAny{T}"/> correctly handles fail conditions followed by success conditions.
         /// </summary>
         [Test]
-        public void TestTrySucceed()
+        public void TestTryAnySucceed()
         {
             var actionCalledFor = new List<int>();
             new[] {1, 2, 3}.TryAny(value =>
@@ -92,7 +93,7 @@ namespace NanoByte.Common
         /// Ensures that <see cref="ExceptionUtils.TryAny{T}"/> correctly handles pure fail conditions.
         /// </summary>
         [Test]
-        public void TestTryFail()
+        public void TestTryAnyFail()
         {
             var actionCalledFor = new List<int>();
             Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.TryAny(value =>
@@ -107,7 +108,10 @@ namespace NanoByte.Common
         [Test]
         public void TestRetryPassOnLastAttmpt()
         {
-            ExceptionUtils.Retry<InvalidOperationException>(lastAttempt => { if (!lastAttempt) throw new InvalidOperationException("Test exception"); });
+            ExceptionUtils.Retry<InvalidOperationException>(lastAttempt =>
+            {
+                if (!lastAttempt) throw new InvalidOperationException("Test exception");
+            });
         }
 
         [Test]
@@ -122,6 +126,72 @@ namespace NanoByte.Common
         {
             Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
                 delegate { throw new IOException("Test exception"); }, maxRetries: 1));
+        }
+
+        /// <summary>
+        /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles fail conditions followed by success conditions.
+        /// </summary>
+        [Test]
+        public async Task TestTryAnyAsyncSucceed()
+        {
+            var actionCalledFor = new List<int>();
+            await new[] {1, 2, 3}.TryAnyAsync(async value =>
+            {
+                await Task.Yield();
+                actionCalledFor.Add(value);
+                if (value == 1) throw new ArgumentException("Test exception");
+            });
+
+            actionCalledFor.Should().Equal(1, 2);
+        }
+
+        /// <summary>
+        /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles pure fail conditions.
+        /// </summary>
+        [Test]
+        public void TestTryAnyAsyncFail()
+        {
+            var actionCalledFor = new List<int>();
+            Assert.Throws<ArgumentException>(async () => await new[] {1, 2, 3}.TryAnyAsync(async value =>
+            {
+                await Task.Yield();
+                actionCalledFor.Add(value);
+                throw new ArgumentException("Test exception");
+            }), "Last exceptions should be passed through.");
+
+            actionCalledFor.Should().Equal(1, 2, 3);
+        }
+
+        [Test]
+        public async Task TestRetryAsyncPassOnLastAttmpt()
+        {
+            await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
+            {
+                await Task.Yield();
+                if (!lastAttempt) throw new InvalidOperationException("Test exception");
+            });
+        }
+
+        [Test]
+        public void TestRetryAsyncDoubleFail()
+        {
+            Assert.Throws<InvalidOperationException>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+                async delegate
+                {
+                    await Task.Yield();
+                    throw new InvalidOperationException("Test exception");
+                }, maxRetries: 1));
+        }
+
+        [Test]
+        public void TestRetryAsyncOtherExceptionType()
+        {
+            Assert.Throws<IOException>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+                async delegate
+                {
+                    await Task.Yield();
+                    throw new IOException("Test exception");
+                }, maxRetries: 1));
         }
 
         [Test]

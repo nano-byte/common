@@ -30,6 +30,10 @@ using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
+#if NET45
+using System.Threading.Tasks;
+#endif
+
 namespace NanoByte.Common
 {
     /// <summary>
@@ -38,6 +42,15 @@ namespace NanoByte.Common
     /// <param name="lastAttempt">Indicates whether this retry run is the last attempt before giving up and passing the exception through.</param>
     /// <seealso cref="ExceptionUtils.Retry{TException}"/>
     public delegate void RetryAction(bool lastAttempt);
+
+#if NET45
+    /// <summary>
+    /// Delegate used by <see cref="ExceptionUtils.RetryAsync{TException}"/>.
+    /// </summary>
+    /// <param name="lastAttempt">Indicates whether this retry run is the last attempt before giving up and passing the exception through.</param>
+    /// <seealso cref="ExceptionUtils.Retry{TException}"/>
+    public delegate Task RetryAsyncAction(bool lastAttempt);
+#endif
 
     /// <summary>
     /// Provides helper methods related to <see cref="Exception"/>s.
@@ -205,5 +218,90 @@ namespace NanoByte.Common
                 }
             }
         }
+
+#if NET45
+        /// <summary>
+        /// Applies an operation for the first possible element of a collection.
+        /// If the operation succeeds the remaining elements are ignored. If the operation fails it is repeated for the next element.
+        /// </summary>
+        /// <typeparam name="T">The type of elements to operate on.</typeparam>
+        /// <param name="elements">The elements to apply the action for.</param>
+        /// <param name="action">The action to apply to an element.</param>
+        /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
+        public static async Task TryAnyAsync<T>([NotNull] this IEnumerable<T> elements, [NotNull] Func<T, Task> action)
+        {
+            #region Sanity checks
+            if (elements == null) throw new ArgumentNullException("elements");
+            if (action == null) throw new ArgumentNullException("action");
+            #endregion
+
+            var enumerator = elements.GetEnumerator();
+            if (!enumerator.MoveNext()) return;
+
+            while (true)
+            {
+                try
+                {
+                    await action(enumerator.Current);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
+                    else throw; // Rethrow exception if there are no more elements
+                }
+            }
+        }
+
+        /// <summary>
+        /// Executes an asynchronous delegate and automatically retries it using exponential backoff if a specifc type of exception was raised.
+        /// </summary>
+        /// <typeparam name="TException">The type of exception to triger a retry.</typeparam>
+        /// <param name="action">The action to execute.</param>
+        /// <param name="maxRetries">The maximum number of retries to attempt.</param>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
+        public static async Task RetryAsync<TException>([NotNull] RetryAsyncAction action, int maxRetries = 2)
+            where TException : Exception
+        {
+            #region Sanity checks
+            if (action == null) throw new ArgumentNullException("action");
+            #endregion
+
+            int retryCounter = 0;
+            Retry:
+            if (retryCounter >= maxRetries)
+                await action(lastAttempt: true);
+            else
+            {
+                try
+                {
+                    await action(lastAttempt: false);
+                }
+                catch (TException ex)
+                {
+                    Log.Info(ex);
+
+                    Random random;
+                    try
+                    {
+                        // Use process ID as a seed to ensure we get different values than other competing processes on the same machine
+                        random = new Random(Process.GetCurrentProcess().Id);
+                    }
+                    catch (Exception)
+                    {
+                        random = new Random();
+                    }
+
+                    int delay = random.Next(50, 1000 * (1 << retryCounter));
+                    Log.Info("Retrying in " + delay + " milliseconds");
+                    Thread.Sleep(delay);
+
+                    retryCounter++;
+                    goto Retry;
+                }
+            }
+        }
+#endif
     }
 }
