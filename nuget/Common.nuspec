@@ -9,6 +9,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.
 API documentation: http://nano-byte.de/common/api/</description>
+        <dependencies>
+            <dependency id="JetBrains.Annotations" version="10.0.0" />
+        </dependencies>
         <references>
             <reference file="NanoByte.Common.dll" />
         </references>
