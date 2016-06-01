@@ -134,6 +134,52 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
+        /// Adds or replaces an element in a list using a key selector for comparison.
+        /// </summary>
+        /// <param name="list">The list to update.</param>
+        /// <param name="element">The element to add or update.</param>
+        /// <param name="keySelector">Used to map elements to keys for comparison</param>
+        /// <returns></returns>
+        public static bool AddOrReplace<T, TKey>([NotNull] this List<T> list, [NotNull] T element, [NotNull, InstantHandle] Func<T, TKey> keySelector)
+        {
+            #region Sanity checks
+            if (list == null) throw new ArgumentNullException("list");
+            if (element == null) throw new ArgumentNullException("element");
+            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            #endregion
+
+            int index = list.FindIndex(x => Equals(keySelector(x), keySelector(element)));
+
+            if (index == -1)
+            {
+                list.Add(element);
+                return true;
+            }
+            else if (!element.Equals(list[index]))
+            {
+                list[index] = element;
+                return true;
+            }
+            else return false;
+        }
+
+        /// <summary>
+        /// Adds or replaces an element in a list.
+        /// </summary>
+        /// <param name="list">The list to update.</param>
+        /// <param name="element">The element to add or update.</param>
+        /// <returns></returns>
+        public static bool AddOrReplace<T>(this List<T> list, T element)
+        {
+            #region Sanity checks
+            if (list == null) throw new ArgumentNullException("list");
+            if (element == null) throw new ArgumentNullException("element");
+            #endregion
+
+            return list.AddOrReplace(element, x => x);
+        }
+
+        /// <summary>
         /// Determines whether the collection contains an element or is null.
         /// </summary>
         /// <param name="collection">The list to check.</param>

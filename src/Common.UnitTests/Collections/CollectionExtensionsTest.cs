@@ -65,6 +65,14 @@ namespace NanoByte.Common.Collections
         }
 
         [Test]
+        public void TestAddOrReplace()
+        {
+            var list = new List<string> {"a", "bb", "ccc"};
+            list.AddOrReplace("xx", keySelector: x => x.Length);
+            list.Should().Equal("a", "xx", "ccc");
+        }
+
+        [Test]
         public void TestContainsAny()
         {
             new[] {1, 2}.ContainsAny(new[] {2}).Should().BeTrue();
