@@ -111,7 +111,9 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
-    <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Posix">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='DebugNet40' Or '$(Configuration)'=='ReleaseNet40' Or '$(Configuration)'=='DebugNet35' Or '$(Configuration)'=='ReleaseNet35'">
     <Reference Include="System.Core" />
