@@ -62,7 +62,7 @@ namespace NanoByte.Common.Tasks
                     ex = dialog.Exception;
                 }
             });
-            if (ex != null) ex.Rethrow();
+            if (ex != null) throw ex.PreserveStack();
         }
 
         /// <inheritdoc/>

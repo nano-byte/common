@@ -56,7 +56,7 @@ namespace NanoByte.Common.Tasks
                 using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource, _owner))
                 {
                     dialog.Execute();
-                    if (dialog.Exception != null) dialog.Exception.Rethrow();
+                    if (dialog.Exception != null) throw dialog.Exception.PreserveStack();
                 }
             });
         }

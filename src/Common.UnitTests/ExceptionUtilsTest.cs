@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -37,19 +38,27 @@ namespace NanoByte.Common
     public class ExceptionUtilsTest
     {
         [Test]
-        public void TestRethrow()
+        public void TestPreserveStack()
         {
-            Exception caught;
+            Exception caught = null;
             try
             {
-                throw new InvalidOperationException("Test exception");
+                ThrowMockException();
             }
             catch (Exception ex)
             {
                 caught = ex;
             }
 
-            caught.Invoking(x => x.Rethrow()).ShouldThrow<InvalidOperationException>();
+            caught.Invoking(x => { throw x.PreserveStack(); })
+                .ShouldThrow<InvalidOperationException>()
+                .Where(x => x.StackTrace.Contains("ThrowMockException"));
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void ThrowMockException()
+        {
+            throw new InvalidOperationException("Test exception");
         }
 
         /// <summary>

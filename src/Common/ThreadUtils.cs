@@ -105,7 +105,7 @@ namespace NanoByte.Common
             thread.Start();
             thread.Join();
 
-            if (error != null) error.Rethrow();
+            if (error != null) throw error.PreserveStack();
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace NanoByte.Common
             thread.Start();
             thread.Join();
 
-            if (error != null) error.Rethrow();
+            if (error != null) throw error.PreserveStack();
             return result;
         }
     }

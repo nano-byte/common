@@ -58,9 +58,9 @@ namespace NanoByte.Common
     public static class ExceptionUtils
     {
         /// <summary>
-        /// Throws a previously thrown exception again, preserving the existing stack trace if possible.
+        /// Configures an <paramref name="exception"/> to preserve its stack trace when it is (re)thrown.
         /// </summary>
-        public static void Rethrow([NotNull] this Exception exception)
+        public static Exception PreserveStack([NotNull] this Exception exception)
         {
             #region Sanity checks
             if (exception == null) throw new ArgumentNullException("exception");
@@ -82,7 +82,7 @@ namespace NanoByte.Common
             catch (SerializationException)
             {}
 
-            throw exception;
+            return exception;
         }
 
         /// <summary>
