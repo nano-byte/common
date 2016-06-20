@@ -112,6 +112,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Posix">
+      <HintPath>..\..\lib\Mono.Posix.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
