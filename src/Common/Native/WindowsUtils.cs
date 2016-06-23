@@ -234,39 +234,24 @@ namespace NanoByte.Common.Native
         #endregion
 
         #region .NET Framework
-        /// <summary>The full version number of the .NET Framework 2.0. This release contains a new compiler and CLR.</summary>
+        /// <summary>The directory version number for .NET Framework 2.0. This release includes the C# 2.0 compiler and the CLR 2.0 runtime.</summary>
         public const string NetFx20 = "v2.0.50727";
 
-        /// <summary>The full version number of the .NET Framework 3.0.</summary>
+        /// <summary>The directory version number for .NET Framework 3.0.</summary>
         public const string NetFx30 = "v3.0";
 
-        /// <summary>The full version number of the .NET Framework 3.5. This release contains a new compiler.</summary>
+        /// <summary>The directory version number for .NET Framework 3.5. This release includes the C# 3.0 compiler.</summary>
         public const string NetFx35 = "v3.5";
 
-        /// <summary>The full version number of the .NET Framework 4.0. This release contains a new compiler and CLR.</summary>
+        /// <summary>The directory version number for .NET Framework 4.x.  This release includes a C# 4.0+ compiler and the CLR 4.0 runtime.</summary>
         public const string NetFx40 = "v4.0.30319";
 
         /// <summary>
-        /// Determines whether a specific version of the .NET framework is available.
-        /// </summary>
-        /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
-        /// <returns><c>true</c> if the specified version is available, <c>false</c> otherwise.</returns>
-        /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <c>true</c>.</remarks>
-        public static bool HasNetFxVersion([NotNull] string version)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(version)) throw new ArgumentNullException("version");
-            #endregion
-
-            return Directory.Exists(GetNetFxDirectory(version));
-        }
-
-        /// <summary>
-        /// Returns the .NET Framework root directory for a specific version of the .NET framework. Does not verify the directory actually exists!
+        /// Returns the .NET Framework root directory for a specific version of the .NET Framework. Does not verify the directory actually exists!
         /// </summary>
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns>The path to the .NET Framework root directory.</returns>
-        /// <remarks>Automatically uses 64-bit directories if <see cref="Is64BitProcess"/> is <c>true</c>.</remarks>
+        /// <remarks>Returns 64-bit directories if <see cref="Is64BitProcess"/> is <c>true</c>.</remarks>
         [NotNull]
         public static string GetNetFxDirectory([NotNull] string version)
         {

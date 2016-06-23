@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Microsoft.CSharp;
 using NanoByte.Common.Storage;
@@ -83,10 +84,10 @@ namespace NanoByte.Common.Native
                 compilerParameters.CompilerOptions += " /win32manifest:" + manifestFilePath.EscapeArgument();
                 return new CSharpCodeProvider();
             }
-            else if (WindowsUtils.HasNetFxVersion(WindowsUtils.NetFx35))
+            else if (File.Exists(Path.Combine(WindowsUtils.GetNetFxDirectory(WindowsUtils.NetFx35), "csc.exe")))
             { // C# 3.0 (.NET 3.5)
                 compilerParameters.CompilerOptions += " /win32manifest:" + manifestFilePath.EscapeArgument();
-                return NewCSharpCodeProviderEx(WindowsUtils.NetFx35);
+                return NewCSharpCodeProvider(WindowsUtils.NetFx35);
             }
             else
             { // C# 2.0 (.NET 2.0/3.0)
@@ -94,13 +95,11 @@ namespace NanoByte.Common.Native
             }
         }
 
-        /// <summary>
-        /// Instantiates a post-v2.0 C# compiler in a 2.0 .NET runtime environment.
-        /// </summary>
-        /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
-        /// <remarks>Extracted to a separate method in case this is older than .NET 2.0 SP2 and the required constructor is therefore missing.</remarks>
+        // Instantiates a post-v2.0 C# compiler in a 2.0 .NET runtime environment.
+        // Extracted to a separate method in case this is older than .NET 2.0 SP2 and the required constructor is therefore missing.
         [SuppressMessage("Microsoft.Portability", "CA1903:UseOnlyApiFromTargetedFramework", MessageId = "Microsoft.CSharp.CSharpCodeProvider.#.ctor(System.Collections.Generic.IDictionary`2<System.String,System.String>)", Justification = "Will only be called on post-2.0 .NET versions")]
-        private static CodeDomProvider NewCSharpCodeProviderEx(string version)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static CodeDomProvider NewCSharpCodeProvider(string version)
         {
             return new CSharpCodeProvider(new Dictionary<string, string> {{"CompilerVersion", version}});
         }
