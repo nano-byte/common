@@ -38,9 +38,13 @@ namespace NanoByte.Common.Values
         [Pure]
         public static bool HasFlag([NotNull] this Enum enumRef, [NotNull] Enum flag)
         {
+#if NET20 || NET35
             long enumValue = Convert.ToInt64(enumRef);
             long flagVal = Convert.ToInt64(flag);
             return (enumValue & flagVal) == flagVal;
+#else
+            return enumRef.HasFlag(flag);
+#endif
         }
 
         /// <summary>
