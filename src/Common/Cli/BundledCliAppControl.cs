@@ -23,7 +23,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
@@ -52,9 +51,9 @@ namespace NanoByte.Common.Cli
             if (Directory.Exists(path)) return path;
             path = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", name); // Subdir of library installation diretory
             if (Directory.Exists(path)) return path;
-            path = new[] {Locations.InstallBase, "..", "..", "..", "bundled", name}.Aggregate(Path.Combine); // Parallel directory during development
+            path = FileUtils.PathCombine(Locations.InstallBase, "..", "..", "..", "bundled", name); // Parallel directory during development
             if (Directory.Exists(path)) return path;
-            path = new[] {Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", "..", "..", "..", "bundled", name}.Aggregate(Path.Combine); // Parallel directory during developmen
+            path = FileUtils.PathCombine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", "..", "..", "..", "bundled", name); // Parallel directory during developmen
             if (Directory.Exists(path)) return path;
             path = Path.Combine(Environment.CurrentDirectory, name); // Subdir of working directory
             if (Directory.Exists(path)) return path;

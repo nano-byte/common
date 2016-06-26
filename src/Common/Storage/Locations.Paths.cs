@@ -50,13 +50,13 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException("resource");
             #endregion
 
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string path;
             try
             {
-                path = (_isPortable
-                    ? new[] {_portableBase, "config", resourceCombined}
-                    : new[] {UserConfigDir, appName, resourceCombined}).Aggregate(Path.Combine);
+                path = IsPortable
+                    ? FileUtils.PathCombine(PortableBase, "config", resourceCombined)
+                    : FileUtils.PathCombine(UserConfigDir, appName, resourceCombined);
             }
                 #region Error handling
             catch (ArgumentException ex)
@@ -93,11 +93,11 @@ namespace NanoByte.Common.Storage
             if (_isPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
 
             string systemConfigDir = SystemConfigDirs.Split(Path.PathSeparator).Last();
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string path;
             try
             {
-                path = (new[] {systemConfigDir, appName, resourceCombined}).Aggregate(Path.Combine);
+                path = FileUtils.PathCombine(systemConfigDir, appName, resourceCombined);
             }
                 #region Error handling
             catch (ArgumentException ex)
@@ -132,12 +132,12 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException("resource");
             #endregion
 
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string path;
             if (_isPortable)
             {
                 // Check in portable base directory
-                path = new[] {_portableBase, "config", resourceCombined}.Aggregate(Path.Combine);
+                path = FileUtils.PathCombine(PortableBase, "config", resourceCombined);
                 if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
                     yield return Path.GetFullPath(path);
             }
@@ -148,7 +148,7 @@ namespace NanoByte.Common.Storage
                 {
                     try
                     {
-                        path = new[] {dirPath, appName, resourceCombined}.Aggregate(Path.Combine);
+                        path = FileUtils.PathCombine(dirPath, appName, resourceCombined);
                     }
                         #region Error handling
                     catch (ArgumentException ex)
@@ -181,13 +181,13 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException("resource");
             #endregion
 
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string path;
             try
             {
-                path = (_isPortable
-                    ? new[] {_portableBase, "data", resourceCombined}
-                    : new[] {UserDataDir, appName, resourceCombined}).Aggregate(Path.Combine);
+                path = IsPortable
+                    ? FileUtils.PathCombine(PortableBase, "data", resourceCombined)
+                    : FileUtils.PathCombine(UserDataDir, appName, resourceCombined);
             }
                 #region Error handling
             catch (ArgumentException ex)
@@ -222,12 +222,12 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException("resource");
             #endregion
 
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string path;
             if (_isPortable)
             {
                 // Check in portable base directory
-                path = new[] {_portableBase, "data", resourceCombined}.Aggregate(Path.Combine);
+                path = FileUtils.PathCombine(PortableBase, "data", resourceCombined);
                 if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
                     yield return Path.GetFullPath(path);
             }
@@ -238,7 +238,7 @@ namespace NanoByte.Common.Storage
                 {
                     try
                     {
-                        path = new[] {dirPath, appName, resourceCombined}.Aggregate(Path.Combine);
+                        path = FileUtils.PathCombine(dirPath, appName, resourceCombined);
                     }
                         #region Error handling
                     catch (ArgumentException ex)

@@ -46,17 +46,17 @@ namespace NanoByte.Common.Storage
             try
             {
                 new MoveDirectory(temp1, temp2).Run();
-                File.Exists(Path.Combine(Path.Combine(temp2, "subdir"), "file")).Should().BeTrue();
+                File.Exists(Path.Combine(temp2, "subdir", "file")).Should().BeTrue();
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
-                File.GetLastWriteTimeUtc(Path.Combine(Path.Combine(temp2, "subdir"), "file"))
+                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
 
                 Directory.Exists(temp1).Should().BeFalse(because: "Original directory should be gone after move");
             }
             finally
             {
-                File.SetAttributes(Path.Combine(Path.Combine(temp2, "subdir"), "file"), FileAttributes.Normal);
+                File.SetAttributes(Path.Combine(temp2, "subdir", "file"), FileAttributes.Normal);
                 Directory.Delete(temp2, recursive: true);
             }
         }

@@ -48,20 +48,20 @@ namespace NanoByte.Common.Storage
             {
                 new CopyDirectory(temp1, temp2).Run();
                 FileAssert.AreEqual(
-                    expected: Path.Combine(Path.Combine(temp1, "subdir"), "file"),
-                    actual: Path.Combine(Path.Combine(temp2, "subdir"), "file"));
+                    expected: Path.Combine(temp1, "subdir", "file"),
+                    actual: Path.Combine(temp2, "subdir", "file"));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
-                File.GetLastWriteTimeUtc(Path.Combine(Path.Combine(temp2, "subdir"), "file"))
+                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
 
                 new CopyDirectory(temp1, temp2).Invoking(x => x.Run()).ShouldThrow<IOException>();
             }
             finally
             {
-                File.SetAttributes(Path.Combine(Path.Combine(temp1, "subdir"), "file"), FileAttributes.Normal);
+                File.SetAttributes(Path.Combine(temp1, "subdir", "file"), FileAttributes.Normal);
                 Directory.Delete(temp1, recursive: true);
-                File.SetAttributes(Path.Combine(Path.Combine(temp2, "subdir"), "file"), FileAttributes.Normal);
+                File.SetAttributes(Path.Combine(temp2, "subdir", "file"), FileAttributes.Normal);
                 Directory.Delete(temp2, recursive: true);
             }
         }
@@ -96,11 +96,11 @@ namespace NanoByte.Common.Storage
             {
                 new CopyDirectory(temp1, temp2, preserveDirectoryTimestamps: false).Run();
                 FileAssert.AreEqual(
-                    expected: Path.Combine(Path.Combine(temp1, "subdir"), "file"),
-                    actual: Path.Combine(Path.Combine(temp2, "subdir"), "file"));
+                    expected: Path.Combine(temp1, "subdir", "file"),
+                    actual: Path.Combine(temp2, "subdir", "file"));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
                     .Should().NotBe(new DateTime(2000, 1, 1), because: "Last-write time for copied directory is invalid");
-                File.GetLastWriteTimeUtc(Path.Combine(Path.Combine(temp2, "subdir"), "file")).Should().Be(
+                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file")).Should().Be(
                     new DateTime(2000, 1, 1),
                     because: "Last-write time for copied file is invalid");
 
@@ -136,12 +136,12 @@ namespace NanoByte.Common.Storage
             {
                 new CopyDirectory(temp1, temp2, preserveDirectoryTimestamps: true, overwrite: true).Run();
                 FileAssert.AreEqual(
-                    expected: Path.Combine(Path.Combine(temp1, "subdir"), "file"),
-                    actual: Path.Combine(Path.Combine(temp2, "subdir"), "file"));
+                    expected: Path.Combine(temp1, "subdir", "file"),
+                    actual: Path.Combine(temp2, "subdir", "file"));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir")).Should().Be(
                     new DateTime(2000, 1, 1),
                     because: "Last-write time for copied directory is invalid");
-                File.GetLastWriteTimeUtc(Path.Combine(Path.Combine(temp2, "subdir"), "file")).Should().Be(
+                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file")).Should().Be(
                     new DateTime(2000, 1, 1),
                     because: "Last-write time for copied file is invalid");
             }

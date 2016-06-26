@@ -85,7 +85,7 @@ namespace NanoByte.Common.Cli
                 result[0].FullName.Should().Be(Path.Combine(tempDir, "a.txt"));
                 result[1].FullName.Should().Be(Path.Combine(tempDir, "b.txt"));
                 result[2].FullName.Should().Be(Path.Combine(tempDir, "d.nfo"));
-                Path.Combine(Path.Combine(tempDir, subdirPath), "1.txt").Should().Be(result[3].FullName);
+                Path.Combine(tempDir, subdirPath, "1.txt").Should().Be(result[3].FullName);
             }
         }
     }

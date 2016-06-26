@@ -35,7 +35,10 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
+
+#if NET20 || NET35
 using NanoByte.Common.Values;
+#endif
 
 namespace NanoByte.Common.Storage
 {
@@ -45,6 +48,19 @@ namespace NanoByte.Common.Storage
     public static class FileUtils
     {
         #region Paths
+        /// <summary>
+        /// Combines an array of strings into a path.
+        /// </summary>
+        /// <remarks>Backport of the n-parameter version of <see cref="Path.Combine(string,string)"/> introduced in .NET 4.0.</remarks>
+        public static string PathCombine(params string[] paths)
+        {
+#if NET20 || NET35
+            return (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
+#else
+            return Path.Combine(paths);
+#endif
+        }
+
         /// <summary>
         /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
         /// </summary>

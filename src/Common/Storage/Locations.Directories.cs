@@ -23,7 +23,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
@@ -147,7 +146,7 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException("resource");
             #endregion
 
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string appPath;
             try
             {
@@ -197,7 +196,7 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException("resource");
             #endregion
 
-            string resourceCombined = (resource.Length == 0) ? "" : resource.Aggregate(Path.Combine);
+            string resourceCombined = FileUtils.PathCombine(resource);
             string appPath = Path.Combine(
                 Environment.GetFolderPath(machineWide ? Environment.SpecialFolder.CommonApplicationData : Environment.SpecialFolder.ApplicationData),
                 appName);

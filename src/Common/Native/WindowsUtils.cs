@@ -25,7 +25,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Principal;
@@ -33,6 +32,7 @@ using System.Text;
 using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Native
 {
@@ -259,7 +259,11 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(version)) throw new ArgumentNullException("version");
             #endregion
 
-            return new[] {Environment.GetEnvironmentVariable("windir"), "Microsoft.NET", (Is64BitProcess ? "Framework64" : "Framework"), version}.Aggregate(Path.Combine);
+            return FileUtils.PathCombine(
+                Environment.GetEnvironmentVariable("windir") ?? @"C:\Windows",
+                "Microsoft.NET",
+                Is64BitProcess ? "Framework64" : "Framework",
+                version);
         }
         #endregion
 
