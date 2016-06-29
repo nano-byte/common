@@ -58,7 +58,7 @@ namespace NanoByte.Common
     public static class ExceptionUtils
     {
         /// <summary>
-        /// Configures an <paramref name="exception"/> to preserve its stack trace when it is (re)thrown.
+        /// Configures a caught <paramref name="exception"/> to preserve its original stack trace when it is rethrown.
         /// </summary>
         public static Exception PreserveStack([NotNull] this Exception exception)
         {

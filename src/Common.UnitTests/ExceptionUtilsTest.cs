@@ -27,6 +27,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using NanoByte.Common.Native;
 using NUnit.Framework;
 
 namespace NanoByte.Common
@@ -40,6 +41,8 @@ namespace NanoByte.Common
         [Test]
         public void TestPreserveStack()
         {
+            if (!WindowsUtils.IsWindows) Assert.Ignore("Preserving exception stack traces of rethrown exceptions uses .NET Remoting functionality not available on some Mono versions.");
+
             Exception caught = null;
             try
             {
