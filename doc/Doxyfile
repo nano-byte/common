@@ -1,7 +1,8 @@
 ﻿PROJECT_NAME = "NanoByte.Common"
 PROJECT_NUMBER = "2.0.2"
 
-INPUT = ../src
+INPUT = Intro.md ../src
+USE_MDFILE_AS_MAINPAGE = Intro.md
 STRIP_FROM_PATH = ../src
 RECURSIVE = YES
 EXCLUDE_PATTERNS = */*.UnitTests/* */Properties/* *.NativeMethods.cs */obj/* */Common.Gtk/* */JetBrains.Annotations.cs
