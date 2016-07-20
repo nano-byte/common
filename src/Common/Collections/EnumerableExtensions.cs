@@ -281,17 +281,21 @@ namespace NanoByte.Common.Collections
         [NotNull]
         public static async Task ForEachAsync<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, Task> taskFactory, int maxParallel = 0)
         {
-            var activeTasks = new List<Task>(maxParallel);
+            var tasks = new List<Task>(maxParallel);
+
             foreach (var task in enumerable.Select(taskFactory))
             {
-                activeTasks.Add(task);
-                if (activeTasks.Count == maxParallel)
+                tasks.Add(task);
+
+                if (tasks.Count == maxParallel)
                 {
-                    await Task.WhenAny(activeTasks.ToArray());
-                    activeTasks.RemoveAll(x => x.IsCompleted);
+                    var completedTask = await Task.WhenAny(tasks.ToArray());
+                    await completedTask; // observe exceptions
+                    tasks.Remove(completedTask);
                 }
             }
-            await Task.WhenAll(activeTasks.ToArray());
+
+            await Task.WhenAll(tasks.ToArray());
         }
 #endif
     }
