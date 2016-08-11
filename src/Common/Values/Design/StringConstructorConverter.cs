@@ -55,10 +55,9 @@ namespace NanoByte.Common.Values.Design
                     {
                         return string.IsNullOrEmpty(stringValue) ? null : constructor.Invoke(new object[] {stringValue});
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) when (ex.InnerException != null)
                     {
-                        if (ex.InnerException != null) throw ex.InnerException;
-                        else throw;
+                        throw ex.InnerException.PreserveStack();
                     }
                 }
             }

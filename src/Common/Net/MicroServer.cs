@@ -107,14 +107,10 @@ namespace NanoByte.Common.Net
                     _listener.Start();
                     return prefix;
                 }
-                catch (HttpListenerException)
-                {
-                    if (port > MaxmimumPort) throw;
-                }
-                catch (SocketException)
-                {
-                    if (port > MaxmimumPort) throw;
-                }
+                catch (HttpListenerException) when (port <= MaxmimumPort)
+                {}
+                catch (SocketException) when (port <= MaxmimumPort)
+                {}
             }
         }
 
