@@ -39,10 +39,7 @@ namespace NanoByte.Common.Storage
         public string Path { get; }
 
         [ContractAnnotation("null => null; notnull => notnull")]
-        public static implicit operator string(TemporaryFile file)
-        {
-            return file?.Path;
-        }
+        public static implicit operator string(TemporaryFile file) => file?.Path;
 
         /// <summary>
         /// Creates a uniquely named, empty temporary file on disk.

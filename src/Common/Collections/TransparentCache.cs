@@ -45,9 +45,6 @@ namespace NanoByte.Common.Collections
         }
 
         /// <inheritdoc/>
-        protected override TValue Retrieve(TKey key)
-        {
-            return _retriever(key);
-        }
+        protected override TValue Retrieve(TKey key) => _retriever(key);
     }
 }

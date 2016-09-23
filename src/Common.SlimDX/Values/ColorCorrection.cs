@@ -23,7 +23,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
 using NanoByte.Common.Values.Design;
@@ -114,22 +113,13 @@ namespace NanoByte.Common.Values
 
         #region Conversion
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "(Brightness: {0}, Contrast: {1}, Saturation: {2}, Hue: {3})", Brightness, Contrast, Saturation, Hue);
-        }
+        public override string ToString() => $"(Brightness: {Brightness}, Contrast: {Contrast}, Saturation: {Saturation}, Hue: {Hue})";
 
         /// <summary>Convert <see cref="ColorCorrection"/> into <see cref="Vector4"/></summary>
-        public static explicit operator Vector4(ColorCorrection correction)
-        {
-            return new Vector4(correction._brightness, correction._contrast, correction._saturation, correction._hue);
-        }
+        public static explicit operator Vector4(ColorCorrection correction) => new Vector4(correction._brightness, correction._contrast, correction._saturation, correction._hue);
 
         /// <summary>Convert <see cref="Vector4"/> into see <see cref="ColorCorrection"/></summary>
-        public static explicit operator ColorCorrection(Vector4 vector)
-        {
-            return new ColorCorrection(vector.X, vector.Y, vector.Z, vector.W);
-        }
+        public static explicit operator ColorCorrection(Vector4 vector) => new ColorCorrection(vector.X, vector.Y, vector.Z, vector.W);
         #endregion
 
         #region Equality

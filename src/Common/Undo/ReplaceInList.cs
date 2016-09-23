@@ -52,16 +52,8 @@ namespace NanoByte.Common.Undo
             _newElement = newElement;
         }
 
-        protected override void OnExecute()
-        {
-            int index = _list.IndexOf(_oldElement);
-            _list[index] = _newElement;
-        }
+        protected override void OnExecute() => _list[_list.IndexOf(_oldElement)] = _newElement;
 
-        protected override void OnUndo()
-        {
-            int index = _list.IndexOf(_newElement);
-            _list[index] = _oldElement;
-        }
+        protected override void OnUndo() => _list[_list.IndexOf(_newElement)] = _oldElement;
     }
 }

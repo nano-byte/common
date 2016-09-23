@@ -42,11 +42,9 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider()
-        {
-            if (WindowsUtils.IsWindowsNT) return new WindowsDialogCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
-            else return null;
-        }
+        protected override ICredentialProvider BuildCrendentialProvider() => WindowsUtils.IsWindowsNT
+            ? new WindowsDialogCredentialProvider(interactive: Verbosity >= Verbosity.Normal)
+            : null;
 
         /// <inheritdoc/>
         public override bool Ask(string question)

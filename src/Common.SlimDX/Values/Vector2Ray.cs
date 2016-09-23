@@ -61,10 +61,7 @@ namespace NanoByte.Common.Values
 
         #region Conversion
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "({0} => {1})", Position, Direction);
-        }
+        public override string ToString() => string.Format(CultureInfo.InvariantCulture, "({0} => {1})", Position, Direction);
         #endregion
 
         #region Equality

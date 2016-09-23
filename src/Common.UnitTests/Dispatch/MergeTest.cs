@@ -43,15 +43,9 @@ namespace NanoByte.Common.Dispatch
 
             public DateTime Timestamp { get; set; }
 
-            public static IEnumerable<MergeTestData> BuildList(params string[] mergeIDs)
-            {
-                return mergeIDs.Select(value => new MergeTestData {MergeID = value}).ToList();
-            }
+            public static IEnumerable<MergeTestData> BuildList(params string[] mergeIDs) => mergeIDs.Select(value => new MergeTestData {MergeID = value}).ToList();
 
-            public override string ToString()
-            {
-                return MergeID + " (" + Data + ")";
-            }
+            public override string ToString() => MergeID + " (" + Data + ")";
 
             #region Equality
             public bool Equals(MergeTestData other)

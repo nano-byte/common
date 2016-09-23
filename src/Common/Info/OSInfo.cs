@@ -73,10 +73,7 @@ namespace NanoByte.Common.Info
         [XmlAttribute("framework-version"), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FrameworkVersionString { get { return FrameworkVersion?.ToString(); } set { FrameworkVersion = string.IsNullOrEmpty(value) ? null : new Version(value); } }
 
-        public override string ToString()
-        {
-            return Platform + " " + (Is64Bit ? "64-bit " : "") + Version + " " + ServicePack;
-        }
+        public override string ToString() => Platform + " " + (Is64Bit ? "64-bit " : "") + Version + " " + ServicePack;
 
         #region Static
         /// <summary>

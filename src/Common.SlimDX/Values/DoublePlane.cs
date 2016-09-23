@@ -22,7 +22,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Globalization;
 using NanoByte.Common.Values.Design;
 using SlimDX;
 
@@ -71,10 +70,7 @@ namespace NanoByte.Common.Values
 
         #region Conversion
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "({0} => {1})", Point, Normal);
-        }
+        public override string ToString() => $"({Point} => {Normal})";
         #endregion
 
         #region Equality

@@ -39,10 +39,7 @@ namespace NanoByte.Common.Storage
         public string Path { get; }
 
         [ContractAnnotation("null => null; notnull => notnull")]
-        public static implicit operator string(TemporaryDirectory dir)
-        {
-            return dir?.Path;
-        }
+        public static implicit operator string(TemporaryDirectory dir) => dir?.Path;
 
         /// <summary>
         /// Creates a uniquely named, empty temporary directory on disk.

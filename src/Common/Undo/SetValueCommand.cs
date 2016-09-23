@@ -75,9 +75,6 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Restores the old value in the model.
         /// </summary>
-        protected override void OnUndo()
-        {
-            _pointer.Value = _oldValue;
-        }
+        protected override void OnUndo() => _pointer.Value = _oldValue;
     }
 }

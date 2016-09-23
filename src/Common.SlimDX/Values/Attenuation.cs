@@ -23,7 +23,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Xml.Serialization;
 using NanoByte.Common.Values.Design;
 using SlimDX;
@@ -76,22 +75,13 @@ namespace NanoByte.Common.Values
 
         #region Conversion
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "(Constant: {0}, Linear: {1}, Quadratic: {2})", Constant, Linear, Quadratic);
-        }
+        public override string ToString() => $"(Constant: {Constant}, Linear: {Linear}, Quadratic: {Quadratic})";
 
         /// <summary>Convert <see cref="Attenuation"/> into <see cref="Vector4"/></summary>
-        public static explicit operator Vector4(Attenuation attenuation)
-        {
-            return new Vector4(attenuation.Constant, attenuation.Linear, attenuation.Quadratic, 0);
-        }
+        public static explicit operator Vector4(Attenuation attenuation) => new Vector4(attenuation.Constant, attenuation.Linear, attenuation.Quadratic, 0);
 
         /// <summary>Convert <see cref="Vector4"/> into <see cref="Attenuation"/></summary>
-        public static explicit operator Attenuation(Vector4 vector)
-        {
-            return new Attenuation(vector.X, vector.Y, vector.Z);
-        }
+        public static explicit operator Attenuation(Vector4 vector) => new Attenuation(vector.X, vector.Y, vector.Z);
         #endregion
 
         #region Equality

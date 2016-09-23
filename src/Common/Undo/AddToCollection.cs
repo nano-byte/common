@@ -43,17 +43,11 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Adds the element to the collection.
         /// </summary>
-        protected override void OnExecute()
-        {
-            Collection.Add(Element);
-        }
+        protected override void OnExecute() => Collection.Add(Element);
 
         /// <summary>
         /// Removes the element from the collection.
         /// </summary>
-        protected override void OnUndo()
-        {
-            Collection.Remove(Element);
-        }
+        protected override void OnUndo() => Collection.Remove(Element);
     }
 }

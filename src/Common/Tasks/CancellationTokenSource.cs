@@ -90,10 +90,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return "CancellationTokenSource {IsCancellationRequested=" + IsCancellationRequested + "}";
-        }
+        public override string ToString() => "CancellationTokenSource {IsCancellationRequested=" + IsCancellationRequested + "}";
 
         /// <inheritdoc/>
         public void Dispose()

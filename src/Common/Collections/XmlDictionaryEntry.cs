@@ -81,10 +81,7 @@ namespace NanoByte.Common.Collections
 
         #region Conversion
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return Key + ": " + Value;
-        }
+        public override string ToString() => Key + ": " + Value;
         #endregion
 
         #region Equality

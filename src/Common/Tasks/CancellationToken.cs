@@ -78,10 +78,7 @@ namespace NanoByte.Common.Tasks
         public WaitHandle WaitHandle => _source == null ? new ManualResetEvent(false) : _source.WaitHandle;
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
-        }
+        public override string ToString() => "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
 
 #if NET40 || NET45
         /// <summary>

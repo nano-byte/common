@@ -70,9 +70,6 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Restores the original entry in the collection.
         /// </summary>
-        protected override void OnUndo()
-        {
-            _collection.Set(_entry.Language, _previousValue);
-        }
+        protected override void OnUndo() => _collection.Set(_entry.Language, _previousValue);
     }
 }

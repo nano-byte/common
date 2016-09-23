@@ -56,9 +56,6 @@ namespace NanoByte.Common.Net
         }
 
         /// <inheritdoc/>
-        protected override Stream CreateTargetStream()
-        {
-            return File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write);
-        }
+        protected override Stream CreateTargetStream() => File.Open(Target, FileMode.OpenOrCreate, FileAccess.Write);
     }
 }

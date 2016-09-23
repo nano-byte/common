@@ -52,17 +52,11 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Sets the new entry in the list.
         /// </summary>
-        protected override void OnExecute()
-        {
-            _list[_list.IndexOf(_oldElement)] = _newElement;
-        }
+        protected override void OnExecute() => _list[_list.IndexOf(_oldElement)] = _newElement;
 
         /// <summary>
         /// Restores the old entry in the list.
         /// </summary>
-        protected override void OnUndo()
-        {
-            _list[_list.IndexOf(_newElement)] = _oldElement;
-        }
+        protected override void OnUndo() => _list[_list.IndexOf(_newElement)] = _oldElement;
     }
 }

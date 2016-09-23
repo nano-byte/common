@@ -43,34 +43,22 @@ namespace NanoByte.Common.Values.Design
     {
         #region Capabilities
         /// <inheritdoc/>
-        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
-        {
-            return true;
-        }
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) => true;
 
         /// <inheritdoc/>
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
-        {
-            return true;
-        }
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context) => true;
 
         /// <inheritdoc/>
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
-        {
-            return TypeDescriptor.GetProperties(value, attributes);
-        }
+        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) =>
+            TypeDescriptor.GetProperties(value, attributes);
 
         /// <inheritdoc/>
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
-            return (destinationType == typeof(InstanceDescriptor)) || base.CanConvertFrom(context, destinationType);
-        }
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
+            (destinationType == typeof(InstanceDescriptor)) || base.CanConvertFrom(context, destinationType);
 
         /// <inheritdoc/>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
-        }
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+            (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
         #endregion
 
         #region Convert to

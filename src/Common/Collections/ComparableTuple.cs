@@ -66,10 +66,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Returns the tuple in the form "Key = Value". Not safe for parsing!
         /// </summary>
-        public override string ToString()
-        {
-            return Key + " = " + Value;
-        }
+        public override string ToString() => Key + " = " + Value;
         #endregion
 
         #region Equality

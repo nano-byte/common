@@ -43,10 +43,7 @@ namespace NanoByte.Common.Storage
         public new string Path => System.IO.Path.Combine(base.Path, "flag");
 
         [ContractAnnotation("null => null; notnull => notnull")]
-        public static implicit operator string(TemporaryFlagFile dir)
-        {
-            return dir?.Path;
-        }
+        public static implicit operator string(TemporaryFlagFile dir) => dir?.Path;
 
         /// <summary>
         /// Indicates or controls whether the file exists.

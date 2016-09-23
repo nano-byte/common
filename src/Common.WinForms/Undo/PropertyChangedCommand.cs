@@ -71,18 +71,12 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Set the changed property value again.
         /// </summary>
-        protected override void OnRedo()
-        {
-            _property.SetValue(_target, _newValue);
-        }
+        protected override void OnRedo() => _property.SetValue(_target, _newValue);
 
         /// <summary>
         /// Restore the original property value.
         /// </summary>
-        protected override void OnUndo()
-        {
-            _property.SetValue(_target, _oldValue);
-        }
+        protected override void OnUndo() => _property.SetValue(_target, _oldValue);
         #endregion
     }
 }
