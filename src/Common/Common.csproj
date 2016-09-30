@@ -254,6 +254,7 @@
     <Compile Include="Streams\StreamUtils.cs" />
     <Compile Include="Streams\_Namespace.cs" />
     <Compile Include="StringUtils.cs" />
+    <Compile Include="Tasks\CancellationGuard.cs" />
     <Compile Include="Tasks\CancellationToken.cs" />
     <Compile Include="Tasks\CancellationTokenRegistration.cs" />
     <Compile Include="Tasks\CancellationTokenSource.cs" />
