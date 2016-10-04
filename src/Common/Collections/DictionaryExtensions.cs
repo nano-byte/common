@@ -52,9 +52,13 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Returns the element with the specified <paramref name="key"/> from the <paramref name="dictionary"/>.
-        /// Creates, adds and returns a new value using <paramref name="valueFactory"/> if no match was found.
+        /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.
         /// </summary>
+        /// <param name="dictionary">The dictionary to get an element from or to add an element to.</param>
+        /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
+        /// <param name="valueFactory">A callback that provides the value to add to the <paramref name="dictionary"/> if the <paramref name="key"/> is not found.</param>
+        /// <returns>The existing element or the newly created element.</returns>
+        /// <remarks>No superflous calls to <paramref name="valueFactory"/> occur. Not thread-safe!</remarks>
         public static TValue GetOrAdd<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull, InstantHandle] Func<TValue> valueFactory)
         {
             #region Sanity checks
@@ -70,9 +74,11 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Returns the element with the specified <paramref name="key"/> from the <paramref name="dictionary"/>.
-        /// Creates, adds and returns a new <typeparamref name="TValue"/> instance if no match was found.
+        /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using the default constructor if it is missing.
         /// </summary>
+        /// <param name="dictionary">The dictionary to get an element from or to add an element to.</param>
+        /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
+        /// <returns>The existing element or the newly created element.</returns>
         public static TValue GetOrAdd<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
             where TValue : new()
         {
@@ -86,15 +92,30 @@ namespace NanoByte.Common.Collections
 
 #if NET45
         /// <summary>
-        /// Returns the element with the specified <paramref name="key"/> from the <paramref name="dictionary"/>.
-        /// Creates, adds and returns a new value using <paramref name="valueFactory"/> if no match was found.
+        /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.
         /// </summary>
-        public static async Task<TValue> GetOrAddAsync<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<Task<TValue>> valueFactory)
+        /// <param name="dictionary">The dictionary to get an element from or to add an element to.</param>
+        /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
+        /// <param name="valueFactory">A callback that provides a task that provides the value to add to the <paramref name="dictionary"/> if the <paramref name="key"/> is not found.</param>
+        /// <returns>The existing element or the newly created element.</returns>
+        /// <remarks>Superflous calls to <paramref name="valueFactory"/> may occur in case of read races. <see cref="IDisposable.Dispose"/> is called on superflously created objects if implemented.</remarks>
+        public static async Task<TValue> GetOrAddAsync<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key, [NotNull] Func<Task<TValue>> valueFactory)
         {
-            TValue value;
-            if (!dictionary.TryGetValue(key, out value))
-                dictionary.Add(key, value = await valueFactory());
-            return value;
+            TValue existingValue;
+            if (dictionary.TryGetValue(key, out existingValue))
+                return existingValue;
+
+            var newValue = await valueFactory();
+
+            // Detect and handle races
+            if (dictionary.TryGetValue(key, out existingValue))
+            {
+                (newValue as IDisposable)?.Dispose();
+                return existingValue;
+            }
+
+            dictionary.Add(key, newValue);
+            return newValue;
         }
 #endif
     }
