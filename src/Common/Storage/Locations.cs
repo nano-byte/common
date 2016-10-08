@@ -49,7 +49,13 @@ namespace NanoByte.Common.Storage
         /// Works with ngened and shadow copied assemblies. Does not work with GACed assemblies.
         /// </remarks>
         [PublicAPI, NotNull]
-        public static readonly string InstallBase = GetInstallBase();
+        public static string InstallBase { get; private set; } = GetInstallBase();
+
+        /// <summary>
+        /// Override the automatically determined <see cref="InstallBase"/> with a custom <paramref name="path"/>.
+        /// </summary>
+        /// <remarks>Use with caution. Be aware of possible race conditions. Intended for unit testing, runtime relocation, etc..</remarks>
+        public static void OverrideInstallBase(string path) => InstallBase = path;
 
         private static string GetInstallBase()
         {
