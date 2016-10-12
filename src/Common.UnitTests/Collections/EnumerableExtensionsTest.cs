@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
@@ -117,6 +118,9 @@ namespace NanoByte.Common.Collections
         [Test]
         public async Task TestForEachAsync()
         {
+            // Need to explicity set default SynchronizationContext to satisfy precondition check
+            SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+
             int runningTasksCount = 0;
             await new List<int> {1, 2, 3, 4, 5, 6}.ForEachAsync(async x =>
             {

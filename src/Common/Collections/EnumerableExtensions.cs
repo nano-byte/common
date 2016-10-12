@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Values;
 
@@ -273,14 +274,22 @@ namespace NanoByte.Common.Collections
 
 #if NET45
         /// <summary>
-        /// Runs asynchronous operations for each element in an enumeration. Performs automatic interleaving/parallelization.
+        /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
         /// </summary>
         /// <param name="enumerable">The input elements to enumerate over.</param>
         /// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
         /// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
+        /// <exception cref="InvalidOperationException"><see cref="SynchronizationContext.Current"/> is <c>null</c>.</exception>
+        /// <remarks>
+        /// <see cref="SynchronizationContext.Current"/> must not be null.
+        /// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
+        /// </remarks>
         [NotNull]
         public static async Task ForEachAsync<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, Task> taskFactory, int maxParallel = 0)
         {
+            if (SynchronizationContext.Current == null)
+                throw new InvalidOperationException("SynchronizationContext.Current must not be null when using ForEachAsync().");
+
             var tasks = new List<Task>(maxParallel);
 
             foreach (var task in enumerable.Select(taskFactory))
