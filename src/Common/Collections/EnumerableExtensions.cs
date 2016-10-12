@@ -253,9 +253,14 @@ namespace NanoByte.Common.Collections
             return sorted;
         }
 
-        private static void TopologicalSortVisit<T>(T node, HashSet<T> visited, ICollection<T> sorted, Func<T, IEnumerable<T>> getDependencies)
+        private static void TopologicalSortVisit<T>(T node, HashSet<T> visited, List<T> sorted, Func<T, IEnumerable<T>> getDependencies)
         {
-            if (!visited.Contains(node))
+            if (visited.Contains(node))
+            {
+                if (!sorted.Contains(node))
+                    throw new InvalidDataException($"Cyclic dependency found at: {node}");
+            }
+            else
             {
                 visited.Add(node);
 
@@ -263,11 +268,6 @@ namespace NanoByte.Common.Collections
                     TopologicalSortVisit(dep, visited, sorted, getDependencies);
 
                 sorted.Add(node);
-            }
-            else
-            {
-                if (!sorted.Contains(node))
-                    throw new InvalidDataException("Cyclic dependency found.");
             }
         }
 
