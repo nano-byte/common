@@ -52,8 +52,12 @@ namespace NanoByte.Common.Storage
         /// Combines an array of strings into a path.
         /// </summary>
         /// <remarks>Backport of the n-parameter version of <see cref="Path.Combine(string,string)"/> introduced in .NET 4.0.</remarks>
-        public static string PathCombine(params string[] paths)
+        public static string PathCombine([NotNull] params string[] paths)
         {
+            #region Sanity checks
+            if (paths == null) throw new ArgumentNullException(nameof(paths));
+            #endregion
+
 #if NET20 || NET35
             return (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
 #else

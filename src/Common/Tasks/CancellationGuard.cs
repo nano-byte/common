@@ -22,6 +22,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace NanoByte.Common.Tasks
@@ -38,6 +39,7 @@ namespace NanoByte.Common.Tasks
     /// }
     /// </code>
     /// </example>
+    [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
     public class CancellationGuard : IDisposable
     {
         private CancellationTokenRegistration _registration;
@@ -65,6 +67,8 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Releases the block and allows <see cref="CancellationTokenSource.Cancel()"/> to complete.
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
+        [SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
         public void Dispose()
         {
             _tcs.SetResult(true);
