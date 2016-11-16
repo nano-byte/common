@@ -1,10 +1,7 @@
 # Disable linebreak normalization
-*	     text=false
+*        -text
 
 # Visual Studio file types
 *.cs     diff=csharp
 *.sln    merge=union
 *.csproj merge=union
-*.vbproj merge=union
-*.fsproj merge=union
-*.dbproj merge=union
