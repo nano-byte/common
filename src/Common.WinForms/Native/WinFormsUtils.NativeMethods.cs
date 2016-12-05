@@ -71,7 +71,6 @@ namespace NanoByte.Common.Native
 
             // ReSharper disable once MemberHidesStaticFromOuterClass
             [DllImport("user32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
             public static extern IntPtr SetCapture(IntPtr handle);
 
             // ReSharper disable once MemberHidesStaticFromOuterClass
