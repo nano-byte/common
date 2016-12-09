@@ -21,9 +21,7 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using NanoByte.Common.Cli;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
@@ -123,12 +121,8 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override bool Ask(string question)
+        protected override bool Ask(string question, MsgSeverity severity)
         {
-            #region Sanity checks
-            if (question == null) throw new ArgumentNullException(nameof(question));
-            #endregion
-
             Log.Debug("Question: " + question);
             Console.Error.WriteLine(question);
 

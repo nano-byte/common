@@ -271,7 +271,6 @@
     <Compile Include="Tasks\SimpleTask.cs" />
     <Compile Include="Tasks\SynchronousProgress.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
-    <Compile Include="Tasks\TaskHandlerExtensions.cs" />
     <Compile Include="Tasks\TaskSnapshot.cs" />
     <Compile Include="Tasks\TaskState.cs" />
     <Compile Include="Tasks\Verbosity.cs" />

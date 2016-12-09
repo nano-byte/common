@@ -47,14 +47,10 @@ namespace NanoByte.Common.Tasks
             : null;
 
         /// <inheritdoc/>
-        public override bool Ask(string question)
+        protected override bool Ask(string question, MsgSeverity severity)
         {
-            #region Sanity checks
-            if (question == null) throw new ArgumentNullException(nameof(question));
-            #endregion
-
             Log.Debug("Question: " + question);
-            switch (ThreadUtils.RunSta(() => Msg.YesNoCancel(null, question, MsgSeverity.Warn)))
+            switch (ThreadUtils.RunSta(() => Msg.YesNoCancel(null, question, severity)))
             {
                 case DialogResult.Yes:
                     Log.Debug("Answer: Yes");

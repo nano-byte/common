@@ -22,6 +22,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 
@@ -32,6 +33,22 @@ namespace NanoByte.Common.Native
     /// </summary>
     public static partial class WinFormsUtils
     {
+        /// <summary>
+        /// Centers a window on its parent/owner. Call this from the <see cref="Form.Load"/> event handler.
+        /// </summary>
+        /// <remarks>This method is an alternative to <see cref="FormStartPosition.CenterParent"/> which only works with <see cref="Form.ShowDialog(IWin32Window)"/> and not <see cref="Form.Show(IWin32Window)"/>.</remarks>
+        public static void CenterOnParent([NotNull] this Form form)
+        {
+            #region Sanity checks
+            if (form == null) throw new ArgumentNullException(nameof(form));
+            #endregion
+
+            if (form.Owner == null) return;
+            form.Location = new Point(
+                x: form.Owner.Location.X + form.Owner.Width / 2 - form.Width / 2,
+                y: form.Owner.Location.Y + form.Owner.Height / 2 - form.Height / 2);
+        }
+
         /// <summary>
         /// Forces a window to the foreground or flashes the taskbar if another process has the focus.
         /// </summary>

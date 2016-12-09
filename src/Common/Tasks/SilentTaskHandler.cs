@@ -29,33 +29,17 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Ignores progress reports.
     /// </summary>
-    public class SilentTaskHandler : MarshalNoTimeout, ITaskHandler
+    public class SilentTaskHandler : TaskHandlerBase
     {
-        /// <summary>
-        /// Used to signal the <see cref="CancellationToken"/>.
-        /// </summary>
-        protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+        /// <inheritdoc/>
+        protected override void LogHandler(LogSeverity severity, string message)
+        {}
 
         /// <inheritdoc/>
-        public CancellationToken CancellationToken => CancellationTokenSource.Token;
+        protected override ICredentialProvider BuildCrendentialProvider() => null;
 
         /// <inheritdoc/>
-        public ICredentialProvider CredentialProvider => null;
-
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing) CancellationTokenSource.Dispose();
-        }
-
-        /// <inheritdoc/>
-        public void RunTask(ITask task)
+        public override void RunTask(ITask task)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException(nameof(task));
@@ -68,12 +52,12 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Always returns <see cref="Tasks.Verbosity.Batch"/>.
         /// </summary>
-        public virtual Verbosity Verbosity { get { return Verbosity.Batch; } set { } }
+        public override Verbosity Verbosity { get { return Verbosity.Batch; } set {} }
 
         /// <summary>
         /// Always returns <c>false</c>.
         /// </summary>
-        public virtual bool Ask(string question)
+        protected override bool Ask(string question, MsgSeverity severity)
         {
             Log.Debug("Question: " + question);
             Log.Debug("Silent answer: No");
@@ -81,19 +65,19 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void Output(string title, string message)
+        public override void Output(string title, string message)
         {
             // No UI, so nothing to do
         }
 
         /// <inheritdoc/>
-        public virtual void Output<T>(string title, IEnumerable<T> data)
+        public override void Output<T>(string title, IEnumerable<T> data)
         {
             // No UI, so nothing to do
         }
 
         /// <inheritdoc/>
-        public void Error(Exception exception)
+        public override void Error(Exception exception)
         {
             // No UI, so nothing to do
         }
