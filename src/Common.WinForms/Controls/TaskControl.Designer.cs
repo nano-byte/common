@@ -30,35 +30,38 @@
         {
             this.components = new System.ComponentModel.Container();
             this.labelOperation = new System.Windows.Forms.Label();
-            this.progressBar = new Common.Controls.TaskProgressBar();
-            this.progressLabel = new Common.Controls.TaskLabel();
+            this.progressBar = new NanoByte.Common.Controls.TaskProgressBar();
+            this.progressLabel = new NanoByte.Common.Controls.TaskLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelOperation
             // 
             this.labelOperation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelOperation.Location = new System.Drawing.Point(0, 32);
+            this.labelOperation.Location = new System.Drawing.Point(0, 0);
             this.labelOperation.Name = "labelOperation";
-            this.labelOperation.Size = new System.Drawing.Size(200, 16);
+            this.labelOperation.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.labelOperation.Size = new System.Drawing.Size(200, 17);
             this.labelOperation.TabIndex = 0;
+            this.labelOperation.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.labelOperation.UseMnemonic = false;
             // 
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.progressBar.Location = new System.Drawing.Point(0, 19);
+            this.progressBar.Location = new System.Drawing.Point(0, 17);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(200, 13);
+            this.progressBar.Size = new System.Drawing.Size(200, 18);
             this.progressBar.TabIndex = 1;
             this.progressBar.UseTaskbar = true;
             // 
             // progressLabel
             // 
             this.progressLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.progressLabel.Location = new System.Drawing.Point(0, 0);
+            this.progressLabel.Location = new System.Drawing.Point(0, 35);
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(200, 19);
+            this.progressLabel.Size = new System.Drawing.Size(200, 17);
+            this.progressLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.progressLabel.TabIndex = 2;
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -66,11 +69,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelOperation);
-            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.progressLabel);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.labelOperation);
             this.Name = "TaskControl";
-            this.Size = new System.Drawing.Size(200, 50);
+            this.Size = new System.Drawing.Size(200, 54);
             this.ResumeLayout(false);
 
         }
