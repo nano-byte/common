@@ -183,6 +183,9 @@
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>Ο κατάλογος ρύθμισης &apos;{0}&apos; είναι μάλλον άκυρος.</value>
   </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Τα διαπιστευτήρια σύνδεσης για {0} είναι εσφαλμένη.</value>
+  </data>
   <data name="ItemAlreadyInPool" xml:space="preserve">
     <value>Το στοιχείο είναι ήδη σε μια δεξαμενή. Δεν μπορεί να προστεθεί σε περισσότερες από μία δεξαμενες.</value>
   </data>
@@ -216,6 +219,9 @@
   <data name="NoModActive" xml:space="preserve">
     <value>Σήμερα δεν υπάρχει ενεργό σημ.</value>
   </data>
+  <data name="NoSystemConfigInPortableMode" xml:space="preserve">
+    <value>Η διαμόρφωση του συστήματος δεν μπορεί να επεξεργαστεί σε φορητές λειτουργία.</value>
+  </data>
   <data name="NotAnImage" xml:space="preserve">
     <value>Το αρχείο δεν είναι μια έγκυρη εικόνα.</value>
   </data>
@@ -236,6 +242,12 @@
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Η μέθοδος αυτή είναι προς το παρόν διαθέσιμη μόνο στα Windows.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Σύνθημα:</value>
+  </data>
+  <data name="PleasEnterCredentials" xml:space="preserve">
+    <value>Παρακαλούμε, εισάγετε login διαπιστευτήρια για {0}:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
     <value>Υπήρξε ένα πρόβλημα φόρτωσης &apos;{0}&apos;.</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="UserCancel" xml:space="preserve">
     <value>Ο χρήστης έχει επιλέξει να ακυρώσει τη λειτουργία.</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Όνομα Χρήστη:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ναί</value>
