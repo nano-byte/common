@@ -800,23 +800,38 @@ namespace NanoByte.Common.Storage
         {
             if (!File.Exists(path)) return false;
 
-            // TODO: Detect special files on Windows
-            if (!UnixUtils.IsUnix) return true;
-
-            try
+            if (UnixUtils.IsUnix)
             {
-                return UnixUtils.IsRegularFile(path);
-            }
+                try
+                {
+                    return UnixUtils.IsRegularFile(path);
+                }
                 #region Error handling
-            catch (InvalidOperationException ex)
-            {
-                throw new IOException(Resources.UnixSubsystemFail, ex);
+                catch (InvalidOperationException ex)
+                {
+                    throw new IOException(Resources.UnixSubsystemFail, ex);
+                }
+                catch (IOException ex)
+                {
+                    throw new IOException(Resources.UnixSubsystemFail, ex);
+                }
+                #endregion
             }
-            catch (IOException ex)
+            else if (WindowsUtils.IsWindowsVista)
             {
-                throw new IOException(Resources.UnixSubsystemFail, ex);
+                try
+                {
+                    return !WindowsUtils.IsSymlink(path);
+                }
+                    #region Error handling
+                catch (Win32Exception ex)
+                {
+                    // Wrap exception since only certain exception types are allowed
+                    throw new IOException(ex.Message, ex);
+                }
+                #endregion
             }
-            #endregion
+            else return true;
         }
 
         /// <summary>
@@ -845,7 +860,20 @@ namespace NanoByte.Common.Storage
                 }
                 #endregion
             }
-            // TODO: Detect NTFS symlinks
+            else if (WindowsUtils.IsWindowsVista)
+            {
+                try
+                {
+                    return WindowsUtils.IsSymlink(path);
+                }
+                    #region Error handling
+                catch (Win32Exception ex)
+                {
+                    // Wrap exception since only certain exception types are allowed
+                    throw new IOException(ex.Message, ex);
+                }
+                #endregion
+            }
             else return false;
         }
 
@@ -876,7 +904,20 @@ namespace NanoByte.Common.Storage
                 }
                 #endregion
             }
-            // TODO: Detect NTFS symlinks
+            else if (WindowsUtils.IsWindowsVista)
+            {
+                try
+                {
+                    return WindowsUtils.IsSymlink(path, out target);
+                }
+                    #region Error handling
+                catch (Win32Exception ex)
+                {
+                    // Wrap exception since only certain exception types are allowed
+                    throw new IOException(ex.Message, ex);
+                }
+                #endregion
+            }
             else
             {
                 target = null;

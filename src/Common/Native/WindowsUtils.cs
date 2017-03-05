@@ -432,6 +432,51 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
+        /// Checks whether a file is an NTFS symbolic link.
+        /// </summary>
+        /// <param name="path">The path of the file to check.</param>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
+        /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
+        /// <exception cref="IOException">There was an IO problem getting link information.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
+        /// <exception cref="Win32Exception">Getting link information failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
+        public static bool IsSymlink([NotNull, Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
+
+            if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            // TODO: Implement
+            return false;
+        }
+
+        /// <summary>
+        /// Checks whether a file is an NTFS symbolic link.
+        /// </summary>
+        /// <param name="path">The path of the file to check.</param>
+        /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
+        /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
+        /// <exception cref="IOException">There was an IO problem getting link information.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
+        /// <exception cref="Win32Exception">Getting link information failed.</exception>
+        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
+        public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
+
+            if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+            // TODO: Implement
+            target = null;
+            return false;
+        }
+
+        /// <summary>
         /// Creates a hard link between two files.
         /// </summary>
         /// <param name="sourcePath">The path of the link to create.</param>
