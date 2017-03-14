@@ -52,6 +52,15 @@ namespace NanoByte.Common.Net
         }
 
         /// <summary>
+        /// Enables support for SSL3, TLS 1.0, TLS 1.1 and TLS 1.2.
+        /// </summary>
+        public static void ConfigureTls() => ServicePointManager.SecurityProtocol =
+            SecurityProtocolType.Ssl3 |
+            SecurityProtocolType.Tls |
+            (SecurityProtocolType)768 | // Tls11
+            (SecurityProtocolType)3072; // Tls12
+
+        /// <summary>
         /// Makes the SSL validation subsystem trust a set of certificates, even if their certificate chain is not trusted.
         /// </summary>
         /// <param name="publicKeys">The public keys of the certificates to trust.</param>
