@@ -3,8 +3,11 @@
 
 echo.
 call "%~dp0src\build.cmd" Release
+if errorlevel 1 pause
 call "%~dp0src\build.cmd" ReleaseNet40
+if errorlevel 1 pause
 call "%~dp0src\build.cmd" ReleaseNet35
+if errorlevel 1 pause
 call "%~dp0src\build.cmd" ReleaseNet20
 if errorlevel 1 pause
 
