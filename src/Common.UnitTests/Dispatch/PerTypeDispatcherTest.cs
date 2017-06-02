@@ -22,14 +22,13 @@
 
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Contains test methods for <see cref="PerTypeDispatcher{TBase,TResult}"/>.
     /// </summary>
-    [TestFixture]
     public class PerTypeDispatcherTest
     {
         private abstract class Base
@@ -41,7 +40,7 @@ namespace NanoByte.Common.Dispatch
         private class Sub2 : Base
         {}
 
-        [Test]
+        [Fact]
         public void TestDispatchAction()
         {
             var sub1Orig = new Sub1();
@@ -62,7 +61,7 @@ namespace NanoByte.Common.Dispatch
             sub2Dispatched.Should().BeSameAs(sub2Orig);
         }
 
-        [Test]
+        [Fact]
         public void TestDispatchActionExceptions()
         {
             new PerTypeDispatcher<Base>(false) {(Sub1 sub1) => { }}
@@ -73,7 +72,7 @@ namespace NanoByte.Common.Dispatch
                 .ShouldNotThrow<KeyNotFoundException>();
         }
 
-        [Test]
+        [Fact]
         public void TestDispatchFunc()
         {
             var sub1Orig = new Sub1();
@@ -89,7 +88,7 @@ namespace NanoByte.Common.Dispatch
             dispatcher.Dispatch(sub2Orig).Should().BeSameAs(sub2Orig);
         }
 
-        [Test]
+        [Fact]
         public void TestDispatchFuncExceptions()
         {
             new PerTypeDispatcher<Base, Base>(false) {(Sub1 sub1) => sub1}

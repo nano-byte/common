@@ -22,30 +22,29 @@
 
 using System.Globalization;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="LanguageSet"/>.
     /// </summary>
-    [TestFixture]
     public class LanguageSetTest
     {
-        [Test]
+        [Fact]
         public void TestToString()
         {
             var collection = new LanguageSet {"en-US", "de"};
             collection.ToString().Should().Be("de en_US");
         }
 
-        [Test]
+        [Fact]
         public void TestFromString()
         {
             new LanguageSet("en_US de").Should().BeEquivalentTo(new LanguageSet {"de", "en-US"});
         }
 
-        [Test]
+        [Fact]
         public void TestDuplicateDetection()
         {
             var collection = new LanguageSet("en_US");
@@ -53,7 +52,7 @@ namespace NanoByte.Common.Collections
             collection.Should().BeEquivalentTo(new LanguageSet {"en-US"});
         }
 
-        [Test]
+        [Fact]
         public void TestContainsAny()
         {
             new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}).Should().BeTrue();
@@ -69,7 +68,7 @@ namespace NanoByte.Common.Collections
             new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestContainsAnyIgnoreCountry()
         {
             new LanguageSet {"de", "en"}.ContainsAny(new LanguageSet {"en", "fr"}, ignoreCountry: true).Should().BeTrue();
@@ -85,7 +84,7 @@ namespace NanoByte.Common.Collections
             new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestInvalidCultureInSet()
         {
             new LanguageSet("invalid en").Should().Equal(new LanguageSet{CultureInfo.InvariantCulture, new CultureInfo("en")});

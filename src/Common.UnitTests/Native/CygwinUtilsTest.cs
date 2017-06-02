@@ -25,14 +25,10 @@ using System.Linq;
 using System.Text;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Native
 {
-    /// <summary>
-    /// SUMMARY
-    /// </summary>
-    [TestFixture]
     public class CygwinUtilsTest
     {
         private static readonly byte[] _symlinkBytes = CygwinUtils.SymlinkCookie
@@ -40,7 +36,7 @@ namespace NanoByte.Common.Native
             .Concat(Encoding.Unicode.GetBytes("target\0"))
             .ToArray();
 
-        [Test]
+        [Fact]
         public void TestIsSymlinkNoMatch()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -55,7 +51,7 @@ namespace NanoByte.Common.Native
             }
         }
 
-        [Test]
+        [Fact]
         public void TestIsSymlinkMatch()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -72,10 +68,10 @@ namespace NanoByte.Common.Native
             }
         }
 
-        [Test]
+        [SkippableFact]
         public void TestCreateSymlink()
         {
-            if (!WindowsUtils.IsWindows) Assert.Ignore("The 'system' file attribute can only be set on the Windows platform.");
+            Skip.IfNot(WindowsUtils.IsWindows, reason: "The 'system' file attribute can only be set on the Windows platform.");
 
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
@@ -83,7 +79,7 @@ namespace NanoByte.Common.Native
                 CygwinUtils.CreateSymlink(symlinkFile, "target");
 
                 File.Exists(symlinkFile).Should().BeTrue();
-                CollectionAssert.AreEqual(expected: _symlinkBytes, actual: File.ReadAllBytes(symlinkFile));
+                File.ReadAllBytes(symlinkFile).Should().Equal(_symlinkBytes);
             }
         }
     }

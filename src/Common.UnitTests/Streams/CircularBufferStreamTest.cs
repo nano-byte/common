@@ -24,28 +24,21 @@ using System;
 using System.IO;
 using System.Threading;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Streams
 {
     /// <summary>
     /// Contains test methods for <see cref="CircularBufferStream"/>.
     /// </summary>
-    [TestFixture]
     public class CircularBufferStreamTest
     {
-        private CircularBufferStream _stream;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _stream = new CircularBufferStream(6);
-        }
+        private readonly CircularBufferStream _stream = new CircularBufferStream(6);
 
         /// <summary>
         /// Fills the buffer with some data that will fit in a single block and then reads it again.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestSequential()
         {
             _stream.Write(new byte[] {255, 1, 2, 3, 255}, 1, 3);
@@ -58,7 +51,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Writes some data into the buffer, reads a part of it, write more data into it and then read all thats remaining.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestMixed()
         {
             _stream.WriteByte(0);
@@ -84,7 +77,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Read and write data in the buffer in multiple calls, some of which will force the backing byte array storage to wrap around.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestWrapAround()
         {
             _stream.Write(new byte[] {0, 1, 2, 3}, 0, 4);
@@ -103,7 +96,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Creates a producer and a consumer thread, both accessing the buffer simultaneously.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestThreading()
         {
             var producerData = new byte[128];
@@ -124,7 +117,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Similar to <see cref="TestThreading"/> but uses end-of-data detection via <see cref="CircularBufferStream.DoneWriting"/>
         /// </summary>
-        [Test]
+        [Fact]
         public void TestThreadingDoneWriting()
         {
             var producerData = new byte[64];
@@ -155,7 +148,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Ensures exceptions get passed from <see cref="CircularBufferStream.RelayErrorToReader"/> to <see cref="CircularBufferStream.Read"/>.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestErrorRelay()
         {
             // Throw exception on producer thread after a short delay
@@ -172,7 +165,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Ensures blocked writers terminate when the stream is disposed.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestDisposeBeforeComplete()
         {
             var data = new byte[_stream.BufferSize];

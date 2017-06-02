@@ -23,17 +23,16 @@
 using System.IO;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Values
 {
     /// <summary>
     /// Contains test methods for <see cref="ByteGrid"/>.
     /// </summary>
-    [TestFixture]
     public class ByteGridTest
     {
-        [Test]
+        [Fact]
         public void TestSaveLoad()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
@@ -51,7 +50,7 @@ namespace NanoByte.Common.Values
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSampledRead()
         {
             new ByteGrid(new byte[,] {{10}, {0}}).SampledRead(0.5f, 0).Should().Be(5);

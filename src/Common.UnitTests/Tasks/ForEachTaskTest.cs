@@ -24,17 +24,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
     /// Contains test methods for <see cref="ForEachTask{T}"/>.
     /// </summary>
-    [TestFixture]
     public class ForEachTaskTest
     {
-        [Test(Description = "Ensures the work delegate gets called synchronously.")]
+        [Fact]
         public void TestCallback()
         {
             var target = new[] {"element1", "element2", "element2"};
@@ -46,7 +45,7 @@ namespace NanoByte.Common.Tasks
             calledFor.Should().Equal(target);
         }
 
-        [Test(Description = "Ensures exceptions from the work delegate get correctly passed through.")]
+        [Fact]
         public void TestExceptionPassing()
         {
             new ForEachTask<string>("Test task", new[] {""}, delegate { throw new IOException("Test exception"); })

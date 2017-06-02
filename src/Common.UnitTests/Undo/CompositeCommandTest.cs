@@ -23,14 +23,13 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// Contains test methods for <see cref="CompositeCommand"/>.
     /// </summary>
-    [TestFixture]
     public class CompositeCommandTest
     {
         private class MockCommand : IUndoCommand
@@ -54,7 +53,7 @@ namespace NanoByte.Common.Undo
             }
         }
 
-        [Test(Description = "Makes sure executing and undoing a CompositeCommand correctly executes and undos the contained child commands.")]
+        [Fact]
         public void TestExecuteUndo()
         {
             var executeCalls = new List<int>(3);
@@ -71,7 +70,7 @@ namespace NanoByte.Common.Undo
             undoCalls.Should().Equal(new[] {2, 1, 0}, because: "Child commands should be undone in descending order");
         }
 
-        [Test(Description = "Makes sure exceptions while executing cause rollbacks to occur.")]
+        [Fact]
         public void TestExecuteRollback()
         {
             var executeCalls = new List<int>(3);
@@ -79,14 +78,14 @@ namespace NanoByte.Common.Undo
             var command = new CompositeCommand(
                 new MockCommand(() => executeCalls.Add(0), () => undoCalls.Add(0)),
                 new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
-                new MockCommand(() => { throw new OperationCanceledException(); }, () => undoCalls.Add(2)));
+                new MockCommand(() => throw new OperationCanceledException(), () => undoCalls.Add(2)));
 
-            Assert.Throws<OperationCanceledException>(command.Execute, "Exceptions should be passed through after rollback");
+            command.Invoking(x => x.Execute()).ShouldThrow<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
             executeCalls.Should().Equal(new[] {0, 1}, because: "After an exception the rest of the commands should not be executed");
             undoCalls.Should().Equal(new[] {1, 0}, because: "After an exception all successful executions should be undone");
         }
 
-        [Test(Description = "Makes sure exceptions while undoing cause rollbacks to occur.")]
+        [Fact]
         public void TestUndoRollback()
         {
             var executeCalls = new List<int>(3);
@@ -100,19 +99,19 @@ namespace NanoByte.Common.Undo
             executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
 
             executeCalls.Clear();
-            Assert.Throws<OperationCanceledException>(command.Undo, "Exceptions should be passed through after rollback");
+            command.Invoking(x => x.Undo()).ShouldThrow<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
             undoCalls.Should().Equal(new[] {2, 1}, because: "After an exception the rest of the undoes should not be performed");
             executeCalls.Should().Equal(new[] {1, 2}, because: "After an exception all successful undoes should be re-executed");
         }
 
-        [Test(Description = "Makes sure a correct order of calling Execute() and Undo() is enforced.")]
+        [Fact]
         public void TestWrongOrder()
         {
             var command = new CompositeCommand();
-            Assert.Throws<InvalidOperationException>(command.Undo, "Should not allow Undo before Execute");
+            command.Invoking(x => x.Undo()).ShouldThrow<InvalidOperationException>(because: "Should not allow Undo before Execute");
 
             command.Execute();
-            Assert.Throws<InvalidOperationException>(command.Execute, "Should not allow two Executes without an Undo in between");
+            command.Invoking(x => x.Execute()).ShouldThrow<InvalidOperationException>(because: "Should not allow two Executes without an Undo in between");
         }
     }
 }

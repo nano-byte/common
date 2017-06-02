@@ -22,20 +22,19 @@
 
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// Contains test methods for <see cref="ReplaceInList{T}"/>.
     /// </summary>
-    [TestFixture]
     public class ReplaceInListTest
     {
         /// <summary>
         /// Makes sure <see cref="ReplaceInList{T}"/> correctly performs executions and undos.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestExecute()
         {
             var list = new List<string> {"a", "b", "c"};

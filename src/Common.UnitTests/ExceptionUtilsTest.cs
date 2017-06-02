@@ -28,20 +28,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NanoByte.Common.Native;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common
 {
     /// <summary>
     /// Contains test methods for <see cref="ExceptionUtils"/>.
     /// </summary>
-    [TestFixture]
     public class ExceptionUtilsTest
     {
-        [Test]
+        [SkippableFact]
         public void TestPreserveStack()
         {
-            if (!WindowsUtils.IsWindows) Assert.Ignore("Preserving exception stack traces of rethrown exceptions uses .NET Remoting functionality not available on some Mono versions.");
+            Skip.IfNot(WindowsUtils.IsWindows, reason: "Preserving exception stack traces of rethrown exceptions uses .NET Remoting functionality not available on some Mono versions.");
 
             Exception caught = null;
             try
@@ -53,7 +52,7 @@ namespace NanoByte.Common
                 caught = ex;
             }
 
-            caught.Invoking(x => { throw x.PreserveStack(); })
+            caught.Invoking(x => throw x.PreserveStack())
                 .ShouldThrow<InvalidOperationException>()
                 .Where(x => x.StackTrace.Contains("ThrowMockException"));
         }
@@ -67,19 +66,19 @@ namespace NanoByte.Common
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.ApplyWithRollback{T}"/> correctly performs rollbacks on exceptions.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestApplyWithRollback()
         {
             var applyCalledFor = new List<int>();
             var rollbackCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.ApplyWithRollback(
-                apply: value =>
-                {
-                    applyCalledFor.Add(value);
-                    if (value == 2) throw new ArgumentException("Test exception");
-                },
-                rollback: rollbackCalledFor.Add),
-                message: "Exceptions should be passed through after rollback.");
+            new Action(() => new[] {1, 2, 3}.ApplyWithRollback(
+                    apply: value =>
+                    {
+                        applyCalledFor.Add(value);
+                        if (value == 2) throw new ArgumentException("Test exception");
+                    },
+                    rollback: rollbackCalledFor.Add))
+                .ShouldThrow<ArgumentException>(because: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);
@@ -88,7 +87,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.TryAny{T}"/> correctly handles fail conditions followed by success conditions.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestTryAnySucceed()
         {
             var actionCalledFor = new List<int>();
@@ -104,20 +103,21 @@ namespace NanoByte.Common
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.TryAny{T}"/> correctly handles pure fail conditions.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestTryAnyFail()
         {
             var actionCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(() => new[] {1, 2, 3}.TryAny(value =>
-            {
-                actionCalledFor.Add(value);
-                throw new ArgumentException("Test exception");
-            }), "Last exceptions should be passed through.");
+            new Action(() => new[] {1, 2, 3}.TryAny(value =>
+                {
+                    actionCalledFor.Add(value);
+                    throw new ArgumentException("Test exception");
+                }))
+                .ShouldThrow<ArgumentException>(because: "Last exceptions should be passed through.");
 
             actionCalledFor.Should().Equal(1, 2, 3);
         }
 
-        [Test]
+        [Fact]
         public void TestRetryPassOnLastAttmpt()
         {
             ExceptionUtils.Retry<InvalidOperationException>(lastAttempt =>
@@ -126,14 +126,14 @@ namespace NanoByte.Common
             });
         }
 
-        [Test]
+        [Fact]
         public void TestRetryDoubleFail()
         {
             Assert.Throws<InvalidOperationException>(() => ExceptionUtils.Retry<InvalidOperationException>(
                 delegate { throw new InvalidOperationException("Test exception"); }, maxRetries: 1));
         }
 
-        [Test]
+        [Fact]
         public void TestRetryOtherExceptionType()
         {
             Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
@@ -143,12 +143,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.ApplyWithRollbackAsync{T}"/> correctly performs rollbacks on exceptions.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestApplyWithRollbackAsync()
         {
             var applyCalledFor = new List<int>();
             var rollbackCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(async () => await new[] {1, 2, 3}.ApplyWithRollbackAsync(
+            new Func<Task>(async () => await new[] {1, 2, 3}.ApplyWithRollbackAsync(
                 apply: async value =>
                 {
                     await Task.Yield();
@@ -158,8 +158,7 @@ namespace NanoByte.Common
                 {
                     await Task.Yield();
                     rollbackCalledFor.Add(x);
-                }),
-                message: "Exceptions should be passed through after rollback.");
+                })).ShouldThrow<ArgumentException>(because: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);
@@ -168,7 +167,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles fail conditions followed by success conditions.
         /// </summary>
-        [Test]
+        [Fact]
         public async Task TestTryAnyAsyncSucceed()
         {
             var actionCalledFor = new List<int>();
@@ -185,21 +184,21 @@ namespace NanoByte.Common
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles pure fail conditions.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestTryAnyAsyncFail()
         {
             var actionCalledFor = new List<int>();
-            Assert.Throws<ArgumentException>(async () => await new[] {1, 2, 3}.TryAnyAsync(async value =>
+            new Func<Task>(async () => await new[] {1, 2, 3}.TryAnyAsync(async value =>
             {
                 await Task.Yield();
                 actionCalledFor.Add(value);
                 throw new ArgumentException("Test exception");
-            }), "Last exceptions should be passed through.");
+            })).ShouldThrow<ArgumentException>(because: "Last exceptions should be passed through.");
 
             actionCalledFor.Should().Equal(1, 2, 3);
         }
 
-        [Test]
+        [Fact]
         public async Task TestRetryAsyncPassOnLastAttmpt()
         {
             await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
@@ -209,29 +208,29 @@ namespace NanoByte.Common
             });
         }
 
-        [Test]
+        [Fact]
         public void TestRetryAsyncDoubleFail()
         {
-            Assert.Throws<InvalidOperationException>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+            new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
                 async delegate
                 {
                     await Task.Yield();
                     throw new InvalidOperationException("Test exception");
-                }, maxRetries: 1));
+                }, maxRetries: 1)).ShouldThrow<InvalidOperationException>();
         }
 
-        [Test]
+        [Fact]
         public void TestRetryAsyncOtherExceptionType()
         {
-            Assert.Throws<IOException>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+            new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
                 async delegate
                 {
                     await Task.Yield();
                     throw new IOException("Test exception");
-                }, maxRetries: 1));
+                }, maxRetries: 1)).ShouldThrow<IOException>();
         }
 
-        [Test]
+        [Fact]
         public void RetryStressTest()
         {
             var exceptions = new Exception[10];

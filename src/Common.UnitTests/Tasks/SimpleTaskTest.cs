@@ -23,17 +23,16 @@
 using System.IO;
 using System.Net;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
     /// Contains test methods for <see cref="SimpleTask"/>.
     /// </summary>
-    [TestFixture]
     public class SimpleTaskTest
     {
-        [Test(Description = "Ensures the work delegate gets called synchronously.")]
+        [Fact]
         public void TestCallback()
         {
             bool called = false;
@@ -44,7 +43,7 @@ namespace NanoByte.Common.Tasks
             called.Should().BeTrue();
         }
 
-        [Test(Description = "Ensures exceptions from the work delegate get correctly passed through.")]
+        [Fact]
         public void TestExceptionPassing()
         {
             new SimpleTask("Test task", delegate { throw new IOException("Test exception"); })

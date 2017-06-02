@@ -21,14 +21,13 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// Contains test methods for <see cref="CommandCollector"/>.
     /// </summary>
-    [TestFixture]
     public class CommandCollectorTest
     {
         private class MockCommand : IUndoCommand
@@ -49,7 +48,7 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Makes sure <see cref="CommandCollector"/> correctly collects and composes commands.
         /// </summary>
-        [Test]
+        [Fact]
         public void Test()
         {
             var collector = new CommandCollector();

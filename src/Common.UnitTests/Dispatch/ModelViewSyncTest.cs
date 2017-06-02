@@ -25,14 +25,13 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NanoByte.Common.Collections;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Contains test methods for <see cref="ModelViewSync{TModel,TView}"/>.
     /// </summary>
-    [TestFixture]
     public class ModelViewSyncTest
     {
         #region Mock classes
@@ -78,7 +77,7 @@ namespace NanoByte.Common.Dispatch
         {}
         #endregion
 
-        [Test]
+        [Fact]
         public void Initialize()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
@@ -93,7 +92,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void Lookup()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
@@ -109,7 +108,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void Representations()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
@@ -123,7 +122,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void MonitoringAdd()
         {
             var model = new MonitoredCollection<ModelBase>();
@@ -140,7 +139,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void MonitoringRemove()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
@@ -158,7 +157,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void MonitoringChanged()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
@@ -174,7 +173,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void MonitoringChangedRebuild()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
@@ -190,7 +189,7 @@ namespace NanoByte.Common.Dispatch
             }
         }
 
-        [Test]
+        [Fact]
         public void Dispose()
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};

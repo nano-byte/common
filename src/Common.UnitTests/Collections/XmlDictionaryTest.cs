@@ -23,17 +23,16 @@
 using System;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="XmlDictionary"/>.
     /// </summary>
-    [TestFixture]
     public class XmlDictionaryTest
     {
-        [Test(Description = "Ensures that the class is correctly serialized and deserialized.")]
+        [Fact]
         public void TestSaveLoad()
         {
             var dictionary1 = new XmlDictionary
@@ -51,7 +50,7 @@ namespace NanoByte.Common.Collections
             ReferenceEquals(dictionary1, dictionary2).Should().BeFalse(because: "Serialized objects should not return the same reference.");
         }
 
-        [Test]
+        [Fact]
         public void TestContainsKey()
         {
             var dictionary = new XmlDictionary
@@ -62,7 +61,7 @@ namespace NanoByte.Common.Collections
             dictionary.ContainsKey("key2").Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestContainsValue()
         {
             var dictionary = new XmlDictionary
@@ -73,7 +72,7 @@ namespace NanoByte.Common.Collections
             dictionary.ContainsValue("value2").Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestGetValue()
         {
             var dictionary = new XmlDictionary
@@ -84,7 +83,7 @@ namespace NanoByte.Common.Collections
             dictionary.GetValue("key1").Should().Be("value1");
         }
 
-        [Test]
+        [Fact]
         public void ShouldRejectDuplicateKeys()
         {
             var dictionary = new XmlDictionary

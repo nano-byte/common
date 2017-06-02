@@ -24,20 +24,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="CollectionExtensions"/>.
     /// </summary>
-    [TestFixture]
     public class CollectionExtensionsTest
     {
         /// <summary>
         /// Ensures that <see cref="CollectionExtensions.AddIfNew{T}"/> correctly detects pre-existing entries.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestAddIfNew()
         {
             var list = new List<string> {"a", "b", "c"};
@@ -54,7 +53,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Ensures that <see cref="CollectionExtensions.RemoveLast{T}"/> correctly removes the last n elements from a list.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestRemoveLast()
         {
             var list = new List<string> {"a", "b", "c"};
@@ -64,7 +63,7 @@ namespace NanoByte.Common.Collections
             list.Invoking(x => x.RemoveLast(-1)).ShouldThrow<ArgumentOutOfRangeException>();
         }
 
-        [Test]
+        [Fact]
         public void TestAddOrReplace()
         {
             var list = new List<string> {"a", "bb", "ccc"};
@@ -72,7 +71,7 @@ namespace NanoByte.Common.Collections
             list.Should().Equal("a", "xx", "ccc");
         }
 
-        [Test]
+        [Fact]
         public void TestContainsAny()
         {
             new[] {1, 2}.ContainsAny(new[] {2}).Should().BeTrue();
@@ -82,7 +81,7 @@ namespace NanoByte.Common.Collections
             new[] {1, 2}.ContainsAny(new int[0]).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestSequencedEqualsList()
         {
             new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
@@ -93,7 +92,7 @@ namespace NanoByte.Common.Collections
             new[] {new object()}.ToList().SequencedEquals(new[] {new object()}).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestSequencedEqualsArray()
         {
             new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
@@ -104,7 +103,7 @@ namespace NanoByte.Common.Collections
             new[] {new object()}.SequencedEquals(new[] {new object()}).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestUnsequencedEquals()
         {
             new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
@@ -115,7 +114,7 @@ namespace NanoByte.Common.Collections
             new[] {new object()}.UnsequencedEquals(new[] {new object()}).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestGetSequencedHashCode()
         {
             new[] {"A", "B", "C"}.GetSequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetSequencedHashCode());
@@ -125,7 +124,7 @@ namespace NanoByte.Common.Collections
             new[] {"A", "B"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
         }
 
-        [Test]
+        [Fact]
         public void TestGetUnsequencedHashCode()
         {
             new[] {"A", "B", "C"}.GetUnsequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetUnsequencedHashCode());

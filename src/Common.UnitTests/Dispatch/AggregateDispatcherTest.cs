@@ -21,14 +21,13 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Contains test methods for <see cref="AggregateDispatcher{TBase,TResultElement}"/>.
     /// </summary>
-    [TestFixture]
     public class AggregateDispatcherTest
     {
         private abstract class Base
@@ -40,7 +39,7 @@ namespace NanoByte.Common.Dispatch
         private class Sub2 : Sub1
         {}
 
-        [Test]
+        [Fact]
         public void Aggregate()
         {
             var dispatcher = new AggregateDispatcher<Base, string>
@@ -53,7 +52,7 @@ namespace NanoByte.Common.Dispatch
             dispatcher.Dispatch(new Sub2()).Should().Equal("sub1", "sub2");
         }
 
-        [Test]
+        [Fact]
         public void UnknownType()
         {
             var dispatcher = new AggregateDispatcher<Base, string>();

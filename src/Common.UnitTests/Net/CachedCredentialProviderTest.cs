@@ -24,33 +24,23 @@ using System;
 using System.Net;
 using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Contains unit tests for <see cref="CachedCredentialProvider"/>
     /// </summary>
-    [TestFixture]
-    public class CachedCredentialProviderTest
+    public class CachedCredentialProviderTest : IDisposable
     {
-        private Mock<ICredentialProvider> _innerMock;
-        private CachedCredentialProvider _provider;
+        private readonly Mock<ICredentialProvider> _innerMock = new Mock<ICredentialProvider>(MockBehavior.Strict);
+        private readonly CachedCredentialProvider _provider;
 
-        [SetUp]
-        public void SetUp()
-        {
-            _innerMock = new Mock<ICredentialProvider>(MockBehavior.Strict);
-            _provider = new CachedCredentialProvider(_innerMock.Object);
-        }
+        public CachedCredentialProviderTest() => _provider = new CachedCredentialProvider(_innerMock.Object);
 
-        [TearDown]
-        public void TearDown()
-        {
-            _innerMock.VerifyAll();
-        }
+        public void Dispose() => _innerMock.VerifyAll();
 
-        [Test]
+        [Fact]
         public void TestGetCredential()
         {
             var uriOuter = new Uri("http://domain/dir/file");
@@ -65,7 +55,7 @@ namespace NanoByte.Common.Net
             _innerMock.Verify(x => x.GetCredential(uriInner, null), Times.Exactly(1));
         }
 
-        [Test]
+        [Fact]
         public void TestReportInvalid()
         {
             var uriOuter = new Uri("http://domain/dir/file");

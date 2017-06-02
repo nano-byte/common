@@ -26,52 +26,51 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="EnumerableExtensions"/>.
     /// </summary>
-    [TestFixture]
     public class EnumerableExtensionsTest
     {
-        [Test]
+        [Fact]
         public void TestMaxBy()
         {
             new[] {"abc", "a", "abcd", "ab"}.MaxBy(x => x.Length)
                 .Should().Be("abcd");
         }
 
-        [Test]
+        [Fact]
         public void TestMaxByNull()
         {
             Enumerable.Empty<string>().MaxBy(x => x.Length)
                 .Should().Be(null);
         }
 
-        [Test]
+        [Fact]
         public void TestMinBy()
         {
             new[] {"abc", "a", "abcd", "ab"}.MinBy(x => x.Length)
                 .Should().Be("a");
         }
 
-        [Test]
+        [Fact]
         public void TestMinByNull()
         {
             Enumerable.Empty<string>().MaxBy(x => x.Length)
                 .Should().Be(null);
         }
 
-        [Test]
+        [Fact]
         public void TestDistinctBy()
         {
             new[] {"a123", "a234", "b123"}.DistinctBy(x => x[0])
                 .Should().BeEquivalentTo("a123", "b123");
         }
 
-        [Test]
+        [Fact]
         public void TestTrySelect()
         {
             var strings = new[] {"1", "2", "c", "4"};
@@ -84,14 +83,14 @@ namespace NanoByte.Common.Collections
                 .ShouldThrow<FormatException>();
         }
 
-        [Test]
+        [Fact]
         public void TestAppend()
         {
             var strings = new List<string> {"A", "B"};
             strings.Append("C").Should().Equal("A", "B", "C");
         }
 
-        [Test]
+        [Fact]
         public void TestPrepend()
         {
             var strings = new List<string> {"B", "C"};
@@ -103,7 +102,7 @@ namespace NanoByte.Common.Collections
             public readonly List<Element> Children = new List<Element>();
         }
 
-        [Test]
+        [Fact]
         public void TestTopologicalSort()
         {
             var b = new Element();
@@ -115,7 +114,7 @@ namespace NanoByte.Common.Collections
                 .Should().Equal(b, c, a);
         }
 
-        [Test]
+        [Fact]
         public async Task TestForEachAsync()
         {
             // Need to explicity set default SynchronizationContext to satisfy precondition check

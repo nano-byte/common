@@ -23,17 +23,16 @@
 using System;
 using FluentAssertions;
 using NanoByte.Common.Native;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Net
 {
     /// <summary>
     /// Contains test methods for <see cref="UriExtensions"/>.
     /// </summary>
-    [TestFixture]
     public class UriExtensionsTest
     {
-        [Test]
+        [Fact]
         public void TestToStringRfc()
         {
             new Uri("http://test/absolute path").ToStringRfc().Should().Be("http://test/absolute%20path");
@@ -45,21 +44,21 @@ namespace NanoByte.Common.Net
                 "relative path");
         }
 
-        [Test]
+        [Fact]
         public void TestEnsureTrailingSlashAbsolute()
         {
             new Uri("http://test/test", UriKind.Absolute).EnsureTrailingSlash().Should().Be(
                 new Uri("http://test/test/", UriKind.Absolute));
         }
 
-        [Test]
+        [Fact]
         public void TestEnsureTrailingSlashRelative()
         {
             new Uri("test", UriKind.Relative).EnsureTrailingSlash().Should().Be(
                 new Uri("test/", UriKind.Relative));
         }
 
-        [Test]
+        [Fact]
         public void TestGetLocalFilePath()
         {
             new Uri("http://test/test/my%20file.ext").GetLocalFileName().Should().Be("my file.ext");
@@ -67,7 +66,7 @@ namespace NanoByte.Common.Net
             new Uri("file:///test/").GetLocalFileName().Should().Be("test");
         }
 
-        [Test]
+        [Fact]
         public void TestGetBaseUri()
         {
             new Uri("http://domain/directory/file").GetBaseUri().Should().Be(new Uri("http://domain/directory/"));

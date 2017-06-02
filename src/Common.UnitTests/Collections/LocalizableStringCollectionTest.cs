@@ -23,17 +23,16 @@
 using System.Globalization;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="LocalizableStringCollection"/>.
     /// </summary>
-    [TestFixture]
     public class LocalizableStringCollectionTest
     {
-        [Test(Description = "Ensures that the class is correctly serialized and deserialized.")]
+        [Fact]
         public void TestSaveLoad()
         {
             var collection1 = new LocalizableStringCollection
@@ -46,7 +45,6 @@ namespace NanoByte.Common.Collections
             };
 
             // Serialize and deserialize data
-            Assert.That(collection1, Is.XmlSerializable);
             string data = collection1.ToXmlString();
             var collection2 = XmlStorage.FromXmlString<LocalizableStringCollection>(data);
 
@@ -56,7 +54,7 @@ namespace NanoByte.Common.Collections
             ReferenceEquals(collection1, collection2).Should().BeFalse(because: "Serialized objects should not return the same reference.");
         }
 
-        [Test]
+        [Fact]
         public void TestContainsExactLanguage()
         {
             var dictionary = new LocalizableStringCollection
@@ -71,7 +69,7 @@ namespace NanoByte.Common.Collections
             dictionary.ContainsExactLanguage(new CultureInfo("en-US")).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestRemoveRange()
         {
             var dictionary = new LocalizableStringCollection
@@ -87,7 +85,7 @@ namespace NanoByte.Common.Collections
             dictionary.ContainsExactLanguage(new CultureInfo("de-DE")).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestSet()
         {
             var dictionary = new LocalizableStringCollection
@@ -106,7 +104,7 @@ namespace NanoByte.Common.Collections
             dictionary.GetExactLanguage(new CultureInfo("de-DE")).Should().Be("germanyValue2");
         }
 
-        [Test]
+        [Fact]
         public void TestGetExactLanguage()
         {
             var dictionary = new LocalizableStringCollection
@@ -127,7 +125,7 @@ namespace NanoByte.Common.Collections
             dictionary.GetExactLanguage(new CultureInfo("de-AT")).Should().BeNull();
         }
 
-        [Test]
+        [Fact]
         public void TestGetBestLanguage()
         {
             var dictionary = new LocalizableStringCollection

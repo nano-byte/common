@@ -23,17 +23,16 @@
 using System;
 using System.Threading;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
     /// Contains test methods for <see cref="WaitTask"/>.
     /// </summary>
-    [TestFixture]
     public class WaitTaskTest
     {
-        [Test(Description = "Ensures the task waits until the wait handle is signaled.")]
+        [Fact]
         public void TestWait()
         {
             using (var waitHandle = new ManualResetEvent(false))
@@ -51,7 +50,7 @@ namespace NanoByte.Common.Tasks
             }
         }
 
-        [Test(Description = "Starts waiting for an everblocking handle using Run() and stops again right away using Cancel().")]
+        [Fact]
         public void TestCancel()
         {
             using (var waitHandle = new ManualResetEvent(false))

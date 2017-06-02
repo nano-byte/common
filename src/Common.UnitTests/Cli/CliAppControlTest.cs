@@ -22,17 +22,16 @@
 
 using FluentAssertions;
 using NanoByte.Common.Native;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Cli
 {
     /// <summary>
     /// Contains test methods for <see cref="CliAppControl"/>.
     /// </summary>
-    [TestFixture]
     public class CliAppControlTest
     {
-        [Test]
+        [Fact]
         public void TestStringOutput()
         {
             var control = new DummyControl();

@@ -23,17 +23,16 @@
 using System.IO;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Values
 {
     /// <summary>
     /// Contains test methods for <see cref="ByteVector4Grid"/>.
     /// </summary>
-    [TestFixture]
     public class ByteVector4GridTest
     {
-        [Test]
+        [Fact]
         public void TestSaveLoad()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))

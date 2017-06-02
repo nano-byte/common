@@ -27,7 +27,7 @@ using System.Threading;
 using FluentAssertions;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Tasks;
-using NUnit.Framework;
+using Xunit;
 using CancellationTokenSource = NanoByte.Common.Tasks.CancellationTokenSource;
 
 namespace NanoByte.Common.Net
@@ -35,28 +35,17 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Contains test methods for <see cref="DownloadFile"/>.
     /// </summary>
-    [TestFixture]
     public class DownloadFileTest : DownloadTestBase
     {
-        private TemporaryFile _tempFile;
+        private TemporaryFile _tempFile = new TemporaryFile("unit-tests");
 
-        [SetUp]
-        public override void SetUp()
+        public override void Dispose()
         {
-            base.SetUp();
-
-            _tempFile = new TemporaryFile("unit-tests");
-        }
-
-        [TearDown]
-        public override void TearDown()
-        {
+            base.Dispose();
             _tempFile.Dispose();
-
-            base.TearDown();
         }
 
-        [Test(Description = "Downloads a small file using Run().")]
+        [Fact]
         public void TestRun()
         {
             // Download the file
@@ -71,7 +60,7 @@ namespace NanoByte.Common.Net
             fileContent.Should().Equal(GetTestFileStream().ToArray());
         }
 
-        [Test(Description = "Starts downloading a small file using Run() and stops again right away using Cancel().")]
+        [Fact]
         public void TestCancel()
         {
             // Prepare a very slow download of the file and monitor for a cancellation exception
@@ -100,14 +89,14 @@ namespace NanoByte.Common.Net
             exceptionThrown.Should().BeTrue(because: "Should throw OperationCanceledException");
         }
 
-        [Test(Description = "Ensure files with an incorrect size are rejected.")]
+        [Fact]
         public void TestFileMissing()
         {
             var download = new DownloadFile(new Uri(Server.ServerUri, "wrong"), _tempFile);
             download.Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
 
-        [Test(Description = "Ensure files with an incorrect size are rejected.")]
+        [Fact]
         public void TestIncorrectSize()
         {
             var download = new DownloadFile(Server.FileUri, _tempFile, bytesTotal: 1024);

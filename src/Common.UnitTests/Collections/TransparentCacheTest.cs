@@ -21,17 +21,16 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="TransparentCache{TKey,TValue}"/>.
     /// </summary>
-    [TestFixture]
     public class TransparentCacheTest
     {
-        [Test]
+        [Fact]
         public void Test()
         {
             int callCounter = 0;

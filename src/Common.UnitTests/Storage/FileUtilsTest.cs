@@ -27,24 +27,23 @@ using System.Text;
 using FluentAssertions;
 using Moq;
 using NanoByte.Common.Native;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// Contains test methods for <see cref="FileUtils"/>.
     /// </summary>
-    [TestFixture]
     public class FileUtilsTest
     {
         #region Paths
-        [Test]
+        [Fact]
         public void TestUnifySlashes()
         {
             FileUtils.UnifySlashes("a/b").Should().Be("a" + Path.DirectorySeparatorChar + "b");
         }
 
-        [Test]
+        [Fact]
         public void TestIsBreakoutPath()
         {
             FileUtils.IsBreakoutPath(WindowsUtils.IsWindows ? @"C:\test" : "/test").Should().BeTrue(because: "Should detect absolute paths");
@@ -58,7 +57,7 @@ namespace NanoByte.Common.Storage
             FileUtils.IsBreakoutPath("").Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestRelativeTo()
         {
             if (WindowsUtils.IsWindows)
@@ -75,7 +74,7 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestExpandUnixVariables()
         {
             var variables = new StringDictionary
@@ -95,7 +94,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="FileUtils.ToUnixTime"/> correctly converts a <see cref="DateTime"/> value to a Unix epoch value.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestToUnixTime()
         {
             // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
@@ -105,7 +104,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="FileUtils.FromUnixTime"/> correctly converts a Unix epoch value to a <see cref="DateTime"/> value.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestFromUnixTime()
         {
             // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
@@ -117,7 +116,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="FileUtils.ExistsCaseSensitive"/> correctly detects case mismatches.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestExistsCaseSensitive()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -133,7 +132,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="FileUtils.Touch"/> correctly handles both missing and existing files.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestTouch()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -154,7 +153,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Creates a temporary fileusing <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestGetTempFile()
         {
             string path = FileUtils.GetTempFile("unit-tests");
@@ -167,7 +166,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Creates a temporary directory using <see cref="FileUtils.GetTempDirectory"/>, ensures it is empty and deletes it again.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestGetTempDirectory()
         {
             string path = FileUtils.GetTempDirectory("unit-tests");
@@ -182,7 +181,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="FileUtils.Replace"/> correctly replaces the content of one file with that of another.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestReplace()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -200,7 +199,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="FileUtils.Replace"/> correctly handles a missing destination file (simply move).
         /// </summary>
-        [Test]
+        [Fact]
         public void TestReplaceMissing()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -216,7 +215,7 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Read
-        [Test]
+        [Fact]
         public void TestReadFirstline()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
@@ -235,7 +234,7 @@ namespace NanoByte.Common.Storage
             void Execute(T obj);
         }
 
-        [Test]
+        [Fact]
         public void TestWalk()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -266,7 +265,7 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestWalkThroughPrefix()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -287,7 +286,7 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestGetFilesRecursive()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -306,10 +305,10 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Links
-        [Test]
+        [SkippableFact]
         public void TestCreateSymlinkPosixFile()
         {
-            if (!UnixUtils.IsUnix) Assert.Ignore("Can only test POSIX symlinks on Unixoid system");
+            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
 
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
@@ -327,10 +326,10 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [SkippableFact]
         public void TestCreateSymlinkPosixDirectory()
         {
-            if (!UnixUtils.IsUnix) Assert.Ignore("Can only test POSIX symlinks on Unixoid system");
+            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
 
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
@@ -346,11 +345,11 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [SkippableFact]
         public void TestCreateSymlinkNtfsFile()
         {
-            if (!WindowsUtils.IsWindowsVista) Assert.Ignore("Can only test NTFS symlinks on Windows Vista or newer");
-            if (!WindowsUtils.IsAdministrator) Assert.Ignore("Can only test NTFS symlinks with Administrator privileges");
+            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
+            Skip.IfNot(WindowsUtils.IsAdministrator, reason: "Can only test NTFS symlinks with Administrator privileges");
 
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
@@ -363,11 +362,11 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [SkippableFact]
         public void TestCreateSymlinkNtfsDirectory()
         {
-            if (!WindowsUtils.IsWindowsVista) Assert.Ignore("Can only test NTFS symlinks on Windows Vista or newer");
-            if (!WindowsUtils.IsAdministrator) Assert.Ignore("Can only test NTFS symlinks with Administrator privileges");
+            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
+            Skip.IfNot(WindowsUtils.IsAdministrator, reason: "Can only test NTFS symlinks with Administrator privileges");
 
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
@@ -379,7 +378,7 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestCreateHardlink()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -401,14 +400,14 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Unix
-        [Test]
+        [Fact]
         public void TestIsRegularFile()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
                 FileUtils.IsRegularFile(tempFile).Should().BeTrue(because: "Regular file should be detected as such");
         }
 
-        [Test]
+        [Fact]
         public void TestIsSymlink()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
@@ -419,17 +418,17 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestIsExecutable()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))
                 FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File was incorrectly identified as executable");
         }
 
-        [Test]
+        [SkippableFact]
         public void TestSetExecutable()
         {
-            if (!UnixUtils.IsUnix) Assert.Ignore("Can only test executable bits on Unixoid system");
+            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test executable bits on Unixoid system");
 
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
@@ -444,7 +443,7 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestIsUnixFS()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -456,7 +455,7 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Extended metadata
-        [Test]
+        [Fact]
         public void TestWriteReadExtendedMetadata()
         {
             var data = new byte[] {0, 1, 2, 3, 4, 5, 6, 7};
@@ -469,7 +468,7 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        [Test]
+        [Fact]
         public void TestReadExtendedMetadataExceptionOnMissingBaseFile()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))

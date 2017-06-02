@@ -23,17 +23,16 @@
 using System.IO;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Values
 {
     /// <summary>
     /// Contains test methods for <see cref="NibbleGrid"/>.
     /// </summary>
-    [TestFixture]
     public class NibbleGridTest
     {
-        [Test]
+        [Fact]
         public void TestSaveLoad()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))

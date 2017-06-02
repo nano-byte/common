@@ -23,20 +23,19 @@
 using System;
 using System.IO;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// Contains test methods for <see cref="MoveDirectory"/>.
     /// </summary>
-    [TestFixture]
     public class MoveDirectoryTest
     {
         /// <summary>
         /// Ensures <see cref="MoveDirectory"/> correctly moves a directories from one location to another.
         /// </summary>
-        [Test]
+        [Fact]
         public void Normal()
         {
             string temp1 = CreateCopyTestTempDir();

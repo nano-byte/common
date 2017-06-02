@@ -22,17 +22,16 @@
 
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// Contains test methods for <see cref="AddToCollection{T}"/> and <see cref="RemoveFromCollection{T}"/>.
     /// </summary>
-    [TestFixture]
     public class CollectionTest
     {
-        [Test]
+        [Fact]
         public void TestAddToCollection()
         {
             var collection = new List<string> {"a", "b", "c"};
@@ -45,7 +44,7 @@ namespace NanoByte.Common.Undo
             collection.Should().NotContain("d");
         }
 
-        [Test]
+        [Fact]
         public void TestRemoveFromCollection()
         {
             var collection = new List<string> {"a", "b", "c"};

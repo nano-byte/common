@@ -24,30 +24,29 @@ using System.IO;
 using System.Text;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Streams
 {
     /// <summary>
     /// Contains test methods for <see cref="StreamUtils"/>.
     /// </summary>
-    [TestFixture]
     public class StreamUtilsTest
     {
-        [Test]
+        [Fact]
         public void TestRead()
         {
             new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
         }
 
-        [Test]
+        [Fact]
         public void TestToArray()
         {
             Stream stream = new MemoryStream(new byte[] {1, 2, 3});
             StreamUtils.ToArray(stream).Should().Equal(1, 2, 3);
         }
 
-        [Test]
+        [Fact]
         public static void TestWrite()
         {
             var stream = new MemoryStream();
@@ -56,7 +55,7 @@ namespace NanoByte.Common.Streams
             stream.ToArray().Should().Equal(1, 2, 3);
         }
 
-        [Test]
+        [Fact]
         public void TestContentEquals()
         {
             "abc".ToStream().ContentEquals("abc".ToStream()).Should().BeTrue();
@@ -65,7 +64,7 @@ namespace NanoByte.Common.Streams
             "abc".ToStream().ContentEquals("".ToStream()).Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestString()
         {
             const string test = "Test";
@@ -73,7 +72,7 @@ namespace NanoByte.Common.Streams
                 stream.ReadToString().Should().Be(test);
         }
 
-        [Test]
+        [Fact]
         public void TestCopyToFile()
         {
             using (var tempFile = new TemporaryFile("unit-tests"))

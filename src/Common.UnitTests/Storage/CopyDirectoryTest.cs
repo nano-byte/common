@@ -24,20 +24,19 @@ using System;
 using System.IO;
 using FluentAssertions;
 using NanoByte.Common.Native;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// Contains test methods for <see cref="CopyDirectory"/>.
     /// </summary>
-    [TestFixture]
     public class CopyDirectoryTest
     {
         /// <summary>
         /// Ensures <see cref="CopyDirectory"/> correctly copies a directories from one location to another.
         /// </summary>
-        [Test]
+        [Fact]
         public void Normal()
         {
             string temp1 = CreateCopyTestTempDir();
@@ -47,9 +46,8 @@ namespace NanoByte.Common.Storage
             try
             {
                 new CopyDirectory(temp1, temp2).Run();
-                FileAssert.AreEqual(
-                    expected: Path.Combine(temp1, "subdir", "file"),
-                    actual: Path.Combine(temp2, "subdir", "file"));
+                File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
+                    .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
                 File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
@@ -69,7 +67,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="CopyDirectory"/> correctly detects usage errors.
         /// </summary>
-        [Test]
+        [Fact]
         public void ErrorHandling()
         {
             // ReSharper disable once ObjectCreationAsStatement
@@ -85,7 +83,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="CopyDirectory"/> correctly copies a directories from one location to another without setting directory timestamps.
         /// </summary>
-        [Test]
+        [Fact]
         public void NoDirTimestamp()
         {
             string temp1 = CreateCopyTestTempDir();
@@ -95,9 +93,8 @@ namespace NanoByte.Common.Storage
             try
             {
                 new CopyDirectory(temp1, temp2, preserveDirectoryTimestamps: false).Run();
-                FileAssert.AreEqual(
-                    expected: Path.Combine(temp1, "subdir", "file"),
-                    actual: Path.Combine(temp2, "subdir", "file"));
+                File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
+                    .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
                     .Should().NotBe(new DateTime(2000, 1, 1), because: "Last-write time for copied directory is invalid");
                 File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file")).Should().Be(
@@ -120,7 +117,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="CopyDirectory"/> correctly copies a directory on top another.
         /// </summary>
-        [Test]
+        [Fact]
         public void Overwrite()
         {
             string temp1 = CreateCopyTestTempDir();
@@ -135,9 +132,8 @@ namespace NanoByte.Common.Storage
             try
             {
                 new CopyDirectory(temp1, temp2, preserveDirectoryTimestamps: true, overwrite: true).Run();
-                FileAssert.AreEqual(
-                    expected: Path.Combine(temp1, "subdir", "file"),
-                    actual: Path.Combine(temp2, "subdir", "file"));
+                File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
+                    .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir")).Should().Be(
                     new DateTime(2000, 1, 1),
                     because: "Last-write time for copied directory is invalid");
@@ -157,10 +153,10 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="CopyDirectory"/> correctly copies symlinks.
         /// </summary>
-        [Test]
+        [SkippableFact]
         public void Symlinks()
         {
-            if (!UnixUtils.IsUnix) Assert.Ignore("Can only test POSIX symlinks on Unixoid system");
+            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
 
             string temp1 = CreateCopyTestTempDir();
             string temp2 = FileUtils.GetTempDirectory("unit-tests");

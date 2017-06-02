@@ -18,14 +18,13 @@
 using System;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="NamedCollection{T}"/>.
     /// </summary>
-    [TestFixture]
     public class NamedCollectionTest
     {
         private class TestElement : INamed<TestElement>
@@ -38,7 +37,7 @@ namespace NanoByte.Common.Collections
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSort()
         {
             var collection = new NamedCollection<TestElement> {new TestElement {Name = "c"}, new TestElement {Name = "b"}, new TestElement {Name = "a"}};
@@ -46,7 +45,7 @@ namespace NanoByte.Common.Collections
             collection.Select(x => x.Name).Should().Equal("a", "b", "c");
         }
 
-        [Test]
+        [Fact]
         public void TestRename()
         {
             var element = new TestElement {Name = "Name1"};

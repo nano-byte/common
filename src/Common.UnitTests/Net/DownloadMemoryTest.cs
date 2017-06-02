@@ -25,7 +25,7 @@ using System.Net;
 using System.Threading;
 using FluentAssertions;
 using NanoByte.Common.Tasks;
-using NUnit.Framework;
+using Xunit;
 using CancellationTokenSource = NanoByte.Common.Tasks.CancellationTokenSource;
 
 namespace NanoByte.Common.Net
@@ -33,10 +33,9 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Contains test methods for <see cref="DownloadMemory"/>.
     /// </summary>
-    [TestFixture]
     public class DownloadMemoryTest : DownloadTestBase
     {
-        [Test(Description = "Downloads a small file using Run().")]
+        [Fact]
         public void TestRun()
         {
             // Download the file
@@ -48,7 +47,7 @@ namespace NanoByte.Common.Net
             download.GetData().Should().Equal(GetTestFileStream().ToArray());
         }
 
-        [Test(Description = "Starts downloading a small file using Run() and stops again right away using Cancel().")]
+        [Fact]
         public void TestCancel()
         {
             // Prepare a very slow download of the file and monitor for a cancellation exception
@@ -77,14 +76,14 @@ namespace NanoByte.Common.Net
             exceptionThrown.Should().BeTrue(because: "Should throw OperationCanceledException");
         }
 
-        [Test(Description = "Ensure files with an incorrect size are rejected.")]
+        [Fact]
         public void TestFileMissing()
         {
             var download = new DownloadMemory(new Uri(Server.ServerUri, "wrong"));
             download.Invoking(x => x.Run()).ShouldThrow<WebException>();
         }
 
-        [Test(Description = "Ensure files with an incorrect size are rejected.")]
+        [Fact]
         public void TestIncorrectSize()
         {
             var download = new DownloadMemory(Server.FileUri, bytesTotal: 1024);

@@ -21,18 +21,17 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="ComparableTuple{T}"/>.
     /// </summary>
-    [TestFixture]
     public class ComparableTupleTest
     {
-        [Test(Description = "Ensures tuples are compared correctly.")]
-        public void TestComparTo()
+        [Fact]
+        public void TestCompareTo()
         {
             var tuple1 = new ComparableTuple<int>(1, 1);
             var tuple2 = new ComparableTuple<int>(1, 2);

@@ -21,7 +21,7 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 #if SLIMDX
 using System.IO;
@@ -35,10 +35,6 @@ namespace NanoByte.Common.Storage
     /// <summary>
     /// Contains test methods for <see cref="XmlStorage"/>.
     /// </summary>
-    [TestFixture]
-#if SLIMDX
-    [Ignore]
-#endif
     public class XmlStorageTest
     {
         // ReSharper disable MemberCanBePrivate.Global
@@ -55,7 +51,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestFile()
         {
             TestData testData1 = new TestData {Data = "Hello"}, testData2;
@@ -73,7 +69,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly with relative paths.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestFileRelative()
         {
             TestData testData1 = new TestData {Data = "Hello"}, testData2;
@@ -89,10 +85,10 @@ namespace NanoByte.Common.Storage
         }
 
 #if SLIMDX
-    /// <summary>
-    /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with no password.
-    /// </summary>
-        [Test]
+        /// <summary>
+        /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with no password.
+        /// </summary>
+        [Fact]
         public void TestZipNoPassword()
         {
             // Write and read file
@@ -109,7 +105,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with a password.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestZipPassword()
         {
             // Write and read file
@@ -126,7 +122,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> correctly detects incorrect passwords.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestIncorrectPassword()
         {
             var tempStream = new MemoryStream();
@@ -139,7 +135,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Ensures <see cref="XmlStorage.ToXmlString{T}"/> and <see cref="XmlStorage.FromXmlString{T}"/> work correctly.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestString()
         {
             var testData1 = new TestData {Data = "Hello"};

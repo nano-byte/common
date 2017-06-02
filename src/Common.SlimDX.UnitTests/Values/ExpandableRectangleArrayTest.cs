@@ -22,17 +22,16 @@
 
 using System.Drawing;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Values
 {
     /// <summary>
     /// Contains test methods for <see cref="ExpandableRectangleArray{T}"/>.
     /// </summary>
-    [TestFixture]
     public class ExpandableRectangleArrayTest
     {
-        [Test]
+        [Fact]
         public void TestGetArrayBase()
         {
             var expandableRectangleArray = new ExpandableRectangleArray<int>();
@@ -44,7 +43,7 @@ namespace NanoByte.Common.Values
             expandableRectangleArray.TotalArea.Should().Be(new Rectangle(1, 1, 3, 3));
         }
 
-        [Test]
+        [Fact]
         public void TestGetArraySmallBase()
         {
             var expandableRectangleArray = new ExpandableRectangleArray<int>();
@@ -56,7 +55,7 @@ namespace NanoByte.Common.Values
             expandableRectangleArray.TotalArea.Should().Be(new Rectangle(1, 1, 3, 3));
         }
 
-        [Test]
+        [Fact]
         public void TestGetArrayNoBase()
         {
             var expandableRectangleArray = new ExpandableRectangleArray<int>();
@@ -68,7 +67,7 @@ namespace NanoByte.Common.Values
             expandableRectangleArray.TotalArea.Should().Be(new Rectangle(1, 1, 3, 3));
         }
 
-        [Test]
+        [Fact]
         public void TestNegativeArea()
         {
             var expandableRectangleArray = new ExpandableRectangleArray<int>();

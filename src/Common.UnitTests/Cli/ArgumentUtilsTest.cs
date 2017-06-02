@@ -23,17 +23,16 @@
 using System.IO;
 using FluentAssertions;
 using NanoByte.Common.Storage;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Cli
 {
     /// <summary>
     /// Contains test methods for <see cref="ArgumentUtils"/>.
     /// </summary>
-    [TestFixture]
     public class ArgumentUtilsTest
     {
-        [Test]
+        [Fact]
         public void TestGetFilesAbsolute()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
@@ -61,7 +60,7 @@ namespace NanoByte.Common.Cli
             }
         }
 
-        [Test]
+        [Fact]
         public void TestGetFilesRelative()
         {
             using (var tempDir = new TemporaryWorkingDirectory("unit-tests"))

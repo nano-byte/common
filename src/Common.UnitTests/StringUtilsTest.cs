@@ -22,17 +22,16 @@
 
 using System.Security.Cryptography;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common
 {
     /// <summary>
     /// Contains test methods for <see cref="StringUtils"/>.
     /// </summary>
-    [TestFixture]
     public class StringUtilsTest
     {
-        [Test]
+        [Fact]
         public void TestCompare()
         {
             StringUtils.EqualsIgnoreCase("abc", "abc").Should().BeTrue();
@@ -42,7 +41,7 @@ namespace NanoByte.Common
             StringUtils.EqualsIgnoreCase("abc", "abc ").Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestContains()
         {
             "This is a test.".ContainsIgnoreCase("TEST").Should().BeTrue();
@@ -52,7 +51,7 @@ namespace NanoByte.Common
             "test".ContainsIgnoreCase("This is a test.").Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void TestCountOccurences()
         {
             "abc".CountOccurences('/').Should().Be(0);
@@ -60,7 +59,7 @@ namespace NanoByte.Common
             "ab/c/".CountOccurences('/').Should().Be(2);
         }
 
-        [Test]
+        [Fact]
         public void TestSplitMultilineText()
         {
             "123\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Linux-stlye linebreaks");
@@ -68,7 +67,7 @@ namespace NanoByte.Common
             "123\r\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Windows-stlye linebreaks");
         }
 
-        [Test]
+        [Fact]
         public void TestJoin()
         {
             StringUtils.Join(" ", new[] {"part1"}).Should().Be("part1");
@@ -76,7 +75,7 @@ namespace NanoByte.Common
             new[] {"part1 part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 part2\" part3");
         }
 
-        [Test]
+        [Fact]
         public void TestJoinEscapeArguments()
         {
             new[] {"part1"}.JoinEscapeArguments().Should().Be("part1");
@@ -84,7 +83,7 @@ namespace NanoByte.Common
             new[] {"part1 \" part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 \\\" part2\" part3");
         }
 
-        [Test]
+        [Fact]
         public void TestGetLeftRightPartChar()
         {
             const string testString = "text1 text2 text3";
@@ -94,7 +93,7 @@ namespace NanoByte.Common
             testString.GetRightPartAtLastOccurrence(' ').Should().Be("text3");
         }
 
-        [Test]
+        [Fact]
         public void TestGetLeftRightPartString()
         {
             const string testString = "text1 - text2 - text3";
@@ -104,19 +103,19 @@ namespace NanoByte.Common
             testString.GetRightPartAtLastOccurrence(" - ").Should().Be("text3");
         }
 
-        [Test]
+        [Fact]
         public void TestStripCharacters()
         {
             "a!b?".StripCharacters("!?").Should().Be("ab");
         }
 
-        [Test]
+        [Fact]
         public void TestStripFromEnd()
         {
             "abc".StripFromEnd(count: 1).Should().Be("ab");
         }
 
-        [Test]
+        [Fact]
         public void TestEscapeArgument()
         {
             "".EscapeArgument().Should().Be("\"\"", because: "Empty strings need to be escaped in order not to vanish");
@@ -128,46 +127,46 @@ namespace NanoByte.Common
             "test1\\\"test2".EscapeArgument().Should().Be("test1\\\\\\\"test2", because: "Slashes with quotation marks should be escaped");
         }
 
-        [Test]
+        [Fact]
         public void TestBase64Utf8Encode()
         {
             "".Base64Utf8Encode().Should().Be("");
             "test".Base64Utf8Encode().Should().Be("dGVzdA==");
         }
 
-        [Test]
+        [Fact]
         public void TestBase64Utf8Decode()
         {
             "".Base64Utf8Decode().Should().Be("");
             "dGVzdA==".Base64Utf8Decode().Should().Be("test");
         }
 
-        [Test]
+        [Fact]
         public void TestBase32Encode()
         {
             new byte[] {65, 66}.Base32Encode().Should().Be("IFBA");
         }
 
-        [Test]
+        [Fact]
         public void TestBase16Encode()
         {
             new byte[] {65, 66}.Base16Encode().Should().Be("4142");
         }
 
-        [Test]
+        [Fact]
         public void TestBase16Decode()
         {
             "4142".Base16Decode().Should().Equal(65, 66);
         }
 
-        [Test]
+        [Fact]
         public void TestHash()
         {
             const string sha1ForEmptyString = "da39a3ee5e6b4b0d3255bfef95601890afd80709";
             "".Hash(SHA1.Create()).Should().Be(sha1ForEmptyString);
         }
 
-        [Test]
+        [Fact]
         public void TestGeneratePassword()
         {
             for (int i = 0; i < 128; i++)

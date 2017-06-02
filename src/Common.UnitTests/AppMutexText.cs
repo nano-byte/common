@@ -23,24 +23,22 @@
 using System.IO;
 using FluentAssertions;
 using NanoByte.Common.Native;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common
 {
     /// <summary>
     /// Contains test methods for <see cref="AppMutex"/>.
     /// </summary>
-    [TestFixture]
     public class AppMutexTest
     {
         /// <summary>
         /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create(string,out AppMutex)"/> and <see cref="AppMutex.Close"/> work correctly together.
         /// </summary>
-        // Fails when executed within TeamCity's test runner
-        //[Test]
+        [SkippableFact]
         public void TestProbeCreateClose()
         {
-            if (!WindowsUtils.IsWindowsNT) Assert.Ignore("AppMutexes are only available on the Windows NT platform.");
+            Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "AppMutexes are only available on the Windows NT platform.");
 
             string mutexName = "unit-tests-" + Path.GetRandomFileName();
             AppMutex.Probe(mutexName).Should().BeFalse();

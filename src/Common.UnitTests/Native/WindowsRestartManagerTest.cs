@@ -21,20 +21,19 @@
  */
 
 using NanoByte.Common.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Contains test methods for <see cref="WindowsRestartManager"/>.
     /// </summary>
-    [TestFixture]
     public class WindowsRestartManagerTest
     {
-        [Test]
+        [SkippableFact]
         public void TestListApps()
         {
-            if (!WindowsUtils.IsWindowsVista) Assert.Ignore("Restart Manager only available on Windows Vista or higher");
+            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Restart Manager only available on Windows Vista or higher");
 
             using (var restartManager = new WindowsRestartManager())
             {

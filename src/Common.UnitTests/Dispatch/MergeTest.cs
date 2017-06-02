@@ -24,14 +24,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using FluentAssertions.Execution;
+using Xunit;
 
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Contains test methods for <see cref="Merge"/>.
     /// </summary>
-    [TestFixture]
     public class MergeTest
     {
         #region Inner class
@@ -76,7 +76,7 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Ensures that <see cref="Merge.TwoWay{T}"/> correctly detects added and removed elements.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestMergeSimple()
         {
             ICollection<int> toRemove = new List<int>();
@@ -93,20 +93,20 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Ensures that <see cref="Merge.ThreeWay{T}"/> correctly detects unchanged lists.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestMergeEquals()
         {
             var list = new[] {new MergeTestData {MergeID = "1"}};
 
             Merge.ThreeWay(reference: new MergeTestData[0], theirs: list, mine: list,
-                added: delegate(MergeTestData element) { throw new AssertionException(element + " should not be detected as added."); },
-                removed: delegate(MergeTestData element) { throw new AssertionException(element + " should not be detected as removed."); });
+                added: element => throw new AssertionFailedException(element + " should not be detected as added."),
+                removed: element => throw new AssertionFailedException(element + " should not be detected as removed."));
         }
 
         /// <summary>
         /// Ensures that <see cref="Merge.ThreeWay{T}"/> correctly detects added and removed elements.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestMergeAddAndRemove()
         {
             ICollection<MergeTestData> toRemove = new List<MergeTestData>();
@@ -124,7 +124,7 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Ensures that <see cref="Merge.ThreeWay{T}"/> correctly modified elements.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestMergeModify()
         {
             var reference = MergeTestData.BuildList("a", "b", "c", "d", "e");

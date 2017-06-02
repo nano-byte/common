@@ -24,17 +24,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="DictionaryExtensions"/>.
     /// </summary>
-    [TestFixture]
     public class DictionaryExtensionsTest
     {
-        [Test]
+        [Fact]
         public void TestGetOrAdd()
         {
             var dict = new Dictionary<string, string>();
@@ -44,7 +43,7 @@ namespace NanoByte.Common.Collections
             dict.Should().Equal(new Dictionary<string, string> {["x"] = "a"});
         }
 
-        [Test]
+        [Fact]
         public async Task TestGetOrAddAsync()
         {
             var dict = new Dictionary<string, string>();
@@ -61,7 +60,7 @@ namespace NanoByte.Common.Collections
             public void Dispose() => IsDisposed = true;
         }
 
-        [Test]
+        [Fact]
         public async Task TestGetOrAddAsyncRace()
         {
             var mock1 = new Mock();

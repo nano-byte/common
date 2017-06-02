@@ -1,28 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NanoByte.Common.Streams;
-using NUnit.Framework;
 
 namespace NanoByte.Common.Net
 {
-    public abstract class DownloadTestBase
+    public abstract class DownloadTestBase : IDisposable
     {
-        protected MicroServer Server;
+        protected readonly MicroServer Server = new MicroServer("file", GetTestFileStream());
 
-        [SetUp]
-        public virtual void SetUp()
-        {
-            Server = new MicroServer("file", GetTestFileStream());
-        }
+        protected static MemoryStream GetTestFileStream() => "abc".ToStream();
 
-        [TearDown]
-        public virtual void TearDown()
-        {
-            Server.Dispose();
-        }
-
-        protected static MemoryStream GetTestFileStream()
-        {
-            return "abc".ToStream();
-        }
+        public virtual void Dispose() => Server.Dispose();
     }
 }

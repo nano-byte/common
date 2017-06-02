@@ -23,20 +23,19 @@
 using System.Globalization;
 using FluentAssertions;
 using NanoByte.Common.Collections;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// Contains test methods for <see cref="SetLocalizableString"/>.
     /// </summary>
-    [TestFixture]
     public class SetLocalizableStringTest
     {
         /// <summary>
         /// Makes sure <see cref="SetLocalizableString"/> correctly performs executions and undos.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestExecute()
         {
             var collection = new LocalizableStringCollection

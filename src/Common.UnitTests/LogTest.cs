@@ -21,24 +21,23 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common
 {
     /// <summary>
     /// Contains unit tests for <see cref="Log"/>.
     /// </summary>
-    [TestFixture]
     public class LogTest
     {
-        [Test]
+        [Fact]
         public void TestContent()
         {
             Log.Info("Log Unit Test Token");
             Log.Content.Contains("Log Unit Test Token").Should().BeTrue();
         }
 
-        [Test]
+        [Fact]
         public void TestHandler()
         {
             LogSeverity reportedSeverity = (LogSeverity)(-1);

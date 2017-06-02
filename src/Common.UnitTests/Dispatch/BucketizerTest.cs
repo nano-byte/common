@@ -22,17 +22,16 @@
 
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// Contains test methods for <see cref="Bucketizer{T}"/> and <see cref="Bucketizer{TElement,TValue}"/>.
     /// </summary>
-    [TestFixture]
     public class BucketizerTest
     {
-        [Test]
+        [Fact]
         public void TestPredicate()
         {
             var even = new List<int>();
@@ -49,7 +48,7 @@ namespace NanoByte.Common.Dispatch
             rest.Should().Equal(3);
         }
 
-        [Test]
+        [Fact]
         public void TestValue()
         {
             var a = new List<string>();

@@ -21,17 +21,16 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common
 {
     /// <summary>
     /// Contains test methods for <see cref="MathUtils"/>.
     /// </summary>
-    [TestFixture]
     public class MathUtilsTest
     {
-        [Test]
+        [Fact]
         public void TestModuloDouble()
         {
             5.0.Modulo(3).Should().Be(2);
@@ -45,7 +44,7 @@ namespace NanoByte.Common
             (-3.0).Modulo(3).Should().Be(0);
         }
 
-        [Test]
+        [Fact]
         public void TestModuloFloat()
         {
             5f.Modulo(3).Should().Be(2);
@@ -59,7 +58,7 @@ namespace NanoByte.Common
             (-3f).Modulo(3).Should().Be(0);
         }
 
-        [Test]
+        [Fact]
         public void TestModuloInt()
         {
             5.Modulo(3).Should().Be(2);

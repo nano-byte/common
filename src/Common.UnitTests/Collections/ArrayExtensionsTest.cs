@@ -21,31 +21,30 @@
  */
 
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Collections
 {
     /// <summary>
     /// Contains test methods for <see cref="ArrayExtensions"/>.
     /// </summary>
-    [TestFixture]
     public class ArrayExtensionsTest
     {
-        [Test]
+        [Fact]
         public void TestAppend()
         {
             var strings = new[] {"A", "B"};
             strings.Append("C").Should().Equal("A", "B", "C");
         }
 
-        [Test]
+        [Fact]
         public void TestPrepend()
         {
             var strings = new[] {"B", "C"};
             strings.Prepend("A").Should().Equal("A", "B", "C");
         }
 
-        [Test]
+        [Fact]
         public void TestGetAddedElements()
         {
             new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}).Should().Equal("B", "H");

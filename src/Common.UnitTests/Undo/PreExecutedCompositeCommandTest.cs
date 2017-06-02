@@ -23,14 +23,13 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// Contains test methods for <see cref="PreExecutedCompositeCommand"/>.
     /// </summary>
-    [TestFixture]
     public class PreExecutedCompositeCommandTest
     {
         private class MockCommand : IUndoCommand
@@ -43,18 +42,12 @@ namespace NanoByte.Common.Undo
                 _undoCallback = undoCallback;
             }
 
-            public void Execute()
-            {
-                _executeCallback();
-            }
+            public void Execute() => _executeCallback();
 
-            public void Undo()
-            {
-                _undoCallback();
-            }
+            public void Undo() => _undoCallback();
         }
 
-        [Test(Description = "Makes sure executing and undoing a PreExecutedCompositeCommandTest correctly skips the first execution and undos the contained child commands.")]
+        [Fact]
         public void TestExecuteUndo()
         {
             var executeCalls = new List<int>(3);
