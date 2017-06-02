@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.SlimDX", "Common.Sli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.SlimDX.UnitTests", "Common.SlimDX.UnitTests\Common.SlimDX.UnitTests.csproj", "{9A31FAC8-32D1-422E-8C03-37218F847AAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.WinForms.Sample", "Common.WinForms.Sample\Common.WinForms.Sample.csproj", "{AC3E5EC9-759A-4B54-A1D6-B75B13184343}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
