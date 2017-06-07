@@ -63,13 +63,13 @@ namespace NanoByte.Common.Storage
             if (WindowsUtils.IsWindows)
             {
                 new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")).Should().Be("a/b");
-                new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\x")).Should().Be("test/a/b");
+                new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\file")).Should().Be("test/a/b");
                 new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")).Should().Be("../test1");
             }
             else
             {
                 new FileInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")).Should().Be("a/b");
-                new FileInfo("/test/a/b").RelativeTo(new FileInfo("/x")).Should().Be("test/a/b");
+                new FileInfo("/test/a/b").RelativeTo(new FileInfo("/file")).Should().Be("test/a/b");
                 new DirectoryInfo("/test1").RelativeTo(new DirectoryInfo("/test2")).Should().Be("../test1");
             }
         }
