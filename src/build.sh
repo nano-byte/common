@@ -1,15 +1,7 @@
 #!/bin/sh
-#Compiles the xbuild solution.
+set -e
 cd `dirname $0`
 
-#Handle Windows-style paths in project files
-export MONO_IOMAP=all
-
-#Project settings
-SOLUTION_FILE=NanoByte.Common_Mono.sln
-
-echo Restoring NuGet packages...
-mono NuGet.exe restore $SOLUTION_FILE -Verbosity quiet
-
-echo Compiling solution...
-xbuild $SOLUTION_FILE /nologo /v:q
+msbuild /t:Restore /t:Build /p:Configuration=Release
+#dotnet test --configuration Release --no-build Common.UnitTests/Common.UnitTests.csproj
+#dotnet test --configuration Release --no-build Common.SlimDX.UnitTests/Common.SlimDX.UnitTests.csproj

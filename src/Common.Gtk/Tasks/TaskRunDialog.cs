@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2006-2015 Bastian Eicher
+ * Copyright 2006-2017 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -65,6 +65,66 @@ namespace NanoByte.Common.Tasks
             _taskThread = new Thread(RunTask);
             _cancellationTokenSource = cancellationTokenSource;
             _credentialProvider = credentialProvider;
+        }
+
+        private readonly ProgressBar progressBarTask = new ProgressBar();
+        private readonly Label labelTask = new Label();
+        private readonly Button buttonCancel = new Button
+        {
+            CanDefault = true,
+            CanFocus = true,
+            UseStock = true,
+            UseUnderline = true,
+            Label = "gtk-cancel"
+        };
+
+        private void Build()
+        {
+            var vBox = new VBox
+            {
+                BorderWidth = 2
+            };
+
+            var vBoxInner = new VBox
+            {
+                Spacing = 10,
+                BorderWidth = 10,
+            };
+            vBox.Add(vBoxInner);
+            {
+                var child = (Box.BoxChild)vBox[vBoxInner];
+                child.Position = 0;
+                child.Expand = false;
+                child.Fill = false;
+            }
+
+            vBoxInner.Add(progressBarTask);
+            ((Box.BoxChild)vBoxInner[progressBarTask]).Position = 0;
+
+            vBoxInner.Add(labelTask);
+            ((Box.BoxChild)vBoxInner[labelTask]).Position = 1;
+
+            var actionArea = new HButtonBox
+            {
+                Spacing = 10,
+                BorderWidth = 5,
+                LayoutStyle = ButtonBoxStyle.End
+            };
+
+
+            AddActionWidget(buttonCancel, -6);
+            {
+                var child = (ButtonBox.ButtonBoxChild)actionArea[buttonCancel];
+                child.Expand = false;
+                child.Fill = false;
+            }
+
+            WindowPosition = WindowPosition.CenterOnParent;
+            Child?.ShowAll();
+            DefaultWidth = 400;
+            DefaultHeight = 150;
+
+            Show();
         }
 
         /// <summary>

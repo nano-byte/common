@@ -1,14 +1,17 @@
 ﻿Param ([Parameter(Mandatory=$True)] [string]$NewVersion)
-#Sets a new version number in all relevant locations
 $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 
+function SearchAndReplace($FilePath, $PatternLeft, $PatternRight)
+{
+  (Get-Content "$ScriptDir\$FilePath" -Encoding UTF8) `
+    -replace "$PatternLeft.*$PatternRight", ($PatternLeft + $NewVersion + $PatternRight) |
+    Set-Content "$ScriptDir\$FilePath" -Encoding UTF8
+}
+
 [System.IO.File]::WriteAllText("$ScriptDir\VERSION", $NewVersion)
-
-(Get-Content "$ScriptDir\src\GlobalAssemblyInfo.cs" -Encoding UTF8) `
-  -replace 'AssemblyVersion\(".*"\)', ('AssemblyVersion("' + $NewVersion + '")') |
-  Set-Content "$ScriptDir\src\GlobalAssemblyInfo.cs" -Encoding UTF8
-
-(Get-Content "$ScriptDir\doc\Doxyfile" -Encoding UTF8) `
-  -replace 'PROJECT_NUMBER = ".*"', ('PROJECT_NUMBER = "' + $NewVersion + '"') |
-  Set-Content "$ScriptDir\doc\Doxyfile" -Encoding UTF8
+SearchAndReplace doc\Doxyfile -PatternLeft 'PROJECT_NUMBER = "' -PatternRight '"'
+SearchAndReplace src\Common\Common.csproj -PatternLeft '<Version>' -PatternRight '</Version>'
+SearchAndReplace src\Common.WinForms\Common.WinForms.csproj -PatternLeft '<Version>' -PatternRight '</Version>'
+SearchAndReplace src\Common.SlimDX\Common.SlimDX.csproj -PatternLeft '<Version>' -PatternRight '</Version>'
+SearchAndReplace src\Common.Gtk\Common.Gtk.csproj -PatternLeft '<Version>' -PatternRight '</Version>'

@@ -1,350 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81AF4FA5-44F7-4010-8769-B85B8B542FA2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NanoByte.Common</RootNamespace>
     <AssemblyName>NanoByte.Common</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
+    <RootNamespace>NanoByte.Common</RootNamespace>
+    <TargetFrameworks>net20;net35;net40;net45</TargetFrameworks>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSource>True</IncludeSource>
+    <NoWarn>$(NoWarn);1591;414;169</NoWarn>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591;414;169</NoWarn>
-    <WarningLevel>4</WarningLevel>
-    <RestorePackages>true</RestorePackages>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+    <OutputPath>..\..\build\$(Configuration)\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\Debug\</OutputPath>
-    <DocumentationFile>..\..\build\Debug\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET45</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+
+  <PropertyGroup>
+    <Version>2.0.5</Version>
+    <Description>
+      Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.
+      API documentation: http://nano-byte.de/common/api/
+    </Description>
+    <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
+    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
+    <Authors>Bastian Eicher</Authors>
+    <Company>NanoByte</Company>
+    <Copyright>Copyright 2006-2017 Bastian Eicher et al</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet40|AnyCPU' ">
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\DebugNet40\</OutputPath>
-    <DocumentationFile>..\..\build\DebugNet40\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET40</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet35|AnyCPU' ">
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\DebugNet35\</OutputPath>
-    <DocumentationFile>..\..\build\DebugNet35\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET35</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet20|AnyCPU' ">
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\DebugNet20\</OutputPath>
-    <DocumentationFile>..\..\build\DebugNet20\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET20</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Release\</OutputPath>
-    <DocumentationFile>..\..\build\Release\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET45</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseNet40|AnyCPU' ">
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\ReleaseNet40\</OutputPath>
-    <DocumentationFile>..\..\build\ReleaseNet40\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET40</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseNet35|AnyCPU' ">
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\ReleaseNet35\</OutputPath>
-    <DocumentationFile>..\..\build\ReleaseNet35\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET35</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseNet20|AnyCPU' ">
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\ReleaseNet20\</OutputPath>
-    <DocumentationFile>..\..\build\ReleaseNet20\NanoByte.Common.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET20</DefineConstants>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Mono.Posix">
-      <HintPath>..\..\lib\Mono.Posix.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
   </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='DebugNet40' Or '$(Configuration)'=='ReleaseNet40' Or '$(Configuration)'=='DebugNet35' Or '$(Configuration)'=='ReleaseNet35'">
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)'=='DebugNet20' Or '$(Configuration)'=='ReleaseNet20'">
-  </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\GlobalAssemblyInfo.cs" />
-    <Compile Include="AppMutex.cs" />
-    <Compile Include="Backports\HashPrimeNumbers.cs" />
-    <Compile Include="Backports\HashSet.cs" />
-    <Compile Include="Backports\LinqBridge.cs" />
-    <Compile Include="Backports\RBTree.cs" />
-    <Compile Include="Backports\SortedSet.cs" />
-    <Compile Include="Cli\ArgumentUtils.cs" />
-    <Compile Include="Cli\BundledCliAppControl.cs" />
-    <Compile Include="Cli\CliAppControl.cs" />
-    <Compile Include="Cli\CliUtils.cs" />
-    <Compile Include="Cli\CliUtils.NativeMethods.cs" />
-    <Compile Include="Cli\ProgressBar.cs" />
-    <Compile Include="Cli\TaskProgressBar.cs" />
-    <Compile Include="Cli\_Namespace.cs" />
-    <Compile Include="Collections\ArrayExtensions.cs" />
-    <Compile Include="Collections\ComparableTuple.cs" />
-    <Compile Include="Collections\CultureComparer.cs" />
-    <Compile Include="Collections\DictionaryExtensions.cs" />
-    <Compile Include="Collections\EnumerableExtensions.cs" />
-    <Compile Include="Collections\LanguageSet.cs" />
-    <Compile Include="Collections\CollectionExtensions.cs" />
-    <Compile Include="Collections\LocalizableString.cs" />
-    <Compile Include="Collections\LocalizableStringCollection.cs" />
-    <Compile Include="Collections\MonitoredCollection.cs" />
-    <Compile Include="Collections\MultiDictionary.cs" />
-    <Compile Include="Collections\NamedCollection.cs" />
-    <Compile Include="Collections\StackExtensions.cs" />
-    <Compile Include="Collections\TransparentCache.cs" />
-    <Compile Include="Collections\TransparentCacheBase.cs" />
-    <Compile Include="Collections\XmlDictionary.cs" />
-    <Compile Include="Collections\XmlDictionaryEntry.cs" />
-    <Compile Include="Collections\_Namespace.cs" />
-    <Compile Include="Dispatch\AggregateDispatcher.Action.cs" />
-    <Compile Include="Dispatch\AggregateDispatcher.Func.cs" />
-    <Compile Include="Dispatch\Bucketizer.Predicate.cs" />
-    <Compile Include="Dispatch\Bucketizer.Value.cs" />
-    <Compile Include="Dispatch\BucketRule.Predicate.cs" />
-    <Compile Include="Dispatch\BucketRule.Value.cs" />
-    <Compile Include="Dispatch\IMergeable.cs" />
-    <Compile Include="Dispatch\Merge.cs" />
-    <Compile Include="Dispatch\ModelViewSync.cs" />
-    <Compile Include="Dispatch\PerTypeDispatcher.Action.cs" />
-    <Compile Include="Dispatch\PerTypeDispatcher.Func.cs" />
-    <Compile Include="Dispatch\_Namespace.cs" />
-    <Compile Include="Disposable.cs" />
-    <Compile Include="ExceptionUtils.cs" />
-    <Compile Include="Future.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IChangeNotify.cs" />
-    <Compile Include="INamed.cs" />
-    <Compile Include="Info\AppInfo.cs" />
-    <Compile Include="Info\ExceptionInfo.cs" />
-    <Compile Include="Info\OSInfo.cs" />
-    <Compile Include="Info\_Namespace.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="LogSeverity.cs" />
-    <Compile Include="MarshalNoTimeout.cs" />
-    <Compile Include="MsgSeverity.cs" />
-    <Compile Include="MutexLock.cs" />
-    <Compile Include="NamedComparer.cs" />
-    <Compile Include="Native\CompilerUtils.cs" />
-    <Compile Include="Native\CygwinUtils.cs" />
-    <Compile Include="Native\UnixUtils.cs" />
-    <Compile Include="Native\WindowsCredentials.cs" />
-    <Compile Include="Native\WindowsCredentials.NativeMethods.cs" />
-    <Compile Include="Native\WindowsCredentialsFlags.cs" />
-    <Compile Include="Native\WindowsMutex.cs" />
-    <Compile Include="Native\WindowsMutex.NativeMethods.cs" />
-    <Compile Include="Native\WindowsRestartManager.cs" />
-    <Compile Include="Native\WindowsRestartManager.NativeMethods.cs" />
-    <Compile Include="Native\WindowsTaskbar.cs" />
-    <Compile Include="Native\WindowsTaskbar.NativeMethods.cs" />
-    <Compile Include="Native\WindowsUtils.cs" />
-    <Compile Include="Native\WindowsUtils.NativeMethods.cs" />
-    <Compile Include="Native\_Namespace.cs" />
-    <Compile Include="NeedGuiException.cs" />
-    <Compile Include="Net\CachedCredentialProvider.cs" />
-    <Compile Include="Net\CliCredentialProvider.cs" />
-    <Compile Include="Net\CredentialProviderBase.cs" />
-    <Compile Include="Net\DownloadFile.cs" />
-    <Compile Include="Net\DownloadMemory.cs" />
-    <Compile Include="Net\DownloadTask.cs" />
-    <Compile Include="Net\ICredentialProvider.cs" />
-    <Compile Include="Net\MicroServer.cs" />
-    <Compile Include="Net\NetUtils.cs" />
-    <Compile Include="Net\UriExtensions.cs" />
-    <Compile Include="Net\WebClientTimeout.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Net\WindowsCliCredentialProvider.cs" />
-    <Compile Include="Net\WindowsCredentialProvider.cs" />
-    <Compile Include="Net\WindowsDialogCredentialProvider.cs" />
-    <Compile Include="Net\_Namespace.cs" />
-    <Compile Include="NotAdminException.cs" />
-    <Compile Include="ProcessUtils.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\ImageResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ImageResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="PropertyPointer.cs" />
-    <Compile Include="RegistryUtils.cs" />
-    <Compile Include="StagedOperation.cs" />
-    <Compile Include="Storage\AtomicWrite.cs" />
-    <Compile Include="Storage\BinaryStorage.cs" />
-    <Compile Include="Storage\CopyDirectory.cs" />
-    <Compile Include="Storage\FileUtils.cs" />
-    <Compile Include="Storage\Locations.cs" />
-    <Compile Include="Storage\Locations.Directories.cs" />
-    <Compile Include="Storage\Locations.Paths.cs" />
-    <Compile Include="Storage\LocationsRedirect.cs" />
-    <Compile Include="Storage\MoveDirectory.cs" />
-    <Compile Include="Storage\TemporaryDirectory.cs" />
-    <Compile Include="Storage\TemporaryFile.cs" />
-    <Compile Include="Storage\TemporaryFlagFile.cs" />
-    <Compile Include="Storage\TemporaryWorkingDirectory.cs" />
-    <Compile Include="Storage\XmlNamespaceAttribute.cs" />
-    <Compile Include="Storage\XmlStorage.cs" />
-    <Compile Include="Storage\_Namespace.cs" />
-    <Compile Include="Streams\CircularBufferStream.cs" />
-    <Compile Include="Streams\DisposeWrapperStream.cs" />
-    <Compile Include="Streams\OffsetStream.cs" />
-    <Compile Include="Streams\StreamConsumer.cs" />
-    <Compile Include="Streams\StreamUtils.cs" />
-    <Compile Include="Streams\_Namespace.cs" />
-    <Compile Include="StringUtils.cs" />
-    <Compile Include="Tasks\CancellationGuard.cs" />
-    <Compile Include="Tasks\CancellationToken.cs" />
-    <Compile Include="Tasks\CancellationTokenRegistration.cs" />
-    <Compile Include="Tasks\CancellationTokenSource.cs" />
-    <Compile Include="Tasks\CliTaskHandler.cs" />
-    <Compile Include="Tasks\ProgressExtensions.cs" />
-    <Compile Include="Tasks\TaskHandlerBase.cs" />
-    <Compile Include="Tasks\ForEachTask.cs" />
-    <Compile Include="Tasks\IProgress.cs" />
-    <Compile Include="Tasks\ITask.cs" />
-    <Compile Include="Tasks\ITaskHandler.cs" />
-    <Compile Include="Tasks\Progress.cs" />
-    <Compile Include="Tasks\SilentTaskHandler.cs" />
-    <Compile Include="Tasks\SimplePercentTask.cs" />
-    <Compile Include="Tasks\SimpleTask.cs" />
-    <Compile Include="Tasks\SynchronousProgress.cs" />
-    <Compile Include="Tasks\TaskBase.cs" />
-    <Compile Include="Tasks\TaskSnapshot.cs" />
-    <Compile Include="Tasks\TaskState.cs" />
-    <Compile Include="Tasks\Verbosity.cs" />
-    <Compile Include="Tasks\WaitTask.cs" />
-    <Compile Include="Tasks\_Namespace.cs" />
-    <Compile Include="ThreadUtils.cs" />
-    <Compile Include="TimedLogEvent.cs" />
-    <Compile Include="Undo\AddToCollection.cs" />
-    <Compile Include="Undo\CollectionCommand.cs" />
-    <Compile Include="Undo\CommandCollector.cs" />
-    <Compile Include="Undo\CommandManager.cs" />
-    <Compile Include="Undo\CompositeCommand.cs" />
-    <Compile Include="Undo\FirstExecuteCommand.cs" />
-    <Compile Include="Undo\ICommandExecutor.cs" />
-    <Compile Include="Undo\IUndoCommand.cs" />
-    <Compile Include="Undo\IValueCommand.cs" />
-    <Compile Include="Undo\PreExecutedCommand.cs" />
-    <Compile Include="Undo\PreExecutedCompositeCommand.cs" />
-    <Compile Include="Undo\RemoveFromCollection.cs" />
-    <Compile Include="Undo\ReplaceInList.cs" />
-    <Compile Include="Undo\SetInList.cs" />
-    <Compile Include="Undo\SetLocalizableString.cs" />
-    <Compile Include="Undo\SetValueCommand.cs" />
-    <Compile Include="Undo\SimpleCommand.cs" />
-    <Compile Include="Undo\SimpleCommandExecutor.cs" />
-    <Compile Include="Undo\_Namespace.cs" />
-    <Compile Include="UpdateUtils.cs" />
-    <Compile Include="Values\AttributeUtils.cs" />
-    <Compile Include="Values\Design\EnumDescriptionConverter.cs" />
-    <Compile Include="Values\Design\EnumXmlConverter.cs" />
-    <Compile Include="Values\Design\StringConstructorConverter.cs" />
-    <Compile Include="Values\Design\StructConverter.cs" />
-    <Compile Include="Values\Design\_Namespace.cs" />
-    <Compile Include="Values\EnumExtensions.cs" />
-    <Compile Include="Values\KeyEqualityComparer.cs" />
-    <Compile Include="Values\Languages.cs" />
-    <Compile Include="Values\_Namespace.cs" />
-    <Compile Include="_Namespace.cs" />
+    <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
   </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\ImageResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ImageResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.de.resx" />
-    <EmbeddedResource Include="Properties\Resources.el.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.tr.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\ClearButton.png" />
-    <Content Include="Resources\CreateButton.png" />
-    <Content Include="Resources\DeleteButton.png" />
-    <Content Include="Resources\Error.png" />
-    <Content Include="Resources\Info.png" />
-    <Content Include="Resources\Warning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Undo\ClassDiagram.cd" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

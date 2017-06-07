@@ -1,116 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DACD1A8E-7734-458C-92B4-DA1F29940890}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NanoByte.Common</RootNamespace>
     <AssemblyName>NanoByte.Common.WinForms</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
+    <RootNamespace>NanoByte.Common</RootNamespace>
+    <TargetFrameworks>net20;net35;net40;net45</TargetFrameworks>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSource>True</IncludeSource>
+    <NoWarn>$(NoWarn);1591;414;169</NoWarn>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591</NoWarn>
-    <WarningLevel>4</WarningLevel>
-    <RestorePackages>true</RestorePackages>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+    <OutputPath>..\..\build\$(Configuration)\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\Debug\</OutputPath>
-    <DocumentationFile>..\..\build\Debug\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET45</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+
+  <PropertyGroup>
+    <Version>2.0.5</Version>
+    <Description>
+      Generic utility classes, interfaces, controls, etc. for WinForms projects.
+      API documentation: http://nano-byte.de/common/api/
+    </Description>
+    <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
+    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
+    <Authors>Bastian Eicher</Authors>
+    <Company>NanoByte</Company>
+    <Copyright>Copyright 2006-2017 Bastian Eicher et al</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet40|AnyCPU' ">
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\DebugNet40\</OutputPath>
-    <DocumentationFile>..\..\build\DebugNet40\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET40</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet35|AnyCPU' ">
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\DebugNet35\</OutputPath>
-    <DocumentationFile>..\..\build\DebugNet35\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET35</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet20|AnyCPU' ">
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\DebugNet20\</OutputPath>
-    <DocumentationFile>..\..\build\DebugNet20\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET20</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Release\</OutputPath>
-    <DocumentationFile>..\..\build\Release\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET45</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseNet40|AnyCPU' ">
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\ReleaseNet40\</OutputPath>
-    <DocumentationFile>..\..\build\ReleaseNet40\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET40</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseNet35|AnyCPU' ">
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\ReleaseNet35\</OutputPath>
-    <DocumentationFile>..\..\build\ReleaseNet35\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET35</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseNet20|AnyCPU' ">
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\ReleaseNet20\</OutputPath>
-    <DocumentationFile>..\..\build\ReleaseNet20\NanoByte.Common.WinForms.xml</DocumentationFile>
-    <DefineConstants>TRACE;NET20</DefineConstants>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
     <Reference Include="ICSharpCode.TextEditor">
       <HintPath>..\..\lib\ICSharpCode.TextEditor.dll</HintPath>
     </Reference>
@@ -118,211 +43,5 @@
       <HintPath>..\..\lib\TaskDialog.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='DebugNet40' Or '$(Configuration)'=='ReleaseNet40' Or '$(Configuration)'=='DebugNet35' Or '$(Configuration)'=='ReleaseNet35'">
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)'=='DebugNet20' Or '$(Configuration)'=='ReleaseNet20'">
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\GlobalAssemblyInfo.cs" />
-    <Compile Include="AsyncFormWrapper.cs" />
-    <Compile Include="Controls\ControlExtensions.cs" />
-    <Compile Include="Controls\DropDownButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\EditorControlBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\EditorDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\EditorDialog.Designer.cs">
-      <DependentUpon>EditorDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ErrorBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\ErrorBox.Designer.cs">
-      <DependentUpon>ErrorBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ErrorReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\ErrorReportForm.Designer.cs">
-      <DependentUpon>ErrorReportForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ErrorReportForm.ErrorReport.cs">
-      <DependentUpon>ErrorReportForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FilteredTreeView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\FilteredTreeView.Designer.cs">
-      <DependentUpon>FilteredTreeView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GenericEditorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\HintTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\IContextMenu.cs" />
-    <Compile Include="Controls\IEditorControl.cs" />
-    <Compile Include="Controls\IEditorControlContainerRef.cs" />
-    <Compile Include="Controls\IEditorDialog.cs" />
-    <Compile Include="Controls\IHighlightColor.cs" />
-    <Compile Include="Controls\InputBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\InputBox.Designer.cs">
-      <DependentUpon>InputBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\InspectionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\InspectionForm.Designer.cs">
-      <DependentUpon>InspectionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ITouchControl.cs" />
-    <Compile Include="Controls\IWizardPage.cs" />
-    <Compile Include="Controls\LiveEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LiveEditor.Designer.cs">
-      <DependentUpon>LiveEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LocalizableTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LocalizableTextBox.Designer.cs">
-      <DependentUpon>LocalizableTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OKCancelDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\OKCancelDialog.Designer.cs">
-      <DependentUpon>OKCancelDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OutputBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\OutputBox.Designer.cs">
-      <DependentUpon>OutputBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OutputGridBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\OutputGridBox.Designer.cs">
-      <DependentUpon>OutputGridBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ResettablePropertyGrid.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\RtfBuilder.cs" />
-    <Compile Include="Controls\TaskControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TaskControl.Designer.cs">
-      <DependentUpon>TaskControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TaskLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\TaskProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\TimeSpanControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TimeSpanControl.Designer.cs">
-      <DependentUpon>TimeSpanControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TouchEventArgs.cs" />
-    <Compile Include="Controls\TouchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\TouchPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\UriTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Wizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\_Namespace.cs" />
-    <Compile Include="Msg.cs" />
-    <Compile Include="Native\WindowMessage.cs" />
-    <Compile Include="Native\WinFormsUtils.Touch.cs" />
-    <Compile Include="Native\WinFormsUtils.cs" />
-    <Compile Include="Native\WinFormsUtils.NativeMethods.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StructureEditor\ChildInfo.cs" />
-    <Compile Include="StructureEditor\ContainerDescription.cs" />
-    <Compile Include="StructureEditor\ContainerDescription.List.cs" />
-    <Compile Include="StructureEditor\ContainerDescription.List.Element.cs" />
-    <Compile Include="StructureEditor\ContainerDescription.Property.cs" />
-    <Compile Include="StructureEditor\EntryInfo.cs" />
-    <Compile Include="StructureEditor\IListDescription.cs" />
-    <Compile Include="StructureEditor\StructureEditorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="StructureEditor\StructureEditorControl.Designer.cs">
-      <DependentUpon>StructureEditorControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StructureEditor\StructureEditorControl.Node.cs">
-      <DependentUpon>StructureEditorControl.cs</DependentUpon>
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="StructureEditor\_Namespace.cs" />
-    <Compile Include="Tasks\DialogTaskHandler.cs" />
-    <Compile Include="Tasks\GuiTaskHandlerBase.cs" />
-    <Compile Include="Tasks\TaskRunDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tasks\TaskRunDialog.Designer.cs">
-      <DependentUpon>TaskRunDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Undo\MultiPropertyChangedCommand.cs" />
-    <Compile Include="Undo\MultiPropertyTracker.cs" />
-    <Compile Include="Undo\PropertyChangedCommand.cs" />
-    <Compile Include="Values\Design\TimeSpanEditor.cs" />
-    <Compile Include="Values\Design\LanguageSetEditor.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\ErrorReportForm.de.resx">
-      <DependentUpon>ErrorReportForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ErrorReportForm.el.resx">
-      <DependentUpon>ErrorReportForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ErrorReportForm.resx">
-      <DependentUpon>ErrorReportForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ErrorReportForm.tr.resx">
-      <DependentUpon>ErrorReportForm.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{81AF4FA5-44F7-4010-8769-B85B8B542FA2}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
