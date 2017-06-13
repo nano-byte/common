@@ -38,7 +38,7 @@ namespace NanoByte.Common.Collections
         {
             var dict = new Dictionary<string, string>();
             dict.GetOrAdd("x", () => "a");
-            dict.GetOrAdd("x", () => { throw new Exception("Should not be reached."); });
+            dict.GetOrAdd("x", () => throw new Exception("Should not be reached."));
 
             dict.Should().Equal(new Dictionary<string, string> {["x"] = "a"});
         }

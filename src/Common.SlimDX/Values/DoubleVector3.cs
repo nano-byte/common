@@ -23,7 +23,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using NanoByte.Common.Values.Design;

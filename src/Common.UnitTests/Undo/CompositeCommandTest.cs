@@ -91,7 +91,7 @@ namespace NanoByte.Common.Undo
             var executeCalls = new List<int>(3);
             var undoCalls = new List<int>(3);
             var command = new CompositeCommand(
-                new MockCommand(() => executeCalls.Add(0), () => { throw new OperationCanceledException(); }),
+                new MockCommand(() => executeCalls.Add(0), () => throw new OperationCanceledException()),
                 new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
                 new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2)));
 

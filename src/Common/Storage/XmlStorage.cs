@@ -315,7 +315,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         [NotNull]
-        public static T LoadXmlZip<T>([NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
+        public static T LoadXmlZip<T>([NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -371,7 +371,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         [NotNull]
-        public static T LoadXmlZip<T>([NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
+        public static T LoadXmlZip<T>([NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -392,7 +392,7 @@ namespace NanoByte.Common.Storage
         /// <param name="stream">The ZIP archive to be written.</param>
         /// <param name="password">The password to use for encryption; <c>null</c> for no encryption.</param>
         /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <c>null</c>.</param>
-        public static void SaveXmlZip<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
+        public static void SaveXmlZip<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string password = null, [NotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -437,7 +437,7 @@ namespace NanoByte.Common.Storage
         /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <c>null</c>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        public static void SaveXmlZip<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull, ItemNotNull] params EmbeddedFile[] additionalFiles)
+        public static void SaveXmlZip<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

@@ -25,11 +25,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Values;
 
 #if NET45
+using System.Threading;
 using System.Threading.Tasks;
 #endif
 

@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -39,7 +38,7 @@ namespace NanoByte.Common.Collections
         {}
 
         /// <inheritdoc/>
-        public int Compare([NotNull] CultureInfo x, [NotNull] CultureInfo y)
+        public int Compare(CultureInfo x, CultureInfo y)
         {
             #region Sanity checks
             if (x == null) throw new ArgumentNullException(nameof(x));

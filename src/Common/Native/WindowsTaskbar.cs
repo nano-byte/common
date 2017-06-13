@@ -227,7 +227,7 @@ namespace NanoByte.Common.Native
         /// <param name="appID">The application ID of the jumplist to add the task to.</param>
         /// <param name="links">The links to add to the jumplist.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-        public static void AddTaskLinks([NotNull, Localizable(false)] string appID, [NotNull, ItemNotNull] IEnumerable<ShellLink> links)
+        public static void AddTaskLinks([NotNull, Localizable(false)] string appID, [NotNull] IEnumerable<ShellLink> links)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));

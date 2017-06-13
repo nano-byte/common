@@ -55,7 +55,7 @@ namespace NanoByte.Common.Net
         /// The complete URL under which the server provides its file.
         /// </summary>
         [NotNull]
-        public Uri FileUri { get; private set; }
+        public Uri FileUri { get; }
 
         /// <summary>
         /// The content of the file to be served under <see cref="FileUri"/>.

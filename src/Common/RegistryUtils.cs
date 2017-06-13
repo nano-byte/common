@@ -242,7 +242,7 @@ namespace NanoByte.Common
         private static void DeleteValue(RegistryKey root, string subkeyName, string valueName)
         {
             var key = root.OpenSubKey(subkeyName, writable: true);
-            if (key != null) key.DeleteValue(valueName, throwOnMissingValue: false);
+            key?.DeleteValue(valueName, throwOnMissingValue: false);
         }
         #endregion
 

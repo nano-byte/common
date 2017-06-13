@@ -30,7 +30,7 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Do nothing on first execute.
         /// </summary>
-        protected override sealed void OnFirstExecute()
+        protected sealed override void OnFirstExecute()
         {}
     }
 }

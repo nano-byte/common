@@ -11,7 +11,7 @@ namespace NanoByte.Common.Net
     public abstract class CredentialProviderBase : MarshalNoTimeout, ICredentialProvider
     {
         /// <inheritdoc/>
-        public bool Interactive { get; private set; }
+        public bool Interactive { get; }
 
         /// <summary>
         /// Creates a new credential provider.

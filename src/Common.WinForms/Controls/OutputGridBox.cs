@@ -69,7 +69,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         private class SimpleEntry<T>
         {
-            public T Value { get; private set; }
+            public T Value { get; }
 
             public SimpleEntry(T value)
             {

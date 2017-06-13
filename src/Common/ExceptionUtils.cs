@@ -152,20 +152,22 @@ namespace NanoByte.Common
             if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
-            var enumerator = elements.GetEnumerator();
-            if (!enumerator.MoveNext()) return;
-
-            while (true)
+            using (var enumerator = elements.GetEnumerator())
             {
-                try
+                if (!enumerator.MoveNext()) return;
+
+                while (true)
                 {
-                    action(enumerator.Current);
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
-                    else throw; // Rethrow exception if there are no more elements
+                    try
+                    {
+                        action(enumerator.Current);
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
+                        else throw; // Rethrow exception if there are no more elements
+                    }
                 }
             }
         }
