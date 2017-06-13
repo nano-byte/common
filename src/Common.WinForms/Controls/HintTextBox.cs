@@ -112,7 +112,7 @@ namespace NanoByte.Common.Controls
         [DefaultValue(typeof(Color), "ControlText")]
         public new Color ForeColor
         {
-            get { return _foreColor; }
+            get => _foreColor;
             set
             {
                 _foreColor = value;
@@ -123,7 +123,7 @@ namespace NanoByte.Common.Controls
         /// <inheritdoc/>
         public override string Text
         {
-            get { return IsHintTextVisible ? "" : base.Text; }
+            get => IsHintTextVisible ? "" : base.Text;
             set
             {
                 // Update the visibility of the hint text when the text is changed externally
@@ -144,7 +144,7 @@ namespace NanoByte.Common.Controls
         [DefaultValue("")]
         public string HintText
         {
-            get { return _hintText; }
+            get => _hintText;
             set
             {
                 _hintText = value;
@@ -168,7 +168,7 @@ namespace NanoByte.Common.Controls
         [DefaultValue(false), Description("Controls whether the clear button is shown. Remains invisible when the HintText is visible."), Category("Appearance")]
         public bool ShowClearButton
         {
-            get { return _showClearButton; }
+            get => _showClearButton;
             set
             {
                 _showClearButton = value;

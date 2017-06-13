@@ -63,7 +63,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         public bool UndoEnabled
         {
-            get { return _undoEnabled; }
+            get => _undoEnabled;
             private set
             {
                 _undoEnabled = value;
@@ -78,7 +78,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         public bool RedoEnabled
         {
-            get { return _redoEnabled; }
+            get => _redoEnabled;
             private set
             {
                 _redoEnabled = value;

@@ -45,7 +45,7 @@ namespace NanoByte.Common.Values
         /// The normal vector of the plane.
         /// </summary>
         [Description("The normal vector of the plane.")]
-        public Vector3 Normal { get { return _normal; } set { _normal = Vector3.Normalize(value); } }
+        public Vector3 Normal { get => _normal; set => _normal = Vector3.Normalize(value); }
 
         /// <summary>
         /// Creates a new plane.

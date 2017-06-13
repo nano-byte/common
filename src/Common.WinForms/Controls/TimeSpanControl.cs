@@ -35,7 +35,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         public TimeSpan Value
         {
-            get { return new TimeSpan((int)upDownDays.Value, (int)upDownHours.Value, (int)upDownMinutes.Value, (int)upDownSeconds.Value); }
+            get => new TimeSpan((int)upDownDays.Value, (int)upDownHours.Value, (int)upDownMinutes.Value, (int)upDownSeconds.Value);
             set
             {
                 upDownDays.Value = value.Days;

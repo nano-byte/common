@@ -69,7 +69,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <summary>
         /// The relative file path.
         /// </summary>
-        public string Name { get { return _name; } set { throw new NotSupportedException(); } }
+        public string Name { get => _name; set => throw new NotSupportedException(); }
 
         /// <summary>
         /// The kind of file entry this is (in relation to its mod status).

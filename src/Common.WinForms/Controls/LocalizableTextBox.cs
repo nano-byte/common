@@ -47,13 +47,13 @@ namespace NanoByte.Common.Controls
         /// </summary>
         [DefaultValue(true)]
         [Category("Behavior"), Description("Controls whether the text can span more than one line.")]
-        public bool Multiline { get { return textBox.Multiline; } set { textBox.Multiline = value; } }
+        public bool Multiline { get => textBox.Multiline; set => textBox.Multiline = value; }
 
         /// <summary>
         /// A text to be displayed in <see cref="SystemColors.GrayText"/> when the text box is empty.
         /// </summary>
         [Description("A text to be displayed in gray when Text is empty."), Category("Appearance"), Localizable(true)]
-        public string HintText { get { return textBox.HintText; } set { textBox.HintText = value; } }
+        public string HintText { get => textBox.HintText; set => textBox.HintText = value; }
         #endregion
 
         #region Constructor

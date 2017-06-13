@@ -48,7 +48,7 @@ namespace NanoByte.Common.StructureEditor
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public CommandManager<T> CommandManager
         {
-            get { return _commandManager; }
+            get => _commandManager;
             set
             {
                 if (_commandManager != null) _commandManager.Updated -= RebuildOnIdle;

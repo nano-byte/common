@@ -54,7 +54,7 @@ namespace NanoByte.Common.Info
         /// <summary>Used for XML serialization.</summary>
         /// <seealso cref="Version"/>
         [XmlAttribute("version"), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string VersionString { get { return Version?.ToString(); } set { Version = string.IsNullOrEmpty(value) ? null : new Version(value); } }
+        public string VersionString { get => Version?.ToString(); set => Version = string.IsNullOrEmpty(value) ? null : new Version(value); }
 
         /// <summary>
         /// The service pack level (e.g. "Service Pack 1").
@@ -71,7 +71,7 @@ namespace NanoByte.Common.Info
         /// <summary>Used for XML serialization.</summary>
         /// <seealso cref="Version"/>
         [XmlAttribute("framework-version"), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string FrameworkVersionString { get { return FrameworkVersion?.ToString(); } set { FrameworkVersion = string.IsNullOrEmpty(value) ? null : new Version(value); } }
+        public string FrameworkVersionString { get => FrameworkVersion?.ToString(); set => FrameworkVersion = string.IsNullOrEmpty(value) ? null : new Version(value); }
 
         public override string ToString() => Platform + " " + (Is64Bit ? "64-bit " : "") + Version + " " + ServicePack;
 

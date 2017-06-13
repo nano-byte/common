@@ -47,7 +47,7 @@ namespace NanoByte.Common.Collections
         [XmlAttribute("key")]
         public string Key
         {
-            get { return _key; }
+            get => _key;
             set
             {
                 if (Parent != null && Parent.ContainsKey(value))

@@ -88,7 +88,7 @@ namespace NanoByte.Common.Controls
         /// Toggle the visibility of the search box.
         /// </summary>
         [DefaultValue(true), Description("Toggle the visibility of the search box."), Category("Appearance")]
-        public bool ShowSearchBox { get { return textSearch.Visible; } set { textSearch.Visible = value; } }
+        public bool ShowSearchBox { get => textSearch.Visible; set => textSearch.Visible = value; }
 
         private NamedCollection<T> _nodes;
 
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Controls
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This control is supposed to represent a live and mutable collection")]
         public NamedCollection<T> Nodes
         {
-            get { return _nodes; }
+            get => _nodes;
             set
             {
                 // Keep track of any changes within the collection
@@ -120,7 +120,7 @@ namespace NanoByte.Common.Controls
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public T SelectedEntry
         {
-            get { return _selectedEntry; }
+            get => _selectedEntry;
             set
             {
                 _selectedEntry = value;
@@ -146,7 +146,7 @@ namespace NanoByte.Common.Controls
         [DefaultValue('.'), Description("The character used to separate namespaces in the Names. This controls how the tree structure is generated.")]
         public char Separator
         {
-            get { return _separator; }
+            get => _separator;
             set
             {
                 _separator = value;
@@ -159,7 +159,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <see cref="CheckedEntries"/>
         [DefaultValue(false), Description("Controls whether check boxes are displayed for every entry.")]
-        public bool CheckBoxes { get { return treeView.CheckBoxes; } set { treeView.CheckBoxes = value; } }
+        public bool CheckBoxes { get => treeView.CheckBoxes; set => treeView.CheckBoxes = value; }
         #endregion
 
         #region Constructor

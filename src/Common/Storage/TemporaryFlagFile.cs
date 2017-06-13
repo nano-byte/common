@@ -50,7 +50,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         public bool Set
         {
-            get { return File.Exists(Path); }
+            get => File.Exists(Path);
             set
             {
                 if (value) File.WriteAllText(Path, "");

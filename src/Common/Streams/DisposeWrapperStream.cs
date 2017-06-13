@@ -73,7 +73,7 @@ namespace NanoByte.Common.Streams
         public override long Length => _baseStream.Length;
 
         /// <inheritdoc/>
-        public override long Position { get { return _baseStream.Position; } set { _baseStream.Position = value; } }
+        public override long Position { get => _baseStream.Position; set => _baseStream.Position = value; }
 
         /// <inheritdoc/>
         public override void Flush() => _baseStream.Flush();

@@ -60,7 +60,7 @@ namespace NanoByte.Common.Streams
         public override long Length => _baseStream.Length - _offset;
 
         /// <inheritdoc/>
-        public override long Position { get { return _baseStream.Position - _offset; } set { _baseStream.Position = value + _offset; } }
+        public override long Position { get => _baseStream.Position - _offset; set => _baseStream.Position = value + _offset; }
 
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count) => _baseStream.Read(buffer, offset, count);

@@ -49,7 +49,7 @@ namespace NanoByte.Common.Values
         /// <exception cref="ArgumentOutOfRangeException">A value larger than 15 is set.</exception>
         public override byte this[int x, int y]
         {
-            get { return Data[x, y]; }
+            get => Data[x, y];
             set
             {
                 if (value > 15) throw new ArgumentOutOfRangeException(nameof(value));

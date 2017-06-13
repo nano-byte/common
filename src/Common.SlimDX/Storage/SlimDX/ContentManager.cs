@@ -84,7 +84,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
         public static DirectoryInfo BaseDir
         {
-            get { return _baseDir; }
+            get => _baseDir;
             set
             {
                 if (value != null && !value.Exists)
@@ -100,7 +100,7 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <exception cref="DirectoryNotFoundException">The specified directory could not be found.</exception>
         public static DirectoryInfo ModDir
         {
-            get { return _modDir; }
+            get => _modDir;
             set
             {
                 if (value != null && !value.Exists)

@@ -75,7 +75,7 @@ namespace NanoByte.Common.Collections
         [CanBeNull]
         public string LanguageString
         {
-            get { return Language.ToString(); }
+            get => Language.ToString();
             set
             {
                 try

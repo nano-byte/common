@@ -46,7 +46,7 @@ namespace NanoByte.Common.Values
         /// A vector pointing along the ray - automatically normalized when set
         /// </summary>
         [Description("A unit vector specifying the direction in which the ray is pointing.")]
-        public Vector2 Direction { get { return _direction; } set { _direction = Vector2.Normalize(value); } }
+        public Vector2 Direction { get => _direction; set => _direction = Vector2.Normalize(value); }
 
         /// <summary>
         /// Creates a new ray

@@ -43,7 +43,7 @@ namespace NanoByte.Common.Controls
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual T Target
         {
-            get { return _target; }
+            get => _target;
             set
             {
                 _target = value;
@@ -64,7 +64,7 @@ namespace NanoByte.Common.Controls
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual ICommandExecutor CommandExecutor
         {
-            get { return _commandExecutor; }
+            get => _commandExecutor;
             set
             {
                 _commandExecutor = value;

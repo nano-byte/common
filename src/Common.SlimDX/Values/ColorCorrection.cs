@@ -49,7 +49,7 @@ namespace NanoByte.Common.Values
         /// How bright the picture should be - values between 0 (black) and 5 (5x normal).
         /// </summary>
         [XmlAttribute, Description("How bright the picture should be - values between 0 (black) and 5 (5x normal).")]
-        public float Brightness { get { return _brightness; } set { _brightness = value.Clamp(0, 5); } }
+        public float Brightness { get => _brightness; set => _brightness = value.Clamp(0, 5); }
 
         private float _contrast;
 
@@ -57,7 +57,7 @@ namespace NanoByte.Common.Values
         /// The contrast level of the picture - values between -5 and 5.
         /// </summary>
         [XmlAttribute, Description("The contrast level of the picture - values between -5 and 5.")]
-        public float Contrast { get { return _contrast; } set { _contrast = value.Clamp(-5, 5); } }
+        public float Contrast { get => _contrast; set => _contrast = value.Clamp(-5, 5); }
 
         private float _saturation;
 
@@ -65,7 +65,7 @@ namespace NanoByte.Common.Values
         /// The color saturation level of the picture - values between -5 and 5.
         /// </summary>
         [XmlAttribute, Description("The color saturation level of the picture - values between -5 and 5.")]
-        public float Saturation { get { return _saturation; } set { _saturation = value.Clamp(-5, 5); } }
+        public float Saturation { get => _saturation; set => _saturation = value.Clamp(-5, 5); }
 
         private float _hue;
 
@@ -73,7 +73,7 @@ namespace NanoByte.Common.Values
         /// The color hue rotation of the picture - values between 0 and 360.
         /// </summary>
         [XmlAttribute, DefaultValue(0f), Description("The color hue rotation of the picture - values between 0 and 360.")]
-        public float Hue { get { return _hue; } set { _hue = value.Clamp(0, 360); } }
+        public float Hue { get => _hue; set => _hue = value.Clamp(0, 360); }
 
         /// <summary>
         /// Creates a new color correction structure.

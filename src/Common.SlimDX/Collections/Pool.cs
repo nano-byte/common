@@ -43,7 +43,7 @@ namespace NanoByte.Common.Collections
 
         private T _firstElement;
 
-        T IPoolable<T>.NextElement { get { return _firstElement; } set { _firstElement = value; } }
+        T IPoolable<T>.NextElement { get => _firstElement; set => _firstElement = value; }
 
         /// <summary>
         /// Performs the specified action on each element of the pool

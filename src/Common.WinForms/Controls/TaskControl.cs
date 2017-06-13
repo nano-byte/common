@@ -38,7 +38,7 @@ namespace NanoByte.Common.Controls
         [DefaultValue("")]
         public string TaskName
         {
-            get { return labelOperation.Text; }
+            get => labelOperation.Text;
             set
             {
                 labelOperation.Text = (value ?? "");

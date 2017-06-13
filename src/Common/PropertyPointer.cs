@@ -39,7 +39,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Transparent access to the wrapper value.
         /// </summary>
-        public T Value { get { return _getValue(); } set { _setValue(value); } }
+        public T Value { get => _getValue(); set => _setValue(value); }
 
         /// <summary>
         /// The default value of the property.

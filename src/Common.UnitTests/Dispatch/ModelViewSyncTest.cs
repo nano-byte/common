@@ -41,7 +41,7 @@ namespace NanoByte.Common.Dispatch
 
             public string ID
             {
-                get { return _id; }
+                get => _id;
                 set
                 {
                     _id = value;

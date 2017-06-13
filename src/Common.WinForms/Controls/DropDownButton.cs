@@ -68,12 +68,12 @@ namespace NanoByte.Common.Controls
 
         #region Properties
         [Browsable(false)]
-        public override ContextMenuStrip ContextMenuStrip { get { return DropDownMenuStrip; } set { DropDownMenuStrip = value; } }
+        public override ContextMenuStrip ContextMenuStrip { get => DropDownMenuStrip; set => DropDownMenuStrip = value; }
 
         [DefaultValue(null)]
         public ContextMenu DropDownMenu
         {
-            get { return _dropDownMenu; }
+            get => _dropDownMenu;
             set
             {
                 //remove the event handlers for the old DropDownMenu
@@ -91,7 +91,7 @@ namespace NanoByte.Common.Controls
         [DefaultValue(null)]
         public ContextMenuStrip DropDownMenuStrip
         {
-            get { return _dropDownMenuStrip; }
+            get => _dropDownMenuStrip;
             set
             {
                 //remove the event handlers for the old DropDownMenuStrip
@@ -119,7 +119,7 @@ namespace NanoByte.Common.Controls
         [Description("Splits the button into a conventional \"button\" part and a \"drop down\" part rather than treating the entire button as a \"drop down\" button.")]
         public bool ShowSplit
         {
-            get { return _showSplit; }
+            get => _showSplit;
             set
             {
                 if (value != _showSplit)
@@ -136,7 +136,7 @@ namespace NanoByte.Common.Controls
 
         private PushButtonState State
         {
-            get { return _state; }
+            get => _state;
             set
             {
                 if (!_state.Equals(value))

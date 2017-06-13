@@ -113,7 +113,7 @@ namespace NanoByte.Common.Tasks
         private TaskState _state;
 
         /// <summary>The current State of the task.</summary>
-        protected internal TaskState State { get { return _state; } protected set { value.To(ref _state, OnProgressChanged); } }
+        protected internal TaskState State { get => _state; protected set => value.To(ref _state, OnProgressChanged); }
 
         /// <summary>
         /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
@@ -124,12 +124,12 @@ namespace NanoByte.Common.Tasks
         private long _unitsProcessed;
 
         /// <summary>The number of units that have been processed so far.</summary>
-        protected long UnitsProcessed { get { return _unitsProcessed; } set { value.To(ref _unitsProcessed, OnProgressChangedThrottled); } }
+        protected long UnitsProcessed { get => _unitsProcessed; set => value.To(ref _unitsProcessed, OnProgressChangedThrottled); }
 
         private long _unitsTotal = -1;
 
         /// <summary>The total number of units that are to be processed; -1 for unknown.</summary>
-        protected long UnitsTotal { get { return _unitsTotal; } set { value.To(ref _unitsTotal, OnProgressChanged); } }
+        protected long UnitsTotal { get => _unitsTotal; set => value.To(ref _unitsTotal, OnProgressChanged); }
 
         /// <summary>
         /// Informs the caller of the current progress, if a callback was registered.

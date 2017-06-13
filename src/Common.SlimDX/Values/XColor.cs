@@ -54,16 +54,16 @@ namespace NanoByte.Common.Values
         public byte B { get; set; }
 
         [XmlIgnore]
-        public float Red { get { return (float)R / 255; } set { R = (byte)(value * 255); } }
+        public float Red { get => (float)R / 255; set => R = (byte)(value * 255); }
 
         [XmlIgnore]
-        public float Green { get { return (float)G / 255; } set { G = (byte)(value * 255); } }
+        public float Green { get => (float)G / 255; set => G = (byte)(value * 255); }
 
         [XmlIgnore]
-        public float Blue { get { return (float)B / 255; } set { B = (byte)(value * 255); } }
+        public float Blue { get => (float)B / 255; set => B = (byte)(value * 255); }
 
         [XmlIgnore]
-        public float Alpha { get { return (float)A / 255; } set { A = (byte)(value * 255); } }
+        public float Alpha { get => (float)A / 255; set => A = (byte)(value * 255); }
 
         public XColor(float red, float green, float blue, float alpha)
         {

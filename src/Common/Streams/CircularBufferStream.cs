@@ -55,7 +55,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Indicates how many bytes have been read from this buffer so far in total.
         /// </summary>
-        public override long Position { get { return _positionRead; } set { throw new NotSupportedException(); } }
+        public override long Position { get => _positionRead; set => throw new NotSupportedException(); }
 
         /// <summary>
         /// Indicates how many bytes have been written to this buffer so far in total.
