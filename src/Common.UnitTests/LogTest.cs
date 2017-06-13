@@ -42,13 +42,14 @@ namespace NanoByte.Common
         {
             LogSeverity reportedSeverity = (LogSeverity)(-1);
             string reportedMessage = null;
-            LogEntryEventHandler handler = (severity, message) =>
+
+            void Handler(LogSeverity severity, string message)
             {
                 reportedSeverity = severity;
                 reportedMessage = message;
-            };
+            }
 
-            Log.Handler += handler;
+            Log.Handler += Handler;
             try
             {
                 Log.Info("Log Unit Test Token");
@@ -58,7 +59,7 @@ namespace NanoByte.Common
             }
             finally
             {
-                Log.Handler -= handler;
+                Log.Handler -= Handler;
             }
         }
     }

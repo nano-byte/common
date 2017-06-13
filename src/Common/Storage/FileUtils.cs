@@ -288,67 +288,65 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">The read or write access to one of the files was denied.</exception>
         public static void Replace([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath)
         {
-            #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
             if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException(nameof(destinationPath));
             if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
-            #endregion
 
             if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
-            else if (WindowsUtils.IsWindowsXP) ReplaceNT(sourcePath, destinationPath);
-            else ReplaceSimple(sourcePath, destinationPath);
-        }
+            else if (WindowsUtils.IsWindowsXP) ReplaceNT();
+            else ReplaceSimple();
 
-        private static void ReplaceNT(string sourcePath, string destinationPath)
-        {
-            if (!File.Exists(destinationPath))
+            void ReplaceSimple()
             {
-                // File.Replace() fails if destinationPath does not exist yet
-                File.Move(sourcePath, destinationPath);
-                return;
+                // ReSharper disable once AssignNullToNotNullAttribute
+                string backupPath = Path.Combine(
+                    Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
+                    "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
+
+                if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
+                try
+                {
+                    File.Move(sourcePath, destinationPath);
+                }
+                catch
+                {
+                    if (File.Exists(backupPath)) File.Move(backupPath, destinationPath);
+                    throw;
+                }
+                finally
+                {
+                    if (File.Exists(backupPath)) File.Delete(backupPath);
+                }
             }
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            string backupPath = Path.Combine(
-                Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
-                "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
+            void ReplaceNT()
+            {
+                if (!File.Exists(destinationPath))
+                {
+                    // File.Replace() fails if destinationPath does not exist yet
+                    File.Move(sourcePath, destinationPath);
+                    return;
+                }
 
-            try
-            {
-                File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
-            }
-            catch (IOException ex)
-            {
-                Log.Debug("File.Replace() failed. Falling back to simple 'delete and move' in case we are running on a Windows version that does not support File.Replace() (e.g. Windows Azure).");
-                Log.Debug(ex);
-                ReplaceSimple(sourcePath, destinationPath);
-            }
-            finally
-            {
-                if (File.Exists(backupPath)) File.Delete(backupPath);
-            }
-        }
+                // ReSharper disable once AssignNullToNotNullAttribute
+                string backupPath = Path.Combine(
+                    Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
+                    "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
 
-        private static void ReplaceSimple(string sourcePath, string destinationPath)
-        {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            string backupPath = Path.Combine(
-                Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
-                "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
-
-            if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
-            try
-            {
-                File.Move(sourcePath, destinationPath);
-            }
-            catch
-            {
-                if (File.Exists(backupPath)) File.Move(backupPath, destinationPath);
-                throw;
-            }
-            finally
-            {
-                if (File.Exists(backupPath)) File.Delete(backupPath);
+                try
+                {
+                    File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
+                }
+                catch (IOException ex)
+                {
+                    Log.Debug("File.Replace() failed. Falling back to simple 'delete and move' in case we are running on a Windows version that does not support File.Replace() (e.g. Windows Azure).");
+                    Log.Debug(ex);
+                    ReplaceSimple();
+                }
+                finally
+                {
+                    if (File.Exists(backupPath)) File.Delete(backupPath);
+                }
             }
         }
         #endregion

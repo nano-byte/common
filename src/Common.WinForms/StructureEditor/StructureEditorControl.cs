@@ -119,21 +119,22 @@ namespace NanoByte.Common.StructureEditor
         private void RebuildTree()
         {
             Node reselectNode = null;
-            Func<object, TreeNode[]> buildNodes = null;
-            buildNodes = target =>
+
+            TreeNode[] BuildNodes(object target)
             {
-                var nodes = _getEntries.Dispatch(target).Select(entry =>
-                {
-                    var node = new Node(entry, buildNodes(entry.Target));
-                    if (entry.Target == _selectedTarget) reselectNode = node;
-                    return node;
-                });
+                var nodes = _getEntries.Dispatch(target)
+                    .Select(entry =>
+                    {
+                        var node = new Node(entry, BuildNodes(entry.Target));
+                        if (entry.Target == _selectedTarget) reselectNode = node;
+                        return node;
+                    });
                 return nodes.Cast<TreeNode>().ToArray();
-            };
+            }
 
             treeView.BeginUpdate();
             treeView.Nodes.Clear();
-            treeView.Nodes.AddRange(buildNodes(this));
+            treeView.Nodes.AddRange(BuildNodes(this));
             treeView.SelectedNode = reselectNode ?? (Node)treeView.Nodes[0];
             treeView.SelectedNode.Expand();
             treeView.EndUpdate();
@@ -144,13 +145,13 @@ namespace NanoByte.Common.StructureEditor
         /// </summary>
         private void RebuildOnIdle()
         {
-            EventHandler rebuild = null;
-            rebuild = delegate
+            void Rebuild(object sender, EventArgs e)
             {
                 RebuildTree();
-                Application.Idle -= rebuild;
-            };
-            Application.Idle += rebuild;
+                Application.Idle -= Rebuild;
+            }
+
+            Application.Idle += Rebuild;
         }
         #endregion
 
