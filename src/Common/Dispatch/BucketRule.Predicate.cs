@@ -50,13 +50,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="predicate"/>.</param>
         public BucketRule([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
         {
-            #region Sanity checks
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
-            #endregion
-
-            Predicate = predicate;
-            Bucket = bucket;
+            Predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
+            Bucket = bucket ?? throw new ArgumentNullException(nameof(bucket));
         }
     }
 }

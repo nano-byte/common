@@ -43,11 +43,7 @@ namespace NanoByte.Common.Streams
         /// <param name="offset">Number of bytes to offset the <paramref name="baseStream"/>.</param>
         public OffsetStream([NotNull] Stream baseStream, long offset)
         {
-            #region Sanity checks
-            if (baseStream == null) throw new ArgumentNullException(nameof(baseStream));
-            #endregion
-
-            _baseStream = baseStream;
+            _baseStream = baseStream ?? throw new ArgumentNullException(nameof(baseStream));
             _baseStream.Position = _offset = offset;
         }
 
@@ -67,51 +63,27 @@ namespace NanoByte.Common.Streams
         public override long Position { get { return _baseStream.Position - _offset; } set { _baseStream.Position = value + _offset; } }
 
         /// <inheritdoc/>
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            return _baseStream.Read(buffer, offset, count);
-        }
+        public override int Read(byte[] buffer, int offset, int count) => _baseStream.Read(buffer, offset, count);
 
         /// <inheritdoc/>
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            _baseStream.Write(buffer, offset, count);
-        }
+        public override void Write(byte[] buffer, int offset, int count) => _baseStream.Write(buffer, offset, count);
 
         /// <inheritdoc/>
-        public override int ReadByte()
-        {
-            return _baseStream.ReadByte();
-        }
+        public override int ReadByte() => _baseStream.ReadByte();
 
         /// <inheritdoc/>
-        public override void WriteByte(byte value)
-        {
-            _baseStream.WriteByte(value);
-        }
+        public override void WriteByte(byte value) => _baseStream.WriteByte(value);
 
         /// <inheritdoc/>
-        public override void Flush()
-        {
-            _baseStream.Flush();
-        }
+        public override void Flush() => _baseStream.Flush();
 
         /// <inheritdoc/>
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            return _baseStream.Seek((origin == SeekOrigin.Begin ? _offset : 0L) + offset, origin) - _offset;
-        }
+        public override long Seek(long offset, SeekOrigin origin) => _baseStream.Seek((origin == SeekOrigin.Begin ? _offset : 0L) + offset, origin) - _offset;
 
         /// <inheritdoc/>
-        public override void SetLength(long value)
-        {
-            _baseStream.SetLength(value + _offset);
-        }
+        public override void SetLength(long value) => _baseStream.SetLength(value + _offset);
 
         /// <inheritdoc/>
-        public override void Close()
-        {
-            _baseStream.Close();
-        }
+        public override void Close() => _baseStream.Close();
     }
 }

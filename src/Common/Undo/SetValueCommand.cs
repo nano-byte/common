@@ -45,12 +45,8 @@ namespace NanoByte.Common.Undo
         /// <param name="newValue">The new value to be set.</param>
         public SetValueCommand([NotNull] PropertyPointer<T> pointer, T newValue)
         {
-            #region Sanity checks
-            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-            #endregion
-
             _newValue = newValue;
-            _pointer = pointer;
+            _pointer = pointer ?? throw new ArgumentNullException(nameof(pointer));
         }
 
         /// <summary>

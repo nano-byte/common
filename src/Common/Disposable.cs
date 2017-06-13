@@ -37,14 +37,7 @@ namespace NanoByte.Common
         /// Creates a new disposable.
         /// </summary>
         /// <param name="callback">The callback to invoke on <see cref="Dispose"/>.</param>
-        public Disposable([NotNull] Action callback)
-        {
-            #region Sanity checks
-            if (callback == null) throw new ArgumentNullException(nameof(callback));
-            #endregion
-
-            _callback = callback;
-        }
+        public Disposable([NotNull] Action callback) => _callback = callback ?? throw new ArgumentNullException(nameof(callback));
 
         /// <summary>
         /// Invokes the callback.

@@ -54,15 +54,9 @@ namespace NanoByte.Common.Tasks
         /// <param name="work">The code to be executed once per element in <paramref name="target"/>. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
         public ForEachTask([NotNull, Localizable(true)] string name, [NotNull] IEnumerable<T> target, [NotNull] Action<T> work)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            if (target == null) throw new ArgumentNullException(nameof(target));
-            if (work == null) throw new ArgumentNullException(nameof(work));
-            #endregion
-
-            Name = name;
-            _work = work;
-            _target = target;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            _work = work ?? throw new ArgumentNullException(nameof(work));
+            _target = target ?? throw new ArgumentNullException(nameof(target));
 
             // Detect collections that know their own length
             var collection = target as ICollection<T>;
@@ -97,8 +91,6 @@ namespace NanoByte.Common.Tasks
         /// <param name="target">A list of objects to execute work for. Cancellation is possible between two elements.</param>
         /// <param name="work">The code to be executed once per element in <paramref name="target"/>. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
         public static ForEachTask<T> Create<T>([NotNull, Localizable(true)] string name, [NotNull] IEnumerable<T> target, [NotNull] Action<T> work)
-        {
-            return new ForEachTask<T>(name, target, work);
-        }
+            => new ForEachTask<T>(name, target, work);
     }
 }

@@ -46,32 +46,18 @@ namespace NanoByte.Common.Net
         /// <param name="inner">The inner <see cref="ICredentialProvider"/> to wrap.</param>
         public CachedCredentialProvider([NotNull] ICredentialProvider inner)
         {
-            #region Sanity checks
-            if (inner == null) throw new ArgumentNullException(nameof(inner));
-            #endregion
-
-            _inner = inner;
+            _inner = inner ?? throw new ArgumentNullException(nameof(inner));
             _cache = new TransparentCache<Uri, NetworkCredential>(uri => inner.GetCredential(uri, null));
         }
 
         /// <inheritdoc/>
         public NetworkCredential GetCredential(Uri uri, string authType)
-        {
-            #region Sanity checks
-            if (uri == null) throw new ArgumentNullException(nameof(uri));
-            #endregion
-
-            return _cache[uri.GetBaseUri()];
-        }
+            => _cache[(uri ?? throw new ArgumentNullException(nameof(uri))).GetBaseUri()];
 
         /// <inheritdoc/>
         public void ReportInvalid(Uri uri)
         {
-            #region Sanity checks
-            if (uri == null) throw new ArgumentNullException(nameof(uri));
-            #endregion
-
-            uri = uri.GetBaseUri();
+            uri = (uri ?? throw new ArgumentNullException(nameof(uri))).GetBaseUri();
             _cache.Remove(uri);
             _inner.ReportInvalid(uri);
         }

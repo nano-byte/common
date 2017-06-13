@@ -49,12 +49,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="value"/>.</param>
         public BucketRule(TValue value, [NotNull] ICollection<TElement> bucket)
         {
-            #region Sanity checks
-            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
-            #endregion
-
             Value = value;
-            Bucket = bucket;
+            Bucket = bucket ?? throw new ArgumentNullException(nameof(bucket));
         }
     }
 }

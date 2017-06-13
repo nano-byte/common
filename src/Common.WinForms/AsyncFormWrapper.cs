@@ -46,10 +46,9 @@ namespace NanoByte.Common
         public AsyncFormWrapper([NotNull] Func<T> init)
         {
             #region Sanity checks
-            if (init == null) throw new ArgumentNullException(nameof(init));
             #endregion
 
-            _init = init;
+            _init = init ?? throw new ArgumentNullException(nameof(init));
         }
 
         private readonly object _lock = new object();
@@ -96,16 +95,12 @@ namespace NanoByte.Common
         [PublicAPI]
         public void Post([NotNull, InstantHandle] Action<T> action)
         {
-            #region Sanity checks
-            if (action == null) throw new ArgumentNullException(nameof(action));
-            #endregion
-
             var form = InitializeForm();
             try
             {
-                form.Invoke(action, form);
+                form.Invoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Sanity checks
+                #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -129,16 +124,12 @@ namespace NanoByte.Common
         [PublicAPI]
         public TResult Post<TResult>([NotNull, InstantHandle] Func<T, TResult> action)
         {
-            #region Sanity checks
-            if (action == null) throw new ArgumentNullException(nameof(action));
-            #endregion
-
             var form = InitializeForm();
             try
             {
-                return (TResult)form.Invoke(action, form);
+                return (TResult)form.Invoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Sanity checks
+                #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -160,16 +151,12 @@ namespace NanoByte.Common
         [PublicAPI]
         public void Send([NotNull] Action<T> action)
         {
-            #region Sanity checks
-            if (action == null) throw new ArgumentNullException(nameof(action));
-            #endregion
-
             var form = InitializeForm();
             try
             {
-                form.BeginInvoke(action, form);
+                form.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Sanity checks
+                #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -192,18 +179,14 @@ namespace NanoByte.Common
         [PublicAPI]
         public void SendLow([NotNull] Action<T> action)
         {
-            #region Sanity checks
-            if (action == null) throw new ArgumentNullException(nameof(action));
-            #endregion
-
             var form = _form;
             if (form == null) return;
 
             try
             {
-                form.BeginInvoke(action, form);
+                form.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Sanity checks
+                #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -240,7 +223,7 @@ namespace NanoByte.Common
                     form.Dispose();
                 }));
             }
-                #region Sanity checks
+                #region Error handling
             catch (InvalidOperationException ex)
             {
                 // Don't worry if the form was already closing

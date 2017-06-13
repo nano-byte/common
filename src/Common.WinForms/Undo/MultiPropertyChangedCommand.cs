@@ -52,16 +52,10 @@ namespace NanoByte.Common.Undo
         /// <param name="newValue">The property's current value.</param>
         public MultiPropertyChangedCommand([NotNull] object[] targets, [NotNull] PropertyDescriptor property, [NotNull] object[] oldValues, object newValue)
         {
-            #region Sanity checks
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (property == null) throw new ArgumentNullException(nameof(property));
-            if (oldValues == null) throw new ArgumentNullException(nameof(oldValues));
+            _targets = targets ?? throw new ArgumentNullException(nameof(targets));
+            _property = property ?? throw new ArgumentNullException(nameof(property));
+            _oldValues = oldValues ?? throw new ArgumentNullException(nameof(oldValues));
             if (targets.Length != oldValues.Length) throw new ArgumentException(Resources.TargetsOldValuesLength, nameof(targets));
-            #endregion
-
-            _targets = targets;
-            _property = property;
-            _oldValues = oldValues;
             _newValue = newValue;
         }
 

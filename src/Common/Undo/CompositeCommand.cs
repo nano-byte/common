@@ -38,14 +38,8 @@ namespace NanoByte.Common.Undo
         /// </summary>
         /// <param name="commands">The commands to be contained inside the transaction.</param>
         public CompositeCommand([NotNull] params IUndoCommand[] commands)
-        {
-            #region Sanity checks
-            if (commands == null) throw new ArgumentNullException(nameof(commands));
-            #endregion
-
             // Defensive copy
-            _commands = commands.ToArray();
-        }
+            => _commands = (commands ?? throw new ArgumentNullException(nameof(commands))).ToArray();
 
         /// <summary>
         /// Executes all the contained <see cref="IUndoCommand"/>s in order.

@@ -46,11 +46,7 @@ namespace NanoByte.Common.Streams
         /// <param name="reader">The stream to read from.</param>
         public StreamConsumer([NotNull] StreamReader reader)
         {
-            #region Sanity checks
-            if (reader == null) throw new ArgumentNullException(nameof(reader));
-            #endregion
-
-            _reader = reader;
+            _reader = reader ?? throw new ArgumentNullException(nameof(reader));
             _thread = ThreadUtils.StartBackground(ThreadStart, name: "StreamConsumer");
         }
 

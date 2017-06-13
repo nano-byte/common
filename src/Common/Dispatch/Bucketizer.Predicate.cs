@@ -45,11 +45,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="elements">The elements to be bucketized.</param>
         internal Bucketizer([NotNull] IEnumerable<T> elements)
         {
-            #region Sanity checks
-            if (elements == null) throw new ArgumentNullException(nameof(elements));
-            #endregion
-
-            _elements = elements;
+            _elements = elements ?? throw new ArgumentNullException(nameof(elements));
         }
 
         /// <summary>
@@ -60,12 +56,7 @@ namespace NanoByte.Common.Dispatch
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
         public Bucketizer<T> Add([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
         {
-            #region Sanity checks
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
-            #endregion
-
-            _rules.Add(new BucketRule<T>(predicate, bucket));
+            _rules.Add(new BucketRule<T>(predicate ?? throw new ArgumentNullException(nameof(predicate)), bucket ?? throw new ArgumentNullException(nameof(bucket))));
 
             return this;
         }
@@ -84,15 +75,9 @@ namespace NanoByte.Common.Dispatch
         }
 
         #region IEnumerable
-        public IEnumerator<BucketRule<T>> GetEnumerator()
-        {
-            return _rules.GetEnumerator();
-        }
+        public IEnumerator<BucketRule<T>> GetEnumerator() => _rules.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _rules.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _rules.GetEnumerator();
         #endregion
     }
 
@@ -105,9 +90,6 @@ namespace NanoByte.Common.Dispatch
         /// Creates a new predicate-matching bucketizer.
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
-        public static Bucketizer<T> Bucketize<T>([NotNull] this IEnumerable<T> elements)
-        {
-            return new Bucketizer<T>(elements);
-        }
+        public static Bucketizer<T> Bucketize<T>([NotNull] this IEnumerable<T> elements) => new Bucketizer<T>(elements);
     }
 }

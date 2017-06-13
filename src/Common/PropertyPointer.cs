@@ -65,13 +65,8 @@ namespace NanoByte.Common
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public PropertyPointer([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default(T), bool needsEncoding = false)
         {
-            #region Sanity checks
-            if (getValue == null) throw new ArgumentNullException(nameof(getValue));
-            if (setValue == null) throw new ArgumentNullException(nameof(setValue));
-            #endregion
-
-            _getValue = getValue;
-            _setValue = setValue;
+            _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
+            _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
             DefaultValue = defaultValue;
             NeedsEncoding = needsEncoding;
         }
@@ -87,9 +82,7 @@ namespace NanoByte.Common
         /// </summary>
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<bool> pointer)
         {
-            #region Sanity checks
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-            #endregion
 
             return new PropertyPointer<string>(
                 getValue: () => pointer.Value.ToString(CultureInfo.InvariantCulture),
@@ -102,9 +95,7 @@ namespace NanoByte.Common
         /// </summary>
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<int> pointer)
         {
-            #region Sanity checks
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-            #endregion
 
             return new PropertyPointer<string>(
                 getValue: () => pointer.Value.ToString(CultureInfo.InvariantCulture),
@@ -117,9 +108,7 @@ namespace NanoByte.Common
         /// </summary>
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<long> pointer)
         {
-            #region Sanity checks
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-            #endregion
 
             return new PropertyPointer<string>(
                 getValue: () => pointer.Value.ToString(CultureInfo.InvariantCulture),
@@ -132,9 +121,7 @@ namespace NanoByte.Common
         /// </summary>
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<TimeSpan> pointer)
         {
-            #region Sanity checks
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-            #endregion
 
             return new PropertyPointer<string>(
                 getValue: () => ((int)pointer.Value.TotalSeconds).ToString(CultureInfo.InvariantCulture),
@@ -147,9 +134,7 @@ namespace NanoByte.Common
         /// </summary>
         public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<Uri> pointer)
         {
-            #region Sanity checks
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-            #endregion
 
             return new PropertyPointer<string>(
                 getValue: () => pointer.Value?.ToStringRfc(),

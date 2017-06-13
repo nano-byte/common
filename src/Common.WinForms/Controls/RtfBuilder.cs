@@ -51,11 +51,7 @@ namespace NanoByte.Common.Controls
         /// <param name="color">The color of the text.</param>
         public void AppendPar([NotNull] string text, RtfColor color)
         {
-            #region Sanity checks
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            #endregion
-
-            text = text.Replace(@"\", @"\\").Replace(Environment.NewLine, "\\par\n");
+            text = (text ?? throw new ArgumentNullException(nameof(text))).Replace(@"\", @"\\").Replace(Environment.NewLine, "\\par\n");
             _builder.AppendLine("\\cf" + ((int)color + 1) + " " + text + "\\par\\par\n");
         }
 

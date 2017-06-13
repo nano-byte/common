@@ -45,11 +45,7 @@ namespace NanoByte.Common.Undo
         /// <param name="propertyGrid">The property grid being tracked.</param>
         public MultiPropertyTracker(PropertyGrid propertyGrid)
         {
-            #region Sanity checks
-            if (propertyGrid == null) throw new ArgumentNullException(nameof(propertyGrid));
-            #endregion
-
-            _propertyGrid = propertyGrid;
+            _propertyGrid = propertyGrid ?? throw new ArgumentNullException(nameof(propertyGrid));
             propertyGrid.SelectedGridItemChanged += SelectionChanged;
         }
         #endregion

@@ -75,11 +75,7 @@ namespace NanoByte.Common.Info
         /// <param name="ex">The exception whose information to extract.</param>
         public ExceptionInfo([NotNull] Exception ex) : this()
         {
-            #region Sanity checks
-            if (ex == null) throw new ArgumentNullException(nameof(ex));
-            #endregion
-
-            ExceptionType = ex.GetType().ToString();
+            ExceptionType = (ex ?? throw new ArgumentNullException(nameof(ex))).GetType().ToString();
             Message = ex.Message;
             Source = ex.Source;
             StackTrace = ex.StackTrace;

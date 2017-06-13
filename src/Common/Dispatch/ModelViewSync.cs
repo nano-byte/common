@@ -51,13 +51,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="view">The View that is to be automatically updated to reflect changes in the Model.</param>
         public ModelViewSync([NotNull] MonitoredCollection<TModel> model, [NotNull] ICollection<TView> view)
         {
-            #region Sanity checks
-            if (model == null) throw new ArgumentNullException(nameof(model));
-            if (view == null) throw new ArgumentNullException(nameof(view));
-            #endregion
-
-            _model = model;
-            _view = view;
+            _model = model ?? throw new ArgumentNullException(nameof(model));
+            _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
         private bool _initialized;
@@ -130,19 +125,13 @@ namespace NanoByte.Common.Dispatch
             _modelToView.RemoveKey(element);
         }
 
-        private void OnChanged(TModel element)
-        {
-            _updateDispatcher.Dispatch(element);
-        }
+        private void OnChanged(TModel element) => _updateDispatcher.Dispatch(element);
 
         /// <summary>
         /// Looks up the Model element a View representation was created for.
         /// </summary>
         /// <exception cref="KeyNotFoundException">There is no match.</exception>
-        public TModel Lookup(TView representation)
-        {
-            return _viewToModel[representation];
-        }
+        public TModel Lookup(TView representation) => _viewToModel[representation];
 
         private readonly AggregateDispatcher<TModel, TView> _createDispatcher = new AggregateDispatcher<TModel, TView>();
 
@@ -157,9 +146,7 @@ namespace NanoByte.Common.Dispatch
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
         {
-            #region Sanity checks
             if (create == null) throw new ArgumentNullException(nameof(create));
-            #endregion
 
 #if NET20 || NET35
             _createDispatcher.Add<TSpecificModel>(element => create(element).OfType<TView>());
@@ -185,9 +172,7 @@ namespace NanoByte.Common.Dispatch
             where TSpecificModel : class, TModel
             where TSpecificView : class, TView
         {
-            #region Sanity checks
             if (create == null) throw new ArgumentNullException(nameof(create));
-            #endregion
 
             RegisterMultiple(element => new[] {create(element)}, update);
         }

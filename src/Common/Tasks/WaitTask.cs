@@ -52,13 +52,8 @@ namespace NanoByte.Common.Tasks
         /// <param name="millisecondsTimeout">The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely.</param>
         public WaitTask([NotNull, Localizable(true)] string name, [NotNull] WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            if (waitHandle == null) throw new ArgumentNullException(nameof(waitHandle));
-            #endregion
-
-            Name = name;
-            _waitHandle = waitHandle;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            _waitHandle = waitHandle ?? throw new ArgumentNullException(nameof(waitHandle));
             _millisecondsTimeout = millisecondsTimeout;
         }
 

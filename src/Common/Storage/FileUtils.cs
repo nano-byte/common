@@ -80,11 +80,7 @@ namespace NanoByte.Common.Storage
         [Pure]
         public static bool IsBreakoutPath([NotNull, Localizable(false)] string path)
         {
-            #region Sanity checks
-            if (path == null) throw new ArgumentNullException(nameof(path));
-            #endregion
-
-            path = UnifySlashes(path);
+            path = UnifySlashes(path ?? throw new ArgumentNullException(nameof(path)));
             return Path.IsPathRooted(path) || path.Split(Path.DirectorySeparatorChar).Contains("..");
         }
 

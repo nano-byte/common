@@ -48,13 +48,8 @@ namespace NanoByte.Common.Dispatch
         /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
         internal Bucketizer([NotNull] IEnumerable<TElement> elements, [NotNull] Func<TElement, TValue> valueRetriever)
         {
-            #region Sanity checks
-            if (elements == null) throw new ArgumentNullException(nameof(elements));
-            if (valueRetriever == null) throw new ArgumentNullException(nameof(valueRetriever));
-            #endregion
-
-            _elements = elements;
-            _valueRetriever = valueRetriever;
+            _elements = elements ?? throw new ArgumentNullException(nameof(elements));
+            _valueRetriever = valueRetriever ?? throw new ArgumentNullException(nameof(valueRetriever));
         }
 
         /// <summary>
@@ -65,11 +60,7 @@ namespace NanoByte.Common.Dispatch
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
         public Bucketizer<TElement, TValue> Add(TValue value, [NotNull] ICollection<TElement> bucket)
         {
-            #region Sanity checks
-            if (bucket == null) throw new ArgumentNullException(nameof(bucket));
-            #endregion
-
-            _rules.Add(new BucketRule<TElement, TValue>(value, bucket));
+            _rules.Add(new BucketRule<TElement, TValue>(value, bucket ?? throw new ArgumentNullException(nameof(bucket))));
 
             return this;
         }
@@ -89,15 +80,9 @@ namespace NanoByte.Common.Dispatch
         }
 
         #region IEnumerable
-        public IEnumerator<BucketRule<TElement, TValue>> GetEnumerator()
-        {
-            return _rules.GetEnumerator();
-        }
+        public IEnumerator<BucketRule<TElement, TValue>> GetEnumerator() => _rules.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _rules.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _rules.GetEnumerator();
         #endregion
     }
 
@@ -109,8 +94,6 @@ namespace NanoByte.Common.Dispatch
         /// <param name="elements">The elements to be bucketized.</param>
         /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
         public static Bucketizer<TElement, TValue> Bucketize<TElement, TValue>([NotNull] this IEnumerable<TElement> elements, [NotNull] Func<TElement, TValue> valueRetriever)
-        {
-            return new Bucketizer<TElement, TValue>(elements, valueRetriever);
-        }
+            => new Bucketizer<TElement, TValue>(elements, valueRetriever);
     }
 }

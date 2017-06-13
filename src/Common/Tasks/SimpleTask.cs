@@ -56,13 +56,8 @@ namespace NanoByte.Common.Tasks
         /// <param name="cancellationCallback">A callback to be called when cancellation is requested via a <see cref="CancellationToken"/>.</param>
         public SimpleTask([NotNull, Localizable(true)] string name, [NotNull] Action work, [CanBeNull] Action cancellationCallback = null)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            if (work == null) throw new ArgumentNullException(nameof(work));
-            #endregion
-
-            Name = name;
-            _work = work;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            _work = work ?? throw new ArgumentNullException(nameof(work));
             _cancelationCallback = cancellationCallback;
         }
 
