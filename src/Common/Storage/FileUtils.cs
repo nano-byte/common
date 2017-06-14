@@ -33,6 +33,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -107,6 +108,27 @@ namespace NanoByte.Common.Storage
             return Uri.UnescapeDataString(relativeUri.ToString()).TrimEnd('/');
         }
 
+        private static readonly Regex _varStyle1 = new Regex(@"\${(.+)}"), _varStyle2 = new Regex(@"\$([^\$\s\\/-]+)");
+
+        /// <summary>
+        /// Expands/substitutes any Unix-style environment variables in the string.
+        /// </summary>
+        /// <param name="value">The string containing variables to be expanded.</param>
+        /// <param name="variables">The list of variables available for expansion.</param>
+        [NotNull]
+        public static string ExpandUnixVariables([NotNull] string value, [NotNull] IDictionary<string, string> variables)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (variables == null) throw new ArgumentNullException(nameof(variables));
+            if (WindowsUtils.IsWindows)
+            {
+                // Environment variables are case-insensitive on Windows
+                variables = variables.ToDictionary(x => x.Key.ToUpperInvariant(), x => x.Value);
+                return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? "");
+            }
+            else return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value) ?? "");
+        }
+
         /// <summary>
         /// Expands/substitutes any Unix-style environment variables in the string.
         /// </summary>
@@ -115,18 +137,9 @@ namespace NanoByte.Common.Storage
         [NotNull]
         public static string ExpandUnixVariables([NotNull] string value, [NotNull] StringDictionary variables)
         {
-            #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (variables == null) throw new ArgumentNullException(nameof(variables));
-            #endregion
-
-            // Substitute ${VAR} for the value of VAR
-            value = Regex.Replace(value, @"\${(.+)}", match => variables[match.Groups[1].Value]);
-
-            // Substitute $VAR for the value of VAR
-            value = Regex.Replace(value, @"\$([^\$\s\\/-]+)", match => variables[match.Groups[1].Value]);
-
-            return value;
+            return _varStyle2.Replace(_varStyle1.Replace(value, x => variables[x.Groups[1].Value]), x => variables[x.Groups[1].Value]);
         }
         #endregion
 
@@ -142,7 +155,7 @@ namespace NanoByte.Common.Storage
 
             return File.Exists(path) &&
                    // Make sure the file found is a string-exact match
-                   Directory.GetFiles(Path.GetDirectoryName(path) ?? Environment.CurrentDirectory, Path.GetFileName(path)).Contains(path);
+                   Directory.GetFiles(Path.GetDirectoryName(path) ?? Directory.GetCurrentDirectory(), Path.GetFileName(path)).Contains(path);
         }
         #endregion
 

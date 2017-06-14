@@ -45,16 +45,14 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public virtual bool CanCancel => true;
 
+        /// <summary>The identity of the user that originally created this task.</summary>
+        private readonly WindowsIdentity _originalIdentity;
+
         protected TaskBase()
         {
             if (WindowsUtils.IsWindowsNT)
                 _originalIdentity = WindowsIdentity.GetCurrent();
         }
-
-        #region Run
-        /// <summary>The identity of the user that originally created this task.</summary>
-        private readonly WindowsIdentity _originalIdentity;
-
         /// <summary>Signaled when the user wishes to cancel the task execution.</summary>
         protected CancellationToken CancellationToken;
 
@@ -77,12 +75,8 @@ namespace NanoByte.Common.Tasks
             try
             {
                 // Run task with privileges of original user if possible
-                if (_originalIdentity != null)
-                {
-                    using (_originalIdentity.Impersonate())
-                        Execute();
-                }
-                else Execute();
+                using (_originalIdentity?.Impersonate())
+                    Execute();
             }
                 #region Error handling
             catch (OperationCanceledException)
@@ -107,7 +101,6 @@ namespace NanoByte.Common.Tasks
             }
             #endregion
         }
-        #endregion
 
         #region Progress
         private TaskState _state;

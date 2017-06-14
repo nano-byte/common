@@ -423,7 +423,7 @@ namespace NanoByte.Common.Native
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Environment.CurrentDirectory, targetPath);
+            string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath);
             if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, Directory.Exists(targetAbsolute) ? 1 : 0))
                 throw BuildException(Marshal.GetLastWin32Error());
         }

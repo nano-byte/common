@@ -41,9 +41,9 @@ namespace NanoByte.Common.Collections
             if (array == null) throw new ArgumentNullException(nameof(array));
             #endregion
 
-            var result = new T[array.LongLength + 1];
-            Array.Copy(array, result, array.LongLength);
-            result[array.LongLength] = element;
+            var result = new T[array.Length + 1];
+            Array.Copy(array, result, array.Length);
+            result[array.Length] = element;
             return result;
         }
 
@@ -57,8 +57,8 @@ namespace NanoByte.Common.Collections
             if (array == null) throw new ArgumentNullException(nameof(array));
             #endregion
 
-            var result = new T[array.LongLength + 1];
-            Array.Copy(array, 0, result, 1, array.LongLength);
+            var result = new T[array.Length + 1];
+            Array.Copy(array, 0, result, 1, array.Length);
             result[0] = element;
             return result;
         }

@@ -20,12 +20,12 @@
  * THE SOFTWARE.
  */
 
-using System;
+using System.IO;
 
 namespace NanoByte.Common.Storage
 {
     /// <summary>
-    /// Like <see cref="TemporaryDirectory"/> but also sets <see cref="Environment.CurrentDirectory"/> to <see cref="TemporaryDirectory.Path"/>.
+    /// Like <see cref="TemporaryDirectory"/> but also sets the current working directory to <see cref="TemporaryDirectory.Path"/>.
     /// </summary>
     public sealed class TemporaryWorkingDirectory : TemporaryDirectory
     {
@@ -38,8 +38,8 @@ namespace NanoByte.Common.Storage
         public TemporaryWorkingDirectory(string prefix) : base(prefix)
         {
             // Remember the current working directory for later restoration and then change it
-            _oldWorkingDir = Environment.CurrentDirectory;
-            Environment.CurrentDirectory = Path;
+            _oldWorkingDir = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(Path);
         }
         #endregion
 
@@ -47,7 +47,7 @@ namespace NanoByte.Common.Storage
         protected override void Dispose(bool disposing)
         {
             // Restore the original working directory
-            if (disposing) Environment.CurrentDirectory = _oldWorkingDir;
+            if (disposing) Directory.SetCurrentDirectory(_oldWorkingDir);
 
             base.Dispose(disposing);
         }

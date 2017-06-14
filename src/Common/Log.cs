@@ -70,7 +70,7 @@ namespace NanoByte.Common
             // Clear cache file once it reaches 1MB
             if (file.Length > 1024 * 1024)
             {
-                file.Close();
+                file.Dispose();
                 file = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             }
 
@@ -285,7 +285,7 @@ namespace NanoByte.Common
 
             lock (_lock)
             {
-                System.Diagnostics.Debug.Print(formattedMessage);
+                System.Diagnostics.Debug.Write(formattedMessage);
                 _sessionContent.AppendLine(formattedMessage);
                 _fileWriter?.WriteLine(formattedMessage);
                 _handlers.Last()(severity, message);

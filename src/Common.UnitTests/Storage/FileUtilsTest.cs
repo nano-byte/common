@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
@@ -75,17 +76,29 @@ namespace NanoByte.Common.Storage
         }
 
         [Fact]
-        public void TestExpandUnixVariables()
+        public void TestExpandUnixVariablesGeneric()
         {
+            var variables = WindowsUtils.IsWindows
+                // Environment variables are case-insensitive on Windows
+                ? new Dictionary<string, string> {{"key1", "value1"}, {"key2", "value2"}, {"long key", "long value"}}
+                : new Dictionary<string, string> {{"KEY1", "value1"}, {"KEY2", "value2"}, {"LONG KEY", "long value"}};
+
+            FileUtils.ExpandUnixVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables).Should().Be("value1value2/value1 value2 long value ");
+            FileUtils.ExpandUnixVariables("$KEY1-bla", variables).Should().Be("value1-bla");
+            FileUtils.ExpandUnixVariables("", variables).Should().Be("");
+        }
+
+        [Fact]
+        public void TestExpandUnixVariablesSpecialized()
+        {
+            // Environment variables are case-insensitive on Windows
             var variables = new StringDictionary
             {
                 {"key1", "value1"}, {"key2", "value2"}, {"long key", "long value"}
             };
 
             FileUtils.ExpandUnixVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables).Should().Be("value1value2/value1 value2 long value ");
-
             FileUtils.ExpandUnixVariables("$KEY1-bla", variables).Should().Be("value1-bla");
-
             FileUtils.ExpandUnixVariables("", variables).Should().Be("");
         }
         #endregion

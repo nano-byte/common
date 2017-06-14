@@ -58,7 +58,7 @@ namespace NanoByte.Common.Cli
                 if (entry.Contains("*") || entry.Contains("?"))
                 {
                     string dewildcardedPath = entry.Replace("*", "x").Replace("?", "x");
-                    string directory = Path.GetDirectoryName(Path.GetFullPath(dewildcardedPath)) ?? Environment.CurrentDirectory;
+                    string directory = Path.GetDirectoryName(Path.GetFullPath(dewildcardedPath)) ?? Directory.GetCurrentDirectory();
                     string filePattern = Path.GetFileName(entry);
                     if (string.IsNullOrEmpty(filePattern)) filePattern = defaultPattern;
                     result.AddRange(Directory.GetFiles(directory, filePattern).Select(file => new FileInfo(Path.GetFullPath(file))));

@@ -20,7 +20,6 @@
  * THE SOFTWARE.
  */
 
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -55,7 +54,7 @@ namespace NanoByte.Common.Cli
             if (Directory.Exists(path)) return path;
             path = FileUtils.PathCombine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", "..", "..", "..", "bundled", name); // Parallel directory during developmen
             if (Directory.Exists(path)) return path;
-            path = Path.Combine(Environment.CurrentDirectory, name); // Subdir of working directory
+            path = Path.Combine(Directory.GetCurrentDirectory(), name); // Subdir of working directory
             if (Directory.Exists(path)) return path;
             return Locations.InstallBase; // Installation directory
         }
