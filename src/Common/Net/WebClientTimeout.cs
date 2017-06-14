@@ -48,10 +48,7 @@ namespace NanoByte.Common.Net
         /// Creates a new <see cref="WebClient"/>.
         /// </summary>
         /// <param name="timeout">The length of time, in milliseconds, before requests made by this <see cref="WebClient"/> time out.</param>
-        public WebClientTimeout(int timeout)
-        {
-            _timeout = timeout;
-        }
+        public WebClientTimeout(int timeout) => _timeout = timeout;
 
         protected override WebRequest GetWebRequest(Uri address)
         {
@@ -60,8 +57,8 @@ namespace NanoByte.Common.Net
             {
                 request.Timeout = _timeout;
 
-                var httpRequest = request as HttpWebRequest;
-                if (httpRequest != null) httpRequest.UserAgent = AppInfo.Current.NameVersion;
+                if (request is HttpWebRequest httpRequest)
+                    httpRequest.UserAgent = AppInfo.Current.NameVersion;
             }
             return request;
         }

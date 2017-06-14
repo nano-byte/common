@@ -54,8 +54,7 @@ namespace NanoByte.Common.Dispatch
 
             _delegates.Add(value =>
             {
-                var specificValue = value as TSpecific;
-                if (specificValue != null) action(specificValue);
+                if (value is TSpecific specificValue) action(specificValue);
             });
 
             return this;

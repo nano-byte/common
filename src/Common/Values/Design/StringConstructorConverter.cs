@@ -38,15 +38,12 @@ namespace NanoByte.Common.Values.Design
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
-        }
+            => (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            var stringValue = value as string;
-            if (stringValue != null)
+            if (value is string stringValue)
             {
                 var constructor = typeof(T).GetConstructor(new[] {typeof(string)});
                 if (constructor != null)
@@ -66,9 +63,8 @@ namespace NanoByte.Common.Values.Design
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if (value != null && destinationType == typeof(string)) return value.ToString();
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
+            => value != null && destinationType == typeof(string)
+                ? value.ToString()
+                : base.ConvertTo(context, culture, value, destinationType);
     }
 }

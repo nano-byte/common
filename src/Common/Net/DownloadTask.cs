@@ -99,8 +99,7 @@ namespace NanoByte.Common.Net
             }
             #endregion
 
-            var httpRequest = request as HttpWebRequest;
-            if (httpRequest != null)
+            if (request is HttpWebRequest httpRequest)
             {
                 httpRequest.UserAgent = AppInfo.Current.NameVersion;
                 httpRequest.Credentials = CredentialProvider;
@@ -146,8 +145,7 @@ namespace NanoByte.Common.Net
                 if (ex.Status == WebExceptionStatus.RequestCanceled) throw new OperationCanceledException();
                 if (ex.Status == WebExceptionStatus.ProtocolError)
                 {
-                    var response = ex.Response as HttpWebResponse;
-                    if (response != null && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
+                    if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
                     {
                         CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
                         if (CredentialProvider.Interactive) goto Retry;

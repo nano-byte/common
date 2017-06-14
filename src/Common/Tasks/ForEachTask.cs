@@ -59,8 +59,7 @@ namespace NanoByte.Common.Tasks
             _target = target ?? throw new ArgumentNullException(nameof(target));
 
             // Detect collections that know their own length
-            var collection = target as ICollection<T>;
-            if (collection != null) UnitsTotal = collection.Count;
+            if (target is ICollection<T> collection) UnitsTotal = collection.Count;
         }
 
         /// <inheritdoc/>

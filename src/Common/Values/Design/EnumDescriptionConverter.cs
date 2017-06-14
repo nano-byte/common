@@ -51,25 +51,18 @@ namespace NanoByte.Common.Values.Design
 
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
-        }
+            => (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            var stringValue = value as string;
-            if (stringValue != null) return GetEnumFromString(stringValue);
-            return base.ConvertFrom(context, culture, value);
-        }
+            => value is string stringValue
+            ? GetEnumFromString(stringValue)
+            : base.ConvertFrom(context, culture, value);
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            var enumValue = value as Enum;
-            if (enumValue != null && destinationType == typeof(string))
-                return enumValue.GetEnumAttributeValue((DescriptionAttribute attribute) => attribute.Description);
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
+            => value is Enum enumValue && destinationType == typeof(string)
+            ? enumValue.GetEnumAttributeValue((DescriptionAttribute attribute) => attribute.Description)
+            : base.ConvertTo(context, culture, value, destinationType);
     }
 }

@@ -268,8 +268,7 @@ namespace NanoByte.Common.Controls
             if (_checkedEntries.Contains(entry)) finalNode.Checked = true;
 
             #region Highlight color
-            var highlightColorProvider = entry as IHighlightColor;
-            if (highlightColorProvider != null && highlightColorProvider.HighlightColor != Color.Empty)
+            if (entry is IHighlightColor highlightColorProvider && highlightColorProvider.HighlightColor != Color.Empty)
             {
                 // Apply the highlighting color if one is set
                 finalNode.ForeColor = highlightColorProvider.HighlightColor;
