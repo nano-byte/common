@@ -81,8 +81,7 @@ namespace NanoByte.Common.Dispatch
             #endregion
 
             var type = element.GetType();
-            Action<object> action;
-            if (_map.TryGetValue(type, out action)) action(element);
+            if (_map.TryGetValue(type, out var action)) action(element);
             else if (!_ignoreMissing) throw new KeyNotFoundException(string.Format(Resources.MissingDispatchAction, type.Name));
         }
 

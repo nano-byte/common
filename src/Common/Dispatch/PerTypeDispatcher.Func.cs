@@ -84,8 +84,7 @@ namespace NanoByte.Common.Dispatch
             #endregion
 
             var type = element.GetType();
-            Func<TBase, TResult> function;
-            if (_map.TryGetValue(type, out function)) return function(element);
+            if (_map.TryGetValue(type, out var function)) return function(element);
             else
             {
                 if (_ignoreMissing) return default(TResult);

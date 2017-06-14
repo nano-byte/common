@@ -47,9 +47,7 @@ namespace NanoByte.Common.Native
 
             if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();
 
-            int count;
-            IntPtr credentials;
-            NativeMethods.CredEnumerate(target, 0, out count, out credentials);
+            NativeMethods.CredEnumerate(target, 0, out int count, out IntPtr credentials);
 
             return (count > 0);
         }

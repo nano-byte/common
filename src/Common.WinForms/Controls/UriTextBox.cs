@@ -110,8 +110,7 @@ namespace NanoByte.Common.Controls
             if (string.IsNullOrEmpty(text)) return true;
 
             // Check URI is well-formed
-            Uri uri;
-            if (!Uri.TryCreate(text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute, out uri)) return false;
+            if (!Uri.TryCreate(text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute, out var uri)) return false;
 
             // Check URI is HTTP(S) if that was requested
             if (HttpOnly && uri.IsAbsoluteUri) return uri.Scheme == "http" || uri.Scheme == "https";

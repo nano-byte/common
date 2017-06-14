@@ -351,10 +351,7 @@ namespace NanoByte.Common.Controls
         private void PaintTextAndImage(Graphics g, Rectangle bounds)
         {
             // Figure out where our text and image should go
-            Rectangle textRectangle;
-            Rectangle imageRectangle;
-
-            CalculateButtonTextAndImageLayout(ref bounds, out textRectangle, out imageRectangle);
+            CalculateButtonTextAndImageLayout(ref bounds, out var textRectangle, out var imageRectangle);
 
             //draw the image
             if (Image != null)

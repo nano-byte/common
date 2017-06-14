@@ -69,8 +69,7 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
-            AppMutex mutex;
-            return Create(name, out mutex);
+            return Create(name, out _);
         }
 
         /// <summary>

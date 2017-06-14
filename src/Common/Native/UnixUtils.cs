@@ -65,8 +65,7 @@ namespace NanoByte.Common.Native
             [MethodImpl(MethodImplOptions.NoInlining)]
             get
             {
-                Utsname buffer;
-                Syscall.uname(out buffer);
+                Syscall.uname(out var buffer);
                 return buffer.sysname;
             }
         }
@@ -80,8 +79,7 @@ namespace NanoByte.Common.Native
             [MethodImpl(MethodImplOptions.NoInlining)]
             get
             {
-                Utsname buffer;
-                Syscall.uname(out buffer);
+                Syscall.uname(out var buffer);
                 string cpuType = buffer.machine;
 
                 // Normalize names
@@ -327,8 +325,7 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
-            byte[] data;
-            if (Syscall.getxattr(path, name, out data) == -1) return null;
+            if (Syscall.getxattr(path, name, out var data) == -1) return null;
             return data;
         }
 

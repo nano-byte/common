@@ -163,8 +163,7 @@ namespace NanoByte.Common.Controls
                 int lineLength = ex.Message.LastIndexOf(',') - lineStart;
                 int charStart = ex.Message.LastIndexOf(' ') + 1;
                 int charLength = ex.Message.LastIndexOf(')') - charStart;
-                int lineNumber, charNumber;
-                if (int.TryParse(ex.Message.Substring(lineStart, lineLength), out lineNumber) && int.TryParse(ex.Message.Substring(charStart, charLength), out charNumber))
+                if (int.TryParse(ex.Message.Substring(lineStart, lineLength), out int lineNumber) && int.TryParse(ex.Message.Substring(charStart, charLength), out int charNumber))
                 {
                     int lineOffset = TextEditor.Document.GetLineSegment(lineNumber - 1).Offset;
                     TextEditor.Document.MarkerStrategy.AddMarker(

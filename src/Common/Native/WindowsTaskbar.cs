@@ -242,9 +242,7 @@ namespace NanoByte.Common.Native
                 customDestinationList.SetAppID(appID);
 
                 var objectArray = new Guid("92CA9DCD-5622-4BBA-A805-5E9F541BD8C9");
-                object removedItems;
-                uint maxSlots;
-                customDestinationList.BeginList(out maxSlots, ref objectArray, out removedItems);
+                customDestinationList.BeginList(out uint maxSlots, ref objectArray, out object removedItems);
 
                 var taskContent = (IObjectCollection)new CEnumerableObjectCollection();
                 foreach (var shellLink in links)
@@ -313,9 +311,8 @@ namespace NanoByte.Common.Native
         /// <param name="hwnd">A handle to the window to retrieve the property store for.</param>
         private static IPropertyStore GetWindowPropertyStore(IntPtr hwnd)
         {
-            IPropertyStore propStore;
             var guid = new Guid(PropertyStoreGuid);
-            int rc = NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out propStore);
+            int rc = NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out var propStore);
             if (rc != 0) throw Marshal.GetExceptionForHR(rc);
             return propStore;
         }

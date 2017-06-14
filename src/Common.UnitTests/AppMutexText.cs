@@ -42,8 +42,7 @@ namespace NanoByte.Common
 
             string mutexName = "unit-tests-" + Path.GetRandomFileName();
             AppMutex.Probe(mutexName).Should().BeFalse();
-            AppMutex mutex;
-            AppMutex.Create(mutexName, out mutex);
+            AppMutex.Create(mutexName, out AppMutex mutex);
             AppMutex.Probe(mutexName).Should().BeTrue();
             mutex.Close();
             AppMutex.Probe(mutexName).Should().BeFalse();

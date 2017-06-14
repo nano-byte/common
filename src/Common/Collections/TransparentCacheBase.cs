@@ -50,8 +50,7 @@ namespace NanoByte.Common.Collections
 
                 lock (_lock)
                 {
-                    TValue result;
-                    if (!_lookup.TryGetValue(key, out result))
+                    if (!_lookup.TryGetValue(key, out var result))
                         _lookup.Add(key, result = Retrieve(key));
                     return result;
                 }

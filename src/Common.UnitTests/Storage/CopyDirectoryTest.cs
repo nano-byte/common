@@ -166,8 +166,7 @@ namespace NanoByte.Common.Storage
                 FileUtils.CreateSymlink(sourcePath: Path.Combine(temp1, "symlink"), targetPath: "target");
 
                 new CopyDirectory(temp1, temp2).Run();
-                string symlinkTarget;
-                FileUtils.IsSymlink(Path.Combine(temp2, "symlink"), out symlinkTarget).Should().BeTrue();
+                FileUtils.IsSymlink(Path.Combine(temp2, "symlink"), out string symlinkTarget).Should().BeTrue();
                 symlinkTarget.Should().Be("target");
             }
             finally

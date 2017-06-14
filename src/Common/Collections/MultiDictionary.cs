@@ -137,20 +137,14 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><c>true</c> if the dictionary contains an element with the key; otherwise, <c>false</c>.</returns>
         /// <param name="key">The key to locate in the dictionary.</param>
-        public bool ContainsKey([NotNull] TKey key)
-        {
-            return _dictionary.ContainsKey(key);
-        }
+        public bool ContainsKey([NotNull] TKey key) => _dictionary.ContainsKey(key);
 
         /// <summary>
         /// Determines whether the dictionary contains an element with the specified value.
         /// </summary>
         /// <returns><c>true</c> if the dictionary contains an element with the value; otherwise, <c>false</c>.</returns>
         /// <param name="value">The value to locate in the dictionary.</param>
-        public bool ContainsValue([NotNull] TValue value)
-        {
-            return _values.Contains(value);
-        }
+        public bool ContainsValue([NotNull] TValue value) => _values.Contains(value);
 
         /// <summary>
         /// Gets a collection containing the values with the specified key.
@@ -158,12 +152,6 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key of the element to get.</param>
         /// <returns>A list of elements with the specified key. Empty list if the key was not found.</returns>
         public IEnumerable<TValue> this[TKey key]
-        {
-            get
-            {
-                HashSet<TValue> result;
-                return _dictionary.TryGetValue(key, out result) ? result : Enumerable.Empty<TValue>();
-            }
-        }
+            => _dictionary.TryGetValue(key, out var result) ? result : Enumerable.Empty<TValue>();
     }
 }

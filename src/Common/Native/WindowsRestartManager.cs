@@ -143,9 +143,7 @@ namespace NanoByte.Common.Native
             string[] names = null;
             handler.RunTask(new SimplePercentTask(Resources.SearchingFileReferences, delegate
             {
-                uint arrayLength;
-                NativeMethods.RM_REBOOT_REASON rebootReasons;
-                var apps = ListAppsInternal(out arrayLength, out rebootReasons);
+                var apps = ListAppsInternal(out uint arrayLength, out NativeMethods.RM_REBOOT_REASON rebootReasons);
 
                 names = new string[arrayLength];
                 for (int i = 0; i < arrayLength; i++)
@@ -162,9 +160,7 @@ namespace NanoByte.Common.Native
         [NotNull]
         private IEnumerable<string> ListAppProblems(out bool permissionDenied)
         {
-            uint arrayLength;
-            NativeMethods.RM_REBOOT_REASON rebootReasons;
-            var apps = ListAppsInternal(out arrayLength, out rebootReasons);
+            var apps = ListAppsInternal(out uint arrayLength, out NativeMethods.RM_REBOOT_REASON rebootReasons);
 
             permissionDenied = rebootReasons == NativeMethods.RM_REBOOT_REASON.RmRebootReasonPermissionDenied;
 

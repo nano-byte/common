@@ -118,8 +118,7 @@ namespace NanoByte.Common.Storage
             {
                 CancellationToken.ThrowIfCancellationRequested();
 
-                string symlinkTarget;
-                if (sourceDirectory.IsSymlink(out symlinkTarget))
+                if (sourceDirectory.IsSymlink(out string symlinkTarget))
                     CreateSymlink(PathInDestination(sourceDirectory), symlinkTarget);
                 else
                     Directory.CreateDirectory(PathInDestination(sourceDirectory));
@@ -153,8 +152,7 @@ namespace NanoByte.Common.Storage
                     #endregion
                 }
 
-                string symlinkTarget;
-                if (sourceFile.IsSymlink(out symlinkTarget))
+                if (sourceFile.IsSymlink(out string symlinkTarget))
                     CreateSymlink(destinationFile.FullName, symlinkTarget);
                 else
                     CopyFile(sourceFile, destinationFile);

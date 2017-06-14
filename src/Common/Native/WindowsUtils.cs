@@ -173,8 +173,7 @@ namespace NanoByte.Common.Native
                 // Can only detect WOW on Windows XP or newer
                 if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version < new Version(5, 1)) return false;
 
-                bool retVal;
-                SafeNativeMethods.IsWow64Process(Process.GetCurrentProcess().Handle, out retVal);
+                SafeNativeMethods.IsWow64Process(Process.GetCurrentProcess().Handle, out bool retVal);
                 return retVal;
             }
         }
@@ -282,8 +281,7 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(commandLine)) return new string[0];
             if (!IsWindows) return new[] {commandLine};
 
-            int numberOfArgs;
-            var ptrToSplitArgs = SafeNativeMethods.CommandLineToArgvW(commandLine, out numberOfArgs);
+            var ptrToSplitArgs = SafeNativeMethods.CommandLineToArgvW(commandLine, out int numberOfArgs);
             if (ptrToSplitArgs == IntPtr.Zero) return new[] {commandLine};
 
             try
@@ -327,8 +325,7 @@ namespace NanoByte.Common.Native
                     if (_performanceFrequency == 0)
                         SafeNativeMethods.QueryPerformanceFrequency(out _performanceFrequency);
 
-                    long time;
-                    SafeNativeMethods.QueryPerformanceCounter(out time);
+                    SafeNativeMethods.QueryPerformanceCounter(out long time);
                     return time / (double)_performanceFrequency;
                 }
 
@@ -525,8 +522,7 @@ namespace NanoByte.Common.Native
 
             try
             {
-                NativeMethods.BY_HANDLE_FILE_INFORMATION fileInfo;
-                if (!NativeMethods.GetFileInformationByHandle(handle, out fileInfo))
+                if (!NativeMethods.GetFileInformationByHandle(handle, out NativeMethods.BY_HANDLE_FILE_INFORMATION fileInfo))
                     throw BuildException(Marshal.GetLastWin32Error());
                 return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
             }
@@ -596,8 +592,7 @@ namespace NanoByte.Common.Native
 
             const int WM_SETTINGCHANGE = 0x001A;
             const int SMTO_ABORTIFHUNG = 0x0002;
-            IntPtr result;
-            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out result);
+            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out IntPtr result);
         }
         #endregion
 

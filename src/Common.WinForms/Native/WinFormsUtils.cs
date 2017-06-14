@@ -127,8 +127,7 @@ namespace NanoByte.Common.Native
             get
             {
                 if (!WindowsUtils.IsWindows) return true;
-                NativeMethods.WinMessage msg;
-                return !NativeMethods.PeekMessage(out msg, IntPtr.Zero, 0, 0, 0);
+                return !NativeMethods.PeekMessage(out _, IntPtr.Zero, 0, 0, 0);
             }
         }
 

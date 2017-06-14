@@ -67,8 +67,7 @@ namespace NanoByte.Common.Collections
             if (valueFactory == null) throw new ArgumentNullException(nameof(valueFactory));
             #endregion
 
-            TValue value;
-            if (!dictionary.TryGetValue(key, out value))
+            if (!dictionary.TryGetValue(key, out var value))
                 dictionary.Add(key, value = valueFactory());
             return value;
         }
@@ -101,8 +100,7 @@ namespace NanoByte.Common.Collections
         /// <remarks>Superflous calls to <paramref name="valueFactory"/> may occur in case of read races. <see cref="IDisposable.Dispose"/> is called on superflously created objects if implemented.</remarks>
         public static async Task<TValue> GetOrAddAsync<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key, [NotNull] Func<Task<TValue>> valueFactory)
         {
-            TValue existingValue;
-            if (dictionary.TryGetValue(key, out existingValue))
+            if (dictionary.TryGetValue(key, out var existingValue))
                 return existingValue;
 
             var newValue = await valueFactory();
