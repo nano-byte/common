@@ -34,7 +34,7 @@ namespace NanoByte.Common.Collections
     /// A keyed collection (pseudo-dictionary) of <see cref="INamed{T}"/> objects. Case-insensitive!
     /// </summary>
     /// <remarks>Elements are automatically maintained in an alphabetically sorted order. Suitable for XML serialization.</remarks>
-    public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable where T : INamed<T>
+    public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable<NamedCollection<T>> where T : INamed<T>
     {
         #region Events
         /// <inheritdoc/>
@@ -144,15 +144,7 @@ namespace NanoByte.Common.Collections
         /// Creates a shallow copy of this collection (elements are not cloned).
         /// </summary>
         /// <returns>The cloned collection.</returns>
-        public virtual NamedCollection<T> Clone()
-        {
-            return new NamedCollection<T>(this);
-        }
-
-        object ICloneable.Clone()
-        {
-            return Clone();
-        }
+        public virtual NamedCollection<T> Clone() => new NamedCollection<T>(this);
         #endregion
     }
 }

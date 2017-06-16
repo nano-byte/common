@@ -34,7 +34,7 @@ namespace NanoByte.Common.Collections
     /// A collection of <see cref="LocalizableString"/>s with language-search methods.
     /// </summary>
     [Serializable]
-    public class LocalizableStringCollection : List<LocalizableString>, ICloneable
+    public class LocalizableStringCollection : List<LocalizableString>, ICloneable<LocalizableStringCollection>
     {
         /// <summary>
         /// Adds a new string with an associated language to the collection.
@@ -159,11 +159,6 @@ namespace NanoByte.Common.Collections
             var newDict = new LocalizableStringCollection();
             newDict.AddRange(this.Select(entry => entry.Clone()));
             return newDict;
-        }
-
-        object ICloneable.Clone()
-        {
-            return Clone();
         }
         #endregion
     }

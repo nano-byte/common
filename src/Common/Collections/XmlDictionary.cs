@@ -35,7 +35,7 @@ namespace NanoByte.Common.Collections
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization"),
      SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
     [Serializable]
-    public class XmlDictionary : BindingList<XmlDictionaryEntry>, ICloneable
+    public class XmlDictionary : BindingList<XmlDictionaryEntry>, ICloneable<XmlDictionary>
     {
         /// <summary>
         /// Adds a new value and links it to a key
@@ -130,7 +130,7 @@ namespace NanoByte.Common.Collections
                 return pair.Value;
             throw new KeyNotFoundException();
         }
-        
+
         #region Conversion
         /// <summary>
         /// Convert this <see cref="XmlDictionary"/> to a <see cref="Dictionary{TKey,TValue}"/> for better lookup-performance.
@@ -147,7 +147,7 @@ namespace NanoByte.Common.Collections
         /// Creates a deep copy of this <see cref="XmlDictionary"/> (elements are cloned).
         /// </summary>
         /// <returns>The cloned <see cref="XmlDictionary"/>.</returns>
-        public virtual object Clone()
+        public virtual XmlDictionary Clone()
         {
             var newDict = new XmlDictionary();
             foreach (XmlDictionaryEntry entry in this)

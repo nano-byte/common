@@ -32,7 +32,7 @@ namespace NanoByte.Common.Collections
     /// A string with an associated language that can be XML serialized to an element with an xml:lang tag.
     /// </summary>
     [Serializable]
-    public sealed class LocalizableString : IEquatable<LocalizableString>, ICloneable
+    public sealed class LocalizableString : IEquatable<LocalizableString>, ICloneable<LocalizableString>
     {
         /// <summary>
         /// The default language: english with an invariant country.
@@ -144,15 +144,7 @@ namespace NanoByte.Common.Collections
         /// Creates a plain copy of this string.
         /// </summary>
         /// <returns>The cloned string.</returns>
-        public LocalizableString Clone()
-        {
-            return new LocalizableString {Language = Language, Value = Value};
-        }
-
-        object ICloneable.Clone()
-        {
-            return Clone();
-        }
+        public LocalizableString Clone() => new LocalizableString {Language = Language, Value = Value};
         #endregion
     }
 }

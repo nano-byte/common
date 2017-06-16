@@ -220,17 +220,11 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Calls <see cref="ICloneable.Clone"/> for every element in a collection and returns the results as a new collection.
+        /// Calls <see cref="ICloneable{T}.Clone"/> for every element in a collection and returns the results as a new collection.
         /// </summary>
         [NotNull, Pure]
-        public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable
-        {
-            #region Sanity checks
-            if (enumerable == null) throw new ArgumentNullException(nameof(enumerable));
-            #endregion
-
-            return enumerable.Select(entry => (T)entry.Clone());
-        }
+        public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable<T>
+            => (enumerable ?? throw new ArgumentNullException(nameof(enumerable))).Select(x => x.Clone());
 
         /// <summary>
         /// Performs a topological sort of an object graph.

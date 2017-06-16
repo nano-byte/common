@@ -31,7 +31,7 @@ namespace NanoByte.Common.Collections
     /// A key-value string pair for <see cref="XmlDictionary"/>.
     /// </summary>
     [Serializable]
-    public sealed class XmlDictionaryEntry : IEquatable<XmlDictionaryEntry>, ICloneable
+    public sealed class XmlDictionaryEntry : IEquatable<XmlDictionaryEntry>, ICloneable<XmlDictionaryEntry>
     {
         /// <summary>
         /// The collection that owns this entry - set to enable automatic duplicate detection!
@@ -130,15 +130,7 @@ namespace NanoByte.Common.Collections
         /// Creates a plain copy of this entry.
         /// </summary>
         /// <returns>The cloned entry.</returns>
-        public XmlDictionaryEntry Clone()
-        {
-            return new XmlDictionaryEntry(Key, Value);
-        }
-
-        object ICloneable.Clone()
-        {
-            return Clone();
-        }
+        public XmlDictionaryEntry Clone() => new XmlDictionaryEntry(Key, Value);
         #endregion
     }
 }
