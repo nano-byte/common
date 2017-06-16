@@ -30,6 +30,7 @@ namespace NanoByte.Common.Cli
     /// <summary>
     /// Contains test methods for <see cref="ArgumentUtils"/>.
     /// </summary>
+    [Collection("WorkingDir")]
     public class ArgumentUtilsTest
     {
         [Fact]

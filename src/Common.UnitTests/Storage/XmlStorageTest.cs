@@ -35,6 +35,7 @@ namespace NanoByte.Common.Storage
     /// <summary>
     /// Contains test methods for <see cref="XmlStorage"/>.
     /// </summary>
+    [Collection("WorkingDir")]
     public class XmlStorageTest
     {
         // ReSharper disable MemberCanBePrivate.Global
