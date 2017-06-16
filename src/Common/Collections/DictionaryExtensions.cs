@@ -52,6 +52,23 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
+        /// Returns an existing element with a specific key from a dictionary or the value type's default value if it is missing.
+        /// </summary>
+        /// <param name="dictionary">The dictionary to get an element from.</param>
+        /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
+        /// <returns>The existing element or the default value of <typeparamref name="TValue"/>.</returns>
+        public static TValue GetOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
+        {
+            #region Sanity checks
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            #endregion
+
+            dictionary.TryGetValue(key, out var value);
+            return value;
+        }
+
+        /// <summary>
         /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.
         /// </summary>
         /// <param name="dictionary">The dictionary to get an element from or to add an element to.</param>

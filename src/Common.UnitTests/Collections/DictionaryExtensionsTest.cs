@@ -34,6 +34,14 @@ namespace NanoByte.Common.Collections
     public class DictionaryExtensionsTest
     {
         [Fact]
+        public void TestGetOrDefault()
+        {
+            var dict = new Dictionary<string, string> {{"x", "a"}};
+            dict.GetOrDefault("x").Should().Be("a");
+            dict.GetOrDefault("y").Should().BeNull();
+        }
+
+        [Fact]
         public void TestGetOrAdd()
         {
             var dict = new Dictionary<string, string>();
