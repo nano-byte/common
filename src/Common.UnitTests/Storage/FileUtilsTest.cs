@@ -40,9 +40,7 @@ namespace NanoByte.Common.Storage
         #region Paths
         [Fact]
         public void TestUnifySlashes()
-        {
-            FileUtils.UnifySlashes("a/b").Should().Be("a" + Path.DirectorySeparatorChar + "b");
-        }
+            => FileUtils.UnifySlashes("a/b").Should().Be("a" + Path.DirectorySeparatorChar + "b");
 
         [Fact]
         public void TestIsBreakoutPath()
@@ -109,20 +107,16 @@ namespace NanoByte.Common.Storage
         /// </summary>
         [Fact]
         public void TestToUnixTime()
-        {
-            // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
-            new DateTime(2004, 09, 16, 0, 0, 0, DateTimeKind.Utc).ToUnixTime().Should().Be(1095292800);
-        }
+            => new DateTime(2004, 09, 16, 0, 0, 0, DateTimeKind.Utc).ToUnixTime()
+                .Should().Be(12677 /*days*/ * 86400 /*seconds*/);
 
         /// <summary>
         /// Ensures <see cref="FileUtils.FromUnixTime"/> correctly converts a Unix epoch value to a <see cref="DateTime"/> value.
         /// </summary>
         [Fact]
         public void TestFromUnixTime()
-        {
-            // 12677 days = 12677 x 86400 seconds = 1095292800 seconds
-            FileUtils.FromUnixTime(1095292800).Should().Be(new DateTime(2004, 09, 16));
-        }
+            => FileUtils.FromUnixTime(12677 /*days*/ * 86400 /*seconds*/)
+                .Should().Be(new DateTime(2004, 09, 16));
         #endregion
 
         #region Exists
@@ -313,6 +307,28 @@ namespace NanoByte.Common.Storage
                 FileUtils.Touch(file2);
 
                 FileUtils.GetFilesRecursive(tempDir).Should().Equal(file1, file2);
+            }
+        }
+        #endregion
+
+        #region Write protection
+        [Fact]
+        public void TestWriteProtection()
+        {
+            using (var tempDir = new TemporaryDirectory("unit-tests"))
+            {
+                File.WriteAllText(Path.Combine(tempDir, "file"), @"contents");
+                FileUtils.CreateSymlink(Path.Combine(tempDir, "symlink"), targetPath: "file");
+
+                FileUtils.EnableWriteProtection(tempDir);
+                try
+                {
+                    Assert.Throws<UnauthorizedAccessException>(() => File.Delete(Path.Combine(tempDir, "file")));
+                }
+                finally
+                {
+                    FileUtils.DisableWriteProtection(tempDir);
+                }
             }
         }
         #endregion

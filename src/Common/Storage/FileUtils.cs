@@ -411,9 +411,10 @@ namespace NanoByte.Common.Storage
 
             foreach (var subDir in directory.GetDirectories())
             {
-                if (!followDirSymlinks && IsSymlink(subDir.FullName))
+                if (followDirSymlinks || !IsSymlink(subDir.FullName))
+                    Walk(subDir, dirAction, fileAction);
+                else
                     dirAction?.Invoke(subDir);
-                else Walk(subDir, dirAction, fileAction);
             }
         }
 
@@ -606,8 +607,18 @@ namespace NanoByte.Common.Storage
         {
             try
             {
-                if (enable) Walk(directory, dir => UnixUtils.MakeReadOnly(dir.FullName), file => UnixUtils.MakeReadOnly(file.FullName));
-                else Walk(directory, dir => UnixUtils.MakeWritable(dir.FullName), file => UnixUtils.MakeWritable(file.FullName));
+                Walk(directory,
+                    dir =>
+                    {
+                        if (enable) UnixUtils.MakeReadOnly(dir.FullName);
+                        else UnixUtils.MakeWritable(dir.FullName);
+                    },
+                    file =>
+                    {
+                        if (UnixUtils.IsSymlink(file.FullName)) return; // Cannot set permissions on a POSIX symlink
+                        if (enable) UnixUtils.MakeReadOnly(file.FullName);
+                        else UnixUtils.MakeWritable(file.FullName);
+                    });
             }
                 #region Error handling
             catch (InvalidOperationException ex)
