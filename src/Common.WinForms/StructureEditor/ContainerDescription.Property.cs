@@ -80,9 +80,7 @@ namespace NanoByte.Common.StructureEditor
         [PublicAPI]
         public ContainerDescription<TContainer> AddProperty<TProperty>(string name, Func<TContainer, PropertyPointer<TProperty>> getPointer)
             where TProperty : class, IEquatable<TProperty>, new()
-        {
-            return AddProperty<TProperty, GenericEditorControl<TProperty>>(name, getPointer);
-        }
+            => AddProperty<TProperty, GenericEditorControl<TProperty>>(name, getPointer);
 
         private class PropertyDescription<TProperty, TEditor> : DescriptionBase
             where TProperty : class, IEquatable<TProperty>, new()
@@ -97,7 +95,7 @@ namespace NanoByte.Common.StructureEditor
                 _getPointer = getPointer;
             }
 
-            public override IEnumerable<EntryInfo> GetEntrysIn(TContainer container)
+            public override IEnumerable<EntryInfo> GetEntriesIn(TContainer container)
             {
                 var pointer = _getPointer(container);
                 if (pointer.Value != null)
@@ -119,9 +117,7 @@ namespace NanoByte.Common.StructureEditor
             }
 
             protected virtual TEditor CreateEditor(TContainer container, TProperty value, Undo.ICommandExecutor executor)
-            {
-                return new TEditor {Target = value, CommandExecutor = executor};
-            }
+                => new TEditor {Target = value, CommandExecutor = executor};
 
             public override IEnumerable<ChildInfo> GetPossibleChildrenFor(TContainer container)
             {
@@ -144,9 +140,7 @@ namespace NanoByte.Common.StructureEditor
             {}
 
             protected override TEditor CreateEditor(TContainer container, TProperty value, Undo.ICommandExecutor executor)
-            {
-                return new TEditor {Target = value, ContainerRef = container, CommandExecutor = executor};
-            }
+                => new TEditor {Target = value, ContainerRef = container, CommandExecutor = executor};
         }
     }
 }

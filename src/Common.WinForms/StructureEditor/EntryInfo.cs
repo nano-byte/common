@@ -49,5 +49,7 @@ namespace NanoByte.Common.StructureEditor
             FromXmlString = fromXmlString;
             RemoveCommand = removeCommand;
         }
+
+        public override string ToString() => $"{Name}: {Target}";
     }
 }

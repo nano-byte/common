@@ -106,10 +106,7 @@ namespace NanoByte.Common.Undo
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Cannot rename System.Action<T>.")]
         public event Action RedoEnabledChanged;
 
-        protected void OnUpdated()
-        {
-            Updated?.Invoke();
-        }
+        protected void OnUpdated() => Updated?.Invoke();
         #endregion
 
         #region Commands

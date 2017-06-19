@@ -105,20 +105,13 @@ namespace NanoByte.Common.StructureEditor
             private readonly Func<TContainer, IList<TList>> _getList;
             private readonly List<IElementDescription> _descriptions = new List<IElementDescription>();
 
-            public ListDescription(Func<TContainer, IList<TList>> getList)
-            {
-                _getList = getList;
-            }
+            public ListDescription(Func<TContainer, IList<TList>> getList) => _getList = getList;
 
-            public override IEnumerable<EntryInfo> GetEntrysIn(TContainer container)
-            {
-                return _descriptions.SelectMany(description => description.GetEntrysIn(container, _getList(container)));
-            }
+            public override IEnumerable<EntryInfo> GetEntriesIn(TContainer container)
+                => _descriptions.SelectMany(description => description.GetEntriesIn(container, _getList(container)));
 
             public override IEnumerable<ChildInfo> GetPossibleChildrenFor(TContainer container)
-            {
-                return _descriptions.Select(description => description.GetPossibleChildFor(_getList(container)));
-            }
+                => _descriptions.Select(description => description.GetPossibleChildFor(_getList(container)));
         }
     }
 }

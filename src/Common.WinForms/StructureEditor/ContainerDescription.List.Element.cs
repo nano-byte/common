@@ -57,13 +57,11 @@ namespace NanoByte.Common.StructureEditor
             /// <inheritdoc/>
             public IListDescription<TContainer, TList> AddElement<TElement>(string name)
                 where TElement : class, TList, IEquatable<TElement>, new()
-            {
-                return AddElement<TElement, GenericEditorControl<TElement>>(name);
-            }
+                => AddElement<TElement, GenericEditorControl<TElement>>(name);
 
             private interface IElementDescription
             {
-                IEnumerable<EntryInfo> GetEntrysIn(TContainer container, IList<TList> list);
+                IEnumerable<EntryInfo> GetEntriesIn(TContainer container, IList<TList> list);
                 ChildInfo GetPossibleChildFor(IList<TList> list);
             }
 
@@ -73,12 +71,9 @@ namespace NanoByte.Common.StructureEditor
             {
                 private readonly string _name;
 
-                public ElementDescription(string name)
-                {
-                    _name = name;
-                }
+                public ElementDescription(string name) => _name = name;
 
-                public IEnumerable<EntryInfo> GetEntrysIn(TContainer container, IList<TList> list)
+                public IEnumerable<EntryInfo> GetEntriesIn(TContainer container, IList<TList> list)
                 {
                     var description = AttributeUtils.GetAttributes<DescriptionAttribute, TElement>().FirstOrDefault();
                     return list.OfType<TElement>().Select(element =>
@@ -97,9 +92,7 @@ namespace NanoByte.Common.StructureEditor
                 }
 
                 protected virtual TEditor CreateEditor(TContainer container, TElement value, Undo.ICommandExecutor executor)
-                {
-                    return new TEditor {Target = value, CommandExecutor = executor};
-                }
+                    => new TEditor {Target = value, CommandExecutor = executor};
 
                 public ChildInfo GetPossibleChildFor(IList<TList> list)
                 {
@@ -119,9 +112,7 @@ namespace NanoByte.Common.StructureEditor
                 {}
 
                 protected override TEditor CreateEditor(TContainer container, TElement value, Undo.ICommandExecutor executor)
-                {
-                    return new TEditor {Target = value, ContainerRef = container, CommandExecutor = executor};
-                }
+                    => new TEditor {Target = value, ContainerRef = container, CommandExecutor = executor};
             }
         }
     }

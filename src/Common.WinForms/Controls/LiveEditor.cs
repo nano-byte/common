@@ -50,10 +50,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         public TextEditorControl TextEditor { get; private set; }
 
-        public LiveEditor()
-        {
-            InitializeComponent();
-        }
+        public LiveEditor() => InitializeComponent();
 
         #region Set content
         /// <summary>
@@ -140,16 +137,16 @@ namespace NanoByte.Common.Controls
             timer.Stop();
             if (ContentChanged == null) return;
 
+            Log.Handler += HandleLogEntry;
+            ContentChanged(TextEditor.Text);
+            Log.Handler -= HandleLogEntry;
+
             string warning = null;
 
             void HandleLogEntry(LogSeverity severity, string message)
             {
                 if (severity >= LogSeverity.Warn) warning = message;
             }
-
-            Log.Handler += HandleLogEntry;
-            ContentChanged(TextEditor.Text);
-            Log.Handler -= HandleLogEntry;
 
             if (warning == null) SetStatus(ImageResources.Info, "OK");
             else SetStatus(ImageResources.Error, warning);

@@ -39,10 +39,8 @@ namespace NanoByte.Common.StructureEditor
         /// </summary>
         /// <param name="container">The container instance to look in to.</param>
         /// <returns>A list of entry information structures.</returns>
-        internal IEnumerable<EntryInfo> GetEntrysIn(TContainer container)
-        {
-            return _descriptions.SelectMany(description => description.GetEntrysIn(container));
-        }
+        internal IEnumerable<EntryInfo> GetEntriesIn(TContainer container)
+            => _descriptions.SelectMany(description => description.GetEntriesIn(container));
 
         /// <summary>
         /// Returns information about possible new children for a specific instance of <typeparamref name="TContainer"/>.
@@ -50,14 +48,12 @@ namespace NanoByte.Common.StructureEditor
         /// <param name="container">The container instance to look at.</param>
         /// <returns>A list of child information structures.</returns>
         internal IEnumerable<ChildInfo> GetPossibleChildrenFor(TContainer container)
-        {
-            return _descriptions.SelectMany(description => description.GetPossibleChildrenFor(container))
+            => _descriptions.SelectMany(description => description.GetPossibleChildrenFor(container))
                 .Append(null); // split marker
-        }
 
         private abstract class DescriptionBase
         {
-            public abstract IEnumerable<EntryInfo> GetEntrysIn(TContainer container);
+            public abstract IEnumerable<EntryInfo> GetEntriesIn(TContainer container);
             public abstract IEnumerable<ChildInfo> GetPossibleChildrenFor(TContainer container);
         }
     }

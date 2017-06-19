@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Dispatch;
 using NanoByte.Common.Properties;
@@ -36,6 +37,7 @@ namespace NanoByte.Common.StructureEditor
     /// A universal editor for hierarchical structures with undo support.
     /// </summary>
     /// <remarks>Derive and call <see cref="DescribeRoot"/> or <see cref="DescribeRoot{TEditor}"/> as well as <see cref="Describe{TContainer}"/> in the constructor.</remarks>
+    [PublicAPI]
     public abstract partial class StructureEditorControl<T> : UserControl
         where T : class, IEquatable<T>, new()
     {
@@ -51,10 +53,22 @@ namespace NanoByte.Common.StructureEditor
             get => _commandManager;
             set
             {
-                if (_commandManager != null) _commandManager.Updated -= RebuildOnIdle;
+                if (_commandManager != null) _commandManager.Updated -= RebuildOnNextIdle;
                 _commandManager = value;
-                if (_commandManager != null) _commandManager.Updated += RebuildOnIdle;
+                if (_commandManager != null) _commandManager.Updated += RebuildOnNextIdle;
+
                 RebuildTree();
+
+                void RebuildOnNextIdle()
+                {
+                    Application.Idle += RebuildOnce;
+
+                    void RebuildOnce(object sender, EventArgs e)
+                    {
+                        RebuildTree();
+                        Application.Idle -= RebuildOnce;
+                    }
+                }
             }
         }
         #endregion
@@ -83,7 +97,7 @@ namespace NanoByte.Common.StructureEditor
             where TContainer : class
         {
             var description = new ContainerDescription<TContainer>();
-            _getEntries.Add<TContainer>(container => description.GetEntrysIn(container).ToList());
+            _getEntries.Add<TContainer>(container => description.GetEntriesIn(container).ToList());
             _getPossibleChildren.Add<TContainer>(container => description.GetPossibleChildrenFor(container).ToList());
             return description;
         }
@@ -92,11 +106,8 @@ namespace NanoByte.Common.StructureEditor
         /// Set up handling for the root element with a generic editor.
         /// </summary>
         /// <param name="name">The name of the root element.</param>
-        protected void DescribeRoot(string name)
-        {
-            Describe<StructureEditorControl<T>>()
-                .AddProperty(name, x => new PropertyPointer<T>(() => CommandManager.Target, value => CommandManager.Target = value));
-        }
+        protected void DescribeRoot(string name) => Describe<StructureEditorControl<T>>()
+            .AddProperty(name, x => new PropertyPointer<T>(() => CommandManager.Target, value => CommandManager.Target = value));
 
         /// <summary>
         /// Set up handling for the root element with a custom editor.
@@ -104,12 +115,8 @@ namespace NanoByte.Common.StructureEditor
         /// <typeparam name="TEditor">An editor for modifying the content of the root.</typeparam>
         /// <param name="name">The name of the root element.</param>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Generics used as type-safe reflection replacement.")]
-        protected void DescribeRoot<TEditor>(string name)
-            where TEditor : Control, IEditorControl<T>, new()
-        {
-            Describe<StructureEditorControl<T>>()
-                .AddProperty<T, TEditor>(name, x => new PropertyPointer<T>(() => CommandManager.Target, value => CommandManager.Target = value));
-        }
+        protected void DescribeRoot<TEditor>(string name) where TEditor : Control, IEditorControl<T>, new() => Describe<StructureEditorControl<T>>()
+            .AddProperty<T, TEditor>(name, x => new PropertyPointer<T>(() => CommandManager.Target, value => CommandManager.Target = value));
         #endregion
 
         #region Build nodes
@@ -120,38 +127,32 @@ namespace NanoByte.Common.StructureEditor
         {
             Node reselectNode = null;
 
-            TreeNode[] BuildNodes(object target)
-            {
-                var nodes = _getEntries.Dispatch(target)
-                    .Select(entry =>
-                    {
-                        var node = new Node(entry, BuildNodes(entry.Target));
-                        if (entry.Target == _selectedTarget) reselectNode = node;
-                        return node;
-                    });
-                return nodes.Cast<TreeNode>().ToArray();
-            }
-
             treeView.BeginUpdate();
             treeView.Nodes.Clear();
             treeView.Nodes.AddRange(BuildNodes(this));
             treeView.SelectedNode = reselectNode ?? (Node)treeView.Nodes[0];
-            treeView.SelectedNode.Expand();
+            treeView.SelectedNode?.Expand();
             treeView.EndUpdate();
+
+            TreeNode[] BuildNodes(object target) => _getEntries.Dispatch(target).Select(entry =>
+            {
+                var node = new Node(entry, BuildNodes(entry.Target));
+                if (entry.Target == _selectedTarget) reselectNode = node;
+                return (TreeNode)node;
+            }).ToArray();
         }
 
-        /// <summary>
-        /// Schedules <see cref="RebuildTree"/> to be called once on the next <see cref="Application.Idle"/>.
-        /// </summary>
-        private void RebuildOnIdle()
+        private sealed class Node : TreeNode
         {
-            void Rebuild(object sender, EventArgs e)
-            {
-                RebuildTree();
-                Application.Idle -= Rebuild;
-            }
+            public readonly EntryInfo Entry;
 
-            Application.Idle += Rebuild;
+            public Node(EntryInfo entry, TreeNode[] children)
+                : base(entry.ToString(), children)
+            {
+                Entry = entry;
+                ToolTipText = entry.Description;
+                ContextMenu = new ContextMenu(new MenuItem[] { });
+            }
         }
         #endregion
 
@@ -215,10 +216,7 @@ namespace NanoByte.Common.StructureEditor
             CommandManager.Execute(deleteCommand);
         }
 
-        private void buttonRemove_Click(object sender, EventArgs e)
-        {
-            Remove();
-        }
+        private void buttonRemove_Click(object sender, EventArgs e) => Remove();
         #endregion
 
         #region Selection
@@ -263,12 +261,9 @@ namespace NanoByte.Common.StructureEditor
         /// <summary>
         /// Returns the XML representation of the <see cref="SelectedNode"/>.
         /// </summary>
-        protected virtual string ToXmlString()
-        {
-            return SelectedNode.Entry.ToXmlString().
+        protected virtual string ToXmlString() => SelectedNode.Entry.ToXmlString()
                 // Hide <?xml> header
-                GetRightPartAtFirstOccurrence('\n');
-        }
+                .GetRightPartAtFirstOccurrence('\n');
 
         private void xmlEditor_ContentChanged(string text)
         {
