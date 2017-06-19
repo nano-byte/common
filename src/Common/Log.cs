@@ -47,8 +47,9 @@ namespace NanoByte.Common
     /// </summary>
     public static class Log
     {
-        #region Constructor
-        private static readonly StreamWriter _fileWriter;
+        #region File Writer
+        [CanBeNull]
+        private static StreamWriter _fileWriter;
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "The static constructor is used to add an identification header to the log file")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Any kind of problems writing the log file should be ignored")]
@@ -125,10 +126,7 @@ namespace NanoByte.Common
         /// Writes information to help developers diagnose problems to the log.
         /// </summary>
         [PublicAPI]
-        public static void Debug([NotNull] string message)
-        {
-            AddEntry(LogSeverity.Debug, message);
-        }
+        public static void Debug([NotNull] string message) => AddEntry(LogSeverity.Debug, message);
 
         /// <summary>
         /// Writes an exception as an <see cref="Debug(string)"/>.
@@ -136,9 +134,7 @@ namespace NanoByte.Common
         [PublicAPI]
         public static void Debug([NotNull] Exception ex)
         {
-            #region Sanity checks
             if (ex == null) throw new ArgumentNullException(nameof(ex));
-            #endregion
 
             Debug(ex.ToString());
         }
@@ -147,10 +143,7 @@ namespace NanoByte.Common
         /// Writes nice-to-know information to the log.
         /// </summary>
         [PublicAPI]
-        public static void Info([NotNull] string message)
-        {
-            AddEntry(LogSeverity.Info, message);
-        }
+        public static void Info([NotNull] string message) => AddEntry(LogSeverity.Info, message);
 
         /// <summary>
         /// Writes an exception's message as a <see cref="Info(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
@@ -159,9 +152,7 @@ namespace NanoByte.Common
         [PublicAPI]
         public static void Info([NotNull] Exception ex)
         {
-            #region Sanity checks
             if (ex == null) throw new ArgumentNullException(nameof(ex));
-            #endregion
 
             Info(ex.Message);
             if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Info(ex.InnerException.Message);
@@ -173,10 +164,7 @@ namespace NanoByte.Common
         /// Writes a warning that doesn't have to be acted upon immediately to the log.
         /// </summary>
         [PublicAPI]
-        public static void Warn([NotNull] string message)
-        {
-            AddEntry(LogSeverity.Warn, message);
-        }
+        public static void Warn([NotNull] string message) => AddEntry(LogSeverity.Warn, message);
 
         /// <summary>
         /// Writes an exception's message as a <see cref="Warn(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
@@ -185,9 +173,7 @@ namespace NanoByte.Common
         [PublicAPI]
         public static void Warn([NotNull] Exception ex)
         {
-            #region Sanity checks
             if (ex == null) throw new ArgumentNullException(nameof(ex));
-            #endregion
 
             Warn(ex.Message);
             if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Warn(ex.InnerException.Message);
@@ -199,10 +185,7 @@ namespace NanoByte.Common
         /// Writes a critical error that should be attended to to the log.
         /// </summary>
         [PublicAPI]
-        public static void Error([NotNull] string message)
-        {
-            AddEntry(LogSeverity.Error, message);
-        }
+        public static void Error([NotNull] string message) => AddEntry(LogSeverity.Error, message);
 
         /// <summary>
         /// Writes an exception's message as an <see cref="Error(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
@@ -211,9 +194,7 @@ namespace NanoByte.Common
         [PublicAPI]
         public static void Error([NotNull] Exception ex)
         {
-            #region Sanity checks
             if (ex == null) throw new ArgumentNullException(nameof(ex));
-            #endregion
 
             Error(ex.Message);
             if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException.Message);
@@ -229,10 +210,6 @@ namespace NanoByte.Common
         [PublicAPI]
         public static void PrintToConsole(LogSeverity severity, [NotNull] string message)
         {
-            #region Sanity checks
-            if (message == null) throw new ArgumentNullException(nameof(message));
-            #endregion
-
             try
             {
                 switch (severity)
@@ -258,7 +235,7 @@ namespace NanoByte.Common
             {}
             #endregion
 
-            Console.Error.WriteLine(message);
+            Console.Error.WriteLine(message ?? throw new ArgumentNullException(nameof(message)));
             try
             {
                 Console.ResetColor();
@@ -276,18 +253,25 @@ namespace NanoByte.Common
 
         private static void AddEntry(LogSeverity severity, string message)
         {
-            #region Sanity checks
-            if (message == null) throw new ArgumentNullException(nameof(message));
-            #endregion
-
-            message = UnifyWhitespace(message);
+            message = UnifyWhitespace(message ?? throw new ArgumentNullException(nameof(message)));
             string formattedMessage = FormatMessage(severity, message);
 
             lock (_lock)
             {
                 System.Diagnostics.Debug.Write(formattedMessage);
                 _sessionContent.AppendLine(formattedMessage);
-                _fileWriter?.WriteLine(formattedMessage);
+                try
+                {
+                    _fileWriter?.WriteLine(formattedMessage);
+                }
+                    #region Error handling
+                catch (Exception ex)
+                {
+                    _fileWriter = null;
+                    Console.Error.WriteLine("Error writing to log file:");
+                    Console.Error.WriteLine(ex);
+                }
+                #endregion
                 _handlers.Last()(severity, message);
             }
         }
