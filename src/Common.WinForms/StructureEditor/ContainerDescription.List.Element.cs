@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Undo;
@@ -61,7 +62,9 @@ namespace NanoByte.Common.StructureEditor
 
             private interface IElementDescription
             {
-                IEnumerable<EntryInfo> GetEntriesIn(TContainer container, IList<TList> list);
+                [CanBeNull]
+                EntryInfo TryGetEntry(TContainer container, IList<TList> list, TList candidate);
+
                 ChildInfo GetPossibleChildFor(IList<TList> list);
             }
 
@@ -73,22 +76,24 @@ namespace NanoByte.Common.StructureEditor
 
                 public ElementDescription(string name) => _name = name;
 
-                public IEnumerable<EntryInfo> GetEntriesIn(TContainer container, IList<TList> list)
+                public EntryInfo TryGetEntry(TContainer container, IList<TList> list, TList candidate)
                 {
+                    var element = candidate as TElement;
+                    if (element == null) return null;
+
                     var description = AttributeUtils.GetAttributes<DescriptionAttribute, TElement>().FirstOrDefault();
-                    return list.OfType<TElement>().Select(element =>
-                        new EntryInfo(
-                            name: _name,
-                            description: description?.Description,
-                            target: element,
-                            getEditorControl: executor => CreateEditor(container, element, executor),
-                            toXmlString: () => element.ToXmlString(),
-                            fromXmlString: xmlString =>
-                            {
-                                var newValue = XmlStorage.FromXmlString<TElement>(xmlString);
-                                return newValue.Equals(element) ? null : new ReplaceInList<TList>(list, element, newValue);
-                            },
-                            removeCommand: new RemoveFromCollection<TList>(list, element)));
+                    return new EntryInfo(
+                        name: _name,
+                        description: description?.Description,
+                        target: element,
+                        getEditorControl: executor => CreateEditor(container, element, executor),
+                        toXmlString: () => element.ToXmlString(),
+                        fromXmlString: xmlString =>
+                        {
+                            var newValue = XmlStorage.FromXmlString<TElement>(xmlString);
+                            return newValue.Equals(element) ? null : new ReplaceInList<TList>(list, element, newValue);
+                        },
+                        removeCommand: new RemoveFromCollection<TList>(list, element));
                 }
 
                 protected virtual TEditor CreateEditor(TContainer container, TElement value, Undo.ICommandExecutor executor)

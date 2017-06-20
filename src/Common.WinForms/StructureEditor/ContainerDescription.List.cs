@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Controls;
 
 namespace NanoByte.Common.StructureEditor
@@ -108,7 +109,14 @@ namespace NanoByte.Common.StructureEditor
             public ListDescription(Func<TContainer, IList<TList>> getList) => _getList = getList;
 
             public override IEnumerable<EntryInfo> GetEntriesIn(TContainer container)
-                => _descriptions.SelectMany(description => description.GetEntriesIn(container, _getList(container)));
+            {
+                var list = _getList(container);
+                foreach (var element in list)
+                {
+                    var entry = _descriptions.Select(x => x.TryGetEntry(container, list, element)).WhereNotNull().FirstOrDefault();
+                    if (entry != null) yield return entry;
+                }
+            }
 
             public override IEnumerable<ChildInfo> GetPossibleChildrenFor(TContainer container)
                 => _descriptions.Select(description => description.GetPossibleChildFor(_getList(container)));
