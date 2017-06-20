@@ -73,7 +73,6 @@ namespace NanoByte.Common.Tasks
         protected override void Execute()
         {
             UnitsTotal = 100;
-            State = TaskState.Started;
 
             if (_cancelationCallback == null) _work(percent => UnitsProcessed = percent);
             else
@@ -81,8 +80,6 @@ namespace NanoByte.Common.Tasks
                 using (CancellationToken.Register(_cancelationCallback))
                     _work(percent => UnitsProcessed = percent);
             }
-
-            State = TaskState.Complete;
         }
     }
 }

@@ -64,14 +64,12 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override void Execute()
         {
-            State = TaskState.Started;
             if (_cancelationCallback == null) _work();
             else
             {
                 using (CancellationToken.Register(_cancelationCallback))
                     _work();
             }
-            State = TaskState.Complete;
         }
     }
 }

@@ -100,6 +100,8 @@ namespace NanoByte.Common.Tasks
                 throw;
             }
             #endregion
+
+            State = TaskState.Complete;
         }
 
         #region Progress
@@ -153,6 +155,13 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// The actual code to be executed.
         /// </summary>
+        /// <remarks>
+        /// <see cref="State"/> is automatically set
+        /// to <see cref="TaskState.Started"/> before calling this method,
+        /// to <see cref="TaskState.Complete"/> after a sucessfull exit and
+        /// to an appropriate error state in case on an exception.
+        /// You can set additional <see cref="TaskState"/>s during execution.
+        /// </remarks>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
         /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>

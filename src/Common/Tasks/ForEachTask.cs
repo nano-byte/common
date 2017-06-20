@@ -73,8 +73,6 @@ namespace NanoByte.Common.Tasks
                 _work(element);
                 UnitsProcessed++;
             }
-
-            State = TaskState.Complete;
         }
     }
 

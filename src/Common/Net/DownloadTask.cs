@@ -156,8 +156,6 @@ namespace NanoByte.Common.Net
                 throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
             }
             #endregion
-
-            State = TaskState.Complete;
         }
 
         /// <summary>

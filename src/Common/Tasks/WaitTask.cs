@@ -65,7 +65,6 @@ namespace NanoByte.Common.Tasks
                 switch (WaitHandle.WaitAny(new[] {_waitHandle, CancellationToken.WaitHandle}, _millisecondsTimeout, exitContext: false))
                 {
                     case 0:
-                        State = TaskState.Complete;
                         break;
 
                     case 1:
@@ -80,7 +79,6 @@ namespace NanoByte.Common.Tasks
             {
                 // Abandoned mutexes also get owned, but indicate something may have gone wrong elsewhere
                 Log.Warn(ex.Message);
-                State = TaskState.Complete;
             }
         }
     }

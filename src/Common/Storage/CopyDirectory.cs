@@ -109,7 +109,6 @@ namespace NanoByte.Common.Storage
             CopyFiles(sourceFiles);
             if (PreserveDirectoryTimestamps)
                 CopyDirectoryTimestamps(sourceDirectories);
-            State = TaskState.Complete;
         }
 
         private void CopyDirectories(IEnumerable<DirectoryInfo> sourceDirectories)
