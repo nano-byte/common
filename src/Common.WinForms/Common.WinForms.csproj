@@ -44,4 +44,135 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Workaround to ensure satellite assemblies are packaged. -->
+    <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\DropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EditorControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\EditorDialog.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\ErrorBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\ErrorBox.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\ErrorReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\ErrorReportForm.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\FilteredTreeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\FilteredTreeView.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\GenericEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\HintTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\InputBox.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\InspectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\InspectionForm.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\LiveEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\LiveEditor.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\LocalizableTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\LocalizableTextBox.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\OKCancelDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\OKCancelDialog.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\OutputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\OutputBox.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\OutputGridBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\OutputGridBox.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\ResettablePropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\TaskControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TaskControl.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TaskLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\TaskProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\TimeSpanControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TimeSpanControl.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TouchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\TouchPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\UriTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\Wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StructureEditor\StructureEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="StructureEditor\StructureEditorControl.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Tasks\TaskRunDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Tasks\TaskRunDialog.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

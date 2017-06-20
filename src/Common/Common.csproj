@@ -36,7 +36,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Workaround to ensure satellite assemblies are packaged. -->
+    <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
+
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Net\WebClientTimeout.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

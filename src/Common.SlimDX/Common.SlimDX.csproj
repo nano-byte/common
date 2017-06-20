@@ -45,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Workaround to ensure satellite assemblies are packaged. -->
+    <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
+
     <PackageReference Include="SlimDX" Version="4.0.13.44" />
     <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="0.86.5" />
   </ItemGroup>
@@ -52,6 +55,18 @@
   <ItemGroup>
     <Compile Include="..\Common\Storage\XmlStorage.cs">
       <Link>Storage\SlimDX\XmlStorage.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\AngleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\AsyncWaitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Controls\AsyncWaitDialog.Designer.cs">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
 
