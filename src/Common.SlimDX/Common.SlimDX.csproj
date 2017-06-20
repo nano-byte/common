@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common.SlimDX</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <TargetFrameworks>net20;net35;net40;net45</TargetFrameworks>
+    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
     <DefineConstants>$(DefineConstants);SLIMDX</DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -17,6 +17,20 @@
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <OutputPath>..\..\build\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <!-- Support old .NET Framework Client Profiles -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net35-client'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>client</TargetFrameworkProfile>
+    <DefineConstants>$(DefineConstants);NET35</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40-client'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>client</TargetFrameworkProfile>
+    <DefineConstants>$(DefineConstants);NET40</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -45,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Workaround to ensure satellite assemblies are packaged. -->
+    <!-- Workaround to ensure satellite assemblies are packaged -->
     <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
 
     <PackageReference Include="SlimDX" Version="4.0.13.44" />
@@ -55,18 +69,6 @@
   <ItemGroup>
     <Compile Include="..\Common\Storage\XmlStorage.cs">
       <Link>Storage\SlimDX\XmlStorage.cs</Link>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Controls\AngleControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\AsyncWaitDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Controls\AsyncWaitDialog.Designer.cs">
-      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
 

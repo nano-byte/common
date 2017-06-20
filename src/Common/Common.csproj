@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <TargetFrameworks>net20;net35;net40;net45</TargetFrameworks>
+    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
@@ -14,6 +14,20 @@
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <OutputPath>..\..\build\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <!-- Support old .NET Framework Client Profiles -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net35-client'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>client</TargetFrameworkProfile>
+    <DefineConstants>$(DefineConstants);NET35</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40-client'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>client</TargetFrameworkProfile>
+    <DefineConstants>$(DefineConstants);NET40</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -31,12 +45,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Used as a Reference Assembly, not distributed with NuGet package. -->
+    <!-- Used as a Reference Assembly, not distributed with NuGet package -->
     <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Workaround to ensure satellite assemblies are packaged. -->
+    <!-- Workaround to ensure satellite assemblies are packaged -->
     <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
 
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
