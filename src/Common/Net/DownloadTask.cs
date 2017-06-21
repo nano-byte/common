@@ -101,8 +101,8 @@ namespace NanoByte.Common.Net
 
             if (request is HttpWebRequest httpRequest)
             {
-                httpRequest.UserAgent = AppInfo.Current.NameVersion;
                 httpRequest.Credentials = CredentialProvider;
+                httpRequest.UserAgent = AppInfo.Current.NameVersion;
                 if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             }
 

@@ -56,10 +56,4 @@
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Net\WebClientTimeout.cs">
-      <SubType>Component</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>

@@ -100,8 +100,6 @@ namespace NanoByte.Common.Native
         [SuppressMessage("Microsoft.Portability", "CA1903:UseOnlyApiFromTargetedFramework", MessageId = "Microsoft.CSharp.CSharpCodeProvider.#.ctor(System.Collections.Generic.IDictionary`2<System.String,System.String>)", Justification = "Will only be called on post-2.0 .NET versions")]
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static CodeDomProvider NewCSharpCodeProvider(string version)
-        {
-            return new CSharpCodeProvider(new Dictionary<string, string> {{"CompilerVersion", version}});
-        }
+            => new CSharpCodeProvider(new Dictionary<string, string> {{"CompilerVersion", version}});
     }
 }

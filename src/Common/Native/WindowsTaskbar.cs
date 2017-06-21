@@ -242,7 +242,7 @@ namespace NanoByte.Common.Native
                 customDestinationList.SetAppID(appID);
 
                 var objectArray = new Guid("92CA9DCD-5622-4BBA-A805-5E9F541BD8C9");
-                customDestinationList.BeginList(out uint maxSlots, ref objectArray, out object removedItems);
+                customDestinationList.BeginList(out _, ref objectArray, out _);
 
                 var taskContent = (IObjectCollection)new CEnumerableObjectCollection();
                 foreach (var shellLink in links)

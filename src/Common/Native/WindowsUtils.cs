@@ -150,12 +150,22 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
-        public static bool Is64BitOperatingSystem => Is64BitProcess || Is32BitProcessOn64BitOperatingSystem;
+        public static bool Is64BitOperatingSystem =>
+#if NET45
+            Environment.Is64BitOperatingSystem;
+#else
+            Is64BitProcess || Is32BitProcessOn64BitOperatingSystem;
+#endif
 
         /// <summary>
         /// <c>true</c> if the current process is 64-bit; <c>false</c> otherwise.
         /// </summary>
-        public static bool Is64BitProcess => IntPtr.Size == 8;
+        public static bool Is64BitProcess =>
+#if NET45
+            Environment.Is64BitProcess;
+#else
+            IntPtr.Size == 8;
+#endif
 
         /// <summary>
         /// <c>true</c> if the current operating system supports UAC and it is enabled; <c>false</c> otherwise.
@@ -230,9 +240,9 @@ namespace NanoByte.Common.Native
                 return fileName.ToString();
             }
         }
-        #endregion
+#endregion
 
-        #region .NET Framework
+#region .NET Framework
         /// <summary>The directory version number for .NET Framework 2.0. This release includes the C# 2.0 compiler and the CLR 2.0 runtime.</summary>
         public const string NetFx20 = "v2.0.50727";
 
@@ -254,9 +264,9 @@ namespace NanoByte.Common.Native
         [NotNull]
         public static string GetNetFxDirectory([NotNull] string version)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(version)) throw new ArgumentNullException(nameof(version));
-            #endregion
+#endregion
 
             return FileUtils.PathCombine(
                 Environment.GetEnvironmentVariable("windir") ?? @"C:\Windows",
@@ -264,9 +274,9 @@ namespace NanoByte.Common.Native
                 Is64BitProcess ? "Framework64" : "Framework",
                 version);
         }
-        #endregion
+#endregion
 
-        #region Command-line
+#region Command-line
         /// <summary>
         /// Tries to split a command-line into individual arguments.
         /// </summary>
@@ -306,9 +316,9 @@ namespace NanoByte.Common.Native
         {
             return IsWindowsNT && NativeMethods.AttachConsole(uint.MaxValue);
         }
-        #endregion
+#endregion
 
-        #region Performance counter
+#region Performance counter
         private static long _performanceFrequency;
 
         /// <summary>
@@ -332,9 +342,9 @@ namespace NanoByte.Common.Native
                 return Environment.TickCount / 1000f;
             }
         }
-        #endregion
+#endregion
 
-        #region File system
+#region File system
         /// <summary>
         /// Reads the entire contents of a file using the Win32 API.
         /// </summary>
@@ -345,9 +355,9 @@ namespace NanoByte.Common.Native
         [CanBeNull]
         public static byte[] ReadAllBytes([NotNull, Localizable(false)] string path)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
+#endregion
 
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
@@ -381,10 +391,10 @@ namespace NanoByte.Common.Native
         /// <remarks>This method works like <see cref="File.WriteAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
         public static void WriteAllBytes([NotNull, Localizable(false)] string path, [NotNull] byte[] data)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             if (data == null) throw new ArgumentNullException(nameof(data));
-            #endregion
+#endregion
 
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
@@ -416,10 +426,10 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
         public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
             if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
-            #endregion
+#endregion
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
@@ -440,9 +450,9 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
+#endregion
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
@@ -462,9 +472,9 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
         public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
+#endregion
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
@@ -485,10 +495,10 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
         public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
             if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
-            #endregion
+#endregion
 
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
             if (!NativeMethods.CreateHardLink(sourcePath, targetPath, IntPtr.Zero))
@@ -506,10 +516,10 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
         public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
             if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException(nameof(path2));
-            #endregion
+#endregion
 
             if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
             return GetFileIndex(path1) == GetFileIndex(path2);
@@ -540,16 +550,16 @@ namespace NanoByte.Common.Native
         /// <remarks>Useful for replacing in-use files.</remarks>
         public static void MoveFileOnReboot([NotNull] string sourcePath, [CanBeNull] string destinationPath)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
-            #endregion
+#endregion
 
             if (!NativeMethods.MoveFileEx(sourcePath, destinationPath, NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING | NativeMethods.MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT))
                 throw BuildException(Marshal.GetLastWin32Error());
         }
-        #endregion
+#endregion
 
-        #region Shell
+#region Shell
         /// <summary>
         /// Sets the current process' explicit application user model ID.
         /// </summary>
@@ -557,9 +567,9 @@ namespace NanoByte.Common.Native
         /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
         public static void SetCurrentProcessAppID(string appID)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
-            #endregion
+#endregion
 
             if (!IsWindows7) return;
             NativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
@@ -594,9 +604,9 @@ namespace NanoByte.Common.Native
             const int SMTO_ABORTIFHUNG = 0x0002;
             NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out IntPtr result);
         }
-        #endregion
+#endregion
 
-        #region Window messages
+#region Window messages
         /// <summary>
         /// Registers a new message type that can be sent to windows.
         /// </summary>
@@ -615,9 +625,9 @@ namespace NanoByte.Common.Native
         {
             if (IsWindows) NativeMethods.PostMessage(HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
         }
-        #endregion
+#endregion
 
-        #region Restart Manager
+#region Restart Manager
         /// <summary>
         /// Registers the current application for automatic restart after updates or crashes.
         /// </summary>
@@ -625,9 +635,9 @@ namespace NanoByte.Common.Native
         /// <exception cref="ArgumentException"><paramref name="arguments"/> is too long.</exception>
         public static void RegisterApplicationRestart([NotNull] string arguments)
         {
-            #region Sanity checks
+#region Sanity checks
             if (string.IsNullOrEmpty(arguments)) throw new ArgumentNullException(nameof(arguments));
-            #endregion
+#endregion
 
             if (!IsWindowsVista) return;
 
@@ -644,6 +654,6 @@ namespace NanoByte.Common.Native
 
             NativeMethods.UnregisterApplicationRestart();
         }
-        #endregion
+#endregion
     }
 }

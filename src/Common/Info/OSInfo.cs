@@ -37,7 +37,7 @@ namespace NanoByte.Common.Info
         /// The operating system platform (e.g. Windows NT).
         /// </summary>
         [XmlAttribute("platform")]
-        public PlatformID Platform;
+        public string Platform;
 
         /// <summary>
         /// True if the operating system is a 64-bit version of Windows.
@@ -48,13 +48,8 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// The version of the operating system (e.g. 6.0 for Vista).
         /// </summary>
-        [XmlIgnore]
-        public Version Version;
-
-        /// <summary>Used for XML serialization.</summary>
-        /// <seealso cref="Version"/>
-        [XmlAttribute("version"), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string VersionString { get => Version?.ToString(); set => Version = string.IsNullOrEmpty(value) ? null : new Version(value); }
+        [XmlAttribute("version")]
+        public string Version;
 
         /// <summary>
         /// The service pack level (e.g. "Service Pack 1").
@@ -65,15 +60,10 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// The version of the operating system (e.g. 6.0 for Vista).
         /// </summary>
-        [XmlIgnore]
-        public Version FrameworkVersion;
+        [XmlAttribute("framework-version")]
+        public string FrameworkVersion;
 
-        /// <summary>Used for XML serialization.</summary>
-        /// <seealso cref="Version"/>
-        [XmlAttribute("framework-version"), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string FrameworkVersionString { get => FrameworkVersion?.ToString(); set => FrameworkVersion = string.IsNullOrEmpty(value) ? null : new Version(value); }
-
-        public override string ToString() => Platform + " " + (Is64Bit ? "64-bit " : "") + Version + " " + ServicePack;
+        public override string ToString() => $"{Platform}{(Is64Bit ? " 64-bit" : "")} {Version} {ServicePack}";
 
         #region Static
         /// <summary>
@@ -85,11 +75,11 @@ namespace NanoByte.Common.Info
         {
             return new OSInfo
             {
-                Platform = Environment.OSVersion.Platform,
+                Platform = Environment.OSVersion.Platform.ToString(),
                 Is64Bit = WindowsUtils.Is64BitOperatingSystem,
-                Version = Environment.OSVersion.Version,
+                Version = Environment.OSVersion.Version.ToString(),
                 ServicePack = Environment.OSVersion.ServicePack,
-                FrameworkVersion = Environment.Version
+                FrameworkVersion = Environment.Version.ToString()
             };
         }
         #endregion
