@@ -226,12 +226,6 @@ namespace NanoByte.Common.Storage
             var serializer = new XmlSerializer(typeof(T));
 #endif
 
-            // Detect and handle namespace attributes
-            var rootAttribute = AttributeUtils.GetAttributes<XmlRootAttribute, T>().FirstOrDefault();
-            var namespaceAttributes = AttributeUtils.GetAttributes<XmlNamespaceAttribute, T>();
-            var qualifiedNames = namespaceAttributes.Select(attr => attr.QualifiedName);
-            if (rootAttribute != null) qualifiedNames = qualifiedNames.Concat(new[] {new XmlQualifiedName("", rootAttribute.Namespace)});
-
             var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
             {
                 Encoding = new UTF8Encoding(false),
@@ -243,10 +237,9 @@ namespace NanoByte.Common.Storage
             if (!string.IsNullOrEmpty(stylesheet))
                 xmlWriter.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet + "\"");
 
-            // ReSharper disable PossibleMultipleEnumeration
-            if (qualifiedNames.Any()) serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames.ToArray()));
-            else serializer.Serialize(xmlWriter, data);
-            // ReSharper restore PossibleMultipleEnumeration
+            var qualifiedNames = GetQualifiedNames<T>();
+            if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
+            else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
 
             // End file with line break
             xmlWriter.Flush();
@@ -255,6 +248,17 @@ namespace NanoByte.Common.Storage
                 var newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
                 stream.Write(newLine, 0, newLine.Length);
             }
+        }
+
+        private static XmlQualifiedName[] GetQualifiedNames<T>()
+        {
+            var namespaceAttributes = AttributeUtils.GetAttributes<XmlNamespaceAttribute, T>();
+            var qualifiedNames = namespaceAttributes.Select(attr => attr.QualifiedName);
+
+            var rootAttribute = AttributeUtils.GetAttributes<XmlRootAttribute, T>().FirstOrDefault();
+            if (rootAttribute != null) qualifiedNames = qualifiedNames.Concat(new[] {new XmlQualifiedName("", rootAttribute.Namespace)});
+
+            return qualifiedNames.ToArray();
         }
 
         /// <summary>
@@ -296,7 +300,12 @@ namespace NanoByte.Common.Storage
                 SaveXml(data, stream, stylesheet);
 
                 // Copy the stream to a string
-                return stream.ReadToString();
+                string result = stream.ReadToString();
+
+                // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
+                const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+                const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
+                return prefixWithoutEncoding + result.Substring(prefixWithEncoding.Length);
             }
         }
         #endregion

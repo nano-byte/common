@@ -26,7 +26,6 @@ using Xunit;
 #if SLIMDX
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
-
 namespace NanoByte.Common.Storage.SlimDX
 #else
 namespace NanoByte.Common.Storage
@@ -42,11 +41,11 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// A data-structure used to test serialization.
         /// </summary>
+        [XmlNamespace("", "")]
         public class TestData
         {
             public string Data { get; set; }
         }
-
         // ReSharper restore MemberCanBePrivate.Global
 
         /// <summary>
@@ -84,6 +83,14 @@ namespace NanoByte.Common.Storage
             // Ensure data stayed the same
             testData2.Data.Should().Be(testData1.Data);
         }
+
+        [Fact]
+        public void TestToXmlString()
+            => new TestData {Data = "Hello"}.ToXmlString().Should().Be("<?xml version=\"1.0\"?>\n<TestData>\n  <Data>Hello</Data>\n</TestData>\n");
+
+        [Fact]
+        public void TestFromXmlString()
+            => XmlStorage.FromXmlString<TestData>("<?xml version=\"1.0\"?><TestData><Data>Hello</Data></TestData>").Data.Should().Be("Hello");
 
 #if SLIMDX
         /// <summary>
@@ -131,21 +138,6 @@ namespace NanoByte.Common.Storage
             testData.SaveXmlZip(tempStream, "Correct password");
             tempStream.Seek(0, SeekOrigin.Begin);
             Assert.Throws<ZipException>(() => XmlStorage.LoadXmlZip<TestData>(tempStream, password: "Wrong password"));
-        }
-
-        /// <summary>
-        /// Ensures <see cref="XmlStorage.ToXmlString{T}"/> and <see cref="XmlStorage.FromXmlString{T}"/> work correctly.
-        /// </summary>
-        [Fact]
-        public void TestString()
-        {
-            var testData1 = new TestData {Data = "Hello"};
-
-            // Serialize and deserialize
-            string xml = testData1.ToXmlString();
-            var testData2 = XmlStorage.FromXmlString<TestData>(xml);
-
-            testData2.Data.Should().Be(testData1.Data);
         }
 #endif
     }
