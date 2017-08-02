@@ -312,9 +312,11 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Write protection
-        [Fact]
+        [SkippableFact]
         public void TestWriteProtection()
         {
+            Skip.If(WindowsUtils.IsWindowsVista && !WindowsUtils.IsAdministrator, "Must be Admin to create symlinks on Windows");
+
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
                 File.WriteAllText(Path.Combine(tempDir, "file"), @"contents");
