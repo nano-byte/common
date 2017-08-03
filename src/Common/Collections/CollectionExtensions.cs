@@ -228,6 +228,7 @@ namespace NanoByte.Common.Collections
             if (second == null) throw new ArgumentNullException(nameof(second));
             #endregion
 
+            if (first == second) return true;
             if (first.Count != second.Count) return false;
             return first.SequenceEqual(second, comparer ?? EqualityComparer<T>.Default);
         }
@@ -246,6 +247,7 @@ namespace NanoByte.Common.Collections
             if (second == null) throw new ArgumentNullException(nameof(second));
             #endregion
 
+            if (first == second) return true;
             if (first.Count != second.Count) return false;
             var set = new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
             return second.All(set.Contains);

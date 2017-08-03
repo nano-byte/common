@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 
 #if NET45
@@ -133,5 +134,58 @@ namespace NanoByte.Common.Collections
             return newValue;
         }
 #endif
+
+        /// <summary>
+        /// Determines whether two dictionaries contain the same key-value pairs.
+        /// </summary>
+        /// <param name="first">The first of the two dictionaries to compare.</param>
+        /// <param name="second">The first of the two dictionaries to compare.</param>
+        /// <param name="valueComparer">Controls how to compare values; leave <c>null</c> for default comparer.</param>
+        [Pure]
+        public static bool UnsequencedEquals<TKey, TValue>([NotNull, InstantHandle] this IDictionary<TKey, TValue> first, [NotNull, InstantHandle] IDictionary<TKey, TValue> second, [CanBeNull] IEqualityComparer<TValue> valueComparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            #endregion
+
+            if (first == second) return true;
+            if (first.Count != second.Count) return false;
+
+            var keySet = new HashSet<TKey>(first.Keys);
+            if (!second.Keys.All(keySet.Contains)) return false;
+
+            if (valueComparer == null) valueComparer = EqualityComparer<TValue>.Default;
+            foreach (var pair in first)
+            {
+                if (!valueComparer.Equals(pair.Value, second[pair.Key]))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Generates a hash code for the contents of the dictionary.
+        /// </summary>
+        /// <param name="dictionary">The dictionary to generate the hash for.</param>
+        /// <param name="valueComparer">Controls how to compare values; leave <c>null</c> for default comparer.</param>
+        /// <seealso cref="UnsequencedEquals{TKey,TValue}"/>
+        [Pure]
+        public static int GetUnsequencedHashCode<TKey, TValue>([NotNull, InstantHandle] this IDictionary<TKey, TValue> dictionary, [CanBeNull] IEqualityComparer<TValue> valueComparer = null)
+        {
+            #region Sanity checks
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            #endregion
+
+            if (valueComparer == null) valueComparer = EqualityComparer<TValue>.Default;
+            unchecked
+            {
+                int result = 397;
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (var pair in dictionary)
+                    result = result ^ (pair.Key.GetHashCode() + valueComparer.GetHashCode(pair.Value));
+                return result;
+            }
+        }
     }
 }

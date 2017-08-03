@@ -85,5 +85,26 @@ namespace NanoByte.Common.Collections
             mock1.IsDisposed.Should().BeFalse();
             mock2.IsDisposed.Should().BeFalse();
         }
+
+        [Fact]
+        public void TestUnsequencedEquals()
+        {
+            new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}).Should().BeTrue();
+            new string[0].UnsequencedEquals(new string[0]).Should().BeTrue();
+            new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "C", [2] = "B", [3] = "A"}).Should().BeFalse();
+            new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "X", [2] = "Y", [3] = "Z"}).Should().BeFalse();
+            new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "A", [2] = "B"}).Should().BeFalse();
+            new Dictionary<int, object> {[1] = new object()}.UnsequencedEquals(new Dictionary<int, object> {[1] = new object()}).Should().BeFalse();
+        }
+
+        [Fact]
+        public void TestGetUnsequencedHashCode()
+        {
+            new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode().Should().Be(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
+            new Dictionary<int, string>().GetUnsequencedHashCode().Should().Be(new Dictionary<int, string>().GetUnsequencedHashCode());
+            new Dictionary<int, string> {[1] = "C", [2] = "B", [3] = "A"}.GetUnsequencedHashCode().Should().NotBe(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
+            new Dictionary<int, string> {[1] = "X", [2] = "Y", [3] = "Z"}.GetUnsequencedHashCode().Should().NotBe(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
+            new Dictionary<int, string> {[1] = "A", [2] = "B"}.GetUnsequencedHashCode().Should().NotBe(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
+        }
     }
 }
