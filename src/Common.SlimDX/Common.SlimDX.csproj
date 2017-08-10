@@ -36,8 +36,8 @@
   <PropertyGroup>
     <Version>2.1.1</Version>
     <Description>
-      Generic utility classes, interfaces, controls, etc. for SlimDX projects.
-      API documentation: http://nano-byte.de/common/api/
+Utility classes, interfaces, controls, etc. for SlimDX projects.
+API documentation: http://nano-byte.de/common/api/
     </Description>
     <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>

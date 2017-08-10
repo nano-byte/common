@@ -33,8 +33,8 @@
   <PropertyGroup>
     <Version>2.1.1</Version>
     <Description>
-      Generic utility classes, interfaces, controls, etc. that are applicable to a wide range of different applications.
-      API documentation: http://nano-byte.de/common/api/
+Utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, OS integration and task progress UIs.
+API documentation: http://nano-byte.de/common/api/
     </Description>
     <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>

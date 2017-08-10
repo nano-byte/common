@@ -1,14 +1,14 @@
 ﻿PROJECT_NAME = "NanoByte.Common"
 PROJECT_NUMBER = "2.1.1"
 
-INPUT = Intro.md ../src
-USE_MDFILE_AS_MAINPAGE = ../README.md
+INPUT = main.md ../src
+USE_MDFILE_AS_MAINPAGE = main.md
 STRIP_FROM_PATH = ../src
 RECURSIVE = YES
-EXCLUDE_PATTERNS = */*.UnitTests/* */Properties/* *.NativeMethods.cs */obj/* */Common.Gtk/* */JetBrains.Annotations.cs
+EXCLUDE_PATTERNS = */*.UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs */Common.Gtk/* */JetBrains.Annotations.cs
 
 OUTPUT_DIRECTORY = ../build/Documentation
-GENERATE_TAGFILE = ../build/Documentation/common.tag
+GENERATE_TAGFILE = ../build/Documentation/nanobyte-common.tag
 HTML_OUTPUT = .
 
 GENERATE_LATEX = NO
