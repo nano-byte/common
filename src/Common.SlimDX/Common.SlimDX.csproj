@@ -60,7 +60,7 @@ API documentation: http://nano-byte.de/common/api/
 
   <ItemGroup>
     <!-- Workaround to ensure satellite assemblies are packaged -->
-    <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
+    <PackageReference Include="NuGet4698Workaround" Version="1.0.3" PrivateAssets="All" />
 
     <PackageReference Include="SlimDX" Version="4.0.13.44" />
     <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="0.86.5" />

@@ -36,7 +36,7 @@ API documentation: http://nano-byte.de/common/api/
 
   <ItemGroup>
     <!-- Workaround to ensure satellite assemblies are packaged -->
-    <PackageReference Include="NuGet4698Workaround" Version="1.0.1" PrivateAssets="All" />
+    <PackageReference Include="NuGet4698Workaround" Version="1.0.3" PrivateAssets="All" />
 
     <PackageReference Include="GtkSharp" Version="3.1.3" />
   </ItemGroup>
