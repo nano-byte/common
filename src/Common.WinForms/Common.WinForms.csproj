@@ -62,9 +62,4 @@ API documentation: http://nano-byte.de/common/api/
     <None Include="..\..\lib\ICSharpCode.TextEditor.*;..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
   </ItemGroup>
 
-  <ItemGroup>
-    <!-- Workaround to ensure satellite assemblies are packaged -->
-    <PackageReference Include="NuGet4698Workaround" Version="1.0.3" PrivateAssets="All" />
-  </ItemGroup>
-
 </Project>
