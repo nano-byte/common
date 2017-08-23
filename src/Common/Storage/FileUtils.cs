@@ -108,7 +108,7 @@ namespace NanoByte.Common.Storage
             return Uri.UnescapeDataString(relativeUri.ToString()).TrimEnd('/');
         }
 
-        private static readonly Regex _varStyle1 = new Regex(@"\${(.+)}"), _varStyle2 = new Regex(@"\$([^\$\s\\/-]+)");
+        private static readonly Regex _varStyle1 = new Regex(@"\${([^}]+)}"), _varStyle2 = new Regex(@"\$([^\$\s\\/-]+)");
 
         /// <summary>
         /// Expands/substitutes any Unix-style environment variables in the string.

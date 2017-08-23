@@ -83,6 +83,8 @@ namespace NanoByte.Common.Storage
 
             FileUtils.ExpandUnixVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables).Should().Be("value1value2/value1 value2 long value ");
             FileUtils.ExpandUnixVariables("$KEY1-bla", variables).Should().Be("value1-bla");
+            FileUtils.ExpandUnixVariables("{bla-$KEY1-bla}", variables).Should().Be("{bla-value1-bla}");
+            FileUtils.ExpandUnixVariables("{bla-${KEY1}-bla}", variables).Should().Be("{bla-value1-bla}");
             FileUtils.ExpandUnixVariables("", variables).Should().Be("");
         }
 
