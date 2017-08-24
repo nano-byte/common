@@ -74,8 +74,10 @@ namespace NanoByte.Common.Tasks
 
             try
             {
+#if !NETSTANDARD2_0
                 // Run task with privileges of original user if possible
                 using (_originalIdentity?.Impersonate())
+#endif
                     Execute();
             }
                 #region Error handling

@@ -130,13 +130,21 @@ namespace NanoByte.Common.Storage
         /// <exception cref="NotAdminException">A directory does not exist yet and the user is not an administrator.</exception>
         private static void CreateSecureMachineWideDir([NotNull, Localizable(false)] string path)
         {
-            if (Directory.Exists(path)) return;
+            var directory = new DirectoryInfo(path);
+            if (directory.Exists) return;
+
             if (WindowsUtils.IsWindowsNT)
             {
                 if (!WindowsUtils.IsAdministrator) throw new NotAdminException();
-                Directory.CreateDirectory(path, _secureSharedAcl);
+
+#if NETSTANDARD2_0
+                directory.Create();
+                directory.SetAccessControl(_secureSharedAcl);
+#else
+                directory.Create(_secureSharedAcl);
+#endif
             }
-            else Directory.CreateDirectory(path);
+            else directory.Create();
         }
         #endregion
     }

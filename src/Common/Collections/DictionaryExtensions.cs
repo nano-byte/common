@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-#if NET45
+#if NET45 || NETSTANDARD2_0
 using System.Threading.Tasks;
 #endif
 
@@ -107,7 +107,7 @@ namespace NanoByte.Common.Collections
             return dictionary.GetOrAdd(key, () => new TValue());
         }
 
-#if NET45
+#if NET45 || NETSTANDARD2_0
         /// <summary>
         /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.
         /// </summary>

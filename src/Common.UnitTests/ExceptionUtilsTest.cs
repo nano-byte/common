@@ -23,12 +23,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using NanoByte.Common.Native;
 using Xunit;
+
+#if !NETCOREAPP2_0
+using System.Runtime.CompilerServices;
+using NanoByte.Common.Native;
+#endif
 
 namespace NanoByte.Common
 {
@@ -37,6 +40,7 @@ namespace NanoByte.Common
     /// </summary>
     public class ExceptionUtilsTest
     {
+#if !NETCOREAPP2_0
         [SkippableFact]
         public void TestPreserveStack()
         {
@@ -62,6 +66,7 @@ namespace NanoByte.Common
         {
             throw new InvalidOperationException("Test exception");
         }
+#endif
 
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.ApplyWithRollback{T}"/> correctly performs rollbacks on exceptions.

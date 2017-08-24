@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+#if !NETSTANDARD2_0
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -103,3 +104,4 @@ namespace NanoByte.Common.Native
             => new CSharpCodeProvider(new Dictionary<string, string> {{"CompilerVersion", version}});
     }
 }
+#endif

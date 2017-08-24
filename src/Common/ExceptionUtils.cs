@@ -30,7 +30,7 @@ using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
-#if NET45
+#if NET45 || NETSTANDARD2_0
 using System.Threading.Tasks;
 #endif
 
@@ -43,7 +43,7 @@ namespace NanoByte.Common
     /// <seealso cref="ExceptionUtils.Retry{TException}"/>
     public delegate void RetryAction(bool lastAttempt);
 
-#if NET45
+#if NET45 || NETSTANDARD2_0
     /// <summary>
     /// Delegate used by <see cref="ExceptionUtils.RetryAsync{TException}"/>.
     /// </summary>
@@ -60,6 +60,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Configures a caught <paramref name="exception"/> to preserve its original stack trace when it is rethrown.
         /// </summary>
+        /// <remarks>This has no effect on platforms that do not support exception serialization.</remarks>
         public static Exception PreserveStack([NotNull] this Exception exception)
         {
             #region Sanity checks
@@ -221,7 +222,7 @@ namespace NanoByte.Common
             }
         }
 
-#if NET45
+#if NET45 || NETSTANDARD2_0
         /// <summary>
         /// Applies an operation for all elements of a collection. Automatically applies rollback operations in case of an exception.
         /// </summary>

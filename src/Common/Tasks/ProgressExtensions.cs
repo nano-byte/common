@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-#if NET45
+#if NET45 || NETSTANDARD2_0
 namespace NanoByte.Common.Tasks
 {
     /// <summary>

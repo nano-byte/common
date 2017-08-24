@@ -151,7 +151,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitOperatingSystem =>
-#if NET45
+#if NET45 || NETSTANDARD2_0
             Environment.Is64BitOperatingSystem;
 #else
             Is64BitProcess || Is32BitProcessOn64BitOperatingSystem;
@@ -161,7 +161,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current process is 64-bit; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitProcess =>
-#if NET45
+#if NET45 || NETSTANDARD2_0
             Environment.Is64BitProcess;
 #else
             IntPtr.Size == 8;

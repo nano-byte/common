@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
+    <TargetFrameworks>net20;net35-client;net40-client;net45;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
@@ -44,13 +44,27 @@ API documentation: http://nano-byte.de/common/api/
     <Copyright>Copyright 2006-2017 Bastian Eicher et al</Copyright>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
     <!-- Used as a Reference Assembly, not distributed with NuGet package -->
     <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="4.4.0" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
+    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0-beta1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <EmbeddedResource Remove="Properties\ImageResources.resx" />
+    <Compile Remove="Properties\ImageResources.Designer.cs" />
   </ItemGroup>
 
 </Project>

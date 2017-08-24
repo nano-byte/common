@@ -22,8 +22,11 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Remoting;
 using System.Threading;
+
+#if !NETSTANDARD2_0
+using System.Runtime.Remoting;
+#endif
 
 namespace NanoByte.Common.Tasks
 {
@@ -79,12 +82,16 @@ namespace NanoByte.Common.Tasks
                 _isCancellationRequested = true;
                 if (CancellationRequested != null)
                 {
+#if !NETSTANDARD2_0
                     try
                     {
+#endif
                         CancellationRequested();
+#if !NETSTANDARD2_0
                     }
                     catch (RemotingException)
                     {}
+#endif
                 }
             }
         }
