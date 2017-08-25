@@ -52,8 +52,7 @@ namespace NanoByte.Common.Values.Design
             if (provider == null) throw new ArgumentNullException(nameof(provider));
             #endregion
 
-            var languages = value as LanguageSet;
-            if (languages == null) throw new ArgumentNullException(nameof(value));
+            if (!(value is LanguageSet languages)) throw new ArgumentNullException(nameof(value));
 
             var editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
             if (editorService == null) return value;

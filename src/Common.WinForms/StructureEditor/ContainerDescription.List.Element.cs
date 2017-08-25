@@ -78,8 +78,7 @@ namespace NanoByte.Common.StructureEditor
 
                 public EntryInfo TryGetEntry(TContainer container, IList<TList> list, TList candidate)
                 {
-                    var element = candidate as TElement;
-                    if (element == null) return null;
+                    if (!(candidate is TElement element)) return null;
 
                     var description = AttributeUtils.GetAttributes<DescriptionAttribute, TElement>().FirstOrDefault();
                     return new EntryInfo(

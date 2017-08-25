@@ -53,8 +53,7 @@ namespace NanoByte.Common.Native
                 case Win32ErrorFailNoactionReboot:
                 case Win32ErrorFailShutdown:
                 case Win32ErrorFailRestart:
-                    bool permissionDenied;
-                    string message = new Win32Exception(error).Message + Environment.NewLine + StringUtils.Join(Environment.NewLine, ListAppProblems(out permissionDenied));
+                    string message = new Win32Exception(error).Message + Environment.NewLine + StringUtils.Join(Environment.NewLine, ListAppProblems(out var permissionDenied));
 
                     if (permissionDenied) return new UnauthorizedAccessException(message);
                     else return new IOException(message);

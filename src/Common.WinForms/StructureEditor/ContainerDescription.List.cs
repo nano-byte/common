@@ -108,15 +108,12 @@ namespace NanoByte.Common.StructureEditor
 
             public ListDescription(Func<TContainer, IList<TList>> getList) => _getList = getList;
 
-            public override IEnumerable<EntryInfo> GetEntriesIn(TContainer container)
-            {
-                var list = _getList(container);
-                foreach (var element in list)
-                {
-                    var entry = _descriptions.Select(x => x.TryGetEntry(container, list, element)).WhereNotNull().FirstOrDefault();
-                    if (entry != null) yield return entry;
-                }
-            }
+            public override IEnumerable<EntryInfo> GetEntriesIn(TContainer container) => _getList(container)
+                .Select(element => _descriptions
+                    .Select(x => x.TryGetEntry(container, _getList(container), element))
+                    .WhereNotNull()
+                    .FirstOrDefault())
+                .Where(entry => entry != null);
 
             public override IEnumerable<ChildInfo> GetPossibleChildrenFor(TContainer container)
                 => _descriptions.Select(description => description.GetPossibleChildFor(_getList(container)));

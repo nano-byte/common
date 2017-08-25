@@ -32,10 +32,7 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public sealed class TaskLabel : Label, Tasks.IProgress<TaskSnapshot>
     {
-        public TaskLabel()
-        {
-            CreateHandle();
-        }
+        public TaskLabel() => CreateHandle();
 
         /// <inheritdoc/>
         public void Report(TaskSnapshot value)

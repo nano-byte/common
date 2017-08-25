@@ -544,28 +544,13 @@ namespace NanoByte.Common
         }
 
         [Pure]
-        public static int HiByte(byte b)
-        {
-            unchecked
-            {
-                return b >> 4;
-            }
-        }
+        public static int HiByte(byte b) => b >> 4;
 
         [Pure]
-        public static int LoByte(byte b)
-        {
-            unchecked
-            {
-                return b & 15;
-            }
-        }
+        public static int LoByte(byte b) => b & 15;
 
         [Pure]
-        public static byte CombineHiLoByte(int high, int low)
-        {
-            return (byte)((high << 4) + low);
-        }
+        public static byte CombineHiLoByte(int high, int low) => (byte)((high << 4) + low);
         #endregion
 
         //--------------------//

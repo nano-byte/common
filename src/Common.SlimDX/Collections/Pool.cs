@@ -34,7 +34,6 @@ namespace NanoByte.Common.Collections
     /// <typeparam name="T">The type of items to store in the pool.</typeparam>
     public sealed class Pool<T> : IPoolable<T> where T : class, IPoolable<T>
     {
-
         /// <summary>
         /// Gets the number of elements contained in the pool
         /// </summary>
