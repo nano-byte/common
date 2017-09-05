@@ -116,18 +116,21 @@ namespace NanoByte.Common.Collections
 
         [Fact]
         public async Task TestForEachAsync()
-        {
-            // Need to explicity set default SynchronizationContext to satisfy precondition check
-            SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+            => await new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskContinuationOptions.None, new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler)
+                .StartNew(async () =>
+                {
+                    int runningTasksCount = 0;
+                    await Enumerable.Range(1, 100).ForEachAsync(async x =>
+                    {
+                        runningTasksCount++;
+                        await Task.Delay(10);
+                        runningTasksCount.Should().BeLessOrEqualTo(2);
+                        runningTasksCount--;
+                    }, maxParallel: 2);
+                }).Unwrap();
 
-            int runningTasksCount = 0;
-            await new List<int> {1, 2, 3, 4, 5, 6}.ForEachAsync(async x =>
-            {
-                runningTasksCount++;
-                await Task.Delay(500);
-                runningTasksCount.Should().BeLessOrEqualTo(2);
-                runningTasksCount--;
-            }, maxParallel: 2);
-        }
+        [Fact]
+        public async Task ForEachAsyncShouldRejectDefaultScheduler()
+            => await Assert.ThrowsAsync<InvalidOperationException>(() => Enumerable.Range(1, 100).ForEachAsync(x => Task.CompletedTask));
     }
 }

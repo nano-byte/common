@@ -273,7 +273,7 @@ namespace NanoByte.Common.Collections
         /// <param name="enumerable">The input elements to enumerate over.</param>
         /// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
         /// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
-        /// <exception cref="InvalidOperationException"><see cref="SynchronizationContext.Current"/> is <c>null</c>.</exception>
+        /// <exception cref="InvalidOperationException"><see cref="TaskScheduler.Current"/> is equal to <see cref="TaskScheduler.Default"/>.</exception>
         /// <remarks>
         /// <see cref="SynchronizationContext.Current"/> must not be null.
         /// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
@@ -281,8 +281,8 @@ namespace NanoByte.Common.Collections
         [NotNull]
         public static async Task ForEachAsync<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, Task> taskFactory, int maxParallel = 0)
         {
-            if (SynchronizationContext.Current == null)
-                throw new InvalidOperationException("SynchronizationContext.Current must not be null when using ForEachAsync().");
+            if (TaskScheduler.Current == TaskScheduler.Default)
+                throw new InvalidOperationException("TaskScheduler.Current must not be equal to TaskScheduler.Default value when using ForEachAsync().");
 
             var tasks = new List<Task>(maxParallel);
 
