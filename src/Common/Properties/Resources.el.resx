@@ -166,13 +166,13 @@
     <value>Αποτυχία λυψης {0}.</value>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Απέτυχε η επαναφορά &apos;{0}&apos;.</value>
+    <value>Απέτυχε η επαναφορά '{0}'.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>Το αρχείο που επρόκειτο να μεταφορτωθεί από {0} δεν έχει το αναμενόμενο μέγεθος. Υποτίθεται ότι είναι {1} bytes, αλλά στην πραγματικότητα ειναι {2} bytes.</value>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Το αρχείο &apos;{0}&apos; δεν θα μπορεσε να βρεθεί.</value>
+    <value>Το αρχείο '{0}' δεν θα μπορεσε να βρεθεί.</value>
   </data>
   <data name="HideDetails" xml:space="preserve">
     <value>Απόκρυψη λεπτομερειών</value>
@@ -181,7 +181,7 @@
     <value>Μόνο HTTP και FTP υποστηρίζονται λήψη πρωτοκόλλων.</value>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Ο κατάλογος ρύθμισης &apos;{0}&apos; είναι μάλλον άκυρος.</value>
+    <value>Ο κατάλογος ρύθμισης '{0}' είναι μάλλον άκυρος.</value>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Τα διαπιστευτήρια σύνδεσης για {0} είναι εσφαλμένη.</value>
@@ -205,7 +205,7 @@
     <value>Η ελάχιστη τιμή δεν μπορεί να είναι μεγαλύτερη από την μέγιστη τιμή.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Καμία ενέργεια δεν έχει καταχωρισθεί για &apos;{0}&apos;.</value>
+    <value>Καμία ενέργεια δεν έχει καταχωρισθεί για '{0}'.</value>
   </data>
   <data name="MissingStreamSeekSupport" xml:space="preserve">
     <value>Η ροή πρέπει να υποστηρίζει την αναζήτηση.</value>
@@ -250,7 +250,7 @@
     <value>Παρακαλούμε, εισάγετε login διαπιστευτήρια για {0}:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Υπήρξε ένα πρόβλημα φόρτωσης &apos;{0}&apos;.</value>
+    <value>Υπήρξε ένα πρόβλημα φόρτωσης '{0}'.</value>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>
@@ -295,7 +295,7 @@
     <value>Σφάλμα IO</value>
   </data>
   <data name="StateMustBeReady" xml:space="preserve">
-    <value>Το κράτος πρέπει να είναι &quot;έτοιμο&quot;.</value>
+    <value>Το κράτος πρέπει να είναι "έτοιμο".</value>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Έτοιμο</value>
@@ -313,7 +313,7 @@
     <value>Το πακέτο {0} εγκατάστασης δεν μπορεσε να ξεκινήσει. Παρακαλούμε εγκαταστήστε ξανά την εφαρμογή.</value>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Η διάταξη με το όνομα &quot;{0}&quot; δεν μπορεί να τοποθετηθει.</value>
+    <value>Η διάταξη με το όνομα "{0}" δεν μπορεί να τοποθετηθει.</value>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>

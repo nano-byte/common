@@ -166,13 +166,13 @@
     <value>{0} indirilemedi.</value>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>&apos;{0}&apos; geri alınamadı.</value>
+    <value>'{0}' geri alınamadı.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>&quot;{0}&quot; dosyası bulunamadı.</value>
+    <value>"{0}" dosyası bulunamadı.</value>
   </data>
   <data name="HideDetails" xml:space="preserve">
     <value>Ayrıntıları gizle</value>
@@ -181,7 +181,7 @@
     <value>İndirme için yalnız HTTP ve FTP ağ iletişim kuralları destekleniyor.</value>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Büyük olasılıkla &apos;{0}&apos; yapılandırma dizini geçersiz.</value>
+    <value>Büyük olasılıkla '{0}' yapılandırma dizini geçersiz.</value>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
@@ -205,7 +205,7 @@
     <value>En küçük değer en büyük değerden büyük olamaz.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>&apos;{0}&apos; için bir işlem kaydedilmemiş.</value>
+    <value>'{0}' için bir işlem kaydedilmemiş.</value>
   </data>
   <data name="MissingStreamSeekSupport" xml:space="preserve">
     <value>Akış tarama özelliğini desteklemeli.</value>
@@ -250,7 +250,7 @@
     <value>Lütfen {0} için oturum açma kimlik bilgilerinizi yazın:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>&apos;{0}&apos; yüklenirken bir sorun çıktı.</value>
+    <value>'{0}' yüklenirken bir sorun çıktı.</value>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
@@ -295,7 +295,7 @@
     <value>Giriş çıkış hatası</value>
   </data>
   <data name="StateMustBeReady" xml:space="preserve">
-    <value>Durum &quot;Hazır&quot; olmalı.</value>
+    <value>Durum "Hazır" olmalı.</value>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Hazır</value>
@@ -313,7 +313,7 @@
     <value>Bağlantılı {0} yüklemesi başlatılamadı. Lütfen uygulamayı yeniden yükleyin.</value>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>&quot;{0}&quot; adındaki mekanizma bulunamadı.</value>
+    <value>"{0}" adındaki mekanizma bulunamadı.</value>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Bu geri alma komutu yürürlükteki komutun işlenmesi bitene kadar yürütülemez.</value>
