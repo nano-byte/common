@@ -149,6 +149,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="baseValues">An array to query for values to fill the blanks left between subsets.</param>
         /// <returns>An array containing the copyed data. Size will be trimmed if <paramref name="baseValues"/> is too small.</returns>
+        [Pure, NotNull]
         public T[,] GetArray([NotNull] Grid<T> baseValues)
         {
             #region Sanity checks

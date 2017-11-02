@@ -43,6 +43,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
+        [Pure]
         public static int GetDword([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, int defaultValue = 0)
         {
             #region Sanity checks
@@ -98,7 +99,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-        [ContractAnnotation("defaultValue:notnull => notnull")]
+        [Pure, ContractAnnotation("defaultValue:notnull => notnull")]
         public static string GetString([NotNull, Localizable(false)] string keyName, [CanBeNull, Localizable(false)] string valueName, [CanBeNull, Localizable(false)] string defaultValue = null)
         {
             #region Sanity checks
@@ -159,7 +160,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-        [ContractAnnotation("defaultValue:notnull => notnull")]
+        [Pure, ContractAnnotation("defaultValue:notnull => notnull")]
         public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, [CanBeNull, Localizable(false)] string defaultValue = null)
         {
             #region Sanity checks
@@ -179,7 +180,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="WindowsUtils.Is64BitProcess"/>); <c>false</c> to read from HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-        [CanBeNull]
+        [Pure, CanBeNull]
         public static string GetSoftwareString([NotNull, Localizable(false)] string subkeyName, [CanBeNull, Localizable(false)] string valueName, bool machineWide)
         {
             #region Sanity checks
@@ -254,7 +255,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
         /// <returns>A list of value names; an empty array if the key does not exist.</returns>
         /// <exception cref="IOException">Registry access failed.</exception>
-        [NotNull, ItemNotNull]
+        [Pure, NotNull, ItemNotNull]
         public static string[] GetValueNames([NotNull, Localizable(false)] this RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks
@@ -283,7 +284,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
         /// <returns>A list of key names; an empty array if the key does not exist.</returns>
         /// <exception cref="IOException">Registry access failed.</exception>
-        [NotNull, ItemNotNull]
+        [Pure, NotNull, ItemNotNull]
         public static string[] GetSubKeyNames([NotNull, Localizable(false)] RegistryKey key, [NotNull, Localizable(false)] string subkeyName)
         {
             #region Sanity checks

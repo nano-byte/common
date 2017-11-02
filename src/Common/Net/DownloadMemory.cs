@@ -50,7 +50,7 @@ namespace NanoByte.Common.Net
         /// Returns the downloaded data.
         /// </summary>
         /// <exception cref="InvalidOperationException">The download is not finished yet.</exception>
-        [NotNull]
+        [Pure, NotNull]
         public byte[] GetData()
         {
             if (_targetStream == null) throw new InvalidOperationException();

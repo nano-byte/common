@@ -22,6 +22,7 @@
 
 using System;
 using System.Threading;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -46,6 +47,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Waits for the result and returns it when it is ready.
         /// </summary>
+        [Pure]
         public T Get()
         {
             _waitHandle.WaitOne();
