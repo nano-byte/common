@@ -148,6 +148,16 @@ namespace NanoByte.Common.Native
         public static bool IsWindows8 => IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 2);
 
         /// <summary>
+        /// <c>true</c> if the current operating system is Windows 10 or newer; <c>false</c> otherwise.
+        /// </summary>
+        public static bool IsWindows10 => IsWindowsNT && Environment.OSVersion.Version >= new Version(10, 0);
+
+        /// <summary>
+        /// <c>true</c> if the current operating system is Windows 10 Anniversary Update (Redstone 1) or newer; <c>false</c> otherwise.
+        /// </summary>
+        public static bool IsWindows10Redstone => IsWindowsNT && Environment.OSVersion.Version >= new Version(10, 0, 14393);
+
+        /// <summary>
         /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitOperatingSystem =>
