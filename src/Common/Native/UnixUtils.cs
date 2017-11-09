@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2015 Bastian Eicher
+ * Copyright 2006-2017 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,18 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Cli;
+using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Native
 {
@@ -36,10 +41,46 @@ namespace NanoByte.Common.Native
     /// </summary>
     /// <remarks>
     /// This class has a dependency on <c>Mono.Posix</c>.
-    /// Make sure to check <see cref="IsUnix"/> before calling any other methods in this class to avoid missing assembly exceptions.
+    /// Make sure to check <see cref="IsUnix"/> before calling any methods in this class except <see cref="ExpandVariables(string,IDictionary{string,string})"/> or <see cref="ExpandVariables(string,StringDictionary)"/> to avoid missing assembly exceptions.
     /// </remarks>
     public static class UnixUtils
     {
+        #region Environment
+        private static readonly Regex _varStyle1 = new Regex(@"\${([^}]+)}"), _varStyle2 = new Regex(@"\$([^\$\s\\/-]+)");
+
+        /// <summary>
+        /// Expands/substitutes any Unix-style environment variables in the string.
+        /// </summary>
+        /// <param name="value">The string containing variables to be expanded.</param>
+        /// <param name="variables">The list of variables available for expansion.</param>
+        [NotNull]
+        public static string ExpandVariables([NotNull] string value, [NotNull] IDictionary<string, string> variables)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (variables == null) throw new ArgumentNullException(nameof(variables));
+            if (WindowsUtils.IsWindows)
+            {
+                // Environment variables are case-insensitive on Windows
+                variables = variables.ToDictionary(x => x.Key.ToUpperInvariant(), x => x.Value);
+                return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? "");
+            }
+            else return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value) ?? "");
+        }
+
+        /// <summary>
+        /// Expands/substitutes any Unix-style environment variables in the string.
+        /// </summary>
+        /// <param name="value">The string containing variables to be expanded.</param>
+        /// <param name="variables">The list of variables available for expansion.</param>
+        [NotNull]
+        public static string ExpandVariables([NotNull] string value, [NotNull] StringDictionary variables)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (variables == null) throw new ArgumentNullException(nameof(variables));
+            return _varStyle2.Replace(_varStyle1.Replace(value, x => variables[x.Groups[1].Value]), x => variables[x.Groups[1].Value]);
+        }
+        #endregion
+
         #region OS
         /// <summary>
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).

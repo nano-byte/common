@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -31,9 +30,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
-using System.Text.RegularExpressions;
 using JetBrains.Annotations;
-using NanoByte.Common.Collections;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -106,40 +103,6 @@ namespace NanoByte.Common.Storage
 
             var relativeUri = new Uri(basePath).MakeRelativeUri(new Uri(targetPath));
             return Uri.UnescapeDataString(relativeUri.ToString()).TrimEnd('/');
-        }
-
-        private static readonly Regex _varStyle1 = new Regex(@"\${([^}]+)}"), _varStyle2 = new Regex(@"\$([^\$\s\\/-]+)");
-
-        /// <summary>
-        /// Expands/substitutes any Unix-style environment variables in the string.
-        /// </summary>
-        /// <param name="value">The string containing variables to be expanded.</param>
-        /// <param name="variables">The list of variables available for expansion.</param>
-        [NotNull]
-        public static string ExpandUnixVariables([NotNull] string value, [NotNull] IDictionary<string, string> variables)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (variables == null) throw new ArgumentNullException(nameof(variables));
-            if (WindowsUtils.IsWindows)
-            {
-                // Environment variables are case-insensitive on Windows
-                variables = variables.ToDictionary(x => x.Key.ToUpperInvariant(), x => x.Value);
-                return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? "");
-            }
-            else return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value) ?? "");
-        }
-
-        /// <summary>
-        /// Expands/substitutes any Unix-style environment variables in the string.
-        /// </summary>
-        /// <param name="value">The string containing variables to be expanded.</param>
-        /// <param name="variables">The list of variables available for expansion.</param>
-        [NotNull]
-        public static string ExpandUnixVariables([NotNull] string value, [NotNull] StringDictionary variables)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (variables == null) throw new ArgumentNullException(nameof(variables));
-            return _varStyle2.Replace(_varStyle1.Replace(value, x => variables[x.Groups[1].Value]), x => variables[x.Groups[1].Value]);
         }
         #endregion
 
