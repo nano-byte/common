@@ -32,6 +32,7 @@ using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Cli;
 using NanoByte.Common.Collections;
+using System.Linq;
 
 namespace NanoByte.Common.Native
 {
@@ -45,7 +46,9 @@ namespace NanoByte.Common.Native
     public static class UnixUtils
     {
         #region Environment
-        private static readonly Regex _varStyle1 = new Regex(@"\${([^}]+)}"), _varStyle2 = new Regex(@"\$([^\$\s\\/-]+)");
+        private static readonly Regex
+            _envVariableLongStyle = new Regex(@"\${([^}]+)}"),
+            _envVariableShortStyle = new Regex(@"\$([^\$\s\\/-]+)");
 
         /// <summary>
         /// Expands/substitutes any Unix-style environment variables in the string.
@@ -58,7 +61,31 @@ namespace NanoByte.Common.Native
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (variables == null) throw new ArgumentNullException(nameof(variables));
 
-            return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value) ?? "");
+            string intermediate = _envVariableLongStyle.Replace(value, x =>
+            {
+                var parts = x.Groups[1].Value.Split(new[] {":-"}, StringSplitOptions.None);
+                if (variables.TryGetValue(parts[0], out string ret))
+                    return ret;
+                else if (parts.Length > 1)
+                    return StringUtils.Join(":-", parts.Skip(1));
+                else
+                {
+                    Log.Warn($"Variable '{parts[0]}' not set. Defaulting to empty string.");
+                    return "";
+                }
+            });
+
+            return _envVariableShortStyle.Replace(intermediate, x =>
+            {
+                string key = x.Groups[1].Value;
+                if (variables.TryGetValue(key, out string ret))
+                    return ret;
+                else
+                {
+                    Log.Warn($"Variable '{key}' not set. Defaulting to empty string.");
+                    return "";
+                }
+            });
         }
 
         /// <summary>

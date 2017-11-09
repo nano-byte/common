@@ -38,7 +38,7 @@ namespace NanoByte.Common.Native
             // Environment variables are case-insensitive on some OSes
             var variables = new Dictionary<string, string> {{"KEY1", "value1"}, {"KEY2", "value2"}, {"LONG KEY", "long value"}};
 
-            UnixUtils.ExpandVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables).Should().Be("value1value2/value1 value2 long value ");
+            UnixUtils.ExpandVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $UNSET ${UNSET:-default}", variables).Should().Be("value1value2/value1 value2 long value  default");
             UnixUtils.ExpandVariables("$KEY1-bla", variables).Should().Be("value1-bla");
             UnixUtils.ExpandVariables("$key1", variables).Should().Be("");
             UnixUtils.ExpandVariables("{bla-$KEY1-bla}", variables).Should().Be("{bla-value1-bla}");
@@ -55,7 +55,7 @@ namespace NanoByte.Common.Native
                 {"key1", "value1"}, {"key2", "value2"}, {"long key", "long value"}
             };
 
-            UnixUtils.ExpandVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $NOKEY", variables).Should().Be("value1value2/value1 value2 long value ");
+            UnixUtils.ExpandVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $UNSET ${UNSET:-default}", variables).Should().Be("value1value2/value1 value2 long value  default");
             UnixUtils.ExpandVariables("$KEY1-bla", variables).Should().Be("value1-bla");
             UnixUtils.ExpandVariables("", variables).Should().Be("");
         }
