@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
@@ -58,13 +57,8 @@ namespace NanoByte.Common.Native
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (variables == null) throw new ArgumentNullException(nameof(variables));
-            if (WindowsUtils.IsWindows)
-            {
-                // Environment variables are case-insensitive on Windows
-                variables = variables.ToDictionary(x => x.Key.ToUpperInvariant(), x => x.Value);
-                return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value.ToUpperInvariant()) ?? "");
-            }
-            else return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value) ?? "");
+
+            return _varStyle2.Replace(_varStyle1.Replace(value, x => variables.GetOrDefault(x.Groups[1].Value) ?? ""), x => variables.GetOrDefault(x.Groups[1].Value) ?? "");
         }
 
         /// <summary>
@@ -77,7 +71,12 @@ namespace NanoByte.Common.Native
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (variables == null) throw new ArgumentNullException(nameof(variables));
-            return _varStyle2.Replace(_varStyle1.Replace(value, x => variables[x.Groups[1].Value]), x => variables[x.Groups[1].Value]);
+
+            var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string key in variables.Keys)
+                dictionary[key] = variables[key];
+
+            return ExpandVariables(value, dictionary);
         }
         #endregion
 
