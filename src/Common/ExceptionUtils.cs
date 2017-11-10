@@ -24,11 +24,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
-using System.Security;
 using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
+
+#if !NETSTANDARD2_0
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security;
+#endif
 
 #if NET45 || NETSTANDARD2_0
 using System.Threading.Tasks;
@@ -67,6 +71,7 @@ namespace NanoByte.Common
             if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
+#if !NETSTANDARD2_0
             var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
             var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
             exception.GetObjectData(serializationInfo, streamingContext);
@@ -82,6 +87,9 @@ namespace NanoByte.Common
             {}
             catch (SerializationException)
             {}
+            catch (TargetInvocationException)
+            {}
+#endif
 
             return exception;
         }

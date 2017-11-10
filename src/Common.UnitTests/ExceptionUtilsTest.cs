@@ -23,13 +23,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
 #if !NETCOREAPP2_0
-using System.Runtime.CompilerServices;
 using NanoByte.Common.Native;
 #endif
 
@@ -40,12 +40,9 @@ namespace NanoByte.Common
     /// </summary>
     public class ExceptionUtilsTest
     {
-#if !NETCOREAPP2_0
-        [SkippableFact]
+        [Fact]
         public void TestPreserveStack()
         {
-            Skip.IfNot(WindowsUtils.IsWindows, reason: "Preserving exception stack traces of rethrown exceptions uses .NET Remoting functionality not available on some Mono versions.");
-
             Exception caught = null;
             try
             {
@@ -56,17 +53,19 @@ namespace NanoByte.Common
                 caught = ex;
             }
 
-            caught.Invoking(x => throw x.PreserveStack())
-                .ShouldThrow<InvalidOperationException>()
-                .Where(x => x.StackTrace.Contains("ThrowMockException"));
+            var exceptionAssertion = caught.Invoking(x => throw x.PreserveStack())
+                .ShouldThrow<InvalidOperationException>();
+            exceptionAssertion.WithMessage("Test exception");
+
+            // Preserving the stack trace is only possible on .NET Framework on Windows
+#if !NETCOREAPP2_0
+            if (WindowsUtils.IsWindows)
+                exceptionAssertion.Where(x => x.StackTrace.Contains("ThrowMockException"));
+#endif
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void ThrowMockException()
-        {
-            throw new InvalidOperationException("Test exception");
-        }
-#endif
+        private static void ThrowMockException() => throw new InvalidOperationException("Test exception");
 
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.ApplyWithRollback{T}"/> correctly performs rollbacks on exceptions.
