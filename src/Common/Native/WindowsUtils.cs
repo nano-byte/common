@@ -642,7 +642,6 @@ namespace NanoByte.Common.Native
         /// Registers the current application for automatic restart after updates or crashes.
         /// </summary>
         /// <param name="arguments">The command-line arguments to pass to the application on restart. Must not be empty!</param>
-        /// <exception cref="ArgumentException"><paramref name="arguments"/> is too long.</exception>
         public static void RegisterApplicationRestart([NotNull] string arguments)
         {
             #region Sanity checks
@@ -652,7 +651,7 @@ namespace NanoByte.Common.Native
             if (!IsWindowsVista) return;
 
             int ret = NativeMethods.RegisterApplicationRestart(arguments, NativeMethods.RestartFlags.NONE);
-            if (ret != 0) throw new ArgumentException("arguments are too long", nameof(arguments));
+            if (ret != 0) Log.Warn("Failed to register application for restart with arguments: " + arguments);
         }
 
         /// <summary>
