@@ -55,6 +55,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="value">The string containing variables to be expanded.</param>
         /// <param name="variables">The list of variables available for expansion.</param>
+        /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
         [NotNull]
         public static string ExpandVariables([NotNull] string value, [NotNull] IDictionary<string, string> variables)
         {
@@ -64,14 +65,22 @@ namespace NanoByte.Common.Native
             string intermediate = _envVariableLongStyle.Replace(value, x =>
             {
                 var parts = x.Groups[1].Value.Split(new[] {":-"}, StringSplitOptions.None);
-                if (variables.TryGetValue(parts[0], out string ret))
+                if (variables.TryGetValue(parts[0], out string ret) && !string.IsNullOrEmpty(ret))
                     return ret;
                 else if (parts.Length > 1)
                     return StringUtils.Join(":-", parts.Skip(1));
                 else
                 {
-                    Log.Warn($"Variable '{parts[0]}' not set. Defaulting to empty string.");
-                    return "";
+                    parts = x.Groups[1].Value.Split('-');
+                    if (variables.TryGetValue(parts[0], out ret))
+                        return ret;
+                    else if (parts.Length > 1)
+                        return StringUtils.Join("-", parts.Skip(1));
+                    else
+                    {
+                        Log.Warn($"Variable '{parts[0]}' not set. Defaulting to empty string.");
+                        return "";
+                    }
                 }
             });
 
@@ -93,6 +102,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="value">The string containing variables to be expanded.</param>
         /// <param name="variables">The list of variables available for expansion.</param>
+        /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
         [NotNull]
         public static string ExpandVariables([NotNull] string value, [NotNull] StringDictionary variables)
         {
