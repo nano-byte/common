@@ -60,7 +60,7 @@ API documentation: http://nano-byte.de/common/api/
 
   <ItemGroup>
     <PackageReference Include="SlimDX" Version="4.0.13.44" />
-    <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="0.86.5" />
+    <PackageReference Include="ICSharpCode.SharpZipLib.Patched" Version="0.86.5.1" />
   </ItemGroup>
 
   <ItemGroup>
