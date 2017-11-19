@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2006-2015 Bastian Eicher
+ * Copyright 2006-2017 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,12 @@
  */
 
 using System;
-using System.Collections.Generic;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Ignores progress reports.
+    /// Executes tasks silently and suppresses any questions.
     /// </summary>
     public class SilentTaskHandler : TaskHandlerBase
     {
@@ -52,34 +51,21 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Always returns <see cref="Tasks.Verbosity.Batch"/>.
         /// </summary>
-        public override Verbosity Verbosity { get { return Verbosity.Batch; } set {} }
+        public override Verbosity Verbosity { get => Verbosity.Batch; set {} }
 
         /// <summary>
         /// Always returns <c>false</c>.
         /// </summary>
         protected override bool Ask(string question, MsgSeverity severity)
         {
-            Log.Debug("Question: " + question);
-            Log.Debug("Silent answer: No");
+            Log.Debug($"Question: {question}\nAutomatic answer: No");
             return false;
         }
 
         /// <inheritdoc/>
-        public override void Output(string title, string message)
-        {
-            // No UI, so nothing to do
-        }
+        public override void Output(string title, string message) => Log.Info($"{title}\n{message}");
 
         /// <inheritdoc/>
-        public override void Output<T>(string title, IEnumerable<T> data)
-        {
-            // No UI, so nothing to do
-        }
-
-        /// <inheritdoc/>
-        public override void Error(Exception exception)
-        {
-            // No UI, so nothing to do
-        }
+        public override void Error(Exception exception) => Log.Error(exception);
     }
 }

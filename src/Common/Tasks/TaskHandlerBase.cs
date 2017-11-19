@@ -89,14 +89,7 @@ namespace NanoByte.Common.Tasks
         public abstract void RunTask(ITask task);
 
         /// <inheritdoc/>
-        public bool Ask(string question)
-        {
-            #region Sanity checks
-            if (question == null) throw new ArgumentNullException(nameof(question));
-            #endregion
-
-            return Ask(question, MsgSeverity.Warn);
-        }
+        public bool Ask(string question) => Ask(question ?? throw new ArgumentNullException(nameof(question)), MsgSeverity.Warn);
 
         /// <inheritdoc/>
         public bool Ask(string question, bool defaultAnswer, string alternateMessage = null)

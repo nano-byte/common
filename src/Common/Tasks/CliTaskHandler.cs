@@ -29,7 +29,7 @@ using NanoByte.Common.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses the stderr stream to inform the user about the progress of tasks.
+    /// Uses the console (stderr stream) to inform the user about the progress of tasks and ask questions.
     /// </summary>
     public class CliTaskHandler : TaskHandlerBase
     {
@@ -123,7 +123,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override bool Ask(string question, MsgSeverity severity)
         {
-            Log.Debug("Question: " + question);
+            Log.Debug($"Question: {question}");
             Console.Error.WriteLine(question);
 
             // Loop until the user has made a valid choice
@@ -156,9 +156,6 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override void Error(Exception exception)
-        {
-            Log.Error(exception);
-        }
+        public override void Error(Exception exception) => Log.Error(exception);
     }
 }
