@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
@@ -40,22 +41,14 @@ namespace NanoByte.Common
         [Fact]
         public void TestHandler()
         {
-            LogSeverity reportedSeverity = (LogSeverity)(-1);
-            string reportedMessage = null;
-
-            void Handler(LogSeverity severity, string message)
-            {
-                reportedSeverity = severity;
-                reportedMessage = message;
-            }
+            var events = new List<(LogSeverity, string)>();
+            void Handler(LogSeverity severity, string message) => events.Add((severity, message));
 
             Log.Handler += Handler;
             try
             {
                 Log.Info("Log Unit Test Token");
-
-                reportedSeverity.Should().Be(LogSeverity.Info);
-                reportedMessage.Should().Be("Log Unit Test Token");
+                events.Should().Contain((LogSeverity.Info, "Log Unit Test Token"));
             }
             finally
             {
