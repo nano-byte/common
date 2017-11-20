@@ -63,7 +63,7 @@ API documentation: http://nano-byte.de/common/api/
     <PackageReference Include="System.IO.FileSystem.AccessControl" Version="4.4.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
-    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0-beta1" />
+    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0-beta3" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
