@@ -133,5 +133,24 @@ namespace NanoByte.Common.Collections
             new[] {"X", "Y", "Z"}.GetUnsequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
             new[] {"A", "B"}.GetUnsequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
         }
+
+        [Fact]
+        public void TestPermutate()
+        {
+            var permutations = new[] { 1, 2, 3 }.Permutate().ToList();
+            permutations[0].Should().Equal(1, 2, 3);
+            permutations[1].Should().Equal(1, 3, 2);
+            permutations[2].Should().Equal(2, 1, 3);
+            permutations[3].Should().Equal(2, 3, 1);
+            permutations[4].Should().Equal(3, 2, 1);
+            permutations[5].Should().Equal(3, 1, 2);
+        }
+
+        [Fact]
+        public void TestPermutateEmpty()
+        {
+            var permutations = new int[0].Permutate().ToList();
+            permutations[0].Should().BeEmpty();
+        }
     }
 }

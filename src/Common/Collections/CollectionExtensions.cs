@@ -300,5 +300,37 @@ namespace NanoByte.Common.Collections
                 return result;
             }
         }
+
+        /// <summary>
+        /// Generates all possible permutations of a set of <paramref name="elements"/>.
+        /// </summary>
+        [Pure, NotNull, ItemNotNull]
+        public static IEnumerable<T[]> Permutate<T>([NotNull] this IEnumerable<T> elements)
+        {
+            #region Sanity checks
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            #endregion
+
+            IEnumerable<T[]> Helper(T[] array, int index)
+            {
+                if (index >= array.Length - 1)
+                    yield return array;
+                else
+                {
+                    for (int i = index; i < array.Length; i++)
+                    {
+                        var subArray = array.ToArray();
+                        var t1 = subArray[index];
+                        subArray[index] = subArray[i];
+                        subArray[i] = t1;
+
+                        foreach (var element in Helper(subArray, index + 1))
+                            yield return element;
+                    }
+                }
+            }
+
+            return Helper(elements.ToArray(), index: 0);
+        }
     }
 }
