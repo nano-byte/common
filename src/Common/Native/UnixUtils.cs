@@ -21,18 +21,17 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Cli;
-using NanoByte.Common.Collections;
-using System.Linq;
+
+#if NETSTANDARD2_0
+using System.Runtime.InteropServices;
+#endif
 
 namespace NanoByte.Common.Native
 {
@@ -41,92 +40,30 @@ namespace NanoByte.Common.Native
     /// </summary>
     /// <remarks>
     /// This class has a dependency on <c>Mono.Posix</c>.
-    /// Make sure to check <see cref="IsUnix"/> before calling any methods in this class except <see cref="ExpandVariables(string,IDictionary{string,string})"/> or <see cref="ExpandVariables(string,StringDictionary)"/> to avoid missing assembly exceptions.
+    /// Make sure to check <see cref="IsUnix"/> before calling any methods in this class to avoid exceptions.
     /// </remarks>
     public static class UnixUtils
     {
-        #region Environment
-        private static readonly Regex
-            _envVariableLongStyle = new Regex(@"\${([^}]+)}"),
-            _envVariableShortStyle = new Regex(@"\$([^\$\s\\/-]+)");
-
-        /// <summary>
-        /// Expands/substitutes any Unix-style environment variables in the string.
-        /// </summary>
-        /// <param name="value">The string containing variables to be expanded.</param>
-        /// <param name="variables">The list of variables available for expansion.</param>
-        /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
-        [NotNull]
-        public static string ExpandVariables([NotNull] string value, [NotNull] IDictionary<string, string> variables)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (variables == null) throw new ArgumentNullException(nameof(variables));
-
-            string intermediate = _envVariableLongStyle.Replace(value, x =>
-            {
-                var parts = x.Groups[1].Value.Split(new[] {":-"}, StringSplitOptions.None);
-                if (variables.TryGetValue(parts[0], out string ret) && !string.IsNullOrEmpty(ret))
-                    return ret;
-                else if (parts.Length > 1)
-                    return StringUtils.Join(":-", parts.Skip(1));
-                else
-                {
-                    parts = x.Groups[1].Value.Split('-');
-                    if (variables.TryGetValue(parts[0], out ret))
-                        return ret;
-                    else if (parts.Length > 1)
-                        return StringUtils.Join("-", parts.Skip(1));
-                    else
-                    {
-                        Log.Warn($"Variable '{parts[0]}' not set. Defaulting to empty string.");
-                        return "";
-                    }
-                }
-            });
-
-            return _envVariableShortStyle.Replace(intermediate, x =>
-            {
-                string key = x.Groups[1].Value;
-                if (variables.TryGetValue(key, out string ret))
-                    return ret;
-                else
-                {
-                    Log.Warn($"Variable '{key}' not set. Defaulting to empty string.");
-                    return "";
-                }
-            });
-        }
-
-        /// <summary>
-        /// Expands/substitutes any Unix-style environment variables in the string.
-        /// </summary>
-        /// <param name="value">The string containing variables to be expanded.</param>
-        /// <param name="variables">The list of variables available for expansion.</param>
-        /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
-        [NotNull]
-        public static string ExpandVariables([NotNull] string value, [NotNull] StringDictionary variables)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (variables == null) throw new ArgumentNullException(nameof(variables));
-
-            var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            foreach (string key in variables.Keys)
-                dictionary[key] = variables[key];
-
-            return ExpandVariables(value, dictionary);
-        }
-        #endregion
-
         #region OS
         /// <summary>
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
-        public static bool IsUnix => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128;
+        public static bool IsUnix
+#if NETSTANDARD2_0
+            => RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || IsMacOSX;
+#else
+            => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128;
+#endif
 
         /// <summary>
         /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
-        public static bool IsMacOSX => IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework");
+        public static bool IsMacOSX
+#if NETSTANDARD2_0
+            => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+#else
+            => IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework");
+#endif
 
         /// <summary>
         /// <c>true</c> if there is an X Server running or the current operating system is MacOS X.

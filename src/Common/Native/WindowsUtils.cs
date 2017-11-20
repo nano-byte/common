@@ -22,7 +22,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -120,12 +119,22 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is Windows (9x- or NT-based); <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindows => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;
+        public static bool IsWindows
+#if NETSTANDARD2_0
+            => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+#else
+            => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;
+#endif
 
         /// <summary>
         /// <c>true</c> if the current operating system is a modern Windows version (NT-based); <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindowsNT => Environment.OSVersion.Platform == PlatformID.Win32NT;
+        public static bool IsWindowsNT
+#if NETSTANDARD2_0
+            => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+#else
+            => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;
+#endif
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows XP or newer; <c>false</c> otherwise.
@@ -158,45 +167,9 @@ namespace NanoByte.Common.Native
         public static bool IsWindows10Redstone => IsWindowsNT && Environment.OSVersion.Version >= new Version(10, 0, 14393);
 
         /// <summary>
-        /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
-        /// </summary>
-        public static bool Is64BitOperatingSystem =>
-#if NET45 || NETSTANDARD2_0
-            Environment.Is64BitOperatingSystem;
-#else
-            Is64BitProcess || Is32BitProcessOn64BitOperatingSystem;
-#endif
-
-        /// <summary>
-        /// <c>true</c> if the current process is 64-bit; <c>false</c> otherwise.
-        /// </summary>
-        public static bool Is64BitProcess =>
-#if NET45 || NETSTANDARD2_0
-            Environment.Is64BitProcess;
-#else
-            IntPtr.Size == 8;
-#endif
-
-        /// <summary>
         /// <c>true</c> if the current operating system supports UAC and it is enabled; <c>false</c> otherwise.
         /// </summary>
         public static bool HasUac => IsWindowsVista && RegistryUtils.GetDword(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", defaultValue: 1) == 1;
-
-        /// <summary>
-        /// <c>true</c> if the current process is 32-bit but the operating system is 64-bit capable; <c>false</c> otherwise.
-        /// </summary>
-        /// <remarks>Can only detect WOW on Windows XP and newer</remarks>
-        public static bool Is32BitProcessOn64BitOperatingSystem
-        {
-            get
-            {
-                // Can only detect WOW on Windows XP or newer
-                if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version < new Version(5, 1)) return false;
-
-                SafeNativeMethods.IsWow64Process(Process.GetCurrentProcess().Handle, out bool retVal);
-                return retVal;
-            }
-        }
 
         /// <summary>
         /// Indicates whether the current user is an administrator. Always returns <c>true</c> on non-Windows NT systems.
@@ -270,7 +243,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns>The path to the .NET Framework root directory.</returns>
-        /// <remarks>Returns 64-bit directories if <see cref="Is64BitProcess"/> is <c>true</c>.</remarks>
+        /// <remarks>Returns 64-bit directories if <see cref="OSUtils.Is64BitProcess"/> is <c>true</c>.</remarks>
         [NotNull]
         public static string GetNetFxDirectory([NotNull] string version)
         {
@@ -281,7 +254,7 @@ namespace NanoByte.Common.Native
             return FileUtils.PathCombine(
                 Environment.GetEnvironmentVariable("windir") ?? @"C:\Windows",
                 "Microsoft.NET",
-                Is64BitProcess ? "Framework64" : "Framework",
+                OSUtils.Is64BitProcess ? "Framework64" : "Framework",
                 version);
         }
         #endregion

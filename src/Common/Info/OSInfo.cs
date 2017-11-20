@@ -25,6 +25,10 @@ using System.ComponentModel;
 using System.Xml.Serialization;
 using NanoByte.Common.Native;
 
+#if NETSTANDARD2_0
+using System.Runtime.InteropServices;
+#endif
+
 namespace NanoByte.Common.Info
 {
     /// <summary>
@@ -71,17 +75,19 @@ namespace NanoByte.Common.Info
         /// </summary>
         public static OSInfo Current { get; } = Load();
 
-        private static OSInfo Load()
+        private static OSInfo Load() => new OSInfo
         {
-            return new OSInfo
-            {
-                Platform = Environment.OSVersion.Platform.ToString(),
-                Is64Bit = WindowsUtils.Is64BitOperatingSystem,
-                Version = Environment.OSVersion.Version.ToString(),
-                ServicePack = Environment.OSVersion.ServicePack,
-                FrameworkVersion = Environment.Version.ToString()
-            };
-        }
+#if NETSTANDARD2_0
+            FrameworkVersion = RuntimeInformation.FrameworkDescription,
+            Platform = RuntimeInformation.OSDescription,
+#else
+            FrameworkVersion = Environment.Version.ToString(),
+            Platform = Environment.OSVersion.Platform.ToString(),
+#endif
+            Is64Bit = OSUtils.Is64BitOperatingSystem,
+            Version = Environment.OSVersion.Version.ToString(),
+            ServicePack = Environment.OSVersion.ServicePack
+        };
         #endregion
     }
 }
