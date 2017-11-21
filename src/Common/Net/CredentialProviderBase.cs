@@ -17,10 +17,7 @@ namespace NanoByte.Common.Net
         /// Creates a new credential provider.
         /// </summary>
         /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
-        protected CredentialProviderBase(bool interactive)
-        {
-            Interactive = interactive;
-        }
+        protected CredentialProviderBase(bool interactive) => Interactive = interactive;
 
         /// <inheritdoc/>
         [CanBeNull]

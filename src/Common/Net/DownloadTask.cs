@@ -74,11 +74,7 @@ namespace NanoByte.Common.Net
         /// <param name="bytesTotal">The number of bytes the file to be downloaded is long. The file will be rejected if it does not have this length. -1 if the size is unknown.</param>
         protected DownloadTask(Uri source, long bytesTotal = -1)
         {
-            #region Sanity checks
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            #endregion
-
-            Source = source;
+            Source = source ?? throw new ArgumentNullException(nameof(source));
             UnitsTotal = bytesTotal;
         }
 
