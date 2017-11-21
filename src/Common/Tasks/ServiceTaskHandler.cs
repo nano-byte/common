@@ -22,20 +22,29 @@
  */
 
 using System;
+using System.Net;
+using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Redirects output to an <see cref="ILogger{TCategoryName}" /> instance and suppresses any questions.
+    /// Uses <see cref="ILogger{TCategoryName}"/> for output and <see cref="IConfigurationRoot"/> for credentials and suppresses any questions. Use this for non-interactive services.
     /// </summary>
+    /// <remarks>Credentials must be stored in a configuration section named <c>Credentials</c>. Each URI must be a subsection with <c>User</c> and <c>Password</c> values.</remarks>
     [CLSCompliant(false)]
-    public class LoggingTaskHandler : TaskHandlerBase
+    public class ServiceTaskHandler : TaskHandlerBase
     {
-        private readonly ILogger<LoggingTaskHandler> _logger;
+        private readonly ILogger<ServiceTaskHandler> _logger;
+        private readonly IConfiguration _configuration;
 
-        public LoggingTaskHandler(ILogger<LoggingTaskHandler> logger) => _logger = logger;
+        public ServiceTaskHandler([NotNull] ILogger<ServiceTaskHandler> logger, [NotNull] IConfigurationRoot configuration)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
 
         /// <inheritdoc/>
         protected override void LogHandler(LogSeverity severity, string message)
@@ -58,7 +67,12 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider() => null;
+        protected override ICredentialProvider BuildCredentialProvider()
+            => new ExternalCredentialProvider(uri =>
+            {
+                var cred = _configuration.GetSection("Credentials").GetSection(uri.ToString());
+                return new NetworkCredential(cred["User"], cred["Password"]);
+            });
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)
@@ -68,7 +82,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             _logger.LogDebug("Task: " + task.Name);
-            task.Run(CancellationToken);
+            task.Run(CancellationToken, CredentialProvider);
         }
 
         /// <summary>
