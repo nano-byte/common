@@ -67,7 +67,7 @@ namespace NanoByte.Common.Tasks
                     {
                         if (_credentialProvider == null)
                         {
-                            var provider = BuildCrendentialProvider();
+                            var provider = BuildCredentialProvider();
                             if (provider != null) _credentialProvider = new CachedCredentialProvider(provider);
                         }
                     }
@@ -80,7 +80,7 @@ namespace NanoByte.Common.Tasks
         /// Template method for building an <see cref="ICredentialProvider"/>. Called on first use of <see cref="CredentialProvider"/>.
         /// </summary>
         [CanBeNull]
-        protected abstract ICredentialProvider BuildCrendentialProvider();
+        protected abstract ICredentialProvider BuildCredentialProvider();
 
         /// <inheritdoc/>
         public virtual Verbosity Verbosity { get; set; }

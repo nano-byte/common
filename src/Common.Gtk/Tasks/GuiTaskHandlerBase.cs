@@ -16,7 +16,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider()
+        protected override ICredentialProvider BuildCredentialProvider()
         {
             // TODO: Implement
             return null;

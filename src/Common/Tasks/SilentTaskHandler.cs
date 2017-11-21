@@ -35,7 +35,7 @@ namespace NanoByte.Common.Tasks
         {}
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider() => null;
+        protected override ICredentialProvider BuildCredentialProvider() => null;
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)

@@ -96,7 +96,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCrendentialProvider()
+        protected override ICredentialProvider BuildCredentialProvider()
         {
             if (WindowsUtils.IsWindowsNT) return new WindowsCliCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
             else return new CliCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
