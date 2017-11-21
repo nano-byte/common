@@ -81,11 +81,57 @@ namespace NanoByte.Common.Net
         /// <inheritdoc/>
         protected override void Execute()
         {
-            Retry:
+            // Try once without credentials, then retry with if required
+            bool useCredentials = false;
+            while (true)
+            {
+                var request = BuildRequest(useCredentials);
+
+                try
+                {
+                    Download(request);
+                    return;
+                }
+                catch (WebException ex)
+                {
+                    switch (ex.Status)
+                    {
+                        case WebExceptionStatus.RequestCanceled:
+                            throw new OperationCanceledException();
+
+                        case WebExceptionStatus.ProtocolError:
+                            if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
+                            {
+                                if (useCredentials) CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
+
+                                // Retry (but only once when non-interactive)
+                                if (CredentialProvider.Interactive || !useCredentials)
+                                {
+                                    useCredentials = true;
+                                    continue;
+                                }
+                            }
+                            break;
+                    }
+
+                    // Wrap exception to add context
+                    throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
+                }
+            }
+        }
+
+        private WebRequest BuildRequest(bool useCredentials)
+        {
             WebRequest request;
             try
             {
                 request = WebRequest.Create(Source);
+                if (request is HttpWebRequest httpRequest)
+                {
+                    httpRequest.UserAgent = AppInfo.Current.NameVersion;
+                    if (useCredentials) httpRequest.Credentials = CredentialProvider;
+                    if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
+                }
             }
                 #region Error handling
             catch (NotSupportedException ex)
@@ -95,77 +141,32 @@ namespace NanoByte.Common.Net
             }
             #endregion
 
-            if (request is HttpWebRequest httpRequest)
-            {
-                httpRequest.Credentials = CredentialProvider;
-                httpRequest.UserAgent = AppInfo.Current.NameVersion;
-                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
-            }
-
-            // Start HTTP request
-            State = TaskState.Header;
-            // ReSharper disable AssignNullToNotNullAttribute
-            var responseRequest = request.BeginGetResponse(null, null);
-            // ReSharper restore AssignNullToNotNullAttribute
-
-            // Wait for the download request to complete or a cancel request to arrive
-            if (WaitHandle.WaitAny(new[] {responseRequest.AsyncWaitHandle, CancellationToken.WaitHandle}) == 1)
-                throw new OperationCanceledException();
-
-            // Process the response
-            try
-            {
-                using (var response = request.EndGetResponse(responseRequest))
-                {
-                    CancellationToken.ThrowIfCancellationRequested();
-                    ReadHeader(response);
-                    State = TaskState.Data;
-
-                    if (response != null)
-                    {
-                        using (var sourceStream = response.GetResponseStream())
-                        using (var targetStream = CreateTargetStream())
-                        {
-                            Debug.Assert(sourceStream != null);
-                            sourceStream.CopyToEx(targetStream,
-                                bufferSize: 8 * 1024,
-                                cancellationToken: CancellationToken,
-                                progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
-                        }
-                    }
-                }
-            }
-                #region Error handling
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.RequestCanceled) throw new OperationCanceledException();
-                if (ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
-                    {
-                        CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
-                        if (CredentialProvider.Interactive) goto Retry;
-                    }
-                }
-
-                // Wrap exception to add context
-                throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
-            }
-            #endregion
+            return request;
         }
 
-        /// <summary>
-        /// Creates the <see cref="Stream"/> to write the downloaded data to.
-        /// </summary>
-        [NotNull]
-        protected abstract Stream CreateTargetStream();
-
-        /// <summary>
-        /// Reads the header information in the <paramref name="response"/> and stores it the object properties.
-        /// </summary>
-        /// <returns><c>true</c> if everything is ok; <c>false</c> if there was an error.</returns>
-        private void ReadHeader(WebResponse response)
+        private void Download(WebRequest request)
         {
+            State = TaskState.Header;
+            using (var response = GetResponse(request))
+            {
+                HandleHeaders(response);
+                State = TaskState.Data;
+                HandleData(response);
+            }
+        }
+
+        private WebResponse GetResponse(WebRequest request)
+        {
+            var responseHandler = request.BeginGetResponse(null, null);
+            if (WaitHandle.WaitAny(new[] {responseHandler.AsyncWaitHandle, CancellationToken.WaitHandle}) == 1) throw new OperationCanceledException();
+            var responsex = request.EndGetResponse(responseHandler);
+            return responsex;
+        }
+
+        private void HandleHeaders(WebResponse response)
+        {
+            CancellationToken.ThrowIfCancellationRequested();
+
             ResponseHeaders = response.Headers;
 
             // Update the source URL to reflect changes made by HTTP redirection
@@ -176,5 +177,24 @@ namespace NanoByte.Common.Net
             else if (UnitsTotal != response.ContentLength)
                 throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, UnitsTotal, response.ContentLength));
         }
+
+        private void HandleData(WebResponse response)
+        {
+            using (var sourceStream = response.GetResponseStream())
+            using (var targetStream = CreateTargetStream())
+            {
+                Debug.Assert(sourceStream != null);
+                sourceStream.CopyToEx(targetStream,
+                    bufferSize: 8 * 1024,
+                    cancellationToken: CancellationToken,
+                    progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
+            }
+        }
+
+        /// <summary>
+        /// Creates the <see cref="Stream"/> to write the downloaded data to.
+        /// </summary>
+        [NotNull]
+        protected abstract Stream CreateTargetStream();
     }
 }
