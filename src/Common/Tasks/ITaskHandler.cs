@@ -98,20 +98,20 @@ namespace NanoByte.Common.Tasks
         void Output([NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message);
 
         /// <summary>
-        /// Displays multi-line text to the user unless <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/>.
-        /// </summary>
-        /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
-        /// <param name="message">The string to display.</param>
-        /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-        void OutputLow([NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message);
-
-        /// <summary>
         /// Displays tabular data to the user.
         /// </summary>
         /// <param name="title">A title for the data. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output<T>([NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data);
+
+        /// <summary>
+        /// Displays multi-line text to the user unless <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/>.
+        /// </summary>
+        /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
+        /// <param name="message">The string to display.</param>
+        /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
+        void OutputLow([NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message);
 
         /// <summary>
         /// Displays tabular data to the user unless <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/>.

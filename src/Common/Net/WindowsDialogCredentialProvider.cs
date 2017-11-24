@@ -40,8 +40,6 @@ namespace NanoByte.Common.Net
 
         /// <inheritdoc/>
         protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
-        {
-            return WindowsCredentials.PromptDialog(target, flags);
-        }
+            => WindowsCredentials.PromptDialog(target, flags);
     }
 }

@@ -23,6 +23,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -34,15 +35,13 @@ namespace NanoByte.Common.Tasks
     public struct CancellationToken
     {
         [SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields", Justification = "Access to this field is remoted.")]
+        [CanBeNull]
         private readonly CancellationTokenSource _source;
 
         /// <summary>
         /// Creates a new token controlled by a specific <see cref="CancellationTokenSource"/>.
         /// </summary>
-        internal CancellationToken(CancellationTokenSource source)
-        {
-            _source = source;
-        }
+        internal CancellationToken([NotNull] CancellationTokenSource source) => _source = source;
 
         /// <summary>
         /// Registers a delegate that will be called when cancellation has been requested.
@@ -53,10 +52,7 @@ namespace NanoByte.Common.Tasks
         /// The callback is called from a background thread. Wrap via synchronization context to update UI elements.
         /// Handling this blocks the task, therefore observers should handle the event quickly.
         /// </remarks>
-        public CancellationTokenRegistration Register(Action callback)
-        {
-            return new CancellationTokenRegistration(_source, callback);
-        }
+        public CancellationTokenRegistration Register([NotNull] Action callback) => new CancellationTokenRegistration(_source, callback);
 
         /// <summary>
         /// Indicates whether cancellation has been requested.
@@ -67,6 +63,7 @@ namespace NanoByte.Common.Tasks
         /// Throws an <see cref="OperationCanceledException"/> if cancellation has been requested.
         /// </summary>
         /// <exception cref="OperationCanceledException">Cancellation has been requested.</exception>
+        [Pure]
         public void ThrowIfCancellationRequested()
         {
             if (IsCancellationRequested) throw new OperationCanceledException();
@@ -75,7 +72,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Gets a wait handle that is signaled when cancellation has been requested.
         /// </summary>
-        public WaitHandle WaitHandle => _source == null ? new ManualResetEvent(false) : _source.WaitHandle;
+        public WaitHandle WaitHandle => (_source == null) ? new ManualResetEvent(false) : _source.WaitHandle;
 
         /// <inheritdoc/>
         public override string ToString() => "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";

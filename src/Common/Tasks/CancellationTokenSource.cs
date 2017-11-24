@@ -100,9 +100,6 @@ namespace NanoByte.Common.Tasks
         public override string ToString() => "CancellationTokenSource {IsCancellationRequested=" + IsCancellationRequested + "}";
 
         /// <inheritdoc/>
-        public void Dispose()
-        {
-            _waitHandle.Close();
-        }
+        public void Dispose() => _waitHandle.Close();
     }
 }

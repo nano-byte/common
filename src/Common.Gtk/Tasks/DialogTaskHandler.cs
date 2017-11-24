@@ -38,10 +38,7 @@ namespace NanoByte.Common.Tasks
         /// Creates a new task handler.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler.</param>
-        public DialogTaskHandler([CanBeNull] Window owner = null)
-        {
-            _owner = owner;
-        }
+        public DialogTaskHandler([CanBeNull] Window owner = null) => _owner = owner;
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)

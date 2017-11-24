@@ -14,10 +14,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Starts handling log events.
         /// </summary>
-        protected TaskHandlerBase()
-        {
-            Log.Handler += LogHandler;
-        }
+        protected TaskHandlerBase() => Log.Handler += LogHandler;
 
         /// <summary>
         /// Reports <see cref="Log"/> messages to the user based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.

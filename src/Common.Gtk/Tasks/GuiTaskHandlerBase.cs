@@ -16,11 +16,8 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCredentialProvider()
-        {
-            // TODO: Implement
-            return null;
-        }
+        // TODO: Implement
+        public override ICredentialProvider CredentialProvider => null;
 
         /// <inheritdoc/>
         protected override bool Ask(string question, MsgSeverity severity)
