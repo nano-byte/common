@@ -105,9 +105,20 @@ namespace NanoByte.Common
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         [CanBeNull, PublicAPI]
-        public static event LogEntryEventHandler Handler { add { lock (_lock) _handlers.Add(value); } remove { lock (_lock) _handlers.Remove(value); } }
+        public static event LogEntryEventHandler Handler
+        {
+            add
+            {
+                lock (_lock)
+                {
+                    _sessionContent = new StringBuilder(); // Reset per session (indicated by new handler)
+                    _handlers.Add(value);
+                }
+            }
+            remove { lock (_lock) _handlers.Remove(value); }
+        }
 
-        private static readonly StringBuilder _sessionContent = new StringBuilder();
+        private static StringBuilder _sessionContent = new StringBuilder();
 
         /// <summary>
         /// Collects all log entries from this application session.
@@ -259,7 +270,9 @@ namespace NanoByte.Common
             lock (_lock)
             {
                 System.Diagnostics.Debug.Write(formattedMessage);
+
                 _sessionContent.AppendLine(formattedMessage);
+
                 try
                 {
                     _fileWriter?.WriteLine(formattedMessage);
@@ -272,6 +285,7 @@ namespace NanoByte.Common
                     Console.Error.WriteLine(ex);
                 }
                 #endregion
+
                 _handlers.Last()(severity, message);
             }
         }
