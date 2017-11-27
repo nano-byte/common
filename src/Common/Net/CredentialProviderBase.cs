@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using JetBrains.Annotations;
+using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
@@ -10,14 +11,16 @@ namespace NanoByte.Common.Net
     /// </summary>
     public abstract class CredentialProviderBase : MarshalNoTimeout, ICredentialProvider
     {
-        /// <inheritdoc/>
-        public bool Interactive { get; }
+        private readonly ITaskHandler _handler;
 
         /// <summary>
         /// Creates a new credential provider.
         /// </summary>
-        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
-        protected CredentialProviderBase(bool interactive) => Interactive = interactive;
+        /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
+        protected CredentialProviderBase([NotNull] ITaskHandler handler) => _handler = handler;
+
+        /// <inheritdoc/>
+        public bool Interactive => _handler.Verbosity > Verbosity.Batch;
 
         /// <inheritdoc/>
         [CanBeNull]

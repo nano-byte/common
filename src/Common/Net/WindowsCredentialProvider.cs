@@ -23,7 +23,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
+using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
@@ -32,11 +34,8 @@ namespace NanoByte.Common.Net
     /// </summary>
     public abstract class WindowsCredentialProvider : CredentialProviderBase
     {
-        /// <summary>
-        /// Creates a new Windows credential provider.
-        /// </summary>
-        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
-        protected WindowsCredentialProvider(bool interactive) : base(interactive)
+        /// <inheritdoc/>
+        protected WindowsCredentialProvider([NotNull] ITaskHandler handler) : base(handler)
         {}
 
         /// <inheritdoc/>

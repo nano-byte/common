@@ -22,32 +22,37 @@
  */
 
 using System;
-using System.Net;
 using JetBrains.Annotations;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses <see cref="ILogger{TCategoryName}"/> for output and <see cref="IConfigurationRoot"/> for credentials and suppresses any questions. Use this for non-interactive services.
+    /// Executes tasks silently and suppresses any questions.
+    /// Automatically uses <see cref="ILogger{TCategoryName}"/> and <see cref="ICredentialProvider"/> if available via <seealso cref="IServiceProvider"/>.
     /// </summary>
-    /// <remarks>Credentials must be stored in a configuration section named <c>Credentials</c>. Each URI must be a subsection with <c>User</c> and <c>Password</c> values.</remarks>
+    /// <seealso cref="ConfigurationCredentialProviderRegisration.ConfigureCredentials"/>
     [CLSCompliant(false)]
-    public class ServiceTaskHandler : TaskHandlerBase
+    public sealed class ServiceTaskHandler : SilentTaskHandler
     {
         private readonly ILogger<ServiceTaskHandler> _logger;
-        private readonly IConfiguration _configuration;
 
-        public ServiceTaskHandler([NotNull] ILogger<ServiceTaskHandler> logger, [NotNull] IConfigurationRoot configuration)
+        public ServiceTaskHandler([NotNull] IServiceProvider provider)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            #region Sanity checks
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+            #endregion
+
+            _logger = provider.GetService<ILogger<ServiceTaskHandler>>();
+            if (_logger != null)
+                Log.Handler += LogHandler;
+
+            CredentialProvider = provider.GetService<ICredentialProvider>();
         }
 
-        /// <inheritdoc/>
-        protected override void LogHandler(LogSeverity severity, string message)
+        private void LogHandler(LogSeverity severity, string message)
         {
             switch (severity)
             {
@@ -67,43 +72,14 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCredentialProvider()
-            => new ExternalCredentialProvider(uri =>
-            {
-                var cred = _configuration.GetSection("Credentials").GetSection(uri.ToString());
-                return new NetworkCredential(cred["User"], cred["Password"]);
-            });
-
-        /// <inheritdoc/>
-        public override void RunTask(ITask task)
+        public override void Dispose()
         {
-            #region Sanity checks
-            if (task == null) throw new ArgumentNullException(nameof(task));
-            #endregion
-
-            _logger.LogDebug("Task: " + task.Name);
-            task.Run(CancellationToken, CredentialProvider);
-        }
-
-        /// <summary>
-        /// Always returns <see cref="Tasks.Verbosity.Batch"/>.
-        /// </summary>
-        public override Verbosity Verbosity { get => Verbosity.Batch; set {} }
-
-        /// <summary>
-        /// Always returns <c>false</c>.
-        /// </summary>
-        protected override bool Ask(string question, MsgSeverity severity)
-        {
-            _logger.LogDebug("Question: {0}\nAutomatic answer: No", question);
-            return false;
+            if (_logger != null)
+                Log.Handler -= LogHandler;
         }
 
         /// <inheritdoc/>
-        public override void Output(string title, string message) => _logger.LogInformation("{0}\n{1}", title, message);
-
-        /// <inheritdoc/>
-        public override void Error(Exception exception) => _logger.LogError(exception, exception.Message);
+        public override ICredentialProvider CredentialProvider { get; }
     }
 }
 #endif

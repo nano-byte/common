@@ -48,36 +48,8 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
-        private ICredentialProvider _credentialProvider;
-
-        private readonly object _credentialProviderLock = new object();
-
         /// <inheritdoc/>
-        public ICredentialProvider CredentialProvider
-        {
-            get
-            {
-                // Double-checked locking
-                if (_credentialProvider == null)
-                {
-                    lock (_credentialProviderLock)
-                    {
-                        if (_credentialProvider == null)
-                        {
-                            var provider = BuildCredentialProvider();
-                            if (provider != null) _credentialProvider = new CachedCredentialProvider(provider);
-                        }
-                    }
-                }
-                return _credentialProvider;
-            }
-        }
-
-        /// <summary>
-        /// Template method for building an <see cref="ICredentialProvider"/>. Called on first use of <see cref="CredentialProvider"/>.
-        /// </summary>
-        [CanBeNull]
-        protected abstract ICredentialProvider BuildCredentialProvider();
+        public abstract ICredentialProvider CredentialProvider { get; }
 
         /// <inheritdoc/>
         public virtual Verbosity Verbosity { get; set; }
@@ -121,27 +93,24 @@ namespace NanoByte.Common.Tasks
         public abstract void Output(string title, string message);
 
         /// <inheritdoc/>
-        public virtual void OutputLow(string title, string message)
+        public virtual void Output<T>(string title, IEnumerable<T> data)
         {
-            if (Verbosity > Verbosity.Batch) Output(title, message);
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            Output(title ?? throw new ArgumentNullException(nameof(title)), message);
         }
 
         /// <inheritdoc/>
-        public virtual void Output<T>(string title, IEnumerable<T> data)
+        public virtual void OutputLow(string title, string message)
         {
-            #region Sanity checks
-            if (title == null) throw new ArgumentNullException(nameof(title));
-            if (data == null) throw new ArgumentNullException(nameof(data));
-            #endregion
-
-            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
-            Output(title, message);
+            if (Verbosity > Verbosity.Batch) Output(title, message);
+            else Log.Info($"{title}:\n{message}");
         }
 
         /// <inheritdoc/>
         public virtual void OutputLow<T>(string title, IEnumerable<T> data)
         {
-            if (Verbosity > Verbosity.Batch) Output(title, data);
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            OutputLow(title ?? throw new ArgumentNullException(nameof(title)), message);
         }
 
         /// <inheritdoc/>

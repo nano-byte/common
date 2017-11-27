@@ -22,8 +22,10 @@
 
 using System;
 using System.Net;
+using JetBrains.Annotations;
 using NanoByte.Common.Cli;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
@@ -35,8 +37,8 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Creates a new command-line credential provider.
         /// </summary>
-        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
-        public CliCredentialProvider(bool interactive) : base(interactive)
+        /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
+        public CliCredentialProvider([NotNull] ITaskHandler handler) : base(handler)
         {}
 
         /// <inheritdoc/>

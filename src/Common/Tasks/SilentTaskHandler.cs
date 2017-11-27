@@ -21,6 +21,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
@@ -28,44 +30,71 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Executes tasks silently and suppresses any questions.
     /// </summary>
-    public class SilentTaskHandler : TaskHandlerBase
+    public class SilentTaskHandler : ITaskHandler
     {
         /// <inheritdoc/>
-        protected override void LogHandler(LogSeverity severity, string message)
+        public virtual void Dispose()
         {}
 
-        /// <inheritdoc/>
-        protected override ICredentialProvider BuildCredentialProvider() => null;
+        /// <summary>
+        /// Never reports cancellation.
+        /// </summary>
+        public CancellationToken CancellationToken => default(CancellationToken);
 
         /// <inheritdoc/>
-        public override void RunTask(ITask task)
+        public virtual ICredentialProvider CredentialProvider => null;
+
+        /// <inheritdoc/>
+        public void RunTask(ITask task)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            task.Run(CancellationToken);
+            task.Run(CancellationToken, CredentialProvider);
         }
 
         /// <summary>
         /// Always returns <see cref="Tasks.Verbosity.Batch"/>.
         /// </summary>
-        public override Verbosity Verbosity { get => Verbosity.Batch; set {} }
+        public Verbosity Verbosity { get => Verbosity.Batch; set {} }
 
         /// <summary>
         /// Always returns <c>false</c>.
         /// </summary>
-        protected override bool Ask(string question, MsgSeverity severity)
+        public bool Ask(string question) => Ask(question, defaultAnswer: false);
+
+        /// <summary>
+        /// Always returns <paramref name="defaultAnswer"/>.
+        /// </summary>
+        public bool Ask(string question, bool defaultAnswer, string alternateMessage = null)
         {
-            Log.Debug($"Question: {question}\nAutomatic answer: No");
-            return false;
+            Log.Info($"Question: {question}\nAutomatic answer: {defaultAnswer}");
+            return defaultAnswer;
         }
 
         /// <inheritdoc/>
-        public override void Output(string title, string message) => Log.Info($"{title}\n{message}");
+        public void Output(string title, string message) => Log.Info($"{title}\n{message}");
 
         /// <inheritdoc/>
-        public override void Error(Exception exception) => Log.Error(exception);
+        public void Output<T>(string title, IEnumerable<T> data)
+        {
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            Output(title ?? throw new ArgumentNullException(nameof(title)), message);
+        }
+
+        /// <inheritdoc/>
+        public void OutputLow(string title, string message) => Log.Debug($"{title}\n{message}");
+
+        /// <inheritdoc/>
+        public void OutputLow<T>(string title, IEnumerable<T> data)
+        {
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            OutputLow(title ?? throw new ArgumentNullException(nameof(title)), message);
+        }
+
+        /// <inheritdoc/>
+        public void Error(Exception exception) => Log.Error(exception);
     }
 }

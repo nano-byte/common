@@ -33,11 +33,11 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class CliTaskHandler : TaskHandlerBase
     {
-        /// <summary>
-        /// Sets up Ctrl+C handling and console <see cref="Log"/> output.
-        /// </summary>
         public CliTaskHandler()
         {
+            if (WindowsUtils.IsWindowsNT)
+                CredentialProvider = new CachedCredentialProvider(new WindowsCliCredentialProvider(this));
+
             try
             {
                 Console.CancelKeyPress += CancelKeyPressHandler;
@@ -96,11 +96,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCredentialProvider()
-        {
-            if (WindowsUtils.IsWindowsNT) return new WindowsCliCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
-            else return new CliCredentialProvider(interactive: Verbosity >= Verbosity.Normal);
-        }
+        public override ICredentialProvider CredentialProvider { get; }
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)

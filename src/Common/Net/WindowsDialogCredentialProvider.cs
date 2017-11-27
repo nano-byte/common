@@ -22,7 +22,9 @@
 
 using System;
 using System.Net;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
+using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
@@ -34,8 +36,8 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Creates a new Windows GUI credential provider.
         /// </summary>
-        /// <param name="interactive">Indicates whether the credential provider is interactive, i.e., can ask the user for input.</param>
-        public WindowsDialogCredentialProvider(bool interactive) : base(interactive)
+        /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
+        public WindowsDialogCredentialProvider([NotNull] ITaskHandler handler) : base(handler)
         {}
 
         /// <inheritdoc/>

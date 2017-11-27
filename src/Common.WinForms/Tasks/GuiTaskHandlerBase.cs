@@ -12,6 +12,12 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public abstract class GuiTaskHandlerBase : TaskHandlerBase
     {
+        protected GuiTaskHandlerBase()
+        {
+            if (WindowsUtils.IsWindowsNT)
+                CredentialProvider = new CachedCredentialProvider(new WindowsDialogCredentialProvider(this));
+        }
+
         /// <summary>
         /// Stores log messages formatted in RTF for visualization.
         /// </summary>
@@ -42,9 +48,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override ICredentialProvider BuildCredentialProvider() => WindowsUtils.IsWindowsNT
-            ? new WindowsDialogCredentialProvider(interactive: Verbosity >= Verbosity.Normal)
-            : null;
+        public override ICredentialProvider CredentialProvider { get; }
 
         /// <inheritdoc/>
         protected override bool Ask(string question, MsgSeverity severity)
