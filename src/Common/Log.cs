@@ -95,7 +95,7 @@ namespace NanoByte.Common
         private static readonly List<LogEntryEventHandler> _handlers = new List<LogEntryEventHandler>
         {
             // Default handler
-            (severity, message) => { if (severity >= LogSeverity.Info) PrintToConsole(severity, message); }
+            (severity, message) => { if (severity >= LogSeverity.Warn) PrintToConsole(severity, message); }
         };
 
         /// <summary>
