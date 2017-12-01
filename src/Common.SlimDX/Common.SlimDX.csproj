@@ -34,7 +34,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>2.1.7</Version>
+    <Version>2.1.8</Version>
     <Description>
 Utility classes, interfaces, controls, etc. for SlimDX projects.
 API documentation: http://nano-byte.de/common/api/
