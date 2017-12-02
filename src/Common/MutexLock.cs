@@ -26,12 +26,13 @@ using System.Threading;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides a wrapper around <see cref="Mutex"/> that automatically acquires on creating and releases on <see cref="Dispose"/>
+    /// Provides a wrapper around <see cref="Mutex"/> that automatically acquires on creating and releases on <see cref="Dispose"/>.
     /// </summary>
     /// <example>
     /// Instead of <c>lock (_object) { code(); }</c> for per-process locking use
     /// <c>using (new MutexLock("name") { code(); }</c> for inter-process locking.
     /// </example>
+    /// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn(Exception)"/>.</remarks>
     public sealed class MutexLock : IDisposable
     {
         private readonly Mutex _mutex;
@@ -42,7 +43,15 @@ namespace NanoByte.Common
         public MutexLock(string name)
         {
             _mutex = new Mutex(false, name);
-            _mutex.WaitOne();
+            try
+            {
+                _mutex.WaitOne();
+            }
+            catch (AbandonedMutexException ex)
+            {
+                // Abandoned mutexes also get aquired, but indicate something may have gone wrong elsewhere
+                Log.Warn(ex);
+            }
         }
 
         /// <summary>
