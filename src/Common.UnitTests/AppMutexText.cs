@@ -33,7 +33,7 @@ namespace NanoByte.Common
     public class AppMutexTest
     {
         /// <summary>
-        /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create(string,out AppMutex)"/> and <see cref="AppMutex.Close"/> work correctly together.
+        /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create"/> and <see cref="AppMutex.Close"/> work correctly together.
         /// </summary>
         [SkippableFact]
         public void TestProbeCreateClose()
@@ -42,7 +42,7 @@ namespace NanoByte.Common
 
             string mutexName = "unit-tests-" + Path.GetRandomFileName();
             AppMutex.Probe(mutexName).Should().BeFalse();
-            AppMutex.Create(mutexName, out AppMutex mutex);
+            var mutex = AppMutex.Create(mutexName);
             AppMutex.Probe(mutexName).Should().BeTrue();
             mutex.Close();
             AppMutex.Probe(mutexName).Should().BeFalse();

@@ -36,96 +36,34 @@ namespace NanoByte.Common.Native
         private const uint Synchronize = 0x00100000;
 
         /// <summary>
-        /// Creates or opens a mutex.
+        /// Creates a new (or opens an existing) mutex.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <param name="handle">The handle created for the mutex. Can be used to close it before the process ends.</param>
-        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if a new one was created.</returns>
+        /// <param name="alreadyExists"><c>true</c> if an existing mutex was opened; <c>false</c> if a new one was created.</param>
+        /// <returns>The handle for the mutex. Can be used in <see cref="Close"/>. Will automatically be released once the process terminates.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        /// <remarks>The mutex will automatically be released once the process terminates.</remarks>
-        public static bool Create([NotNull, Localizable(false)] string name, out IntPtr handle)
+        public static IntPtr Create([NotNull, Localizable(false)] string name, out bool alreadyExists)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            #endregion
-
             if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             // Create new or open existing mutex
-            handle = NativeMethods.CreateMutex(IntPtr.Zero, false, name);
+            var handle = NativeMethods.CreateMutex(IntPtr.Zero, false, name ?? throw new ArgumentNullException(nameof(name)));
 
             int error = Marshal.GetLastWin32Error();
             switch (error)
             {
                 case 0:
-                    // New mutex created, handle passed out
-                    return false;
+                    alreadyExists = false;
+                    return handle;
 
                 case WindowsUtils.Win32ErrorAlreadyExists:
-                    // Existing mutex opened, handle passed out
-                    return true;
-
-                case WindowsUtils.Win32ErrorAccessDenied:
-                    // Try to open existing mutex
-                    handle = NativeMethods.OpenMutex(Synchronize, false, name);
-
-                    if (handle == IntPtr.Zero)
-                    {
-                        error = Marshal.GetLastWin32Error();
-                        switch (error)
-                        {
-                            case WindowsUtils.Win32ErrorFileNotFound:
-                                // No existing mutex found
-                                return false;
-                            default:
-                                throw new Win32Exception(error);
-                        }
-                    }
-
-                    // Existing mutex opened, handle passed out
-                    return true;
+                    alreadyExists = true;
+                    return handle;
 
                 default:
                     throw new Win32Exception(error);
             }
-        }
-
-        /// <summary>
-        /// Tries to open an existing mutex.
-        /// </summary>
-        /// <param name="name">The name to be used as a mutex identifier.</param>
-        /// <returns><c>true</c> if an existing mutex was opened; <c>false</c> if none existed.</returns>
-        /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
-        /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        /// <remarks>Opening a mutex creates an additional handle to it, keeping it alive until the process terminates.</remarks>
-        public static bool Open([NotNull, Localizable(false)] string name)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            #endregion
-
-            if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-
-            // Try to open existing mutex
-            var handle = NativeMethods.OpenMutex(Synchronize, false, name);
-
-            if (handle == IntPtr.Zero)
-            {
-                int error = Marshal.GetLastWin32Error();
-                switch (error)
-                {
-                    case WindowsUtils.Win32ErrorFileNotFound:
-                        // No existing mutex found
-                        return false;
-
-                    default:
-                        throw new Win32Exception(error);
-                }
-            }
-
-            // Existing mutex opened, handle remains until process terminates
-            return true;
         }
 
         /// <summary>
@@ -137,14 +75,10 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         public static bool Probe([NotNull, Localizable(false)] string name)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            #endregion
-
             if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             // Try to open existing mutex
-            var handle = NativeMethods.OpenMutex(Synchronize, false, name);
+            var handle = NativeMethods.OpenMutex(Synchronize, false, name ?? throw new ArgumentNullException(nameof(name)));
 
             if (handle == IntPtr.Zero)
             {
