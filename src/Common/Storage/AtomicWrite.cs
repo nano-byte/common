@@ -62,11 +62,7 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The file path of the final destination.</param>
         public AtomicWrite([NotNull, Localizable(false)] string path)
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
-
-            DestinationPath = path;
+            DestinationPath = path ?? throw new ArgumentNullException(nameof(path));
 
             // Make sure the containing directory exists
             string directory = Path.GetDirectoryName(Path.GetFullPath(path));
@@ -79,10 +75,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Allows the new file to be deployed upon <see cref="Dispose"/>.
         /// </summary>
-        public void Commit()
-        {
-            IsCommited = true;
-        }
+        public void Commit() => IsCommited = true;
 
         /// <summary>
         /// Replaces <see cref="DestinationPath"/> with the contents of <see cref="WritePath"/>.

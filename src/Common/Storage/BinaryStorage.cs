@@ -94,13 +94,7 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The binary file to be written.</param>
         public static void SaveBinary<T>([NotNull] this T data, [NotNull] Stream stream)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
-            #endregion
-
-            _serializer.Serialize(stream, data);
-        }
+            => _serializer.Serialize(stream ?? throw new ArgumentNullException(nameof(stream)), data);
 
         /// <summary>
         /// Saves an object in a binary file.
