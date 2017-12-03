@@ -278,9 +278,9 @@ namespace NanoByte.Common.Storage
             #endregion
 
             using (var atomic = new AtomicWrite(path))
-            using (var fileStream = File.Create(atomic.WritePath))
             {
-                SaveXml(data, fileStream, stylesheet);
+                using (var fileStream = File.Create(atomic.WritePath))
+                    SaveXml(data, fileStream, stylesheet);
                 atomic.Commit();
             }
         }
@@ -454,9 +454,9 @@ namespace NanoByte.Common.Storage
             #endregion
 
             using (var atomic = new AtomicWrite(path))
-            using (var fileStream = File.Create(atomic.WritePath))
             {
-                SaveXmlZip(data, fileStream, password, additionalFiles);
+                using (var fileStream = File.Create(atomic.WritePath))
+                    SaveXmlZip(data, fileStream, password, additionalFiles);
                 atomic.Commit();
             }
         }
