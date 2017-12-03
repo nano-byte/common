@@ -47,7 +47,6 @@ namespace NanoByte.Common.Storage
     /// <summary>
     /// Provides easy serialization to XML files (optionally wrapped in ZIP archives).
     /// </summary>
-    /// <remarks>This class only serializes public properties.</remarks>
     public static class XmlStorage
     {
         #region Constants
@@ -163,6 +162,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
+        /// <remarks>Uses <see cref="AtomicRead"/> internally.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         [NotNull]
         public static T LoadXml<T>([NotNull, Localizable(false)] string path)
@@ -173,6 +173,7 @@ namespace NanoByte.Common.Storage
 
             try
             {
+                using (new AtomicRead(path))
                 using (var fileStream = File.OpenRead(path))
                     return LoadXml<T>(fileStream);
             }
@@ -271,6 +272,7 @@ namespace NanoByte.Common.Storage
         /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
         public static void SaveXml<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string stylesheet = null)
         {
             #region Sanity checks
@@ -378,6 +380,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="ZipException">A problem occurred while reading the ZIP data or if <paramref name="password"/> is wrong.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
+        /// <remarks>Uses <see cref="AtomicRead"/> internally.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         [NotNull]
         public static T LoadXmlZip<T>([NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull] params EmbeddedFile[] additionalFiles)
@@ -387,6 +390,7 @@ namespace NanoByte.Common.Storage
             if (additionalFiles == null) throw new ArgumentNullException(nameof(additionalFiles));
             #endregion
 
+            using (new AtomicRead(path))
             using (var fileStream = File.OpenRead(path))
                 return LoadXmlZip<T>(fileStream, password, additionalFiles);
         }
@@ -446,6 +450,7 @@ namespace NanoByte.Common.Storage
         /// <param name="additionalFiles">Additional files to be stored alongside the XML file in the ZIP archive; can be <c>null</c>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
         public static void SaveXmlZip<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string password = null, [NotNull] params EmbeddedFile[] additionalFiles)
         {
             #region Sanity checks

@@ -33,7 +33,6 @@ namespace NanoByte.Common.Storage
     /// <summary>
     /// Provides easy serialization to binary files (optionally wrapped in ZIP archives).
     /// </summary>
-    /// <remarks>This class serializes private fields.</remarks>
     public static class BinaryStorage
     {
         private static readonly BinaryFormatter _serializer = new BinaryFormatter();
@@ -75,6 +74,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
+        /// <remarks>Uses see cref="AtomicRead"/> internally.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
         [NotNull]
         public static T LoadBinary<T>([NotNull, Localizable(false)] string path)
@@ -83,6 +83,7 @@ namespace NanoByte.Common.Storage
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
+            using (new AtomicRead(path))
             using (var fileStream = File.OpenRead(path))
                 return LoadBinary<T>(fileStream);
         }
@@ -105,6 +106,7 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The binary file to be written.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
         public static void SaveBinary<T>([NotNull] this T data, [NotNull, Localizable(false)] string path)
         {
             #region Sanity checks

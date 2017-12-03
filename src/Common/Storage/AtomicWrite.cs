@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright 2006-2015 Bastian Eicher
+ * Copyright 2006-2017 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,8 @@ namespace NanoByte.Common.Storage
     ///     atomic.Commit();
     /// }
     /// </code></example>
-    public sealed class AtomicWrite : IDisposable
+    /// <seealso cref="AtomicRead"/>
+    public sealed  class AtomicWrite : IDisposable
     {
         /// <summary>
         /// The file path of the final destination.
@@ -56,8 +57,10 @@ namespace NanoByte.Common.Storage
         /// </summary>
         public bool IsCommited { get; private set; }
 
+        private readonly MutexLock _lock;
+
         /// <summary>
-        /// Prepares a atomic write operation.
+        /// Prepares an atomic write operation.
         /// </summary>
         /// <param name="path">The file path of the final destination.</param>
         public AtomicWrite([NotNull, Localizable(false)] string path)
@@ -70,6 +73,8 @@ namespace NanoByte.Common.Storage
 
             // Prepend random string for temp file name
             WritePath = directory + Path.DirectorySeparatorChar + "temp." + Path.GetRandomFileName() + "." + Path.GetFileName(path);
+
+            _lock = new MutexLock("atomic-file-" + path.GetHashCode());
         }
 
         /// <summary>
@@ -89,6 +94,7 @@ namespace NanoByte.Common.Storage
             }
             finally
             {
+                _lock.Dispose();
                 if (File.Exists(WritePath)) File.Delete(WritePath);
             }
         }
