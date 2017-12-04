@@ -55,7 +55,14 @@ namespace NanoByte.Common.Tasks
         public virtual Verbosity Verbosity { get; set; }
 
         /// <inheritdoc/>
-        public abstract void RunTask(ITask task);
+        public virtual void RunTask(ITask task)
+        {
+            #region Sanity checks
+            if (task == null) throw new ArgumentNullException(nameof(task));
+            #endregion
+
+            task.Run(CancellationToken, CredentialProvider);
+        }
 
         /// <inheritdoc/>
         public bool Ask(string question) => Ask(question ?? throw new ArgumentNullException(nameof(question)), MsgSeverity.Warn);
