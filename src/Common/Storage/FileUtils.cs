@@ -126,9 +126,15 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Sets the "last modified" timestamp for a file to now. Creates a new empty file if it does not exist yet.
         /// </summary>
+        /// <exception cref="IOException">Creating the file or updating its timestamp failed.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the file or update its timestamp.</exception>
         public static void Touch([NotNull, Localizable(false)] string path)
         {
-            File.Open(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete).Dispose();
+            var fileInfo = new FileInfo(path ?? throw new ArgumentNullException(nameof(path)));
+            if (fileInfo.Exists)
+                fileInfo.LastWriteTimeUtc = DateTime.UtcNow;
+            else
+                File.Open(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete).Dispose();
         }
         #endregion
 

@@ -107,22 +107,26 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Touch
-        /// <summary>
-        /// Ensures <see cref="FileUtils.Touch"/> correctly handles both missing and existing files.
-        /// </summary>
         [Fact]
-        public void TestTouch()
+        public void TestTouchNew()
         {
             using (var tempDir = new TemporaryDirectory("unit-tests"))
             {
                 string testFile = Path.Combine(tempDir, "test");
-                File.Exists(testFile).Should().BeFalse();
-
                 FileUtils.Touch(testFile);
                 File.Exists(testFile).Should().BeTrue();
+                File.GetLastWriteTimeUtc(testFile).Should().BeOnOrAfter(DateTime.UtcNow - TimeSpan.FromSeconds(2));
+            }
+        }
 
-                FileUtils.Touch(testFile);
-                File.Exists(testFile).Should().BeTrue();
+        [Fact]
+        public void TestTouchExisting()
+        {
+            using (var tempFile = new TemporaryFile("unit-tests"))
+            {
+                File.SetLastWriteTimeUtc(tempFile, new DateTime(2000, 1, 1));
+                FileUtils.Touch(tempFile);
+                File.GetLastWriteTimeUtc(tempFile).Should().BeOnOrAfter(DateTime.UtcNow - TimeSpan.FromSeconds(2));
             }
         }
         #endregion
