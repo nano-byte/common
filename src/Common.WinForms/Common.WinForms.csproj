@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>2.1.9</Version>
+    <Version>2.1.10</Version>
     <Description>
 Utility classes, interfaces, controls, etc. for Windows Forms projects.
 API documentation: http://nano-byte.de/common/api/
