@@ -3,6 +3,8 @@ NanoByte.Common
 
 NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, OS integration and task progress UIs.
 
+[![TeamCity Build status](https://0install.de/teamcity/app/rest/builds/buildType:(id:NanoByte_Common_Build)/statusIcon)](https://0install.de/teamcity/viewType.html?buildTypeId=NanoByte_Common_Build&guest=1)
+
 NuGet packages:
 - **[NanoByte.Common](https://www.nuget.org/packages/NanoByte.Common/)** (platform-agnostic base)
 - **[NanoByte.Common.WinForms](https://www.nuget.org/packages/NanoByte.Common.WinForms/)** ([Windows Forms](https://docs.microsoft.com/en-us/dotnet/framework/winforms/)-specific features)
