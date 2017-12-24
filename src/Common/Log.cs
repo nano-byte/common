@@ -157,7 +157,7 @@ namespace NanoByte.Common
         public static void Info([NotNull] string message) => AddEntry(LogSeverity.Info, message);
 
         /// <summary>
-        /// Writes an exception's message as a <see cref="Info(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
+        /// Writes an exception's message as a <see cref="Info(string)"/>.
         /// </summary>
         /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
         [PublicAPI]
@@ -165,9 +165,7 @@ namespace NanoByte.Common
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
-            Info(ex.Message);
-            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Info(ex.InnerException.Message);
-
+            Info(ex.GetMessageWithInner());
             Debug(ex);
         }
 
@@ -178,7 +176,7 @@ namespace NanoByte.Common
         public static void Warn([NotNull] string message) => AddEntry(LogSeverity.Warn, message);
 
         /// <summary>
-        /// Writes an exception's message as a <see cref="Warn(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
+        /// Writes an exception's message as a <see cref="Warn(string)"/>.
         /// </summary>
         /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
         [PublicAPI]
@@ -186,9 +184,7 @@ namespace NanoByte.Common
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
-            Warn(ex.Message);
-            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Warn(ex.InnerException.Message);
-
+            Warn(ex.GetMessageWithInner());
             Debug(ex);
         }
 
@@ -199,7 +195,7 @@ namespace NanoByte.Common
         public static void Error([NotNull] string message) => AddEntry(LogSeverity.Error, message);
 
         /// <summary>
-        /// Writes an exception's message as an <see cref="Error(string)"/>. Recursivley handles <see cref="Exception.InnerException"/>s.
+        /// Writes an exception's message as an <see cref="Error(string)"/>.
         /// </summary>
         /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
         [PublicAPI]
@@ -207,9 +203,7 @@ namespace NanoByte.Common
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
-            Error(ex.Message);
-            if (ex.InnerException != null && ex.InnerException.Message != ex.Message) Error(ex.InnerException.Message);
-
+            Error(ex.GetMessageWithInner());
             Debug(ex);
         }
 

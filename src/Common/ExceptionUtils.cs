@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
@@ -61,6 +62,25 @@ namespace NanoByte.Common
     /// </summary>
     public static class ExceptionUtils
     {
+        /// <summary>
+        /// Recursively follows the <see cref="Exception.InnerException"/>s and combines all their <see cref="Exception.Message"/>s, removing duplicates.
+        /// </summary>
+        [NotNull, Pure]
+        public static string GetMessageWithInner([NotNull] this Exception exception)
+        {
+            IEnumerable<string> Messages()
+            {
+                var ex = exception;
+                do
+                {
+                    yield return ex.Message;
+                    ex = ex.InnerException;
+                } while (ex != null);
+            }
+
+            return StringUtils.Join(Environment.NewLine, Messages().Distinct());
+        }
+
         /// <summary>
         /// Configures a caught <paramref name="exception"/> to preserve its original stack trace when it is rethrown.
         /// </summary>

@@ -41,6 +41,11 @@ namespace NanoByte.Common
     public class ExceptionUtilsTest
     {
         [Fact]
+        public void TestGetMessageWithInner()
+            => new Exception("Message 1", new Exception("Message 1", new Exception("Message 2")))
+                .GetMessageWithInner().Should().Be($"Message 1{Environment.NewLine}Message 2");
+
+        [Fact]
         public void TestPreserveStack()
         {
             Exception caught = null;
