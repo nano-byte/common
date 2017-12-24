@@ -23,9 +23,13 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Security;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using JetBrains.Annotations;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Net
 {
@@ -85,6 +89,20 @@ namespace NanoByte.Common.Net
                 if (sslPolicyErrors == SslPolicyErrors.None) return true;
                 return (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors && publicKeys.Contains(certificate.GetPublicKeyString()));
             };
+        }
+
+        /// <summary>
+        /// Determines whether an internet conncetion is currently available. May return false positives.
+        /// </summary>
+        public static bool IsInternetConnected() => WindowsUtils.IsWindowsNT
+            ? SafeNativeMethods.InternetGetConnectedState(out _, 0)
+            : NetworkInterface.GetIsNetworkAvailable();
+
+        [SuppressUnmanagedCodeSecurity]
+        private static class SafeNativeMethods
+        {
+            [DllImport("wininet", SetLastError = true)]
+            public static extern bool InternetGetConnectedState(out int lpdwFlags, int dwReserved);
         }
     }
 }
