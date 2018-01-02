@@ -14,4 +14,3 @@ SearchAndReplace doc\Doxyfile -PatternLeft 'PROJECT_NUMBER = "' -PatternRight '"
 SearchAndReplace src\Common\Common.csproj -PatternLeft '<Version>' -PatternRight '</Version>'
 SearchAndReplace src\Common.WinForms\Common.WinForms.csproj -PatternLeft '<Version>' -PatternRight '</Version>'
 SearchAndReplace src\Common.SlimDX\Common.SlimDX.csproj -PatternLeft '<Version>' -PatternRight '</Version>'
-SearchAndReplace src\Common.Gtk\Common.Gtk.csproj -PatternLeft '<Version>' -PatternRight '</Version>'

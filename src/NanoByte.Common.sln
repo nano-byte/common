@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.UnitTests", "Common.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.SlimDX.UnitTests", "Common.SlimDX.UnitTests\Common.SlimDX.UnitTests.csproj", "{69C4B5BD-EE2F-487A-9937-B5308C99F64B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Gtk", "Common.Gtk\Common.Gtk.csproj", "{6531E5B8-833A-4436-8E57-F3F9E05D1438}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{69C4B5BD-EE2F-487A-9937-B5308C99F64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C4B5BD-EE2F-487A-9937-B5308C99F64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C4B5BD-EE2F-487A-9937-B5308C99F64B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6531E5B8-833A-4436-8E57-F3F9E05D1438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6531E5B8-833A-4436-8E57-F3F9E05D1438}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6531E5B8-833A-4436-8E57-F3F9E05D1438}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6531E5B8-833A-4436-8E57-F3F9E05D1438}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

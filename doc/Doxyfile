@@ -5,7 +5,7 @@ INPUT = main.md ../src
 USE_MDFILE_AS_MAINPAGE = main.md
 STRIP_FROM_PATH = ../src
 RECURSIVE = YES
-EXCLUDE_PATTERNS = */packages/* */*.UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs */Common.Gtk/* */JetBrains.Annotations.cs
+EXCLUDE_PATTERNS = */packages/* */*.UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs */JetBrains.Annotations.cs
 
 OUTPUT_DIRECTORY = ../build/Documentation
 GENERATE_TAGFILE = ../build/Documentation/nanobyte-common.tag
