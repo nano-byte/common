@@ -38,6 +38,7 @@ namespace NanoByte.Common.Tasks
     public sealed class ServiceTaskHandler : SilentTaskHandler
     {
         private readonly ILogger<ServiceTaskHandler> _logger;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public ServiceTaskHandler([NotNull] IServiceProvider provider)
         {
@@ -50,6 +51,7 @@ namespace NanoByte.Common.Tasks
                 Log.Handler += LogHandler;
 
             CredentialProvider = provider.GetService<ICredentialProvider>();
+            _cancellationTokenSource = provider.GetService<CancellationTokenSource>();
         }
 
         /// <inheritdoc/>
@@ -73,6 +75,9 @@ namespace NanoByte.Common.Tasks
                     break;
             }
         }
+
+        /// <inheritdoc/>
+        public override CancellationToken CancellationToken => _cancellationTokenSource?.Token ?? base.CancellationToken;
 
         /// <inheritdoc/>
         public override ICredentialProvider CredentialProvider { get; }

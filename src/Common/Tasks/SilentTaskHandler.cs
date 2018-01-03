@@ -36,10 +36,8 @@ namespace NanoByte.Common.Tasks
         public virtual void Dispose()
         {}
 
-        /// <summary>
-        /// Never reports cancellation.
-        /// </summary>
-        public CancellationToken CancellationToken => default(CancellationToken);
+        /// <inheritdoc/>
+        public virtual CancellationToken CancellationToken => default(CancellationToken);
 
         /// <inheritdoc/>
         public virtual ICredentialProvider CredentialProvider => null;
