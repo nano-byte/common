@@ -4,6 +4,7 @@
     <AssemblyName>NanoByte.Common.UnitTests</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
+    <LangVersion>7.1</LangVersion>
     <IsPackable>False</IsPackable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <SignAssembly>True</SignAssembly>

@@ -4,6 +4,7 @@
     <AssemblyName>NanoByte.Common.WinForms</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
+    <LangVersion>7.1</LangVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>

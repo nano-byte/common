@@ -4,8 +4,9 @@
     <AssemblyName>NanoByte.Common.SlimDX.UnitTests</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <TargetFramework>net461</TargetFramework>
-    <DefineConstants>$(DefineConstants);SLIMDX</DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>$(DefineConstants);SLIMDX</DefineConstants>
+    <LangVersion>7.1</LangVersion>
     <IsPackable>False</IsPackable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <SignAssembly>True</SignAssembly>
