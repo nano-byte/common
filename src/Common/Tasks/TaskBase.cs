@@ -63,7 +63,7 @@ namespace NanoByte.Common.Tasks
         protected ICredentialProvider CredentialProvider;
 
         /// <inheritdoc/>
-        public void Run(CancellationToken cancellationToken = default(CancellationToken), ICredentialProvider credentialProvider = null, IProgress<TaskSnapshot> progress = null)
+        public void Run(CancellationToken cancellationToken = default, ICredentialProvider credentialProvider = null, IProgress<TaskSnapshot> progress = null)
         {
             cancellationToken.ThrowIfCancellationRequested();
             CancellationToken = cancellationToken;

@@ -125,7 +125,7 @@ namespace NanoByte.Common
 
             Log.Debug("Running STA thread");
 
-            T result = default(T);
+            T result = default;
             Exception error = null;
             var thread = new Thread(new ThreadStart(delegate
             {

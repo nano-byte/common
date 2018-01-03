@@ -62,7 +62,7 @@ namespace NanoByte.Common.Native
         /// <param name="owner">The parent window for the dialog; can be <c>null</c>.</param>
         /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
-        public static NetworkCredential PromptDialog([NotNull] string target, WindowsCredentialsFlags flags, [CanBeNull] string title = null, [CanBeNull] string message = null, IntPtr owner = default(IntPtr))
+        public static NetworkCredential PromptDialog([NotNull] string target, WindowsCredentialsFlags flags, [CanBeNull] string title = null, [CanBeNull] string message = null, IntPtr owner = default)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));

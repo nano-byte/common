@@ -103,7 +103,7 @@ namespace NanoByte.Common.Values
                 subsetArea.Y = 0;
             }
 
-            TotalArea = (TotalArea == default(Rectangle)) ? subsetArea : Rectangle.Union(TotalArea, subsetArea);
+            TotalArea = (TotalArea == default) ? subsetArea : Rectangle.Union(TotalArea, subsetArea);
         }
 
         /// <summary>

@@ -116,7 +116,7 @@ namespace NanoByte.Common.Streams
         /// <param name="progress">Used to report back the number of bytes that have been copied so far.</param>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of <paramref name="source"/>.</remarks>
         [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        public static void CopyToEx([NotNull] this Stream source, [NotNull] Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), Tasks.IProgress<long> progress = null)
+        public static void CopyToEx([NotNull] this Stream source, [NotNull] Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default, Tasks.IProgress<long> progress = null)
         {
             #region Sanity checks
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -145,7 +145,7 @@ namespace NanoByte.Common.Streams
         /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
         /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
         /// <param name="progress">Used to report back the number of bytes that have been copied so far. Callbacks are rate limited to once every 250ms.</param>
-        public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path, int bufferSize = 4096, CancellationToken cancellationToken = default(CancellationToken), Tasks.IProgress<long> progress = null)
+        public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path, int bufferSize = 4096, CancellationToken cancellationToken = default, Tasks.IProgress<long> progress = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));

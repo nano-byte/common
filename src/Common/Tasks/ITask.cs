@@ -49,7 +49,7 @@ namespace NanoByte.Common.Tasks
         /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <seealso cref="ITaskHandler.RunTask"/>
-        void Run(CancellationToken cancellationToken = default(CancellationToken), [CanBeNull] ICredentialProvider credentialProvider = null, [CanBeNull] IProgress<TaskSnapshot> progress = null);
+        void Run(CancellationToken cancellationToken = default, [CanBeNull] ICredentialProvider credentialProvider = null, [CanBeNull] IProgress<TaskSnapshot> progress = null);
 
         /// <summary>
         /// A name describing the task in human-readable form.

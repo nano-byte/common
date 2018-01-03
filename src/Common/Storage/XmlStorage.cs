@@ -334,7 +334,7 @@ namespace NanoByte.Common.Storage
             #endregion
 
             bool xmlFound = false;
-            T output = default(T);
+            T output = default;
 
             using (var zipFile = new ZipFile(stream) {IsStreamOwner = false})
             {

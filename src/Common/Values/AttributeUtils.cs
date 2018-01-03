@@ -112,7 +112,7 @@ namespace NanoByte.Common.Values
             #endregion
 
             var attributes = assembly.GetCustomAttributes(typeof(TAttribute), inherit: false);
-            return (attributes.Length > 0) ? valueRetrieval((TAttribute)attributes[0]) : default(TValue);
+            return (attributes.Length > 0) ? valueRetrieval((TAttribute)attributes[0]) : default;
         }
     }
 }

@@ -117,7 +117,7 @@ namespace NanoByte.Common.Collections
 
             using (var enumerator = enumeration.GetEnumerator())
             {
-                if (!enumerator.MoveNext()) return default(T);
+                if (!enumerator.MoveNext()) return default;
                 T maxElement = enumerator.Current;
                 TValue maxValue = expression(maxElement);
 
@@ -157,7 +157,7 @@ namespace NanoByte.Common.Collections
 
             using (var enumerator = enumeration.GetEnumerator())
             {
-                if (!enumerator.MoveNext()) return default(T);
+                if (!enumerator.MoveNext()) return default;
                 T minElement = enumerator.Current;
                 TValue minValue = expression(minElement);
 

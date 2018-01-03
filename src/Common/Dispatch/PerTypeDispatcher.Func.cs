@@ -87,7 +87,7 @@ namespace NanoByte.Common.Dispatch
             if (_map.TryGetValue(type, out var function)) return function(element);
             else
             {
-                if (_ignoreMissing) return default(TResult);
+                if (_ignoreMissing) return default;
                 else throw new KeyNotFoundException(string.Format(Resources.MissingDispatchAction, type.Name));
             }
         }

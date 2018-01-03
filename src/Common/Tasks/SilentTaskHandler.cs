@@ -37,7 +37,7 @@ namespace NanoByte.Common.Tasks
         {}
 
         /// <inheritdoc/>
-        public virtual CancellationToken CancellationToken => default(CancellationToken);
+        public virtual CancellationToken CancellationToken => default;
 
         /// <inheritdoc/>
         public virtual ICredentialProvider CredentialProvider => null;

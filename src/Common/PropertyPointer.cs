@@ -63,7 +63,7 @@ namespace NanoByte.Common
         /// <param name="setValue">A delegate that sets the valuel.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public PropertyPointer([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default(T), bool needsEncoding = false)
+        public PropertyPointer([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
         {
             _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
             _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
