@@ -23,6 +23,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+using JetBrains.Annotations;
 
 #if !NETSTANDARD2_0
 using System.Runtime.Remoting;
@@ -58,12 +59,13 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         public bool IsCancellationRequested => _isCancellationRequested;
 
-        private readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
+        private readonly ManualResetEvent _waitEvent = new ManualResetEvent(initialState: false);
 
         /// <summary>
         /// Gets a wait handle that is signaled when see cref="Cancel"/> has been called.
         /// </summary>
-        internal WaitHandle WaitHandle => _waitHandle;
+        [NotNull]
+        internal WaitHandle WaitHandle => _waitEvent;
 
         private readonly object _lock = new object();
 
@@ -77,7 +79,7 @@ namespace NanoByte.Common.Tasks
                 // Don't trigger more than once
                 if (_isCancellationRequested) return;
 
-                _waitHandle.Set();
+                _waitEvent.Set();
 
                 _isCancellationRequested = true;
                 if (CancellationRequested != null)
@@ -100,6 +102,6 @@ namespace NanoByte.Common.Tasks
         public override string ToString() => "CancellationTokenSource {IsCancellationRequested=" + IsCancellationRequested + "}";
 
         /// <inheritdoc/>
-        public void Dispose() => _waitHandle.Close();
+        public void Dispose() => _waitEvent.Close();
     }
 }

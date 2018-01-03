@@ -69,10 +69,12 @@ namespace NanoByte.Common.Tasks
             if (IsCancellationRequested) throw new OperationCanceledException();
         }
 
+        private static readonly WaitHandle _dummyWaitHandle = new ManualResetEvent(initialState: false);
+
         /// <summary>
         /// Gets a wait handle that is signaled when cancellation has been requested.
         /// </summary>
-        public WaitHandle WaitHandle => (_source == null) ? new ManualResetEvent(false) : _source.WaitHandle;
+        public WaitHandle WaitHandle => _source?.WaitHandle ?? _dummyWaitHandle;
 
         /// <inheritdoc/>
         public override string ToString() => "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
