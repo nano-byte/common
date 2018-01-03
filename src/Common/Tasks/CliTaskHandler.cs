@@ -42,12 +42,29 @@ namespace NanoByte.Common.Tasks
             {
                 Console.CancelKeyPress += CancelKeyPressHandler;
             }
-                #region Error handler
+            #region Error handling
             catch (IOException)
             {
-                // Ignore failures caused by non-standard terminal emulators
+                // Ignore problems caused by unusual terminal emulators
             }
             #endregion
+        }
+
+        /// <inheritdoc/>
+        public override void Dispose()
+        {
+            try
+            {
+                Console.CancelKeyPress -= CancelKeyPressHandler;
+            }
+            #region Error handling
+            catch (IOException)
+            {
+                // Ignore problems caused by unusual terminal emulators
+            }
+            #endregion
+
+            base.Dispose();
         }
 
         /// <summary>
@@ -59,18 +76,6 @@ namespace NanoByte.Common.Tasks
 
             // Allow the application to finish cleanup rather than terminating immediately
             e.Cancel = true;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                Console.CancelKeyPress -= CancelKeyPressHandler;
-            }
-            finally
-            {
-                base.Dispose(disposing);
-            }
         }
 
         /// <summary>

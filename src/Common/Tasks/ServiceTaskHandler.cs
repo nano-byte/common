@@ -52,6 +52,9 @@ namespace NanoByte.Common.Tasks
             CredentialProvider = provider.GetService<ICredentialProvider>();
         }
 
+        /// <inheritdoc/>
+        public override void Dispose() => Log.Handler -= LogHandler;
+
         private void LogHandler(LogSeverity severity, string message)
         {
             switch (severity)
@@ -69,13 +72,6 @@ namespace NanoByte.Common.Tasks
                     _logger.LogError(message);
                     break;
             }
-        }
-
-        /// <inheritdoc/>
-        public override void Dispose()
-        {
-            if (_logger != null)
-                Log.Handler -= LogHandler;
         }
 
         /// <inheritdoc/>
