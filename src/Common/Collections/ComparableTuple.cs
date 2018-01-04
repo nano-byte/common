@@ -71,17 +71,10 @@ namespace NanoByte.Common.Collections
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(ComparableTuple<T> other)
-        {
-            return Equals(Key, other.Key) && Equals(Value, other.Value);
-        }
+        public bool Equals(ComparableTuple<T> other) => Equals(Key, other.Key) && Equals(Value, other.Value);
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            return obj is ComparableTuple<T> && Equals((ComparableTuple<T>)obj);
-        }
+        public override bool Equals(object obj) => obj is ComparableTuple<T> tuple && Equals(tuple);
 
         /// <inheritdoc/>
         public override int GetHashCode()
@@ -94,17 +87,8 @@ namespace NanoByte.Common.Collections
             }
         }
 
-        /// <inheritdoc/>
-        public static bool operator ==(ComparableTuple<T> left, ComparableTuple<T> right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(ComparableTuple<T> left, ComparableTuple<T> right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(ComparableTuple<T> left, ComparableTuple<T> right) => left.Equals(right);
+        public static bool operator !=(ComparableTuple<T> left, ComparableTuple<T> right) => !left.Equals(right);
         #endregion
 
         #region Comparison
@@ -116,29 +100,10 @@ namespace NanoByte.Common.Collections
             return (keyCompare == 0) ? Value.CompareTo(other.Value) : keyCompare;
         }
 
-        /// <inheritdoc/>
-        public static bool operator <(ComparableTuple<T> left, ComparableTuple<T> right)
-        {
-            return left.CompareTo(right) < 0;
-        }
-
-        /// <inheritdoc/>
-        public static bool operator >(ComparableTuple<T> left, ComparableTuple<T> right)
-        {
-            return left.CompareTo(right) > 0;
-        }
-
-        /// <inheritdoc/>
-        public static bool operator <=(ComparableTuple<T> left, ComparableTuple<T> right)
-        {
-            return left.CompareTo(right) <= 0;
-        }
-
-        /// <inheritdoc/>
-        public static bool operator >=(ComparableTuple<T> left, ComparableTuple<T> right)
-        {
-            return left.CompareTo(right) >= 0;
-        }
+        public static bool operator <(ComparableTuple<T> left, ComparableTuple<T> right) => left.CompareTo(right) < 0;
+        public static bool operator >(ComparableTuple<T> left, ComparableTuple<T> right) => left.CompareTo(right) > 0;
+        public static bool operator <=(ComparableTuple<T> left, ComparableTuple<T> right) => left.CompareTo(right) <= 0;
+        public static bool operator >=(ComparableTuple<T> left, ComparableTuple<T> right) => left.CompareTo(right) >= 0;
         #endregion
     }
 }

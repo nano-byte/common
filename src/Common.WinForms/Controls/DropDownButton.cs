@@ -60,10 +60,7 @@ namespace NanoByte.Common.Controls
         #endregion
 
         #region Constructor
-        public DropDownButton()
-        {
-            AutoSize = true;
-        }
+        public DropDownButton() => AutoSize = true;
         #endregion
 
         #region Properties
@@ -620,14 +617,21 @@ namespace NanoByte.Common.Controls
             HorizontalAlignment hText = GetHorizontalAlignment(TextAlign);
             HorizontalAlignment hImage = GetHorizontalAlignment(ImageAlign);
 
-            if (hImage == HorizontalAlignment.Left)
-                offset = 0;
-            else if (hImage == HorizontalAlignment.Right && hText == HorizontalAlignment.Right)
-                offset = excessWidth;
-            else if (hImage == HorizontalAlignment.Center && (hText == HorizontalAlignment.Left || hText == HorizontalAlignment.Center))
-                offset += excessWidth / 3;
-            else
-                offset += 2 * (excessWidth / 3);
+            switch (hImage)
+            {
+                case HorizontalAlignment.Left:
+                    offset = 0;
+                    break;
+                case HorizontalAlignment.Right when hText == HorizontalAlignment.Right:
+                    offset = excessWidth;
+                    break;
+                case HorizontalAlignment.Center when (hText == HorizontalAlignment.Left || hText == HorizontalAlignment.Center):
+                    offset += excessWidth / 3;
+                    break;
+                default:
+                    offset += 2 * (excessWidth / 3);
+                    break;
+            }
 
             if (textFirst)
             {
@@ -671,14 +675,21 @@ namespace NanoByte.Common.Controls
             VerticalAlignment vText = GetVerticalAlignment(TextAlign);
             VerticalAlignment vImage = GetVerticalAlignment(ImageAlign);
 
-            if (vImage == VerticalAlignment.Top)
-                offset = 0;
-            else if (vImage == VerticalAlignment.Bottom && vText == VerticalAlignment.Bottom)
-                offset = excessHeight;
-            else if (vImage == VerticalAlignment.Center && (vText == VerticalAlignment.Top || vText == VerticalAlignment.Center))
-                offset += excessHeight / 3;
-            else
-                offset += 2 * (excessHeight / 3);
+            switch (vImage)
+            {
+                case VerticalAlignment.Top:
+                    offset = 0;
+                    break;
+                case VerticalAlignment.Bottom when vText == VerticalAlignment.Bottom:
+                    offset = excessHeight;
+                    break;
+                case VerticalAlignment.Center when (vText == VerticalAlignment.Top || vText == VerticalAlignment.Center):
+                    offset += excessHeight / 3;
+                    break;
+                default:
+                    offset += 2 * (excessHeight / 3);
+                    break;
+            }
 
             if (textFirst)
             {

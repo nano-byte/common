@@ -56,7 +56,7 @@ namespace NanoByte.Common.Values.Design
             var editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
             if (editorService == null) return value;
 
-            var range = context.PropertyDescriptor.Attributes.OfType<FloatRangeAttribute>().FirstOrDefault();
+            var range = context.PropertyDescriptor?.Attributes.OfType<FloatRangeAttribute>().FirstOrDefault();
             return (range == null)
                 ? EditValue((float)value, editorService)
                 : EditValue((float)value, range, editorService);

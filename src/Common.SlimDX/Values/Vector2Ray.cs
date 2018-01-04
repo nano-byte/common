@@ -66,28 +66,16 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(Vector2Ray other)
-        {
-            return other.Direction == Direction && other.Position == Position;
-        }
+        public bool Equals(Vector2Ray other) => other.Direction == Direction && other.Position == Position;
 
-        /// <inheritdoc/>
-        public static bool operator ==(Vector2Ray left, Vector2Ray right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(Vector2Ray left, Vector2Ray right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(Vector2Ray left, Vector2Ray right) => left.Equals(right);
+        public static bool operator !=(Vector2Ray left, Vector2Ray right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Vector2Ray && Equals((Vector2Ray)obj);
+            return obj is Vector2Ray ray && Equals(ray);
         }
 
         /// <inheritdoc/>

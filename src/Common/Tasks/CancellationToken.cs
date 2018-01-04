@@ -63,7 +63,6 @@ namespace NanoByte.Common.Tasks
         /// Throws an <see cref="OperationCanceledException"/> if cancellation has been requested.
         /// </summary>
         /// <exception cref="OperationCanceledException">Cancellation has been requested.</exception>
-        [Pure]
         public void ThrowIfCancellationRequested()
         {
             if (IsCancellationRequested) throw new OperationCanceledException();

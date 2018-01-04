@@ -237,8 +237,7 @@ namespace NanoByte.Common.Collections
             _dontRaiseEvents = false;
 
             // Raise the events afterwards en bloc
-            if (Removed != null)
-                foreach (var item in removed) Removed(item);
+            foreach (var item in removed) Removed?.Invoke(item);
 
             // Add any new items (raising all events en bloc)
             AddMany(collection);

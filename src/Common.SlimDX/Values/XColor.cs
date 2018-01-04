@@ -91,64 +91,33 @@ namespace NanoByte.Common.Values
         // Convert EasyColor into Drawing.Color
         public static explicit operator Color(XColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
 
-        // Convert Direct3D.Color4 into EasyColor
         [Pure]
         public static XColor FromColorValue(Color4 color) => new XColor(color.Red, color.Green, color.Blue, color.Alpha);
 
-        // Convert EasyColor into Direct3D.Color4
+        [Pure]
         public Color4 ToColorValue() => new Color4(Alpha, Red, Green, Blue);
         #endregion
 
         #region Equality
-        /// <inheritdoc/>
-        public static bool operator ==(XColor color1, XColor color2)
-        {
-            return (Color)color1 == (Color)color2;
-        }
+        public static bool operator ==(XColor color1, XColor color2) => (Color)color1 == (Color)color2;
+        public static bool operator !=(XColor color1, XColor color2) => (Color)color1 != (Color)color2;
 
-        /// <inheritdoc/>
-        public static bool operator !=(XColor color1, XColor color2)
-        {
-            return (Color)color1 != (Color)color2;
-        }
+        public static bool operator ==(XColor color1, Color color2) => (Color)color1 == color2;
+        public static bool operator !=(XColor color1, Color color2) => (Color)color1 != color2;
 
-        /// <inheritdoc/>
-        public static bool operator ==(XColor color1, Color color2)
-        {
-            return (Color)color1 == color2;
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(XColor color1, Color color2)
-        {
-            return (Color)color1 != color2;
-        }
-
-        /// <inheritdoc/>
-        public static bool operator ==(Color color1, XColor color2)
-        {
-            return color1 == (Color)color2;
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(Color color1, XColor color2)
-        {
-            return color1 != (Color)color2;
-        }
+        public static bool operator ==(Color color1, XColor color2) => color1 == (Color)color2;
+        public static bool operator !=(Color color1, XColor color2) => color1 != (Color)color2;
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj is XColor) return ((XColor)obj == this);
-            if (obj is Color) return ((Color)obj == this);
+            if (obj is XColor a) return (a == this);
+            if (obj is Color b) return (b == this);
             return false;
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return ((Color)this).GetHashCode();
-        }
+        public override int GetHashCode() => ((Color)this).GetHashCode();
         #endregion
     }
 }

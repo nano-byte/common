@@ -75,28 +75,16 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(DoublePlane other)
-        {
-            return other.Point == Point && other.Normal == Normal;
-        }
+        public bool Equals(DoublePlane other) => other.Point == Point && other.Normal == Normal;
 
-        /// <inheritdoc/>
-        public static bool operator ==(DoublePlane left, DoublePlane right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(DoublePlane left, DoublePlane right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(DoublePlane left, DoublePlane right) => left.Equals(right);
+        public static bool operator !=(DoublePlane left, DoublePlane right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is DoublePlane && Equals((DoublePlane)obj);
+            return obj is DoublePlane plane && Equals(plane);
         }
 
         /// <inheritdoc/>

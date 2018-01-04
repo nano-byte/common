@@ -108,10 +108,7 @@ namespace NanoByte.Common.Collections
             private DefaultComparer()
             {}
 
-            public int Compare(T x, T y)
-            {
-                return x.CompareTo(y);
-            }
+            public int Compare(T x, T y) => x.CompareTo(y);
         }
 
         /// <summary>

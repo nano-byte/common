@@ -93,17 +93,8 @@ namespace NanoByte.Common.Collections
             return other.Value == Value && other.Key == Key;
         }
 
-        /// <inheritdoc/>
-        public static bool operator ==(XmlDictionaryEntry left, XmlDictionaryEntry right)
-        {
-            return Equals(left, right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(XmlDictionaryEntry left, XmlDictionaryEntry right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator ==(XmlDictionaryEntry left, XmlDictionaryEntry right) => Equals(left, right);
+        public static bool operator !=(XmlDictionaryEntry left, XmlDictionaryEntry right) => !Equals(left, right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)

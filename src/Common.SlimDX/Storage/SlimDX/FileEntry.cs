@@ -182,7 +182,7 @@ namespace NanoByte.Common.Storage.SlimDX
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj is FileEntry && Equals((FileEntry)obj);
+            return obj is FileEntry entry && Equals(entry);
         }
 
         /// <inheritdoc/>

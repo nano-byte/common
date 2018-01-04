@@ -92,23 +92,14 @@ namespace NanoByte.Common.Values
             return other.Constant == Constant && other.Linear == Linear && other.Quadratic == Quadratic;
         }
 
-        /// <inheritdoc/>
-        public static bool operator ==(Attenuation left, Attenuation right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(Attenuation left, Attenuation right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(Attenuation left, Attenuation right) => left.Equals(right);
+        public static bool operator !=(Attenuation left, Attenuation right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Attenuation && Equals((Attenuation)obj);
+            return obj is Attenuation attenuation && Equals(attenuation);
         }
 
         /// <inheritdoc/>

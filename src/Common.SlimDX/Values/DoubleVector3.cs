@@ -115,32 +115,16 @@ namespace NanoByte.Common.Values
 
         #region Scalar multiplication
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="double"/></summary>
-        public static DoubleVector3 operator *(DoubleVector3 vector, double scalar)
-        {
-            var decScalar = scalar;
-            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
-        }
+        public static DoubleVector3 operator *(DoubleVector3 vector, double scalar) => new DoubleVector3(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
 
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="double"/></summary>
-        public static DoubleVector3 operator *(double scalar, DoubleVector3 vector)
-        {
-            var decScalar = scalar;
-            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
-        }
+        public static DoubleVector3 operator *(double scalar, DoubleVector3 vector) => new DoubleVector3(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
 
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="float"/></summary>
-        public static DoubleVector3 operator *(float scalar, DoubleVector3 vector)
-        {
-            var decScalar = scalar;
-            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
-        }
+        public static DoubleVector3 operator *(float scalar, DoubleVector3 vector) => new DoubleVector3(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
 
         /// <summary>Multiply <see cref="DoubleVector3"/> with <see cref="float"/></summary>
-        public static DoubleVector3 operator *(DoubleVector3 vector, float scalar)
-        {
-            var decScalar = scalar;
-            return new DoubleVector3(vector.X * decScalar, vector.Y * decScalar, vector.Z * decScalar);
-        }
+        public static DoubleVector3 operator *(DoubleVector3 vector, float scalar) => new DoubleVector3(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
         #endregion
 
         #region Dot product
@@ -182,28 +166,16 @@ namespace NanoByte.Common.Values
         #region Equality
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-        public bool Equals(DoubleVector3 other)
-        {
-            return other.X == X && other.Y == Y && other.Z == Z;
-        }
+        public bool Equals(DoubleVector3 other) => other.X == X && other.Y == Y && other.Z == Z;
 
-        /// <inheritdoc/>
-        public static bool operator ==(DoubleVector3 left, DoubleVector3 right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(DoubleVector3 left, DoubleVector3 right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(DoubleVector3 left, DoubleVector3 right) => left.Equals(right);
+        public static bool operator !=(DoubleVector3 left, DoubleVector3 right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is DoubleVector3 && Equals((DoubleVector3)obj);
+            return obj is DoubleVector3 vector3 && Equals(vector3);
         }
 
         /// <inheritdoc/>

@@ -37,7 +37,6 @@ namespace NanoByte.Common.Collections
     public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable<NamedCollection<T>> where T : INamed<T>
     {
         #region Events
-        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         public event Action<object> CollectionChanged;
 

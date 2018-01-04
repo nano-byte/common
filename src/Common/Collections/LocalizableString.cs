@@ -100,31 +100,17 @@ namespace NanoByte.Common.Collections
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(LocalizableString other)
-        {
-            if (ReferenceEquals(null, other)) return false;
+        public bool Equals(LocalizableString other) => other != null && other.Value == Value && Language.Equals(other.Language);
 
-            return other.Value == Value && Language.Equals(other.Language);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator ==(LocalizableString left, LocalizableString right)
-        {
-            return Equals(left, right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(LocalizableString left, LocalizableString right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator ==(LocalizableString left, LocalizableString right) => Equals(left, right);
+        public static bool operator !=(LocalizableString left, LocalizableString right) => !Equals(left, right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj is LocalizableString && Equals((LocalizableString)obj);
+            return obj is LocalizableString s && Equals(s);
         }
 
         /// <inheritdoc/>

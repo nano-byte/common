@@ -83,35 +83,20 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(ByteVector4 other)
-        {
-            return other.X == X && other.Y == Y && other.Z == Z && other.W == W;
-        }
+        public bool Equals(ByteVector4 other) => other.X == X && other.Y == Y && other.Z == Z && other.W == W;
 
-        /// <inheritdoc/>
-        public static bool operator ==(ByteVector4 left, ByteVector4 right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(ByteVector4 left, ByteVector4 right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(ByteVector4 left, ByteVector4 right) => left.Equals(right);
+        public static bool operator !=(ByteVector4 left, ByteVector4 right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is ByteVector4 && Equals((ByteVector4)obj);
+            return obj is ByteVector4 vector4 && Equals(vector4);
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return X | (Y << 8) | (Z << 16) | (W << 24);
-        }
+        public override int GetHashCode() => X | (Y << 8) | (Z << 16) | (W << 24);
         #endregion
     }
 }

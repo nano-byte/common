@@ -125,22 +125,10 @@ namespace NanoByte.Common.Values
         #region Equality
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-        public bool Equals(ColorCorrection other)
-        {
-            return other.Brightness == Brightness && other.Contrast == Contrast && other.Saturation == Saturation && other.Hue == Hue;
-        }
+        public bool Equals(ColorCorrection other) => other.Brightness == Brightness && other.Contrast == Contrast && other.Saturation == Saturation && other.Hue == Hue;
 
-        /// <inheritdoc/>
-        public static bool operator ==(ColorCorrection left, ColorCorrection right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(ColorCorrection left, ColorCorrection right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(ColorCorrection left, ColorCorrection right) => left.Equals(right);
+        public static bool operator !=(ColorCorrection left, ColorCorrection right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)

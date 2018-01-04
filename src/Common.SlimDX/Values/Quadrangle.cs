@@ -247,28 +247,16 @@ namespace NanoByte.Common.Values
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(Quadrangle other)
-        {
-            return other.P1 == P1 && other.P2 == P2 && other.P3 == P3 && other.P4 == P4;
-        }
+        public bool Equals(Quadrangle other) => other.P1 == P1 && other.P2 == P2 && other.P3 == P3 && other.P4 == P4;
 
-        /// <inheritdoc/>
-        public static bool operator ==(Quadrangle left, Quadrangle right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <inheritdoc/>
-        public static bool operator !=(Quadrangle left, Quadrangle right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator ==(Quadrangle left, Quadrangle right) => left.Equals(right);
+        public static bool operator !=(Quadrangle left, Quadrangle right) => !left.Equals(right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Quadrangle && Equals((Quadrangle)obj);
+            return obj is Quadrangle quadrangle && Equals(quadrangle);
         }
 
         /// <inheritdoc/>

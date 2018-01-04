@@ -64,7 +64,7 @@ namespace NanoByte.Common.Values.Design
                 Controls = {editorControl}
             };
 
-            var fileType = context.PropertyDescriptor.Attributes.OfType<FileTypeAttribute>().FirstOrDefault();
+            var fileType = context.PropertyDescriptor?.Attributes.OfType<FileTypeAttribute>().FirstOrDefault();
             if (fileType != null)
             {
                 editorControl.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy(fileType.FileType);

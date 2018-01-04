@@ -36,19 +36,10 @@ namespace NanoByte.Common
         private NamedComparer()
         {}
 
-        public int Compare(T x, T y)
-        {
-            return StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name);
-        }
+        public int Compare(T x, T y) => StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name);
 
-        public bool Equals(T x, T y)
-        {
-            return StringComparer.OrdinalIgnoreCase.Equals(x.Name, y.Name);
-        }
+        public bool Equals(T x, T y) => StringComparer.OrdinalIgnoreCase.Equals(x.Name, y.Name);
 
-        public int GetHashCode(T obj)
-        {
-            return StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name);
-        }
+        public int GetHashCode(T obj) => StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name);
     }
 }
