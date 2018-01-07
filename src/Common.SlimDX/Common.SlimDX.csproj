@@ -45,7 +45,7 @@ API documentation: http://nano-byte.de/common/api/
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
     <Authors>Bastian Eicher</Authors>
     <Company>NanoByte</Company>
-    <Copyright>Copyright 2006-2017 Bastian Eicher et al</Copyright>
+    <Copyright>Copyright Bastian Eicher et al.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
