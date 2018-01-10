@@ -92,9 +92,9 @@ namespace NanoByte.Common.Net
         }
 
         /// <summary>
-        /// Determines whether an internet conncetion is currently available. May return false positives.
+        /// Determines whether an internet connection is currently available. May return false positives.
         /// </summary>
-        public static bool IsInternetConnected() => WindowsUtils.IsWindowsNT
+        public static bool IsInternetConnected => WindowsUtils.IsWindowsNT
             ? SafeNativeMethods.InternetGetConnectedState(out _, 0)
             : NetworkInterface.GetIsNetworkAvailable();
 
