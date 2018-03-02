@@ -187,7 +187,7 @@
     <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
   </data>
   <data name="ItemAlreadyInPool" xml:space="preserve">
-    <value>Öğe zaten havuzda. Bir öğe havuza bir kereden fazla eklenemez.</value>
+    <value>Öge zaten havuzda. Bir öge havuza bir kereden fazla eklenemez.</value>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Anahtar zaten sözlükte var.</value>
