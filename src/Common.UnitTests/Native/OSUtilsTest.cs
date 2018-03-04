@@ -69,11 +69,23 @@ namespace NanoByte.Common.Native
 
             OSUtils.ExpandVariables("$KEY1$KEY2/$KEY1 $KEY2 ${LONG KEY} $UNSET", variables).Should().Be("value1value2/value1 value2 long value ");
             OSUtils.ExpandVariables("$KEY1-bla", variables).Should().Be("value1-bla");
+            OSUtils.ExpandVariables("$KEY1{bla}", variables).Should().Be("value1{bla}");
             OSUtils.ExpandVariables("${UNSET:-default}", variables).Should().Be("default");
             OSUtils.ExpandVariables("${UNSET-default}", variables).Should().Be("default");
             OSUtils.ExpandVariables("${EMPTY:-default}", variables).Should().Be("default");
             OSUtils.ExpandVariables("${EMPTY-default}", variables).Should().Be("");
             OSUtils.ExpandVariables("", variables).Should().Be("");
+        }
+
+        [Fact]
+        public void TestExpandVariablesEscaping()
+        {
+            var variables = new Dictionary<string, string> {{"KEY", "value"}};
+
+            OSUtils.ExpandVariables("$KEY-$$KEY", variables).Should().Be("value-$KEY");
+            OSUtils.ExpandVariables("$$KEY-$KEY", variables).Should().Be("$KEY-value");
+            OSUtils.ExpandVariables("${KEY}-$${KEY}", variables).Should().Be("value-${KEY}");
+            OSUtils.ExpandVariables("$${KEY}-${KEY}", variables).Should().Be("${KEY}-value");
         }
     }
 }

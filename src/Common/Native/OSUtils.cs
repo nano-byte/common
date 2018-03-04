@@ -63,8 +63,8 @@ namespace NanoByte.Common.Native
 #endif
 
         private static readonly Regex
-            _envVariableLongStyle = new Regex(@"\${([^}]+)}"),
-            _envVariableShortStyle = new Regex(@"\$([^\$\s\\/-]+)");
+            _envVariableLongStyle = new Regex(@"\${([^{}]+)}"),
+            _envVariableShortStyle = new Regex(@"\$([^{}\$\s\\/-]+)");
 
         /// <summary>
         /// Expands/substitutes any Unix-style environment variables in the string.
@@ -80,6 +80,9 @@ namespace NanoByte.Common.Native
 
             string intermediate = _envVariableLongStyle.Replace(value, x =>
             {
+                if (x.Index >= 1 && value[x.Index - 1] == '$') // Treat $$ as escaping
+                    return "{" + x.Groups[1].Value + "}";
+
                 var parts = x.Groups[1].Value.Split(new[] { ":-" }, StringSplitOptions.None);
                 if (variables.TryGetValue(parts[0], out string ret) && !string.IsNullOrEmpty(ret))
                     return ret;
@@ -102,6 +105,9 @@ namespace NanoByte.Common.Native
 
             return _envVariableShortStyle.Replace(intermediate, x =>
             {
+                if (x.Index >= 1 && value[x.Index - 1] == '$') // Treat $$ as escaping
+                    return x.Groups[1].Value;
+
                 string key = x.Groups[1].Value;
                 if (variables.TryGetValue(key, out string ret))
                     return ret;
