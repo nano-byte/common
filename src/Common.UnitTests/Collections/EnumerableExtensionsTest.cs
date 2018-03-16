@@ -80,7 +80,7 @@ namespace NanoByte.Common.Collections
 
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             strings.Invoking(x => x.TrySelect<string, int, ArgumentException>(int.Parse).ToList())
-                .ShouldThrow<FormatException>();
+                .Should().Throw<FormatException>();
         }
 
         [Fact]

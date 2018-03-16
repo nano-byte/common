@@ -47,7 +47,7 @@ namespace NanoByte.Common.Collections
             list.AddIfNew("d").Should().BeTrue();
             list.Should().Equal("a", "b", "c", "d");
 
-            list.Invoking(x => x.RemoveLast(-1)).ShouldThrow<ArgumentOutOfRangeException>();
+            list.Invoking(x => x.RemoveLast(-1)).Should().Throw<ArgumentOutOfRangeException>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace NanoByte.Common.Collections
             list.RemoveLast(2);
             list.Should().Equal("a");
 
-            list.Invoking(x => x.RemoveLast(-1)).ShouldThrow<ArgumentOutOfRangeException>();
+            list.Invoking(x => x.RemoveLast(-1)).Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Fact]

@@ -59,7 +59,7 @@ namespace NanoByte.Common
             }
 
             var exceptionAssertion = caught.Invoking(x => throw x.PreserveStack())
-                .ShouldThrow<InvalidOperationException>();
+                .Should().Throw<InvalidOperationException>();
             exceptionAssertion.WithMessage("Test exception");
 
             // Preserving the stack trace is only possible on .NET Framework on Windows
@@ -87,7 +87,7 @@ namespace NanoByte.Common
                         if (value == 2) throw new ArgumentException("Test exception");
                     },
                     rollback: rollbackCalledFor.Add))
-                .ShouldThrow<ArgumentException>(because: "Exceptions should be passed through after rollback.");
+                .Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);
@@ -121,7 +121,7 @@ namespace NanoByte.Common
                     actionCalledFor.Add(value);
                     throw new ArgumentException("Test exception");
                 }))
-                .ShouldThrow<ArgumentException>(because: "Last exceptions should be passed through.");
+                .Should().Throw<ArgumentException>(because: "Last exceptions should be passed through.");
 
             actionCalledFor.Should().Equal(1, 2, 3);
         }
@@ -167,7 +167,7 @@ namespace NanoByte.Common
                 {
                     await Task.Yield();
                     rollbackCalledFor.Add(x);
-                })).ShouldThrow<ArgumentException>(because: "Exceptions should be passed through after rollback.");
+                })).Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);
@@ -202,7 +202,7 @@ namespace NanoByte.Common
                 await Task.Yield();
                 actionCalledFor.Add(value);
                 throw new ArgumentException("Test exception");
-            })).ShouldThrow<ArgumentException>(because: "Last exceptions should be passed through.");
+            })).Should().Throw<ArgumentException>(because: "Last exceptions should be passed through.");
 
             actionCalledFor.Should().Equal(1, 2, 3);
         }
@@ -225,7 +225,7 @@ namespace NanoByte.Common
                 {
                     await Task.Yield();
                     throw new InvalidOperationException("Test exception");
-                }, maxRetries: 1)).ShouldThrow<InvalidOperationException>();
+                }, maxRetries: 1)).Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -236,7 +236,7 @@ namespace NanoByte.Common
                 {
                     await Task.Yield();
                     throw new IOException("Test exception");
-                }, maxRetries: 1)).ShouldThrow<IOException>();
+                }, maxRetries: 1)).Should().Throw<IOException>();
         }
 
         [Fact]

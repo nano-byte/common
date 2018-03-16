@@ -50,10 +50,10 @@ namespace NanoByte.Common.Tasks
         {
             new ForEachTask<string>("Test task", new[] {""}, delegate { throw new IOException("Test exception"); })
                 .Invoking(x => x.Run())
-                .ShouldThrow<IOException>();
+                .Should().Throw<IOException>();
             new ForEachTask<string>("Test task", new[] {""}, delegate { throw new WebException("Test exception"); })
                 .Invoking(x => x.Run())
-                .ShouldThrow<WebException>();
+                .Should().Throw<WebException>();
         }
     }
 }

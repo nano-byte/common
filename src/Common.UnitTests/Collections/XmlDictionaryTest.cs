@@ -93,12 +93,12 @@ namespace NanoByte.Common.Collections
             };
 
             // Check for duplicate keys when adding new entries
-            dictionary.Invoking(x => x.Add("key1", "newValue1")).ShouldThrow<ArgumentException>();
+            dictionary.Invoking(x => x.Add("key1", "newValue1")).Should().Throw<ArgumentException>();
 
             // Check for duplicate keys when modifying existing entries
             var entry = new XmlDictionaryEntry("key3", "value3");
             dictionary.Add(entry);
-            entry.Invoking(x => x.Key = "key1").ShouldThrow<InvalidOperationException>();
+            entry.Invoking(x => x.Key = "key1").Should().Throw<InvalidOperationException>();
         }
     }
 }

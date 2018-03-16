@@ -53,7 +53,7 @@ namespace NanoByte.Common.Storage
                 File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
 
-                new CopyDirectory(temp1, temp2).Invoking(x => x.Run()).ShouldThrow<IOException>();
+                new CopyDirectory(temp1, temp2).Invoking(x => x.Run()).Should().Throw<IOException>();
             }
             finally
             {
@@ -77,7 +77,7 @@ namespace NanoByte.Common.Storage
             Directory.Delete(temp);
             new CopyDirectory(temp, "a")
                 .Invoking(x => x.Run())
-                .ShouldThrow<DirectoryNotFoundException>();
+                .Should().Throw<DirectoryNotFoundException>();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace NanoByte.Common.Storage
 
                 new CopyDirectory(temp1, temp2)
                     .Invoking(x => x.Run())
-                    .ShouldThrow<IOException>();
+                    .Should().Throw<IOException>();
             }
             finally
             {

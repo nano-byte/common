@@ -93,14 +93,14 @@ namespace NanoByte.Common.Net
         public void TestFileMissing()
         {
             var download = new DownloadFile(new Uri(Server.ServerUri, "wrong"), _tempFile);
-            download.Invoking(x => x.Run()).ShouldThrow<WebException>();
+            download.Invoking(x => x.Run()).Should().Throw<WebException>();
         }
 
         [Fact]
         public void TestIncorrectSize()
         {
             var download = new DownloadFile(Server.FileUri, _tempFile, bytesTotal: 1024);
-            download.Invoking(x => x.Run()).ShouldThrow<WebException>();
+            download.Invoking(x => x.Run()).Should().Throw<WebException>();
         }
     }
 }

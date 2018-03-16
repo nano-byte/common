@@ -66,10 +66,10 @@ namespace NanoByte.Common.Dispatch
         {
             new PerTypeDispatcher<Base>(false) {(Sub1 sub1) => { }}
                 .Invoking(x => x.Dispatch(new Sub2()))
-                .ShouldThrow<KeyNotFoundException>();
+                .Should().Throw<KeyNotFoundException>();
             new PerTypeDispatcher<Base>(true) {(Sub1 sub1) => { }}
                 .Invoking(x => x.Dispatch(new Sub2()))
-                .ShouldNotThrow<KeyNotFoundException>();
+                .Should().NotThrow<KeyNotFoundException>();
         }
 
         [Fact]
@@ -93,10 +93,10 @@ namespace NanoByte.Common.Dispatch
         {
             new PerTypeDispatcher<Base, Base>(false) {(Sub1 sub1) => sub1}
                 .Invoking(x => x.Dispatch(new Sub2()))
-                .ShouldThrow<KeyNotFoundException>();
+                .Should().Throw<KeyNotFoundException>();
             new PerTypeDispatcher<Base, Base>(true) {(Sub1 sub1) => sub1}
                 .Invoking(x => x.Dispatch(new Sub2()))
-                .ShouldNotThrow<KeyNotFoundException>();
+                .Should().NotThrow<KeyNotFoundException>();
         }
     }
 }

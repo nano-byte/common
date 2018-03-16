@@ -159,7 +159,7 @@ namespace NanoByte.Common.Streams
             }).Start();
 
             // Catch exception on consumer thread
-            _stream.Invoking(x => x.Read(2)).ShouldThrow<InvalidDataException>();
+            _stream.Invoking(x => x.Read(2)).Should().Throw<InvalidDataException>();
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace NanoByte.Common.Streams
                 _stream.Dispose();
             }).Start();
 
-            _stream.Invoking(x => x.Write(data)).ShouldThrow<ObjectDisposedException>();
+            _stream.Invoking(x => x.Write(data)).Should().Throw<ObjectDisposedException>();
         }
     }
 }

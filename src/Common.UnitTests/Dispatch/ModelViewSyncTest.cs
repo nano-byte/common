@@ -104,7 +104,7 @@ namespace NanoByte.Common.Dispatch
 
                 sync.Lookup(view[0]).Should().BeSameAs(model[0]);
                 sync.Invoking(x => x.Lookup(new SpecificView()))
-                    .ShouldThrow<KeyNotFoundException>();
+                    .Should().Throw<KeyNotFoundException>();
             }
         }
 

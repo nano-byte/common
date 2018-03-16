@@ -80,7 +80,7 @@ namespace NanoByte.Common.Undo
                 new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
                 new MockCommand(() => throw new OperationCanceledException(), () => undoCalls.Add(2)));
 
-            command.Invoking(x => x.Execute()).ShouldThrow<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
+            command.Invoking(x => x.Execute()).Should().Throw<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
             executeCalls.Should().Equal(new[] {0, 1}, because: "After an exception the rest of the commands should not be executed");
             undoCalls.Should().Equal(new[] {1, 0}, because: "After an exception all successful executions should be undone");
         }
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Undo
             executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
 
             executeCalls.Clear();
-            command.Invoking(x => x.Undo()).ShouldThrow<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
+            command.Invoking(x => x.Undo()).Should().Throw<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
             undoCalls.Should().Equal(new[] {2, 1}, because: "After an exception the rest of the undoes should not be performed");
             executeCalls.Should().Equal(new[] {1, 2}, because: "After an exception all successful undoes should be re-executed");
         }
@@ -108,10 +108,10 @@ namespace NanoByte.Common.Undo
         public void TestWrongOrder()
         {
             var command = new CompositeCommand();
-            command.Invoking(x => x.Undo()).ShouldThrow<InvalidOperationException>(because: "Should not allow Undo before Execute");
+            command.Invoking(x => x.Undo()).Should().Throw<InvalidOperationException>(because: "Should not allow Undo before Execute");
 
             command.Execute();
-            command.Invoking(x => x.Execute()).ShouldThrow<InvalidOperationException>(because: "Should not allow two Executes without an Undo in between");
+            command.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>(because: "Should not allow two Executes without an Undo in between");
         }
     }
 }

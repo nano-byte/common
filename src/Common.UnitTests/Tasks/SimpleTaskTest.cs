@@ -47,9 +47,9 @@ namespace NanoByte.Common.Tasks
         public void TestExceptionPassing()
         {
             new SimpleTask("Test task", () => throw new IOException("Test exception"))
-                .Invoking(x => x.Run()).ShouldThrow<IOException>();
+                .Invoking(x => x.Run()).Should().Throw<IOException>();
             new SimpleTask("Test task", () => throw new WebException("Test exception"))
-                .Invoking(x => x.Run()).ShouldThrow<WebException>();
+                .Invoking(x => x.Run()).Should().Throw<WebException>();
         }
     }
 }
