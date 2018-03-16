@@ -3,13 +3,11 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common.SlimDX</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>$(DefineConstants);SLIMDX</DefineConstants>
     <LangVersion>7.1</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -18,6 +16,14 @@
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <OutputPath>..\..\build\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Full'">
+    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Core' and '$(OS)' == 'Windows_NT'">
+    <TargetFrameworks>net45</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Support old .NET Framework Client Profiles -->

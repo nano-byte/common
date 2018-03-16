@@ -3,7 +3,6 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common.SlimDX.UnitTests</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <TargetFramework>net461</TargetFramework>
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>$(DefineConstants);SLIMDX</DefineConstants>
     <LangVersion>7.1</LangVersion>
@@ -11,6 +10,10 @@
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <TargetFrameworks>net461</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
