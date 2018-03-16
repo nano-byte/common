@@ -1,7 +1,7 @@
 NanoByte.Common
 ===============
 
-NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, OS integration and task progress UIs.
+NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, integration with native features and down-level compatibility. It is available for .NET Framework 2.0 or newer and .NET Standard 2.0 or newer.
 
 [![TeamCity Build status](https://0install.de/teamcity/app/rest/builds/buildType:(id:NanoByte_Common_Build)/statusIcon)](https://0install.de/teamcity/viewType.html?buildTypeId=NanoByte_Common_Build&guest=1)
 
