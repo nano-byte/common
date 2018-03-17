@@ -1,5 +1,4 @@
 ﻿PROJECT_NAME = "NanoByte.Common"
-PROJECT_NUMBER = "2.1.11"
 
 INPUT = main.md ../src
 USE_MDFILE_AS_MAINPAGE = main.md
