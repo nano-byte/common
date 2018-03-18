@@ -1,16 +1,15 @@
 NanoByte.Common
 ===============
 
-NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, integration with native features and down-level compatibility. It is available for .NET Framework 2.0 or newer and .NET Standard 2.0 or newer.
+NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, integration with native features and down-level compatibility. It is available for .NET Framework 2.0 or later and .NET Standard 2.0 or later.
 
-[![TeamCity Build status](https://0install.de/teamcity/app/rest/builds/buildType:(id:NanoByte_Common_Build)/statusIcon)](https://0install.de/teamcity/viewType.html?buildTypeId=NanoByte_Common_Build&guest=1)
+NuGet packages:  
+[![NanoByte.Common](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common)](https://www.nuget.org/packages/NanoByte.Common/)
+[![NanoByte.Common.WinForms](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common.WinForms)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)
+[![NanoByte.Common.SlimDX](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common.SlimDX)](https://www.nuget.org/packages/NanoByte.Common.SlimDX/)
 
-NuGet packages:
-- **[NanoByte.Common](https://www.nuget.org/packages/NanoByte.Common/)** (platform-agnostic base)
-- **[NanoByte.Common.WinForms](https://www.nuget.org/packages/NanoByte.Common.WinForms/)** ([Windows Forms](https://docs.microsoft.com/en-us/dotnet/framework/winforms/)-specific features)
-- **[NanoByte.Common.SlimDX](https://www.nuget.org/packages/NanoByte.Common.SlimDX/)** ([SlimDX](http://slimdx.org/)-specific features)
-
-**[API documentation](http://nano-byte.de/common/api/)**
+[![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](http://nano-byte.de/common/api/)
+[![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)
 
 Directory structure
 -------------------
