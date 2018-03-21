@@ -6,10 +6,12 @@ NanoByte.Common provides utility classes, interfaces, controls, etc. with an emp
 NuGet packages:  
 [![NanoByte.Common](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common)](https://www.nuget.org/packages/NanoByte.Common/)
 [![NanoByte.Common.WinForms](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common.WinForms)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)
-[![NanoByte.Common.SlimDX](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common.SlimDX)](https://www.nuget.org/packages/NanoByte.Common.SlimDX/)
-
+[![NanoByte.Common.SlimDX](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common.SlimDX)](https://www.nuget.org/packages/NanoByte.Common.SlimDX/)  
 [![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](http://nano-byte.de/common/api/)
-[![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)
+
+CI Builds:  
+[![Windows](https://img.shields.io/appveyor/ci/nano-byte/common.svg?label=Windows)](https://ci.appveyor.com/project/nano-byte/common)
+[![Linux](https://img.shields.io/travis/nano-byte/common.svg?label=Linux)](https://travis-ci.org/nano-byte/common)
 
 Directory structure
 -------------------
