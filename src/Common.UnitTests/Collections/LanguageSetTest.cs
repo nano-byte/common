@@ -22,6 +22,7 @@
 
 using System.Globalization;
 using FluentAssertions;
+using NanoByte.Common.Native;
 using Xunit;
 
 namespace NanoByte.Common.Collections
@@ -84,9 +85,11 @@ namespace NanoByte.Common.Collections
             new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true).Should().BeFalse();
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidCultureInSet()
         {
+            Skip.IfNot(WindowsUtils.IsWindows, reason: "Non-Windows systems may not have a .NET language/culture database installed.");
+
             new LanguageSet("invalid en").Should().Equal(new LanguageSet{CultureInfo.InvariantCulture, new CultureInfo("en")});
         }
     }
