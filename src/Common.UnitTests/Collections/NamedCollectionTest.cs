@@ -31,10 +31,7 @@ namespace NanoByte.Common.Collections
         {
             public string Name { get; set; }
 
-            public int CompareTo(TestElement other)
-            {
-                return string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
-            }
+            public int CompareTo(TestElement other) => string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

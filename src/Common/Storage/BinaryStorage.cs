@@ -57,7 +57,7 @@ namespace NanoByte.Common.Storage
             {
                 return (T)_serializer.Deserialize(stream);
             }
-                #region Error handling
+            #region Error handling
             catch (SerializationException ex)
             { // Convert exception type
                 throw new InvalidDataException(ex.Message, ex.InnerException) {Source = ex.Source};

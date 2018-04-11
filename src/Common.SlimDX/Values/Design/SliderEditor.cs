@@ -35,9 +35,7 @@ namespace NanoByte.Common.Values.Design
     {
         /// <inheritdoc/>
         protected override float EditValue(float value, IWindowsFormsEditorService editorService)
-        {
-            return EditValue(value, new FloatRangeAttribute(0, 10), editorService);
-        }
+            => EditValue(value, new FloatRangeAttribute(0, 10), editorService);
 
         /// <inheritdoc/>
         protected override float EditValue(float value, FloatRangeAttribute range, IWindowsFormsEditorService editorService)

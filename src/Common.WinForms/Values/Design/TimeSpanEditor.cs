@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,10 +36,7 @@ namespace NanoByte.Common.Values.Design
     public class TimeSpanEditor : UITypeEditor
     {
         /// <inheritdoc/>
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
-        {
-            return UITypeEditorEditStyle.DropDown;
-        }
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) => UITypeEditorEditStyle.DropDown;
 
         /// <inheritdoc/>
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)

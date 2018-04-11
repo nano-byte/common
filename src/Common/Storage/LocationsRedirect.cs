@@ -40,7 +40,8 @@ namespace NanoByte.Common.Storage
         /// <param name="prefix">A short string the directory name should start with.</param>
         /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="System.IO.Path.GetTempPath"/>.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
-        public LocationsRedirect(string prefix) : base(prefix)
+        public LocationsRedirect(string prefix)
+            : base(prefix)
         {
             _previousPortableBase = Locations.PortableBase;
             _previousIsPortable = Locations.IsPortable;

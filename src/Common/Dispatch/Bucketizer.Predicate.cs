@@ -44,9 +44,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
         internal Bucketizer([NotNull] IEnumerable<T> elements)
-        {
-            _elements = elements ?? throw new ArgumentNullException(nameof(elements));
-        }
+            => _elements = elements ?? throw new ArgumentNullException(nameof(elements));
 
         /// <summary>
         /// Adds a new bucket rule.
@@ -56,7 +54,9 @@ namespace NanoByte.Common.Dispatch
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
         public Bucketizer<T> Add([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
         {
-            _rules.Add(new BucketRule<T>(predicate ?? throw new ArgumentNullException(nameof(predicate)), bucket ?? throw new ArgumentNullException(nameof(bucket))));
+            _rules.Add(new BucketRule<T>(
+                predicate ?? throw new ArgumentNullException(nameof(predicate)),
+                bucket ?? throw new ArgumentNullException(nameof(bucket))));
 
             return this;
         }

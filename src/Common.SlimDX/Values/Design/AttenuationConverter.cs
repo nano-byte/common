@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,16 +34,10 @@ namespace NanoByte.Common.Values.Design
         protected override int NoArguments => 3;
 
         /// <inheritdoc/>
-        protected override ConstructorInfo GetConstructor()
-        {
-            return typeof(Attenuation).GetConstructor(new[] {typeof(float), typeof(float), typeof(float)});
-        }
+        protected override ConstructorInfo GetConstructor() => typeof(Attenuation).GetConstructor(new[] {typeof(float), typeof(float), typeof(float)});
 
         /// <inheritdoc/>
-        protected override object[] GetArguments(Attenuation value)
-        {
-            return new object[] {value.Constant, value.Linear, value.Quadratic};
-        }
+        protected override object[] GetArguments(Attenuation value) => new object[] {value.Constant, value.Linear, value.Quadratic};
 
         /// <inheritdoc/>
         protected override string[] GetValues(Attenuation value, ITypeDescriptorContext context, CultureInfo culture)

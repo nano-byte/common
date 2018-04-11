@@ -136,7 +136,8 @@ namespace NanoByte.Common.StructureEditor
             where TProperty : class, IEquatable<TProperty>, new()
             where TEditor : Control, IEditorControlContainerRef<TProperty, TContainer>, new()
         {
-            public PropertyDescriptionContainerRef(string name, Func<TContainer, PropertyPointer<TProperty>> getPointer) : base(name, getPointer)
+            public PropertyDescriptionContainerRef(string name, Func<TContainer, PropertyPointer<TProperty>> getPointer)
+                : base(name, getPointer)
             {}
 
             protected override TEditor CreateEditor(TContainer container, TProperty value, Undo.ICommandExecutor executor)

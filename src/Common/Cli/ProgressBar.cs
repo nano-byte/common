@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -109,17 +109,11 @@ namespace NanoByte.Common.Cli
         /// <summary>
         /// Stops the progress bar by writing a line break to the <see cref="Console"/>.
         /// </summary>
-        public virtual void Done()
-        {
-            Console.Error.WriteLine();
-        }
+        public virtual void Done() => Console.Error.WriteLine();
 
         /// <summary>
         /// Stops the progress bar by writing a line break to the <see cref="Console"/>.
         /// </summary>
-        void IDisposable.Dispose()
-        {
-            Done();
-        }
+        void IDisposable.Dispose() => Done();
     }
 }

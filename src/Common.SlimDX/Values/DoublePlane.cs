@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -52,7 +52,8 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="point">A point that lies along the plane.</param>
         /// <param name="normal">The normal vector of the plane.</param>
-        public DoublePlane(DoubleVector3 point, Vector3 normal) : this()
+        public DoublePlane(DoubleVector3 point, Vector3 normal)
+            : this()
         {
             Point = point;
             Normal = normal;
@@ -63,10 +64,7 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="offset">This value is subtracted from the double-precision data before it is casted to single-precision.</param>
         /// <returns>The newly positioned <see cref="Plane"/>.</returns>
-        public Plane ApplyOffset(DoubleVector3 offset)
-        {
-            return new Plane(Point.ApplyOffset(offset), _normal);
-        }
+        public Plane ApplyOffset(DoubleVector3 offset) => new Plane(Point.ApplyOffset(offset), _normal);
 
         #region Conversion
         /// <inheritdoc/>

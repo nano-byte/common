@@ -38,7 +38,8 @@ namespace NanoByte.Common.Net
         /// Creates a new command-line credential provider.
         /// </summary>
         /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        public CliCredentialProvider([NotNull] ITaskHandler handler) : base(handler)
+        public CliCredentialProvider([NotNull] ITaskHandler handler)
+            : base(handler)
         {}
 
         /// <inheritdoc/>

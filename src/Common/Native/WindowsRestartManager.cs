@@ -90,10 +90,7 @@ namespace NanoByte.Common.Native
         }
 
         /// <inheritdoc/>
-        ~WindowsRestartManager()
-        {
-            DisposeNative();
-        }
+        ~WindowsRestartManager() => DisposeNative();
 
         private void DisposeNative()
         {
@@ -101,10 +98,7 @@ namespace NanoByte.Common.Native
             if (ret != 0) Log.Debug(BuildException(ret));
         }
 
-        private void CancellationCallback()
-        {
-            NativeMethods.RmCancelCurrentTask(_sessionHandle);
-        }
+        private void CancellationCallback() => NativeMethods.RmCancelCurrentTask(_sessionHandle);
         #endregion
 
         #region Resources

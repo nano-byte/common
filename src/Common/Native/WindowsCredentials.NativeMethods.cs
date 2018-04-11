@@ -40,6 +40,7 @@ namespace NanoByte.Common.Native
             public IntPtr hwndParent;
             public string pszMessageText;
             public string pszCaptionText;
+
             // ReSharper disable once FieldCanBeMadeReadOnly.Local
             public IntPtr hbmBanner;
         }

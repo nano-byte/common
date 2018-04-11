@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -39,8 +39,12 @@ namespace NanoByte.Common.Values.Design
         {
             return typeof(DoublePlane).GetConstructor(new[]
             {
-                typeof(double), typeof(double), typeof(double),
-                typeof(float), typeof(float), typeof(float)
+                typeof(double),
+                typeof(double),
+                typeof(double),
+                typeof(float),
+                typeof(float),
+                typeof(float)
             });
         }
 
@@ -49,8 +53,12 @@ namespace NanoByte.Common.Values.Design
         {
             return new object[]
             {
-                value.Point.X, value.Point.Y, value.Point.Z,
-                value.Normal.X, value.Normal.Y, value.Normal.Z
+                value.Point.X,
+                value.Point.Y,
+                value.Point.Z,
+                value.Normal.X,
+                value.Normal.Y,
+                value.Normal.Z
             };
         }
 

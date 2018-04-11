@@ -470,14 +470,11 @@ namespace NanoByte.Common.Controls
 
             if (_dropDownMenu != null)
                 _dropDownMenu.Show(this, new Point(0, Height));
-            else if (_dropDownMenuStrip != null)
-                _dropDownMenuStrip.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
+            else
+                _dropDownMenuStrip?.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
         }
 
-        private void DropDownMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            _isDropDownMenuVisible = true;
-        }
+        private void DropDownMenuStrip_Opening(object sender, CancelEventArgs e) => _isDropDownMenuVisible = true;
 
         private void DropDownMenuStrip_Closing(object sender, ToolStripDropDownClosingEventArgs e)
         {
@@ -489,10 +486,7 @@ namespace NanoByte.Common.Controls
                 _skipNextOpen = (EffectiveDropDownRectangle.Contains(PointToClient(Cursor.Position))) && MouseButtons == MouseButtons.Left;
         }
 
-        private void DropDownMenu_Popup(object sender, EventArgs e)
-        {
-            _isDropDownMenuVisible = true;
-        }
+        private void DropDownMenu_Popup(object sender, EventArgs e) => _isDropDownMenuVisible = true;
         #endregion
 
         #region Button Layout Calculations

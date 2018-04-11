@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -144,7 +144,7 @@ namespace NanoByte.Common.Storage
                 return (T)new XmlSerializer(typeof(T)).Deserialize(stream);
 #endif
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 // Convert exception type
@@ -177,7 +177,7 @@ namespace NanoByte.Common.Storage
                 using (var fileStream = File.OpenRead(path))
                     return LoadXml<T>(fileStream);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidDataException ex)
             {
                 // Change exception message to add context information
@@ -230,7 +230,8 @@ namespace NanoByte.Common.Storage
             var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
             {
                 Encoding = new UTF8Encoding(false),
-                Indent = true, IndentChars = "  ",
+                Indent = true,
+                IndentChars = "  ",
                 NewLineChars = "\n"
             });
 

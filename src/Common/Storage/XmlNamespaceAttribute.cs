@@ -45,9 +45,6 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="name">The short-name.</param>
         /// <param name="ns">The full namespace URI.</param>
-        public XmlNamespaceAttribute(string name, string ns)
-        {
-            QualifiedName = new XmlQualifiedName(name, ns);
-        }
+        public XmlNamespaceAttribute(string name, string ns) => QualifiedName = new XmlQualifiedName(name, ns);
     }
 }

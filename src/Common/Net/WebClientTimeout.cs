@@ -41,7 +41,8 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Creates a new <see cref="WebClient"/> using <see cref="DefaultTimeout"/>.
         /// </summary>
-        public WebClientTimeout() : this(DefaultTimeout)
+        public WebClientTimeout()
+            : this(DefaultTimeout)
         {}
 
         /// <summary>

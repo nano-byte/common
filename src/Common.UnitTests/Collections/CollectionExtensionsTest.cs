@@ -137,7 +137,7 @@ namespace NanoByte.Common.Collections
         [Fact]
         public void TestPermutate()
         {
-            var permutations = new[] { 1, 2, 3 }.Permutate().ToList();
+            var permutations = new[] {1, 2, 3}.Permutate().ToList();
             permutations[0].Should().Equal(1, 2, 3);
             permutations[1].Should().Equal(1, 3, 2);
             permutations[2].Should().Equal(2, 1, 3);

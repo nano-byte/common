@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -266,7 +266,6 @@ namespace NanoByte.Common.Storage.SlimDX
         #endregion
 
         #region Get file list
-
         #region Helpers
         /// <summary>
         /// Adds a specific file to the <paramref name="files"/> list.
@@ -333,8 +332,8 @@ namespace NanoByte.Common.Storage.SlimDX
         private static void AddArchivesToList(NamedCollection<FileEntry> files, string type, string extension, IEnumerable<KeyValuePair<string, ContentArchiveEntry>> archiveData, bool flagAsMod)
         {
             foreach (var pair in archiveData
-                .Where(pair => pair.Key.StartsWith(type, StringComparison.OrdinalIgnoreCase) &&
-                               pair.Key.EndsWith(extension, StringComparison.OrdinalIgnoreCase)))
+                .Where(pair => pair.Key.StartsWith(type, StringComparison.OrdinalIgnoreCase)
+                            && pair.Key.EndsWith(extension, StringComparison.OrdinalIgnoreCase)))
             {
                 // Cut away the type part of the path
                 AddFileToList(files, type, pair.Key.Substring(type.Length + 1), flagAsMod);
@@ -472,7 +471,7 @@ namespace NanoByte.Common.Storage.SlimDX
                         using (var inputStream = _modArchiveEntries[fullID].ZipFile.GetInputStream(_modArchiveEntries[fullID].ZipEntry))
                             inputStream.CopyToEx(memoryStream);
                     }
-                        #region Error handling
+                    #region Error handling
                     catch (ZipException ex)
                     {
                         throw new IOException(ex.Message, ex);

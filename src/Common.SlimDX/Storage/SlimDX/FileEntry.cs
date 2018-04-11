@@ -32,7 +32,6 @@ using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Storage.SlimDX
 {
-
     #region Enumerations
     /// <seealso cref="FileEntry.EntryType"/>
     public enum FileEntryType
@@ -147,7 +146,7 @@ namespace NanoByte.Common.Storage.SlimDX
                 {
                     ContentManager.DeleteModFile(FileType, _name);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (IOException)
                 {
                     Msg.Inform(null, Resources.UnableToDelete, MsgSeverity.Error);
@@ -186,17 +185,11 @@ namespace NanoByte.Common.Storage.SlimDX
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return _name.ToUpperInvariant().GetHashCode();
-        }
+        public override int GetHashCode() => _name.ToUpperInvariant().GetHashCode();
         #endregion
 
         #region Comparison
-        int IComparable<FileEntry>.CompareTo(FileEntry other)
-        {
-            return (other == null) ? 0 : string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        }
+        int IComparable<FileEntry>.CompareTo(FileEntry other) => (other == null) ? 0 : string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
         #endregion
     }
 }

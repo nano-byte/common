@@ -53,19 +53,13 @@ namespace NanoByte.Common.Values
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
         [CLSCompliant(false)]
         [Pure]
-        public static bool HasFlag(this ushort enumRef, ushort flag)
-        {
-            return (enumRef & flag) == flag;
-        }
+        public static bool HasFlag(this ushort enumRef, ushort flag) => (enumRef & flag) == flag;
 
         /// <summary>
         /// Checks whether a flag is set.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
         [Pure]
-        public static bool HasFlag(this int enumRef, int flag)
-        {
-            return (enumRef & flag) == flag;
-        }
+        public static bool HasFlag(this int enumRef, int flag) => (enumRef & flag) == flag;
     }
 }

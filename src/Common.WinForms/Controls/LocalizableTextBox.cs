@@ -57,7 +57,8 @@ namespace NanoByte.Common.Controls
         #endregion
 
         #region Constructor
-        public LocalizableTextBox() : base(showDescriptionBox: false)
+        public LocalizableTextBox()
+            : base(showDescriptionBox: false)
         {
             InitializeComponent();
         }
@@ -120,10 +121,7 @@ namespace NanoByte.Common.Controls
             FillTextBox();
         }
 
-        private void textBox_TextChanged(object sender, EventArgs e)
-        {
-            _textBoxDirty = true;
-        }
+        private void textBox_TextChanged(object sender, EventArgs e) => _textBoxDirty = true;
 
         private void textBox_Validating(object sender, CancelEventArgs e)
         {

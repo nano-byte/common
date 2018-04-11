@@ -58,19 +58,13 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="width">The width of the grid (number of values along the X axis).</param>
         /// <param name="height">The height of the grid (number of values along the Y axis).</param>
-        protected Grid(int width, int height)
-        {
-            Data = new T[width, height];
-        }
+        protected Grid(int width, int height) => Data = new T[width, height];
 
         /// <summary>
         /// Creates a new grid based on an existing array.
         /// </summary>
         /// <param name="data">Used as the internal array (no defensive copy). Do not modify once passing in!</param>
-        protected Grid(T[,] data)
-        {
-            Data = data;
-        }
+        protected Grid(T[,] data) => Data = data;
 
         /// <summary>
         /// Gets or sets a value in the grid.
@@ -81,10 +75,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Reads a value in the grid and automatically clamps out of bound values of <paramref name="x"/> or <paramref name="y"/>.
         /// </summary>
-        public T ClampedRead(int x, int y)
-        {
-            return Data[x.Clamp(0, Data.GetUpperBound(0)), y.Clamp(0, Data.GetUpperBound(1))];
-        }
+        public T ClampedRead(int x, int y) => Data[x.Clamp(0, Data.GetUpperBound(0)), y.Clamp(0, Data.GetUpperBound(1))];
 
         /// <summary>
         /// Saves the grid to a PNG file.

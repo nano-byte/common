@@ -98,10 +98,7 @@ namespace NanoByte.Common.Collections
         /// <param name="langCode">The string identifying the language to add.</param>
         /// <returns><c>true</c> if the language could be added, <c>false</c> otherwise.</returns>
         /// <exception cref="ArgumentException"><paramref name="langCode"/> is not a valid language code.</exception>
-        public bool Add(string langCode)
-        {
-            return Add(Languages.FromString(langCode));
-        }
+        public bool Add(string langCode) => Add(Languages.FromString(langCode));
 
         /// <summary>
         /// Determines whether this language set contains any of a set of target languages.

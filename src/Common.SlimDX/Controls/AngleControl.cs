@@ -45,10 +45,7 @@ namespace NanoByte.Common.Controls
         #endregion
 
         #region Constructor
-        public AngleControl()
-        {
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-        }
+        public AngleControl() => SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         #endregion
 
         //--------------------//

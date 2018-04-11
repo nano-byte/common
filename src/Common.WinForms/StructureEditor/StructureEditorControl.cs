@@ -151,7 +151,7 @@ namespace NanoByte.Common.StructureEditor
             {
                 Entry = entry;
                 ToolTipText = entry.Description;
-                ContextMenu = new ContextMenu(new MenuItem[] { });
+                ContextMenu = new ContextMenu(new MenuItem[] {});
             }
         }
         #endregion
@@ -194,12 +194,12 @@ namespace NanoByte.Common.StructureEditor
                 {
                     ChildInfo child1 = child;
                     buttonAdd.DropDownItems.Add(new ToolStripMenuItem(child.Name, null, delegate
-                    {
-                        var command = child1.Create();
-                        _selectedTarget = command.Value;
-                        CommandManager.Execute(command);
-                    })
-                    {ToolTipText = child.Description});
+                        {
+                            var command = child1.Create();
+                            _selectedTarget = command.Value;
+                            CommandManager.Execute(command);
+                        })
+                        {ToolTipText = child.Description});
                 }
             }
         }
@@ -262,8 +262,8 @@ namespace NanoByte.Common.StructureEditor
         /// Returns the XML representation of the <see cref="SelectedNode"/>.
         /// </summary>
         protected virtual string ToXmlString() => SelectedNode.Entry.ToXmlString()
-                // Hide <?xml> header
-                .GetRightPartAtFirstOccurrence('\n');
+            // Hide <?xml> header
+            .GetRightPartAtFirstOccurrence('\n');
 
         private void xmlEditor_ContentChanged(string text)
         {

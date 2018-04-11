@@ -32,19 +32,21 @@ namespace NanoByte.Common
     public class NotAdminException : UnauthorizedAccessException
     {
         /// <inheritdoc/>
-        public NotAdminException()
+        public NotAdminException() {}
+
+        /// <inheritdoc/>
+        public NotAdminException(string message, Exception inner)
+            : base(message, inner)
         {}
 
         /// <inheritdoc/>
-        public NotAdminException(string message, Exception inner) : base(message, inner)
+        public NotAdminException(string message)
+            : base(message)
         {}
 
         /// <inheritdoc/>
-        public NotAdminException(string message) : base(message)
-        {}
-
-        /// <inheritdoc/>
-        protected NotAdminException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected NotAdminException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {}
     }
 }

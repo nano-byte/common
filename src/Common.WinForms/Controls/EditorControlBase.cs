@@ -95,8 +95,11 @@ namespace NanoByte.Common.Controls
 
             var descriptionLabel = new Label
             {
-                Text = description.Description, AutoEllipsis = true,
-                AutoSize = false, Height = 35, Dock = DockStyle.Bottom,
+                Text = description.Description,
+                AutoEllipsis = true,
+                AutoSize = false,
+                Height = 35,
+                Dock = DockStyle.Bottom,
                 BorderStyle = BorderStyle.FixedSingle
             };
             descriptionLabel.Click += delegate { Msg.Inform(this, description.Description, MsgSeverity.Info); };
@@ -143,7 +146,7 @@ namespace NanoByte.Common.Controls
                     if (CommandExecutor == null) pointer.Value = text;
                     else CommandExecutor.Execute(new Undo.SetValueCommand<string>(pointer, text));
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Exception ex)
                 {
                     Msg.Inform(this, ex.Message, MsgSeverity.Warn);
@@ -152,7 +155,10 @@ namespace NanoByte.Common.Controls
                 #endregion
             };
 
-            OnRefresh += () => { if (control.Text != pointer.Value) control.Text = pointer.Value; };
+            OnRefresh += () =>
+            {
+                if (control.Text != pointer.Value) control.Text = pointer.Value;
+            };
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -104,17 +104,13 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Creates a new monitored collection.
         /// </summary>
-        public MonitoredCollection()
-        {}
+        public MonitoredCollection() {}
 
         /// <summary>
         /// Creates a new monitored collection with an upper limit to the number of elements.
         /// </summary>
         /// <param name="maxElements">The maximum number of elements; 0 for no limit.</param>
-        public MonitoredCollection(int maxElements)
-        {
-            MaxElements = maxElements;
-        }
+        public MonitoredCollection(int maxElements) => MaxElements = maxElements;
         #endregion
 
         //--------------------//

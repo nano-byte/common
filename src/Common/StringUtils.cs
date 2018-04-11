@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,19 +40,13 @@ namespace NanoByte.Common
         /// Compare strings using case-insensitive comparison.
         /// </summary>
         [Pure]
-        public static bool EqualsIgnoreCase([CanBeNull] string s1, [CanBeNull] string s2)
-        {
-            return string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
-        }
+        public static bool EqualsIgnoreCase([CanBeNull] string s1, [CanBeNull] string s2) => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Compare chars using case-insensitive comparison.
         /// </summary>
         [Pure]
-        public static bool EqualsIgnoreCase(char c1, char c2)
-        {
-            return char.ToLowerInvariant(c1) == char.ToLowerInvariant(c2);
-        }
+        public static bool EqualsIgnoreCase(char c1, char c2) => char.ToLowerInvariant(c1) == char.ToLowerInvariant(c2);
 
         /// <summary>
         /// Compare strings using case sensitive, invariant culture comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
@@ -472,9 +466,9 @@ namespace NanoByte.Common
                 // Is the current digit going to span a byte boundary?
                 if (index > (NormaleByteSize - Base32ByteSize))
                 {
-                    int nextByte = (i + 1) < data.Length
-                        ? ((data[i + 1] >= 0) ? data[i + 1]
-                            : (data[i + 1] + 256)) : 0;
+                    int nextByte = ((i + 1) < data.Length)
+                        ? ((data[i + 1] >= 0) ? data[i + 1] : (data[i + 1] + 256))
+                        : 0;
 
                     digit = currentByte & (0xFF >> index);
                     index = (index + Base32ByteSize) % NormaleByteSize;

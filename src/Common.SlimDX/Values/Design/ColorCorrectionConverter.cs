@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,16 +34,10 @@ namespace NanoByte.Common.Values.Design
         protected override int NoArguments => 4;
 
         /// <inheritdoc/>
-        protected override ConstructorInfo GetConstructor()
-        {
-            return typeof(ColorCorrection).GetConstructor(new[] {typeof(float), typeof(float), typeof(float), typeof(float)});
-        }
+        protected override ConstructorInfo GetConstructor() => typeof(ColorCorrection).GetConstructor(new[] {typeof(float), typeof(float), typeof(float), typeof(float)});
 
         /// <inheritdoc/>
-        protected override object[] GetArguments(ColorCorrection value)
-        {
-            return new object[] {value.Brightness, value.Contrast, value.Saturation, value.Hue};
-        }
+        protected override object[] GetArguments(ColorCorrection value) => new object[] {value.Brightness, value.Contrast, value.Saturation, value.Hue};
 
         /// <inheritdoc/>
         protected override string[] GetValues(ColorCorrection value, ITypeDescriptorContext context, CultureInfo culture)

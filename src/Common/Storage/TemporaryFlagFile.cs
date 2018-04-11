@@ -33,7 +33,8 @@ namespace NanoByte.Common.Storage
     public class TemporaryFlagFile : TemporaryDirectory
     {
         /// <inheritdoc/>
-        public TemporaryFlagFile(string prefix) : base(prefix)
+        public TemporaryFlagFile(string prefix)
+            : base(prefix)
         {}
 
         /// <summary>

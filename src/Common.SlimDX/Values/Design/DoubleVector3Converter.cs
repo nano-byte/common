@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,16 +34,10 @@ namespace NanoByte.Common.Values.Design
         protected override int NoArguments => 3;
 
         /// <inheritdoc/>
-        protected override ConstructorInfo GetConstructor()
-        {
-            return typeof(DoubleVector3).GetConstructor(new[] {typeof(double), typeof(double), typeof(double)});
-        }
+        protected override ConstructorInfo GetConstructor() => typeof(DoubleVector3).GetConstructor(new[] {typeof(double), typeof(double), typeof(double)});
 
         /// <inheritdoc/>
-        protected override object[] GetArguments(DoubleVector3 value)
-        {
-            return new object[] {value.X, value.Y};
-        }
+        protected override object[] GetArguments(DoubleVector3 value) => new object[] {value.X, value.Y};
 
         /// <inheritdoc/>
         protected override string[] GetValues(DoubleVector3 value, ITypeDescriptorContext context, CultureInfo culture)

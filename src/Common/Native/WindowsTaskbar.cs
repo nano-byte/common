@@ -151,7 +151,7 @@ namespace NanoByte.Common.Native
                 lock (_taskbarList)
                     _taskbarList.SetProgressState(handle, state);
             }
-                #region Error handling
+            #region Error handling
             catch (Exception ex)
             {
                 Log.Warn(ex);
@@ -175,7 +175,7 @@ namespace NanoByte.Common.Native
                 lock (_taskbarList)
                     _taskbarList.SetProgressValue(handle, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
             }
-                #region Error handling
+            #region Error handling
             catch (Exception ex)
             {
                 Log.Warn(ex);
@@ -213,7 +213,7 @@ namespace NanoByte.Common.Native
 
                 Marshal.ReleaseComObject(propertyStore);
             }
-                #region Error handling
+            #region Error handling
             catch (Exception ex)
             {
                 Log.Warn(ex);
@@ -251,7 +251,7 @@ namespace NanoByte.Common.Native
                 customDestinationList.AddUserTasks((IObjectArray)taskContent);
                 customDestinationList.CommitList();
             }
-                #region Error handling
+            #region Error handling
             catch (Exception ex)
             {
                 Log.Warn(ex);
@@ -277,7 +277,7 @@ namespace NanoByte.Common.Native
 
                 Marshal.ReleaseComObject(propertyStore);
             }
-                #region Error handling
+            #region Error handling
             catch (Exception ex)
             {
                 Log.Warn(ex);

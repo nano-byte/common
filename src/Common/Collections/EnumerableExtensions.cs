@@ -46,18 +46,14 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [NotNull, Pure, LinqTunnel]
         public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, bool> predicate)
-        {
-            return enumeration.Where(x => !predicate(x));
-        }
+            => enumeration.Where(x => !predicate(x));
 
         /// <summary>
         /// Filters a sequence of elements to remove any that are equal to <paramref name="element"/>.
         /// </summary>
         [NotNull, Pure, LinqTunnel]
         public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, T element)
-        {
-            return enumeration.Except(new[] {element});
-        }
+            => enumeration.Except(new[] {element});
 
         /// <summary>
         /// Flattens a list of lists.
@@ -65,36 +61,28 @@ namespace NanoByte.Common.Collections
         [NotNull, Pure]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<T> Flatten<T>([NotNull] this IEnumerable<IEnumerable<T>> enumeration)
-        {
-            return enumeration.SelectMany(x => x);
-        }
+            => enumeration.SelectMany(x => x);
 
         /// <summary>
         /// Appends an element to a list.
         /// </summary>
         [NotNull, Pure]
         public static IEnumerable<T> Append<T>([NotNull] this IEnumerable<T> enumeration, T element)
-        {
-            return enumeration.Concat(new[] {element});
-        }
+            => enumeration.Concat(new[] {element});
 
         /// <summary>
         /// Prepends an element to a list.
         /// </summary>
         [NotNull, Pure]
         public static IEnumerable<T> Prepend<T>([NotNull] this IEnumerable<T> enumeration, T element)
-        {
-            return new[] {element}.Concat(enumeration);
-        }
+            => new[] {element}.Concat(enumeration);
 
         /// <summary>
         /// Filters a sequence of elements to remove any <c>null</c> values.
         /// </summary>
         [NotNull, ItemNotNull, Pure, LinqTunnel]
         public static IEnumerable<T> WhereNotNull<T>([NotNull, ItemCanBeNull] this IEnumerable<T> enumeration)
-        {
-            return enumeration.Where(element => element != null);
-        }
+            => enumeration.Where(element => element != null);
 
         /// <summary>
         /// Determines the element in a list that maximizes a specified expression.
@@ -183,9 +171,7 @@ namespace NanoByte.Common.Collections
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
         [NotNull, Pure, LinqTunnel]
         public static IEnumerable<T> DistinctBy<T, TKey>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, TKey> keySelector)
-        {
-            return enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
-        }
+            => enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
 
         /// <summary>
         /// Maps elements like <see cref="Enumerable.Select{TSource,TResult}(IEnumerable{TSource},Func{TSource,TResult})"/>, but with exception handling.
@@ -267,17 +253,17 @@ namespace NanoByte.Common.Collections
         }
 
 #if NET45 || NETSTANDARD2_0
-        /// <summary>
-        /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
-        /// </summary>
-        /// <param name="enumerable">The input elements to enumerate over.</param>
-        /// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
-        /// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
-        /// <exception cref="InvalidOperationException"><see cref="TaskScheduler.Current"/> is equal to <see cref="TaskScheduler.Default"/>.</exception>
-        /// <remarks>
-        /// <see cref="SynchronizationContext.Current"/> must not be null.
-        /// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
-        /// </remarks>
+/// <summary>
+/// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
+/// </summary>
+/// <param name="enumerable">The input elements to enumerate over.</param>
+/// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
+/// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
+/// <exception cref="InvalidOperationException"><see cref="TaskScheduler.Current"/> is equal to <see cref="TaskScheduler.Default"/>.</exception>
+/// <remarks>
+/// <see cref="SynchronizationContext.Current"/> must not be null.
+/// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
+/// </remarks>
         [NotNull]
         public static async Task ForEachAsync<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, Task> taskFactory, int maxParallel = 0)
         {

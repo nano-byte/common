@@ -142,7 +142,7 @@ namespace NanoByte.Common.Storage
                     {
                         destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
                     }
-                        #region Error handling
+                    #region Error handling
                     catch (ArgumentException ex)
                     {
                         // The .NET BCL implementation of FileSystemInfo.Attributes_set raises ArgumentException instead of UnauthorizedAccessException for ERROR_ACCESS_DENIED
@@ -207,9 +207,6 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        private string PathInDestination(FileSystemInfo element)
-        {
-            return Path.Combine(DestinationPath, element.RelativeTo(_source));
-        }
+        private string PathInDestination(FileSystemInfo element) => Path.Combine(DestinationPath, element.RelativeTo(_source));
     }
 }

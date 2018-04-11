@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +31,6 @@ namespace NanoByte.Common
     public static class UpdateUtils
     {
         #region Ref bool
-
         #region Struct
         /// <summary>
         /// Updates a value and sets a boolean flag to <c>true</c> if the original value actually changed.
@@ -102,11 +101,9 @@ namespace NanoByte.Common
             original = value;
         }
         #endregion
-
         #endregion
 
         #region Exec Delegate
-
         #region Struct
         /// <summary>
         /// Updates a value and calls back a delegate if the original value actually changed.
@@ -179,7 +176,6 @@ namespace NanoByte.Common
             }
         }
         #endregion
-
         #endregion
 
         #region Swap

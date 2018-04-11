@@ -35,7 +35,8 @@ namespace NanoByte.Common.Net
     public abstract class WindowsCredentialProvider : CredentialProviderBase
     {
         /// <inheritdoc/>
-        protected WindowsCredentialProvider([NotNull] ITaskHandler handler) : base(handler)
+        protected WindowsCredentialProvider([NotNull] ITaskHandler handler)
+            : base(handler)
         {}
 
         /// <inheritdoc/>

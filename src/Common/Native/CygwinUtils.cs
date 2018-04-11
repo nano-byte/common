@@ -108,9 +108,7 @@ namespace NanoByte.Common.Native
         /// Always <c>true</c> on non-Windows systems since they do not expose this attribute, so we assume it might be set.
         /// </summary>
         private static bool HasSystemAttribute(string path)
-        {
-            return !WindowsUtils.IsWindows || File.GetAttributes(path).HasFlag(FileAttributes.System);
-        }
+            => !WindowsUtils.IsWindows || File.GetAttributes(path).HasFlag(FileAttributes.System);
 
         /// <summary>
         /// Creates a new Cygwin symbolic link (http://cygwin.com/cygwin-ug-net/using.html#pathnames-symlinks).

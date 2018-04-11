@@ -37,26 +37,18 @@ namespace NanoByte.Common.Controls
             buttonCancel.Text = Resources.Cancel;
         }
 
-        private void buttonOK_Click(object sender, System.EventArgs e)
-        {
-            OnOKClicked();
-        }
+        private void buttonOK_Click(object sender, System.EventArgs e) => OnOKClicked();
 
-        private void buttonCancel_Click(object sender, System.EventArgs e)
-        {
-            OnCancelClicked();
-        }
+        private void buttonCancel_Click(object sender, System.EventArgs e) => OnCancelClicked();
 
         /// <summary>
         /// This hook is called when the user clicks the OK button.
         /// </summary>
-        protected virtual void OnOKClicked()
-        {}
+        protected virtual void OnOKClicked() {}
 
         /// <summary>
         /// This hook is called when the user clicks the Cancel button.
         /// </summary>
-        protected virtual void OnCancelClicked()
-        {}
+        protected virtual void OnCancelClicked() {}
     }
 }

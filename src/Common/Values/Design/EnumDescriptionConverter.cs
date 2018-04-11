@@ -56,13 +56,13 @@ namespace NanoByte.Common.Values.Design
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             => value is string stringValue
-            ? GetEnumFromString(stringValue)
-            : base.ConvertFrom(context, culture, value);
+                ? GetEnumFromString(stringValue)
+                : base.ConvertFrom(context, culture, value);
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
             => value is Enum enumValue && destinationType == typeof(string)
-            ? enumValue.GetEnumAttributeValue((DescriptionAttribute attribute) => attribute.Description)
-            : base.ConvertTo(context, culture, value, destinationType);
+                ? enumValue.GetEnumAttributeValue((DescriptionAttribute attribute) => attribute.Description)
+                : base.ConvertTo(context, culture, value, destinationType);
     }
 }

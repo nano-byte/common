@@ -54,7 +54,7 @@ namespace NanoByte.Common
             {
                 return Registry.GetValue(keyName, valueName, defaultValue) as int? ?? defaultValue;
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 Log.Warn(ex);
@@ -81,7 +81,7 @@ namespace NanoByte.Common
             {
                 Registry.SetValue(keyName, valueName, value, RegistryValueKind.DWord);
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 // Wrap exception since only certain exception types are allowed
@@ -110,7 +110,7 @@ namespace NanoByte.Common
             {
                 return Registry.GetValue(keyName, valueName, defaultValue) as string ?? defaultValue;
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 Log.Warn(ex);
@@ -137,7 +137,7 @@ namespace NanoByte.Common
             {
                 Registry.SetValue(keyName, valueName, value, RegistryValueKind.String);
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 // Wrap exception since only certain exception types are allowed
@@ -268,7 +268,7 @@ namespace NanoByte.Common
                 using (var subkey = key.OpenSubKey(subkeyName))
                     return subkey?.GetValueNames() ?? new string[0];
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 Log.Warn(ex);
@@ -297,7 +297,7 @@ namespace NanoByte.Common
                 using (var subkey = key.OpenSubKey(subkeyName))
                     return subkey?.GetSubKeyNames() ?? new string[0];
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 Log.Warn(ex);
@@ -331,7 +331,7 @@ namespace NanoByte.Common
                 if (result == null) throw new IOException(string.Format("Failed to open subkey '{1}' in '{0}'.", key, subkeyName));
                 return result;
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 // Wrap exception since only certain exception types are allowed
@@ -362,7 +362,7 @@ namespace NanoByte.Common
                 if (result == null) throw new IOException(string.Format("Failed to create subkey '{1}' in '{0}'.", key, subkeyName));
                 return result;
             }
-                #region Error handling
+            #region Error handling
             catch (SecurityException ex)
             {
                 // Wrap exception since only certain exception types are allowed

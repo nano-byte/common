@@ -78,10 +78,7 @@ namespace NanoByte.Common.Streams
         /// Creates a new circular buffer.
         /// </summary>
         /// <param name="bufferSize">The maximum number of bytes the buffer can hold at any time.</param>
-        public CircularBufferStream(int bufferSize)
-        {
-            _buffer = new byte[bufferSize];
-        }
+        public CircularBufferStream(int bufferSize) => _buffer = new byte[bufferSize];
 
         /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
         private readonly object _lock = new object();
@@ -255,21 +252,14 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Sets the estimated number of bytes that will run through this buffer in total; -1 for unknown.
         /// </summary>
-        public override void SetLength(long value)
-        {
-            _length = value;
-        }
+        public override void SetLength(long value) => _length = value;
 
         #region Unsupported operations
         /// <inheritdoc/>
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            throw new NotSupportedException();
-        }
+        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
         /// <inheritdoc/>
-        public override void Flush()
-        {}
+        public override void Flush() {}
         #endregion
 
         #region Dispose

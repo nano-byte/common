@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,15 +33,9 @@ namespace NanoByte.Common.Values
         /// Creates a new key equality comparer.
         /// </summary>
         /// <param name="keySelector">A function mapping objects to their respective equality keys.</param>
-        public KeyEqualityComparer(Func<T, TKey> keySelector)
-        {
-            _keySelector = keySelector;
-        }
+        public KeyEqualityComparer(Func<T, TKey> keySelector) => _keySelector = keySelector;
 
-        public bool Equals(T x, T y)
-        {
-            return Equals(_keySelector(x), _keySelector(y));
-        }
+        public bool Equals(T x, T y) => Equals(_keySelector(x), _keySelector(y));
 
         public int GetHashCode(T obj)
         {

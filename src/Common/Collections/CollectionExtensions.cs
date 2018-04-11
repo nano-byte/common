@@ -101,8 +101,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><c>true</c> if any elements where removed.</returns>
         /// <seealso cref="List{T}.RemoveAll"/>
-        public static bool RemoveAll<T>([NotNull, InstantHandle] this ICollection<T> collection,
-            [NotNull] Func<T, bool> condition)
+        public static bool RemoveAll<T>([NotNull, InstantHandle] this ICollection<T> collection, [NotNull] Func<T, bool> condition)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));

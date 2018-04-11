@@ -117,10 +117,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Stops listening for incoming HTTP connections.
         /// </summary>
-        public void Dispose()
-        {
-            _listener.Close();
-        }
+        public void Dispose() => _listener.Close();
 
         /// <summary>
         /// Waits for HTTP requests and responds to them if they ask for "file".
@@ -135,7 +132,7 @@ namespace NanoByte.Common.Net
                     HandleRequest(context);
                     context.Response.OutputStream.Close();
                 }
-                    #region Error handling
+                #region Error handling
                 catch (HttpListenerException)
                 {
                     return;

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher, Simon E. Silva Lauinger
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -67,10 +67,7 @@ namespace NanoByte.Common.Storage
         /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
         /// </summary>
         [Pure, ContractAnnotation("null => null; notnull => notnull")]
-        public static string UnifySlashes([CanBeNull] string value)
-        {
-            return value?.Replace('/', Path.DirectorySeparatorChar);
-        }
+        public static string UnifySlashes([CanBeNull] string value) => value?.Replace('/', Path.DirectorySeparatorChar);
 
         /// <summary>
         /// Determines whether a path might escape its parent directory (by being absolute or using ..).
@@ -116,9 +113,9 @@ namespace NanoByte.Common.Storage
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            return File.Exists(path) &&
+            return File.Exists(path)
                    // Make sure the file found is a string-exact match
-                   Directory.GetFiles(Path.GetDirectoryName(path) ?? Directory.GetCurrentDirectory(), Path.GetFileName(path)).Contains(path);
+                && Directory.GetFiles(Path.GetDirectoryName(path) ?? Directory.GetCurrentDirectory(), Path.GetFileName(path)).Contains(path);
         }
         #endregion
 
@@ -432,7 +429,7 @@ namespace NanoByte.Common.Storage
                     dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl),
                     file => ResetAcl(file.GetAccessControl, file.SetAccessControl));
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 Log.Error(ex);
@@ -589,7 +586,7 @@ namespace NanoByte.Common.Storage
                         else UnixUtils.MakeWritable(file.FullName);
                     });
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -613,7 +610,7 @@ namespace NanoByte.Common.Storage
                 else acl.RemoveAccessRule(_denyEveryoneWrite);
                 directory.SetAccessControl(acl);
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 Log.Error(ex);
@@ -625,7 +622,6 @@ namespace NanoByte.Common.Storage
             #endregion
         }
         #endregion
-
         #endregion
 
         #region Links
@@ -650,7 +646,7 @@ namespace NanoByte.Common.Storage
                 {
                     UnixUtils.CreateSymlink(sourcePath, targetPath);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (InvalidOperationException ex)
                 {
                     throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -667,7 +663,7 @@ namespace NanoByte.Common.Storage
                 {
                     WindowsUtils.CreateSymlink(sourcePath, targetPath);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed
@@ -699,7 +695,7 @@ namespace NanoByte.Common.Storage
                 {
                     UnixUtils.CreateHardlink(sourcePath, targetPath);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (InvalidOperationException ex)
                 {
                     throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -716,7 +712,7 @@ namespace NanoByte.Common.Storage
                 {
                     WindowsUtils.CreateHardlink(sourcePath, targetPath);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed
@@ -747,7 +743,7 @@ namespace NanoByte.Common.Storage
                 {
                     return UnixUtils.AreHardlinked(path1, path2);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (InvalidOperationException ex)
                 {
                     throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -764,7 +760,7 @@ namespace NanoByte.Common.Storage
                 {
                     return WindowsUtils.AreHardlinked(path1, path2);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed
@@ -810,7 +806,7 @@ namespace NanoByte.Common.Storage
                 {
                     return !WindowsUtils.IsSymlink(path);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed
@@ -836,7 +832,7 @@ namespace NanoByte.Common.Storage
                 {
                     return UnixUtils.IsSymlink(path);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (InvalidOperationException ex)
                 {
                     throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -853,7 +849,7 @@ namespace NanoByte.Common.Storage
                 {
                     return WindowsUtils.IsSymlink(path);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed
@@ -880,7 +876,7 @@ namespace NanoByte.Common.Storage
                 {
                     return UnixUtils.IsSymlink(path, out target);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (InvalidOperationException ex)
                 {
                     throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -897,7 +893,7 @@ namespace NanoByte.Common.Storage
                 {
                     return WindowsUtils.IsSymlink(path, out target);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed
@@ -943,7 +939,7 @@ namespace NanoByte.Common.Storage
             {
                 return UnixUtils.IsExecutable(path);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -974,7 +970,7 @@ namespace NanoByte.Common.Storage
             {
                 UnixUtils.SetExecutable(path, executable);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -1049,7 +1045,7 @@ namespace NanoByte.Common.Storage
 
                 return true;
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
@@ -1058,7 +1054,7 @@ namespace NanoByte.Common.Storage
             {
                 throw new IOException(Resources.UnixSubsystemFail, ex);
             }
-                #endregion
+            #endregion
 
             finally
             {
@@ -1118,7 +1114,7 @@ namespace NanoByte.Common.Storage
                 {
                     WindowsUtils.WriteAllBytes(path + ":" + name, data);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Win32Exception ex)
                 {
                     // Wrap exception since only certain exception types are allowed

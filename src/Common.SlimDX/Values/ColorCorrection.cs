@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -82,7 +82,8 @@ namespace NanoByte.Common.Values
         /// <param name="contrast">The contrast level of the picture - values between -5 and 5.</param>
         /// <param name="saturation">The color saturation level of the picture - values between -5 and 5.</param>
         /// <param name="hue">The color hue rotation of the picture - values between 0 and 360.</param>
-        public ColorCorrection(float brightness = 1, float contrast = 1, float saturation = 1, float hue = 0) : this()
+        public ColorCorrection(float brightness = 1, float contrast = 1, float saturation = 1, float hue = 0)
+            : this()
         {
             Brightness = brightness;
             Contrast = contrast;

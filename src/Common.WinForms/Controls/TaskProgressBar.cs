@@ -53,10 +53,7 @@ namespace NanoByte.Common.Controls
         [Description("Show the progress in the Windows taskbar."), DefaultValue(false)]
         public bool UseTaskbar { set; get; }
 
-        public TaskProgressBar()
-        {
-            CreateHandle();
-        }
+        public TaskProgressBar() => CreateHandle();
 
         /// <inheritdoc/>
         public void Report(TaskSnapshot value)

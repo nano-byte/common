@@ -96,10 +96,7 @@ namespace NanoByte.Common.Values.Design
 
         #region Create instance
         /// <inheritdoc/>
-        public override object CreateInstance(ITypeDescriptorContext context, IDictionary propertyValues)
-        {
-            return GetObject(propertyValues);
-        }
+        public override object CreateInstance(ITypeDescriptorContext context, IDictionary propertyValues) => GetObject(propertyValues);
         #endregion
 
         //--------------------//

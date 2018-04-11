@@ -45,9 +45,6 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        public TimeSpanControl()
-        {
-            InitializeComponent();
-        }
+        public TimeSpanControl() => InitializeComponent();
     }
 }

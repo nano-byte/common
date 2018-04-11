@@ -33,15 +33,11 @@ namespace NanoByte.Common.Controls
     /// <typeparam name="T">The type of element to edit.</typeparam>
     public sealed class GenericEditorControl<T> : EditorControlBase<T> where T : class
     {
-        public GenericEditorControl()
-        {
-            AddPropertyGrid();
-        }
+        public GenericEditorControl() => AddPropertyGrid();
 
-        public GenericEditorControl(bool showDescriptionBox) : base(showDescriptionBox)
-        {
-            AddPropertyGrid();
-        }
+        public GenericEditorControl(bool showDescriptionBox)
+            : base(showDescriptionBox)
+        { AddPropertyGrid(); }
 
         private void AddPropertyGrid()
         {

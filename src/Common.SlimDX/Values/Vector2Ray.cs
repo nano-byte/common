@@ -53,7 +53,8 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="point">A point along the ray</param>
         /// <param name="direction">A vector pointing along the ray - automatically normalized when set</param>
-        public Vector2Ray(Vector2 point, Vector2 direction) : this()
+        public Vector2Ray(Vector2 point, Vector2 direction)
+            : this()
         {
             Position = point;
             Direction = direction;

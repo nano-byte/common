@@ -52,9 +52,6 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Creates a new <see cref="CompositeCommand"/> containing all <see cref="IUndoCommand"/>s collected so far.
         /// </summary>
-        public IUndoCommand BuildComposite()
-        {
-            return new PreExecutedCompositeCommand(_commands);
-        }
+        public IUndoCommand BuildComposite() => new PreExecutedCompositeCommand(_commands);
     }
 }

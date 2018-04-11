@@ -38,7 +38,7 @@ namespace NanoByte.Common.Storage
     /// }
     /// </code></example>
     /// <seealso cref="AtomicRead"/>
-    public sealed  class AtomicWrite : IDisposable
+    public sealed class AtomicWrite : IDisposable
     {
         /// <summary>
         /// The file path of the final destination.

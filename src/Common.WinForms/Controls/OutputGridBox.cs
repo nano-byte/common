@@ -71,10 +71,7 @@ namespace NanoByte.Common.Controls
         {
             public T Value { get; }
 
-            public SimpleEntry(T value)
-            {
-                Value = value;
-            }
+            public SimpleEntry(T value) => Value = value;
         }
 
         private void SetData<T>(IEnumerable<T> data)

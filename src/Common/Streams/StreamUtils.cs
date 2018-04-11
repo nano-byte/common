@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -282,7 +282,7 @@ namespace NanoByte.Common.Streams
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
-            using (var stream = type.GetEmbeddedStream( name))
+            using (var stream = type.GetEmbeddedStream(name))
                 stream.CopyToFile(path);
         }
     }

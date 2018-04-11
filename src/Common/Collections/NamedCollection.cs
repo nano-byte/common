@@ -40,23 +40,22 @@ namespace NanoByte.Common.Collections
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         public event Action<object> CollectionChanged;
 
-        private void OnCollectionChanged()
-        {
-            CollectionChanged?.Invoke(this);
-        }
+        private void OnCollectionChanged() => CollectionChanged?.Invoke(this);
         #endregion
 
         /// <summary>
         /// Creates a new named collection.
         /// </summary>
-        public NamedCollection() : base(StringComparer.OrdinalIgnoreCase)
+        public NamedCollection()
+            : base(StringComparer.OrdinalIgnoreCase)
         {}
 
         /// <summary>
         /// Creates a new named collection pre-filled with elements.
         /// </summary>
         /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed{T}.Name"/>s!</param>
-        public NamedCollection([NotNull, ItemNotNull] IEnumerable<T> elements) : this()
+        public NamedCollection([NotNull, ItemNotNull] IEnumerable<T> elements)
+            : this()
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));
@@ -100,10 +99,7 @@ namespace NanoByte.Common.Collections
 
         #region Hooks
         /// <inheritdoc/>
-        protected override string GetKeyForItem(T item)
-        {
-            return item.Name;
-        }
+        protected override string GetKeyForItem(T item) => item.Name;
 
         /// <inheritdoc/>
         protected override void InsertItem(int index, T item)

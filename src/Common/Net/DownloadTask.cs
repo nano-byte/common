@@ -133,7 +133,7 @@ namespace NanoByte.Common.Net
                     if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
                 }
             }
-                #region Error handling
+            #region Error handling
             catch (NotSupportedException ex)
             {
                 // Wrap exception since only certain exception types are allowed

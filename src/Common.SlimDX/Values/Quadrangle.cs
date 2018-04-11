@@ -87,7 +87,8 @@ namespace NanoByte.Common.Values
         /// Creates a new quadrangle. Counter-clockwise ordering is recommended.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1025:ReplaceRepetitiveArgumentsWithParamsArray", Justification = "We always want exactly four points")]
-        public Quadrangle(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4) : this()
+        public Quadrangle(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
+            : this()
         {
             P1 = p1;
             P2 = p2;
@@ -98,7 +99,8 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Creates a new quadrangle. Counter-clockwise ordering is recommended.
         /// </summary>
-        public Quadrangle(float p1X, float p1Y, float p2X, float p2Y, float p3X, float p3Y, float p4X, float p4Y) : this()
+        public Quadrangle(float p1X, float p1Y, float p2X, float p2Y, float p3X, float p3Y, float p4X, float p4Y)
+            : this()
         {
             P1 = new Vector2(p1X, p1Y);
             P2 = new Vector2(p2X, p2Y);
@@ -109,7 +111,8 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Creates a new quadrangle from a simple rectangle.
         /// </summary>
-        public Quadrangle(RectangleF rectangle) : this()
+        public Quadrangle(RectangleF rectangle)
+            : this()
         {
             P1 = new Vector2(rectangle.Left, rectangle.Top);
             P2 = new Vector2(rectangle.Left, rectangle.Bottom);
@@ -149,7 +152,6 @@ namespace NanoByte.Common.Values
         #endregion
 
         #region Intersect
-
         #region Point
         /// <summary>
         /// If the points are stored counter-clockwise and form a convex polygon, this will test if a point lies inside it.
@@ -235,7 +237,6 @@ namespace NanoByte.Common.Values
             return false;
         }
         #endregion
-
         #endregion
 
         //--------------------//

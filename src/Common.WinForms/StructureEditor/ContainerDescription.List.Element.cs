@@ -112,7 +112,8 @@ namespace NanoByte.Common.StructureEditor
                 where TElement : class, TList, IEquatable<TElement>, new()
                 where TEditor : Control, IEditorControlContainerRef<TElement, TContainer>, new()
             {
-                public ElementDescriptionContainerRef(string name) : base(name)
+                public ElementDescriptionContainerRef(string name)
+                    : base(name)
                 {}
 
                 protected override TEditor CreateEditor(TContainer container, TElement value, Undo.ICommandExecutor executor)

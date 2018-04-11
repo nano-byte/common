@@ -39,8 +39,14 @@ namespace NanoByte.Common.Values.Design
         {
             return typeof(Quadrangle).GetConstructor(new[]
             {
-                typeof(float), typeof(float), typeof(float), typeof(float),
-                typeof(float), typeof(float), typeof(float), typeof(float)
+                typeof(float),
+                typeof(float),
+                typeof(float),
+                typeof(float),
+                typeof(float),
+                typeof(float),
+                typeof(float),
+                typeof(float)
             });
         }
 
@@ -49,8 +55,14 @@ namespace NanoByte.Common.Values.Design
         {
             return new object[]
             {
-                value.P1.X, value.P1.Y, value.P2.X, value.P2.Y,
-                value.P3.X, value.P3.Y, value.P4.X, value.P4.Y
+                value.P1.X,
+                value.P1.Y,
+                value.P2.X,
+                value.P2.Y,
+                value.P3.X,
+                value.P3.Y,
+                value.P4.X,
+                value.P4.Y
             };
         }
 

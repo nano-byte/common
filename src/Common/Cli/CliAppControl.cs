@@ -77,7 +77,7 @@ namespace NanoByte.Common.Cli
                 process = GetStartInfo(arguments).Start();
                 Debug.Assert(process != null);
             }
-                #region Error handling
+            #region Error handling
             catch (IOException ex)
             {
                 throw new IOException(string.Format(Resources.UnableToLaunchBundled, AppBinary), ex);
@@ -136,8 +136,7 @@ namespace NanoByte.Common.Cli
         /// </summary>
         /// <param name="writer">The stream writer providing access to stdin.</param>
         [PublicAPI]
-        protected virtual void InitStdin([NotNull] StreamWriter writer)
-        {}
+        protected virtual void InitStdin([NotNull] StreamWriter writer) {}
 
         /// <summary>
         /// Reads all currently pending <paramref name="stderr"/> lines and sends responses to <paramref name="stdin"/>.

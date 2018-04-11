@@ -37,10 +37,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Returns the arguments stored in this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return _args;
-        }
+        public override string ToString() => _args;
 
         private readonly List<string> _files = new List<string>();
 
@@ -66,13 +63,9 @@ namespace NanoByte.Common
         #endregion
 
         #region Constructor
-
         #region Helper
         /// <returns><c>true</c> if <paramref name="value"/> starts with a slash or a hyphen.</returns>
-        private static bool IsCommand(string value)
-        {
-            return value.StartsWith("/", StringComparison.Ordinal) || value.StartsWith("-", StringComparison.Ordinal);
-        }
+        private static bool IsCommand(string value) => value.StartsWith("/", StringComparison.Ordinal) || value.StartsWith("-", StringComparison.Ordinal);
         #endregion
 
         /// <summary>
@@ -115,9 +108,6 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="command">The command to check for.</param>
         /// <returns>True if the command was set; false otherwise.</returns>
-        public bool Contains(string command)
-        {
-            return _commands.ContainsKey(command);
-        }
+        public bool Contains(string command) => _commands.ContainsKey(command);
     }
 }

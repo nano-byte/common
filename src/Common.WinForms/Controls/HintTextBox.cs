@@ -83,10 +83,7 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Raises the <see cref="ClearButtonClicked"/> event.
         /// </summary>
-        protected virtual void OnClearButtonClicked(EventArgs e)
-        {
-            ClearButtonClicked?.Invoke(this, e);
-        }
+        protected virtual void OnClearButtonClicked(EventArgs e) => ClearButtonClicked?.Invoke(this, e);
         #endregion
 
         #region Variables
@@ -97,9 +94,14 @@ namespace NanoByte.Common.Controls
 
         private readonly PictureBox _buttonClear = new PictureBox
         {
-            Visible = false, Cursor = Cursors.Default,
-            Location = new Point(81, 1), Size = new Size(14, 14), Dock = DockStyle.Right,
-            BackColor = SystemColors.Window, Image = _clearButton, SizeMode = PictureBoxSizeMode.Zoom
+            Visible = false,
+            Cursor = Cursors.Default,
+            Location = new Point(81, 1),
+            Size = new Size(14, 14),
+            Dock = DockStyle.Right,
+            BackColor = SystemColors.Window,
+            Image = _clearButton,
+            SizeMode = PictureBoxSizeMode.Zoom
         };
         #endregion
 

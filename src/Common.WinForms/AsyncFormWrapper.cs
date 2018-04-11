@@ -100,7 +100,7 @@ namespace NanoByte.Common
             {
                 form.Invoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -129,7 +129,7 @@ namespace NanoByte.Common
             {
                 return (TResult)form.Invoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -156,7 +156,7 @@ namespace NanoByte.Common
             {
                 form.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -186,7 +186,7 @@ namespace NanoByte.Common
             {
                 form.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), form);
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 Log.Debug(ex);
@@ -223,7 +223,7 @@ namespace NanoByte.Common
                     form.Dispose();
                 }));
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException ex)
             {
                 // Don't worry if the form was already closing
@@ -248,9 +248,6 @@ namespace NanoByte.Common
         }
 
         /// <inheritdoc/>
-        public void Dispose()
-        {
-            Close();
-        }
+        public void Dispose() => Close();
     }
 }

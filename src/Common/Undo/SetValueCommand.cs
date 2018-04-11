@@ -55,8 +55,8 @@ namespace NanoByte.Common.Undo
         /// <param name="getValue">A delegate that returns the current value.</param>
         /// <param name="setValue">A delegate that sets the valuel.</param>
         /// <param name="newValue">The new value to be set.</param>
-        public SetValueCommand([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue) :
-            this(new PropertyPointer<T>(getValue, setValue), newValue)
+        public SetValueCommand([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue)
+            : this(new PropertyPointer<T>(getValue, setValue), newValue)
         {}
 
         /// <summary>

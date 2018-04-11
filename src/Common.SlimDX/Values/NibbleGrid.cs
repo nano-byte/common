@@ -35,11 +35,13 @@ namespace NanoByte.Common.Values
     public class NibbleGrid : Grid<byte>
     {
         /// <inheritdoc/>
-        public NibbleGrid(int width, int height) : base(width, height)
+        public NibbleGrid(int width, int height)
+            : base(width, height)
         {}
 
         /// <inheritdoc/>
-        public NibbleGrid([NotNull] byte[,] data) : base(data)
+        public NibbleGrid([NotNull] byte[,] data)
+            : base(data)
         {}
 
         /// <summary>
@@ -80,7 +82,7 @@ namespace NanoByte.Common.Values
                     return new NibbleGrid(data);
                 }
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 throw new IOException(Resources.NotAnImage, ex);

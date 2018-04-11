@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -174,10 +174,7 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void buttonCancel_Click(object sender, EventArgs e) => Close();
         #endregion
 
         #region Generate report

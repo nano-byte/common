@@ -73,10 +73,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Waits for <see cref="StreamReader.EndOfStream"/>.
         /// </summary>
-        public void WaitForEnd()
-        {
-            _thread.Join();
-        }
+        public void WaitForEnd() => _thread.Join();
 
         /// <summary>
         /// Returns all buffered lines that have not been read yet.

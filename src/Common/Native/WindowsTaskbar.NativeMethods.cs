@@ -317,7 +317,7 @@ namespace NanoByte.Common.Native
                     _taskbarList = (ITaskbarList4)new CTaskbarList();
                     _taskbarList.HrInit();
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Exception ex)
                 {
                     Log.Warn(ex);

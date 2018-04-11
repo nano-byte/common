@@ -89,15 +89,9 @@ namespace NanoByte.Common.Dispatch
         }
 
         #region IEnumerable
-        public IEnumerator<Func<TBase, IEnumerable<TResult>>> GetEnumerator()
-        {
-            return _delegates.GetEnumerator();
-        }
+        public IEnumerator<Func<TBase, IEnumerable<TResult>>> GetEnumerator() => _delegates.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _delegates.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _delegates.GetEnumerator();
         #endregion
     }
 }

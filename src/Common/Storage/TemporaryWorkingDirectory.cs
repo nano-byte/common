@@ -35,7 +35,8 @@ namespace NanoByte.Common.Storage
 
         #region Constructor
         /// <inheritdoc/>
-        public TemporaryWorkingDirectory(string prefix) : base(prefix)
+        public TemporaryWorkingDirectory(string prefix)
+            : base(prefix)
         {
             // Remember the current working directory for later restoration and then change it
             _oldWorkingDir = Directory.GetCurrentDirectory();

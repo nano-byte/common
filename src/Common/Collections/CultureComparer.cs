@@ -34,8 +34,7 @@ namespace NanoByte.Common.Collections
         /// <summary>A singleton instance of the comparer.</summary>
         public static readonly CultureComparer Instance = new CultureComparer();
 
-        private CultureComparer()
-        {}
+        private CultureComparer() {}
 
         /// <inheritdoc/>
         public int Compare(CultureInfo x, CultureInfo y)

@@ -65,8 +65,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Base-constructor for XML serialization. Do not call manually!
         /// </summary>
-        public XmlDictionaryEntry()
-        {}
+        public XmlDictionaryEntry() {}
 
         /// <summary>
         /// Creates a new entry for <see cref="XmlDictionary"/>.

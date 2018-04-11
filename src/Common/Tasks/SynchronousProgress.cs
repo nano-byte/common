@@ -44,10 +44,7 @@ namespace NanoByte.Common.Tasks
             if (callback != null) ProgressChanged += callback;
         }
 
-        void IProgress<T>.Report(T value)
-        {
-            OnReport(value);
-        }
+        void IProgress<T>.Report(T value) => OnReport(value);
 
         protected virtual void OnReport(T value)
         {

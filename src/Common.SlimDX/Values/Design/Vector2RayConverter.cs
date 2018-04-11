@@ -39,8 +39,10 @@ namespace NanoByte.Common.Values.Design
         {
             return typeof(Vector2Ray).GetConstructor(new[]
             {
-                typeof(float), typeof(float),
-                typeof(float), typeof(float)
+                typeof(float),
+                typeof(float),
+                typeof(float),
+                typeof(float)
             });
         }
 
@@ -49,8 +51,10 @@ namespace NanoByte.Common.Values.Design
         {
             return new object[]
             {
-                value.Position.X, value.Position.Y,
-                value.Direction.X, value.Direction.Y
+                value.Position.X,
+                value.Position.Y,
+                value.Direction.X,
+                value.Direction.Y
             };
         }
 

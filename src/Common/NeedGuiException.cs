@@ -32,19 +32,21 @@ namespace NanoByte.Common
     public class NeedGuiException : InvalidOperationException
     {
         /// <inheritdoc/>
-        public NeedGuiException()
+        public NeedGuiException() {}
+
+        /// <inheritdoc/>
+        public NeedGuiException(string message, Exception inner)
+            : base(message, inner)
         {}
 
         /// <inheritdoc/>
-        public NeedGuiException(string message, Exception inner) : base(message, inner)
+        public NeedGuiException(string message)
+            : base(message)
         {}
 
         /// <inheritdoc/>
-        public NeedGuiException(string message) : base(message)
-        {}
-
-        /// <inheritdoc/>
-        protected NeedGuiException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected NeedGuiException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {}
     }
 }

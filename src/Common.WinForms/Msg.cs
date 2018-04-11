@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -112,7 +112,7 @@ namespace NanoByte.Common
                 {
                     return ShowTaskDialog(taskDialog, owner) == DialogResult.OK;
                 }
-                    #region Error handling
+                #region Error handling
                 catch (BadImageFormatException)
                 {
                     return ShowMesageBox(owner, text, severity, MessageBoxButtons.OKCancel) == DialogResult.OK;
@@ -135,9 +135,7 @@ namespace NanoByte.Common
         /// <returns><c>true</c> if OK was selected, <c>false</c> if Cancel was selected.</returns>
         /// <remarks>If a <see cref="MessageBox"/> is used, OK and Cancel are not display to the user, so don't rely on them!</remarks>
         public static bool OkCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
-        {
-            return OkCancel(owner, text, severity, "OK", Resources.Cancel);
-        }
+            => OkCancel(owner, text, severity, "OK", Resources.Cancel);
         #endregion
 
         #region Yes/No
@@ -175,7 +173,7 @@ namespace NanoByte.Common
                 {
                     return (ShowTaskDialog(taskDialog, owner) == DialogResult.Yes);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (BadImageFormatException)
                 {
                     return (ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNo) == DialogResult.Yes);
@@ -196,9 +194,7 @@ namespace NanoByte.Common
         /// <param name="text">The message to be displayed.</param>
         /// <param name="severity">How severe/important the message is.</param>
         public static bool YesNo([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
-        {
-            return YesNo(owner, text, severity, Resources.Yes, Resources.No);
-        }
+            => YesNo(owner, text, severity, Resources.Yes, Resources.No);
         #endregion
 
         #region Yes/No/Cancel
@@ -243,7 +239,7 @@ namespace NanoByte.Common
                 {
                     return ShowTaskDialog(taskDialog, owner);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (BadImageFormatException)
                 {
                     return ShowMesageBox(owner, text, severity, MessageBoxButtons.YesNoCancel);
@@ -267,9 +263,7 @@ namespace NanoByte.Common
         /// <see cref="DialogResult.No"/> if No was chosen,
         /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
         public static DialogResult YesNoCancel([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string text, MsgSeverity severity)
-        {
-            return YesNoCancel(owner, text, severity, Resources.Yes, Resources.No);
-        }
+            => YesNoCancel(owner, text, severity, Resources.Yes, Resources.No);
         #endregion
 
         //--------------------//

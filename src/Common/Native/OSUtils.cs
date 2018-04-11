@@ -83,7 +83,7 @@ namespace NanoByte.Common.Native
                 if (x.Index >= 1 && value[x.Index - 1] == '$') // Treat $$ as escaping
                     return "{" + x.Groups[1].Value + "}";
 
-                var parts = x.Groups[1].Value.Split(new[] { ":-" }, StringSplitOptions.None);
+                var parts = x.Groups[1].Value.Split(new[] {":-"}, StringSplitOptions.None);
                 if (variables.TryGetValue(parts[0], out string ret) && !string.IsNullOrEmpty(ret))
                     return ret;
                 else if (parts.Length > 1)

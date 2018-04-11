@@ -1,4 +1,4 @@
-namespace NanoByte.Common
+﻿namespace NanoByte.Common
 {
     /// <summary>
     /// Describes how severe/important a <see cref="Log"/> entry is.

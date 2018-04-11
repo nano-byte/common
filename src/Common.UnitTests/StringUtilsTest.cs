@@ -104,16 +104,10 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public void TestStripCharacters()
-        {
-            "a!b?".StripCharacters("!?").Should().Be("ab");
-        }
+        public void TestStripCharacters() => "a!b?".StripCharacters("!?").Should().Be("ab");
 
         [Fact]
-        public void TestStripFromEnd()
-        {
-            "abc".StripFromEnd(count: 1).Should().Be("ab");
-        }
+        public void TestStripFromEnd() => "abc".StripFromEnd(count: 1).Should().Be("ab");
 
         [Fact]
         public void TestEscapeArgument()
@@ -142,22 +136,13 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public void TestBase32Encode()
-        {
-            new byte[] {65, 66}.Base32Encode().Should().Be("IFBA");
-        }
+        public void TestBase32Encode() => new byte[] {65, 66}.Base32Encode().Should().Be("IFBA");
 
         [Fact]
-        public void TestBase16Encode()
-        {
-            new byte[] {65, 66}.Base16Encode().Should().Be("4142");
-        }
+        public void TestBase16Encode() => new byte[] {65, 66}.Base16Encode().Should().Be("4142");
 
         [Fact]
-        public void TestBase16Decode()
-        {
-            "4142".Base16Decode().Should().Equal(65, 66);
-        }
+        public void TestBase16Decode() => "4142".Base16Decode().Should().Equal(65, 66);
 
         [Fact]
         public void TestHash()

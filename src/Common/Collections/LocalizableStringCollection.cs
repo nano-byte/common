@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -55,10 +55,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="value">The actual string value to store.</param>
         [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo")]
-        public void Add(string value)
-        {
-            Add(new LocalizableString {Value = value});
-        }
+        public void Add(string value) => Add(new LocalizableString {Value = value});
 
         /// <summary>
         /// Checks if the collection contains an entry exactly matching the specified language.

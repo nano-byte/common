@@ -39,10 +39,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new transparent cache.
         /// </summary>
         /// <param name="retriever">The callback used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.</param>
-        public TransparentCache([NotNull] Func<TKey, TValue> retriever)
-        {
-            _retriever = retriever;
-        }
+        public TransparentCache([NotNull] Func<TKey, TValue> retriever) => _retriever = retriever;
 
         /// <inheritdoc/>
         protected override TValue Retrieve(TKey key) => _retriever(key);

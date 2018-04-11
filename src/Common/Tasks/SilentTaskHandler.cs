@@ -33,8 +33,7 @@ namespace NanoByte.Common.Tasks
     public class SilentTaskHandler : ITaskHandler
     {
         /// <inheritdoc/>
-        public virtual void Dispose()
-        {}
+        public virtual void Dispose() {}
 
         /// <inheritdoc/>
         public virtual CancellationToken CancellationToken => default;

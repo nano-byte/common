@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -66,7 +66,8 @@ namespace NanoByte.Common.Values
         /// <param name="constant">A constant factor multiplied with the color.</param>
         /// <param name="linear">A constant factor multiplied with the color and the inverse distance.</param>
         /// <param name="quadratic">A constant factor multiplied with the color and the inverse distance squared.</param>
-        public Attenuation(float constant, float linear, float quadratic) : this()
+        public Attenuation(float constant, float linear, float quadratic)
+            : this()
         {
             Constant = constant;
             Linear = linear;
@@ -87,10 +88,7 @@ namespace NanoByte.Common.Values
         #region Equality
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-        public bool Equals(Attenuation other)
-        {
-            return other.Constant == Constant && other.Linear == Linear && other.Quadratic == Quadratic;
-        }
+        public bool Equals(Attenuation other) => other.Constant == Constant && other.Linear == Linear && other.Quadratic == Quadratic;
 
         public static bool operator ==(Attenuation left, Attenuation right) => left.Equals(right);
         public static bool operator !=(Attenuation left, Attenuation right) => !left.Equals(right);

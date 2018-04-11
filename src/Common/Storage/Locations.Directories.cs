@@ -126,7 +126,7 @@ namespace NanoByte.Common.Storage
                         : Path.Combine(UserCacheDir, appName);
                 }
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information

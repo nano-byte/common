@@ -34,15 +34,9 @@ namespace NanoByte.Common.Undo
         {
             public bool Executed { get; private set; }
 
-            public void Execute()
-            {
-                Executed = true;
-            }
+            public void Execute() => Executed = true;
 
-            public void Undo()
-            {
-                Executed = false;
-            }
+            public void Undo() => Executed = false;
         }
 
         /// <summary>

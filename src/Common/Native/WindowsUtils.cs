@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -295,10 +295,7 @@ namespace NanoByte.Common.Native
         /// Tries to attach to a command-line console owned by the parent process.
         /// </summary>
         /// <returns><c>true</c> if the console was successfully attached; <c>false</c> if the parent process did not own a console.</returns>
-        public static bool AttachConsole()
-        {
-            return IsWindowsNT && NativeMethods.AttachConsole(uint.MaxValue);
-        }
+        public static bool AttachConsole() => IsWindowsNT && NativeMethods.AttachConsole(uint.MaxValue);
         #endregion
 
         #region Performance counter
@@ -595,10 +592,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="message">A unique string used to identify the message type session-wide.</param>
         /// <returns>A unique ID number used to identify the message type session-wide.</returns>
-        public static int RegisterWindowMessage([Localizable(false)] string message)
-        {
-            return IsWindows ? NativeMethods.RegisterWindowMessage(message) : 0;
-        }
+        public static int RegisterWindowMessage([Localizable(false)] string message) => IsWindows ? NativeMethods.RegisterWindowMessage(message) : 0;
 
         /// <summary>
         /// Sends a message of a specific type to all windows in the current session.

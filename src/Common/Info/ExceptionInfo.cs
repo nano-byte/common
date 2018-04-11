@@ -66,14 +66,14 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// Base-constructor for XML serialization. Do not call manually!
         /// </summary>
-        public ExceptionInfo()
-        {}
+        public ExceptionInfo() {}
 
         /// <summary>
         /// Creates an exception information based on an exception.
         /// </summary>
         /// <param name="ex">The exception whose information to extract.</param>
-        public ExceptionInfo([NotNull] Exception ex) : this()
+        public ExceptionInfo([NotNull] Exception ex)
+            : this()
         {
             ExceptionType = (ex ?? throw new ArgumentNullException(nameof(ex))).GetType().ToString();
             Message = ex.Message;

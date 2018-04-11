@@ -48,10 +48,7 @@ namespace NanoByte.Common.Dispatch
         /// Creates a new dispatcher.
         /// </summary>
         /// <param name="ignoreMissing"><c>true</c> to return the default value (usually <c>null</c>) for dispatch attempts on unknown types; <c>false</c> to throw exceptions.</param>
-        public PerTypeDispatcher(bool ignoreMissing)
-        {
-            _ignoreMissing = ignoreMissing;
-        }
+        public PerTypeDispatcher(bool ignoreMissing) => _ignoreMissing = ignoreMissing;
 
         /// <summary>
         /// Adds a dispatch delegate.
@@ -108,15 +105,9 @@ namespace NanoByte.Common.Dispatch
         }
 
         #region IEnumerable
-        public IEnumerator<KeyValuePair<Type, Func<TBase, TResult>>> GetEnumerator()
-        {
-            return _map.GetEnumerator();
-        }
+        public IEnumerator<KeyValuePair<Type, Func<TBase, TResult>>> GetEnumerator() => _map.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _map.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _map.GetEnumerator();
         #endregion
     }
 }

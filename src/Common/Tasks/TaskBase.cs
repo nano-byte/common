@@ -53,6 +53,7 @@ namespace NanoByte.Common.Tasks
             if (WindowsUtils.IsWindowsNT)
                 _originalIdentity = WindowsIdentity.GetCurrent();
         }
+
         /// <summary>Signaled when the user wishes to cancel the task execution.</summary>
         protected CancellationToken CancellationToken;
 
@@ -80,7 +81,7 @@ namespace NanoByte.Common.Tasks
 #endif
                     Execute();
             }
-                #region Error handling
+            #region Error handling
             catch (OperationCanceledException)
             {
                 State = TaskState.Canceled;
@@ -131,10 +132,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Informs the caller of the current progress, if a callback was registered.
         /// </summary>
-        private void OnProgressChanged()
-        {
-            _progress?.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
-        }
+        private void OnProgressChanged() => _progress?.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
 
         private DateTime _lastProgress;
         private static readonly TimeSpan _progressRate = TimeSpan.FromMilliseconds(250);

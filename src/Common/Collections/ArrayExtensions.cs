@@ -82,7 +82,10 @@ namespace NanoByte.Common.Collections
 
             // ReSharper disable once LoopCanBeConvertedToQuery
             for (int i = 0; i < first.Length; i++)
-                if (!comparer.Equals(first[i], second[i])) return false;
+            {
+                if (!comparer.Equals(first[i], second[i]))
+                    return false;
+            }
             return true;
         }
 
@@ -105,8 +108,7 @@ namespace NanoByte.Common.Collections
             /// <summary>A singleton instance of the comparer.</summary>
             public static readonly DefaultComparer<T> Instance = new DefaultComparer<T>();
 
-            private DefaultComparer()
-            {}
+            private DefaultComparer() {}
 
             public int Compare(T x, T y) => x.CompareTo(y);
         }

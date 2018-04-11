@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,8 +32,8 @@ namespace NanoByte.Common.Collections
     /// <summary>
     /// A string dictionary that supports data-binding and can be XML serialized.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization"),
-     SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
+    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
     [Serializable]
     public class XmlDictionary : BindingList<XmlDictionaryEntry>, ICloneable<XmlDictionary>
     {
@@ -88,20 +88,14 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The key to look for.</param>
         /// <returns><c>true</c> if the key was found.</returns>
-        public bool ContainsKey(string key)
-        {
-            return this.Any(entry => entry.Key == key);
-        }
+        public bool ContainsKey(string key) => this.Any(entry => entry.Key == key);
 
         /// <summary>
         /// Checks whether this collection contains a certain value.
         /// </summary>
         /// <param name="value">The value to look for.</param>
         /// <returns><c>true</c> if the value was found.</returns>
-        public bool ContainsValue(string value)
-        {
-            return this.Any(entry => entry.Value == value);
-        }
+        public bool ContainsValue(string value) => this.Any(entry => entry.Value == value);
 
         /// <summary>
         /// Sorts all entries alphabetically by their key.
@@ -136,10 +130,7 @@ namespace NanoByte.Common.Collections
         /// Convert this <see cref="XmlDictionary"/> to a <see cref="Dictionary{TKey,TValue}"/> for better lookup-performance.
         /// </summary>
         /// <returns>A dictionary containing the same data as this collection.</returns>
-        public IDictionary<string, string> ToDictionary()
-        {
-            return this.ToDictionary(entry => entry.Key, entry => entry.Value);
-        }
+        public IDictionary<string, string> ToDictionary() => this.ToDictionary(entry => entry.Key, entry => entry.Value);
         #endregion
 
         #region Clone

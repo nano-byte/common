@@ -63,10 +63,7 @@ namespace NanoByte.Common.Values.Design
         }
 
         /// <inheritdoc/>
-        public override bool GetPaintValueSupported(ITypeDescriptorContext context)
-        {
-            return true;
-        }
+        public override bool GetPaintValueSupported(ITypeDescriptorContext context) => true;
 
         /// <inheritdoc/>
         public override void PaintValue(PaintValueEventArgs e)

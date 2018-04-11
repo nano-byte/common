@@ -173,17 +173,11 @@ namespace NanoByte.Common.Controls
         //--------------------//
 
         #region Search control
-        private void textSearch_TextChanged(object sender, EventArgs e)
-        {
-            UpdateList();
-        }
+        private void textSearch_TextChanged(object sender, EventArgs e) => UpdateList();
         #endregion
 
         #region TreeView control
-        private void treeView_DoubleClick(object sender, EventArgs e)
-        {
-            OnSelectionConfirmed();
-        }
+        private void treeView_DoubleClick(object sender, EventArgs e) => OnSelectionConfirmed();
 
         private void treeView_KeyDown(object sender, KeyEventArgs e)
         {

@@ -58,7 +58,7 @@ namespace NanoByte.Common.Storage
                     ? FileUtils.PathCombine(PortableBase, "config", resourceCombined)
                     : FileUtils.PathCombine(UserConfigDir, appName, resourceCombined);
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Storage
             {
                 path = FileUtils.PathCombine(systemConfigDir, appName, resourceCombined);
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
@@ -150,7 +150,7 @@ namespace NanoByte.Common.Storage
                     {
                         path = FileUtils.PathCombine(dirPath, appName, resourceCombined);
                     }
-                        #region Error handling
+                    #region Error handling
                     catch (ArgumentException ex)
                     {
                         // Wrap exception to add context information
@@ -189,7 +189,7 @@ namespace NanoByte.Common.Storage
                     ? FileUtils.PathCombine(PortableBase, "data", resourceCombined)
                     : FileUtils.PathCombine(UserDataDir, appName, resourceCombined);
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 // Wrap exception to add context information
@@ -240,7 +240,7 @@ namespace NanoByte.Common.Storage
                     {
                         path = FileUtils.PathCombine(dirPath, appName, resourceCombined);
                     }
-                        #region Error handling
+                    #region Error handling
                     catch (ArgumentException ex)
                     {
                         // Wrap exception to add context information

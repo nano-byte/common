@@ -102,7 +102,7 @@ namespace NanoByte.Common
                 objectManager.RegisterObject(exception, 1, serializationInfo);
                 objectManager.DoFixups();
             }
-                // Ignore if preserving stack trace is not possible
+            // Ignore if preserving stack trace is not possible
             catch (SecurityException)
             {}
             catch (SerializationException)

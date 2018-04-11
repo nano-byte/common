@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2017 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -312,8 +312,7 @@ namespace NanoByte.Common.Native
             #region Singleton
             public static readonly Stat Instance = new Stat();
 
-            private Stat()
-            {}
+            private Stat() {}
             #endregion
 
             protected override string AppBinary => "stat";

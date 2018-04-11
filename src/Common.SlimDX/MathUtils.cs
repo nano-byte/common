@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -170,10 +170,7 @@ namespace NanoByte.Common
         /// <param name="value">The angle in degrees</param>
         /// <returns>The angle in radians</returns>
         [Pure]
-        public static float DegreeToRadian(this float value)
-        {
-            return value * ((float)Math.PI / 180);
-        }
+        public static float DegreeToRadian(this float value) => value * ((float)Math.PI / 180);
 
         /// <summary>
         /// Converts an angle in degrees to radians
@@ -181,10 +178,7 @@ namespace NanoByte.Common
         /// <param name="value">The angle in degrees</param>
         /// <returns>The angle in radians</returns>
         [Pure]
-        public static double DegreeToRadian(this double value)
-        {
-            return value * (Math.PI / 180);
-        }
+        public static double DegreeToRadian(this double value) => value * (Math.PI / 180);
 
         /// <summary>
         /// Converts an angle in radians to degrees
@@ -192,10 +186,7 @@ namespace NanoByte.Common
         /// <param name="value">The angle in radians</param>
         /// <returns>The angle in degrees</returns>
         [Pure]
-        public static float RadianToDegree(this float value)
-        {
-            return value * (180 / (float)Math.PI);
-        }
+        public static float RadianToDegree(this float value) => value * (180 / (float)Math.PI);
 
         /// <summary>
         /// Converts an angle in radians to degrees
@@ -203,10 +194,7 @@ namespace NanoByte.Common
         /// <param name="value">The angle in radians</param>
         /// <returns>The angle in degrees</returns>
         [Pure]
-        public static double RadianToDegree(this double value)
-        {
-            return value * (180 / Math.PI);
-        }
+        public static double RadianToDegree(this double value) => value * (180 / Math.PI);
         #endregion
 
         #region Sphere coordinates
@@ -227,25 +215,19 @@ namespace NanoByte.Common
 
         #region Byte angles
         /// <summary>
-        /// Maps a 0°-180° angle in radians to a 0-255 byte value.
+        /// Maps a 0ï¿½-180ï¿½ angle in radians to a 0-255 byte value.
         /// </summary>
         [Pure]
-        public static byte AngleToByte(this double angle)
-        {
-            return (byte)(angle.Clamp(0, Math.PI) / Math.PI * 255);
-        }
+        public static byte AngleToByte(this double angle) => (byte)(angle.Clamp(0, Math.PI) / Math.PI * 255);
 
         /// <summary>
-        /// Maps a 0-255 byte value to a 0°-180° angle in radians.
+        /// Maps a 0-255 byte value to a 0ï¿½-180ï¿½ angle in radians.
         /// </summary>
         [Pure]
-        public static double ByteToAngle(this byte b)
-        {
-            return b / 255.0 * Math.PI;
-        }
+        public static double ByteToAngle(this byte b) => b / 255.0 * Math.PI;
 
         /// <summary>
-        /// Maps a vector of 0-255 byte values to a vector of 0°-180° angles in radians.
+        /// Maps a vector of 0-255 byte values to a vector of 0ï¿½-180ï¿½ angles in radians.
         /// </summary>
         [Pure]
         public static Vector4 ByteToAngle(this ByteVector4 vector)
@@ -392,10 +374,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Calculates a Bernstein basis polynomial
         /// </summary>
-        private static double Bernstein(int n, int i, double t)
-        {
-            return BinomCoeff(n, i) * Math.Pow(t, i) * Math.Pow((1 - t), (n - i));
-        }
+        private static double Bernstein(int n, int i, double t) => BinomCoeff(n, i) * Math.Pow(t, i) * Math.Pow((1 - t), (n - i));
         #endregion
 
         #region Bezier
@@ -543,14 +522,11 @@ namespace NanoByte.Common
             }
         }
 
-        [Pure]
-        public static int HiByte(byte b) => b >> 4;
+        [Pure] public static int HiByte(byte b) => b >> 4;
 
-        [Pure]
-        public static int LoByte(byte b) => b & 15;
+        [Pure] public static int LoByte(byte b) => b & 15;
 
-        [Pure]
-        public static byte CombineHiLoByte(int high, int low) => (byte)((high << 4) + low);
+        [Pure] public static byte CombineHiLoByte(int high, int low) => (byte)((high << 4) + low);
         #endregion
 
         //--------------------//
@@ -563,10 +539,7 @@ namespace NanoByte.Common
         /// <param name="roll">The roll value</param>
         /// <returns>A normalized quaternion</returns>
         [Pure]
-        public static Quaternion ViewQuaternion(this Vector3 view, float roll)
-        {
-            return Quaternion.Normalize(new Quaternion(view.X, view.Y, view.Z, roll));
-        }
+        public static Quaternion ViewQuaternion(this Vector3 view, float roll) => Quaternion.Normalize(new Quaternion(view.X, view.Y, view.Z, roll));
         #endregion
 
         #region Rotate

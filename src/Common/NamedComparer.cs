@@ -33,8 +33,7 @@ namespace NanoByte.Common
         /// <summary>A singleton instance of the comparer.</summary>
         public static readonly NamedComparer<T> Instance = new NamedComparer<T>();
 
-        private NamedComparer()
-        {}
+        private NamedComparer() {}
 
         public int Compare(T x, T y) => StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name);
 

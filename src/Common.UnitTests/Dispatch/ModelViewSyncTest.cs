@@ -49,10 +49,7 @@ namespace NanoByte.Common.Dispatch
                 }
             }
 
-            public void Rebuild()
-            {
-                ChangedRebuild?.Invoke(this);
-            }
+            public void Rebuild() => ChangedRebuild?.Invoke(this);
 
             public event Action<ModelBase> Changed;
             public event Action<ModelBase> ChangedRebuild;
@@ -67,10 +64,7 @@ namespace NanoByte.Common.Dispatch
 
             public bool Disposed { get; private set; }
 
-            public void Dispose()
-            {
-                Disposed = true;
-            }
+            public void Dispose() => Disposed = true;
         }
 
         private class SpecificView : ViewBase

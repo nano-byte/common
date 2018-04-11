@@ -64,8 +64,8 @@ namespace NanoByte.Common.Values.Design
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
             => value is Enum enumValue && destinationType == typeof(string)
-            ? enumValue.GetEnumAttributeValue((XmlEnumAttribute attribute) => attribute.Name)
-            : base.ConvertTo(context, culture, value, destinationType);
+                ? enumValue.GetEnumAttributeValue((XmlEnumAttribute attribute) => attribute.Name)
+                : base.ConvertTo(context, culture, value, destinationType);
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context) => true;
 

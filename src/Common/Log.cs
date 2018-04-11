@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2006-2015 Bastian Eicher
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -95,7 +95,10 @@ namespace NanoByte.Common
         private static readonly List<LogEntryEventHandler> _handlers = new List<LogEntryEventHandler>
         {
             // Default handler
-            (severity, message) => { if (severity >= LogSeverity.Warn) PrintToConsole(severity, message); }
+            (severity, message) =>
+            {
+                if (severity >= LogSeverity.Warn) PrintToConsole(severity, message);
+            }
         };
 
         /// <summary>
@@ -115,7 +118,10 @@ namespace NanoByte.Common
                     _handlers.Add(value);
                 }
             }
-            remove { lock (_lock) _handlers.Remove(value); }
+            remove
+            {
+                lock (_lock) _handlers.Remove(value);
+            }
         }
 
         private static StringBuilder _sessionContent = new StringBuilder();
@@ -233,7 +239,7 @@ namespace NanoByte.Common
                         break;
                 }
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException)
             {}
             catch (IOException)
@@ -245,7 +251,7 @@ namespace NanoByte.Common
             {
                 Console.ResetColor();
             }
-                #region Error handling
+            #region Error handling
             catch (InvalidOperationException)
             {}
             catch (IOException)
@@ -271,7 +277,7 @@ namespace NanoByte.Common
                 {
                     _fileWriter?.WriteLine(formattedMessage);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (Exception ex)
                 {
                     _fileWriter = null;

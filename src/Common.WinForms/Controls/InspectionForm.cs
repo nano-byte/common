@@ -44,9 +44,6 @@ namespace NanoByte.Common.Controls
         /// Displays a property grid for manipulating the properties of an object.
         /// </summary>
         /// <param name="value">The object to be inspected.</param>
-        public static void Inspect(object value)
-        {
-            new InspectionForm(value).Show();
-        }
+        public static void Inspect(object value) => new InspectionForm(value).Show();
     }
 }

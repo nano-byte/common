@@ -42,15 +42,9 @@ namespace NanoByte.Common.Undo
                 _undoCallback = undoCallback;
             }
 
-            public void Execute()
-            {
-                _executeCallback();
-            }
+            public void Execute() => _executeCallback();
 
-            public void Undo()
-            {
-                _undoCallback();
-            }
+            public void Undo() => _undoCallback();
         }
 
         [Fact]

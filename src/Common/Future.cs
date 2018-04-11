@@ -65,9 +65,6 @@ namespace NanoByte.Common
         }
 
         /// <inheritdoc/>
-        public void Dispose()
-        {
-            _waitHandle.Close();
-        }
+        public void Dispose() => _waitHandle.Close();
     }
 }

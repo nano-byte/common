@@ -164,7 +164,7 @@ namespace NanoByte.Common.Controls
                 {
                     int lineOffset = TextEditor.Document.GetLineSegment(lineNumber - 1).Offset;
                     TextEditor.Document.MarkerStrategy.AddMarker(
-                        new TextMarker(lineOffset + charNumber -1, 10, TextMarkerType.WaveLine) {ToolTip = ex.InnerException.Message});
+                        new TextMarker(lineOffset + charNumber - 1, 10, TextMarkerType.WaveLine) {ToolTip = ex.InnerException.Message});
                     TextEditor.Refresh();
                 }
 
@@ -189,10 +189,7 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Clears the undo stack of the underlying text editor control.
         /// </summary>
-        public void ClearUndoStack()
-        {
-            TextEditor.Document.UndoStack.ClearAll();
-        }
+        public void ClearUndoStack() => TextEditor.Document.UndoStack.ClearAll();
 
         /// <summary>
         /// Indicates whether <see cref="Undo"/> is currently available.
@@ -207,18 +204,12 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// Executes the undo method of the underlying text editor control.
         /// </summary>
-        public void Undo()
-        {
-            TextEditor.Undo();
-        }
+        public void Undo() => TextEditor.Undo();
 
         /// <summary>
         /// Executes the redo method of the underlying text editor control.
         /// </summary>
-        public void Redo()
-        {
-            TextEditor.Redo();
-        }
+        public void Redo() => TextEditor.Redo();
         #endregion
     }
 }

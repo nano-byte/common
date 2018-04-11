@@ -1,4 +1,4 @@
-namespace NanoByte.Common.Controls
+﻿namespace NanoByte.Common.Controls
 {
     partial class ErrorReportForm
     {

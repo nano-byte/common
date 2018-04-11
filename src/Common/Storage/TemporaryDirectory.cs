@@ -77,7 +77,7 @@ namespace NanoByte.Common.Storage
                     // Write protection might prevent a directory from being deleted (especially on Unixoid systems)
                     FileUtils.DisableWriteProtection(Path);
                 }
-                    #region Error handling
+                #region Error handling
                 catch (IOException)
                 {}
                 catch (UnauthorizedAccessException)

@@ -85,9 +85,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         /// <param name="changedItem">The property grid item that was changed.</param>
         public IUndoCommand GetCommand(GridItem changedItem)
-        {
-            return new MultiPropertyChangedCommand(_propertyGrid.SelectedObjects, MoveOutOfNested(changedItem), _oldValues);
-        }
+            => new MultiPropertyChangedCommand(_propertyGrid.SelectedObjects, MoveOutOfNested(changedItem), _oldValues);
         #endregion
 
         #region Helpers

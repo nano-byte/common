@@ -40,10 +40,7 @@ namespace NanoByte.Common.Collections
         }
 
         [Fact]
-        public void TestFromString()
-        {
-            new LanguageSet("en_US de").Should().BeEquivalentTo(new LanguageSet {"de", "en-US"});
-        }
+        public void TestFromString() => new LanguageSet("en_US de").Should().BeEquivalentTo(new LanguageSet {"de", "en-US"});
 
         [Fact]
         public void TestDuplicateDetection()

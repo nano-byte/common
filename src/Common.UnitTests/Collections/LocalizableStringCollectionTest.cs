@@ -59,7 +59,8 @@ namespace NanoByte.Common.Collections
         {
             var dictionary = new LocalizableStringCollection
             {
-                "neutralValue", {"de-DE", "germanyValue"}
+                "neutralValue",
+                {"de-DE", "germanyValue"}
             };
 
             dictionary.ContainsExactLanguage(LocalizableString.DefaultLanguage).Should().BeTrue(because: "Unspecified language should default to English generic");
@@ -74,9 +75,11 @@ namespace NanoByte.Common.Collections
         {
             var dictionary = new LocalizableStringCollection
             {
-                "neutralValue", {"de-DE", "germanyValue"},
+                "neutralValue",
+                {"de-DE", "germanyValue"},
                 // Intential duplicates (should be ignored)
-                "neutralValue", {"de-DE", "germanyValue"}
+                "neutralValue",
+                {"de-DE", "germanyValue"}
             };
 
             dictionary.Set(LocalizableString.DefaultLanguage, null);

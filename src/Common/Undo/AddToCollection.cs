@@ -37,7 +37,8 @@ namespace NanoByte.Common.Undo
         /// </summary>
         /// <param name="collection">The collection to be modified.</param>
         /// <param name="element">The element to be added to <paramref name="collection"/>.</param>
-        public AddToCollection(ICollection<T> collection, T element) : base(collection, element)
+        public AddToCollection(ICollection<T> collection, T element)
+            : base(collection, element)
         {}
 
         /// <summary>

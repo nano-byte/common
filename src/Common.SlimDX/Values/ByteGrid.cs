@@ -35,11 +35,13 @@ namespace NanoByte.Common.Values
     public class ByteGrid : Grid<byte>
     {
         /// <inheritdoc/>
-        public ByteGrid(int width, int height) : base(width, height)
+        public ByteGrid(int width, int height)
+            : base(width, height)
         {}
 
         /// <inheritdoc/>
-        public ByteGrid(byte[,] data) : base(data)
+        public ByteGrid(byte[,] data)
+            : base(data)
         {}
 
         /// <summary>
@@ -64,10 +66,7 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// Returns <c>true</c> if the specified coordinates are within the bounds of the grid.
         /// </summary>
-        public bool IsInRange(float x, float y)
-        {
-            return x >= 0 && x < Width && y >= 0 && y < Height;
-        }
+        public bool IsInRange(float x, float y) => x >= 0 && x < Width && y >= 0 && y < Height;
 
         /// <summary>
         /// Loads a grid from a PNG stream.
@@ -91,7 +90,7 @@ namespace NanoByte.Common.Values
                     return new ByteGrid(data);
                 }
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 throw new IOException(Resources.NotAnImage, ex);

@@ -103,7 +103,8 @@ namespace NanoByte.Common.Info
         /// </summary>
         public static AppInfo CurrentLibrary
         {
-            [MethodImpl(MethodImplOptions.NoInlining)] get => Load(Assembly.GetCallingAssembly());
+            [MethodImpl(MethodImplOptions.NoInlining)]
+            get => Load(Assembly.GetCallingAssembly());
         }
 
         /// <summary>

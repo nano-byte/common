@@ -35,9 +35,7 @@ namespace NanoByte.Common.Streams
     {
         [Fact]
         public void TestRead()
-        {
-            new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
-        }
+            => new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
 
         [Fact]
         public void TestToArray()

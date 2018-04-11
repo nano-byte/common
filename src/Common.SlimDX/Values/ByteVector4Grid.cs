@@ -35,11 +35,13 @@ namespace NanoByte.Common.Values
     public class ByteVector4Grid : Grid<ByteVector4>
     {
         /// <inheritdoc/>
-        public ByteVector4Grid(int width, int height) : base(width, height)
+        public ByteVector4Grid(int width, int height)
+            : base(width, height)
         {}
 
         /// <inheritdoc/>
-        public ByteVector4Grid([NotNull] ByteVector4[,] data) : base(data)
+        public ByteVector4Grid([NotNull] ByteVector4[,] data)
+            : base(data)
         {}
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace NanoByte.Common.Values
                     return new ByteVector4Grid(data);
                 }
             }
-                #region Error handling
+            #region Error handling
             catch (ArgumentException ex)
             {
                 throw new IOException(Resources.NotAnImage, ex);
