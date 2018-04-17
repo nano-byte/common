@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -171,9 +152,9 @@ namespace NanoByte.Common
             #endregion
 
             var result = new List<string>();
-            string[] splitted1 = value.Split('\n');
-            string[] splitted2 = value.Split('\r');
-            string[] splitted = splitted1.Length >= splitted2.Length ? splitted1 : splitted2;
+            var splitted1 = value.Split('\n');
+            var splitted2 = value.Split('\r');
+            var splitted = splitted1.Length >= splitted2.Length ? splitted1 : splitted2;
 
             foreach (string s in splitted)
             {
@@ -205,7 +186,7 @@ namespace NanoByte.Common
 
             var output = new StringBuilder();
             bool first = true;
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 // No separator before first or after last part
                 if (first) first = false;
@@ -357,7 +338,7 @@ namespace NanoByte.Common
             var result = containsWhitespace ? new StringBuilder("\"", value.Length + 2) : new StringBuilder(value.Length);
 
             // Split by quotation marks
-            string[] parts = value.Split('"');
+            var parts = value.Split('"');
             for (int i = 0; i < parts.Length; i++)
             {
                 // Count slashes preceeding the quotation mark

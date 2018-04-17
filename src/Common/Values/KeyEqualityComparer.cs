@@ -1,19 +1,5 @@
-﻿/*
- * Copyright 2010-2014 Bastian Eicher
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser Public License for more details.
- *
- * You should have received a copy of the GNU Lesser Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -33,14 +19,17 @@ namespace NanoByte.Common.Values
         /// Creates a new key equality comparer.
         /// </summary>
         /// <param name="keySelector">A function mapping objects to their respective equality keys.</param>
-        public KeyEqualityComparer(Func<T, TKey> keySelector) => _keySelector = keySelector;
+        public KeyEqualityComparer(Func<T, TKey> keySelector)
+        {
+            _keySelector = keySelector;
+        }
 
         public bool Equals(T x, T y) => Equals(_keySelector(x), _keySelector(y));
 
         public int GetHashCode(T obj)
         {
             var key = _keySelector(obj);
-            return (key == null) ? 0 : _keySelector(obj).GetHashCode();
+            return key == null ? 0 : _keySelector(obj).GetHashCode();
         }
     }
 }

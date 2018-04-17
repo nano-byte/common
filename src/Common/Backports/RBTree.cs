@@ -1,4 +1,4 @@
-﻿#if NET20 || NET35
+#if NET20 || NET35
 // Taken and adapted from: https://github.com/mono/mono/blob/mono-3.12.1/mcs/class/System/System.Collections.Generic/RBTree.cs
 //
 // Authors:

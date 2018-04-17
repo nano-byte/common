@@ -1,4 +1,4 @@
-﻿namespace NanoByte.Common.StructureEditor
+namespace NanoByte.Common.StructureEditor
 {
     partial class StructureEditorControl<T>
     {

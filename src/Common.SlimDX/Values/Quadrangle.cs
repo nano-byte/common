@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.ComponentModel;
@@ -129,12 +110,9 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="distance">This value is added to each corner position.</param>
         /// <returns>The shifted <see cref="Quadrangle"/>.</returns>
-        public Quadrangle Offset(Vector2 distance)
-        {
-            return new Quadrangle(
-                P1 + distance, P2 + distance,
-                P3 + distance, P4 + distance);
-        }
+        public Quadrangle Offset(Vector2 distance) => new Quadrangle(
+            P1 + distance, P2 + distance,
+            P3 + distance, P4 + distance);
         #endregion
 
         #region Rotation
@@ -143,12 +121,9 @@ namespace NanoByte.Common.Values
         /// </summary>
         /// <param name="rotation">The angle to rotate by in degrees.</param>
         /// <returns>The rotated <see cref="Quadrangle"/>.</returns>
-        public Quadrangle Rotate(float rotation)
-        {
-            return new Quadrangle(
-                P1.Rotate(rotation), P2.Rotate(rotation),
-                P3.Rotate(rotation), P4.Rotate(rotation));
-        }
+        public Quadrangle Rotate(float rotation) => new Quadrangle(
+            P1.Rotate(rotation), P2.Rotate(rotation),
+            P3.Rotate(rotation), P4.Rotate(rotation));
         #endregion
 
         #region Intersect
@@ -206,14 +181,12 @@ namespace NanoByte.Common.Values
         /// <param name="quadrangle">The other quadrangle to test for intersection.</param>
         /// <returns><c>true</c> if <paramref name="quadrangle"/> intersects with this quadrangle.</returns>
         public bool IntersectWith(Quadrangle quadrangle)
-        {
             // ToDo: Optimize
-            return
-                // this and quadrangle intersect or quadrangle fully inside this
-                IntersectWith(quadrangle.P1) || IntersectWith(quadrangle.P2) || IntersectWith(quadrangle.P3) || IntersectWith(quadrangle.P4) ||
-                // this fully inside quadrangle
-                quadrangle.IntersectWith(P1) /*|| quadrangle.IntersectWith(_p2) || quadrangle.IntersectWith(_p3) || quadrangle.IntersectWith(_p4)*/;
-        }
+            => IntersectWith(quadrangle.P1)
+            || IntersectWith(quadrangle.P2)
+            || IntersectWith(quadrangle.P3)
+            || IntersectWith(quadrangle.P4)
+            || quadrangle.IntersectWith(P1); // this fully inside quadrangle
         #endregion
 
         #region Circle

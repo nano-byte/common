@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.IO;
@@ -49,11 +30,12 @@ namespace NanoByte.Common.Storage
                 File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
                     .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
-                    .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
+                         .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
                 File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
                     .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
 
-                new CopyDirectory(temp1, temp2).Invoking(x => x.Run()).Should().Throw<IOException>();
+                new CopyDirectory(temp1, temp2).Invoking(x => x.Run())
+                                               .Should().Throw<IOException>();
             }
             finally
             {
@@ -75,9 +57,8 @@ namespace NanoByte.Common.Storage
 
             string temp = FileUtils.GetTempDirectory("unit-tests");
             Directory.Delete(temp);
-            new CopyDirectory(temp, "a")
-                .Invoking(x => x.Run())
-                .Should().Throw<DirectoryNotFoundException>();
+            new CopyDirectory(temp, "a").Invoking(x => x.Run())
+                                        .Should().Throw<DirectoryNotFoundException>();
         }
 
         /// <summary>
@@ -96,14 +77,13 @@ namespace NanoByte.Common.Storage
                 File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
                     .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
                 Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
-                    .Should().NotBe(new DateTime(2000, 1, 1), because: "Last-write time for copied directory is invalid");
+                         .Should().NotBe(new DateTime(2000, 1, 1), because: "Last-write time for copied directory is invalid");
                 File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file")).Should().Be(
                     new DateTime(2000, 1, 1),
                     because: "Last-write time for copied file is invalid");
 
-                new CopyDirectory(temp1, temp2)
-                    .Invoking(x => x.Run())
-                    .Should().Throw<IOException>();
+                new CopyDirectory(temp1, temp2).Invoking(x => x.Run())
+                                               .Should().Throw<IOException>();
             }
             finally
             {

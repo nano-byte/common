@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.ComponentModel;
@@ -71,7 +52,7 @@ namespace NanoByte.Common.Controls
                 exception = exception.InnerException;
 
             // Make the message simpler for missing files
-            detailsBox.Text = (exception is FileNotFoundException) ? exception.Message.Replace("\n", Environment.NewLine) : exception.ToString();
+            detailsBox.Text = exception is FileNotFoundException ? exception.Message.Replace("\n", Environment.NewLine) : exception.ToString();
 
             // Append inner exceptions
             if (exception.InnerException != null)
@@ -105,7 +86,7 @@ namespace NanoByte.Common.Controls
 
             AppDomain.CurrentDomain.UnhandledException += delegate(object sender, UnhandledExceptionEventArgs e)
             {
-                Report((e.ExceptionObject as Exception) ?? new Exception("Unknown error"), uploadUri);
+                Report(e.ExceptionObject as Exception ?? new Exception("Unknown error"), uploadUri);
                 Process.GetCurrentProcess().Kill();
             };
         }

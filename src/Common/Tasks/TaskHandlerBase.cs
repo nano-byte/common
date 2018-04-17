@@ -1,4 +1,7 @@
-﻿using System;
+// Copyright Bastian Eicher
+// Licensed under the MIT License
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -14,7 +17,10 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Starts handling log events.
         /// </summary>
-        protected TaskHandlerBase() => Log.Handler += LogHandler;
+        protected TaskHandlerBase()
+        {
+            Log.Handler += LogHandler;
+        }
 
         /// <inheritdoc/>
         public virtual void Dispose()
@@ -70,12 +76,9 @@ namespace NanoByte.Common.Tasks
                 if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
                 return defaultAnswer;
             }
-            else
-            {
-                return Ask(question,
-                    // Treat messages that default to "Yes" as less severe than those that default to "No"
-                    defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn);
-            }
+            return Ask(question,
+                // Treat messages that default to "Yes" as less severe than those that default to "No"
+                defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn);
         }
 
         /// <summary>

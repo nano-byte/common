@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections;
@@ -35,36 +16,30 @@ namespace NanoByte.Common.Values.Design
         protected override int NoArguments => 8;
 
         /// <inheritdoc/>
-        protected override ConstructorInfo GetConstructor()
+        protected override ConstructorInfo GetConstructor() => typeof(Quadrangle).GetConstructor(new[]
         {
-            return typeof(Quadrangle).GetConstructor(new[]
-            {
-                typeof(float),
-                typeof(float),
-                typeof(float),
-                typeof(float),
-                typeof(float),
-                typeof(float),
-                typeof(float),
-                typeof(float)
-            });
-        }
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float)
+        });
 
         /// <inheritdoc/>
-        protected override object[] GetArguments(Quadrangle value)
+        protected override object[] GetArguments(Quadrangle value) => new object[]
         {
-            return new object[]
-            {
-                value.P1.X,
-                value.P1.Y,
-                value.P2.X,
-                value.P2.Y,
-                value.P3.X,
-                value.P3.Y,
-                value.P4.X,
-                value.P4.Y
-            };
-        }
+            value.P1.X,
+            value.P1.Y,
+            value.P2.X,
+            value.P2.Y,
+            value.P3.X,
+            value.P3.Y,
+            value.P4.X,
+            value.P4.Y
+        };
 
         /// <inheritdoc/>
         protected override string[] GetValues(Quadrangle value, ITypeDescriptorContext context, CultureInfo culture)

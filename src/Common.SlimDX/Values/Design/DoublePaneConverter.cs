@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections;
@@ -35,32 +16,26 @@ namespace NanoByte.Common.Values.Design
         protected override int NoArguments => 6;
 
         /// <inheritdoc/>
-        protected override ConstructorInfo GetConstructor()
+        protected override ConstructorInfo GetConstructor() => typeof(DoublePlane).GetConstructor(new[]
         {
-            return typeof(DoublePlane).GetConstructor(new[]
-            {
-                typeof(double),
-                typeof(double),
-                typeof(double),
-                typeof(float),
-                typeof(float),
-                typeof(float)
-            });
-        }
+            typeof(double),
+            typeof(double),
+            typeof(double),
+            typeof(float),
+            typeof(float),
+            typeof(float)
+        });
 
         /// <inheritdoc/>
-        protected override object[] GetArguments(DoublePlane value)
+        protected override object[] GetArguments(DoublePlane value) => new object[]
         {
-            return new object[]
-            {
-                value.Point.X,
-                value.Point.Y,
-                value.Point.Z,
-                value.Normal.X,
-                value.Normal.Y,
-                value.Normal.Z
-            };
-        }
+            value.Point.X,
+            value.Point.Y,
+            value.Point.Z,
+            value.Normal.X,
+            value.Normal.Y,
+            value.Normal.Z
+        };
 
         /// <inheritdoc/>
         protected override string[] GetValues(DoublePlane value, ITypeDescriptorContext context, CultureInfo culture)

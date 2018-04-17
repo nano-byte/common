@@ -1,4 +1,7 @@
-﻿using System;
+// Copyright Bastian Eicher
+// Licensed under the MIT License
+
+using System;
 using System.Collections.Generic;
 using System.Net;
 using JetBrains.Annotations;
@@ -17,7 +20,10 @@ namespace NanoByte.Common.Net
         /// Creates a new credential provider.
         /// </summary>
         /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        protected CredentialProviderBase([NotNull] ITaskHandler handler) => _handler = handler;
+        protected CredentialProviderBase([NotNull] ITaskHandler handler)
+        {
+            _handler = handler;
+        }
 
         /// <inheritdoc/>
         public bool Interactive => _handler.Verbosity > Verbosity.Batch;

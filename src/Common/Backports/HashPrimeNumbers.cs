@@ -1,4 +1,4 @@
-﻿#if NET20
+#if NET20
 // Taken and adapted from: https://github.com/mono/mono/blob/mono-3.12.1/mcs/class/corlib/System.Collections/HashPrimeNumbers.cs
 //
 // Author:

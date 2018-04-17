@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher, Simon E. Silva Lauinger
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.IO;
@@ -78,8 +59,9 @@ namespace NanoByte.Common.Storage
         /// </summary>
         [Fact]
         public void TestToUnixTime()
-            => new DateTime(2004, 09, 16, 0, 0, 0, DateTimeKind.Utc).ToUnixTime()
-                .Should().Be(12677 /*days*/ * 86400 /*seconds*/);
+            => new DateTime(2004, 09, 16, 0, 0, 0, DateTimeKind.Utc)
+              .ToUnixTime()
+              .Should().Be(12677 /*days*/ * 86400 /*seconds*/);
 
         /// <summary>
         /// Ensures <see cref="FileUtils.FromUnixTime"/> correctly converts a Unix epoch value to a <see cref="DateTime"/> value.
@@ -87,7 +69,7 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void TestFromUnixTime()
             => FileUtils.FromUnixTime(12677 /*days*/ * 86400 /*seconds*/)
-                .Should().Be(new DateTime(2004, 09, 16));
+                        .Should().Be(new DateTime(2004, 09, 16));
         #endregion
 
         #region Exists

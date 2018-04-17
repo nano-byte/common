@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -110,21 +91,21 @@ namespace NanoByte.Common.Collections
             #endregion
 
             // Try to find exact match
-            foreach (LocalizableString entry in this.Where(entry => Equals(language, entry.Language)))
+            foreach (var entry in this.Where(entry => Equals(language, entry.Language)))
                 return entry.Value;
 
             // Try to find same language with neutral culture
-            foreach (LocalizableString entry in this.Where(entry => language.TwoLetterISOLanguageName == entry.Language.TwoLetterISOLanguageName && entry.Language.IsNeutralCulture))
+            foreach (var entry in this.Where(entry => language.TwoLetterISOLanguageName == entry.Language.TwoLetterISOLanguageName && entry.Language.IsNeutralCulture))
                 return entry.Value;
 
             // Try to find "en"
             var en = LocalizableString.DefaultLanguage;
-            foreach (LocalizableString entry in this.Where(entry => en.Equals(entry.Language)))
+            foreach (var entry in this.Where(entry => en.Equals(entry.Language)))
                 return entry.Value;
 
             // Try to find "en-US"
             var enUs = new CultureInfo("en-US");
-            foreach (LocalizableString entry in this.Where(entry => enUs.Equals(entry.Language)))
+            foreach (var entry in this.Where(entry => enUs.Equals(entry.Language)))
                 return entry.Value;
 
             // Try to find first entry in collection

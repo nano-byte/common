@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using JetBrains.Annotations;
@@ -204,13 +185,10 @@ namespace NanoByte.Common
         /// <param name="inclination">Angle away from positive Z axis in radians. Values from 0 to Pi.</param>
         /// <param name="azimuth">Angle away from from positive X axis in radians. Values from 0 to 2*Pi.</param>
         [Pure]
-        public static Vector3 UnitVector(double inclination, double azimuth)
-        {
-            return new Vector3(
-                (float)(Math.Sin(inclination) * Math.Cos(azimuth)),
-                (float)(Math.Sin(inclination) * Math.Sin(azimuth)),
-                (float)Math.Cos(inclination));
-        }
+        public static Vector3 UnitVector(double inclination, double azimuth) => new Vector3(
+            (float)(Math.Sin(inclination) * Math.Cos(azimuth)),
+            (float)(Math.Sin(inclination) * Math.Sin(azimuth)),
+            (float)Math.Cos(inclination));
         #endregion
 
         #region Byte angles
@@ -230,14 +208,11 @@ namespace NanoByte.Common
         /// Maps a vector of 0-255 byte values to a vector of 0�-180� angles in radians.
         /// </summary>
         [Pure]
-        public static Vector4 ByteToAngle(this ByteVector4 vector)
-        {
-            return new Vector4(
-                (float)vector.X.ByteToAngle(),
-                (float)vector.Y.ByteToAngle(),
-                (float)vector.Z.ByteToAngle(),
-                (float)vector.W.ByteToAngle());
-        }
+        public static Vector4 ByteToAngle(this ByteVector4 vector) => new Vector4(
+            (float)vector.X.ByteToAngle(),
+            (float)vector.Y.ByteToAngle(),
+            (float)vector.Z.ByteToAngle(),
+            (float)vector.W.ByteToAngle());
         #endregion
 
         //--------------------//
@@ -261,7 +236,7 @@ namespace NanoByte.Common
             if (factor >= values.Length - 1) return values[values.Length - 1];
 
             // Isolate index shift from factor
-            var index = (int)Math.Floor(factor);
+            int index = (int)Math.Floor(factor);
 
             // Remove index shift from factor
             factor -= index;
@@ -290,7 +265,7 @@ namespace NanoByte.Common
             if (factor >= values.Length - 1) return values[values.Length - 1];
 
             // Isolate index shift from factor
-            var index = (int)factor;
+            int index = (int)factor;
 
             // Remove index shift from factor
             factor -= index;
@@ -319,7 +294,7 @@ namespace NanoByte.Common
             if (factor >= values.Length - 1) return values[values.Length - 1];
 
             // Isolate index shift from factor
-            var index = (int)factor;
+            int index = (int)factor;
 
             // Remove index shift from factor
             factor -= index;
@@ -403,7 +378,7 @@ namespace NanoByte.Common
                 // Loop through the available control points
                 for (int iIn = 0; iIn < controlPoints.Length; iIn++)
                 {
-                    var basis = (float)Bernstein(controlPoints.Length - 1, iIn, t);
+                    float basis = (float)Bernstein(controlPoints.Length - 1, iIn, t);
                     output[iOut] += new Vector2(
                         basis * controlPoints[iIn].X,
                         basis * controlPoints[iIn].Y);
@@ -440,7 +415,7 @@ namespace NanoByte.Common
                 // Loop through the available control points
                 for (int iRef = 0; iRef < controlPoints.Length; iRef++)
                 {
-                    var basis = Bernstein(controlPoints.Length - 1, iRef, t);
+                    double basis = Bernstein(controlPoints.Length - 1, iRef, t);
                     output[iOut] += new DoubleVector3(
                         basis * controlPoints[iRef].X,
                         basis * controlPoints[iRef].Y,
@@ -639,7 +614,7 @@ namespace NanoByte.Common
                 return new BoundingSphere(sphere.Center + translation, 0);
 
             // Scale, rotate and transform the center of the bounding sphere
-            Vector3 newCenter = Vector3.TransformCoordinate(sphere.Center, matrix);
+            var newCenter = Vector3.TransformCoordinate(sphere.Center, matrix);
 
             // Scale a reference vector to determine the average axis factor for sphere scaling
             var referenceVector = Vector3.TransformCoordinate(new Vector3(_sqrtThreeThirds, _sqrtThreeThirds, _sqrtThreeThirds), matrix) - translation;

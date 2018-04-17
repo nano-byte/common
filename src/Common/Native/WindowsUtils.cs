@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.ComponentModel;
@@ -347,7 +328,7 @@ namespace NanoByte.Common.Native
             try
             {
                 uint size = NativeMethods.GetFileSize(handle, IntPtr.Zero);
-                byte[] buffer = new byte[size];
+                var buffer = new byte[size];
                 uint read = uint.MinValue;
                 var lpOverlapped = new NativeOverlapped();
                 if (NativeMethods.ReadFile(handle, buffer, size, ref read, ref lpOverlapped)) return buffer;
@@ -512,7 +493,7 @@ namespace NanoByte.Common.Native
 
             try
             {
-                if (!NativeMethods.GetFileInformationByHandle(handle, out NativeMethods.BY_HANDLE_FILE_INFORMATION fileInfo))
+                if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
                     throw BuildException(Marshal.GetLastWin32Error());
                 return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
             }
@@ -582,7 +563,7 @@ namespace NanoByte.Common.Native
 
             const int WM_SETTINGCHANGE = 0x001A;
             const int SMTO_ABORTIFHUNG = 0x0002;
-            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out IntPtr result);
+            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out var result);
         }
         #endregion
 

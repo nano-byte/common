@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -73,14 +54,14 @@ namespace NanoByte.Common.Collections
         {
             // Build a list of elements to remove
             var pendingRemove = new LinkedList<XmlDictionaryEntry>();
-            foreach (XmlDictionaryEntry pair in this.Where(pair => pair.Key.Equals(key)))
+            foreach (var pair in this.Where(pair => pair.Key.Equals(key)))
                 pendingRemove.AddLast(pair);
 
             // Remove the elements one-by-one
-            foreach (XmlDictionaryEntry pair in pendingRemove) Remove(pair);
+            foreach (var pair in pendingRemove) Remove(pair);
 
             // Were any elements removed?
-            return (pendingRemove.Count > 0);
+            return pendingRemove.Count > 0;
         }
 
         /// <summary>
@@ -120,7 +101,7 @@ namespace NanoByte.Common.Collections
         /// <exception cref="KeyNotFoundException"><paramref name="key"/> was not found in the collection.</exception>
         public string GetValue(string key)
         {
-            foreach (XmlDictionaryEntry pair in this.Where(pair => pair.Key.Equals(key)))
+            foreach (var pair in this.Where(pair => pair.Key.Equals(key)))
                 return pair.Value;
             throw new KeyNotFoundException();
         }
@@ -141,7 +122,7 @@ namespace NanoByte.Common.Collections
         public virtual XmlDictionary Clone()
         {
             var newDict = new XmlDictionary();
-            foreach (XmlDictionaryEntry entry in this)
+            foreach (var entry in this)
                 newDict.Add(entry.Clone());
 
             return newDict;

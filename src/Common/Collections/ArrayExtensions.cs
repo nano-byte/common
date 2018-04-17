@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -98,10 +79,7 @@ namespace NanoByte.Common.Collections
         /// <remarks>Elements that are present in <paramref name="oldArray"/> but not in <paramref name="newArray"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
         [NotNull, Pure]
         public static T[] GetAddedElements<T>([CanBeNull] this T[] newArray, [CanBeNull] T[] oldArray)
-            where T : IComparable<T>, IEquatable<T>
-        {
-            return GetAddedElements(newArray, oldArray, DefaultComparer<T>.Instance);
-        }
+            where T : IComparable<T>, IEquatable<T> => GetAddedElements(newArray, oldArray, DefaultComparer<T>.Instance);
 
         private sealed class DefaultComparer<T> : IComparer<T> where T : IComparable<T>
         {
@@ -137,8 +115,8 @@ namespace NanoByte.Common.Collections
             int newCounter = 0;
             while (newCounter < newArray.Length)
             {
-                T newElement = newArray[newCounter];
-                int comparison = (oldCounter < oldArray.Length)
+                var newElement = newArray[newCounter];
+                int comparison = oldCounter < oldArray.Length
                     // In-range, compare elements
                     ? comparer.Compare(oldArray[oldCounter], newElement)
                     // Out-of-range, add all remaining new elements

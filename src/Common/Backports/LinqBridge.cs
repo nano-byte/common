@@ -1,4 +1,4 @@
-﻿#if NET20
+#if NET20
 
 // Taken and adapted from: https://bitbucket.org/raboof/linqbridge/downloads/LinqBridge-1.3.cs
 //

@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -43,7 +24,7 @@ namespace NanoByte.Common
         [Fact]
         public void TestGetMessageWithInner()
             => new Exception("Message 1", new Exception("Message 1", new Exception("Message 2")))
-                .GetMessageWithInner().Should().Be($"Message 1{Environment.NewLine}Message 2");
+              .GetMessageWithInner().Should().Be($"Message 1{Environment.NewLine}Message 2");
 
         [Fact]
         public void TestPreserveStack()
@@ -59,7 +40,7 @@ namespace NanoByte.Common
             }
 
             var exceptionAssertion = caught.Invoking(x => throw x.PreserveStack())
-                .Should().Throw<InvalidOperationException>();
+                                           .Should().Throw<InvalidOperationException>();
             exceptionAssertion.WithMessage("Test exception");
 
             // Preserving the stack trace is only possible on .NET Framework on Windows
@@ -87,7 +68,7 @@ namespace NanoByte.Common
                         if (value == 2) throw new ArgumentException("Test exception");
                     },
                     rollback: rollbackCalledFor.Add))
-                .Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
+               .Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);
@@ -121,33 +102,27 @@ namespace NanoByte.Common
                     actionCalledFor.Add(value);
                     throw new ArgumentException("Test exception");
                 }))
-                .Should().Throw<ArgumentException>(because: "Last exceptions should be passed through.");
+               .Should().Throw<ArgumentException>(because: "Last exceptions should be passed through.");
 
             actionCalledFor.Should().Equal(1, 2, 3);
         }
 
         [Fact]
         public void TestRetryPassOnLastAttmpt()
-        {
-            ExceptionUtils.Retry<InvalidOperationException>(lastAttempt =>
+            => ExceptionUtils.Retry<InvalidOperationException>(lastAttempt =>
             {
                 if (!lastAttempt) throw new InvalidOperationException("Test exception");
             });
-        }
 
         [Fact]
         public void TestRetryDoubleFail()
-        {
-            Assert.Throws<InvalidOperationException>(() => ExceptionUtils.Retry<InvalidOperationException>(
+            => Assert.Throws<InvalidOperationException>(() => ExceptionUtils.Retry<InvalidOperationException>(
                 delegate { throw new InvalidOperationException("Test exception"); }, maxRetries: 1));
-        }
 
         [Fact]
         public void TestRetryOtherExceptionType()
-        {
-            Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
+            => Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
                 delegate { throw new IOException("Test exception"); }, maxRetries: 1));
-        }
 
         /// <summary>
         /// Ensures that <see cref="ExceptionUtils.ApplyWithRollbackAsync{T}"/> correctly performs rollbacks on exceptions.
@@ -208,36 +183,27 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public async Task TestRetryAsyncPassOnLastAttmpt()
+        public async Task TestRetryAsyncPassOnLastAttmpt() => await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
         {
-            await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
+            await Task.Yield();
+            if (!lastAttempt) throw new InvalidOperationException("Test exception");
+        });
+
+        [Fact]
+        public void TestRetryAsyncDoubleFail() => new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+            async delegate
             {
                 await Task.Yield();
-                if (!lastAttempt) throw new InvalidOperationException("Test exception");
-            });
-        }
+                throw new InvalidOperationException("Test exception");
+            }, maxRetries: 1)).Should().Throw<InvalidOperationException>();
 
         [Fact]
-        public void TestRetryAsyncDoubleFail()
-        {
-            new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
-                async delegate
-                {
-                    await Task.Yield();
-                    throw new InvalidOperationException("Test exception");
-                }, maxRetries: 1)).Should().Throw<InvalidOperationException>();
-        }
-
-        [Fact]
-        public void TestRetryAsyncOtherExceptionType()
-        {
-            new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
-                async delegate
-                {
-                    await Task.Yield();
-                    throw new IOException("Test exception");
-                }, maxRetries: 1)).Should().Throw<IOException>();
-        }
+        public void TestRetryAsyncOtherExceptionType() => new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+            async delegate
+            {
+                await Task.Yield();
+                throw new IOException("Test exception");
+            }, maxRetries: 1)).Should().Throw<IOException>();
 
         [Fact]
         public void RetryStressTest()
@@ -246,7 +212,7 @@ namespace NanoByte.Common
             var threads = new Thread[10];
             for (int i = 0; i < threads.Length; i++)
             {
-                var x = i;
+                int x = i;
                 threads[i] = new Thread(() =>
                 {
                     try

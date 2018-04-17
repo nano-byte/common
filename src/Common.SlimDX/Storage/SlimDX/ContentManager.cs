@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -311,13 +292,12 @@ namespace NanoByte.Common.Storage.SlimDX
         private static void AddDirectoryToList(NamedCollection<FileEntry> files, string type, string extension, DirectoryInfo directory, string prefix, bool flagAsMod)
         {
             // Add the files in this directory to the list
-            foreach (FileInfo file in directory.GetFiles("*" + extension))
+            foreach (var file in directory.GetFiles("*" + extension))
                 AddFileToList(files, type, prefix + file.Name, flagAsMod);
 
             // Recursively call this method for all sub-directories
-            foreach (DirectoryInfo subDir in directory.GetDirectories()
-                // Don't add dot directories (e.g. .svn)
-                .Where(subDir => !subDir.Name.StartsWith(".")))
+            foreach (var subDir in directory.GetDirectories()
+                                            .Where(subDir => !subDir.Name.StartsWith("."))) // Don't add dot directories (e.g. .svn)
                 AddDirectoryToList(files, type, extension, subDir, prefix + subDir.Name + Path.DirectorySeparatorChar, flagAsMod);
         }
 
@@ -331,13 +311,9 @@ namespace NanoByte.Common.Storage.SlimDX
         /// <param name="flagAsMod">Set to <c>true</c> when handling mod files to detect added and changed files.</param>
         private static void AddArchivesToList(NamedCollection<FileEntry> files, string type, string extension, IEnumerable<KeyValuePair<string, ContentArchiveEntry>> archiveData, bool flagAsMod)
         {
-            foreach (var pair in archiveData
-                .Where(pair => pair.Key.StartsWith(type, StringComparison.OrdinalIgnoreCase)
-                            && pair.Key.EndsWith(extension, StringComparison.OrdinalIgnoreCase)))
-            {
-                // Cut away the type part of the path
-                AddFileToList(files, type, pair.Key.Substring(type.Length + 1), flagAsMod);
-            }
+            foreach (var pair in archiveData.Where(pair => pair.Key.StartsWith(type, StringComparison.OrdinalIgnoreCase)
+                                                        && pair.Key.EndsWith(extension, StringComparison.OrdinalIgnoreCase)))
+                AddFileToList(files, type, pair.Key.Substring(type.Length + 1), flagAsMod); // Cut away the type part of the path
         }
         #endregion
 

@@ -1,24 +1,5 @@
-﻿/*
- * Copyright 2006-2015 Bastian Eicher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+// Copyright Bastian Eicher
+// Licensed under the MIT License
 
 using System;
 using System.Collections.Generic;
@@ -53,7 +34,7 @@ namespace NanoByte.Common.Native
                 case Win32ErrorFailNoactionReboot:
                 case Win32ErrorFailShutdown:
                 case Win32ErrorFailRestart:
-                    string message = new Win32Exception(error).Message + Environment.NewLine + StringUtils.Join(Environment.NewLine, ListAppProblems(out var permissionDenied));
+                    string message = new Win32Exception(error).Message + Environment.NewLine + StringUtils.Join(Environment.NewLine, ListAppProblems(out bool permissionDenied));
 
                     if (permissionDenied) return new UnauthorizedAccessException(message);
                     else return new IOException(message);
@@ -90,7 +71,10 @@ namespace NanoByte.Common.Native
         }
 
         /// <inheritdoc/>
-        ~WindowsRestartManager() => DisposeNative();
+        ~WindowsRestartManager()
+        {
+            DisposeNative();
+        }
 
         private void DisposeNative()
         {
@@ -136,7 +120,7 @@ namespace NanoByte.Common.Native
             string[] names = null;
             handler.RunTask(new SimplePercentTask(Resources.SearchingFileReferences, delegate
             {
-                var apps = ListAppsInternal(out uint arrayLength, out NativeMethods.RM_REBOOT_REASON rebootReasons);
+                var apps = ListAppsInternal(out uint arrayLength, out var rebootReasons);
 
                 names = new string[arrayLength];
                 for (int i = 0; i < arrayLength; i++)
@@ -153,7 +137,7 @@ namespace NanoByte.Common.Native
         [NotNull]
         private IEnumerable<string> ListAppProblems(out bool permissionDenied)
         {
-            var apps = ListAppsInternal(out uint arrayLength, out NativeMethods.RM_REBOOT_REASON rebootReasons);
+            var apps = ListAppsInternal(out uint arrayLength, out var rebootReasons);
 
             permissionDenied = rebootReasons == NativeMethods.RM_REBOOT_REASON.RmRebootReasonPermissionDenied;
 
@@ -204,13 +188,11 @@ namespace NanoByte.Common.Native
         }
 
         private void ShutdownAppsWork(PercentProgressCallback progressCallback)
-        {
-            ExceptionUtils.Retry<IOException>(lastAttempt =>
+            => ExceptionUtils.Retry<IOException>(lastAttempt =>
             {
                 int ret = NativeMethods.RmShutdown(_sessionHandle, lastAttempt ? NativeMethods.RM_SHUTDOWN_TYPE.RmForceShutdown : 0, progressCallback);
                 if (ret != 0) throw BuildException(ret);
             }, maxRetries: 3);
-        }
         #endregion
 
         #region Restart
