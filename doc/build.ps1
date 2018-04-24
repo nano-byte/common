@@ -11,7 +11,6 @@ if (!(Get-Command 0install -ErrorAction SilentlyContinue)) {
 if (Test-Path ..\build\Documentation) {rm -Recurse -Force ..\build\Documentation}
 mkdir ..\build\Documentation | Out-Null
 
-cmd /c "0install run --batch http://0install.de/feeds/Doxygen.xml 2>&1" # Redirect stderr to stdout
-if ($LASTEXITCODE -ne 0) {throw "Exit Code: $LASTEXITCODE"}
+0install run --batch http://0install.de/feeds/Doxygen.xml
 
 popd
