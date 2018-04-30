@@ -4,13 +4,7 @@
 using FluentAssertions;
 using Xunit;
 
-#if SLIMDX
-using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
-namespace NanoByte.Common.Storage.SlimDX
-#else
 namespace NanoByte.Common.Storage
-#endif
 {
     /// <summary>
     /// Contains test methods for <see cref="XmlStorage"/>.
@@ -72,54 +66,5 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void TestFromXmlString()
             => XmlStorage.FromXmlString<TestData>("<?xml version=\"1.0\"?><TestData><Data>Hello</Data></TestData>").Data.Should().Be("Hello");
-
-#if SLIMDX
-        /// <summary>
-        /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with no password.
-        /// </summary>
-        [Fact]
-        public void TestZipNoPassword()
-        {
-            // Write and read file
-            var testData1 = new TestData {Data = "Hello"};
-            var tempStream = new MemoryStream();
-            testData1.SaveXmlZip(tempStream);
-            tempStream.Seek(0, SeekOrigin.Begin);
-            var testData2 = XmlStorage.LoadXmlZip<TestData>(tempStream);
-
-            // Ensure data stayed the same
-            testData2.Data.Should().Be(testData1.Data);
-        }
-
-        /// <summary>
-        /// Ensures <see cref="XmlStorage.SaveXmlZip{T}(T,string,string,EmbeddedFile[])"/> and <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> work correctly with a password.
-        /// </summary>
-        [Fact]
-        public void TestZipPassword()
-        {
-            // Write and read file
-            var testData1 = new TestData {Data = "Hello"};
-            var tempStream = new MemoryStream();
-            testData1.SaveXmlZip(tempStream, "Test password");
-            tempStream.Seek(0, SeekOrigin.Begin);
-            var testData2 = XmlStorage.LoadXmlZip<TestData>(tempStream, password: "Test password");
-
-            // Ensure data stayed the same
-            testData2.Data.Should().Be(testData1.Data);
-        }
-
-        /// <summary>
-        /// Ensures <see cref="XmlStorage.LoadXmlZip{T}(string,string,EmbeddedFile[])"/> correctly detects incorrect passwords.
-        /// </summary>
-        [Fact]
-        public void TestIncorrectPassword()
-        {
-            var tempStream = new MemoryStream();
-            var testData = new TestData {Data = "Hello"};
-            testData.SaveXmlZip(tempStream, "Correct password");
-            tempStream.Seek(0, SeekOrigin.Begin);
-            Assert.Throws<ZipException>(() => XmlStorage.LoadXmlZip<TestData>(tempStream, password: "Wrong password"));
-        }
-#endif
     }
 }

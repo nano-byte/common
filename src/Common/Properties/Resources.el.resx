@@ -117,17 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArchiveInvalid" xml:space="preserve">
-    <value>Το αρχείο αρχειοθέτησης δεν είναι έγκυρο ή κατεστραμμένο.</value>
-  </data>
   <data name="ArgMustBeGreaterThanZero" xml:space="preserve">
     <value>Το επιχείρημα αυτό πρέπει να είναι μεγαλύτερο από το μηδέν.</value>
-  </data>
-  <data name="ArgMustNotBeNegative" xml:space="preserve">
-    <value>Το επιχείρημα αυτό δεν μπορεί να είναι μικρότερο του μηδενός.</value>
-  </data>
-  <data name="AtLeast2Values" xml:space="preserve">
-    <value>Θα χρειαστεί να περάσουν τουλάχιστον δύο τιμές.</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Πίσω</value>
@@ -141,17 +132,11 @@
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>Το DACL δεν μπορεί να κανονικοποιηθει διότι θα μπορούσε δυνητικά να οδηγήσει σε απώλεια πληροφοριών.</value>
   </data>
-  <data name="ContentArchivesAlreadyLoaded" xml:space="preserve">
-    <value>Τα αρχεία περιεχομένου είχαν ήδη φορτωθεί</value>
-  </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Αντιγραφή αρχείων</value>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
     <value>Αντιγραφή στο Πρόχειρο</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Διαγραφή</value>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Ο κατάλογος προορισμού υπάρχει ήδη.</value>
@@ -186,23 +171,14 @@
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Τα διαπιστευτήρια σύνδεσης για {0} είναι εσφαλμένη.</value>
   </data>
-  <data name="ItemAlreadyInPool" xml:space="preserve">
-    <value>Το στοιχείο είναι ήδη σε μια δεξαμενή. Δεν μπορεί να προστεθεί σε περισσότερες από μία δεξαμενες.</value>
-  </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Το κλειδί υπάρχει ήδη στο λεξικό.</value>
   </data>
   <data name="KeyNotFound" xml:space="preserve">
     <value>Το κλειδί δεν βρέθηκε στη συλλογή.</value>
   </data>
-  <data name="LoseChangesAsk" xml:space="preserve">
-    <value>Προσοχή! Όλες οι αλλαγές σας σε αυτό το αρχείο θα χαθούν. Θέλετε να συνεχίσετε;</value>
-  </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Έχει υπερβεί το ανώτατο ποσό των στοιχείων της συλλογής.</value>
-  </data>
-  <data name="MinLargerMax" xml:space="preserve">
-    <value>Η ελάχιστη τιμή δεν μπορεί να είναι μεγαλύτερη από την μέγιστη τιμή.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
     <value>Καμία ενέργεια δεν έχει καταχωρισθεί για '{0}'.</value>
@@ -213,29 +189,11 @@
   <data name="No" xml:space="preserve">
     <value>Οχι</value>
   </data>
-  <data name="NoBinaryDataInZip" xml:space="preserve">
-    <value>Δεν υπήρχαν δυαδικά δεδομένα που βρίσκονται στο αρχείο ZIP.</value>
-  </data>
   <data name="NoModActive" xml:space="preserve">
     <value>Σήμερα δεν υπάρχει ενεργό σημ.</value>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>Η διαμόρφωση του συστήματος δεν μπορεί να επεξεργαστεί σε φορητές λειτουργία.</value>
-  </data>
-  <data name="NotAnImage" xml:space="preserve">
-    <value>Το αρχείο δεν είναι μια έγκυρη εικόνα.</value>
-  </data>
-  <data name="NotFoundGameContentDir" xml:space="preserve">
-    <value>Ο κατάλογος περιεχόμενο του παιχνιδιού δεν μπορεσε να βρεθεί:</value>
-  </data>
-  <data name="NotFoundGameContentFile" xml:space="preserve">
-    <value>Το ακόλουθο αρχείο περιεχόμενο του παιχνιδιού δεν μπορεσε να βρεθεί:</value>
-  </data>
-  <data name="NotFoundModContentDir" xml:space="preserve">
-    <value>Η σημ καταλόγου δεν θα μπορεσε να βρεθεί:</value>
-  </data>
-  <data name="NoXmlDataInZip" xml:space="preserve">
-    <value>Δεν υπάρχουν δεδομένα XML που βρίσκονται στο αρχείο ZIP.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -260,9 +218,6 @@
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Επανεκκίνηση εφαρμογών</value>
-  </data>
-  <data name="Revert" xml:space="preserve">
-    <value>Επαναφορά</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Αναζήτηση</value>
@@ -305,9 +260,6 @@
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Το μήκος των στόχων πρέπει να είναι ίσο με το μήκος των παλιών τιμων</value>
-  </data>
-  <data name="UnableToDelete" xml:space="preserve">
-    <value>Το αρχείο δεν μπορεί να διαγραφεί.</value>
   </data>
   <data name="UnableToLaunchBundled" xml:space="preserve">
     <value>Το πακέτο {0} εγκατάστασης δεν μπορεσε να ξεκινήσει. Παρακαλούμε εγκαταστήστε ξανά την εφαρμογή.</value>

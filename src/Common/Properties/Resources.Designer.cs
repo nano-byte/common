@@ -61,15 +61,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The archive file is invalid or damaged..
-        /// </summary>
-        internal static string ArchiveInvalid {
-            get {
-                return ResourceManager.GetString("ArchiveInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The argument must be greater than zero..
         /// </summary>
         internal static string ArgMustBeGreaterThanZero {
@@ -77,25 +68,7 @@ namespace NanoByte.Common.Properties {
                 return ResourceManager.GetString("ArgMustBeGreaterThanZero", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The argument may not be less than zero..
-        /// </summary>
-        internal static string ArgMustNotBeNegative {
-            get {
-                return ResourceManager.GetString("ArgMustNotBeNegative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You need to pass at least two values..
-        /// </summary>
-        internal static string AtLeast2Values {
-            get {
-                return ResourceManager.GetString("AtLeast2Values", resourceCulture);
-            }
-        }
-        
+                
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
@@ -133,15 +106,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The content archives were already loaded.
-        /// </summary>
-        internal static string ContentArchivesAlreadyLoaded {
-            get {
-                return ResourceManager.GetString("ContentArchivesAlreadyLoaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Copying files.
         /// </summary>
         internal static string CopyFiles {
@@ -156,15 +120,6 @@ namespace NanoByte.Common.Properties {
         internal static string CopyToClipboard {
             get {
                 return ResourceManager.GetString("CopyToClipboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete.
-        /// </summary>
-        internal static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
@@ -268,15 +223,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The item is already in a pool. It can not be added to more than one pool..
-        /// </summary>
-        internal static string ItemAlreadyInPool {
-            get {
-                return ResourceManager.GetString("ItemAlreadyInPool", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The key was already present in the dictionary..
         /// </summary>
         internal static string KeyAlreadyPresent {
@@ -295,29 +241,11 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning! All your changes to this file will be lost. Do you wish to continue?.
-        /// </summary>
-        internal static string LoseChangesAsk {
-            get {
-                return ResourceManager.GetString("LoseChangesAsk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The maximum amount of elements in the collection has been exceeded..
         /// </summary>
         internal static string MaxElementsExceeded {
             get {
                 return ResourceManager.GetString("MaxElementsExceeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The Min value may not be larger than the Max value..
-        /// </summary>
-        internal static string MinLargerMax {
-            get {
-                return ResourceManager.GetString("MinLargerMax", resourceCulture);
             }
         }
         
@@ -349,15 +277,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was no binary data found in the ZIP file..
-        /// </summary>
-        internal static string NoBinaryDataInZip {
-            get {
-                return ResourceManager.GetString("NoBinaryDataInZip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to There is currently no active mod..
         /// </summary>
         internal static string NoModActive {
@@ -372,51 +291,6 @@ namespace NanoByte.Common.Properties {
         internal static string NoSystemConfigInPortableMode {
             get {
                 return ResourceManager.GetString("NoSystemConfigInPortableMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The file is not a valid image..
-        /// </summary>
-        internal static string NotAnImage {
-            get {
-                return ResourceManager.GetString("NotAnImage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The game content directory could not be found:.
-        /// </summary>
-        internal static string NotFoundGameContentDir {
-            get {
-                return ResourceManager.GetString("NotFoundGameContentDir", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The following game content file could not be found:.
-        /// </summary>
-        internal static string NotFoundGameContentFile {
-            get {
-                return ResourceManager.GetString("NotFoundGameContentFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The mod directory could not be found:.
-        /// </summary>
-        internal static string NotFoundModContentDir {
-            get {
-                return ResourceManager.GetString("NotFoundModContentDir", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There was no XML data found in the ZIP file..
-        /// </summary>
-        internal static string NoXmlDataInZip {
-            get {
-                return ResourceManager.GetString("NoXmlDataInZip", resourceCulture);
             }
         }
         
@@ -489,15 +363,6 @@ namespace NanoByte.Common.Properties {
         internal static string RestartingApps {
             get {
                 return ResourceManager.GetString("RestartingApps", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Revert.
-        /// </summary>
-        internal static string Revert {
-            get {
-                return ResourceManager.GetString("Revert", resourceCulture);
             }
         }
         
@@ -624,15 +489,6 @@ namespace NanoByte.Common.Properties {
         internal static string TargetsOldValuesLength {
             get {
                 return ResourceManager.GetString("TargetsOldValuesLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The file could not be deleted..
-        /// </summary>
-        internal static string UnableToDelete {
-            get {
-                return ResourceManager.GetString("UnableToDelete", resourceCulture);
             }
         }
         

@@ -117,17 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArchiveInvalid" xml:space="preserve">
-    <value>Arşiv dosyası geçersiz ya da bozuk.</value>
-  </data>
   <data name="ArgMustBeGreaterThanZero" xml:space="preserve">
     <value>Değişken sıfırdan büyük olmalı.</value>
-  </data>
-  <data name="ArgMustNotBeNegative" xml:space="preserve">
-    <value>Değişken sıfırdan küçük olmalı.</value>
-  </data>
-  <data name="AtLeast2Values" xml:space="preserve">
-    <value>En az iki değer yazmalısınız.</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Geri</value>
@@ -141,17 +132,11 @@
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
   </data>
-  <data name="ContentArchivesAlreadyLoaded" xml:space="preserve">
-    <value>İçerik arşivleri zaten yüklenmiş</value>
-  </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Dosyalar kopyalanıyor</value>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
     <value>Panoya kopyala</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Sil</value>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Hedef dizin zaten var.</value>
@@ -186,23 +171,14 @@
   <data name="InvalidCredentials" xml:space="preserve">
     <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
   </data>
-  <data name="ItemAlreadyInPool" xml:space="preserve">
-    <value>Öge zaten havuzda. Bir öge havuza bir kereden fazla eklenemez.</value>
-  </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Anahtar zaten sözlükte var.</value>
   </data>
   <data name="KeyNotFound" xml:space="preserve">
     <value>Anahtar koleksiyon içinde bulunamadı.</value>
   </data>
-  <data name="LoseChangesAsk" xml:space="preserve">
-    <value>Uyarı! Bu dosyada yaptığınız tüm değişiklikler kaybolacak. Devam etmek istiyor musunuz?</value>
-  </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
-  </data>
-  <data name="MinLargerMax" xml:space="preserve">
-    <value>En küçük değer en büyük değerden büyük olamaz.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
     <value>'{0}' için bir işlem kaydedilmemiş.</value>
@@ -213,29 +189,11 @@
   <data name="No" xml:space="preserve">
     <value>Hayır</value>
   </data>
-  <data name="NoBinaryDataInZip" xml:space="preserve">
-    <value>ZIP dosyası içinde ikili veri bulunamadı.</value>
-  </data>
   <data name="NoModActive" xml:space="preserve">
     <value>Şu anda etkin kip kullanılmıyor.</value>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
-  </data>
-  <data name="NotAnImage" xml:space="preserve">
-    <value>Dosya geçerli bir görsel dosyası değil.</value>
-  </data>
-  <data name="NotFoundGameContentDir" xml:space="preserve">
-    <value>Oyun içeriği dizini bulunamadı:</value>
-  </data>
-  <data name="NotFoundGameContentFile" xml:space="preserve">
-    <value>Şu oyun içeriği dosyası bulunamadı:</value>
-  </data>
-  <data name="NotFoundModContentDir" xml:space="preserve">
-    <value>Mod dizini bulunamadı:</value>
-  </data>
-  <data name="NoXmlDataInZip" xml:space="preserve">
-    <value>ZIP dosyası içinde XML verisi bulunamadı.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>Tamam</value>
@@ -260,9 +218,6 @@
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Uygulamalar yeniden başlatılıyor</value>
-  </data>
-  <data name="Revert" xml:space="preserve">
-    <value>Geri al</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Arama</value>
@@ -305,9 +260,6 @@
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
-  </data>
-  <data name="UnableToDelete" xml:space="preserve">
-    <value>Dosya silinemedi.</value>
   </data>
   <data name="UnableToLaunchBundled" xml:space="preserve">
     <value>Bağlantılı {0} yüklemesi başlatılamadı. Lütfen uygulamayı yeniden yükleyin.</value>

@@ -5,8 +5,7 @@ NanoByte.Common provides utility classes, interfaces, controls, etc. with an emp
 
 NuGet packages (for .NET Framework 2.0+ and .NET Standard 2.0+):  
 [![NanoByte.Common](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common)](https://www.nuget.org/packages/NanoByte.Common/)
-[![NanoByte.Common.WinForms](https://img.shields.io/nuget/v/NanoByte.Common.WinForms.svg?label=NanoByte.Common.WinForms)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)
-[![NanoByte.Common.SlimDX](https://img.shields.io/nuget/v/NanoByte.Common.SlimDX.svg?label=NanoByte.Common.SlimDX)](https://www.nuget.org/packages/NanoByte.Common.SlimDX/)  
+[![NanoByte.Common.WinForms](https://img.shields.io/nuget/v/NanoByte.Common.WinForms.svg?label=NanoByte.Common.WinForms)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)  
 [![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](http://nano-byte.de/common/api/)
 
 CI Builds:  
