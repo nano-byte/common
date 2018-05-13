@@ -491,6 +491,15 @@ namespace NanoByte.Common.Properties {
                 return ResourceManager.GetString("TargetsOldValuesLength", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Your version of .NET does not support TLS 1.2. This may cause connection errors when downloading content via HTTPS. Please run Windows Update to install the necessary patches..
+        /// </summary>
+        internal static string Tls12SupportMissing {
+            get {
+                return ResourceManager.GetString("Tls12SupportMissing", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to The bundled {0} installation could not be launched. Please reinstall the application..

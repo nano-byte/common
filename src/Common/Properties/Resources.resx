@@ -261,6 +261,9 @@
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Length of targets must be equal to Length of oldValues</value>
   </data>
+  <data name="Tls12SupportMissing" xml:space="preserve">
+    <value>Your version of .NET does not support TLS 1.2. This may cause connection errors when downloading content via HTTPS. Please run Windows Update to install the necessary patches.</value>
+  </data>
   <data name="UnableToLaunchBundled" xml:space="preserve">
     <value>The bundled {0} installation could not be launched. Please reinstall the application.</value>
   </data>

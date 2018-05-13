@@ -11,6 +11,7 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Net
 {
@@ -52,6 +53,10 @@ namespace NanoByte.Common.Net
                     // Skip any unsupported protocols
                 }
             }
+
+            const SecurityProtocolType tls12 = (SecurityProtocolType)3072;
+            if ((ServicePointManager.SecurityProtocol | tls12) != tls12)
+                Log.Warn(Resources.Tls12SupportMissing);
         }
 
         /// <summary>
