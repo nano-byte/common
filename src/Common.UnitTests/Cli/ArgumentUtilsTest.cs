@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.IO;
+using System.Linq;
 using FluentAssertions;
 using NanoByte.Common.Storage;
 using Xunit;
@@ -29,16 +30,16 @@ namespace NanoByte.Common.Cli
                 File.WriteAllText(Path.Combine(subdirPath, "1.txt"), @"1");
                 File.WriteAllText(Path.Combine(subdirPath, "2.inf"), @"a");
 
-                var result = ArgumentUtils.GetFiles(new[]
+                ArgumentUtils.GetFiles(new[]
                 {
                     Path.Combine(tempDir, "*.txt"), // Wildcard
                     Path.Combine(tempDir, "d.nfo"), // Specifc file
                     subdirPath // Directory with implict default wildcard
-                }, "*.txt");
-                result[0].FullName.Should().Be(Path.Combine(tempDir, "a.txt"));
-                result[1].FullName.Should().Be(Path.Combine(tempDir, "b.txt"));
-                result[2].FullName.Should().Be(Path.Combine(tempDir, "d.nfo"));
-                result[3].FullName.Should().Be(Path.Combine(subdirPath, "1.txt"));
+                }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
+                    Path.Combine(tempDir, "a.txt"),
+                    Path.Combine(tempDir, "b.txt"),
+                    Path.Combine(tempDir, "d.nfo"),
+                    Path.Combine(subdirPath, "1.txt"));
             }
         }
 
@@ -57,16 +58,16 @@ namespace NanoByte.Common.Cli
                 File.WriteAllText(Path.Combine(subdirPath, "1.txt"), @"1");
                 File.WriteAllText(Path.Combine(subdirPath, "2.inf"), @"a");
 
-                var result = ArgumentUtils.GetFiles(new[]
+                ArgumentUtils.GetFiles(new[]
                 {
                     "*.txt", // Wildcard
                     "d.nfo", // Specifc file
                     subdirPath // Directory with implict default wildcard
-                }, "*.txt");
-                result[0].FullName.Should().Be(Path.Combine(tempDir, "a.txt"));
-                result[1].FullName.Should().Be(Path.Combine(tempDir, "b.txt"));
-                result[2].FullName.Should().Be(Path.Combine(tempDir, "d.nfo"));
-                Path.Combine(tempDir, subdirPath, "1.txt").Should().Be(result[3].FullName);
+                }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
+                    Path.Combine(tempDir, "a.txt"),
+                    Path.Combine(tempDir, "b.txt"),
+                    Path.Combine(tempDir, "d.nfo"),
+                    Path.Combine(tempDir, subdirPath, "1.txt"));
             }
         }
     }
