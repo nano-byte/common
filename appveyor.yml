@@ -24,10 +24,16 @@ for:
         name: Documentation
 
     deploy:
-      provider: Environment
-      name: nuget.org
-      on:
-        appveyor_repo_tag: true
+      - provider: Environment
+        name: github.com
+        artifact: Documentation
+        on:
+          appveyor_repo_tag: true
+      - provider: Environment
+        name: nuget.org
+        artifact: NuGet
+        on:
+          appveyor_repo_tag: true
 
   - matrix:
       only:
