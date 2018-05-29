@@ -261,6 +261,9 @@
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
   </data>
+  <data name="Tls12SupportMissing" xml:space="preserve">
+    <value>.NET sürümünüz TLS 1.2 sürümünü desteklemiyor. Bu durum HTTPS üzerinden içerik indirilirken sorun çıkmasına neden olabilir. Lütfen gerekli güncellemelerin kurulması için Windows Update uygulamasını çalıştırın.</value>
+  </data>
   <data name="UnableToLaunchBundled" xml:space="preserve">
     <value>Bağlantılı {0} yüklemesi başlatılamadı. Lütfen uygulamayı yeniden yükleyin.</value>
   </data>
