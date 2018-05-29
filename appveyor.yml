@@ -26,12 +26,10 @@ for:
     deploy:
       - provider: Environment
         name: github.com
-        artifact: Documentation
         on:
           appveyor_repo_tag: true
       - provider: Environment
         name: nuget.org
-        artifact: NuGet
         on:
           appveyor_repo_tag: true
 
