@@ -55,7 +55,7 @@ namespace NanoByte.Common.Net
             }
 
             const SecurityProtocolType tls12 = (SecurityProtocolType)3072;
-            if ((ServicePointManager.SecurityProtocol | tls12) != tls12)
+            if ((ServicePointManager.SecurityProtocol & tls12) != tls12)
                 Log.Warn(Resources.Tls12SupportMissing);
         }
 
