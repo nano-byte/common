@@ -8,8 +8,8 @@ if (!(Get-Command 0install -ErrorAction SilentlyContinue)) {
     $env:PATH = "$env:TEMP\zero-install;$env:PATH"
 }
 
-if (Test-Path ..\build\Documentation) {rm -Recurse -Force ..\build\Documentation}
-mkdir ..\build\Documentation | Out-Null
+if (Test-Path ..\artifacts\Documentation) {rm -Recurse -Force ..\artifacts\Documentation}
+mkdir ..\artifacts\Documentation | Out-Null
 
 0install run --batch http://0install.de/feeds/Doxygen.xml
 

@@ -18,9 +18,9 @@ for:
       - ps: src\test.ps1
 
     artifacts:
-      - path: build\Documentation
+      - path: artifacts\Documentation
         name: apidocs
-      - path: build\Release\*.nupkg
+      - path: artifacts\Release\*.nupkg
 
     deploy:
       - provider: Environment
