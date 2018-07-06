@@ -11,7 +11,8 @@
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <OutputType>Library</OutputType>
-    <IncludeSource>True</IncludeSource>
+    <PublishRepositoryUrl>True</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -76,6 +77,10 @@ API documentation: http://nano-byte.de/common/api/
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63102-01" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
