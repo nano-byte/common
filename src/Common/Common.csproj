@@ -10,6 +10,8 @@
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
+    <OutputType>Library</OutputType>
+    <IncludeSource>True</IncludeSource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -20,7 +22,6 @@
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
     <TargetFrameworks>net20;net35-client;net40-client;net45;netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <IncludeSource>True</IncludeSource>
   </PropertyGroup>
   <PropertyGroup Condition="('$(OS)'=='Windows_NT' And '$(MSBuildRuntimeType)'=='Core') Or '$(MSBuildRuntimeType)'=='Mono'">
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
@@ -30,13 +31,13 @@
   </PropertyGroup>
 
   <!-- Support old .NET Framework Client Profiles -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net35-client'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net35-client'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>client</TargetFrameworkProfile>
     <DefineConstants>$(DefineConstants);NET35</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net40-client'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net40-client'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>client</TargetFrameworkProfile>
@@ -56,26 +57,23 @@ API documentation: http://nano-byte.de/common/api/
     <Copyright>Copyright Bastian Eicher et al.</Copyright>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
     <!-- Used as a Reference Assembly, not distributed with NuGet package -->
     <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="System.IO.FileSystem.AccessControl" Version="4.5.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
   </ItemGroup>
@@ -101,7 +99,7 @@ API documentation: http://nano-byte.de/common/api/
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <EmbeddedResource Remove="Properties\ImageResources.resx" />
     <Compile Remove="Properties\ImageResources.Designer.cs" />
   </ItemGroup>

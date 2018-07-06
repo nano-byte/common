@@ -10,6 +10,8 @@
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
+    <OutputType>Library</OutputType>
+    <IncludeSource>True</IncludeSource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -20,7 +22,6 @@
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
     <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <IncludeSource>True</IncludeSource>
   </PropertyGroup>
   <PropertyGroup Condition="('$(OS)'=='Windows_NT' And '$(MSBuildRuntimeType)'=='Core') Or '$(MSBuildRuntimeType)'=='Mono'">
     <TargetFrameworks>net45</TargetFrameworks>
@@ -40,13 +41,13 @@ API documentation: http://nano-byte.de/common/api/
   </PropertyGroup>
 
   <!-- Support old .NET Framework Client Profiles -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net35-client'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net35-client'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>client</TargetFrameworkProfile>
     <DefineConstants>$(DefineConstants);NET35</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net40-client'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net40-client'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>client</TargetFrameworkProfile>
