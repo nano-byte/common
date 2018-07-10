@@ -103,7 +103,7 @@ namespace NanoByte.Common.Dispatch
                 var disposable = representation as IDisposable;
                 disposable?.Dispose();
             }
-            _modelToView.RemoveKey(element);
+            _modelToView.Remove(element);
         }
 
         private void OnChanged(TModel element) => _updateDispatcher.Dispatch(element);

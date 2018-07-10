@@ -117,6 +117,27 @@ namespace NanoByte.Common.Collections
 #endif
 
         /// <summary>
+        /// Builds a <see cref="MultiDictionary{TKey,TValue}"/> from an enumerable.
+        /// </summary>
+        /// <param name="elements">The elements to build the dictionary from.</param>
+        /// <param name="keySelector">Selects the dictionary key from an input element.</param>
+        /// <param name="valueSelector">Selects a dictionary value from an input element.</param>
+        [NotNull]
+        public static MultiDictionary<TKey, TValue> ToMultiDictionary<TSource, TKey, TValue>([NotNull, InstantHandle] this IEnumerable<TSource> elements, [NotNull, InstantHandle] Func<TSource, TKey> keySelector, [NotNull, InstantHandle] Func<TSource, TValue> valueSelector)
+        {
+            #region Sanity checks
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+            if (valueSelector == null) throw new ArgumentNullException(nameof(valueSelector));
+            #endregion
+
+            var result = new MultiDictionary<TKey, TValue>();
+            foreach (TSource item in elements)
+                result.Add(keySelector(item), valueSelector(item));
+            return result;
+        }
+
+        /// <summary>
         /// Determines whether two dictionaries contain the same key-value pairs.
         /// </summary>
         /// <param name="first">The first of the two dictionaries to compare.</param>
