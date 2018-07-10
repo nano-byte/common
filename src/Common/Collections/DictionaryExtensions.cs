@@ -29,8 +29,8 @@ namespace NanoByte.Common.Collections
             if (source == null) throw new ArgumentNullException(nameof(source));
             #endregion
 
-            foreach (var pair in source)
-                target.Add(pair.Key, pair.Value);
+            foreach (var (key, value) in source)
+                target.Add(key, value);
         }
 
         /// <summary>
@@ -137,9 +137,9 @@ namespace NanoByte.Common.Collections
             if (!second.Keys.All(keySet.Contains)) return false;
 
             if (valueComparer == null) valueComparer = EqualityComparer<TValue>.Default;
-            foreach (var pair in first)
+            foreach (var (key, value) in first)
             {
-                if (!valueComparer.Equals(pair.Value, second[pair.Key]))
+                if (!valueComparer.Equals(value, second[key]))
                     return false;
             }
             return true;
@@ -163,8 +163,8 @@ namespace NanoByte.Common.Collections
             {
                 int result = 397;
                 // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (var pair in dictionary)
-                    result = result ^ (pair.Key.GetHashCode() + valueComparer.GetHashCode(pair.Value));
+                foreach (var (key, value) in dictionary)
+                    result = result ^ (key.GetHashCode() + valueComparer.GetHashCode(value));
                 return result;
             }
         }
