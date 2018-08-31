@@ -1,8 +1,15 @@
 mode: ContinuousDeployment
+
 branches:
-  master:
-    tag: rc
-    increment: patch
+  # Mainline branches
+  master: 
+    tag: ci
   develop:
-    tag: pre
+    tag: dev
     increment: patch
+
+  # Stabilization branches
+  release[/-]:
+    tag: rc
+  hotfix[/-]:
+    tag: rc
