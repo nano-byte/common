@@ -1,7 +1,7 @@
 NanoByte.Common
 ===============
 
-NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, integration with native features and down-level compatibility. It is available for .NET Framework 2.0 or later and .NET Standard 2.0 or later.
+NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, integration with native features and down-level compatibility.
 
 NuGet packages (for .NET Framework 2.0+ and .NET Standard 2.0+):  
 [![NanoByte.Common](https://img.shields.io/nuget/v/NanoByte.Common.svg?label=NanoByte.Common)](https://www.nuget.org/packages/NanoByte.Common/)
@@ -14,7 +14,7 @@ Directory structure
 -------------------
 - `src` contains source code.
 - `lib` contains pre-compiled 3rd party libraries which are not available via NuGet.
-- `doc` contains a Doxyfile project for generation the API documentation.
+- `doc` contains a Doxygen project for generation the API documentation.
 - `artifacts` contains the results of various compilation processes. It is created on first usage.
 
 Building
