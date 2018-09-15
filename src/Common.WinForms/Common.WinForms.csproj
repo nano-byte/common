@@ -29,10 +29,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>
-Utility classes, interfaces, controls, etc. for Windows Forms projects.
-API documentation: http://nano-byte.de/common/api/
-    </Description>
+    <Description>builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
     <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>

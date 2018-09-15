@@ -1,7 +1,11 @@
-NanoByte.Common provides utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, OS integration and task progress UIs.
+This API documentation lists the public interfaces provided by the [NanoByte.Common](https://www.nuget.org/packages/NanoByte.Common/) and [NanoByte.Common.WinForms](https://www.nuget.org/packages/NanoByte.Common.WinForms/) libraries.
 
-NuGet packages:
-- [NanoByte.Common](https://www.nuget.org/packages/NanoByte.Common/) (platform-agnostic base)
-- [NanoByte.Common.WinForms](https://www.nuget.org/packages/NanoByte.Common.WinForms/) ([Windows Forms](https://docs.microsoft.com/en-us/dotnet/framework/winforms/)-specific features)
+NanoByte.Common provides various utility classes and data structures with an emphasis on:
+- integration with native Windows and Linux features,
+- network and disk IO,
+- advanced collections and
+- undo/redo logic.
 
-This API documentation lists the public interfaces provided by NanoByte.Common. It is intended primarily for developers consuming the libraries.
+NanoByte.Common.WinForms builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on:
+- progress reporting and
+- data binding.

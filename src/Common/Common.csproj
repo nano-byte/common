@@ -46,10 +46,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>
-Utility classes, interfaces, controls, etc. with an emphasis on cross-platform development, OS integration and task progress UIs.
-API documentation: http://nano-byte.de/common/api/
-    </Description>
+    <Description>Utility classes and data structures with an emphasis on integration with native Windows and Linux features, network and disk IO, advanced collections and undo/redo logic.</Description>
     <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
