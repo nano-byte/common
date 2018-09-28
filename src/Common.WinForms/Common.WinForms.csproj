@@ -29,13 +29,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
+    <Description>Builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
+    <Authors>Bastian Eicher</Authors>
+    <Copyright>Copyright Bastian Eicher et al.</Copyright>
     <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
-    <Authors>Bastian Eicher</Authors>
-    <Company>NanoByte</Company>
-    <Copyright>Copyright Bastian Eicher et al.</Copyright>
   </PropertyGroup>
 
   <!-- Support old .NET Framework Client Profiles -->

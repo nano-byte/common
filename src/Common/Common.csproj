@@ -47,12 +47,11 @@
 
   <PropertyGroup>
     <Description>Utility classes and data structures with an emphasis on integration with native Windows and Linux features, network and disk IO, advanced collections and undo/redo logic.</Description>
+    <Authors>Bastian Eicher</Authors>
+    <Copyright>Copyright Bastian Eicher et al.</Copyright>
     <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
-    <Authors>Bastian Eicher</Authors>
-    <Company>NanoByte</Company>
-    <Copyright>Copyright Bastian Eicher et al.</Copyright>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
