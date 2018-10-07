@@ -32,7 +32,7 @@
     <Description>Builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
     <Authors>Bastian Eicher</Authors>
     <Copyright>Copyright Bastian Eicher et al.</Copyright>
-    <PackageProjectUrl>http://nano-byte.de/common/</PackageProjectUrl>
+    <PackageProjectUrl>https://common.nanobyte.de/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
   </PropertyGroup>
@@ -62,7 +62,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63102-01" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- Bundle 3rd party libs in NuGet package -->
