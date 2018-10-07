@@ -1,10 +1,10 @@
 PROJECT_NAME = "NanoByte.Common"
 
-INPUT = main.md ../src
+INPUT = . ../src
 USE_MDFILE_AS_MAINPAGE = main.md
 STRIP_FROM_PATH = ../src
 RECURSIVE = YES
-EXCLUDE_PATTERNS = */packages/* */*.UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs */JetBrains.Annotations.cs
+EXCLUDE_PATTERNS = */packages/* */*.UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs
 
 OUTPUT_DIRECTORY = ../artifacts/Documentation
 GENERATE_TAGFILE = ../artifacts/Documentation/nanobyte-common.tag

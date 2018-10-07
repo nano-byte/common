@@ -11,6 +11,8 @@ if (!(Get-Command 0install -ErrorAction SilentlyContinue)) {
 if (Test-Path ..\artifacts\Documentation) {rm -Recurse -Force ..\artifacts\Documentation}
 mkdir ..\artifacts\Documentation | Out-Null
 
-0install run --batch http://0install.de/feeds/Doxygen.xml
+0install run --batch http://repo.roscidus.com/devel/doxygen
+
+cp CNAME ..\artifacts\Documentation\
 
 popd

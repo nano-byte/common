@@ -1,6 +1,8 @@
 # NanoByte.Common
 
-[![NuGet](https://img.shields.io/nuget/v/NanoByte.Common.svg)](https://www.nuget.org/packages/NanoByte.Common/) [![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](http://nano-byte.de/common/api/) [![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)  
+[![NuGet](https://img.shields.io/nuget/v/NanoByte.Common.svg)](https://www.nuget.org/packages/NanoByte.Common/)
+[![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](https://common.nanobyte.de/)
+[![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)  
 NanoByte.Common provides various utility classes and data structures with an emphasis on:
 
 - integration with native Windows and Linux features,
@@ -9,7 +11,6 @@ NanoByte.Common provides various utility classes and data structures with an emp
 - undo/redo logic.
 
 The library is available for .NET Framework 2.0+ and .NET Standard 2.0+.
-
 
 ## NanoByte.Common.WinForms
 
