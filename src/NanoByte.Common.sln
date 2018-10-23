@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.WinForms", "Common.WinForms\Common.WinForms.csproj", "{DACD1A8E-7734-458C-92B4-DA1F29940890}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.UnitTests", "Common.UnitTests\Common.UnitTests.csproj", "{4E618CB3-F190-4080-8509-7D65C46D5700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{4E618CB3-F190-4080-8509-7D65C46D5700}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

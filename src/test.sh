@@ -2,4 +2,4 @@
 set -e
 cd `dirname $0`
 
-dotnet test --no-build Common.UnitTests/Common.UnitTests.csproj
+dotnet test --no-build UnitTests/UnitTests.csproj
