@@ -41,7 +41,7 @@ namespace NanoByte.Common
         /// Creates a property pointer.
         /// </summary>
         /// <param name="getValue">A delegate that returns the current value.</param>
-        /// <param name="setValue">A delegate that sets the valuel.</param>
+        /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public PropertyPointer([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
@@ -58,6 +58,17 @@ namespace NanoByte.Common
     /// </summary>
     public static class PropertyPointer
     {
+        /// <summary>
+        /// Creates a property pointer.
+        /// </summary>
+        /// <typeparam name="T">The type of value the property contains.</typeparam>
+        /// <param name="getValue">A delegate that returns the current value.</param>
+        /// <param name="setValue">A delegate that sets the value.</param>
+        /// <param name="defaultValue">The default value of the property</param>
+        /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
+        public static PropertyPointer<T> For<T>([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
+            => new PropertyPointer<T>(getValue, setValue, defaultValue, needsEncoding);
+
         /// <summary>
         /// Wraps a <see cref="bool"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
