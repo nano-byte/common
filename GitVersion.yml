@@ -9,7 +9,7 @@ branches:
     tag: beta
 
   # Stabilization branches
-  release[/-]:
+  release:
     tag: rc
-  hotfix[/-]:
+  hotfix:
     tag: rc
