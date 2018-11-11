@@ -36,7 +36,7 @@ namespace NanoByte.Common
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Any kind of problems writing the log file should be ignored")]
         static Log()
         {
-            string filePath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(AppInfo.Current.Name) + " Log.txt");
+            string filePath = Path.Combine(Path.GetTempPath(), $"{AppInfo.Current.Name} {Environment.UserName} Log.txt");
 
             // Try to open the file for writing but give up right away if there are any problems
             FileStream file;
