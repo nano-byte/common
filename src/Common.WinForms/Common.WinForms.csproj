@@ -14,19 +14,6 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
-    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(OS)'=='Windows_NT' And '$(MSBuildRuntimeType)'=='Core') Or '$(MSBuildRuntimeType)'=='Mono'">
-    <TargetFrameworks>net45</TargetFrameworks>
-  </PropertyGroup>
-
   <PropertyGroup>
     <Description>Builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
     <Authors>Bastian Eicher</Authors>
@@ -34,6 +21,15 @@
     <PackageProjectUrl>https://common.nanobyte.de/</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
+  </PropertyGroup>
+
+  <!-- Auto-select supported target frameworks based on MSBuild version -->
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
+    <TargetFrameworks>net20;net35-client;net40-client;net45</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="('$(OS)'=='Windows_NT' And '$(MSBuildRuntimeType)'=='Core') Or '$(MSBuildRuntimeType)'=='Mono'">
+    <TargetFrameworks>net45</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Support old .NET Framework Client Profiles -->
@@ -48,6 +44,11 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>client</TargetFrameworkProfile>
     <DefineConstants>$(DefineConstants);NET40</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
