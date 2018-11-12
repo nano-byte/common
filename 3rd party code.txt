@@ -8,12 +8,6 @@ http://www.icsharpcode.net/OpenSource/SharpZipLib/ + https://github.com/nano-byt
 GNU GPL with GNU Classpath exception
 NuGet package: ICSharpCode.SharpZipLib.Patched
 
-ICSharpCode.TextEditor
-http://www.icsharpcode.net/OpenSource/SD/
-GNU LGPL 2.1: http://opensource.org/licenses/LGPL-2.1
-Applied patches: ICSharpCode.TextEditor.*.patch
-Self-compiled managed DLL: ICSharpCode.TextEditor.dll
-
 TaskDialog
 http://www.codeproject.com/KB/vista/TaskDialogWinForms.aspx
 Public domain

@@ -63,29 +63,9 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AddButton {
-            get {
-                object obj = ResourceManager.GetObject("AddButton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ClearButton {
             get {
                 object obj = ResourceManager.GetObject("ClearButton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DeleteButton {
-            get {
-                object obj = ResourceManager.GetObject("DeleteButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

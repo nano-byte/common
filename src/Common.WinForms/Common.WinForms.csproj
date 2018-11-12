@@ -57,7 +57,6 @@
 
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="ICSharpCode.TextEditor" HintPath="..\..\lib\ICSharpCode.TextEditor.dll" />
     <Reference Include="TaskDialog" HintPath="..\..\lib\TaskDialog.dll" />
   </ItemGroup>
 
@@ -67,10 +66,10 @@
 
   <!-- Bundle 3rd party libs in NuGet package -->
   <ItemGroup>
-    <None Include="..\..\lib\ICSharpCode.TextEditor.*;..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net20;" />
-    <None Include="..\..\lib\ICSharpCode.TextEditor.*;..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net35-client" />
-    <None Include="..\..\lib\ICSharpCode.TextEditor.*;..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net40-client" />
-    <None Include="..\..\lib\ICSharpCode.TextEditor.*;..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net20;" />
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net35-client" />
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net40-client" />
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
   </ItemGroup>
 
 </Project>
