@@ -251,8 +251,8 @@ namespace NanoByte.Common.Collections
             {
                 int result = 397;
                 // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T unknown in collection.WhereNotNull())
-                    result = (result * 397) ^ comparer.GetHashCode(unknown);
+                foreach (T item in collection.WhereNotNull())
+                    result = (result * 397) ^ comparer.GetHashCode(item);
                 return result;
             }
         }
@@ -275,8 +275,8 @@ namespace NanoByte.Common.Collections
             {
                 int result = 397;
                 // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T unknown in collection.WhereNotNull())
-                    result = result ^ comparer.GetHashCode(unknown);
+                foreach (T item in collection.WhereNotNull())
+                    result = result ^ comparer.GetHashCode(item);
                 return result;
             }
         }
