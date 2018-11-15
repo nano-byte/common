@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
 {
@@ -11,26 +12,36 @@ namespace NanoByte.Common.Undo
     /// Controls editing a target using <see cref="IUndoCommand"/>s.
     /// </summary>
     /// <typeparam name="T">The type of the root object being edited.</typeparam>
-    public abstract class CommandManager<T> : ICommandExecutor
+    public class CommandManager<T> : ICommandExecutor
+        where T : class
     {
-        #region Variables
         /// <summary>Entries used by the undo-system to undo changes</summary>
         protected readonly Stack<IUndoCommand> UndoStack = new Stack<IUndoCommand>();
 
         /// <summary>Entries used by the undo-system to redo changes previously undone</summary>
         protected readonly Stack<IUndoCommand> RedoStack = new Stack<IUndoCommand>();
-        #endregion
 
-        #region Properties
         /// <summary>
         /// The root object being edited.
         /// </summary>
-        public abstract T Target { get; set; }
+        [NotNull]
+        public virtual T Target { get; }
 
         /// <summary>
         /// The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.
         /// </summary>
-        public string Path { get; protected set; }
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Creates a new command manager.
+        /// </summary>
+        /// <param name="target">The root object being edited.</param>
+        /// <param name="path">The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.</param>
+        public CommandManager([NotNull] T target, [CanBeNull] string path = null)
+        {
+            Target = target ?? throw new ArgumentNullException(nameof(target));
+            Path = path;
+        }
 
         /// <summary>
         /// Indicates whether the <see cref="Target"/> has unsaved changes.
@@ -66,9 +77,7 @@ namespace NanoByte.Common.Undo
                 RedoEnabledChanged?.Invoke();
             }
         }
-        #endregion
 
-        #region Events
         /// <summary>
         /// Is raised after an <see cref="IUndoCommand"/> has been executed.
         /// </summary>
@@ -88,9 +97,7 @@ namespace NanoByte.Common.Undo
         public event Action RedoEnabledChanged;
 
         protected void OnUpdated() => Updated?.Invoke();
-        #endregion
 
-        #region Commands
         /// <inheritdoc/>
         public void Execute(IUndoCommand command)
         {
@@ -171,6 +178,5 @@ namespace NanoByte.Common.Undo
             UndoEnabled = false;
             RedoEnabled = false;
         }
-        #endregion
     }
 }
