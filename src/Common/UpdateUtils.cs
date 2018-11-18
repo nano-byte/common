@@ -11,8 +11,6 @@ namespace NanoByte.Common
     /// </summary>
     public static class UpdateUtils
     {
-        #region Ref bool
-        #region Struct
         /// <summary>
         /// Updates a value and sets a boolean flag to <c>true</c> if the original value actually changed.
         /// </summary>
@@ -47,9 +45,7 @@ namespace NanoByte.Common
             updated2 = true;
             original = value;
         }
-        #endregion
 
-        #region String
         /// <summary>
         /// Updates a value and sets a boolean flag to <c>true</c> if the original value actually changed
         /// </summary>
@@ -81,11 +77,7 @@ namespace NanoByte.Common
             updated2 = true;
             original = value;
         }
-        #endregion
-        #endregion
 
-        #region Exec Delegate
-        #region Struct
         /// <summary>
         /// Updates a value and calls back a delegate if the original value actually changed.
         /// </summary>
@@ -93,7 +85,7 @@ namespace NanoByte.Common
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets called if value is different from original.</param>
-        public static void To<T>(this T value, ref T original, [NotNull, InstantHandle] Action updated) where T : struct
+        public static void To<T>(this T value, ref T original, [CanBeNull, InstantHandle] Action updated) where T : struct
         {
             #region Sanity checks
             if (updated == null) throw new ArgumentNullException(nameof(updated));
@@ -111,7 +103,7 @@ namespace NanoByte.Common
             // Execute the "updated" delegate
             try
             {
-                updated();
+                updated?.Invoke();
             }
             catch
             {
@@ -120,16 +112,14 @@ namespace NanoByte.Common
                 throw;
             }
         }
-        #endregion
 
-        #region String
         /// <summary>
         /// Updates a value and calls back a delegate if the original value actually changed.
         /// </summary>
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets called if value is different from original.</param>
-        public static void To(this string value, ref string original, [NotNull, InstantHandle] Action updated)
+        public static void To(this string value, ref string original, [CanBeNull, InstantHandle] Action updated)
         {
             #region Sanity checks
             if (updated == null) throw new ArgumentNullException(nameof(updated));
@@ -147,7 +137,7 @@ namespace NanoByte.Common
             // Execute the "updated" delegate
             try
             {
-                updated();
+                updated?.Invoke();
             }
             catch
             {
@@ -156,10 +146,7 @@ namespace NanoByte.Common
                 throw;
             }
         }
-        #endregion
-        #endregion
 
-        #region Swap
         /// <summary>
         /// Swaps the content of two fields.
         /// </summary>
@@ -172,6 +159,5 @@ namespace NanoByte.Common
             value1 = value2;
             value2 = tempValue;
         }
-        #endregion
     }
 }
