@@ -7,4 +7,4 @@ mkdir -p ../artifacts/Documentation
 
 0install run http://repo.roscidus.com/devel/doxygen
 
-cp CNAME ..\artifacts\Documentation\
+cp CNAME ../artifacts/Documentation/

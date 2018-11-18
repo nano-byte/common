@@ -1,7 +1,7 @@
 # NanoByte.Common
 
 [![NuGet](https://img.shields.io/nuget/v/NanoByte.Common.svg)](https://www.nuget.org/packages/NanoByte.Common/)
-[![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](https://common.nanobyte.de/)
+[![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](https://common.nano-byte.net/)
 [![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)  
 NanoByte.Common provides various utility classes and data structures with an emphasis on:
 
