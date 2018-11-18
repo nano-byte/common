@@ -2,9 +2,15 @@
 // Licensed under the MIT License
 
 using System;
+using System.CodeDom;
 using System.Globalization;
 using JetBrains.Annotations;
 using NanoByte.Common.Net;
+
+#if !NET20 && !NET35
+using System.Linq.Expressions;
+using System.Reflection;
+#endif
 
 namespace NanoByte.Common
 {
@@ -68,6 +74,40 @@ namespace NanoByte.Common
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public static PropertyPointer<T> For<T>([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
             => new PropertyPointer<T>(getValue, setValue, defaultValue, needsEncoding);
+
+#if !NET20 && !NET35
+        /// <summary>
+        /// Creates a property pointer.
+        /// </summary>
+        /// <typeparam name="T">The type of value the property contains.</typeparam>
+        /// <param name="getValue">An expression pointing to the property.</param>
+        /// <param name="defaultValue">The default value of the property</param>
+        /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
+        public static PropertyPointer<T> For<T>([NotNull] Expression<Func<T>> getValue, T defaultValue = default, bool needsEncoding = false)
+        {
+            #region Sanity checks
+            if (getValue == null) throw new ArgumentNullException(nameof(getValue));
+            #endregion
+
+            Expression<Action<T>> SetValue()
+            {
+                var memberExpression = getValue.Body as MemberExpression;
+                var parameter = Expression.Parameter(typeof(T));
+
+                switch (memberExpression?.Member)
+                {
+                    case PropertyInfo propertyInfo:
+                        return Expression.Lambda<Action<T>>(Expression.Call(memberExpression.Expression, propertyInfo.GetSetMethod(), parameter), parameter);
+                    case FieldInfo _:
+                        return Expression.Lambda<Action<T>>(Expression.Assign(memberExpression, parameter), parameter);
+                    default:
+                        throw new ArgumentException("The expression must point to a property or field", nameof(getValue));
+                }
+            }
+
+            return new PropertyPointer<T>(getValue.Compile(), SetValue().Compile(), defaultValue, needsEncoding);
+        }
+#endif
 
         /// <summary>
         /// Wraps a <see cref="bool"/> pointer in a <see cref="string"/> pointer.
