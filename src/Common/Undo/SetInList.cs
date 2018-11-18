@@ -40,4 +40,20 @@ namespace NanoByte.Common.Undo
         /// </summary>
         protected override void OnUndo() => _list[_list.IndexOf(_newElement)] = _oldElement;
     }
+
+    /// <summary>
+    /// Factory methods for <see cref="SetInList{T}"/>.
+    /// </summary>
+    public static class SetInList
+    {
+        /// <summary>
+        /// Creates a new set in list command.
+        /// </summary>
+        /// <param name="list">The list to be modified.</param>
+        /// <param name="oldElement">The old element currently in the <paramref name="list"/> to be replaced.</param>
+        /// <param name="newElement">The new element to take the place of <paramref name="oldElement"/> in the <paramref name="list"/>.</param>
+        /// <typeparam name="T">The type of elements the list contains.</typeparam>
+        public static SetInList<T> For<T>(IList<T> list, T oldElement, T newElement)
+            => new SetInList<T>(list, oldElement, newElement);
+    }
 }

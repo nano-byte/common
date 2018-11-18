@@ -4,12 +4,16 @@
 using System;
 using JetBrains.Annotations;
 
+#if !NET20 && !NET35
+using System.Linq.Expressions;
+#endif
+
 namespace NanoByte.Common.Undo
 {
     /// <summary>
     /// An undo command that uses a delegates for getting and setting values from a backing model.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The type of the value to set.</typeparam>
     public class SetValueCommand<T> : SimpleCommand, IValueCommand
     {
         private readonly PropertyPointer<T> _pointer;
@@ -31,16 +35,6 @@ namespace NanoByte.Common.Undo
         }
 
         /// <summary>
-        /// Creates a new value-setting command.
-        /// </summary>
-        /// <param name="getValue">A delegate that returns the current value.</param>
-        /// <param name="setValue">A delegate that sets the valuel.</param>
-        /// <param name="newValue">The new value to be set.</param>
-        public SetValueCommand([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue)
-            : this(new PropertyPointer<T>(getValue, setValue), newValue)
-        {}
-
-        /// <summary>
         /// Sets the new value in the model.
         /// </summary>
         protected override void OnExecute()
@@ -53,5 +47,41 @@ namespace NanoByte.Common.Undo
         /// Restores the old value in the model.
         /// </summary>
         protected override void OnUndo() => _pointer.Value = _oldValue;
+    }
+
+    /// <summary>
+    /// Factory methods for <see cref="SetValueCommand{T}"/>.
+    /// </summary>
+    public static class SetValueCommand
+    {
+        /// <summary>
+        /// Creates a new value-setting command.
+        /// </summary>
+        /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
+        /// <param name="newValue">The new value to be set.</param>
+        /// <typeparam name="T">The type of the value to set.</typeparam>
+        public static SetValueCommand<T> For<T>([NotNull] PropertyPointer<T> pointer, T newValue)
+            => new SetValueCommand<T>(pointer, newValue);
+
+        /// <summary>
+        /// Creates a new value-setting command.
+        /// </summary>
+        /// <param name="getValue">A delegate that returns the current value.</param>
+        /// <param name="setValue">A delegate that sets the value.</param>
+        /// <param name="newValue">The new value to be set.</param>
+        /// <typeparam name="T">The type of the value to set.</typeparam>
+        public static SetValueCommand<T> For<T>([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue)
+            => For(PropertyPointer.For(getValue, setValue), newValue);
+
+#if !NET20 && !NET35
+        /// <summary>
+        /// Creates a new value-setting command.
+        /// </summary>
+        /// <typeparam name="T">The type of value the property contains.</typeparam>
+        /// <param name="expression">An expression pointing to the property.</param>
+        /// <param name="newValue">The new value to be set.</param>
+        public static SetValueCommand<T> For<T>( [NotNull] Expression<Func<T>> expression, T newValue)
+            => For(PropertyPointer.For(expression), newValue);
+#endif
     }
 }

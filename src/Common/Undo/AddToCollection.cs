@@ -32,4 +32,19 @@ namespace NanoByte.Common.Undo
         /// </summary>
         protected override void OnUndo() => Collection.Remove(Element);
     }
+
+    /// <summary>
+    /// Factory methods for <see cref="AddToCollection{T}"/>.
+    /// </summary>
+    public static class AddToCollection
+    {
+        /// <summary>
+        /// Creates a new add to collection command.
+        /// </summary>
+        /// <param name="collection">The collection to be modified.</param>
+        /// <param name="element">The element to be added to <paramref name="collection"/>.</param>
+        /// <typeparam name="T">The type of elements the collection contains.</typeparam>
+        public static AddToCollection<T> For<T>(ICollection<T> collection, T element)
+            => new AddToCollection<T>(collection, element);
+    }
 }

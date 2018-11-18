@@ -37,4 +37,20 @@ namespace NanoByte.Common.Undo
 
         protected override void OnUndo() => _list[_list.IndexOf(_newElement)] = _oldElement;
     }
+
+    /// <summary>
+    /// Factory methods for <see cref="ReplaceInList{T}"/>.
+    /// </summary>
+    public static class ReplaceInList
+    {
+        /// <summary>
+        /// Creates a new replace in list command.
+        /// </summary>
+        /// <param name="list">The collection to be modified.</param>
+        /// <param name="oldElement">The element to be removed from <paramref name="list"/>.</param>
+        /// <param name="newElement">The element to be added to <paramref name="list"/>.</param>
+        /// <typeparam name="T">The type of elements the list contains.</typeparam>
+        public static ReplaceInList<T> For<T>(IList<T> list, T oldElement, T newElement)
+            => new ReplaceInList<T>(list, oldElement, newElement);
+    }
 }

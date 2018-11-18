@@ -11,7 +11,6 @@ namespace NanoByte.Common.Undo
     /// <typeparam name="T">The type of elements the collection contains.</typeparam>
     public abstract class CollectionCommand<T> : SimpleCommand, IValueCommand
     {
-        #region Variables
         /// <summary>
         /// The collection to be modified.
         /// </summary>
@@ -21,14 +20,10 @@ namespace NanoByte.Common.Undo
         /// The element to be added or removed from <see cref="Collection"/>.
         /// </summary>
         protected readonly T Element;
-        #endregion
 
-        #region Properties
         /// <inheritdoc/>
         public object Value => Element;
-        #endregion
 
-        #region Constructor
         /// <summary>
         /// Creates a new collection command.
         /// </summary>
@@ -39,6 +34,5 @@ namespace NanoByte.Common.Undo
             Collection = collection;
             Element = element;
         }
-        #endregion
     }
 }
