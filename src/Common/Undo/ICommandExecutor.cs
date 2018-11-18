@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Undo
 {
     /// <summary>
-    /// An object that can execute <see cref="IUndoCommand"/>s.
+    /// Executes <see cref="IUndoCommand"/>s.
     /// </summary>
     public interface ICommandExecutor
     {

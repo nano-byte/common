@@ -3,29 +3,27 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
 {
     /// <summary>
-    /// Controls editing a target using <see cref="IUndoCommand"/>s.
+    /// Executes <see cref="IUndoCommand"/>s for editing a specific object and allows undo/redo operations.
     /// </summary>
-    /// <typeparam name="T">The type of the root object being edited.</typeparam>
-    public class CommandManager<T> : ICommandExecutor
+    /// <typeparam name="T">The type of the object being edited.</typeparam>
+    [PublicAPI]
+    public class CommandManager<T> : ICommandManager<T>
         where T : class
     {
-        /// <summary>Entries used by the undo-system to undo changes</summary>
-        protected readonly Stack<IUndoCommand> UndoStack = new Stack<IUndoCommand>();
+        private readonly Stack<IUndoCommand>
+            _undoStack = new Stack<IUndoCommand>(),
+            _redoStack = new Stack<IUndoCommand>();
 
-        /// <summary>Entries used by the undo-system to redo changes previously undone</summary>
-        protected readonly Stack<IUndoCommand> RedoStack = new Stack<IUndoCommand>();
+        /// <inheritdoc/>
+        public T Target { get; set; }
 
-        /// <summary>
-        /// The root object being edited.
-        /// </summary>
-        [NotNull]
-        public virtual T Target { get; }
+        /// <inheritdoc/>
+        public event Action TargetUpdated;
 
         /// <summary>
         /// The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.
@@ -43,60 +41,29 @@ namespace NanoByte.Common.Undo
             Path = path;
         }
 
-        /// <summary>
-        /// Indicates whether the <see cref="Target"/> has unsaved changes.
-        /// </summary>
-        public bool Changed { get; protected set; }
+        /// <inheritdoc/>
+        public bool UndoEnabled { get; private set; }
 
-        private bool _undoEnabled;
-
-        /// <summary>
-        /// Indicates whether <see cref="Undo"/> can presently be called.
-        /// </summary>
-        public bool UndoEnabled
-        {
-            get => _undoEnabled;
-            private set
-            {
-                _undoEnabled = value;
-                UndoEnabledChanged?.Invoke();
-            }
-        }
-
-        private bool _redoEnabled;
-
-        /// <summary>
-        /// Indicates whether <see cref="Redo"/> can presently be called.
-        /// </summary>
-        public bool RedoEnabled
-        {
-            get => _redoEnabled;
-            private set
-            {
-                _redoEnabled = value;
-                RedoEnabledChanged?.Invoke();
-            }
-        }
-
-        /// <summary>
-        /// Is raised after an <see cref="IUndoCommand"/> has been executed.
-        /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        public event Action Updated;
-
-        /// <summary>
-        /// Is raised when the value of <see cref="UndoEnabled"/> has changed.
-        /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Cannot rename System.Action<T>.")]
+        /// <inheritdoc/>
         public event Action UndoEnabledChanged;
 
-        /// <summary>
-        /// Is raised when the value of <see cref="RedoEnabled"/> has changed.
-        /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Cannot rename System.Action<T>.")]
+        private void SetUndoEnabled(bool value)
+        {
+            UndoEnabled = value;
+            UndoEnabledChanged?.Invoke();
+        }
+
+        /// <inheritdoc/>
+        public bool RedoEnabled { get; private set; }
+
+        /// <inheritdoc/>
         public event Action RedoEnabledChanged;
 
-        protected void OnUpdated() => Updated?.Invoke();
+        private void SetRedoEnabled(bool value)
+        {
+            RedoEnabled = value;
+            RedoEnabledChanged?.Invoke();
+        }
 
         /// <inheritdoc/>
         public void Execute(IUndoCommand command)
@@ -109,15 +76,13 @@ namespace NanoByte.Common.Undo
             command.Execute();
 
             // Store the command and invalidate previous redo history
-            UndoStack.Push(command);
-            RedoStack.Clear();
+            _undoStack.Push(command);
+            _redoStack.Clear();
 
             // Only enable the buttons that still have a use
-            UndoEnabled = true;
-            RedoEnabled = false;
-            OnUpdated();
-
-            Changed = true;
+            SetUndoEnabled(true);
+            SetRedoEnabled(false);
+            TargetUpdated?.Invoke();
         }
 
         /// <summary>
@@ -125,22 +90,18 @@ namespace NanoByte.Common.Undo
         /// </summary>
         public void Undo()
         {
-            if (UndoStack.Count == 0) return;
+            if (_undoStack.Count == 0) return;
 
             // Remove last command from the undo list, execute it and add it to the redo list
-            var lastCommand = UndoStack.Pop();
+            var lastCommand = _undoStack.Pop();
             lastCommand.Undo();
-            RedoStack.Push(lastCommand);
+            _redoStack.Push(lastCommand);
 
             // Only enable the buttons that still have a use
-            if (UndoStack.Count == 0)
-            {
-                UndoEnabled = false;
-                Changed = false;
-            }
-            RedoEnabled = true;
+            if (_undoStack.Count == 0) SetUndoEnabled(false);
+            SetRedoEnabled(true);
 
-            OnUpdated();
+            TargetUpdated?.Invoke();
         }
 
         /// <summary>
@@ -148,35 +109,30 @@ namespace NanoByte.Common.Undo
         /// </summary>
         public void Redo()
         {
-            if (RedoStack.Count == 0) return;
+            if (_redoStack.Count == 0) return;
 
             // Remove last command from the redo list, execute it and add it to the undo list
-            var lastCommand = RedoStack.Pop();
+            var lastCommand = _redoStack.Pop();
             lastCommand.Execute();
-            UndoStack.Push(lastCommand);
-
-            // Mark as "to be saved" again
-            Changed = true;
+            _undoStack.Push(lastCommand);
 
             // Only enable the buttons that still have a use
-            RedoEnabled = RedoStack.Count > 0;
-            UndoEnabled = true;
+            SetUndoEnabled(true);
+            SetRedoEnabled(_redoStack.Count > 0);
 
-            OnUpdated();
+            TargetUpdated?.Invoke();
         }
 
         /// <summary>
-        /// Resets the entire undo system, clearing all stacks.
+        /// Clears the undo/redo stacks.
         /// </summary>
-        public void Reset()
+        protected void ClearUndo()
         {
-            Changed = false;
+            _undoStack.Clear();
+            _redoStack.Clear();
 
-            UndoStack.Clear();
-            RedoStack.Clear();
-
-            UndoEnabled = false;
-            RedoEnabled = false;
+            SetUndoEnabled(false);
+            SetRedoEnabled(false);
         }
     }
 }
