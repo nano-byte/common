@@ -5,7 +5,7 @@
     <RootNamespace>NanoByte.Common</RootNamespace>
     <LangVersion>7.2</LangVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591;NU5125</NoWarn>
+    <NoWarn>$(NoWarn);1591</NoWarn>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <RunCodeAnalysis>False</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
@@ -19,7 +19,7 @@
     <Authors>Bastian Eicher</Authors>
     <Copyright>Copyright Bastian Eicher et al.</Copyright>
     <PackageProjectUrl>https://common.nano-byte.net/</PackageProjectUrl>
-    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
   </PropertyGroup>
 
