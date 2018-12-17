@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common.WinForms</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <LangVersion>7.2</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
