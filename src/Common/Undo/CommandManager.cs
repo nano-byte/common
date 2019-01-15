@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using JetBrains.Annotations;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Undo
 {
@@ -33,8 +35,8 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Creates a new command manager.
         /// </summary>
-        /// <param name="target">The root object being edited.</param>
-        /// <param name="path">The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.</param>
+        /// <param name="target">The object being edited.</param>
+        /// <param name="path">The path of the file the <paramref name="target"/> was loaded from. <c>null</c> if none.</param>
         public CommandManager([NotNull] T target, [CanBeNull] string path = null)
         {
             Target = target ?? throw new ArgumentNullException(nameof(target));
@@ -85,9 +87,7 @@ namespace NanoByte.Common.Undo
             TargetUpdated?.Invoke();
         }
 
-        /// <summary>
-        /// Undoes the last action performed by <see cref="Execute"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Undo()
         {
             if (_undoStack.Count == 0) return;
@@ -104,9 +104,7 @@ namespace NanoByte.Common.Undo
             TargetUpdated?.Invoke();
         }
 
-        /// <summary>
-        /// Redoes the last action undone by <see cref="Undo"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public void Redo()
         {
             if (_redoStack.Count == 0) return;
@@ -134,5 +132,43 @@ namespace NanoByte.Common.Undo
             SetUndoEnabled(false);
             SetRedoEnabled(false);
         }
+
+        /// <inheritdoc/>
+        public virtual void Save(string path)
+        {
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+
+            Target.SaveXml(path);
+
+            Path = path;
+            ClearUndo();
+        }
+
+        /// <summary>
+        /// Loads an object from an XML file.
+        /// </summary>
+        /// <param name="path">The file to load from.</param>
+        /// <returns>An <see cref="ICommandManager{T}"/> containing the loaded object.</returns>
+        /// <exception cref="IOException">A problem occurs while reading the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
+        /// <exception cref="InvalidDataException">A problem occurs while deserializing the XML data.</exception>
+        [NotNull]
+        public static CommandManager<T> Load([NotNull] string path)
+            => new CommandManager<T>(XmlStorage.LoadXml<T>(path), path);
+    }
+
+    /// <summary>
+    /// Factory methods for <see cref="ICommandManager{T}"/>.
+    /// </summary>
+    public static class CommandManager
+    {
+        /// <summary>
+        /// Creates a new command manager.
+        /// </summary>
+        /// <param name="target">The object being edited.</param>
+        /// <param name="path">The path of the file the <paramref name="target"/> was loaded from. <c>null</c> if none.</param>
+        public static ICommandManager<T> For<T>([NotNull] T target, [CanBeNull] string path = null)
+            where T : class
+            => new CommandManager<T>(target, path);
     }
 }

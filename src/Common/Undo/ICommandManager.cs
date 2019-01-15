@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
@@ -22,8 +23,9 @@ namespace NanoByte.Common.Undo
         event Action TargetUpdated;
 
         /// <summary>
-        /// Indicates whether <see cref="Undo"/> can presently be called.
+        /// Indicates whether there currently are operations that can be <see cref="Undo"/>ne.
         /// </summary>
+        /// <remarks>This can also be used as an indicator for unsaved changes.</remarks>
         bool UndoEnabled { get; }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace NanoByte.Common.Undo
         event Action UndoEnabledChanged;
 
         /// <summary>
-        /// Indicates whether <see cref="Redo"/> can presently be called.
+        /// Indicates whether there currently are operations that can be <see cref="Redo"/>ne.
         /// </summary>
         bool RedoEnabled { get; }
 
@@ -50,5 +52,13 @@ namespace NanoByte.Common.Undo
         /// Redoes the last action undone by <see cref="Undo"/>.
         /// </summary>
         void Redo();
+
+        /// <summary>
+        /// Saves the <see cref="Target"/> to an XML file
+        /// </summary>
+        /// <param name="path">The file to save to.</param>
+        /// <exception cref="IOException">A problem occurs while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        void Save([NotNull] string path);
     }
 }
