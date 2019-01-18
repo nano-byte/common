@@ -72,4 +72,31 @@
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
   </ItemGroup>
 
+  <!-- Enable WinForms Designer support -->
+  <ItemGroup>
+    <Compile Update="Tasks\TaskRunDialog.cs" SubType="Form" />
+    <Compile Update="Tasks\TaskRunDialog.Designer.cs" DependentUpon="TaskRunDialog.cs" />
+    <Compile Update="Controls\OutputGridBox.cs" SubType="Form" />
+    <Compile Update="Controls\OutputGridBox.Designer.cs" DependentUpon="OutputGridBox.cs" />
+    <Compile Update="Controls\OutputBox.cs" SubType="Form" />
+    <Compile Update="Controls\OutputBox.Designer.cs" DependentUpon="OutputBox.cs" />
+    <Compile Update="Controls\OKCancelDialog.cs" SubType="Form" />
+    <Compile Update="Controls\OKCancelDialog.Designer.cs" DependentUpon="OKCancelDialog.cs" />
+    <Compile Update="Controls\InspectionForm.cs" SubType="Form" />
+    <Compile Update="Controls\InspectionForm.Designer.cs" DependentUpon="InspectionForm.cs" />
+    <Compile Update="Controls\InputBox.cs" SubType="Form" />
+    <Compile Update="Controls\InputBox.Designer.cs" DependentUpon="InputBox.cs" />
+    <Compile Update="Controls\ErrorReportForm.cs" SubType="Form" />
+    <Compile Update="Controls\ErrorReportForm.Designer.cs" DependentUpon="ErrorReportForm.cs" />
+    <EmbeddedResource Update="Controls\ErrorReportForm*.resx" DependentUpon="ErrorReportForm.cs" />
+    <Compile Update="Controls\ErrorBox.cs" SubType="Form" />
+    <Compile Update="Controls\ErrorBox.Designer.cs" DependentUpon="ErrorBox.cs" />
+    <Compile Update="Controls\TimeSpanControl.cs" SubType="UserControl" />
+    <Compile Update="Controls\TimeSpanControl.Designer.cs" DependentUpon="TimeSpanControl.cs" />
+    <Compile Update="Controls\TaskControl.cs" SubType="UserControl" />
+    <Compile Update="Controls\TaskControl.Designer.cs" DependentUpon="TaskControl.cs" />
+    <Compile Update="Controls\FilteredTreeView.cs" SubType="UserControl" />
+    <Compile Update="Controls\FilteredTreeView.Designer.cs" DependentUpon="FilteredTreeView.cs" />
+  </ItemGroup>
+
 </Project>
