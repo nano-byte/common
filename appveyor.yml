@@ -7,6 +7,9 @@ for:
       only:
         - image: Visual Studio 2017
 
+    cache:
+      - '%USERPROFILE%\.nuget\packages -> **\*.csproj'
+
     before_build:
       - gitversion /l console /output buildserver
 
@@ -28,6 +31,9 @@ for:
   - matrix:
       only:
         - image: Ubuntu
+
+    cache:
+      - '$HOME/.nuget/packages -> **/*.csproj'
 
     build_script:
       - sh: src/build.sh
