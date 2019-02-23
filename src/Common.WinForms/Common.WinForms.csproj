@@ -97,6 +97,7 @@
     <Compile Update="Controls\TaskControl.Designer.cs" DependentUpon="TaskControl.cs" />
     <Compile Update="Controls\FilteredTreeView.cs" SubType="UserControl" />
     <Compile Update="Controls\FilteredTreeView.Designer.cs" DependentUpon="FilteredTreeView.cs" />
+    <EmbeddedResource Remove="**\*.filtered.resx" />
   </ItemGroup>
 
 </Project>
