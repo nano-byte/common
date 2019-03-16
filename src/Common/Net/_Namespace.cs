@@ -1,9 +1,2 @@
-#pragma warning disable 1587
-// ReSharper disable EmptyNamespace
-
-/// <summary>
-/// Classes for network communication.
-/// </summary>
-
-namespace NanoByte.Common.Net
-{}
+//! \namespace NanoByte.Common.Net
+//! \brief Classes for network communication.

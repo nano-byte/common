@@ -1,9 +1,2 @@
-#pragma warning disable 1587
-// ReSharper disable EmptyNamespace
-
-/// <summary>
-/// <see cref="System.ComponentModel.TypeConverter"/>s used for serialization and to provide a better runtime experience when using <see cref="System.Windows.Forms.PropertyGrid"/>.
-/// </summary>
-
-namespace NanoByte.Common.Values.Design
-{}
+//! \namespace NanoByte.Common.Values.Design
+//! \brief TypeConverters used for serialization and to provide a better runtime experience when using WinForms PropertyGrids.
