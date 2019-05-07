@@ -183,9 +183,9 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Executes a delegate and automatically retries it using exponential backoff if a specifc type of exception was raised.
+        /// Executes a delegate and automatically retries it using exponential backoff if a specific type of exception was raised.
         /// </summary>
-        /// <typeparam name="TException">The type of exception to triger a retry.</typeparam>
+        /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
         /// <param name="action">The action to execute.</param>
         /// <param name="maxRetries">The maximum number of retries to attempt.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
