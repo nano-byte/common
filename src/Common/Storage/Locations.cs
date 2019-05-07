@@ -40,15 +40,15 @@ namespace NanoByte.Common.Storage
 
         private static string GetInstallBase()
         {
-            string codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-            if (codeBase == null) return AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
-            else
+            string codeBase = null;
+            try
             {
-                string libsSuffix = Path.DirectorySeparatorChar + "lib";
-                return codeBase.EndsWithIgnoreCase(libsSuffix)
-                    ? codeBase.StripFromEnd(libsSuffix.Length)
-                    : codeBase;
+                codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             }
+            catch (PlatformNotSupportedException)
+            {}
+
+            return codeBase ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
         }
 
         /// <summary>
