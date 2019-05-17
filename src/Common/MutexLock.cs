@@ -30,7 +30,7 @@ namespace NanoByte.Common
             }
             catch (AbandonedMutexException ex)
             {
-                // Abandoned mutexes also get aquired, but indicate something may have gone wrong elsewhere
+                // Abandoned mutexes also get acquired, but indicate something may have gone wrong elsewhere
                 Log.Warn(ex);
             }
         }

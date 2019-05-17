@@ -204,7 +204,7 @@ namespace NanoByte.Common.Collections
             // Create separate collection to be able to dispatch events afterwards
             var removed = new LinkedList<T>();
 
-            // Remove superflous items without raising the events yet
+            // Remove superfluous items without raising the events yet
             _dontRaiseEvents = true;
             foreach (var item in copy.Where(item => !collection.Contains(item)))
             {

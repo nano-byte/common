@@ -124,7 +124,7 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Returns a path for a directory that can safley be used for desktop integration. It ignores <see cref="IsPortable"/>.
+        /// Returns a path for a directory that can safely be used for desktop integration. It ignores <see cref="IsPortable"/>.
         /// </summary>
         /// <param name="appName">The name of application. Used as part of the path.</param>
         /// <param name="machineWide"><c>true</c> if the directory should be machine-wide and machine-specific instead of roaming with the user profile.</param>

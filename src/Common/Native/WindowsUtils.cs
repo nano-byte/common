@@ -539,7 +539,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Informs the Windows shell that changes were made to the file association data in the registry.
         /// </summary>
-        /// <remarks>This should be called immediatley after the changes in order to trigger a refresh of the Explorer UI.</remarks>
+        /// <remarks>This should be called immediately after the changes in order to trigger a refresh of the Explorer UI.</remarks>
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyAssocChanged()
         {

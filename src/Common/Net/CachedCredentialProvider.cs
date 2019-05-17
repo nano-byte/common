@@ -22,7 +22,7 @@ namespace NanoByte.Common.Net
         private readonly TransparentCache<Uri, NetworkCredential> _cache;
 
         /// <summary>
-        /// Creates a new caching dectorator.
+        /// Creates a new caching decorator.
         /// </summary>
         /// <param name="inner">The inner <see cref="ICredentialProvider"/> to wrap.</param>
         public CachedCredentialProvider([NotNull] ICredentialProvider inner)

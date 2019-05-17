@@ -30,7 +30,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Writes some data into the buffer, reads a part of it, write more data into it and then read all thats remaining.
+        /// Writes some data into the buffer, reads a part of it, write more data into it and then read all that's remaining.
         /// </summary>
         [Fact]
         public void TestMixed()

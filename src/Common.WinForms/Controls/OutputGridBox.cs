@@ -23,7 +23,7 @@ namespace NanoByte.Common.Controls
         }
 
         /// <summary>
-        /// Displays an ouput dialog with tabular data.
+        /// Displays an output dialog with tabular data.
         /// </summary>
         /// <typeparam name="T">The type of the data elements to display.</typeparam>
         /// <param name="owner">The parent window for the dialogs; can be <c>null</c>.</param>

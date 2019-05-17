@@ -21,7 +21,7 @@ namespace NanoByte.Common.Cli
         protected abstract string AppBinary { get; }
 
         /// <summary>
-        /// Runs the external application interactivley instead of processing its output.
+        /// Runs the external application interactively instead of processing its output.
         /// </summary>
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
         /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
@@ -106,7 +106,7 @@ namespace NanoByte.Common.Cli
                 ErrorDialog = false
             };
 
-            // Suppress localization to enable programatic parsing of output
+            // Suppress localization to enable programmatic parsing of output
             startInfo.EnvironmentVariables["LANG"] = "C";
 
             return startInfo;

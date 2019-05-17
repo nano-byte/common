@@ -15,7 +15,7 @@ namespace NanoByte.Common.Dispatch
     /// <typeparam name="TModel">The common base type of elements in the model.</typeparam>
     /// <typeparam name="TView">The common base type of representations in the view.</typeparam>
     /// <remarks>
-    /// Useful for maintining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
+    /// Useful for maintaining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
     /// Generated View representations will automatically be disposed on removal, if they implement <see cref="IDisposable"/>.
     /// </remarks>
     public sealed class ModelViewSync<TModel, TView> : IDisposable

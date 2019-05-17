@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Continously reads lines from a <see cref="StreamReader"/> using a background thread while providing them to a foreground thread on demand.
+    /// Continuously reads lines from a <see cref="StreamReader"/> using a background thread while providing them to a foreground thread on demand.
     /// </summary>
     /// <remarks>Useful for processing <see cref="Process.StandardOutput"/> and <see cref="Process.StandardError"/> without risking deadlocks.</remarks>
     public class StreamConsumer

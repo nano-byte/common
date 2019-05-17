@@ -48,7 +48,7 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
-        /// Checks whether a specific mutex exists without openining a lasting handle.
+        /// Checks whether a specific mutex exists without opening a lasting handle.
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><c>true</c> if an existing mutex was found; <c>false</c> if none existed.</returns>

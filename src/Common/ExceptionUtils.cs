@@ -103,7 +103,7 @@ namespace NanoByte.Common
         /// <param name="apply">The action to apply to each element.</param>
         /// <param name="rollback">The action to apply to each element that <paramref name="apply"/> was called on in case of an exception.</param>
         /// <remarks>
-        /// <paramref name="rollback"/> is applied to the element that raised an exception in <paramref name="apply"/> and then interating backwards through all previous elements.
+        /// <paramref name="rollback"/> is applied to the element that raised an exception in <paramref name="apply"/> and then iterating backwards through all previous elements.
         /// After rollback is complete the exception is passed on.
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place")]
@@ -183,7 +183,7 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Executes a delegate and automatically retries it using exponential backoff if a specific type of exception was raised.
+        /// Executes a delegate and automatically retries it using exponential back-off if a specific type of exception was raised.
         /// </summary>
         /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
         /// <param name="action">The action to execute.</param>
@@ -240,7 +240,7 @@ namespace NanoByte.Common
         /// <param name="apply">The action to apply to each element.</param>
         /// <param name="rollback">The action to apply to each element that <paramref name="apply"/> was called on in case of an exception.</param>
         /// <remarks>
-        /// <paramref name="rollback"/> is applied to the element that raised an exception in <paramref name="apply"/> and then interating backwards through all previous elements.
+        /// <paramref name="rollback"/> is applied to the element that raised an exception in <paramref name="apply"/> and then iterating backwards through all previous elements.
         /// After rollback is complete the exception is passed on.
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place")]
@@ -320,9 +320,9 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Executes an asynchronous delegate and automatically retries it using exponential backoff if a specifc type of exception was raised.
+        /// Executes an asynchronous delegate and automatically retries it using exponential back-off if a specific type of exception was raised.
         /// </summary>
-        /// <typeparam name="TException">The type of exception to triger a retry.</typeparam>
+        /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
         /// <param name="action">The action to execute.</param>
         /// <param name="maxRetries">The maximum number of retries to attempt.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]

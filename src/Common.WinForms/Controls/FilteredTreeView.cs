@@ -16,7 +16,7 @@ namespace NanoByte.Common.Controls
 {
     /// <summary>
     /// Displays a list of <see cref="INamed{T}"/>s objects in a <see cref="TreeView"/> with incremental search.
-    /// An automatic hierachy is generated based on a <see cref="Separator"/> character.
+    /// An automatic hierarchy is generated based on a <see cref="Separator"/> character.
     /// </summary>
     /// <typeparam name="T">The type of <see cref="INamed{T}"/> object to list.
     /// Special support for types implementing <see cref="IHighlightColor"/> and/or <see cref="IContextMenu"/>.</typeparam>
@@ -192,7 +192,7 @@ namespace NanoByte.Common.Controls
                     // Note: Compare name to handle cloned entries
                     if ((_selectedEntry != null && entry.Name == _selectedEntry.Name) || _checkedEntries.Contains(entry))
                     {
-                        _selectedEntry = entry; // Fix problems that might arrise from using clones
+                        _selectedEntry = entry; // Fix problems that might arise from using clones
                         treeView.SelectedNode = AddTreeNode(entry);
                     }
                     // List all nodes if there is no filter
@@ -228,7 +228,7 @@ namespace NanoByte.Common.Controls
             // Start off at the top-level
             TreeNodeCollection subTree = treeView.Nodes;
 
-            // Try to use a pre-existing nodes for namespace-subtrees, if non-existant create new ones
+            // Try to use a pre-existing nodes for namespace-subtrees, if non-existent create new ones
             string partialName = "";
             for (int i = 0; i < nameSplit.Length - 1; i++)
             {

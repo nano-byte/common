@@ -12,7 +12,7 @@ using NanoByte.Common.Native;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides a cross-process object allowing easy dection of application instances (e.g., for use by installers and update tools). May be a no-op on some platforms.
+    /// Provides a cross-process object allowing easy detection of application instances (e.g., for use by installers and update tools). May be a no-op on some platforms.
     /// </summary>
     /// <remarks>Use <see cref="Mutex"/> or <seealso cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
     public sealed class AppMutex

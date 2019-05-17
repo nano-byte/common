@@ -47,7 +47,7 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Loads an object from a binary filen
+        /// Loads an object from a binary file.
         /// </summary>
         /// <typeparam name="T">The type of object the binary stream shall be converted into.</typeparam>
         /// <param name="path">The binary file to be loaded.</param>

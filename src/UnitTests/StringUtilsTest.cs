@@ -33,11 +33,11 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public void TestCountOccurences()
+        public void TestCountOccurrences()
         {
-            "abc".CountOccurences('/').Should().Be(0);
-            "ab/c".CountOccurences('/').Should().Be(1);
-            "ab/c/".CountOccurences('/').Should().Be(2);
+            "abc".CountOccurrences('/').Should().Be(0);
+            "ab/c".CountOccurrences('/').Should().Be(1);
+            "ab/c/".CountOccurrences('/').Should().Be(2);
         }
 
         [Fact]

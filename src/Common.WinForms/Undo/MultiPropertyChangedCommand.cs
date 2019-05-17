@@ -63,7 +63,7 @@ namespace NanoByte.Common.Undo
         protected override void OnRedo()
         {
             foreach (var target in _targets)
-                // Use refelction to get the specific property for each object and set the new value everywhere
+                // Use reflection to get the specific property for each object and set the new value everywhere
                 target.GetType().GetProperty(_property.Name).SetValue(target, _newValue, null);
         }
 

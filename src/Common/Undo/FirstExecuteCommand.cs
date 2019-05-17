@@ -44,7 +44,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         public virtual void Undo()
         {
-            // If the action has not been performed yet, we cannnot undo it
+            // If the action has not been performed yet, we cannot undo it
             if (!_actionPerformed || _undoPerformed) throw new InvalidOperationException(Resources.UndoNotAvailable);
 
             OnUndo();

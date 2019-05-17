@@ -71,7 +71,7 @@ namespace NanoByte.Common.Undo
 
         #region Helpers
         /// <summary>
-        /// Moves up a hierachy of nested properties to the top element that is still a property.
+        /// Moves up a hierarchy of nested properties to the top element that is still a property.
         /// </summary>
         private static GridItem MoveOutOfNested(GridItem item)
         {

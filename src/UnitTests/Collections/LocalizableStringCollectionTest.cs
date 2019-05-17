@@ -58,7 +58,7 @@ namespace NanoByte.Common.Collections
             {
                 "neutralValue",
                 {"de-DE", "germanyValue"},
-                // Intential duplicates (should be ignored)
+                // Intentional duplicates (should be ignored)
                 "neutralValue",
                 {"de-DE", "germanyValue"}
             };
@@ -76,7 +76,7 @@ namespace NanoByte.Common.Collections
             {
                 "neutralValue",
                 {"de-DE", "germanyValue"},
-                // Intential duplicates (should be removed)
+                // Intentional duplicates (should be removed)
                 "neutralValue",
                 {"de-DE", "germanyValue"}
             };

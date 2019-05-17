@@ -210,7 +210,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Sets write permissions for the owner on a filesystem object (file or directory).
         /// </summary>
-        /// <param name="path">The filesystem object (file or directory) to make writeable by the owner.</param>
+        /// <param name="path">The filesystem object (file or directory) to make writable by the owner.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static void MakeWritable([NotNull, Localizable(false)] string path)
@@ -318,7 +318,7 @@ namespace NanoByte.Common.Native
         {
             string fileSystem = Stat.Instance.FileSystem(path ?? throw new ArgumentNullException(nameof(path)));
             if (fileSystem == "fuseblk")
-            { // FUSE mounts need to be looked up in /etc/fstab to determine actualy file system
+            { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system
                 var fstabData = Syscall.getfsfile(Stat.Instance.MountPoint(path));
                 if (fstabData != null) return fstabData.fs_vfstype;
             }

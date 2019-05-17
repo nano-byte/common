@@ -69,7 +69,7 @@ namespace NanoByte.Common.Native
             [NotNull]
             public readonly string IconPath;
 
-            /// <summary>The resouce index within the file specified by <see cref="IconPath"/>.</summary>
+            /// <summary>The resource index within the file specified by <see cref="IconPath"/>.</summary>
             public readonly int IconIndex;
 
             /// <summary>
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Native
             /// <param name="path">The target path the link shall point to.</param>
             /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <c>null</c>.</param>
             /// <param name="iconPath">The path of the icon for the link.</param>
-            /// <param name="iconIndex">The resouce index within the file specified by <paramref name="iconPath"/>.</param>
+            /// <param name="iconIndex">The resource index within the file specified by <paramref name="iconPath"/>.</param>
             [PublicAPI]
             public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string arguments, [NotNull, Localizable(false)] string iconPath, int iconIndex)
             {

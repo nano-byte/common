@@ -14,7 +14,7 @@ namespace NanoByte.Common.Tasks
     /// Represents an operation that can be cancelled and have its progress tracked.
     /// </summary>
     /// <remarks>
-    /// Unlike System.Threading.Tasks.Task, these tasks do not provide any asynchrony by themselves.
+    /// Unlike System.Threading.Tasks.Task, these tasks do not provide any asynchronicity by themselves.
     /// They execute all their code on the same thread they are started on and rely on <see cref="ITaskHandler"/>s for scheduling on background threads.
     /// </remarks>
     /// <seealso cref="ITaskHandler"/>

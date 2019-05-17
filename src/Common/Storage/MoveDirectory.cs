@@ -17,7 +17,7 @@ namespace NanoByte.Common.Storage
         /// <param name="sourcePath">The path of source directory. Must exist!</param>
         /// <param name="destinationPath">The path of the target directory. May exist. Must be empty if <paramref name="overwrite"/> is <c>false</c>.</param>
         /// <param name="preserveDirectoryTimestamps"><c>true</c> to preserve the modification times for directories as well; <c>false</c> to preserve only the file modification times.</param>
-        /// <param name="overwrite">Overwrite exisiting files and directories at the <paramref name="destinationPath"/>. This will even replace read-only files!</param>
+        /// <param name="overwrite">Overwrite existing files and directories at the <paramref name="destinationPath"/>. This will even replace read-only files!</param>
         public MoveDirectory(string sourcePath, string destinationPath, bool preserveDirectoryTimestamps = true, bool overwrite = false)
             : base(sourcePath, destinationPath, preserveDirectoryTimestamps, overwrite)
         {}

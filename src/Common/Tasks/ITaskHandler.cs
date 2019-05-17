@@ -25,7 +25,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Used to signal when the user wishes to cancel the entire current process (and any <see cref="ITask"/>s it includes).
         /// </summary>
-        /// <remarks>Once this has been signalled this <see cref="ITaskHandler"/> cannot be reused, since any subsequently started <see cref="ITask"/>s will be cancelled immediatley.</remarks>
+        /// <remarks>Once this has been signalled this <see cref="ITaskHandler"/> cannot be reused, since any subsequently started <see cref="ITask"/>s will be cancelled immediately.</remarks>
         CancellationToken CancellationToken { get; }
 
         /// <summary>

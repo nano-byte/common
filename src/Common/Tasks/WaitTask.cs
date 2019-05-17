@@ -16,7 +16,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>The <see cref="WaitHandle"/> to wait for.</summary>
         private readonly WaitHandle _waitHandle;
 
-        /// <summary>The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely</summary>
+        /// <summary>The number of milliseconds to wait before raising <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely</summary>
         private readonly int _millisecondsTimeout;
 
         /// <inheritdoc/>
@@ -30,7 +30,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="name">A name describing the task in human-readable form.</param>
         /// <param name="waitHandle">>The <see cref="WaitHandle"/> to wait for.</param>
-        /// <param name="millisecondsTimeout">The number of milliseconds to wait before rasing <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely.</param>
+        /// <param name="millisecondsTimeout">The number of milliseconds to wait before raising <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely.</param>
         public WaitTask([NotNull, Localizable(true)] string name, [NotNull] WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace NanoByte.Common.Controls
 {
+    // ReSharper disable CommentTypo
     /// <summary>
     /// Mask indicating which fields in <see cref="TouchEventArgs"/> are valid.
     /// </summary>

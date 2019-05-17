@@ -33,8 +33,8 @@ namespace NanoByte.Common.Cli
                 ArgumentUtils.GetFiles(new[]
                 {
                     Path.Combine(tempDir, "*.txt"), // Wildcard
-                    Path.Combine(tempDir, "d.nfo"), // Specifc file
-                    subdirPath // Directory with implict default wildcard
+                    Path.Combine(tempDir, "d.nfo"), // Specific file
+                    subdirPath // Directory with implicit default wildcard
                 }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
                     Path.Combine(tempDir, "a.txt"),
                     Path.Combine(tempDir, "b.txt"),
@@ -61,8 +61,8 @@ namespace NanoByte.Common.Cli
                 ArgumentUtils.GetFiles(new[]
                 {
                     "*.txt", // Wildcard
-                    "d.nfo", // Specifc file
-                    subdirPath // Directory with implict default wildcard
+                    "d.nfo", // Specific file
+                    subdirPath // Directory with implicit default wildcard
                 }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
                     Path.Combine(tempDir, "a.txt"),
                     Path.Combine(tempDir, "b.txt"),

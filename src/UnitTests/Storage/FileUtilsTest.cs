@@ -115,7 +115,7 @@ namespace NanoByte.Common.Storage
 
         #region Temp
         /// <summary>
-        /// Creates a temporary fileusing <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
+        /// Creates a temporary file using <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
         /// </summary>
         [Fact]
         public void TestGetTempFile()

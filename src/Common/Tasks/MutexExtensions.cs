@@ -14,9 +14,9 @@ namespace NanoByte.Common.Tasks
     public static class MutexExtensions
     {
         /// <summary>
-        /// Aquires the mutex, blocking until it becomes available.
+        /// Acquires the mutex, blocking until it becomes available.
         /// </summary>
-        /// <param name="mutex">The mutex to aquire.</param>
+        /// <param name="mutex">The mutex to acquire.</param>
         /// <param name="timeout">The maximum timespan to wait for the mutex to become available.</param>
         /// <param name="cancellationToken">Used to cancel waiting for the mutex to become available.</param>
         /// <exception cref="TimeoutException"><paramref name="timeout"/> elapsed without the mutex becoming available.</exception>
@@ -43,7 +43,7 @@ namespace NanoByte.Common.Tasks
             }
             catch (AbandonedMutexException ex)
             {
-                // Abandoned mutexes also get aquired, but indicate something may have gone wrong elsewhere
+                // Abandoned mutexes also get acquired, but indicate something may have gone wrong elsewhere
                 Log.Warn(ex);
             }
         }

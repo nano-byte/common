@@ -335,7 +335,7 @@ namespace NanoByte.Common.Storage
 
         #region Directories
         /// <summary>
-        /// Walks a directory structure recursivley and performs an action for every directory and file encountered.
+        /// Walks a directory structure recursively and performs an action for every directory and file encountered.
         /// </summary>
         /// <param name="directory">The directory to walk.</param>
         /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); can be <c>null</c>.</param>
@@ -1072,7 +1072,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Writes metadata to an NTFS Alternate Data Stream (Windows) or extended file attribute (Unixoid).
         /// </summary>
-        /// <param name="path">The path of the file to assoicate the metadata with.</param>
+        /// <param name="path">The path of the file to associate the metadata with.</param>
         /// <param name="name">The name of the metadata stream.</param>
         /// <param name="data">The data to write to the metadata stream.</param>
         /// <exception cref="FileNotFoundException">The file specified by <paramref name="path"/> does not exist.</exception>

@@ -139,7 +139,7 @@ namespace NanoByte.Common.Tasks
         /// <remarks>
         /// <see cref="State"/> is automatically set
         /// to <see cref="TaskState.Started"/> before calling this method,
-        /// to <see cref="TaskState.Complete"/> after a sucessfull exit and
+        /// to <see cref="TaskState.Complete"/> after a successful exit and
         /// to an appropriate error state in case on an exception.
         /// You can set additional <see cref="TaskState"/>s during execution.
         /// </remarks>

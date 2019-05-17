@@ -57,7 +57,7 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
         /// <param name="valueFactory">A callback that provides the value to add to the <paramref name="dictionary"/> if the <paramref name="key"/> is not found.</param>
         /// <returns>The existing element or the newly created element.</returns>
-        /// <remarks>No superflous calls to <paramref name="valueFactory"/> occur. Not thread-safe!</remarks>
+        /// <remarks>No superfluous calls to <paramref name="valueFactory"/> occur. Not thread-safe!</remarks>
         public static TValue GetOrAdd<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull, InstantHandle] Func<TValue> valueFactory)
         {
             #region Sanity checks
@@ -96,7 +96,7 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
         /// <param name="valueFactory">A callback that provides a task that provides the value to add to the <paramref name="dictionary"/> if the <paramref name="key"/> is not found.</param>
         /// <returns>The existing element or the newly created element.</returns>
-        /// <remarks>Superflous calls to <paramref name="valueFactory"/> may occur in case of read races. <see cref="IDisposable.Dispose"/> is called on superflously created objects if implemented.</remarks>
+        /// <remarks>Superfluous calls to <paramref name="valueFactory"/> may occur in case of read races. <see cref="IDisposable.Dispose"/> is called on superfluously created objects if implemented.</remarks>
         public static async Task<TValue> GetOrAddAsync<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key, [NotNull] Func<Task<TValue>> valueFactory)
         {
             if (dictionary.TryGetValue(key, out var existingValue))

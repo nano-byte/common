@@ -20,7 +20,7 @@ namespace NanoByte.Common.Dispatch
         string MergeID { get; }
 
         /// <summary>
-        /// The time this element was last modified. This is used to determine preceedence with sync conflicts.
+        /// The time this element was last modified. This is used to determine precedence with sync conflicts.
         /// </summary>
         /// <remarks>This value is ignored by clone and equality methods.</remarks>
         [DefaultValue(0)]

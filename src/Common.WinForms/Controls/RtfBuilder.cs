@@ -19,7 +19,7 @@ namespace NanoByte.Common.Controls
     }
 
     /// <summary>
-    /// Helps build an RTF-formated string.
+    /// Helps build an RTF-formatted string.
     /// </summary>
     public sealed class RtfBuilder
     {

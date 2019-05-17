@@ -14,7 +14,7 @@ using NanoByte.Common.Streams;
 namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Provides a minimalistic HTTP webserver that can provide only a single file. Useful for testing download code.
+    /// Provides a minimalistic HTTP web server that can provide only a single file. Useful for testing download code.
     /// </summary>
     public sealed class MicroServer : IDisposable
     {
@@ -52,7 +52,7 @@ namespace NanoByte.Common.Net
         private readonly string _resourceName;
 
         /// <summary>
-        /// Starts a HTTP webserver that listens on a random port.
+        /// Starts a HTTP web server that listens on a random port.
         /// </summary>
         /// <param name="resourceName">The HTTP resource name under which to provide the content.</param>
         /// <param name="fileContent">The content of the file to serve.</param>
@@ -77,7 +77,7 @@ namespace NanoByte.Common.Net
         {
             int port = MinimumPort;
 
-            // Keep incremeting port number until we find a free one
+            // Keep incrementing port number until we find a free one
             while (true)
             {
                 try

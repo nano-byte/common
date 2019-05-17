@@ -21,7 +21,7 @@ namespace NanoByte.Common.Controls
         }
 
         /// <summary>
-        /// Displays an ouput box with some text.
+        /// Displays an output box with some text.
         /// </summary>
         /// <param name="owner">The parent window for the dialogs; can be <c>null</c>.</param>
         /// <param name="title">The text to display above the <paramref name="message"/>.</param>

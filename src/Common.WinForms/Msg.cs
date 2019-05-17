@@ -12,7 +12,7 @@ using TaskDialog;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides easier access to typical <see cref="MessageBox"/> configurations and automatically upgrades to TaskDialogs when avialable.
+    /// Provides easier access to typical <see cref="MessageBox"/> configurations and automatically upgrades to TaskDialogs when available.
     /// </summary>
     public static class Msg
     {

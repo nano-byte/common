@@ -8,7 +8,7 @@ using System.Globalization;
 namespace NanoByte.Common.Values.Design
 {
     /// <summary>
-    /// Generic type converter for classes that have a constructor with a single string argument and a coressponding <see cref="object.ToString"/> implementation.
+    /// Generic type converter for classes that have a constructor with a single string argument and a corresponding <see cref="object.ToString"/> implementation.
     /// </summary>
     /// <typeparam name="T">The type the converter is used for.</typeparam>
     /// <example>

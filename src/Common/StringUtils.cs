@@ -73,9 +73,9 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The string to search within.</param>
         /// <param name="token">The character to search for.</param>
-        /// <returns>The number of occurences of <paramref name="token"/> wihin <paramref name="value"/>.</returns>
+        /// <returns>The number of occurrences of <paramref name="token"/> within <paramref name="value"/>.</returns>
         [Pure]
-        public static int CountOccurences([CanBeNull] this string value, char token)
+        public static int CountOccurrences([CanBeNull] this string value, char token)
         {
             if (string.IsNullOrEmpty(value)) return 0;
 
@@ -113,7 +113,7 @@ namespace NanoByte.Common
 
         #region Extraction
         /// <summary>
-        /// Removes all occurences of a specific set of characters from a string.
+        /// Removes all occurrences of a specific set of characters from a string.
         /// </summary>
         [Pure, ContractAnnotation("value:null => null; value:notnull => notnull")]
         public static string StripCharacters([CanBeNull] this string value, [NotNull] IEnumerable<char> characters)
@@ -341,7 +341,7 @@ namespace NanoByte.Common
             var parts = value.Split('"');
             for (int i = 0; i < parts.Length; i++)
             {
-                // Count slashes preceeding the quotation mark
+                // Count slashes preceding the quotation mark
                 int slashesCount = parts[i].Length - parts[i].TrimEnd('\\').Length;
 
                 result.Append(parts[i]);
@@ -365,7 +365,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="parts">The strings to be combined.</param>
         /// <remarks>
-        /// This coressponds to Windows' handling of command-line arguments as specified in:
+        /// This corresponds to Windows' handling of command-line arguments as specified in:
         /// http://msdn.microsoft.com/library/17w5ykft
         /// </remarks>
         [Pure, NotNull]

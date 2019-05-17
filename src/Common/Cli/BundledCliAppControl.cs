@@ -29,11 +29,11 @@ namespace NanoByte.Common.Cli
         {
             string path = Path.Combine(Locations.InstallBase, name); // Subdir of installation directory
             if (Directory.Exists(path)) return path;
-            path = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", name); // Subdir of library installation diretory
+            path = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", name); // Subdir of library installation directory
             if (Directory.Exists(path)) return path;
             path = FileUtils.PathCombine(Locations.InstallBase, "..", "..", "..", "bundled", name); // Parallel directory during development
             if (Directory.Exists(path)) return path;
-            path = FileUtils.PathCombine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", "..", "..", "..", "bundled", name); // Parallel directory during developmen
+            path = FileUtils.PathCombine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) ?? "", "..", "..", "..", "bundled", name); // Parallel directory during development
             if (Directory.Exists(path)) return path;
             path = Path.Combine(Directory.GetCurrentDirectory(), name); // Subdir of working directory
             if (Directory.Exists(path)) return path;

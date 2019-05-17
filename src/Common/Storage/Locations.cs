@@ -62,7 +62,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <remarks>
         ///   <para>Portable mode is activated by placing a file named <see cref="PortableFlagName"/> in <see cref="InstallBase"/>.</para>
-        ///   <para>When portable mode is active files are stored and loaded from <see cref="PortableBase"/> instead of the user profile and sysem directories.</para>
+        ///   <para>When portable mode is active files are stored and loaded from <see cref="PortableBase"/> instead of the user profile and system directories.</para>
         /// </remarks>
         public static bool IsPortable { get; set; } = File.Exists(Path.Combine(InstallBase, PortableFlagName));
 

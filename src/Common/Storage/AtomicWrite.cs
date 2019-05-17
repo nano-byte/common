@@ -36,7 +36,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// <c>true</c> if <see cref="Commit"/> has been called.
         /// </summary>
-        public bool IsCommited { get; private set; }
+        public bool IsCommitted { get; private set; }
 
         private readonly MutexLock _lock;
 
@@ -61,7 +61,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Allows the new file to be deployed upon <see cref="Dispose"/>.
         /// </summary>
-        public void Commit() => IsCommited = true;
+        public void Commit() => IsCommitted = true;
 
         /// <summary>
         /// Replaces <see cref="DestinationPath"/> with the contents of <see cref="WritePath"/>.
@@ -70,7 +70,7 @@ namespace NanoByte.Common.Storage
         {
             try
             {
-                if (File.Exists(WritePath) && IsCommited)
+                if (File.Exists(WritePath) && IsCommitted)
                     ExceptionUtils.Retry<IOException>(delegate { FileUtils.Replace(WritePath, DestinationPath); });
             }
             finally

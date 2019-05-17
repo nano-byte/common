@@ -254,7 +254,7 @@ namespace NanoByte.Common.Streams
 
             try
             {
-                // Signal all to prevent livelocks
+                // Signal all to prevent live locks
                 _dataAvailable.Set();
                 _spaceAvailable.Set();
 

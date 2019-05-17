@@ -101,7 +101,7 @@ namespace NanoByte.Common
         /// Creates a <see cref="ProcessStartInfo"/> for launching an assembly located in <see cref="Locations.InstallBase"/>.
         /// </summary>
         /// <param name="name">The name of the assembly to launch (without the file extension).</param>
-        /// <param name="arguments">The command-line arguments to pass to the assembl.</param>
+        /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
         [PublicAPI, NotNull, Pure]
         public static ProcessStartInfo Assembly([NotNull] string name, [NotNull] params string[] arguments)
         {
@@ -124,7 +124,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows using UAC.
         /// </summary>
-        /// <exception cref="PlatformNotSupportedException">The current operating system does not suport UAC or it is disabled..</exception>
+        /// <exception cref="PlatformNotSupportedException">The current operating system does not support UAC or it is disabled..</exception>
         [PublicAPI, NotNull]
         public static ProcessStartInfo AsAdmin([NotNull] this ProcessStartInfo startInfo)
         {
