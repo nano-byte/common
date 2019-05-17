@@ -9,6 +9,12 @@
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Description>Unit test for NanoByte.Common.</Description>
+    <Authors>Bastian Eicher</Authors>
+    <Copyright>Copyright Bastian Eicher et al.</Copyright>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>

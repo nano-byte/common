@@ -2,11 +2,12 @@
 // Licensed under the MIT License
 
 using System;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Info
@@ -32,13 +33,8 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// The version number of the application.
         /// </summary>
-        [XmlIgnore]
-        public Version Version;
-
-        /// <summary>Used for XML serialization.</summary>
-        /// <seealso cref="Version"/>
-        [XmlAttribute("version"), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string VersionString { get => Version?.ToString(); set => Version = string.IsNullOrEmpty(value) ? null : new Version(value); }
+        [XmlAttribute("version")]
+        public string Version { get; set; }
 
         /// <summary>
         /// The <see cref="Name"/> and <see cref="Version"/> combined.
@@ -91,7 +87,7 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// Loads application information for a specific <see cref="Assembly"/>.
         /// </summary>
-        public static AppInfo Load(Assembly assembly)
+        public static AppInfo Load([CanBeNull] Assembly assembly)
         {
             if (assembly == null) return new AppInfo();
 
@@ -100,7 +96,7 @@ namespace NanoByte.Common.Info
             {
                 Name = assembly.GetAttributeValue((AssemblyTitleAttribute x) => x.Title) ?? assemblyInfo.Name,
                 ProductName = assembly.GetAttributeValue((AssemblyProductAttribute x) => x.Product) ?? assemblyInfo.Name,
-                Version = new Version(assemblyInfo.Version.Major, assemblyInfo.Version.Minor, assemblyInfo.Version.Build),
+                Version = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion.GetLeftPartAtFirstOccurrence("+"), // trim Git commit hash
                 Description = assembly.GetAttributeValue((AssemblyDescriptionAttribute x) => x.Description),
                 Copyright = assembly.GetAttributeValue((AssemblyCopyrightAttribute x) => x.Copyright)
             };
