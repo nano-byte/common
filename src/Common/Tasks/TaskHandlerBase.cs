@@ -49,7 +49,7 @@ namespace NanoByte.Common.Tasks
         public abstract ICredentialProvider CredentialProvider { get; }
 
         /// <inheritdoc/>
-        public virtual Verbosity Verbosity { get; set; }
+        public Verbosity Verbosity { get; set; }
 
         /// <inheritdoc/>
         public virtual void RunTask(ITask task)
@@ -62,7 +62,8 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public bool Ask(string question) => Ask(question ?? throw new ArgumentNullException(nameof(question)), MsgSeverity.Warn);
+        public bool Ask(string question)
+            => Ask(question ?? throw new ArgumentNullException(nameof(question)), MsgSeverity.Warn);
 
         /// <inheritdoc/>
         public bool Ask(string question, bool defaultAnswer, string alternateMessage = null)
@@ -96,8 +97,13 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public virtual void Output<T>(string title, IEnumerable<T> data)
         {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
-            Output(title ?? throw new ArgumentNullException(nameof(title)), message);
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            #endregion
+
+            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
+            Output(title, message);
         }
 
         /// <inheritdoc/>
