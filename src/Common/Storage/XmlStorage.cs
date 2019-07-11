@@ -85,6 +85,11 @@ namespace NanoByte.Common.Storage
                     return LoadXml<T>(fileStream);
             }
             #region Error handling
+            catch (ArgumentException ex)
+            {
+                // Convert exception type
+                throw new IOException(ex.Message, ex.InnerException);
+            }
             catch (InvalidDataException ex)
             {
                 // Change exception message to add context information
