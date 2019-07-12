@@ -166,25 +166,6 @@ namespace NanoByte.Common.Storage
         }
         #endregion
 
-        #region File size
-        /// <summary>
-        /// Formats a byte number in human-readable form (KB, MB, GB).
-        /// </summary>
-        /// <param name="value">The value in bytes.</param>
-        /// <param name="provider">Provides culture-specific formatting information.</param>
-        [NotNull]
-        public static string FormatBytes(this long value, IFormatProvider provider)
-        {
-            if (value >= 1073741824)
-                return string.Format(provider, "{0:0.00}", value / 1073741824f) + " GB";
-            if (value >= 1048576)
-                return string.Format(provider, "{0:0.00}", value / 1048576f) + " MB";
-            if (value >= 1024)
-                return string.Format(provider, "{0:0.00}", value / 1024f) + " KB";
-            return value + " Bytes";
-        }
-        #endregion
-
         #region Temp
         /// <summary>
         /// Creates a uniquely named, empty temporary file on disk and returns the full path of that file.

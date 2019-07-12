@@ -2,9 +2,7 @@
 // Licensed under the MIT License
 
 using System;
-using System.Globalization;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Tasks
 {
@@ -101,7 +99,7 @@ namespace NanoByte.Common.Tasks
 
         private string UnitsToString(long units)
             => UnitsByte
-                ? units.FormatBytes(CultureInfo.CurrentCulture)
-                : units.ToString(CultureInfo.CurrentCulture);
+                ? units.FormatBytes()
+                : units.ToString();
     }
 }

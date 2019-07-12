@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -313,6 +314,26 @@ namespace NanoByte.Common
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
 
             return (index == -1) ? "" : value.Substring(index + str.Length);
+        }
+        #endregion
+
+        #region File size
+        /// <summary>
+        /// Formats a byte number in human-readable form (KB, MB, GB).
+        /// </summary>
+        /// <param name="value">The value in bytes.</param>
+        /// <param name="provider">Provides culture-specific formatting information.</param>
+        [NotNull]
+        public static string FormatBytes(this long value, [CanBeNull] IFormatProvider provider = null)
+        {
+            if (provider == null) provider = CultureInfo.CurrentCulture;
+            if (value >= 1073741824)
+                return string.Format(provider, "{0:0.00}", value / 1073741824f) + " GB";
+            if (value >= 1048576)
+                return string.Format(provider, "{0:0.00}", value / 1048576f) + " MB";
+            if (value >= 1024)
+                return string.Format(provider, "{0:0.00}", value / 1024f) + " KB";
+            return value + " Bytes";
         }
         #endregion
 
