@@ -27,6 +27,11 @@ namespace NanoByte.Common.Net
         protected override bool UnitsByte => true;
 
         /// <summary>
+        /// The maximum number of bytes to download.
+        /// </summary>
+        public long BytesMaximum { get; set; } = long.MaxValue;
+
+        /// <summary>
         /// The URL the file is to be downloaded from.
         /// </summary>
         /// <remarks>This value may change once <see cref="TaskState.Data"/> has been reached, based on HTTP redirections.</remarks>
@@ -159,6 +164,8 @@ namespace NanoByte.Common.Net
             if (UnitsTotal == -1 || response.ContentLength == -1) UnitsTotal = response.ContentLength;
             else if (UnitsTotal != response.ContentLength)
                 throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, UnitsTotal, response.ContentLength));
+            if (response.ContentLength > BytesMaximum)
+                throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, BytesMaximum, response.ContentLength));
         }
 
         private void HandleData(WebResponse response)
@@ -171,6 +178,9 @@ namespace NanoByte.Common.Net
                     bufferSize: 8 * 1024,
                     cancellationToken: CancellationToken,
                     progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
+
+                if (targetStream.Position > BytesMaximum)
+                    throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, BytesMaximum, targetStream.Position));
             }
         }
 
