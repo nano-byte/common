@@ -165,7 +165,7 @@ namespace NanoByte.Common.Native
                     // ReSharper disable once AssignNullToNotNullAttribute
                     return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
                 }
-                catch (SecurityException)
+                catch
                 {
                     return false;
                 }
@@ -185,9 +185,9 @@ namespace NanoByte.Common.Native
                     // ReSharper disable once AssignNullToNotNullAttribute
                     return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(new SecurityIdentifier(WellKnownSidType.InteractiveSid, null));
                 }
-                catch (SecurityException)
+                catch
                 {
-                    return false;
+                    return true;
                 }
             }
         }

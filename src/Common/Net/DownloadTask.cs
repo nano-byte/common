@@ -138,10 +138,13 @@ namespace NanoByte.Common.Net
 
         private WebResponse GetResponse(WebRequest request)
         {
+            // ReSharper disable AssignNullToNotNullAttribute
             var responseHandler = request.BeginGetResponse(null, null);
+            // ReSharper restore AssignNullToNotNullAttribute
+
             if (WaitHandle.WaitAny(new[] {responseHandler.AsyncWaitHandle, CancellationToken.WaitHandle}) == 1) throw new OperationCanceledException();
-            var responsex = request.EndGetResponse(responseHandler);
-            return responsex;
+            var response = request.EndGetResponse(responseHandler);
+            return response;
         }
 
         private void HandleHeaders(WebResponse response)
@@ -153,7 +156,6 @@ namespace NanoByte.Common.Net
             // Update the source URL to reflect changes made by HTTP redirection
             Source = response.ResponseUri;
 
-            // Determine file size and make sure predetermined sizes are valid
             if (UnitsTotal == -1 || response.ContentLength == -1) UnitsTotal = response.ContentLength;
             else if (UnitsTotal != response.ContentLength)
                 throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, UnitsTotal, response.ContentLength));
