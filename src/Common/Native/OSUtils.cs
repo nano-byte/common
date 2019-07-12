@@ -20,6 +20,12 @@ namespace NanoByte.Common.Native
     public static class OSUtils
     {
         /// <summary>
+        /// Indicates whether the current process is running in an interactive session (rather than, e.g. as a CI job or a service).
+        /// </summary>
+        public static bool IsInteractive
+            => string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) && WindowsUtils.IsInteractive;
+
+        /// <summary>
         /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitOperatingSystem
