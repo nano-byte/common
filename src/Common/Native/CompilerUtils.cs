@@ -38,6 +38,7 @@ namespace NanoByte.Common.Native
             string directory = Path.GetDirectoryName(Path.GetFullPath(compilerParameters.OutputAssembly));
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
+            using (new WorkingDirectory(Environment.SystemDirectory)) // Prevent DLLs in current working directory from influencing build
             using (var manifestFile = new TemporaryFile("0install"))
             {
                 File.WriteAllText(manifestFile, manifest);
