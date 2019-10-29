@@ -9,7 +9,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Reports progress updates using callbacks/events. Performs the callbacks immediately on the same thread.
     /// </summary>
-    public class SynchronousProgress<T> : MarshalByRefObject, IProgress<T>
+    public class SynchronousProgress<T> : IProgress<T>
     {
         /// <summary>
         /// Raised for each reported progress value.
@@ -27,7 +27,7 @@ namespace NanoByte.Common.Tasks
 
         void IProgress<T>.Report(T value) => OnReport(value);
 
-        protected virtual void OnReport(T value)
+        protected void OnReport(T value)
         {
             var callback = ProgressChanged;
             callback?.Invoke(value);
