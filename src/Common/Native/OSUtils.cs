@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD
 using System.Runtime.InteropServices;
 #endif
 
@@ -29,7 +29,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitOperatingSystem
-#if NETSTANDARD2_0
+#if NETSTANDARD
             => (RuntimeInformation.OSArchitecture == Architecture.X64) || (RuntimeInformation.OSArchitecture == Architecture.Arm64);
 #elif NET45
             => Environment.Is64BitOperatingSystem;
@@ -41,7 +41,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current process is 64-bit; <c>false</c> otherwise.
         /// </summary>
         public static bool Is64BitProcess
-#if NETSTANDARD2_0
+#if NETSTANDARD
             => (RuntimeInformation.ProcessArchitecture == Architecture.X64) || (RuntimeInformation.OSArchitecture == Architecture.Arm64);
 #elif NET45
             => Environment.Is64BitProcess;

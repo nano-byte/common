@@ -9,7 +9,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using NanoByte.Common.Values;
 
-#if NET45 || NETSTANDARD2_0
+#if NET45 || NETSTANDARD
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -233,7 +233,7 @@ namespace NanoByte.Common.Collections
             }
         }
 
-#if NET45 || NETSTANDARD2_0
+#if NET45 || NETSTANDARD
 /// <summary>
 /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
 /// </summary>

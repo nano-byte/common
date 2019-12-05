@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NETSTANDARD2_0
+#if NETFRAMEWORK
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;

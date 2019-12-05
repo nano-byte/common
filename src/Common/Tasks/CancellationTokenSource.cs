@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using JetBrains.Annotations;
 
-#if !NETSTANDARD2_0
+#if NETFRAMEWORK
 using System.Runtime.Remoting;
 #endif
 
@@ -65,12 +65,12 @@ namespace NanoByte.Common.Tasks
                 _isCancellationRequested = true;
                 if (CancellationRequested != null)
                 {
-#if !NETSTANDARD2_0
+#if NETFRAMEWORK
                     try
                     {
 #endif
                         CancellationRequested();
-#if !NETSTANDARD2_0
+#if NETFRAMEWORK
                     }
                     catch (RemotingException)
                     {}

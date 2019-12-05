@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
-#if !NETCOREAPP2_2
+#if NETFRAMEWORK
 using NanoByte.Common.Native;
 #endif
 
@@ -44,7 +44,7 @@ namespace NanoByte.Common
             exceptionAssertion.WithMessage("Test exception");
 
             // Preserving the stack trace is only possible on .NET Framework on Windows
-#if !NETCOREAPP2_2
+#if NETFRAMEWORK
             if (WindowsUtils.IsWindows)
                 exceptionAssertion.Where(x => x.StackTrace.Contains("ThrowMockException"));
 #endif

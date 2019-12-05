@@ -101,7 +101,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is Windows (9x- or NT-based); <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindows
-#if NETSTANDARD2_0
+#if NETSTANDARD
             => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #else
             => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;
@@ -111,7 +111,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is a modern Windows version (NT-based); <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindowsNT
-#if NETSTANDARD2_0
+#if NETSTANDARD
             => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #else
             => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;

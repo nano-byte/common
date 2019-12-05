@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Xml.Serialization;
 using NanoByte.Common.Native;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD
 using System.Runtime.InteropServices;
 #endif
 
@@ -58,7 +58,7 @@ namespace NanoByte.Common.Info
 
         private static OSInfo Load() => new OSInfo
         {
-#if NETSTANDARD2_0
+#if NETSTANDARD
             FrameworkVersion = RuntimeInformation.FrameworkDescription,
             Platform = RuntimeInformation.OSDescription,
 #else

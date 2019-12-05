@@ -118,7 +118,7 @@ namespace NanoByte.Common.Storage
             {
                 if (!WindowsUtils.IsAdministrator) throw new NotAdminException();
 
-#if NETSTANDARD2_0
+#if NETSTANDARD
                 directory.Create();
                 directory.SetAccessControl(_secureSharedAcl);
 #else

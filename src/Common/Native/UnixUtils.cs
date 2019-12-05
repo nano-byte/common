@@ -10,7 +10,7 @@ using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Cli;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD
 using System.Runtime.InteropServices;
 #endif
 
@@ -30,7 +30,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
         public static bool IsUnix
-#if NETSTANDARD2_0
+#if NETSTANDARD
             => RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || IsMacOSX;
 #else
             => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128;
@@ -40,7 +40,7 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
         public static bool IsMacOSX
-#if NETSTANDARD2_0
+#if NETSTANDARD
             => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #else
             => IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework");

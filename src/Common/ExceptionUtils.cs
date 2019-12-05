@@ -10,13 +10,13 @@ using System.Threading;
 using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
-#if !NETSTANDARD2_0
+#if NETFRAMEWORK
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 #endif
 
-#if NET45 || NETSTANDARD2_0
+#if NET45 || NETSTANDARD
 using System.Threading.Tasks;
 #endif
 
@@ -29,7 +29,7 @@ namespace NanoByte.Common
     /// <seealso cref="ExceptionUtils.Retry{TException}"/>
     public delegate void RetryAction(bool lastAttempt);
 
-#if NET45 || NETSTANDARD2_0
+#if NET45 || NETSTANDARD
     /// <summary>
     /// Delegate used by <see cref="ExceptionUtils.RetryAsync{TException}"/>.
     /// </summary>
@@ -72,7 +72,7 @@ namespace NanoByte.Common
             if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
-#if !NETSTANDARD2_0
+#if NETFRAMEWORK
             var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
             var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
             exception.GetObjectData(serializationInfo, streamingContext);
@@ -231,7 +231,7 @@ namespace NanoByte.Common
             }
         }
 
-#if NET45 || NETSTANDARD2_0
+#if NET45 || NETSTANDARD
         /// <summary>
         /// Applies an operation for all elements of a collection. Automatically applies rollback operations in case of an exception.
         /// </summary>
