@@ -8,8 +8,14 @@ using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
+
+#if !NETSTANDARD2_1
 using NanoByte.Common.Streams;
+#endif
+
+#if NET20 || NET35
 using NanoByte.Common.Values;
+#endif
 
 namespace NanoByte.Common.Native
 {

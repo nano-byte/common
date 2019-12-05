@@ -4,10 +4,13 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Remoting;
 using System.Threading;
 using System.Windows.Forms;
 using JetBrains.Annotations;
+
+#if NETFRAMEWORK
+using System.Runtime.Remoting;
+#endif
 
 namespace NanoByte.Common
 {
@@ -212,11 +215,13 @@ namespace NanoByte.Common
                 // Don't worry if the form was already closing
                 Log.Debug(ex);
             }
+#if NETFRAMEWORK
             catch (RemotingException ex)
             {
                 // Remoting exceptions on clean-up are not critical
                 Log.Debug(ex);
             }
+#endif
             catch (NullReferenceException ex)
             {
                 // Rare .NET bug
