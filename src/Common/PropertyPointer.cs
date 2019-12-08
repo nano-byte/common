@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System;
-using System.CodeDom;
 using System.Globalization;
 using JetBrains.Annotations;
 using NanoByte.Common.Net;
