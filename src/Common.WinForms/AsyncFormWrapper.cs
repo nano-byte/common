@@ -26,9 +26,6 @@ namespace NanoByte.Common
         /// <param name="init">Callback that creates an instance of the form for the message loop.</param>
         public AsyncFormWrapper([NotNull] Func<T> init)
         {
-            #region Sanity checks
-            #endregion
-
             _init = init ?? throw new ArgumentNullException(nameof(init));
         }
 
