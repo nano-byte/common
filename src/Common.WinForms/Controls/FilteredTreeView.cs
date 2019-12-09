@@ -32,7 +32,7 @@ namespace NanoByte.Common.Controls
 
         private void OnSelectedEntryChanged()
         {
-            if (!_supressEvents && Visible) SelectedEntryChanged?.Invoke(this, EventArgs.Empty);
+            if (!_suppressEvents && Visible) SelectedEntryChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace NanoByte.Common.Controls
         private void OnSelectionConfirmed()
         {
             // Only confirm if the user actually selected something
-            if (!_supressEvents && Visible && SelectionConfirmed != null && _selectedEntry != null) SelectionConfirmed(this, EventArgs.Empty);
+            if (!_suppressEvents && Visible && SelectionConfirmed != null && _selectedEntry != null) SelectionConfirmed(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -55,13 +55,13 @@ namespace NanoByte.Common.Controls
 
         private void OnCheckedEntriesChanged()
         {
-            if (!_supressEvents && Visible) CheckedEntriesChanged?.Invoke(this, EventArgs.Empty);
+            if (!_suppressEvents && Visible) CheckedEntriesChanged?.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
         #region Variables
         /// <summary>Suppress the execution of <see cref="SelectedEntryChanged"/>.</summary>
-        private bool _supressEvents;
+        private bool _suppressEvents;
         #endregion
 
         #region Properties
@@ -181,7 +181,7 @@ namespace NanoByte.Common.Controls
         public void UpdateList([CanBeNull] object sender = null)
         {
             // Suppress events to prevent infinite loops
-            _supressEvents = true;
+            _suppressEvents = true;
 
             treeView.Nodes.Clear();
             if (_nodes != null)
@@ -209,7 +209,7 @@ namespace NanoByte.Common.Controls
             }
 
             // Restore events at the end
-            _supressEvents = false;
+            _suppressEvents = false;
         }
         #endregion
 
