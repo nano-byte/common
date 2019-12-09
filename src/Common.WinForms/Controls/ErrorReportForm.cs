@@ -92,24 +92,6 @@ namespace NanoByte.Common.Controls
         }
 
         /// <summary>
-        /// Prevent any further user interaction with the crashing application
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We are already handling unexpected exceptions. We need to ignore any additional problems in the cleanup process.")]
-        [SuppressMessage("ReSharper", "EmptyGeneralCatchClause")]
-        private static void HideForms()
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                try
-                {
-                    form.Invoke(new Action(form.Hide));
-                }
-                catch
-                {}
-            }
-        }
-
-        /// <summary>
         /// Displays the error reporting form.
         /// </summary>
         /// <param name="ex">The exception to report.</param>
