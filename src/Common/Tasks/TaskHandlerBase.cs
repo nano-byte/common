@@ -102,7 +102,7 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
-            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x.ToString()));
+            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? ""));
             Output(title, message);
         }
 
@@ -116,7 +116,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public virtual void OutputLow<T>(string title, IEnumerable<T> data)
         {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x?.ToString() ?? ""));
             OutputLow(title ?? throw new ArgumentNullException(nameof(title)), message);
         }
 

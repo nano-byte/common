@@ -73,7 +73,8 @@ namespace NanoByte.Common.Collections
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to maximize.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-        /// <returns>The element that maximizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
+        /// <returns>The element that maximizes the expression.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="enumeration"/> contains no elements.</exception>
         [CanBeNull, Pure]
         public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
         {
@@ -86,7 +87,7 @@ namespace NanoByte.Common.Collections
 
             using (var enumerator = enumeration.GetEnumerator())
             {
-                if (!enumerator.MoveNext()) return default;
+                if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
                 var maxElement = enumerator.Current;
                 var maxValue = expression(maxElement);
 
@@ -113,7 +114,8 @@ namespace NanoByte.Common.Collections
         /// <param name="enumeration">The elements to check.</param>
         /// <param name="expression">The expression to minimize.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-        /// <returns>The element that minimizes the expression; the default value of <typeparamref name="T"/> if <paramref name="enumeration"/> contains no elements.</returns>
+        /// <returns>The element that minimizes the expression.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="enumeration"/> contains no elements.</exception>
         [CanBeNull, Pure]
         public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
         {
@@ -126,7 +128,7 @@ namespace NanoByte.Common.Collections
 
             using (var enumerator = enumeration.GetEnumerator())
             {
-                if (!enumerator.MoveNext()) return default;
+                if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
                 var minElement = enumerator.Current;
                 var minValue = expression(minElement);
 

@@ -23,22 +23,10 @@ namespace NanoByte.Common.Collections
               .Should().Be("abcd");
 
         [Fact]
-        public void TestMaxByNull()
-            => Enumerable.Empty<string>()
-                         .MaxBy(x => x.Length)
-                         .Should().Be(null);
-
-        [Fact]
         public void TestMinBy()
             => new[] {"abc", "a", "abcd", "ab"}
               .MinBy(x => x.Length)
               .Should().Be("a");
-
-        [Fact]
-        public void TestMinByNull()
-            => Enumerable.Empty<string>()
-                         .MaxBy(x => x.Length)
-                         .Should().Be(null);
 
         [Fact]
         public void TestDistinctBy()

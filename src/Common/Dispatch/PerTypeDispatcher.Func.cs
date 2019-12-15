@@ -22,18 +22,6 @@ namespace NanoByte.Common.Dispatch
     {
         private readonly Dictionary<Type, Func<TBase, TResult>> _map = new Dictionary<Type, Func<TBase, TResult>>();
 
-        /// <summary><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</summary>
-        private readonly bool _ignoreMissing;
-
-        /// <summary>
-        /// Creates a new dispatcher.
-        /// </summary>
-        /// <param name="ignoreMissing"><c>true</c> to return the default value (usually <c>null</c>) for dispatch attempts on unknown types; <c>false</c> to throw exceptions.</param>
-        public PerTypeDispatcher(bool ignoreMissing)
-        {
-            _ignoreMissing = ignoreMissing;
-        }
-
         /// <summary>
         /// Adds a dispatch delegate.
         /// </summary>
@@ -57,7 +45,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="element">The element to be dispatched.</param>
         /// <returns>The value returned by the matching delegate.</returns>
-        /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <c>false</c>.</exception>
+        /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed.</exception>
         public TResult Dispatch([NotNull] TBase element)
         {
             #region Sanity checks
@@ -66,11 +54,7 @@ namespace NanoByte.Common.Dispatch
 
             var type = element.GetType();
             if (_map.TryGetValue(type, out var function)) return function(element);
-            else
-            {
-                if (_ignoreMissing) return default;
-                else throw new KeyNotFoundException(string.Format(Resources.MissingDispatchAction, type.Name));
-            }
+            else throw new KeyNotFoundException(string.Format(Resources.MissingDispatchAction, type.Name));
         }
 
         /// <summary>
@@ -78,7 +62,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
         /// <returns>The values returned by the matching delegates.</returns>
-        /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <c>false</c>.</exception>
+        /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed.</exception>
         public IEnumerable<TResult> Dispatch([NotNull, ItemNotNull] IEnumerable<TBase> elements)
         {
             #region Sanity checks

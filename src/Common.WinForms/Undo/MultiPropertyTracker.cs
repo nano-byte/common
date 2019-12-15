@@ -65,8 +65,12 @@ namespace NanoByte.Common.Undo
         /// Creates an undo command representing a property change the <see cref="PropertyGrid"/> has just performed.
         /// </summary>
         /// <param name="changedItem">The property grid item that was changed.</param>
+        /// <exception cref="InvalidOperationException">No change was recorded yet.</exception>
         public IUndoCommand GetCommand(GridItem changedItem)
-            => new MultiPropertyChangedCommand(_propertyGrid.SelectedObjects, MoveOutOfNested(changedItem), _oldValues);
+            => new MultiPropertyChangedCommand(
+                _propertyGrid.SelectedObjects,
+                MoveOutOfNested(changedItem),
+                _oldValues ?? throw new InvalidOperationException("No change was recorded yet."));
         #endregion
 
         #region Helpers

@@ -58,7 +58,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public void Output<T>(string title, IEnumerable<T> data)
         {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x?.ToString() ?? ""));
             Output(title ?? throw new ArgumentNullException(nameof(title)), message);
         }
 
@@ -68,7 +68,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public void OutputLow<T>(string title, IEnumerable<T> data)
         {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x.ToString()));
+            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x?.ToString() ?? ""));
             OutputLow(title ?? throw new ArgumentNullException(nameof(title)), message);
         }
 

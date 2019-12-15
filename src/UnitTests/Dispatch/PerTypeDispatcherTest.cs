@@ -59,7 +59,7 @@ namespace NanoByte.Common.Dispatch
             var sub1Orig = new Sub1();
             var sub2Orig = new Sub2();
 
-            var dispatcher = new PerTypeDispatcher<Base, Base>(false)
+            var dispatcher = new PerTypeDispatcher<Base, Base>()
             {
                 (Sub1 sub1) => sub1,
                 (Sub2 sub2) => sub2
@@ -72,12 +72,9 @@ namespace NanoByte.Common.Dispatch
         [Fact]
         public void TestDispatchFuncExceptions()
         {
-            new PerTypeDispatcher<Base, Base>(false) {(Sub1 sub1) => sub1}
+            new PerTypeDispatcher<Base, Base>() {(Sub1 sub1) => sub1}
                .Invoking(x => x.Dispatch(new Sub2()))
                .Should().Throw<KeyNotFoundException>();
-            new PerTypeDispatcher<Base, Base>(true) {(Sub1 sub1) => sub1}
-               .Invoking(x => x.Dispatch(new Sub2()))
-               .Should().NotThrow<KeyNotFoundException>();
         }
     }
 }
