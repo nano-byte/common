@@ -32,18 +32,16 @@ namespace NanoByte.Common.Controls
             if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
-            using (var outputBox = new OutputBox
+            using var outputBox = new OutputBox
             {
                 Text = Application.ProductName,
                 labelTitle = {Text = title},
                 textMessage = {Text = message.Replace("\n", Environment.NewLine)}
-            })
-            {
-                outputBox.toolTip.SetToolTip(outputBox.labelTitle, outputBox.labelTitle.Text);
-                // ReSharper disable once AccessToDisposedClosure
-                outputBox.Shown += delegate { outputBox.SetForegroundWindow(); };
-                outputBox.ShowDialog(owner);
-            }
+            };
+            outputBox.toolTip.SetToolTip(outputBox.labelTitle, outputBox.labelTitle.Text);
+            // ReSharper disable once AccessToDisposedClosure
+            outputBox.Shown += delegate { outputBox.SetForegroundWindow(); };
+            outputBox.ShowDialog(owner);
         }
     }
 }

@@ -38,8 +38,8 @@ namespace NanoByte.Common.Native
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
             using (new WorkingDirectory(Environment.SystemDirectory)) // Prevent DLLs in current working directory from influencing build
-            using (var manifestFile = new TemporaryFile("0install"))
             {
+                using var manifestFile = new TemporaryFile("0install");
                 File.WriteAllText(manifestFile, manifest);
 
                 var compiler = GetCSharpCompiler(compilerParameters, manifestFile);

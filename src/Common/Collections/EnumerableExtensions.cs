@@ -105,25 +105,23 @@ namespace NanoByte.Common.Collections
 
             if (comparer == null) comparer = Comparer<TValue>.Default;
 
-            using (var enumerator = enumeration.GetEnumerator())
+            using var enumerator = enumeration.GetEnumerator();
+            if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
+            var maxElement = enumerator.Current;
+            var maxValue = expression(maxElement);
+
+            while (enumerator.MoveNext())
             {
-                if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
-                var maxElement = enumerator.Current;
-                var maxValue = expression(maxElement);
-
-                while (enumerator.MoveNext())
+                var candidate = enumerator.Current;
+                var candidateValue = expression(candidate);
+                if (comparer.Compare(candidateValue, maxValue) > 0)
                 {
-                    var candidate = enumerator.Current;
-                    var candidateValue = expression(candidate);
-                    if (comparer.Compare(candidateValue, maxValue) > 0)
-                    {
-                        maxElement = candidate;
-                        maxValue = candidateValue;
-                    }
+                    maxElement = candidate;
+                    maxValue = candidateValue;
                 }
-
-                return maxElement;
             }
+
+            return maxElement;
         }
 
         /// <summary>
@@ -148,25 +146,23 @@ namespace NanoByte.Common.Collections
 
             if (comparer == null) comparer = Comparer<TValue>.Default;
 
-            using (var enumerator = enumeration.GetEnumerator())
+            using var enumerator = enumeration.GetEnumerator();
+            if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
+            var minElement = enumerator.Current;
+            var minValue = expression(minElement);
+
+            while (enumerator.MoveNext())
             {
-                if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
-                var minElement = enumerator.Current;
-                var minValue = expression(minElement);
-
-                while (enumerator.MoveNext())
+                var candidate = enumerator.Current;
+                var candidateValue = expression(candidate);
+                if (comparer.Compare(candidateValue, minValue) < 0)
                 {
-                    var candidate = enumerator.Current;
-                    var candidateValue = expression(candidate);
-                    if (comparer.Compare(candidateValue, minValue) < 0)
-                    {
-                        minElement = candidate;
-                        minValue = candidateValue;
-                    }
+                    minElement = candidate;
+                    minValue = candidateValue;
                 }
-
-                return minElement;
             }
+
+            return minElement;
         }
 
         /// <summary>

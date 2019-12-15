@@ -163,22 +163,20 @@ namespace NanoByte.Common
             if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
-            using (var enumerator = elements.GetEnumerator())
-            {
-                if (!enumerator.MoveNext()) return;
+            using var enumerator = elements.GetEnumerator();
+            if (!enumerator.MoveNext()) return;
 
-                while (true)
+            while (true)
+            {
+                try
                 {
-                    try
-                    {
-                        action(enumerator.Current);
-                        return;
-                    }
-                    catch (Exception ex)
-                    {
-                        if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
-                        else throw; // Rethrow exception if there are no more elements
-                    }
+                    action(enumerator.Current);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
+                    else throw; // Rethrow exception if there are no more elements
                 }
             }
         }
@@ -300,22 +298,20 @@ namespace NanoByte.Common
             if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
-            using (var enumerator = elements.GetEnumerator())
-            {
-                if (!enumerator.MoveNext()) return;
+            using var enumerator = elements.GetEnumerator();
+            if (!enumerator.MoveNext()) return;
 
-                while (true)
+            while (true)
+            {
+                try
                 {
-                    try
-                    {
-                        await action(enumerator.Current);
-                        return;
-                    }
-                    catch (Exception ex)
-                    {
-                        if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
-                        else throw; // Rethrow exception if there are no more elements
-                    }
+                    await action(enumerator.Current);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
+                    else throw; // Rethrow exception if there are no more elements
                 }
             }
         }

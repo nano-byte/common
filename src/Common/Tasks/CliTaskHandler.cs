@@ -97,8 +97,8 @@ namespace NanoByte.Common.Tasks
             {
                 Log.Debug("Task: " + task.Name);
                 Console.Error.WriteLine(task.Name + @"...");
-                using (var progressBar = new TaskProgressBar())
-                    task.Run(CancellationToken, CredentialProvider, progressBar);
+                using var progressBar = new TaskProgressBar();
+                task.Run(CancellationToken, CredentialProvider, progressBar);
             }
         }
 

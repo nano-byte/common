@@ -78,8 +78,10 @@ namespace NanoByte.Common.Storage
             try
             {
                 using (new AtomicRead(path))
-                using (var fileStream = File.OpenRead(path))
+                {
+                    using var fileStream = File.OpenRead(path);
                     return LoadXml<T>(fileStream);
+                }
             }
             #region Error handling
             catch (ArgumentException ex)
@@ -110,8 +112,8 @@ namespace NanoByte.Common.Storage
             #endregion
 
             // Copy string to a stream and then parse
-            using (var stream = data.ToStream())
-                return LoadXml<T>(stream);
+            using var stream = data.ToStream();
+            return LoadXml<T>(stream);
         }
         #endregion
 
@@ -184,12 +186,10 @@ namespace NanoByte.Common.Storage
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            using (var atomic = new AtomicWrite(path))
-            {
-                using (var fileStream = File.Create(atomic.WritePath))
-                    SaveXml(data, fileStream, stylesheet);
-                atomic.Commit();
-            }
+            using var atomic = new AtomicWrite(path);
+            using (var fileStream = File.Create(atomic.WritePath))
+                SaveXml(data, fileStream, stylesheet);
+            atomic.Commit();
         }
 
         /// <summary>
@@ -201,19 +201,17 @@ namespace NanoByte.Common.Storage
         /// <returns>A string containing the XML code.</returns>
         public static string ToXmlString<T>(this T data, [Localizable(false)] string? stylesheet = null)
         {
-            using (var stream = new MemoryStream())
-            {
-                // Write to a memory stream
-                SaveXml(data, stream, stylesheet);
+            using var stream = new MemoryStream();
+            // Write to a memory stream
+            SaveXml(data, stream, stylesheet);
 
-                // Copy the stream to a string
-                string result = stream.ReadToString();
+            // Copy the stream to a string
+            string result = stream.ReadToString();
 
-                // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
-                const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-                const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
-                return prefixWithoutEncoding + result.Substring(prefixWithEncoding.Length);
-            }
+            // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
+            const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+            const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
+            return prefixWithoutEncoding + result.Substring(prefixWithEncoding.Length);
         }
         #endregion
     }

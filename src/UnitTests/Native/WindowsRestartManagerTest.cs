@@ -16,11 +16,9 @@ namespace NanoByte.Common.Native
         {
             Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Restart Manager only available on Windows Vista or higher");
 
-            using (var restartManager = new WindowsRestartManager())
-            {
-                restartManager.RegisterResources(@"C:\Windows\explorer.exe");
-                restartManager.ListApps(new SilentTaskHandler());
-            }
+            using var restartManager = new WindowsRestartManager();
+            restartManager.RegisterResources(@"C:\Windows\explorer.exe");
+            restartManager.ListApps(new SilentTaskHandler());
         }
     }
 }

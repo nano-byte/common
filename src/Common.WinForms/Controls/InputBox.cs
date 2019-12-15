@@ -37,14 +37,14 @@ namespace NanoByte.Common.Controls
             if (string.IsNullOrEmpty(prompt)) throw new ArgumentNullException(nameof(prompt));
             #endregion
 
-            using (var inputBox = new InputBox
+            using var inputBox = new InputBox
             {
                 Text = title,
                 labelPrompt = {Text = prompt.Replace("\n", Environment.NewLine)},
                 textInput = {Text = defaultText, UseSystemPasswordChar = password},
                 ShowInTaskbar = (owner == null)
-            })
-                return (inputBox.ShowDialog(owner) == DialogResult.OK) ? inputBox.textInput.Text : null;
+            };
+            return (inputBox.ShowDialog(owner) == DialogResult.OK) ? inputBox.textInput.Text : null;
         }
 
         private void InputBox_DragDrop(object sender, DragEventArgs e)

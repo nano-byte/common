@@ -317,8 +317,8 @@ namespace NanoByte.Common.Storage
             if (encoding == null) throw new ArgumentNullException(nameof(encoding));
             #endregion
 
-            using (var stream = file.OpenRead())
-                return new StreamReader(stream, encoding).ReadLine();
+            using var stream = file.OpenRead();
+            return new StreamReader(stream, encoding).ReadLine();
         }
         #endregion
 

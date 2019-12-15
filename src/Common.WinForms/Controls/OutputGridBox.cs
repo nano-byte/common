@@ -35,13 +35,11 @@ namespace NanoByte.Common.Controls
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
-            using (var dialog = new OutputGridBox())
-            {
-                dialog.Text = title;
-                dialog.SetData(data);
+            using var dialog = new OutputGridBox();
+            dialog.Text = title;
+            dialog.SetData(data);
 
-                dialog.ShowDialog(owner);
-            }
+            dialog.ShowDialog(owner);
         }
 
         /// <summary>

@@ -21,31 +21,27 @@ namespace NanoByte.Common.Native
         [Fact]
         public void TestIsSymlinkNoMatch()
         {
-            using (var tempDir = new TemporaryDirectory("unit-tests"))
-            {
-                string normalFile = Path.Combine(tempDir, "normal");
-                FileUtils.Touch(normalFile);
+            using var tempDir = new TemporaryDirectory("unit-tests");
+            string normalFile = Path.Combine(tempDir, "normal");
+            FileUtils.Touch(normalFile);
 
-                CygwinUtils.IsSymlink(normalFile).Should().BeFalse();
+            CygwinUtils.IsSymlink(normalFile).Should().BeFalse();
 
-                CygwinUtils.IsSymlink(normalFile, out string target).Should().BeFalse();
-            }
+            CygwinUtils.IsSymlink(normalFile, out string target).Should().BeFalse();
         }
 
         [Fact]
         public void TestIsSymlinkMatch()
         {
-            using (var tempDir = new TemporaryDirectory("unit-tests"))
-            {
-                string symlinkFile = Path.Combine(tempDir, "symlink");
-                File.WriteAllBytes(symlinkFile, _symlinkBytes);
-                File.SetAttributes(symlinkFile, FileAttributes.System);
+            using var tempDir = new TemporaryDirectory("unit-tests");
+            string symlinkFile = Path.Combine(tempDir, "symlink");
+            File.WriteAllBytes(symlinkFile, _symlinkBytes);
+            File.SetAttributes(symlinkFile, FileAttributes.System);
 
-                CygwinUtils.IsSymlink(symlinkFile).Should().BeTrue();
+            CygwinUtils.IsSymlink(symlinkFile).Should().BeTrue();
 
-                CygwinUtils.IsSymlink(symlinkFile, out string target).Should().BeTrue();
-                target.Should().Be("target");
-            }
+            CygwinUtils.IsSymlink(symlinkFile, out string target).Should().BeTrue();
+            target.Should().Be("target");
         }
 
         [SkippableFact]
@@ -53,14 +49,12 @@ namespace NanoByte.Common.Native
         {
             Skip.IfNot(WindowsUtils.IsWindows, reason: "The 'system' file attribute can only be set on the Windows platform.");
 
-            using (var tempDir = new TemporaryDirectory("unit-tests"))
-            {
-                string symlinkFile = Path.Combine(tempDir, "symlink");
-                CygwinUtils.CreateSymlink(symlinkFile, "target");
+            using var tempDir = new TemporaryDirectory("unit-tests");
+            string symlinkFile = Path.Combine(tempDir, "symlink");
+            CygwinUtils.CreateSymlink(symlinkFile, "target");
 
-                File.Exists(symlinkFile).Should().BeTrue();
-                File.ReadAllBytes(symlinkFile).Should().Equal(_symlinkBytes);
-            }
+            File.Exists(symlinkFile).Should().BeTrue();
+            File.ReadAllBytes(symlinkFile).Should().Equal(_symlinkBytes);
         }
     }
 }

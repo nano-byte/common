@@ -59,11 +59,9 @@ namespace NanoByte.Common.Streams
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
-            using (var memoryStream = new MemoryStream())
-            {
-                stream.CopyToEx(memoryStream);
-                return memoryStream.ToArray();
-            }
+            using var memoryStream = new MemoryStream();
+            stream.CopyToEx(memoryStream);
+            return memoryStream.ToArray();
         }
 
         /// <summary>
@@ -129,8 +127,8 @@ namespace NanoByte.Common.Streams
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            using (var fileStream = File.Create(path))
-                stream.CopyToEx(fileStream, bufferSize, cancellationToken, progress);
+            using var fileStream = File.Create(path);
+            stream.CopyToEx(fileStream, bufferSize, cancellationToken, progress);
         }
 
         /// <summary>
@@ -241,8 +239,8 @@ namespace NanoByte.Common.Streams
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
-            using (var stream = type.GetEmbeddedStream(name))
-                return stream.ReadToString(encoding);
+            using var stream = type.GetEmbeddedStream(name);
+            return stream.ReadToString(encoding);
         }
 
         /// <summary>
@@ -259,8 +257,8 @@ namespace NanoByte.Common.Streams
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
-            using (var stream = type.GetEmbeddedStream(name))
-                stream.CopyToFile(path);
+            using var stream = type.GetEmbeddedStream(name);
+            stream.CopyToFile(path);
         }
     }
 }

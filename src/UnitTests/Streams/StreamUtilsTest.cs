@@ -47,18 +47,16 @@ namespace NanoByte.Common.Streams
         public void TestString()
         {
             const string test = "Test";
-            using (var stream = test.ToStream())
-                stream.ReadToString().Should().Be(test);
+            using var stream = test.ToStream();
+            stream.ReadToString().Should().Be(test);
         }
 
         [Fact]
         public void TestCopyToFile()
         {
-            using (var tempFile = new TemporaryFile("unit-tests"))
-            {
-                "abc".ToStream().CopyToFile(tempFile);
-                new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8).Should().Be("abc");
-            }
+            using var tempFile = new TemporaryFile("unit-tests");
+            "abc".ToStream().CopyToFile(tempFile);
+            new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8).Should().Be("abc");
         }
     }
 }

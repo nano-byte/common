@@ -62,8 +62,10 @@ namespace NanoByte.Common.Storage
             #endregion
 
             using (new AtomicRead(path))
-            using (var fileStream = File.OpenRead(path))
+            {
+                using var fileStream = File.OpenRead(path);
                 return LoadBinary<T>(fileStream);
+            }
         }
 
         /// <summary>
@@ -91,12 +93,10 @@ namespace NanoByte.Common.Storage
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            using (var atomic = new AtomicWrite(path))
-            using (var fileStream = File.Create(atomic.WritePath))
-            {
-                SaveBinary(data, fileStream);
-                atomic.Commit();
-            }
+            using var atomic = new AtomicWrite(path);
+            using var fileStream = File.Create(atomic.WritePath);
+            SaveBinary(data, fileStream);
+            atomic.Commit();
         }
     }
 }

@@ -37,18 +37,16 @@ namespace NanoByte.Common.Controls
 
             Log.Error(exception);
 
-            using (var errorBox = new ErrorBox
+            using var errorBox = new ErrorBox
             {
                 Text = Application.ProductName,
                 labelMessage = {Text = exception.Message},
                 labelInnerMessage = {Text = GetInnerMessage(exception)},
                 textLog = {Rtf = logRtf.ToString()}
-            })
-            {
-                // ReSharper disable once AccessToDisposedClosure
-                errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
-                errorBox.ShowDialog(owner);
-            }
+            };
+            // ReSharper disable once AccessToDisposedClosure
+            errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
+            errorBox.ShowDialog(owner);
         }
 
         private static string GetInnerMessage(Exception exception)

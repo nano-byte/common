@@ -126,12 +126,10 @@ namespace NanoByte.Common.Net
         private void Download(WebRequest request)
         {
             State = TaskState.Header;
-            using (var response = GetResponse(request))
-            {
-                HandleHeaders(response);
-                State = TaskState.Data;
-                HandleData(response);
-            }
+            using var response = GetResponse(request);
+            HandleHeaders(response);
+            State = TaskState.Data;
+            HandleData(response);
         }
 
         private WebResponse GetResponse(WebRequest request)
@@ -163,18 +161,16 @@ namespace NanoByte.Common.Net
 
         private void HandleData(WebResponse response)
         {
-            using (var sourceStream = response.GetResponseStream())
-            using (var targetStream = CreateTargetStream())
-            {
-                Debug.Assert(sourceStream != null);
-                sourceStream.CopyToEx(targetStream,
-                    bufferSize: 8 * 1024,
-                    cancellationToken: CancellationToken,
-                    progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
+            using var sourceStream = response.GetResponseStream();
+            using var targetStream = CreateTargetStream();
+            Debug.Assert(sourceStream != null);
+            sourceStream.CopyToEx(targetStream,
+                bufferSize: 8 * 1024,
+                cancellationToken: CancellationToken,
+                progress: new SynchronousProgress<long>(x => UnitsProcessed = x));
 
-                if (targetStream.Position > BytesMaximum)
-                    throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, BytesMaximum, targetStream.Position));
-            }
+            if (targetStream.Position > BytesMaximum)
+                throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, BytesMaximum, targetStream.Position));
         }
 
         /// <summary>

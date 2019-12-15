@@ -57,14 +57,12 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                view[0].Should().BeOfType<SpecificView>();
-                view[0].ID.Should().Be("abc");
-            }
+            view[0].Should().BeOfType<SpecificView>();
+            view[0].ID.Should().Be("abc");
         }
 
         [Fact]
@@ -72,15 +70,13 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                sync.Lookup(view[0]).Should().BeSameAs(model[0]);
-                sync.Invoking(x => x.Lookup(new SpecificView()))
-                    .Should().Throw<KeyNotFoundException>();
-            }
+            sync.Lookup(view[0]).Should().BeSameAs(model[0]);
+            sync.Invoking(x => x.Lookup(new SpecificView()))
+                .Should().Throw<KeyNotFoundException>();
         }
 
         [Fact]
@@ -88,13 +84,11 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                sync.Representations.First().Should().BeSameAs(view[0]);
-            }
+            sync.Representations.First().Should().BeSameAs(view[0]);
         }
 
         [Fact]
@@ -102,16 +96,14 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase>();
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                model.Add(new SpecificModel {ID = "abc"});
+            model.Add(new SpecificModel {ID = "abc"});
 
-                view[0].Should().BeOfType<SpecificView>();
-                view[0].ID.Should().Be("abc");
-            }
+            view[0].Should().BeOfType<SpecificView>();
+            view[0].ID.Should().Be("abc");
         }
 
         [Fact]
@@ -119,17 +111,15 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                var originalRepresentation = view[0];
-                model.RemoveAt(0);
+            var originalRepresentation = view[0];
+            model.RemoveAt(0);
 
-                view.Should().BeEmpty();
-                originalRepresentation.Disposed.Should().BeTrue();
-            }
+            view.Should().BeEmpty();
+            originalRepresentation.Disposed.Should().BeTrue();
         }
 
         [Fact]
@@ -137,15 +127,13 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                model[0].ID = "xyz";
+            model[0].ID = "xyz";
 
-                view[0].ID.Should().Be("xyz");
-            }
+            view[0].ID.Should().Be("xyz");
         }
 
         [Fact]
@@ -153,15 +141,13 @@ namespace NanoByte.Common.Dispatch
         {
             var model = new MonitoredCollection<ModelBase> {new SpecificModel {ID = "abc"}};
             var view = new List<ViewBase>();
-            using (var sync = new ModelViewSync<ModelBase, ViewBase>(model, view))
-            {
-                sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
-                sync.Initialize();
+            using var sync = new ModelViewSync<ModelBase, ViewBase>(model, view);
+            sync.Register((SpecificModel element) => new SpecificView(), (element, representation) => representation.ID = element.ID);
+            sync.Initialize();
 
-                var originalRepresentation = view[0];
-                model[0].Rebuild();
-                view[0].Should().NotBeSameAs(originalRepresentation);
-            }
+            var originalRepresentation = view[0];
+            model[0].Rebuild();
+            view[0].Should().NotBeSameAs(originalRepresentation);
         }
 
         [Fact]

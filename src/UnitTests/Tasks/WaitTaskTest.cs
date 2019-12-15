@@ -16,50 +16,46 @@ namespace NanoByte.Common.Tasks
         [Fact]
         public void TestWait()
         {
-            using (var waitHandle = new ManualResetEvent(false))
-            {
-                var task = new WaitTask("Test task", waitHandle);
-                var waitThread = new Thread(() => task.Run());
-                waitThread.Start();
+            using var waitHandle = new ManualResetEvent(false);
+            var task = new WaitTask("Test task", waitHandle);
+            var waitThread = new Thread(() => task.Run());
+            waitThread.Start();
 
-                Thread.Sleep(100);
-                task.State.Should().Be(TaskState.Started);
+            Thread.Sleep(100);
+            task.State.Should().Be(TaskState.Started);
 
-                waitHandle.Set();
-                waitThread.Join();
-                task.State.Should().Be(TaskState.Complete);
-            }
+            waitHandle.Set();
+            waitThread.Join();
+            task.State.Should().Be(TaskState.Complete);
         }
 
         [Fact]
         public void TestCancel()
         {
-            using (var waitHandle = new ManualResetEvent(false))
+            using var waitHandle = new ManualResetEvent(false);
+            // Monitor for a cancellation exception
+            var task = new WaitTask("Test task", waitHandle);
+            bool exceptionThrown = false;
+            var cancellationTokenSource = new CancellationTokenSource();
+            var waitThread = new Thread(() =>
             {
-                // Monitor for a cancellation exception
-                var task = new WaitTask("Test task", waitHandle);
-                bool exceptionThrown = false;
-                var cancellationTokenSource = new CancellationTokenSource();
-                var waitThread = new Thread(() =>
+                try
                 {
-                    try
-                    {
-                        task.Run(cancellationTokenSource.Token);
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        exceptionThrown = true;
-                    }
-                });
+                    task.Run(cancellationTokenSource.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    exceptionThrown = true;
+                }
+            });
 
-                // Start and then cancel the download
-                waitThread.Start();
-                Thread.Sleep(100);
-                cancellationTokenSource.Cancel();
-                waitThread.Join();
+            // Start and then cancel the download
+            waitThread.Start();
+            Thread.Sleep(100);
+            cancellationTokenSource.Cancel();
+            waitThread.Join();
 
-                exceptionThrown.Should().BeTrue(because: task.State.ToString());
-            }
+            exceptionThrown.Should().BeTrue(because: task.State.ToString());
         }
     }
 }

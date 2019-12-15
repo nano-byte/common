@@ -43,12 +43,10 @@ namespace NanoByte.Common.Native
 
             if (!HasSystemAttribute(path)) return false;
 
-            using (var stream = File.OpenRead(path))
-            {
-                var header = new byte[SymlinkCookie.Length];
-                stream.Read(header, 0, SymlinkCookie.Length);
-                return header.SequencedEquals(SymlinkCookie);
-            }
+            using var stream = File.OpenRead(path);
+            var header = new byte[SymlinkCookie.Length];
+            stream.Read(header, 0, SymlinkCookie.Length);
+            return header.SequencedEquals(SymlinkCookie);
         }
 
         /// <summary>
@@ -76,20 +74,18 @@ namespace NanoByte.Common.Native
                 return false;
             }
 
-            using (var stream = File.OpenRead(path))
+            using var stream = File.OpenRead(path);
+            var header = new byte[SymlinkCookie.Length];
+            stream.Read(header, 0, SymlinkCookie.Length);
+            if (header.SequencedEquals(SymlinkCookie))
             {
-                var header = new byte[SymlinkCookie.Length];
-                stream.Read(header, 0, SymlinkCookie.Length);
-                if (header.SequencedEquals(SymlinkCookie))
-                {
-                    target = new StreamReader(stream, detectEncodingFromByteOrderMarks: true).ReadToEnd().TrimEnd('\0');
-                    return true;
-                }
-                else
-                {
-                    target = null;
-                    return false;
-                }
+                target = new StreamReader(stream, detectEncodingFromByteOrderMarks: true).ReadToEnd().TrimEnd('\0');
+                return true;
+            }
+            else
+            {
+                target = null;
+                return false;
             }
         }
 

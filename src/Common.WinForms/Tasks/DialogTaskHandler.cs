@@ -35,11 +35,9 @@ namespace NanoByte.Common.Tasks
             Exception? ex = null;
             _owner.Invoke(() =>
             {
-                using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource))
-                {
-                    dialog.ShowDialog(_owner);
-                    ex = dialog.Exception;
-                }
+                using var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource);
+                dialog.ShowDialog(_owner);
+                ex = dialog.Exception;
             });
             if (ex != null) throw ex.PreserveStack();
         }
