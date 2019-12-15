@@ -66,30 +66,17 @@ namespace NanoByte.Common.Native
         internal static Exception BuildException(int error)
         {
             var ex = new Win32Exception(error);
-            switch (error)
+            return error switch
             {
-                case Win32ErrorAlreadyExists:
-                case Win32ErrorWriteFault:
-                    return new IOException(ex.Message, ex);
-
-                case Win32ErrorFileNotFound:
-                    return new FileNotFoundException(ex.Message, ex);
-
-                case Win32ErrorAccessDenied:
-                    return new UnauthorizedAccessException(ex.Message, ex);
-
-                case Win32ErrorRequestedOperationRequiresElevation:
-                    return new NotAdminException(ex.Message, ex);
-
-                case Win32ErrorSemTimeout:
-                    return new TimeoutException();
-
-                case Win32ErrorCancelled:
-                    return new OperationCanceledException();
-
-                default:
-                    return ex;
-            }
+                Win32ErrorAlreadyExists => (Exception)new IOException(ex.Message, ex),
+                Win32ErrorWriteFault => new IOException(ex.Message, ex),
+                Win32ErrorFileNotFound => new FileNotFoundException(ex.Message, ex),
+                Win32ErrorAccessDenied => new UnauthorizedAccessException(ex.Message, ex),
+                Win32ErrorRequestedOperationRequiresElevation => new NotAdminException(ex.Message, ex),
+                Win32ErrorSemTimeout => new TimeoutException(),
+                Win32ErrorCancelled => new OperationCanceledException(),
+                _ => ex
+            };
         }
         #endregion
 

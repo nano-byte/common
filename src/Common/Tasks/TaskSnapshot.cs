@@ -51,51 +51,29 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// The progress of the task as a value between 0 and 1; -1 when unknown.
         /// </summary>
-        public double Value
-        {
-            get
+        public double Value =>
+            UnitsTotal switch
             {
-                switch (UnitsTotal)
-                {
-                    case -1:
-                        return -1;
-                    case 0:
-                        return 1;
-                    default:
-                        return UnitsProcessed / (double)UnitsTotal;
-                }
-            }
-        }
+                -1 => -1,
+                0 => 1,
+                _ => (UnitsProcessed / (double)UnitsTotal)
+            };
 
         /// <inheritdoc/>
         public override string ToString()
-        {
-            switch (State)
+            => State switch
             {
-                default:
-                case TaskState.Ready:
-                case TaskState.Started:
-                    return "";
-
-                case TaskState.Header:
-                    return Resources.StateHeader;
-
-                case TaskState.Data:
-                    if (UnitsTotal == -1)
-                        return (UnitsProcessed == 0) ? Resources.StateData : UnitsToString(UnitsProcessed);
-                    else
-                        return UnitsToString(UnitsProcessed) + @" / " + UnitsToString(UnitsTotal);
-
-                case TaskState.Complete:
-                    return Resources.StateComplete;
-
-                case TaskState.WebError:
-                    return Resources.StateWebError;
-
-                case TaskState.IOError:
-                    return Resources.StateIOError;
-            }
-        }
+                TaskState.Ready => "",
+                TaskState.Started => "",
+                TaskState.Header => Resources.StateHeader,
+                TaskState.Data when UnitsTotal == -1 && UnitsProcessed == 0 => Resources.StateData,
+                TaskState.Data when UnitsTotal == -1 => UnitsToString(UnitsProcessed),
+                TaskState.Data => UnitsToString(UnitsProcessed) + @" / " + UnitsToString(UnitsTotal),
+                TaskState.Complete => Resources.StateComplete,
+                TaskState.WebError => Resources.StateWebError,
+                TaskState.IOError => Resources.StateIOError,
+                _ => ""
+            };
 
         private string UnitsToString(long units)
             => UnitsByte

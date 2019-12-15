@@ -92,15 +92,12 @@ namespace NanoByte.Common
                 var memberExpression = getValue.Body as MemberExpression;
                 var parameter = Expression.Parameter(typeof(T));
 
-                switch (memberExpression?.Member)
+                return memberExpression?.Member switch
                 {
-                    case PropertyInfo propertyInfo:
-                        return Expression.Lambda<Action<T>>(Expression.Call(memberExpression.Expression, propertyInfo.GetSetMethod(), parameter), parameter);
-                    case FieldInfo _:
-                        return Expression.Lambda<Action<T>>(Expression.Assign(memberExpression, parameter), parameter);
-                    default:
-                        throw new ArgumentException("The expression must point to a property or field", nameof(getValue));
-                }
+                    PropertyInfo propertyInfo => Expression.Lambda<Action<T>>(Expression.Call(memberExpression.Expression, propertyInfo.GetSetMethod(), parameter), parameter),
+                    FieldInfo _ => Expression.Lambda<Action<T>>(Expression.Assign(memberExpression, parameter), parameter),
+                    _ => throw new ArgumentException("The expression must point to a property or field", nameof(getValue))
+                };
             }
 
             return new PropertyPointer<T>(getValue.Compile(), SetValue().Compile(), defaultValue, needsEncoding);

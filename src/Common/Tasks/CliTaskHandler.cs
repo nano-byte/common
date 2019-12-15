@@ -68,11 +68,11 @@ namespace NanoByte.Common.Tasks
         {
             switch (severity)
             {
-                case LogSeverity.Debug:
-                    if (Verbosity >= Verbosity.Debug) Log.PrintToConsole(severity, message);
+                case LogSeverity.Debug when Verbosity >= Verbosity.Debug:
+                    Log.PrintToConsole(severity, message);
                     break;
-                case LogSeverity.Info:
-                    if (Verbosity >= Verbosity.Verbose) Log.PrintToConsole(severity, message);
+                case LogSeverity.Info when Verbosity >= Verbosity.Verbose:
+                    Log.PrintToConsole(severity, message);
                     break;
                 case LogSeverity.Warn:
                 case LogSeverity.Error:

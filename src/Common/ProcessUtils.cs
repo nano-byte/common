@@ -39,17 +39,12 @@ namespace NanoByte.Common
             }
             catch (Win32Exception ex)
             {
-                switch (ex.NativeErrorCode)
+                throw ex.NativeErrorCode switch
                 {
-                    case WindowsUtils.Win32ErrorCancelled:
-                        throw new OperationCanceledException();
-
-                    case WindowsUtils.Win32ErrorRequestedOperationRequiresElevation:
-                        throw new NotAdminException($"Launching '{startInfo.FileName}' requires Administrator privileges.");
-
-                    default:
-                        throw new IOException(ex.Message, ex);
-                }
+                    WindowsUtils.Win32ErrorCancelled => (Exception)new OperationCanceledException(),
+                    WindowsUtils.Win32ErrorRequestedOperationRequiresElevation => new NotAdminException($"Launching '{startInfo.FileName}' requires Administrator privileges."),
+                    _ => new IOException(ex.Message, ex)
+                };
             }
         }
 

@@ -262,20 +262,13 @@ namespace NanoByte.Common
             else localizedOptions = 0;
 
             // Select icon based on message severity
-            MessageBoxIcon icon;
-            switch (severity)
+            var icon = severity switch
             {
-                case MsgSeverity.Warn:
-                    icon = MessageBoxIcon.Warning;
-                    break;
-                case MsgSeverity.Error:
-                    icon = MessageBoxIcon.Error;
-                    break;
-                default:
-                case MsgSeverity.Info:
-                    icon = MessageBoxIcon.Information;
-                    break;
-            }
+                MsgSeverity.Warn => MessageBoxIcon.Warning,
+                MsgSeverity.Error => MessageBoxIcon.Error,
+                MsgSeverity.Info => MessageBoxIcon.Information,
+                _ => MessageBoxIcon.Information
+            };
 
             // Display MessageDialog
             return MessageBox.Show(owner, text, Application.ProductName, buttons, icon, MessageBoxDefaultButton.Button1, localizedOptions);

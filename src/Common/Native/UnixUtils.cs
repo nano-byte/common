@@ -75,19 +75,14 @@ namespace NanoByte.Common.Native
                 string cpuType = buffer.machine;
 
                 // Normalize names
-                switch (cpuType)
+                return cpuType switch
                 {
-                    case "x86":
-                        return "i386";
-                    case "amd64":
-                        return "x86_64";
-                    case "Power Macintosh":
-                        return "ppc";
-                    case "i86pc":
-                        return "i686";
-                    default:
-                        return cpuType;
-                }
+                    "x86" => "i386",
+                    "amd64" => "x86_64",
+                    "Power Macintosh" => "ppc",
+                    "i86pc" => "i686",
+                    _ => cpuType
+                };
             }
         }
         #endregion

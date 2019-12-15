@@ -193,21 +193,14 @@ namespace NanoByte.Common
         {
             try
             {
-                switch (severity)
+                Console.ForegroundColor = severity switch
                 {
-                    case LogSeverity.Debug:
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        break;
-                    case LogSeverity.Info:
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        break;
-                    case LogSeverity.Warn:
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        break;
-                    case LogSeverity.Error:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        break;
-                }
+                    LogSeverity.Debug => ConsoleColor.Blue,
+                    LogSeverity.Info => ConsoleColor.Green,
+                    LogSeverity.Warn => ConsoleColor.DarkYellow,
+                    LogSeverity.Error => ConsoleColor.Red,
+                    _ => Console.ForegroundColor
+                };
             }
             #region Error handling
             catch (InvalidOperationException)
@@ -269,19 +262,14 @@ namespace NanoByte.Common
 
         private static string FormatMessage(LogSeverity severity, string message)
         {
-            switch (severity)
+            return severity switch
             {
-                case LogSeverity.Debug:
-                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] DEBUG: {1}", DateTime.Now, message);
-                case LogSeverity.Info:
-                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] INFO: {1}", DateTime.Now, message);
-                case LogSeverity.Warn:
-                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] WARN: {1}", DateTime.Now, message);
-                case LogSeverity.Error:
-                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] ERROR: {1}", DateTime.Now, message);
-                default:
-                    return string.Format(CultureInfo.InvariantCulture, "[{0:T}] UNKNOWN: {1}", DateTime.Now, message);
-            }
+                LogSeverity.Debug => string.Format(CultureInfo.InvariantCulture, "[{0:T}] DEBUG: {1}", DateTime.Now, message),
+                LogSeverity.Info => string.Format(CultureInfo.InvariantCulture, "[{0:T}] INFO: {1}", DateTime.Now, message),
+                LogSeverity.Warn => string.Format(CultureInfo.InvariantCulture, "[{0:T}] WARN: {1}", DateTime.Now, message),
+                LogSeverity.Error => string.Format(CultureInfo.InvariantCulture, "[{0:T}] ERROR: {1}", DateTime.Now, message),
+                _ => string.Format(CultureInfo.InvariantCulture, "[{0:T}] UNKNOWN: {1}", DateTime.Now, message)
+            };
         }
         #endregion
     }

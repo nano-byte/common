@@ -32,11 +32,11 @@ namespace NanoByte.Common.Tasks
         {
             switch (severity)
             {
-                case LogSeverity.Debug:
-                    if (Verbosity >= Verbosity.Debug) LogRtf.AppendPar(message, RtfColor.Blue);
+                case LogSeverity.Debug when Verbosity >= Verbosity.Debug:
+                    LogRtf.AppendPar(message, RtfColor.Blue);
                     break;
-                case LogSeverity.Info:
-                    if (Verbosity >= Verbosity.Verbose) LogRtf.AppendPar(message, RtfColor.Green);
+                case LogSeverity.Info when Verbosity >= Verbosity.Verbose:
+                    LogRtf.AppendPar(message, RtfColor.Green);
                     break;
                 case LogSeverity.Warn:
                     LogRtf.AppendPar(message, RtfColor.Orange);

@@ -30,21 +30,13 @@ namespace NanoByte.Common.Controls
 
             Text = value.ToString();
 
-            switch (value.State)
+            ForeColor = value.State switch
             {
-                default:
-                    ForeColor = SystemColors.ControlText;
-                    break;
-
-                case TaskState.Complete:
-                    ForeColor = Color.Green;
-                    break;
-
-                case TaskState.WebError:
-                case TaskState.IOError:
-                    ForeColor = Color.Red;
-                    break;
-            }
+                TaskState.Complete => Color.Green,
+                TaskState.WebError => Color.Red,
+                TaskState.IOError => Color.Red,
+                _ => SystemColors.ControlText
+            };
         }
     }
 }

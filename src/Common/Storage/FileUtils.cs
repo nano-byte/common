@@ -986,20 +986,22 @@ namespace NanoByte.Common.Storage
 
             try
             {
-                switch (UnixUtils.GetFileSystem(path))
+                return UnixUtils.GetFileSystem(path) switch
                 {
-                    case "msdos": // FAT
-                    case "vfat": // FAT
-                    case "hpfs": // HPFS
-                    case "ntfs": // NTFS
-                    case "ntfs-3g": // NTFS
-                    case "smbfs": // Windows Network Share
-                    case "cifs": // Windows Network Share
-                        return false;
-
-                    default:
-                        return true;
-                }
+                    // FAT
+                    "msdos" => false,
+                    "vfat" => false,
+                    // HPFS
+                    "hpfs" => false,
+                    // NTFS
+                    "ntfs" => false,
+                    "ntfs-3g" => false,
+                    // Windows Network Share
+                    "smbfs" => false,
+                    "cifs" => false,
+                    // Other
+                    _ => true
+                };
             }
             catch (IOException)
             {

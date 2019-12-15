@@ -81,17 +81,14 @@ namespace NanoByte.Common.Net
                         case WebExceptionStatus.RequestCanceled:
                             throw new OperationCanceledException();
 
-                        case WebExceptionStatus.ProtocolError:
-                            if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null)
-                            {
-                                if (useCredentials) CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
+                        case WebExceptionStatus.ProtocolError when ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null:
+                            if (useCredentials) CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
 
-                                // Retry (but only once when non-interactive)
-                                if (CredentialProvider.Interactive || !useCredentials)
-                                {
-                                    useCredentials = true;
-                                    continue;
-                                }
+                            // Retry (but only once when non-interactive)
+                            if (CredentialProvider.Interactive || !useCredentials)
+                            {
+                                useCredentials = true;
+                                continue;
                             }
                             break;
                     }

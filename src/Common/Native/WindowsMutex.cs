@@ -63,15 +63,13 @@ namespace NanoByte.Common.Native
             if (handle == IntPtr.Zero)
             {
                 int error = Marshal.GetLastWin32Error();
-                switch (error)
+                return error switch
                 {
-                    case WindowsUtils.Win32ErrorFileNotFound:
-                        // No existing mutex found
-                        return false;
-
-                    default:
-                        throw new Win32Exception(error);
-                }
+                    WindowsUtils.Win32ErrorFileNotFound =>
+                    // No existing mutex found
+                    false,
+                    _ => throw new Win32Exception(error)
+                };
             }
 
             // Existing mutex opened, close handle again
