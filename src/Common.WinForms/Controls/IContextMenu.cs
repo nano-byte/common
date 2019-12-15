@@ -18,6 +18,6 @@ namespace NanoByte.Common.Controls
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Creates a new object on each call")]
         [CanBeNull]
-        ContextMenu GetContextMenu();
+        ContextMenuStrip GetContextMenu();
     }
 }

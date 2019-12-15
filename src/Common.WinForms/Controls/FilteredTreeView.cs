@@ -255,7 +255,7 @@ namespace NanoByte.Common.Controls
             var contextMenuProvider = entry as IContextMenu;
             // Attach the context menu if one is set
             var contextMenu = contextMenuProvider?.GetContextMenu();
-            if (contextMenu != null) finalNode.ContextMenu = contextMenu;
+            if (contextMenu != null) finalNode.ContextMenuStrip = contextMenu;
             #endregion
 
             return finalNode;

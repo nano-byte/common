@@ -46,13 +46,11 @@ namespace NanoByte.Common.Controls
 
         private static readonly int _borderSize = SystemInformation.Border3DSize.Width * 2;
         private Rectangle _dropDownRectangle;
-        private bool _isMouseEntered;
 
         private bool _isDropDownMenuVisible;
 
         private bool _showSplit;
         private bool _skipNextOpen;
-        private ContextMenu _dropDownMenu;
         private ContextMenuStrip _dropDownMenuStrip;
         private PushButtonState _state;
 
@@ -66,24 +64,6 @@ namespace NanoByte.Common.Controls
         #region Properties
         [Browsable(false)]
         public override ContextMenuStrip ContextMenuStrip { get => DropDownMenuStrip; set => DropDownMenuStrip = value; }
-
-        [DefaultValue(null)]
-        public ContextMenu DropDownMenu
-        {
-            get => _dropDownMenu;
-            set
-            {
-                //remove the event handlers for the old DropDownMenu
-                if (_dropDownMenu != null)
-                    _dropDownMenu.Popup -= DropDownMenu_Popup;
-
-                //add the event handlers for the new DropDownMenu
-                if (value != null)
-                    value.Popup += DropDownMenu_Popup;
-
-                _dropDownMenu = value;
-            }
-        }
 
         [DefaultValue(null)]
         public ContextMenuStrip DropDownMenuStrip
@@ -214,16 +194,12 @@ namespace NanoByte.Common.Controls
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            _isMouseEntered = true;
-
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
                 State = PushButtonState.Hot;
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            _isMouseEntered = false;
-
             if (!State.Equals(PushButtonState.Pressed) && !State.Equals(PushButtonState.Disabled))
                 State = Focused ? PushButtonState.Default : PushButtonState.Normal;
         }
@@ -233,10 +209,6 @@ namespace NanoByte.Common.Controls
             #region Sanity checks
             if (e == null) throw new ArgumentNullException(nameof(e));
             #endregion
-
-            //handle ContextMenu re-clicking the drop-down region to close the menu
-            if (_dropDownMenu != null && e.Button == MouseButtons.Left && !_isMouseEntered)
-                _skipNextOpen = true;
 
             if (EffectiveDropDownRectangle.Contains(e.Location) && !_isDropDownMenuVisible && e.Button == MouseButtons.Left)
                 ShowDropDownMenu();
@@ -253,7 +225,7 @@ namespace NanoByte.Common.Controls
             // if the right button was released inside the button
             if (mevent.Button == MouseButtons.Right && ClientRectangle.Contains(mevent.Location) && !_isDropDownMenuVisible)
                 ShowDropDownMenu();
-            else if (_dropDownMenuStrip == null && _dropDownMenu == null || !_isDropDownMenuVisible)
+            else if (_dropDownMenuStrip == null || !_isDropDownMenuVisible)
             {
                 SetButtonDrawState();
 
@@ -468,10 +440,7 @@ namespace NanoByte.Common.Controls
 
             State = PushButtonState.Pressed;
 
-            if (_dropDownMenu != null)
-                _dropDownMenu.Show(this, new Point(0, Height));
-            else
-                _dropDownMenuStrip?.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
+            _dropDownMenuStrip?.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
         }
 
         private void DropDownMenuStrip_Opening(object sender, CancelEventArgs e) => _isDropDownMenuVisible = true;
@@ -485,8 +454,6 @@ namespace NanoByte.Common.Controls
             if (e.CloseReason == ToolStripDropDownCloseReason.AppClicked)
                 _skipNextOpen = (EffectiveDropDownRectangle.Contains(PointToClient(Cursor.Position))) && MouseButtons == MouseButtons.Left;
         }
-
-        private void DropDownMenu_Popup(object sender, EventArgs e) => _isDropDownMenuVisible = true;
         #endregion
 
         #region Button Layout Calculations

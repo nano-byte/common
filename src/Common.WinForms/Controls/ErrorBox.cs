@@ -66,10 +66,13 @@ namespace NanoByte.Common.Controls
         private void label_Click(object sender, EventArgs e)
         {
             var control = (Control)sender;
-            new ContextMenu(new[]
+            new ContextMenuStrip()
             {
-                new MenuItem(Resources.CopyToClipboard, delegate { Clipboard.SetText(control.Text); })
-            }).Show(control, new Point());
+                Items =
+                {
+                    {Resources.CopyToClipboard, null, delegate { Clipboard.SetText(control.Text); }}
+                }
+            }.Show(control, new Point());
         }
     }
 }
