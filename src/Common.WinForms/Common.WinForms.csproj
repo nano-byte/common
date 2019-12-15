@@ -16,7 +16,7 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
     <GenerateResourceUsePreserializedResources>True</GenerateResourceUsePreserializedResources>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -32,11 +32,11 @@
 
   <!-- Auto-select supported target frameworks based on MSBuild version -->
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
-    <TargetFrameworks>net20;net35-client;net40-client;net45;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net20;net35-client;net40-client;net45;netcoreapp3.1</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="('$(OS)'=='Windows_NT' And '$(MSBuildRuntimeType)'=='Core') Or '$(MSBuildRuntimeType)'=='Mono'">
-    <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Support .NET Framework Client Profiles -->
@@ -62,7 +62,7 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='netcoreapp3.0'">
+  <ItemGroup Condition="'$(TargetFramework)'!='netcoreapp3.1'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
@@ -70,7 +70,7 @@
     <Reference Include="TaskDialog" HintPath="..\..\lib\TaskDialog.dll" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
     <PackageReference Include="System.Resources.Extensions" Version="4.7.0" />
   </ItemGroup>
 
@@ -84,7 +84,7 @@
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net35-client" />
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net40-client" />
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
-    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/netcoreapp3.0" />
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/netcoreapp3.1" />
   </ItemGroup>
 
   <!-- Enable WinForms Designer support -->
