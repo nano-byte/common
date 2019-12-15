@@ -17,9 +17,9 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// The collection that owns this entry - set to enable automatic duplicate detection!
         /// </summary>
-        internal XmlDictionary Parent;
+        internal XmlDictionary? Parent;
 
-        private string _key;
+        private string _key = default!;
 
         /// <summary>
         /// The unique text key. Warning: If this is changed the <see cref="XmlDictionary"/> must be rebuilt in order to update its internal hash table.
@@ -41,7 +41,7 @@ namespace NanoByte.Common.Collections
         /// The text value.
         /// </summary>
         [XmlText]
-        public string Value { get; set; }
+        public string Value { get; set; } = default!;
 
         /// <summary>
         /// Base-constructor for XML serialization. Do not call manually!

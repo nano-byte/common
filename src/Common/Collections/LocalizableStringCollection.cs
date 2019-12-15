@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -22,7 +21,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="language">The language of the <paramref name="value"/>.</param>
         /// <param name="value">The actual string value to store.</param>
-        public void Add([NotNull, Localizable(false)] string language, [CanBeNull] string value)
+        public void Add([Localizable(false)] string language, string? value)
         {
             #region Sanity checks
             if (language == null) throw new ArgumentNullException(nameof(language));
@@ -44,7 +43,7 @@ namespace NanoByte.Common.Collections
         /// <param name="language">The exact language to look for.</param>
         /// <returns><c>true</c> if an element with the specified language exists in the collection; <c>false</c> otherwise.</returns>
         /// <seealso cref="GetExactLanguage"/>
-        public bool ContainsExactLanguage([NotNull] CultureInfo language)
+        public bool ContainsExactLanguage(CultureInfo language)
         {
             #region Sanity checks
             if (language == null) throw new ArgumentNullException(nameof(language));
@@ -59,8 +58,7 @@ namespace NanoByte.Common.Collections
         /// <param name="language">The exact language to look for.</param>
         /// <returns>The string value found in the collection; <c>null</c> if none was found.</returns>
         /// <seealso cref="ContainsExactLanguage"/>
-        [CanBeNull]
-        public string GetExactLanguage([NotNull] CultureInfo language)
+        public string? GetExactLanguage(CultureInfo language)
         {
             #region Sanity checks
             if (language == null) throw new ArgumentNullException(nameof(language));
@@ -83,8 +81,7 @@ namespace NanoByte.Common.Collections
         /// 4. en-US<br/>
         /// 5. first entry in collection
         /// </remarks>
-        [CanBeNull]
-        public string GetBestLanguage([NotNull] CultureInfo language)
+        public string? GetBestLanguage(CultureInfo language)
         {
             #region Sanity checks
             if (language == null) throw new ArgumentNullException(nameof(language));
@@ -117,7 +114,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="language">The language of the <paramref name="value"/>.</param>
         /// <param name="value">The actual string value to store; <c>null</c> to remove existing entries.</param>
-        public void Set([NotNull] CultureInfo language, [CanBeNull] string value)
+        public void Set(CultureInfo language, string? value)
         {
             #region Sanity checks
             if (language == null) throw new ArgumentNullException(nameof(language));

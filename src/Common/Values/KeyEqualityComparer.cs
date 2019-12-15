@@ -12,6 +12,8 @@ namespace NanoByte.Common.Values
     /// <typeparam name="T">The type of objects to compare.</typeparam>
     /// <typeparam name="TKey">The type of the key to use to determine equality.</typeparam>
     public class KeyEqualityComparer<T, TKey> : IEqualityComparer<T>
+        where T : notnull
+        where TKey : notnull
     {
         private readonly Func<T, TKey> _keySelector;
 

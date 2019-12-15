@@ -48,7 +48,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override ICredentialProvider CredentialProvider { get; }
+        public override ICredentialProvider? CredentialProvider { get; }
 
         /// <inheritdoc/>
         protected override bool Ask(string question, MsgSeverity severity)

@@ -35,7 +35,7 @@ namespace NanoByte.Common.Net
             _timeout = timeout;
         }
 
-        protected override WebRequest GetWebRequest(Uri address)
+        protected override WebRequest? GetWebRequest(Uri address)
         {
             var request = base.GetWebRequest(address);
             if (request != null)

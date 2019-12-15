@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Net
 {
@@ -17,7 +16,6 @@ namespace NanoByte.Common.Net
         /// The local path to save the file to.
         /// </summary>
         [Description("The local path to save the file to.")]
-        [NotNull]
         public string Target { get; }
 
         /// <summary>
@@ -26,7 +24,7 @@ namespace NanoByte.Common.Net
         /// <param name="source">The URL the file is to be downloaded from.</param>
         /// <param name="target">The local path to save the file to. A preexisting file will be overwritten.</param>
         /// <param name="bytesTotal">The number of bytes the file to be downloaded is long. The file will be rejected if it does not have this length. -1 if the size is unknown.</param>
-        public DownloadFile([NotNull] Uri source, [NotNull, Localizable(false)] string target, long bytesTotal = -1)
+        public DownloadFile(Uri source, [Localizable(false)] string target, long bytesTotal = -1)
             : base(source, bytesTotal)
         {
             #region Sanity checks

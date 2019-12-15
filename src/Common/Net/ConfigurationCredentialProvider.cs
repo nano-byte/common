@@ -4,7 +4,6 @@
 #if NETSTANDARD
 using System;
 using System.Net;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,14 +16,13 @@ namespace NanoByte.Common.Net
     [CLSCompliant(false)]
     public class ConfigurationCredentialProvider : ICredentialProvider
     {
-        [NotNull]
         private readonly IConfiguration _configuration;
 
         /// <summary>
         /// Creates a new configuration credential provider.
         /// </summary>
         /// <param name="configuration">The configuration containing credentials. Each URI must be a subsection with <c>User</c> and <c>Password</c> values.</param>
-        public ConfigurationCredentialProvider([NotNull] IConfiguration configuration)
+        public ConfigurationCredentialProvider(IConfiguration configuration)
             => _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
         /// <inheritdoc/>
@@ -50,7 +48,6 @@ namespace NanoByte.Common.Net
     /// Provides extension methods for registering <seealso cref="ConfigurationCredentialProvider"/> instances.
     /// </summary>
     [CLSCompliant(false)]
-    [PublicAPI]
     public static class ConfigurationCredentialProviderRegisration
     {
         /// <summary>

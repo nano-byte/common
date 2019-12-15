@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
-using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 
@@ -36,7 +35,7 @@ namespace NanoByte.Common.Native
         /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
-        public static bool IsSymlink([NotNull, Localizable(false)] string path)
+        public static bool IsSymlink([Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -60,7 +59,12 @@ namespace NanoByte.Common.Native
         /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
-        public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
+        public static bool IsSymlink(
+            [Localizable(false)] string path,
+#if NETSTANDARD2_1
+            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out string? target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -104,7 +108,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="IOException">There was an IO problem writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file was denied.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
+        public static void CreateSymlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));

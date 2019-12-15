@@ -3,7 +3,6 @@
 
 using System;
 using System.Xml.Serialization;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Info
 {
@@ -17,31 +16,31 @@ namespace NanoByte.Common.Info
         /// The type of exception.
         /// </summary>
         [XmlAttribute("type")]
-        public string ExceptionType { get; set; }
+        public string? ExceptionType { get; set; }
 
         /// <summary>
         /// The message describing the exception.
         /// </summary>
         [XmlElement("message")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         /// <summary>
         /// The name of the application or the object that causes the error.
         /// </summary>
         [XmlElement("source")]
-        public string Source { get; set; }
+        public string? Source { get; set; }
 
         /// <summary>
         /// A string representation of the frames on the call stack at the time the exception was thrown.
         /// </summary>
         [XmlElement("stack-trace")]
-        public string StackTrace { get; set; }
+        public string? StackTrace { get; set; }
 
         /// <summary>
         /// Information about the exception that originally caused the exception being described here.
         /// </summary>
         [XmlElement("inner-exception")]
-        public ExceptionInfo InnerException { get; set; }
+        public ExceptionInfo? InnerException { get; set; }
 
         #region Constructor
         /// <summary>
@@ -53,7 +52,7 @@ namespace NanoByte.Common.Info
         /// Creates an exception information based on an exception.
         /// </summary>
         /// <param name="ex">The exception whose information to extract.</param>
-        public ExceptionInfo([NotNull] Exception ex)
+        public ExceptionInfo(Exception ex)
             : this()
         {
             ExceptionType = (ex ?? throw new ArgumentNullException(nameof(ex))).GetType().ToString();

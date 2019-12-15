@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Native
 {
@@ -54,19 +53,15 @@ namespace NanoByte.Common.Native
         public struct ShellLink
         {
             /// <summary>The title/name of the task link.</summary>
-            [NotNull]
             public readonly string Title;
 
             /// <summary>The target path the link shall point to.</summary>
-            [NotNull]
             public readonly string Path;
 
             /// <summary>Additional arguments for <see cref="Title"/>; can be <c>null</c>.</summary>
-            [CanBeNull]
-            public readonly string Arguments;
+            public readonly string? Arguments;
 
             /// <summary>The path of the icon for the link.</summary>
-            [NotNull]
             public readonly string IconPath;
 
             /// <summary>The resource index within the file specified by <see cref="IconPath"/>.</summary>
@@ -78,8 +73,7 @@ namespace NanoByte.Common.Native
             /// <param name="title">The title/name of the task link.</param>
             /// <param name="path">The target path the link shall point to and to get the icon from.</param>
             /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <c>null</c>.</param>
-            [PublicAPI]
-            public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string arguments = null)
+                public ShellLink([Localizable(true)] string title, [Localizable(false)] string path, [Localizable(false)] string? arguments = null)
             {
                 #region Sanity checks
                 if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
@@ -100,8 +94,7 @@ namespace NanoByte.Common.Native
             /// <param name="arguments">Additional arguments for <paramref name="title"/>; can be <c>null</c>.</param>
             /// <param name="iconPath">The path of the icon for the link.</param>
             /// <param name="iconIndex">The resource index within the file specified by <paramref name="iconPath"/>.</param>
-            [PublicAPI]
-            public ShellLink([NotNull, Localizable(true)] string title, [NotNull, Localizable(false)] string path, [NotNull, Localizable(false)] string arguments, [NotNull, Localizable(false)] string iconPath, int iconIndex)
+                public ShellLink([Localizable(true)] string title, [Localizable(false)] string path, [Localizable(false)] string arguments, [Localizable(false)] string iconPath, int iconIndex)
             {
                 #region Sanity checks
                 if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
@@ -174,7 +167,7 @@ namespace NanoByte.Common.Native
         /// <param name="relaunchName">The user-friendly name to associate with <paramref name="relaunchCommand"/>; can be <c>null</c>.</param>
         /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-        public static void SetWindowAppID(IntPtr hwnd, [NotNull, Localizable(false)] string appID, [CanBeNull, Localizable(false)] string relaunchCommand = null, [CanBeNull, Localizable(false)] string relaunchIcon = null, [CanBeNull, Localizable(true)] string relaunchName = null)
+        public static void SetWindowAppID(IntPtr hwnd, [Localizable(false)] string appID, [Localizable(false)] string? relaunchCommand = null, [Localizable(false)] string? relaunchIcon = null, [Localizable(true)] string? relaunchName = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
@@ -208,7 +201,7 @@ namespace NanoByte.Common.Native
         /// <param name="appID">The application ID of the jumplist to add the task to.</param>
         /// <param name="links">The links to add to the jumplist.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-        public static void AddTaskLinks([NotNull, Localizable(false)] string appID, [NotNull] IEnumerable<ShellLink> links)
+        public static void AddTaskLinks([Localizable(false)] string appID, IEnumerable<ShellLink> links)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));

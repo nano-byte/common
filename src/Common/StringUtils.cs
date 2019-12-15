@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common
@@ -21,20 +20,26 @@ namespace NanoByte.Common
         /// <summary>
         /// Compare strings using case-insensitive comparison.
         /// </summary>
-        [Pure]
-        public static bool EqualsIgnoreCase([CanBeNull] string s1, [CanBeNull] string s2) => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool EqualsIgnoreCase(string? s1, string? s2) => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Compare chars using case-insensitive comparison.
         /// </summary>
-        [Pure]
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
         public static bool EqualsIgnoreCase(char c1, char c2) => char.ToLowerInvariant(c1) == char.ToLowerInvariant(c2);
 
         /// <summary>
         /// Compare strings using case sensitive, invariant culture comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
         /// </summary>
-        [Pure]
-        public static bool EqualsEmptyNull([CanBeNull] string s1, [CanBeNull] string s2)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool EqualsEmptyNull(string? s1, string? s2)
         {
             if (string.IsNullOrEmpty(s1) && string.IsNullOrEmpty(s2)) return true;
             return s1 == s2;
@@ -45,8 +50,10 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The string to search.</param>
         /// <param name="text">The string to search for in <paramref name="value"/>.</param>
-        [Pure]
-        public static bool ContainsIgnoreCase([NotNull] this string value, [NotNull] string text)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool ContainsIgnoreCase(this string value, string text)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -59,8 +66,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Checks whether a string contains any whitespace characters
         /// </summary>
-        [Pure]
-        public static bool ContainsWhitespace([NotNull] this string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool ContainsWhitespace(this string value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -75,8 +84,10 @@ namespace NanoByte.Common
         /// <param name="value">The string to search within.</param>
         /// <param name="token">The character to search for.</param>
         /// <returns>The number of occurrences of <paramref name="token"/> within <paramref name="value"/>.</returns>
-        [Pure]
-        public static int CountOccurrences([CanBeNull] this string value, char token)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static int CountOccurrences(this string? value, char token)
         {
             if (string.IsNullOrEmpty(value)) return 0;
 
@@ -86,8 +97,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Determines whether the beginning of this string matches a specific value case-insensitive comparison.
         /// </summary>
-        [Pure]
-        public static bool StartsWithIgnoreCase([NotNull] this string text, [NotNull] string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool StartsWithIgnoreCase(this string text, string value)
         {
             #region Sanity checks
             if (text == null) throw new ArgumentNullException(nameof(text));
@@ -100,8 +113,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Determines whether the end of this string matches a specific value case-insensitive comparison.
         /// </summary>
-        [Pure]
-        public static bool EndsWithIgnoreCase([NotNull] this string text, [NotNull] string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool EndsWithIgnoreCase(this string text, string value)
         {
             #region Sanity checks
             if (text == null) throw new ArgumentNullException(nameof(text));
@@ -116,8 +131,13 @@ namespace NanoByte.Common
         /// <summary>
         /// Removes all occurrences of a specific set of characters from a string.
         /// </summary>
-        [Pure, ContractAnnotation("value:null => null; value:notnull => notnull")]
-        public static string StripCharacters([CanBeNull] this string value, [NotNull] IEnumerable<char> characters)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+#if NETSTANDARD2_1
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
+#endif
+        public static string? StripCharacters(this string? value, IEnumerable<char> characters)
         {
             #region Sanity checks
             if (characters == null) throw new ArgumentNullException(nameof(characters));
@@ -130,8 +150,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Returns a string with <paramref name="count"/> characters removed from the end.
         /// </summary>
-        [Pure, NotNull]
-        public static string StripFromEnd([NotNull] this string value, int count)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string StripFromEnd(this string value, int count)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -145,8 +167,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Splits a multiline string to several strings and returns the result as a string array.
         /// </summary>
-        [Pure, NotNull, ItemNotNull]
-        public static string[] SplitMultilineText([NotNull] this string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string[] SplitMultilineText(this string value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -177,8 +201,10 @@ namespace NanoByte.Common
         /// <param name="separator">The separator characters to place between the <paramref name="parts"/>.</param>
         /// <param name="parts">The strings to be combined.</param>
         /// <remarks>Works like <see cref="string.Join(string,string[])"/> but for <see cref="IEnumerable{T}"/>s.</remarks>
-        [Pure, NotNull]
-        public static string Join([NotNull] string separator, [NotNull, ItemNotNull] IEnumerable<string> parts)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string Join(string separator, IEnumerable<string> parts)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(separator)) throw new ArgumentNullException(nameof(separator));
@@ -202,8 +228,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the left of the first occurrence of a character.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetLeftPartAtFirstOccurrence([NotNull] this string value, char ch)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetLeftPartAtFirstOccurrence(this string value, char ch)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -216,8 +244,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the right of the first occurrence of a character.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetRightPartAtFirstOccurrence([NotNull] this string value, char ch)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetRightPartAtFirstOccurrence(this string value, char ch)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -230,8 +260,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the left of the last occurrence of a character.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetLeftPartAtLastOccurrence([NotNull] this string value, char ch)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetLeftPartAtLastOccurrence(this string value, char ch)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -244,8 +276,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the right of the last occurrence of a character.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetRightPartAtLastOccurrence([NotNull] this string value, char ch)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetRightPartAtLastOccurrence(this string value, char ch)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -258,8 +292,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the left of the first occurrence of a string.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetLeftPartAtFirstOccurrence([NotNull] this string value, [NotNull] string str)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetLeftPartAtFirstOccurrence(this string value, string str)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -273,8 +309,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the right of the first occurrence of a string.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetRightPartAtFirstOccurrence([NotNull] this string value, [NotNull] string str)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetRightPartAtFirstOccurrence(this string value, string str)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -288,8 +326,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the left of the last occurrence of a string.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetLeftPartAtLastOccurrence([NotNull] this string value, [NotNull] string str)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetLeftPartAtLastOccurrence(this string value, string str)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -303,8 +343,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Get everything to the right of the last occurrence of a string.
         /// </summary>
-        [Pure, NotNull]
-        public static string GetRightPartAtLastOccurrence([NotNull] this string value, [NotNull] string str)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetRightPartAtLastOccurrence(this string value, string str)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -323,8 +365,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="value">The value in bytes.</param>
         /// <param name="provider">Provides culture-specific formatting information.</param>
-        [NotNull]
-        public static string FormatBytes(this long value, [CanBeNull] IFormatProvider provider = null)
+        public static string FormatBytes(this long value, IFormatProvider? provider = null)
         {
             if (provider == null) provider = CultureInfo.CurrentCulture;
             if (value >= 1073741824)
@@ -345,8 +386,10 @@ namespace NanoByte.Common
         /// This corresponds to Windows' handling of command-line arguments as specified in:
         /// http://msdn.microsoft.com/library/17w5ykft
         /// </remarks>
-        [Pure, NotNull]
-        public static string EscapeArgument([NotNull] this string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string EscapeArgument(this string value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -389,8 +432,10 @@ namespace NanoByte.Common
         /// This corresponds to Windows' handling of command-line arguments as specified in:
         /// http://msdn.microsoft.com/library/17w5ykft
         /// </remarks>
-        [Pure, NotNull]
-        public static string JoinEscapeArguments([NotNull, ItemNotNull] this IEnumerable<string> parts)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string JoinEscapeArguments(this IEnumerable<string> parts)
         {
             #region Sanity checks
             if (parts == null) throw new ArgumentNullException(nameof(parts));
@@ -415,8 +460,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Encodes a string as UTF-8 in base64.
         /// </summary>
-        [Pure, NotNull]
-        public static string Base64Utf8Encode([NotNull] this string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string Base64Utf8Encode(this string value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -429,8 +476,10 @@ namespace NanoByte.Common
         /// Decodes a UTF-8 in base64 string.
         /// </summary>
         /// <exception cref="FormatException"><paramref name="value"/> is not a valid base 64 string.</exception>
-        [Pure, NotNull]
-        public static string Base64Utf8Decode([NotNull] this string value)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string Base64Utf8Decode(this string value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -447,8 +496,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Encodes a byte array in base32 without padding.
         /// </summary>
-        [Pure, NotNull]
-        public static string Base32Encode([NotNull] this byte[] data)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string Base32Encode(this byte[] data)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -497,8 +548,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Encodes a byte array in base16 (hexadecimal).
         /// </summary>
-        [Pure, NotNull]
-        public static string Base16Encode([NotNull] this byte[] data)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string Base16Encode(this byte[] data)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -512,8 +565,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Decodes a base16 (hexadecimal) to a byte array.
         /// </summary>
-        [Pure, NotNull]
-        public static byte[] Base16Decode([NotNull] this string encoded)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static byte[] Base16Decode(this string encoded)
         {
             #region Sanity checks
             if (encoded == null) throw new ArgumentNullException(nameof(encoded));
@@ -533,8 +588,10 @@ namespace NanoByte.Common
         /// <param name="value">The string to hash.</param>
         /// <param name="algorithm">The hashing algorithm to use.</param>
         /// <returns>A hexadecimal string representation of the hash value.</returns>
-        [Pure, NotNull]
-        public static string Hash([NotNull] this string value, [NotNull] HashAlgorithm algorithm)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string Hash(this string value, HashAlgorithm algorithm)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -551,7 +608,9 @@ namespace NanoByte.Common
         /// Returns a string filled with random human-readable ASCII characters based on a cryptographic random number generator.
         /// </summary>
         /// <param name="length">The length of the string to be generated.</param>
-        [Pure, NotNull]
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
         public static string GeneratePassword(int length)
         {
             var generator = RandomNumberGenerator.Create();

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
 
@@ -91,8 +90,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="files">An array of full filename paths.</param>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        [PublicAPI]
-        public void RegisterResources([NotNull, ItemNotNull] params string[] files)
+        public void RegisterResources(params string[] files)
         {
             #region Sanity checks
             if (files == null) throw new ArgumentNullException(nameof(files));
@@ -110,14 +108,13 @@ namespace NanoByte.Common.Native
         /// <exception cref="IOException">The Restart Manager could not access the registry.</exception>
         /// <exception cref="TimeoutException">The Restart Manager could not obtain a Registry write mutex in the allotted time. A system restart is recommended.</exception>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        [NotNull, PublicAPI]
-        public string[] ListApps([NotNull] ITaskHandler handler)
+        public string[] ListApps(ITaskHandler handler)
         {
             #region Sanity checks
             if (handler == null) throw new ArgumentNullException(nameof(handler));
             #endregion
 
-            string[] names = null;
+            string[] names = null!;
             handler.RunTask(new SimplePercentTask(Resources.SearchingFileReferences, delegate
             {
                 var apps = ListAppsInternal(out uint arrayLength, out var rebootReasons);
@@ -134,7 +131,6 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="permissionDenied">Indicates whether trying again as administrator may help.</param>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        [NotNull]
         private IEnumerable<string> ListAppProblems(out bool permissionDenied)
         {
             var apps = ListAppsInternal(out uint arrayLength, out var rebootReasons);
@@ -150,7 +146,6 @@ namespace NanoByte.Common.Native
             return names;
         }
 
-        [NotNull]
         private NativeMethods.RM_PROCESS_INFO[] ListAppsInternal(out uint arrayLength, out NativeMethods.RM_REBOOT_REASON rebootReasons)
         {
             int ret;
@@ -177,8 +172,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">One or more applications could not be shut down. Trying again as administrator may help.</exception>
         /// <exception cref="IOException">One or more applications could not be shut down. A system reboot may be required.</exception>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        [PublicAPI]
-        public void ShutdownApps([NotNull] ITaskHandler handler)
+        public void ShutdownApps(ITaskHandler handler)
         {
             #region Sanity checks
             if (handler == null) throw new ArgumentNullException(nameof(handler));
@@ -202,8 +196,7 @@ namespace NanoByte.Common.Native
         /// <param name="handler">A callback object used to report progress to the user and allow cancellation.</param>
         /// <exception cref="IOException">One or more applications could not be automatically restarted.</exception>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        [PublicAPI]
-        public void RestartApps([NotNull] ITaskHandler handler)
+        public void RestartApps(ITaskHandler handler)
         {
             #region Sanity checks
             if (handler == null) throw new ArgumentNullException(nameof(handler));

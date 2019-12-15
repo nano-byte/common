@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 #if NETFRAMEWORK
@@ -46,8 +45,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Recursively follows the <see cref="Exception.InnerException"/>s and combines all their <see cref="Exception.Message"/>s, removing duplicates.
         /// </summary>
-        [NotNull, Pure]
-        public static string GetMessageWithInner([NotNull] this Exception exception)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static string GetMessageWithInner(this Exception exception)
         {
             IEnumerable<string> Messages()
             {
@@ -66,7 +67,7 @@ namespace NanoByte.Common
         /// Configures a caught <paramref name="exception"/> to preserve its original stack trace when it is rethrown.
         /// </summary>
         /// <remarks>This has no effect on platforms that do not support exception serialization.</remarks>
-        public static Exception PreserveStack([NotNull] this Exception exception)
+        public static Exception PreserveStack(this Exception exception)
         {
             #region Sanity checks
             if (exception == null) throw new ArgumentNullException(nameof(exception));
@@ -107,7 +108,7 @@ namespace NanoByte.Common
         /// After rollback is complete the exception is passed on.
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place")]
-        public static void ApplyWithRollback<T>([NotNull, InstantHandle] this IEnumerable<T> elements, [NotNull, InstantHandle] Action<T> apply, [NotNull, InstantHandle] Action<T> rollback)
+        public static void ApplyWithRollback<T>(this IEnumerable<T> elements, Action<T> apply, Action<T> rollback)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));
@@ -155,7 +156,7 @@ namespace NanoByte.Common
         /// <param name="action">The action to apply to an element.</param>
         /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
-        public static void TryAny<T>([NotNull, InstantHandle] this IEnumerable<T> elements, [NotNull, InstantHandle] Action<T> action)
+        public static void TryAny<T>(this IEnumerable<T> elements, Action<T> action)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));
@@ -189,7 +190,7 @@ namespace NanoByte.Common
         /// <param name="action">The action to execute.</param>
         /// <param name="maxRetries">The maximum number of retries to attempt.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
-        public static void Retry<TException>([NotNull, InstantHandle] RetryAction action, int maxRetries = 2)
+        public static void Retry<TException>(RetryAction action, int maxRetries = 2)
             where TException : Exception
         {
             #region Sanity checks
@@ -244,7 +245,7 @@ namespace NanoByte.Common
         /// After rollback is complete the exception is passed on.
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place")]
-        public static async Task ApplyWithRollbackAsync<T>([NotNull] this IEnumerable<T> elements, [NotNull] Func<T, Task> apply, [NotNull] Func<T, Task> rollback)
+        public static async Task ApplyWithRollbackAsync<T>(this IEnumerable<T> elements, Func<T, Task> apply, Func<T, Task> rollback)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));
@@ -292,7 +293,7 @@ namespace NanoByte.Common
         /// <param name="action">The action to apply to an element.</param>
         /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
-        public static async Task TryAnyAsync<T>([NotNull] this IEnumerable<T> elements, [NotNull] Func<T, Task> action)
+        public static async Task TryAnyAsync<T>(this IEnumerable<T> elements, Func<T, Task> action)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));
@@ -326,7 +327,7 @@ namespace NanoByte.Common
         /// <param name="action">The action to execute.</param>
         /// <param name="maxRetries">The maximum number of retries to attempt.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
-        public static async Task RetryAsync<TException>([NotNull] RetryAsyncAction action, int maxRetries = 2)
+        public static async Task RetryAsync<TException>(RetryAsyncAction action, int maxRetries = 2)
             where TException : Exception
         {
             #region Sanity checks

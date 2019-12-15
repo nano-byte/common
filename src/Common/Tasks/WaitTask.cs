@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -31,7 +30,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="name">A name describing the task in human-readable form.</param>
         /// <param name="waitHandle">>The <see cref="WaitHandle"/> to wait for.</param>
         /// <param name="millisecondsTimeout">The number of milliseconds to wait before raising <see cref="TimeoutException"/>; <see cref="Timeout.Infinite"/> to wait indefinitely.</param>
-        public WaitTask([NotNull, Localizable(true)] string name, [NotNull] WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
+        public WaitTask([Localizable(true)] string name, WaitHandle waitHandle, int millisecondsTimeout = Timeout.Infinite)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             _waitHandle = waitHandle ?? throw new ArgumentNullException(nameof(waitHandle));

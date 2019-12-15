@@ -3,7 +3,6 @@
 
 using System;
 using System.Net;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Tasks;
 
@@ -18,7 +17,7 @@ namespace NanoByte.Common.Net
         /// Creates a new Windows GUI credential provider.
         /// </summary>
         /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        public WindowsDialogCredentialProvider([NotNull] ITaskHandler handler)
+        public WindowsDialogCredentialProvider(ITaskHandler handler)
             : base(handler)
         {}
 

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JetBrains.Annotations;
 
 #if NETSTANDARD
 using System.Runtime.InteropServices;
@@ -59,8 +58,7 @@ namespace NanoByte.Common.Native
         /// <param name="value">The string containing variables to be expanded.</param>
         /// <param name="variables">The list of variables available for expansion.</param>
         /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
-        [NotNull]
-        public static string ExpandVariables([NotNull] string value, [NotNull] IDictionary<string, string> variables)
+        public static string ExpandVariables(string value, IDictionary<string, string> variables)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (variables == null) throw new ArgumentNullException(nameof(variables));
@@ -112,8 +110,7 @@ namespace NanoByte.Common.Native
         /// <param name="value">The string containing variables to be expanded.</param>
         /// <param name="variables">The list of variables available for expansion.</param>
         /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
-        [NotNull]
-        public static string ExpandVariables([NotNull] string value, [NotNull] StringDictionary variables)
+        public static string ExpandVariables(string value, StringDictionary variables)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (variables == null) throw new ArgumentNullException(nameof(variables));

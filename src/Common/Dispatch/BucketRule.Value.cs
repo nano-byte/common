@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -20,7 +19,6 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// The collection elements are added to if they match the <see cref="Value"/>.
         /// </summary>
-        [NotNull]
         public readonly ICollection<TElement> Bucket;
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace NanoByte.Common.Dispatch
         /// </summary>
         /// <param name="value">A value to compare with the result of the value retriever using <see cref="object.Equals(object,object)"/>.</param>
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="value"/>.</param>
-        public BucketRule(TValue value, [NotNull] ICollection<TElement> bucket)
+        public BucketRule(TValue value, ICollection<TElement> bucket)
         {
             Value = value;
             Bucket = bucket ?? throw new ArgumentNullException(nameof(bucket));

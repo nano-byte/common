@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
-using JetBrains.Annotations;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
@@ -30,20 +29,19 @@ namespace NanoByte.Common.Tasks
         /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
         /// <seealso cref="ITaskHandler.RunTask"/>
-        void Run(CancellationToken cancellationToken = default, [CanBeNull] ICredentialProvider credentialProvider = null, [CanBeNull] IProgress<TaskSnapshot> progress = null);
+        void Run(CancellationToken cancellationToken = default, ICredentialProvider? credentialProvider = null, IProgress<TaskSnapshot>? progress = null);
 
         /// <summary>
         /// A name describing the task in human-readable form.
         /// </summary>
         [Description("A name describing the task in human-readable form.")]
-        [NotNull, Localizable(true)]
+        [Localizable(true)]
         string Name { get; }
 
         /// <summary>
         /// An object used to associate the task with a specific process; can be <c>null</c>.
         /// </summary>
-        [CanBeNull]
-        object Tag { get; set; }
+        object? Tag { get; set; }
 
         /// <summary>
         /// Indicates whether this task can be canceled once it has been started.

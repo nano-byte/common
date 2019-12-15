@@ -59,7 +59,7 @@ namespace NanoByte.Common.Controls
         /// Occurs when the clear button is clicked.
         /// </summary>
         [Description("Occurs when the clear button is clicked.")]
-        public event EventHandler ClearButtonClicked;
+        public event EventHandler? ClearButtonClicked;
 
         /// <summary>
         /// Raises the <see cref="ClearButtonClicked"/> event.
@@ -118,7 +118,7 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        private string _hintText;
+        private string _hintText = "";
 
         /// <summary>
         /// A text to be displayed in <see cref="SystemColors.GrayText"/> when <see cref="TextBox.Text"/> is empty.

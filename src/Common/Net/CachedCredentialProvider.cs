@@ -3,7 +3,6 @@
 
 using System;
 using System.Net;
-using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Net
@@ -13,7 +12,6 @@ namespace NanoByte.Common.Net
     /// </summary>
     public class CachedCredentialProvider : MarshalNoTimeout, ICredentialProvider
     {
-        [NotNull]
         private readonly ICredentialProvider _inner;
 
         /// <inheritdoc/>
@@ -25,7 +23,7 @@ namespace NanoByte.Common.Net
         /// Creates a new caching decorator.
         /// </summary>
         /// <param name="inner">The inner <see cref="ICredentialProvider"/> to wrap.</param>
-        public CachedCredentialProvider([NotNull] ICredentialProvider inner)
+        public CachedCredentialProvider(ICredentialProvider inner)
         {
             _inner = inner ?? throw new ArgumentNullException(nameof(inner));
             _cache = new TransparentCache<Uri, NetworkCredential>(uri => inner.GetCredential(uri, null));

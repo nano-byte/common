@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using JetBrains.Annotations;
 
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
@@ -33,7 +32,7 @@ namespace NanoByte.Common.Tasks
         /// Handling this blocks the task, therefore observers should handle the event quickly.
         /// </remarks>
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        public event Action CancellationRequested;
+        public event Action? CancellationRequested;
 
         /// <summary>
         /// Indicates whether <see cref="Cancel"/> has been called.
@@ -45,7 +44,6 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Gets a wait handle that is signaled when see cref="Cancel"/> has been called.
         /// </summary>
-        [NotNull]
         internal WaitHandle WaitHandle => _waitEvent;
 
         private readonly object _lock = new object();

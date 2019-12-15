@@ -14,13 +14,13 @@ namespace NanoByte.Common.Controls
     public class TouchForm : Form, ITouchControl
     {
         /// <inheritdoc/>
-        public event EventHandler<TouchEventArgs> TouchDown;
+        public event EventHandler<TouchEventArgs>? TouchDown;
 
         /// <inheritdoc/>
-        public event EventHandler<TouchEventArgs> TouchUp;
+        public event EventHandler<TouchEventArgs>? TouchUp;
 
         /// <inheritdoc/>
-        public event EventHandler<TouchEventArgs> TouchMove;
+        public event EventHandler<TouchEventArgs>? TouchMove;
 
         protected override CreateParams CreateParams
         {

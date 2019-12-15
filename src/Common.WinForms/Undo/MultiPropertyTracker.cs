@@ -16,7 +16,7 @@ namespace NanoByte.Common.Undo
         private readonly PropertyGrid _propertyGrid;
 
         /// <summary>Contains backups of property values.</summary>
-        private object[] _oldValues;
+        private object?[]? _oldValues;
         #endregion
 
         #region Constructor
@@ -50,12 +50,12 @@ namespace NanoByte.Common.Undo
 
             // Create a new array to hold old values before the user changes them
             _oldValues = new object[_propertyGrid.SelectedObjects.Length];
-            string property = MoveOutOfNested(e.NewSelection).PropertyDescriptor.Name;
+            string property = MoveOutOfNested(e.NewSelection).PropertyDescriptor!.Name;
             for (int i = 0; i < _propertyGrid.SelectedObjects.Length; i++)
             {
                 // Use reflection to get the specific property for each object and backup the corresponding old value for each
                 var item = _propertyGrid.SelectedObjects[i];
-                _oldValues[i] = item.GetType().GetProperty(property).GetValue(item, null);
+                _oldValues[i] = item.GetType().GetProperty(property)!.GetValue(item, null);
             }
         }
         #endregion

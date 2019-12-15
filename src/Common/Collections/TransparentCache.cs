@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -20,7 +19,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new transparent cache.
         /// </summary>
         /// <param name="retriever">The callback used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.</param>
-        public TransparentCache([NotNull] Func<TKey, TValue> retriever)
+        public TransparentCache(Func<TKey, TValue> retriever)
         {
             _retriever = retriever;
         }

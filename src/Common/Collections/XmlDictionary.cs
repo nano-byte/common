@@ -34,10 +34,6 @@ namespace NanoByte.Common.Collections
         /// <inheritdoc/>
         protected override void InsertItem(int index, XmlDictionaryEntry item)
         {
-            #region Sanity checks
-            if (item == null) throw new ArgumentNullException(nameof(item));
-            #endregion
-
             if (!string.IsNullOrEmpty(item.Key) && ContainsKey(item.Key))
                 throw new ArgumentException(Resources.KeyAlreadyPresent, nameof(item));
             item.Parent = this;

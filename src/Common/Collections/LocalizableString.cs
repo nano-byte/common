@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Serialization;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -25,8 +24,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [Description("The actual string value to store.")]
         [XmlText]
-        [CanBeNull]
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         private CultureInfo _language = DefaultLanguage;
 
@@ -35,7 +33,6 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [Description("The language of the Value.")]
         [XmlIgnore]
-        [NotNull]
         public CultureInfo Language
         {
             get { return _language; }
@@ -53,8 +50,7 @@ namespace NanoByte.Common.Collections
         /// <seealso cref="Language"/>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), EditorBrowsable(EditorBrowsableState.Never)]
         [XmlAttribute("lang", Namespace = "http://www.w3.org/XML/1998/namespace", DataType = "language") /* Will be serialized as xml:lang, must be done this way for Mono */]
-        [CanBeNull]
-        public string LanguageString
+        public string? LanguageString
         {
             get => Language.ToString();
             set
@@ -81,10 +77,10 @@ namespace NanoByte.Common.Collections
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(LocalizableString other) => other != null && other.Value == Value && Language.Equals(other.Language);
+        public bool Equals(LocalizableString? other) => other != null && other.Value == Value && Language.Equals(other.Language);
 
-        public static bool operator ==(LocalizableString left, LocalizableString right) => Equals(left, right);
-        public static bool operator !=(LocalizableString left, LocalizableString right) => !Equals(left, right);
+        public static bool operator ==(LocalizableString? left, LocalizableString? right) => Equals(left, right);
+        public static bool operator !=(LocalizableString? left, LocalizableString? right) => !Equals(left, right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj)

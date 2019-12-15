@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 
@@ -28,7 +28,7 @@ namespace NanoByte.Common.Controls
         /// Occurs whenever <see cref="SelectedEntry"/> has been changed.
         /// </summary>
         [Description("Occurs whenever SelectedEntry has been changed.")]
-        public event EventHandler SelectedEntryChanged;
+        public event EventHandler? SelectedEntryChanged;
 
         private void OnSelectedEntryChanged()
         {
@@ -39,7 +39,7 @@ namespace NanoByte.Common.Controls
         /// Occurs when the user has confirmed the <see cref="SelectedEntry"/> via double-clicking or pressing Enter.
         /// </summary>
         [Description("Occurs when the user has confirmed the current selection via double-clicking or pressing Enter.")]
-        public event EventHandler SelectionConfirmed;
+        public event EventHandler? SelectionConfirmed;
 
         private void OnSelectionConfirmed()
         {
@@ -51,7 +51,7 @@ namespace NanoByte.Common.Controls
         /// Occurs whenever the content of <see cref="CheckedEntries"/> has changed.
         /// </summary>
         [Description("Occurs whenever the content of CheckedEntries has changed.")]
-        public event EventHandler CheckedEntriesChanged;
+        public event EventHandler? CheckedEntriesChanged;
 
         private void OnCheckedEntriesChanged()
         {
@@ -71,14 +71,14 @@ namespace NanoByte.Common.Controls
         [DefaultValue(true), Description("Toggle the visibility of the search box."), Category("Appearance")]
         public bool ShowSearchBox { get => textSearch.Visible; set => textSearch.Visible = value; }
 
-        private NamedCollection<T> _nodes;
+        private NamedCollection<T>? _nodes;
 
         /// <summary>
         /// The <see cref="INamed{T}"/> (and optionally <see cref="IContextMenu"/>) objects to be listed in the tree.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This control is supposed to represent a live and mutable collection")]
-        public NamedCollection<T> Nodes
+        public NamedCollection<T>? Nodes
         {
             get => _nodes;
             set
@@ -93,13 +93,13 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        private T _selectedEntry;
+        private T? _selectedEntry;
 
         /// <summary>
         /// The <see cref="INamed{T}"/> object currently selected in the <see cref="TreeView"/>; <c>null</c> for no selection.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public T SelectedEntry
+        public T? SelectedEntry
         {
             get => _selectedEntry;
             set
@@ -170,7 +170,7 @@ namespace NanoByte.Common.Controls
             string name = treeView.SelectedNode.Name;
 
             // Don't use the property, to prevent a loop
-            _selectedEntry = _nodes.Contains(name) ? _nodes[name] : null;
+            _selectedEntry = _nodes != null && _nodes.Contains(name) ? _nodes[name] : null;
             OnSelectedEntryChanged();
         }
 
@@ -178,7 +178,7 @@ namespace NanoByte.Common.Controls
         /// Updates the filtered <see cref="TreeView"/> representation of <see cref="Nodes"/>.
         /// </summary>
         /// <remarks>Called automatically internally.</remarks>
-        public void UpdateList([CanBeNull] object sender = null)
+        public void UpdateList(object? sender = null)
         {
             // Suppress events to prevent infinite loops
             _suppressEvents = true;
@@ -270,7 +270,7 @@ namespace NanoByte.Common.Controls
         /// <param name="fullNameExpand">Shall a search for the full name of a tag allow it to be expanded?</param>
         private void ExpandNodes(TreeNodeCollection subTree, bool fullNameExpand)
         {
-            foreach (TreeNode node in subTree)
+            foreach (var node in subTree.OfType<TreeNode>())
             {
                 // Checked nodes and nodes with matches in the last part of their name (the displayed text) shall always be visible
                 if (node.Checked || node.Text.ContainsIgnoreCase(textSearch.Text)) node.EnsureVisible();
@@ -293,11 +293,11 @@ namespace NanoByte.Common.Controls
         private void treeView_AfterCheck(object sender, TreeViewEventArgs e)
         {
             // Checking a parent will check all its children
-            foreach (TreeNode node in e.Node.Nodes)
+            foreach (var node in e.Node.Nodes.OfType<TreeNode>())
                 node.Checked = e.Node.Checked;
 
             // Maintain a list of currently checked bottom-level entries
-            if (Nodes.Contains(e.Node.Name))
+            if (Nodes != null && Nodes.Contains(e.Node.Name))
             {
                 T entry = Nodes[e.Node.Name];
                 if (e.Node.Checked) _checkedEntries.Add(entry);

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -21,7 +20,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Retrieves a value from the cache.
         /// </summary>
-        public TValue this[[NotNull] TKey key]
+        public TValue this[TKey key]
         {
             get
             {
@@ -41,13 +40,13 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Template method used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.
         /// </summary>
-        protected abstract TValue Retrieve([NotNull] TKey key);
+        protected abstract TValue Retrieve(TKey key);
 
         /// <summary>
         /// Removes the the entry with the specified <paramref name="key"/> from the cache.
         /// </summary>
         /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
-        public bool Remove([NotNull] TKey key)
+        public bool Remove(TKey key)
         {
             lock (_lock)
                 return _lookup.Remove(key);

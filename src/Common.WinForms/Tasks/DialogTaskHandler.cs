@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 
 namespace NanoByte.Common.Tasks
@@ -14,14 +13,13 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public class DialogTaskHandler : GuiTaskHandlerBase
     {
-        [NotNull]
         private readonly Control _owner;
 
         /// <summary>
         /// Creates a new task handler.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler.</param>
-        public DialogTaskHandler([NotNull] Control owner)
+        public DialogTaskHandler(Control owner)
         {
             _owner = owner;
         }
@@ -34,7 +32,7 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Debug("Task: " + task.Name);
-            Exception ex = null;
+            Exception? ex = null;
             _owner.Invoke(() =>
             {
                 using (var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource))

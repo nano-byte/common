@@ -3,7 +3,6 @@
 
 using System;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Net
 {
@@ -21,8 +20,7 @@ namespace NanoByte.Common.Net
             : base(source, bytesTotal)
         {}
 
-        [CanBeNull]
-        private MemoryStream _targetStream;
+        private MemoryStream? _targetStream;
 
         /// <inheritdoc/>
         protected override Stream CreateTargetStream() => _targetStream = new MemoryStream();
@@ -31,7 +29,9 @@ namespace NanoByte.Common.Net
         /// Returns the downloaded data.
         /// </summary>
         /// <exception cref="InvalidOperationException">The download is not finished yet.</exception>
-        [Pure, NotNull]
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
         public byte[] GetData()
         {
             if (_targetStream == null) throw new InvalidOperationException();

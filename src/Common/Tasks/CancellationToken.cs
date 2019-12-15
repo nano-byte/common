@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -16,13 +15,12 @@ namespace NanoByte.Common.Tasks
     public struct CancellationToken
     {
         [SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields", Justification = "Access to this field is remoted.")]
-        [CanBeNull]
-        private readonly CancellationTokenSource _source;
+        private readonly CancellationTokenSource? _source;
 
         /// <summary>
         /// Creates a new token controlled by a specific <see cref="CancellationTokenSource"/>.
         /// </summary>
-        internal CancellationToken([NotNull] CancellationTokenSource source)
+        internal CancellationToken(CancellationTokenSource source)
         {
             _source = source;
         }
@@ -36,7 +34,7 @@ namespace NanoByte.Common.Tasks
         /// The callback is called from a background thread. Wrap via synchronization context to update UI elements.
         /// Handling this blocks the task, therefore observers should handle the event quickly.
         /// </remarks>
-        public CancellationTokenRegistration Register([NotNull] Action callback) => new CancellationTokenRegistration(_source, callback);
+        public CancellationTokenRegistration Register(Action callback) => new CancellationTokenRegistration(_source, callback);
 
         /// <summary>
         /// Indicates whether cancellation has been requested.
@@ -48,7 +46,9 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <exception cref="OperationCanceledException">Cancellation has been requested.</exception>
         // ReSharper disable once PureAttributeOnVoidMethod
-        [Pure]
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
         public void ThrowIfCancellationRequested()
         {
             if (IsCancellationRequested) throw new OperationCanceledException();

@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -17,7 +16,5 @@ namespace NanoByte.Common.Controls
         /// Returns the context menu for this object; can be <c>null</c>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Creates a new object on each call")]
-        [CanBeNull]
-        ContextMenuStrip GetContextMenu();
-    }
+        ContextMenuStrip? GetContextMenu();    }
 }

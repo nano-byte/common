@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using JetBrains.Annotations;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Streams
@@ -25,8 +24,7 @@ namespace NanoByte.Common.Streams
         /// <param name="throwOnEnd">Controls whether the method throws an exception when the end of the stream is reached instead of returning <c>null</c>.</param>
         /// <returns>The bytes read from the stream; may be <c>null</c> if <paramref name="throwOnEnd"/> is <c>false</c>.</returns>
         /// <exception cref="IOException">The desired number of bytes could not be read from the stream and <paramref name="throwOnEnd"/> is <c>true</c>.</exception>
-        [ContractAnnotation("throwOnEnd:true => notnull; throwOnEnd:false => canbenull")]
-        public static byte[] Read([NotNull] this Stream stream, int count, bool throwOnEnd = true)
+        public static byte[]? Read(this Stream stream, int count, bool throwOnEnd = true)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -55,8 +53,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <returns>A entire content of the stream.</returns>
-        [NotNull]
-        public static byte[] ToArray([NotNull] this Stream stream)
+        public static byte[] ToArray(this Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -75,8 +72,7 @@ namespace NanoByte.Common.Streams
         /// <param name="stream">The stream to read from.</param>
         /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A entire content of the stream.</returns>
-        [NotNull]
-        public static string ReadToString([NotNull] this Stream stream, [CanBeNull] Encoding encoding = null)
+        public static string ReadToString(this Stream stream, Encoding? encoding = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -97,7 +93,7 @@ namespace NanoByte.Common.Streams
         /// <param name="progress">Used to report back the number of bytes that have been copied so far.</param>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of <paramref name="source"/>.</remarks>
         [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        public static void CopyToEx([NotNull] this Stream source, [NotNull] Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default, Tasks.IProgress<long> progress = null)
+        public static void CopyToEx(this Stream source, Stream destination, int bufferSize = 4096, CancellationToken cancellationToken = default, Tasks.IProgress<long>? progress = null)
         {
             #region Sanity checks
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -126,7 +122,7 @@ namespace NanoByte.Common.Streams
         /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
         /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
         /// <param name="progress">Used to report back the number of bytes that have been copied so far. Callbacks are rate limited to once every 250ms.</param>
-        public static void CopyToFile([NotNull] this Stream stream, [NotNull, Localizable(false)] string path, int bufferSize = 4096, CancellationToken cancellationToken = default, Tasks.IProgress<long> progress = null)
+        public static void CopyToFile(this Stream stream, [Localizable(false)] string path, int bufferSize = 4096, CancellationToken cancellationToken = default, Tasks.IProgress<long>? progress = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -142,7 +138,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to write to.</param>
         /// <param name="data">The array containing the bytes to write.</param>
-        public static void Write([NotNull] this Stream stream, [NotNull] byte[] data)
+        public static void Write(this Stream stream, byte[] data)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -160,7 +156,7 @@ namespace NanoByte.Common.Streams
         /// Compares two streams for bit-wise equality. Seeks to the beginnings of the streams if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of both streams.</remarks>
-        public static bool ContentEquals([NotNull] this Stream stream1, [NotNull] Stream stream2)
+        public static bool ContentEquals(this Stream stream1, Stream stream2)
         {
             #region Sanity checks
             if (stream1 == null) throw new ArgumentNullException(nameof(stream1));
@@ -185,8 +181,7 @@ namespace NanoByte.Common.Streams
         /// <param name="data">The data to fill the stream with.</param>
         /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
-        [NotNull]
-        public static MemoryStream ToStream([NotNull] this string data, [CanBeNull] Encoding encoding = null)
+        public static MemoryStream ToStream(this string data, Encoding? encoding = null)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -203,8 +198,7 @@ namespace NanoByte.Common.Streams
         /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
         /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-        [NotNull]
-        public static Stream GetEmbeddedStream([NotNull] this Type type, [NotNull, Localizable(false)] string name)
+        public static Stream GetEmbeddedStream(this Type type, [Localizable(false)] string name)
         {
             #region Sanity checks
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -223,8 +217,7 @@ namespace NanoByte.Common.Streams
         /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
         /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-        [NotNull]
-        public static byte[] GetEmbeddedBytes([NotNull] this Type type, [NotNull, Localizable(false)] string name)
+        public static byte[] GetEmbeddedBytes(this Type type, [Localizable(false)] string name)
         {
             #region Sanity checks
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -241,8 +234,7 @@ namespace NanoByte.Common.Streams
         /// <param name="name">The name of the embedded resource.</param>
         /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-        [NotNull]
-        public static string GetEmbeddedString([NotNull] this Type type, [NotNull, Localizable(false)] string name, [CanBeNull] Encoding encoding = null)
+        public static string GetEmbeddedString(this Type type, [Localizable(false)] string name, Encoding? encoding = null)
         {
             #region Sanity checks
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -260,7 +252,7 @@ namespace NanoByte.Common.Streams
         /// <param name="name">The name of the embedded resource.</param>
         /// <param name="path">The path of the file to write.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-        public static void CopyEmbeddedToFile([NotNull] this Type type, [NotNull, Localizable(false)] string name, [NotNull, Localizable(false)] string path)
+        public static void CopyEmbeddedToFile(this Type type, [Localizable(false)] string name, [Localizable(false)] string path)
         {
             #region Sanity checks
             if (type == null) throw new ArgumentNullException(nameof(type));

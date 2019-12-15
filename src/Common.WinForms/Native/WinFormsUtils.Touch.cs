@@ -42,7 +42,7 @@ namespace NanoByte.Common.Native
         /// <param name="onTouchMove">The event handler to call for touch move events; can be <c>null</c>.</param>
         /// <param name="onTouchUp">The event handler to call for touch up events; can be <c>null</c>.</param>
         [SuppressMessage("ReSharper", "InconsistentNaming")]
-        public static void HandleTouchMessage(ref Message m, object sender, EventHandler<TouchEventArgs> onTouchDown, EventHandler<TouchEventArgs> onTouchMove, EventHandler<TouchEventArgs> onTouchUp)
+        public static void HandleTouchMessage(ref Message m, object sender, EventHandler<TouchEventArgs>? onTouchDown, EventHandler<TouchEventArgs>? onTouchMove, EventHandler<TouchEventArgs>? onTouchUp)
         {
             const int WM_TOUCHMOVE = 0x0240, WM_TOUCHDOWN = 0x0241, WM_TOUCHUP = 0x0242;
 
@@ -73,7 +73,7 @@ namespace NanoByte.Common.Native
                 NativeMethods.TouchInput ti = inputs[i];
 
                 // Assign a handler to this message.
-                EventHandler<TouchEventArgs> handler = null; // Touch event handler
+                EventHandler<TouchEventArgs>? handler = null; // Touch event handler
                 if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Down)) handler = onTouchDown;
                 else if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Up)) handler = onTouchUp;
                 else if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Move)) handler = onTouchMove;

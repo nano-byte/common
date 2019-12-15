@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Streams
 {
@@ -25,7 +24,7 @@ namespace NanoByte.Common.Streams
         /// Starts reading from the stream in a background thread.
         /// </summary>
         /// <param name="reader">The stream to read from.</param>
-        public StreamConsumer([NotNull] StreamReader reader)
+        public StreamConsumer(StreamReader reader)
         {
             _reader = reader ?? throw new ArgumentNullException(nameof(reader));
             _thread = ThreadUtils.StartBackground(ThreadStart, name: "StreamConsumer");
@@ -44,8 +43,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// Returns the next pending line; <c>null</c> if there are no pending lines.
         /// </summary>
-        [CanBeNull]
-        public string ReadLine()
+        public string? ReadLine()
         {
             lock (_lock)
                 return (_queue.Count == 0) ? null : _queue.Dequeue();

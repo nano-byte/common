@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -23,7 +22,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">Called for every element that should be added to <paramref name="mine"/>.</param>
         /// <param name="removed">Called for every element that should be removed from <paramref name="mine"/>.</param>
         /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
-        public static void TwoWay<T>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull, InstantHandle] Action<T> added, [NotNull, InstantHandle] Action<T> removed)
+        public static void TwoWay<T>(IEnumerable<T> theirs, IEnumerable<T> mine, Action<T> added, Action<T> removed)
         {
             #region Sanity checks
             if (theirs == null) throw new ArgumentNullException(nameof(theirs));
@@ -49,7 +48,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">All elements that should be added to <paramref name="mine"/> are added to this list.</param>
         /// <param name="removed">All elements that should be removed from <paramref name="mine"/> are added to this list.</param>
         /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
-        public static void TwoWay<T, TAdded, TRemoved>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull] ICollection<TAdded> added, [NotNull] ICollection<TRemoved> removed)
+        public static void TwoWay<T, TAdded, TRemoved>(IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, TAdded, TRemoved
         {
 #if __MonoCS__
@@ -68,7 +67,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">Called for every element that should be added to <paramref name="mine"/>.</param>
         /// <param name="removed">Called for every element that should be removed from <paramref name="mine"/>.</param>
         /// <remarks>Modified elements are handled by calling <paramref name="removed"/> for the old state and <paramref name="added"/> for the new state.</remarks>
-        public static void ThreeWay<T>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> reference, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull, InstantHandle] Action<T> added, [NotNull, InstantHandle] Action<T> removed)
+        public static void ThreeWay<T>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, Action<T> added, Action<T> removed)
             where T : class, IMergeable<T>
         {
             #region Sanity checks
@@ -111,7 +110,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">All elements that should be added to <paramref name="mine"/> are added to this list.</param>
         /// <param name="removed">All elements that should be removed from <paramref name="mine"/> are added to this list.</param>
         /// <remarks>Modified elements are handled by adding to <paramref name="removed"/> for the old state and to <paramref name="added"/> for the new state.</remarks>
-        public static void ThreeWay<T, TAdded, TRemoved>([NotNull, ItemNotNull, InstantHandle] IEnumerable<T> reference, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> theirs, [NotNull, ItemNotNull, InstantHandle] IEnumerable<T> mine, [NotNull] ICollection<TAdded> added, [NotNull] ICollection<TRemoved> removed)
+        public static void ThreeWay<T, TAdded, TRemoved>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, IMergeable<T>, TAdded, TRemoved
         {
 #if __MonoCS__

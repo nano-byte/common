@@ -5,10 +5,10 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using JetBrains.Annotations;
 using NanoByte.Common.Streams;
 
 namespace NanoByte.Common.Net
@@ -29,19 +29,16 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// The URL under which the server root can be reached. Usually you should use <see cref="FileUri"/> instead.
         /// </summary>
-        [NotNull]
         public Uri ServerUri { get; }
 
         /// <summary>
         /// The complete URL under which the server provides its file.
         /// </summary>
-        [NotNull]
         public Uri FileUri { get; }
 
         /// <summary>
         /// The content of the file to be served under <see cref="FileUri"/>.
         /// </summary>
-        [NotNull]
         public Stream FileContent { get; private set; }
 
         /// <summary>
@@ -50,6 +47,7 @@ namespace NanoByte.Common.Net
         public bool Slow { get; set; }
 
         private readonly string _resourceName;
+        private readonly HttpListener _listener;
 
         /// <summary>
         /// Starts a HTTP web server that listens on a random port.
@@ -57,23 +55,19 @@ namespace NanoByte.Common.Net
         /// <param name="resourceName">The HTTP resource name under which to provide the content.</param>
         /// <param name="fileContent">The content of the file to serve.</param>
         [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings")]
-        public MicroServer([NotNull, Localizable(false)] string resourceName, [NotNull] Stream fileContent)
+        public MicroServer([Localizable(false)] string resourceName, Stream fileContent)
         {
             _resourceName = resourceName;
             FileContent = fileContent;
 
-            ServerUri = new Uri(StartListening());
+            _listener = StartListening();
+            ServerUri = new Uri(_listener.Prefixes.Last());
             FileUri = new Uri(ServerUri, resourceName);
 
             ThreadUtils.StartBackground(ListenLoop, name: "MicroServer.Listen");
         }
 
-        private HttpListener _listener;
-
-        /// <summary>
-        /// Starts listening and returns the URL prefix under which the content is reachable.
-        /// </summary>
-        private string StartListening()
+        private HttpListener StartListening()
         {
             int port = MinimumPort;
 
@@ -83,10 +77,10 @@ namespace NanoByte.Common.Net
                 try
                 {
                     string prefix = "http://localhost:" + port++ + "/";
-                    _listener = new HttpListener();
+                    var _listener = new HttpListener();
                     _listener.Prefixes.Add(prefix);
                     _listener.Start();
-                    return prefix;
+                    return _listener;
                 }
                 catch (HttpListenerException) when (port <= MaxmimumPort)
                 {}

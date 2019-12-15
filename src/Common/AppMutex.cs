@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common
@@ -29,7 +28,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns>The handle for the mutex. Can be used to <see cref="Close"/> it again. Will automatically be released once the process terminates.</returns>
-        public static AppMutex Create([NotNull, Localizable(false)] string name)
+        public static AppMutex Create([Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
@@ -67,7 +66,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="name">The name to be used as a mutex identifier.</param>
         /// <returns><c>true</c> if an existing mutex was found; <c>false</c> if none existed.</returns>
-        public static bool Probe([NotNull, Localizable(false)] string name)
+        public static bool Probe([Localizable(false)] string name)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));

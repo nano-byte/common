@@ -3,7 +3,6 @@
 
 #if NETSTANDARD
 using System;
-using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NanoByte.Common.Net;
@@ -21,7 +20,7 @@ namespace NanoByte.Common.Tasks
         private readonly ILogger<ServiceTaskHandler> _logger;
         private CancellationTokenSource _cancellationTokenSource;
 
-        public ServiceTaskHandler([NotNull] IServiceProvider provider)
+        public ServiceTaskHandler(IServiceProvider provider)
         {
             #region Sanity checks
             if (provider == null) throw new ArgumentNullException(nameof(provider));

@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
 {
@@ -18,7 +17,7 @@ namespace NanoByte.Common.Undo
         /// Creates a new composite command.
         /// </summary>
         /// <param name="commands">The commands to be contained inside the transaction.</param>
-        public CompositeCommand([NotNull] params IUndoCommand[] commands)
+        public CompositeCommand(params IUndoCommand[] commands)
         {
             // Defensive copy
             _commands = (commands ?? throw new ArgumentNullException(nameof(commands))).ToArray();

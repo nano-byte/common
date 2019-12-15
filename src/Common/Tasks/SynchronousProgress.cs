@@ -15,12 +15,12 @@ namespace NanoByte.Common.Tasks
         /// Raised for each reported progress value.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        public event Action<T> ProgressChanged;
+        public event Action<T>? ProgressChanged;
 
         /// <summary>
         /// Captures the current synchronization context for callbacks.
         /// </summary>
-        public SynchronousProgress(Action<T> callback = null)
+        public SynchronousProgress(Action<T>? callback = null)
         {
             if (callback != null) ProgressChanged += callback;
         }

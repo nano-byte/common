@@ -82,7 +82,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override ICredentialProvider CredentialProvider { get; }
+        public override ICredentialProvider? CredentialProvider { get; }
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)

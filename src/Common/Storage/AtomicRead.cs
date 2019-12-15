@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -22,7 +21,7 @@ namespace NanoByte.Common.Storage
         /// Prepares an atomic read operation.
         /// </summary>
         /// <param name="path">The path of the file that will be read.</param>
-        public AtomicRead([NotNull, Localizable(false)] string path)
+        public AtomicRead([Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

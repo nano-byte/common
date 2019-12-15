@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Storage
@@ -23,8 +22,7 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        [PublicAPI, NotNull]
-        public static string GetSaveConfigPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
+        public static string GetSaveConfigPath([Localizable(false)] string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
@@ -63,8 +61,7 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        [PublicAPI, NotNull]
-        public static string GetSaveSystemConfigPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
+        public static string GetSaveSystemConfigPath([Localizable(false)] string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
@@ -105,8 +102,7 @@ namespace NanoByte.Common.Storage
         /// A list of fully qualified paths to use to load the resource sorted by decreasing importance.
         /// This list will always reflect the current state in the filesystem and can not be modified! It may be empty.
         /// </returns>
-        [PublicAPI, NotNull]
-        public static IEnumerable<string> GetLoadConfigPaths([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
+        public static IEnumerable<string> GetLoadConfigPaths([Localizable(false)] string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
@@ -154,8 +150,7 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        [PublicAPI, NotNull]
-        public static string GetSaveDataPath([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
+        public static string GetSaveDataPath([Localizable(false)] string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
@@ -195,8 +190,7 @@ namespace NanoByte.Common.Storage
         /// A list of fully qualified paths to use to load the resource sorted by decreasing importance.
         /// This list will always reflect the current state in the filesystem and can not be modified! It may be empty.
         /// </returns>
-        [PublicAPI, NotNull]
-        public static IEnumerable<string> GetLoadDataPaths([NotNull, Localizable(false)] string appName, bool isFile, [NotNull, ItemNotNull] params string[] resource)
+        public static IEnumerable<string> GetLoadDataPaths([Localizable(false)] string appName, bool isFile, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
@@ -241,8 +235,7 @@ namespace NanoByte.Common.Storage
         /// <param name="fileName">The file name of the file to search for.</param>
         /// <returns>The fully qualified path of the first located instance of the file.</returns>
         /// <exception cref="IOException">The file could not be found.</exception>
-        [PublicAPI, NotNull]
-        public static string GetInstalledFilePath([NotNull, Localizable(false)] string fileName)
+        public static string GetInstalledFilePath([Localizable(false)] string fileName)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));

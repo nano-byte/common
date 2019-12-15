@@ -6,7 +6,12 @@
     <LangVersion>8.0</LangVersion>
     <OutputType>Library</OutputType>
     <IsPackable>False</IsPackable>
+    <Nullable>annotations</Nullable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework)=='netstandard2.1'">
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>

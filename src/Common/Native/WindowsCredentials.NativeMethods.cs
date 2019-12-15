@@ -19,14 +19,14 @@ namespace NanoByte.Common.Native
         {
             public int cbSize;
             public IntPtr hwndParent;
-            public string pszMessageText;
-            public string pszCaptionText;
+            public string? pszMessageText;
+            public string? pszCaptionText;
 
             // ReSharper disable once FieldCanBeMadeReadOnly.Local
             public IntPtr hbmBanner;
         }
 
-        private static CredUIInfo CreateCredUIInfo(IntPtr owner, string title, string message)
+        private static CredUIInfo CreateCredUIInfo(IntPtr owner, string? title, string? message)
         {
             var credUI = new CredUIInfo();
             credUI.cbSize = Marshal.SizeOf(credUI);

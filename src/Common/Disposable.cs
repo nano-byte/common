@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -11,14 +10,13 @@ namespace NanoByte.Common
     /// </summary>
     public sealed class Disposable : IDisposable
     {
-        [NotNull]
         private readonly Action _callback;
 
         /// <summary>
         /// Creates a new disposable.
         /// </summary>
         /// <param name="callback">The callback to invoke on <see cref="Dispose"/>.</param>
-        public Disposable([NotNull] Action callback)
+        public Disposable(Action callback)
         {
             _callback = callback ?? throw new ArgumentNullException(nameof(callback));
         }

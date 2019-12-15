@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
 
@@ -50,7 +49,7 @@ namespace NanoByte.Common.Storage
         /// <param name="destinationPath">The path of the target directory. May exist. Must be empty if <paramref name="overwrite"/> is <c>false</c>.</param>
         /// <param name="preserveDirectoryTimestamps"><c>true</c> to preserve the modification times for directories as well; <c>false</c> to preserve only the file modification times.</param>
         /// <param name="overwrite">Overwrite existing files and directories at the <paramref name="destinationPath"/>. This will even replace read-only files!</param>
-        public CopyDirectory([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string destinationPath, bool preserveDirectoryTimestamps = true, bool overwrite = false)
+        public CopyDirectory([Localizable(false)] string sourcePath, [Localizable(false)] string destinationPath, bool preserveDirectoryTimestamps = true, bool overwrite = false)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
@@ -64,7 +63,7 @@ namespace NanoByte.Common.Storage
             Overwrite = overwrite;
         }
 
-        private DirectoryInfo _source, _destination;
+        private DirectoryInfo? _source, _destination;
 
         /// <inheritdoc/>
         protected override void Execute()
@@ -98,7 +97,7 @@ namespace NanoByte.Common.Storage
             {
                 CancellationToken.ThrowIfCancellationRequested();
 
-                if (sourceDirectory.IsSymlink(out string symlinkTarget))
+                if (sourceDirectory.IsSymlink(out string? symlinkTarget))
                     CreateSymlink(PathInDestination(sourceDirectory), symlinkTarget);
                 else
                     Directory.CreateDirectory(PathInDestination(sourceDirectory));
@@ -132,7 +131,7 @@ namespace NanoByte.Common.Storage
                     #endregion
                 }
 
-                if (sourceFile.IsSymlink(out string symlinkTarget))
+                if (sourceFile.IsSymlink(out string? symlinkTarget))
                     CreateSymlink(destinationFile.FullName, symlinkTarget);
                 else
                     CopyFile(sourceFile, destinationFile);
@@ -146,7 +145,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <exception cref="IOException">A problem occurred while copying the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the <paramref name="sourceFile"/> or write access to the <paramref name="destinationFile"/> is not permitted.</exception>
-        protected virtual void CopyFile([NotNull] FileInfo sourceFile, [NotNull] FileInfo destinationFile)
+        protected virtual void CopyFile(FileInfo sourceFile, FileInfo destinationFile)
         {
             #region Sanity checks
             if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
@@ -167,7 +166,7 @@ namespace NanoByte.Common.Storage
         /// <param name="linkTarget">The path of the existing file or directory to point to (relative to <paramref name="linkPath"/>).</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-        protected virtual void CreateSymlink([NotNull, Localizable(false)] string linkPath, [NotNull, Localizable(false)] string linkTarget)
+        protected virtual void CreateSymlink([Localizable(false)] string linkPath, [Localizable(false)] string linkTarget)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(linkPath)) throw new ArgumentNullException(nameof(linkPath));
@@ -188,6 +187,6 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        private string PathInDestination(FileSystemInfo element) => Path.Combine(DestinationPath, element.RelativeTo(_source));
+        private string PathInDestination(FileSystemInfo element) => Path.Combine(DestinationPath, element.RelativeTo(_source!));
     }
 }

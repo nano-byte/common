@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
@@ -29,7 +28,7 @@ namespace NanoByte.Common.Controls
         /// <param name="owner">The parent window for the dialogs; can be <c>null</c>.</param>
         /// <param name="title">A title for the data.</param>
         /// <param name="data">The data to display.</param>
-        public static void Show<T>([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, ItemNotNull] IEnumerable<T> data)
+        public static void Show<T>(IWin32Window? owner, [Localizable(true)] string title, IEnumerable<T> data)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException(nameof(title));

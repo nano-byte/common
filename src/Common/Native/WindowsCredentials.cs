@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Text;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Native
 {
@@ -20,7 +19,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="target">A string uniquely identifying the target the credentials are intended for.</param>
         /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
-        public static bool IsCredentialStored([NotNull] string target)
+        public static bool IsCredentialStored(string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
@@ -43,7 +42,7 @@ namespace NanoByte.Common.Native
         /// <param name="owner">The parent window for the dialog; can be <c>null</c>.</param>
         /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
-        public static NetworkCredential PromptDialog([NotNull] string target, WindowsCredentialsFlags flags, [CanBeNull] string title = null, [CanBeNull] string message = null, IntPtr owner = default)
+        public static NetworkCredential PromptDialog(string target, WindowsCredentialsFlags flags, string? title = null, string? message = null, IntPtr owner = default)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
@@ -69,7 +68,7 @@ namespace NanoByte.Common.Native
         /// <param name="flags">Flags for configuring the prompt.</param>
         /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
-        public static NetworkCredential PromptCli([NotNull] string target, WindowsCredentialsFlags flags)
+        public static NetworkCredential PromptCli(string target, WindowsCredentialsFlags flags)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));

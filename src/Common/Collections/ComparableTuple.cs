@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -16,13 +15,11 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// The first element of the tuple.
         /// </summary>
-        [NotNull]
         public readonly T Key;
 
         /// <summary>
         /// The second element of the tuple.
         /// </summary>
-        [NotNull]
         public readonly T Value;
 
         /// <summary>
@@ -30,7 +27,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The first element of the tuple.</param>
         /// <param name="value">The second element of the tuple.</param>
-        public ComparableTuple([NotNull] T key, [NotNull] T value)
+        public ComparableTuple(T key, T value)
         {
             #region Sanity checks
             // ReSharper disable CompareNonConstrainedGenericWithNull

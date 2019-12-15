@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using JetBrains.Annotations;
 using NanoByte.Common.Values;
 
 #if NET45 || NETSTANDARD
@@ -25,45 +24,64 @@ namespace NanoByte.Common.Collections
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(IEnumerable{TSource},Func{TSource,bool})"/>.
         /// </summary>
-        [NotNull, Pure, LinqTunnel]
-        public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, bool> predicate)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, Func<T, bool> predicate)
             => enumeration.Where(x => !predicate(x));
 
         /// <summary>
         /// Filters a sequence of elements to remove any that are equal to <paramref name="element"/>.
         /// </summary>
-        [NotNull, Pure, LinqTunnel]
-        public static IEnumerable<T> Except<T>([NotNull] this IEnumerable<T> enumeration, T element)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, T element)
             => enumeration.Except(new[] {element});
 
         /// <summary>
         /// Flattens a list of lists.
         /// </summary>
-        [NotNull, Pure]
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-        public static IEnumerable<T> Flatten<T>([NotNull] this IEnumerable<IEnumerable<T>> enumeration)
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> enumeration)
             => enumeration.SelectMany(x => x);
 
         /// <summary>
         /// Appends an element to a list.
         /// </summary>
-        [NotNull, Pure]
-        public static IEnumerable<T> Append<T>([NotNull] this IEnumerable<T> enumeration, T element)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumeration, T element)
             => enumeration.Concat(new[] {element});
 
         /// <summary>
         /// Prepends an element to a list.
         /// </summary>
-        [NotNull, Pure]
-        public static IEnumerable<T> Prepend<T>([NotNull] this IEnumerable<T> enumeration, T element)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> enumeration, T element)
             => new[] {element}.Concat(enumeration);
 
         /// <summary>
         /// Filters a sequence of elements to remove any <c>null</c> values.
         /// </summary>
-        [NotNull, ItemNotNull, Pure, LinqTunnel]
-        public static IEnumerable<T> WhereNotNull<T>([NotNull, ItemCanBeNull] this IEnumerable<T> enumeration)
-            => enumeration.Where(element => element != null);
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumeration)
+            where T : class
+        {
+            foreach (var element in enumeration)
+            {
+                if (element != null)
+                    yield return element;
+            }
+        }
 
         /// <summary>
         /// Determines the element in a list that maximizes a specified expression.
@@ -75,8 +93,10 @@ namespace NanoByte.Common.Collections
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns>The element that maximizes the expression.</returns>
         /// <exception cref="InvalidOperationException"><paramref name="enumeration"/> contains no elements.</exception>
-        [CanBeNull, Pure]
-        public static T MaxBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static T MaxBy<T, TValue>(this IEnumerable<T> enumeration, Func<T, TValue> expression, IComparer<TValue>? comparer = null)
         {
             #region Sanity checks
             if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
@@ -116,8 +136,10 @@ namespace NanoByte.Common.Collections
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns>The element that minimizes the expression.</returns>
         /// <exception cref="InvalidOperationException"><paramref name="enumeration"/> contains no elements.</exception>
-        [CanBeNull, Pure]
-        public static T MinBy<T, TValue>([NotNull, ItemNotNull, InstantHandle] this IEnumerable<T> enumeration, [NotNull, InstantHandle] Func<T, TValue> expression, [CanBeNull] IComparer<TValue> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static T MinBy<T, TValue>(this IEnumerable<T> enumeration, Func<T, TValue> expression, IComparer<TValue>? comparer = null)
         {
             #region Sanity checks
             if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
@@ -152,8 +174,12 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="enumeration">The sequence of elements to filter.</param>
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
-        [NotNull, Pure, LinqTunnel]
-        public static IEnumerable<T> DistinctBy<T, TKey>([NotNull] this IEnumerable<T> enumeration, [NotNull] Func<T, TKey> keySelector)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> enumeration, Func<T, TKey> keySelector)
+            where T : notnull
+            where TKey : notnull
             => enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
 
         /// <summary>
@@ -164,8 +190,7 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TException">The type of exceptions to ignore. Any other exceptions are passed through.</typeparam>
         /// <param name="source">The elements to map.</param>
         /// <param name="selector">The selector to execute for each <paramref name="source"/> element. When it throws <typeparamref name="TException"/> the element is skipped. Any other exceptions are passed through.</param>
-        [NotNull, LinqTunnel]
-        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>([NotNull] this IEnumerable<TSource> source, [NotNull] Func<TSource, TResult> selector)
+        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
             where TException : Exception
         {
             #region Sanity checks
@@ -191,8 +216,10 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Calls <see cref="ICloneable{T}.Clone"/> for every element in a collection and returns the results as a new collection.
         /// </summary>
-        [NotNull, Pure]
-        public static IEnumerable<T> CloneElements<T>([NotNull, ItemNotNull] this IEnumerable<T> enumerable) where T : ICloneable<T>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T> CloneElements<T>(this IEnumerable<T> enumerable) where T : ICloneable<T>
             => (enumerable ?? throw new ArgumentNullException(nameof(enumerable))).Select(x => x.Clone());
 
         /// <summary>
@@ -201,7 +228,7 @@ namespace NanoByte.Common.Collections
         /// <param name="nodes">The set of nodes to sort.</param>
         /// <param name="getDependencies">A function that retrieves all dependencies of a node.</param>
         /// <exception cref="InvalidDataException">Cyclic dependency found.</exception>
-        public static IEnumerable<T> TopologicalSort<T>([NotNull] this IEnumerable<T> nodes, [NotNull, InstantHandle] Func<T, IEnumerable<T>> getDependencies)
+        public static IEnumerable<T> TopologicalSort<T>(this IEnumerable<T> nodes, Func<T, IEnumerable<T>> getDependencies)
         {
             #region Sanity checks
             if (nodes == null) throw new ArgumentNullException(nameof(nodes));
@@ -236,19 +263,18 @@ namespace NanoByte.Common.Collections
         }
 
 #if NET45 || NETSTANDARD
-/// <summary>
-/// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
-/// </summary>
-/// <param name="enumerable">The input elements to enumerate over.</param>
-/// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
-/// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
-/// <exception cref="InvalidOperationException"><see cref="TaskScheduler.Current"/> is equal to <see cref="TaskScheduler.Default"/>.</exception>
-/// <remarks>
-/// <see cref="SynchronizationContext.Current"/> must not be null.
-/// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
-/// </remarks>
-        [NotNull]
-        public static async Task ForEachAsync<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, Task> taskFactory, int maxParallel = 0)
+        /// <summary>
+        /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
+        /// </summary>
+        /// <param name="enumerable">The input elements to enumerate over.</param>
+        /// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
+        /// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
+        /// <exception cref="InvalidOperationException"><see cref="TaskScheduler.Current"/> is equal to <see cref="TaskScheduler.Default"/>.</exception>
+        /// <remarks>
+        /// <see cref="SynchronizationContext.Current"/> must not be null.
+        /// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
+        /// </remarks>
+        public static async Task ForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> taskFactory, int maxParallel = 0)
         {
             if (TaskScheduler.Current == TaskScheduler.Default)
                 throw new InvalidOperationException("TaskScheduler.Current must not be equal to TaskScheduler.Default value when using ForEachAsync().");

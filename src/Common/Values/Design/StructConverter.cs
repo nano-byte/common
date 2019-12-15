@@ -60,7 +60,7 @@ namespace NanoByte.Common.Values.Design
 
         #region Convert from
         /// <inheritdoc/>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             if (culture == null) throw new ArgumentNullException(nameof(culture));
 

@@ -32,7 +32,7 @@ namespace NanoByte.Common.Undo
             _entry = element;
         }
 
-        private string _previousValue;
+        private string? _previousValue;
 
         /// <summary>
         /// Sets the entry in the collection.

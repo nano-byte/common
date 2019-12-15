@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 
@@ -26,7 +25,7 @@ namespace NanoByte.Common.Cli
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
         /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
-        public Process StartInteractive([NotNull] params string[] arguments)
+        public Process StartInteractive(params string[] arguments)
         {
             #region Sanity checks
             if (arguments == null) throw new ArgumentNullException(nameof(arguments));
@@ -45,8 +44,7 @@ namespace NanoByte.Common.Cli
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
         /// <returns>The application's complete stdout output.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
-        [NotNull]
-        public virtual string Execute([NotNull] params string[] arguments)
+        public virtual string Execute(params string[] arguments)
         {
             #region Sanity checks
             if (arguments == null) throw new ArgumentNullException(nameof(arguments));
@@ -85,8 +83,7 @@ namespace NanoByte.Common.Cli
         /// Creates the <see cref="ProcessStartInfo"/> used by <see cref="Execute"/> to launch the external application and redirect its input/output.
         /// </summary>
         /// <param name="arguments">The arguments to pass to the process at startup.</param>
-        [NotNull]
-        protected virtual ProcessStartInfo GetStartInfo([NotNull] params string[] arguments)
+        protected virtual ProcessStartInfo GetStartInfo(params string[] arguments)
         {
             #region Sanity checks
             if (arguments == null) throw new ArgumentNullException(nameof(arguments));
@@ -116,18 +113,17 @@ namespace NanoByte.Common.Cli
         /// A hook method for writing to the application's stdin right after startup.
         /// </summary>
         /// <param name="writer">The stream writer providing access to stdin.</param>
-        [PublicAPI]
-        protected virtual void InitStdin([NotNull] StreamWriter writer) {}
+        protected virtual void InitStdin(StreamWriter writer) {}
 
         /// <summary>
         /// Reads all currently pending <paramref name="stderr"/> lines and sends responses to <paramref name="stdin"/>.
         /// </summary>
-        private void HandlePending([NotNull] StreamConsumer stderr, [NotNull] StreamWriter stdin)
+        private void HandlePending(StreamConsumer stderr, StreamWriter stdin)
         {
-            string line;
+            string? line;
             while ((line = stderr.ReadLine()) != null)
             {
-                string response = HandleStderr(line);
+                string? response = HandleStderr(line);
                 if (response != null) stdin.WriteLine(response);
             }
         }
@@ -137,8 +133,7 @@ namespace NanoByte.Common.Cli
         /// </summary>
         /// <param name="line">The line written to stderr.</param>
         /// <returns>The response to write to stdin; <c>null</c> for none.</returns>
-        [CanBeNull]
-        protected virtual string HandleStderr([NotNull] string line)
+        protected virtual string? HandleStderr(string line)
         {
             Log.Warn(AppBinary + ": " + line);
             return null;

@@ -9,7 +9,6 @@ using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -64,7 +63,7 @@ namespace NanoByte.Common.Net
         /// </summary>
         /// <param name="publicKeys">The public keys of the certificates to trust.</param>
         /// <remarks>This method affects the global state of the <see cref="AppDomain"/>. Calling it more than once is not cumulative and will overwrite previous certificates. You should call this method exactly once near the beginning of your application.</remarks>
-        public static void TrustCertificates([NotNull, ItemNotNull] params string[] publicKeys)
+        public static void TrustCertificates(params string[] publicKeys)
         {
             #region Sanity checks
             if (publicKeys == null) throw new ArgumentNullException(nameof(publicKeys));

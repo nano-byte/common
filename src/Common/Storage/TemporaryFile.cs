@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -16,11 +15,12 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The fully qualified path of the temporary file.
         /// </summary>
-        [NotNull]
         public string Path { get; }
 
-        [ContractAnnotation("null => null; notnull => notnull")]
-        public static implicit operator string(TemporaryFile file) => file?.Path;
+#if NETSTANDARD2_1
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("file")]
+#endif
+        public static implicit operator string?(TemporaryFile file) => file?.Path;
 
         /// <summary>
         /// Creates a uniquely named, empty temporary file on disk.
@@ -28,7 +28,7 @@ namespace NanoByte.Common.Storage
         /// <param name="prefix">A short string the directory name should start with.</param>
         /// <exception cref="IOException">A problem occurred while creating a file in <see cref="System.IO.Path.GetTempPath"/>.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a file in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
-        public TemporaryFile([NotNull, Localizable(false)] string prefix)
+        public TemporaryFile([Localizable(false)] string prefix)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));

@@ -3,7 +3,6 @@
 
 using System;
 using System.Text;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Controls
 {
@@ -30,7 +29,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="text">The text in the paragraph.</param>
         /// <param name="color">The color of the text.</param>
-        public void AppendPar([NotNull] string text, RtfColor color)
+        public void AppendPar(string text, RtfColor color)
         {
             text = (text ?? throw new ArgumentNullException(nameof(text))).Replace(@"\", @"\\").Replace(Environment.NewLine, "\\par\n");
             _builder.AppendLine("\\cf" + ((int)color + 1) + " " + text + "\\par\\par\n");

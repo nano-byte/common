@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -15,8 +14,10 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Appends an element to an array.
         /// </summary>
-        [NotNull, Pure]
-        public static T[] Append<T>([NotNull] this T[] array, T element)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static T[] Append<T>(this T[] array, T element)
         {
             #region Sanity checks
             if (array == null) throw new ArgumentNullException(nameof(array));
@@ -31,8 +32,10 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Prepends an element to an array.
         /// </summary>
-        [NotNull, Pure]
-        public static T[] Prepend<T>([NotNull] this T[] array, T element)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static T[] Prepend<T>(this T[] array, T element)
         {
             #region Sanity checks
             if (array == null) throw new ArgumentNullException(nameof(array));
@@ -50,8 +53,10 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-        [Pure]
-        public static bool SequencedEquals<T>([NotNull] this T[] first, [NotNull] T[] second, [CanBeNull] IEqualityComparer<T> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool SequencedEquals<T>(this T[] first, T[] second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException(nameof(first));
@@ -77,8 +82,10 @@ namespace NanoByte.Common.Collections
         /// <param name="oldArray">The original list of elements; can be <c>null</c> (will be treated as an empty array).</param>
         /// <returns>An array of elements that were added.</returns>
         /// <remarks>Elements that are present in <paramref name="oldArray"/> but not in <paramref name="newArray"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
-        [NotNull, Pure]
-        public static T[] GetAddedElements<T>([CanBeNull] this T[] newArray, [CanBeNull] T[] oldArray)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static T[] GetAddedElements<T>(this T[]? newArray, T[]? oldArray)
             where T : IComparable<T>, IEquatable<T> => GetAddedElements(newArray, oldArray, DefaultComparer<T>.Instance);
 
         private sealed class DefaultComparer<T> : IComparer<T> where T : IComparable<T>
@@ -99,8 +106,10 @@ namespace NanoByte.Common.Collections
         /// <param name="comparer">An object that compares to elements to determine which one is bigger.</param>
         /// <returns>An array of elements that were added.</returns>
         /// <remarks>Elements that are present in <paramref name="oldArray"/> but not in <paramref name="newArray"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
-        [NotNull, Pure]
-        public static T[] GetAddedElements<T>([CanBeNull] this T[] newArray, [CanBeNull] T[] oldArray, [NotNull] IComparer<T> comparer)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static T[] GetAddedElements<T>(this T[]? newArray, T[]? oldArray, IComparer<T> comparer)
         {
             #region Sanity checks
             if (comparer == null) throw new ArgumentNullException(nameof(comparer));

@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Undo
 {
@@ -14,7 +13,6 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// The object being edited.
         /// </summary>
-        [NotNull]
         T Target { get; set; }
 
         /// <summary>
@@ -59,6 +57,6 @@ namespace NanoByte.Common.Undo
         /// <param name="path">The file to save to.</param>
         /// <exception cref="IOException">A problem occurs while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        void Save([NotNull] string path);
+        void Save(string path);
     }
 }

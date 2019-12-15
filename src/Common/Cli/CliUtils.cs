@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Cli
@@ -20,8 +19,7 @@ namespace NanoByte.Common.Cli
         /// <param name="prompt">The prompt to display to the user on <see cref="Console.Error"/>.</param>
         /// <returns>The string the user entered.</returns>
         /// <exception cref="IOException">The <see cref="Console.In"/> stream has been closed.</exception>
-        [NotNull]
-        public static string ReadString([NotNull, Localizable(true)] string prompt)
+        public static string ReadString([Localizable(true)] string prompt)
         {
             Console.Error.Write(prompt + " ");
             string line = Console.ReadLine();
@@ -34,8 +32,7 @@ namespace NanoByte.Common.Cli
         /// </summary>
         /// <param name="prompt">The prompt to display to the user on <see cref="Console.Error"/>.</param>
         /// <returns>The password the user entered; <see cref="string.Empty"/> if none.</returns>
-        [NotNull]
-        public static string ReadPassword([NotNull, Localizable(true)] string prompt)
+        public static string ReadPassword([Localizable(true)] string prompt)
         {
             Console.Error.Write(prompt + " ");
 

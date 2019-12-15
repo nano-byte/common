@@ -23,28 +23,28 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         [Description("Occurs whenever something in the collection changes.")]
-        public event Action Changed;
+        public event Action? Changed;
 
         /// <summary>
         /// Occurs when a new item has just been added to the collection.
         /// </summary>
         [Description("Occurs when a new item has just been added to the collection.")]
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The normal event signature would have been unnecessarily verbose")]
-        public event Action<T> Added;
+        public event Action<T>? Added;
 
         /// <summary>
         /// Occurs when an item is just about to be removed from the collection.
         /// </summary>
         [Description("Occurs when an item is just about to be removed from the collection.")]
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The normal event signature would have been unnecessarily verbose")]
-        public event Action<T> Removing;
+        public event Action<T>? Removing;
 
         /// <summary>
         /// Occurs when an item has just been removed from the collection.
         /// </summary>
         [Description("Occurs when an item has just been removed from the collection.")]
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The normal event signature would have been unnecessarily verbose")]
-        public event Action<T> Removed;
+        public event Action<T>? Removed;
 
         private void OnChanged()
         {

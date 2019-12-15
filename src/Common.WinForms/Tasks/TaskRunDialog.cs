@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Net;
 using NanoByte.Common.Properties;
 
@@ -18,7 +17,7 @@ namespace NanoByte.Common.Tasks
     {
         private readonly ITask _task;
         private readonly Thread _taskThread;
-        private readonly ICredentialProvider _credentialProvider;
+        private readonly ICredentialProvider? _credentialProvider;
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly Progress<TaskSnapshot> _progress = new Progress<TaskSnapshot>();
 
@@ -28,7 +27,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="task">The trackable task to execute and display.</param>
         /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <c>null</c>.</param>
         /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
-        public TaskRunDialog([NotNull] ITask task, [CanBeNull] ICredentialProvider credentialProvider, CancellationTokenSource cancellationTokenSource)
+        public TaskRunDialog(ITask task, ICredentialProvider? credentialProvider, CancellationTokenSource cancellationTokenSource)
         {
             #region Sanity checks
             if (task == null) throw new ArgumentNullException(nameof(task));
@@ -67,7 +66,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// An exception thrown by <see cref="ITask.Run"/>, if any.
         /// </summary>
-        public Exception Exception { get; private set; }
+        public Exception? Exception { get; private set; }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on the UI thread.")]
         private void RunTask()

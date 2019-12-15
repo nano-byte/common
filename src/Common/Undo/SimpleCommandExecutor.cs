@@ -11,7 +11,7 @@ namespace NanoByte.Common.Undo
     public class SimpleCommandExecutor : ICommandExecutor
     {
         /// <inheritdoc/>
-        public string Path { get; set; }
+        public string? Path { get; set; }
 
         /// <inheritdoc/>
         public void Execute(IUndoCommand command)

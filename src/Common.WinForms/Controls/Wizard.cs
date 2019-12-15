@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
@@ -89,7 +88,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="page">The page to display and add.</param>
         /// <seealso cref="IWizardPage"/>
-        protected void PushPage([NotNull] UserControl page)
+        protected void PushPage(UserControl page)
         {
             #region Sanity checks
             if (page == null) throw new ArgumentNullException(nameof(page));

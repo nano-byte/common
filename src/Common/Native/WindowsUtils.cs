@@ -3,13 +3,11 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
 
@@ -59,7 +57,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation was cancelled by the user.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
         internal const int Win32ErrorCancelled = 1223;
 
         /// <summary>
@@ -224,8 +222,7 @@ namespace NanoByte.Common.Native
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns>The path to the .NET Framework root directory.</returns>
         /// <remarks>Returns 64-bit directories if <see cref="OSUtils.Is64BitProcess"/> is <c>true</c>.</remarks>
-        [NotNull]
-        public static string GetNetFxDirectory([NotNull] string version)
+        public static string GetNetFxDirectory(string version)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(version)) throw new ArgumentNullException(nameof(version));
@@ -248,8 +245,7 @@ namespace NanoByte.Common.Native
         /// An array of individual arguments.
         /// Will return the entire command-line as one argument when not running on Windows or if splitting failed for some other reason.
         /// </returns>
-        [NotNull, ItemNotNull]
-        public static string[] SplitArgs([CanBeNull] string commandLine)
+        public static string[] SplitArgs(string? commandLine)
         {
             if (string.IsNullOrEmpty(commandLine)) return new string[0];
             if (!IsWindows) return new[] {commandLine};
@@ -312,8 +308,7 @@ namespace NanoByte.Common.Native
         /// <returns>The contents of the file as a byte array; <c>null</c> if there was a problem reading the file.</returns>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>This method works like <see cref="File.ReadAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
-        [CanBeNull]
-        public static byte[] ReadAllBytes([NotNull, Localizable(false)] string path)
+        public static byte[]? ReadAllBytes([Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -349,7 +344,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="Win32Exception">There was a problem writing the file.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
         /// <remarks>This method works like <see cref="File.WriteAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
-        public static void WriteAllBytes([NotNull, Localizable(false)] string path, [NotNull] byte[] data)
+        public static void WriteAllBytes([Localizable(false)] string path, byte[] data)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -384,7 +379,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
         /// <exception cref="Win32Exception">The symbolic link creation failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
-        public static void CreateSymlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
+        public static void CreateSymlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
@@ -408,7 +403,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
         /// <exception cref="Win32Exception">Getting link information failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
-        public static bool IsSymlink([NotNull, Localizable(false)] string path)
+        public static bool IsSymlink([Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -430,7 +425,12 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
         /// <exception cref="Win32Exception">Getting link information failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
-        public static bool IsSymlink([NotNull, Localizable(false)] string path, out string target)
+        public static bool IsSymlink(
+            [Localizable(false)] string path,
+#if NETSTANDARD2_1
+            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out string? target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -453,7 +453,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the hard link.</exception>
         /// <exception cref="Win32Exception">The hard link creation failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
-        public static void CreateHardlink([NotNull, Localizable(false)] string sourcePath, [NotNull, Localizable(false)] string targetPath)
+        public static void CreateHardlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
@@ -474,7 +474,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
         /// <exception cref="Win32Exception">Checking the files failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
-        public static bool AreHardlinked([NotNull, Localizable(false)] string path1, [NotNull, Localizable(false)] string path2)
+        public static bool AreHardlinked([Localizable(false)] string path1, [Localizable(false)] string path2)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
@@ -485,7 +485,7 @@ namespace NanoByte.Common.Native
             return GetFileIndex(path1) == GetFileIndex(path2);
         }
 
-        private static ulong GetFileIndex([NotNull, Localizable(false)] string path)
+        private static ulong GetFileIndex([Localizable(false)] string path)
         {
             var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
             if (handle == IntPtr.Zero) throw BuildException(Marshal.GetLastWin32Error());
@@ -508,7 +508,7 @@ namespace NanoByte.Common.Native
         /// <param name="sourcePath">The source path to move the file from.</param>
         /// <param name="destinationPath">The destination path to move the file to. <c>null</c> to delete the file instead of moving it.</param>
         /// <remarks>Useful for replacing in-use files.</remarks>
-        public static void MoveFileOnReboot([NotNull] string sourcePath, [CanBeNull] string destinationPath)
+        public static void MoveFileOnReboot(string sourcePath, string? destinationPath)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
@@ -539,7 +539,7 @@ namespace NanoByte.Common.Native
         /// Informs the Windows shell that changes were made to the file association data in the registry.
         /// </summary>
         /// <remarks>This should be called immediately after the changes in order to trigger a refresh of the Explorer UI.</remarks>
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyAssocChanged()
         {
             if (!IsWindows) return;
@@ -549,13 +549,13 @@ namespace NanoByte.Common.Native
             NativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
         }
 
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
         private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
 
         /// <summary>
         /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
         /// </summary>
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyEnvironmentChanged()
         {
             if (!IsWindows) return;
@@ -589,7 +589,7 @@ namespace NanoByte.Common.Native
         /// Registers the current application for automatic restart after updates or crashes.
         /// </summary>
         /// <param name="arguments">The command-line arguments to pass to the application on restart. Must not be empty!</param>
-        public static void RegisterApplicationRestart([NotNull] string arguments)
+        public static void RegisterApplicationRestart(string arguments)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(arguments)) throw new ArgumentNullException(nameof(arguments));

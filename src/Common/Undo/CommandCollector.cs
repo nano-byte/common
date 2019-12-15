@@ -12,7 +12,7 @@ namespace NanoByte.Common.Undo
     public class CommandCollector : ICommandExecutor
     {
         /// <inheritdoc/>
-        public string Path { get; set; }
+        public string? Path { get; set; }
 
         private readonly List<IUndoCommand> _commands = new List<IUndoCommand>();
 

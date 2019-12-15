@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
-using JetBrains.Annotations;
 using NanoByte.Common.Controls;
 
 namespace NanoByte.Common.Native
@@ -95,7 +94,7 @@ namespace NanoByte.Common.Native
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local"), UsedImplicitly]
+            [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
             private struct Points
             {
                 public short x, y;

@@ -30,18 +30,18 @@ namespace NanoByte.Common.Controls
         /// Information about the exception that occurred.
         /// </summary>
         [XmlElement("exception")]
-        public ExceptionInfo Exception { get; set; }
+        public ExceptionInfo? Exception { get; set; }
 
         /// <summary>
         /// The contents of the <see cref="Log"/> file.
         /// </summary>
         [XmlElement("log"), DefaultValue("")]
-        public string Log { get; set; }
+        public string? Log { get; set; }
 
         /// <summary>
         /// Comments about the crash entered by the user.
         /// </summary>
         [XmlElement("comments"), DefaultValue("")]
-        public string Comments { get; set; }
+        public string? Comments { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -26,8 +25,7 @@ namespace NanoByte.Common.Storage
         /// <returns>The loaded object.</returns>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        [NotNull]
-        public static T LoadBinary<T>([NotNull] Stream stream)
+        public static T LoadBinary<T>(Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -57,8 +55,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the binary data.</exception>
         /// <remarks>Uses see cref="AtomicRead"/> internally.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        [NotNull]
-        public static T LoadBinary<T>([NotNull, Localizable(false)] string path)
+        public static T LoadBinary<T>([Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -75,7 +72,7 @@ namespace NanoByte.Common.Storage
         /// <typeparam name="T">The type of object to be saved in a binary stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The binary file to be written.</param>
-        public static void SaveBinary<T>([NotNull] this T data, [NotNull] Stream stream)
+        public static void SaveBinary<T>(this T data, Stream stream)
             => _serializer.Serialize(stream ?? throw new ArgumentNullException(nameof(stream)), data);
 
         /// <summary>
@@ -88,7 +85,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
-        public static void SaveBinary<T>([NotNull] this T data, [NotNull, Localizable(false)] string path)
+        public static void SaveBinary<T>(this T data, [Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

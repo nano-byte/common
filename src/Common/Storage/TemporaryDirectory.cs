@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -16,11 +15,12 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The fully qualified path of the temporary directory.
         /// </summary>
-        [NotNull]
         public string Path { get; }
 
-        [ContractAnnotation("null => null; notnull => notnull")]
-        public static implicit operator string(TemporaryDirectory dir) => dir?.Path;
+#if NETSTANDARD2_1
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("dir")]
+#endif
+        public static implicit operator string?(TemporaryDirectory dir) => dir?.Path;
 
         /// <summary>
         /// Creates a uniquely named, empty temporary directory on disk.
@@ -28,7 +28,7 @@ namespace NanoByte.Common.Storage
         /// <param name="prefix">A short string the directory name should start with.</param>
         /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="System.IO.Path.GetTempPath"/>.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
-        public TemporaryDirectory([NotNull, Localizable(false)] string prefix)
+        public TemporaryDirectory([Localizable(false)] string prefix)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));

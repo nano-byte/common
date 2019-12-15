@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
@@ -27,14 +26,14 @@ namespace NanoByte.Common
         /// Creates a new asynchronous form wrapper.
         /// </summary>
         /// <param name="init">Callback that creates an instance of the form for the message loop.</param>
-        public AsyncFormWrapper([NotNull] Func<T> init)
+        public AsyncFormWrapper(Func<T> init)
         {
             _init = init ?? throw new ArgumentNullException(nameof(init));
         }
 
         private readonly object _lock = new object();
 
-        private T _form;
+        private T? _form;
 
         [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "handle", Justification = "Need to retrieve value from Form.Handle to force window handle creation")]
         [SuppressMessage("ReSharper", "UnusedVariable", MessageId = "handle", Justification = "Need to retrieve value from Form.Handle to force window handle creation")]
@@ -45,7 +44,7 @@ namespace NanoByte.Common
             {
                 if (_form != null) return _form;
 
-                T form = null;
+                T form = null!;
                 using (var handleCreatedEvent = new ManualResetEvent(false))
                 {
                     ThreadUtils.StartAsync(() =>
@@ -73,8 +72,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
-        [PublicAPI]
-        public void Post([NotNull, InstantHandle] Action<T> action)
+        public void Post(Action<T> action)
         {
             var form = InitializeForm();
             try
@@ -102,8 +100,7 @@ namespace NanoByte.Common
         /// <param name="action">A delegate that is passed the <see cref="Form"/> instance and returns a result.</param>
         /// <returns>The result returned by <paramref name="action"/>.</returns>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
-        [PublicAPI]
-        public TResult Post<TResult>([NotNull, InstantHandle] Func<T, TResult> action)
+        public TResult Post<TResult>(Func<T, TResult> action)
         {
             var form = InitializeForm();
             try
@@ -129,8 +126,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
-        [PublicAPI]
-        public void Send([NotNull] Action<T> action)
+        public void Send(Action<T> action)
         {
             var form = InitializeForm();
             try
@@ -157,8 +153,7 @@ namespace NanoByte.Common
         /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
         /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
-        [PublicAPI]
-        public void SendLow([NotNull] Action<T> action)
+        public void SendLow(Action<T> action)
         {
             var form = _form;
             if (form == null) return;
@@ -185,7 +180,6 @@ namespace NanoByte.Common
         /// Closes the <see cref="Form"/> and stops the message loop.
         /// </summary>
         /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
-        [PublicAPI]
         public void Close()
         {
             T form;

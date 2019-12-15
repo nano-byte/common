@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using JetBrains.Annotations;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
@@ -20,7 +19,7 @@ namespace NanoByte.Common.Net
         /// Creates a new credential provider.
         /// </summary>
         /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        protected CredentialProviderBase([NotNull] ITaskHandler handler)
+        protected CredentialProviderBase(ITaskHandler handler)
         {
             _handler = handler;
         }
@@ -29,8 +28,7 @@ namespace NanoByte.Common.Net
         public bool Interactive => _handler.Verbosity > Verbosity.Batch;
 
         /// <inheritdoc/>
-        [CanBeNull]
-        public abstract NetworkCredential GetCredential(Uri uri, string authType);
+        public abstract NetworkCredential? GetCredential(Uri uri, string authType);
 
         private readonly HashSet<Uri> _invalidList = new HashSet<Uri>();
 
@@ -48,7 +46,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Checks whether <paramref name="uri"/> was previously reported as invalid and resets the flag.
         /// </summary>
-        protected bool WasReportedInvalid([NotNull] Uri uri)
+        protected bool WasReportedInvalid(Uri uri)
         {
             lock (_invalidList)
                 return _invalidList.Remove(uri);

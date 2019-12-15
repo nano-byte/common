@@ -3,7 +3,6 @@
 
 using System;
 using System.Net;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
@@ -20,7 +19,7 @@ namespace NanoByte.Common.Net
         /// Creates a new Windows command-line credential provider.
         /// </summary>
         /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        public WindowsCliCredentialProvider([NotNull] ITaskHandler handler)
+        public WindowsCliCredentialProvider(ITaskHandler handler)
             : base(handler)
         {}
 

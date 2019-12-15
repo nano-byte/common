@@ -7,7 +7,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
@@ -22,13 +21,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Starts a new <see cref="Process"/> and runs it in parallel with this one. Handles and wraps <see cref="Win32Exception"/>s.
         /// </summary>
-        /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
+        /// <returns>The newly launched process.</returns>
         /// <exception cref="IOException">There was a problem launching the executable.</exception>
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-        [PublicAPI, CanBeNull]
-        public static Process Start([NotNull] this ProcessStartInfo startInfo)
+        public static Process Start(this ProcessStartInfo startInfo)
         {
             #region Sanity checks
             if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
@@ -65,8 +63,7 @@ namespace NanoByte.Common
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-        [PublicAPI, CanBeNull]
-        public static Process Start([NotNull] string fileName, [NotNull] params string[] arguments)
+        public static Process? Start(string fileName, params string[] arguments)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));
@@ -84,8 +81,7 @@ namespace NanoByte.Common
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-        [PublicAPI]
-        public static int Run([NotNull] this ProcessStartInfo startInfo)
+        public static int Run(this ProcessStartInfo startInfo)
         {
             #region Sanity checks
             if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
@@ -102,8 +98,10 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="name">The name of the assembly to launch (without the file extension).</param>
         /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
-        [PublicAPI, NotNull, Pure]
-        public static ProcessStartInfo Assembly([NotNull] string name, [NotNull] params string[] arguments)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static ProcessStartInfo Assembly(string name, params string[] arguments)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
@@ -125,8 +123,7 @@ namespace NanoByte.Common
         /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows using UAC.
         /// </summary>
         /// <exception cref="PlatformNotSupportedException">The current operating system does not support UAC or it is disabled..</exception>
-        [PublicAPI, NotNull]
-        public static ProcessStartInfo AsAdmin([NotNull] this ProcessStartInfo startInfo)
+        public static ProcessStartInfo AsAdmin(this ProcessStartInfo startInfo)
         {
             #region Sanity checks
             if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));

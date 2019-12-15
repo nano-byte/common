@@ -1,16 +1,14 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
     /// <summary>
     /// A temporary directory with a file that may or may not exist to indicate whether a certain condition is true or false.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
     public class TemporaryFlagFile : TemporaryDirectory
     {
         /// <inheritdoc/>
@@ -21,11 +19,12 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The fully qualified path of the flag file.
         /// </summary>
-        [NotNull]
         public new string Path => System.IO.Path.Combine(base.Path, "flag");
 
-        [ContractAnnotation("null => null; notnull => notnull")]
-        public static implicit operator string(TemporaryFlagFile dir) => dir?.Path;
+#if NETSTANDARD2_1
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("dir")]
+#endif
+        public static implicit operator string?(TemporaryFlagFile dir) => dir?.Path;
 
         /// <summary>
         /// Indicates or controls whether the file exists.

@@ -5,7 +5,6 @@ using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -29,7 +28,7 @@ namespace NanoByte.Common.Controls
         /// <param name="exception">The error message to display.</param>
         /// <param name="logRtf">The details formatted as RTF.</param>
         /// <returns>The text the user entered if he pressed OK; otherwise <c>null</c>.</returns>
-        public static void Show([CanBeNull] IWin32Window owner, [NotNull] Exception exception, [NotNull] RtfBuilder logRtf)
+        public static void Show(IWin32Window? owner, Exception exception, RtfBuilder logRtf)
         {
             #region Sanity checks
             if (exception == null) throw new ArgumentNullException(nameof(exception));

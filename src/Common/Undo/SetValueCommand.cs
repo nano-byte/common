@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System;
-using JetBrains.Annotations;
 
 #if !NET20 && !NET35
 using System.Linq.Expressions;
@@ -18,17 +17,17 @@ namespace NanoByte.Common.Undo
     {
         private readonly PropertyPointer<T> _pointer;
         private readonly T _newValue;
-        private T _oldValue;
+        private T _oldValue = default!;
 
         /// <inheritdoc/>
-        public object Value => _newValue;
+        public object? Value => _newValue;
 
         /// <summary>
         /// Creates a new value-setting command.
         /// </summary>
         /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
         /// <param name="newValue">The new value to be set.</param>
-        public SetValueCommand([NotNull] PropertyPointer<T> pointer, T newValue)
+        public SetValueCommand(PropertyPointer<T> pointer, T newValue)
         {
             _newValue = newValue;
             _pointer = pointer ?? throw new ArgumentNullException(nameof(pointer));
@@ -60,7 +59,7 @@ namespace NanoByte.Common.Undo
         /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
         /// <param name="newValue">The new value to be set.</param>
         /// <typeparam name="T">The type of the value to set.</typeparam>
-        public static SetValueCommand<T> For<T>([NotNull] PropertyPointer<T> pointer, T newValue)
+        public static SetValueCommand<T> For<T>(PropertyPointer<T> pointer, T newValue)
             => new SetValueCommand<T>(pointer, newValue);
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace NanoByte.Common.Undo
         /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="newValue">The new value to be set.</param>
         /// <typeparam name="T">The type of the value to set.</typeparam>
-        public static SetValueCommand<T> For<T>([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T newValue)
+        public static SetValueCommand<T> For<T>(Func<T> getValue, Action<T> setValue, T newValue)
             => For(PropertyPointer.For(getValue, setValue), newValue);
 
 #if !NET20 && !NET35
@@ -80,7 +79,7 @@ namespace NanoByte.Common.Undo
         /// <typeparam name="T">The type of value the property contains.</typeparam>
         /// <param name="expression">An expression pointing to the property.</param>
         /// <param name="newValue">The new value to be set.</param>
-        public static SetValueCommand<T> For<T>( [NotNull] Expression<Func<T>> expression, T newValue)
+        public static SetValueCommand<T> For<T>( Expression<Func<T>> expression, T newValue)
             => For(PropertyPointer.For(expression), newValue);
 #endif
     }

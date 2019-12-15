@@ -15,7 +15,7 @@ namespace NanoByte.Common.Undo
         #region Variables
         private readonly object _target;
         private readonly PropertyDescriptor _property;
-        private readonly object _oldValue, _newValue;
+        private readonly object? _oldValue, _newValue;
         #endregion
 
         #region Constructor
@@ -26,7 +26,7 @@ namespace NanoByte.Common.Undo
         /// <param name="property">The property that was changed.</param>
         /// <param name="oldValue">The property's old value.</param>
         /// <param name="newValue">The property's current value.</param>
-        public PropertyChangedCommand(object target, PropertyDescriptor property, object oldValue, object newValue)
+        public PropertyChangedCommand(object target, PropertyDescriptor property, object? oldValue, object? newValue)
         {
             _target = target;
             _property = property;

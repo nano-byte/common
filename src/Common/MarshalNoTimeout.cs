@@ -13,6 +13,6 @@ namespace NanoByte.Common
     {
         /// <inheritdoc/>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.Infrastructure)]
-        public override object InitializeLifetimeService() => null;
+        public override object? InitializeLifetimeService() => null;
     }
 }

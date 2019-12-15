@@ -3,7 +3,6 @@
 
 using System;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -13,7 +12,7 @@ namespace NanoByte.Common
     /// <typeparam name="T">The type of the result.</typeparam>
     public sealed class Future<T> : IDisposable
     {
-        private T _result;
+        private T _result = default!;
         private readonly EventWaitHandle _waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
 
         /// <summary>
@@ -28,7 +27,9 @@ namespace NanoByte.Common
         /// <summary>
         /// Waits for the result and returns it when it is ready.
         /// </summary>
-        [Pure]
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
         public T Get()
         {
             _waitHandle.WaitOne();

@@ -3,7 +3,6 @@
 
 using System;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Streams
 {
@@ -12,7 +11,6 @@ namespace NanoByte.Common.Streams
     /// </summary>
     public class OffsetStream : Stream
     {
-        [NotNull]
         private readonly Stream _baseStream;
 
         private readonly long _offset;
@@ -22,7 +20,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="baseStream">Underlying stream for which all access will be offset.</param>
         /// <param name="offset">Number of bytes to offset the <paramref name="baseStream"/>.</param>
-        public OffsetStream([NotNull] Stream baseStream, long offset)
+        public OffsetStream(Stream baseStream, long offset)
         {
             _baseStream = baseStream ?? throw new ArgumentNullException(nameof(baseStream));
             _baseStream.Position = _offset = offset;

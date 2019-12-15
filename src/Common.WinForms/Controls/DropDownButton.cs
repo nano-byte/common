@@ -51,7 +51,7 @@ namespace NanoByte.Common.Controls
 
         private bool _showSplit;
         private bool _skipNextOpen;
-        private ContextMenuStrip _dropDownMenuStrip;
+        private ContextMenuStrip? _dropDownMenuStrip;
         private PushButtonState _state;
 
         private TextFormatFlags _textFormatFlags = TextFormatFlags.Default;
@@ -63,10 +63,10 @@ namespace NanoByte.Common.Controls
 
         #region Properties
         [Browsable(false)]
-        public override ContextMenuStrip ContextMenuStrip { get => DropDownMenuStrip; set => DropDownMenuStrip = value; }
+        public override ContextMenuStrip? ContextMenuStrip { get => DropDownMenuStrip; set => DropDownMenuStrip = value; }
 
         [DefaultValue(null)]
-        public ContextMenuStrip DropDownMenuStrip
+        public ContextMenuStrip? DropDownMenuStrip
         {
             get => _dropDownMenuStrip;
             set

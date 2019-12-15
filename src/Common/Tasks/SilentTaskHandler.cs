@@ -20,7 +20,7 @@ namespace NanoByte.Common.Tasks
         public virtual CancellationToken CancellationToken => default;
 
         /// <inheritdoc/>
-        public virtual ICredentialProvider CredentialProvider => null;
+        public virtual ICredentialProvider? CredentialProvider => null;
 
         /// <inheritdoc/>
         public void RunTask(ITask task)
@@ -46,7 +46,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Always returns <paramref name="defaultAnswer"/>.
         /// </summary>
-        public bool Ask(string question, bool defaultAnswer, string alternateMessage = null)
+        public bool Ask(string question, bool defaultAnswer, string? alternateMessage = null)
         {
             Log.Info($"Question: {question}\nAutomatic answer: {defaultAnswer}");
             return defaultAnswer;

@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -24,7 +23,7 @@ namespace NanoByte.Common.Dispatch
         /// Creates a new predicate-matching bucketizer.
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
-        internal Bucketizer([NotNull] IEnumerable<T> elements)
+        internal Bucketizer(IEnumerable<T> elements)
         {
             _elements = elements ?? throw new ArgumentNullException(nameof(elements));
         }
@@ -35,7 +34,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="predicate">A condition to check elements against.</param>
         /// <param name="bucket">The collection elements are added to if they match the <paramref name="predicate"/>.</param>
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
-        public Bucketizer<T> Add([NotNull] Predicate<T> predicate, [NotNull] ICollection<T> bucket)
+        public Bucketizer<T> Add(Predicate<T> predicate, ICollection<T> bucket)
         {
             _rules.Add(new BucketRule<T>(
                 predicate ?? throw new ArgumentNullException(nameof(predicate)),
@@ -73,6 +72,6 @@ namespace NanoByte.Common.Dispatch
         /// Creates a new predicate-matching bucketizer.
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
-        public static Bucketizer<T> Bucketize<T>([NotNull] this IEnumerable<T> elements) => new Bucketizer<T>(elements);
+        public static Bucketizer<T> Bucketize<T>(this IEnumerable<T> elements) => new Bucketizer<T>(elements);
     }
 }

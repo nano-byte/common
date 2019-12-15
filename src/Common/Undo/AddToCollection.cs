@@ -12,6 +12,7 @@ namespace NanoByte.Common.Undo
     /// <typeparam name="T">The type of elements the collection contains.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "The complete name is not ambiguous.")]
     public sealed class AddToCollection<T> : CollectionCommand<T>
+        where T : notnull
     {
         /// <summary>
         /// Creates a new add to collection command.
@@ -45,6 +46,7 @@ namespace NanoByte.Common.Undo
         /// <param name="element">The element to be added to <paramref name="collection"/>.</param>
         /// <typeparam name="T">The type of elements the collection contains.</typeparam>
         public static AddToCollection<T> For<T>(ICollection<T> collection, T element)
+            where T : notnull
             => new AddToCollection<T>(collection, element);
     }
 }

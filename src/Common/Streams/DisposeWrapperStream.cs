@@ -3,7 +3,6 @@
 
 using System;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Streams
 {
@@ -20,7 +19,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="baseStream">The underlying <see cref="Stream"/> providing the actual data. Will be disposed.</param>
         /// <param name="disposeHandler">Executed before <paramref name="baseStream"/> is disposed.</param>
-        public DisposeWarpperStream([NotNull] Stream baseStream, [NotNull] Action disposeHandler)
+        public DisposeWarpperStream(Stream baseStream, Action disposeHandler)
         {
             _baseStream = baseStream ?? throw new ArgumentNullException(nameof(baseStream));
             _disposeHandler = disposeHandler ?? throw new ArgumentNullException(nameof(disposeHandler));

@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using JetBrains.Annotations;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Values;
 using Resources = NanoByte.Common.Properties.Resources;
@@ -39,8 +38,7 @@ namespace NanoByte.Common.Storage
         /// <returns>The loaded object.</returns>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        [NotNull]
-        public static T LoadXml<T>([NotNull] Stream stream)
+        public static T LoadXml<T>(Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -71,8 +69,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         /// <remarks>Uses <see cref="AtomicRead"/> internally.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        [NotNull]
-        public static T LoadXml<T>([NotNull, Localizable(false)] string path)
+        public static T LoadXml<T>([Localizable(false)] string path)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -106,8 +103,7 @@ namespace NanoByte.Common.Storage
         /// <returns>The loaded object.</returns>
         /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-        [NotNull]
-        public static T FromXmlString<T>([NotNull, Localizable(false)] string data)
+        public static T FromXmlString<T>([Localizable(false)] string data)
         {
             #region Sanity checks
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -127,7 +123,7 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The stream to write the encoded XML data to.</param>
         /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
-        public static void SaveXml<T>([NotNull] this T data, [NotNull] Stream stream, [CanBeNull, Localizable(false)] string stylesheet = null)
+        public static void SaveXml<T>(this T data, Stream stream, [Localizable(false)] string? stylesheet = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -182,7 +178,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
-        public static void SaveXml<T>([NotNull] this T data, [NotNull, Localizable(false)] string path, [CanBeNull, Localizable(false)] string stylesheet = null)
+        public static void SaveXml<T>(this T data, [Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -203,7 +199,7 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The object to be stored.</param>
         /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         /// <returns>A string containing the XML code.</returns>
-        public static string ToXmlString<T>([NotNull] this T data, [CanBeNull, Localizable(false)] string stylesheet = null)
+        public static string ToXmlString<T>(this T data, [Localizable(false)] string? stylesheet = null)
         {
             using (var stream = new MemoryStream())
             {

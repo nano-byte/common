@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Native
@@ -24,7 +23,7 @@ namespace NanoByte.Common.Native
         /// <returns>The handle for the mutex. Can be used in <see cref="Close"/>. Will automatically be released once the process terminates.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        public static IntPtr Create([NotNull, Localizable(false)] string name, out bool alreadyExists)
+        public static IntPtr Create([Localizable(false)] string name, out bool alreadyExists)
         {
             if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
@@ -54,7 +53,7 @@ namespace NanoByte.Common.Native
         /// <returns><c>true</c> if an existing mutex was found; <c>false</c> if none existed.</returns>
         /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-        public static bool Probe([NotNull, Localizable(false)] string name)
+        public static bool Probe([Localizable(false)] string name)
         {
             if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 

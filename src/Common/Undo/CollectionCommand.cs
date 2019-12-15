@@ -10,6 +10,7 @@ namespace NanoByte.Common.Undo
     /// </summary>
     /// <typeparam name="T">The type of elements the collection contains.</typeparam>
     public abstract class CollectionCommand<T> : SimpleCommand, IValueCommand
+        where T : notnull
     {
         /// <summary>
         /// The collection to be modified.

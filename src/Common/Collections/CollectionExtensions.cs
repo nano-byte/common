@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -17,7 +16,7 @@ namespace NanoByte.Common.Collections
         /// Adds multiple elements to the list.
         /// </summary>
         /// <remarks>This is a covariant wrapper for <see cref="List{T}.AddRange"/>.</remarks>
-        public static void AddRange<TList, TElements>([NotNull] this List<TList> list, [NotNull, InstantHandle] IEnumerable<TElements> elements)
+        public static void AddRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
             where TElements : TList
         {
             #region Sanity checks
@@ -33,7 +32,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><c>true</c> if the element was added to the collection; <c>true</c> if the collection already contained the element.</returns>
         /// <remarks>This makes it possible to use a <see cref="ICollection{T}"/> with semantics similar to a <see cref="HashSet{T}"/>.</remarks>
-        public static bool AddIfNew<T>([NotNull] this ICollection<T> collection, T element)
+        public static bool AddIfNew<T>(this ICollection<T> collection, T element)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -51,7 +50,7 @@ namespace NanoByte.Common.Collections
         /// Adds multiple elements to the collection.
         /// </summary>
         /// <seealso cref="List{T}.AddRange"/>
-        public static void AddRange<TCollection, TElements>([NotNull] this ICollection<TCollection> collection, [NotNull, InstantHandle] IEnumerable<TElements> elements)
+        public static void AddRange<TCollection, TElements>(this ICollection<TCollection> collection, IEnumerable<TElements> elements)
             where TElements : TCollection
         {
             #region Sanity checks
@@ -66,7 +65,7 @@ namespace NanoByte.Common.Collections
         /// Removes multiple elements from the collection.
         /// </summary>
         /// <seealso cref="List{T}.RemoveRange"/>
-        public static void RemoveRange<TCollection, TElements>([NotNull] this ICollection<TCollection> collection, [NotNull, InstantHandle] IEnumerable<TElements> elements)
+        public static void RemoveRange<TCollection, TElements>(this ICollection<TCollection> collection, IEnumerable<TElements> elements)
             where TElements : TCollection
         {
             #region Sanity checks
@@ -82,7 +81,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><c>true</c> if any elements where removed.</returns>
         /// <seealso cref="List{T}.RemoveAll"/>
-        public static bool RemoveAll<T>([NotNull, InstantHandle] this ICollection<T> collection, [NotNull] Func<T, bool> condition)
+        public static bool RemoveAll<T>(this ICollection<T> collection, Func<T, bool> condition)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -103,7 +102,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="list">The list to remove the elements from.</param>
         /// <param name="number">The number of elements to remove.</param>
-        public static void RemoveLast<T>([NotNull] this List<T> list, int number = 1)
+        public static void RemoveLast<T>(this List<T> list, int number = 1)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException(nameof(list));
@@ -120,7 +119,7 @@ namespace NanoByte.Common.Collections
         /// <param name="element">The element to add or update.</param>
         /// <param name="keySelector">Used to map elements to keys for comparison</param>
         /// <returns></returns>
-        public static bool AddOrReplace<T, TKey>([NotNull] this List<T> list, [NotNull] T element, [NotNull, InstantHandle] Func<T, TKey> keySelector)
+        public static bool AddOrReplace<T, TKey>(this List<T> list, T element, Func<T, TKey> keySelector)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException(nameof(list));
@@ -165,7 +164,7 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The list to check.</param>
         /// <param name="element">The element to look for.</param>
         /// <remarks>Useful for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
-        public static bool ContainsOrEmpty<T>([NotNull] this ICollection<T> collection, [NotNull] T element)
+        public static bool ContainsOrEmpty<T>(this ICollection<T> collection, T element)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -182,8 +181,10 @@ namespace NanoByte.Common.Collections
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns><c>true</c> if <paramref name="first"/> contains any element from <paramref name="second"/>. <c>false</c> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
-        [Pure]
-        public static bool ContainsAny<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool ContainsAny<T>(this ICollection<T> first, ICollection<T> second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException(nameof(first));
@@ -200,8 +201,10 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-        [Pure]
-        public static bool SequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool SequencedEquals<T>(this ICollection<T> first, ICollection<T> second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException(nameof(first));
@@ -219,8 +222,10 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-        [Pure]
-        public static bool UnsequencedEquals<T>([NotNull, InstantHandle] this ICollection<T> first, [NotNull, InstantHandle] ICollection<T> second, [CanBeNull] IEqualityComparer<T> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool UnsequencedEquals<T>(this ICollection<T> first, ICollection<T> second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException(nameof(first));
@@ -239,8 +244,10 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The collection to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="SequencedEquals{T}(ICollection{T},ICollection{T},IEqualityComparer{T})"/>
-        [Pure]
-        public static int GetSequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull] IEqualityComparer<T> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static int GetSequencedHashCode<T>(this ICollection<T> collection, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -251,8 +258,11 @@ namespace NanoByte.Common.Collections
             {
                 int result = 397;
                 // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T item in collection.WhereNotNull())
-                    result = (result * 397) ^ comparer.GetHashCode(item);
+                foreach (T item in collection)
+                {
+                    if (item != null)
+                        result = (result * 397) ^ comparer.GetHashCode(item);
+                }
                 return result;
             }
         }
@@ -263,8 +273,10 @@ namespace NanoByte.Common.Collections
         /// <param name="collection">The collection to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="UnsequencedEquals{T}"/>
-        [Pure]
-        public static int GetUnsequencedHashCode<T>([NotNull, InstantHandle] this ICollection<T> collection, [CanBeNull, InstantHandle] IEqualityComparer<T> comparer = null)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static int GetUnsequencedHashCode<T>(this ICollection<T> collection, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -275,8 +287,11 @@ namespace NanoByte.Common.Collections
             {
                 int result = 397;
                 // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T item in collection.WhereNotNull())
-                    result = result ^ comparer.GetHashCode(item);
+                foreach (T item in collection)
+                {
+                    if (item != null)
+                        result = result ^ comparer.GetHashCode(item);
+                }
                 return result;
             }
         }
@@ -284,8 +299,10 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Generates all possible permutations of a set of <paramref name="elements"/>.
         /// </summary>
-        [Pure, NotNull, ItemNotNull]
-        public static IEnumerable<T[]> Permutate<T>([NotNull] this IEnumerable<T> elements)
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T[]> Permutate<T>(this IEnumerable<T> elements)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));

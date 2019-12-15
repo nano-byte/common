@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -15,14 +14,12 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The home/profile directory of the current user.
         /// </summary>
-        [PublicAPI, NotNull]
         public static string HomeDir => Environment.GetEnvironmentVariable(WindowsUtils.IsWindows ? "userprofile" : "HOME") ?? "";
 
         /// <summary>
         /// The directory to store per-user settings (can roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%appdata%</c>, on Linux it usually is <c>~/.config</c>.</remarks>
-        [PublicAPI, NotNull]
         public static string UserConfigDir => GetEnvironmentVariable("XDG_CONFIG_HOME", WindowsUtils.IsWindows
             ? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
             : Path.Combine(HomeDir, ".config"));
@@ -31,7 +28,6 @@ namespace NanoByte.Common.Storage
         /// The directory to store per-user data files (should not roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.local/share</c>.</remarks>
-        [PublicAPI, NotNull]
         public static string UserDataDir => GetEnvironmentVariable("XDG_DATA_HOME", WindowsUtils.IsWindows
             ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
             : Path.Combine(HomeDir, ".local/share"));
@@ -40,7 +36,6 @@ namespace NanoByte.Common.Storage
         /// The directory to store per-user non-essential data (should not roam across different machines).
         /// </summary>
         /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.cache</c>.</remarks>
-        [PublicAPI, NotNull]
         public static string UserCacheDir => GetEnvironmentVariable("XDG_CACHE_HOME", WindowsUtils.IsWindows
             ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
             : Path.Combine(HomeDir, ".cache"));
@@ -50,7 +45,6 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/etc/xdg</c>.</remarks>
-        [PublicAPI, NotNull]
         public static string SystemConfigDirs => GetEnvironmentVariable("XDG_CONFIG_DIRS", WindowsUtils.IsWindows
             ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
             : "/etc/xdg");
@@ -60,7 +54,6 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/usr/local/share:/usr/share</c>.</remarks>
-        [PublicAPI, NotNull]
         public static string SystemDataDirs => GetEnvironmentVariable("XDG_DATA_DIRS", WindowsUtils.IsWindows
             ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
             : "/usr/local/share" + Path.PathSeparator + "/usr/share");
@@ -69,7 +62,6 @@ namespace NanoByte.Common.Storage
         /// The directory to store machine-wide non-essential data.
         /// </summary>
         /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it is <c>/var/cache</c>.</remarks>
-        [PublicAPI, NotNull]
         public static string SystemCacheDir => WindowsUtils.IsWindows
             ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
             : "/var/cache";
@@ -83,8 +75,7 @@ namespace NanoByte.Common.Storage
         /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        [PublicAPI, NotNull]
-        public static string GetCacheDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
+        public static string GetCacheDirPath([Localizable(false)] string appName, bool machineWide, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
@@ -133,8 +124,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
         /// <remarks>If a new directory is created with <paramref name="machineWide"/> set to <c>true</c> on Windows, ACLs are set to deny write access for non-Administrator users.</remarks>
-        [PublicAPI, NotNull]
-        public static string GetIntegrationDirPath([NotNull, Localizable(false)] string appName, bool machineWide, [NotNull, ItemNotNull] params string[] resource)
+        public static string GetIntegrationDirPath([Localizable(false)] string appName, bool machineWide, params string[] resource)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));

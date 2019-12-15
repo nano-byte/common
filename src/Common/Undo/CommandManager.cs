@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using JetBrains.Annotations;
 using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Undo
@@ -13,7 +12,6 @@ namespace NanoByte.Common.Undo
     /// Executes <see cref="IUndoCommand"/>s for editing a specific object and allows undo/redo operations.
     /// </summary>
     /// <typeparam name="T">The type of the object being edited.</typeparam>
-    [PublicAPI]
     public class CommandManager<T> : ICommandManager<T>
         where T : class
     {
@@ -25,19 +23,19 @@ namespace NanoByte.Common.Undo
         public T Target { get; set; }
 
         /// <inheritdoc/>
-        public event Action TargetUpdated;
+        public event Action? TargetUpdated;
 
         /// <summary>
         /// The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.
         /// </summary>
-        public string Path { get; set; }
+        public string? Path { get; set; }
 
         /// <summary>
         /// Creates a new command manager.
         /// </summary>
         /// <param name="target">The object being edited.</param>
         /// <param name="path">The path of the file the <paramref name="target"/> was loaded from. <c>null</c> if none.</param>
-        public CommandManager([NotNull] T target, [CanBeNull] string path = null)
+        public CommandManager(T target, string? path = null)
         {
             Target = target ?? throw new ArgumentNullException(nameof(target));
             Path = path;
@@ -47,7 +45,7 @@ namespace NanoByte.Common.Undo
         public bool UndoEnabled { get; private set; }
 
         /// <inheritdoc/>
-        public event Action UndoEnabledChanged;
+        public event Action? UndoEnabledChanged;
 
         private void SetUndoEnabled(bool value)
         {
@@ -59,7 +57,7 @@ namespace NanoByte.Common.Undo
         public bool RedoEnabled { get; private set; }
 
         /// <inheritdoc/>
-        public event Action RedoEnabledChanged;
+        public event Action? RedoEnabledChanged;
 
         private void SetRedoEnabled(bool value)
         {
@@ -152,8 +150,7 @@ namespace NanoByte.Common.Undo
         /// <exception cref="IOException">A problem occurs while reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="InvalidDataException">A problem occurs while deserializing the XML data.</exception>
-        [NotNull]
-        public static CommandManager<T> Load([NotNull] string path)
+        public static CommandManager<T> Load(string path)
             => new CommandManager<T>(XmlStorage.LoadXml<T>(path), path);
     }
 
@@ -167,7 +164,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         /// <param name="target">The object being edited.</param>
         /// <param name="path">The path of the file the <paramref name="target"/> was loaded from. <c>null</c> if none.</param>
-        public static ICommandManager<T> For<T>([NotNull] T target, [CanBeNull] string path = null)
+        public static ICommandManager<T> For<T>(T target, string? path = null)
             where T : class
             => new CommandManager<T>(target, path);
     }

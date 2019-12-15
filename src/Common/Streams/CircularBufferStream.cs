@@ -77,7 +77,7 @@ namespace NanoByte.Common.Streams
         private bool _doneWriting;
 
         /// <summary>Exceptions sent to <see cref="Read"/>ers via <see cref="RelayErrorToReader"/>.</summary>
-        private Exception _relayedException;
+        private Exception? _relayedException;
 
         /// <summary>A barrier that blocks threads until new data is available in the <see cref="_buffer"/>.</summary>
         private readonly ManualResetEvent _dataAvailable = new ManualResetEvent(initialState: false);

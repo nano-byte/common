@@ -3,7 +3,6 @@
 
 using System;
 using System.Net;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Net
 {
@@ -21,6 +20,6 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Report that the credentials that were retrieved for <paramref name="uri"/> were incorrect.
         /// </summary>
-        void ReportInvalid([NotNull] Uri uri);
+        void ReportInvalid(Uri uri);
     }
 }

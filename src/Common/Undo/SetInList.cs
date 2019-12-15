@@ -10,6 +10,7 @@ namespace NanoByte.Common.Undo
     /// </summary>
     /// <typeparam name="T">The type of elements the list contains.</typeparam>
     public sealed class SetInList<T> : SimpleCommand, IValueCommand
+        where T : notnull
     {
         private readonly IList<T> _list;
         private readonly T _oldElement, _newElement;
@@ -54,6 +55,7 @@ namespace NanoByte.Common.Undo
         /// <param name="newElement">The new element to take the place of <paramref name="oldElement"/> in the <paramref name="list"/>.</param>
         /// <typeparam name="T">The type of elements the list contains.</typeparam>
         public static SetInList<T> For<T>(IList<T> list, T oldElement, T newElement)
+            where T : notnull
             => new SetInList<T>(list, oldElement, newElement);
     }
 }

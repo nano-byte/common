@@ -8,6 +8,6 @@ namespace NanoByte.Common.Undo
     /// </summary>
     public interface IValueCommand : IUndoCommand
     {
-        object Value { get; }
+        object? Value { get; }
     }
 }

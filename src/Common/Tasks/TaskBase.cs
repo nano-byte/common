@@ -21,13 +21,13 @@ namespace NanoByte.Common.Tasks
         public abstract string Name { get; }
 
         /// <inheritdoc/>
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
 
         /// <inheritdoc/>
         public virtual bool CanCancel => true;
 
         /// <summary>The identity of the user that originally created this task.</summary>
-        private readonly WindowsIdentity _originalIdentity;
+        private readonly WindowsIdentity? _originalIdentity;
 
         protected TaskBase()
         {
@@ -39,13 +39,13 @@ namespace NanoByte.Common.Tasks
         protected CancellationToken CancellationToken;
 
         /// <summary>Used to report back the task's progress.</summary>
-        private IProgress<TaskSnapshot> _progress;
+        private IProgress<TaskSnapshot>? _progress;
 
         /// <summary>Used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <c>null</c>.</summary>
-        protected ICredentialProvider CredentialProvider;
+        protected ICredentialProvider? CredentialProvider;
 
         /// <inheritdoc/>
-        public void Run(CancellationToken cancellationToken = default, ICredentialProvider credentialProvider = null, IProgress<TaskSnapshot> progress = null)
+        public void Run(CancellationToken cancellationToken = default, ICredentialProvider? credentialProvider = null, IProgress<TaskSnapshot>? progress = null)
         {
             cancellationToken.ThrowIfCancellationRequested();
             CancellationToken = cancellationToken;

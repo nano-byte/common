@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Native
 {
@@ -18,7 +17,7 @@ namespace NanoByte.Common.Native
         /// Centers a window on its parent/owner. Call this from the <see cref="Form.Load"/> event handler.
         /// </summary>
         /// <remarks>This method is an alternative to <see cref="FormStartPosition.CenterParent"/> which only works with <see cref="Form.ShowDialog(IWin32Window)"/> and not <see cref="Form.Show(IWin32Window)"/>.</remarks>
-        public static void CenterOnParent([NotNull] this Form form)
+        public static void CenterOnParent(this Form form)
         {
             #region Sanity checks
             if (form == null) throw new ArgumentNullException(nameof(form));
@@ -34,7 +33,7 @@ namespace NanoByte.Common.Native
         /// Forces a window to the foreground or flashes the taskbar if another process has the focus.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method operates only on windows and not on individual controls.")]
-        public static void SetForegroundWindow([NotNull] this Form form)
+        public static void SetForegroundWindow(this Form form)
         {
             #region Sanity checks
             if (form == null) throw new ArgumentNullException(nameof(form));
@@ -48,7 +47,7 @@ namespace NanoByte.Common.Native
         /// Configures a control to move the entire window when clicked and dragged.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method operates only on windows and not on individual controls.")]
-        public static void EnableWindowDrag([NotNull] this Control control)
+        public static void EnableWindowDrag(this Control control)
         {
             #region Sanity checks
             if (control == null) throw new ArgumentNullException(nameof(control));
@@ -75,7 +74,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <remarks>This is purely cosmetic. UAC elevation is a separate concern.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons."), SuppressMessage("ReSharper", "InconsistentNaming")]
-        public static void AddShieldIcon([NotNull] this Button button)
+        public static void AddShieldIcon(this Button button)
         {
             #region Sanity checks
             if (button == null) throw new ArgumentNullException(nameof(button));

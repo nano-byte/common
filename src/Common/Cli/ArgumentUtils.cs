@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Cli
@@ -24,8 +23,7 @@ namespace NanoByte.Common.Cli
         /// <returns>Handles to all matching files that were found</returns>
         /// <exception cref="FileNotFoundException">A file that was explicitly specified in <paramref name="args"/> (no wildcards) could not be found.</exception>
         /// <remarks><paramref name="args"/> are first interpreted as files, then as directories. Directories are searched using the <paramref name="defaultPattern"/>. * and ? characters are considered as wildcards.</remarks>
-        [NotNull, ItemNotNull]
-        public static IList<FileInfo> GetFiles([NotNull, ItemNotNull] IEnumerable<string> args, [NotNull, Localizable(false)] string defaultPattern = "*")
+        public static IList<FileInfo> GetFiles(IEnumerable<string> args, [Localizable(false)] string defaultPattern = "*")
         {
             #region Sanity checks
             if (args == null) throw new ArgumentNullException(nameof(args));

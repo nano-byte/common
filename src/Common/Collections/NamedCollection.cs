@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Collections
@@ -19,7 +18,7 @@ namespace NanoByte.Common.Collections
     {
         #region Events
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        public event Action<object> CollectionChanged;
+        public event Action<object>? CollectionChanged;
 
         private void OnCollectionChanged() => CollectionChanged?.Invoke(this);
         #endregion
@@ -35,7 +34,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new named collection pre-filled with elements.
         /// </summary>
         /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed{T}.Name"/>s!</param>
-        public NamedCollection([NotNull, ItemNotNull] IEnumerable<T> elements)
+        public NamedCollection(IEnumerable<T> elements)
             : this()
         {
             #region Sanity checks
@@ -52,7 +51,7 @@ namespace NanoByte.Common.Collections
         /// <param name="newName">The new <see cref="INamed{T}.Name"/> for the element.</param>
         /// <exception cref="KeyNotFoundException">The <paramref name="element"/> is not in the collection.</exception>
         /// <exception cref="InvalidOperationException">The <paramref name="newName"/> is already taken by another element in the collection.</exception>
-        public void Rename([NotNull] T element, [NotNull, Localizable(false)] string newName)
+        public void Rename(T element, [Localizable(false)] string newName)
         {
             #region Sanity checks
             if (element == null) throw new ArgumentNullException(nameof(element));

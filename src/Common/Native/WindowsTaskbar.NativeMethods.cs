@@ -286,7 +286,7 @@ namespace NanoByte.Common.Native
         private class CShellLink
         {}
 
-        private static readonly ITaskbarList4 _taskbarList;
+        private static readonly ITaskbarList4? _taskbarList;
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Must perform COM call during init")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]

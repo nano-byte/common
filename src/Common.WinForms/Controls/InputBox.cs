@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
@@ -31,8 +30,7 @@ namespace NanoByte.Common.Controls
         /// <param name="defaultText">The default text to show pre-entered in the input field.</param>
         /// <param name="password">Shall the input characters be hidden as a password?</param>
         /// <returns>The text the user entered if she pressed OK; otherwise <c>null</c>.</returns>
-        [CanBeNull]
-        public static string Show([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string prompt, [CanBeNull, Localizable(true)] string defaultText = null, bool password = false)
+        public static string? Show(IWin32Window? owner, [Localizable(true)] string title, [Localizable(true)] string prompt, [Localizable(true)] string? defaultText = null, bool password = false)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));

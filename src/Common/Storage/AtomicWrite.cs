@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Storage
 {
@@ -24,13 +23,11 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The file path of the final destination.
         /// </summary>
-        [NotNull]
         public string DestinationPath { get; }
 
         /// <summary>
         /// The temporary file path to write to.
         /// </summary>
-        [NotNull]
         public string WritePath { get; }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace NanoByte.Common.Storage
         /// Prepares an atomic write operation.
         /// </summary>
         /// <param name="path">The file path of the final destination.</param>
-        public AtomicWrite([NotNull, Localizable(false)] string path)
+        public AtomicWrite([Localizable(false)] string path)
         {
             DestinationPath = path ?? throw new ArgumentNullException(nameof(path));
 

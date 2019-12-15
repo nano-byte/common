@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -15,12 +14,11 @@ namespace NanoByte.Common.Tasks
     public struct CancellationTokenRegistration : IDisposable
     {
         [SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields", Justification = "Access to this field is remoted.")]
-        [CanBeNull]
-        private readonly CancellationTokenSource _source;
+        private readonly CancellationTokenSource? _source;
 
         private readonly Action _callback;
 
-        internal CancellationTokenRegistration([CanBeNull] CancellationTokenSource source, [NotNull] Action callback)
+        internal CancellationTokenRegistration(CancellationTokenSource? source, Action callback)
         {
             _source = source;
             _callback = callback;

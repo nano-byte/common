@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-using JetBrains.Annotations;
 using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Info
@@ -87,7 +86,7 @@ namespace NanoByte.Common.Info
         /// <summary>
         /// Loads application information for a specific <see cref="Assembly"/>.
         /// </summary>
-        public static AppInfo Load([CanBeNull] Assembly assembly)
+        public static AppInfo Load(Assembly? assembly)
         {
             if (assembly == null) return new AppInfo();
 

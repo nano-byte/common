@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
@@ -26,7 +25,7 @@ namespace NanoByte.Common.Controls
         /// <param name="owner">The parent window for the dialogs; can be <c>null</c>.</param>
         /// <param name="title">The text to display above the <paramref name="message"/>.</param>
         /// <param name="message">The selectable multi-line text to display to the user.</param>
-        public static void Show([CanBeNull] IWin32Window owner, [NotNull, Localizable(true)] string title, [NotNull, Localizable(true)] string message)
+        public static void Show(IWin32Window? owner, [Localizable(true)] string title, [Localizable(true)] string message)
         {
             #region Sanity checks
             if (title == null) throw new ArgumentNullException(nameof(title));

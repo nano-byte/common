@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Undo
@@ -19,8 +18,8 @@ namespace NanoByte.Common.Undo
         #region Variables
         private readonly object[] _targets;
         private readonly PropertyDescriptor _property;
-        private readonly object[] _oldValues;
-        private readonly object _newValue;
+        private readonly object?[] _oldValues;
+        private readonly object? _newValue;
         #endregion
 
         #region Constructor
@@ -31,7 +30,7 @@ namespace NanoByte.Common.Undo
         /// <param name="property">The property that was changed.</param>
         /// <param name="oldValues">The property's old values.</param>
         /// <param name="newValue">The property's current value.</param>
-        public MultiPropertyChangedCommand([NotNull] object[] targets, [NotNull] PropertyDescriptor property, [NotNull] object[] oldValues, object newValue)
+        public MultiPropertyChangedCommand(object[] targets, PropertyDescriptor property, object?[] oldValues, object? newValue)
         {
             _targets = targets ?? throw new ArgumentNullException(nameof(targets));
             _property = property ?? throw new ArgumentNullException(nameof(property));
@@ -48,7 +47,7 @@ namespace NanoByte.Common.Undo
         /// <param name="oldValues">The property's old values.</param>
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "The arguments are passed on to a different overload of the constructor")]
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Justification = "This is simply a comfort wrapper for extracting values from the event arguments")]
-        public MultiPropertyChangedCommand([NotNull] object[] targets, [NotNull] GridItem gridItem, [NotNull] object[] oldValues)
+        public MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object?[] oldValues)
             // ReSharper disable once AssignNullToNotNullAttribute
             : this(targets, gridItem.PropertyDescriptor, oldValues, gridItem.Value)
         {}
@@ -64,7 +63,7 @@ namespace NanoByte.Common.Undo
         {
             foreach (var target in _targets)
                 // Use reflection to get the specific property for each object and set the new value everywhere
-                target.GetType().GetProperty(_property.Name).SetValue(target, _newValue, null);
+                target.GetType().GetProperty(_property.Name)!.SetValue(target, _newValue, null);
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace NanoByte.Common.Undo
         {
             for (int i = 0; i < _targets.Length; i++)
                 // Use reflection to get the specific property for each object and set the corresponding old value for each
-                _targets[i].GetType().GetProperty(_property.Name).SetValue(_targets[i], _oldValues[i], null);
+                _targets[i].GetType().GetProperty(_property.Name)!.SetValue(_targets[i], _oldValues[i], null);
         }
         #endregion
     }

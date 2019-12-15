@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
@@ -39,14 +38,13 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Used to signal the <see cref="CancellationToken"/>.
         /// </summary>
-        [NotNull]
         protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         /// <inheritdoc/>
         public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
         /// <inheritdoc/>
-        public abstract ICredentialProvider CredentialProvider { get; }
+        public abstract ICredentialProvider? CredentialProvider { get; }
 
         /// <inheritdoc/>
         public Verbosity Verbosity { get; set; }
@@ -66,7 +64,7 @@ namespace NanoByte.Common.Tasks
             => Ask(question ?? throw new ArgumentNullException(nameof(question)), MsgSeverity.Warn);
 
         /// <inheritdoc/>
-        public bool Ask(string question, bool defaultAnswer, string alternateMessage = null)
+        public bool Ask(string question, bool defaultAnswer, string? alternateMessage = null)
         {
             #region Sanity checks
             if (question == null) throw new ArgumentNullException(nameof(question));

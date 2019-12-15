@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Values
@@ -20,7 +19,6 @@ namespace NanoByte.Common.Values
         /// <summary>
         /// All known languages in alphabetical order.
         /// </summary>
-        [NotNull]
         public static readonly IEnumerable<CultureInfo> AllKnown = GetAllKnown();
 
         private static IEnumerable<CultureInfo> GetAllKnown()
@@ -46,7 +44,7 @@ namespace NanoByte.Common.Values
         /// Changes the UI language used by this process. Should be called right after startup.
         /// </summary>
         /// <remarks>This sets <see cref="CultureInfo.CurrentUICulture"/> for the current and all future threads.</remarks>
-        public static void SetUI([NotNull] CultureInfo culture)
+        public static void SetUI(CultureInfo culture)
         {
             #region Sanity checks
             if (culture == null) throw new ArgumentNullException(nameof(culture));

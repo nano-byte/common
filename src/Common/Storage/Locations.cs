@@ -8,7 +8,6 @@ using System.IO;
 using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Storage
@@ -29,7 +28,6 @@ namespace NanoByte.Common.Storage
         /// Uses the location of the NanoByte.Common DLL, not the calling EXE. Walks up one directory level if placed within a dir called "lib".
         /// Works with ngened and shadow copied assemblies. Does not work with GACed assemblies.
         /// </remarks>
-        [PublicAPI, NotNull]
         public static string InstallBase { get; private set; } = GetInstallBase();
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace NanoByte.Common.Storage
 
         private static string GetInstallBase()
         {
-            string codeBase = null;
+            string? codeBase = null;
             try
             {
                 codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
@@ -69,7 +67,6 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// The directory used for storing files if <see cref="IsPortable"/> is <c>true</c>. Defaults to <see cref="InstallBase"/>.
         /// </summary>
-        [PublicAPI, NotNull]
         public static string PortableBase { get; set; } = InstallBase;
 
         /// <summary>
@@ -88,7 +85,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// ACL that gives normal users read and execute access and admins and the the system full access.
         /// </summary>
-        private static readonly DirectorySecurity _secureSharedAcl;
+        private static readonly DirectorySecurity? _secureSharedAcl;
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static Locations()
@@ -109,12 +106,12 @@ namespace NanoByte.Common.Storage
         /// Creates a directory with ACLs that block write-access for regular users.
         /// </summary>
         /// <exception cref="NotAdminException">A directory does not exist yet and the user is not an administrator.</exception>
-        private static void CreateSecureMachineWideDir([NotNull, Localizable(false)] string path)
+        private static void CreateSecureMachineWideDir([Localizable(false)] string path)
         {
             var directory = new DirectoryInfo(path);
             if (directory.Exists) return;
 
-            if (WindowsUtils.IsWindowsNT)
+            if (_secureSharedAcl != null)
             {
                 if (!WindowsUtils.IsAdministrator) throw new NotAdminException();
 

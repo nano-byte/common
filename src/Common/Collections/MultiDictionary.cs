@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -27,7 +26,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The key of the element to add.</param>
         /// <param name="value">The value of the element to add.</param>
-        public void Add([NotNull] TKey key, [NotNull] TValue value)
+        public void Add(TKey key, TValue value)
         {
             #region Sanity checks
             if (key == null) throw new ArgumentNullException(nameof(key));
@@ -45,7 +44,7 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key of the element to remove.</param>
         /// <param name="value">The value of the element to remove.</param>
         /// <returns><c>true</c> if any elements were successfully removed; otherwise, <c>false</c>.</returns>
-        public bool Remove([NotNull] TKey key, [NotNull] TValue value)
+        public bool Remove(TKey key, TValue value)
         {
             #region Sanity checks
             if (value == null) throw new ArgumentNullException(nameof(value));

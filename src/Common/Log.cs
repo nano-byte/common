@@ -8,7 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using JetBrains.Annotations;
 using NanoByte.Common.Info;
 using NanoByte.Common.Storage;
 
@@ -29,8 +28,7 @@ namespace NanoByte.Common
     public static class Log
     {
         #region File Writer
-        [CanBeNull]
-        private static StreamWriter _fileWriter;
+        private static StreamWriter? _fileWriter;
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "The static constructor is used to add an identification header to the log file")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Any kind of problems writing the log file should be ignored")]
@@ -88,19 +86,20 @@ namespace NanoByte.Common
         /// <see cref="Console"/> output is used as a fallback if no handlers are registered.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
-        [CanBeNull, PublicAPI]
-        public static event LogEntryEventHandler Handler
+        public static event LogEntryEventHandler? Handler
         {
             add
             {
                 lock (_lock)
                 {
+                    if (value == null) return;
                     _sessionContent = new StringBuilder(); // Reset per session (indicated by new handler)
                     _handlers.Add(value);
                 }
             }
             remove
             {
+                if (value == null) return;
                 lock (_lock) _handlers.Remove(value);
             }
         }
@@ -110,7 +109,6 @@ namespace NanoByte.Common
         /// <summary>
         /// Collects all log entries from this application session.
         /// </summary>
-        [NotNull]
         public static string Content
         {
             get
@@ -123,14 +121,12 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes information to help developers diagnose problems to the log.
         /// </summary>
-        [PublicAPI]
-        public static void Debug([NotNull] string message) => AddEntry(LogSeverity.Debug, message);
+        public static void Debug(string message) => AddEntry(LogSeverity.Debug, message);
 
         /// <summary>
         /// Writes an exception as an <see cref="Debug(string)"/>.
         /// </summary>
-        [PublicAPI]
-        public static void Debug([NotNull] Exception ex)
+        public static void Debug(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
@@ -140,15 +136,13 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes nice-to-know information to the log.
         /// </summary>
-        [PublicAPI]
-        public static void Info([NotNull] string message) => AddEntry(LogSeverity.Info, message);
+        public static void Info(string message) => AddEntry(LogSeverity.Info, message);
 
         /// <summary>
         /// Writes an exception's message as a <see cref="Info(string)"/>.
         /// </summary>
         /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
-        [PublicAPI]
-        public static void Info([NotNull] Exception ex)
+        public static void Info(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
@@ -159,15 +153,13 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes a warning that doesn't have to be acted upon immediately to the log.
         /// </summary>
-        [PublicAPI]
-        public static void Warn([NotNull] string message) => AddEntry(LogSeverity.Warn, message);
+        public static void Warn(string message) => AddEntry(LogSeverity.Warn, message);
 
         /// <summary>
         /// Writes an exception's message as a <see cref="Warn(string)"/>.
         /// </summary>
         /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
-        [PublicAPI]
-        public static void Warn([NotNull] Exception ex)
+        public static void Warn(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
@@ -178,15 +170,13 @@ namespace NanoByte.Common
         /// <summary>
         /// Writes a critical error that should be attended to to the log.
         /// </summary>
-        [PublicAPI]
-        public static void Error([NotNull] string message) => AddEntry(LogSeverity.Error, message);
+        public static void Error(string message) => AddEntry(LogSeverity.Error, message);
 
         /// <summary>
         /// Writes an exception's message as an <see cref="Error(string)"/>.
         /// </summary>
         /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
-        [PublicAPI]
-        public static void Error([NotNull] Exception ex)
+        public static void Error(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException(nameof(ex));
 
@@ -199,8 +189,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
-        [PublicAPI]
-        public static void PrintToConsole(LogSeverity severity, [NotNull] string message)
+        public static void PrintToConsole(LogSeverity severity, string message)
         {
             try
             {

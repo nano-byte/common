@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Controls
@@ -16,7 +15,6 @@ namespace NanoByte.Common.Controls
     /// </summary>
     /// <remarks>Will turn red for invalid input and green for valid input. Will not allow focus to be lost for invalid input.</remarks>
     [Description("A HintTextBox designed specifically for entering URIs.")]
-    [PublicAPI]
     public class UriTextBox : HintTextBox
     {
         #region Events
@@ -50,7 +48,7 @@ namespace NanoByte.Common.Controls
         /// <exception cref="UriFormatException">Trying to read while <see cref="TextBox.Text"/> is not a well-formed <see cref="Uri"/>.</exception>
         /// <remarks>It is always safe to set this property. It is safe to read this property after validation has been performed.</remarks>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Uri Uri { get => string.IsNullOrEmpty(Text) ? null : new Uri(Text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute); set => Text = value?.ToStringRfc(); }
+        public Uri? Uri { get => string.IsNullOrEmpty(Text) ? null : new Uri(Text, AllowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute); set => Text = value?.ToStringRfc() ?? ""; }
 
         /// <summary>
         /// When set to <c>true</c> only URIs starting with "http:" or "https:" will be considered valid.
@@ -109,12 +107,12 @@ namespace NanoByte.Common.Controls
             if (dragEventArgs.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = dragEventArgs.Data.GetData(DataFormats.FileDrop) as string[];
-                return (files ?? new string[0]).FirstOrDefault();
+                return (files ?? new string[0]).FirstOrDefault() ?? "";
             }
             if (dragEventArgs.Data.GetDataPresent(DataFormats.Text))
                 return (string)dragEventArgs.Data.GetData(DataFormats.Text);
 
-            return null;
+            return "";
         }
         #endregion
     }

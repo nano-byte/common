@@ -3,7 +3,6 @@
 
 using System;
 using System.Globalization;
-using JetBrains.Annotations;
 using NanoByte.Common.Net;
 
 #if !NET20 && !NET35
@@ -49,7 +48,7 @@ namespace NanoByte.Common
         /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public PropertyPointer([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
+        public PropertyPointer(Func<T> getValue, Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
         {
             _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
             _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
@@ -71,7 +70,7 @@ namespace NanoByte.Common
         /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public static PropertyPointer<T> For<T>([NotNull] Func<T> getValue, [NotNull] Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
+        public static PropertyPointer<T> For<T>(Func<T> getValue, Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
             => new PropertyPointer<T>(getValue, setValue, defaultValue, needsEncoding);
 
 #if !NET20 && !NET35
@@ -82,7 +81,7 @@ namespace NanoByte.Common
         /// <param name="getValue">An expression pointing to the property.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public static PropertyPointer<T> For<T>([NotNull] Expression<Func<T>> getValue, T defaultValue = default, bool needsEncoding = false)
+        public static PropertyPointer<T> For<T>(Expression<Func<T>> getValue, T defaultValue = default, bool needsEncoding = false)
         {
             #region Sanity checks
             if (getValue == null) throw new ArgumentNullException(nameof(getValue));
@@ -111,7 +110,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Wraps a <see cref="bool"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
-        public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<bool> pointer)
+        public static PropertyPointer<string> ToStringPointer(this PropertyPointer<bool> pointer)
         {
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
 
@@ -124,7 +123,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Wraps an <see cref="int"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
-        public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<int> pointer)
+        public static PropertyPointer<string> ToStringPointer(this PropertyPointer<int> pointer)
         {
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
 
@@ -137,7 +136,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Wraps an <see cref="long"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
-        public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<long> pointer)
+        public static PropertyPointer<string> ToStringPointer(this PropertyPointer<long> pointer)
         {
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
 
@@ -150,7 +149,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Wraps a <see cref="TimeSpan"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
-        public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<TimeSpan> pointer)
+        public static PropertyPointer<string> ToStringPointer(this PropertyPointer<TimeSpan> pointer)
         {
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
 
@@ -163,11 +162,11 @@ namespace NanoByte.Common
         /// <summary>
         /// Wraps an <see cref="Uri"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
-        public static PropertyPointer<string> ToStringPointer([NotNull] this PropertyPointer<Uri> pointer)
+        public static PropertyPointer<string?> ToStringPointer(this PropertyPointer<Uri?> pointer)
         {
             if (pointer == null) throw new ArgumentNullException(nameof(pointer));
 
-            return new PropertyPointer<string>(
+            return new PropertyPointer<string?>(
                 getValue: () => pointer.Value?.ToStringRfc(),
                 setValue: value => pointer.Value = (value == null) ? null : new Uri(value),
                 defaultValue: pointer.DefaultValue?.ToStringRfc());

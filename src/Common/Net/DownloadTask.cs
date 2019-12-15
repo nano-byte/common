@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
-using JetBrains.Annotations;
 using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
@@ -36,7 +35,6 @@ namespace NanoByte.Common.Net
         /// </summary>
         /// <remarks>This value may change once <see cref="TaskState.Data"/> has been reached, based on HTTP redirections.</remarks>
         [Description("The URL the file is to be downloaded from.")]
-        [NotNull]
         public Uri Source { get; private set; }
 
         /// <summary>
@@ -49,9 +47,7 @@ namespace NanoByte.Common.Net
         /// </summary>
         /// <remarks>This value is always <c>null</c> until <see cref="TaskState.Data"/> has been reached.</remarks>
         [Browsable(false)]
-        [CanBeNull]
-        [PublicAPI]
-        public WebHeaderCollection ResponseHeaders { get; private set; }
+        public WebHeaderCollection? ResponseHeaders { get; private set; }
 
         /// <summary>
         /// Creates a new download task.
@@ -187,7 +183,6 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Creates the <see cref="Stream"/> to write the downloaded data to.
         /// </summary>
-        [NotNull]
         protected abstract Stream CreateTargetStream();
     }
 }

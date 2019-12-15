@@ -3,14 +3,12 @@
 
 using System;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
     /// Provides extension methods for <seealso cref="Mutex"/>.
     /// </summary>
-    [PublicAPI]
     public static class MutexExtensions
     {
         /// <summary>
@@ -22,7 +20,7 @@ namespace NanoByte.Common.Tasks
         /// <exception cref="TimeoutException"><paramref name="timeout"/> elapsed without the mutex becoming available.</exception>
         /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was signaled while waiting for the mutex to become available.</exception>
         /// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn(Exception)"/>.</remarks>
-        public static void WaitOne([NotNull] this Mutex mutex, TimeSpan timeout, CancellationToken cancellationToken)
+        public static void WaitOne(this Mutex mutex, TimeSpan timeout, CancellationToken cancellationToken)
         {
             try
             {

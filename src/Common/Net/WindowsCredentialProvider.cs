@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Tasks;
 
@@ -16,12 +15,12 @@ namespace NanoByte.Common.Net
     public abstract class WindowsCredentialProvider : CredentialProviderBase
     {
         /// <inheritdoc/>
-        protected WindowsCredentialProvider([NotNull] ITaskHandler handler)
+        protected WindowsCredentialProvider(ITaskHandler handler)
             : base(handler)
         {}
 
         /// <inheritdoc/>
-        public override NetworkCredential GetCredential(Uri uri, string authType)
+        public override NetworkCredential? GetCredential(Uri uri, string authType)
         {
             #region Sanity checks
             if (uri == null) throw new ArgumentNullException(nameof(uri));

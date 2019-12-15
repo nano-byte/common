@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {
@@ -20,8 +19,7 @@ namespace NanoByte.Common
         /// <param name="execute">The delegate to execute.</param>
         /// <param name="name">A short name for the new thread; can be <c>null</c>.</param>
         /// <returns>The newly launched thread.</returns>
-        [PublicAPI, NotNull]
-        public static Thread StartAsync([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
+        public static Thread StartAsync(ThreadStart execute, [Localizable(false)] string? name = null)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException(nameof(execute));
@@ -41,8 +39,7 @@ namespace NanoByte.Common
         /// <param name="execute">The delegate to execute.</param>
         /// <param name="name">A short name for the new thread; can be <c>null</c>.</param>
         /// <returns>The newly launched thread.</returns>
-        [PublicAPI, NotNull]
-        public static Thread StartBackground([NotNull] ThreadStart execute, [CanBeNull, Localizable(false)] string name = null)
+        public static Thread StartBackground(ThreadStart execute, [Localizable(false)] string? name = null)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException(nameof(execute));
@@ -61,8 +58,7 @@ namespace NanoByte.Common
         /// <param name="execute">The delegate to execute.</param>
         /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
-        [PublicAPI]
-        public static void RunSta([NotNull, InstantHandle] Action execute)
+        public static void RunSta(Action execute)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException(nameof(execute));
@@ -70,7 +66,7 @@ namespace NanoByte.Common
 
             Log.Debug("Running STA thread");
 
-            Exception error = null;
+            Exception? error = null;
             var thread = new Thread(new ThreadStart(delegate
             {
                 try
@@ -97,8 +93,7 @@ namespace NanoByte.Common
         /// <returns>The return value of <paramref name="execute"/></returns>
         /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
-        [PublicAPI]
-        public static T RunSta<T>([NotNull, InstantHandle] Func<T> execute)
+        public static T RunSta<T>(Func<T> execute)
         {
             #region Sanity checks
             if (execute == null) throw new ArgumentNullException(nameof(execute));
@@ -106,8 +101,8 @@ namespace NanoByte.Common
 
             Log.Debug("Running STA thread");
 
-            T result = default;
-            Exception error = null;
+            T result = default!;
+            Exception? error = null;
             var thread = new Thread(new ThreadStart(delegate
             {
                 try

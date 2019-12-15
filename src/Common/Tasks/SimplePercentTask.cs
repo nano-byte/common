@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common.Tasks
 {
@@ -29,7 +28,7 @@ namespace NanoByte.Common.Tasks
         private readonly Action<PercentProgressCallback> _work;
 
         /// <summary>A callback to be called when cancellation is requested via a <see cref="CancellationToken"/>.</summary>
-        private readonly Action _cancellationCallback;
+        private readonly Action? _cancellationCallback;
 
         /// <inheritdoc/>
         public override bool CanCancel => _cancellationCallback != null;
@@ -43,7 +42,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="name">A name describing the task in human-readable form.</param>
         /// <param name="work">The code to be executed by the task. Is given a callback to report progress in percent. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
         /// <param name="cancellationCallback">A callback to be called when cancellation is requested via a <see cref="CancellationToken"/>.</param>
-        public SimplePercentTask([NotNull, Localizable(true)] string name, [NotNull] Action<PercentProgressCallback> work, [CanBeNull] Action cancellationCallback = null)
+        public SimplePercentTask([Localizable(true)] string name, Action<PercentProgressCallback> work, Action? cancellationCallback = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             _work = work ?? throw new ArgumentNullException(nameof(work));

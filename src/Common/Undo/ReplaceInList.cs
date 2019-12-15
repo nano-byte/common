@@ -12,6 +12,7 @@ namespace NanoByte.Common.Undo
     /// <typeparam name="T">The type of elements the list contains.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "The complete name is not ambiguous.")]
     public class ReplaceInList<T> : SimpleCommand, IValueCommand
+        where T : notnull
     {
         private readonly IList<T> _list;
         private readonly T _oldElement;
@@ -51,6 +52,7 @@ namespace NanoByte.Common.Undo
         /// <param name="newElement">The element to be added to <paramref name="list"/>.</param>
         /// <typeparam name="T">The type of elements the list contains.</typeparam>
         public static ReplaceInList<T> For<T>(IList<T> list, T oldElement, T newElement)
+            where T : notnull
             => new ReplaceInList<T>(list, oldElement, newElement);
     }
 }
