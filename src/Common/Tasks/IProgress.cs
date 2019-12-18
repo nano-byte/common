@@ -12,7 +12,7 @@ namespace NanoByte.Common.Tasks
     /// <remarks>Unlike the built-in Progress type of .NET implementations of the NanoByte.Common variant should derive from <see cref="MarshalByRefObject"/> to support remoting.</remarks>
     /// <typeparam name="T">The type of progress update value.</typeparam>
     public interface IProgress
-#if NET40
+#if NET40 || NET45 || NET461 || NETSTANDARD
         <in T>
 #else
         <T>

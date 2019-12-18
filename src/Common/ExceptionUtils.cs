@@ -15,7 +15,7 @@ using System.Runtime.Serialization;
 using System.Security;
 #endif
 
-#if NET45 || NETSTANDARD
+#if NET45 || NET461 || NETSTANDARD
 using System.Threading.Tasks;
 #endif
 
@@ -28,7 +28,7 @@ namespace NanoByte.Common
     /// <seealso cref="ExceptionUtils.Retry{TException}"/>
     public delegate void RetryAction(bool lastAttempt);
 
-#if NET45 || NETSTANDARD
+#if NET45 || NET461 || NETSTANDARD
     /// <summary>
     /// Delegate used by <see cref="ExceptionUtils.RetryAsync{TException}"/>.
     /// </summary>
@@ -230,7 +230,7 @@ namespace NanoByte.Common
             }
         }
 
-#if NET45 || NETSTANDARD
+#if NET45 || NET461 || NETSTANDARD
         /// <summary>
         /// Applies an operation for all elements of a collection. Automatically applies rollback operations in case of an exception.
         /// </summary>

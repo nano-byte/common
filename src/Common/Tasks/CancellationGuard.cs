@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
-#if NET40 || NET45 || NETSTANDARD
+#if NET40 || NET45 || NET461 || NETSTANDARD
 using System.Threading.Tasks;
 #endif
 
@@ -29,7 +29,7 @@ namespace NanoByte.Common.Tasks
     {
         private CancellationTokenRegistration _registration;
 
-#if NET40 || NET45 || NETSTANDARD
+#if NET40 || NET45 || NET461 || NETSTANDARD
         private readonly TaskCompletionSource<bool> _tcs = new TaskCompletionSource<bool>();
 #else
         private readonly ManualResetEvent _event = new ManualResetEvent(initialState: false);
@@ -42,7 +42,7 @@ namespace NanoByte.Common.Tasks
         public CancellationGuard(CancellationToken cancellationToken)
         {
             _registration = cancellationToken.Register(
-#if NET40 || NET45 || NETSTANDARD
+#if NET40 || NET45 || NET461 || NETSTANDARD
                 _tcs.Task.Wait
 #else
                 () => _event.WaitOne()
@@ -58,7 +58,7 @@ namespace NanoByte.Common.Tasks
         public CancellationGuard(CancellationToken cancellationToken, TimeSpan timeout)
         {
             _registration = cancellationToken.Register(
-#if NET40 || NET45 || NETSTANDARD
+#if NET40 || NET45 || NET461 || NETSTANDARD
                 () => _tcs.Task.Wait(timeout)
 #else
                 () =>
@@ -77,7 +77,7 @@ namespace NanoByte.Common.Tasks
         [SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
         public void Dispose()
         {
-#if NET40 || NET45 || NETSTANDARD
+#if NET40 || NET45 || NET461 || NETSTANDARD
             _tcs.SetResult(true);
 #else
             _event.Set();

@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using NanoByte.Common.Values;
 
-#if NET45 || NETSTANDARD
+#if NET45 || NET461 || NETSTANDARD
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -258,7 +258,7 @@ namespace NanoByte.Common.Collections
             }
         }
 
-#if NET45 || NETSTANDARD
+#if NET45 || NET461 || NETSTANDARD
         /// <summary>
         /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
         /// </summary>

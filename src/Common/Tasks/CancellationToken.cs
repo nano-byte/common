@@ -64,7 +64,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public override string ToString() => "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
 
-#if NET40 || NET45 || NETSTANDARD
+#if NET40 || NET45 || NET461 || NETSTANDARD
         /// <summary>
         /// Converts a NanoByte.Common cancellation token to a regular .NET cancellation token.
         /// </summary>

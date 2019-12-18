@@ -30,7 +30,7 @@ namespace NanoByte.Common.Native
         public static bool Is64BitOperatingSystem
 #if NETSTANDARD
             => (RuntimeInformation.OSArchitecture == Architecture.X64) || (RuntimeInformation.OSArchitecture == Architecture.Arm64);
-#elif NET45
+#elif NET45 || NET461
             => Environment.Is64BitOperatingSystem;
 #else
             => Is64BitProcess;
@@ -42,7 +42,7 @@ namespace NanoByte.Common.Native
         public static bool Is64BitProcess
 #if NETSTANDARD
             => (RuntimeInformation.ProcessArchitecture == Architecture.X64) || (RuntimeInformation.OSArchitecture == Architecture.Arm64);
-#elif NET45
+#elif NET45 || NET461
             => Environment.Is64BitProcess;
 #else
             => IntPtr.Size == 8;
