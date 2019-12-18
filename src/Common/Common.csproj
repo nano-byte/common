@@ -64,6 +64,10 @@
     <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.0" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' Or '$(TargetFramework)'=='netstandard2.1'">
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />

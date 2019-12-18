@@ -181,18 +181,13 @@ namespace NanoByte.Common.Collections
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
             #endregion
 
-            if (valueComparer == null) valueComparer = EqualityComparer<TValue>.Default;
-            unchecked
+            var hash = new HashCode();
+            foreach (var (key, value) in dictionary)
             {
-                int result = 397;
-                // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (var (key, value) in dictionary)
-                {
-                    if (key != null)
-                        result = result ^ (key.GetHashCode() + valueComparer.GetHashCode(value));
-                }
-                return result;
+                hash.Add(key);
+                hash.Add(value, valueComparer);
             }
+            return hash.ToHashCode();
         }
 
         /// <summary>

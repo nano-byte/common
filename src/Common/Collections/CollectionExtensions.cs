@@ -253,18 +253,10 @@ namespace NanoByte.Common.Collections
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             #endregion
 
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
-            unchecked
-            {
-                int result = 397;
-                // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T item in collection)
-                {
-                    if (item != null)
-                        result = (result * 397) ^ comparer.GetHashCode(item);
-                }
-                return result;
-            }
+            var hash = new System.HashCode();
+            foreach (T item in collection)
+                hash.Add(item, comparer);
+            return hash.ToHashCode();
         }
 
         /// <summary>

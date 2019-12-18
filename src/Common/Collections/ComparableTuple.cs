@@ -56,14 +56,7 @@ namespace NanoByte.Common.Collections
 
         /// <inheritdoc/>
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                int result = Key.GetHashCode();
-                result = (result * 397) ^ Value.GetHashCode();
-                return result;
-            }
-        }
+            => HashCode.Combine(Key, Value);
 
         public static bool operator ==(ComparableTuple<T> left, ComparableTuple<T> right) => left.Equals(right);
         public static bool operator !=(ComparableTuple<T> left, ComparableTuple<T> right) => !left.Equals(right);

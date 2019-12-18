@@ -88,12 +88,7 @@ namespace NanoByte.Common.Collections
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Value?.GetHashCode() ?? 0) * 397) ^ (_key?.GetHashCode() ?? 0);
-            }
-        }
+            => HashCode.Combine(Value, _key);
         #endregion
 
         #region Clone

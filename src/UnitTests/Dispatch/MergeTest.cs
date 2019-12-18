@@ -44,12 +44,7 @@ namespace NanoByte.Common.Dispatch
             }
 
             public override int GetHashCode()
-            {
-                unchecked
-                {
-                    return ((MergeID?.GetHashCode() ?? 0) * 397) ^ (Data?.GetHashCode() ?? 0);
-                }
-            }
+                => HashCode.Combine(MergeID, Data);
             #endregion
         }
         #endregion

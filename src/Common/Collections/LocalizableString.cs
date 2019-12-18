@@ -92,14 +92,7 @@ namespace NanoByte.Common.Collections
 
         /// <inheritdoc/>
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                int result = Language.GetHashCode();
-                result = (result * 397) ^ Value?.GetHashCode() ?? 0;
-                return result;
-            }
-        }
+            => HashCode.Combine(Language, Value);
         #endregion
 
         #region Clone
