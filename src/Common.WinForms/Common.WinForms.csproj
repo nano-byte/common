@@ -32,25 +32,11 @@
 
   <!-- Auto-select supported target frameworks based on MSBuild version -->
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
-    <TargetFrameworks>net20;net35-client;net40-client;net45;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net20;net45;netcoreapp3.1</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="('$(OS)'=='Windows_NT' And '$(MSBuildRuntimeType)'=='Core') Or '$(MSBuildRuntimeType)'=='Mono'">
     <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
-  </PropertyGroup>
-
-  <!-- Support .NET Framework Client Profiles -->
-  <PropertyGroup Condition="'$(TargetFramework)'=='net35-client'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>client</TargetFrameworkProfile>
-    <DefineConstants>$(DefineConstants);NET35</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net40-client'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>client</TargetFrameworkProfile>
-    <DefineConstants>$(DefineConstants);NET40</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -81,8 +67,6 @@
   <!-- Bundle 3rd party libs in NuGet package -->
   <ItemGroup>
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net20;" />
-    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net35-client" />
-    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net40-client" />
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/netcoreapp3.1" />
   </ItemGroup>

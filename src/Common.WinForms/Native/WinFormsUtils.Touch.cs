@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using NanoByte.Common.Controls;
 
-#if NET20 || NET35
+#if NET20
 using NanoByte.Common.Values;
 #endif
 
