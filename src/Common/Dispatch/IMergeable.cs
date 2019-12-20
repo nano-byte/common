@@ -15,15 +15,15 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// A unique identifier used when comparing for merging. Should always remain the same, even when the element is modified.
         /// </summary>
-        [DefaultValue(0)]
         [Localizable(false)]
+        [Browsable(false)]
         string MergeID { get; }
 
         /// <summary>
         /// The time this element was last modified. This is used to determine precedence with sync conflicts.
         /// </summary>
-        /// <remarks>This value is ignored by clone and equality methods.</remarks>
-        [DefaultValue(0)]
-        DateTime Timestamp { get; set; }
+        /// <remarks>This value should be ignored by clone and equality methods.</remarks>
+        [Browsable(false)]
+        DateTime Timestamp { get; }
     }
 }
