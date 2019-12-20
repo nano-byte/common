@@ -17,13 +17,19 @@ namespace NanoByte.Common.Collections
         {
             public string Name { get; set; }
 
-            public int CompareTo(TestElement other) => string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+            public TestElement(string name)
+            {
+                Name = name;
+            }
+
+            public int CompareTo(TestElement other)
+                => string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
         public void TestSort()
         {
-            var collection = new NamedCollection<TestElement> {new TestElement {Name = "c"}, new TestElement {Name = "b"}, new TestElement {Name = "a"}};
+            var collection = new NamedCollection<TestElement> {new TestElement("c"), new TestElement("b"), new TestElement("a")};
 
             collection.Select(x => x.Name).Should().Equal("a", "b", "c");
         }
@@ -31,7 +37,7 @@ namespace NanoByte.Common.Collections
         [Fact]
         public void TestRename()
         {
-            var element = new TestElement {Name = "Name1"};
+            var element = new TestElement("Name1");
 
             var collection = new NamedCollection<TestElement> {element};
             collection["Name1"].Should().BeSameAs(element);

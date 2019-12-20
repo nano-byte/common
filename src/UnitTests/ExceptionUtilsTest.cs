@@ -29,7 +29,7 @@ namespace NanoByte.Common
         [Fact]
         public void TestPreserveStack()
         {
-            Exception caught = null;
+            Exception caught = default!;
             try
             {
                 ThrowMockException();

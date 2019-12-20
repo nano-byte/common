@@ -10,7 +10,7 @@ namespace NanoByte.Common
     {
         private class Sample
         {
-            public string Data { get; set; }
+            public string? Data { get; set; }
         }
 
         [Fact]

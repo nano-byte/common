@@ -85,7 +85,7 @@ namespace NanoByte.Common.Streams
                 producerData[i] = i;
             var producerThread = new Thread(() => _stream.Write(producerData));
 
-            byte[] consumerData = null;
+            byte[]? consumerData = null;
             var consumerThread = new Thread(() => consumerData = _stream.Read(128));
 
             producerThread.Start();

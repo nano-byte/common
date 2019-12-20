@@ -30,7 +30,7 @@ namespace NanoByte.Common.Net
         }
 
         /// <inheritdoc/>
-        public NetworkCredential GetCredential(Uri uri, string authType)
+        public NetworkCredential GetCredential(Uri uri, string? authType)
             => _cache[(uri ?? throw new ArgumentNullException(nameof(uri))).GetBaseUri()];
 
         /// <inheritdoc/>

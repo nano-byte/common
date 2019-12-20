@@ -27,7 +27,7 @@ namespace NanoByte.Common.Native
 
             CygwinUtils.IsSymlink(normalFile).Should().BeFalse();
 
-            CygwinUtils.IsSymlink(normalFile, out string target).Should().BeFalse();
+            CygwinUtils.IsSymlink(normalFile, out string? target).Should().BeFalse();
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace NanoByte.Common.Native
 
             CygwinUtils.IsSymlink(symlinkFile).Should().BeTrue();
 
-            CygwinUtils.IsSymlink(symlinkFile, out string target).Should().BeTrue();
+            CygwinUtils.IsSymlink(symlinkFile, out string? target).Should().BeTrue();
             target.Should().Be("target");
         }
 

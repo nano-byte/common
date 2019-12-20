@@ -19,7 +19,7 @@ namespace NanoByte.Common.Storage
         [XmlNamespace("", "")]
         public class TestData
         {
-            public string Data { get; set; }
+            public string? Data { get; set; }
         }
         // ReSharper restore MemberCanBePrivate.Global
 

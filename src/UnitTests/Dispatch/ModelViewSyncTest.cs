@@ -18,9 +18,9 @@ namespace NanoByte.Common.Dispatch
         #region Mock classes
         private abstract class ModelBase : IChangeNotify<ModelBase>
         {
-            private string _id;
+            private string? _id;
 
-            public string ID
+            public string? ID
             {
                 get => _id;
                 set
@@ -32,8 +32,8 @@ namespace NanoByte.Common.Dispatch
 
             public void Rebuild() => ChangedRebuild?.Invoke(this);
 
-            public event Action<ModelBase> Changed;
-            public event Action<ModelBase> ChangedRebuild;
+            public event Action<ModelBase>? Changed;
+            public event Action<ModelBase>? ChangedRebuild;
         }
 
         private class SpecificModel : ModelBase
@@ -41,7 +41,7 @@ namespace NanoByte.Common.Dispatch
 
         private abstract class ViewBase : IDisposable
         {
-            public string ID { get; set; }
+            public string? ID { get; set; }
 
             public bool Disposed { get; private set; }
 

@@ -25,9 +25,9 @@ namespace NanoByte.Common.Dispatch
         public void TestDispatchAction()
         {
             var sub1Orig = new Sub1();
-            Sub1 sub1Dispatched = null;
+            Sub1? sub1Dispatched = null;
             var sub2Orig = new Sub2();
-            Sub2 sub2Dispatched = null;
+            Sub2? sub2Dispatched = null;
 
             var dispatcher = new PerTypeDispatcher<Base>(false)
             {

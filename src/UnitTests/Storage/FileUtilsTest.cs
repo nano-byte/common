@@ -286,7 +286,7 @@ namespace NanoByte.Common.Storage
             File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
             File.ReadAllText(sourcePath).Should().Be("data", because: "Symlinked file contents should be equal");
 
-            FileUtils.IsSymlink(sourcePath, out string target).Should().BeTrue(because: "Should detect symlink as such");
+            FileUtils.IsSymlink(sourcePath, out string? target).Should().BeTrue(because: "Should detect symlink as such");
             "target".Should().Be(target, because: "Should retrieve relative link target");
             FileUtils.IsRegularFile(sourcePath).Should().BeFalse(because: "Should not detect symlink as regular file");
         }
@@ -303,7 +303,7 @@ namespace NanoByte.Common.Storage
 
             Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
 
-            FileUtils.IsSymlink(sourcePath, out string contents).Should().BeTrue(because: "Should detect symlink as such");
+            FileUtils.IsSymlink(sourcePath, out string? contents).Should().BeTrue(because: "Should detect symlink as such");
             "target".Should().Be(contents, because: "Should retrieve relative link target");
         }
 
@@ -367,7 +367,7 @@ namespace NanoByte.Common.Storage
         public void TestIsSymlink()
         {
             using var tempFile = new TemporaryFile("unit-tests");
-            FileUtils.IsSymlink(tempFile, out string contents).Should().BeFalse(because: "File was incorrectly identified as symlink");
+            FileUtils.IsSymlink(tempFile, out string? contents).Should().BeFalse(because: "File was incorrectly identified as symlink");
             contents.Should().BeNull();
         }
 

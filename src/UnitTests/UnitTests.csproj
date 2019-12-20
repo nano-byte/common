@@ -10,7 +10,7 @@
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework)=='netstandard2.1'">
+  <PropertyGroup Condition="$(TargetFramework)=='netcoreapp3.1'">
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

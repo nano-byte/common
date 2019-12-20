@@ -18,13 +18,21 @@ namespace NanoByte.Common.Dispatch
         #region Inner class
         private class MergeTestData : IMergeable<MergeTestData>
         {
-            public string MergeID { get; set; }
+            public string MergeID { get; }
 
-            public string Data { get; set; }
+            public string? Data { get; }
 
-            public DateTime Timestamp { get; set; }
+            public DateTime Timestamp { get; }
 
-            public static IEnumerable<MergeTestData> BuildList(params string[] mergeIDs) => mergeIDs.Select(value => new MergeTestData {MergeID = value}).ToList();
+            public MergeTestData(string mergeID, string? data = null, DateTime timestamp = default)
+            {
+                MergeID = mergeID;
+                Data = data;
+                Timestamp = timestamp;
+            }
+
+            public static IEnumerable<MergeTestData> BuildList(params string[] mergeIDs)
+                => mergeIDs.Select(mergeID => new MergeTestData(mergeID)).ToList();
 
             public override string ToString() => MergeID + " (" + Data + ")";
 
@@ -36,7 +44,7 @@ namespace NanoByte.Common.Dispatch
                 return Equals(other.MergeID, MergeID) && Equals(other.Data, Data);
             }
 
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
@@ -72,7 +80,7 @@ namespace NanoByte.Common.Dispatch
         [Fact]
         public void TestMergeEquals()
         {
-            var list = new[] {new MergeTestData {MergeID = "1"}};
+            var list = new[] {new MergeTestData(mergeID: "1")};
 
             Merge.ThreeWay(reference: new MergeTestData[0], theirs: list, mine: list,
                 added: element => throw new AssertionFailedException(element + " should not be detected as added."),
@@ -106,19 +114,19 @@ namespace NanoByte.Common.Dispatch
             var reference = MergeTestData.BuildList("a", "b", "c", "d", "e");
             var theirs = new[]
             {
-                new MergeTestData {MergeID = "a"},
-                new MergeTestData {MergeID = "b", Data = "123", Timestamp = new DateTime(2000, 1, 1)},
-                new MergeTestData {MergeID = "c"},
-                new MergeTestData {MergeID = "d", Data = "456", Timestamp = new DateTime(2000, 1, 1)},
-                new MergeTestData {MergeID = "e", Data = "789", Timestamp = new DateTime(2999, 1, 1)}
+                new MergeTestData(mergeID: "a"),
+                new MergeTestData(mergeID: "b", data: "123", timestamp: new DateTime(2000, 1, 1)),
+                new MergeTestData(mergeID: "c"),
+                new MergeTestData(mergeID: "d", data: "456", timestamp: new DateTime(2000, 1, 1)),
+                new MergeTestData(mergeID: "e", data: "789", timestamp: new DateTime(2999, 1, 1))
             };
             var mine = new[]
             {
-                new MergeTestData {MergeID = "a"},
-                new MergeTestData {MergeID = "b"},
-                new MergeTestData {MergeID = "c", Data = "abc", Timestamp = new DateTime(2000, 1, 1)},
-                new MergeTestData {MergeID = "d", Data = "def", Timestamp = new DateTime(2999, 1, 1)},
-                new MergeTestData {MergeID = "e", Data = "ghi", Timestamp = new DateTime(2000, 1, 1)}
+                new MergeTestData(mergeID: "a"),
+                new MergeTestData(mergeID: "b"),
+                new MergeTestData(mergeID: "c", data: "abc", timestamp: new DateTime(2000, 1, 1)),
+                new MergeTestData(mergeID: "d", data: "def", timestamp: new DateTime(2999, 1, 1)),
+                new MergeTestData(mergeID: "e", data: "ghi", timestamp: new DateTime(2000, 1, 1))
             };
 
             ICollection<MergeTestData> toRemove = new List<MergeTestData>();
