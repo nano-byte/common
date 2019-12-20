@@ -17,10 +17,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         public string Path { get; }
 
-#if NETSTANDARD2_1
-        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("dir")]
-#endif
-        public static implicit operator string?(TemporaryDirectory dir) => dir?.Path;
+        public static implicit operator string(TemporaryDirectory dir) => dir.Path;
 
         /// <summary>
         /// Creates a uniquely named, empty temporary directory on disk.
