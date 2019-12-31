@@ -108,65 +108,45 @@ namespace NanoByte.Common
         /// Wraps a <see cref="bool"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
         public static PropertyPointer<string> ToStringPointer(this PropertyPointer<bool> pointer)
-        {
-            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-
-            return new PropertyPointer<string>(
+            => For(
                 getValue: () => pointer.Value.ToString(CultureInfo.InvariantCulture),
                 setValue: value => pointer.Value = (value == "1" || (value != "0" && bool.Parse(value))),
                 defaultValue: pointer.DefaultValue.ToString(CultureInfo.InvariantCulture));
-        }
 
         /// <summary>
         /// Wraps an <see cref="int"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
         public static PropertyPointer<string> ToStringPointer(this PropertyPointer<int> pointer)
-        {
-            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-
-            return new PropertyPointer<string>(
+            => For(
                 getValue: () => pointer.Value.ToString(CultureInfo.InvariantCulture),
-                setValue: value => pointer.Value = int.Parse(value),
+                setValue: value => pointer.Value = string.IsNullOrEmpty(value) ? default : int.Parse(value),
                 defaultValue: pointer.DefaultValue.ToString(CultureInfo.InvariantCulture));
-        }
 
         /// <summary>
         /// Wraps an <see cref="long"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
         public static PropertyPointer<string> ToStringPointer(this PropertyPointer<long> pointer)
-        {
-            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-
-            return new PropertyPointer<string>(
+            => For(
                 getValue: () => pointer.Value.ToString(CultureInfo.InvariantCulture),
-                setValue: value => pointer.Value = long.Parse(value),
+                setValue: value => pointer.Value = string.IsNullOrEmpty(value) ? default : long.Parse(value),
                 defaultValue: pointer.DefaultValue.ToString(CultureInfo.InvariantCulture));
-        }
 
         /// <summary>
         /// Wraps a <see cref="TimeSpan"/> pointer in a <see cref="string"/> pointer.
         /// </summary>
         public static PropertyPointer<string> ToStringPointer(this PropertyPointer<TimeSpan> pointer)
-        {
-            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-
-            return new PropertyPointer<string>(
+            => For(
                 getValue: () => ((int)pointer.Value.TotalSeconds).ToString(CultureInfo.InvariantCulture),
-                setValue: value => pointer.Value = TimeSpan.FromSeconds(int.Parse(value)),
+                setValue: value => pointer.Value = string.IsNullOrEmpty(value) ? default : TimeSpan.FromSeconds(int.Parse(value)),
                 defaultValue: ((int)pointer.DefaultValue.TotalSeconds).ToString(CultureInfo.InvariantCulture));
-        }
 
         /// <summary>
-        /// Wraps an <see cref="Uri"/> pointer in a <see cref="string"/> pointer.
+        /// Wraps an <see cref="Uri"/> pointer in a <see cref="string"/> pointer. Maps empty strings to <c>null</c> URIs.
         /// </summary>
-        public static PropertyPointer<string?> ToStringPointer(this PropertyPointer<Uri?> pointer)
-        {
-            if (pointer == null) throw new ArgumentNullException(nameof(pointer));
-
-            return new PropertyPointer<string?>(
-                getValue: () => pointer.Value?.ToStringRfc(),
-                setValue: value => pointer.Value = (value == null) ? null : new Uri(value),
-                defaultValue: pointer.DefaultValue?.ToStringRfc());
-        }
+        public static PropertyPointer<string> ToStringPointer(this PropertyPointer<Uri?> pointer)
+            => For(
+                getValue: () => pointer.Value?.ToStringRfc() ?? "",
+                setValue: value => pointer.Value = string.IsNullOrEmpty(value) ? default : new Uri(value),
+                defaultValue: pointer.DefaultValue?.ToStringRfc() ?? "");
     }
 }
