@@ -21,10 +21,18 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="count">The number of bytes to read.</param>
-        /// <param name="throwOnEnd">Controls whether the method throws an exception when the end of the stream is reached instead of returning <c>null</c>.</param>
-        /// <returns>The bytes read from the stream; may be <c>null</c> if <paramref name="throwOnEnd"/> is <c>false</c>.</returns>
-        /// <exception cref="IOException">The desired number of bytes could not be read from the stream and <paramref name="throwOnEnd"/> is <c>true</c>.</exception>
-        public static byte[]? Read(this Stream stream, int count, bool throwOnEnd = true)
+        /// <returns>The bytes read from the stream.</returns>
+        /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
+        public static byte[] Read(this Stream stream, int count)
+            => stream.TryRead(count) ?? throw new IOException("The desired number of bytes could not be read from the stream.");
+
+        /// <summary>
+        /// Reads a fixed number of bytes from a stream starting from the current offset.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="count">The number of bytes to read.</param>
+        /// <returns>The bytes read from the stream; <c>null</c> if the desired number of bytes could not be read from the stream .</returns>
+        public static byte[]? TryRead(this Stream stream, int count)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -40,12 +48,7 @@ namespace NanoByte.Common.Streams
                 offset += read;
             }
 
-            if (offset == count) return buffer;
-            else
-            {
-                if (throwOnEnd) throw new IOException("The desired number of bytes could not be read from the stream.");
-                else return null;
-            }
+            return offset == count ? buffer : null;
         }
 
         /// <summary>
