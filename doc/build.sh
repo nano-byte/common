@@ -5,6 +5,6 @@ cd `dirname $0`
 rm -rf ../artifacts/Documentation
 mkdir -p ../artifacts/Documentation
 
-0install run http://repo.roscidus.com/devel/doxygen
+0install run https://apps.0install.net/devel/doxygen.xml
 
 cp .nojekyll CNAME ../artifacts/Documentation/
