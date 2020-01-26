@@ -21,10 +21,7 @@ namespace NanoByte.Common.Storage
         /// </summary>
         public new string Path => System.IO.Path.Combine(base.Path, "flag");
 
-#if NETSTANDARD2_1
-        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("dir")]
-#endif
-        public static implicit operator string?(TemporaryFlagFile dir) => dir?.Path;
+        public static implicit operator string(TemporaryFlagFile dir) => dir.Path;
 
         /// <summary>
         /// Indicates or controls whether the file exists.
