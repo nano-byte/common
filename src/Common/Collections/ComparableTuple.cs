@@ -9,7 +9,7 @@ namespace NanoByte.Common.Collections
     /// Represents a tuple of comparable elements.
     /// </summary>
     [Serializable]
-    public struct ComparableTuple<T> : IEquatable<ComparableTuple<T>>, IComparable<ComparableTuple<T>>
+    public readonly struct ComparableTuple<T> : IEquatable<ComparableTuple<T>>, IComparable<ComparableTuple<T>>
         where T : IEquatable<T>, IComparable<T>
     {
         /// <summary>

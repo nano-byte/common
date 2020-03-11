@@ -10,7 +10,7 @@ namespace NanoByte.Common.Tasks
     /// Represents a progress snapshot of an <see cref="ITask"/>.
     /// </summary>
     [Serializable]
-    public struct TaskSnapshot
+    public readonly struct TaskSnapshot
     {
         /// <summary>
         /// The current State of the task.
