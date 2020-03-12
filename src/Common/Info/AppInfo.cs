@@ -21,19 +21,19 @@ namespace NanoByte.Common.Info
         /// The name of the application.
         /// </summary>
         [XmlAttribute("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The name of the product the application is a part of.
         /// </summary>
         [XmlAttribute("product-name")]
-        public string ProductName { get; set; }
+        public string? ProductName { get; set; }
 
         /// <summary>
         /// The version number of the application.
         /// </summary>
         [XmlAttribute("version")]
-        public string Version { get; set; }
+        public string? Version { get; set; }
 
         /// <summary>
         /// The <see cref="Name"/> and <see cref="Version"/> combined.
@@ -45,20 +45,20 @@ namespace NanoByte.Common.Info
         /// The copyright information for the application.
         /// </summary>
         [XmlIgnore]
-        public string Copyright { get; set; }
+        public string? Copyright { get; set; }
 
         /// <summary>
         /// A description of the application.
         /// </summary>
         [XmlIgnore]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The command-line arguments the application was started with.
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Used for XML serialization.")]
         [XmlElement("arg")]
-        public string[] Arguments { get; set; }
+        public string[]? Arguments { get; set; }
 
         /// <summary>
         /// Information about the currently running application (looks at the entry assembly).
