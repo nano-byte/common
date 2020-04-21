@@ -37,7 +37,7 @@ namespace NanoByte.Common.Dispatch
             public override string ToString() => MergeID + " (" + Data + ")";
 
             #region Equality
-            public bool Equals(MergeTestData other)
+            public bool Equals(MergeTestData? other)
             {
                 if (ReferenceEquals(null, other)) return false;
                 if (ReferenceEquals(this, other)) return true;

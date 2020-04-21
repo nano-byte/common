@@ -22,8 +22,8 @@ namespace NanoByte.Common.Collections
                 Name = name;
             }
 
-            public int CompareTo(TestElement other)
-                => string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+            public int CompareTo(TestElement? other)
+                => string.Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

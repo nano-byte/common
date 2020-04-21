@@ -396,8 +396,8 @@ namespace NanoByte.Common.Storage
             try
             {
                 directoryInfo.Walk(
-                    dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl),
-                    file => ResetAcl(file.GetAccessControl, file.SetAccessControl));
+                    dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl!),
+                    file => ResetAcl(file.GetAccessControl, file.SetAccessControl!));
             }
             #region Error handling
             catch (ArgumentException ex)

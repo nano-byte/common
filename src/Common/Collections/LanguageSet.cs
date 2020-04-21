@@ -68,7 +68,7 @@ namespace NanoByte.Common.Collections
                     Log.Warn("Unknown language code: " + language);
                     language = CultureInfo.InvariantCulture;
                 }
-                if (language != null) yield return language;
+                yield return language;
             }
         }
 
@@ -95,7 +95,7 @@ namespace NanoByte.Common.Collections
             {
                 var targetWeakNames = targets.Select(x => x.TwoLetterISOLanguageName);
                 var thisWeakNames = this.Select(x => x.TwoLetterISOLanguageName);
-                return targetWeakNames.Any(thisWeakNames.Contains);
+                return targetWeakNames.Any(thisWeakNames.Contains!);
             }
             else return targets.Any(Contains);
         }
