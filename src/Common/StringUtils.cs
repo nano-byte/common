@@ -143,8 +143,9 @@ namespace NanoByte.Common
             if (characters == null) throw new ArgumentNullException(nameof(characters));
             #endregion
 
-            if (value == null) return null;
-            return new string(value.Except(characters.Contains).ToArray());
+            return value == null
+                ? null
+                : new string(value.Except(characters.Contains!).ToArray());
         }
 
         /// <summary>
