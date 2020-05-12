@@ -1,8 +1,9 @@
 # NanoByte.Common
 
-[![NuGet](https://img.shields.io/nuget/v/NanoByte.Common.svg)](https://www.nuget.org/packages/NanoByte.Common/)
 [![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](https://common.nano-byte.net/)
-[![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)  
+[![Build status](https://img.shields.io/appveyor/ci/nano-byte/common.svg)](https://ci.appveyor.com/project/nano-byte/common)
+
+[![NanoByte.Common](https://img.shields.io/nuget/v/NanoByte.Common.svg)](https://www.nuget.org/packages/NanoByte.Common/)  
 NanoByte.Common provides various utility classes and data structures with an emphasis on:
 
 - integration with native Windows and Linux features,
@@ -10,17 +11,11 @@ NanoByte.Common provides various utility classes and data structures with an emp
 - advanced collections and
 - undo/redo logic.
 
-The library is available for .NET Framework 2.0+ and .NET Standard 2.0+.
-
-## NanoByte.Common.WinForms
-
-[![NuGet](https://img.shields.io/nuget/v/NanoByte.Common.WinForms.svg)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)  
+[![NanoByte.Common.WinForms](https://img.shields.io/nuget/v/NanoByte.Common.WinForms.svg)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)  
 NanoByte.Common.WinForms builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on:
 
 - progress reporting and
 - data binding.
-
-The library is available for .NET Framework 2.0+.
 
 ## Building
 
