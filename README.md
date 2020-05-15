@@ -19,12 +19,10 @@ NanoByte.Common.WinForms builds upon NanoByte.Common and adds various Windows Fo
 
 ## Building
 
-The source code is in [`src/`](src/), a project for API documentation is in [`doc/`](doc/) and generated build artifacts are placed in `artifacts/`.
+The source code is in [`src/`](src/), config for building the API documentation is in [`doc/`](doc/) and generated build artifacts are placed in `artifacts/`. The source code does not contain version numbers. Instead the version is determined during CI using [GitVersion](http://gitversion.readthedocs.io/).
 
-You need [Visual Studio 2019](https://www.visualstudio.com/downloads/) to perform a full build of this project.  
-You can build the cross-platform components on Linux using just the [.NET Core SDK 3.1+](https://www.microsoft.com/net/download). Additionally installing [Mono 6.4+](https://www.mono-project.com/download/stable/) allows more components to be built. The build scripts will automatically adjust accordingly.
-
-Run `.\build.ps1` on Windows or `./build.sh` on Linux. These scripts take a version number as an input argument. The source code itself contains only contains dummy version numbers. The actual version is picked by continuous integration using [GitVersion](http://gitversion.readthedocs.io/).
+To build on Windows install [Visual Studio 2019 v16.5 or newer](https://www.visualstudio.com/downloads/) and run `.\build.ps1`.  
+To build on Linux or MacOS X install [.NET Core SDK 3.1 or newer](https://www.microsoft.com/net/download) and run `./build.sh`. Note: Some parts of the code can only be built on Windows.
 
 ## Contributing
 
