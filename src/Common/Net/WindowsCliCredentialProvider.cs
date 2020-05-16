@@ -6,7 +6,10 @@ using System.Net;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
+
+#if NET20 || NET35
 using NanoByte.Common.Values;
+#endif
 
 namespace NanoByte.Common.Net
 {

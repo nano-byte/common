@@ -117,7 +117,7 @@ namespace NanoByte.Common.Native
             string[] names = null!;
             handler.RunTask(new SimplePercentTask(Resources.SearchingFileReferences, delegate
             {
-                var apps = ListAppsInternal(out uint arrayLength, out var rebootReasons);
+                var apps = ListAppsInternal(out uint arrayLength, out _);
 
                 names = new string[arrayLength];
                 for (int i = 0; i < arrayLength; i++)

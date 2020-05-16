@@ -140,7 +140,7 @@ namespace NanoByte.Common.Collections
                 { // old < new
                     oldCounter++;
                 }
-                else if (comparison > 0)
+                else
                 { // old > new
                     added.AddLast(newElement);
                     newCounter++;

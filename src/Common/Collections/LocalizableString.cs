@@ -83,7 +83,7 @@ namespace NanoByte.Common.Collections
         public static bool operator !=(LocalizableString? left, LocalizableString? right) => !Equals(left, right);
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;

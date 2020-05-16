@@ -67,7 +67,7 @@ namespace NanoByte.Common.Net
             ThreadUtils.StartBackground(ListenLoop, name: "MicroServer.Listen");
         }
 
-        private HttpListener StartListening()
+        private static HttpListener StartListening()
         {
             int port = MinimumPort;
 
@@ -77,10 +77,10 @@ namespace NanoByte.Common.Net
                 try
                 {
                     string prefix = "http://localhost:" + port++ + "/";
-                    var _listener = new HttpListener();
-                    _listener.Prefixes.Add(prefix);
-                    _listener.Start();
-                    return _listener;
+                    var listener = new HttpListener();
+                    listener.Prefixes.Add(prefix);
+                    listener.Start();
+                    return listener;
                 }
                 catch (HttpListenerException) when (port <= MaxmimumPort)
                 {}

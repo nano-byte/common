@@ -127,7 +127,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Ensures exceptions get passed from <see cref="CircularBufferStream.RelayErrorToReader"/> to <see cref="CircularBufferStream.Read"/>.
+        /// Ensures exceptions get passed from <see cref="CircularBufferStream.RelayErrorToReader"/> to <see cref="CircularBufferStream.Read(byte[],int,int)"/>.
         /// </summary>
         [Fact]
         public void TestErrorRelay()

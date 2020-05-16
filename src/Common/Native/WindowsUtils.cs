@@ -68,7 +68,7 @@ namespace NanoByte.Common.Native
             var ex = new Win32Exception(error);
             return error switch
             {
-                Win32ErrorAlreadyExists => (Exception)new IOException(ex.Message, ex),
+                Win32ErrorAlreadyExists => new IOException(ex.Message, ex),
                 Win32ErrorWriteFault => new IOException(ex.Message, ex),
                 Win32ErrorFileNotFound => new FileNotFoundException(ex.Message, ex),
                 Win32ErrorAccessDenied => new UnauthorizedAccessException(ex.Message, ex),
@@ -549,7 +549,7 @@ namespace NanoByte.Common.Native
 
             const int WM_SETTINGCHANGE = 0x001A;
             const int SMTO_ABORTIFHUNG = 0x0002;
-            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out var result);
+            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out _);
         }
         #endregion
 

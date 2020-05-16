@@ -195,7 +195,7 @@ namespace NanoByte.Common.Collections
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (collection == this) throw new ArgumentException(Resources.CannotAddCollectionToSelf, nameof(collection));
+            if (ReferenceEquals(collection, this)) throw new ArgumentException(Resources.CannotAddCollectionToSelf, nameof(collection));
             #endregion
 
             // Create backup of collection to be able to remove while enumerating

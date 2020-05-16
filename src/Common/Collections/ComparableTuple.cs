@@ -52,7 +52,7 @@ namespace NanoByte.Common.Collections
         public bool Equals(ComparableTuple<T> other) => Equals(Key, other.Key) && Equals(Value, other.Value);
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is ComparableTuple<T> tuple && Equals(tuple);
+        public override bool Equals(object? obj) => obj is ComparableTuple<T> tuple && Equals(tuple);
 
         /// <inheritdoc/>
         public override int GetHashCode()

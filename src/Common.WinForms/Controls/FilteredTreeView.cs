@@ -21,7 +21,8 @@ namespace NanoByte.Common.Controls
     /// <typeparam name="T">The type of <see cref="INamed{T}"/> object to list.
     /// Special support for types implementing <see cref="IHighlightColor"/> and/or <see cref="IContextMenu"/>.</typeparam>
     [Description("Displays a list of INamed in a TreeView with incremental search."), Guid("5065F310-D0B3-4AD3-BBE5-B41D00D5F036")]
-    public sealed partial class FilteredTreeView<T> : UserControl where T : class, INamed<T>
+    public sealed partial class FilteredTreeView<T> : UserControl
+        where T : class, INamed<T>
     {
         #region Events
         /// <summary>
@@ -219,6 +220,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         /// <param name="entry">The <typeparamref name="T"/> to create the entry for.</param>
         /// <returns>The newly created <see cref="TreeNode"/>.</returns>
+        [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
         private TreeNode AddTreeNode(T entry)
         {
             // Split into hierarchic namespaces
