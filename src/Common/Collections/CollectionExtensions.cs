@@ -274,7 +274,7 @@ namespace NanoByte.Common.Collections
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             #endregion
 
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
+            comparer ??= EqualityComparer<T>.Default;
             unchecked
             {
                 int result = 397;

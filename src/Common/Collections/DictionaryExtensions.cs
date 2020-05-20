@@ -157,7 +157,7 @@ namespace NanoByte.Common.Collections
             var keySet = new HashSet<TKey>(first.Keys);
             if (!second.Keys.All(keySet.Contains)) return false;
 
-            if (valueComparer == null) valueComparer = EqualityComparer<TValue>.Default;
+            valueComparer ??= EqualityComparer<TValue>.Default;
             foreach (var (key, value) in first)
             {
                 if (!valueComparer.Equals(value, second[key]))

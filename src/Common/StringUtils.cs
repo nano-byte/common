@@ -368,7 +368,7 @@ namespace NanoByte.Common
         /// <param name="provider">Provides culture-specific formatting information.</param>
         public static string FormatBytes(this long value, IFormatProvider? provider = null)
         {
-            if (provider == null) provider = CultureInfo.CurrentCulture;
+            provider ??= CultureInfo.CurrentCulture;
             if (value >= 1073741824)
                 return string.Format(provider, "{0:0.00}", value / 1073741824f) + " GB";
             if (value >= 1048576)

@@ -103,7 +103,7 @@ namespace NanoByte.Common.Collections
             if (expression == null) throw new ArgumentNullException(nameof(expression));
             #endregion
 
-            if (comparer == null) comparer = Comparer<TValue>.Default;
+            comparer ??= Comparer<TValue>.Default;
 
             using var enumerator = enumeration.GetEnumerator();
             if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
@@ -144,7 +144,7 @@ namespace NanoByte.Common.Collections
             if (expression == null) throw new ArgumentNullException(nameof(expression));
             #endregion
 
-            if (comparer == null) comparer = Comparer<TValue>.Default;
+            comparer ??= Comparer<TValue>.Default;
 
             using var enumerator = enumeration.GetEnumerator();
             if (!enumerator.MoveNext()) throw new InvalidOperationException("Enumeration contains no elements");
