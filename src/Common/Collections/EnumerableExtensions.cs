@@ -21,6 +21,142 @@ namespace NanoByte.Common.Collections
     public static class EnumerableExtensions
     {
         /// <summary>
+        /// Determines whether the enumeration contains an element or is null.
+        /// </summary>
+        /// <param name="enumeration">The list to check.</param>
+        /// <param name="element">The element to look for.</param>
+        /// <remarks>Useful for lists that contain an OR-ed list of restrictions, where an empty list means no restrictions.</remarks>
+        public static bool ContainsOrEmpty<T>(this IEnumerable<T> enumeration, T element)
+        {
+            #region Sanity checks
+            if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
+            if (element == null) throw new ArgumentNullException(nameof(element));
+            #endregion
+
+            // ReSharper disable PossibleMultipleEnumeration
+            return enumeration.Contains(element) || !enumeration.Any();
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        /// <summary>
+        /// Determines whether one enumeration of elements contains any of the elements in another.
+        /// </summary>
+        /// <param name="first">The first of the two enumerations to compare.</param>
+        /// <param name="second">The first of the two enumerations to compare.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+        /// <returns><c>true</c> if <paramref name="first"/> contains any element from <paramref name="second"/>. <c>false</c> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool ContainsAny<T>(this IEnumerable<T> first, IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            #endregion
+
+            var set =
+#if NET40 || NET45 || NET461 || NETSTANDARD
+                second as ISet<T> ??
+#endif
+                new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
+            return second.Any(set.Contains);
+        }
+
+        /// <summary>
+        /// Determines whether two enumerations contain the same elements in the same order.
+        /// </summary>
+        /// <param name="first">The first of the two enumerations to compare.</param>
+        /// <param name="second">The first of the two enumerations to compare.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool SequencedEquals<T>(this IEnumerable<T> first, IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            #endregion
+
+            if (ReferenceEquals(first, second)) return true;
+            if (first is ICollection<T> a && second is ICollection<T> b && a.Count != b.Count) return false;
+            return first.SequenceEqual(second, comparer ?? EqualityComparer<T>.Default);
+        }
+
+        /// <summary>
+        /// Determines whether two enumerations contain the same elements disregarding the order they are in.
+        /// </summary>
+        /// <param name="first">The first of the two enumerations to compare.</param>
+        /// <param name="second">The first of the two enumerations to compare.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static bool UnsequencedEquals<T>(this IEnumerable<T> first, IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
+        {
+            #region Sanity checks
+            if (first == null) throw new ArgumentNullException(nameof(first));
+            if (second == null) throw new ArgumentNullException(nameof(second));
+            #endregion
+
+            if (ReferenceEquals(first, second)) return true;
+            if (first is ICollection<T> a && second is ICollection<T> b && a.Count != b.Count) return false;
+            var set = new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
+            return second.All(set.Contains);
+        }
+
+        /// <summary>
+        /// Generates a hash code for the contents of the enumeration. Changing the elements' order will change the hash.
+        /// </summary>
+        /// <param name="enumeration">The enumeration to generate the hash for.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+        /// <seealso cref="SequencedEquals{T}"/>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static int GetSequencedHashCode<T>(this IEnumerable<T> enumeration, IEqualityComparer<T>? comparer = null)
+        {
+            #region Sanity checks
+            if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
+            #endregion
+
+            var hash = new HashCode();
+            foreach (T item in enumeration)
+                hash.Add(item, comparer);
+            return hash.ToHashCode();
+        }
+
+        /// <summary>
+        /// Generates a hash code for the contents of the enumeration. Changing the elements' order will not change the hash.
+        /// </summary>
+        /// <param name="enumeration">The enumeration to generate the hash for.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+        /// <seealso cref="UnsequencedEquals{T}"/>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static int GetUnsequencedHashCode<T>(this IEnumerable<T> enumeration, IEqualityComparer<T>? comparer = null)
+        {
+            #region Sanity checks
+            if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
+            #endregion
+
+            comparer ??= EqualityComparer<T>.Default;
+            unchecked
+            {
+                int result = 397;
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (T item in enumeration)
+                {
+                    if (item != null)
+                        result = result ^ comparer.GetHashCode(item);
+                }
+                return result;
+            }
+        }
+
+        /// <summary>
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(IEnumerable{TSource},Func{TSource,bool})"/>.
         /// </summary>
@@ -210,7 +346,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Calls <see cref="ICloneable{T}.Clone"/> for every element in a collection and returns the results as a new collection.
+        /// Calls <see cref="ICloneable{T}.Clone"/> for every element in a enumeration and returns the results as a new enumeration.
         /// </summary>
 #if NETSTANDARD
         [System.Diagnostics.Contracts.Pure]
@@ -292,5 +428,39 @@ namespace NanoByte.Common.Collections
             await Task.WhenAll(tasks.ToArray());
         }
 #endif
+
+        /// <summary>
+        /// Generates all possible permutations of a set of <paramref name="elements"/>.
+        /// </summary>
+#if NETSTANDARD
+        [System.Diagnostics.Contracts.Pure]
+#endif
+        public static IEnumerable<T[]> Permutate<T>(this IEnumerable<T> elements)
+        {
+            #region Sanity checks
+            if (elements == null) throw new ArgumentNullException(nameof(elements));
+            #endregion
+
+            IEnumerable<T[]> Helper(T[] array, int index)
+            {
+                if (index >= array.Length - 1)
+                    yield return array;
+                else
+                {
+                    for (int i = index; i < array.Length; i++)
+                    {
+                        var subArray = array.ToArray();
+                        var t1 = subArray[index];
+                        subArray[index] = subArray[i];
+                        subArray[i] = t1;
+
+                        foreach (var element in Helper(subArray, index + 1))
+                            yield return element;
+                    }
+                }
+            }
+
+            return Helper(elements.ToArray(), index: 0);
+        }
     }
 }
