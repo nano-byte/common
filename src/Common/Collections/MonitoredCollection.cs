@@ -183,19 +183,19 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Adds all the items in <paramref name="collection"/> to the collection that weren't already there and
-        /// removes all items in the collection that are not in <paramref name="collection"/>.
+        /// Adds all the items in <paramref name="enumeration"/> to the collection that weren't already there and
+        /// removes all items in the collection that are not in <paramref name="enumeration"/>.
         /// </summary>
-        /// <param name="collection">A collection of items to add to the collection.</param>
+        /// <param name="enumeration">An enumeration with items to add to the collection.</param>
         /// <remarks>
         ///   <para>All events are raised en bloc after the items have been added.</para>
-        ///   <para>After calling this method this collection will contain the same items as <paramref name="collection"/>, but not necessarily in the same order.</para>
+        ///   <para>After calling this method this collection will contain the same items as <paramref name="enumeration"/>, but not necessarily in the same order.</para>
         /// </remarks>
-        public void SetMany(ICollection<T> collection)
+        public void SetMany(IEnumerable<T> enumeration)
         {
             #region Sanity checks
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (ReferenceEquals(collection, this)) throw new ArgumentException(Resources.CannotAddCollectionToSelf, nameof(collection));
+            if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));
+            if (ReferenceEquals(enumeration, this)) throw new ArgumentException(Resources.CannotAddCollectionToSelf, nameof(enumeration));
             #endregion
 
             // Create backup of collection to be able to remove while enumerating
@@ -206,7 +206,7 @@ namespace NanoByte.Common.Collections
 
             // Remove superfluous items without raising the events yet
             _dontRaiseEvents = true;
-            foreach (var item in copy.Where(item => !collection.Contains(item)))
+            foreach (var item in copy.Where(item => !enumeration.Contains(item)))
             {
                 Remove(item);
                 removed.AddLast(item);
@@ -217,7 +217,7 @@ namespace NanoByte.Common.Collections
             foreach (var item in removed) Removed?.Invoke(item);
 
             // Add any new items (raising all events en bloc)
-            AddMany(collection);
+            AddMany(enumeration);
         }
         #endregion
     }

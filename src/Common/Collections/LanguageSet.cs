@@ -85,7 +85,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="targets">The language set to match against.</param>
         /// <param name="ignoreCountry"><c>true</c> to compare only the two-letter language name; <c>false</c> to also compare the country code.</param>
-        public bool ContainsAny(ICollection<CultureInfo> targets, bool ignoreCountry = false)
+        public bool ContainsAny(IEnumerable<CultureInfo> targets, bool ignoreCountry = false)
         {
             #region Sanity checks
             if (targets == null) throw new ArgumentNullException(nameof(targets));
