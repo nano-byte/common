@@ -177,14 +177,17 @@ namespace NanoByte.Common.Native
 #endif
             out string? target)
         {
-            bool result = IsSymlink(path ?? throw new ArgumentNullException(nameof(path)));
-            if (result)
+            if (IsSymlink(path ?? throw new ArgumentNullException(nameof(path))))
             {
                 var symlinkInfo = new UnixSymbolicLinkInfo(path);
                 target = symlinkInfo.ContentsPath;
+                return true;
             }
-            else target = null;
-            return result;
+            else
+            {
+                target = null;
+                return false;
+            }
         }
         #endregion
 
