@@ -1,4 +1,5 @@
 PROJECT_NAME = "NanoByte.Common"
+PROJECT_NUMBER = $(VERSION)
 
 INPUT = . ../src
 USE_MDFILE_AS_MAINPAGE = main.md
