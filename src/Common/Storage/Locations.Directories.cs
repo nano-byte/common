@@ -113,35 +113,5 @@ namespace NanoByte.Common.Storage
 
             return Path.GetFullPath(path);
         }
-
-        /// <summary>
-        /// Returns a path for a directory that can safely be used for desktop integration. It ignores <see cref="IsPortable"/>.
-        /// </summary>
-        /// <param name="appName">The name of application. Used as part of the path.</param>
-        /// <param name="machineWide"><c>true</c> if the directory should be machine-wide and machine-specific instead of roaming with the user profile.</param>
-        /// <param name="resource">The directory name of the resource to be stored.</param>
-        /// <returns>A fully qualified directory path. The directory is guaranteed to already exist.</returns>
-        /// <exception cref="IOException">A problem occurred while creating a directory.</exception>
-        /// <exception cref="UnauthorizedAccessException">Creating a directory is not permitted.</exception>
-        /// <remarks>If a new directory is created with <paramref name="machineWide"/> set to <c>true</c> on Windows, ACLs are set to deny write access for non-Administrator users.</remarks>
-        public static string GetIntegrationDirPath([Localizable(false)] string appName, bool machineWide, params string[] resource)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(appName)) throw new ArgumentNullException(nameof(appName));
-            if (resource == null) throw new ArgumentNullException(nameof(resource));
-            #endregion
-
-            string resourceCombined = FileUtils.PathCombine(resource);
-            string appPath = Path.Combine(
-                Environment.GetFolderPath(machineWide ? Environment.SpecialFolder.CommonApplicationData : Environment.SpecialFolder.ApplicationData),
-                appName);
-            if (machineWide) CreateSecureMachineWideDir(appPath);
-            string path = Path.Combine(appPath, resourceCombined);
-
-            // Ensure the directory exists
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-
-            return Path.GetFullPath(path);
-        }
     }
 }
