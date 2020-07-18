@@ -1,5 +1,13 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": ["Microsoft.NET.Test.Sdk", "[Xx]unit.*", "FluentAssertions", "Moq"],
+      "groupName": "Testing dependencies",
+      "automerge": true,
+      "automergeType": "branch"
+    }
   ]
 }
