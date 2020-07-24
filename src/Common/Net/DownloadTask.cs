@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Threading;
 using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
@@ -138,7 +137,7 @@ namespace NanoByte.Common.Net
             var responseHandler = request.BeginGetResponse(null, null);
             // ReSharper restore AssignNullToNotNullAttribute
 
-            if (WaitHandle.WaitAny(new[] {responseHandler.AsyncWaitHandle, CancellationToken.WaitHandle}) == 1) throw new OperationCanceledException();
+            responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
             var response = request.EndGetResponse(responseHandler);
             return response;
         }

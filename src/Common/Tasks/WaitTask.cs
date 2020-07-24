@@ -40,26 +40,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override void Execute()
         {
-            try
-            {
-                switch (WaitHandle.WaitAny(new[] {_waitHandle, CancellationToken.WaitHandle}, _millisecondsTimeout, exitContext: false))
-                {
-                    case 0:
-                        break;
-
-                    case 1:
-                        throw new OperationCanceledException();
-
-                    default:
-                    case WaitHandle.WaitTimeout:
-                        throw new TimeoutException();
-                }
-            }
-            catch (AbandonedMutexException ex)
-            {
-                // Abandoned mutexes also get owned, but indicate something may have gone wrong elsewhere
-                Log.Warn(ex.Message);
-            }
+            _waitHandle.WaitOne(CancellationToken, _millisecondsTimeout);
         }
     }
 }
