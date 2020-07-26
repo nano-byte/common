@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace NanoByte.Common.Storage
 {
     /// <summary>
-    /// Ensures that a read operation for a file does not occur while an <seealso cref="AtomicWrite"/> for the same file is in progress.
+    /// Ensures that a read operation for a file does not occur while an <see cref="AtomicWrite"/> for the same file is in progress.
     /// </summary>
     /// <example><code>
     /// using (new AtomicRead(filePath))

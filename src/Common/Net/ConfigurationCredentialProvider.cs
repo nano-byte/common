@@ -45,7 +45,7 @@ namespace NanoByte.Common.Net
     }
 
     /// <summary>
-    /// Provides extension methods for registering <seealso cref="ConfigurationCredentialProvider"/> instances.
+    /// Provides extension methods for registering <see cref="ConfigurationCredentialProvider"/> instances.
     /// </summary>
     [CLSCompliant(false)]
     public static class ConfigurationCredentialProviderRegisration

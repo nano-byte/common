@@ -1,2 +1,2 @@
 //! \namespace NanoByte.Common.Tasks
-//! \brief Classes for tracking the progress of background tasks.
+//! \brief Manage long-running tasks and track their progress.
