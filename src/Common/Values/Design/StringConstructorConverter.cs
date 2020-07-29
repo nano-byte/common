@@ -35,7 +35,7 @@ namespace NanoByte.Common.Values.Design
                     }
                     catch (Exception ex) when (ex.InnerException != null)
                     {
-                        throw ex.InnerException.PreserveStack();
+                        ex.InnerException.Rethrow();
                     }
                 }
             }

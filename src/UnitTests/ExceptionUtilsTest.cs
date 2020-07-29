@@ -39,7 +39,7 @@ namespace NanoByte.Common
                 caught = ex;
             }
 
-            var exceptionAssertion = caught.Invoking(x => throw x.PreserveStack())
+            var exceptionAssertion = caught.Invoking(x => x.Rethrow())
                                            .Should().Throw<InvalidOperationException>();
             exceptionAssertion.WithMessage("Test exception");
 

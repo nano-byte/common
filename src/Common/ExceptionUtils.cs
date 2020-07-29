@@ -9,14 +9,13 @@ using System.Linq;
 using System.Threading;
 using NanoByte.Common.Properties;
 
-#if NETFRAMEWORK
+#if NET45 || NET461 || NETSTANDARD
+using System.Threading.Tasks;
+using System.Runtime.ExceptionServices;
+#else
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
-#endif
-
-#if NET45 || NET461 || NETSTANDARD
-using System.Threading.Tasks;
 #endif
 
 namespace NanoByte.Common
@@ -64,36 +63,42 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Configures a caught <paramref name="exception"/> to preserve its original stack trace when it is rethrown.
+        /// Rethrows an <paramref name="exception"/> while preserving its original stack trace.
         /// </summary>
-        /// <remarks>This has no effect on platforms that do not support exception serialization.</remarks>
-        public static Exception PreserveStack(this Exception exception)
+        /// <returns>This method never returns. You can "throw" the return value to satisfy the compiler's flow analysis if necessary.</returns>
+#if NETSTANDARD2_1
+        [DoesNotReturn]
+#endif
+        public static Exception Rethrow(this Exception exception)
         {
             #region Sanity checks
             if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
-#if NETFRAMEWORK
-            var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
-            var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
-            exception.GetObjectData(serializationInfo, streamingContext);
-
-            try
-            {
-                var objectManager = new ObjectManager(null, streamingContext);
-                objectManager.RegisterObject(exception, 1, serializationInfo);
-                objectManager.DoFixups();
-            }
-            // Ignore if preserving stack trace is not possible
-            catch (SecurityException)
-            {}
-            catch (SerializationException)
-            {}
-            catch (TargetInvocationException)
-            {}
-#endif
-
+#if NET45 || NET461 || NETSTANDARD
+            ExceptionDispatchInfo.Capture(exception).Throw();
             return exception;
+#else
+             var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
+             var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
+             exception.GetObjectData(serializationInfo, streamingContext);
+
+             try
+             {
+                 var objectManager = new ObjectManager(null, streamingContext);
+                 objectManager.RegisterObject(exception, 1, serializationInfo);
+                 objectManager.DoFixups();
+             }
+             // Ignore if preserving stack trace is not possible
+             catch (SecurityException)
+             {}
+             catch (SerializationException)
+             {}
+             catch (TargetInvocationException)
+             {}
+
+             throw exception;
+#endif
         }
 
         /// <summary>
