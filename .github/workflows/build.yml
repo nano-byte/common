@@ -17,9 +17,10 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            ~\AppData\Roaming\0install.net
             ~\AppData\Local\0install.net
             C:\ProgramData\0install.net
-          key: 0install-${{hashFiles('**/build.ps1')}}
+          key: windows-0install-${{hashFiles('**/build.ps1')}}
 
       # Build
       - name: Build (pre-release)
@@ -64,7 +65,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.cache/0install.net
-          key: 0install-${{hashFiles('**/build.sh')}}
+          key: linux-0install-${{hashFiles('**/build.sh')}}
 
       # Build
       - name: Build (pre-release)
