@@ -29,6 +29,12 @@ jobs:
       - name: Build (release)
         if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
         run: .\build.ps1 ${{steps.gitversion.outputs.nuGetVersion}}
+      - name: Report test results
+        uses: scacap/action-surefire-report@v1
+        with:
+          github_token: ${{github.token}}
+          report_paths: '**/TestResults/TestResults.xml'
+          check_name: windows - Test Report
 
       # Release
       - name: Create GitHub Release
@@ -74,6 +80,12 @@ jobs:
       - name: Build (release)
         if: steps.gitversion.outputs.preReleaseLabel == ''
         run: ./build.sh ${{steps.gitversion.outputs.nuGetVersion}}
+      - name: Report test results
+        uses: scacap/action-surefire-report@v1
+        with:
+          github_token: ${{github.token}}
+          report_paths: '**/TestResults/TestResults.xml'
+          check_name: linux - Test Report
 
       # Publish
       - name: Publish documentation
