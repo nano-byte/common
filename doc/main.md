@@ -2,6 +2,8 @@ This website documents the APIs of the NanoByte.Common NuGet packages.
 
 Take a look at the [**Namespace List**](namespaces.html) to get an overview of the available functionality.
 
+[**GitHub repository**](https://github.com/nano-byte/common)
+
 **NuGet packages**
 
 [NanoByte.Common](https://www.nuget.org/packages/NanoByte.Common/) provides various utility classes and data structures with an emphasis on:
@@ -15,5 +17,3 @@ Take a look at the [**Namespace List**](namespaces.html) to get an overview of t
 
 - progress reporting and
 - data binding.
-
-[**GitHub repository**](https://github.com/nano-byte/common)

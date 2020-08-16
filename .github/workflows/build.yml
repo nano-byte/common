@@ -20,14 +20,14 @@ jobs:
             ~\AppData\Roaming\0install.net
             ~\AppData\Local\0install.net
             C:\ProgramData\0install.net
-          key: windows-0install-${{hashFiles('**/build.ps1')}}
+          key: 0install-${{hashFiles('**/build.ps1')}}
 
       # Build
       - name: Build (pre-release)
         if: steps.gitversion.outputs.preReleaseLabel != ''
         run: .\build.ps1 ${{steps.gitversion.outputs.nuGetVersion}}-${{steps.gitversion.outputs.shortSha}}
       - name: Build (release)
-        if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
+        if: steps.gitversion.outputs.preReleaseLabel == ''
         run: .\build.ps1 ${{steps.gitversion.outputs.nuGetVersion}}
       - name: Report test results
         uses: scacap/action-surefire-report@v1
@@ -46,6 +46,14 @@ jobs:
           GITHUB_TOKEN: ${{github.token}}
 
       # Publish
+      - name: Publish documentation
+        if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{github.token}}
+          force_orphan: true
+          publish_dir: artifacts/Documentation
+          cname: common.nano-byte.net
       - name: Publish packages (GitHub)
         if: github.event_name == 'push'
         run: |
@@ -68,10 +76,6 @@ jobs:
           versionSpec: 5.3.x
       - uses: gittools/actions/gitversion/execute@v0.9.4
         id: gitversion
-      - uses: actions/cache@v2
-        with:
-          path: ~/.cache/0install.net
-          key: linux-0install-${{hashFiles('**/build.sh')}}
 
       # Build
       - name: Build (pre-release)
@@ -86,13 +90,3 @@ jobs:
           github_token: ${{github.token}}
           report_paths: '**/TestResults/TestResults.xml'
           check_name: linux - Test Report
-
-      # Publish
-      - name: Publish documentation
-        if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{github.token}}
-          force_orphan: true
-          publish_dir: artifacts/Documentation
-          cname: common.nano-byte.net
