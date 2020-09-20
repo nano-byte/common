@@ -39,16 +39,17 @@ jobs:
 
       # Release
       - name: Create GitHub Release
-        if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
+        if: steps.gitversion.outputs.preReleaseLabel == ''
         uses: actions/create-release@v1
         with:
           tag_name: ${{github.ref}}
+          release_name: ${{github.ref}}
         env:
           GITHUB_TOKEN: ${{github.token}}
 
       # Publish
       - name: Publish documentation
-        if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
+        if: steps.gitversion.outputs.preReleaseLabel == ''
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{github.token}}
@@ -62,7 +63,7 @@ jobs:
             curl.exe -sS -X PUT -u "${{github.actor}}:${{github.token}}" -F package=@$_ https://nuget.pkg.github.com/${{github.repository_owner}}/
           }
       - name: Publish packages (NuGet.org)
-        if: github.event_name == 'push' && steps.gitversion.outputs.preReleaseLabel == ''
+        if: steps.gitversion.outputs.preReleaseLabel == ''
         run: dotnet nuget push artifacts\Release\*.nupkg --source nuget.org --api-key ${{secrets.NUGET_API_KEY}}
 
   linux:
