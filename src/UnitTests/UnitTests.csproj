@@ -15,6 +15,7 @@
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="$(TargetFramework)=='netcoreapp3.1'">
+    <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

@@ -5,6 +5,8 @@
     <AssemblyName>NanoByte.Common</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <LangVersion>8.0</LangVersion>
+    <TargetFrameworks>net20;net40;net45;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <Nullable>annotations</Nullable>
@@ -16,7 +18,13 @@
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework)=='netstandard2.1'">
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
+    <!-- .NET Core MSBuild does not support legacy ResGen -->
+    <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+    <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -30,34 +38,9 @@
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
   </PropertyGroup>
 
-  <!-- Auto-select supported target frameworks based on MSBuild version -->
-  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
-    <TargetFrameworks>net20;net35-client;net40-client;net45;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core' And '$(OS)'=='Windows_NT'">
-    <TargetFrameworks>net45;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core' And '$(OS)'!='Windows_NT'">
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-  </PropertyGroup>
-
-  <!-- Support .NET Framework Client Profiles -->
-  <PropertyGroup Condition="'$(TargetFramework)'=='net35-client'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>client</TargetFrameworkProfile>
-    <DefineConstants>$(DefineConstants);NET35</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net40-client'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>client</TargetFrameworkProfile>
-    <DefineConstants>$(DefineConstants);NET40</DefineConstants>
-  </PropertyGroup>
-
   <!-- Dependencies -->
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='netstandard2.0'">
@@ -107,10 +90,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ImageResources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' Or '$(TargetFramework)'=='netstandard2.1'">
-    <EmbeddedResource Remove="Properties\ImageResources.resx" />
-    <Compile Remove="Properties\ImageResources.Designer.cs" />
   </ItemGroup>
 
 </Project>

@@ -23,6 +23,10 @@
       "packagePatterns": ["^Microsoft\\.Extensions"],
       "updateTypes": ["major", "minor"],
       "enabled": false
+    },
+    {
+      "packagePatterns": ["System.Resources.Extensions"],
+      "enabled": false
     }
   ]
 }
