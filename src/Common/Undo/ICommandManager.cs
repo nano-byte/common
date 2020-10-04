@@ -13,12 +13,12 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// The object being edited.
         /// </summary>
-        T Target { get; set; }
+        T? Target { get; set; }
 
         /// <summary>
         /// Is raised after <see cref="Target"/> has been updated.
         /// </summary>
-        event Action TargetUpdated;
+        event Action? TargetUpdated;
 
         /// <summary>
         /// Indicates whether there currently are operations that can be <see cref="Undo"/>ne.
@@ -29,7 +29,7 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Is raised when the value of <see cref="UndoEnabled"/> has changed.
         /// </summary>
-        event Action UndoEnabledChanged;
+        event Action? UndoEnabledChanged;
 
         /// <summary>
         /// Indicates whether there currently are operations that can be <see cref="Redo"/>ne.
@@ -39,7 +39,7 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Is raised when the value of <see cref="RedoEnabled"/> has changed.
         /// </summary>
-        event Action RedoEnabledChanged;
+        event Action? RedoEnabledChanged;
 
         /// <summary>
         /// Undoes the last action performed by <see cref="ICommandExecutor.Execute"/>.

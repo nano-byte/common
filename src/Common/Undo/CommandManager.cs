@@ -20,7 +20,7 @@ namespace NanoByte.Common.Undo
             _redoStack = new Stack<IUndoCommand>();
 
         /// <inheritdoc/>
-        public T Target { get; set; }
+        public T? Target { get; set; }
 
         /// <inheritdoc/>
         public event Action? TargetUpdated;
