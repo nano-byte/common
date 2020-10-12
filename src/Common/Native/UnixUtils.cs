@@ -9,7 +9,7 @@ using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Cli;
 
-#if NETSTANDARD
+#if !NET20 && !NET40
 using System.Runtime.InteropServices;
 #endif
 
@@ -29,26 +29,28 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
         public static bool IsUnix
-#if NETSTANDARD
-            => RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || IsMacOSX;
-#else
-            => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128;
+            => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128
+#if !NET20 && !NET40
+             || RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
 #endif
+        ;
 
         /// <summary>
         /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
         public static bool IsMacOSX
-#if NETSTANDARD
-            => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+#if NET20 || NET40
+            => IsUnix && OSName == "Darwin";
 #else
-            => IsUnix && (OSName == "Darwin") && File.Exists("/System/Library/Frameworks/Carbon.framework");
+            => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #endif
 
         /// <summary>
         /// <c>true</c> if there is an X Server running or the current operating system is MacOS X.
         /// </summary>
-        public static bool HasGui => IsMacOSX || (IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY")));
+        public static bool HasGui
+            => IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))
+            || IsMacOSX;
 
         /// <summary>
         /// The operating system name as reported by the "uname" system call.
