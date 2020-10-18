@@ -19,10 +19,6 @@ namespace NanoByte.Common.Native
             [DllImport("shell32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern IntPtr CommandLineToArgvW([MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
 
-            [DllImport("kernel32")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool IsWow64Process([In] IntPtr hProcess, [Out, MarshalAs(UnmanagedType.Bool)] out bool lpSystemInfo);
-
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern uint GetModuleFileName(IntPtr hModule, [Out] StringBuilder lpFilename, int nSize);
 
