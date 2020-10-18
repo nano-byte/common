@@ -12,7 +12,7 @@ using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 #endif
 
-#if NET20 || NET35
+#if NET20
 using NanoByte.Common.Values;
 #endif
 

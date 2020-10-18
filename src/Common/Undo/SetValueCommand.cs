@@ -3,7 +3,7 @@
 
 using System;
 
-#if !NET20 && !NET35
+#if !NET20
 using System.Linq.Expressions;
 #endif
 
@@ -72,7 +72,7 @@ namespace NanoByte.Common.Undo
         public static SetValueCommand<T> For<T>(Func<T> getValue, Action<T> setValue, T newValue)
             => For(PropertyPointer.For(getValue, setValue), newValue);
 
-#if !NET20 && !NET35
+#if !NET20
         /// <summary>
         /// Creates a new value-setting command.
         /// </summary>

@@ -128,7 +128,7 @@ namespace NanoByte.Common.Dispatch
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
 
-#if NET20 || NET35
+#if NET20
             _createDispatcher.Add<TSpecificModel>(element => create(element).OfType<TView>());
 #else
             _createDispatcher.Add(create);

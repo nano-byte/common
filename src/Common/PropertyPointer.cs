@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using NanoByte.Common.Net;
 
-#if !NET20 && !NET35
+#if !NET20
 using System.Linq.Expressions;
 using System.Reflection;
 #endif
@@ -73,7 +73,7 @@ namespace NanoByte.Common
         public static PropertyPointer<T> For<T>(Func<T> getValue, Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
             => new PropertyPointer<T>(getValue, setValue, defaultValue, needsEncoding);
 
-#if !NET20 && !NET35
+#if !NET20
         /// <summary>
         /// Creates a property pointer.
         /// </summary>

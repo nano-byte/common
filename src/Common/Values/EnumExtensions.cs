@@ -20,7 +20,7 @@ namespace NanoByte.Common.Values
 #endif
         public static bool HasFlag(this Enum enumRef, Enum flag)
         {
-#if NET20 || NET35
+#if NET20
             long enumValue = Convert.ToInt64(enumRef);
             long flagVal = Convert.ToInt64(flag);
             return (enumValue & flagVal) == flagVal;

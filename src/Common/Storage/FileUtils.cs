@@ -13,7 +13,7 @@ using System.Text;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
-#if NET20 || NET35
+#if NET20
 using NanoByte.Common.Values;
 #endif
 
@@ -35,7 +35,7 @@ namespace NanoByte.Common.Storage
             if (paths == null) throw new ArgumentNullException(nameof(paths));
             #endregion
 
-#if NET20 || NET35
+#if NET20
             return (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
 #else
             return Path.Combine(paths);

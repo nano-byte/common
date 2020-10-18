@@ -11,7 +11,7 @@ namespace NanoByte.Common
     /// </summary>
     /// <see cref="Collections.NamedCollection{T}"/>
     public interface INamed<
-#if !NET20 && !NET35
+#if !NET20
         in
 #endif
         T> : IComparable<T>

@@ -7,7 +7,7 @@ using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
 
-#if NET20 || NET35
+#if NET20
 using NanoByte.Common.Values;
 #endif
 
