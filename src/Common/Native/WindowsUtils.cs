@@ -9,7 +9,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Native
 {
@@ -215,10 +214,13 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(version)) throw new ArgumentNullException(nameof(version));
             #endregion
 
-            return FileUtils.PathCombine(
+            string microsoftDotNetDir = Path.Combine(
                 Environment.GetEnvironmentVariable("windir") ?? @"C:\Windows",
-                "Microsoft.NET",
-                OSUtils.Is64BitProcess ? "Framework64" : "Framework",
+                "Microsoft.NET");
+            string framework32Dir = Path.Combine(microsoftDotNetDir, "Framework");
+            string framework64Dir = Path.Combine(microsoftDotNetDir, "Framework64");
+            return Path.Combine(
+                Directory.Exists(framework64Dir) ? framework64Dir : framework32Dir,
                 version);
         }
         #endregion
