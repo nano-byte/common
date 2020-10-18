@@ -207,7 +207,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="version">The full .NET version number including the leading "v". Use predefined constants when possible.</param>
         /// <returns>The path to the .NET Framework root directory.</returns>
-        /// <remarks>Returns 64-bit directories if <see cref="OSUtils.Is64BitProcess"/> is <c>true</c>.</remarks>
+        /// <remarks>Returns 64-bit directories if on 64-bit Windows is <c>true</c>.</remarks>
         public static string GetNetFxDirectory(string version)
         {
             #region Sanity checks

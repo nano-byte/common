@@ -4,9 +4,8 @@
 using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using NanoByte.Common.Native;
 
-#if NETSTANDARD
+#if !NET20 && !NET40
 using System.Runtime.InteropServices;
 #endif
 
@@ -24,11 +23,19 @@ namespace NanoByte.Common.Info
         [XmlAttribute("platform")]
         public string Platform;
 
+#if !NET20 && !NET40
         /// <summary>
-        /// True if the operating system is a 64-bit version of Windows.
+        /// The processor architecture of the operating system.
         /// </summary>
-        [XmlAttribute("is64bit")]
-        public bool Is64Bit;
+        [XmlAttribute("os-architecture")]
+        public Architecture OSArchitecture { get; set; }
+
+        /// <summary>
+        /// The (potentially emulated) processor architecture of the running process.
+        /// </summary>
+        [XmlAttribute("process-architecture")]
+        public Architecture ProcessArchitecture { get; set; }
+#endif
 
         /// <summary>
         /// The version of the operating system (e.g. 6.0 for Vista).
@@ -48,27 +55,24 @@ namespace NanoByte.Common.Info
         [XmlAttribute("framework-version")]
         public string FrameworkVersion;
 
-        public override string ToString() => $"{Platform}{(Is64Bit ? " 64-bit" : "")} {Version} {ServicePack}";
-
-        #region Static
         /// <summary>
         /// Information about the current operating system.
         /// </summary>
-        public static OSInfo Current { get; } = Load();
+        public static OSInfo Current { get; } = GetCurrent();
 
-        private static OSInfo Load() => new OSInfo
+        private static OSInfo GetCurrent() => new OSInfo
         {
-#if NETSTANDARD
-            FrameworkVersion = RuntimeInformation.FrameworkDescription,
-            Platform = RuntimeInformation.OSDescription,
-#else
+#if NET20 || NET40
             FrameworkVersion = Environment.Version.ToString(),
             Platform = Environment.OSVersion.Platform.ToString(),
+#else
+            FrameworkVersion = RuntimeInformation.FrameworkDescription,
+            Platform = RuntimeInformation.OSDescription,
+            OSArchitecture = RuntimeInformation.OSArchitecture,
+            ProcessArchitecture = RuntimeInformation.ProcessArchitecture,
 #endif
-            Is64Bit = OSUtils.Is64BitOperatingSystem,
             Version = Environment.OSVersion.Version.ToString(),
             ServicePack = Environment.OSVersion.ServicePack
         };
-        #endregion
     }
 }

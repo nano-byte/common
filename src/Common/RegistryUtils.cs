@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Security;
 using Microsoft.Win32;
-using NanoByte.Common.Native;
 
 namespace NanoByte.Common
 {
@@ -170,7 +169,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to read.</param>
-        /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="OSUtils.Is64BitProcess"/>); <c>false</c> to read from HCKU/SOFTWARE.</param>
+        /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to read from HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
 #if NETSTANDARD
         [System.Diagnostics.Contracts.Pure]
@@ -193,7 +192,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to write.</param>
         /// <param name="value">The value to write.</param>
-        /// <param name="machineWide"><c>true</c> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="OSUtils.Is64BitProcess"/>); <c>false</c> to write to HCKU/SOFTWARE.</param>
+        /// <param name="machineWide"><c>true</c> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to write to HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
         public static void SetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, [Localizable(false)] string value, bool machineWide = false)
@@ -205,7 +204,9 @@ namespace NanoByte.Common
             if (machineWide)
             {
                 SetString(HklmSoftwareKey + subkeyName, valueName, value);
-                if (OSUtils.Is64BitProcess) SetString(HklmWowSoftwareKey + subkeyName, valueName, value);
+#if !NET20 && !NET40
+                if (Environment.Is64BitProcess) SetString(HklmWowSoftwareKey + subkeyName, valueName, value);
+#endif
             }
             else SetString(HkcuSoftwareKey + subkeyName, valueName, value);
         }
@@ -216,7 +217,7 @@ namespace NanoByte.Common
         /// <remarks>Does not throw an exception for missing keys or values.</remarks>
         /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
         /// <param name="valueName">The name of the value to delete.</param>
-        /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if <see cref="OSUtils.Is64BitProcess"/>); <c>false</c> to delete from HCKU/SOFTWARE.</param>
+        /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to delete from HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
         public static void DeleteSoftwareValue([Localizable(false)] string subkeyName, [Localizable(false)] string valueName, bool machineWide)
         {
@@ -228,7 +229,9 @@ namespace NanoByte.Common
             if (machineWide)
             {
                 DeleteValue(Registry.LocalMachine, @"SOFTWARE\" + subkeyName, valueName);
-                if (OSUtils.Is64BitProcess) DeleteValue(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\" + subkeyName, valueName);
+#if !NET20 && !NET40
+                if (Environment.Is64BitProcess) DeleteValue(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\" + subkeyName, valueName);
+#endif
             }
             else
                 DeleteValue(Registry.CurrentUser, @"SOFTWARE\" + subkeyName, valueName);
@@ -381,7 +384,9 @@ namespace NanoByte.Common
             if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
 
-            if (OSUtils.Is64BitProcess)
+
+#if !NET20 && !NET40
+            if (Environment.Is64BitProcess)
             {
                 var result = Registry.LocalMachine.OpenSubKey(subkeyName);
                 if (result != null)
@@ -396,6 +401,7 @@ namespace NanoByte.Common
                 }
             }
             else
+#endif
             {
                 x64 = false;
                 return OpenSubKeyChecked(Registry.LocalMachine, subkeyName);

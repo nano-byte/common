@@ -7,10 +7,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-#if NETSTANDARD
-using System.Runtime.InteropServices;
-#endif
-
 namespace NanoByte.Common.Native
 {
     /// <summary>
@@ -23,30 +19,6 @@ namespace NanoByte.Common.Native
         /// </summary>
         public static bool IsInteractive
             => string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) && WindowsUtils.IsInteractive;
-
-        /// <summary>
-        /// <c>true</c> if the current operating system is 64-bit capable; <c>false</c> otherwise.
-        /// </summary>
-        public static bool Is64BitOperatingSystem
-#if NETSTANDARD
-            => (RuntimeInformation.OSArchitecture == Architecture.X64) || (RuntimeInformation.OSArchitecture == Architecture.Arm64);
-#elif NET45 || NET461
-            => Environment.Is64BitOperatingSystem;
-#else
-            => Is64BitProcess;
-#endif
-
-        /// <summary>
-        /// <c>true</c> if the current process is 64-bit; <c>false</c> otherwise.
-        /// </summary>
-        public static bool Is64BitProcess
-#if NETSTANDARD
-            => (RuntimeInformation.ProcessArchitecture == Architecture.X64) || (RuntimeInformation.OSArchitecture == Architecture.Arm64);
-#elif NET45 || NET461
-            => Environment.Is64BitProcess;
-#else
-            => IntPtr.Size == 8;
-#endif
 
         private static readonly Regex
             _envVariableLongStyle = new Regex(@"\${([^{}]+)}"),
