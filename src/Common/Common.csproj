@@ -53,7 +53,7 @@
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
-    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="4.7.0" />
+    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
