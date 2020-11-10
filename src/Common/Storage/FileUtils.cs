@@ -447,7 +447,10 @@ namespace NanoByte.Common.Storage
             var allowed = new List<CommonAce>();
             var allowedObject = new List<CommonAce>();
             var inherited = new List<CommonAce>();
-            foreach (var ace in securityDescriptor.DiscretionaryAcl.Cast<CommonAce>())
+            var discretionaryAcl = securityDescriptor.DiscretionaryAcl;
+            if (discretionaryAcl == null) return;
+
+            foreach (var ace in discretionaryAcl.Cast<CommonAce>())
             {
                 if (ace.AceFlags.HasFlag(AceFlags.Inherited)) inherited.Add(ace);
                 else
@@ -471,14 +474,14 @@ namespace NanoByte.Common.Storage
             }
 
             int aceIndex = 0;
-            var newDacl = new RawAcl(securityDescriptor.DiscretionaryAcl.Revision, securityDescriptor.DiscretionaryAcl.Count);
+            var newDacl = new RawAcl(discretionaryAcl.Revision, discretionaryAcl.Count);
             denied.ForEach(ace => newDacl.InsertAce(aceIndex++, ace));
             deniedObject.ForEach(ace => newDacl.InsertAce(aceIndex++, ace));
             allowed.ForEach(ace => newDacl.InsertAce(aceIndex++, ace));
             allowedObject.ForEach(ace => newDacl.InsertAce(aceIndex++, ace));
             inherited.ForEach(ace => newDacl.InsertAce(aceIndex++, ace));
 
-            if (aceIndex != securityDescriptor.DiscretionaryAcl.Count) throw new InvalidOperationException(Resources.CannotCanonicalizeDacl);
+            if (aceIndex != discretionaryAcl.Count) throw new InvalidOperationException(Resources.CannotCanonicalizeDacl);
             securityDescriptor.DiscretionaryAcl = newDacl;
             objectSecurity.SetSecurityDescriptorSddlForm(securityDescriptor.GetSddlForm(AccessControlSections.Access), AccessControlSections.Access);
         }
