@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 
 namespace NanoByte.Common.Net
@@ -14,9 +15,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// An alternate version of <see cref="Uri.ToString"/> that produces results escaped according to RFC 2396.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string ToStringRfc(this Uri uri)
         {
             #region Sanity checks
@@ -30,9 +29,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Adds a trailing slash to the URI if it does not already have one.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static Uri EnsureTrailingSlash(this Uri uri)
         {
             #region Sanity checks
@@ -48,9 +45,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Reparses a URI (generated via conversion) to ensure it is a valid absolute URI.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static Uri ReparseAsAbsolute(this Uri uri)
         {
             #region Sanity checks
@@ -63,9 +58,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Extracts the file-name portion of an URI and ensures it is a valid file-name on the local OS.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string GetLocalFileName(this Uri uri)
         {
             #region Sanity checks
@@ -82,9 +75,7 @@ namespace NanoByte.Common.Net
         /// <summary>
         /// Extracts the base part of an URI, i.e., the part that is used for resolving relative URIs.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static Uri GetBaseUri(this Uri uri)
         {
             #region Sanity checks

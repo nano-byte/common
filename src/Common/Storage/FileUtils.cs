@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -45,20 +47,14 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
-#if NETSTANDARD2_1
-        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
-#endif
+        [Pure]
+        [return: NotNullIfNotNull("value")]
         public static string? UnifySlashes(string? value) => value?.Replace('/', Path.DirectorySeparatorChar);
 
         /// <summary>
         /// Determines whether a path might escape its parent directory (by being absolute or using ..).
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool IsBreakoutPath([Localizable(false)] string path)
         {
             path = UnifySlashes(path ?? throw new ArgumentNullException(nameof(path)));
@@ -68,9 +64,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns a relative path pointing to <paramref name="target"/> from <paramref name="baseRef"/> using Unix/Uri-style directory separators.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string RelativeTo(this FileSystemInfo target, FileSystemInfo baseRef)
         {
             #region Sanity checks
@@ -127,9 +121,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Converts a <see cref="DateTime"/> into the number of seconds since the Unix epoch (1970-1-1).
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static long ToUnixTime(this DateTime time)
         {
             var timespan = (time.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
@@ -139,9 +131,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Converts a number of seconds since the Unix epoch (1970-1-1) into a <see cref="DateTime"/>.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static DateTime FromUnixTime(long time)
         {
             var timespan = TimeSpan.FromSeconds(time);
@@ -213,7 +203,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="Path.GetTempPath"/>.</exception>
         /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="Path.GetTempPath"/> is not permitted.</exception>
         /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Delivers a new value on each call")]
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Delivers a new value on each call")]
         public static string GetTempDirectory([Localizable(false)] string prefix)
         {
             #region Sanity checks
@@ -843,10 +833,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink(
             [Localizable(false)] string path,
-#if NETSTANDARD2_1
-            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-#endif
-            out string? target)
+            [NotNullWhen(true)] out string? target)
         {
             if (UnixUtils.IsUnix)
             {
@@ -896,10 +883,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink(
             this FileSystemInfo item,
-#if NETSTANDARD2_1
-            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-#endif
-            out string? target)
+            [NotNullWhen(true)] out string? target)
         {
             #region Sanity checks
             if (item == null) throw new ArgumentNullException(nameof(item));

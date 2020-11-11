@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
 namespace NanoByte.Common.Tasks
 {
     /// <summary>

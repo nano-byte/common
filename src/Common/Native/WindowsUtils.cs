@@ -3,6 +3,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
@@ -56,7 +57,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation was cancelled by the user.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
         internal const int Win32ErrorCancelled = 1223;
 
         /// <summary>
@@ -416,10 +417,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
         public static bool IsSymlink(
             [Localizable(false)] string path,
-#if NETSTANDARD2_1
-            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-#endif
-            out string? target)
+            [NotNullWhen(true)] out string? target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

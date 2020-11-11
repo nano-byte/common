@@ -1,4 +1,4 @@
-#if !NET461 && !NETSTANDARD
+#if NET20 || NET40 || NET45
 
 // Taken and adapted from Microsoft.Bcl.HashCode NuGet package
 

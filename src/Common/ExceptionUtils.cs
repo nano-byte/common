@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading;
 using NanoByte.Common.Properties;
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
 using System.Threading.Tasks;
 using System.Runtime.ExceptionServices;
 #else
@@ -27,7 +28,7 @@ namespace NanoByte.Common
     /// <seealso cref="ExceptionUtils.Retry{TException}"/>
     public delegate void RetryAction(bool lastAttempt);
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
     /// <summary>
     /// Delegate used by <see cref="ExceptionUtils.RetryAsync{TException}"/>.
     /// </summary>
@@ -44,9 +45,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Recursively follows the <see cref="Exception.InnerException"/>s and combines all their <see cref="Exception.Message"/>s, removing duplicates.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string GetMessageWithInner(this Exception exception)
         {
             IEnumerable<string> Messages()
@@ -66,16 +65,14 @@ namespace NanoByte.Common
         /// Rethrows an <paramref name="exception"/> while preserving its original stack trace.
         /// </summary>
         /// <returns>This method never returns. You can "throw" the return value to satisfy the compiler's flow analysis if necessary.</returns>
-#if NETSTANDARD2_1
         [DoesNotReturn]
-#endif
         public static Exception Rethrow(this Exception exception)
         {
             #region Sanity checks
             if (exception == null) throw new ArgumentNullException(nameof(exception));
             #endregion
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
             ExceptionDispatchInfo.Capture(exception).Throw();
             return exception;
 #else
@@ -235,7 +232,7 @@ namespace NanoByte.Common
             }
         }
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
         /// <summary>
         /// Applies an operation for all elements of a collection. Automatically applies rollback operations in case of an exception.
         /// </summary>

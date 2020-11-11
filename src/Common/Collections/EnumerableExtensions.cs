@@ -4,11 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using NanoByte.Common.Values;
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -45,9 +46,7 @@ namespace NanoByte.Common.Collections
         /// <param name="second">The first of the two enumerations to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns><c>true</c> if <paramref name="first"/> contains any element from <paramref name="second"/>. <c>false</c> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool ContainsAny<T>(this IEnumerable<T> first, IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
@@ -56,7 +55,7 @@ namespace NanoByte.Common.Collections
             #endregion
 
             var set =
-#if NET40 || NET45 || NET461 || NETSTANDARD
+#if !NET20
                 second as ISet<T> ??
 #endif
                 new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
@@ -69,9 +68,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two enumerations to compare.</param>
         /// <param name="second">The first of the two enumerations to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool SequencedEquals<T>(this IEnumerable<T> first, IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
@@ -90,9 +87,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two enumerations to compare.</param>
         /// <param name="second">The first of the two enumerations to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool UnsequencedEquals<T>(this IEnumerable<T> first, IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
@@ -112,9 +107,7 @@ namespace NanoByte.Common.Collections
         /// <param name="enumeration">The enumeration to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="SequencedEquals{T}"/>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static int GetSequencedHashCode<T>(this IEnumerable<T> enumeration, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
@@ -133,9 +126,7 @@ namespace NanoByte.Common.Collections
         /// <param name="enumeration">The enumeration to generate the hash for.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="UnsequencedEquals{T}"/>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static int GetUnsequencedHashCode<T>(this IEnumerable<T> enumeration, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
@@ -160,27 +151,21 @@ namespace NanoByte.Common.Collections
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(IEnumerable{TSource},Func{TSource,bool})"/>.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, Func<T, bool> predicate)
             => enumeration.Where(x => !predicate(x));
 
         /// <summary>
         /// Filters a sequence of elements to remove any that are equal to <paramref name="element"/>.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, T element)
             => enumeration.Except(new[] {element});
 
         /// <summary>
         /// Flattens a list of lists.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> enumeration)
             => enumeration.SelectMany(x => x);
@@ -188,27 +173,21 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Appends an element to a list.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> Append<T>(this IEnumerable<T> enumeration, T element)
             => enumeration.Concat(new[] {element});
 
         /// <summary>
         /// Prepends an element to a list.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> enumeration, T element)
             => new[] {element}.Concat(enumeration);
 
         /// <summary>
         /// Filters a sequence of elements to remove any <c>null</c> values.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumeration)
             where T : class
         {
@@ -229,9 +208,7 @@ namespace NanoByte.Common.Collections
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns>The element that maximizes the expression.</returns>
         /// <exception cref="InvalidOperationException"><paramref name="enumeration"/> contains no elements.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static T MaxBy<T, TValue>(this IEnumerable<T> enumeration, Func<T, TValue> expression, IComparer<TValue>? comparer = null)
         {
             #region Sanity checks
@@ -270,9 +247,7 @@ namespace NanoByte.Common.Collections
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
         /// <returns>The element that minimizes the expression.</returns>
         /// <exception cref="InvalidOperationException"><paramref name="enumeration"/> contains no elements.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static T MinBy<T, TValue>(this IEnumerable<T> enumeration, Func<T, TValue> expression, IComparer<TValue>? comparer = null)
         {
             #region Sanity checks
@@ -306,9 +281,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="enumeration">The sequence of elements to filter.</param>
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> enumeration, Func<T, TKey> keySelector)
             where T : notnull
             where TKey : notnull
@@ -348,9 +321,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Calls <see cref="ICloneable{T}.Clone"/> for every element in a enumeration and returns the results as a new enumeration.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T> CloneElements<T>(this IEnumerable<T> enumerable) where T : ICloneable<T>
             => (enumerable ?? throw new ArgumentNullException(nameof(enumerable))).Select(x => x.Clone());
 
@@ -394,7 +365,7 @@ namespace NanoByte.Common.Collections
             }
         }
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
         /// <summary>
         /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
         /// </summary>
@@ -432,9 +403,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Generates all possible permutations of a set of <paramref name="elements"/>.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static IEnumerable<T[]> Permutate<T>(this IEnumerable<T> elements)
         {
             #region Sanity checks

@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 
 namespace NanoByte.Common.Net
@@ -29,9 +30,7 @@ namespace NanoByte.Common.Net
         /// Returns the downloaded data.
         /// </summary>
         /// <exception cref="InvalidOperationException">The download is not finished yet.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public byte[] GetData()
         {
             if (_targetStream == null) throw new InvalidOperationException();

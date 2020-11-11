@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace NanoByte.Common.Tasks
@@ -46,9 +47,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <exception cref="OperationCanceledException">Cancellation has been requested.</exception>
         // ReSharper disable once PureAttributeOnVoidMethod
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public void ThrowIfCancellationRequested()
         {
             if (IsCancellationRequested) throw new OperationCanceledException();
@@ -64,7 +63,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public override string ToString() => "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
 
-#if NET40 || NET45 || NET461 || NETSTANDARD
+#if !NET20
         /// <summary>
         /// Converts a NanoByte.Common cancellation token to a regular .NET cancellation token.
         /// </summary>

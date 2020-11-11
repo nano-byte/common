@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Threading;
 
 namespace NanoByte.Common
@@ -27,9 +28,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Waits for the result and returns it when it is ready.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public T Get()
         {
             _waitHandle.WaitOne();

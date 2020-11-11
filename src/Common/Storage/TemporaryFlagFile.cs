@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace NanoByte.Common.Storage
@@ -8,7 +9,7 @@ namespace NanoByte.Common.Storage
     /// <summary>
     /// A temporary directory with a file that may or may not exist to indicate whether a certain condition is true or false.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
+    [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
     public class TemporaryFlagFile : TemporaryDirectory
     {
         /// <inheritdoc/>

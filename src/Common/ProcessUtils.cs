@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.IO;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
@@ -93,9 +94,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="name">The name of the assembly to launch (without the file extension).</param>
         /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static ProcessStartInfo Assembly(string name, params string[] arguments)
         {
             #region Sanity checks

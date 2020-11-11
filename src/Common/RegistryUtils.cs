@@ -3,6 +3,8 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Security;
 using Microsoft.Win32;
@@ -22,9 +24,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static int GetDword([Localizable(false)] string keyName, [Localizable(false)] string? valueName, int defaultValue = 0)
         {
             #region Sanity checks
@@ -80,12 +80,8 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
-#if NETSTANDARD2_1
-        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("defaultValue")]
-#endif
+        [Pure]
+        [return: NotNullIfNotNull("defaultValue")]
         public static string? GetString([Localizable(false)] string keyName, [Localizable(false)] string? valueName, [Localizable(false)] string? defaultValue = null)
         {
             #region Sanity checks
@@ -146,12 +142,8 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
-#if NETSTANDARD2_1
-        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("defaultValue")]
-#endif
+        [Pure]
+        [return: NotNullIfNotNull("defaultValue")]
         public static string? GetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, [Localizable(false)] string? defaultValue = null)
         {
             #region Sanity checks
@@ -171,9 +163,7 @@ namespace NanoByte.Common
         /// <param name="valueName">The name of the value to read.</param>
         /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to read from HCKU/SOFTWARE.</param>
         /// <exception cref="IOException">Registry access failed.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string? GetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, bool machineWide)
         {
             #region Sanity checks
@@ -252,9 +242,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
         /// <returns>A list of value names; an empty array if the key does not exist.</returns>
         /// <exception cref="IOException">Registry access failed.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string[] GetValueNames([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName)
         {
             #region Sanity checks
@@ -283,9 +271,7 @@ namespace NanoByte.Common
         /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
         /// <returns>A list of key names; an empty array if the key does not exist.</returns>
         /// <exception cref="IOException">Registry access failed.</exception>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static string[] GetSubKeyNames([Localizable(false)] RegistryKey key, [Localizable(false)] string subkeyName)
         {
             #region Sanity checks

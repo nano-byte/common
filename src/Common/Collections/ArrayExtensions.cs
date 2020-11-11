@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace NanoByte.Common.Collections
 {
@@ -14,9 +15,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Appends an element to an array.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static T[] Append<T>(this T[] array, T element)
         {
             #region Sanity checks
@@ -32,9 +31,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Prepends an element to an array.
         /// </summary>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static T[] Prepend<T>(this T[] array, T element)
         {
             #region Sanity checks
@@ -53,9 +50,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two collections to compare.</param>
         /// <param name="second">The first of the two collections to compare.</param>
         /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool SequencedEquals<T>(this T[] first, T[] second, IEqualityComparer<T>? comparer = null)
         {
             #region Sanity checks
@@ -81,9 +76,7 @@ namespace NanoByte.Common.Collections
         /// <param name="oldArray">The original list of elements; can be <c>null</c> (will be treated as an empty array).</param>
         /// <returns>An array of elements that were added.</returns>
         /// <remarks>Elements that are present in <paramref name="oldArray"/> but not in <paramref name="newArray"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static T[] GetAddedElements<T>(this T[]? newArray, T[]? oldArray)
             where T : IComparable<T>, IEquatable<T> => GetAddedElements(newArray, oldArray, DefaultComparer<T>.Instance);
 
@@ -105,9 +98,7 @@ namespace NanoByte.Common.Collections
         /// <param name="comparer">An object that compares to elements to determine which one is bigger.</param>
         /// <returns>An array of elements that were added.</returns>
         /// <remarks>Elements that are present in <paramref name="oldArray"/> but not in <paramref name="newArray"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static T[] GetAddedElements<T>(this T[]? newArray, T[]? oldArray, IComparer<T> comparer)
         {
             #region Sanity checks

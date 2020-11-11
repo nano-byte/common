@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
 using System.Threading.Tasks;
 #endif
 
@@ -87,7 +89,7 @@ namespace NanoByte.Common.Collections
             return dictionary.GetOrAdd(key, () => new TValue());
         }
 
-#if NET45 || NET461 || NETSTANDARD
+#if !NET20 && !NET40
         /// <summary>
         /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.
         /// </summary>
@@ -141,9 +143,7 @@ namespace NanoByte.Common.Collections
         /// <param name="first">The first of the two dictionaries to compare.</param>
         /// <param name="second">The first of the two dictionaries to compare.</param>
         /// <param name="valueComparer">Controls how to compare values; leave <c>null</c> for default comparer.</param>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool UnsequencedEquals<TKey, TValue>(this IDictionary<TKey, TValue> first, IDictionary<TKey, TValue> second, IEqualityComparer<TValue>? valueComparer = null)
         {
             #region Sanity checks
@@ -172,9 +172,7 @@ namespace NanoByte.Common.Collections
         /// <param name="dictionary">The dictionary to generate the hash for.</param>
         /// <param name="valueComparer">Controls how to compare values; leave <c>null</c> for default comparer.</param>
         /// <seealso cref="UnsequencedEquals{TKey,TValue}"/>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static int GetUnsequencedHashCode<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, IEqualityComparer<TValue>? valueComparer = null)
         {
             #region Sanity checks
@@ -197,9 +195,7 @@ namespace NanoByte.Common.Collections
         /// foreach (var (key, value) in dictionary)
         /// {/*...*/}
         /// </example>
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> pair, out TKey key, out TValue value)
         {
             key = pair.Key;

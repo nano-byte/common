@@ -3,12 +3,13 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 
-#if !NETSTANDARD2_1
+#if !NETSTANDARD2_1 && !NET
 using NanoByte.Common.Streams;
 #endif
 
@@ -59,10 +60,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink(
             [Localizable(false)] string path,
-#if NETSTANDARD2_1
-            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-#endif
-            out string? target)
+            [NotNullWhen(true)] out string? target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

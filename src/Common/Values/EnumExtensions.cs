@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 
 namespace NanoByte.Common.Values
 {
@@ -15,9 +16,7 @@ namespace NanoByte.Common.Values
         /// Checks whether a flag is set.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool HasFlag(this Enum enumRef, Enum flag)
         {
 #if NET20
@@ -34,18 +33,14 @@ namespace NanoByte.Common.Values
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
         [CLSCompliant(false)]
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool HasFlag(this ushort enumRef, ushort flag) => (enumRef & flag) == flag;
 
         /// <summary>
         /// Checks whether a flag is set.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
-#if NETSTANDARD
-        [System.Diagnostics.Contracts.Pure]
-#endif
+        [Pure]
         public static bool HasFlag(this int enumRef, int flag) => (enumRef & flag) == flag;
     }
 }
