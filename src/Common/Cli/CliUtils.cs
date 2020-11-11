@@ -22,7 +22,7 @@ namespace NanoByte.Common.Cli
         public static string ReadString([Localizable(true)] string prompt)
         {
             Console.Error.Write(prompt + " ");
-            string line = Console.ReadLine();
+            string? line = Console.ReadLine();
             if (line == null) throw new IOException("input stream closed, unable to get user input");
             return line;
         }

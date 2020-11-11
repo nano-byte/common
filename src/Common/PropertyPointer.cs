@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using NanoByte.Common.Net;
 
@@ -29,6 +30,7 @@ namespace NanoByte.Common
         /// <summary>
         /// The default value of the property.
         /// </summary>
+        [AllowNull]
         public T DefaultValue { get; }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace NanoByte.Common
         /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public PropertyPointer(Func<T> getValue, Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
+        public PropertyPointer(Func<T> getValue, Action<T> setValue, [AllowNull] T defaultValue = default, bool needsEncoding = false)
         {
             _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
             _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
@@ -94,7 +96,12 @@ namespace NanoByte.Common
 
                 return memberExpression?.Member switch
                 {
-                    PropertyInfo propertyInfo => Expression.Lambda<Action<T>>(Expression.Call(memberExpression.Expression, propertyInfo.GetSetMethod(), parameter), parameter),
+                    PropertyInfo propertyInfo => Expression.Lambda<Action<T>>(
+                        Expression.Call(
+                            memberExpression.Expression,
+                            propertyInfo.GetSetMethod() ?? throw new InvalidOperationException($"Missing setter on {propertyInfo.Name}."),
+                            parameter),
+                        parameter),
                     FieldInfo _ => Expression.Lambda<Action<T>>(Expression.Assign(memberExpression, parameter), parameter),
                     _ => throw new ArgumentException("The expression must point to a property or field", nameof(getValue))
                 };

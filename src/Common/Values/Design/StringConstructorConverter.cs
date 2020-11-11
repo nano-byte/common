@@ -43,7 +43,7 @@ namespace NanoByte.Common.Values.Design
         }
 
         /// <inheritdoc/>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object? ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object? value, Type destinationType)
             => value != null && destinationType == typeof(string)
                 ? value.ToString()
                 : base.ConvertTo(context, culture, value, destinationType);

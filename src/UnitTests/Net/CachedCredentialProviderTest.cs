@@ -31,12 +31,12 @@ namespace NanoByte.Common.Net
             var uriInner = new Uri("http://domain/dir/");
             var credential = new NetworkCredential("userName", "password");
 
-            _innerMock.Setup(x => x.GetCredential(uriInner, null)).Returns(credential);
+            _innerMock.Setup(x => x.GetCredential(uriInner, null!)).Returns(credential);
 
-            _provider.GetCredential(uriOuter, null).Should().BeSameAs(credential);
-            _provider.GetCredential(uriOuter, null).Should().BeSameAs(credential);
+            _provider.GetCredential(uriOuter, null!).Should().BeSameAs(credential);
+            _provider.GetCredential(uriOuter, null!).Should().BeSameAs(credential);
 
-            _innerMock.Verify(x => x.GetCredential(uriInner, null), Times.Exactly(1));
+            _innerMock.Verify(x => x.GetCredential(uriInner, null!), Times.Exactly(1));
         }
 
         [Fact]

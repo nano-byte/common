@@ -16,7 +16,8 @@ namespace NanoByte.Common.Values.Design
     ///   <code>[TypeConverter(typeof(DescriptionEnumConverter&lt;NameOfEnum&gt;))]</code>
     /// </example>
     /// <remarks><see cref="DescriptionAttribute.Description"/> is used as the case-insensitive string representation (falls back to element name).</remarks>
-    public class EnumDescriptionConverter<T> : TypeConverter where T : struct
+    public class EnumDescriptionConverter<T> : TypeConverter
+        where T : struct
     {
         private static object GetEnumFromString(string stringValue)
         {
@@ -24,7 +25,7 @@ namespace NanoByte.Common.Values.Design
             {
                 var attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), inherit: false);
                 if (attributes.Length > 0 && StringUtils.EqualsIgnoreCase(attributes[0].Description, stringValue))
-                    return field.GetValue(field.Name);
+                    return field.GetValue(field.Name)!;
             }
             return Enum.Parse(typeof(T), stringValue, ignoreCase: true);
         }
@@ -37,12 +38,12 @@ namespace NanoByte.Common.Values.Design
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             => value is string stringValue
                 ? GetEnumFromString(stringValue)
-                : base.ConvertFrom(context, culture, value);
+                : base.ConvertFrom(context, culture, value)!;
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
             => value is Enum enumValue && destinationType == typeof(string)
                 ? enumValue.GetEnumAttributeValue((DescriptionAttribute attribute) => attribute.Description)
-                : base.ConvertTo(context, culture, value, destinationType);
+                : base.ConvertTo(context, culture, value, destinationType)!;
     }
 }

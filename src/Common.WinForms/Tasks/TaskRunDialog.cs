@@ -45,7 +45,7 @@ namespace NanoByte.Common.Tasks
             _credentialProvider = credentialProvider;
         }
 
-        private void TaskRunDialog_Shown(object sender, EventArgs e)
+        private void TaskRunDialog_Shown(object? sender, EventArgs e)
         {
             _progress.ProgressChanged += OnProgressChanged;
             _taskThread.Start();
@@ -89,7 +89,7 @@ namespace NanoByte.Common.Tasks
 
         private bool _allowClose;
 
-        private void TaskRunDialog_FormClosing(object sender, FormClosingEventArgs e)
+        private void TaskRunDialog_FormClosing(object? sender, FormClosingEventArgs e)
         {
             if (!_allowClose)
             {

@@ -48,8 +48,7 @@ namespace NanoByte.Common.Undo
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "The arguments are passed on to a different overload of the constructor")]
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Justification = "This is simply a comfort wrapper for extracting values from the event arguments")]
         public MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object?[] oldValues)
-            // ReSharper disable once AssignNullToNotNullAttribute
-            : this(targets, gridItem.PropertyDescriptor, oldValues, gridItem.Value)
+            : this(targets, gridItem.PropertyDescriptor!, oldValues, gridItem.Value)
         {}
         #endregion
 

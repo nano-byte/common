@@ -40,6 +40,7 @@ namespace NanoByte.Common.Collections
         /// <param name="dictionary">The dictionary to get an element from.</param>
         /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
         /// <returns>The existing element or the default value of <typeparamref name="TValue"/>.</returns>
+        [return: MaybeNull]
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
             #region Sanity checks
@@ -124,6 +125,7 @@ namespace NanoByte.Common.Collections
         /// <param name="keySelector">Selects the dictionary key from an input element.</param>
         /// <param name="valueSelector">Selects a dictionary value from an input element.</param>
         public static MultiDictionary<TKey, TValue> ToMultiDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> elements, Func<TSource, TKey> keySelector, Func<TSource, TValue> valueSelector)
+            where TKey : notnull
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));

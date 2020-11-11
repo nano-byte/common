@@ -443,9 +443,9 @@ namespace NanoByte.Common.Controls
             _dropDownMenuStrip?.Show(this, new Point(0, Height), ToolStripDropDownDirection.BelowRight);
         }
 
-        private void DropDownMenuStrip_Opening(object sender, CancelEventArgs e) => _isDropDownMenuVisible = true;
+        private void DropDownMenuStrip_Opening(object? sender, CancelEventArgs e) => _isDropDownMenuVisible = true;
 
-        private void DropDownMenuStrip_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        private void DropDownMenuStrip_Closing(object? sender, ToolStripDropDownClosingEventArgs e)
         {
             _isDropDownMenuVisible = false;
 

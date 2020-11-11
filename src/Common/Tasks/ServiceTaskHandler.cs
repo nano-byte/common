@@ -17,7 +17,7 @@ namespace NanoByte.Common.Tasks
     [CLSCompliant(false)]
     public sealed class ServiceTaskHandler : SilentTaskHandler
     {
-        private readonly ILogger<ServiceTaskHandler> _logger;
+        private readonly ILogger<ServiceTaskHandler>? _logger;
         private CancellationTokenSource _cancellationTokenSource;
 
         public ServiceTaskHandler(IServiceProvider provider)

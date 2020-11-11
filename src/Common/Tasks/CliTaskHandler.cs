@@ -51,7 +51,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Handles Ctrl+C key presses.
         /// </summary>
-        private void CancelKeyPressHandler(object sender, ConsoleCancelEventArgs e)
+        private void CancelKeyPressHandler(object? sender, ConsoleCancelEventArgs e)
         {
             CancellationTokenSource.Cancel();
 

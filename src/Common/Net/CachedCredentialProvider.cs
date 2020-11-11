@@ -17,7 +17,7 @@ namespace NanoByte.Common.Net
         /// <inheritdoc/>
         public bool Interactive => _inner.Interactive;
 
-        private readonly TransparentCache<Uri, NetworkCredential> _cache;
+        private readonly TransparentCache<Uri, NetworkCredential?> _cache;
 
         /// <summary>
         /// Creates a new caching decorator.
@@ -26,11 +26,11 @@ namespace NanoByte.Common.Net
         public CachedCredentialProvider(ICredentialProvider inner)
         {
             _inner = inner ?? throw new ArgumentNullException(nameof(inner));
-            _cache = new TransparentCache<Uri, NetworkCredential>(uri => inner.GetCredential(uri, null));
+            _cache = new TransparentCache<Uri, NetworkCredential?>(uri => inner.GetCredential(uri, null!));
         }
 
         /// <inheritdoc/>
-        public NetworkCredential GetCredential(Uri uri, string? authType)
+        public NetworkCredential? GetCredential(Uri uri, string? authType)
             => _cache[(uri ?? throw new ArgumentNullException(nameof(uri))).GetBaseUri()];
 
         /// <inheritdoc/>

@@ -146,7 +146,6 @@ namespace NanoByte.Common.Native
                 if (!IsWindowsNT) return true;
                 try
                 {
-                    // ReSharper disable once AssignNullToNotNullAttribute
                     return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
                 }
                 catch
@@ -166,7 +165,6 @@ namespace NanoByte.Common.Native
                 if (!IsWindowsNT) return true;
                 try
                 {
-                    // ReSharper disable once AssignNullToNotNullAttribute
                     return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(new SecurityIdentifier(WellKnownSidType.InteractiveSid, null));
                 }
                 catch
@@ -248,7 +246,7 @@ namespace NanoByte.Common.Native
                 // Copy result to managed array
                 var splitArgs = new string[numberOfArgs];
                 for (int i = 0; i < numberOfArgs; i++)
-                    splitArgs[i] = Marshal.PtrToStringUni(Marshal.ReadIntPtr(ptrToSplitArgs, i * IntPtr.Size));
+                    splitArgs[i] = Marshal.PtrToStringUni(Marshal.ReadIntPtr(ptrToSplitArgs, i * IntPtr.Size))!;
                 return splitArgs;
             }
             finally

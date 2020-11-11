@@ -19,7 +19,7 @@ namespace NanoByte.Common.Tasks
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         public event Action<T>? ProgressChanged;
 
-        private readonly SynchronizationContext _synchronizationContext;
+        private readonly SynchronizationContext? _synchronizationContext;
 
         /// <summary>
         /// Captures the current synchronization context for callbacks.

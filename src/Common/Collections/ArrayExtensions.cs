@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 
 namespace NanoByte.Common.Collections
@@ -87,7 +88,10 @@ namespace NanoByte.Common.Collections
 
             private DefaultComparer() {}
 
-            public int Compare(T x, T y) => x.CompareTo(y);
+            public int Compare([AllowNull] T x, [AllowNull] T y)
+                => (x == null || y == null)
+                    ? 0
+                    : x.CompareTo(y);
         }
 
         /// <summary>

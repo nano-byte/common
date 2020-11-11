@@ -66,7 +66,7 @@ namespace NanoByte.Common.Net
             #endregion
 
             string fileName = Path.GetFileName(uri.LocalPath).StripCharacters(Path.GetInvalidFileNameChars());
-            if (string.IsNullOrEmpty(fileName)) fileName = Path.GetFileName(Path.GetDirectoryName(uri.LocalPath)).StripCharacters(Path.GetInvalidFileNameChars());
+            if (string.IsNullOrEmpty(fileName)) fileName = Path.GetFileName(Path.GetDirectoryName(uri.LocalPath)!).StripCharacters(Path.GetInvalidFileNameChars());
             if (string.IsNullOrEmpty(fileName)) fileName = "file.ext";
 
             return fileName;

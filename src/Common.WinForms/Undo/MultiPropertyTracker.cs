@@ -35,7 +35,7 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Reacts to any focus change in the <see cref="PropertyGrid"/> and creates backups of the current values before the user can change them.
         /// </summary>
-        private void SelectionChanged(object sender, SelectedGridItemChangedEventArgs e)
+        private void SelectionChanged(object? sender, SelectedGridItemChangedEventArgs e)
         {
             // Only handle property selections
             if (e.NewSelection == null || e.NewSelection.GridItemType != GridItemType.Property)

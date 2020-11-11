@@ -46,7 +46,7 @@ namespace NanoByte.Common.Storage
             DestinationPath = path ?? throw new ArgumentNullException(nameof(path));
 
             // Make sure the containing directory exists
-            string directory = Path.GetDirectoryName(Path.GetFullPath(path));
+            string? directory = Path.GetDirectoryName(Path.GetFullPath(path));
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
             // Prepend random string for temp file name

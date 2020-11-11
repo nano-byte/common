@@ -18,16 +18,10 @@ namespace NanoByte.Common.Collections
         private CultureComparer() {}
 
         /// <inheritdoc/>
-        public int Compare(CultureInfo x, CultureInfo y)
-        {
-            #region Sanity checks
-            if (x == null) throw new ArgumentNullException(nameof(x));
-            if (y == null) throw new ArgumentNullException(nameof(y));
-            #endregion
-
+        public int Compare(CultureInfo? x, CultureInfo? y)
             // ReSharper disable once PossibleUnintendedReferenceComparison
-            if (x == y) return 0;
-            return StringComparer.Ordinal.Compare(x.ToString(), y.ToString());
-        }
+            => x == y
+                ? 0
+                : StringComparer.Ordinal.Compare(x?.ToString(), y?.ToString());
     }
 }

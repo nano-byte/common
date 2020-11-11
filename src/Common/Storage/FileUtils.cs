@@ -238,9 +238,8 @@ namespace NanoByte.Common.Storage
 
             void ReplaceSimple()
             {
-                // ReSharper disable once AssignNullToNotNullAttribute
                 string backupPath = Path.Combine(
-                    Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
+                    Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
                     "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
 
                 if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
@@ -268,9 +267,8 @@ namespace NanoByte.Common.Storage
                     return;
                 }
 
-                // ReSharper disable once AssignNullToNotNullAttribute
                 string backupPath = Path.Combine(
-                    Path.GetDirectoryName(Path.GetFullPath(destinationPath)),
+                    Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
                     "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
 
                 try

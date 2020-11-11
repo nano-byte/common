@@ -12,6 +12,7 @@ namespace NanoByte.Common.Collections
     /// <typeparam name="TKey">The type of keys used to request values.</typeparam>
     /// <typeparam name="TValue">The type of values returned.</typeparam>
     public sealed class TransparentCache<TKey, TValue> : TransparentCacheBase<TKey, TValue>
+        where TKey : notnull
     {
         private readonly Func<TKey, TValue> _retriever;
 

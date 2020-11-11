@@ -62,6 +62,7 @@ namespace NanoByte.Common.Undo
         public static SetValueCommand<T> For<T>(PropertyPointer<T> pointer, T newValue)
             => new SetValueCommand<T>(pointer, newValue);
 
+#nullable disable
         /// <summary>
         /// Creates a new value-setting command.
         /// </summary>
@@ -82,5 +83,6 @@ namespace NanoByte.Common.Undo
         public static SetValueCommand<T> For<T>(Expression<Func<T>> expression, T newValue)
             => For(PropertyPointer.For(expression), newValue);
 #endif
+#nullable restore
     }
 }

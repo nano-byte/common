@@ -41,7 +41,7 @@ namespace NanoByte.Common.Native
                     return "{" + x.Groups[1].Value + "}";
 
                 var parts = x.Groups[1].Value.Split(new[] {":-"}, StringSplitOptions.None);
-                if (variables.TryGetValue(parts[0], out string ret) && !string.IsNullOrEmpty(ret))
+                if (variables.TryGetValue(parts[0], out string? ret) && !string.IsNullOrEmpty(ret))
                     return ret;
                 else if (parts.Length > 1)
                     return StringUtils.Join(":-", parts.Skip(1));
@@ -66,7 +66,7 @@ namespace NanoByte.Common.Native
                     return x.Groups[1].Value;
 
                 string key = x.Groups[1].Value;
-                if (variables.TryGetValue(key, out string ret))
+                if (variables.TryGetValue(key, out string? ret))
                     return ret;
                 else
                 {
@@ -89,7 +89,7 @@ namespace NanoByte.Common.Native
 
             var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             foreach (string key in variables.Keys)
-                dictionary[key] = variables[key];
+                dictionary[key] = variables[key]!;
 
             return ExpandVariables(value, dictionary);
         }

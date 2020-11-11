@@ -27,7 +27,7 @@ namespace NanoByte.Common
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-        public static Process Start(this ProcessStartInfo startInfo)
+        public static Process? Start(this ProcessStartInfo startInfo)
         {
             #region Sanity checks
             if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
@@ -143,7 +143,7 @@ namespace NanoByte.Common
             {
                 try
                 {
-                    dict.Add((string)entry.Key, (string)entry.Value);
+                    dict.Add((string)entry.Key, (string?)entry.Value);
                 }
                 catch (ArgumentException ex)
                 {

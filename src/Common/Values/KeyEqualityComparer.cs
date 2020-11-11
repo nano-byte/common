@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NanoByte.Common.Values
 {
@@ -26,12 +27,10 @@ namespace NanoByte.Common.Values
             _keySelector = keySelector;
         }
 
-        public bool Equals(T x, T y) => Equals(_keySelector(x), _keySelector(y));
+        public bool Equals([AllowNull] T x, [AllowNull] T y)
+            => Equals(_keySelector(x!), _keySelector(y!));
 
         public int GetHashCode(T obj)
-        {
-            var key = _keySelector(obj);
-            return key == null ? 0 : _keySelector(obj).GetHashCode();
-        }
+            => _keySelector(obj).GetHashCode();
     }
 }

@@ -243,7 +243,7 @@ namespace NanoByte.Common.Storage
 
             try
             {
-                return new[] {InstallBase, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}
+                return new[] {InstallBase, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!}
                       .Concat((Environment.GetEnvironmentVariable("PATH") ?? "").Split(Path.PathSeparator))
                       .Select(x => Path.Combine(x, fileName))
                       .First(File.Exists);

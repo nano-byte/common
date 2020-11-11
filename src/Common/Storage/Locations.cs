@@ -77,7 +77,7 @@ namespace NanoByte.Common.Storage
         /// <returns>The value of the environment variable or <paramref name="defaultValue"/>.</returns>
         private static string GetEnvironmentVariable(string variable, string defaultValue)
         {
-            string value = Environment.GetEnvironmentVariable(variable);
+            string? value = Environment.GetEnvironmentVariable(variable);
             return string.IsNullOrEmpty(value) ? defaultValue : value;
         }
 

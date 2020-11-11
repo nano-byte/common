@@ -17,7 +17,7 @@ namespace NanoByte.Common.Info
             {
                 Name = "NanoByte.Common.UnitTests",
                 ProductName = "NanoByte.Common.UnitTests",
-                Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion.GetLeftPartAtFirstOccurrence("+"),
+                Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion?.GetLeftPartAtFirstOccurrence("+"),
                 Description = "Unit test for NanoByte.Common.",
                 Copyright = "Copyright Bastian Eicher et al."
             });

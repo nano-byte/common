@@ -108,7 +108,7 @@ namespace NanoByte.Common.Controls
         //--------------------//
 
         #region Buttons
-        private void buttonReport_Click(object sender, EventArgs e)
+        private void buttonReport_Click(object? sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = false;
@@ -137,7 +137,7 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e) => Close();
+        private void buttonCancel_Click(object? sender, EventArgs e) => Close();
         #endregion
 
         #region Generate report

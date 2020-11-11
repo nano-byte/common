@@ -37,8 +37,8 @@ namespace NanoByte.Common.Values
             if (valueRetriever == null) throw new ArgumentNullException(nameof(valueRetriever));
 
             var fieldInfo = target.GetType().GetField(target.ToString());
-            var attributes = (TAttribute[])fieldInfo.GetCustomAttributes(typeof(TAttribute), inherit: true);
-            var attribute = attributes.FirstOrDefault();
+            var attributes = (TAttribute[]?)fieldInfo?.GetCustomAttributes(typeof(TAttribute), inherit: true);
+            var attribute = attributes?.FirstOrDefault();
             return (attribute == null) ? target.ToString() : valueRetriever(attribute);
         }
 

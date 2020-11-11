@@ -75,6 +75,7 @@ namespace NanoByte.Common.Storage
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The binary file to be written.</param>
         public static void SaveBinary<T>(this T data, Stream stream)
+            where T : notnull
             => _serializer.Serialize(stream ?? throw new ArgumentNullException(nameof(stream)), data);
 
         /// <summary>
@@ -88,6 +89,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
         public static void SaveBinary<T>(this T data, [Localizable(false)] string path)
+            where T : notnull
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

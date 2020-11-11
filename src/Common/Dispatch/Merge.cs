@@ -123,7 +123,7 @@ namespace NanoByte.Common.Dispatch
         /// <summary>
         /// Finds the first element in a list matching the specified <see cref="IMergeable{T}.MergeID"/>.
         /// </summary>
-        private static T FindMergeID<T>(IEnumerable<T> elements, string id)
+        private static T? FindMergeID<T>(IEnumerable<T?> elements, string id)
             where T : class, IMergeable<T>
             => elements.FirstOrDefault(element => element != null && element.MergeID == id);
     }

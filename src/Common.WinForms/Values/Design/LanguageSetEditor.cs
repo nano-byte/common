@@ -32,7 +32,7 @@ namespace NanoByte.Common.Values.Design
 
             if (!(value is LanguageSet languages)) throw new ArgumentNullException(nameof(value));
 
-            var editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+            var editorService = (IWindowsFormsEditorService?)provider.GetService(typeof(IWindowsFormsEditorService));
             if (editorService == null) return value;
 
             var listBox = new CheckedListBox {CheckOnClick = true};

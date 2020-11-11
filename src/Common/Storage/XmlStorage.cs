@@ -47,7 +47,7 @@ namespace NanoByte.Common.Storage
             if (stream.CanSeek) stream.Position = 0;
             try
             {
-                return (T)new XmlSerializer(typeof(T)).Deserialize(stream);
+                return (T)new XmlSerializer(typeof(T)).Deserialize(stream)!;
             }
             #region Error handling
             catch (InvalidOperationException ex)
@@ -181,6 +181,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
         /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
         public static void SaveXml<T>(this T data, [Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
+            where T : notnull
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -200,6 +201,7 @@ namespace NanoByte.Common.Storage
         /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         /// <returns>A string containing the XML code.</returns>
         public static string ToXmlString<T>(this T data, [Localizable(false)] string? stylesheet = null)
+            where T : notnull
         {
             using var stream = new MemoryStream();
             // Write to a memory stream

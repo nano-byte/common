@@ -35,17 +35,18 @@ namespace NanoByte.Common.Net
             _timeout = timeout;
         }
 
-        protected override WebRequest? GetWebRequest(Uri address)
+        protected override WebRequest GetWebRequest(Uri address)
         {
             var request = base.GetWebRequest(address);
+
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             if (request != null)
-            {
                 request.Timeout = _timeout;
 
-                if (request is HttpWebRequest httpRequest)
-                    httpRequest.UserAgent = AppInfo.Current.NameVersion;
-            }
-            return request;
+            if (request is HttpWebRequest httpRequest)
+                httpRequest.UserAgent = AppInfo.Current.NameVersion;
+
+            return request!;
         }
     }
 }

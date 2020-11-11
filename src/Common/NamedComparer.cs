@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NanoByte.Common
 {
@@ -16,10 +17,13 @@ namespace NanoByte.Common
 
         private NamedComparer() {}
 
-        public int Compare(T x, T y) => StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name);
+        public int Compare([AllowNull] T x, [AllowNull] T y)
+            => StringComparer.OrdinalIgnoreCase.Compare(x?.Name, y?.Name);
 
-        public bool Equals(T x, T y) => StringComparer.OrdinalIgnoreCase.Equals(x.Name, y.Name);
+        public bool Equals([AllowNull] T x, [AllowNull] T y)
+            => StringComparer.OrdinalIgnoreCase.Equals(x?.Name, y?.Name);
 
-        public int GetHashCode(T obj) => StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name);
+        public int GetHashCode(T obj)
+            => StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name);
     }
 }

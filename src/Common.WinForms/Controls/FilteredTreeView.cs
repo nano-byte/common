@@ -155,18 +155,18 @@ namespace NanoByte.Common.Controls
         //--------------------//
 
         #region Search control
-        private void textSearch_TextChanged(object sender, EventArgs e) => UpdateList();
+        private void textSearch_TextChanged(object? sender, EventArgs e) => UpdateList();
         #endregion
 
         #region TreeView control
-        private void treeView_DoubleClick(object sender, EventArgs e) => OnSelectionConfirmed();
+        private void treeView_DoubleClick(object? sender, EventArgs e) => OnSelectionConfirmed();
 
-        private void treeView_KeyDown(object sender, KeyEventArgs e)
+        private void treeView_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) OnSelectionConfirmed();
         }
 
-        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeView_AfterSelect(object? sender, TreeViewEventArgs e)
         {
             string name = treeView.SelectedNode.Name;
 
@@ -292,7 +292,7 @@ namespace NanoByte.Common.Controls
         #endregion
 
         #region Checkbox control
-        private void treeView_AfterCheck(object sender, TreeViewEventArgs e)
+        private void treeView_AfterCheck(object? sender, TreeViewEventArgs e)
         {
             // Checking a parent will check all its children
             foreach (var node in e.Node.Nodes.OfType<TreeNode>())

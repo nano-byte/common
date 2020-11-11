@@ -32,7 +32,7 @@ namespace NanoByte.Common.Streams
 
         private void ThreadStart()
         {
-            string line;
+            string? line;
             while ((line = _reader.ReadLine()) != null)
             {
                 lock (_lock)

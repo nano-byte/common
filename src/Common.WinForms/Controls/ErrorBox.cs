@@ -60,16 +60,18 @@ namespace NanoByte.Common.Controls
             return builder.ToString();
         }
 
-        private void label_Click(object sender, EventArgs e)
+        private void label_Click(object? sender, EventArgs e)
         {
-            var control = (Control)sender;
-            new ContextMenuStrip()
+            if (sender is Control control)
             {
-                Items =
+                new ContextMenuStrip()
                 {
-                    {Resources.CopyToClipboard, null, delegate { Clipboard.SetText(control.Text); }}
-                }
-            }.Show(control, new Point());
+                    Items =
+                    {
+                        {Resources.CopyToClipboard, null, delegate { Clipboard.SetText(control.Text); }}
+                    }
+                }.Show(control, new Point());
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Net.NetworkInformation;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Security.Cryptography.X509Certificates;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -25,9 +24,9 @@ namespace NanoByte.Common.Net
         /// <remarks>Uses classic Linux environment variables: http_proxy, http_proxy_user, http_proxy_pass</remarks>
         public static void ApplyProxy()
         {
-            string httpProxy = Environment.GetEnvironmentVariable("http_proxy");
-            string httpProxyUser = Environment.GetEnvironmentVariable("http_proxy_user");
-            string httpProxyPass = Environment.GetEnvironmentVariable("http_proxy_pass");
+            string? httpProxy = Environment.GetEnvironmentVariable("http_proxy");
+            string? httpProxyUser = Environment.GetEnvironmentVariable("http_proxy_user");
+            string? httpProxyPass = Environment.GetEnvironmentVariable("http_proxy_pass");
             if (!string.IsNullOrEmpty(httpProxy))
             {
                 WebRequest.DefaultWebProxy = string.IsNullOrEmpty(httpProxyUser)
@@ -69,11 +68,9 @@ namespace NanoByte.Common.Net
             if (publicKeys == null) throw new ArgumentNullException(nameof(publicKeys));
             #endregion
 
-            ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-            {
-                if (sslPolicyErrors == SslPolicyErrors.None) return true;
-                return (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors && publicKeys.Contains(certificate.GetPublicKeyString()));
-            };
+            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors)
+                => sslPolicyErrors == SslPolicyErrors.None
+                || sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors && certificate != null && publicKeys.Contains(certificate.GetPublicKeyString());
         }
 
         /// <summary>

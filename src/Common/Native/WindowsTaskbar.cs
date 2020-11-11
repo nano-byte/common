@@ -286,8 +286,8 @@ namespace NanoByte.Common.Native
         private static IPropertyStore GetWindowPropertyStore(IntPtr hwnd)
         {
             var guid = new Guid(PropertyStoreGuid);
-            int rc = NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out var propStore);
-            if (rc != 0) throw Marshal.GetExceptionForHR(rc);
+            var exception =  Marshal.GetExceptionForHR(NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out var propStore));
+            if (exception != null) throw exception;
             return propStore;
         }
 

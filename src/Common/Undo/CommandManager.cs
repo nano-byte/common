@@ -135,9 +135,9 @@ namespace NanoByte.Common.Undo
         public virtual void Save(string path)
         {
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (Target == null) return;
 
             Target.SaveXml(path);
-
             Path = path;
             ClearUndo();
         }

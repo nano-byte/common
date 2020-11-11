@@ -66,7 +66,7 @@ namespace NanoByte.Common.Collections
 
         #region Equality
         /// <inheritdoc/>
-        public bool Equals(XmlDictionaryEntry other)
+        public bool Equals(XmlDictionaryEntry? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;

@@ -15,6 +15,7 @@ namespace NanoByte.Common.Collections
     /// <remarks>This structure internally uses hash maps, so most operations run in O(1).</remarks>
     [Serializable]
     public class MultiDictionary<TKey, TValue> : Dictionary<TKey, HashSet<TValue>>
+        where TKey : notnull
     {
         /// <summary>
         /// A collection containing the values in the dictionary.

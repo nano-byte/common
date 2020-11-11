@@ -47,7 +47,7 @@ namespace NanoByte.Common.Controls
             return (inputBox.ShowDialog(owner) == DialogResult.OK) ? inputBox.textInput.Text : null;
         }
 
-        private void InputBox_DragDrop(object sender, DragEventArgs e)
+        private void InputBox_DragDrop(object? sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -58,7 +58,7 @@ namespace NanoByte.Common.Controls
                 textInput.Text = (string)e.Data.GetData(DataFormats.Text);
         }
 
-        private void InputBox_DragEnter(object sender, DragEventArgs e)
+        private void InputBox_DragEnter(object? sender, DragEventArgs e)
         {
             e.Effect = (e.Data.GetDataPresent(DataFormats.Text) || e.Data.GetDataPresent(DataFormats.FileDrop))
                 ? DragDropEffects.Copy
