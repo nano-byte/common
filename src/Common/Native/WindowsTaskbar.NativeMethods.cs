@@ -296,7 +296,6 @@ namespace NanoByte.Common.Native
             {
                 try
                 {
-                    // ReSharper disable once SuspiciousTypeConversion.Global
                     _taskbarList = (ITaskbarList4)new CTaskbarList();
                     _taskbarList.HrInit();
                 }

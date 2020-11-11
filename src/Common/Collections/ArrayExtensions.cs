@@ -64,9 +64,8 @@ namespace NanoByte.Common.Collections
             #endregion
 
             if (first.Length != second.Length) return false;
-            if (comparer == null) comparer = EqualityComparer<T>.Default;
+            comparer ??= EqualityComparer<T>.Default;
 
-            // ReSharper disable once LoopCanBeConvertedToQuery
             for (int i = 0; i < first.Length; i++)
             {
                 if (!comparer.Equals(first[i], second[i]))

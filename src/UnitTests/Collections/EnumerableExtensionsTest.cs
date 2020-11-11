@@ -94,7 +94,6 @@ namespace NanoByte.Common.Collections
             strings.TrySelect<string, int, FormatException>(int.Parse)
                    .Should().Equal(1, 2, 4);
 
-            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             strings.Invoking(x => x.TrySelect<string, int, ArgumentException>(int.Parse).ToList())
                    .Should().Throw<FormatException>();
         }

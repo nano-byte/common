@@ -150,7 +150,7 @@ namespace NanoByte.Common.Collections
                 foreach (T item in enumeration)
                 {
                     if (item != null)
-                        result = result ^ comparer.GetHashCode(item);
+                        result ^= comparer.GetHashCode(item);
                 }
                 return result;
             }

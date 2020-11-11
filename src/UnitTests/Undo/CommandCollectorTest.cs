@@ -39,7 +39,6 @@ namespace NanoByte.Common.Undo
             composite.Execute();
             composite.Undo();
             command1.Executed.Should().BeFalse(because: "Should undo as part of composite");
-            // ReSharper disable once HeuristicUnreachableCode
             command2.Executed.Should().BeFalse(because: "Should undo as part of composite");
         }
     }

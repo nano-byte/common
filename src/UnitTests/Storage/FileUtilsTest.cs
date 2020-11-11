@@ -180,7 +180,6 @@ namespace NanoByte.Common.Storage
 
         #region Directory
         // Interfaces used for mocking delegates
-        // ReSharper disable once MemberCanBePrivate.Global
         public interface IActionSimulator<in T>
         {
             void Execute(T obj);

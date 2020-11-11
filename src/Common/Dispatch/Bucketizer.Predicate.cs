@@ -50,7 +50,6 @@ namespace NanoByte.Common.Dispatch
         {
             foreach (var element in _elements)
             {
-                // ReSharper disable once AccessToForEachVariableInClosure
                 var matchedRule = _rules.FirstOrDefault(rule => rule.Predicate(element));
                 matchedRule?.Bucket.Add(element);
             }

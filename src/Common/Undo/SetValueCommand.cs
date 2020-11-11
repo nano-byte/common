@@ -79,7 +79,7 @@ namespace NanoByte.Common.Undo
         /// <typeparam name="T">The type of value the property contains.</typeparam>
         /// <param name="expression">An expression pointing to the property.</param>
         /// <param name="newValue">The new value to be set.</param>
-        public static SetValueCommand<T> For<T>( Expression<Func<T>> expression, T newValue)
+        public static SetValueCommand<T> For<T>(Expression<Func<T>> expression, T newValue)
             => For(PropertyPointer.For(expression), newValue);
 #endif
     }

@@ -20,7 +20,6 @@ namespace NanoByte.Common.Values.Design
     {
         private static object GetEnumFromString(string stringValue)
         {
-            // ReSharper disable once LoopCanBePartlyConvertedToQuery
             foreach (var field in typeof(T).GetFields())
             {
                 var attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), inherit: false);
