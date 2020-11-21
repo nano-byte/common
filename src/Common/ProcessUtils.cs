@@ -27,7 +27,7 @@ namespace NanoByte.Common
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-        public static Process? Start(this ProcessStartInfo startInfo)
+        public static Process Start(this ProcessStartInfo startInfo)
         {
             #region Sanity checks
             if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
@@ -36,7 +36,7 @@ namespace NanoByte.Common
             Log.Debug("Launching process: " + startInfo.FileName.EscapeArgument() + " " + startInfo.Arguments);
             try
             {
-                return Process.Start(startInfo);
+                return Process.Start(startInfo) ?? throw new IOException($"Failed to start {startInfo.FileName}.");
             }
             catch (Win32Exception ex)
             {
@@ -59,7 +59,7 @@ namespace NanoByte.Common
         /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
         /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
         /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-        public static Process? Start(string fileName, params string[] arguments)
+        public static Process Start(string fileName, params string[] arguments)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));
@@ -84,7 +84,6 @@ namespace NanoByte.Common
             #endregion
 
             var process = Start(startInfo);
-            if (process == null) return 0;
             process.WaitForExit();
             return process.ExitCode;
         }

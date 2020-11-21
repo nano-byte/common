@@ -25,7 +25,7 @@ namespace NanoByte.Common.Cli
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
         /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
         /// <exception cref="IOException">The external application could not be launched.</exception>
-        public Process? StartInteractive(params string[] arguments)
+        public Process StartInteractive(params string[] arguments)
         {
             #region Sanity checks
             if (arguments == null) throw new ArgumentNullException(nameof(arguments));
@@ -53,8 +53,7 @@ namespace NanoByte.Common.Cli
             Process process;
             try
             {
-                process = GetStartInfo(arguments).Start()!;
-                Debug.Assert(process != null);
+                process = GetStartInfo(arguments).Start();
             }
             #region Error handling
             catch (IOException ex)
