@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using NanoByte.Common.Info;
@@ -162,7 +161,6 @@ namespace NanoByte.Common.Net
         {
             using var sourceStream = response.GetResponseStream();
             using var targetStream = CreateTargetStream();
-            Debug.Assert(sourceStream != null);
             sourceStream.CopyToEx(targetStream,
                 bufferSize: 8 * 1024,
                 cancellationToken: CancellationToken,

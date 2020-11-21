@@ -524,7 +524,7 @@ namespace NanoByte.Common.Native
         /// Informs the Windows shell that changes were made to the file association data in the registry.
         /// </summary>
         /// <remarks>This should be called immediately after the changes in order to trigger a refresh of the Explorer UI.</remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyAssocChanged()
         {
             if (!IsWindows) return;
@@ -534,13 +534,13 @@ namespace NanoByte.Common.Native
             NativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
 
         /// <summary>
         /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "InconsistentNaming")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static void NotifyEnvironmentChanged()
         {
             if (!IsWindows) return;

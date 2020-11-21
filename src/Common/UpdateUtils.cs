@@ -84,7 +84,7 @@ namespace NanoByte.Common
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets called if value is different from original.</param>
-        public static void To<T>(this T value, ref T original, Action? updated) where T : struct
+        public static void To<T>(this T value, ref T original, Action updated) where T : struct
         {
             #region Sanity checks
             if (updated == null) throw new ArgumentNullException(nameof(updated));
@@ -102,7 +102,7 @@ namespace NanoByte.Common
             // Execute the "updated" delegate
             try
             {
-                updated?.Invoke();
+                updated.Invoke();
             }
             catch
             {
@@ -118,7 +118,7 @@ namespace NanoByte.Common
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets called if value is different from original.</param>
-        public static void To(this string value, ref string original, Action? updated)
+        public static void To(this string value, ref string original, Action updated)
         {
             #region Sanity checks
             if (updated == null) throw new ArgumentNullException(nameof(updated));
@@ -136,7 +136,7 @@ namespace NanoByte.Common
             // Execute the "updated" delegate
             try
             {
-                updated?.Invoke();
+                updated.Invoke();
             }
             catch
             {

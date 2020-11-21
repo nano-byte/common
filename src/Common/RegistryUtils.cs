@@ -344,6 +344,7 @@ namespace NanoByte.Common
             try
             {
                 var result = key.CreateSubKey(subkeyName);
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (result == null) throw new IOException(string.Format("Failed to create subkey '{1}' in '{0}'.", key, subkeyName));
                 return result;
             }
