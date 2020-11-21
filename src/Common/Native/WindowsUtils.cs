@@ -96,7 +96,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         public static bool IsWindowsNT
 #if NET20 || NET40
-            => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;
+            => Environment.OSVersion.Platform == PlatformID.Win32NT;
 #else
             => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #endif
