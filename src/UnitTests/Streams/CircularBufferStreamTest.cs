@@ -14,7 +14,7 @@ namespace NanoByte.Common.Streams
     /// </summary>
     public class CircularBufferStreamTest
     {
-        private readonly CircularBufferStream _stream = new CircularBufferStream(6);
+        private readonly CircularBufferStream _stream = new(6);
 
         /// <summary>
         /// Fills the buffer with some data that will fit in a single block and then reads it again.

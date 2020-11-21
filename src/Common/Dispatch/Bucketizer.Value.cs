@@ -17,7 +17,7 @@ namespace NanoByte.Common.Dispatch
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class Bucketizer<TElement, TValue> : IEnumerable<BucketRule<TElement, TValue>>
     {
-        private readonly List<BucketRule<TElement, TValue>> _rules = new List<BucketRule<TElement, TValue>>();
+        private readonly List<BucketRule<TElement, TValue>> _rules = new();
         private readonly IEnumerable<TElement> _elements;
         private readonly Func<TElement, TValue> _valueRetriever;
 
@@ -74,6 +74,6 @@ namespace NanoByte.Common.Dispatch
         /// <param name="elements">The elements to be bucketized.</param>
         /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
         public static Bucketizer<TElement, TValue> Bucketize<TElement, TValue>(this IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever)
-            => new Bucketizer<TElement, TValue>(elements, valueRetriever);
+            => new(elements, valueRetriever);
     }
 }

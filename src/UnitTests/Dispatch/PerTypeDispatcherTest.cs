@@ -45,10 +45,10 @@ namespace NanoByte.Common.Dispatch
         [Fact]
         public void TestDispatchActionExceptions()
         {
-            new PerTypeDispatcher<Base>(false) {(Sub1 sub1) => {}}
+            new PerTypeDispatcher<Base>(false) {(Sub1 _) => {}}
                .Invoking(x => x.Dispatch(new Sub2()))
                .Should().Throw<KeyNotFoundException>();
-            new PerTypeDispatcher<Base>(true) {(Sub1 sub1) => {}}
+            new PerTypeDispatcher<Base>(true) {(Sub1 _) => {}}
                .Invoking(x => x.Dispatch(new Sub2()))
                .Should().NotThrow<KeyNotFoundException>();
         }

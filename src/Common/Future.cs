@@ -14,7 +14,7 @@ namespace NanoByte.Common
     public sealed class Future<T> : IDisposable
     {
         private T _result = default!;
-        private readonly EventWaitHandle _waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
+        private readonly EventWaitHandle _waitHandle = new(false, EventResetMode.ManualReset);
 
         /// <summary>
         /// Sets the result and signals anyone waiting for it.

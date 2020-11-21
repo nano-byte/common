@@ -64,7 +64,7 @@ namespace NanoByte.Common.Values.Design
         {
             if (culture == null) throw new ArgumentNullException(nameof(culture));
 
-            if (!(value is string sValue)) return base.ConvertFrom(context, culture, value);
+            if (value is not string sValue) return base.ConvertFrom(context, culture, value);
 
             sValue = sValue.Trim();
             if (sValue.Length == 0) return null;

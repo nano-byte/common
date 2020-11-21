@@ -290,7 +290,7 @@ namespace NanoByte.Common.Native
         private class Stat : CliAppControl
         {
             #region Singleton
-            public static readonly Stat Instance = new Stat();
+            public static readonly Stat Instance = new();
 
             private Stat() {}
             #endregion

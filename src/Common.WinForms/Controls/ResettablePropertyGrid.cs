@@ -27,7 +27,7 @@ namespace NanoByte.Common.Controls
             TypeDescriptor.AddAttributes(typeof(LanguageSet), new EditorAttribute(typeof(LanguageSetEditor), typeof(UITypeEditor)));
         }
 
-        private readonly ToolStripMenuItem _menuReset = new ToolStripMenuItem {Text = Resources.ResetValue};
+        private readonly ToolStripMenuItem _menuReset = new() {Text = Resources.ResetValue};
 
         public ResettablePropertyGrid()
         {

@@ -30,7 +30,7 @@ namespace NanoByte.Common.Tasks
         private CancellationTokenRegistration _registration;
 
 #if !NET20
-        private readonly TaskCompletionSource<bool> _tcs = new TaskCompletionSource<bool>();
+        private readonly TaskCompletionSource<bool> _tcs = new();
 #else
         private readonly ManualResetEvent _event = new ManualResetEvent(initialState: false);
 #endif

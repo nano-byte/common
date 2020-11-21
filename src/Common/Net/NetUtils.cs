@@ -68,7 +68,7 @@ namespace NanoByte.Common.Net
             if (publicKeys == null) throw new ArgumentNullException(nameof(publicKeys));
             #endregion
 
-            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors)
+            ServicePointManager.ServerCertificateValidationCallback = (_, certificate, _, sslPolicyErrors)
                 => sslPolicyErrors == SslPolicyErrors.None
                 || sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors && certificate != null && publicKeys.Contains(certificate.GetPublicKeyString());
         }

@@ -17,7 +17,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// The default language: english with an invariant country.
         /// </summary>
-        public static readonly CultureInfo DefaultLanguage = new CultureInfo("en");
+        public static readonly CultureInfo DefaultLanguage = new("en");
 
         /// <summary>
         /// The actual string value to store.
@@ -100,7 +100,7 @@ namespace NanoByte.Common.Collections
         /// Creates a plain copy of this string.
         /// </summary>
         /// <returns>The cloned string.</returns>
-        public LocalizableString Clone() => new LocalizableString {Language = Language, Value = Value};
+        public LocalizableString Clone() => new() {Language = Language, Value = Value};
         #endregion
     }
 }

@@ -68,6 +68,6 @@ namespace NanoByte.Common.Tasks
         /// <param name="target">A list of objects to execute work for. Cancellation is possible between two elements.</param>
         /// <param name="work">The code to be executed once per element in <paramref name="target"/>. May throw <see cref="WebException"/>, <see cref="IOException"/> or <see cref="OperationCanceledException"/>.</param>
         public static ForEachTask<T> Create<T>([Localizable(true)] string name, IEnumerable<T> target, Action<T> work)
-            => new ForEachTask<T>(name, target, work);
+            => new(name, target, work);
     }
 }

@@ -33,8 +33,7 @@ namespace NanoByte.Common.Controls
             ForeColor = value.State switch
             {
                 TaskState.Complete => Color.Green,
-                TaskState.WebError => Color.Red,
-                TaskState.IOError => Color.Red,
+                TaskState.WebError or TaskState.IOError => Color.Red,
                 _ => SystemColors.ControlText
             };
         }

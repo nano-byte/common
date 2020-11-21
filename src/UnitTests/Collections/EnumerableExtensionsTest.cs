@@ -114,7 +114,7 @@ namespace NanoByte.Common.Collections
 
         private class Element
         {
-            public readonly List<Element> Children = new List<Element>();
+            public readonly List<Element> Children = new();
         }
 
         [Fact]
@@ -135,7 +135,7 @@ namespace NanoByte.Common.Collections
                     .StartNew(async () =>
                      {
                          int runningTasksCount = 0;
-                         await Enumerable.Range(1, 100).ForEachAsync(async x =>
+                         await Enumerable.Range(1, 100).ForEachAsync(async _ =>
                          {
                              runningTasksCount++;
                              await Task.Delay(10);
@@ -146,7 +146,7 @@ namespace NanoByte.Common.Collections
 
         [Fact]
         public async Task ForEachAsyncShouldRejectDefaultScheduler()
-            => await Assert.ThrowsAsync<InvalidOperationException>(() => Enumerable.Range(1, 100).ForEachAsync(x => Task.CompletedTask));
+            => await Assert.ThrowsAsync<InvalidOperationException>(() => Enumerable.Range(1, 100).ForEachAsync(_ => Task.CompletedTask));
 
         [Fact]
         public void TestPermutate()

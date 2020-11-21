@@ -9,7 +9,7 @@ namespace NanoByte.Common.Net
 {
     public abstract class DownloadTestBase : IDisposable
     {
-        protected readonly MicroServer Server = new MicroServer("file", GetTestFileStream());
+        protected readonly MicroServer Server = new("file", GetTestFileStream());
 
         protected static MemoryStream GetTestFileStream() => "abc".ToStream();
 

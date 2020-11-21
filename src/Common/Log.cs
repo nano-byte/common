@@ -71,7 +71,7 @@ namespace NanoByte.Common
         }
         #endregion
 
-        private static readonly List<LogEntryEventHandler> _handlers = new List<LogEntryEventHandler>
+        private static readonly List<LogEntryEventHandler> _handlers = new()
         {
             // Default handler
             (severity, message) =>
@@ -104,7 +104,7 @@ namespace NanoByte.Common
             }
         }
 
-        private static StringBuilder _sessionContent = new StringBuilder();
+        private static StringBuilder _sessionContent = new();
 
         /// <summary>
         /// Collects all log entries from this application session.
@@ -223,7 +223,7 @@ namespace NanoByte.Common
         }
 
         #region Helpers
-        private static readonly object _lock = new object();
+        private static readonly object _lock = new();
 
         private static void AddEntry(LogSeverity severity, string message)
         {

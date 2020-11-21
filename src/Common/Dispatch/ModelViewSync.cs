@@ -64,9 +64,9 @@ namespace NanoByte.Common.Dispatch
                 OnRemoved(element);
         }
 
-        private readonly MultiDictionary<TModel, TView> _modelToView = new MultiDictionary<TModel, TView>();
+        private readonly MultiDictionary<TModel, TView> _modelToView = new();
 
-        private readonly Dictionary<TView, TModel> _viewToModel = new Dictionary<TView, TModel>();
+        private readonly Dictionary<TView, TModel> _viewToModel = new();
 
         /// <summary>
         /// All View representations created by the synchronizer.
@@ -113,9 +113,9 @@ namespace NanoByte.Common.Dispatch
         /// <exception cref="KeyNotFoundException">There is no match.</exception>
         public TModel Lookup(TView representation) => _viewToModel[representation];
 
-        private readonly AggregateDispatcher<TModel, TView> _createDispatcher = new AggregateDispatcher<TModel, TView>();
+        private readonly AggregateDispatcher<TModel, TView> _createDispatcher = new();
 
-        private readonly AggregateDispatcher<TModel> _updateDispatcher = new AggregateDispatcher<TModel>();
+        private readonly AggregateDispatcher<TModel> _updateDispatcher = new();
 
         /// <summary>
         /// Registers a mapping rule for a specific type of Model element.

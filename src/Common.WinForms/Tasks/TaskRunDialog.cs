@@ -19,7 +19,7 @@ namespace NanoByte.Common.Tasks
         private readonly Thread _taskThread;
         private readonly ICredentialProvider? _credentialProvider;
         private readonly CancellationTokenSource _cancellationTokenSource;
-        private readonly Progress<TaskSnapshot> _progress = new Progress<TaskSnapshot>();
+        private readonly Progress<TaskSnapshot> _progress = new();
 
         /// <summary>
         /// Creates a new task tracking dialog.

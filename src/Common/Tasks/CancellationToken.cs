@@ -35,7 +35,7 @@ namespace NanoByte.Common.Tasks
         /// The callback is called from a background thread. Wrap via synchronization context to update UI elements.
         /// Handling this blocks the task, therefore observers should handle the event quickly.
         /// </remarks>
-        public CancellationTokenRegistration Register(Action callback) => new CancellationTokenRegistration(_source, callback);
+        public CancellationTokenRegistration Register(Action callback) => new(_source, callback);
 
         /// <summary>
         /// Indicates whether cancellation has been requested.

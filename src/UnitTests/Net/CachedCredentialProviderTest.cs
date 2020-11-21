@@ -14,7 +14,7 @@ namespace NanoByte.Common.Net
     /// </summary>
     public class CachedCredentialProviderTest : IDisposable
     {
-        private readonly Mock<ICredentialProvider> _innerMock = new Mock<ICredentialProvider>(MockBehavior.Strict);
+        private readonly Mock<ICredentialProvider> _innerMock = new(MockBehavior.Strict);
         private readonly CachedCredentialProvider _provider;
 
         public CachedCredentialProviderTest()

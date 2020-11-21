@@ -21,8 +21,8 @@ namespace NanoByte.Common.Native
             => string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) && WindowsUtils.IsInteractive;
 
         private static readonly Regex
-            _envVariableLongStyle = new Regex(@"\${([^{}]+)}"),
-            _envVariableShortStyle = new Regex(@"\$([^{}\$\s\\/-]+)");
+            _envVariableLongStyle = new(@"\${([^{}]+)}"),
+            _envVariableShortStyle = new(@"\$([^{}\$\s\\/-]+)");
 
         /// <summary>
         /// Expands/substitutes any Unix-style environment variables in the string.

@@ -17,7 +17,7 @@ namespace NanoByte.Common.Dispatch
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class PerTypeDispatcher<TBase> : IEnumerable<KeyValuePair<Type, Action<object>>> where TBase : class
     {
-        private readonly Dictionary<Type, Action<object>> _map = new Dictionary<Type, Action<object>>();
+        private readonly Dictionary<Type, Action<object>> _map = new();
 
         /// <summary><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</summary>
         private readonly bool _ignoreMissing;

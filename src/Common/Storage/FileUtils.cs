@@ -559,7 +559,7 @@ namespace NanoByte.Common.Storage
             #endregion
         }
 
-        private static readonly FileSystemAccessRule _denyEveryoneWrite = new FileSystemAccessRule(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
+        private static readonly FileSystemAccessRule _denyEveryoneWrite = new(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
 
         private static void ToggleWriteProtectionWinNT(this DirectoryInfo directory, bool enable)
         {
@@ -974,16 +974,13 @@ namespace NanoByte.Common.Storage
                 return UnixUtils.GetFileSystem(path) switch
                 {
                     // FAT
-                    "msdos" => false,
-                    "vfat" => false,
+                    "msdos" or "vfat" => false,
                     // HPFS
                     "hpfs" => false,
                     // NTFS
-                    "ntfs" => false,
-                    "ntfs-3g" => false,
+                    "ntfs" or "ntfs-3g" => false,
                     // Windows Network Share
-                    "smbfs" => false,
-                    "cifs" => false,
+                    "smbfs" or "cifs" => false,
                     // Other
                     _ => true
                 };

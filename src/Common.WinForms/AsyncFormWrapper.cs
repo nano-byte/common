@@ -31,7 +31,7 @@ namespace NanoByte.Common
             _init = init ?? throw new ArgumentNullException(nameof(init));
         }
 
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
 
         private T? _form;
 

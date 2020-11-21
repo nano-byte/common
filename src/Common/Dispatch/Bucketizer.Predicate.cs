@@ -17,7 +17,7 @@ namespace NanoByte.Common.Dispatch
     public class Bucketizer<T> : IEnumerable<BucketRule<T>>
     {
         private readonly IEnumerable<T> _elements;
-        private readonly List<BucketRule<T>> _rules = new List<BucketRule<T>>();
+        private readonly List<BucketRule<T>> _rules = new();
 
         /// <summary>
         /// Creates a new predicate-matching bucketizer.
@@ -71,6 +71,6 @@ namespace NanoByte.Common.Dispatch
         /// Creates a new predicate-matching bucketizer.
         /// </summary>
         /// <param name="elements">The elements to be bucketized.</param>
-        public static Bucketizer<T> Bucketize<T>(this IEnumerable<T> elements) => new Bucketizer<T>(elements);
+        public static Bucketizer<T> Bucketize<T>(this IEnumerable<T> elements) => new(elements);
     }
 }

@@ -74,7 +74,7 @@ namespace NanoByte.Common.Collections
             new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "C", [2] = "B", [3] = "A"}).Should().BeFalse();
             new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "X", [2] = "Y", [3] = "Z"}).Should().BeFalse();
             new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.UnsequencedEquals(new Dictionary<int, string> {[1] = "A", [2] = "B"}).Should().BeFalse();
-            new Dictionary<int, object> {[1] = new object()}.UnsequencedEquals(new Dictionary<int, object> {[1] = new object()}).Should().BeFalse();
+            new Dictionary<int, object> {[1] = new()}.UnsequencedEquals(new Dictionary<int, object> {[1] = new()}).Should().BeFalse();
         }
 
         [Fact]

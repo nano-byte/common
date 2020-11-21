@@ -18,7 +18,7 @@ namespace NanoByte.Common.Net
     /// </summary>
     public class DownloadFileTest : DownloadTestBase
     {
-        private readonly TemporaryFile _tempFile = new TemporaryFile("unit-tests");
+        private readonly TemporaryFile _tempFile = new("unit-tests");
 
         public override void Dispose()
         {

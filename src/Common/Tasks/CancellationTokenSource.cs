@@ -20,7 +20,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Gets a <see cref="CancellationToken"/> associated with this <see cref="CancellationTokenSource"/>.
         /// </summary>
-        public CancellationToken Token => new CancellationToken(this);
+        public CancellationToken Token => new(this);
 
         private volatile bool _isCancellationRequested; // Volatile justification: Write access is locked, many reads
 
@@ -39,14 +39,14 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         public bool IsCancellationRequested => _isCancellationRequested;
 
-        private readonly ManualResetEvent _waitEvent = new ManualResetEvent(initialState: false);
+        private readonly ManualResetEvent _waitEvent = new(initialState: false);
 
         /// <summary>
         /// Gets a wait handle that is signaled when see cref="Cancel"/> has been called.
         /// </summary>
         internal WaitHandle WaitHandle => _waitEvent;
 
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
 
         /// <summary>
         /// Notifies all listening <see cref="CancellationToken"/>s that operations should be canceled.

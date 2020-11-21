@@ -56,8 +56,7 @@ namespace NanoByte.Common.Controls
                     if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.NoProgress);
                     break;
 
-                case TaskState.Started:
-                case TaskState.Header:
+                case TaskState.Started or TaskState.Header:
                     Style = ProgressBarStyle.Marquee;
                     if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Indeterminate);
                     break;
@@ -75,8 +74,7 @@ namespace NanoByte.Common.Controls
                     }
                     break;
 
-                case TaskState.IOError:
-                case TaskState.WebError:
+                case TaskState.IOError or TaskState.WebError:
                     Style = ProgressBarStyle.Continuous;
                     if (UseTaskbar && ParentHandle != IntPtr.Zero) WindowsTaskbar.SetProgressState(ParentHandle, WindowsTaskbar.ProgressBarState.Error);
                     break;
@@ -90,9 +88,12 @@ namespace NanoByte.Common.Controls
                     break;
             }
 
-            var currentValue = (int)(value.Value * 100);
-            if (currentValue < 0) currentValue = 0;
-            else if (currentValue > 100) currentValue = 100;
+            int currentValue = value.Value switch
+            {
+                <= 0 => 0,
+                >= 1 => 100,
+                _ => (int)(value.Value * 100)
+            };
 
             // When the State is complete the bar should always be full
             if (value.State == TaskState.Complete) currentValue = 100;

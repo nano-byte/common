@@ -15,8 +15,8 @@ namespace NanoByte.Common.Collections
     public abstract class TransparentCacheBase<TKey, TValue>
         where TKey : notnull
     {
-        private readonly Dictionary<TKey, TValue> _lookup = new Dictionary<TKey, TValue>();
-        private readonly object _lock = new object();
+        private readonly Dictionary<TKey, TValue> _lookup = new();
+        private readonly object _lock = new();
 
         /// <summary>
         /// Retrieves a value from the cache.

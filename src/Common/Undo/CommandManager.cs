@@ -16,8 +16,8 @@ namespace NanoByte.Common.Undo
         where T : class
     {
         private readonly Stack<IUndoCommand>
-            _undoStack = new Stack<IUndoCommand>(),
-            _redoStack = new Stack<IUndoCommand>();
+            _undoStack = new(),
+            _redoStack = new();
 
         /// <inheritdoc/>
         public T? Target { get; set; }
@@ -151,7 +151,7 @@ namespace NanoByte.Common.Undo
         /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
         /// <exception cref="InvalidDataException">A problem occurs while deserializing the XML data.</exception>
         public static CommandManager<T> Load(string path)
-            => new CommandManager<T>(XmlStorage.LoadXml<T>(path), path);
+            => new(XmlStorage.LoadXml<T>(path), path);
     }
 
     /// <summary>

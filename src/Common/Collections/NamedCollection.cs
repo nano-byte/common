@@ -119,7 +119,7 @@ namespace NanoByte.Common.Collections
         /// Creates a shallow copy of this collection (elements are not cloned).
         /// </summary>
         /// <returns>The cloned collection.</returns>
-        public virtual NamedCollection<T> Clone() => new NamedCollection<T>(this);
+        public virtual NamedCollection<T> Clone() => new(this);
         #endregion
     }
 }

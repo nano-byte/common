@@ -96,7 +96,7 @@ namespace NanoByte.Common.Collections
         /// Creates a plain copy of this entry.
         /// </summary>
         /// <returns>The cloned entry.</returns>
-        public XmlDictionaryEntry Clone() => new XmlDictionaryEntry(Key, Value);
+        public XmlDictionaryEntry Clone() => new(Key, Value);
         #endregion
     }
 }

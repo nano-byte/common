@@ -54,6 +54,6 @@ namespace NanoByte.Common.Values.Design
 
         private static readonly string[] _values = (from T value in Enum.GetValues(typeof(T)) select value.ConvertToString()).ToArray();
 
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) => new StandardValuesCollection(_values);
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) => new(_values);
     }
 }

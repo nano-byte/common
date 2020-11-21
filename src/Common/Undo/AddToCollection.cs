@@ -47,6 +47,6 @@ namespace NanoByte.Common.Undo
         /// <typeparam name="T">The type of elements the collection contains.</typeparam>
         public static AddToCollection<T> For<T>(ICollection<T> collection, T element)
             where T : notnull
-            => new AddToCollection<T>(collection, element);
+            => new(collection, element);
     }
 }

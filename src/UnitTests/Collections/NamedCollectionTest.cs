@@ -29,7 +29,7 @@ namespace NanoByte.Common.Collections
         [Fact]
         public void TestSort()
         {
-            var collection = new NamedCollection<TestElement> {new TestElement("c"), new TestElement("b"), new TestElement("a")};
+            var collection = new NamedCollection<TestElement> {new("c"), new("b"), new("a")};
 
             collection.Select(x => x.Name).Should().Equal("a", "b", "c");
         }

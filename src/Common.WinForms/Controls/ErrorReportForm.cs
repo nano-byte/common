@@ -63,7 +63,7 @@ namespace NanoByte.Common.Controls
         #endregion
 
         #region Static access
-        private static readonly object _monitoringLock = new object();
+        private static readonly object _monitoringLock = new();
 
         /// <summary>
         /// Sets up hooks that catch and report any unhandled exceptions. Calling this more than once has no effect.
@@ -84,7 +84,7 @@ namespace NanoByte.Common.Controls
             // Disable WinForm's built-in error handling
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException, threadScope: false);
 
-            AppDomain.CurrentDomain.UnhandledException += delegate(object sender, UnhandledExceptionEventArgs e)
+            AppDomain.CurrentDomain.UnhandledException += (_, e) =>
             {
                 Report(e.ExceptionObject as Exception ?? new Exception("Unknown error"), uploadUri);
                 Process.GetCurrentProcess().Kill();

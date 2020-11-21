@@ -54,7 +54,7 @@ namespace NanoByte.Common.Native
             #endregion
 
             if (!WindowsUtils.IsWindows) return;
-            control.MouseDown += (sender, args) =>
+            control.MouseDown += (_, args) =>
             {
                 if (args.Button == MouseButtons.Left)
                 {

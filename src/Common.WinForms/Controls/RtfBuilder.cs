@@ -22,7 +22,7 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public sealed class RtfBuilder
     {
-        private readonly StringBuilder _builder = new StringBuilder();
+        private readonly StringBuilder _builder = new();
 
         /// <summary>
         /// Appends a new paragraph.

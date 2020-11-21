@@ -29,7 +29,7 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void TestFile()
         {
-            TestData testData1 = new TestData {Data = "Hello"}, testData2;
+            TestData testData1 = new() {Data = "Hello"}, testData2;
             using (var tempFile = new TemporaryFile("unit-tests"))
             {
                 // Write and read file
@@ -47,7 +47,7 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void TestFileRelative()
         {
-            TestData testData1 = new TestData {Data = "Hello"}, testData2;
+            TestData testData1 = new() {Data = "Hello"}, testData2;
             using (new TemporaryWorkingDirectory("unit-tests"))
             {
                 // Write and read file

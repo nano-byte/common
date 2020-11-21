@@ -535,7 +535,7 @@ namespace NanoByte.Common.Native
         }
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
-        private static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
+        private static readonly IntPtr HWND_BROADCAST = new(0xFFFF);
 
         /// <summary>
         /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.

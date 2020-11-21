@@ -111,7 +111,7 @@ namespace NanoByte.Common.Controls
             }
         }
 
-        private readonly HashSet<T> _checkedEntries = new HashSet<T>();
+        private readonly HashSet<T> _checkedEntries = new();
 
         /// <summary>
         /// Returns a list of all <see cref="INamed{T}"/> objects currently marked with a check box.

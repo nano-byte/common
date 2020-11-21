@@ -25,8 +25,8 @@ namespace NanoByte.Common.Dispatch
         {
             var dispatcher = new AggregateDispatcher<Base, string>
             {
-                (Sub1 sub1) => new[] {"sub1"},
-                (Sub2 sub2) => new[] {"sub2"}
+                (Sub1 _) => new[] {"sub1"},
+                (Sub2 _) => new[] {"sub2"}
             };
 
             dispatcher.Dispatch(new Sub1()).Should().Equal("sub1");

@@ -21,7 +21,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Stores log messages formatted in RTF for visualization.
         /// </summary>
-        protected readonly RtfBuilder LogRtf = new RtfBuilder();
+        protected readonly RtfBuilder LogRtf = new();
 
         /// <summary>
         /// Records <see cref="Log"/> messages in an internal log based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.

@@ -81,7 +81,7 @@ namespace NanoByte.Common.Controls
         /// <summary>
         /// The wizard page history with the currently visible page on top.
         /// </summary>
-        protected readonly Stack<UserControl> PageStack = new Stack<UserControl>();
+        protected readonly Stack<UserControl> PageStack = new();
 
         /// <summary>
         /// Displays a new wizard page and adds it to the <see cref="PageStack"/>.

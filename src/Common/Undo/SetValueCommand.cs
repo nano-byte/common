@@ -17,7 +17,7 @@ namespace NanoByte.Common.Undo
     {
         private readonly PropertyPointer<T> _pointer;
         private readonly T _newValue;
-        private T _oldValue = default!;
+        private T? _oldValue;
 
         /// <inheritdoc/>
         public object? Value => _newValue;
@@ -45,7 +45,8 @@ namespace NanoByte.Common.Undo
         /// <summary>
         /// Restores the old value in the model.
         /// </summary>
-        protected override void OnUndo() => _pointer.Value = _oldValue;
+        protected override void OnUndo()
+            => _pointer.Value = _oldValue!;
     }
 
     /// <summary>
@@ -60,7 +61,7 @@ namespace NanoByte.Common.Undo
         /// <param name="newValue">The new value to be set.</param>
         /// <typeparam name="T">The type of the value to set.</typeparam>
         public static SetValueCommand<T> For<T>(PropertyPointer<T> pointer, T newValue)
-            => new SetValueCommand<T>(pointer, newValue);
+            => new(pointer, newValue);
 
         /// <summary>
         /// Creates a new value-setting command.

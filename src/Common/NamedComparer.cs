@@ -13,14 +13,14 @@ namespace NanoByte.Common
     public sealed class NamedComparer<T> : IComparer<T>, IEqualityComparer<T> where T : INamed<T>
     {
         /// <summary>A singleton instance of the comparer.</summary>
-        public static readonly NamedComparer<T> Instance = new NamedComparer<T>();
+        public static readonly NamedComparer<T> Instance = new();
 
         private NamedComparer() {}
 
-        public int Compare([AllowNull] T x, [AllowNull] T y)
+        public int Compare(T? x, T? y)
             => StringComparer.OrdinalIgnoreCase.Compare(x?.Name, y?.Name);
 
-        public bool Equals([AllowNull] T x, [AllowNull] T y)
+        public bool Equals(T? x, T? y)
             => StringComparer.OrdinalIgnoreCase.Equals(x?.Name, y?.Name);
 
         public int GetHashCode(T obj)

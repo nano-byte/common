@@ -93,8 +93,8 @@ namespace NanoByte.Common.Dispatch
         [Fact]
         public void TestMergeAddAndRemove()
         {
-            ICollection<MergeTestData> toRemove = new List<MergeTestData>();
-            ICollection<MergeTestData> toAdd = new List<MergeTestData>();
+            var toRemove = new List<MergeTestData>();
+            var toAdd = new List<MergeTestData>();
             Merge.ThreeWay(
                 reference: MergeTestData.BuildList("a", "b", "c"),
                 theirs: MergeTestData.BuildList("a", "b", "d"),
@@ -129,8 +129,8 @@ namespace NanoByte.Common.Dispatch
                 new MergeTestData(mergeID: "e", data: "ghi", timestamp: new DateTime(2000, 1, 1))
             };
 
-            ICollection<MergeTestData> toRemove = new List<MergeTestData>();
-            ICollection<MergeTestData> toAdd = new List<MergeTestData>();
+            var toRemove = new List<MergeTestData>();
+            var toAdd = new List<MergeTestData>();
             Merge.ThreeWay(reference, theirs, mine, toAdd, toRemove);
 
             toRemove.Should().Equal(mine[1], mine[4]);

@@ -21,7 +21,7 @@ namespace NanoByte.Common.Dispatch
             new[] {1, 2, 3, 4}.Bucketize()
                               .Add(x => x % 2 == 0, even)
                               .Add(x => x < 3, lessThanThree)
-                              .Add(x => true, rest)
+                              .Add(_ => true, rest)
                               .Run();
 
             even.Should().Equal(2, 4);

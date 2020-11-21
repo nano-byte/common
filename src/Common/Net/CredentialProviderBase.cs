@@ -30,7 +30,7 @@ namespace NanoByte.Common.Net
         /// <inheritdoc/>
         public abstract NetworkCredential? GetCredential(Uri uri, string authType);
 
-        private readonly HashSet<Uri> _invalidList = new HashSet<Uri>();
+        private readonly HashSet<Uri> _invalidList = new();
 
         /// <inheritdoc/>
         public void ReportInvalid(Uri uri)

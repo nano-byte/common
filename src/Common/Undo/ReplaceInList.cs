@@ -53,6 +53,6 @@ namespace NanoByte.Common.Undo
         /// <typeparam name="T">The type of elements the list contains.</typeparam>
         public static ReplaceInList<T> For<T>(IList<T> list, T oldElement, T newElement)
             where T : notnull
-            => new ReplaceInList<T>(list, oldElement, newElement);
+            => new(list, oldElement, newElement);
     }
 }

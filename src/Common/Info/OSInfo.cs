@@ -60,7 +60,7 @@ namespace NanoByte.Common.Info
         /// </summary>
         public static OSInfo Current { get; } = GetCurrent();
 
-        private static OSInfo GetCurrent() => new OSInfo
+        private static OSInfo GetCurrent() => new()
         {
 #if NET20 || NET40
             FrameworkVersion = Environment.Version.ToString(),

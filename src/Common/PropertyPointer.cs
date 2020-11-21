@@ -71,7 +71,7 @@ namespace NanoByte.Common
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public static PropertyPointer<T> For<T>(Func<T> getValue, Action<T> setValue, T defaultValue, bool needsEncoding = false)
-            => new PropertyPointer<T>(getValue, setValue, defaultValue, needsEncoding);
+            => new(getValue, setValue, defaultValue, needsEncoding);
 
 #if !NET20
         /// <summary>
@@ -105,7 +105,7 @@ namespace NanoByte.Common
                 };
             }
 
-            return new PropertyPointer<T>(getValue.Compile(), SetValue().Compile(), defaultValue, needsEncoding);
+            return new(getValue.Compile(), SetValue().Compile(), defaultValue, needsEncoding);
         }
 #endif
 

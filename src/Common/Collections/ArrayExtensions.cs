@@ -84,11 +84,11 @@ namespace NanoByte.Common.Collections
         private sealed class DefaultComparer<T> : IComparer<T> where T : IComparable<T>
         {
             /// <summary>A singleton instance of the comparer.</summary>
-            public static readonly DefaultComparer<T> Instance = new DefaultComparer<T>();
+            public static readonly DefaultComparer<T> Instance = new();
 
             private DefaultComparer() {}
 
-            public int Compare([AllowNull] T x, [AllowNull] T y)
+            public int Compare(T? x, T? y)
                 => (x == null || y == null)
                     ? 0
                     : x.CompareTo(y);

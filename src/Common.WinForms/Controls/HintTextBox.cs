@@ -73,7 +73,7 @@ namespace NanoByte.Common.Controls
 
         private static readonly Bitmap _clearButton = ImageResources.ClearButton;
 
-        private readonly PictureBox _buttonClear = new PictureBox
+        private readonly PictureBox _buttonClear = new()
         {
             Visible = false,
             Cursor = Cursors.Default,

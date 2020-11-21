@@ -63,8 +63,7 @@ namespace NanoByte.Common.Tasks
         public override string ToString()
             => State switch
             {
-                TaskState.Ready => "",
-                TaskState.Started => "",
+                TaskState.Ready or TaskState.Started => "",
                 TaskState.Header => Resources.StateHeader,
                 TaskState.Data when UnitsTotal == -1 && UnitsProcessed == 0 => Resources.StateData,
                 TaskState.Data when UnitsTotal == -1 => UnitsToString(UnitsProcessed),

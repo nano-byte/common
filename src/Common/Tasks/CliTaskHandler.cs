@@ -105,12 +105,10 @@ namespace NanoByte.Common.Tasks
             {
                 switch (CliUtils.ReadString(@"[Y/N]").ToLower())
                 {
-                    case "y":
-                    case "yes":
+                    case "y" or "yes":
                         Log.Debug("Answer: Yes");
                         return true;
-                    case "n":
-                    case "no":
+                    case "n" or "no":
                         Log.Debug("Answer: No");
                         return false;
                 }

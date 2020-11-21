@@ -65,7 +65,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
 
         /// <summary>The index of the first byte currently store in the <see cref="_buffer"/>.</summary>
         private int _dataStart;
@@ -80,10 +80,10 @@ namespace NanoByte.Common.Streams
         private Exception? _relayedException;
 
         /// <summary>A barrier that blocks threads until new data is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _dataAvailable = new ManualResetEvent(initialState: false);
+        private readonly ManualResetEvent _dataAvailable = new(initialState: false);
 
         /// <summary>A barrier that blocks threads until empty space is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _spaceAvailable = new ManualResetEvent(initialState: true);
+        private readonly ManualResetEvent _spaceAvailable = new(initialState: true);
 
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)

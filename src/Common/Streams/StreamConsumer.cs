@@ -15,8 +15,8 @@ namespace NanoByte.Common.Streams
     /// <remarks>Useful for processing <see cref="Process.StandardOutput"/> and <see cref="Process.StandardError"/> without risking deadlocks.</remarks>
     public class StreamConsumer
     {
-        private readonly object _lock = new object();
-        private readonly Queue<string> _queue = new Queue<string>();
+        private readonly object _lock = new();
+        private readonly Queue<string> _queue = new();
         private readonly StreamReader _reader;
         private readonly Thread _thread;
 

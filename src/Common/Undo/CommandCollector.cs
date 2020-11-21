@@ -14,7 +14,7 @@ namespace NanoByte.Common.Undo
         /// <inheritdoc/>
         public string? Path { get; set; }
 
-        private readonly List<IUndoCommand> _commands = new List<IUndoCommand>();
+        private readonly List<IUndoCommand> _commands = new();
 
         /// <summary>
         /// Store an <see cref="IUndoCommand"/> for later execution.

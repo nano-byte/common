@@ -13,7 +13,7 @@ namespace NanoByte.Common.Collections
     public sealed class CultureComparer : IComparer<CultureInfo>
     {
         /// <summary>A singleton instance of the comparer.</summary>
-        public static readonly CultureComparer Instance = new CultureComparer();
+        public static readonly CultureComparer Instance = new();
 
         private CultureComparer() {}
 

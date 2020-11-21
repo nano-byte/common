@@ -38,7 +38,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Used to signal the <see cref="CancellationToken"/>.
         /// </summary>
-        protected readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+        protected readonly CancellationTokenSource CancellationTokenSource = new();
 
         /// <inheritdoc/>
         public CancellationToken CancellationToken => CancellationTokenSource.Token;

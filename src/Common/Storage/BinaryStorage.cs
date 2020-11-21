@@ -16,7 +16,7 @@ namespace NanoByte.Common.Storage
     /// </summary>
     public static class BinaryStorage
     {
-        private static readonly BinaryFormatter _serializer = new BinaryFormatter();
+        private static readonly BinaryFormatter _serializer = new();
 
         /// <summary>
         /// Loads an object from a binary file.
