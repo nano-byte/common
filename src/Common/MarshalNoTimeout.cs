@@ -2,7 +2,10 @@
 // Licensed under the MIT License
 
 using System;
+
+#if !NET
 using System.Security.Permissions;
+#endif
 
 namespace NanoByte.Common
 {
@@ -11,8 +14,10 @@ namespace NanoByte.Common
     /// </summary>
     public abstract class MarshalNoTimeout : MarshalByRefObject
     {
+#if !NET
         /// <inheritdoc/>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.Infrastructure)]
         public override object? InitializeLifetimeService() => null;
+#endif
     }
 }

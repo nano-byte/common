@@ -4,16 +4,21 @@
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
-using System.Security.Permissions;
 using System.Windows.Forms.Design;
 using NanoByte.Common.Controls;
+
+#if !NET
+using System.Security.Permissions;
+#endif
 
 namespace NanoByte.Common.Values.Design
 {
     /// <summary>
     /// An editor that can be associated with <see cref="TimeSpan"/> properties. Uses <see cref="TimeSpanControl"/>.
     /// </summary>
+#if !NET
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+#endif
     public class TimeSpanEditor : UITypeEditor
     {
         /// <inheritdoc/>
@@ -30,7 +35,7 @@ namespace NanoByte.Common.Values.Design
 
             if (value.GetType() != typeof(TimeSpan)) return value;
 
-            var editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+            var editorService = (IWindowsFormsEditorService?)provider.GetService(typeof(IWindowsFormsEditorService));
             if (editorService == null) return value;
 
             var picker = new TimeSpanControl {Value = (TimeSpan)value};

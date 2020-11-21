@@ -2,9 +2,12 @@
 // Licensed under the MIT License
 
 using System;
-using System.Security.Permissions;
 using System.Windows.Forms;
 using NanoByte.Common.Native;
+
+#if !NET
+using System.Security.Permissions;
+#endif
 
 namespace NanoByte.Common.Controls
 {
@@ -24,7 +27,9 @@ namespace NanoByte.Common.Controls
 
         protected override CreateParams CreateParams
         {
+#if !NET
             [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+#endif
             get
             {
                 var createParams = base.CreateParams;
@@ -39,7 +44,9 @@ namespace NanoByte.Common.Controls
             WinFormsUtils.RegisterTouchWindow(this);
         }
 
+#if !NET
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+#endif
         protected override void WndProc(ref Message m)
         {
             WinFormsUtils.HandleTouchMessage(ref m, this, TouchDown, TouchMove, TouchUp);

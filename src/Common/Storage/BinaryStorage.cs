@@ -1,3 +1,4 @@
+#if !NET
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
@@ -102,3 +103,4 @@ namespace NanoByte.Common.Storage
         }
     }
 }
+#endif

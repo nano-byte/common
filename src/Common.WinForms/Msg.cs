@@ -8,7 +8,15 @@ using System.Globalization;
 using System.Windows.Forms;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
+
+#if NET
+using System.Linq;
+using NanoByte.Common.Collections;
+#endif
+
+#if NET45 || NET461
 using TaskDialog;
+#endif
 
 namespace NanoByte.Common
 {
@@ -157,6 +165,9 @@ namespace NanoByte.Common
 
         private static DialogResult? ShowTaskDialog(IWin32Window? owner, string text, MsgSeverity severity, string? yes = null, string? no = null, string? ok = null, string? cancel = null, bool canCancel = false)
         {
+#if NET20 || NET40
+            return null;
+#else
             if (!WindowsUtils.IsWindowsVista) return null;
 
             var icon = severity switch
@@ -175,14 +186,46 @@ namespace NanoByte.Common
 
             void AddButton(DialogResult result, string? caption)
             {
+#if NET
+                if (string.IsNullOrEmpty(caption)) return;
+                string[] captionSplit = caption.Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
+                buttons.Add(new TaskDialogCommandLinkButton(captionSplit[0], (captionSplit.Length == 2) ? captionSplit[1] : null) {Tag = result});
+#else
                 if (!string.IsNullOrEmpty(caption))
                     buttons.Add(new TaskDialogButton((int)result, caption.Replace("\r\n", "\n")));
+#endif
             }
 
             AddButton(DialogResult.Yes, yes);
             AddButton(DialogResult.No, no);
             AddButton(DialogResult.OK, ok);
 
+#if NET
+            var taskDialog = new TaskDialogPage
+            {
+                Caption = Application.ProductName,
+                Icon = icon,
+                Heading = heading,
+                Text = details
+            };
+
+            if (canCancel)
+            {
+                if (string.IsNullOrEmpty(ok)) buttons.Add(TaskDialogButton.Cancel);
+                else AddButton(DialogResult.Cancel, cancel);
+
+                // Cancel non-errors with ESC and errors with ENTER
+                if (severity < MsgSeverity.Error) taskDialog.AllowCancel = true;
+                else taskDialog.DefaultButton = buttons.Last();
+            }
+
+            taskDialog.Buttons.AddRange(buttons);
+
+            var pushedButton = (owner == null)
+                ? TaskDialog.ShowDialog(taskDialog)
+                : TaskDialog.ShowDialog(owner, taskDialog);
+            return pushedButton.Tag is DialogResult tag ? tag : DialogResult.Cancel;
+#else
             var taskDialog = new TaskDialog.TaskDialog
             {
                 PositionRelativeToWindow = true,
@@ -223,6 +266,8 @@ namespace NanoByte.Common
             {
                 return null;
             }
+#endif
+#endif
         }
     }
 }

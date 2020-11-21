@@ -5,10 +5,13 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using NanoByte.Common.Native;
+
+#if !NET
+using System.Reflection;
+#endif
 
 namespace NanoByte.Common.Storage
 {
@@ -39,12 +42,14 @@ namespace NanoByte.Common.Storage
         private static string GetInstallBase()
         {
             string? codeBase = null;
+#if !NET
             try
             {
                 codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             }
             catch (PlatformNotSupportedException)
             {}
+#endif
 
             return codeBase ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
         }

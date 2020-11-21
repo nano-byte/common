@@ -2,7 +2,7 @@
 set -e
 cd `dirname $0`
 
-echo "WARNING: You need Visual Studio 2019 v16.5+ to perform a full build of this project" >&2
+echo "WARNING: You need Visual Studio 2019 v16.8+ to perform a full build of this project" >&2
 
 # Find dotnet
 if command -v dotnet > /dev/null 2> /dev/null; then

@@ -4,11 +4,14 @@
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
-using System.Security.Permissions;
 using System.Windows.Forms;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Values.Design;
+
+#if !NET
+using System.Security.Permissions;
+#endif
 
 namespace NanoByte.Common.Controls
 {
@@ -39,7 +42,9 @@ namespace NanoByte.Common.Controls
             ContextMenuStrip = new ContextMenuStrip {Items = {_menuReset}};
         }
 
+#if !NET
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
+#endif
         protected override void OnSelectedGridItemChanged(SelectedGridItemChangedEventArgs e)
         {
             #region Sanity checks

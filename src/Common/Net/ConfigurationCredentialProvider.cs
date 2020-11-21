@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if NETSTANDARD
+#if !NETFRAMEWORK
 using System;
 using System.Net;
 using Microsoft.Extensions.Configuration;

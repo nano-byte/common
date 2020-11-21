@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if NETSTANDARD
+#if !NETFRAMEWORK
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -18,7 +18,7 @@ namespace NanoByte.Common.Tasks
     public sealed class ServiceTaskHandler : SilentTaskHandler
     {
         private readonly ILogger<ServiceTaskHandler>? _logger;
-        private CancellationTokenSource _cancellationTokenSource;
+        private readonly CancellationTokenSource? _cancellationTokenSource;
 
         public ServiceTaskHandler(IServiceProvider provider)
         {
@@ -60,7 +60,7 @@ namespace NanoByte.Common.Tasks
         public override CancellationToken CancellationToken => _cancellationTokenSource?.Token ?? base.CancellationToken;
 
         /// <inheritdoc/>
-        public override ICredentialProvider CredentialProvider { get; }
+        public override ICredentialProvider? CredentialProvider { get; }
     }
 }
 #endif

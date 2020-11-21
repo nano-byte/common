@@ -301,7 +301,9 @@ namespace NanoByte.Common.Controls
                 ControlPaint.DrawFocusRectangle(g, focusRect);
         }
 
+#if !NET
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+#endif
         protected override void WndProc(ref Message m)
         {
             //0x0212 == WM_EXITMENULOOP

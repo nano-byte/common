@@ -5,10 +5,10 @@
     <AssemblyName>NanoByte.Common</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <LangVersion>8.0</LangVersion>
-    <TargetFrameworks>net20;net40;net45;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net45;net461;netstandard2.1;net5.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591;CA1416</NoWarn>
     <Nullable>annotations</Nullable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <OutputType>Library</OutputType>
@@ -20,10 +20,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
     <!-- .NET Core MSBuild does not support legacy ResGen -->
-    <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net461;netstandard2.1;net5.0</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1' Or '$(TargetFramework)'=='net5.0'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -40,16 +40,15 @@
 
   <!-- Dependencies -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net461'">
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' Or '$(TargetFramework)'=='netstandard2.1'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1' Or '$(TargetFramework)'=='net5.0'">
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
@@ -58,19 +57,19 @@
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0' And '$(TargetFramework)'!='netstandard2.1'">
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.1' And '$(TargetFramework)'!='net5.0'">
     <!-- Used as a Reference Assembly, not distributed with NuGet package -->
     <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.10" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.10" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net5.0'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <!-- Embedded resources -->
