@@ -4,27 +4,21 @@
   <PropertyGroup>
     <AssemblyName>NanoByte.Common.UnitTests</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
-    <LangVersion>8.0</LangVersion>
+    <Description>Unit test for NanoByte.Common.</Description>
     <TargetFrameworks>net48;net5.0</TargetFrameworks>
-    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <IsPackable>False</IsPackable>
     <DeterministicSourcePaths>False</DeterministicSourcePaths>
-    <Nullable>annotations</Nullable>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="$(TargetFramework)=='net5.0'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <!-- Metadata used for unit tests -->
-  <PropertyGroup>
-    <Description>Unit test for NanoByte.Common.</Description>
-    <Authors>Bastian Eicher</Authors>
-    <Copyright>Copyright Bastian Eicher et al.</Copyright>
-  </PropertyGroup>
+  <!-- Mark as unit test project -->
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
 
   <!-- Dependencies -->
   <ItemGroup>
@@ -39,11 +33,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
     <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-  </ItemGroup>
-
-  <!-- Mark as unit test project -->
-  <ItemGroup>
-    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
 </Project>
