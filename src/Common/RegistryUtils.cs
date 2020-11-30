@@ -314,7 +314,7 @@ namespace NanoByte.Common
             try
             {
                 var result = key.OpenSubKey(subkeyName, writable);
-                if (result == null) throw new IOException(string.Format("Failed to open subkey '{1}' in '{0}'.", key, subkeyName));
+                if (result == null) throw new IOException($"Failed to open subkey '{subkeyName}' in '{key}'.");
                 return result;
             }
             #region Error handling
@@ -345,7 +345,7 @@ namespace NanoByte.Common
             {
                 var result = key.CreateSubKey(subkeyName);
                 // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                if (result == null) throw new IOException(string.Format("Failed to create subkey '{1}' in '{0}'.", key, subkeyName));
+                if (result == null) throw new IOException($"Failed to create subkey '{subkeyName}' in '{key}'.");
                 return result;
             }
             #region Error handling

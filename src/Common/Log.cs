@@ -227,8 +227,9 @@ namespace NanoByte.Common
 
         private static void AddEntry(LogSeverity severity, string message)
         {
-            message = UnifyWhitespace(message ?? throw new ArgumentNullException(nameof(message)));
-            string formattedMessage = FormatMessage(severity, message);
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
+            string formattedMessage = "[" + FormatTimestamp(DateTime.Now) + "] " + FormatSeverity(severity) + ": " + UnifyWhitespace(message);
 
             lock (_lock)
             {
@@ -253,24 +254,21 @@ namespace NanoByte.Common
             }
         }
 
-        private static string UnifyWhitespace(string message)
-        {
-            var lines = message.Trim().SplitMultilineText();
-            message = string.Join(Environment.NewLine + "\t", lines);
-            return message;
-        }
+        private static string FormatTimestamp(DateTime timestamp)
+            => timestamp.ToString("T", CultureInfo.InvariantCulture);
 
-        private static string FormatMessage(LogSeverity severity, string message)
-        {
-            return severity switch
+        private static string FormatSeverity(LogSeverity severity)
+            => severity switch
             {
-                LogSeverity.Debug => string.Format(CultureInfo.InvariantCulture, "[{0:T}] DEBUG: {1}", DateTime.Now, message),
-                LogSeverity.Info => string.Format(CultureInfo.InvariantCulture, "[{0:T}] INFO: {1}", DateTime.Now, message),
-                LogSeverity.Warn => string.Format(CultureInfo.InvariantCulture, "[{0:T}] WARN: {1}", DateTime.Now, message),
-                LogSeverity.Error => string.Format(CultureInfo.InvariantCulture, "[{0:T}] ERROR: {1}", DateTime.Now, message),
-                _ => string.Format(CultureInfo.InvariantCulture, "[{0:T}] UNKNOWN: {1}", DateTime.Now, message)
+                LogSeverity.Debug => "DEBUG",
+                LogSeverity.Info => "INFO",
+                LogSeverity.Warn => "WARN",
+                LogSeverity.Error => "ERROR",
+                _ => "UNKNOWN"
             };
-        }
+
+        private static string UnifyWhitespace(string message)
+            => string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText());
         #endregion
     }
 }
