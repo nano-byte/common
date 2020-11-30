@@ -19,7 +19,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         internal XmlDictionary? Parent;
 
-        private string _key = default!;
+        private string? _key;
 
         /// <summary>
         /// The unique text key. Warning: If this is changed the <see cref="XmlDictionary"/> must be rebuilt in order to update its internal hash table.
@@ -28,7 +28,7 @@ namespace NanoByte.Common.Collections
         [XmlAttribute("key")]
         public string Key
         {
-            get => _key;
+            get => _key ?? "";
             set
             {
                 if (Parent != null && Parent.ContainsKey(value))
@@ -41,7 +41,7 @@ namespace NanoByte.Common.Collections
         /// The text value.
         /// </summary>
         [XmlText]
-        public string Value { get; set; } = default!;
+        public string Value { get; set; } = "";
 
         /// <summary>
         /// Base-constructor for XML serialization. Do not call manually!

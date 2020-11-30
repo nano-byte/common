@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using NanoByte.Common.Net;
 
@@ -30,7 +29,6 @@ namespace NanoByte.Common
         /// <summary>
         /// The default value of the property.
         /// </summary>
-        [AllowNull]
         public T DefaultValue { get; }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace NanoByte.Common
         /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public PropertyPointer(Func<T> getValue, Action<T> setValue, [AllowNull] T defaultValue = default, bool needsEncoding = false)
+        public PropertyPointer(Func<T> getValue, Action<T> setValue, T defaultValue, bool needsEncoding = false)
         {
             _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
             _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
@@ -72,7 +70,7 @@ namespace NanoByte.Common
         /// <param name="setValue">A delegate that sets the value.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public static PropertyPointer<T> For<T>(Func<T> getValue, Action<T> setValue, T defaultValue = default, bool needsEncoding = false)
+        public static PropertyPointer<T> For<T>(Func<T> getValue, Action<T> setValue, T defaultValue, bool needsEncoding = false)
             => new PropertyPointer<T>(getValue, setValue, defaultValue, needsEncoding);
 
 #if !NET20
@@ -83,7 +81,7 @@ namespace NanoByte.Common
         /// <param name="getValue">An expression pointing to the property.</param>
         /// <param name="defaultValue">The default value of the property</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
-        public static PropertyPointer<T> For<T>(Expression<Func<T>> getValue, T defaultValue = default, bool needsEncoding = false)
+        public static PropertyPointer<T> For<T>(Expression<Func<T>> getValue, T defaultValue, bool needsEncoding = false)
         {
             #region Sanity checks
             if (getValue == null) throw new ArgumentNullException(nameof(getValue));
