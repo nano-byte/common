@@ -46,7 +46,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <param name="getValue">A delegate that returns the current value.</param>
         /// <param name="setValue">A delegate that sets the value.</param>
-        /// <param name="defaultValue">The default value of the property</param>
+        /// <param name="defaultValue">The default value of the property.</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public PropertyPointer(Func<T> getValue, Action<T> setValue, T defaultValue, bool needsEncoding = false)
         {
@@ -68,10 +68,21 @@ namespace NanoByte.Common
         /// <typeparam name="T">The type of value the property contains.</typeparam>
         /// <param name="getValue">A delegate that returns the current value.</param>
         /// <param name="setValue">A delegate that sets the value.</param>
-        /// <param name="defaultValue">The default value of the property</param>
+        /// <param name="defaultValue">The default value of the property.</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public static PropertyPointer<T> For<T>(Func<T> getValue, Action<T> setValue, T defaultValue, bool needsEncoding = false)
             => new(getValue, setValue, defaultValue, needsEncoding);
+
+        /// <summary>
+        /// Creates a property pointer.
+        /// </summary>
+        /// <typeparam name="T">The type of value the property contains.</typeparam>
+        /// <param name="getValue">A delegate that returns the current value.</param>
+        /// <param name="setValue">A delegate that sets the value.</param>
+        /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
+        public static PropertyPointer<T?> For<T>(Func<T?> getValue, Action<T?> setValue, bool needsEncoding = false)
+            where T : class
+            => For(getValue, setValue, null, needsEncoding);
 
 #if !NET20
         /// <summary>
@@ -79,7 +90,7 @@ namespace NanoByte.Common
         /// </summary>
         /// <typeparam name="T">The type of value the property contains.</typeparam>
         /// <param name="getValue">An expression pointing to the property.</param>
-        /// <param name="defaultValue">The default value of the property</param>
+        /// <param name="defaultValue">The default value of the property.</param>
         /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
         public static PropertyPointer<T> For<T>(Expression<Func<T>> getValue, T defaultValue, bool needsEncoding = false)
         {
@@ -101,12 +112,22 @@ namespace NanoByte.Common
                             parameter),
                         parameter),
                     FieldInfo _ => Expression.Lambda<Action<T>>(Expression.Assign(memberExpression, parameter), parameter),
-                    _ => throw new ArgumentException("The expression must point to a property or field", nameof(getValue))
+                    _ => throw new ArgumentException("The expression must point to a property or field.", nameof(getValue))
                 };
             }
 
-            return new(getValue.Compile(), SetValue().Compile(), defaultValue, needsEncoding);
+            return For(getValue.Compile(), SetValue().Compile(), defaultValue, needsEncoding);
         }
+
+        /// <summary>
+        /// Creates a property pointer.
+        /// </summary>
+        /// <typeparam name="T">The type of value the property contains.</typeparam>
+        /// <param name="getValue">An expression pointing to the property.</param>
+        /// <param name="needsEncoding">Indicates that this property needs to be encoded (e.g. as base64) before it can be stored in a file.</param>
+        public static PropertyPointer<T?> For<T>(Expression<Func<T?>> getValue, bool needsEncoding = false)
+            where T : class
+            => For(getValue, null, needsEncoding);
 #endif
 
         /// <summary>
