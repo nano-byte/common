@@ -5,10 +5,14 @@ using System;
 using System.Threading;
 using NanoByte.Common.Native;
 
-namespace NanoByte.Common.Tasks
+#if NET20
+using NanoByte.Common.Tasks;
+#endif
+
+namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides extension methods for <seealso cref="WaitHandle"/>.
+    /// Provides extension methods for <seealso cref="System.Threading.WaitHandle"/>.
     /// </summary>
     public static class WaitHandleExtensions
     {
@@ -20,7 +24,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="cancellationToken">Used to cancel waiting for the handle.</param>
         /// <exception cref="TimeoutException"><paramref name="millisecondsTimeout"/> elapsed without the handle being signalled.</exception>
         /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was signaled while waiting for the handle.</exception>
-        /// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn(Exception)"/>.</remarks>
+        /// <remarks>Automatically handles <see cref="System.Threading.AbandonedMutexException"/> with <see cref="Log.Warn(Exception)"/>.</remarks>
         public static void WaitOne(this WaitHandle handle, CancellationToken cancellationToken, int millisecondsTimeout = -1)
         {
             try

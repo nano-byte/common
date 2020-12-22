@@ -1,15 +1,13 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if !NET20
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-
-#if !NET20
 using System.Threading.Tasks;
-#endif
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common
 {
     /// <summary>
     /// Ensures that a block of code running on a background thread cleanly exits before a <see cref="CancellationTokenSource.Cancel()"/> call completes.
@@ -29,11 +27,7 @@ namespace NanoByte.Common.Tasks
     {
         private CancellationTokenRegistration _registration;
 
-#if !NET20
         private readonly TaskCompletionSource<bool> _tcs = new();
-#else
-        private readonly ManualResetEvent _event = new ManualResetEvent(initialState: false);
-#endif
 
         /// <summary>
         /// Registers a callback for the <paramref name="cancellationToken"/> that blocks calls to <see cref="CancellationTokenSource.Cancel()"/> until <see cref="Dispose"/> has been called.
@@ -41,13 +35,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="cancellationToken">Used to signal cancellation requests.</param>
         public CancellationGuard(CancellationToken cancellationToken)
         {
-            _registration = cancellationToken.Register(
-#if !NET20
-                _tcs.Task.Wait
-#else
-                () => _event.WaitOne()
-#endif
-            );
+            _registration = cancellationToken.Register(_tcs.Task.Wait);
         }
 
         /// <summary>
@@ -57,17 +45,7 @@ namespace NanoByte.Common.Tasks
         /// <param name="timeout">A timespan after which the cancellation will be considered completed even if <see cref="Dispose"/> has not been called yet.</param>
         public CancellationGuard(CancellationToken cancellationToken, TimeSpan timeout)
         {
-            _registration = cancellationToken.Register(
-#if !NET20
-                () => _tcs.Task.Wait(timeout)
-#else
-                () =>
-                {
-                    _event.WaitOne(timeout, exitContext: true);
-                    _event.Close();
-                }
-#endif
-            );
+            _registration = cancellationToken.Register(() => _tcs.Task.Wait(timeout));
         }
 
         /// <summary>
@@ -77,12 +55,9 @@ namespace NanoByte.Common.Tasks
         [SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
         public void Dispose()
         {
-#if !NET20
             _tcs.SetResult(true);
-#else
-            _event.Set();
-#endif
             _registration.Dispose();
         }
     }
 }
+#endif
