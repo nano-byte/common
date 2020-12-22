@@ -120,7 +120,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Informs the caller of the current progress, if a callback was registered.
         /// </summary>
-        private void OnProgressChanged() => _progress?.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
+        private void OnProgressChanged() => _progress?.Report(new(_state, UnitsByte, _unitsProcessed, _unitsTotal));
 
         private DateTime _lastProgress;
         private static readonly TimeSpan _progressRate = TimeSpan.FromMilliseconds(250);
@@ -135,7 +135,7 @@ namespace NanoByte.Common.Tasks
             var now = DateTime.Now;
             if ((now - _lastProgress) < _progressRate) return;
 
-            _progress.Report(new TaskSnapshot(_state, UnitsByte, _unitsProcessed, _unitsTotal));
+            _progress.Report(new(_state, UnitsByte, _unitsProcessed, _unitsTotal));
             _lastProgress = now;
         }
         #endregion

@@ -24,7 +24,7 @@ namespace NanoByte.Common.Net
         private MemoryStream? _targetStream;
 
         /// <inheritdoc/>
-        protected override Stream CreateTargetStream() => _targetStream = new MemoryStream();
+        protected override Stream CreateTargetStream() => _targetStream = new();
 
         /// <summary>
         /// Returns the downloaded data.

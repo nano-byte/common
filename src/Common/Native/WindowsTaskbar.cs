@@ -246,7 +246,7 @@ namespace NanoByte.Common.Native
             {
                 var propertyStore = GetWindowPropertyStore(hwnd);
 
-                var preventPinningProperty = new PropertyKey(new Guid("9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3"), 9);
+                var preventPinningProperty = new PropertyKey(new("9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3"), 9);
                 SetPropertyValue(propertyStore, preventPinningProperty, "1");
 
                 Marshal.ReleaseComObject(propertyStore);
@@ -273,7 +273,7 @@ namespace NanoByte.Common.Native
 
             nativeShellLink.SetShowCmd(1); // Normal window state
 
-            SetPropertyValue(nativePropertyStore, new PropertyKey(new Guid("F29F85E0-4FF9-1068-AB91-08002B27B3D9"), 2), shellLink.Title);
+            SetPropertyValue(nativePropertyStore, new PropertyKey(new("F29F85E0-4FF9-1068-AB91-08002B27B3D9"), 2), shellLink.Title);
             nativePropertyStore.Commit();
 
             return nativeShellLink;

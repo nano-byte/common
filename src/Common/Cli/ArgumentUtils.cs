@@ -42,7 +42,7 @@ namespace NanoByte.Common.Cli
                     if (string.IsNullOrEmpty(filePattern)) filePattern = defaultPattern;
                     result.AddRange(Directory.GetFiles(directory, filePattern).Select(file => new FileInfo(Path.GetFullPath(file))));
                 }
-                else if (File.Exists(entry)) result.Add(new FileInfo(Path.GetFullPath(entry)));
+                else if (File.Exists(entry)) result.Add(new(Path.GetFullPath(entry)));
                 else if (Directory.Exists(entry))
                     result.AddRange(Directory.GetFiles(entry, defaultPattern).Select(file => new FileInfo(file)));
                 else throw new FileNotFoundException(string.Format(Resources.FileNotFound, entry), entry);

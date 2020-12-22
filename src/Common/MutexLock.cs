@@ -23,7 +23,7 @@ namespace NanoByte.Common
         /// </summary>
         public MutexLock(string name)
         {
-            _mutex = new Mutex(false, name);
+            _mutex = new(false, name);
             try
             {
                 _mutex.WaitOne();

@@ -26,7 +26,7 @@ namespace NanoByte.Common.Net
         public CachedCredentialProvider(ICredentialProvider inner)
         {
             _inner = inner ?? throw new ArgumentNullException(nameof(inner));
-            _cache = new TransparentCache<Uri, NetworkCredential?>(uri => inner.GetCredential(uri, null!));
+            _cache = new(uri => inner.GetCredential(uri, null!));
         }
 
         /// <inheritdoc/>

@@ -52,7 +52,7 @@ namespace NanoByte.Common.Storage
             // Prepend random string for temp file name
             WritePath = directory + Path.DirectorySeparatorChar + "temp." + Path.GetRandomFileName() + "." + Path.GetFileName(path);
 
-            _lock = new MutexLock("atomic-file-" + path.GetHashCode());
+            _lock = new("atomic-file-" + path.GetHashCode());
         }
 
         /// <summary>

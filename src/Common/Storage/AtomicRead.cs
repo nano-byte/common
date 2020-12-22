@@ -27,7 +27,7 @@ namespace NanoByte.Common.Storage
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            _lock = new MutexLock("atomic-file-" + path.GetHashCode());
+            _lock = new("atomic-file-" + path.GetHashCode());
         }
 
         /// <inheritdoc/>

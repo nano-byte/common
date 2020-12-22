@@ -40,7 +40,7 @@ namespace NanoByte.Common
             FileStream file;
             try
             {
-                file = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+                file = new(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
             }
             catch
             {
@@ -51,7 +51,7 @@ namespace NanoByte.Common
             if (file.Length > 1024 * 1024)
             {
                 file.Dispose();
-                file = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                file = new(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             }
 
             // When writing to a new file use UTF-8 with BOM, otherwise keep existing encoding
@@ -93,7 +93,7 @@ namespace NanoByte.Common
                 lock (_lock)
                 {
                     if (value == null) return;
-                    _sessionContent = new StringBuilder(); // Reset per session (indicated by new handler)
+                    _sessionContent = new(); // Reset per session (indicated by new handler)
                     _handlers.Add(value);
                 }
             }

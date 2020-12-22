@@ -36,7 +36,7 @@ namespace NanoByte.Common.Dispatch
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
         public Bucketizer<T> Add(Predicate<T> predicate, ICollection<T> bucket)
         {
-            _rules.Add(new BucketRule<T>(
+            _rules.Add(new(
                 predicate ?? throw new ArgumentNullException(nameof(predicate)),
                 bucket ?? throw new ArgumentNullException(nameof(bucket))));
 

@@ -61,8 +61,8 @@ namespace NanoByte.Common.Net
             FileContent = fileContent;
 
             _listener = StartListening();
-            ServerUri = new Uri(_listener.Prefixes.Last());
-            FileUri = new Uri(ServerUri, resourceName);
+            ServerUri = new(_listener.Prefixes.Last());
+            FileUri = new(ServerUri, resourceName);
 
             ThreadUtils.StartBackground(ListenLoop, name: "MicroServer.Listen");
         }

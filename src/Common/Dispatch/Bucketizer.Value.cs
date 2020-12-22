@@ -40,7 +40,7 @@ namespace NanoByte.Common.Dispatch
         /// <returns>The "this" pointer for use in a "Fluent API" style.</returns>
         public Bucketizer<TElement, TValue> Add(TValue value, ICollection<TElement> bucket)
         {
-            _rules.Add(new BucketRule<TElement, TValue>(value, bucket ?? throw new ArgumentNullException(nameof(bucket))));
+            _rules.Add(new(value, bucket ?? throw new ArgumentNullException(nameof(bucket))));
 
             return this;
         }

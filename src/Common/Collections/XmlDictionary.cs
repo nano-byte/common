@@ -28,7 +28,7 @@ namespace NanoByte.Common.Collections
         {
             if (!string.IsNullOrEmpty(key) && ContainsKey(key))
                 throw new ArgumentException(Resources.KeyAlreadyPresent, nameof(key));
-            Add(new XmlDictionaryEntry(key, value));
+            Add(new(key, value));
         }
 
         /// <inheritdoc/>
@@ -86,7 +86,7 @@ namespace NanoByte.Common.Collections
             items?.Sort((x, y) => string.Compare(x.Key, y.Key, StringComparison.OrdinalIgnoreCase));
 
             // Let bound controls know they should refresh their views
-            OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            OnListChanged(new(ListChangedType.Reset, -1));
         }
 
         /// <summary>
