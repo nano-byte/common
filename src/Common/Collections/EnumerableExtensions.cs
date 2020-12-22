@@ -134,17 +134,14 @@ namespace NanoByte.Common.Collections
             #endregion
 
             comparer ??= EqualityComparer<T>.Default;
-            unchecked
+            int result = 397;
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (T item in enumeration)
             {
-                int result = 397;
-                // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (T item in enumeration)
-                {
-                    if (item != null)
-                        result ^= comparer.GetHashCode(item);
-                }
-                return result;
+                if (item != null)
+                    result ^= comparer.GetHashCode(item);
             }
+            return result;
         }
 
         /// <summary>

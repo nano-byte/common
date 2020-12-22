@@ -108,7 +108,7 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public void TestRetryPassOnLastAttmpt()
+        public void TestRetryPassOnLastAttempt()
             => ExceptionUtils.Retry<InvalidOperationException>(lastAttempt =>
             {
                 if (!lastAttempt) throw new InvalidOperationException("Test exception");
