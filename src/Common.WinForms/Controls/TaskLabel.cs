@@ -11,7 +11,7 @@ namespace NanoByte.Common.Controls
     /// <summary>
     /// A progress label that takes <see cref="TaskSnapshot"/> inputs.
     /// </summary>
-    public sealed class TaskLabel : Label, Tasks.IProgress<TaskSnapshot>
+    public sealed class TaskLabel : Label, IProgress<TaskSnapshot>
     {
         public TaskLabel()
         {

@@ -1,15 +1,12 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-
-namespace NanoByte.Common.Tasks
+#if NET20 || NET40
+namespace System
 {
     /// <summary>
-    /// Defines a provider for progress updates.
+    /// Interface for providing progress updates.
     /// </summary>
-    /// <remarks>Implementations should derive from <see cref="MarshalByRefObject"/>.</remarks>
-    /// <remarks>Unlike the built-in Progress type of .NET implementations of the NanoByte.Common variant should derive from <see cref="MarshalByRefObject"/> to support remoting.</remarks>
     /// <typeparam name="T">The type of progress update value.</typeparam>
     public interface IProgress
 #if NET20
@@ -26,3 +23,6 @@ namespace NanoByte.Common.Tasks
         void Report(T value);
     }
 }
+#else
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IProgress<>))]
+#endif
