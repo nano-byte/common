@@ -5,7 +5,7 @@ branches:
   develop:
     tag: alpha
     increment: patch
-  master: 
+  master:
     tag: beta
 
   # Stabilization branches
