@@ -13,7 +13,7 @@ namespace NanoByte.Common.Collections
     /// </summary>
     public class NamedCollectionTest
     {
-        private class TestElement : INamed<TestElement>
+        private class TestElement : INamed
         {
             public string Name { get; set; }
 

@@ -7,9 +7,10 @@ using System.Collections.Generic;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Compares <see cref="INamed{T}"/> objects based on their <see cref="INamed{T}.Name"/> in a case-insensitive way.
+    /// Compares <see cref="INamed"/> objects based on their <see cref="INamed.Name"/> in a case-insensitive way.
     /// </summary>
-    public sealed class NamedComparer<T> : IComparer<T>, IEqualityComparer<T> where T : INamed<T>
+    public sealed class NamedComparer<T> : IComparer<T>, IEqualityComparer<T>
+        where T : INamed
     {
         /// <summary>A singleton instance of the comparer.</summary>
         public static readonly NamedComparer<T> Instance = new();

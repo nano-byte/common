@@ -11,10 +11,11 @@ using NanoByte.Common.Properties;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// A keyed collection (pseudo-dictionary) of <see cref="INamed{T}"/> objects. Case-insensitive!
+    /// A keyed collection (pseudo-dictionary) of <see cref="INamed"/> objects. Case-insensitive!
     /// </summary>
     /// <remarks>Elements are automatically maintained in an alphabetically sorted order. Suitable for XML serialization.</remarks>
-    public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable<NamedCollection<T>> where T : INamed<T>
+    public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable<NamedCollection<T>>
+        where T : INamed
     {
         #region Events
         [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
@@ -33,7 +34,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Creates a new named collection pre-filled with elements.
         /// </summary>
-        /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed{T}.Name"/>s!</param>
+        /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed.Name"/>s!</param>
         public NamedCollection(IEnumerable<T> elements)
             : this()
         {
@@ -48,7 +49,7 @@ namespace NanoByte.Common.Collections
         /// Renames an element in the list. Renaming an element in the list directly (without using this method) will prevent lookups from working properly!
         /// </summary>
         /// <param name="element">The element to rename.</param>
-        /// <param name="newName">The new <see cref="INamed{T}.Name"/> for the element.</param>
+        /// <param name="newName">The new <see cref="INamed.Name"/> for the element.</param>
         /// <exception cref="KeyNotFoundException">The <paramref name="element"/> is not in the collection.</exception>
         /// <exception cref="InvalidOperationException">The <paramref name="newName"/> is already taken by another element in the collection.</exception>
         public void Rename(T element, [Localizable(false)] string newName)
@@ -69,7 +70,7 @@ namespace NanoByte.Common.Collections
         }
 
         /// <summary>
-        /// Sorts all elements alphabetically by their <see cref="INamed{T}.Name"/>.
+        /// Sorts all elements alphabetically by their <see cref="INamed.Name"/>.
         /// </summary>
         private void Sort()
         {

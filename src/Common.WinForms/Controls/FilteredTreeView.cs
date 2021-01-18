@@ -15,14 +15,14 @@ using NanoByte.Common.Properties;
 namespace NanoByte.Common.Controls
 {
     /// <summary>
-    /// Displays a list of <see cref="INamed{T}"/>s objects in a <see cref="TreeView"/> with incremental search.
+    /// Displays a list of <see cref="INamed"/>s objects in a <see cref="TreeView"/> with incremental search.
     /// An automatic hierarchy is generated based on a <see cref="Separator"/> character.
     /// </summary>
-    /// <typeparam name="T">The type of <see cref="INamed{T}"/> object to list.
+    /// <typeparam name="T">The type of <see cref="INamed"/> object to list.
     /// Special support for types implementing <see cref="IHighlightColor"/> and/or <see cref="IContextMenu"/>.</typeparam>
     [Description("Displays a list of INamed in a TreeView with incremental search."), Guid("5065F310-D0B3-4AD3-BBE5-B41D00D5F036")]
     public sealed partial class FilteredTreeView<T> : UserControl
-        where T : class, INamed<T>
+        where T : class, INamed
     {
         #region Events
         /// <summary>
@@ -75,7 +75,7 @@ namespace NanoByte.Common.Controls
         private NamedCollection<T>? _nodes;
 
         /// <summary>
-        /// The <see cref="INamed{T}"/> (and optionally <see cref="IContextMenu"/>) objects to be listed in the tree.
+        /// The <see cref="INamed"/> (and optionally <see cref="IContextMenu"/>) objects to be listed in the tree.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This control is supposed to represent a live and mutable collection")]
@@ -97,7 +97,7 @@ namespace NanoByte.Common.Controls
         private T? _selectedEntry;
 
         /// <summary>
-        /// The <see cref="INamed{T}"/> object currently selected in the <see cref="TreeView"/>; <c>null</c> for no selection.
+        /// The <see cref="INamed"/> object currently selected in the <see cref="TreeView"/>; <c>null</c> for no selection.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public T? SelectedEntry
@@ -114,7 +114,7 @@ namespace NanoByte.Common.Controls
         private readonly HashSet<T> _checkedEntries = new();
 
         /// <summary>
-        /// Returns a list of all <see cref="INamed{T}"/> objects currently marked with a check box.
+        /// Returns a list of all <see cref="INamed"/> objects currently marked with a check box.
         /// </summary>
         /// <remarks>Does NOT create a defensive copy. Take care to only add valid elements when modifying. Call <see cref="UpdateList"/> after changing.</remarks>
         /// <see cref="CheckBoxes"/>
@@ -123,7 +123,7 @@ namespace NanoByte.Common.Controls
         private char _separator = '.';
 
         /// <summary>
-        /// The character used to separate namespaces in the <see cref="INamed{T}.Name"/>s. This controls how the tree structure is generated.
+        /// The character used to separate namespaces in the <see cref="INamed.Name"/>s. This controls how the tree structure is generated.
         /// </summary>
         [DefaultValue('.'), Description("The character used to separate namespaces in the Names. This controls how the tree structure is generated.")]
         public char Separator
