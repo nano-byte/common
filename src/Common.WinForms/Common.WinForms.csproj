@@ -53,8 +53,6 @@
     <Compile Update="Controls\OutputBox.Designer.cs" DependentUpon="OutputBox.cs" />
     <Compile Update="Controls\OKCancelDialog.cs" SubType="Form" />
     <Compile Update="Controls\OKCancelDialog.Designer.cs" DependentUpon="OKCancelDialog.cs" />
-    <Compile Update="Controls\InspectionForm.cs" SubType="Form" />
-    <Compile Update="Controls\InspectionForm.Designer.cs" DependentUpon="InspectionForm.cs" />
     <Compile Update="Controls\InputBox.cs" SubType="Form" />
     <Compile Update="Controls\InputBox.Designer.cs" DependentUpon="InputBox.cs" />
     <Compile Update="Controls\ErrorReportForm.cs" SubType="Form" />
