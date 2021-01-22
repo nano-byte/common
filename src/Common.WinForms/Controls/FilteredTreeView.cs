@@ -22,7 +22,7 @@ namespace NanoByte.Common.Controls
     /// Special support for types implementing <see cref="IHighlightColor"/> and/or <see cref="IContextMenu"/>.</typeparam>
     [Description("Displays a list of INamed in a TreeView with incremental search."), Guid("5065F310-D0B3-4AD3-BBE5-B41D00D5F036")]
     public sealed partial class FilteredTreeView<T> : UserControl
-        where T : class, INamed
+        where T : notnull, INamed
     {
         #region Events
         /// <summary>
@@ -171,7 +171,7 @@ namespace NanoByte.Common.Controls
             string name = treeView.SelectedNode.Name;
 
             // Don't use the property, to prevent a loop
-            _selectedEntry = _nodes != null && _nodes.Contains(name) ? _nodes[name] : null;
+            _selectedEntry = _nodes != null && _nodes.Contains(name) ? _nodes[name] : default;
             OnSelectedEntryChanged();
         }
 
