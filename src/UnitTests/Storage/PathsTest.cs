@@ -4,16 +4,15 @@
 using System.IO;
 using System.Linq;
 using FluentAssertions;
-using NanoByte.Common.Storage;
 using Xunit;
 
-namespace NanoByte.Common.Cli
+namespace NanoByte.Common.Storage
 {
     /// <summary>
-    /// Contains test methods for <see cref="ArgumentUtils"/>.
+    /// Contains test methods for <see cref="Paths"/>.
     /// </summary>
     [Collection("WorkingDir")]
-    public class ArgumentUtilsTest
+    public class PathsTest
     {
         [Fact]
         public void TestGetFilesAbsolute()
@@ -29,7 +28,7 @@ namespace NanoByte.Common.Cli
             File.WriteAllText(Path.Combine(subdirPath, "1.txt"), @"1");
             File.WriteAllText(Path.Combine(subdirPath, "2.inf"), @"a");
 
-            ArgumentUtils.GetFiles(new[]
+            Paths.ResolveFiles(new[]
             {
                 Path.Combine(tempDir, "*.txt"), // Wildcard
                 Path.Combine(tempDir, "d.nfo"), // Specific file
@@ -55,7 +54,7 @@ namespace NanoByte.Common.Cli
             File.WriteAllText(Path.Combine(subdirPath, "1.txt"), @"1");
             File.WriteAllText(Path.Combine(subdirPath, "2.inf"), @"a");
 
-            ArgumentUtils.GetFiles(new[]
+            Paths.ResolveFiles(new[]
             {
                 "*.txt", // Wildcard
                 "d.nfo", // Specific file

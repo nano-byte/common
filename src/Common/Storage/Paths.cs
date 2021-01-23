@@ -8,31 +8,31 @@ using System.IO;
 using System.Linq;
 using NanoByte.Common.Properties;
 
-namespace NanoByte.Common.Cli
+namespace NanoByte.Common.Storage
 {
     /// <summary>
-    /// Provides helper methods for for parsing command-line arguments.
+    /// Helper methods for resolving file system paths.
     /// </summary>
-    public static class ArgumentUtils
+    public static class Paths
     {
         /// <summary>
-        /// Parses command-line arguments as file paths including wildcard support.
+        /// Resolves paths to absolute file paths with wildcard support.
         /// </summary>
-        /// <param name="args">The arguments to parse.</param>
+        /// <param name="paths">The paths to resolve.</param>
         /// <param name="defaultPattern">The default pattern to use for finding files when a directory is specified.</param>
         /// <returns>Handles to all matching files that were found</returns>
-        /// <exception cref="FileNotFoundException">A file that was explicitly specified in <paramref name="args"/> (no wildcards) could not be found.</exception>
-        /// <remarks><paramref name="args"/> are first interpreted as files, then as directories. Directories are searched using the <paramref name="defaultPattern"/>. * and ? characters are considered as wildcards.</remarks>
-        public static IList<FileInfo> GetFiles(IEnumerable<string> args, [Localizable(false)] string defaultPattern = "*")
+        /// <exception cref="FileNotFoundException">A file that was explicitly specified in <paramref name="paths"/> (no wildcards) could not be found.</exception>
+        /// <remarks><paramref name="paths"/> are first interpreted as files, then as directories. Directories are searched using the <paramref name="defaultPattern"/>. * and ? characters are considered as wildcards.</remarks>
+        public static IList<FileInfo> ResolveFiles(IEnumerable<string> paths, [Localizable(false)] string defaultPattern = "*")
         {
             #region Sanity checks
-            if (args == null) throw new ArgumentNullException(nameof(args));
+            if (paths == null) throw new ArgumentNullException(nameof(paths));
             if (string.IsNullOrEmpty(defaultPattern)) throw new ArgumentNullException(nameof(defaultPattern));
             #endregion
 
             var result = new List<FileInfo>();
 
-            foreach (string entry in args)
+            foreach (string entry in paths)
             {
                 if (entry.Contains("*") || entry.Contains("?"))
                 {
