@@ -30,10 +30,8 @@ namespace NanoByte.Common.Collections
         public ComparableTuple(T key, T value)
         {
             #region Sanity checks
-            // ReSharper disable CompareNonConstrainedGenericWithNull
             if (key == null) throw new ArgumentNullException(nameof(key));
             if (value == null) throw new ArgumentNullException(nameof(value));
-            // ReSharper restore CompareNonConstrainedGenericWithNull
             #endregion
 
             Key = key;

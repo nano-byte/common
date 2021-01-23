@@ -12,7 +12,6 @@ namespace NanoByte.Common.Storage
     [Collection("WorkingDir")]
     public class XmlStorageTest
     {
-        // ReSharper disable MemberCanBePrivate.Global
         /// <summary>
         /// A data-structure used to test serialization.
         /// </summary>
@@ -21,7 +20,6 @@ namespace NanoByte.Common.Storage
         {
             public string? Data { get; set; }
         }
-        // ReSharper restore MemberCanBePrivate.Global
 
         /// <summary>
         /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly.

@@ -344,7 +344,6 @@ namespace NanoByte.Common
             try
             {
                 var result = key.CreateSubKey(subkeyName);
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (result == null) throw new IOException($"Failed to create subkey '{subkeyName}' in '{key}'.");
                 return result;
             }
@@ -370,7 +369,6 @@ namespace NanoByte.Common
             #region Sanity checks
             if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
             #endregion
-
 
 #if !NET20 && !NET40
             if (Environment.Is64BitProcess)

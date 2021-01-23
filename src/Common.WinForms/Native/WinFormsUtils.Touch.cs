@@ -13,7 +13,6 @@ using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Native
 {
-    // ReSharper disable once InconsistentNaming
     partial class WinFormsUtils
     {
         // Note: The following code is based on Windows API Code Pack for Microsoft .NET Framework 1.0.1

@@ -52,7 +52,6 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void ErrorHandling()
         {
-            // ReSharper disable once ObjectCreationAsStatement
             Assert.Throws<ArgumentException>(() => new CopyDirectory("a", "a"));
 
             string temp = FileUtils.GetTempDirectory("unit-tests");

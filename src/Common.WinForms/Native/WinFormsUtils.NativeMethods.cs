@@ -49,11 +49,9 @@ namespace NanoByte.Common.Native
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool PeekMessage(out WinMessage msg, IntPtr hWnd, uint messageFilterMin, uint messageFilterMax, uint flags);
 
-            // ReSharper disable once MemberHidesStaticFromOuterClass
             [DllImport("user32")]
             public static extern IntPtr SetCapture(IntPtr handle);
 
-            // ReSharper disable once MemberHidesStaticFromOuterClass
             [DllImport("user32")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool ReleaseCapture();

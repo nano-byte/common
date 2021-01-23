@@ -188,8 +188,6 @@ namespace NanoByte.Common.Native
             void AbortList();
         }
 
-        // ReSharper disable UnusedMember.Local
-
         private enum ThumbnailMask
         {
             Bitmap = 0x1,
@@ -224,8 +222,6 @@ namespace NanoByte.Common.Native
             Frequent = 1,
             Recent
         }
-
-        // ReSharper restore UnusedMember.Local
 
         [ComImport, Guid("77F10CF0-3DB5-4966-B520-B7C54FD35ED6"), ClassInterface(ClassInterfaceType.None)]
         private class CDestinationList

@@ -19,8 +19,7 @@ namespace NanoByte.Common.Collections
 
         /// <inheritdoc/>
         public int Compare(CultureInfo? x, CultureInfo? y)
-            // ReSharper disable once PossibleUnintendedReferenceComparison
-            => x == y
+            => ReferenceEquals(x, y)
                 ? 0
                 : StringComparer.Ordinal.Compare(x?.ToString(), y?.ToString());
     }
