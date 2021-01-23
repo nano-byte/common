@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
@@ -89,6 +90,17 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             ThreadUtils.RunSta(() => OutputGridBox.Show(null, title, data));
+        }
+
+        /// <inheritdoc/>
+        public override void Output<T>(string title, NamedCollection<T> data)
+        {
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            #endregion
+
+            ThreadUtils.RunSta(() => OutputTreeBox.Show(null, title, data));
         }
 
         public override void Error(Exception exception)

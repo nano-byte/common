@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
@@ -82,6 +83,15 @@ namespace NanoByte.Common.Tasks
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output<T>([Localizable(true)] string title, IEnumerable<T> data);
+
+        /// <summary>
+        /// Displays tree-like data to the user.
+        /// </summary>
+        /// <param name="title">A title for the data.INamed</param>
+        /// <param name="data">The data to display.</param>
+        /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
+        void Output<T>([Localizable(true)] string title, NamedCollection<T> data)
+            where T : INamed;
 
         /// <summary>
         /// Displays an error message to the user.

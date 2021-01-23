@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
@@ -103,6 +104,11 @@ namespace NanoByte.Common.Tasks
             string message = StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? ""));
             Output(title, message);
         }
+
+        /// <inheritdoc />
+        public virtual void Output<T>(string title, NamedCollection<T> data)
+            where T : INamed
+            => Output(title, data.AsEnumerable());
 
         /// <inheritdoc/>
         public abstract void Error(Exception exception);
