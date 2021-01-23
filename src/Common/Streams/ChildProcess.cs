@@ -5,14 +5,13 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Streams;
 
-namespace NanoByte.Common.Cli
+namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Provides an interface to an external command-line application controlled via arguments and stdin and monitored via stdout and stderr.
+    /// Runs an external processes with redirected stdin, stdout and stderr steams.
     /// </summary>
-    public abstract class CliAppControl
+    public abstract class ChildProcess
     {
         /// <summary>
         /// The name of the application's binary (without a file extension).
@@ -20,26 +19,7 @@ namespace NanoByte.Common.Cli
         protected abstract string AppBinary { get; }
 
         /// <summary>
-        /// Runs the external application interactively instead of processing its output.
-        /// </summary>
-        /// <param name="arguments">Command-line arguments to launch the application with.</param>
-        /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
-        /// <exception cref="IOException">The external application could not be launched.</exception>
-        public Process StartInteractive(params string[] arguments)
-        {
-            #region Sanity checks
-            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
-            #endregion
-
-            return new ProcessStartInfo
-            {
-                FileName = AppBinary,
-                Arguments = arguments.JoinEscapeArguments()
-            }.Start();
-        }
-
-        /// <summary>
-        /// Runs the external application, processes its output and waits until it has terminated.
+        /// Runs the external process, processes its output and waits until it has terminated.
         /// </summary>
         /// <param name="arguments">Command-line arguments to launch the application with.</param>
         /// <returns>The application's complete stdout output.</returns>

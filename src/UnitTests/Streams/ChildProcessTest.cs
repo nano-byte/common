@@ -5,12 +5,12 @@ using FluentAssertions;
 using NanoByte.Common.Native;
 using Xunit;
 
-namespace NanoByte.Common.Cli
+namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Contains test methods for <see cref="CliAppControl"/>.
+    /// Contains test methods for <see cref="ChildProcess"/>.
     /// </summary>
-    public class CliAppControlTest
+    public class ChildProcessTest
     {
         [Fact]
         public void TestStringOutput()
@@ -20,7 +20,7 @@ namespace NanoByte.Common.Cli
             output.Length.Should().BeGreaterThan(1);
         }
 
-        private class DummyControl : CliAppControl
+        private class DummyControl : ChildProcess
         {
             protected override string AppBinary => WindowsUtils.IsWindows ? "help" : "ls";
         }

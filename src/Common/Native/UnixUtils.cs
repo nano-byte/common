@@ -8,7 +8,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Mono.Unix;
 using Mono.Unix.Native;
-using NanoByte.Common.Cli;
+using NanoByte.Common.Streams;
 
 #if !NET20 && !NET40
 using System.Runtime.InteropServices;
@@ -287,7 +287,7 @@ namespace NanoByte.Common.Native
         #endregion
 
         #region Mount point
-        private class Stat : CliAppControl
+        private class Stat : ChildProcess
         {
             #region Singleton
             public static readonly Stat Instance = new();
