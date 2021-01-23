@@ -120,12 +120,12 @@ namespace NanoByte.Common.Controls
         /// <see cref="CheckBoxes"/>
         public ICollection<T> CheckedEntries => _checkedEntries;
 
-        private char _separator = '.';
+        private char _separator = Named.TreeSeparator;
 
         /// <summary>
         /// The character used to separate namespaces in the <see cref="INamed.Name"/>s. This controls how the tree structure is generated.
         /// </summary>
-        [DefaultValue('.'), Description("The character used to separate namespaces in the Names. This controls how the tree structure is generated.")]
+        [DefaultValue(Named.TreeSeparator), Description("The character used to separate namespaces in the Names. This controls how the tree structure is generated.")]
         public char Separator
         {
             get => _separator;

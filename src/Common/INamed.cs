@@ -6,15 +6,26 @@ using System.ComponentModel;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// An object that has a unique human-readable name that can be used for identification in lists and sorting and that can be modified.
+    /// An entity that has a unique name that can be used for identification in lists and trees.
     /// </summary>
     /// <see cref="Collections.NamedCollection{T}"/>
     public interface INamed
     {
         /// <summary>
-        /// A unique human-readable name for the object.
+        /// A unique name for the object.
         /// </summary>
         [Description("A unique name for the object.")]
         string Name { get; set; }
+    }
+
+    /// <summary>
+    /// Static companion for <see cref="INamed"/>.
+    /// </summary>
+    public static class Named
+    {
+        /// <summary>
+        /// The default separator to use in <see cref="INamed.Name"/> for tree hierarchies.
+        /// </summary>
+        public const char TreeSeparator = '|';
     }
 }
