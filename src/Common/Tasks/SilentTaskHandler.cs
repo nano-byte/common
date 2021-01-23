@@ -40,17 +40,12 @@ namespace NanoByte.Common.Tasks
         public Verbosity Verbosity { get => Verbosity.Batch; set {} }
 
         /// <summary>
-        /// Always returns <c>false</c>.
-        /// </summary>
-        public bool Ask(string question) => Ask(question, defaultAnswer: false);
-
-        /// <summary>
         /// Always returns <paramref name="defaultAnswer"/>.
         /// </summary>
-        public bool Ask(string question, bool defaultAnswer, string? alternateMessage = null)
+        public bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
         {
             Log.Info($"Question: {question}\nAutomatic answer: {defaultAnswer}");
-            return defaultAnswer;
+            return defaultAnswer ?? false;
         }
 
         /// <inheritdoc/>

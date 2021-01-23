@@ -94,9 +94,19 @@ namespace NanoByte.Common.Tasks
             }
         }
 
-        /// <inheritdoc/>
-        protected override bool Ask(string question, MsgSeverity severity)
+        /// <inheritdoc />
+        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
         {
+            #region Sanity checks
+            if (question == null) throw new ArgumentNullException(nameof(question));
+            #endregion
+
+            if (Verbosity <= Verbosity.Batch && defaultAnswer.HasValue)
+            {
+                if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
+                return defaultAnswer.Value;
+            }
+
             Log.Debug($"Question: {question}");
             Console.Error.WriteLine(question);
 

@@ -52,8 +52,21 @@ namespace NanoByte.Common.Tasks
         public override ICredentialProvider? CredentialProvider { get; }
 
         /// <inheritdoc/>
-        protected override bool Ask(string question, MsgSeverity severity)
+        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
         {
+            #region Sanity checks
+            if (question == null) throw new ArgumentNullException(nameof(question));
+            #endregion
+
+            if (Verbosity <= Verbosity.Batch && defaultAnswer.HasValue)
+            {
+                if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
+                return defaultAnswer.Value;
+            }
+
+            // Treat messages that default to "Yes" as less severe than those that default to "No"
+            var severity = defaultAnswer == true ? MsgSeverity.Info : MsgSeverity.Warn;
+
             Log.Debug("Question: " + question);
             switch (ThreadUtils.RunSta(() => Msg.YesNoCancel(null, question, severity)))
             {

@@ -54,19 +54,11 @@ namespace NanoByte.Common.Tasks
         /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
-        /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
-        bool Ask([Localizable(true)] string question);
-
-        /// <summary>
-        /// Asks the user a Yes/No/Cancel question or uses a default answer in <see cref="Tasks.Verbosity.Batch"/> mode.
-        /// </summary>
-        /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="defaultAnswer">The answer to automatically use when <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/> or lower.</param>
+        /// <param name="defaultAnswer">An answer to choose automatically when <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/> or lower. <c>null</c> if the user must make the choice themselves.</param>
         /// <param name="alternateMessage">A message to output with <see cref="Log.Warn(string)"/> when the <paramref name="defaultAnswer"/> is used instead of asking the user.</param>
         /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
-        bool Ask([Localizable(true)] string question, bool defaultAnswer, [Localizable(true)] string? alternateMessage = null);
+        bool Ask([Localizable(true)] string question, bool? defaultAnswer = null, [Localizable(true)] string? alternateMessage = null);
 
         /// <summary>
         /// Displays multi-line text to the user.

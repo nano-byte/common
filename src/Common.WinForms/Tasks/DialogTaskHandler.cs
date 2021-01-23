@@ -39,12 +39,19 @@ namespace NanoByte.Common.Tasks
                 dialog.ShowDialog(_owner);
                 ex = dialog.Exception;
             });
-            if (ex != null) ex.Rethrow();
+            ex?.Rethrow();
         }
 
         /// <inheritdoc/>
-        protected override bool Ask(string question, MsgSeverity severity)
+        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
         {
+            #region Sanity checks
+            if (question == null) throw new ArgumentNullException(nameof(question));
+            #endregion
+
+            // Treat messages that default to "Yes" as less severe than those that default to "No"
+            var severity = defaultAnswer == true ? MsgSeverity.Info : MsgSeverity.Warn;
+
             Log.Debug("Question: " + question);
             switch (_owner.Invoke(() => Msg.YesNoCancel(_owner, question, severity)))
             {

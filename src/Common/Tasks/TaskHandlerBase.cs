@@ -61,34 +61,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public bool Ask(string question)
-            => Ask(question ?? throw new ArgumentNullException(nameof(question)), MsgSeverity.Warn);
-
-        /// <inheritdoc/>
-        public bool Ask(string question, bool defaultAnswer, string? alternateMessage = null)
-        {
-            #region Sanity checks
-            if (question == null) throw new ArgumentNullException(nameof(question));
-            #endregion
-
-            if (Verbosity <= Verbosity.Batch)
-            {
-                if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
-                return defaultAnswer;
-            }
-            return Ask(question,
-                // Treat messages that default to "Yes" as less severe than those that default to "No"
-                defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn);
-        }
-
-        /// <summary>
-        /// Asks the user a Yes/No/Cancel question.
-        /// </summary>
-        /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="severity">The severity/possible impact of the question.</param>
-        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
-        /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>
-        protected abstract bool Ask(string question, MsgSeverity severity);
+        public abstract bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null);
 
         /// <inheritdoc/>
         public abstract void Output(string title, string message);
