@@ -63,16 +63,6 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public void OutputLow(string title, string message) => Log.Debug($"{title}\n{message}");
-
-        /// <inheritdoc/>
-        public void OutputLow<T>(string title, IEnumerable<T> data)
-        {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x?.ToString() ?? ""));
-            OutputLow(title ?? throw new ArgumentNullException(nameof(title)), message);
-        }
-
-        /// <inheritdoc/>
         public void Error(Exception exception) => Log.Error(exception);
     }
 }

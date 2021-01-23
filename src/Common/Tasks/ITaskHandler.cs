@@ -70,7 +70,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Displays multi-line text to the user.
         /// </summary>
-        /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
+        /// <param name="title">A title for the message.</param>
         /// <param name="message">The string to display. Trailing linebreaks are appropriately handled or ignored.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output([Localizable(true)] string title, [Localizable(true)] string message);
@@ -78,26 +78,10 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Displays tabular data to the user.
         /// </summary>
-        /// <param name="title">A title for the data. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
+        /// <param name="title">A title for the data.INamed</param>
         /// <param name="data">The data to display.</param>
         /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
         void Output<T>([Localizable(true)] string title, IEnumerable<T> data);
-
-        /// <summary>
-        /// Displays multi-line text to the user unless <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/>.
-        /// </summary>
-        /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
-        /// <param name="message">The string to display.</param>
-        /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-        void OutputLow([Localizable(true)] string title, [Localizable(true)] string message);
-
-        /// <summary>
-        /// Displays tabular data to the user unless <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/>.
-        /// </summary>
-        /// <param name="title">A title for the message. Will only be displayed in GUIs, not on the console. Must not contain critical information!</param>
-        /// <param name="data">The data to display.</param>
-        /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-        void OutputLow<T>([Localizable(true)] string title, IEnumerable<T> data);
 
         /// <summary>
         /// Displays an error message to the user.

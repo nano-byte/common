@@ -105,20 +105,6 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public virtual void OutputLow(string title, string message)
-        {
-            if (Verbosity > Verbosity.Batch) Output(title, message);
-            else Log.Info($"{title}:\n{message}");
-        }
-
-        /// <inheritdoc/>
-        public virtual void OutputLow<T>(string title, IEnumerable<T> data)
-        {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x?.ToString() ?? ""));
-            OutputLow(title ?? throw new ArgumentNullException(nameof(title)), message);
-        }
-
-        /// <inheritdoc/>
         public abstract void Error(Exception exception);
     }
 }
