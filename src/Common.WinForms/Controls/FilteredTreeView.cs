@@ -237,7 +237,7 @@ namespace NanoByte.Common.Controls
                 partialName += nameSplit[i];
                 TreeNode node = subTree[partialName] ?? subTree.Add(partialName, nameSplit[i]);
                 subTree = node.Nodes;
-                partialName += ".";
+                partialName += _separator;
             }
 
             // Create node storing full name, using last part as visible text
