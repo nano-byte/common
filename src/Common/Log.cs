@@ -22,7 +22,7 @@ namespace NanoByte.Common
     public delegate void LogEntryEventHandler(LogSeverity severity, string message);
 
     /// <summary>
-    /// Sends log messages to custom handlers or the <see cref="Console"/>.
+    /// Sends log messages to custom handlers or the console.
     /// Additionally writes to <see cref="System.Diagnostics.Debug"/>, an in-memory buffer and a plain text file.
     /// </summary>
     public static class Log
@@ -76,7 +76,37 @@ namespace NanoByte.Common
             // Default handler
             (severity, message) =>
             {
-                if (severity >= LogSeverity.Warn) PrintToConsole(severity, message);
+                void WriteLine(ConsoleColor color)
+                {
+                    try
+                    {
+                        Console.ForegroundColor = color;
+                    }
+                    catch (InvalidOperationException)
+                    {}
+                    catch (IOException)
+                    {}
+
+                    Console.Error.WriteLine(message);
+                    try
+                    {
+                        Console.ResetColor();
+                    }
+                    catch (InvalidOperationException)
+                    {}
+                    catch (IOException)
+                    {}
+                }
+
+                switch (severity)
+                {
+                    case LogSeverity.Warn:
+                        WriteLine(ConsoleColor.DarkYellow);
+                        break;
+                    case LogSeverity.Error:
+                        WriteLine(ConsoleColor.Red);
+                        break;
+                }
             }
         };
 
@@ -182,44 +212,6 @@ namespace NanoByte.Common
 
             Error(ex.GetMessageWithInner());
             Debug(ex);
-        }
-
-        /// <summary>
-        /// Prints a log entry to the <see cref="Console"/>.
-        /// </summary>
-        /// <param name="severity">The type/severity of the entry.</param>
-        /// <param name="message">The message text of the entry.</param>
-        public static void PrintToConsole(LogSeverity severity, string message)
-        {
-            try
-            {
-                Console.ForegroundColor = severity switch
-                {
-                    LogSeverity.Debug => ConsoleColor.Blue,
-                    LogSeverity.Info => ConsoleColor.Green,
-                    LogSeverity.Warn => ConsoleColor.DarkYellow,
-                    LogSeverity.Error => ConsoleColor.Red,
-                    _ => Console.ForegroundColor
-                };
-            }
-            #region Error handling
-            catch (InvalidOperationException)
-            {}
-            catch (IOException)
-            {}
-            #endregion
-
-            Console.Error.WriteLine(message ?? throw new ArgumentNullException(nameof(message)));
-            try
-            {
-                Console.ResetColor();
-            }
-            #region Error handling
-            catch (InvalidOperationException)
-            {}
-            catch (IOException)
-            {}
-            #endregion
         }
 
         #region Helpers

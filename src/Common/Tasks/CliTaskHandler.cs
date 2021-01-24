@@ -66,11 +66,43 @@ namespace NanoByte.Common.Tasks
         /// <param name="message">The message text of the entry.</param>
         protected override void LogHandler(LogSeverity severity, string message)
         {
-            if (severity == LogSeverity.Debug && Verbosity >= Verbosity.Debug
-             || severity == LogSeverity.Info && Verbosity >= Verbosity.Verbose
-             || severity == LogSeverity.Warn
-             || severity == LogSeverity.Error)
-                Log.PrintToConsole(severity, message);
+            void WriteLine(ConsoleColor color)
+            {
+                try
+                {
+                    Console.ForegroundColor = color;
+                }
+                catch (InvalidOperationException)
+                {}
+                catch (IOException)
+                {}
+
+                Console.Error.WriteLine(message);
+                try
+                {
+                    Console.ResetColor();
+                }
+                catch (InvalidOperationException)
+                {}
+                catch (IOException)
+                {}
+            }
+
+            switch (severity)
+            {
+                case LogSeverity.Debug when Verbosity >= Verbosity.Debug:
+                    WriteLine(ConsoleColor.Blue);
+                    break;
+                case LogSeverity.Info when Verbosity >= Verbosity.Verbose:
+                    WriteLine(ConsoleColor.Green);
+                    break;
+                case LogSeverity.Warn:
+                    WriteLine(ConsoleColor.DarkYellow);
+                    break;
+                case LogSeverity.Error:
+                    WriteLine(ConsoleColor.Red);
+                    break;
+            }
         }
 
         /// <inheritdoc/>
