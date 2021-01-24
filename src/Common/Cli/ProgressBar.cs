@@ -14,7 +14,7 @@ namespace NanoByte.Common.Cli
     /// A progress bar rendered on the <see cref="Console"/>.
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is used as a convenience wrapper around Done()")]
-    public class ProgressBar : MarshalByRefObject, IDisposable
+    internal class ProgressBar : MarshalByRefObject, IDisposable
     {
         private int _maximum = 20;
 

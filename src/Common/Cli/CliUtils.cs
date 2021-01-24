@@ -11,7 +11,7 @@ namespace NanoByte.Common.Cli
     /// <summary>
     /// Provides helper methods for communication with the user via the <see cref="Console"/>.
     /// </summary>
-    public static partial class CliUtils
+    internal static partial class CliUtils
     {
         /// <summary>
         /// Asks the user to input a string.
