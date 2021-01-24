@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using NanoByte.Common.Collections;
 
@@ -17,15 +17,15 @@ namespace NanoByte.Common.Controls
     public sealed class OutputTreeBox<T> : Form
         where T : INamed
     {
-        internal OutputTreeBox(IEnumerable<T> data, char separator)
+        internal OutputTreeBox(NamedCollection<T> data, char separator)
         {
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(280, 260);
+            ClientSize = new Size(600, 450);
             Controls.Add(new FilteredTreeView<T>
             {
                 Dock = DockStyle.Fill,
                 CheckBoxes = false,
-                Nodes = new NamedCollection<T>(data),
+                Nodes = data,
                 Separator = separator
             });
             ShowIcon = false;
@@ -46,7 +46,7 @@ namespace NanoByte.Common.Controls
         /// <param name="title">A title for the data.</param>
         /// <param name="data">The data to display.</param>
         /// <param name="separator">The character used to separate namespaces in the <see cref="INamed.Name"/>s. This controls how the tree structure is generated.</param>
-        public static void Show<T>(IWin32Window? owner, [Localizable(true)] string title, IEnumerable<T> data, char separator = Named.TreeSeparator)
+        public static void Show<T>(IWin32Window? owner, [Localizable(true)] string title, NamedCollection<T> data, char separator = Named.TreeSeparator)
             where T : INamed
         {
             using var dialog = new OutputTreeBox<T>(data ?? throw new ArgumentNullException(nameof(data)), separator)
