@@ -245,15 +245,15 @@ namespace NanoByte.Common.Controls
             if (_checkedEntries.Contains(entry)) finalNode.Checked = true;
 
             // Apply the highlighting color if one is set
-            if (entry is IHighlightColor highlightColorProvider && highlightColorProvider.HighlightColor != Color.Empty)
+            var color = (entry as IHighlightColor)?.HighlightColor ?? default;
+            if (color != default)
             {
-                finalNode.ForeColor = highlightColorProvider.HighlightColor;
+                finalNode.ForeColor = color;
                 finalNode.NodeFont = new Font(treeView.Font, FontStyle.Bold);
             }
 
             // Attach the context menu if one is set
-            var contextMenuProvider = entry as IContextMenu;
-            var contextMenu = contextMenuProvider?.GetContextMenu();
+            var contextMenu = (entry as IContextMenu)?.GetContextMenu();
             if (contextMenu != null) finalNode.ContextMenuStrip = contextMenu;
 
             return finalNode;
