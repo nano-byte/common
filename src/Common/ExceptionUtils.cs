@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 #if !NET20 && !NET40
@@ -110,7 +110,7 @@ namespace NanoByte.Common
         /// After rollback is complete the exception is passed on.
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place")]
-        public static void ApplyWithRollback<T>(this IEnumerable<T> elements, Action<T> apply, Action<T> rollback)
+        public static void ApplyWithRollback<T>([InstantHandle] this IEnumerable<T> elements, [InstantHandle] Action<T> apply, [InstantHandle] Action<T> rollback)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));
@@ -158,7 +158,7 @@ namespace NanoByte.Common
         /// <param name="action">The action to apply to an element.</param>
         /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
-        public static void TryAny<T>(this IEnumerable<T> elements, Action<T> action)
+        public static void TryAny<T>([InstantHandle] this IEnumerable<T> elements, [InstantHandle] Action<T> action)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));

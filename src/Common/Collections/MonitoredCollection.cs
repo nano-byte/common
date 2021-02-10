@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Collections
@@ -158,7 +159,7 @@ namespace NanoByte.Common.Collections
         ///   <para>All events are raised en bloc after the items have been added.</para>
         ///   <para>After calling this method this collection will contain a superset of the items in <paramref name="collection"/>, but not necessarily in the same order.</para>
         /// </remarks>
-        public void AddMany(IEnumerable<T> collection)
+        public void AddMany([InstantHandle] IEnumerable<T> collection)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -191,7 +192,7 @@ namespace NanoByte.Common.Collections
         ///   <para>All events are raised en bloc after the items have been added.</para>
         ///   <para>After calling this method this collection will contain the same items as <paramref name="enumeration"/>, but not necessarily in the same order.</para>
         /// </remarks>
-        public void SetMany(IEnumerable<T> enumeration)
+        public void SetMany([InstantHandle] IEnumerable<T> enumeration)
         {
             #region Sanity checks
             if (enumeration == null) throw new ArgumentNullException(nameof(enumeration));

@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Values;
 using NanoByte.Common.Values.Design;
 
@@ -34,7 +35,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new language collection pre-filled with a set of languages.
         /// </summary>
         /// <param name="collection"></param>
-        public LanguageSet(IEnumerable<CultureInfo> collection)
+        public LanguageSet([InstantHandle] IEnumerable<CultureInfo> collection)
             : base(collection, CultureComparer.Instance)
         {}
 
@@ -85,7 +86,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="targets">The language set to match against.</param>
         /// <param name="ignoreCountry"><c>true</c> to compare only the two-letter language name; <c>false</c> to also compare the country code.</param>
-        public bool ContainsAny(IEnumerable<CultureInfo> targets, bool ignoreCountry = false)
+        public bool ContainsAny([InstantHandle] IEnumerable<CultureInfo> targets, bool ignoreCountry = false)
         {
             #region Sanity checks
             if (targets == null) throw new ArgumentNullException(nameof(targets));

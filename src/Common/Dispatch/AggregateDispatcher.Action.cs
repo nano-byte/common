@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -56,7 +57,7 @@ namespace NanoByte.Common.Dispatch
         /// Dispatches for each element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
         /// </summary>
         /// <param name="elements">The elements to be dispatched.</param>
-        public void Dispatch(IEnumerable<TBase> elements)
+        public void Dispatch([InstantHandle] IEnumerable<TBase> elements)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));

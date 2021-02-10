@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -16,7 +17,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="stack">The stack to pop elements from.</param>
         /// <param name="action">An action to be invoked for each element on the <paramref name="stack"/>.</param>
-        public static void PopEach<T>(this Stack<T> stack, Action<T> action)
+        public static void PopEach<T>(this Stack<T> stack, [InstantHandle] Action<T> action)
         {
             #region Sanity checks
             if (stack == null) throw new ArgumentNullException(nameof(stack));

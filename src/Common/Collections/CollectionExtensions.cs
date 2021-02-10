@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -35,7 +36,7 @@ namespace NanoByte.Common.Collections
         /// Adds multiple elements to the collection.
         /// </summary>
         /// <seealso cref="List{T}.AddRange"/>
-        public static void AddRange<TCollection, TElements>(this ICollection<TCollection> collection, IEnumerable<TElements> elements)
+        public static void AddRange<TCollection, TElements>(this ICollection<TCollection> collection, [InstantHandle] IEnumerable<TElements> elements)
             where TElements : TCollection
         {
             #region Sanity checks
@@ -51,7 +52,7 @@ namespace NanoByte.Common.Collections
         /// Removes multiple elements from the collection.
         /// </summary>
         /// <seealso cref="List{T}.RemoveRange"/>
-        public static void RemoveRange<TCollection, TElements>(this ICollection<TCollection> collection, IEnumerable<TElements> elements)
+        public static void RemoveRange<TCollection, TElements>(this ICollection<TCollection> collection, [InstantHandle] IEnumerable<TElements> elements)
             where TElements : TCollection
         {
             #region Sanity checks
@@ -68,7 +69,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <returns><c>true</c> if any elements where removed.</returns>
         /// <seealso cref="List{T}.RemoveAll"/>
-        public static bool RemoveAll<T>(this ICollection<T> collection, Func<T, bool> condition)
+        public static bool RemoveAll<T>(this ICollection<T> collection, [InstantHandle] Func<T, bool> condition)
         {
             #region Sanity checks
             if (collection == null) throw new ArgumentNullException(nameof(collection));

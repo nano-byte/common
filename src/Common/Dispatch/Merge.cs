@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Dispatch
 {
@@ -22,7 +23,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">Called for every element that should be added to <paramref name="mine"/>.</param>
         /// <param name="removed">Called for every element that should be removed from <paramref name="mine"/>.</param>
         /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
-        public static void TwoWay<T>(IEnumerable<T> theirs, IEnumerable<T> mine, Action<T> added, Action<T> removed)
+        public static void TwoWay<T>([InstantHandle] IEnumerable<T> theirs, [InstantHandle] IEnumerable<T> mine, [InstantHandle] Action<T> added, [InstantHandle] Action<T> removed)
         {
             #region Sanity checks
             if (theirs == null) throw new ArgumentNullException(nameof(theirs));
@@ -48,7 +49,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">All elements that should be added to <paramref name="mine"/> are added to this list.</param>
         /// <param name="removed">All elements that should be removed from <paramref name="mine"/> are added to this list.</param>
         /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
-        public static void TwoWay<T, TAdded, TRemoved>(IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
+        public static void TwoWay<T, TAdded, TRemoved>([InstantHandle] IEnumerable<T> theirs, [InstantHandle] IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, TAdded, TRemoved
             => TwoWay(theirs, mine, added.Add, removed.Add);
 
@@ -61,7 +62,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">Called for every element that should be added to <paramref name="mine"/>.</param>
         /// <param name="removed">Called for every element that should be removed from <paramref name="mine"/>.</param>
         /// <remarks>Modified elements are handled by calling <paramref name="removed"/> for the old state and <paramref name="added"/> for the new state.</remarks>
-        public static void ThreeWay<T>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, Action<T> added, Action<T> removed)
+        public static void ThreeWay<T>([InstantHandle] IEnumerable<T> reference, [InstantHandle] IEnumerable<T> theirs, [InstantHandle] IEnumerable<T> mine, [InstantHandle] Action<T> added, [InstantHandle] Action<T> removed)
             where T : class, IMergeable<T>
         {
             #region Sanity checks
@@ -104,7 +105,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="added">All elements that should be added to <paramref name="mine"/> are added to this list.</param>
         /// <param name="removed">All elements that should be removed from <paramref name="mine"/> are added to this list.</param>
         /// <remarks>Modified elements are handled by adding to <paramref name="removed"/> for the old state and to <paramref name="added"/> for the new state.</remarks>
-        public static void ThreeWay<T, TAdded, TRemoved>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
+        public static void ThreeWay<T, TAdded, TRemoved>([InstantHandle] IEnumerable<T> reference, [InstantHandle] IEnumerable<T> theirs, [InstantHandle] IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, IMergeable<T>, TAdded, TRemoved
             => ThreeWay(reference, theirs, mine, added.Add, removed.Add);
 

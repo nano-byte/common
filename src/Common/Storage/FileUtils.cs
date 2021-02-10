@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -318,7 +318,7 @@ namespace NanoByte.Common.Storage
         /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); can be <c>null</c>.</param>
         /// <param name="fileAction">The action to perform for every found file; can be <c>null</c>.</param>
         /// <param name="followDirSymlinks">If <c>true</c> recurse into directory symlinks; if <c>false</c> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
-        public static void Walk(this DirectoryInfo directory, Action<DirectoryInfo>? dirAction = null, Action<FileInfo>? fileAction = null, bool followDirSymlinks = false)
+        public static void Walk(this DirectoryInfo directory, [InstantHandle] Action<DirectoryInfo>? dirAction = null, [InstantHandle] Action<FileInfo>? fileAction = null, bool followDirSymlinks = false)
         {
             #region Sanity checks
             if (directory == null) throw new ArgumentNullException(nameof(directory));

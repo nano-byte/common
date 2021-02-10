@@ -10,7 +10,8 @@
       "automergeType": "branch"
     },
     {
-      "packagePatterns": ["SourceLink", "ValueTuple"],
+      "packagePatterns": ["SourceLink"],
+      "packageNames": ["System.ValueTuple", "JetBrains.Annotations"],
       "automerge": true,
       "automergeType": "branch"
     },

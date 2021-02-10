@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common
@@ -119,7 +119,7 @@ namespace NanoByte.Common
         /// </summary>
         [Pure]
         [return: NotNullIfNotNull("value")]
-        public static string? StripCharacters(this string? value, IEnumerable<char> characters)
+        public static string? StripCharacters(this string? value, [InstantHandle] IEnumerable<char> characters)
         {
             #region Sanity checks
             if (characters == null) throw new ArgumentNullException(nameof(characters));
@@ -181,7 +181,7 @@ namespace NanoByte.Common
         /// <param name="parts">The strings to be combined.</param>
         /// <remarks>Works like <see cref="string.Join(string,string[])"/> but for <see cref="IEnumerable{T}"/>s.</remarks>
         [Pure]
-        public static string Join(string separator, IEnumerable<string> parts)
+        public static string Join(string separator, [InstantHandle] IEnumerable<string> parts)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(separator)) throw new ArgumentNullException(nameof(separator));

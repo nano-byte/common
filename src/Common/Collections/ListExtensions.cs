@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -16,7 +17,7 @@ namespace NanoByte.Common.Collections
         /// Adds multiple elements to the list.
         /// </summary>
         /// <remarks>This is a covariant wrapper for <see cref="List{T}.AddRange"/>.</remarks>
-        public static void AddRange<TList, TElements>(this List<TList> list, IEnumerable<TElements> elements)
+        public static void AddRange<TList, TElements>(this List<TList> list, [InstantHandle] IEnumerable<TElements> elements)
             where TElements : TList
         {
             #region Sanity checks
@@ -49,7 +50,7 @@ namespace NanoByte.Common.Collections
         /// <param name="element">The element to add or update.</param>
         /// <param name="keySelector">Used to map elements to keys for comparison</param>
         /// <returns></returns>
-        public static bool AddOrReplace<T, TKey>(this List<T> list, T element, Func<T, TKey> keySelector)
+        public static bool AddOrReplace<T, TKey>(this List<T> list, T element, [InstantHandle] Func<T, TKey> keySelector)
         {
             #region Sanity checks
             if (list == null) throw new ArgumentNullException(nameof(list));

@@ -2,8 +2,8 @@
 // Licensed under the MIT License
 
 using System;
-using System.Diagnostics.Contracts;
 using System.Threading;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {

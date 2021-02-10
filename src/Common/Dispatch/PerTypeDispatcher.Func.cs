@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Dispatch
@@ -61,7 +62,7 @@ namespace NanoByte.Common.Dispatch
         /// <param name="elements">The elements to be dispatched.</param>
         /// <returns>The values returned by the matching delegates.</returns>
         /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed.</exception>
-        public IEnumerable<TResult> Dispatch(IEnumerable<TBase> elements)
+        public IEnumerable<TResult> Dispatch([InstantHandle] IEnumerable<TBase> elements)
         {
             #region Sanity checks
             if (elements == null) throw new ArgumentNullException(nameof(elements));

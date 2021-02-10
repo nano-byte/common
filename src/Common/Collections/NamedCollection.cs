@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Collections
@@ -35,7 +36,7 @@ namespace NanoByte.Common.Collections
         /// Creates a new named collection pre-filled with elements.
         /// </summary>
         /// <param name="elements">The elements to pre-fill the collection with. Must all have unique <see cref="INamed.Name"/>s!</param>
-        public NamedCollection(IEnumerable<T> elements)
+        public NamedCollection([InstantHandle] IEnumerable<T> elements)
             : this()
         {
             #region Sanity checks

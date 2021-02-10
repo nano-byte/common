@@ -4,9 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Security;
+using JetBrains.Annotations;
 using Microsoft.Win32;
 
 namespace NanoByte.Common
