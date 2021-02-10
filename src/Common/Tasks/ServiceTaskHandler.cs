@@ -3,6 +3,7 @@
 
 #if !NETFRAMEWORK
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NanoByte.Common.Net;
@@ -37,6 +38,7 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         public override void Dispose() => Log.Handler -= LogHandler;
 
+        [SuppressMessage("ReSharper", "TemplateIsNotCompileTimeConstantProblem")]
         private void LogHandler(LogSeverity severity, string message)
         {
             switch (severity)
