@@ -123,9 +123,9 @@ namespace NanoByte.Common.Controls
         private char _separator = Named.TreeSeparator;
 
         /// <summary>
-        /// The character used to separate namespaces in the <see cref="INamed.Name"/>s. This controls how the tree structure is generated.
+        /// The character used to split <see cref="INamed.Name"/>s into tree levels.
         /// </summary>
-        [DefaultValue(Named.TreeSeparator), Description("The character used to separate namespaces in the Names. This controls how the tree structure is generated.")]
+        [DefaultValue(Named.TreeSeparator), Description("The character used to split names into tree levels.")]
         public char Separator
         {
             get => _separator;
@@ -223,14 +223,13 @@ namespace NanoByte.Common.Controls
         [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
         private TreeNode AddTreeNode(T entry)
         {
-            // Split into hierarchic namespaces
-            string name = entry.Name;
-            string[] nameSplit = name.Split(_separator);
+            // Split into hierarchy levels
+            string[] nameSplit = entry.Name.Split(_separator);
 
             // Start off at the top-level
             TreeNodeCollection subTree = treeView.Nodes;
 
-            // Try to use a pre-existing nodes for namespace-subtrees, if non-existent create new ones
+            // Try to use existing nodes for parents, create new ones if missing
             string partialName = "";
             for (int i = 0; i < nameSplit.Length - 1; i++)
             {
@@ -240,25 +239,21 @@ namespace NanoByte.Common.Controls
                 partialName += _separator;
             }
 
-            // Create node storing full name, using last part as visible text
-            TreeNode finalNode = subTree.Add(name, nameSplit[nameSplit.Length - 1]);
+            // Create node for actual entry using last part as visible text
+            TreeNode finalNode = subTree.Add(entry.Name, nameSplit.Last());
             if (_checkedEntries.Contains(entry)) finalNode.Checked = true;
 
-            #region Highlight color
+            // Apply the highlighting color if one is set
             if (entry is IHighlightColor highlightColorProvider && highlightColorProvider.HighlightColor != Color.Empty)
             {
-                // Apply the highlighting color if one is set
                 finalNode.ForeColor = highlightColorProvider.HighlightColor;
                 finalNode.NodeFont = new Font(treeView.Font, FontStyle.Bold);
             }
-            #endregion
 
-            #region Context menu
-            var contextMenuProvider = entry as IContextMenu;
             // Attach the context menu if one is set
+            var contextMenuProvider = entry as IContextMenu;
             var contextMenu = contextMenuProvider?.GetContextMenu();
             if (contextMenu != null) finalNode.ContextMenuStrip = contextMenu;
-            #endregion
 
             return finalNode;
         }
