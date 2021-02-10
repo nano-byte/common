@@ -9,7 +9,7 @@ namespace NanoByte.Common.Streams
     /// <summary>
     /// This wrapper stream passes all operations through to an underlying <see cref="Stream"/> without modifying them. An additional delegate is executed before <see cref="Stream.Dispose()"/> is passed through.
     /// </summary>
-    public class DisposeWarpperStream : Stream
+    public class DisposeWrapperStream : Stream
     {
         private readonly Stream _baseStream;
         private readonly Action _disposeHandler;
@@ -19,7 +19,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="baseStream">The underlying <see cref="Stream"/> providing the actual data. Will be disposed.</param>
         /// <param name="disposeHandler">Executed before <paramref name="baseStream"/> is disposed.</param>
-        public DisposeWarpperStream(Stream baseStream, Action disposeHandler)
+        public DisposeWrapperStream(Stream baseStream, Action disposeHandler)
         {
             _baseStream = baseStream ?? throw new ArgumentNullException(nameof(baseStream));
             _disposeHandler = disposeHandler ?? throw new ArgumentNullException(nameof(disposeHandler));
