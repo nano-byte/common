@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -21,9 +20,6 @@ namespace NanoByte.Common.Collections
             {
                 Name = name;
             }
-
-            public int CompareTo(TestElement? other)
-                => string.Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

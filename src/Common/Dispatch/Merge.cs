@@ -50,13 +50,7 @@ namespace NanoByte.Common.Dispatch
         /// <remarks><paramref name="theirs"/> and <paramref name="mine"/> should use an internal hashmap for <see cref="ICollection{T}.Contains"/> for better performance.</remarks>
         public static void TwoWay<T, TAdded, TRemoved>(IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, TAdded, TRemoved
-        {
-#if __MonoCS__
-            TwoWay(theirs, mine, x => added.Add(x), x => removed.Add(x));
-#else
-            TwoWay(theirs, mine, added.Add, removed.Add);
-#endif
-        }
+            => TwoWay(theirs, mine, added.Add, removed.Add);
 
         /// <summary>
         /// Performs a 3-way merge on a set of collections. Changes between <paramref name="reference"/> and <paramref name="theirs"/> as they apply to <paramref name="mine"/> are emitted using callback delegates.
@@ -112,13 +106,7 @@ namespace NanoByte.Common.Dispatch
         /// <remarks>Modified elements are handled by adding to <paramref name="removed"/> for the old state and to <paramref name="added"/> for the new state.</remarks>
         public static void ThreeWay<T, TAdded, TRemoved>(IEnumerable<T> reference, IEnumerable<T> theirs, IEnumerable<T> mine, ICollection<TAdded> added, ICollection<TRemoved> removed)
             where T : class, IMergeable<T>, TAdded, TRemoved
-        {
-#if __MonoCS__
-            ThreeWay(reference, theirs, mine, x => added.Add(x), x => removed.Add(x));
-#else
-            ThreeWay(reference, theirs, mine, added.Add, removed.Add);
-#endif
-        }
+            => ThreeWay(reference, theirs, mine, added.Add, removed.Add);
 
         /// <summary>
         /// Finds the first element in a list matching the specified <see cref="IMergeable{T}.MergeID"/>.
