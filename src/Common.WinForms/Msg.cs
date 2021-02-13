@@ -184,7 +184,7 @@ namespace NanoByte.Common
 
             var buttons = new List<TaskDialogButton>();
 
-            void AddButton(DialogResult result, string? caption)
+            void TryAddButton(DialogResult result, string? caption)
             {
 #if NET
                 if (string.IsNullOrEmpty(caption)) return;
@@ -196,9 +196,9 @@ namespace NanoByte.Common
 #endif
             }
 
-            AddButton(DialogResult.Yes, yes);
-            AddButton(DialogResult.No, no);
-            AddButton(DialogResult.OK, ok);
+            TryAddButton(DialogResult.Yes, yes);
+            TryAddButton(DialogResult.No, no);
+            TryAddButton(DialogResult.OK, ok);
 
 #if NET
             var taskDialog = new TaskDialogPage
@@ -209,17 +209,15 @@ namespace NanoByte.Common
                 Text = details
             };
 
+            taskDialog.Buttons.AddRange(buttons);
             if (canCancel)
             {
+                taskDialog.AllowCancel = true;
                 if (string.IsNullOrEmpty(ok)) buttons.Add(TaskDialogButton.Cancel);
-                else AddButton(DialogResult.Cancel, cancel);
-
-                // Cancel non-errors with ESC and errors with ENTER
-                if (severity < MsgSeverity.Error) taskDialog.AllowCancel = true;
-                else taskDialog.DefaultButton = buttons.Last();
+                else TryAddButton(DialogResult.Cancel, cancel);
             }
-
-            taskDialog.Buttons.AddRange(buttons);
+            if (severity >= MsgSeverity.Warn)
+                taskDialog.DefaultButton = buttons.Skip(1).FirstOrDefault(); // "No" or "Cancel"
 
             var pushedButton = (owner == null)
                 ? TaskDialog.ShowDialog(taskDialog)
@@ -235,23 +233,21 @@ namespace NanoByte.Common
                 Content = details
             };
 
-            if (canCancel)
-            {
-                if (string.IsNullOrEmpty(ok))
-                    taskDialog.CommonButtons = TaskDialogCommonButtons.Cancel;
-                else
-                    AddButton(DialogResult.Cancel, cancel);
-
-                // Cancel non-errors with ESC and errors with ENTER
-                if (severity < MsgSeverity.Error) taskDialog.AllowDialogCancellation = true;
-                else taskDialog.DefaultButton = (int) DialogResult.Cancel;
-            }
-
             if (buttons.Count != 0)
             {
                 taskDialog.UseCommandLinks = true;
                 taskDialog.Buttons = buttons.ToArray();
             }
+            if (canCancel)
+            {
+                taskDialog.AllowDialogCancellation = true;
+                if (string.IsNullOrEmpty(cancel))
+                    taskDialog.CommonButtons = TaskDialogCommonButtons.Cancel;
+                else
+                    TryAddButton(DialogResult.Cancel, cancel);
+            }
+            if (severity >= MsgSeverity.Warn)
+                taskDialog.DefaultButton = (int)(string.IsNullOrEmpty(no) ? DialogResult.No : DialogResult.Cancel);
 
             try
             {

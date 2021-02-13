@@ -64,7 +64,7 @@ namespace NanoByte.Common.Tasks
                 return defaultAnswer.Value;
             }
 
-            // Treat messages that default to "Yes" as less severe than those that default to "No"
+            // Treat questions that default to "Yes" as less severe than those that default to "No"
             var severity = defaultAnswer == true ? MsgSeverity.Info : MsgSeverity.Warn;
 
             Log.Debug("Question: " + question);
