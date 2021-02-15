@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using NanoByte.Common.Native;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Native
 {
     /// <summary>
-    /// Provides a cross-process object allowing easy detection of application instances (e.g., for use by installers and update tools). May be a no-op on some platforms.
+    /// Provides a cross-process object allowing easy detection of application instances (e.g., for use by installers and update tools).
+    /// No-op on non-Windows platforms.
     /// </summary>
     /// <remarks>Use <see cref="Mutex"/> or <see cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
     public sealed class AppMutex

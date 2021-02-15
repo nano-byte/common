@@ -9,7 +9,7 @@ using System.Security;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides utility and extension methods for <see cref="Registry"/> access.
