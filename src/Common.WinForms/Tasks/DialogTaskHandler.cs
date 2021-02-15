@@ -16,7 +16,8 @@ namespace NanoByte.Common.Tasks
         private readonly Control _owner;
 
         /// <summary>
-        /// Creates a new task handler.
+        /// Creates a new dialog task handler.
+        /// Registers a <see cref="Log.Handler"/>.
         /// </summary>
         /// <param name="owner">The parent window for any dialogs created by the handler.</param>
         public DialogTaskHandler(Control owner)

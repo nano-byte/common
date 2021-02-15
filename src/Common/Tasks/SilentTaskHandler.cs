@@ -2,68 +2,34 @@
 // Licensed under the MIT License
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using NanoByte.Common.Collections;
-using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
     /// Executes tasks silently and suppresses any questions.
     /// </summary>
-    public class SilentTaskHandler : ITaskHandler
+    public class SilentTaskHandler : TaskHandlerBase
     {
-        /// <inheritdoc/>
-        public virtual void Dispose() {}
-
-        /// <inheritdoc/>
-        public virtual CancellationToken CancellationToken => default;
-
-        /// <inheritdoc/>
-        public virtual ICredentialProvider? CredentialProvider => null;
-
-        /// <inheritdoc/>
-        public void RunTask(ITask task)
+        public SilentTaskHandler()
         {
-            #region Sanity checks
-            if (task == null) throw new ArgumentNullException(nameof(task));
-            #endregion
-
-            Log.Debug("Task: " + task.Name);
-            task.Run(CancellationToken, CredentialProvider);
+            Verbosity = Verbosity.Batch;
         }
-
-        /// <summary>
-        /// Always returns <see cref="Tasks.Verbosity.Batch"/>.
-        /// </summary>
-        public Verbosity Verbosity { get => Verbosity.Batch; set {} }
 
         /// <summary>
         /// Always returns <paramref name="defaultAnswer"/>.
         /// </summary>
-        public bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
         {
             Log.Info($"Question: {question}\nAutomatic answer: {defaultAnswer}");
             return defaultAnswer ?? false;
         }
 
         /// <inheritdoc/>
-        public void Output(string title, string message) => Log.Info($"{title}\n{message}");
+        public override void Output(string title, string message)
+            => Log.Info($"{title}\n{message}");
 
         /// <inheritdoc/>
-        public void Output<T>(string title, IEnumerable<T> data)
-        {
-            string message = StringUtils.Join(Environment.NewLine, (data ?? throw new ArgumentNullException(nameof(data))).Select(x => x?.ToString() ?? ""));
-            Output(title ?? throw new ArgumentNullException(nameof(title)), message);
-        }
-
-        /// <inheritdoc />
-        public void Output<T>(string title, NamedCollection<T> data)
-            where T : INamed
-            => Output(title, data.AsEnumerable());
-
-        /// <inheritdoc/>
-        public void Error(Exception exception) => Log.Error(exception);
+        public override void Error(Exception exception)
+            => Log.Error(exception);
     }
 }

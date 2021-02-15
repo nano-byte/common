@@ -11,16 +11,20 @@ using NanoByte.Common.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
+    /// Uses <see cref="ILogger{TCategoryName}"/>, <see cref="ICredentialProvider"/> and <see cref="CancellationTokenSource"/> from <seealso cref="IServiceProvider"/> if available.
     /// Executes tasks silently and suppresses any questions.
-    /// Automatically uses <see cref="ILogger{TCategoryName}"/> and <see cref="ICredentialProvider"/> if available via <seealso cref="IServiceProvider"/>.
     /// </summary>
     /// <seealso cref="ConfigurationCredentialProviderRegisration.ConfigureCredentials"/>
     [CLSCompliant(false)]
-    public sealed class ServiceTaskHandler : SilentTaskHandler
+    public class ServiceTaskHandler : SilentTaskHandler
     {
         private readonly ILogger<ServiceTaskHandler>? _logger;
-        private readonly CancellationTokenSource? _cancellationTokenSource;
 
+        /// <summary>
+        /// Creates a new service task handler.
+        /// Registers a <see cref="Log.Handler"/> if <paramref name="provider"/> provides <see cref="ILogger{TCategoryName}"/>.
+        /// </summary>
+        /// <param name="provider">The DI container to check for  <see cref="ILogger{TCategoryName}"/>, <see cref="ICredentialProvider"/> and <see cref="CancellationTokenSource"/>.</param>
         public ServiceTaskHandler(IServiceProvider provider)
         {
             #region Sanity checks
@@ -32,11 +36,18 @@ namespace NanoByte.Common.Tasks
                 Log.Handler += LogHandler;
 
             CredentialProvider = provider.GetService<ICredentialProvider>();
-            _cancellationTokenSource = provider.GetService<CancellationTokenSource>();
+            CancellationTokenSource = provider.GetService<CancellationTokenSource>() ?? new();
         }
 
-        /// <inheritdoc/>
-        public override void Dispose() => Log.Handler -= LogHandler;
+        /// <summary>
+        /// Unregisters the <see cref="Log.Handler"/>.
+        /// </summary>
+        public override void Dispose()
+        {
+            Log.Handler -= LogHandler;
+
+            base.Dispose();
+        }
 
         [SuppressMessage("ReSharper", "TemplateIsNotCompileTimeConstantProblem")]
         private void LogHandler(LogSeverity severity, string message)
@@ -57,12 +68,6 @@ namespace NanoByte.Common.Tasks
                     break;
             }
         }
-
-        /// <inheritdoc/>
-        public override CancellationToken CancellationToken => _cancellationTokenSource?.Token ?? base.CancellationToken;
-
-        /// <inheritdoc/>
-        public override ICredentialProvider? CredentialProvider { get; }
     }
 }
 #endif

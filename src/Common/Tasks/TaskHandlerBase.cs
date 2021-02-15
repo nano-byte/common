@@ -14,38 +14,22 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public abstract class TaskHandlerBase : MarshalNoTimeout, ITaskHandler
     {
-        /// <summary>
-        /// Starts handling log events.
-        /// </summary>
-        protected TaskHandlerBase()
-        {
-            Log.Handler += LogHandler;
-        }
-
         /// <inheritdoc/>
         public virtual void Dispose()
         {
-            Log.Handler -= LogHandler;
             CancellationTokenSource.Dispose();
         }
 
         /// <summary>
-        /// Reports <see cref="Log"/> messages to the user based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
-        /// </summary>
-        /// <param name="severity">The type/severity of the entry.</param>
-        /// <param name="message">The message text of the entry.</param>
-        protected abstract void LogHandler(LogSeverity severity, string message);
-
-        /// <summary>
         /// Used to signal the <see cref="CancellationToken"/>.
         /// </summary>
-        protected readonly CancellationTokenSource CancellationTokenSource = new();
+        protected CancellationTokenSource CancellationTokenSource { get; init; } = new();
 
         /// <inheritdoc/>
         public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
         /// <inheritdoc/>
-        public abstract ICredentialProvider? CredentialProvider { get; }
+        public ICredentialProvider? CredentialProvider { get; protected init; }
 
         /// <inheritdoc/>
         public Verbosity Verbosity { get; set; }

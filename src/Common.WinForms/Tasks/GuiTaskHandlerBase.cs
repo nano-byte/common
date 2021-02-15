@@ -13,10 +13,26 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     public abstract class GuiTaskHandlerBase : TaskHandlerBase
     {
+        /// <summary>
+        /// Creates a new GUI task handler.
+        /// Registers a <see cref="Log.Handler"/>.
+        /// </summary>
         protected GuiTaskHandlerBase()
         {
+            Log.Handler += LogHandler;
+
             if (WindowsUtils.IsWindowsNT)
                 CredentialProvider = new CachedCredentialProvider(new WindowsDialogCredentialProvider(this));
+        }
+
+        /// <summary>
+        /// Unregisters the <see cref="Log.Handler"/>.
+        /// </summary>
+        public override void Dispose()
+        {
+            Log.Handler -= LogHandler;
+
+            base.Dispose();
         }
 
         /// <summary>
@@ -29,7 +45,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
-        protected override void LogHandler(LogSeverity severity, string message)
+        private void LogHandler(LogSeverity severity, string message)
         {
             switch (severity)
             {
@@ -47,9 +63,6 @@ namespace NanoByte.Common.Tasks
                     break;
             }
         }
-
-        /// <inheritdoc/>
-        public override ICredentialProvider? CredentialProvider { get; }
 
         /// <inheritdoc/>
         public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)

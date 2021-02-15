@@ -10,10 +10,14 @@ using NanoByte.Common.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses the console (stderr stream) to inform the user about the progress of tasks and ask questions.
+    /// Uses the console to inform the user about the progress of tasks and ask questions.
     /// </summary>
     public class CliTaskHandler : TaskHandlerBase
     {
+        /// <summary>
+        /// Creates a new CLI task handler.
+        /// Registers a <see cref="Log.Handler"/>.
+        /// </summary>
         public CliTaskHandler()
         {
             if (WindowsUtils.IsWindowsNT)
@@ -29,11 +33,17 @@ namespace NanoByte.Common.Tasks
                 // Ignore problems caused by unusual terminal emulators
             }
             #endregion
+
+            Log.Handler += LogHandler;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Unregisters the <see cref="Log.Handler"/>.
+        /// </summary>
         public override void Dispose()
         {
+            Log.Handler -= LogHandler;
+
             try
             {
                 Console.CancelKeyPress -= CancelKeyPressHandler;
@@ -64,7 +74,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
-        protected override void LogHandler(LogSeverity severity, string message)
+        private void LogHandler(LogSeverity severity, string message)
         {
             void WriteLine(ConsoleColor color)
             {
@@ -104,9 +114,6 @@ namespace NanoByte.Common.Tasks
                     break;
             }
         }
-
-        /// <inheritdoc/>
-        public override ICredentialProvider? CredentialProvider { get; }
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)
@@ -170,6 +177,7 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        public override void Error(Exception exception) => Log.Error(exception);
+        public override void Error(Exception exception)
+            => Log.Error(exception);
     }
 }
