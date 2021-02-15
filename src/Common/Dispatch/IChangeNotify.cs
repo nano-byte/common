@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Dispatch
 {
     /// <summary>
     /// An object that can notify interested parties of changes in properties of interest.
