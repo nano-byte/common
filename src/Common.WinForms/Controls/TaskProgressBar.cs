@@ -22,7 +22,7 @@ namespace NanoByte.Common.Controls
         {
             get
             {
-                Form parent = FindForm();
+                var parent = FindForm();
                 return parent?.Handle ?? IntPtr.Zero;
             }
         }

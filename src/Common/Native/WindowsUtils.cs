@@ -479,6 +479,7 @@ namespace NanoByte.Common.Native
             {
                 if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
                     throw BuildException(Marshal.GetLastWin32Error());
+                // ReSharper disable once ShiftExpressionRealShiftCountIsZero
                 return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
             }
             finally

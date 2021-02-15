@@ -23,7 +23,7 @@ namespace NanoByte.Common.Controls
             get => labelOperation.Text;
             set
             {
-                labelOperation.Text = value ?? "";
+                labelOperation.Text = value;
                 toolTip.SetToolTip(labelOperation, labelOperation.Text); // Show as tooltip in case text is cut off
             }
         }

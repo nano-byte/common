@@ -155,8 +155,12 @@ namespace NanoByte.Common
         /// <exception cref="OperationCanceledException">The form was closed.</exception>
         public void SendLow(Action<T> action)
         {
-            var form = _form;
-            if (form == null) return;
+            T form;
+            lock (_lock)
+            {
+                if (_form == null) return;
+                form = _form;
+            }
 
             try
             {

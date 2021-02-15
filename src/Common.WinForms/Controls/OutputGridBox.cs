@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls
@@ -46,6 +47,7 @@ namespace NanoByte.Common.Controls
         /// </summary>
         private class SimpleEntry<T>
         {
+            [UsedImplicitly]
             public T Value { get; }
 
             public SimpleEntry(T value)
