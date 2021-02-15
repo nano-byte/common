@@ -10,7 +10,12 @@ namespace NanoByte.Common
     /// An object that can notify interested parties of changes in properties of interest.
     /// </summary>
     /// <typeparam name="TSender">The type of the class implementing this interface.</typeparam>
-    public interface IChangeNotify<TSender>
+    public interface IChangeNotify
+#if NET20
+        <TSender>
+#else
+        <out TSender>
+#endif
     {
         /// <summary>
         /// Occurs when a property of interest has changed.
