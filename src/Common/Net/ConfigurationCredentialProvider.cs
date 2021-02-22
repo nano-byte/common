@@ -12,7 +12,7 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Gets credentials from <see cref="IConfiguration"/>.
     /// </summary>
-    /// <seealso cref="ConfigurationCredentialProviderRegisration.ConfigureCredentials"/>
+    /// <seealso cref="ConfigurationCredentialProviderRegistration.ConfigureCredentials"/>
     [CLSCompliant(false)]
     public class ConfigurationCredentialProvider : ICredentialProvider
     {
@@ -48,7 +48,7 @@ namespace NanoByte.Common.Net
     /// Provides extension methods for registering <see cref="ConfigurationCredentialProvider"/> instances.
     /// </summary>
     [CLSCompliant(false)]
-    public static class ConfigurationCredentialProviderRegisration
+    public static class ConfigurationCredentialProviderRegistration
     {
         /// <summary>
         /// Registers an <see cref="ICredentialProvider"/> with credentials from <see cref="IConfiguration"/>.

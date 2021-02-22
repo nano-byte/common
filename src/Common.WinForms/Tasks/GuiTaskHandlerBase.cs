@@ -71,7 +71,7 @@ namespace NanoByte.Common.Tasks
             if (question == null) throw new ArgumentNullException(nameof(question));
             #endregion
 
-            if (Verbosity <= Verbosity.Batch && defaultAnswer.HasValue)
+            if (Verbosity == Verbosity.Batch && defaultAnswer.HasValue)
             {
                 if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
                 return defaultAnswer.Value;
