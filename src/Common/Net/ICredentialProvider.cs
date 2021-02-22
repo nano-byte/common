@@ -13,11 +13,6 @@ namespace NanoByte.Common.Net
     public interface ICredentialProvider : ICredentials
     {
         /// <summary>
-        /// Indicates whether the credential provider is interactive, i.e., can ask the user for input.
-        /// </summary>
-        bool Interactive { get; }
-
-        /// <summary>
         /// Report that the credentials that were retrieved for <paramref name="uri"/> were incorrect.
         /// </summary>
         void ReportInvalid(Uri uri);

@@ -30,7 +30,7 @@ namespace NanoByte.Common.Tasks
         public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
         /// <inheritdoc/>
-        public ICredentialProvider? CredentialProvider { get; protected init; }
+        public virtual ICredentialProvider? CredentialProvider => null;
 
         /// <inheritdoc/>
         public Verbosity Verbosity { get; set; }

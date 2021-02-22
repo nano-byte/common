@@ -19,9 +19,6 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         public CliTaskHandler()
         {
-            if (WindowsUtils.IsWindowsNT)
-                CredentialProvider = new CachedCredentialProvider(new WindowsCliCredentialProvider(this));
-
             try
             {
                 Console.CancelKeyPress += CancelKeyPressHandler;
@@ -113,6 +110,12 @@ namespace NanoByte.Common.Tasks
                     break;
             }
         }
+
+        /// <inheritdoc />
+        public override ICredentialProvider? CredentialProvider
+            => WindowsUtils.IsWindowsNT
+                ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsSilentCredentialProvider()
+                : null;
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)

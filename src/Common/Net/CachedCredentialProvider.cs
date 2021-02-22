@@ -14,9 +14,6 @@ namespace NanoByte.Common.Net
     {
         private readonly ICredentialProvider _inner;
 
-        /// <inheritdoc/>
-        public bool Interactive => _inner.Interactive;
-
         private readonly TransparentCache<Uri, NetworkCredential?> _cache;
 
         /// <summary>

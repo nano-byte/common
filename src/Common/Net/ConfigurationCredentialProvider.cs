@@ -37,9 +37,6 @@ namespace NanoByte.Common.Net
         }
 
         /// <inheritdoc/>
-        public bool Interactive => false;
-
-        /// <inheritdoc/>
         public void ReportInvalid(Uri uri)
         {}
     }

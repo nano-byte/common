@@ -5,20 +5,14 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using NanoByte.Common.Native;
-using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials"/>.
+    /// Gets <see cref="NetworkCredential"/>s using the Windows Credential Manager.
     /// </summary>
     public abstract class WindowsCredentialProvider : CredentialProviderBase
     {
-        /// <inheritdoc/>
-        protected WindowsCredentialProvider(ITaskHandler handler)
-            : base(handler)
-        {}
-
         /// <inheritdoc/>
         public override NetworkCredential? GetCredential(Uri uri, string authType)
         {
@@ -26,16 +20,11 @@ namespace NanoByte.Common.Net
             if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
-            string target = uri.ToStringRfc();
-
-            if (!Interactive && !WindowsCredentials.IsCredentialStored(target))
-                return null;
-
             var flags = WindowsCredentialsFlags.GenericCredentials | WindowsCredentialsFlags.ExcludeCertificates | WindowsCredentialsFlags.ShowSaveCheckBox;
             if (WasReportedInvalid(uri))
                 flags |= WindowsCredentialsFlags.IncorrectPassword | WindowsCredentialsFlags.AlwaysShowUI;
 
-            return Prompt(target, flags);
+            return Prompt(uri.ToStringRfc(), flags);
         }
 
         /// <summary>
@@ -44,6 +33,6 @@ namespace NanoByte.Common.Net
         /// <param name="target">A string uniquely identifying the target the credentials are intended for.</param>
         /// <param name="flags">Flags for configuring the prompt.</param>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
-        protected abstract NetworkCredential Prompt(string target, WindowsCredentialsFlags flags);
+        protected abstract NetworkCredential? Prompt(string target, WindowsCredentialsFlags flags);
     }
 }

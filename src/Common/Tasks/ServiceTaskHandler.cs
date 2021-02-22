@@ -20,6 +20,9 @@ namespace NanoByte.Common.Tasks
     {
         private readonly ILogger<ServiceTaskHandler>? _logger;
 
+        /// <inheritdoc />
+        public override ICredentialProvider? CredentialProvider { get; }
+
         /// <summary>
         /// Creates a new service task handler.
         /// Registers a <see cref="Log.Handler"/> if <paramref name="provider"/> provides <see cref="ILogger{TCategoryName}"/>.
@@ -35,8 +38,8 @@ namespace NanoByte.Common.Tasks
             if (_logger != null)
                 Log.Handler += LogHandler;
 
-            CredentialProvider = provider.GetService<ICredentialProvider>();
             CancellationTokenSource = provider.GetService<CancellationTokenSource>() ?? new();
+            CredentialProvider = provider.GetService<ICredentialProvider>();
         }
 
         /// <summary>

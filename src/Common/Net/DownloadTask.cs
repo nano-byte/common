@@ -62,10 +62,10 @@ namespace NanoByte.Common.Net
         protected override void Execute()
         {
             // Try once without credentials, then retry with if required
-            bool useCredentials = false;
+            bool usedCredentials = false;
             while (true)
             {
-                var request = BuildRequest(useCredentials);
+                var request = BuildRequest(usedCredentials);
 
                 try
                 {
@@ -79,14 +79,13 @@ namespace NanoByte.Common.Net
                         case WebExceptionStatus.RequestCanceled:
                             throw new OperationCanceledException();
 
-                        case WebExceptionStatus.ProtocolError when ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.Unauthorized && CredentialProvider != null:
-                            if (useCredentials) CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
-
-                            // Retry (but only once when non-interactive)
-                            if (CredentialProvider.Interactive || !useCredentials)
+                        case WebExceptionStatus.ProtocolError when ex.Response is HttpWebResponse {StatusCode: HttpStatusCode.Unauthorized} && CredentialProvider != null:
+                            if (usedCredentials)
+                                CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
+                            else
                             {
-                                useCredentials = true;
-                                continue;
+                                usedCredentials = true;
+                                continue; // Retry
                             }
                             break;
                     }

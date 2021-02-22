@@ -20,9 +20,6 @@ namespace NanoByte.Common.Tasks
         protected GuiTaskHandlerBase()
         {
             Log.Handler += LogHandler;
-
-            if (WindowsUtils.IsWindowsNT)
-                CredentialProvider = new CachedCredentialProvider(new WindowsDialogCredentialProvider(this));
         }
 
         /// <summary>
@@ -63,6 +60,12 @@ namespace NanoByte.Common.Tasks
                     break;
             }
         }
+
+        /// <inheritdoc />
+        public override ICredentialProvider? CredentialProvider
+            => WindowsUtils.IsWindowsNT
+                ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsSilentCredentialProvider()
+                : null;
 
         /// <inheritdoc/>
         public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)

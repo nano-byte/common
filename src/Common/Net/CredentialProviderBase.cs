@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
@@ -13,20 +12,6 @@ namespace NanoByte.Common.Net
     /// </summary>
     public abstract class CredentialProviderBase : MarshalNoTimeout, ICredentialProvider
     {
-        private readonly ITaskHandler _handler;
-
-        /// <summary>
-        /// Creates a new credential provider.
-        /// </summary>
-        /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        protected CredentialProviderBase(ITaskHandler handler)
-        {
-            _handler = handler;
-        }
-
-        /// <inheritdoc/>
-        public bool Interactive => _handler.Verbosity > Verbosity.Batch;
-
         /// <inheritdoc/>
         public abstract NetworkCredential? GetCredential(Uri uri, string authType);
 

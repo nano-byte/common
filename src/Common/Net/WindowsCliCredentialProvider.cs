@@ -1,11 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Net;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Tasks;
 
 #if NET20
 using NanoByte.Common.Values;
@@ -14,18 +12,10 @@ using NanoByte.Common.Values;
 namespace NanoByte.Common.Net
 {
     /// <summary>
-    /// Asks for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s using <see cref="WindowsCredentials.PromptCli"/>.
+    /// Asks the user for <see cref="NetworkCredential"/>s using the Windows Credential Manager command-line interface.
     /// </summary>
     public class WindowsCliCredentialProvider : WindowsCredentialProvider
     {
-        /// <summary>
-        /// Creates a new Windows command-line credential provider.
-        /// </summary>
-        /// <param name="handler">Used to determine whether and how to ask the user for input.</param>
-        public WindowsCliCredentialProvider(ITaskHandler handler)
-            : base(handler)
-        {}
-
         /// <inheritdoc/>
         protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
         {
