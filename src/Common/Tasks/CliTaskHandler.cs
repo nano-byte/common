@@ -3,14 +3,13 @@
 
 using System;
 using System.IO;
-using NanoByte.Common.Cli;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses the console to inform the user about the progress of tasks and ask questions.
+    /// Informs the user about the progress of tasks and ask questions using console output.
     /// </summary>
     public class CliTaskHandler : TaskHandlerBase
     {
@@ -128,8 +127,7 @@ namespace NanoByte.Common.Tasks
             {
                 Log.Debug("Task: " + task.Name);
                 Console.Error.WriteLine(task.Name + @"...");
-                using var progressBar = new TaskProgressBar();
-                task.Run(CancellationToken, CredentialProvider, progressBar);
+                task.Run(CancellationToken, CredentialProvider, new CliProgress());
             }
         }
 
@@ -152,7 +150,8 @@ namespace NanoByte.Common.Tasks
             // Loop until the user has made a valid choice
             while (true)
             {
-                switch (CliUtils.ReadString(@"[Y/N]").ToLower())
+                Console.Error.Write(@"[Y/N]" + " ");
+                switch ((Console.ReadLine() ?? throw new IOException("input stream closed, unable to get user input")).ToLower())
                 {
                     case "y" or "yes":
                         Log.Debug("Answer: Yes");
