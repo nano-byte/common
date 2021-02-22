@@ -22,21 +22,21 @@ namespace NanoByte.Common.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        public Resources() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NanoByte.Common.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace NanoByte.Common.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The argument must be greater than zero..
         /// </summary>
-        internal static string ArgMustBeGreaterThanZero {
+        public static string ArgMustBeGreaterThanZero {
             get {
                 return ResourceManager.GetString("ArgMustBeGreaterThanZero", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
-        internal static string Back {
+        public static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Cancel {
+        public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The collection cannot be added to itself..
         /// </summary>
-        internal static string CannotAddCollectionToSelf {
+        public static string CannotAddCollectionToSelf {
             get {
                 return ResourceManager.GetString("CannotAddCollectionToSelf", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The DACL cannot be canonicalized since it would potentially result in a loss of information..
         /// </summary>
-        internal static string CannotCanonicalizeDacl {
+        public static string CannotCanonicalizeDacl {
             get {
                 return ResourceManager.GetString("CannotCanonicalizeDacl", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Copying files.
         /// </summary>
-        internal static string CopyFiles {
+        public static string CopyFiles {
             get {
                 return ResourceManager.GetString("CopyFiles", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &amp;Copy to clipboard.
         /// </summary>
-        internal static string CopyToClipboard {
+        public static string CopyToClipboard {
             get {
                 return ResourceManager.GetString("CopyToClipboard", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The destination directory already exists..
         /// </summary>
-        internal static string DestinationDirExist {
+        public static string DestinationDirExist {
             get {
                 return ResourceManager.GetString("DestinationDirExist", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Downloading {0}.
         /// </summary>
-        internal static string Downloading {
+        public static string Downloading {
             get {
                 return ResourceManager.GetString("Downloading", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The error report was sent successfully..
         /// </summary>
-        internal static string ErrorReportSent {
+        public static string ErrorReportSent {
             get {
                 return ResourceManager.GetString("ErrorReportSent", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Failed to download {0}..
         /// </summary>
-        internal static string FailedToDownload {
+        public static string FailedToDownload {
             get {
                 return ResourceManager.GetString("FailedToDownload", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Failed to rollback &apos;{0}&apos;..
         /// </summary>
-        internal static string FailedToRollback {
+        public static string FailedToRollback {
             get {
                 return ResourceManager.GetString("FailedToRollback", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The file that was supposed to be downloaded from {0} doesn&apos;t have the expected size. Was supposed to be {1} bytes but was actually {2} bytes..
         /// </summary>
-        internal static string FileNotExpectedSize {
+        public static string FileNotExpectedSize {
             get {
                 return ResourceManager.GetString("FileNotExpectedSize", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The file &quot;{0}&quot; could not be found..
         /// </summary>
-        internal static string FileNotFound {
+        public static string FileNotFound {
             get {
                 return ResourceManager.GetString("FileNotFound", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Hide details.
         /// </summary>
-        internal static string HideDetails {
+        public static string HideDetails {
             get {
                 return ResourceManager.GetString("HideDetails", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Only HTTP and FTP are supported download protocols..
         /// </summary>
-        internal static string HttpAndFtpOnly {
+        public static string HttpAndFtpOnly {
             get {
                 return ResourceManager.GetString("HttpAndFtpOnly", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The configuration directory &apos;{0}&apos; is probably invalid..
         /// </summary>
-        internal static string InvalidConfigDir {
+        public static string InvalidConfigDir {
             get {
                 return ResourceManager.GetString("InvalidConfigDir", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The login credentials for {0} are incorrect..
         /// </summary>
-        internal static string InvalidCredentials {
+        public static string InvalidCredentials {
             get {
                 return ResourceManager.GetString("InvalidCredentials", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The key was already present in the dictionary..
         /// </summary>
-        internal static string KeyAlreadyPresent {
+        public static string KeyAlreadyPresent {
             get {
                 return ResourceManager.GetString("KeyAlreadyPresent", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The key was not found in the collection..
         /// </summary>
-        internal static string KeyNotFound {
+        public static string KeyNotFound {
             get {
                 return ResourceManager.GetString("KeyNotFound", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The maximum amount of elements in the collection has been exceeded..
         /// </summary>
-        internal static string MaxElementsExceeded {
+        public static string MaxElementsExceeded {
             get {
                 return ResourceManager.GetString("MaxElementsExceeded", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No action registered for &apos;{0}&apos;..
         /// </summary>
-        internal static string MissingDispatchAction {
+        public static string MissingDispatchAction {
             get {
                 return ResourceManager.GetString("MissingDispatchAction", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The stream must support seeking..
         /// </summary>
-        internal static string MissingStreamSeekSupport {
+        public static string MissingStreamSeekSupport {
             get {
                 return ResourceManager.GetString("MissingStreamSeekSupport", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string No {
+        public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to There is currently no active mod..
         /// </summary>
-        internal static string NoModActive {
+        public static string NoModActive {
             get {
                 return ResourceManager.GetString("NoModActive", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to System configuration cannot be edited in portable mode..
         /// </summary>
-        internal static string NoSystemConfigInPortableMode {
+        public static string NoSystemConfigInPortableMode {
             get {
                 return ResourceManager.GetString("NoSystemConfigInPortableMode", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        internal static string OK {
+        public static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This method is only available on Windows..
         /// </summary>
-        internal static string OnlyAvailableOnWindows {
+        public static string OnlyAvailableOnWindows {
             get {
                 return ResourceManager.GetString("OnlyAvailableOnWindows", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Password:.
         /// </summary>
-        internal static string Password {
+        public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please enter login credentials for {0}:.
         /// </summary>
-        internal static string PleasEnterCredentials {
+        public static string PleasEnterCredentials {
             get {
                 return ResourceManager.GetString("PleasEnterCredentials", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to There was a problem loading &apos;{0}&apos;..
         /// </summary>
-        internal static string ProblemLoading {
+        public static string ProblemLoading {
             get {
                 return ResourceManager.GetString("ProblemLoading", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This command cannot be performed again until the undo command has been performed..
         /// </summary>
-        internal static string RedoNotAvailable {
+        public static string RedoNotAvailable {
             get {
                 return ResourceManager.GetString("RedoNotAvailable", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &amp;Reset value.
         /// </summary>
-        internal static string ResetValue {
+        public static string ResetValue {
             get {
                 return ResourceManager.GetString("ResetValue", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Restarting applications.
         /// </summary>
-        internal static string RestartingApps {
+        public static string RestartingApps {
             get {
                 return ResourceManager.GetString("RestartingApps", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        internal static string Search {
+        public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Searching for open file references.
         /// </summary>
-        internal static string SearchingFileReferences {
+        public static string SearchingFileReferences {
             get {
                 return ResourceManager.GetString("SearchingFileReferences", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Show details.
         /// </summary>
-        internal static string ShowDetails {
+        public static string ShowDetails {
             get {
                 return ResourceManager.GetString("ShowDetails", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Shutting down applications.
         /// </summary>
-        internal static string ShuttingDownApps {
+        public static string ShuttingDownApps {
             get {
                 return ResourceManager.GetString("ShuttingDownApps", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Source and destination are equal..
         /// </summary>
-        internal static string SourceDestinationEqual {
+        public static string SourceDestinationEqual {
             get {
                 return ResourceManager.GetString("SourceDestinationEqual", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The source directory does not exist..
         /// </summary>
-        internal static string SourceDirNotExist {
+        public static string SourceDirNotExist {
             get {
                 return ResourceManager.GetString("SourceDirNotExist", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Complete.
         /// </summary>
-        internal static string StateComplete {
+        public static string StateComplete {
             get {
                 return ResourceManager.GetString("StateComplete", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Processing data.
         /// </summary>
-        internal static string StateData {
+        public static string StateData {
             get {
                 return ResourceManager.GetString("StateData", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Getting headers.
         /// </summary>
-        internal static string StateHeader {
+        public static string StateHeader {
             get {
                 return ResourceManager.GetString("StateHeader", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to IO error.
         /// </summary>
-        internal static string StateIOError {
+        public static string StateIOError {
             get {
                 return ResourceManager.GetString("StateIOError", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The state must be &quot;Ready&quot;..
         /// </summary>
-        internal static string StateMustBeReady {
+        public static string StateMustBeReady {
             get {
                 return ResourceManager.GetString("StateMustBeReady", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
-        internal static string StateReady {
+        public static string StateReady {
             get {
                 return ResourceManager.GetString("StateReady", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Web error.
         /// </summary>
-        internal static string StateWebError {
+        public static string StateWebError {
             get {
                 return ResourceManager.GetString("StateWebError", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Length of targets must be equal to Length of oldValues.
         /// </summary>
-        internal static string TargetsOldValuesLength {
+        public static string TargetsOldValuesLength {
             get {
                 return ResourceManager.GetString("TargetsOldValuesLength", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Your version of .NET does not support TLS 1.2. This may cause connection errors when downloading content via HTTPS. Please run Windows Update to install the necessary patches..
         /// </summary>
-        internal static string Tls12SupportMissing {
+        public static string Tls12SupportMissing {
             get {
                 return ResourceManager.GetString("Tls12SupportMissing", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The bundled {0} installation could not be launched. Please reinstall the application..
         /// </summary>
-        internal static string UnableToLaunchBundled {
+        public static string UnableToLaunchBundled {
             get {
                 return ResourceManager.GetString("UnableToLaunchBundled", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The assembly named &quot;{0}&quot; could not be located..
         /// </summary>
-        internal static string UnableToLocateAssembly {
+        public static string UnableToLocateAssembly {
             get {
                 return ResourceManager.GetString("UnableToLocateAssembly", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This undo command cannot be performed until the actual command has been performed..
         /// </summary>
-        internal static string UndoNotAvailable {
+        public static string UndoNotAvailable {
             get {
                 return ResourceManager.GetString("UndoNotAvailable", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The Unix subsystem failed to process the request. You may have insufficient rights..
         /// </summary>
-        internal static string UnixSubsystemFail {
+        public static string UnixSubsystemFail {
             get {
                 return ResourceManager.GetString("UnixSubsystemFail", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The user has chosen to cancel the operation..
         /// </summary>
-        internal static string UserCancel {
+        public static string UserCancel {
             get {
                 return ResourceManager.GetString("UserCancel", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to User name:.
         /// </summary>
-        internal static string UserName {
+        public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
             }
@@ -558,7 +558,7 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string Yes {
+        public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
             }
