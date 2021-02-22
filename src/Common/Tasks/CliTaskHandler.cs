@@ -121,14 +121,23 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
-            if (Verbosity <= Verbosity.Batch)
-                task.Run(CancellationToken, CredentialProvider);
+            Log.Debug("Task: " + task.Name);
+#if !NET20 && !NET40
+            if (Console.IsErrorRedirected)
+                base.RunTask(task);
             else
-            {
-                Log.Debug("Task: " + task.Name);
-                Console.Error.WriteLine(task.Name + @"...");
-                task.Run(CancellationToken, CredentialProvider, new CliProgress());
-            }
+#endif
+                RunTaskInteractive(task);
+        }
+
+        /// <summary>
+        /// Runs an <see cref="ITask"/> and reports progress updates using console output.
+        /// </summary>
+        /// <param name="task">The task to be run.</param>
+        private void RunTaskInteractive(ITask task)
+        {
+            Console.Error.WriteLine(task.Name + @"...");
+            task.Run(CancellationToken, CredentialProvider, new CliProgress());
         }
 
         /// <inheritdoc />
@@ -138,13 +147,25 @@ namespace NanoByte.Common.Tasks
             if (question == null) throw new ArgumentNullException(nameof(question));
             #endregion
 
-            if (Verbosity <= Verbosity.Batch && defaultAnswer.HasValue)
+            if (!IsInteractive && defaultAnswer.HasValue)
             {
                 if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
                 return defaultAnswer.Value;
             }
 
             Log.Debug($"Question: {question}");
+            bool answer = AskInteractive(question);
+            Log.Debug("Answer: " + (answer ? "Yes" : "No"));
+            return answer;
+        }
+
+        /// <summary>
+        /// Asks the user a Yes/No question using console output.
+        /// </summary>
+        /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
+        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
+        private bool AskInteractive(string question)
+        {
             Console.Error.WriteLine(question);
 
             // Loop until the user has made a valid choice
@@ -154,10 +175,8 @@ namespace NanoByte.Common.Tasks
                 switch ((Console.ReadLine() ?? throw new IOException("input stream closed, unable to get user input")).ToLower())
                 {
                     case "y" or "yes":
-                        Log.Debug("Answer: Yes");
                         return true;
                     case "n" or "no":
-                        Log.Debug("Answer: No");
                         return false;
                 }
             }

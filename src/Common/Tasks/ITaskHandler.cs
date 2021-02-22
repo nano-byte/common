@@ -54,7 +54,7 @@ namespace NanoByte.Common.Tasks
         /// Asks the user a Yes/No/Cancel question.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="defaultAnswer">An answer to choose automatically when <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/> or lower. <c>null</c> if the user must make the choice themselves.</param>
+        /// <param name="defaultAnswer">The default answer to preselect. May be chosen automatically if the user cannot be asked. <c>null</c> if the user must make the choice themselves.</param>
         /// <param name="alternateMessage">A message to output with <see cref="Log.Warn(string)"/> when the <paramref name="defaultAnswer"/> is used instead of asking the user.</param>
         /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
         /// <exception cref="OperationCanceledException">The user selected 'Cancel'.</exception>

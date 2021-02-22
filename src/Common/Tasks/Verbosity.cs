@@ -6,7 +6,7 @@ namespace NanoByte.Common.Tasks
     /// <seealso cref="ITaskHandler.Verbosity"/>
     public enum Verbosity
     {
-        /// <summary>Automatically answer questions with defaults when possible. Avoid unnecessary console output (e.g. progress bars).</summary>
+        /// <summary>Automatically answer questions with defaults when possible. Avoid non-essential output and questions.</summary>
         Batch = -1,
 
         /// <summary>Normal interactive operation.</summary>
