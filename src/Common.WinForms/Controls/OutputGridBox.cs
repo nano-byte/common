@@ -58,7 +58,7 @@ namespace NanoByte.Common.Controls
 
         private void SetData<T>(IEnumerable<T> data)
         {
-            if (typeof(T) == typeof(string) || typeof(T) == typeof(Uri) || typeof(T).IsSubclassOf(typeof(Uri)))
+            if (typeof(T) == typeof(string) || typeof(Uri).IsAssignableFrom(typeof(T)))
                 dataGrid.DataSource = data.Select(x => new SimpleEntry<T>(x)).ToList();
             else dataGrid.DataSource = data.ToList();
         }

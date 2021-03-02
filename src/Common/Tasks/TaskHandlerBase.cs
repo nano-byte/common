@@ -72,7 +72,14 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc />
         public virtual void Output<T>(string title, NamedCollection<T> data)
             where T : INamed
-            => Output(title, data.AsEnumerable());
+        {
+            #region Sanity checks
+            if (title == null) throw new ArgumentNullException(nameof(title));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            #endregion
+
+            Output(title, data.AsEnumerable());
+        }
 
         /// <inheritdoc/>
         public abstract void Error(Exception exception);
