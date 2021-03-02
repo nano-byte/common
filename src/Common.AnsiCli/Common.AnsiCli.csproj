@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build config -->
+  <PropertyGroup>
+    <AssemblyName>NanoByte.Common.AnsiCli</AssemblyName>
+    <RootNamespace>NanoByte.Common</RootNamespace>
+    <Description>Builds upon NanoByte.Common and adds ANSI console output.</Description>
+    <TargetFrameworks>net461;netstandard2.1;net5.0</TargetFrameworks>
+    <SignAssembly>False</SignAssembly>
+    <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1' Or '$(TargetFramework)'=='net5.0'">
+    <!-- Run nullability analysis only on annotated frameworks -->
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.38.0" />
+  </ItemGroup>
+
+</Project>

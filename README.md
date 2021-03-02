@@ -11,6 +11,9 @@ NanoByte.Common provides various utility classes and data structures with an emp
 - advanced collections and
 - undo/redo logic.
 
+[![NanoByte.Common.AnsiCli](https://img.shields.io/nuget/v/NanoByte.Common.AnsiCli.svg)](https://www.nuget.org/packages/NanoByte.Common.AnsiCli/)  
+NanoByte.Common.AnsiCli builds upon NanoByte.Common and adds ANSI console output. Powered by [Spectre.Console](https://github.com/spectresystems/spectre.console).
+
 [![NanoByte.Common.WinForms](https://img.shields.io/nuget/v/NanoByte.Common.WinForms.svg)](https://www.nuget.org/packages/NanoByte.Common.WinForms/)  
 NanoByte.Common.WinForms builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on:
 

@@ -70,7 +70,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
-        private void LogHandler(LogSeverity severity, string message)
+        protected virtual void LogHandler(LogSeverity severity, string message)
         {
             void WriteLine(ConsoleColor color)
             {
@@ -138,7 +138,7 @@ namespace NanoByte.Common.Tasks
         /// Runs an <see cref="ITask"/> and reports progress updates using console output.
         /// </summary>
         /// <param name="task">The task to be run.</param>
-        private void RunTaskInteractive(ITask task)
+        protected virtual void RunTaskInteractive(ITask task)
         {
             Console.Error.WriteLine(task.Name + @"...");
             task.Run(CancellationToken, CredentialProvider, new CliProgress());
@@ -158,7 +158,7 @@ namespace NanoByte.Common.Tasks
             }
 
             Log.Debug($"Question: {question}");
-            bool answer = AskInteractive(question);
+            bool answer = AskInteractive(question, defaultAnswer);
             Log.Debug("Answer: " + (answer ? "Yes" : "No"));
             return answer;
         }
@@ -167,8 +167,9 @@ namespace NanoByte.Common.Tasks
         /// Asks the user a Yes/No question using console output.
         /// </summary>
         /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
+        /// <param name="defaultAnswer">The default answer to preselect.</param>
         /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
-        private bool AskInteractive(string question)
+        protected virtual bool AskInteractive(string question, bool? defaultAnswer)
         {
             Console.Error.WriteLine(question);
 
