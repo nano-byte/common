@@ -12,7 +12,7 @@ using NanoByte.Common.Tasks;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Provides extension methods for <seealso cref="System.Threading.WaitHandle"/>.
+    /// Provides extension methods for <see cref="System.Threading.WaitHandle"/>.
     /// </summary>
     public static class WaitHandleExtensions
     {
