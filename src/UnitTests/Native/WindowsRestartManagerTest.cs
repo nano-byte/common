@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using NanoByte.Common.Tasks;
 using Xunit;
 
 namespace NanoByte.Common.Native
@@ -18,7 +17,7 @@ namespace NanoByte.Common.Native
 
             using var restartManager = new WindowsRestartManager();
             restartManager.RegisterResources(@"C:\Windows\explorer.exe");
-            restartManager.ListApps(new SilentTaskHandler());
+            restartManager.ListApps();
         }
     }
 }

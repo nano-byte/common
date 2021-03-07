@@ -105,25 +105,23 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// Gets a list of all applications that are currently using resources that have been registered with <see cref="RegisterResources"/>.
         /// </summary>
+        /// <param name="cancellationToken">Used to signal cancellation requests.</param>
         /// <exception cref="IOException">The Restart Manager could not access the registry.</exception>
         /// <exception cref="TimeoutException">The Restart Manager could not obtain a Registry write mutex in the allotted time. A system restart is recommended.</exception>
         /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
-        public string[] ListApps(ITaskHandler handler)
+        public string[] ListApps(CancellationToken cancellationToken = default)
         {
-            #region Sanity checks
-            if (handler == null) throw new ArgumentNullException(nameof(handler));
-            #endregion
+            Log.Debug(Resources.SearchingFileReferences);
 
-            string[] names = null!;
-            handler.RunTask(new SimplePercentTask(Resources.SearchingFileReferences, delegate
+            using (cancellationToken.Register(CancellationCallback))
             {
                 var apps = ListAppsInternal(out uint arrayLength, out _);
 
-                names = new string[arrayLength];
+                string[] names = new string[arrayLength];
                 for (int i = 0; i < arrayLength; i++)
                     names[i] = apps[i].strAppName;
-            }, CancellationCallback));
-            return names;
+                return names;
+            }
         }
 
         /// <summary>
