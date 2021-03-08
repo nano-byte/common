@@ -32,7 +32,8 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
-            Log.Debug("Task: " + task.Name);
+            Log.Info(task.Name);
+
             Exception? ex = null;
             _owner.Invoke(() =>
             {

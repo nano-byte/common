@@ -124,7 +124,8 @@ namespace NanoByte.Common.Tasks
             if (task == null) throw new ArgumentNullException(nameof(task));
             #endregion
 
-            Log.Debug("Task: " + task.Name);
+            Log.Info(task.Name);
+
 #if !NET20 && !NET40
             if (Console.IsErrorRedirected)
                 base.RunTask(task);
