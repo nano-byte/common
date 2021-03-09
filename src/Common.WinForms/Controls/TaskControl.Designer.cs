@@ -53,7 +53,6 @@ namespace NanoByte.Common.Controls
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(200, 18);
             this.progressBar.TabIndex = 1;
-            this.progressBar.UseTaskbar = true;
             // 
             // progressLabel
             // 

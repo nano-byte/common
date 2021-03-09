@@ -43,7 +43,6 @@ namespace NanoByte.Common.Tasks
             this.progressBarTask.Name = "progressBarTask";
             this.progressBarTask.Size = new System.Drawing.Size(270, 23);
             this.progressBarTask.TabIndex = 0;
-            this.progressBarTask.UseTaskbar = true;
             // 
             // labelTask
             // 
