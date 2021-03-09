@@ -5,22 +5,18 @@
     <AssemblyName>NanoByte.Common.WinForms</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
-    <TargetFrameworks>net20;net40;net45;net461;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net45;net472;net5.0-windows</TargetFrameworks>
     <UseWindowsForms>True</UseWindowsForms>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
-    <!-- .NET Core MSBuild does not support legacy ResGen -->
-    <TargetFrameworks>net461;net5.0-windows</TargetFrameworks>
+    <!-- .NET Core MSBuild does not support non-primitive resources (e.g., images) for .NET Framework -->
+    <TargetFrameworks>net5.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net5.0-windows'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-    <!-- Support non-string resources -->
-    <GenerateResourceUsePreserializedResources>True</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
 
   <!-- Dependencies -->
@@ -30,13 +26,10 @@
   <ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net461'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net472'">
     <Reference Include="TaskDialog">
       <HintPath>..\..\lib\TaskDialog.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
-    <PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
   </ItemGroup>
 
   <!-- Bundle 3rd party libs in NuGet package -->
@@ -47,7 +40,7 @@
     </None>
     <None Include="..\..\lib\TaskDialog.*">
       <Pack>true</Pack>
-      <PackagePath>lib/net461</PackagePath>
+      <PackagePath>lib/net472</PackagePath>
     </None>
   </ItemGroup>
 
