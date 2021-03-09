@@ -42,7 +42,7 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         /// <param name="severity">The type/severity of the entry.</param>
         /// <param name="message">The message text of the entry.</param>
-        private void LogHandler(LogSeverity severity, string message)
+        protected virtual void LogHandler(LogSeverity severity, string message)
         {
             switch (severity)
             {
