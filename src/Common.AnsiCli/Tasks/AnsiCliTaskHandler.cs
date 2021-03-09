@@ -86,6 +86,12 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
+            if (Verbosity == Verbosity.Batch)
+            {
+                base.Output(title, message);
+                return;
+            }
+
             AnsiConsole.Render(AnsiCli.Title(title));
             if (message.EndsWith("\n")) AnsiConsole.Write(message);
             else AnsiConsole.WriteLine(message);
@@ -98,6 +104,12 @@ namespace NanoByte.Common.Tasks
             if (title == null) throw new ArgumentNullException(nameof(title));
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
+
+            if (Verbosity == Verbosity.Batch)
+            {
+                base.Output(title, data);
+                return;
+            }
 
             AnsiConsole.Render(AnsiCli.Title(title));
             if (typeof(T) == typeof(string) || typeof(Uri).IsAssignableFrom(typeof(T)))
@@ -116,6 +128,12 @@ namespace NanoByte.Common.Tasks
             if (title == null) throw new ArgumentNullException(nameof(title));
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
+
+            if (Verbosity == Verbosity.Batch)
+            {
+                base.Output(title, data);
+                return;
+            }
 
             AnsiConsole.Render(AnsiCli.Title(title));
             AnsiConsole.Render(AnsiCli.Tree(data));

@@ -65,8 +65,7 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
-            string message = StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? ""));
-            Output(title, message);
+            Output(title, StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? "")));
         }
 
         /// <inheritdoc />
