@@ -169,20 +169,6 @@ namespace NanoByte.Common.Collections
             => enumeration.SelectMany(x => x);
 
         /// <summary>
-        /// Appends an element to a list.
-        /// </summary>
-        [Pure, LinqTunnel]
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumeration, T element)
-            => enumeration.Concat(new[] {element});
-
-        /// <summary>
-        /// Prepends an element to a list.
-        /// </summary>
-        [Pure, LinqTunnel]
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> enumeration, T element)
-            => new[] {element}.Concat(enumeration);
-
-        /// <summary>
         /// Filters a sequence of elements to remove any <c>null</c> values.
         /// </summary>
         [Pure, LinqTunnel]
