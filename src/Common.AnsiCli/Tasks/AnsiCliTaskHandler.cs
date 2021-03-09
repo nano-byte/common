@@ -19,7 +19,12 @@ namespace NanoByte.Common.Tasks
         protected override void LogHandler(LogSeverity severity, string message)
         {
             void WriteLine(ConsoleColor color)
-                => AnsiCli.Stderr.WriteLine(message, new Style(color));
+            {
+                if (Console.IsErrorRedirected)
+                    Console.Error.WriteLine(message);
+                else
+                    AnsiCli.Stderr.WriteLine(message, new Style(color));
+            }
 
             switch (severity)
             {
@@ -48,8 +53,21 @@ namespace NanoByte.Common.Tasks
         private AnsiCliProgressContext? _progressContext;
 
         /// <inheritdoc/>
-        protected override void RunTaskInteractive(ITask task)
+        public override void RunTask(ITask task)
         {
+            #region Sanity checks
+            if (task == null) throw new ArgumentNullException(nameof(task));
+            #endregion
+
+            Log.Info(task.Name);
+
+            if (!IsInteractive || Console.IsErrorRedirected)
+            {
+                AnsiCli.Stderr.WriteLine(task.Name);
+                task.Run(CancellationToken, CredentialProvider);
+                return;
+            }
+
             IProgress<TaskSnapshot> progress;
             lock (_progressContextLock)
             {
@@ -86,7 +104,7 @@ namespace NanoByte.Common.Tasks
             if (message == null) throw new ArgumentNullException(nameof(message));
             #endregion
 
-            if (Verbosity == Verbosity.Batch)
+            if (Verbosity == Verbosity.Batch || Console.IsOutputRedirected)
             {
                 base.Output(title, message);
                 return;
@@ -105,7 +123,7 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
-            if (Verbosity == Verbosity.Batch)
+            if (Verbosity == Verbosity.Batch || Console.IsOutputRedirected)
             {
                 base.Output(title, data);
                 return;
@@ -129,7 +147,7 @@ namespace NanoByte.Common.Tasks
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
-            if (Verbosity == Verbosity.Batch)
+            if (Verbosity == Verbosity.Batch || Console.IsOutputRedirected)
             {
                 base.Output(title, data);
                 return;

@@ -125,23 +125,8 @@ namespace NanoByte.Common.Tasks
             #endregion
 
             Log.Info(task.Name);
-
-#if !NET20 && !NET40
-            if (Console.IsErrorRedirected)
-                base.RunTask(task);
-            else
-#endif
-                RunTaskInteractive(task);
-        }
-
-        /// <summary>
-        /// Runs an <see cref="ITask"/> and reports progress updates using console output.
-        /// </summary>
-        /// <param name="task">The task to be run.</param>
-        protected virtual void RunTaskInteractive(ITask task)
-        {
-            Console.Error.WriteLine(task.Name + @"...");
-            task.Run(CancellationToken, CredentialProvider, new CliProgress());
+            Console.Error.WriteLine(task.Name);
+            task.Run(CancellationToken, CredentialProvider, IsInteractive ? new CliProgress() : null);
         }
 
         /// <inheritdoc />
