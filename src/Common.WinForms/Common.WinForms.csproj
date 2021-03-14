@@ -8,6 +8,8 @@
     <TargetFrameworks>net20;net40;net45;net472;net5.0-windows</TargetFrameworks>
     <UseWindowsForms>True</UseWindowsForms>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
     <!-- .NET Core MSBuild does not support non-primitive resources (e.g., images) for .NET Framework -->

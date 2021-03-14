@@ -6,7 +6,6 @@
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Builds upon NanoByte.Common and adds ANSI console output.</Description>
     <TargetFrameworks>net472;netstandard2.1;net5.0</TargetFrameworks>
-    <SignAssembly>False</SignAssembly>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>

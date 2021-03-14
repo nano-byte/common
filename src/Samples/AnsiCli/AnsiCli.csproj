@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build config -->
+  <PropertyGroup>
+    <AssemblyName>NanoByte.Common.Samples.AnsiCli</AssemblyName>
+    <RootNamespace>NanoByte.Common.Samples.AnsiCli</RootNamespace>
+    <Description>Samples for NanoByte.Common.AnsiCli.</Description>
+    <TargetFrameworks>net472;net5.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <IsPackable>False</IsPackable>
+    <DeterministicSourcePaths>False</DeterministicSourcePaths>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
+    <!-- Run nullability analysis only on annotated frameworks -->
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common.AnsiCli\Common.AnsiCli.csproj" />
+  </ItemGroup>
+
+</Project>
