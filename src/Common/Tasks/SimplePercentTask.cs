@@ -13,7 +13,7 @@ namespace NanoByte.Common.Tasks
     /// </summary>
     /// <param name="percent">The workload's progress in percent.</param>
     [CLSCompliant(false)]
-    public delegate void PercentProgressCallback(uint percent);
+    public delegate void PercentProgressCallback(int percent);
 
     /// <summary>
     /// A delegate-driven task. Progress is reported in percent.
@@ -52,14 +52,14 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc/>
         protected override void Execute()
         {
-            UnitsTotal = 100;
+            CancellationTokenRegistration? RegisterCancellationCallBack()
+                => _cancellationCallback == null ? null : CancellationToken.Register(_cancellationCallback);
 
-            if (_cancellationCallback == null) _work(percent => UnitsProcessed = percent);
-            else
-            {
-                using (CancellationToken.Register(_cancellationCallback))
-                    _work(percent => UnitsProcessed = percent);
-            }
+            UnitsTotal = 100;
+            State = TaskState.Data;
+
+            using (RegisterCancellationCallBack())
+                _work(percent => UnitsProcessed = percent);
         }
     }
 }
