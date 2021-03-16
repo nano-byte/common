@@ -39,7 +39,7 @@ namespace NanoByte.Common.Tasks
                     break;
 
                 case TaskState.WebError or TaskState.IOError or TaskState.Canceled:
-                    _progressTask.Description += $" ({value.State})";
+                    _progressTask.Description = value.State + ": " + _progressTask.Description.TrimOverflow(maxLength: AnsiCli.Stderr.Profile.Width - 32);
                     _progressTask.StopTask();
                     break;
             }

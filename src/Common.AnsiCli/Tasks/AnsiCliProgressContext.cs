@@ -47,6 +47,8 @@ namespace NanoByte.Common.Tasks
         /// <param name="description">A descriptive text to show next to the progress bar.</param>
         /// <returns>A handle for updating the state of the progress bar.</returns>
         public IProgress<TaskSnapshot> Add(string description)
-            => new AnsiCliProgress(_context.AddTask(description, new() {AutoStart = false}));
+            => new AnsiCliProgress(_context.AddTask(
+                description.TrimOverflow(maxLength: AnsiCli.Stderr.Profile.Width - 24),
+                new() {AutoStart = false}));
     }
 }
