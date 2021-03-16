@@ -142,6 +142,14 @@ namespace NanoByte.Common
 
             return value.Substring(0, value.Length - count);
         }
+
+        /// <summary>
+        /// Cuts off strings longer than <paramref name="maxLength"/> and replaces the rest with ellipsis (...).
+        /// </summary>
+        public static string TrimOverflow(this string value, int maxLength)
+            => (value.Length <= maxLength)
+                ? value
+                : value.Substring(0, maxLength) + "...";
         #endregion
 
         #region Splitting

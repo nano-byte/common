@@ -91,6 +91,14 @@ namespace NanoByte.Common
         public void TestStripFromEnd() => "abc".StripFromEnd(count: 1).Should().Be("ab");
 
         [Fact]
+        public void TestTrimOverflow()
+        {
+            "abc".TrimOverflow(3).Should().Be("abc");
+            "abc".TrimOverflow(4).Should().Be("abc");
+            "abc".TrimOverflow(2).Should().Be("ab...");
+        }
+
+        [Fact]
         public void TestEscapeArgument()
         {
             "".EscapeArgument().Should().Be("\"\"", because: "Empty strings need to be escaped in order not to vanish");
