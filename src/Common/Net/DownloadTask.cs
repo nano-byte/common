@@ -160,7 +160,7 @@ namespace NanoByte.Common.Net
         {
             using var sourceStream = response.GetResponseStream();
             using var targetStream = CreateTargetStream();
-            sourceStream.CopyToEx(targetStream,
+            sourceStream!.CopyToEx(targetStream,
                 bufferSize: 8 * 1024,
                 cancellationToken: CancellationToken,
                 progress: new SynchronousProgress<long>(x => UnitsProcessed = x));

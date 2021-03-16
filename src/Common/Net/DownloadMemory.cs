@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using JetBrains.Annotations;
+using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Net
 {
@@ -33,7 +34,7 @@ namespace NanoByte.Common.Net
         [Pure]
         public byte[] GetData()
         {
-            if (_targetStream == null) throw new InvalidOperationException();
+            if (State != TaskState.Complete || _targetStream == null) throw new InvalidOperationException("Download not finished yet.");
 
             return _targetStream.ToArray();
         }

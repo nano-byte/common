@@ -28,12 +28,9 @@ namespace NanoByte.Common.Tasks
                     _progressTask.StartTask();
                     break;
 
-                case TaskState.Data:
-                    if (value.UnitsTotal > 0)
-                    {
-                        _progressTask.MaxValue = value.UnitsTotal;
-                        _progressTask.Increment(value.UnitsProcessed - _progressTask.Value);
-                    }
+                case TaskState.Data when value.UnitsTotal > 0:
+                    _progressTask.MaxValue = value.UnitsTotal;
+                    _progressTask.Increment(value.UnitsProcessed - _progressTask.Value);
                     break;
 
                 case TaskState.Complete:

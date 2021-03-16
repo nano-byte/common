@@ -30,13 +30,16 @@ namespace NanoByte.Common.Tasks
                            await _completion.Task;
                        });
 
-        public bool IsFinished => _context.IsFinished;
-
         /// <summary>
         /// Ends the progress context.
         /// </summary>
         public void Dispose()
             => _completion.SetResult(true);
+
+        /// <summary>
+        /// Indicates whether all tasks have completed.
+        /// </summary>
+        public bool IsFinished => _context.IsFinished;
 
         /// <summary>
         /// Adds a new progress bar to the context.
