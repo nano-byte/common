@@ -19,7 +19,7 @@ namespace NanoByte.Common.Tasks
         /// Starts a progress context.
         /// </summary>
         public AnsiCliProgressContext()
-            => AnsiCli.Stderr
+            => AnsiCli.Error
                       .Progress()
                       .AutoClear(true)
                       .HideCompleted(true)
@@ -48,7 +48,7 @@ namespace NanoByte.Common.Tasks
         /// <returns>A handle for updating the state of the progress bar.</returns>
         public IProgress<TaskSnapshot> Add(string description)
             => new AnsiCliProgress(_context.AddTask(
-                description.TrimOverflow(maxLength: AnsiCli.Stderr.Profile.Width - 24),
+                description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 24),
                 new() {AutoStart = false}));
     }
 }

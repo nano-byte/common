@@ -20,9 +20,9 @@ namespace NanoByte.Common
     public class AnsiCli
     {
         /// <summary>
-        /// Used to write output to stderr.
+        /// Used to write to the standard error stream.
         /// </summary>
-        public static IAnsiConsole Stderr { get; } = AnsiConsole.Create(new AnsiConsoleSettings {Out = Console.Error});
+        public static IAnsiConsole Error { get; } = AnsiConsole.Create(new AnsiConsoleSettings {Out = Console.Error});
 
         /// <summary>
         /// Formats text as a title.

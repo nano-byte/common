@@ -24,10 +24,10 @@ namespace NanoByte.Common.Net
             if (WasReportedInvalid(uri))
                 Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
 
-            AnsiCli.Stderr.WriteLine(Resources.PleasEnterCredentials, uri.ToStringRfc());
+            AnsiCli.Error.WriteLine(Resources.PleasEnterCredentials, uri.ToStringRfc());
             return new NetworkCredential(
-                AnsiCli.Stderr.Prompt(new TextPrompt<string>(Resources.UserName)),
-                AnsiCli.Stderr.Prompt(new TextPrompt<string>(Resources.Password) {IsSecret = true}));
+                AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.UserName)),
+                AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.Password) {IsSecret = true}));
         }
     }
 }

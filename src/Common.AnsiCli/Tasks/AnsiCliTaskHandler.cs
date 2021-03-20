@@ -23,7 +23,7 @@ namespace NanoByte.Common.Tasks
                 if (Console.IsErrorRedirected)
                     Console.Error.WriteLine(message);
                 else
-                    AnsiCli.Stderr.WriteLine(message, new Style(color));
+                    AnsiCli.Error.WriteLine(message, new Style(color));
             }
 
             switch (severity)
@@ -63,7 +63,7 @@ namespace NanoByte.Common.Tasks
 
             if (!IsInteractive || Console.IsErrorRedirected)
             {
-                AnsiCli.Stderr.WriteLine(task.Name);
+                AnsiCli.Error.WriteLine(task.Name);
                 task.Run(CancellationToken, CredentialProvider);
                 return;
             }
@@ -93,7 +93,7 @@ namespace NanoByte.Common.Tasks
             var prompt = new TextPrompt<char>(question) {Choices = {'y', 'n'}};
             if (defaultAnswer.HasValue)
                 prompt.DefaultValue(defaultAnswer.Value ? 'y' : 'n');
-            return AnsiCli.Stderr.Prompt(prompt) == 'y';
+            return AnsiCli.Error.Prompt(prompt) == 'y';
         }
 
         /// <inheritdoc/>
