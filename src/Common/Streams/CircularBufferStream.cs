@@ -14,6 +14,15 @@ namespace NanoByte.Common.Streams
     /// <remarks>Do not use more than one producer or consumer thread simultaneously!</remarks>
     public sealed class CircularBufferStream : Stream
     {
+        /// <summary>
+        /// Creates a new circular buffer.
+        /// </summary>
+        /// <param name="bufferSize">The maximum number of bytes the buffer can hold at any time.</param>
+        public CircularBufferStream(int bufferSize)
+        {
+            _buffer = new byte[bufferSize];
+        }
+
         /// <summary>The byte array used as a circular buffer storage.</summary>
         private readonly byte[] _buffer;
 
@@ -51,18 +60,10 @@ namespace NanoByte.Common.Streams
         public override long Length => _length;
 
         /// <summary>
-        /// Indicates that this stream has been closed.
+        /// Sets the estimated number of bytes that will run through this buffer in total; -1 for unknown.
         /// </summary>
-        public bool IsDisposed { get; private set; }
-
-        /// <summary>
-        /// Creates a new circular buffer.
-        /// </summary>
-        /// <param name="bufferSize">The maximum number of bytes the buffer can hold at any time.</param>
-        public CircularBufferStream(int bufferSize)
-        {
-            _buffer = new byte[bufferSize];
-        }
+        public override void SetLength(long value)
+            => _length = value;
 
         /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
         private readonly object _lock = new();
@@ -79,11 +80,11 @@ namespace NanoByte.Common.Streams
         /// <summary>Exceptions sent to <see cref="Read"/>ers via <see cref="RelayErrorToReader"/>.</summary>
         private Exception? _relayedException;
 
-        /// <summary>A barrier that blocks threads until new data is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _dataAvailable = new(initialState: false);
+        /// <summary>State variable for blocking threads until new data is available in the <see cref="_buffer"/>.</summary>
+        private bool _dataAvailable;
 
-        /// <summary>A barrier that blocks threads until empty space is available in the <see cref="_buffer"/>.</summary>
-        private readonly ManualResetEvent _spaceAvailable = new(initialState: true);
+        /// <summary>State variable for blocking threads until empty space is available in the <see cref="_buffer"/>.</summary>
+        private bool _spaceAvailable = true;
 
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)
@@ -100,7 +101,7 @@ namespace NanoByte.Common.Streams
             // Loop until the request number of bytes have been returned
             while (bytesCopied != count)
             {
-                if (IsDisposed) throw new ObjectDisposedException("CircularBufferStream");
+                ThrowIfDisposed();
 
                 lock (_lock)
                 {
@@ -108,15 +109,10 @@ namespace NanoByte.Common.Streams
 
                     // All data read and no new data coming
                     if (_doneWriting && _dataLength == 0) break;
-                }
 
-                // Block while buffer is empty
-                _dataAvailable.WaitOne();
+                    // Block while buffer is empty
+                    WaitFor(ref _dataAvailable);
 
-                if (IsDisposed) throw new ObjectDisposedException("CircularBufferStream");
-
-                lock (_lock)
-                {
                     // The index of the last byte currently stored in the buffer plus one
                     int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
 
@@ -140,11 +136,8 @@ namespace NanoByte.Common.Streams
                     // Roll over start pointer
                     _dataStart %= _buffer.Length;
 
-                    // Start blocking when buffer becomes empty
-                    if (_dataLength == 0) _dataAvailable.Reset();
-
-                    // Stop blocking when space becomes available
-                    if (_dataLength < _buffer.Length) _spaceAvailable.Set();
+                    if (_dataLength == 0) Reset(out _dataAvailable);
+                    if (_dataLength < _buffer.Length) Signal(out _spaceAvailable);
                 }
             }
 
@@ -158,10 +151,12 @@ namespace NanoByte.Common.Streams
         public void RelayErrorToReader(Exception exception)
         {
             lock (_lock)
+            {
                 _relayedException = exception;
 
-            // Stop waiting for data that will never come
-            _dataAvailable.Set();
+                // Stop waiting for data that will never come
+                Signal(out _dataAvailable);
+            }
         }
 
         /// <inheritdoc/>
@@ -179,15 +174,13 @@ namespace NanoByte.Common.Streams
             // Loop until the request number of bytes have been written
             while (bytesCopied != count)
             {
-                if (IsDisposed) throw new ObjectDisposedException("CircularBufferStream");
-
-                // Block while buffer is full
-                _spaceAvailable.WaitOne();
-
-                if (IsDisposed) throw new ObjectDisposedException("CircularBufferStream");
+                ThrowIfDisposed();
 
                 lock (_lock)
                 {
+                    // Block while buffer is full
+                    WaitFor(ref _spaceAvailable);
+
                     // The index of the last byte currently stored in the buffer plus one
                     int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
 
@@ -212,14 +205,18 @@ namespace NanoByte.Common.Streams
                     PositionWrite += bytesToCopy;
                     _dataLength += bytesToCopy;
 
-                    // Start blocking when buffer becomes full
-                    if (_dataLength == _buffer.Length) _spaceAvailable.Reset();
-
-                    // Stop blocking when data becomes available
-                    if (_dataLength > 0) _dataAvailable.Set();
+                    if (_dataLength == _buffer.Length) Reset(out _spaceAvailable);
+                    if (_dataLength > 0) Signal(out _dataAvailable);
                 }
             }
         }
+
+        /// <inheritdoc/>
+        public override long Seek(long offset, SeekOrigin origin)
+            => throw new NotSupportedException();
+
+        /// <inheritdoc/>
+        public override void Flush() {}
 
         /// <summary>
         /// Signals that no further calls to <see cref="Write"/> are intended and any blocked <see cref="Read"/> calls should return.
@@ -227,45 +224,57 @@ namespace NanoByte.Common.Streams
         public void DoneWriting()
         {
             lock (_lock)
+            {
                 _doneWriting = true;
 
-            // Stop waiting for data that will never come
-            _dataAvailable.Set();
+                // Stop waiting for data that will never come
+                Signal(out _dataAvailable);
+            }
+        }
+
+        private void Signal(out bool flag)
+        {
+            flag = true;
+            Monitor.PulseAll(_lock);
+        }
+
+        private static void Reset(out bool flag)
+        {
+            flag = false;
+        }
+
+        private void WaitFor(ref bool flag)
+        {
+            while (!flag)
+                Monitor.Wait(_lock);
+
+            ThrowIfDisposed();
         }
 
         /// <summary>
-        /// Sets the estimated number of bytes that will run through this buffer in total; -1 for unknown.
+        /// Indicates that this stream has been closed.
         /// </summary>
-        public override void SetLength(long value) => _length = value;
+        public bool IsDisposed { get; private set; }
 
-        #region Unsupported operations
-        /// <inheritdoc/>
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        private void ThrowIfDisposed()
+        {
+            if (IsDisposed) throw new ObjectDisposedException(nameof(CircularBufferStream));
+        }
 
-        /// <inheritdoc/>
-        public override void Flush() {}
-        #endregion
-
-        #region Dispose
         /// <inheritdoc/>
         protected override void Dispose(bool disposing)
         {
-            IsDisposed = true;
-
-            try
+            if (disposing)
             {
-                // Signal all to prevent live locks
-                _dataAvailable.Set();
-                _spaceAvailable.Set();
+                lock (_lock)
+                {
+                    IsDisposed = true;
 
-                _dataAvailable.Close();
-                _spaceAvailable.Close();
-            }
-            finally
-            {
-                base.Dispose(disposing);
+                    // Signal all to prevent live locks
+                    Signal(out _dataAvailable);
+                    Signal(out _spaceAvailable);
+                }
             }
         }
-        #endregion
     }
 }
