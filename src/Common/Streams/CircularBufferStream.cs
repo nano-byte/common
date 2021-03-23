@@ -121,14 +121,14 @@ namespace NanoByte.Common.Streams
                     int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
 
                     // Determine how many bytes can be read in one go
-                    int contigousDataBytes;
-                    if (_dataLength == 0) contigousDataBytes = 0; // Empty
-                    else if (_dataLength == _buffer.Length) contigousDataBytes = _buffer.Length - _dataStart; // Full, potentially wrap around, partial read
-                    else if (_dataStart < dataEnd) contigousDataBytes = dataEnd - _dataStart; // No wrap around, read all
-                    else contigousDataBytes = _buffer.Length - _dataStart; // Wrap around, partial read
-                    Debug.Assert(contigousDataBytes <= _dataLength, "Contigous data length can not exceed total data length");
+                    int contiguousDataBytes;
+                    if (_dataLength == 0) contiguousDataBytes = 0; // Empty
+                    else if (_dataLength == _buffer.Length) contiguousDataBytes = _buffer.Length - _dataStart; // Full, potentially wrap around, partial read
+                    else if (_dataStart < dataEnd) contiguousDataBytes = dataEnd - _dataStart; // No wrap around, read all
+                    else contiguousDataBytes = _buffer.Length - _dataStart; // Wrap around, partial read
+                    Debug.Assert(contiguousDataBytes <= _dataLength, "Contiguous data length can not exceed total data length");
 
-                    int bytesToCopy = Math.Min(contigousDataBytes, count - bytesCopied);
+                    int bytesToCopy = Math.Min(contiguousDataBytes, count - bytesCopied);
                     Buffer.BlockCopy(_buffer, _dataStart, buffer, offset + bytesCopied, bytesToCopy);
 
                     // Update counters
@@ -192,19 +192,19 @@ namespace NanoByte.Common.Streams
                     int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
 
                     // Determine how many bytes can be written in one go
-                    int contigousFreeBytes;
-                    if (_dataLength == _buffer.Length) contigousFreeBytes = 0; // Full
+                    int contiguousFreeBytes;
+                    if (_dataLength == _buffer.Length) contiguousFreeBytes = 0; // Full
                     else if (_dataLength == 0)
                     { // Empty, realign with buffer start
                         _dataStart = 0;
                         dataEnd = 0;
-                        contigousFreeBytes = _buffer.Length;
+                        contiguousFreeBytes = _buffer.Length;
                     }
-                    else if (dataEnd < _dataStart) contigousFreeBytes = _dataStart - dataEnd; // No wrap around, full write
-                    else contigousFreeBytes = _buffer.Length - dataEnd; // Wrap around, partial write
-                    Debug.Assert(contigousFreeBytes <= (_buffer.Length - _dataLength), "Contigous free space can not exceed total free space");
+                    else if (dataEnd < _dataStart) contiguousFreeBytes = _dataStart - dataEnd; // No wrap around, full write
+                    else contiguousFreeBytes = _buffer.Length - dataEnd; // Wrap around, partial write
+                    Debug.Assert(contiguousFreeBytes <= (_buffer.Length - _dataLength), "Contiguous free space can not exceed total free space");
 
-                    int bytesToCopy = Math.Min(contigousFreeBytes, count - bytesCopied);
+                    int bytesToCopy = Math.Min(contiguousFreeBytes, count - bytesCopied);
                     Buffer.BlockCopy(buffer, offset + bytesCopied, _buffer, dataEnd, bytesToCopy);
 
                     // Update counters
