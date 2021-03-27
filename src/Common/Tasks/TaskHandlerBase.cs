@@ -38,7 +38,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Indicates whether the user can provide input.
         /// </summary>
-        protected bool IsInteractive
+        protected virtual bool IsInteractive
             => OSUtils.IsInteractive && Verbosity != Verbosity.Batch;
 
         /// <inheritdoc/>

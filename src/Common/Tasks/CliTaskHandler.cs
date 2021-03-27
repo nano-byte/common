@@ -33,6 +33,12 @@ namespace NanoByte.Common.Tasks
             Log.Handler += LogHandler;
         }
 
+#if !NET20 && !NET40
+        /// <inheritdoc/>
+        protected override bool IsInteractive
+            => base.IsInteractive && !Console.IsErrorRedirected;
+#endif
+
         /// <summary>
         /// Unregisters the <see cref="Log.Handler"/>.
         /// </summary>

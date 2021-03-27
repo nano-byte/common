@@ -20,10 +20,10 @@ namespace NanoByte.Common.Tasks
         {
             void WriteLine(ConsoleColor color)
             {
-                if (Console.IsErrorRedirected)
-                    Console.Error.WriteLine(message);
-                else
+                if (IsInteractive)
                     AnsiCli.Error.WriteLine(message, new Style(color));
+                else
+                    Console.Error.WriteLine(message);
             }
 
             switch (severity)
@@ -61,7 +61,7 @@ namespace NanoByte.Common.Tasks
 
             Log.Info(task.Name);
 
-            if (!IsInteractive || Console.IsErrorRedirected)
+            if (!IsInteractive)
             {
                 AnsiCli.Error.WriteLine(task.Name);
                 task.Run(CancellationToken, CredentialProvider);
