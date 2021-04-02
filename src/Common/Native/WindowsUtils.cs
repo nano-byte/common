@@ -156,21 +156,22 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
-        /// Indicates whether the current process is running in an interactive session (rather than, e.g. as a service). Always returns <c>true</c> on non-Windows NT systems.
+        /// Indicates whether the current process is running in a GUI session (rather than, e.g., as a service or in an SSH session).
+        /// Always <c>true</c> on non-Windows NT systems.
         /// </summary>
-        public static bool IsInteractive
+        public static bool IsGuiSession { get; } = DetectGuiSession();
+
+        private static bool DetectGuiSession()
         {
-            get
+            if (!IsWindowsNT) return true;
+            try
             {
-                if (!IsWindowsNT) return true;
-                try
-                {
-                    return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(new SecurityIdentifier(WellKnownSidType.InteractiveSid, null));
-                }
-                catch
-                {
-                    return true;
-                }
+                return new WindowsPrincipal(WindowsIdentity.GetCurrent())
+                   .IsInRole(new SecurityIdentifier(WellKnownSidType.InteractiveSid, null));
+            }
+            catch
+            {
+                return true;
             }
         }
 

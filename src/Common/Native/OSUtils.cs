@@ -14,12 +14,6 @@ namespace NanoByte.Common.Native
     /// </summary>
     public static class OSUtils
     {
-        /// <summary>
-        /// Indicates whether the current process is running in an interactive session (rather than, e.g. as a CI job or a service).
-        /// </summary>
-        public static bool IsInteractive
-            => string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) && WindowsUtils.IsInteractive;
-
         private static readonly Regex
             _envVariableLongStyle = new(@"\${([^{}]+)}"),
             _envVariableShortStyle = new(@"\$([^{}\$\s\\/-]+)");

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NanoByte.Common.Collections;
-using NanoByte.Common.Native;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks
@@ -39,7 +38,7 @@ namespace NanoByte.Common.Tasks
         /// Indicates whether the user can provide input.
         /// </summary>
         protected virtual bool IsInteractive
-            => OSUtils.IsInteractive && Verbosity != Verbosity.Batch;
+            => Verbosity != Verbosity.Batch;
 
         /// <inheritdoc/>
         public virtual void RunTask(ITask task)

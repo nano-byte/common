@@ -33,12 +33,6 @@ namespace NanoByte.Common.Tasks
             Log.Handler += LogHandler;
         }
 
-#if !NET20 && !NET40
-        /// <inheritdoc/>
-        protected override bool IsInteractive
-            => base.IsInteractive && !Console.IsErrorRedirected;
-#endif
-
         /// <summary>
         /// Unregisters the <see cref="Log.Handler"/>.
         /// </summary>
@@ -122,6 +116,12 @@ namespace NanoByte.Common.Tasks
             => WindowsUtils.IsWindowsNT
                 ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsSilentCredentialProvider()
                 : null;
+
+#if !NET20 && !NET40
+        /// <inheritdoc/>
+        protected override bool IsInteractive
+            => base.IsInteractive && !Console.IsErrorRedirected;
+#endif
 
         /// <inheritdoc/>
         public override void RunTask(ITask task)

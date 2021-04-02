@@ -68,6 +68,10 @@ namespace NanoByte.Common.Tasks
                 : null;
 
         /// <inheritdoc/>
+        protected override bool IsInteractive
+            => base.IsInteractive && WindowsUtils.IsGuiSession;
+
+        /// <inheritdoc/>
         public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
         {
             #region Sanity checks
