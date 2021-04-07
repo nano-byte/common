@@ -18,10 +18,10 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Always returns <paramref name="defaultAnswer"/>.
         /// </summary>
-        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+        protected override bool AskInteractive(string question, bool defaultAnswer)
         {
-            Log.Info($"Question: {question}\nAutomatic answer: {defaultAnswer}");
-            return defaultAnswer ?? false;
+            Log.Info($"Question: {question}\nAutomatic/silent answer: {defaultAnswer}");
+            return defaultAnswer;
         }
 
         /// <inheritdoc/>

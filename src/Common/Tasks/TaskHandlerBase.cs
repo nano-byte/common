@@ -50,8 +50,48 @@ namespace NanoByte.Common.Tasks
             task.Run(CancellationToken, CredentialProvider);
         }
 
+        private readonly object _askInteractiveLock = new();
+
         /// <inheritdoc/>
-        public abstract bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null);
+        public bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+        {
+            #region Sanity checks
+            if (question == null) throw new ArgumentNullException(nameof(question));
+            #endregion
+
+            if (IsInteractive || !defaultAnswer.HasValue)
+            {
+                lock (_askInteractiveLock)
+                {
+                    Log.Debug("Question: " + question);
+                    try
+                    {
+                        bool answer = AskInteractive(question, defaultAnswer ?? false);
+                        Log.Debug(answer ? "Answer: Yes" : "Answer: No");
+                        return answer;
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        Log.Debug("Answer: Cancel");
+                        throw;
+                    }
+                }
+            }
+            else
+            {
+                Log.Warn(alternateMessage ?? $"Using default answer {defaultAnswer.Value} for question: {question}");
+                return defaultAnswer.Value;
+            }
+        }
+
+        /// <summary>
+        /// Asks the user a Yes/No/Cancel question.
+        /// </summary>
+        /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
+        /// <param name="defaultAnswer">The default answer to preselect.</param>
+        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
+        /// <exception cref="OperationCanceledException">Throw if the user answered with 'Cancel'.</exception>
+        protected abstract bool AskInteractive(string question, bool defaultAnswer);
 
         /// <inheritdoc/>
         public abstract void Output(string title, string message);

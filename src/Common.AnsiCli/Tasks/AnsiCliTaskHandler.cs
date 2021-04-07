@@ -88,13 +88,11 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <inheritdoc/>
-        protected override bool AskInteractive(string question, bool? defaultAnswer)
-        {
-            var prompt = new TextPrompt<char>(question) {Choices = {'y', 'n'}};
-            if (defaultAnswer.HasValue)
-                prompt.DefaultValue(defaultAnswer.Value ? 'y' : 'n');
-            return AnsiCli.Error.Prompt(prompt) == 'y';
-        }
+        protected override bool AskInteractive(string question, bool defaultAnswer)
+            => AnsiCli.Error.Prompt(new TextPrompt<char>(question)
+                                   .AddChoices(new[] {'y', 'n'})
+                                   .DefaultValue(defaultAnswer ? 'y' : 'n'))
+            == 'y';
 
         /// <inheritdoc/>
         public override void Output(string title, string message)

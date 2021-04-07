@@ -135,33 +135,10 @@ namespace NanoByte.Common.Tasks
             task.Run(CancellationToken, CredentialProvider, IsInteractive ? new CliProgress() : null);
         }
 
-        /// <inheritdoc />
-        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+        /// <inheritdoc/>
+        protected override bool AskInteractive(string question, bool defaultAnswer)
         {
-            #region Sanity checks
-            if (question == null) throw new ArgumentNullException(nameof(question));
-            #endregion
-
-            if (!IsInteractive && defaultAnswer.HasValue)
-            {
-                if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
-                return defaultAnswer.Value;
-            }
-
             Log.Debug($"Question: {question}");
-            bool answer = AskInteractive(question, defaultAnswer);
-            Log.Debug("Answer: " + (answer ? "Yes" : "No"));
-            return answer;
-        }
-
-        /// <summary>
-        /// Asks the user a Yes/No question using console output.
-        /// </summary>
-        /// <param name="question">The question and comprehensive information to help the user make an informed decision.</param>
-        /// <param name="defaultAnswer">The default answer to preselect.</param>
-        /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
-        protected virtual bool AskInteractive(string question, bool? defaultAnswer)
-        {
             Console.Error.WriteLine(question);
 
             // Loop until the user has made a valid choice

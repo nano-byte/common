@@ -72,22 +72,13 @@ namespace NanoByte.Common.Tasks
             => base.IsInteractive && WindowsUtils.IsGuiSession;
 
         /// <inheritdoc/>
-        public override bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+        protected override bool AskInteractive(string question, bool defaultAnswer)
         {
-            #region Sanity checks
-            if (question == null) throw new ArgumentNullException(nameof(question));
-            #endregion
-
-            if (!IsInteractive && defaultAnswer.HasValue)
-            {
-                if (!string.IsNullOrEmpty(alternateMessage)) Log.Warn(alternateMessage);
-                return defaultAnswer.Value;
-            }
+            Log.Debug("Question: " + question);
 
             // Treat questions that default to "Yes" as less severe than those that default to "No"
-            var severity = defaultAnswer == true ? MsgSeverity.Info : MsgSeverity.Warn;
+            var severity = defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn;
 
-            Log.Debug("Question: " + question);
             switch (ThreadUtils.RunSta(() => Msg.YesNoCancel(null, question, severity)))
             {
                 case DialogResult.Yes:
