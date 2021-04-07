@@ -2,7 +2,12 @@
 // Licensed under the MIT License
 
 using System;
+
+#if NET20
 using System.Collections.Generic;
+#else
+using System.Collections.Concurrent;
+#endif
 
 namespace NanoByte.Common.Collections
 {
@@ -15,8 +20,12 @@ namespace NanoByte.Common.Collections
     public abstract class TransparentCacheBase<TKey, TValue>
         where TKey : notnull
     {
+#if NET20
         private readonly Dictionary<TKey, TValue> _lookup = new();
         private readonly object _lock = new();
+#else
+        private readonly ConcurrentDictionary<TKey, TValue> _lookup = new();
+#endif
 
         /// <summary>
         /// Retrieves a value from the cache.
@@ -29,12 +38,16 @@ namespace NanoByte.Common.Collections
                 if (key == null) throw new ArgumentNullException(nameof(key));
                 #endregion
 
+#if NET20
                 lock (_lock)
                 {
                     if (!_lookup.TryGetValue(key, out var result))
                         _lookup.Add(key, result = Retrieve(key));
                     return result;
                 }
+#else
+                return _lookup.GetOrAdd(key, Retrieve);
+#endif
             }
         }
 
@@ -49,8 +62,12 @@ namespace NanoByte.Common.Collections
         /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
         public bool Remove(TKey key)
         {
+#if NET20
             lock (_lock)
                 return _lookup.Remove(key);
+#else
+            return _lookup.TryRemove(key, out _);
+#endif
         }
 
         /// <summary>
@@ -58,8 +75,10 @@ namespace NanoByte.Common.Collections
         /// </summary>
         public void Clear()
         {
+#if NET20
             lock (_lock)
-                _lookup.Clear();
+#endif
+            _lookup.Clear();
         }
     }
 }
