@@ -157,13 +157,12 @@ namespace NanoByte.Common.Native
 
         /// <summary>
         /// Indicates whether the current process is running in a GUI session (rather than, e.g., as a service or in an SSH session).
-        /// Always <c>true</c> on non-Windows NT systems.
+        /// Always <c>false</c> on non-Windows systems.
         /// </summary>
-        public static bool IsGuiSession { get; } = DetectGuiSession();
+        public static bool IsGuiSession { get; } = IsWindows && DetectGuiSession();
 
         private static bool DetectGuiSession()
         {
-            if (!IsWindowsNT) return true;
             try
             {
                 return new WindowsPrincipal(WindowsIdentity.GetCurrent())

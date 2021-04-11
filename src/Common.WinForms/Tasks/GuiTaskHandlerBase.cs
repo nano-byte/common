@@ -69,7 +69,7 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         protected override bool IsInteractive
-            => base.IsInteractive && WindowsUtils.IsGuiSession;
+            => base.IsInteractive && (WindowsUtils.IsGuiSession || !WindowsUtils.IsWindows);
 
         /// <inheritdoc/>
         protected override bool AskInteractive(string question, bool defaultAnswer)
