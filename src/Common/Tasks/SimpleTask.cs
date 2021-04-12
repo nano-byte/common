@@ -20,10 +20,10 @@ namespace NanoByte.Common.Tasks
         private readonly Action _work;
 
         /// <summary>A callback to be called when cancellation is requested via a <see cref="CancellationToken"/>.</summary>
-        private readonly Action? _cancelationCallback;
+        private readonly Action? _cancellationCallback;
 
         /// <inheritdoc/>
-        public override bool CanCancel => _cancelationCallback != null;
+        public override bool CanCancel => _cancellationCallback != null;
 
         /// <inheritdoc/>
         protected override bool UnitsByte => false;
@@ -38,16 +38,16 @@ namespace NanoByte.Common.Tasks
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             _work = work ?? throw new ArgumentNullException(nameof(work));
-            _cancelationCallback = cancellationCallback;
+            _cancellationCallback = cancellationCallback;
         }
 
         /// <inheritdoc/>
         protected override void Execute()
         {
-            if (_cancelationCallback == null) _work();
+            if (_cancellationCallback == null) _work();
             else
             {
-                using (CancellationToken.Register(_cancelationCallback))
+                using (CancellationToken.Register(_cancellationCallback))
                     _work();
             }
         }
