@@ -79,9 +79,9 @@ namespace NanoByte.Common.Tasks
 
             lock (_progressContextLock)
             {
-                if (_progressContext.IsFinished)
+                if (_progressContext != null && _progressContext.IsFinished)
                 {
-                    _progressContext?.Dispose();
+                    _progressContext.Dispose();
                     _progressContext = null;
                 }
             }
@@ -89,10 +89,19 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         protected override bool AskInteractive(string question, bool defaultAnswer)
-            => AnsiCli.Error.Prompt(new TextPrompt<char>(question)
-                                   .AddChoices(new[] {'y', 'n'})
-                                   .DefaultValue(defaultAnswer ? 'y' : 'n'))
-            == 'y';
+        {
+            lock (_progressContextLock)
+            {
+                // Avoid showing progress bars and input prompts at the same time
+                _progressContext?.Dispose();
+                _progressContext = null;
+
+                return AnsiCli.Error.Prompt(new TextPrompt<char>(question)
+                                           .AddChoices(new[] {'y', 'n'})
+                                           .DefaultValue(defaultAnswer ? 'y' : 'n'))
+                    == 'y';
+            }
+        }
 
         /// <inheritdoc/>
         public override void Output(string title, string message)
