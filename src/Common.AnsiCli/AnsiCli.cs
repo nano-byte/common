@@ -22,7 +22,7 @@ namespace NanoByte.Common
         /// <summary>
         /// Used to write to the standard error stream.
         /// </summary>
-        public static IAnsiConsole Error { get; } = AnsiConsole.Create(new AnsiConsoleSettings {Out = Console.Error});
+        public static IAnsiConsole Error { get; } = AnsiConsole.Create(new AnsiConsoleSettings {Out = new AnsiConsoleOutput(Console.Error)});
 
         /// <summary>
         /// Formats text as a title.
