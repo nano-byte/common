@@ -17,6 +17,8 @@ Log.Info("info");
 Log.Warn("warn");
 Log.Error("error");
 
+handler.RunTask(new SimpleTask("Waiting", () => Thread.Sleep(2000)));
+
 Parallel.For(2, 5, x =>
 {
     // ReSharper disable once AccessToDisposedClosure

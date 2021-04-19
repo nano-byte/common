@@ -25,11 +25,13 @@ namespace NanoByte.Common.Tasks
             switch (value.State)
             {
                 case TaskState.Started:
+                    _progressTask.IsIndeterminate = true;
                     _progressTask.StartTask();
                     break;
 
                 case TaskState.Data when value.UnitsTotal > 0:
                     _progressTask.MaxValue = value.UnitsTotal;
+                    _progressTask.IsIndeterminate = false;
                     _progressTask.Increment(value.UnitsProcessed - _progressTask.Value);
                     break;
 
@@ -39,8 +41,8 @@ namespace NanoByte.Common.Tasks
                     break;
 
                 case TaskState.WebError or TaskState.IOError or TaskState.Canceled:
+                    _progressTask.IsIndeterminate = true;
                     _progressTask.Description = value.State + ": " + _progressTask.Description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 32);
-                    _progressTask.StopTask();
                     break;
             }
         }
