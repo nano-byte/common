@@ -19,12 +19,7 @@ namespace NanoByte.Common.Tasks
         protected override void LogHandler(LogSeverity severity, string message)
         {
             void WriteLine(ConsoleColor color)
-            {
-                if (IsInteractive)
-                    AnsiCli.Error.WriteLine(message, new Style(color));
-                else
-                    Console.Error.WriteLine(message);
-            }
+                => AnsiCli.Error.WriteLine(message, new Style(color));
 
             switch (severity)
             {
