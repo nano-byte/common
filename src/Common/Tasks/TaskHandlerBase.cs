@@ -79,7 +79,10 @@ namespace NanoByte.Common.Tasks
             }
             else
             {
-                Log.Warn(alternateMessage ?? $"Using default answer {defaultAnswer.Value} for question: {question}");
+                if (string.IsNullOrEmpty(alternateMessage))
+                    Log.Info("Using default answer " + (defaultAnswer.Value ? "Yes" : "No") + " for question: " + question);
+                else
+                    Log.Warn(alternateMessage);
                 return defaultAnswer.Value;
             }
         }
