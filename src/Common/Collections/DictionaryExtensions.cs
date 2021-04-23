@@ -105,7 +105,7 @@ namespace NanoByte.Common.Collections
             if (dictionary.TryGetValue(key, out var existingValue))
                 return existingValue;
 
-            var newValue = await valueFactory();
+            var newValue = await valueFactory().ConfigureAwait(false);
 
             // Detect and handle races
             if (dictionary.TryGetValue(key, out existingValue))

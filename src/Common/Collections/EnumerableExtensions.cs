@@ -376,13 +376,13 @@ namespace NanoByte.Common.Collections
 
                 if (tasks.Count == maxParallel)
                 {
-                    var completedTask = await Task.WhenAny(tasks.ToArray());
-                    await completedTask; // observe exceptions
+                    var completedTask = await Task.WhenAny(tasks.ToArray()).ConfigureAwait(true);
+                    await completedTask.ConfigureAwait(true); // observe exceptions
                     tasks.Remove(completedTask);
                 }
             }
 
-            await Task.WhenAll(tasks.ToArray());
+            await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
         }
 #endif
 

@@ -254,7 +254,7 @@ namespace NanoByte.Common
                     // Remember the element for potential rollback
                     rollbackJournal.AddFirst(element);
 
-                    await apply(element);
+                    await apply(element).ConfigureAwait(true);
                 }
             }
             catch
@@ -263,7 +263,7 @@ namespace NanoByte.Common
                 {
                     try
                     {
-                        await rollback(element);
+                        await rollback(element).ConfigureAwait(true);
                     }
                     catch (Exception ex)
                     {
@@ -300,7 +300,7 @@ namespace NanoByte.Common
             {
                 try
                 {
-                    await action(enumerator.Current);
+                    await action(enumerator.Current).ConfigureAwait(true);
                     return;
                 }
                 catch (Exception ex)
@@ -329,12 +329,12 @@ namespace NanoByte.Common
             int retryCounter = 0;
             Retry:
             if (retryCounter >= maxRetries)
-                await action(lastAttempt: true);
+                await action(lastAttempt: true).ConfigureAwait(false);
             else
             {
                 try
                 {
-                    await action(lastAttempt: false);
+                    await action(lastAttempt: false).ConfigureAwait(true);
                 }
                 catch (TException ex)
                 {
@@ -342,7 +342,7 @@ namespace NanoByte.Common
 
                     int delay = random.Next(50, 1000 * (1 << retryCounter));
                     Log.Info("Retrying in " + delay + " milliseconds");
-                    await Task.Delay(delay);
+                    await Task.Delay(delay).ConfigureAwait(true);
 
                     retryCounter++;
                     goto Retry;
