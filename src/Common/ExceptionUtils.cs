@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
@@ -17,6 +16,10 @@ using System.Runtime.ExceptionServices;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
+#endif
+
+#if !NET
+using System.Diagnostics;
 #endif
 
 namespace NanoByte.Common
@@ -197,6 +200,7 @@ namespace NanoByte.Common
             if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
+            var random = GetRandom();
             int retryCounter = 0;
             Retry:
             if (retryCounter >= maxRetries)
@@ -210,17 +214,6 @@ namespace NanoByte.Common
                 catch (TException ex)
                 {
                     Log.Info(ex);
-
-                    Random random;
-                    try
-                    {
-                        // Use process ID as a seed to ensure we get different values than other competing processes on the same machine
-                        random = new Random(Process.GetCurrentProcess().Id);
-                    }
-                    catch (Exception)
-                    {
-                        random = new Random();
-                    }
 
                     int delay = random.Next(50, 1000 * (1 << retryCounter));
                     Log.Info("Retrying in " + delay + " milliseconds");
@@ -332,6 +325,7 @@ namespace NanoByte.Common
             if (action == null) throw new ArgumentNullException(nameof(action));
             #endregion
 
+            var random = GetRandom();
             int retryCounter = 0;
             Retry:
             if (retryCounter >= maxRetries)
@@ -346,17 +340,6 @@ namespace NanoByte.Common
                 {
                     Log.Info(ex);
 
-                    Random random;
-                    try
-                    {
-                        // Use process ID as a seed to ensure we get different values than other competing processes on the same machine
-                        random = new Random(Process.GetCurrentProcess().Id);
-                    }
-                    catch (Exception)
-                    {
-                        random = new Random();
-                    }
-
                     int delay = random.Next(50, 1000 * (1 << retryCounter));
                     Log.Info("Retrying in " + delay + " milliseconds");
                     await Task.Delay(delay);
@@ -367,5 +350,24 @@ namespace NanoByte.Common
             }
         }
 #endif
+
+        /// <summary>
+        /// Uses process ID as a random seed to ensure we get different values than other competing processes on the same machine.
+        /// </summary>
+        private static Random GetRandom()
+        {
+            try
+            {
+#if NET
+                return new Random(Environment.ProcessId);
+#else
+                return new Random(Process.GetCurrentProcess().Id);
+#endif
+            }
+            catch (Exception)
+            {
+                return new Random();
+            }
+        }
     }
 }
