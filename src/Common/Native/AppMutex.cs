@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Native
 {

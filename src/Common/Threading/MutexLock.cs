@@ -4,7 +4,7 @@
 using System;
 using System.Threading;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Provides a wrapper around <see cref="Mutex"/> that automatically acquires on creating and releases on <see cref="Dispose"/>.

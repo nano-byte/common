@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Tasks
 {

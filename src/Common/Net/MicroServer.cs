@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using NanoByte.Common.Streams;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Net
 {

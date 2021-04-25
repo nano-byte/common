@@ -9,7 +9,7 @@ using NanoByte.Common.Native;
 using NanoByte.Common.Tasks;
 #endif
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Provides extension methods for <see cref="System.Threading.WaitHandle"/>.

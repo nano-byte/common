@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Provides helper methods for launching <see cref="Thread"/>s.

@@ -3,6 +3,7 @@
 
 using System;
 using System.ComponentModel;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Storage
 {

@@ -9,6 +9,7 @@ using NanoByte.Common.Info;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Net
 {

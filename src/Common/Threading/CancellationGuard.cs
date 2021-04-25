@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Ensures that a block of code running on a background thread cleanly exits before a <see cref="CancellationTokenSource.Cancel()"/> call completes.

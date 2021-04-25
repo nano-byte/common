@@ -5,6 +5,7 @@ using NanoByte.Common.Collections;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Tasks
 {
