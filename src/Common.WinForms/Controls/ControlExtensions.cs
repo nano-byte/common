@@ -37,5 +37,25 @@ namespace NanoByte.Common.Controls
 
             return (T)control.Invoke(action);
         }
+
+        /// <summary>
+        /// Returns the current DPI scaling factor relative to the default value of 96 DPI.
+        /// </summary>
+        public static float GetDpiScale(this Control control)
+        {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            #endregion
+
+            try
+            {
+                using var graphics = control.CreateGraphics();
+                return graphics.DpiX / 96.0f;
+            }
+            catch
+            {
+                return 1;
+            }
+        }
     }
 }
