@@ -3,10 +3,9 @@
 
 using System.IO;
 using FluentAssertions;
-using NanoByte.Common.Native;
 using Xunit;
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Contains test methods for <see cref="AppMutex"/>.
