@@ -1,10 +1,10 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Controls
 {
     /// <summary>
-    /// How severe/important a message is
+    /// How severe/important a message is.
     /// </summary>
     public enum MsgSeverity
     {

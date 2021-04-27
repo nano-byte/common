@@ -18,7 +18,7 @@ using NanoByte.Common.Collections;
 using TaskDialog;
 #endif
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Controls
 {
     /// <summary>
     /// Provides easier access to typical <see cref="MessageBox"/> configurations and automatically upgrades to TaskDialogs when available.
