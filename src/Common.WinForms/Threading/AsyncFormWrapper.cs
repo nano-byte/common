@@ -6,13 +6,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
-using NanoByte.Common.Threading;
 
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
 #endif
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Lazily starts a separate thread with a message loop for a <see cref="Form"/>.
