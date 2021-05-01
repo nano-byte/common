@@ -82,6 +82,13 @@ namespace NanoByte.Common.Tasks
             }
         }
 
+        /// <inheritdoc />
+        public override void Dispose()
+        {
+            _progressContext?.Dispose();
+            base.Dispose();
+        }
+
         /// <inheritdoc/>
         protected override bool AskInteractive(string question, bool defaultAnswer)
         {
