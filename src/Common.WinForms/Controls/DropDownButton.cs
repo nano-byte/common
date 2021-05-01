@@ -29,10 +29,13 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ContentAlignment = System.Drawing.ContentAlignment;
+
+#if !NET
+using System.Security.Permissions;
+#endif
 
 namespace NanoByte.Common.Controls
 {

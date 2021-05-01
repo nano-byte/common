@@ -79,7 +79,7 @@ namespace NanoByte.Common.Undo
         /// </summary>
         private static GridItem MoveOutOfNested(GridItem item)
         {
-            while (item.Parent != null && item.Parent.GridItemType == GridItemType.Property)
+            while (item.Parent is {GridItemType: GridItemType.Property})
                 item = item.Parent;
             return item;
         }

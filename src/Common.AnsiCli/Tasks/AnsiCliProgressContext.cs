@@ -23,7 +23,7 @@ namespace NanoByte.Common.Tasks
                       .Progress()
                       .AutoClear(true)
                       .HideCompleted(true)
-                      .Columns(new ProgressColumn[] {new TaskDescriptionColumn(), new ProgressBarColumn(), new PercentageColumn(), new RemainingTimeColumn()})
+                      .Columns(new TaskDescriptionColumn(), new ProgressBarColumn(), new PercentageColumn(), new RemainingTimeColumn())
                       .StartAsync(async ctx =>
                        {
                            _context = ctx;

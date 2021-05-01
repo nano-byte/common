@@ -71,7 +71,7 @@ namespace NanoByte.Common.Undo
         /// <param name="newValue">The new value to be set.</param>
         /// <typeparam name="T">The type of the value to set.</typeparam>
         public static SetValueCommand<T> For<T>(Func<T> getValue, Action<T> setValue, T newValue)
-            => For(PropertyPointer.For<T>(getValue, setValue, default!), newValue);
+            => For(PropertyPointer.For(getValue, setValue, default!), newValue);
 
 #if !NET20
         /// <summary>

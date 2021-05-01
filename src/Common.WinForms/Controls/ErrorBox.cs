@@ -64,7 +64,7 @@ namespace NanoByte.Common.Controls
         {
             if (sender is Control control)
             {
-                new ContextMenuStrip()
+                new ContextMenuStrip
                 {
                     Items =
                     {

@@ -74,7 +74,7 @@ namespace NanoByte.Common.Tasks
 
             lock (_progressContextLock)
             {
-                if (_progressContext != null && _progressContext.IsFinished)
+                if (_progressContext is {IsFinished: true})
                 {
                     _progressContext.Dispose();
                     _progressContext = null;

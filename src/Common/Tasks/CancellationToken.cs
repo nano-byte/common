@@ -40,7 +40,7 @@ namespace NanoByte.Common.Tasks
         /// <summary>
         /// Indicates whether cancellation has been requested.
         /// </summary>
-        public bool IsCancellationRequested => (_source != null) && _source.IsCancellationRequested;
+        public bool IsCancellationRequested => _source is {IsCancellationRequested: true};
 
         /// <summary>
         /// Throws an <see cref="OperationCanceledException"/> if cancellation has been requested.

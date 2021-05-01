@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Values;
-using Resources = NanoByte.Common.Properties.Resources;
 
 namespace NanoByte.Common.Storage
 {
