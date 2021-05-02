@@ -3,10 +3,12 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
@@ -150,6 +152,78 @@ namespace NanoByte.Common
                     Environment.SetEnvironmentVariable((string)entry.Key, null);
                 }
             }
+        }
+
+        /// <summary>
+        /// Combines multiple strings into one for use as a Windows command-line argument using <see cref="EscapeArgument"/>.
+        /// </summary>
+        /// <param name="parts">The strings to be combined.</param>
+        /// <remarks>
+        /// This corresponds to Windows' handling of command-line arguments as specified in:
+        /// https://docs.microsoft.com/en-us/cpp/cpp/main-function-command-line-args
+        /// </remarks>
+        [Pure]
+        public static string JoinEscapeArguments(this IEnumerable<string> parts)
+        {
+            #region Sanity checks
+            if (parts == null) throw new ArgumentNullException(nameof(parts));
+            #endregion
+
+            var output = new StringBuilder();
+            bool first = true;
+            foreach (string part in parts)
+            {
+                // No separator before first or after last part
+                if (first) first = false;
+                else output.Append(' ');
+
+                output.Append(EscapeArgument(part));
+            }
+
+            return output.ToString();
+        }
+
+        /// <summary>
+        /// Escapes a string for use as a Windows command-line argument, making sure it is encapsulated within <c>"</c> if it contains whitespace characters.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to Windows' handling of command-line arguments as specified in:
+        /// https://docs.microsoft.com/en-us/cpp/cpp/main-function-command-line-args
+        /// </remarks>
+        [Pure]
+        public static string EscapeArgument(this string value)
+        {
+            #region Sanity checks
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            #endregion
+
+            if (value.Length == 0) return "\"\"";
+
+            // Add leading quotation mark if there are whitespaces
+            bool containsWhitespace = value.ContainsWhitespace();
+            var result = containsWhitespace ? new StringBuilder("\"", value.Length + 2) : new StringBuilder(value.Length);
+
+            // Split by quotation marks
+            string[] parts = value.Split('"');
+            for (int i = 0; i < parts.Length; i++)
+            {
+                // Count slashes preceding the quotation mark
+                int slashesCount = parts[i].Length - parts[i].TrimEnd('\\').Length;
+
+                result.Append(parts[i]);
+                if (i < parts.Length - 1)
+                { // Not last part
+                    for (int j = 0; j < slashesCount; j++) result.Append('\\'); // Double number of slashes
+                    result.Append("\\\""); // Escaped quotation mark
+                }
+                else if (containsWhitespace)
+                { // Last part if there are whitespaces
+                    for (int j = 0; j < slashesCount; j++) result.Append('\\'); // Double number of slashes
+                    result.Append('"'); // Non-escaped quotation mark
+                }
+            }
+
+            return result.ToString();
         }
     }
 }

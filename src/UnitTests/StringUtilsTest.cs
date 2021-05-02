@@ -44,15 +44,6 @@ namespace NanoByte.Common
         {
             StringUtils.Join(" ", new[] {"part1"}).Should().Be("part1");
             StringUtils.Join(" ", new[] {"part1", "part2"}).Should().Be("part1 part2");
-            new[] {"part1 part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 part2\" part3");
-        }
-
-        [Fact]
-        public void TestJoinEscapeArguments()
-        {
-            new[] {"part1"}.JoinEscapeArguments().Should().Be("part1");
-            new[] {"part1", "part2"}.JoinEscapeArguments().Should().Be("part1 part2");
-            new[] {"part1 \" part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 \\\" part2\" part3");
         }
 
         [Fact]
