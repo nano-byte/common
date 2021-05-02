@@ -32,6 +32,20 @@ namespace NanoByte.Common
         }
 
         [Fact]
+        public void TestStartsWith()
+        {
+            "prefix: rest".StartsWith("prefix", out string? rest).Should().BeTrue();
+            rest.Should().Be(": rest");
+        }
+
+        [Fact]
+        public void TestEndsWith()
+        {
+            "rest: suffix".EndsWith("suffix", out string? rest).Should().BeTrue();
+            rest.Should().Be("rest: ");
+        }
+
+        [Fact]
         public void TestSplitMultilineText()
         {
             "123\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Linux-stlye linebreaks");

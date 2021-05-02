@@ -73,6 +73,42 @@ namespace NanoByte.Common
             => value.Any(char.IsWhiteSpace);
 
         /// <summary>
+        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes after.
+        /// </summary>
+        [Pure]
+        public static bool StartsWith(this string value, string searchFor, [NotNullWhen(true)] out string? rest)
+        {
+            if (value.StartsWith(searchFor))
+            {
+                rest = value[searchFor.Length..];
+                return true;
+            }
+            else
+            {
+                rest = null;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes after.
+        /// </summary>
+        [Pure]
+        public static bool EndsWith(this string value, string searchFor, [NotNullWhen(true)] out string? rest)
+        {
+            if (value.EndsWith(searchFor))
+            {
+                rest = value[..^searchFor.Length];
+                return true;
+            }
+            else
+            {
+                rest = null;
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Determines whether a string starts with <paramref name="searchFor"/> with case-insensitive comparison.
         /// </summary>
         [Pure]
