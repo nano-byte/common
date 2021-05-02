@@ -65,8 +65,8 @@ namespace NanoByte.Common.Net
             if (uri == null) throw new ArgumentNullException(nameof(uri));
             #endregion
 
-            string fileName = Path.GetFileName(uri.LocalPath).StripCharacters(Path.GetInvalidFileNameChars());
-            if (string.IsNullOrEmpty(fileName)) fileName = Path.GetFileName(Path.GetDirectoryName(uri.LocalPath)!).StripCharacters(Path.GetInvalidFileNameChars());
+            string fileName = Path.GetFileName(uri.LocalPath).RemoveCharacters(Path.GetInvalidFileNameChars());
+            if (string.IsNullOrEmpty(fileName)) fileName = Path.GetFileName(Path.GetDirectoryName(uri.LocalPath)!).RemoveCharacters(Path.GetInvalidFileNameChars());
             if (string.IsNullOrEmpty(fileName)) fileName = "file.ext";
 
             return fileName;

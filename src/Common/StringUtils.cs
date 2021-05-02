@@ -105,7 +105,7 @@ namespace NanoByte.Common
         /// </summary>
         [Pure]
         [return: NotNullIfNotNull("value")]
-        public static string? StripCharacters(this string? value, [InstantHandle] IEnumerable<char> characters)
+        public static string? RemoveCharacters(this string? value, [InstantHandle] IEnumerable<char> characters)
         {
             #region Sanity checks
             if (characters == null) throw new ArgumentNullException(nameof(characters));

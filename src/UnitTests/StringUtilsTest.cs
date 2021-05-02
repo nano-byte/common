@@ -77,7 +77,7 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public void TestStripCharacters() => "a!b?".StripCharacters("!?").Should().Be("ab");
+        public void TestRemoveCharacters() => "a!b?".RemoveCharacters("!?").Should().Be("ab");
 
         [Fact]
         public void TestTrimOverflow()
