@@ -95,7 +95,7 @@ namespace NanoByte.Common.Info
             {
                 Name = assembly.GetAttributeValue((AssemblyTitleAttribute x) => x.Title) ?? assemblyInfo.Name,
                 ProductName = assembly.GetAttributeValue((AssemblyProductAttribute x) => x.Product) ?? assemblyInfo.Name,
-                Version = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion?.GetLeftPartAtFirstOccurrence("+"), // trim Git commit hash
+                Version = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion?.GetLeftPartAtFirstOccurrence('+'), // trim Git commit hash
                 Description = assembly.GetAttributeValue((AssemblyDescriptionAttribute x) => x.Description),
                 Copyright = assembly.GetAttributeValue((AssemblyCopyrightAttribute x) => x.Copyright)
             };
