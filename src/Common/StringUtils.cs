@@ -71,20 +71,6 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Counts how many times a character occurs within a string.
-        /// </summary>
-        /// <param name="value">The string to search within.</param>
-        /// <param name="token">The character to search for.</param>
-        /// <returns>The number of occurrences of <paramref name="token"/> within <paramref name="value"/>.</returns>
-        [Pure]
-        public static int CountOccurrences(this string? value, char token)
-        {
-            if (string.IsNullOrEmpty(value)) return 0;
-
-            return value.Count(t => t == token);
-        }
-
-        /// <summary>
         /// Determines whether the beginning of this string matches a specific value case-insensitive comparison.
         /// </summary>
         [Pure]
@@ -128,19 +114,6 @@ namespace NanoByte.Common
             return value == null
                 ? null
                 : new string(value.Except(characters.Contains!).ToArray());
-        }
-
-        /// <summary>
-        /// Returns a string with <paramref name="count"/> characters removed from the end.
-        /// </summary>
-        [Pure]
-        public static string StripFromEnd(this string value, int count)
-        {
-            #region Sanity checks
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            #endregion
-
-            return value.Substring(0, value.Length - count);
         }
 
         /// <summary>

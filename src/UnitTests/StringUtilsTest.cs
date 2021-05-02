@@ -33,14 +33,6 @@ namespace NanoByte.Common
         }
 
         [Fact]
-        public void TestCountOccurrences()
-        {
-            "abc".CountOccurrences('/').Should().Be(0);
-            "ab/c".CountOccurrences('/').Should().Be(1);
-            "ab/c/".CountOccurrences('/').Should().Be(2);
-        }
-
-        [Fact]
         public void TestSplitMultilineText()
         {
             "123\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Linux-stlye linebreaks");
@@ -86,9 +78,6 @@ namespace NanoByte.Common
 
         [Fact]
         public void TestStripCharacters() => "a!b?".StripCharacters("!?").Should().Be("ab");
-
-        [Fact]
-        public void TestStripFromEnd() => "abc".StripFromEnd(count: 1).Should().Be("ab");
 
         [Fact]
         public void TestTrimOverflow()
