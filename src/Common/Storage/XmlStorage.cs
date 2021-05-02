@@ -213,7 +213,7 @@ namespace NanoByte.Common.Storage
             // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
             const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
             const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
-            return prefixWithoutEncoding + result.Substring(prefixWithEncoding.Length);
+            return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
         }
         #endregion
     }

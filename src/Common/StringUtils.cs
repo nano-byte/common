@@ -149,7 +149,7 @@ namespace NanoByte.Common
         public static string TrimOverflow(this string value, int maxLength)
             => (value.Length <= maxLength)
                 ? value
-                : value.Substring(0, maxLength) + "...";
+                : value[..maxLength] + "...";
         #endregion
 
         #region Splitting
@@ -172,9 +172,9 @@ namespace NanoByte.Common
             {
                 // Never add any \r or \n to the single lines
                 if (s.EndsWithIgnoreCase("\r") || s.EndsWithIgnoreCase("\n"))
-                    result.Add(s.StripFromEnd(count: 1));
+                    result.Add(s[..^1]);
                 else if (s.StartsWithIgnoreCase("\n") || s.StartsWithIgnoreCase("\r"))
-                    result.Add(s.Substring(1));
+                    result.Add(s[1..]);
                 else
                     result.Add(s);
             }
@@ -221,7 +221,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(ch);
-            return (index == -1) ? value : value.Substring(0, index);
+            return (index == -1) ? value : value[..index];
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(ch);
-            return (index == -1) ? "" : value.Substring(index + 1);
+            return (index == -1) ? "" : value[(index + 1)..];
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.LastIndexOf(ch);
-            return (index == -1) ? value : value.Substring(0, index);
+            return (index == -1) ? value : value[..index];
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.LastIndexOf(ch);
-            return (index == -1) ? value : value.Substring(index + 1);
+            return (index == -1) ? value : value[(index + 1)..];
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(str, StringComparison.Ordinal);
-            return (index == -1) ? value : value.Substring(0, index);
+            return (index == -1) ? value : value[..index];
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.IndexOf(str, StringComparison.Ordinal);
-            return (index == -1) ? "" : value.Substring(index + str.Length);
+            return (index == -1) ? "" : value[(index + str.Length)..];
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace NanoByte.Common
             #endregion
 
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
-            return (index == -1) ? value : value.Substring(0, index);
+            return (index == -1) ? value : value[..index];
         }
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace NanoByte.Common
 
             int index = value.LastIndexOf(str, StringComparison.Ordinal);
 
-            return (index == -1) ? "" : value.Substring(index + str.Length);
+            return (index == -1) ? "" : value[(index + str.Length)..];
         }
         #endregion
 
@@ -569,7 +569,7 @@ namespace NanoByte.Common
             generator.GetBytes(array);
 
             // Use base64 encoding without '=' padding and with '-' instead of 'l'
-            return Convert.ToBase64String(array).Substring(0, length).Replace('l', '-');
+            return Convert.ToBase64String(array)[..length].Replace('l', '-');
         }
         #endregion
     }
