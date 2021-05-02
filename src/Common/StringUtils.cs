@@ -14,6 +14,10 @@ using NanoByte.Common.Collections;
 using System.Text;
 #endif
 
+#if !NET20 && !NET40
+using System.Runtime.CompilerServices;
+#endif
+
 namespace NanoByte.Common
 {
     /// <summary>
@@ -25,6 +29,9 @@ namespace NanoByte.Common
         /// Compares strings using case-insensitive comparison.
         /// </summary>
         [Pure]
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static bool EqualsIgnoreCase(string? s1, string? s2)
             => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
 
@@ -32,6 +39,9 @@ namespace NanoByte.Common
         /// Compares chars using case-insensitive comparison.
         /// </summary>
         [Pure]
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static bool EqualsIgnoreCase(char c1, char c2)
             => char.ToLowerInvariant(c1) == char.ToLowerInvariant(c2);
 
@@ -39,6 +49,9 @@ namespace NanoByte.Common
         /// Compares strings using case sensitive, invariant culture comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
         /// </summary>
         [Pure]
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static bool EqualsEmptyNull(string? s1, string? s2)
             => string.IsNullOrEmpty(s1) && string.IsNullOrEmpty(s2)
             || s1 == s2;
@@ -63,6 +76,9 @@ namespace NanoByte.Common
         /// Determines whether a string starts with <paramref name="searchFor"/> with case-insensitive comparison.
         /// </summary>
         [Pure]
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static bool StartsWithIgnoreCase(this string value, string searchFor)
             => value.StartsWith(searchFor, StringComparison.OrdinalIgnoreCase);
 
@@ -70,6 +86,9 @@ namespace NanoByte.Common
         /// Determines whether a string ends with <paramref name="searchFor"/> with case-insensitive comparison.
         /// </summary>
         [Pure]
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static bool EndsWithIgnoreCase(this string value, string searchFor)
             => value.EndsWith(searchFor, StringComparison.OrdinalIgnoreCase);
 
@@ -86,6 +105,9 @@ namespace NanoByte.Common
         /// <summary>
         /// Cuts off strings longer than <paramref name="maxLength"/> and replaces the rest with ellipsis (...).
         /// </summary>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static string TrimOverflow(this string value, int maxLength)
             => (value.Length <= maxLength)
                 ? value

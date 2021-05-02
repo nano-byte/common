@@ -4,6 +4,10 @@
 using System;
 using JetBrains.Annotations;
 
+#if !NET20 && !NET40
+using System.Runtime.CompilerServices;
+#endif
+
 namespace NanoByte.Common
 {
     /// <summary>
@@ -18,6 +22,9 @@ namespace NanoByte.Common
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets set to <c>true</c> if value is different from original.</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void To<T>(this T value, ref T original, ref bool updated) where T : struct
         {
             // If the values already match, nothing needs to be done
@@ -36,6 +43,9 @@ namespace NanoByte.Common
         /// <param name="original">The original value to update.</param>
         /// <param name="updated1">Gets set to <c>true</c> if value is different from original.</param>
         /// <param name="updated2">Gets set to <c>true</c> if value is different from original.</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void To<T>(this T value, ref T original, ref bool updated1, ref bool updated2) where T : struct
         {
             // If the values already match, nothing needs to be done
@@ -52,6 +62,9 @@ namespace NanoByte.Common
         /// <param name="value">The new value</param>
         /// <param name="original">The original value to update</param>
         /// <param name="updated">Gets set to <c>true</c> if value is different from original</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void To(this string value, ref string original, ref bool updated)
         {
             // If the values already match, nothing needs to be done
@@ -69,6 +82,9 @@ namespace NanoByte.Common
         /// <param name="original">The original value to update</param>
         /// <param name="updated1">Gets set to <c>true</c> if value is different from original</param>
         /// <param name="updated2">Gets set to <c>true</c> if value is different from original</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void To(this string value, ref string original, ref bool updated1, ref bool updated2)
         {
             if (original == value) return;
@@ -85,6 +101,9 @@ namespace NanoByte.Common
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets called if value is different from original.</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void To<T>(this T value, ref T original, [InstantHandle] Action updated) where T : struct
         {
             #region Sanity checks
@@ -119,6 +138,9 @@ namespace NanoByte.Common
         /// <param name="value">The new value.</param>
         /// <param name="original">The original value to update.</param>
         /// <param name="updated">Gets called if value is different from original.</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void To(this string value, ref string original, [InstantHandle] Action updated)
         {
             #region Sanity checks
@@ -153,6 +175,9 @@ namespace NanoByte.Common
         /// <typeparam name="T">The type of objects to swap.</typeparam>
         /// <param name="value1">The first field which will afterwards carry the content of <paramref name="value2"/>.</param>
         /// <param name="value2">The first field which will afterwards carry the content of <paramref name="value1"/>.</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Swap<T>(ref T value1, ref T value2)
         {
             var tempValue = value1;

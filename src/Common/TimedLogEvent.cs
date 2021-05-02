@@ -4,6 +4,10 @@
 using System;
 using System.Diagnostics;
 
+#if !NET20 && !NET40
+using System.Runtime.CompilerServices;
+#endif
+
 namespace NanoByte.Common
 {
     /// <summary>
@@ -24,6 +28,9 @@ namespace NanoByte.Common
         /// Starts a new log event.
         /// </summary>
         /// <param name="entry">The entry for the log file. Elapsed time will automatically be appended.</param>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public TimedLogEvent(string entry)
         {
             _entry = entry;
@@ -33,6 +40,10 @@ namespace NanoByte.Common
         /// <summary>
         /// Ends the log event.
         /// </summary>
+
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
         public void Dispose()
         {
             _timer.Stop();
