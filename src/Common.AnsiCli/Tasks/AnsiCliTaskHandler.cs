@@ -98,9 +98,11 @@ namespace NanoByte.Common.Tasks
                 _progressContext?.Dispose();
                 _progressContext = null;
 
-                return AnsiCli.Error.Prompt(new TextPrompt<char>(question)
-                                           .AddChoices(new[] {'y', 'n'})
-                                           .DefaultValue(defaultAnswer ? 'y' : 'n'))
+                return AnsiCli.Prompt(
+                           new TextPrompt<char>(question)
+                              .AddChoices(new[] {'y', 'n'})
+                              .DefaultValue(defaultAnswer ? 'y' : 'n'),
+                           CancellationToken)
                     == 'y';
             }
         }

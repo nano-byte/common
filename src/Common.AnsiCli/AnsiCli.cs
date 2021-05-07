@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Net;
 using Spectre.Console;
@@ -23,6 +25,20 @@ namespace NanoByte.Common
         /// Used to write to the standard error stream.
         /// </summary>
         public static IAnsiConsole Error { get; } = AnsiConsole.Create(new AnsiConsoleSettings {Out = new AnsiConsoleOutput(Console.Error)});
+
+        /// <summary>
+        /// Displays a prompt to the user.
+        /// </summary>
+        /// <typeparam name="T">The prompt result type.</typeparam>
+        /// <param name="prompt">The prompt to display.</param>
+        /// <param name="cancellationToken">Used to cancel the prompt.</param>
+        /// <returns>The prompt input result.</returns>
+        public static T Prompt<T>(TextPrompt<T> prompt, CancellationToken cancellationToken)
+        {
+            var task = Task.Run(() => Error.Prompt(prompt), cancellationToken);
+            task.Wait(cancellationToken);
+            return task.Result;
+        }
 
         /// <summary>
         /// Formats text as a title.
