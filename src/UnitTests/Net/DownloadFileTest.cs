@@ -22,8 +22,8 @@ namespace NanoByte.Common.Net
 
         public override void Dispose()
         {
-            base.Dispose();
             _tempFile.Dispose();
+            base.Dispose();
         }
 
         [Fact]

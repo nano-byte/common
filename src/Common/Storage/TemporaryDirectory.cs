@@ -37,17 +37,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Deletes the temporary directory.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // Do not trigger via GC
-            if (!disposing) return;
-
             if (Directory.Exists(Path))
             {
                 try

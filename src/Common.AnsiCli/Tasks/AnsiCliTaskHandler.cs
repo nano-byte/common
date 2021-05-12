@@ -85,8 +85,14 @@ namespace NanoByte.Common.Tasks
         /// <inheritdoc />
         public override void Dispose()
         {
-            _progressContext?.Dispose();
-            base.Dispose();
+            try
+            {
+                _progressContext?.Dispose();
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         /// <inheritdoc/>

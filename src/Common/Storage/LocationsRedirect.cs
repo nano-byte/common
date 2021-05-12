@@ -31,19 +31,16 @@ namespace NanoByte.Common.Storage
             Locations.IsPortable = true;
         }
 
-        protected override void Dispose(bool disposing)
+        public override void Dispose()
         {
             try
             {
-                if (disposing)
-                {
-                    Locations.IsPortable = _previousIsPortable;
-                    Locations.PortableBase = _previousPortableBase;
-                }
+                Locations.IsPortable = _previousIsPortable;
+                Locations.PortableBase = _previousPortableBase;
             }
             finally
             {
-                base.Dispose(disposing);
+                base.Dispose();
             }
         }
     }

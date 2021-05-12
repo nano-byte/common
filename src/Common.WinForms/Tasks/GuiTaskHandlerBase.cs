@@ -28,9 +28,14 @@ namespace NanoByte.Common.Tasks
         /// </summary>
         public override void Dispose()
         {
-            Log.Handler -= LogHandler;
-
-            base.Dispose();
+            try
+            {
+                Log.Handler -= LogHandler;
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         /// <summary>

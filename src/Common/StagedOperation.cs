@@ -50,15 +50,9 @@ namespace NanoByte.Common
         /// <summary>
         /// Performs a rollback of all changes made by <see cref="Stage"/> if <see cref="Commit"/> has not been called and completed yet.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing && _stageStarted && !_commitCompleted) OnRollback();
+            if (_stageStarted && !_commitCompleted) OnRollback();
         }
 
         /// <summary>

@@ -26,12 +26,17 @@ namespace NanoByte.Common.Storage
         #endregion
 
         #region Dispose
-        protected override void Dispose(bool disposing)
+        public override void Dispose()
         {
-            // Restore the original working directory
-            if (disposing) Directory.SetCurrentDirectory(_oldWorkingDir);
-
-            base.Dispose(disposing);
+            try
+            {
+                // Restore the original working directory
+                Directory.SetCurrentDirectory(_oldWorkingDir);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
         #endregion
     }

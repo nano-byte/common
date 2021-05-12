@@ -37,17 +37,8 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Deletes the temporary file.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // Do not trigger via GC
-            if (!disposing) return;
-
             if (File.Exists(Path)) File.Delete(Path);
         }
     }

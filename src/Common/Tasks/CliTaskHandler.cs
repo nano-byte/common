@@ -15,7 +15,7 @@ namespace NanoByte.Common.Tasks
     {
         /// <summary>
         /// Creates a new CLI task handler.
-        /// Registers a <see cref="Log.Handler"/>.
+        /// Registers a <see cref="Log.Handler"/> and a <see cref="Console.CancelKeyPress"/> handler.
         /// </summary>
         public CliTaskHandler()
         {
@@ -34,24 +34,23 @@ namespace NanoByte.Common.Tasks
         }
 
         /// <summary>
-        /// Unregisters the <see cref="Log.Handler"/>.
+        /// Unregisters the <see cref="Log.Handler"/> and the <see cref="Console.CancelKeyPress"/> handler.
         /// </summary>
         public override void Dispose()
         {
-            Log.Handler -= LogHandler;
-
             try
             {
+                Log.Handler -= LogHandler;
                 Console.CancelKeyPress -= CancelKeyPressHandler;
             }
-            #region Error handling
             catch (IOException)
             {
                 // Ignore problems caused by unusual terminal emulators
             }
-            #endregion
-
-            base.Dispose();
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         /// <summary>
