@@ -149,21 +149,21 @@ namespace NanoByte.Common.Collections
         /// Filters a sequence of elements to remove any that match the <paramref name="predicate"/>.
         /// The opposite of <see cref="Enumerable.Where{TSource}(IEnumerable{TSource},Func{TSource,bool})"/>.
         /// </summary>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, Func<T, bool> predicate)
             => enumeration.Where(x => !predicate(x));
 
         /// <summary>
         /// Filters a sequence of elements to remove any that are equal to <paramref name="element"/>.
         /// </summary>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, T element)
             => enumeration.Except(new[] {element});
 
         /// <summary>
         /// Flattens a list of lists.
         /// </summary>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> enumeration)
             => enumeration.SelectMany(x => x);
@@ -171,7 +171,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Filters a sequence of elements to remove any <c>null</c> values.
         /// </summary>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumeration)
             where T : class
         {
@@ -265,7 +265,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="enumeration">The sequence of elements to filter.</param>
         /// <param name="keySelector">A function mapping elements to their respective equality keys.</param>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> enumeration, Func<T, TKey> keySelector)
             where T : notnull
             where TKey : notnull
@@ -279,7 +279,7 @@ namespace NanoByte.Common.Collections
         /// <typeparam name="TException">The type of exceptions to ignore. Any other exceptions are passed through.</typeparam>
         /// <param name="source">The elements to map.</param>
         /// <param name="selector">The selector to execute for each <paramref name="source"/> element. When it throws <typeparamref name="TException"/> the element is skipped. Any other exceptions are passed through.</param>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
             where TException : Exception
         {
@@ -306,7 +306,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Calls <see cref="ICloneable{T}.Clone"/> for every element in a enumeration and returns the results as a new enumeration.
         /// </summary>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<T> CloneElements<T>(this IEnumerable<T> enumerable) where T : ICloneable<T>
             => (enumerable ?? throw new ArgumentNullException(nameof(enumerable))).Select(x => x.Clone());
 
@@ -389,7 +389,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Generates all possible permutations of a set of <paramref name="elements"/>.
         /// </summary>
-        [Pure, LinqTunnel]
+        [LinqTunnel]
         public static IEnumerable<T[]> Permutate<T>(this IEnumerable<T> elements)
         {
             #region Sanity checks

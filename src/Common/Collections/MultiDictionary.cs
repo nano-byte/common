@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace NanoByte.Common.Collections
 {
@@ -20,6 +21,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// A collection containing the values in the dictionary.
         /// </summary>
+        [CollectionAccess(CollectionAccessType.Read)]
         public new IEnumerable<TValue> Values => base.Values.SelectMany(x => x);
 
         /// <summary>
@@ -27,6 +29,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The key of the element to add.</param>
         /// <param name="value">The value of the element to add.</param>
+        [CollectionAccess(CollectionAccessType.UpdatedContent)]
         public void Add(TKey key, TValue value)
         {
             #region Sanity checks
@@ -45,6 +48,7 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key of the element to remove.</param>
         /// <param name="value">The value of the element to remove.</param>
         /// <returns><c>true</c> if any elements were successfully removed; otherwise, <c>false</c>.</returns>
+        [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
         public bool Remove(TKey key, TValue value)
         {
             #region Sanity checks
@@ -67,6 +71,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         /// <param name="key">The key of the element to get.</param>
         /// <returns>A list of elements with the specified key. Empty list if the key was not found.</returns>
+        [CollectionAccess(CollectionAccessType.Read)]
         public new IEnumerable<TValue> this[TKey key]
             => TryGetValue(key, out var result) ? result : Enumerable.Empty<TValue>();
     }

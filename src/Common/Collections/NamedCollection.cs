@@ -53,6 +53,7 @@ namespace NanoByte.Common.Collections
         /// <param name="newName">The new <see cref="INamed.Name"/> for the element.</param>
         /// <exception cref="KeyNotFoundException">The <paramref name="element"/> is not in the collection.</exception>
         /// <exception cref="InvalidOperationException">The <paramref name="newName"/> is already taken by another element in the collection.</exception>
+        [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
         public void Rename(T element, [Localizable(false)] string newName)
         {
             #region Sanity checks

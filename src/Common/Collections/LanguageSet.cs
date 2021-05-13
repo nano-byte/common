@@ -79,13 +79,16 @@ namespace NanoByte.Common.Collections
         /// <param name="langCode">The string identifying the language to add.</param>
         /// <returns><c>true</c> if the language could be added, <c>false</c> otherwise.</returns>
         /// <exception cref="ArgumentException"><paramref name="langCode"/> is not a valid language code.</exception>
-        public bool Add(string langCode) => Add(Languages.FromString(langCode));
+        [CollectionAccess(CollectionAccessType.UpdatedContent)]
+        public bool Add(string langCode)
+            => Add(Languages.FromString(langCode));
 
         /// <summary>
         /// Determines whether this language set contains any of a set of target languages.
         /// </summary>
         /// <param name="targets">The language set to match against.</param>
         /// <param name="ignoreCountry"><c>true</c> to compare only the two-letter language name; <c>false</c> to also compare the country code.</param>
+        [CollectionAccess(CollectionAccessType.Read)]
         public bool ContainsAny([InstantHandle] IEnumerable<CultureInfo> targets, bool ignoreCountry = false)
         {
             #region Sanity checks

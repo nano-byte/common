@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using JetBrains.Annotations;
 
 #if NET20
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Retrieves a value from the cache.
         /// </summary>
+        [CollectionAccess(CollectionAccessType.Read)]
         public TValue this[TKey key]
         {
             get
@@ -60,6 +62,7 @@ namespace NanoByte.Common.Collections
         /// Removes the the entry with the specified <paramref name="key"/> from the cache.
         /// </summary>
         /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
+        [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
         public bool Remove(TKey key)
         {
 #if NET20
@@ -73,6 +76,7 @@ namespace NanoByte.Common.Collections
         /// <summary>
         /// Removes all entries from the cache.
         /// </summary>
+        [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
         public void Clear()
         {
 #if NET20
