@@ -55,9 +55,10 @@ namespace NanoByte.Common.Storage
         /// Determines whether a path might escape its parent directory (by being absolute or using ..).
         /// </summary>
         [Pure]
-        public static bool IsBreakoutPath([Localizable(false)] string path)
+        public static bool IsBreakoutPath([Localizable(false)] string? path)
         {
-            path = UnifySlashes(path ?? throw new ArgumentNullException(nameof(path)));
+            if (string.IsNullOrEmpty(path)) return false;
+            path = UnifySlashes(path);
             return Path.IsPathRooted(path) || path.Split(Path.DirectorySeparatorChar).Contains("..");
         }
 
