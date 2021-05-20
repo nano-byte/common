@@ -87,15 +87,23 @@ namespace NanoByte.Common.Collections
               .Should().BeEquivalentTo("a123", "b123");
 
         [Fact]
-        public void TestTrySelect()
+        public void TestTrySelectPassException()
         {
-            var strings = new[] {"1", "2", "c", "4"};
-
-            strings.TrySelect<string, int, FormatException>(int.Parse)
-                   .Should().Equal(1, 2, 4);
-
-            strings.Invoking(x => x.TrySelect<string, int, ArgumentException>(int.Parse).ToList())
+            string[] strings = {"1", "2", "c", "4"};
+            bool callbackCalled = false;
+            strings.Invoking(x => x.TrySelect(int.Parse, (ArgumentException _) => callbackCalled = true).ToList())
                    .Should().Throw<FormatException>();
+            callbackCalled.Should().BeFalse();
+        }
+
+        [Fact]
+        public void TestTrySelectCatchException()
+        {
+            string[] strings = {"1", "2", "c", "4"};
+            bool callbackCalled = false;
+            strings.TrySelect(int.Parse, (FormatException _) => callbackCalled = true)
+                   .Should().Equal(1, 2, 4);
+            callbackCalled.Should().BeTrue();
         }
 
         [Fact]

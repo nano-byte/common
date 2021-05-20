@@ -272,15 +272,16 @@ namespace NanoByte.Common.Collections
             => enumeration.Distinct(new KeyEqualityComparer<T, TKey>(keySelector));
 
         /// <summary>
-        /// Maps elements like <see cref="Enumerable.Select{TSource,TResult}(IEnumerable{TSource},Func{TSource,TResult})"/>, but with exception handling.
+        /// Maps elements using a selector. Calls a handler for specific exceptions, skips the element and continues enumerating with the element.
         /// </summary>
         /// <typeparam name="TSource">The type of the input elements.</typeparam>
         /// <typeparam name="TResult">The type of the output elements.</typeparam>
-        /// <typeparam name="TException">The type of exceptions to ignore. Any other exceptions are passed through.</typeparam>
+        /// <typeparam name="TException">The type of exceptions to handle..</typeparam>
         /// <param name="source">The elements to map.</param>
-        /// <param name="selector">The selector to execute for each <paramref name="source"/> element. When it throws <typeparamref name="TException"/> the element is skipped. Any other exceptions are passed through.</param>
+        /// <param name="selector">The selector to execute for each <paramref name="source"/> element.</param>
+        /// <param name="exceptionHandler">A Callback to be invoked when a <typeparamref name="TException"/> is caught.</param>
         [LinqTunnel]
-        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        public static IEnumerable<TResult> TrySelect<TSource, TResult, TException>(this IEnumerable<TSource> source, Func<TSource, TResult> selector, [InstantHandle] Action<TException> exceptionHandler)
             where TException : Exception
         {
             #region Sanity checks
@@ -295,8 +296,9 @@ namespace NanoByte.Common.Collections
                 {
                     result = selector(element);
                 }
-                catch (TException)
+                catch (TException ex)
                 {
+                    exceptionHandler(ex);
                     continue;
                 }
                 yield return result;
