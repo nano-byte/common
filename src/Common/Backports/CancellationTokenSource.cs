@@ -1,21 +1,18 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if NET20
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
-#if NETFRAMEWORK
-using System.Runtime.Remoting;
-#endif
-
-namespace NanoByte.Common.Tasks
+namespace System.Threading
 {
     /// <summary>
     /// Signals to <see cref="CancellationToken"/>s that they should be canceled.
     /// </summary>
     /// <remarks>Unlike the built-in CancellationToken type of .NET the NanoByte.Common variant supports remoting.</remarks>
-    public sealed class CancellationTokenSource : MarshalNoTimeout, IDisposable
+    public class CancellationTokenSource : IDisposable
     {
         /// <summary>
         /// Gets a <see cref="CancellationToken"/> associated with this <see cref="CancellationTokenSource"/>.
@@ -61,19 +58,7 @@ namespace NanoByte.Common.Tasks
                 _waitEvent.Set();
 
                 _isCancellationRequested = true;
-                if (CancellationRequested != null)
-                {
-#if NETFRAMEWORK
-                    try
-                    {
-#endif
-                        CancellationRequested();
-#if NETFRAMEWORK
-                    }
-                    catch (RemotingException)
-                    {}
-#endif
-                }
+                CancellationRequested?.Invoke();
             }
         }
 
@@ -84,3 +69,6 @@ namespace NanoByte.Common.Tasks
         public void Dispose() => _waitEvent.Close();
     }
 }
+#else
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Threading.CancellationTokenSource))]
+#endif

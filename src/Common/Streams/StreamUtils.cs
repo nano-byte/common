@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using NanoByte.Common.Tasks;
+using System.Threading;
 
 namespace NanoByte.Common.Streams
 {

@@ -7,7 +7,6 @@ using System.Threading;
 using FluentAssertions;
 using NanoByte.Common.Tasks;
 using Xunit;
-using CancellationTokenSource = NanoByte.Common.Tasks.CancellationTokenSource;
 
 namespace NanoByte.Common.Net
 {

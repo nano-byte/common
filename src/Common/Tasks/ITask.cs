@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
+using System.Threading;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks

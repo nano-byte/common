@@ -9,7 +9,6 @@ using FluentAssertions;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Tasks;
 using Xunit;
-using CancellationTokenSource = NanoByte.Common.Tasks.CancellationTokenSource;
 
 namespace NanoByte.Common.Net
 {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
 

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using System.Threading;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Net;
 

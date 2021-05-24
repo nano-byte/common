@@ -1,21 +1,19 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if NET20
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using JetBrains.Annotations;
 
-namespace NanoByte.Common.Tasks
+namespace System.Threading
 {
     /// <summary>
     /// Propagates notification that operations should be canceled.
     /// </summary>
-    /// <remarks>Unlike the built-in CancellationToken type of .NET the NanoByte.Common variant supports remoting.</remarks>
-    [Serializable]
     public struct CancellationToken
     {
-        [SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields", Justification = "Access to this field is remoted.")]
         private readonly CancellationTokenSource? _source;
 
         /// <summary>
@@ -62,27 +60,8 @@ namespace NanoByte.Common.Tasks
 
         /// <inheritdoc/>
         public override string ToString() => "CancellationToken {IsCancellationRequested=" + IsCancellationRequested + "}";
-
-#if !NET20
-        /// <summary>
-        /// Converts a NanoByte.Common cancellation token to a regular .NET cancellation token.
-        /// </summary>
-        public static implicit operator System.Threading.CancellationToken(CancellationToken token)
-        {
-            var tokenSource = new System.Threading.CancellationTokenSource();
-            token.Register(tokenSource.Cancel);
-            return tokenSource.Token;
-        }
-
-        /// <summary>
-        /// Converts a regular .NET cancellation token to a NanoByte.Common cancellation token.
-        /// </summary>
-        public static implicit operator CancellationToken(System.Threading.CancellationToken token)
-        {
-            var tokenSource = new CancellationTokenSource();
-            token.Register(tokenSource.Cancel);
-            return tokenSource.Token;
-        }
-#endif
     }
 }
+#else
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Threading.CancellationToken))]
+#endif
