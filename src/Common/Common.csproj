@@ -23,6 +23,7 @@
 
   <!-- Dependencies -->
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net472'">
