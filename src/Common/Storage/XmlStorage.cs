@@ -16,20 +16,15 @@ using NanoByte.Common.Values;
 namespace NanoByte.Common.Storage
 {
     /// <summary>
-    /// Provides easy serialization to XML files (optionally wrapped in ZIP archives).
+    /// Provides easy serialization to XML files.
     /// </summary>
     public static class XmlStorage
     {
-        #region Constants
         /// <summary>
         /// The XML namespace used for XML Schema instance.
         /// </summary>
         public const string XsiNamespace = "http://www.w3.org/2001/XMLSchema-instance";
-        #endregion
 
-        //--------------------//
-
-        #region Load plain
         /// <summary>
         /// Loads an object from an XML file.
         /// </summary>
@@ -84,11 +79,6 @@ namespace NanoByte.Common.Storage
                 }
             }
             #region Error handling
-            catch (ArgumentException ex)
-            {
-                // Convert exception type
-                throw new IOException(ex.Message, ex.InnerException);
-            }
             catch (InvalidDataException ex)
             {
                 // Change exception message to add context information
@@ -115,9 +105,7 @@ namespace NanoByte.Common.Storage
             using var stream = data.ToStream();
             return LoadXml<T>(stream);
         }
-        #endregion
 
-        #region Save plain
         /// <summary>
         /// Saves an object in an XML stream ending with a line break.
         /// </summary>
@@ -153,7 +141,7 @@ namespace NanoByte.Common.Storage
             xmlWriter.Flush();
             if (xmlWriter.Settings != null)
             {
-                var newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
+                byte[] newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
                 stream.Write(newLine, 0, newLine.Length);
             }
         }
@@ -204,10 +192,7 @@ namespace NanoByte.Common.Storage
             where T : notnull
         {
             using var stream = new MemoryStream();
-            // Write to a memory stream
             SaveXml(data, stream, stylesheet);
-
-            // Copy the stream to a string
             string result = stream.ReadToString();
 
             // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
@@ -215,6 +200,5 @@ namespace NanoByte.Common.Storage
             const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
             return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
         }
-        #endregion
     }
 }

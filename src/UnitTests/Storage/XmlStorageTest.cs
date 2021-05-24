@@ -9,7 +9,6 @@ namespace NanoByte.Common.Storage
     /// <summary>
     /// Contains test methods for <see cref="XmlStorage"/>.
     /// </summary>
-    [Collection("WorkingDir")]
     public class XmlStorageTest
     {
         /// <summary>
@@ -33,24 +32,6 @@ namespace NanoByte.Common.Storage
                 // Write and read file
                 testData1.SaveXml(tempFile);
                 testData2 = XmlStorage.LoadXml<TestData>(tempFile);
-            }
-
-            // Ensure data stayed the same
-            testData2.Data.Should().Be(testData1.Data);
-        }
-
-        /// <summary>
-        /// Ensures <see cref="XmlStorage.SaveXml{T}(T,string,string)"/> and <see cref="XmlStorage.LoadXml{T}(string)"/> work correctly with relative paths.
-        /// </summary>
-        [Fact]
-        public void TestFileRelative()
-        {
-            TestData testData1 = new() {Data = "Hello"}, testData2;
-            using (new TemporaryWorkingDirectory("unit-tests"))
-            {
-                // Write and read file
-                testData1.SaveXml("file.xml");
-                testData2 = XmlStorage.LoadXml<TestData>("file.xml");
             }
 
             // Ensure data stayed the same
