@@ -35,12 +35,5 @@ namespace NanoByte.Common.Collections
             new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B"}).Should().BeFalse();
             new[] {new object()}.SequencedEquals(new[] {new object()}).Should().BeFalse();
         }
-
-        [Fact]
-        public void TestGetAddedElements()
-        {
-            new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}).Should().Equal("B", "H");
-            new[] {"C", "D"}.GetAddedElements(new[] {"A", "D"}).Should().Equal("C");
-        }
     }
 }

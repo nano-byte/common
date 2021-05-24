@@ -33,5 +33,12 @@ namespace NanoByte.Common.Collections
             list.AddOrReplace("xx", keySelector: x => x.Length);
             list.Should().Equal("a", "xx", "ccc");
         }
+
+        [Fact]
+        public void TestGetAddedElements()
+        {
+            new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}).Should().Equal("B", "H");
+            new[] {"C", "D"}.GetAddedElements(new[] {"A", "D"}).Should().Equal("C");
+        }
     }
 }
