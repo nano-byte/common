@@ -7,7 +7,7 @@ using System;
 using System.Security.Permissions;
 #endif
 
-namespace NanoByte.Common
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Derive from this class to enable remoting without timeouts. Keeps remoting object alive as long as process is running.
