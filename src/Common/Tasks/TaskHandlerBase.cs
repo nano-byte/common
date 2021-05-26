@@ -13,7 +13,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Common base class for <see cref="ITaskHandler"/> implementations.
     /// </summary>
-    public abstract class TaskHandlerBase : MarshalNoTimeout, ITaskHandler
+    public abstract class TaskHandlerBase : ITaskHandler
     {
         /// <inheritdoc/>
         public virtual void Dispose()

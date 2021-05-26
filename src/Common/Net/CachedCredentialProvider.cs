@@ -10,7 +10,7 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Caching decorator for <see cref="ICredentialProvider"/>s.
     /// </summary>
-    public class CachedCredentialProvider : MarshalNoTimeout, ICredentialProvider
+    public class CachedCredentialProvider : ICredentialProvider
     {
         private readonly ICredentialProvider _inner;
 

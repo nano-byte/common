@@ -10,7 +10,7 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Common base class for <see cref="ICredentialProvider"/> implementations.
     /// </summary>
-    public abstract class CredentialProviderBase : MarshalNoTimeout, ICredentialProvider
+    public abstract class CredentialProviderBase : ICredentialProvider
     {
         /// <inheritdoc/>
         public abstract NetworkCredential? GetCredential(Uri uri, string authType);
