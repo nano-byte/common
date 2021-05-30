@@ -26,12 +26,15 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net472'">
-    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net472'">
+    <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1' Or '$(TargetFramework)'=='net5.0'">
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />

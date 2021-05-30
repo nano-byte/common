@@ -10,11 +10,11 @@ using Xunit;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Contains test methods for <see cref="CircularBufferStream"/>.
+    /// Contains test methods for <see cref="ProducerConsumerStream"/>.
     /// </summary>
-    public class CircularBufferStreamTest
+    public class ProducerConsumerStreamTest
     {
-        private readonly CircularBufferStream _stream = new(6);
+        private readonly ProducerConsumerStream _stream = new(6);
 
         /// <summary>
         /// Fills the buffer with some data that will fit in a single block and then reads it again.
@@ -96,7 +96,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Similar to <see cref="TestThreading"/> but uses end-of-data detection via <see cref="CircularBufferStream.DoneWriting"/>
+        /// Similar to <see cref="TestThreading"/> but uses end-of-data detection via <see cref="ProducerConsumerStream.DoneWriting"/>
         /// </summary>
         [Fact]
         public void TestThreadingDoneWriting()
@@ -127,7 +127,7 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Ensures exceptions get passed from <see cref="CircularBufferStream.RelayErrorToReader"/> to <see cref="CircularBufferStream.Read(byte[],int,int)"/>.
+        /// Ensures exceptions get passed from <see cref="ProducerConsumerStream.RelayErrorToReader"/> to <see cref="ProducerConsumerStream.Read(byte[],int,int)"/>.
         /// </summary>
         [Fact]
         public void TestErrorRelay()
@@ -149,7 +149,7 @@ namespace NanoByte.Common.Streams
         [Fact]
         public void TestDisposeBeforeComplete()
         {
-            var data = new byte[_stream.BufferSize];
+            var data = new byte[6];
             _stream.Write(data);
 
             // Dispose on consumer thread after a short delay
