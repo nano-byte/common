@@ -146,10 +146,10 @@ namespace NanoByte.Common.Streams
             if (data == null) throw new ArgumentNullException(nameof(data));
             #endregion
 
-#if NETSTANDARD2_1 || NET
-            stream.Write(data);
-#else
+#if NETFRAMEWORK
             stream.Write(data, 0, data.Length);
+#else
+            stream.Write(data);
 #endif
         }
 

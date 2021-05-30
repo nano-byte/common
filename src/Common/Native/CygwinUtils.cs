@@ -9,7 +9,7 @@ using System.Text;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 
-#if !NETSTANDARD2_1 && !NET
+#if NETFRAMEWORK
 using NanoByte.Common.Streams;
 #endif
 
