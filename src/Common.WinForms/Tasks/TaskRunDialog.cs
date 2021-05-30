@@ -51,7 +51,7 @@ namespace NanoByte.Common.Tasks
             _taskThread.Start();
         }
 
-        private void OnProgressChanged(TaskSnapshot snapshot)
+        private void OnProgressChanged(object? sender, TaskSnapshot snapshot)
         {
             progressBarTask.Report(snapshot);
             labelTask.Report(snapshot);
