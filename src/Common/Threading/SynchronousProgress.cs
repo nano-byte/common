@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Reports progress updates using callbacks/events. Performs the callbacks immediately on the same thread.
