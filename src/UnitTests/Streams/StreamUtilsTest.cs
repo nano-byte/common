@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System;
 using System.IO;
 using System.Text;
 using FluentAssertions;
@@ -15,31 +16,67 @@ namespace NanoByte.Common.Streams
     public class StreamUtilsTest
     {
         [Fact]
-        public void TestRead()
-            => new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
+        public void TestReadArray()
+        {
+            new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
+        }
+
+        [Fact]
+        public void TestReadSegment()
+        {
+            var segment = new ArraySegment<byte>(new byte[5], 1, 3);
+            new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(segment);
+            segment.Should().Equal(1, 2, 3);
+        }
 
         [Fact]
         public void TestReadAll()
         {
-            Stream stream = new MemoryStream(new byte[] {1, 2, 3});
+            var stream = new MemoryStream(new byte[] {1, 2, 3});
             stream.ReadAll().Should().Equal(1, 2, 3);
         }
 
         [Fact]
-        public static void TestWrite()
+        public static void TestWriteArray()
         {
             var stream = new MemoryStream();
-            stream.Write(new byte[] {1, 2, 3});
-
+            stream.Write(1, 2, 3);
             stream.ReadAll().Should().Equal(1, 2, 3);
         }
 
         [Fact]
-        public void TestString()
+        public static void TestWriteSegment()
         {
-            const string test = "Test";
-            using var stream = test.ToStream();
-            stream.ReadToString().Should().Be(test);
+            var stream = new MemoryStream();
+            stream.Write(new ArraySegment<byte>(new byte[] {1, 2, 3}, 1, 2));
+            stream.ReadAll().Should().Equal(2, 3);
+        }
+
+        [Fact]
+        public void TestAsArrayCopy()
+        {
+            var stream = new MemoryStream();
+            stream.Write(1, 2, 3);
+            stream.AsArray().Should().Equal(1, 2, 3);
+        }
+
+        [Fact]
+        public void TestAsArrayNoCopy()
+        {
+            byte[] buffer = {1, 2, 3};
+            var stream = new MemoryStream(buffer, 0, buffer.Length, true, true);
+            stream.AsArray().Should().BeSameAs(buffer);
+        }
+
+        [Fact]
+        public void TestToMemory()
+        {
+            var stream = new MemoryStream();
+            stream.Write(1,2,3);
+
+            stream = stream.ToMemory();
+            stream.AsArray().Should().Equal(1, 2, 3);
+            stream.Capacity.Should().Be(3);
         }
 
         [Fact]
@@ -48,6 +85,14 @@ namespace NanoByte.Common.Streams
             using var tempFile = new TemporaryFile("unit-tests");
             "abc".ToStream().CopyToFile(tempFile);
             new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8).Should().Be("abc");
+        }
+
+        [Fact]
+        public void TestString()
+        {
+            const string test = "Test";
+            using var stream = test.ToStream();
+            stream.ReadToString().Should().Be(test);
         }
     }
 }

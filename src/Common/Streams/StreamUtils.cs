@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Threading;
+using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Streams
 {
@@ -25,6 +25,23 @@ namespace NanoByte.Common.Streams
         /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
         public static byte[] Read(this Stream stream, int count)
             => stream.TryRead(count) ?? throw new IOException("The desired number of bytes could not be read from the stream.");
+
+        /// <summary>
+        /// Reads a sequence of bytes from the stream.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="buffer">The buffer to read the bytes into.</param>
+        /// <returns>The bytes read from the stream.</returns>
+        /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
+        public static int Read(this Stream stream, ArraySegment<byte> buffer)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            if (buffer.Array == null) return 0;
+            return stream.Read(buffer.Array!, buffer.Offset, buffer.Count);
+        }
 
         /// <summary>
         /// Reads a fixed number of bytes from a stream starting from the current offset.
@@ -94,6 +111,119 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
+        /// Writes the entire contents of an array to a stream.
+        /// </summary>
+        /// <param name="stream">The stream to write to.</param>
+        /// <param name="data">The array containing the bytes to write.</param>
+        public static void Write(this Stream stream, params byte[] data)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            #endregion
+
+#if NETFRAMEWORK
+            stream.Write(data, 0, data.Length);
+#else
+            stream.Write(data);
+#endif
+        }
+
+        /// <summary>
+        /// Writes the entire contents of a buffer to a stream.
+        /// </summary>
+        /// <param name="stream">The stream to write to.</param>
+        /// <param name="buffer">The buffer containing the bytes to write.</param>
+        public static void Write(this Stream stream, ArraySegment<byte> buffer)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            if (buffer.Array == null) return;
+            stream.Write(buffer.Array, buffer.Offset, buffer.Count);
+        }
+
+        /// <summary>
+        /// The entire content of a stream as an array. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>. Avoids copying the underlying array if possible.
+        /// </summary>
+        public static byte[] AsArray(this Stream stream)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+#if !NET20 && !NET40 && !NET45
+            if (stream is MemoryStream memory && memory.TryGetBuffer(out var segment))
+                return segment.AsArray();
+#endif
+
+            return stream.ReadAll().AsArray();
+        }
+
+        /// <summary>
+        /// Copies the entire content of a stream to a <see cref="MemoryStream"/>. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <returns>A new stream or the original <paramref name="stream"/> if it was already a <see cref="MemoryStream"/>.</returns>
+        public static MemoryStream ToMemory(this Stream stream)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            var read = stream.ReadAll();
+            return new MemoryStream(read.Array!, read.Offset, read.Count, true, true);
+        }
+
+        /// <summary>
+        /// Copies the content of one stream to another. Seeks to the beginning of the <paramref name="source"/> stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="source">The source stream to copy from.</param>
+        /// <param name="destination">The destination stream to copy to.</param>
+        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        public static void CopyToEx(this Stream source, Stream destination, int bufferSize = 81920)
+        {
+            #region Sanity checks
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            #endregion
+
+            if (source.CanSeek) source.Position = 0;
+
+#if NET20
+            var buffer = new byte[bufferSize];
+            int read;
+            long sum = 0;
+            do
+            {
+                sum += read = source.Read(buffer, 0, buffer.Length);
+                destination.Write(buffer, 0, read);
+            } while (read != 0);
+#else
+            source.CopyTo(destination);
+#endif
+        }
+
+        /// <summary>
+        /// Writes the entire content of a stream to a file. Seeks to the beginning of the <paramref name="stream"/> if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="path">The path of the file to write.</param>
+        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
+        public static void CopyToFile(this Stream stream, [Localizable(false)] string path, int bufferSize = 81920)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
+
+            using var fileStream = File.Create(path);
+            stream.CopyToEx(fileStream, bufferSize);
+        }
+
+        /// <summary>
         /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
@@ -111,90 +241,13 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Copies the content of one stream to another. Seeks to the beginning of the <paramref name="source"/> stream if <see cref="Stream.CanSeek"/>.
-        /// </summary>
-        /// <param name="source">The source stream to copy from.</param>
-        /// <param name="destination">The destination stream to copy to.</param>
-        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
-        /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
-        /// <param name="progress">Used to report back the number of bytes that have been copied so far.</param>
-        /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of <paramref name="source"/>.</remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        public static void CopyToEx(this Stream source, Stream destination, int bufferSize = 81920, CancellationToken cancellationToken = default, IProgress<long>? progress = null)
-        {
-            #region Sanity checks
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (destination == null) throw new ArgumentNullException(nameof(destination));
-            #endregion
-
-            if (source.CanSeek) source.Position = 0;
-
-            var buffer = new byte[bufferSize];
-            int read;
-            long sum = 0;
-            do
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                sum += read = source.Read(buffer, 0, buffer.Length);
-                destination.Write(buffer, 0, read);
-                progress?.Report(sum);
-            } while (read != 0);
-        }
-
-        /// <summary>
-        /// Writes the entire content of a stream to a file.
-        /// </summary>
-        /// <param name="stream">The stream to read from.</param>
-        /// <param name="path">The path of the file to write.</param>
-        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
-        /// <param name="cancellationToken">Used to signal when the user wishes to cancel the copy process.</param>
-        /// <param name="progress">Used to report back the number of bytes that have been copied so far. Callbacks are rate limited to once every 250ms.</param>
-        public static void CopyToFile(this Stream stream, [Localizable(false)] string path, int bufferSize = 81920, CancellationToken cancellationToken = default, IProgress<long>? progress = null)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
-
-            using var fileStream = File.Create(path);
-            stream.CopyToEx(fileStream, bufferSize, cancellationToken, progress);
-        }
-
-        /// <summary>
-        /// Writes the entire contents of an array to a stream.
-        /// </summary>
-        /// <param name="stream">The stream to write to.</param>
-        /// <param name="data">The array containing the bytes to write.</param>
-        public static void Write(this Stream stream, byte[] data)
-        {
-            #region Sanity checks
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
-            if (data == null) throw new ArgumentNullException(nameof(data));
-            #endregion
-
-#if NETFRAMEWORK
-            stream.Write(data, 0, data.Length);
-#else
-            stream.Write(data);
-#endif
-        }
-
-        /// <summary>
         /// Creates a new <see cref="MemoryStream"/> and fills it with string data.
         /// </summary>
         /// <param name="data">The data to fill the stream with.</param>
         /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
         public static MemoryStream ToStream(this string data, Encoding? encoding = null)
-        {
-            #region Sanity checks
-            if (data == null) throw new ArgumentNullException(nameof(data));
-            #endregion
-
-            var byteArray = (encoding ?? new UTF8Encoding(false)).GetBytes(data);
-            var stream = new MemoryStream(byteArray);
-            return stream;
-        }
+            => new((encoding ?? new UTF8Encoding(false)).GetBytes(data ?? throw new ArgumentNullException(nameof(data))));
 
         /// <summary>
         /// Returns an embedded resource as a stream.
@@ -221,7 +274,7 @@ namespace NanoByte.Common.Streams
         /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
         public static byte[] GetEmbeddedBytes(this Type type, [Localizable(false)] string name)
-            => type.GetEmbeddedStream(name).ReadAll().Array!;
+            => type.GetEmbeddedStream(name).AsArray();
 
         /// <summary>
         /// Returns an embedded resource as a string.
