@@ -19,10 +19,10 @@ namespace NanoByte.Common.Streams
             => new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(3).Should().Equal(1, 2, 3);
 
         [Fact]
-        public void TestToArray()
+        public void TestReadAll()
         {
             Stream stream = new MemoryStream(new byte[] {1, 2, 3});
-            stream.ToArray().Should().Equal(1, 2, 3);
+            stream.ReadAll().Should().Equal(1, 2, 3);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace NanoByte.Common.Streams
             var stream = new MemoryStream();
             stream.Write(new byte[] {1, 2, 3});
 
-            stream.ToArray().Should().Equal(1, 2, 3);
+            stream.ReadAll().Should().Equal(1, 2, 3);
         }
 
         [Fact]

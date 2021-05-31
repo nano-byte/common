@@ -52,19 +52,45 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Reads the entire content of a stream to an array. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// Reads the entire content of a stream. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
-        /// <returns>A entire content of the stream.</returns>
-        public static byte[] ToArray(this Stream stream)
+        /// <returns>The entire content of the stream.</returns>
+        public static ArraySegment<byte> ReadAll(this Stream stream)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
-            using var memoryStream = new MemoryStream();
-            stream.CopyToEx(memoryStream);
-            return memoryStream.ToArray();
+            if (stream.CanSeek) stream.Position = 0;
+
+            long GetLength()
+            {
+                try
+                {
+                    return stream.Length > 0 ? stream.Length : 64;
+                }
+                catch (Exception)
+                {
+                    return 64;
+                }
+            }
+
+            byte[] buffer = new byte[GetLength()];
+            int count = 0;
+            while (true)
+            {
+                if (buffer.Length == count)
+                {
+                    byte[] newBuffer = new byte[buffer.Length * 2];
+                    Array.Copy(buffer, newBuffer, count);
+                    buffer = newBuffer;
+                }
+
+                int read = stream.Read(buffer, count, buffer.Length - count);
+                count += read;
+                if (read == 0) return new ArraySegment<byte>(buffer, 0, count);
+            }
         }
 
         /// <summary>
@@ -195,14 +221,7 @@ namespace NanoByte.Common.Streams
         /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
         public static byte[] GetEmbeddedBytes(this Type type, [Localizable(false)] string name)
-        {
-            #region Sanity checks
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            #endregion
-
-            return type.GetEmbeddedStream(name).ToArray();
-        }
+            => type.GetEmbeddedStream(name).ReadAll().Array!;
 
         /// <summary>
         /// Returns an embedded resource as a string.

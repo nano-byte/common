@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading;
 using FluentAssertions;
 using NanoByte.Common.Storage;
+using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using Xunit;
 
@@ -37,7 +38,7 @@ namespace NanoByte.Common.Net
 
             // Ensure the download was successful and the file is identical
             download.State.Should().Be(TaskState.Complete);
-            fileContent.Should().Equal(GetTestFileStream().ToArray());
+            fileContent.Should().Equal(GetTestFileStream().ReadAll());
         }
 
         [Fact]
