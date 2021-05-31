@@ -16,37 +16,50 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Contains test methods for <see cref="DownloadFile"/>.
     /// </summary>
-    public class DownloadFileTest : DownloadTestBase
+    public class DownloadFileTest : IDisposable
     {
-        private readonly TemporaryFile _tempFile = new("unit-tests");
+        private static MemoryStream GetTestFileStream() => "abc".ToStream();
 
-        public override void Dispose()
+        private readonly MicroServer _server = new("file", GetTestFileStream());
+
+        public void Dispose()
         {
-            _tempFile.Dispose();
-            base.Dispose();
+            _server.Dispose();
         }
 
         [Fact]
         public void TestRun()
         {
             // Download the file
-            var download = new DownloadFile(Server.FileUri, _tempFile);
+            ArraySegment<byte> data = default;
+            var download = new DownloadFile(_server.FileUri, stream => data = stream.ReadAll());
             download.Run();
-
-            // Read the file
-            var fileContent = File.ReadAllBytes(_tempFile);
 
             // Ensure the download was successful and the file is identical
             download.State.Should().Be(TaskState.Complete);
-            fileContent.Should().Equal(GetTestFileStream().ReadAll());
+            data.Should().Equal(GetTestFileStream().ReadAll());
+        }
+
+        [Fact]
+        public void TestRunFile()
+        {
+            using var tempFile = new TemporaryFile("unit-tests");
+
+            // Download the file
+            var download = new DownloadFile(_server.FileUri, tempFile);
+            download.Run();
+
+            // Ensure the download was successful and the file is identical
+            download.State.Should().Be(TaskState.Complete);
+            File.ReadAllBytes(tempFile).Should().Equal(GetTestFileStream().ReadAll());
         }
 
         [Fact]
         public void TestCancel()
         {
             // Prepare a very slow download of the file and monitor for a cancellation exception
-            Server.Slow = true;
-            var download = new DownloadFile(Server.FileUri, _tempFile);
+            _server.Slow = true;
+            var download = new DownloadFile(_server.FileUri, stream => stream.ReadAll());
             bool exceptionThrown = false;
             var cancellationTokenSource = new CancellationTokenSource();
             var downloadThread = new Thread(() =>
@@ -73,14 +86,14 @@ namespace NanoByte.Common.Net
         [Fact]
         public void TestFileMissing()
         {
-            var download = new DownloadFile(new Uri(Server.ServerUri, "wrong"), _tempFile);
+            var download = new DownloadFile(new Uri(_server.ServerUri, "wrong"), stream => stream.ReadAll());
             download.Invoking(x => x.Run()).Should().Throw<WebException>();
         }
 
         [Fact]
         public void TestIncorrectSize()
         {
-            var download = new DownloadFile(Server.FileUri, _tempFile, bytesTotal: 1024);
+            var download = new DownloadFile(_server.FileUri, stream => stream.ReadAll(), bytesTotal: 1024);
             download.Invoking(x => x.Run()).Should().Throw<WebException>();
         }
     }
