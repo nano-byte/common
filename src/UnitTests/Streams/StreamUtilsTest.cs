@@ -35,15 +35,6 @@ namespace NanoByte.Common.Streams
         }
 
         [Fact]
-        public void TestContentEquals()
-        {
-            "abc".ToStream().ContentEquals("abc".ToStream()).Should().BeTrue();
-            "ab".ToStream().ContentEquals("abc".ToStream()).Should().BeFalse();
-            "abc".ToStream().ContentEquals("ab".ToStream()).Should().BeFalse();
-            "abc".ToStream().ContentEquals("".ToStream()).Should().BeFalse();
-        }
-
-        [Fact]
         public void TestString()
         {
             const string test = "Test";

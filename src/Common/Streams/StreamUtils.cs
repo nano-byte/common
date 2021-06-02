@@ -154,29 +154,6 @@ namespace NanoByte.Common.Streams
         }
 
         /// <summary>
-        /// Compares two streams for bit-wise equality. Seeks to the beginnings of the streams if <see cref="Stream.CanSeek"/>.
-        /// </summary>
-        /// <remarks>Will try to <see cref="Stream.Seek"/> to the start of both streams.</remarks>
-        public static bool ContentEquals(this Stream stream1, Stream stream2)
-        {
-            #region Sanity checks
-            if (stream1 == null) throw new ArgumentNullException(nameof(stream1));
-            if (stream2 == null) throw new ArgumentNullException(nameof(stream2));
-            #endregion
-
-            if (stream1.CanSeek) stream1.Position = 0;
-            if (stream2.CanSeek) stream2.Position = 0;
-
-            while (true)
-            {
-                int byte1 = stream1.ReadByte();
-                int byte2 = stream2.ReadByte();
-                if (byte1 != byte2) return false;
-                else if (byte1 == -1) return true;
-            }
-        }
-
-        /// <summary>
         /// Creates a new <see cref="MemoryStream"/> and fills it with string data.
         /// </summary>
         /// <param name="data">The data to fill the stream with.</param>
