@@ -4,9 +4,10 @@
 using System;
 using System.Threading;
 using FluentAssertions;
+using NanoByte.Common.Tasks;
 using Xunit;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Contains test methods for <see cref="WaitTask"/>.

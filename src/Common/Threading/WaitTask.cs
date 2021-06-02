@@ -4,9 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
-using NanoByte.Common.Threading;
+using NanoByte.Common.Tasks;
 
-namespace NanoByte.Common.Tasks
+namespace NanoByte.Common.Threading
 {
     /// <summary>
     /// Waits for a <see cref="WaitHandle"/> to become available.
