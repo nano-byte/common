@@ -210,6 +210,9 @@
   <data name="ProblemLoading" xml:space="preserve">
     <value>Es gab ein Problem beim Laden von '{0}'.</value>
   </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>Lese Datei {0}</value>
+  </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Dieser Befehl kann nicht erneut ausgeführt werden, bis der Rückgängig-Befehl ausgeführt wurde.</value>
   </data>

@@ -340,6 +340,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reading file {0}.
+        /// </summary>
+        public static string ReadingFile {
+            get {
+                return ResourceManager.GetString("ReadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This command cannot be performed again until the undo command has been performed..
         /// </summary>
         public static string RedoNotAvailable {

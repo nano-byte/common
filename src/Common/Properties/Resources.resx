@@ -210,6 +210,9 @@
   <data name="ProblemLoading" xml:space="preserve">
     <value>There was a problem loading '{0}'.</value>
   </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>Reading file {0}</value>
+  </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>This command cannot be performed again until the undo command has been performed.</value>
   </data>
