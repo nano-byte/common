@@ -68,5 +68,25 @@ namespace NanoByte.Common.Collections
             }
             return true;
         }
+
+        /// <summary>
+        /// Converts an <see cref="ArraySegment{T}"/> to an array. Avoids copying the underlying array if possible.
+        /// </summary>
+        public static T[] AsArray<T>(this ArraySegment<T> segment)
+        {
+            if (segment.Array == null)
+#if NET20 || NET40 || NET45
+                return new T[0];
+#else
+                return Array.Empty<T>();
+#endif
+
+            if (segment.Offset == 0 && segment.Count == segment.Array.Length)
+                return segment.Array;
+
+            T[] array = new T[segment.Count];
+            Array.Copy(segment.Array!, segment.Offset, array, 0, segment.Count);
+            return array;
+        }
     }
 }
