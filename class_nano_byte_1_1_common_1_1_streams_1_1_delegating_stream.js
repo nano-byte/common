@@ -1,0 +1,26 @@
+var class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream =
+[
+    [ "DelegatingStream", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a297aa092967a9014c7843e621737e209", null ],
+    [ "Dispose", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a575ec82353df6c3af581393baed961c6", null ],
+    [ "Flush", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#ae3338d232abb857b24efdf35b49ef6c6", null ],
+    [ "FlushAsync", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a94767df5492b5af52e5b5898d471867d", null ],
+    [ "Read", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#ac8ce181bcc398c7fdb2e7b120c48765f", null ],
+    [ "Read", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a84f4010231221810ad50dbc005f99399", null ],
+    [ "ReadAsync", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a9745cd02b150369e725f8082f1c9634f", null ],
+    [ "ReadAsync", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a1000c355bbeaa13c893d5cff60b266b9", null ],
+    [ "Seek", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a65f5d57561f116c4ccbf693c6effde96", null ],
+    [ "SetLength", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a1bb969d37d867796dc2b284f5f2bc1c1", null ],
+    [ "Write", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a64e16bb371e73960b4024f445bba3890", null ],
+    [ "Write", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a2faf556edcd0b247650a0221ddc742b4", null ],
+    [ "WriteAsync", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a1974c64a2821750c2275e1068e2f50c5", null ],
+    [ "WriteAsync", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a9570fcc5ad0ce36eab389c3ba433e700", null ],
+    [ "UnderlyingStream", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a69a887f3001ceb8f4fafd1e1d6a4f842", null ],
+    [ "CanRead", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a1308e8ae70f6979d4bc4b01730b53862", null ],
+    [ "CanSeek", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a3a70e75fd90dd9f584f67eb5d4be0ace", null ],
+    [ "CanTimeout", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#af891e79ad5fffbd7376e00cb4cdc6e77", null ],
+    [ "CanWrite", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a1a05a5bd7b2235358b0d822607ff3e21", null ],
+    [ "Length", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#ab9d460861cfe02aff0a290469ab8d5da", null ],
+    [ "Position", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#adb726d18f64092192cbb3e205b733845", null ],
+    [ "ReadTimeout", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#ab68937bafdedf1fa3d578f12ceb1f0b3", null ],
+    [ "WriteTimeout", "class_nano_byte_1_1_common_1_1_streams_1_1_delegating_stream.html#a02d3aa25c161fe8c8075303bf943a0e9", null ]
+];

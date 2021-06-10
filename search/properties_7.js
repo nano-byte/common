@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['id_1573',['ID',['../class_nano_byte_1_1_common_1_1_controls_1_1_touch_event_args.html#aba362e5f33b7df6f8a1ff253925a2b9b',1,'NanoByte::Common::Controls::TouchEventArgs']]],
+  ['innerexception_1574',['InnerException',['../class_nano_byte_1_1_common_1_1_info_1_1_exception_info.html#a4ca0908e527bf89df5b5e7e5c3578322',1,'NanoByte::Common::Info::ExceptionInfo']]],
+  ['installbase_1575',['InstallBase',['../class_nano_byte_1_1_common_1_1_storage_1_1_locations.html#a199dfc5c64a948d20876255ca95f7235',1,'NanoByte::Common::Storage::Locations']]],
+  ['isadministrator_1576',['IsAdministrator',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#ad804fb098e378dc039d3319f32b1fe7f',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iscommitted_1577',['IsCommitted',['../class_nano_byte_1_1_common_1_1_storage_1_1_atomic_write.html#af7e2133a1ba2d02a6fca19da28e645c9',1,'NanoByte::Common::Storage::AtomicWrite']]],
+  ['isdefaultvalue_1578',['IsDefaultValue',['../class_nano_byte_1_1_common_1_1_property_pointer.html#a4e1181b739f90ff7e989e5027c5f0147',1,'NanoByte::Common::PropertyPointer']]],
+  ['isfinished_1579',['IsFinished',['../class_nano_byte_1_1_common_1_1_tasks_1_1_ansi_cli_progress_context.html#a99c1bc14718bdd19c2060f1585f7fc40',1,'NanoByte::Common::Tasks::AnsiCliProgressContext']]],
+  ['isguisession_1580',['IsGuiSession',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a237187f7b7fc0d78d5e96eef11ed8f25',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['ishinttextvisible_1581',['IsHintTextVisible',['../class_nano_byte_1_1_common_1_1_controls_1_1_hint_text_box.html#a40e11d9c6fd64ad5337b871d7df52e2d',1,'NanoByte::Common::Controls::HintTextBox']]],
+  ['isinteractive_1582',['IsInteractive',['../class_nano_byte_1_1_common_1_1_tasks_1_1_cli_task_handler.html#a0810ac6a567a31491570b8b756058115',1,'NanoByte.Common.Tasks.CliTaskHandler.IsInteractive()'],['../class_nano_byte_1_1_common_1_1_tasks_1_1_task_handler_base.html#a7f893af3f46709e1619143724e06976c',1,'NanoByte.Common.Tasks.TaskHandlerBase.IsInteractive()'],['../class_nano_byte_1_1_common_1_1_tasks_1_1_gui_task_handler_base.html#ab72d79afe67920561dda93c798cbe8e5',1,'NanoByte.Common.Tasks.GuiTaskHandlerBase.IsInteractive()']]],
+  ['isinternetconnected_1583',['IsInternetConnected',['../class_nano_byte_1_1_common_1_1_net_1_1_net_utils.html#a06c9f2cafed3388bad1a2b2d735a1520',1,'NanoByte::Common::Net::NetUtils']]],
+  ['ismacosx_1584',['IsMacOSX',['../class_nano_byte_1_1_common_1_1_native_1_1_unix_utils.html#a9566a030983b940e9beb855f52dcdc77',1,'NanoByte::Common::Native::UnixUtils']]],
+  ['isportable_1585',['IsPortable',['../class_nano_byte_1_1_common_1_1_storage_1_1_locations.html#afefce137b156f55469338cb61f21dd4f',1,'NanoByte::Common::Storage::Locations']]],
+  ['isreadonly_1586',['IsReadOnly',['../class_nano_byte_1_1_common_1_1_collections_1_1_concurrent_set.html#a89f3d6860dcd3944ec5c6d1e76f9a1a3',1,'NanoByte::Common::Collections::ConcurrentSet']]],
+  ['isunix_1587',['IsUnix',['../class_nano_byte_1_1_common_1_1_native_1_1_unix_utils.html#a9b6d478fc051539630f6c6614e3c375d',1,'NanoByte::Common::Native::UnixUtils']]],
+  ['isvalid_1588',['IsValid',['../class_nano_byte_1_1_common_1_1_controls_1_1_uri_text_box.html#a2e9bc9ebff30920bf8a046fa5590ef80',1,'NanoByte::Common::Controls::UriTextBox']]],
+  ['iswindows_1589',['IsWindows',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a392250cdc038e0b4aefc988f2724673f',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindows10_1590',['IsWindows10',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a09900df1623ae2c2bf3292fa06e50870',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindows10redstone_1591',['IsWindows10Redstone',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#af2e15bdefa21b3d8ab4fdd599556696e',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindows7_1592',['IsWindows7',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a50438e9acbe11ccbd241032b6ebb7aad',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindows8_1593',['IsWindows8',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a610f7809e9a5a33e708bd79e0c0d6a6b',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindowsnt_1594',['IsWindowsNT',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#abc6bba9a0f2b28e50227080eae23efc7',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindowsvista_1595',['IsWindowsVista',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#ac4352570a28b81ba87e6ca74400245e9',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['iswindowsxp_1596',['IsWindowsXP',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#ad98d1dff49c77f4769584099a2f03ab4',1,'NanoByte::Common::Native::WindowsUtils']]]
+];

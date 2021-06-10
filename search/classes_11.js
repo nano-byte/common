@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['scalableimage_933',['ScalableImage',['../class_nano_byte_1_1_common_1_1_drawing_1_1_scalable_image.html',1,'NanoByte::Common::Drawing']]],
+  ['servicetaskhandler_934',['ServiceTaskHandler',['../class_nano_byte_1_1_common_1_1_tasks_1_1_service_task_handler.html',1,'NanoByte::Common::Tasks']]],
+  ['setinlist_935',['SetInList',['../class_nano_byte_1_1_common_1_1_undo_1_1_set_in_list.html',1,'NanoByte::Common::Undo']]],
+  ['setlocalizablestring_936',['SetLocalizableString',['../class_nano_byte_1_1_common_1_1_undo_1_1_set_localizable_string.html',1,'NanoByte::Common::Undo']]],
+  ['setvaluecommand_937',['SetValueCommand',['../class_nano_byte_1_1_common_1_1_undo_1_1_set_value_command.html',1,'NanoByte::Common::Undo']]],
+  ['shadowingstream_938',['ShadowingStream',['../class_nano_byte_1_1_common_1_1_streams_1_1_shadowing_stream.html',1,'NanoByte::Common::Streams']]],
+  ['shelllink_939',['ShellLink',['../struct_nano_byte_1_1_common_1_1_native_1_1_windows_taskbar_1_1_shell_link.html',1,'NanoByte::Common::Native::WindowsTaskbar']]],
+  ['silenttaskhandler_940',['SilentTaskHandler',['../class_nano_byte_1_1_common_1_1_tasks_1_1_silent_task_handler.html',1,'NanoByte::Common::Tasks']]],
+  ['simplecommand_941',['SimpleCommand',['../class_nano_byte_1_1_common_1_1_undo_1_1_simple_command.html',1,'NanoByte::Common::Undo']]],
+  ['simplecommandexecutor_942',['SimpleCommandExecutor',['../class_nano_byte_1_1_common_1_1_undo_1_1_simple_command_executor.html',1,'NanoByte::Common::Undo']]],
+  ['simplepercenttask_943',['SimplePercentTask',['../class_nano_byte_1_1_common_1_1_tasks_1_1_simple_percent_task.html',1,'NanoByte::Common::Tasks']]],
+  ['simpletask_944',['SimpleTask',['../class_nano_byte_1_1_common_1_1_tasks_1_1_simple_task.html',1,'NanoByte::Common::Tasks']]],
+  ['stackextensions_945',['StackExtensions',['../class_nano_byte_1_1_common_1_1_collections_1_1_stack_extensions.html',1,'NanoByte::Common::Collections']]],
+  ['stagedoperation_946',['StagedOperation',['../class_nano_byte_1_1_common_1_1_staged_operation.html',1,'NanoByte::Common']]],
+  ['streamconsumer_947',['StreamConsumer',['../class_nano_byte_1_1_common_1_1_streams_1_1_stream_consumer.html',1,'NanoByte::Common::Streams']]],
+  ['streamutils_948',['StreamUtils',['../class_nano_byte_1_1_common_1_1_streams_1_1_stream_utils.html',1,'NanoByte::Common::Streams']]],
+  ['stringconstructorconverter_949',['StringConstructorConverter',['../class_nano_byte_1_1_common_1_1_values_1_1_design_1_1_string_constructor_converter.html',1,'NanoByte::Common::Values::Design']]],
+  ['stringutils_950',['StringUtils',['../class_nano_byte_1_1_common_1_1_string_utils.html',1,'NanoByte::Common']]],
+  ['synchronousprogress_951',['SynchronousProgress',['../class_nano_byte_1_1_common_1_1_threading_1_1_synchronous_progress.html',1,'NanoByte::Common::Threading']]]
+];

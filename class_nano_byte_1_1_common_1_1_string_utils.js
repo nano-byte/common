@@ -1,0 +1,26 @@
+var class_nano_byte_1_1_common_1_1_string_utils =
+[
+    [ "ContainsIgnoreCase", "class_nano_byte_1_1_common_1_1_string_utils.html#a2c93c79ab3aa7be62fd89f095544b249", null ],
+    [ "ContainsWhitespace", "class_nano_byte_1_1_common_1_1_string_utils.html#a92e6ecf83eb6787c14728250d356953e", null ],
+    [ "EndsWith", "class_nano_byte_1_1_common_1_1_string_utils.html#a3c321e0645a20594d799a8aeb26d47ce", null ],
+    [ "EndsWithIgnoreCase", "class_nano_byte_1_1_common_1_1_string_utils.html#a938c4a3378f1493a8b9a5174608a08f4", null ],
+    [ "EqualsEmptyNull", "class_nano_byte_1_1_common_1_1_string_utils.html#ade246df2bc15e08f37f7059ffac0f31c", null ],
+    [ "EqualsIgnoreCase", "class_nano_byte_1_1_common_1_1_string_utils.html#abd1b342bfc17faab8501d3b6c5ba1850", null ],
+    [ "EqualsIgnoreCase", "class_nano_byte_1_1_common_1_1_string_utils.html#a439069a94baec7eef10a9e618d61b9ac", null ],
+    [ "FormatBytes", "class_nano_byte_1_1_common_1_1_string_utils.html#abac64d43251effc873734798edfd7647", null ],
+    [ "GeneratePassword", "class_nano_byte_1_1_common_1_1_string_utils.html#aa449ef87d7b416d2679674010577c021", null ],
+    [ "GetLeftPartAtFirstOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#ad666899de96259e2665e76336e54edce", null ],
+    [ "GetLeftPartAtFirstOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a941456da5025777a8effba23a88ef114", null ],
+    [ "GetLeftPartAtLastOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a7d8989acdf3d04c3f0ca24fab798f797", null ],
+    [ "GetLeftPartAtLastOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a79f4bf2cfee616882bfc161ba6000fcc", null ],
+    [ "GetRightPartAtFirstOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a6b372073003cb59eaa4aceb5441e67ff", null ],
+    [ "GetRightPartAtFirstOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a95b0ecacfa80ed29d5c5fd5cc4669e87", null ],
+    [ "GetRightPartAtLastOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a7ed017a760b4f6bc5115171ecb5c55ca", null ],
+    [ "GetRightPartAtLastOccurrence", "class_nano_byte_1_1_common_1_1_string_utils.html#a9c66a5f23ff8eee136e75d276df73800", null ],
+    [ "Join", "class_nano_byte_1_1_common_1_1_string_utils.html#a886acab372f0b4e96a2a170cbf160d21", null ],
+    [ "RemoveCharacters", "class_nano_byte_1_1_common_1_1_string_utils.html#ae0d603215e0f8bd7d7d647acba431133", null ],
+    [ "SplitMultilineText", "class_nano_byte_1_1_common_1_1_string_utils.html#aa1605aaaa496ce74c39017c17e241405", null ],
+    [ "StartsWith", "class_nano_byte_1_1_common_1_1_string_utils.html#a4088ad9b64dd95a37928b8fba26d4a66", null ],
+    [ "StartsWithIgnoreCase", "class_nano_byte_1_1_common_1_1_string_utils.html#a2a03d1f6299efad1e2c04a0153fb8350", null ],
+    [ "TrimOverflow", "class_nano_byte_1_1_common_1_1_string_utils.html#a63c93e6e5a16d3f2a0b6592cdb2ebfb1", null ]
+];

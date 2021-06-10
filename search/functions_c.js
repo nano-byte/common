@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['makereadonly_1235',['MakeReadOnly',['../class_nano_byte_1_1_common_1_1_native_1_1_unix_utils.html#af6529515f26df604363f6e694f904e8c',1,'NanoByte::Common::Native::UnixUtils']]],
+  ['makewritable_1236',['MakeWritable',['../class_nano_byte_1_1_common_1_1_native_1_1_unix_utils.html#abcf475e9232c7a8db71dbc5bbaf79d09',1,'NanoByte::Common::Native::UnixUtils']]],
+  ['maxby_3c_20t_2c_20tvalue_20_3e_1237',['MaxBy&lt; T, TValue &gt;',['../class_nano_byte_1_1_common_1_1_collections_1_1_enumerable_extensions.html#abe993714ea3a0451e71806b14f34ccb4',1,'NanoByte::Common::Collections::EnumerableExtensions']]],
+  ['microserver_1238',['MicroServer',['../class_nano_byte_1_1_common_1_1_net_1_1_micro_server.html#a629c86701b9cb87cb08dfb32e0a69d25',1,'NanoByte::Common::Net::MicroServer']]],
+  ['minby_3c_20t_2c_20tvalue_20_3e_1239',['MinBy&lt; T, TValue &gt;',['../class_nano_byte_1_1_common_1_1_collections_1_1_enumerable_extensions.html#aedda1e70b0af6770e3e329ffc55471a1',1,'NanoByte::Common::Collections::EnumerableExtensions']]],
+  ['modelviewsync_1240',['ModelViewSync',['../class_nano_byte_1_1_common_1_1_dispatch_1_1_model_view_sync.html#a45cb213832144689fea1d6b56b38aaf5',1,'NanoByte::Common::Dispatch::ModelViewSync']]],
+  ['monitoredcollection_1241',['MonitoredCollection',['../class_nano_byte_1_1_common_1_1_collections_1_1_monitored_collection.html#a384a02ce73a56eef29138b87a26f18ab',1,'NanoByte.Common.Collections.MonitoredCollection.MonitoredCollection()'],['../class_nano_byte_1_1_common_1_1_collections_1_1_monitored_collection.html#a5591b5d893accabe77d60cb573e0ed24',1,'NanoByte.Common.Collections.MonitoredCollection.MonitoredCollection(int maxElements)']]],
+  ['movedirectory_1242',['MoveDirectory',['../class_nano_byte_1_1_common_1_1_storage_1_1_move_directory.html#a0dc34e83bada77f2a836acb305ad2956',1,'NanoByte::Common::Storage::MoveDirectory']]],
+  ['movefileonreboot_1243',['MoveFileOnReboot',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a6348f245923691c3afb07f626674e168',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['multiply_1244',['Multiply',['../class_nano_byte_1_1_common_1_1_math_utils.html#ac9a2dd734ebf498533614929b130e7a4',1,'NanoByte::Common::MathUtils']]],
+  ['multipropertychangedcommand_1245',['MultiPropertyChangedCommand',['../class_nano_byte_1_1_common_1_1_undo_1_1_multi_property_changed_command.html#a6ef27e1eb3c6751f3fe5b53442d1dc8f',1,'NanoByte.Common.Undo.MultiPropertyChangedCommand.MultiPropertyChangedCommand(object[] targets, PropertyDescriptor property, object?[] oldValues, object? newValue)'],['../class_nano_byte_1_1_common_1_1_undo_1_1_multi_property_changed_command.html#a8b56b19626e73d8e959d9eb807c55982',1,'NanoByte.Common.Undo.MultiPropertyChangedCommand.MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object?[] oldValues)']]],
+  ['multipropertytracker_1246',['MultiPropertyTracker',['../class_nano_byte_1_1_common_1_1_undo_1_1_multi_property_tracker.html#a990c4f94f0ae7c68b5c2dc31cf590901',1,'NanoByte::Common::Undo::MultiPropertyTracker']]],
+  ['mutexlock_1247',['MutexLock',['../class_nano_byte_1_1_common_1_1_threading_1_1_mutex_lock.html#a8a0cbfb0c349a2faad6d8c837800fdeb',1,'NanoByte::Common::Threading::MutexLock']]]
+];

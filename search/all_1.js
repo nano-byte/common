@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['base16decode_49',['Base16Decode',['../class_nano_byte_1_1_common_1_1_encoding_utils.html#aba67443ab5a48b1da9ace01176e605cd',1,'NanoByte::Common::EncodingUtils']]],
+  ['base16encode_50',['Base16Encode',['../class_nano_byte_1_1_common_1_1_encoding_utils.html#af36a651927ae1eedc988012a355fa97e',1,'NanoByte::Common::EncodingUtils']]],
+  ['base32encode_51',['Base32Encode',['../class_nano_byte_1_1_common_1_1_encoding_utils.html#a815cd86718c0c8059a93c88e314cf037',1,'NanoByte::Common::EncodingUtils']]],
+  ['base64utf8decode_52',['Base64Utf8Decode',['../class_nano_byte_1_1_common_1_1_encoding_utils.html#ad9391fd5992d6f3654fb3d0d5b2a3dd5',1,'NanoByte::Common::EncodingUtils']]],
+  ['base64utf8encode_53',['Base64Utf8Encode',['../class_nano_byte_1_1_common_1_1_encoding_utils.html#ab2f7fb225d42bf3ba2ea5fc17e1315ab',1,'NanoByte::Common::EncodingUtils']]],
+  ['batch_54',['Batch',['../namespace_nano_byte_1_1_common_1_1_tasks.html#aa61f1fee845dd22fbb1dce83280ddc45a51ffe9dd1b1e143c1b9f1144d040e454',1,'NanoByte::Common::Tasks']]],
+  ['binarystorage_55',['BinaryStorage',['../class_nano_byte_1_1_common_1_1_storage_1_1_binary_storage.html',1,'NanoByte::Common::Storage']]],
+  ['broadcastmessage_56',['BroadcastMessage',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a59a9ca5233c3132e4c3349f6404066ea',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['bucket_57',['Bucket',['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucket_rule.html#ae4b985ff8234d98cc492941a617c852d',1,'NanoByte.Common.Dispatch.BucketRule.Bucket()'],['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucket_rule.html#a3948788796f964466d320c5767221976',1,'NanoByte.Common.Dispatch.BucketRule.Bucket()']]],
+  ['bucketize_3c_20t_20_3e_58',['Bucketize&lt; T &gt;',['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucketizer.html#ae939ac77d0e392e2b9117f76638593a2',1,'NanoByte::Common::Dispatch::Bucketizer']]],
+  ['bucketize_3c_20telement_2c_20tvalue_20_3e_59',['Bucketize&lt; TElement, TValue &gt;',['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucketizer.html#a9ed0a7b39fac5a2a56759526753b4b8c',1,'NanoByte::Common::Dispatch::Bucketizer']]],
+  ['bucketizer_60',['Bucketizer',['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucketizer.html#a0b67e9809eaa0a022173685311280672',1,'NanoByte.Common.Dispatch.Bucketizer.Bucketizer(IEnumerable&lt; T &gt; elements)'],['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucketizer.html#a62002e43468aed8229d585104c9013f1',1,'NanoByte.Common.Dispatch.Bucketizer.Bucketizer(IEnumerable&lt; TElement &gt; elements, Func&lt; TElement, TValue &gt; valueRetriever)'],['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucketizer.html',1,'NanoByte.Common.Dispatch.Bucketizer&lt; TElement, TValue &gt;']]],
+  ['bucketrule_61',['BucketRule',['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucket_rule.html#a781962df821804f6c746852169cf5f18',1,'NanoByte.Common.Dispatch.BucketRule.BucketRule(Predicate&lt; T &gt; predicate, ICollection&lt; T &gt; bucket)'],['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucket_rule.html#ac67e56e87dd7376d83910b86ecbf0352',1,'NanoByte.Common.Dispatch.BucketRule.BucketRule(TValue value, ICollection&lt; TElement &gt; bucket)'],['../class_nano_byte_1_1_common_1_1_dispatch_1_1_bucket_rule.html',1,'NanoByte.Common.Dispatch.BucketRule&lt; TElement, TValue &gt;']]],
+  ['buildcomposite_62',['BuildComposite',['../class_nano_byte_1_1_common_1_1_undo_1_1_command_collector.html#a1efc39b48f9c947db0121d95f82ddcb4',1,'NanoByte::Common::Undo::CommandCollector']]],
+  ['buildexception_63',['BuildException',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a148f989faf451bc76b331e494392fc1d',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['bytesmaximum_64',['BytesMaximum',['../class_nano_byte_1_1_common_1_1_net_1_1_download_file.html#a5dc8534bde0fd2b0a64d0d46105be111',1,'NanoByte::Common::Net::DownloadFile']]]
+];

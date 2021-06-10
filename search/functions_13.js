@@ -1,0 +1,9 @@
+var searchData=
+[
+  ['undo_1431',['Undo',['../class_nano_byte_1_1_common_1_1_undo_1_1_command_manager.html#a1ddeaad2c6969f6b247159b008e136a6',1,'NanoByte.Common.Undo.CommandManager.Undo()'],['../class_nano_byte_1_1_common_1_1_undo_1_1_first_execute_command.html#a27595ba4b2d025442a10875caa6da201',1,'NanoByte.Common.Undo.FirstExecuteCommand.Undo()'],['../interface_nano_byte_1_1_common_1_1_undo_1_1_i_command_manager.html#a3c314038cbc0bc072af2b1d043a2db8c',1,'NanoByte.Common.Undo.ICommandManager.Undo()'],['../interface_nano_byte_1_1_common_1_1_undo_1_1_i_undo_command.html#a3e25de0bac0fcd50016bf656e48bc473',1,'NanoByte.Common.Undo.IUndoCommand.Undo()'],['../class_nano_byte_1_1_common_1_1_undo_1_1_simple_command.html#a27a704be43e8c7771eec9fd9087665e0',1,'NanoByte.Common.Undo.SimpleCommand.Undo()']]],
+  ['unifyslashes_1432',['UnifySlashes',['../class_nano_byte_1_1_common_1_1_storage_1_1_file_utils.html#a49dddda0a9e4023a70c7431bb0bbed21',1,'NanoByte::Common::Storage::FileUtils']]],
+  ['unregisterapplicationrestart_1433',['UnregisterApplicationRestart',['../class_nano_byte_1_1_common_1_1_native_1_1_windows_utils.html#a99c4281a70d280608b41ed3aa675e0d8',1,'NanoByte::Common::Native::WindowsUtils']]],
+  ['unsequencedequals_3c_20t_20_3e_1434',['UnsequencedEquals&lt; T &gt;',['../class_nano_byte_1_1_common_1_1_collections_1_1_enumerable_extensions.html#a02be503e329ffee7a938a3e8011fbb6c',1,'NanoByte::Common::Collections::EnumerableExtensions']]],
+  ['unsequencedequals_3c_20tkey_2c_20tvalue_20_3e_1435',['UnsequencedEquals&lt; TKey, TValue &gt;',['../class_nano_byte_1_1_common_1_1_collections_1_1_dictionary_extensions.html#a804822da0d9c3433e3d6231c52fa3fff',1,'NanoByte::Common::Collections::DictionaryExtensions']]],
+  ['updatelist_1436',['UpdateList',['../class_nano_byte_1_1_common_1_1_controls_1_1_filtered_tree_view.html#ad70cc8fd5f046e9aec686f7a7e7fa0dd',1,'NanoByte::Common::Controls::FilteredTreeView']]]
+];
