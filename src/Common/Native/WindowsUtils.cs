@@ -304,22 +304,14 @@ namespace NanoByte.Common.Native
 
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Normal, IntPtr.Zero);
-            if (handle.ToInt32() == -1) return null;
+            using var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Normal, IntPtr.Zero);
+            if (handle.IsInvalid) return null;
 
-            try
-            {
-                uint size = NativeMethods.GetFileSize(handle, IntPtr.Zero);
-                var buffer = new byte[size];
-                uint read = uint.MinValue;
-                var lpOverlapped = new NativeOverlapped();
-                if (NativeMethods.ReadFile(handle, buffer, size, ref read, ref lpOverlapped)) return buffer;
-                else return null;
-            }
-            finally
-            {
-                NativeMethods.CloseHandle(handle);
-            }
+            uint size = NativeMethods.GetFileSize(handle, IntPtr.Zero);
+            byte[] buffer = new byte[size];
+            uint read = uint.MinValue;
+            var lpOverlapped = new NativeOverlapped();
+            return NativeMethods.ReadFile(handle, buffer, size, ref read, ref lpOverlapped) ? buffer : null;
         }
 
         /// <summary>
@@ -341,21 +333,13 @@ namespace NanoByte.Common.Native
 
             if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            var handle = NativeMethods.CreateFile(path, FileAccess.Write, FileShare.Write, IntPtr.Zero, FileMode.Create, 0, IntPtr.Zero);
-            int error = Marshal.GetLastWin32Error();
-            if (handle == new IntPtr(-1)) throw BuildException(error);
+            using var handle = NativeMethods.CreateFile(path, FileAccess.Write, FileShare.Write, IntPtr.Zero, FileMode.Create, 0, IntPtr.Zero);
+            if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
-            try
-            {
-                uint bytesWritten = 0;
-                var lpOverlapped = new NativeOverlapped();
-                if (!NativeMethods.WriteFile(handle, data, (uint)data.Length, ref bytesWritten, ref lpOverlapped))
-                    throw BuildException(Marshal.GetLastWin32Error());
-            }
-            finally
-            {
-                NativeMethods.CloseHandle(handle);
-            }
+            uint bytesWritten = 0;
+            var lpOverlapped = new NativeOverlapped();
+            if (!NativeMethods.WriteFile(handle, data, (uint)data.Length, ref bytesWritten, ref lpOverlapped))
+                throw BuildException(Marshal.GetLastWin32Error());
         }
 
         /// <summary>
@@ -472,20 +456,13 @@ namespace NanoByte.Common.Native
 
         private static ulong GetFileIndex([Localizable(false)] string path)
         {
-            var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
-            if (handle == IntPtr.Zero) throw BuildException(Marshal.GetLastWin32Error());
+            using var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
+            if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
-            try
-            {
-                if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
-                    throw BuildException(Marshal.GetLastWin32Error());
-                // ReSharper disable once ShiftExpressionRealShiftCountIsZero
-                return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
-            }
-            finally
-            {
-                NativeMethods.CloseHandle(handle);
-            }
+            if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
+                throw BuildException(Marshal.GetLastWin32Error());
+            // ReSharper disable once ShiftExpressionRealShiftCountIsZero
+            return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
         }
 
         /// <summary>
