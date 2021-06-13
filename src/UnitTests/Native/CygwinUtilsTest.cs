@@ -30,9 +30,11 @@ namespace NanoByte.Common.Native
             CygwinUtils.IsSymlink(normalFile, out _).Should().BeFalse();
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestIsSymlinkMatch()
         {
+            Skip.IfNot(WindowsUtils.IsWindows, reason: "The 'system' file attribute can only be checked on the Windows platform.");
+
             using var tempDir = new TemporaryDirectory("unit-tests");
             string symlinkFile = Path.Combine(tempDir, "symlink");
             File.WriteAllBytes(symlinkFile, _symlinkBytes);

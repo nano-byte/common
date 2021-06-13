@@ -55,17 +55,17 @@ namespace NanoByte.Common.Streams
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
-            var buffer = new byte[count];
+            byte[] buffer = new byte[count];
             int offset = 0;
 
             while (offset < count)
             {
                 int read = stream.Read(buffer, offset, count - offset);
-                if (read == 0) break;
+                if (read == 0) return null;
                 offset += read;
             }
 
-            return offset == count ? buffer : null;
+            return buffer;
         }
 
         /// <summary>

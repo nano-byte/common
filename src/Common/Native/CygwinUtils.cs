@@ -8,10 +8,7 @@ using System.IO;
 using System.Text;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
-
-#if NETFRAMEWORK
 using NanoByte.Common.Streams;
-#endif
 
 #if NET20
 using NanoByte.Common.Values;
@@ -37,18 +34,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="IOException">There was an IO problem reading the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink([Localizable(false)] string path)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
-
-            if (!HasSystemAttribute(path)) return false;
-
-            using var stream = File.OpenRead(path);
-            var header = new byte[SymlinkCookie.Length];
-            stream.Read(header, 0, SymlinkCookie.Length);
-            return header.SequencedEquals(SymlinkCookie);
-        }
+            => IsSymlink(path, out _);
 
         /// <summary>
         /// Checks whether a file is a Cygwin symbolic link (http://cygwin.com/cygwin-ug-net/using.html#pathnames-symlinks).
@@ -66,33 +52,21 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            if (!HasSystemAttribute(path))
+            var file = new FileInfo(path);
+
+            if (file.Attributes.HasFlag(FileAttributes.System) && file.Length >= SymlinkCookie.Length)
             {
-                target = null;
-                return false;
+                using var stream = File.OpenRead(path);
+                if (stream.Read(SymlinkCookie.Length).SequencedEquals(SymlinkCookie))
+                {
+                    target = new StreamReader(stream, detectEncodingFromByteOrderMarks: true).ReadToEnd().TrimEnd('\0');
+                    return true;
+                }
             }
 
-            using var stream = File.OpenRead(path);
-            var header = new byte[SymlinkCookie.Length];
-            stream.Read(header, 0, SymlinkCookie.Length);
-            if (header.SequencedEquals(SymlinkCookie))
-            {
-                target = new StreamReader(stream, detectEncodingFromByteOrderMarks: true).ReadToEnd().TrimEnd('\0');
-                return true;
-            }
-            else
-            {
-                target = null;
-                return false;
-            }
+            target = null;
+            return false;
         }
-
-        /// <summary>
-        /// Checks whether a file has the <see cref="FileAttributes.System"/> attribute set.
-        /// Always <c>true</c> on non-Windows systems since they do not expose this attribute, so we assume it might be set.
-        /// </summary>
-        private static bool HasSystemAttribute(string path)
-            => !WindowsUtils.IsWindows || File.GetAttributes(path).HasFlag(FileAttributes.System);
 
         /// <summary>
         /// Creates a new Cygwin symbolic link (http://cygwin.com/cygwin-ug-net/using.html#pathnames-symlinks).
