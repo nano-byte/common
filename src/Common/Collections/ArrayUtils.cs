@@ -8,9 +8,9 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// Provides extension methods for arrays.
+    /// Provides array-related helper methods.
     /// </summary>
-    public static class ArrayExtensions
+    public static class ArrayUtils
     {
         /// <summary>
         /// Appends an element to an array.

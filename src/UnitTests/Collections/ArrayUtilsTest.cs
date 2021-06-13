@@ -7,9 +7,9 @@ using Xunit;
 namespace NanoByte.Common.Collections
 {
     /// <summary>
-    /// Contains test methods for <see cref="ArrayExtensions"/>.
+    /// Contains test methods for <see cref="ArrayUtils"/>.
     /// </summary>
-    public class ArrayExtensionsTest
+    public class ArrayUtilsTest
     {
         [Fact]
         public void TestAppend()
