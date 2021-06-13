@@ -61,15 +61,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The argument must be greater than zero..
-        /// </summary>
-        public static string ArgMustBeGreaterThanZero {
-            get {
-                return ResourceManager.GetString("ArgMustBeGreaterThanZero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Back {
