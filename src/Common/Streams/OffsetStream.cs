@@ -1,26 +1,54 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System;
 using System.IO;
+using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Decorator that applies a constant byte offset to access to another <see cref="Stream"/>.
+    /// Decorator that transparently applies an offset to another <see cref="Stream"/>.
     /// </summary>
     public sealed class OffsetStream : DelegatingStream
     {
-        private readonly long _offset;
-
         /// <summary>
         /// Creates a new offset stream.
         /// </summary>
         /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
-        /// <param name="offset">Number of bytes to offset the <paramref name="underlyingStream"/>.</param>
-        public OffsetStream(Stream underlyingStream, long offset)
+        public OffsetStream(Stream underlyingStream)
             : base(underlyingStream)
+        {}
+
+        private int _offset;
+
+        /// <summary>
+        /// Applies an offset to the underlying stream.
+        /// </summary>
+        /// <param name="offset">The number of bytes to offset by. Must not be negative.</param>
+        /// <exception cref="IOException">The underlying stream was shorter than the specified <paramref name="offset"/>.</exception>
+        public void ApplyOffset(int offset)
         {
-            underlyingStream.Position = _offset = offset;
+            if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset), "Offset must not be negative.");
+            if (offset == 0) return;
+
+            if (UnderlyingStream.CanSeek)
+                UnderlyingStream.Seek(offset, SeekOrigin.Current);
+            else
+            {
+                int toRead = offset;
+                using (ArrayUtils.Rent(Math.Min(toRead, 64), out byte[] buffer))
+                {
+                    while (toRead > 0)
+                    {
+                        int read = UnderlyingStream.Read(buffer, 0, Math.Min(toRead, buffer.Length));
+                        if (read == 0) throw new IOException("The underlying stream was shorter than the specified offset.");
+                        toRead -= read;
+                    }
+                }
+            }
+
+            _offset += offset;
         }
 
         /// <inheritdoc/>
