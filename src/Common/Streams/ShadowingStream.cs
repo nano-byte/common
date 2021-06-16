@@ -35,8 +35,8 @@ namespace NanoByte.Common.Streams
         /// <inheritdoc/>
         public override int Read(byte[] buffer, int offset, int count)
         {
-            int read = base.Read(buffer, offset, count);
-            _shadowStream.Write(buffer, offset, count);
+            int read = UnderlyingStream.Read(buffer, offset, count);
+            _shadowStream.Write(buffer, offset, read);
             return read;
         }
 
@@ -44,8 +44,8 @@ namespace NanoByte.Common.Streams
         /// <inheritdoc/>
         public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            int read = await base.ReadAsync(buffer, offset, count, cancellationToken);
-            await _shadowStream.WriteAsync(buffer, offset, count, cancellationToken);
+            int read = await UnderlyingStream.ReadAsync(buffer, offset, count, cancellationToken);
+            await _shadowStream.WriteAsync(buffer, offset, read, cancellationToken);
             return read;
         }
 #endif
@@ -54,8 +54,8 @@ namespace NanoByte.Common.Streams
         /// <inheritdoc/>
         public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
         {
-            int read = await base.ReadAsync(buffer, cancellationToken);
-            await _shadowStream.WriteAsync(buffer, cancellationToken);
+            int read = await UnderlyingStream.ReadAsync(buffer, cancellationToken);
+            await _shadowStream.WriteAsync(buffer[..read], cancellationToken);
             return read;
         }
 #endif
