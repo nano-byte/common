@@ -6,6 +6,7 @@ USE_MDFILE_AS_MAINPAGE = main.md
 STRIP_FROM_PATH = ../src
 RECURSIVE = YES
 EXCLUDE_PATTERNS = */UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs */Backports/* */Samples/*
+PREDEFINED = NET
 
 OUTPUT_DIRECTORY = ../artifacts/Documentation
 GENERATE_TAGFILE = ../artifacts/Documentation/nanobyte-common.tag
