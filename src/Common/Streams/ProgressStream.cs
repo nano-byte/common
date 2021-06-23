@@ -35,7 +35,7 @@ namespace NanoByte.Common.Streams
         private long? _length;
 
         /// <inheritdoc/>
-        public override long Length => _length ?? base.Length;
+        public override long Length => _length ?? UnderlyingStream.Length;
 
         /// <summary>
         /// Overrides the <see cref="Stream.Length"/> provided by the underlying stream.
@@ -48,7 +48,10 @@ namespace NanoByte.Common.Streams
 
         /// <inheritdoc/>
         public override void Write(byte[] buffer, int offset, int count)
-            => UnderlyingStream.Write(buffer, offset, Report(count));
+        {
+            UnderlyingStream.Write(buffer, offset, count);
+            Report(count);
+        }
 
 #if !NET20 && !NET40
         /// <inheritdoc/>
@@ -57,7 +60,10 @@ namespace NanoByte.Common.Streams
 
         /// <inheritdoc/>
         public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => await UnderlyingStream.WriteAsync(buffer, offset, Report(count), CombineTokens(cancellationToken));
+        {
+            await UnderlyingStream.WriteAsync(buffer, offset, count, CombineTokens(cancellationToken));
+            Report(count);
+        }
 
         private CancellationToken CombineTokens(CancellationToken cancellationToken)
             => CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationToken).Token;
@@ -75,15 +81,15 @@ namespace NanoByte.Common.Streams
         /// <inheritdoc/>
         public override void Write(ReadOnlySpan<byte> buffer)
         {
-            Report(buffer.Length);
             UnderlyingStream.Write(buffer);
+            Report(buffer.Length);
         }
 
         /// <inheritdoc/>
         public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
         {
-            Report(buffer.Length);
             await UnderlyingStream.WriteAsync(buffer, CombineTokens(cancellationToken));
+            Report(buffer.Length);
         }
 #endif
 
@@ -98,7 +104,7 @@ namespace NanoByte.Common.Streams
         private int Report(int count)
         {
             _cancellationToken.ThrowIfCancellationRequested();
-            _progress?.Report(Interlocked.Add(ref _counter, count));
+            _progress?.Report(CanSeek ? Position : Interlocked.Add(ref _counter, count));
             return count;
         }
     }
