@@ -560,16 +560,17 @@ namespace NanoByte.Common.Storage
             #endregion
         }
 
-        private static readonly FileSystemAccessRule _denyEveryoneWrite = new(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
-
         private static void ToggleWriteProtectionWinNT(this DirectoryInfo directory, bool enable)
         {
             try
             {
+                var denyEveryoneWrite = new FileSystemAccessRule(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
+
                 var acl = directory.GetAccessControl();
                 acl.CanonicalizeAcl();
-                if (enable) acl.AddAccessRule(_denyEveryoneWrite);
-                else acl.RemoveAccessRule(_denyEveryoneWrite);
+                if (enable) acl.AddAccessRule(denyEveryoneWrite);
+                else acl.RemoveAccessRule(denyEveryoneWrite);
+
                 directory.SetAccessControl(acl);
             }
             #region Error handling
