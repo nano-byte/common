@@ -120,26 +120,6 @@ namespace NanoByte.Common.Storage
 
         #region Time
         /// <summary>
-        /// Converts a <see cref="DateTime"/> into the number of seconds since the Unix epoch (1970-1-1).
-        /// </summary>
-        [Pure]
-        public static long ToUnixTime(this DateTime time)
-        {
-            var timespan = (time.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
-            return (long)timespan.TotalSeconds;
-        }
-
-        /// <summary>
-        /// Converts a number of seconds since the Unix epoch (1970-1-1) into a <see cref="DateTime"/>.
-        /// </summary>
-        [Pure]
-        public static DateTime FromUnixTime(long time)
-        {
-            var timespan = TimeSpan.FromSeconds(time);
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc) + timespan;
-        }
-
-        /// <summary>
         /// Determines the accuracy with which the filesystem underlying a specific directory can store file-changed times.
         /// </summary>
         /// <param name="path">The path of the directory to check.</param>

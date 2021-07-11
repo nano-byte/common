@@ -53,25 +53,6 @@ namespace NanoByte.Common.Storage
         }
         #endregion
 
-        #region Time
-        /// <summary>
-        /// Ensures <see cref="FileUtils.ToUnixTime"/> correctly converts a <see cref="DateTime"/> value to a Unix epoch value.
-        /// </summary>
-        [Fact]
-        public void TestToUnixTime()
-            => new DateTime(2004, 09, 16, 0, 0, 0, DateTimeKind.Utc)
-              .ToUnixTime()
-              .Should().Be(12677 /*days*/ * 86400 /*seconds*/);
-
-        /// <summary>
-        /// Ensures <see cref="FileUtils.FromUnixTime"/> correctly converts a Unix epoch value to a <see cref="DateTime"/> value.
-        /// </summary>
-        [Fact]
-        public void TestFromUnixTime()
-            => FileUtils.FromUnixTime(12677 /*days*/ * 86400 /*seconds*/)
-                        .Should().Be(new DateTime(2004, 09, 16));
-        #endregion
-
         #region Exists
         /// <summary>
         /// Ensures <see cref="FileUtils.ExistsCaseSensitive"/> correctly detects case mismatches.
