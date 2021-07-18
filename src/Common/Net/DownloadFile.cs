@@ -48,6 +48,11 @@ namespace NanoByte.Common.Net
         [Browsable(false)]
         public WebHeaderCollection? ResponseHeaders { get; private set; }
 
+        /// <summary>
+        /// Indicates whether the server has started sending content.
+        /// </summary>
+        public bool ContentStarted { get; private set; }
+
         private readonly Action<Stream> _callback;
 
         /// <summary>
@@ -93,6 +98,7 @@ namespace NanoByte.Common.Net
                     HandleHeaders(response);
 
                     State = TaskState.Data;
+                    ContentStarted = true;
                     using var stream = new ProgressStream(response.GetResponseStream()!, new SynchronousProgress<long>(x => UnitsProcessed = x), CancellationToken);
                     if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
                     _callback(stream);
