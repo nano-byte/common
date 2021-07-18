@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using JetBrains.Annotations;
 using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Streams
@@ -246,6 +247,7 @@ namespace NanoByte.Common.Streams
         /// <param name="data">The data to fill the stream with.</param>
         /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
+        [Pure]
         public static MemoryStream ToStream(this string data, Encoding? encoding = null)
             => new((encoding ?? new UTF8Encoding(false)).GetBytes(data ?? throw new ArgumentNullException(nameof(data))));
 
@@ -255,6 +257,7 @@ namespace NanoByte.Common.Streams
         /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
         /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [Pure]
         public static Stream GetEmbeddedStream(this Type type, [Localizable(false)] string name)
         {
             #region Sanity checks
@@ -273,6 +276,7 @@ namespace NanoByte.Common.Streams
         /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
         /// <param name="name">The name of the embedded resource.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [Pure]
         public static byte[] GetEmbeddedBytes(this Type type, [Localizable(false)] string name)
             => type.GetEmbeddedStream(name).AsArray();
 
@@ -283,6 +287,7 @@ namespace NanoByte.Common.Streams
         /// <param name="name">The name of the embedded resource.</param>
         /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [Pure]
         public static string GetEmbeddedString(this Type type, [Localizable(false)] string name, Encoding? encoding = null)
         {
             #region Sanity checks

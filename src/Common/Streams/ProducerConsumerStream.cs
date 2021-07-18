@@ -15,16 +15,18 @@ namespace NanoByte.Common.Streams
     public sealed class ProducerConsumerStream : Stream
     {
         /// <summary>
+        /// The default for the maximum number of written but not read bytes the stream can buffer.
+        /// </summary>
+        public const int DefaultBufferSize = 160 * 1024;
+
+        /// <summary>
         /// Creates a new producer consumer stream.
         /// </summary>
         /// <param name="bufferSize">The maximum number of written but not read bytes the stream can buffer.</param>
-        public ProducerConsumerStream(int bufferSize = 163840)
+        public ProducerConsumerStream(int bufferSize = DefaultBufferSize)
         {
             _buffer = new byte[bufferSize];
         }
-
-        /// <summary>The byte array used as a circular buffer storage.</summary>
-        private readonly Memory<byte> _buffer;
 
         /// <inheritdoc/>
         public override bool CanRead => true;
@@ -176,11 +178,14 @@ namespace NanoByte.Common.Streams
         /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
         private readonly object _lock = new();
 
+        /// <summary>The memory used as a circular buffer storage.</summary>
+        private readonly Memory<byte> _buffer;
+
         /// <summary>The index of the first byte currently store in the <see cref="_buffer"/>.</summary>
         private int _dataStart;
 
         /// <summary>The number of bytes currently stored in the <see cref="_buffer"/>.</summary>
-        private int _dataLength; // Invariant: _positionWrite - _positionRead <= _dataLength <= _buffer.Length
+        private int _dataLength;
 
         /// <summary>Indicates that the producer has finished and no new data will be added.</summary>
         private bool _doneWriting;
@@ -210,7 +215,7 @@ namespace NanoByte.Common.Streams
                 // Block while buffer is empty
                 WaitFor(ref _dataAvailable);
 
-                // The index of the last byte currently stored in the buffer plus one
+                // The index of the last byte currently stored in the buffer
                 int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
 
                 // Determine how many bytes can be read in one go
