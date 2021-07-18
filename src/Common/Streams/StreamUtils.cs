@@ -222,6 +222,24 @@ namespace NanoByte.Common.Streams
             stream.CopyToEx(fileStream);
         }
 
+#if !NET20 && !NET40
+        /// <summary>
+        /// Ensures that the stream supports seeking.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="bufferSize">The maximum number of bytes to buffer.</param>
+        /// <returns>The stream wrapped in a <see cref="SeekBufferStream"/> if <see cref="Stream.CanSeek"/> was <c>false</c>; the original <paramref name="stream"/> otherwise.</returns>
+        [Pure]
+        public static Stream EnsureCanSeek(this Stream stream, int bufferSize = SeekBufferStream.DefaultBufferSize)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            return stream.CanSeek ? stream : new SeekBufferStream(stream, bufferSize);
+        }
+#endif
+
         /// <summary>
         /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
