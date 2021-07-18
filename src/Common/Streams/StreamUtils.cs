@@ -182,9 +182,8 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="source">The source stream to copy from.</param>
         /// <param name="destination">The destination stream to copy to.</param>
-        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
         [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        public static void CopyToEx(this Stream source, Stream destination, int bufferSize = 81920)
+        public static void CopyToEx(this Stream source, Stream destination)
         {
             #region Sanity checks
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -194,7 +193,7 @@ namespace NanoByte.Common.Streams
             if (source.CanSeek) source.Position = 0;
 
 #if NET20
-            var buffer = new byte[bufferSize];
+            var buffer = new byte[81920];
             int read;
             long sum = 0;
             do
@@ -212,8 +211,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="path">The path of the file to write.</param>
-        /// <param name="bufferSize">The size of the buffer to use for copying in bytes.</param>
-        public static void CopyToFile(this Stream stream, [Localizable(false)] string path, int bufferSize = 81920)
+        public static void CopyToFile(this Stream stream, [Localizable(false)] string path)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -221,7 +219,7 @@ namespace NanoByte.Common.Streams
             #endregion
 
             using var fileStream = File.Create(path);
-            stream.CopyToEx(fileStream, bufferSize);
+            stream.CopyToEx(fileStream);
         }
 
         /// <summary>
