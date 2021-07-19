@@ -46,9 +46,9 @@ namespace NanoByte.Common.Storage
         {
             if (WindowsUtils.IsWindows)
             {
-                new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")).Should().Be("a/b");
-                new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\file")).Should().Be("test/a/b");
-                new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")).Should().Be("../test1");
+                new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")).Should().Be(@"a\b");
+                new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\file")).Should().Be(@"test\a\b");
+                new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")).Should().Be(@"..\test1");
             }
             else
             {

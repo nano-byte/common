@@ -55,7 +55,7 @@ namespace NanoByte.Common.Storage
         }
 
         /// <summary>
-        /// Returns a relative path pointing to <paramref name="target"/> from <paramref name="baseRef"/> using Unix/Uri-style directory separators.
+        /// Returns a relative path pointing to <paramref name="target"/> from <paramref name="baseRef"/>.
         /// </summary>
         [Pure]
         public static string RelativeTo(this FileSystemInfo target, FileSystemInfo baseRef)
@@ -74,7 +74,7 @@ namespace NanoByte.Common.Storage
                 targetPath += Path.DirectorySeparatorChar;
 
             var relativeUri = new Uri(basePath).MakeRelativeUri(new Uri(targetPath));
-            return Uri.UnescapeDataString(relativeUri.ToString()).TrimEnd('/');
+            return Uri.UnescapeDataString(relativeUri.ToString()).TrimEnd('/').ToNativePath();
         }
         #endregion
 
