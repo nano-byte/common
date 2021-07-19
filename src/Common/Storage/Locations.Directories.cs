@@ -82,7 +82,7 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
-            string resourceCombined = FileUtils.PathCombine(resource);
+            string resourceCombined = PathCombine(resource);
             string appPath;
             try
             {

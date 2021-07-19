@@ -29,13 +29,13 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
-            string resourceCombined = FileUtils.PathCombine(resource);
+            string resourceCombined = PathCombine(resource);
             string path;
             try
             {
                 path = IsPortable
-                    ? FileUtils.PathCombine(PortableBase, "config", resourceCombined)
-                    : FileUtils.PathCombine(UserConfigDir, appName, resourceCombined);
+                    ? PathCombine(PortableBase, "config", resourceCombined)
+                    : PathCombine(UserConfigDir, appName, resourceCombined);
             }
             #region Error handling
             catch (ArgumentException ex)
@@ -71,11 +71,11 @@ namespace NanoByte.Common.Storage
             if (IsPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
 
             string systemConfigDir = SystemConfigDirs.Split(Path.PathSeparator).Last();
-            string resourceCombined = FileUtils.PathCombine(resource);
+            string resourceCombined = PathCombine(resource);
             string path;
             try
             {
-                path = FileUtils.PathCombine(systemConfigDir, appName, resourceCombined);
+                path = PathCombine(systemConfigDir, appName, resourceCombined);
             }
             #region Error handling
             catch (ArgumentException ex)
@@ -109,12 +109,12 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
-            string resourceCombined = FileUtils.PathCombine(resource);
+            string resourceCombined = PathCombine(resource);
             string path;
             if (IsPortable)
             {
                 // Check in portable base directory
-                path = FileUtils.PathCombine(PortableBase, "config", resourceCombined);
+                path = PathCombine(PortableBase, "config", resourceCombined);
                 if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
                     yield return Path.GetFullPath(path);
             }
@@ -125,7 +125,7 @@ namespace NanoByte.Common.Storage
                 {
                     try
                     {
-                        path = FileUtils.PathCombine(dirPath, appName, resourceCombined);
+                        path = PathCombine(dirPath, appName, resourceCombined);
                     }
                     #region Error handling
                     catch (ArgumentException ex)
@@ -157,13 +157,13 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
-            string resourceCombined = FileUtils.PathCombine(resource);
+            string resourceCombined = PathCombine(resource);
             string path;
             try
             {
                 path = IsPortable
-                    ? FileUtils.PathCombine(PortableBase, "data", resourceCombined)
-                    : FileUtils.PathCombine(UserDataDir, appName, resourceCombined);
+                    ? PathCombine(PortableBase, "data", resourceCombined)
+                    : PathCombine(UserDataDir, appName, resourceCombined);
             }
             #region Error handling
             catch (ArgumentException ex)
@@ -197,12 +197,12 @@ namespace NanoByte.Common.Storage
             if (resource == null) throw new ArgumentNullException(nameof(resource));
             #endregion
 
-            string resourceCombined = FileUtils.PathCombine(resource);
+            string resourceCombined = PathCombine(resource);
             string path;
             if (IsPortable)
             {
                 // Check in portable base directory
-                path = FileUtils.PathCombine(PortableBase, "data", resourceCombined);
+                path = PathCombine(PortableBase, "data", resourceCombined);
                 if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
                     yield return Path.GetFullPath(path);
             }
@@ -213,7 +213,7 @@ namespace NanoByte.Common.Storage
                 {
                     try
                     {
-                        path = FileUtils.PathCombine(dirPath, appName, resourceCombined);
+                        path = PathCombine(dirPath, appName, resourceCombined);
                     }
                     #region Error handling
                     catch (ArgumentException ex)
@@ -253,5 +253,15 @@ namespace NanoByte.Common.Storage
                 throw new IOException(string.Format(Resources.FileNotFound, fileName));
             }
         }
+
+        /// <summary>
+        /// Combines an array of strings into a path.
+        /// </summary>
+        private static string PathCombine(params string[] paths)
+#if NET20
+            => (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
+#else
+            => Path.Combine(paths);
+#endif
     }
 }
