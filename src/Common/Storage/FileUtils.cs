@@ -32,7 +32,16 @@ namespace NanoByte.Common.Storage
         /// </summary>
         [Pure]
         [return: NotNullIfNotNull("value")]
-        public static string? UnifySlashes(string? value) => value?.Replace('/', Path.DirectorySeparatorChar);
+        public static string? ToNativePath(this string? value)
+            => value?.Replace('/', Path.DirectorySeparatorChar);
+
+        /// <summary>
+        /// Replaces <see cref="Path.DirectorySeparatorChar"/> with Unix-style directory slashes.
+        /// </summary>
+        [Pure]
+        [return: NotNullIfNotNull("value")]
+        public static string? ToUnixPath(this string? value)
+            => value?.Replace(Path.DirectorySeparatorChar, '/');
 
         /// <summary>
         /// Determines whether a path might escape its parent directory (by being absolute or using ..).
@@ -41,7 +50,7 @@ namespace NanoByte.Common.Storage
         public static bool IsBreakoutPath([Localizable(false)] string? path)
         {
             if (string.IsNullOrEmpty(path)) return false;
-            path = UnifySlashes(path);
+            path = path.ToNativePath();
             return Path.IsPathRooted(path) || path.Split(Path.DirectorySeparatorChar).Contains("..");
         }
 

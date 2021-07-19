@@ -18,8 +18,14 @@ namespace NanoByte.Common.Storage
     {
         #region Paths
         [Fact]
-        public void TestUnifySlashes()
-            => FileUtils.UnifySlashes("a/b").Should().Be("a" + Path.DirectorySeparatorChar + "b");
+        public void TestToNativePath()
+            => "a/b".ToNativePath()
+                    .Should().Be(Path.Combine("a", "b"));
+
+        [Fact]
+        public void TestToUnixPath()
+            => Path.Combine("a", "b").ToUnixPath()
+                   .Should().Be("a/b");
 
         [Fact]
         public void TestIsBreakoutPath()
