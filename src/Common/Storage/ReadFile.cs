@@ -16,43 +16,38 @@ namespace NanoByte.Common.Storage
     /// </summary>
     public sealed class ReadFile : TaskBase
     {
-        /// <inheritdoc/>
-        public override string Name => string.Format(Resources.ReadingFile, Path);
-
-        /// <inheritdoc/>
-        protected override bool UnitsByte => true;
-
-        /// <summary>
-        /// The path of the file to read.
-        /// </summary>
-        [Description("The path of the file to read.")]
-        public string Path { get; }
-
-        private readonly Action<Stream> _stream;
+        private readonly string _path;
+        private readonly Action<Stream> _callback;
 
         /// <summary>
         /// Creates a new file read task.
         /// </summary>
         /// <param name="path">The path of the file to read.</param>
         /// <param name="callback">Called with a stream providing the file content.</param>
-        public ReadFile(string path, Action<Stream> callback)
+        public ReadFile([Localizable(false)] string path, Action<Stream> callback)
         {
-            Path = path ?? throw new ArgumentNullException(nameof(path));
-            _stream = callback ?? throw new ArgumentNullException(nameof(callback));
+            _path = path ?? throw new ArgumentNullException(nameof(path));
+            _callback = callback ?? throw new ArgumentNullException(nameof(callback));
         }
+
+        /// <inheritdoc/>
+        public override string Name => string.Format(Resources.ReadingFile, _path);
+
+        /// <inheritdoc/>
+        protected override bool UnitsByte => true;
 
         /// <inheritdoc/>
         protected override void Execute()
         {
             State = TaskState.Header;
-            UnitsTotal = new FileInfo(Path).Length;
+            UnitsTotal = new FileInfo(_path).Length;
 
             State = TaskState.Data;
             using var stream = new ProgressStream(
-                File.OpenRead(Path),
+                File.OpenRead(_path),
                 new SynchronousProgress<long>(bytes => UnitsProcessed = bytes),
                 CancellationToken);
-            _stream(stream);
+            _callback(stream);
         }
     }
 }
