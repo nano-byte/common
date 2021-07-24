@@ -70,7 +70,6 @@ namespace NanoByte.Common.Storage
         {
             _source = new(SourcePath);
             _destination = new(DestinationPath);
-            if (!_source.Exists) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             if (_destination.Exists)
             { // Fail if overwrite is off but the target directory already exists and contains elements
                 if (!Overwrite && _destination.GetFileSystemInfos().Length > 0)

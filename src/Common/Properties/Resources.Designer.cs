@@ -412,15 +412,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The source directory does not exist..
-        /// </summary>
-        public static string SourceDirNotExist {
-            get {
-                return ResourceManager.GetString("SourceDirNotExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Complete.
         /// </summary>
         public static string StateComplete {

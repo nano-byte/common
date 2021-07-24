@@ -231,9 +231,6 @@
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Προέλευση και προορισμός είναι ίσα.</value>
   </data>
-  <data name="SourceDirNotExist" xml:space="preserve">
-    <value>Ο κατάλογος πηγής δεν υπάρχει.</value>
-  </data>
   <data name="StateComplete" xml:space="preserve">
     <value>Ολοκλήρωση</value>
   </data>

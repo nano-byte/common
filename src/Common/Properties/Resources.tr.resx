@@ -231,9 +231,6 @@
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Kaynak ve hedef eşit.</value>
   </data>
-  <data name="SourceDirNotExist" xml:space="preserve">
-    <value>Kaynak dizin geçerli değil.</value>
-  </data>
   <data name="StateComplete" xml:space="preserve">
     <value>Tamamla</value>
   </data>

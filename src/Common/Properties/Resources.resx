@@ -234,9 +234,6 @@
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Source and destination are equal.</value>
   </data>
-  <data name="SourceDirNotExist" xml:space="preserve">
-    <value>The source directory does not exist.</value>
-  </data>
   <data name="StateComplete" xml:space="preserve">
     <value>Complete</value>
   </data>

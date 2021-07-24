@@ -295,7 +295,6 @@ namespace NanoByte.Common.Storage
         {
             #region Sanity checks
             if (directory == null) throw new ArgumentNullException(nameof(directory));
-            if (!directory.Exists) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
             dirAction?.Invoke(directory);
@@ -460,7 +459,6 @@ namespace NanoByte.Common.Storage
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            if (!Directory.Exists(path)) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
             var directory = new DirectoryInfo(path);
@@ -480,7 +478,6 @@ namespace NanoByte.Common.Storage
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            if (!Directory.Exists(path)) throw new DirectoryNotFoundException(Resources.SourceDirNotExist);
             #endregion
 
             var directory = new DirectoryInfo(path);
