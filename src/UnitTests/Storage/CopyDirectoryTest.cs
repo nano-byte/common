@@ -20,30 +20,17 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void Normal()
         {
-            string temp1 = CreateCopyTestTempDir();
-            string temp2 = FileUtils.GetTempDirectory("unit-tests");
-            Directory.Delete(temp2);
+            using var source = CreateTestDir();
 
-            try
-            {
-                new CopyDirectory(temp1, temp2).Run();
-                File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
-                    .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
-                Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
-                         .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
-                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
-                    .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
+            using var destination = new TemporaryDirectory("unit-tests");
+            Directory.Delete(destination);
 
-                new CopyDirectory(temp1, temp2).Invoking(x => x.Run())
-                                               .Should().Throw<IOException>();
-            }
-            finally
-            {
-                File.SetAttributes(Path.Combine(temp1, "subdir", "file"), FileAttributes.Normal);
-                Directory.Delete(temp1, recursive: true);
-                File.SetAttributes(Path.Combine(temp2, "subdir", "file"), FileAttributes.Normal);
-                Directory.Delete(temp2, recursive: true);
-            }
+            new CopyDirectory(source, destination).Run();
+
+            File.ReadAllBytes(Path.Combine(destination, "subdir", "file"))
+                .Should().Equal(File.ReadAllBytes(Path.Combine(source, "subdir", "file")));
+            File.GetLastWriteTimeUtc(Path.Combine(destination, "subdir", "file"))
+                .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
         }
 
         /// <summary>
@@ -56,41 +43,22 @@ namespace NanoByte.Common.Storage
 
             string temp = FileUtils.GetTempDirectory("unit-tests");
             Directory.Delete(temp);
+
             new CopyDirectory(temp, "a").Invoking(x => x.Run())
                                         .Should().Throw<DirectoryNotFoundException>();
         }
 
         /// <summary>
-        /// Ensures <see cref="CopyDirectory"/> correctly copies a directories from one location to another without setting directory timestamps.
+        /// Ensures <see cref="CopyDirectory"/> correctly rejects overwriting existing directories.
         /// </summary>
         [Fact]
-        public void NoDirTimestamp()
+        public void NoOverwrite()
         {
-            string temp1 = CreateCopyTestTempDir();
-            string temp2 = FileUtils.GetTempDirectory("unit-tests");
-            Directory.Delete(temp2);
+            using var source = CreateTestDir();
+            using var destination = CreateTestDir();
 
-            try
-            {
-                new CopyDirectory(temp1, temp2, preserveDirectoryTimestamps: false).Run();
-                File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
-                    .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
-                Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
-                         .Should().NotBe(new DateTime(2000, 1, 1), because: "Last-write time for copied directory is invalid");
-                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file")).Should().Be(
-                    new DateTime(2000, 1, 1),
-                    because: "Last-write time for copied file is invalid");
-
-                new CopyDirectory(temp1, temp2).Invoking(x => x.Run())
-                                               .Should().Throw<IOException>();
-            }
-            finally
-            {
-                File.SetAttributes(Path.Combine(temp1, Path.Combine("subdir", "file")), FileAttributes.Normal);
-                Directory.Delete(temp1, recursive: true);
-                File.SetAttributes(Path.Combine(temp2, Path.Combine("subdir", "file")), FileAttributes.Normal);
-                Directory.Delete(temp2, recursive: true);
-            }
+            new CopyDirectory(source, destination).Invoking(x => x.Run())
+                                                  .Should().Throw<IOException>("Should not overwrite existing directory.");
         }
 
         /// <summary>
@@ -99,72 +67,105 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void Overwrite()
         {
-            string temp1 = CreateCopyTestTempDir();
+            using var source = CreateTestDir();
 
-            string temp2 = FileUtils.GetTempDirectory("unit-tests");
-            string subdir2 = Path.Combine(temp2, "subdir");
+            using var destination = new TemporaryDirectory("unit-tests");
+            string subdir2 = Path.Combine(destination, "subdir");
             Directory.CreateDirectory(subdir2);
             File.WriteAllText(Path.Combine(subdir2, "file"), @"B");
             File.SetLastWriteTimeUtc(Path.Combine(subdir2, "file"), new DateTime(2002, 1, 1));
-            Directory.SetLastWriteTimeUtc(subdir2, new DateTime(2002, 1, 1));
 
-            try
-            {
-                new CopyDirectory(temp1, temp2, preserveDirectoryTimestamps: true, overwrite: true).Run();
-                File.ReadAllBytes(Path.Combine(temp2, "subdir", "file"))
-                    .Should().Equal(File.ReadAllBytes(Path.Combine(temp1, "subdir", "file")));
-                Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir")).Should().Be(
-                    new DateTime(2000, 1, 1),
-                    because: "Last-write time for copied directory is invalid");
-                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file")).Should().Be(
-                    new DateTime(2000, 1, 1),
-                    because: "Last-write time for copied file is invalid");
-            }
-            finally
-            {
-                File.SetAttributes(Path.Combine(temp1, Path.Combine("subdir", "file")), FileAttributes.Normal);
-                Directory.Delete(temp1, recursive: true);
-                File.SetAttributes(Path.Combine(temp2, Path.Combine("subdir", "file")), FileAttributes.Normal);
-                Directory.Delete(temp2, recursive: true);
-            }
+            new CopyDirectory(source, destination) {Overwrite = true}.Run();
+
+            File.ReadAllBytes(Path.Combine(destination, "subdir", "file"))
+                .Should().Equal(File.ReadAllBytes(Path.Combine(source, "subdir", "file")));
+            File.GetLastWriteTimeUtc(Path.Combine(destination, "subdir", "file")).Should().Be(
+                new DateTime(2000, 1, 1),
+                because: "Last-write time for copied file is invalid");
         }
 
         /// <summary>
         /// Ensures <see cref="CopyDirectory"/> correctly copies symlinks.
         /// </summary>
         [SkippableFact]
-        public void Symlinks()
+        public void CopySymlinks()
         {
             Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
 
-            string temp1 = CreateCopyTestTempDir();
-            string temp2 = FileUtils.GetTempDirectory("unit-tests");
+            using var source = CreateTestDir();
+            FileUtils.CreateSymlink(
+                sourcePath: Path.Combine(source, "dir-symlink"),
+                targetPath: "subdir");
+            FileUtils.CreateSymlink(
+                sourcePath: Path.Combine(source, "file-symlink"),
+                targetPath: Path.Combine("subdir", "file"));
 
-            try
-            {
-                FileUtils.CreateSymlink(sourcePath: Path.Combine(temp1, "symlink"), targetPath: "target");
+            using var destination = new TemporaryDirectory("unit-tests");
 
-                new CopyDirectory(temp1, temp2).Run();
-                FileUtils.IsSymlink(Path.Combine(temp2, "symlink"), out string? symlinkTarget).Should().BeTrue();
-                symlinkTarget.Should().Be("target");
-            }
-            finally
-            {
-                Directory.Delete(temp1, recursive: true);
-                Directory.Delete(temp2, recursive: true);
-            }
+            new CopyDirectory(source, destination).Run();
+
+            FileUtils.IsSymlink(Path.Combine(destination, "dir-symlink"), out string? symlinkTarget).Should().BeTrue();
+            symlinkTarget.Should().Be("subdir");
+
+            FileUtils.IsSymlink(Path.Combine(destination, "file-symlink"), out symlinkTarget).Should().BeTrue();
+            symlinkTarget.Should().Be(Path.Combine("subdir", "file"));
         }
 
-        private static string CreateCopyTestTempDir()
+        /// <summary>
+        /// Ensures <see cref="CopyDirectory"/> correctly copies hardlinks.
+        /// </summary>
+        [SkippableFact]
+        public void CopyHardlinks()
         {
-            string tempPath = FileUtils.GetTempDirectory("unit-tests");
-            string subdir1 = Path.Combine(tempPath, "subdir");
+            using var source = CreateTestDir();
+            FileUtils.CreateHardlink(
+                sourcePath: Path.Combine(source, "hardlink"),
+                targetPath: Path.Combine(source, "subdir", "file"));
+
+            using var destination = new TemporaryDirectory("unit-tests");
+
+            new CopyDirectory(source, destination).Run();
+
+            FileUtils.AreHardlinked(
+                          Path.Combine(destination, "hardlink"),
+                          Path.Combine(destination, "subdir", "file"))
+                     .Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Ensures <see cref="CopyDirectory"/> correctly follows symlinks.
+        /// </summary>
+        [SkippableFact]
+        public void FollowSymlinks()
+        {
+            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
+
+            using var source = CreateTestDir();
+            FileUtils.CreateSymlink(sourcePath: Path.Combine(source, "dir-symlink"), targetPath: "subdir");
+            FileUtils.CreateSymlink(sourcePath: Path.Combine(source, "file-symlink"), targetPath: Path.Combine("subdir", "file"));
+
+            using var destination = new TemporaryDirectory("unit-tests");
+
+            new CopyDirectory(source, destination) {FollowSymlinks = true}.Run();
+
+            FileUtils.IsSymlink(Path.Combine(destination, "dir-symlink"), out _).Should().BeFalse();
+            File.ReadAllBytes(Path.Combine(destination, "dir-symlink", "file"))
+                .Should().Equal(File.ReadAllBytes(Path.Combine(destination, "subdir", "file")));
+
+            FileUtils.IsSymlink(Path.Combine(destination, "file-symlink"), out _).Should().BeFalse();
+            File.ReadAllBytes(Path.Combine(destination, "file-symlink"))
+                .Should().Equal(File.ReadAllBytes(Path.Combine(destination, "subdir", "file")));
+        }
+
+        internal static TemporaryDirectory CreateTestDir()
+        {
+            var tempDir = new TemporaryDirectory("unit-tests");
+            string subdir1 = Path.Combine(tempDir, "subdir");
             Directory.CreateDirectory(subdir1);
             File.WriteAllText(Path.Combine(subdir1, "file"), @"A");
             File.SetLastWriteTimeUtc(Path.Combine(subdir1, "file"), new DateTime(2000, 1, 1));
             File.SetAttributes(Path.Combine(subdir1, "file"), FileAttributes.ReadOnly);
-            Directory.SetLastWriteTimeUtc(subdir1, new DateTime(2000, 1, 1));
-            return tempPath;
+            return tempDir;
         }
     }
 }

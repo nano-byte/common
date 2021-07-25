@@ -19,38 +19,17 @@ namespace NanoByte.Common.Storage
         [Fact]
         public void Normal()
         {
-            string temp1 = CreateCopyTestTempDir();
-            string temp2 = FileUtils.GetTempDirectory("unit-tests");
-            Directory.Delete(temp2);
+            using var source = CopyDirectoryTest.CreateTestDir();
 
-            try
-            {
-                new MoveDirectory(temp1, temp2).Run();
-                File.Exists(Path.Combine(temp2, "subdir", "file")).Should().BeTrue();
-                Directory.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir"))
-                         .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied directory");
-                File.GetLastWriteTimeUtc(Path.Combine(temp2, "subdir", "file"))
-                    .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
+            using var destination = new TemporaryDirectory("unit-tests");
+            Directory.Delete(destination);
 
-                Directory.Exists(temp1).Should().BeFalse(because: "Original directory should be gone after move");
-            }
-            finally
-            {
-                File.SetAttributes(Path.Combine(temp2, "subdir", "file"), FileAttributes.Normal);
-                Directory.Delete(temp2, recursive: true);
-            }
-        }
+            new MoveDirectory(source, destination).Run();
+            File.Exists(Path.Combine(destination, "subdir", "file")).Should().BeTrue();
+            File.GetLastWriteTimeUtc(Path.Combine(destination, "subdir", "file"))
+                .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");
 
-        private static string CreateCopyTestTempDir()
-        {
-            string tempPath = FileUtils.GetTempDirectory("unit-tests");
-            string subdir1 = Path.Combine(tempPath, "subdir");
-            Directory.CreateDirectory(subdir1);
-            File.WriteAllText(Path.Combine(subdir1, "file"), @"A");
-            File.SetLastWriteTimeUtc(Path.Combine(subdir1, "file"), new DateTime(2000, 1, 1));
-            File.SetAttributes(Path.Combine(subdir1, "file"), FileAttributes.ReadOnly);
-            Directory.SetLastWriteTimeUtc(subdir1, new DateTime(2000, 1, 1));
-            return tempPath;
+            Directory.Exists(source).Should().BeFalse(because: "Original directory should be gone after move");
         }
     }
 }
