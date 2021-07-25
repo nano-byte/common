@@ -116,16 +116,14 @@ namespace NanoByte.Common.Native
                .CreateLink(sourcePath ?? throw new ArgumentNullException(nameof(targetPath)));
 
         /// <summary>
-        /// Determines whether to files are hardlinked.
+        /// Returns the Inode ID of a file.
         /// </summary>
-        /// <param name="path1">The path of the first file.</param>
-        /// <param name="path2">The path of the second file.</param>
+        /// <param name="path">The path of the file.</param>
         /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool AreHardlinked([Localizable(false)] string path1, [Localizable(false)] string path2) =>
-            UnixFileSystemInfo.GetFileSystemEntry(path1 ?? throw new ArgumentNullException(nameof(path1))).Inode ==
-            UnixFileSystemInfo.GetFileSystemEntry(path2 ?? throw new ArgumentNullException(nameof(path2))).Inode;
+        public static long GetInode([Localizable(false)] string path)
+            => UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path))).Inode;
 
         /// <summary>
         /// Renames a file. Atomically replaces the destination if present.

@@ -663,21 +663,30 @@ namespace NanoByte.Common.Storage
         /// <exception cref="IOException">Creating the files failed.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
         public static bool AreHardlinked([Localizable(false)] string path1, [Localizable(false)] string path2)
+            => GetFileID(path1) == GetFileID(path2);
+
+        /// <summary>
+        /// Returns the file ID (on Windows) or Inode (on Unix) of a file.
+        /// </summary>
+        /// <param name="path">The path of the file.</param>
+        /// <exception cref="IOException">There was an IO problem checking the files.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
+        public static long GetFileID([Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
-            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException(nameof(path2));
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
             if (UnixUtils.IsUnix)
             {
                 try
                 {
-                    return UnixUtils.AreHardlinked(path1, path2);
+                    return UnixUtils.GetInode(path);
                 }
                 #region Error handling
                 catch (InvalidOperationException ex)
                 {
+                    // Wrap exception since only certain exception types are allowed
                     throw new IOException(Resources.UnixSubsystemFail, ex);
                 }
                 catch (IOException ex)
@@ -690,7 +699,7 @@ namespace NanoByte.Common.Storage
             {
                 try
                 {
-                    return WindowsUtils.AreHardlinked(path1, path2);
+                    return WindowsUtils.GetFileID(path);
                 }
                 #region Error handling
                 catch (Win32Exception ex)
@@ -700,8 +709,17 @@ namespace NanoByte.Common.Storage
                 }
                 #endregion
             }
-            else return false;
+            else throw new PlatformNotSupportedException();
         }
+
+        /// <summary>
+        /// Returns the file ID (on Windows) or Inode (on Unix) of a file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <exception cref="IOException">There was an IO problem checking the files.</exception>
+        /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
+        public static long GetFileID(this FileInfo file)
+            => GetFileID((file ?? throw new ArgumentNullException(nameof(file))).FullName);
         #endregion
 
         #region Unix

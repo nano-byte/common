@@ -435,34 +435,31 @@ namespace NanoByte.Common.Native
         }
 
         /// <summary>
-        /// Determines whether to files are hardlinked.
+        /// Returns the file ID of a file.
         /// </summary>
-        /// <param name="path1">The path of the first file.</param>
-        /// <param name="path2">The path of the second file.</param>
+        /// <param name="path">The path of the file.</param>
         /// <exception cref="IOException">There was an IO problem checking the files.</exception>
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
-        /// <exception cref="Win32Exception">Checking the files failed.</exception>
+        /// <exception cref="Win32Exception">Checking the file failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
-        public static bool AreHardlinked([Localizable(false)] string path1, [Localizable(false)] string path2)
+        public static long GetFileID([Localizable(false)] string path)
         {
             #region Sanity checks
-            if (string.IsNullOrEmpty(path1)) throw new ArgumentNullException(nameof(path1));
-            if (string.IsNullOrEmpty(path2)) throw new ArgumentNullException(nameof(path2));
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             #endregion
 
-            if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-            return GetFileIndex(path1) == GetFileIndex(path2);
-        }
-
-        private static ulong GetFileIndex([Localizable(false)] string path)
-        {
-            using var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
+            using var handle = NativeMethods.CreateFile(
+                path ?? throw new ArgumentNullException(nameof(path)),
+                FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
             if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
             if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
                 throw BuildException(Marshal.GetLastWin32Error());
-            // ReSharper disable once ShiftExpressionRealShiftCountIsZero
-            return fileInfo.FileIndexLow + (fileInfo.FileIndexHigh << 32);
+
+            unchecked
+            {
+                return fileInfo.FileIndexLow + ((long)fileInfo.FileIndexHigh << 32);
+            }
         }
 
         /// <summary>
