@@ -3,7 +3,6 @@
 
 using System;
 using System.IO;
-using System.Text;
 using FluentAssertions;
 using NanoByte.Common.Storage;
 using Xunit;
@@ -84,7 +83,7 @@ namespace NanoByte.Common.Streams
         {
             using var tempFile = new TemporaryFile("unit-tests");
             "abc".ToStream().CopyToFile(tempFile);
-            new FileInfo(tempFile).ReadFirstLine(Encoding.UTF8).Should().Be("abc");
+            new FileInfo(tempFile).ReadFirstLine(EncodingUtils.Utf8).Should().Be("abc");
         }
 
         [Fact]

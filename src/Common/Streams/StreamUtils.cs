@@ -244,7 +244,7 @@ namespace NanoByte.Common.Streams
         /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
-        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
         /// <returns>A entire content of the stream.</returns>
         public static string ReadToString(this Stream stream, Encoding? encoding = null)
         {
@@ -253,7 +253,7 @@ namespace NanoByte.Common.Streams
             #endregion
 
             if (stream.CanSeek) stream.Position = 0;
-            var reader = new StreamReader(stream, encoding ?? new UTF8Encoding(false));
+            var reader = new StreamReader(stream, encoding ?? EncodingUtils.Utf8);
             return reader.ReadToEnd();
         }
 
@@ -261,11 +261,11 @@ namespace NanoByte.Common.Streams
         /// Creates a new <see cref="MemoryStream"/> and fills it with string data.
         /// </summary>
         /// <param name="data">The data to fill the stream with.</param>
-        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
         /// <returns>A filled stream with the position set to zero.</returns>
         [Pure]
         public static MemoryStream ToStream(this string data, Encoding? encoding = null)
-            => new((encoding ?? new UTF8Encoding(false)).GetBytes(data ?? throw new ArgumentNullException(nameof(data))));
+            => new((encoding ?? EncodingUtils.Utf8).GetBytes(data ?? throw new ArgumentNullException(nameof(data))));
 
         /// <summary>
         /// Creates a new <see cref="MemoryStream"/> using the existing array as the underlying storage.
@@ -323,7 +323,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
         /// <param name="name">The name of the embedded resource.</param>
-        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="UTF8Encoding"/>.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
         /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
         [Pure]
         public static string GetEmbeddedString(this Type type, [Localizable(false)] string name, Encoding? encoding = null)

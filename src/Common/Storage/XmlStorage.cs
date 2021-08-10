@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using NanoByte.Common.Properties;
@@ -123,7 +122,7 @@ namespace NanoByte.Common.Storage
 
             var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
             {
-                Encoding = new UTF8Encoding(false),
+                Encoding = EncodingUtils.Utf8,
                 Indent = true,
                 IndentChars = "  ",
                 NewLineChars = "\n"

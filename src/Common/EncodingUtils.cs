@@ -9,10 +9,15 @@ using JetBrains.Annotations;
 namespace NanoByte.Common
 {
     /// <summary>
-    /// Helper methods for hashing and Base16/32/64 encoding/decoding.
+    /// Helper methods for encoding strings, decoding byte arrays, calculating hashes, etc..
     /// </summary>
     public static class EncodingUtils
     {
+        /// <summary>
+        /// UTF-8 encoding without BOM (byte order marker).
+        /// </summary>
+        public static readonly Encoding Utf8 = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+
         /// <summary>
         /// Computes the hash value of a string encoded as UTF-8.
         /// </summary>
@@ -27,7 +32,7 @@ namespace NanoByte.Common
             if (algorithm == null) throw new ArgumentNullException(nameof(algorithm));
             #endregion
 
-            var hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(value));
+            var hash = algorithm.ComputeHash(Utf8.GetBytes(value));
             return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
         }
 
@@ -36,13 +41,7 @@ namespace NanoByte.Common
         /// </summary>
         [Pure]
         public static string Base64Utf8Encode(this string value)
-        {
-            #region Sanity checks
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            #endregion
-
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
-        }
+            => Convert.ToBase64String(Utf8.GetBytes(value ?? throw new ArgumentNullException(nameof(value))));
 
         /// <summary>
         /// Decodes a UTF-8 in base64 string.
@@ -50,17 +49,11 @@ namespace NanoByte.Common
         /// <exception cref="FormatException"><paramref name="value"/> is not a valid base 64 string.</exception>
         [Pure]
         public static string Base64Utf8Decode(this string value)
-        {
-            #region Sanity checks
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            #endregion
-
-            return Encoding.UTF8.GetString(Convert.FromBase64String(value));
-        }
+            => Utf8.GetString(Convert.FromBase64String(value ?? throw new ArgumentNullException(nameof(value))));
 
         private static readonly char[] _base32Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".ToCharArray();
 
-        private const int NormaleByteSize = 8, Base32ByteSize = 5;
+        private const int NormalByteSize = 8, Base32ByteSize = 5;
 
         /// <summary>
         /// Encodes a byte array in base32 without padding.
@@ -75,7 +68,7 @@ namespace NanoByte.Common
             if (data.Length == 0) return "";
 
             int i = 0, index = 0;
-            var result = new StringBuilder((data.Length + 7) * NormaleByteSize / Base32ByteSize);
+            var result = new StringBuilder((data.Length + 7) * NormalByteSize / Base32ByteSize);
 
             while (i < data.Length)
             {
@@ -84,22 +77,22 @@ namespace NanoByte.Common
                 int digit;
 
                 // Is the current digit going to span a byte boundary?
-                if (index > (NormaleByteSize - Base32ByteSize))
+                if (index > (NormalByteSize - Base32ByteSize))
                 {
                     int nextByte = ((i + 1) < data.Length)
                         ? ((data[i + 1] >= 0) ? data[i + 1] : (data[i + 1] + 256))
                         : 0;
 
                     digit = currentByte & (0xFF >> index);
-                    index = (index + Base32ByteSize) % NormaleByteSize;
+                    index = (index + Base32ByteSize) % NormalByteSize;
                     digit <<= index;
-                    digit |= nextByte >> (NormaleByteSize - index);
+                    digit |= nextByte >> (NormalByteSize - index);
                     i++;
                 }
                 else
                 {
-                    digit = (currentByte >> (NormaleByteSize - (index + Base32ByteSize))) & 0x1F;
-                    index = (index + Base32ByteSize) % NormaleByteSize;
+                    digit = (currentByte >> (NormalByteSize - (index + Base32ByteSize))) & 0x1F;
+                    index = (index + Base32ByteSize) % NormalByteSize;
                     if (index == 0)
                         i++;
                 }

@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Text;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 using Newtonsoft.Json;
@@ -33,7 +32,7 @@ namespace NanoByte.Common.Storage
 
             if (stream.CanSeek) stream.Position = 0;
 
-            using var reader = new JsonTextReader(new StreamReader(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true)) {CloseInput = false};
+            using var reader = new JsonTextReader(new StreamReader(stream, EncodingUtils.Utf8, detectEncodingFromByteOrderMarks: true)) {CloseInput = false};
             try
             {
                 return new JsonSerializer().Deserialize<T>(reader)
@@ -126,7 +125,7 @@ namespace NanoByte.Common.Storage
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
-            var writer = new StreamWriter(stream, new UTF8Encoding(false));
+            var writer = new StreamWriter(stream, EncodingUtils.Utf8);
             new JsonSerializer().Serialize(writer, data);
             writer.Flush();
         }

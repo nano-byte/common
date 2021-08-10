@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using NanoByte.Common.Info;
@@ -127,7 +126,7 @@ namespace NanoByte.Common.Controls
             Cursor = Cursors.Default;
             if (uploadEventArgs.Error == null)
             {
-                Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + Encoding.UTF8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
+                Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + EncodingUtils.Utf8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
                 Close();
             }
             else
