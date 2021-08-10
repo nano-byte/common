@@ -268,6 +268,28 @@ namespace NanoByte.Common.Streams
             => new((encoding ?? new UTF8Encoding(false)).GetBytes(data ?? throw new ArgumentNullException(nameof(data))));
 
         /// <summary>
+        /// Creates a new <see cref="MemoryStream"/> using the existing array as the underlying storage.
+        /// </summary>
+        /// <param name="array">The array to create the stream from.</param>
+        /// <param name="writable">Controls whether the stream is writable (i.e., can modify the array).</param>
+        [Pure]
+        public static MemoryStream ToStream(this byte[] array, bool writable = false)
+            => new(array ?? throw new ArgumentNullException(nameof(array)), writable);
+
+        /// <summary>
+        /// Creates a new <see cref="MemoryStream"/> using the existing array segment as the underlying storage.
+        /// </summary>
+        /// <param name="segment">The array segment to create the stream from.</param>
+        /// <param name="writable">Controls whether the stream is writable (i.e., can modify the array).</param>
+        [Pure]
+        public static MemoryStream ToStream(this ArraySegment<byte> segment, bool writable = false)
+            => new(
+                segment.Array ?? throw new ArgumentNullException(nameof(segment)),
+                segment.Offset,
+                segment.Count,
+                writable);
+
+        /// <summary>
         /// Returns an embedded resource as a stream.
         /// </summary>
         /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
