@@ -24,14 +24,16 @@ namespace NanoByte.Common.Storage
         /// </summary>
         /// <param name="path">The path of the file to read.</param>
         /// <param name="callback">Called with a stream providing the file content.</param>
-        public ReadFile([Localizable(false)] string path, Action<Stream> callback)
+        /// <param name="name">A name describing the task in human-readable form.</param>
+        public ReadFile([Localizable(false)] string path, Action<Stream> callback, [Localizable(true)] string? name = null)
         {
             _path = path ?? throw new ArgumentNullException(nameof(path));
             _callback = callback ?? throw new ArgumentNullException(nameof(callback));
+            Name = name ?? string.Format(Resources.ReadingFile, _path);
         }
 
         /// <inheritdoc/>
-        public override string Name => string.Format(Resources.ReadingFile, _path);
+        public override string Name { get; }
 
         /// <inheritdoc/>
         protected override bool UnitsByte => true;
