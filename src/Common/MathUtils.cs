@@ -16,6 +16,28 @@ namespace NanoByte.Common
     public static class MathUtils
     {
         /// <summary>
+        /// Calculates the mathematical modulo of a value.
+        /// </summary>
+        public static int Modulo(this int value, int modulo)
+        {
+            int remainder = value % modulo;
+            return remainder < 0
+                ? remainder + modulo
+                : remainder;
+        }
+
+        /// <summary>
+        /// Calculates the mathematical modulo of a value.
+        /// </summary>
+        public static long Modulo(this long value, long modulo)
+        {
+            long remainder = value % modulo;
+            return remainder < 0
+                ? remainder + modulo
+                : remainder;
+        }
+
+        /// <summary>
         /// Compares two floating-point values for equality, allowing for a certain <paramref name="tolerance"/>.
         /// </summary>
 #if !NET20 && !NET40

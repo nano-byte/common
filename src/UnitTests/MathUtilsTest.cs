@@ -13,6 +13,14 @@ namespace NanoByte.Common
     public class MathUtilsTest
     {
         [Fact]
+        public void TestModule()
+        {
+            3.Modulo(4).Should().Be(3);
+            3.Modulo(2).Should().Be(1);
+            (-1).Modulo(3).Should().Be(2);
+        }
+
+        [Fact]
         public void TestEqualsTolerance()
         {
             1f.EqualsTolerance(1.000009f).Should().BeTrue();
