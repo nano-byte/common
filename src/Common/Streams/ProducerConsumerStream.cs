@@ -216,7 +216,7 @@ namespace NanoByte.Common.Streams
                 WaitFor(ref _dataAvailable);
 
                 // The index of the last byte currently stored in the buffer
-                int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
+                int dataEnd = (_dataStart + _dataLength).Modulo(_buffer.Length);
 
                 // Determine how many bytes can be read in one go
                 if (_dataLength == 0) // No data
@@ -239,7 +239,7 @@ namespace NanoByte.Common.Streams
                 WaitFor(ref _spaceAvailable);
 
                 // The index of the last byte currently stored in the buffer plus one
-                int dataEnd = (_dataStart + _dataLength) % _buffer.Length;
+                int dataEnd = (_dataStart + _dataLength).Modulo(_buffer.Length);
 
                 // Determine how many bytes can be written in one go
                 if (_dataLength == _buffer.Length) // No free space available
