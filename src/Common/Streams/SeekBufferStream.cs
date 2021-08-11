@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Decorator that adds seek-back read buffering to another <see cref="Stream"/>.
+    /// Decorator that adds seek buffering to another <see cref="Stream"/>.
     /// </summary>
     public sealed class SeekBufferStream : DelegatingStream
     {
         /// <summary>
-        /// The default for the maximum number of bytes to buffer for seeking back.
+        /// The default for the maximum number of bytes to buffer for seeking.
         /// </summary>
-        public const int DefaultBufferSize = 160 * 1024;
+        public const int DefaultBufferSize = 1024 * 1024;
 
         /// <summary>
         /// Creates a new seek buffer stream.
         /// </summary>
         /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
-        /// <param name="bufferSize">The maximum number of bytes to buffer for seeking back.</param>
+        /// <param name="bufferSize">The maximum number of bytes to buffer for seeking.</param>
         public SeekBufferStream(Stream underlyingStream, int bufferSize = DefaultBufferSize)
             : base(underlyingStream)
         {
@@ -59,7 +59,7 @@ namespace NanoByte.Common.Streams
                 if (count > MaxRead) count = MaxRead;
                 read = UnderlyingStream.Read(buffer, offset, count);
                 _underlyingPosition += read;
-                WriteToBuffer(new Span<byte>(buffer, offset, count));
+                WriteToBuffer(new ReadOnlySpan<byte>(buffer, offset, read));
             }
 
             Position += read;
@@ -74,7 +74,7 @@ namespace NanoByte.Common.Streams
                 if (count > MaxRead) count = MaxRead;
                 read = await UnderlyingStream.ReadAsync(buffer, offset, count, cancellationToken);
                 _underlyingPosition += read;
-                WriteToBuffer(new Span<byte>(buffer, offset, count));
+                WriteToBuffer(new ReadOnlySpan<byte>(buffer, offset, read));
             }
 
             Position += read;
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Streams
                 if (buffer.Length > MaxRead) buffer = buffer[..MaxRead];
                 read = UnderlyingStream.Read(buffer);
                 _underlyingPosition += read;
-                WriteToBuffer(buffer);
+                WriteToBuffer(buffer[..read]);
             }
 
             Position += read;
@@ -128,20 +128,25 @@ namespace NanoByte.Common.Streams
         /// <exception cref="IOException">Tried to read data outside of the buffered range.</exception>
         private bool TryReadFromBuffer(Span<byte> output, out int read)
         {
-            long diff = _underlyingPosition - Position;
+            long longDiff = Position - _underlyingPosition;
+            if (Math.Abs(longDiff) > _buffer.Length)
+                throw new IOException($"Attempted to read from position {Position}. This is {longDiff} bytes away from the underlying stream position {_underlyingPosition}, but the seek buffer can only accomodate a difference of {_buffer.Length} bytes.");
+            int diff = (int)longDiff;
+
             switch (diff)
             {
-                case < 0:
-                    throw new IOException("Unable to seek beyond what has already been read.");
-
-                case 0:
+                case > 0: // Seek forwards by performing read on underlying stream
+                    Position -= diff;
+                    this.Read(diff);
                     read = 0;
                     return false;
 
-                case > 0:
-                    if (diff > _buffer.Length) throw new IOException($"Unable to seek back more than {_buffer.Length} bytes.");
+                case 0: // Position in sync with underlying stream
+                    read = 0;
+                    return false;
 
-                    int startIndex = (_nextWriteIndex - (int)diff) % _buffer.Length;
+                case < 0: // Seek backwards relative to underlying stream
+                    int startIndex = (_nextWriteIndex + diff).Modulo(_buffer.Length);
                     var data = startIndex < _nextWriteIndex
                         ? _buffer[startIndex.._nextWriteIndex]
                         : _buffer[startIndex..];
@@ -163,7 +168,7 @@ namespace NanoByte.Common.Streams
         private void WriteToBuffer(ReadOnlySpan<byte> data)
         {
             data.CopyTo(_buffer.Span[_nextWriteIndex..]);
-            _nextWriteIndex = (_nextWriteIndex + data.Length) % _buffer.Length;
+            _nextWriteIndex = (_nextWriteIndex + data.Length).Modulo(_buffer.Length);
         }
     }
 }

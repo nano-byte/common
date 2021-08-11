@@ -224,13 +224,12 @@ namespace NanoByte.Common.Streams
 
 #if !NET20 && !NET40
         /// <summary>
-        /// Ensures that the stream supports seeking.
+        /// Wraps a stream in <see cref="SeekBufferStream"/> unless it already <see cref="Stream.CanSeek"/>.
         /// </summary>
         /// <param name="stream">The stream.</param>
-        /// <param name="bufferSize">The maximum number of bytes to buffer.</param>
-        /// <returns>The stream wrapped in a <see cref="SeekBufferStream"/> if <see cref="Stream.CanSeek"/> was <c>false</c>; the original <paramref name="stream"/> otherwise.</returns>
+        /// <param name="bufferSize">The maximum number of bytes to buffer for seeking.</param>
         [Pure]
-        public static Stream EnsureCanSeek(this Stream stream, int bufferSize = SeekBufferStream.DefaultBufferSize)
+        public static Stream WithSeekBuffer(this Stream stream, int bufferSize = SeekBufferStream.DefaultBufferSize)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
