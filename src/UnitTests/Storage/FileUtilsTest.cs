@@ -16,7 +16,6 @@ namespace NanoByte.Common.Storage
     /// </summary>
     public class FileUtilsTest
     {
-        #region Paths
         [Fact]
         public void TestToNativePath()
             => "a/b".ToNativePath()
@@ -57,9 +56,7 @@ namespace NanoByte.Common.Storage
                 new DirectoryInfo("/test1").RelativeTo(new DirectoryInfo("/test2")).Should().Be("../test1");
             }
         }
-        #endregion
 
-        #region Exists
         /// <summary>
         /// Ensures <see cref="FileUtils.ExistsCaseSensitive"/> correctly detects case mismatches.
         /// </summary>
@@ -71,9 +68,7 @@ namespace NanoByte.Common.Storage
             FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "test")).Should().BeTrue();
             FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "Test")).Should().BeFalse();
         }
-        #endregion
 
-        #region Touch
         [Fact]
         public void TestTouchNew()
         {
@@ -92,9 +87,7 @@ namespace NanoByte.Common.Storage
             FileUtils.Touch(tempFile);
             File.GetLastWriteTimeUtc(tempFile).Should().BeOnOrAfter(DateTime.UtcNow - TimeSpan.FromSeconds(2));
         }
-        #endregion
 
-        #region Temp
         /// <summary>
         /// Creates a temporary file using <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
         /// </summary>
@@ -120,9 +113,7 @@ namespace NanoByte.Common.Storage
             Directory.GetFileSystemEntries(path).Should().BeEmpty();
             Directory.Delete(path);
         }
-        #endregion
 
-        #region Replace
         /// <summary>
         /// Ensures <see cref="FileUtils.Replace"/> correctly replaces the content of one file with that of another.
         /// </summary>
@@ -153,19 +144,15 @@ namespace NanoByte.Common.Storage
             FileUtils.Replace(sourcePath, targetPath);
             File.ReadAllText(targetPath).Should().Be("source");
         }
-        #endregion
 
-        #region Read
         [Fact]
-        public void TestReadFirstline()
+        public void TestReadFirstLine()
         {
             using var tempFile = new TemporaryFile("unit-tests");
             File.WriteAllText(tempFile, "line1\nline2");
             new FileInfo(tempFile).ReadFirstLine(Encoding.ASCII).Should().Be("line1");
         }
-        #endregion
 
-        #region Directory
         // Interfaces used for mocking delegates
         public interface IActionSimulator<in T>
         {
@@ -234,9 +221,7 @@ namespace NanoByte.Common.Storage
 
             FileUtils.GetFilesRecursive(tempDir).Should().Equal(file1, file2);
         }
-        #endregion
 
-        #region Write protection
         [SkippableFact]
         public void TestWriteProtection()
         {
@@ -256,71 +241,6 @@ namespace NanoByte.Common.Storage
                 FileUtils.DisableWriteProtection(tempDir);
             }
         }
-        #endregion
-
-        #region Links
-        [SkippableFact]
-        public void TestCreateSymlinkPosixFile()
-        {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
-
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            File.WriteAllText(Path.Combine(tempDir, "target"), @"data");
-            string sourcePath = Path.Combine(tempDir, "symlink");
-            FileUtils.CreateSymlink(sourcePath, "target");
-
-            File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
-            File.ReadAllText(sourcePath).Should().Be("data", because: "Symlinked file contents should be equal");
-
-            FileUtils.IsSymlink(sourcePath, out string? target).Should().BeTrue(because: "Should detect symlink as such");
-            "target".Should().Be(target, because: "Should retrieve relative link target");
-            FileUtils.IsRegularFile(sourcePath).Should().BeFalse(because: "Should not detect symlink as regular file");
-        }
-
-        [SkippableFact]
-        public void TestCreateSymlinkPosixDirectory()
-        {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
-
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            Directory.CreateDirectory(Path.Combine(tempDir, "target"));
-            string sourcePath = Path.Combine(tempDir, "symlink");
-            FileUtils.CreateSymlink(sourcePath, "target");
-
-            Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
-
-            FileUtils.IsSymlink(sourcePath, out string? contents).Should().BeTrue(because: "Should detect symlink as such");
-            "target".Should().Be(contents, because: "Should retrieve relative link target");
-        }
-
-        [SkippableFact]
-        public void TestCreateSymlinkNtfsFile()
-        {
-            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
-            Skip.IfNot(WindowsUtils.IsAdministrator, reason: "Can only test NTFS symlinks with Administrator privileges");
-
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            File.WriteAllText(Path.Combine(tempDir, "target"), @"data");
-            string sourcePath = Path.Combine(tempDir, "symlink");
-            FileUtils.CreateSymlink(sourcePath, "target");
-
-            File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
-            File.ReadAllText(sourcePath).Should().Be("data", because: "Symlinked file contents should be equal");
-        }
-
-        [SkippableFact]
-        public void TestCreateSymlinkNtfsDirectory()
-        {
-            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
-            Skip.IfNot(WindowsUtils.IsAdministrator, reason: "Can only test NTFS symlinks with Administrator privileges");
-
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            Directory.CreateDirectory(Path.Combine(tempDir, "target"));
-            string sourcePath = Path.Combine(tempDir, "symlink");
-            FileUtils.CreateSymlink(sourcePath, "target");
-
-            Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
-        }
 
         [Fact]
         public void TestCreateHardlink()
@@ -339,45 +259,12 @@ namespace NanoByte.Common.Storage
             File.Copy(sourcePath, copyPath);
             FileUtils.AreHardlinked(sourcePath, copyPath).Should().BeFalse();
         }
-        #endregion
 
-        #region Unix
         [Fact]
         public void TestIsRegularFile()
         {
             using var tempFile = new TemporaryFile("unit-tests");
             FileUtils.IsRegularFile(tempFile).Should().BeTrue(because: "Regular file should be detected as such");
-        }
-
-        [Fact]
-        public void TestIsSymlink()
-        {
-            using var tempFile = new TemporaryFile("unit-tests");
-            FileUtils.IsSymlink(tempFile, out string? contents).Should().BeFalse(because: "File was incorrectly identified as symlink");
-            contents.Should().BeNull();
-        }
-
-        [Fact]
-        public void TestIsExecutable()
-        {
-            using var tempFile = new TemporaryFile("unit-tests");
-            FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File was incorrectly identified as executable");
-        }
-
-        [SkippableFact]
-        public void TestSetExecutable()
-        {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test executable bits on Unixoid system");
-
-            using var tempFile = new TemporaryFile("unit-tests");
-            FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File should not be executable yet");
-
-            FileUtils.SetExecutable(tempFile, true);
-            FileUtils.IsExecutable(tempFile).Should().BeTrue(because: "File should now be executable");
-            FileUtils.IsRegularFile(tempFile).Should().BeTrue(because: "File should still be considered a regular file");
-
-            FileUtils.SetExecutable(tempFile, false);
-            FileUtils.IsExecutable(tempFile).Should().BeFalse(because: "File should no longer be executable");
         }
 
         [Fact]
@@ -387,9 +274,7 @@ namespace NanoByte.Common.Storage
             if (UnixUtils.IsUnix) FileUtils.IsUnixFS(tempDir).Should().BeTrue(because: "Temp dir should be on Unixoid filesystem on Unixoid OS");
             else FileUtils.IsUnixFS(tempDir).Should().BeFalse(because: "No directory should be Unixoid on a non-Unixoid OS");
         }
-        #endregion
 
-        #region Extended metadata
         [Fact]
         public void TestWriteReadExtendedMetadata()
         {
@@ -407,6 +292,5 @@ namespace NanoByte.Common.Storage
             using var tempDir = new TemporaryDirectory("unit-tests");
             Assert.Throws<FileNotFoundException>(() => FileUtils.ReadExtendedMetadata(Path.Combine(tempDir, "invalid"), "test-stream"));
         }
-        #endregion
     }
 }
