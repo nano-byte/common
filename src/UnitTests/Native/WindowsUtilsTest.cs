@@ -16,7 +16,6 @@ namespace NanoByte.Common.Native
             Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
 
             using var tempDir = new TemporaryDirectory("unit-tests");
-            File.WriteAllText(Path.Combine(tempDir, "target"), @"data");
             string sourcePath = Path.Combine(tempDir, "symlink");
 
             try

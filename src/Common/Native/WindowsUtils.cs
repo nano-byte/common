@@ -10,7 +10,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using NanoByte.Common.Properties;
-using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Native
 {
@@ -60,6 +59,11 @@ namespace NanoByte.Common.Native
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
         internal const int Win32ErrorCancelled = 1223;
+
+        /// <summary>
+        /// The file or directory is not a reparse point.
+        /// </summary>
+        internal const int Win32ErrorNotAReparsePoint = 4390;
 
         /// <summary>
         /// Builds a suitable <see cref="Exception"/> for a given <see cref="Win32Exception.NativeErrorCode"/>.
@@ -361,12 +365,12 @@ namespace NanoByte.Common.Native
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath);
-
             var flags = IsWindows10Redstone
                 ? NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
                 : NativeMethods.CreateSymbolicLinkFlags.NONE;
-            if (Directory.Exists(targetAbsolute)) flags |= NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_DIRECTORY;
+
+            if (Directory.Exists(Path.Combine(Path.GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath)))
+                flags |= NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_DIRECTORY;
 
             if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, flags))
                 throw BuildException(Marshal.GetLastWin32Error());
@@ -405,20 +409,28 @@ namespace NanoByte.Common.Native
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            target = null;
-            string sourcePath = Path.GetFullPath(path);
-
-            using var handle = NativeMethods.CreateFile(sourcePath, 0, 0, IntPtr.Zero, FileMode.Open, NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero);
+            using var handle = NativeMethods.CreateFile(Path.GetFullPath(path), 0, 0, IntPtr.Zero, FileMode.Open, NativeMethods.FILE_FLAG_OPEN_REPARSE_POINT | NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero);
             if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
-            var builder = new StringBuilder(1024);
-            uint res = NativeMethods.GetFinalPathNameByHandle(handle, builder, 1024, 0);
-            if (res == 0) throw BuildException(Marshal.GetLastWin32Error());
-            string targetPath = builder.ToString()[4..];
 
-            if (sourcePath == targetPath) return false;
+            if (!NativeMethods.DeviceIoControl(handle, NativeMethods.FSCTL_GET_REPARSE_POINT, IntPtr.Zero, 0, out var buffer, Marshal.SizeOf(typeof(NativeMethods.REPARSE_DATA_BUFFER)), out _, IntPtr.Zero))
+            {
+                int error = Marshal.GetLastWin32Error();
+                if (error == Win32ErrorNotAReparsePoint)
+                {
+                    target = null;
+                    return false;
+                }
+                else throw BuildException(error);
+            }
 
-            target = new FileInfo(targetPath).RelativeTo(new FileInfo(sourcePath));
+            if (buffer.ReparseTag != NativeMethods.IO_REPARSE_TAG_SYMLINK)
+            {
+                target = null;
+                return false;
+            }
+
+            target = new string(buffer.PathBuffer, buffer.SubstituteNameOffset / 2, buffer.SubstituteNameLength / 2);
             return true;
         }
 

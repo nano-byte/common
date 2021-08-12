@@ -70,7 +70,9 @@ namespace NanoByte.Common.Native
             [DllImport("kernel32")]
             public static extern IntPtr LocalFree(IntPtr hMem);
 
-            public const FileAttributes FILE_FLAG_BACKUP_SEMANTICS = (FileAttributes)0x02000000;
+            public const FileAttributes
+                FILE_FLAG_OPEN_REPARSE_POINT = (FileAttributes)0x00200000,
+                FILE_FLAG_BACKUP_SEMANTICS = (FileAttributes)0x02000000;
 
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern SafeFileHandle CreateFile(string lpFileName, [MarshalAs(UnmanagedType.U4)] FileAccess dwDesiredAccess, [MarshalAs(UnmanagedType.U4)] FileShare dwShareMode, IntPtr lpSecurityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode dwCreationDisposition, [MarshalAs(UnmanagedType.U4)] FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
@@ -121,8 +123,27 @@ namespace NanoByte.Common.Native
             [return: MarshalAs(UnmanagedType.I1)]
             public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, CreateSymbolicLinkFlags dwFlags);
 
-            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern uint GetFinalPathNameByHandle(SafeFileHandle hFile, [MarshalAs(UnmanagedType.LPTStr)] StringBuilder lpszFilePath, uint cchFilePath, uint dwFlags);
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+            public struct REPARSE_DATA_BUFFER
+            {
+                public uint ReparseTag;
+                public short ReparseDataLength;
+                public short Reserved;
+                public short SubstituteNameOffset;
+                public short SubstituteNameLength;
+                public short PrintNameOffset;
+                public short PrintNameLength;
+                public uint Flags;
+
+                [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16 * 1204)]
+                public char[] PathBuffer;
+            }
+
+            public const int FSCTL_GET_REPARSE_POINT = 0x000900A8;
+            public const uint IO_REPARSE_TAG_SYMLINK = 0xA000000C;
+
+            [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+            public static extern bool DeviceIoControl(SafeFileHandle hDevice, uint dwIoControlCode, IntPtr InBuffer, int nInBufferSize, [Out] out REPARSE_DATA_BUFFER OutBuffer, int nOutBufferSize, out int pBytesReturned, IntPtr lpOverlapped);
 
             [Flags]
             public enum MoveFileFlags
