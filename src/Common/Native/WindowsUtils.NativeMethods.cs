@@ -70,6 +70,8 @@ namespace NanoByte.Common.Native
             [DllImport("kernel32")]
             public static extern IntPtr LocalFree(IntPtr hMem);
 
+            public const FileAttributes FILE_FLAG_BACKUP_SEMANTICS = (FileAttributes)0x02000000;
+
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern SafeFileHandle CreateFile(string lpFileName, [MarshalAs(UnmanagedType.U4)] FileAccess dwDesiredAccess, [MarshalAs(UnmanagedType.U4)] FileShare dwShareMode, IntPtr lpSecurityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode dwCreationDisposition, [MarshalAs(UnmanagedType.U4)] FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
 
@@ -118,6 +120,9 @@ namespace NanoByte.Common.Native
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.I1)]
             public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, CreateSymbolicLinkFlags dwFlags);
+
+            [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern uint GetFinalPathNameByHandle(SafeFileHandle hFile, [MarshalAs(UnmanagedType.LPTStr)] StringBuilder lpszFilePath, uint cchFilePath, uint dwFlags);
 
             [Flags]
             public enum MoveFileFlags

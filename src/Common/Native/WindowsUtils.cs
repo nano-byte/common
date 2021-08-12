@@ -10,6 +10,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using NanoByte.Common.Properties;
+using NanoByte.Common.Storage;
 
 namespace NanoByte.Common.Native
 {
@@ -382,16 +383,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="Win32Exception">Getting link information failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
         public static bool IsSymlink([Localizable(false)] string path)
-        {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            #endregion
-
-            if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-
-            // TODO: Implement
-            return false;
-        }
+            => IsSymlink(path, out _);
 
         /// <summary>
         /// Checks whether a file is an NTFS symbolic link.
@@ -413,9 +405,21 @@ namespace NanoByte.Common.Native
 
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-            // TODO: Implement
             target = null;
-            return false;
+            string sourcePath = Path.GetFullPath(path);
+
+            using var handle = NativeMethods.CreateFile(sourcePath, 0, 0, IntPtr.Zero, FileMode.Open, NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero);
+            if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
+
+            var builder = new StringBuilder(1024);
+            uint res = NativeMethods.GetFinalPathNameByHandle(handle, builder, 1024, 0);
+            if (res == 0) throw BuildException(Marshal.GetLastWin32Error());
+            string targetPath = builder.ToString()[4..];
+
+            if (sourcePath == targetPath) return false;
+
+            target = new FileInfo(targetPath).RelativeTo(new FileInfo(sourcePath));
+            return true;
         }
 
         /// <summary>

@@ -30,7 +30,8 @@ namespace NanoByte.Common.Native
             }
 
             File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
-            File.ReadAllText(sourcePath).Should().Be("data", because: "Symlinked file contents should be equal");
+            WindowsUtils.IsSymlink(sourcePath, out string? target).Should().BeTrue();
+            target.Should().Be("target");
         }
 
         [SkippableFact]
@@ -53,6 +54,17 @@ namespace NanoByte.Common.Native
             }
 
             Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
+            WindowsUtils.IsSymlink(sourcePath, out string? target).Should().BeTrue();
+            target.Should().Be("target");
+        }
+
+        [SkippableFact]
+        public void TestIsNotSymlink()
+        {
+            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
+
+            using var tempFile = new TemporaryFile("unit-tests");
+            WindowsUtils.IsSymlink(tempFile).Should().BeFalse();
         }
     }
 }
