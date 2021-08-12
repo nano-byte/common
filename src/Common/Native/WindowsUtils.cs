@@ -361,7 +361,13 @@ namespace NanoByte.Common.Native
             if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
             string targetAbsolute = Path.Combine(Path.GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath);
-            if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, Directory.Exists(targetAbsolute) ? 1 : 0))
+
+            var flags = IsWindows10Redstone
+                ? NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
+                : NativeMethods.CreateSymbolicLinkFlags.NONE;
+            if (Directory.Exists(targetAbsolute)) flags |= NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_DIRECTORY;
+
+            if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, flags))
                 throw BuildException(Marshal.GetLastWin32Error());
         }
 

@@ -107,9 +107,17 @@ namespace NanoByte.Common.Native
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool CreateHardLink(string lpFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
 
+            [Flags]
+            public enum CreateSymbolicLinkFlags
+            {
+                NONE = 0,
+                SYMBOLIC_LINK_FLAG_DIRECTORY = 1,
+                SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE = 2
+            }
+
             [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.I1)]
-            public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, int dwFlags);
+            public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, CreateSymbolicLinkFlags dwFlags);
 
             [Flags]
             public enum MoveFileFlags
