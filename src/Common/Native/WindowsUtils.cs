@@ -504,13 +504,8 @@ namespace NanoByte.Common.Native
         {
             if (!IsWindows) return;
 
-            const uint SHCNE_ASSOCCHANGED = 0x08000000;
-            const uint SHCNF_IDLIST = 0;
-            NativeMethods.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+            NativeMethods.SHChangeNotify(NativeMethods.SHCNE_ASSOCCHANGED, NativeMethods.SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
         }
-
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
-        private static readonly IntPtr HWND_BROADCAST = new(0xFFFF);
 
         /// <summary>
         /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
@@ -520,9 +515,7 @@ namespace NanoByte.Common.Native
         {
             if (!IsWindows) return;
 
-            const int WM_SETTINGCHANGE = 0x001A;
-            const int SMTO_ABORTIFHUNG = 0x0002;
-            NativeMethods.SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, "Environment", SMTO_ABORTIFHUNG, 5000, out _);
+            NativeMethods.SendMessageTimeout(NativeMethods.HWND_BROADCAST, NativeMethods.WM_SETTINGCHANGE, IntPtr.Zero, "Environment", NativeMethods.SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 5000, out _);
         }
         #endregion
 
@@ -540,7 +533,9 @@ namespace NanoByte.Common.Native
         /// <param name="messageID">A unique ID number used to identify the message type session-wide.</param>
         public static void BroadcastMessage(int messageID)
         {
-            if (IsWindows) NativeMethods.PostMessage(HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
+            if (!IsWindows) return;
+
+            NativeMethods.PostMessage(NativeMethods.HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
         }
         #endregion
 

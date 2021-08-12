@@ -34,11 +34,25 @@ namespace NanoByte.Common.Native
 
         private static class NativeMethods
         {
+            public const uint SHCNE_ASSOCCHANGED = 0x08000000, SHCNF_IDLIST = 0;
+
             [DllImport("shell32", SetLastError = true)]
             public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
+            public const uint WM_SETTINGCHANGE = 0x001A;
+            public static readonly IntPtr HWND_BROADCAST = new(0xFFFF);
+
+            [Flags]
+            public enum SendMessageTimeoutFlags
+            {
+                SMTO_NORMAL = 0,
+                SMTO_BLOCK = 1,
+                SMTO_ABORTIFHUNG = 2,
+                SMTO_NOTIMEOUTIFNOTHUNG = 8,
+            }
+
             [DllImport("user32", CharSet = CharSet.Unicode, SetLastError = true)]
-            public static extern IntPtr SendMessageTimeout(IntPtr hwnd, int msg, IntPtr wParam, string lParam, int flags, uint timeout, out IntPtr lpdwResult);
+            public static extern IntPtr SendMessageTimeout(IntPtr hwnd, uint msg, IntPtr wParam, string lParam, SendMessageTimeoutFlags flags, uint timeout, out IntPtr lpdwResult);
 
             [DllImport("user32", CharSet = CharSet.Unicode, SetLastError = true)]
             public static extern int RegisterWindowMessage(string message);
