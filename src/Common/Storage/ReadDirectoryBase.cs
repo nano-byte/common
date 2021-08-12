@@ -58,23 +58,35 @@ namespace NanoByte.Common.Storage
             foreach (var file in files)
             {
                 CancellationToken.ThrowIfCancellationRequested();
-
-                long id = file.GetFileID();
-                if (fileIDs.TryGetValue(id, out var existingFile))
-                    HandleFile(file, existingFile);
-                else
-                {
-                    HandleFile(file);
-                    fileIDs.Add(id, file);
-                }
-
+                HandleFile(file, TryFindHardlink(file, fileIDs));
                 UnitsProcessed += file.Length;
             }
 
             State = TaskState.Complete;
         }
 
-        private void EnumerateElements(DirectoryInfo directory, List<FileInfo> files, List<DirectoryInfo> directories)
+        private static FileInfo? TryFindHardlink(FileInfo file, IDictionary<long, FileInfo> fileIDs)
+        {
+            long fileID;
+            try
+            {
+                fileID = file.GetFileID();
+            }
+            catch (IOException)
+            {
+                return null;
+            }
+
+            if (fileIDs.TryGetValue(fileID, out var existingFile))
+                return existingFile;
+            else
+            {
+                fileIDs.Add(fileID, file);
+                return null;
+            }
+        }
+
+        private void EnumerateElements(DirectoryInfo directory, List<FileInfo> files, ICollection<DirectoryInfo> directories)
         {
             CancellationToken.ThrowIfCancellationRequested();
 
