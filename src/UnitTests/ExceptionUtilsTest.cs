@@ -128,11 +128,11 @@ namespace NanoByte.Common
         /// Ensures that <see cref="ExceptionUtils.ApplyWithRollbackAsync{T}"/> correctly performs rollbacks on exceptions.
         /// </summary>
         [Fact]
-        public void TestApplyWithRollbackAsync()
+        public async Task TestApplyWithRollbackAsync()
         {
             var applyCalledFor = new List<int>();
             var rollbackCalledFor = new List<int>();
-            new Func<Task>(async () => await new[] {1, 2, 3}.ApplyWithRollbackAsync(
+            await new Func<Task>(async () => await new[] {1, 2, 3}.ApplyWithRollbackAsync(
                 apply: async value =>
                 {
                     await Task.Yield();
@@ -142,7 +142,7 @@ namespace NanoByte.Common
                 {
                     await Task.Yield();
                     rollbackCalledFor.Add(x);
-                })).Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
+                })).Should().ThrowAsync<ArgumentException>(because: "Exceptions should be passed through after rollback.");
 
             applyCalledFor.Should().Equal(1, 2);
             rollbackCalledFor.Should().Equal(2, 1);
@@ -169,41 +169,47 @@ namespace NanoByte.Common
         /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles pure fail conditions.
         /// </summary>
         [Fact]
-        public void TestTryAnyAsyncFail()
+        public async Task TestTryAnyAsyncFail()
         {
             var actionCalledFor = new List<int>();
-            new Func<Task>(async () => await new[] {1, 2, 3}.TryAnyAsync(async value =>
+            await new Func<Task>(async () => await new[] {1, 2, 3}.TryAnyAsync(async value =>
             {
                 await Task.Yield();
                 actionCalledFor.Add(value);
                 throw new ArgumentException("Test exception");
-            })).Should().Throw<ArgumentException>(because: "Last exceptions should be passed through.");
+            })).Should().ThrowAsync<ArgumentException>(because: "Last exceptions should be passed through.");
 
             actionCalledFor.Should().Equal(1, 2, 3);
         }
 
         [Fact]
-        public async Task TestRetryAsyncPassOnLastAttmpt() => await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
+        public async Task TestRetryAsyncPassOnLastAttempt() => await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
         {
             await Task.Yield();
             if (!lastAttempt) throw new InvalidOperationException("Test exception");
         });
 
         [Fact]
-        public void TestRetryAsyncDoubleFail() => new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
-            async delegate
-            {
-                await Task.Yield();
-                throw new InvalidOperationException("Test exception");
-            }, maxRetries: 1)).Should().Throw<InvalidOperationException>();
+        public async Task TestRetryAsyncDoubleFail()
+        {
+            await new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+                async delegate
+                {
+                    await Task.Yield();
+                    throw new InvalidOperationException("Test exception");
+                }, maxRetries: 1)).Should().ThrowAsync<InvalidOperationException>();
+        }
 
         [Fact]
-        public void TestRetryAsyncOtherExceptionType() => new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
-            async delegate
-            {
-                await Task.Yield();
-                throw new IOException("Test exception");
-            }, maxRetries: 1)).Should().Throw<IOException>();
+        public async Task TestRetryAsyncOtherExceptionType()
+        {
+            await new Func<Task>(async () => await ExceptionUtils.RetryAsync<InvalidOperationException>(
+                async delegate
+                {
+                    await Task.Yield();
+                    throw new IOException("Test exception");
+                }, maxRetries: 1)).Should().ThrowAsync<IOException>();
+        }
 
         [Fact]
         public void RetryStressTest()

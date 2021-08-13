@@ -36,7 +36,7 @@ namespace NanoByte.Common.Collections
                 {"A", 0},
                 {"B", 1},
                 {"C", 1}
-            }.Values.Should().BeEquivalentTo(0, 1, 1);
+            }.Values.Should().BeEquivalentTo(new[] {0, 1, 1});
         }
 
         [Fact]
