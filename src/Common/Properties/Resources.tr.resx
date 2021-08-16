@@ -156,12 +156,6 @@
   <data name="FileNotFound" xml:space="preserve">
     <value>"{0}" dosyası bulunamadı.</value>
   </data>
-  <data name="HideDetails" xml:space="preserve">
-    <value>Ayrıntıları gizle</value>
-  </data>
-  <data name="HttpAndFtpOnly" xml:space="preserve">
-    <value>İndirme için yalnız HTTP ve FTP ağ iletişim kuralları destekleniyor.</value>
-  </data>
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>Büyük olasılıkla '{0}' yapılandırma dizini geçersiz.</value>
   </data>
@@ -171,23 +165,14 @@
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Anahtar zaten sözlükte var.</value>
   </data>
-  <data name="KeyNotFound" xml:space="preserve">
-    <value>Anahtar koleksiyon içinde bulunamadı.</value>
-  </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
     <value>'{0}' için bir işlem kaydedilmemiş.</value>
   </data>
-  <data name="MissingStreamSeekSupport" xml:space="preserve">
-    <value>Akış tarama özelliğini desteklemeli.</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Hayır</value>
-  </data>
-  <data name="NoModActive" xml:space="preserve">
-    <value>Şu anda etkin kip kullanılmıyor.</value>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
@@ -222,9 +207,6 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Dosyayı açacak uygulamalar aranıyor</value>
   </data>
-  <data name="ShowDetails" xml:space="preserve">
-    <value>Ayrıntıları görüntüle</value>
-  </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Uygulamalar kapatılıyor</value>
   </data>
@@ -242,9 +224,6 @@
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>Giriş çıkış hatası</value>
-  </data>
-  <data name="StateMustBeReady" xml:space="preserve">
-    <value>Durum "Hazır" olmalı.</value>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Hazır</value>
@@ -269,9 +248,6 @@
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
     <value>Unix alt sistemi isteği işleyemedi. İzinleriniz yeterli olmayabilir.</value>
-  </data>
-  <data name="UserCancel" xml:space="preserve">
-    <value>Kullanıcı işlemi iptal etti.</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Kullanıcı adı:</value>

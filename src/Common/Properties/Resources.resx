@@ -156,12 +156,6 @@
   <data name="FileNotFound" xml:space="preserve">
     <value>The file "{0}" could not be found.</value>
   </data>
-  <data name="HideDetails" xml:space="preserve">
-    <value>Hide details</value>
-  </data>
-  <data name="HttpAndFtpOnly" xml:space="preserve">
-    <value>Only HTTP and FTP are supported download protocols.</value>
-  </data>
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>The configuration directory '{0}' is probably invalid.</value>
   </data>
@@ -171,23 +165,14 @@
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>The key was already present in the dictionary.</value>
   </data>
-  <data name="KeyNotFound" xml:space="preserve">
-    <value>The key was not found in the collection.</value>
-  </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>The maximum amount of elements in the collection has been exceeded.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
     <value>No action registered for '{0}'.</value>
   </data>
-  <data name="MissingStreamSeekSupport" xml:space="preserve">
-    <value>The stream must support seeking.</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
-  </data>
-  <data name="NoModActive" xml:space="preserve">
-    <value>There is currently no active mod.</value>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>System configuration cannot be edited in portable mode.</value>
@@ -225,9 +210,6 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Searching for open file references</value>
   </data>
-  <data name="ShowDetails" xml:space="preserve">
-    <value>Show details</value>
-  </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Shutting down applications</value>
   </data>
@@ -245,9 +227,6 @@
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>IO error</value>
-  </data>
-  <data name="StateMustBeReady" xml:space="preserve">
-    <value>The state must be "Ready".</value>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Ready</value>
@@ -272,9 +251,6 @@
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
     <value>The Unix subsystem failed to process the request. You may have insufficient rights.</value>
-  </data>
-  <data name="UserCancel" xml:space="preserve">
-    <value>The user has chosen to cancel the operation.</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name:</value>

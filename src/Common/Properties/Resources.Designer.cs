@@ -178,24 +178,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hide details.
-        /// </summary>
-        public static string HideDetails {
-            get {
-                return ResourceManager.GetString("HideDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Only HTTP and FTP are supported download protocols..
-        /// </summary>
-        public static string HttpAndFtpOnly {
-            get {
-                return ResourceManager.GetString("HttpAndFtpOnly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The configuration directory &apos;{0}&apos; is probably invalid..
         /// </summary>
         public static string InvalidConfigDir {
@@ -223,15 +205,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The key was not found in the collection..
-        /// </summary>
-        public static string KeyNotFound {
-            get {
-                return ResourceManager.GetString("KeyNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The maximum amount of elements in the collection has been exceeded..
         /// </summary>
         public static string MaxElementsExceeded {
@@ -250,29 +223,11 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The stream must support seeking..
-        /// </summary>
-        public static string MissingStreamSeekSupport {
-            get {
-                return ResourceManager.GetString("MissingStreamSeekSupport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is currently no active mod..
-        /// </summary>
-        public static string NoModActive {
-            get {
-                return ResourceManager.GetString("NoModActive", resourceCulture);
             }
         }
         
@@ -385,15 +340,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show details.
-        /// </summary>
-        public static string ShowDetails {
-            get {
-                return ResourceManager.GetString("ShowDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Shutting down applications.
         /// </summary>
         public static string ShuttingDownApps {
@@ -444,15 +390,6 @@ namespace NanoByte.Common.Properties {
         public static string StateIOError {
             get {
                 return ResourceManager.GetString("StateIOError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The state must be &quot;Ready&quot;..
-        /// </summary>
-        public static string StateMustBeReady {
-            get {
-                return ResourceManager.GetString("StateMustBeReady", resourceCulture);
             }
         }
         
@@ -525,15 +462,6 @@ namespace NanoByte.Common.Properties {
         public static string UnixSubsystemFail {
             get {
                 return ResourceManager.GetString("UnixSubsystemFail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The user has chosen to cancel the operation..
-        /// </summary>
-        public static string UserCancel {
-            get {
-                return ResourceManager.GetString("UserCancel", resourceCulture);
             }
         }
         

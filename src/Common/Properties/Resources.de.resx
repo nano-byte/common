@@ -156,12 +156,6 @@
   <data name="FileNotFound" xml:space="preserve">
     <value>Die Datei "{0}" konnte nicht gefunden werden.</value>
   </data>
-  <data name="HideDetails" xml:space="preserve">
-    <value>Details verstecken</value>
-  </data>
-  <data name="HttpAndFtpOnly" xml:space="preserve">
-    <value>Nur HTTP und FTP sind unterstützte Download-Protokolle.</value>
-  </data>
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>Das Konfigurationsverzeichnis '{0}' ist vermutlich ungültig.</value>
   </data>
@@ -171,23 +165,14 @@
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Der Schlüssel befindet sich bereits im Dictionary.</value>
   </data>
-  <data name="KeyNotFound" xml:space="preserve">
-    <value>Der Schlüssel wurde in der Collection nicht gefunden.</value>
-  </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Die maximale Anzahl an Elementen in der Collection wurde überschritten.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
     <value>Keine Aktion für '{0}' registriert.</value>
   </data>
-  <data name="MissingStreamSeekSupport" xml:space="preserve">
-    <value>Der Stream muss Seeking unterstützen.</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Nein</value>
-  </data>
-  <data name="NoModActive" xml:space="preserve">
-    <value>Derzeit ist kein Mod aktiv.</value>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>Systemkonfiguration kann im Portable-Modus nicht bearbeitet werden.</value>
@@ -225,9 +210,6 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Suche nach offenen Dateireferenzen</value>
   </data>
-  <data name="ShowDetails" xml:space="preserve">
-    <value>Details anzeigen</value>
-  </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Beende Anwendungen</value>
   </data>
@@ -245,9 +227,6 @@
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>IO Fehler</value>
-  </data>
-  <data name="StateMustBeReady" xml:space="preserve">
-    <value>Der Zustand muss "Ready" sein.</value>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Bereit</value>
@@ -272,9 +251,6 @@
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
     <value>Das Unix Subsystem war nicht in der Lage die Anfrage zu bearbeiten. Eventuell haben Sie unzureichende Rechte.</value>
-  </data>
-  <data name="UserCancel" xml:space="preserve">
-    <value>Der Benutzer hat sich entschieden den Vorgang abzubrechen.</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Benutzername:</value>
