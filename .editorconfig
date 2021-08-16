@@ -10,10 +10,10 @@ insert_final_newline = true
 keep_existing_linebreaks = true
 max_line_length = off
 
-[*.{json,xml,yml,htm,html,js,ts,css,scss,less}]
+[*.{json,xml,resx,yml,htm,html,js,ts,css,scss,less}]
 indent_size = 2
 
-[*.{*proj,resx,config,ruleset,cd,props,targets,nuspec}]
+[*.{*proj,config,ruleset,cd,props,targets,nuspec}]
 end_of_line = crlf
 indent_size = 2
 

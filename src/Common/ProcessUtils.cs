@@ -38,14 +38,14 @@ namespace NanoByte.Common
             Log.Debug("Launching process: " + startInfo.FileName.EscapeArgument() + " " + startInfo.Arguments);
             try
             {
-                return Process.Start(startInfo) ?? throw new IOException($"Failed to start {startInfo.FileName}.");
+                return Process.Start(startInfo) ?? throw new IOException(string.Format(Resources.FailedToStart, startInfo.FileName));
             }
             catch (Win32Exception ex)
             {
                 throw ex.NativeErrorCode switch
                 {
                     WindowsUtils.Win32ErrorCancelled => new OperationCanceledException(),
-                    WindowsUtils.Win32ErrorRequestedOperationRequiresElevation => new NotAdminException($"Launching '{startInfo.FileName}' requires Administrator privileges."),
+                    WindowsUtils.Win32ErrorRequestedOperationRequiresElevation => new NotAdminException(string.Format(Resources.LaunchNeedsAdmin, startInfo.FileName)),
                     _ => new IOException(ex.Message, ex)
                 };
             }

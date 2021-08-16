@@ -151,11 +151,29 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to open registry subkey &apos;{0}&apos; in &apos;{1}&apos;..
+        /// </summary>
+        public static string FailedToOpenRegistrySubkey {
+            get {
+                return ResourceManager.GetString("FailedToOpenRegistrySubkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to rollback &apos;{0}&apos;..
         /// </summary>
         public static string FailedToRollback {
             get {
                 return ResourceManager.GetString("FailedToRollback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to start &apos;{0}&apos;..
+        /// </summary>
+        public static string FailedToStart {
+            get {
+                return ResourceManager.GetString("FailedToStart", resourceCulture);
             }
         }
         
@@ -201,6 +219,15 @@ namespace NanoByte.Common.Properties {
         public static string KeyAlreadyPresent {
             get {
                 return ResourceManager.GetString("KeyAlreadyPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launching &apos;{0}&apos; requires Administrator privileges..
+        /// </summary>
+        public static string LaunchNeedsAdmin {
+            get {
+                return ResourceManager.GetString("LaunchNeedsAdmin", resourceCulture);
             }
         }
         
@@ -340,6 +367,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attempted to read from position {0}. This is {1} bytes away from the underlying stream position {2}, but the seek buffer can only accomodate a difference of {3} bytes..
+        /// </summary>
+        public static string SeelOffsetTooLarge {
+            get {
+                return ResourceManager.GetString("SeelOffsetTooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shutting down applications.
         /// </summary>
         public static string ShuttingDownApps {
@@ -444,6 +480,15 @@ namespace NanoByte.Common.Properties {
         public static string UnableToLocateAssembly {
             get {
                 return ResourceManager.GetString("UnableToLocateAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to read {0} bytes from the stream..
+        /// </summary>
+        public static string UnableToReadBytesFromStream {
+            get {
+                return ResourceManager.GetString("UnableToReadBytesFromStream", resourceCulture);
             }
         }
         

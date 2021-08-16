@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -147,8 +147,14 @@
   <data name="FailedToDownload" xml:space="preserve">
     <value>Download von {0} fehlgeschlagen.</value>
   </data>
+  <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
+    <value>Konnte Registrierungs-Subschlüssel '{0}' in '{1}' nicht öffnen.</value>
+  </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>Konnte '{0}' nicht rückgängig machen.</value>
+  </data>
+  <data name="FailedToStart" xml:space="preserve">
+    <value>Konnte '{0}' nicht starten.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>Die Datei die von {0} runtergeladen werden sollte, hat nicht die erwartete Größe. Sollten {1} Bytes sein, waren aber {2} Bytes.</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Der Schlüssel befindet sich bereits im Dictionary.</value>
+  </data>
+  <data name="LaunchNeedsAdmin" xml:space="preserve">
+    <value>Der Start von '{0}' erfordert Administratorrechte.</value>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Die maximale Anzahl an Elementen in der Collection wurde überschritten.</value>
@@ -210,6 +219,9 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Suche nach offenen Dateireferenzen</value>
   </data>
+  <data name="SeelOffsetTooLarge" xml:space="preserve">
+    <value>Es wurde versucht, von Position {0} zu lesen. Diese ist {1} Bytes von der zugrunde liegenden Stream-Position {2} entfernt, aber der Suchpuffer kann nur eine Differenz von {3} Bytes behandeln.</value>
+  </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Beende Anwendungen</value>
   </data>
@@ -245,6 +257,9 @@
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Die Assembly mit dem Namen "{0}" konnte nicht gefunden werden.</value>
+  </data>
+  <data name="UnableToReadBytesFromStream" xml:space="preserve">
+    <value>Konnte nicht {0} Bytes vom Stream lesen.</value>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Dieser Rückgängig-Befehl kann nicht ausgeführt werden, bis der eigentliche Befehl ausgeführt wurde.</value>

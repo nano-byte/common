@@ -8,6 +8,7 @@ using System.IO;
 using System.Security;
 using JetBrains.Annotations;
 using Microsoft.Win32;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Native
 {
@@ -314,7 +315,7 @@ namespace NanoByte.Common.Native
             try
             {
                 var result = key.OpenSubKey(subkeyName, writable);
-                if (result == null) throw new IOException($"Failed to open subkey '{subkeyName}' in '{key}'.");
+                if (result == null) throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
                 return result;
             }
             #region Error handling
@@ -344,7 +345,7 @@ namespace NanoByte.Common.Native
             try
             {
                 var result = key.CreateSubKey(subkeyName);
-                if (result == null) throw new IOException($"Failed to create subkey '{subkeyName}' in '{key}'.");
+                if (result == null) throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
                 return result;
             }
             #region Error handling

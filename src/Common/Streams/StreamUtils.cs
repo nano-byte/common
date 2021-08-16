@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Collections;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Streams
 {
@@ -25,7 +26,7 @@ namespace NanoByte.Common.Streams
         /// <returns>The bytes read from the stream.</returns>
         /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
         public static byte[] Read(this Stream stream, int count)
-            => stream.TryRead(count) ?? throw new IOException("The desired number of bytes could not be read from the stream.");
+            => stream.TryRead(count) ?? throw new IOException(string.Format(Resources.UnableToReadBytesFromStream, count));
 
         /// <summary>
         /// Reads a sequence of bytes from the stream.
@@ -142,7 +143,7 @@ namespace NanoByte.Common.Streams
                 while (toRead > 0)
                 {
                     int read = stream.Read(buffer, 0, Math.Min(toRead, buffer.Length));
-                    if (read == 0) throw new IOException("The underlying stream was shorter than the specified offset.");
+                    if (read == 0) throw new IOException(string.Format(Resources.UnableToReadBytesFromStream, count));
                     toRead -= read;
                 }
             }

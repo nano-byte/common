@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -147,8 +147,14 @@
   <data name="FailedToDownload" xml:space="preserve">
     <value>Failed to download {0}.</value>
   </data>
+  <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
+    <value>Failed to open registry subkey '{0}' in '{1}'.</value>
+  </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>Failed to rollback '{0}'.</value>
+  </data>
+  <data name="FailedToStart" xml:space="preserve">
+    <value>Failed to start '{0}'.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>The file that was supposed to be downloaded from {0} doesn't have the expected size. Was supposed to be {1} bytes but was actually {2} bytes.</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>The key was already present in the dictionary.</value>
+  </data>
+  <data name="LaunchNeedsAdmin" xml:space="preserve">
+    <value>Launching '{0}' requires Administrator privileges.</value>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>The maximum amount of elements in the collection has been exceeded.</value>
@@ -210,6 +219,9 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Searching for open file references</value>
   </data>
+  <data name="SeelOffsetTooLarge" xml:space="preserve">
+    <value>Attempted to read from position {0}. This is {1} bytes away from the underlying stream position {2}, but the seek buffer can only accomodate a difference of {3} bytes.</value>
+  </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Shutting down applications</value>
   </data>
@@ -245,6 +257,9 @@
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>The assembly named "{0}" could not be located.</value>
+  </data>
+  <data name="UnableToReadBytesFromStream" xml:space="preserve">
+    <value>Unable to read {0} bytes from the stream.</value>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>This undo command cannot be performed until the actual command has been performed.</value>

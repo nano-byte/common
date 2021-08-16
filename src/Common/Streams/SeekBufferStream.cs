@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Streams
 {
@@ -130,7 +131,7 @@ namespace NanoByte.Common.Streams
         {
             long longDiff = Position - _underlyingPosition;
             if (Math.Abs(longDiff) > _buffer.Length)
-                throw new IOException($"Attempted to read from position {Position}. This is {longDiff} bytes away from the underlying stream position {_underlyingPosition}, but the seek buffer can only accomodate a difference of {_buffer.Length} bytes.");
+                throw new IOException(string.Format(Resources.SeelOffsetTooLarge, Position, longDiff, _underlyingPosition, _buffer.Length));
             int diff = (int)longDiff;
 
             switch (diff)
