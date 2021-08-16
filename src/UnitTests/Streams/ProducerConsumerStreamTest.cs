@@ -142,24 +142,5 @@ namespace NanoByte.Common.Streams
             // Catch exception on consumer thread
             _stream.Invoking(x => x.Read(2)).Should().Throw<InvalidDataException>();
         }
-
-        /// <summary>
-        /// Ensures blocked writers terminate when the stream is disposed.
-        /// </summary>
-        [Fact]
-        public void TestDisposeBeforeComplete()
-        {
-            var data = new byte[6];
-            _stream.Write(data);
-
-            // Dispose on consumer thread after a short delay
-            new Thread(() =>
-            {
-                Thread.Sleep(50);
-                _stream.Dispose();
-            }).Start();
-
-            _stream.Invoking(x => x.Write(data)).Should().Throw<ObjectDisposedException>();
-        }
     }
 }

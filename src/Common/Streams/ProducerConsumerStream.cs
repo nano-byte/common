@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Streams
 {
@@ -19,13 +20,26 @@ namespace NanoByte.Common.Streams
         /// </summary>
         public const int DefaultBufferSize = 160 * 1024;
 
+        /// <summary>Stores written but not yet read bytes as a ring buffer.</summary>
+        private readonly ArrayBuffer<byte> _buffer;
+
         /// <summary>
         /// Creates a new producer consumer stream.
         /// </summary>
         /// <param name="bufferSize">The maximum number of written but not read bytes the stream can buffer.</param>
         public ProducerConsumerStream(int bufferSize = DefaultBufferSize)
         {
-            _buffer = new byte[bufferSize];
+            _buffer = new(bufferSize);
+        }
+
+        /// <inheritdoc/>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ResolveLiveLocks();
+                _buffer.Dispose();
+            }
         }
 
         /// <inheritdoc/>
@@ -178,9 +192,6 @@ namespace NanoByte.Common.Streams
         /// <summary>Synchronization object used to synchronize access across consumer and producer threads.</summary>
         private readonly object _lock = new();
 
-        /// <summary>The memory used as a circular buffer storage.</summary>
-        private readonly Memory<byte> _buffer;
-
         /// <summary>The index of the first byte currently store in the <see cref="_buffer"/>.</summary>
         private int _dataStart;
 
@@ -297,25 +308,14 @@ namespace NanoByte.Common.Streams
         {
             while (!flag)
                 Monitor.Wait(_lock);
-
-            if (_isDisposed) throw new ObjectDisposedException(nameof(ProducerConsumerStream));
         }
 
-        private bool _isDisposed;
-
-        /// <inheritdoc/>
-        protected override void Dispose(bool disposing)
+        private void ResolveLiveLocks()
         {
-            if (disposing)
+            lock (_lock)
             {
-                lock (_lock)
-                {
-                    _isDisposed = true;
-
-                    // Signal all to prevent live locks
-                    Signal(out _dataAvailable);
-                    Signal(out _spaceAvailable);
-                }
+                Signal(out _dataAvailable);
+                Signal(out _spaceAvailable);
             }
         }
     }

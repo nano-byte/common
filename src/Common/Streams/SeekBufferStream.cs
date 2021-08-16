@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Streams
@@ -20,6 +21,9 @@ namespace NanoByte.Common.Streams
         /// </summary>
         public const int DefaultBufferSize = 1024 * 1024;
 
+        /// <summary>Stores already read bytes as a ring buffer.</summary>
+        private readonly ArrayBuffer<byte> _buffer;
+
         /// <summary>
         /// Creates a new seek buffer stream.
         /// </summary>
@@ -30,7 +34,14 @@ namespace NanoByte.Common.Streams
         {
             if (!underlyingStream.CanRead) throw new ArgumentException("The underlying stream does not support reading.", nameof(underlyingStream));
 
-            _buffer = new byte[bufferSize];
+            _buffer = new(bufferSize);
+        }
+
+        /// <inheritdoc/>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                _buffer.Dispose();
         }
 
         /// <inheritdoc/>
@@ -114,9 +125,6 @@ namespace NanoByte.Common.Streams
         }
 #endif
 
-        /// <summary>The memory used as a circular buffer storage.</summary>
-        private readonly Memory<byte> _buffer;
-
         /// <summary>The index of the next byte to be written in the <see cref="_buffer"/>.</summary>
         private int _nextWriteIndex;
 
@@ -149,10 +157,10 @@ namespace NanoByte.Common.Streams
                 case < 0: // Seek backwards relative to underlying stream
                     int startIndex = (_nextWriteIndex + diff).Modulo(_buffer.Length);
                     var data = startIndex < _nextWriteIndex
-                        ? _buffer[startIndex.._nextWriteIndex]
-                        : _buffer[startIndex..];
+                        ? _buffer.Span[startIndex.._nextWriteIndex]
+                        : _buffer.Span[startIndex..];
                     if (data.Length > output.Length) data = data[..output.Length];
-                    data.Span.CopyTo(output);
+                    data.CopyTo(output);
                     read = data.Length;
                     return true;
             }
