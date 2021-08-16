@@ -5,10 +5,6 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-#if !NET20 && !NET40
-using System.Buffers;
-#endif
-
 namespace NanoByte.Common.Collections
 {
     /// <summary>
@@ -91,24 +87,6 @@ namespace NanoByte.Common.Collections
             T[] array = new T[segment.Count];
             Array.Copy(segment.Array!, segment.Offset, array, 0, segment.Count);
             return array;
-        }
-
-        /// <summary>
-        /// Retrieves a buffer that is at least the requested length.
-        /// </summary>
-        /// <param name="minimumLength">The minimum length of the array needed.</param>
-        /// <param name="array">Returns an array that is at least <paramref name="minimumLength"/> in length.</param>
-        public static IDisposable Rent<T>(int minimumLength, out T[] array)
-        {
-#if NET20 || NET40
-            array = new T[minimumLength];
-            return new Disposable(() => {});
-#else
-            var pool = ArrayPool<T>.Shared;
-            var rented = pool.Rent(minimumLength);
-            array = rented;
-            return new Disposable(() => pool.Return(rented));
-#endif
         }
     }
 }
