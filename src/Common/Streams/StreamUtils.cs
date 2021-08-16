@@ -49,7 +49,7 @@ namespace NanoByte.Common.Streams
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="count">The number of bytes to read.</param>
-        /// <returns>The bytes read from the stream; <c>null</c> if the desired number of bytes could not be read from the stream .</returns>
+        /// <returns>The bytes read from the stream; <c>null</c> if the desired number of bytes could not be read from the stream.</returns>
         public static byte[]? TryRead(this Stream stream, int count)
         {
             #region Sanity checks
@@ -109,6 +109,48 @@ namespace NanoByte.Common.Streams
                 count += read;
                 if (read == 0) return new ArraySegment<byte>(buffer, 0, count);
             }
+        }
+
+        /// <summary>
+        /// Skips a number of bytes in the stream.
+        /// Uses <see cref="Stream.Seek"/> if supported, <see cref="Stream.Read(byte[],int,int)"/> otherwise.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="count">The number of bytes to skip.</param>
+        /// <exception cref="IOException">The desired number of bytes could not be skipped in the stream.</exception>
+        public static void Skip(this Stream stream, int count)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), "Must not be negative.");
+            #endregion
+
+            if (stream.CanSeek)
+            {
+                stream.Seek(count, SeekOrigin.Current);
+                return;
+            }
+
+#if NET20 || NET40
+            stream.Read(count);
+#else
+            var pool = System.Buffers.ArrayPool<byte>.Shared;
+            byte[] buffer = pool.Rent(Math.Min(count, 64));
+            try
+            {
+                int toRead = count;
+                while (toRead > 0)
+                {
+                    int read = stream.Read(buffer, 0, Math.Min(toRead, buffer.Length));
+                    if (read == 0) throw new IOException("The underlying stream was shorter than the specified offset.");
+                    toRead -= read;
+                }
+            }
+            finally
+            {
+                pool.Return(buffer);
+            }
+#endif
         }
 
         /// <summary>

@@ -1,9 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.IO;
-using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Streams
 {
@@ -29,25 +27,9 @@ namespace NanoByte.Common.Streams
         /// <exception cref="IOException">The underlying stream was shorter than the specified <paramref name="offset"/>.</exception>
         public void ApplyOffset(int offset)
         {
-            if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset), "Offset must not be negative.");
             if (offset == 0) return;
 
-            if (UnderlyingStream.CanSeek)
-                UnderlyingStream.Seek(offset, SeekOrigin.Current);
-            else
-            {
-                int toRead = offset;
-                using (ArrayUtils.Rent(Math.Min(toRead, 64), out byte[] buffer))
-                {
-                    while (toRead > 0)
-                    {
-                        int read = UnderlyingStream.Read(buffer, 0, Math.Min(toRead, buffer.Length));
-                        if (read == 0) throw new IOException("The underlying stream was shorter than the specified offset.");
-                        toRead -= read;
-                    }
-                }
-            }
-
+            UnderlyingStream.Skip(offset);
             _offset += offset;
         }
 

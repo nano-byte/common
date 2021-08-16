@@ -36,6 +36,22 @@ namespace NanoByte.Common.Streams
         }
 
         [Fact]
+        public void TestSkipSeekable()
+        {
+            var stream = new MemoryStream(new byte[] {1, 2, 3, 4});
+            stream.Skip(2);
+            stream.Read(2).Should().Equal(3, 4);
+        }
+
+        [Fact]
+        public void TestSkipNonSeekable()
+        {
+            var stream = new NonSeekableStream(new MemoryStream(new byte[] {1, 2, 3, 4}));
+            stream.Skip(2);
+            stream.Read(2).Should().Equal(3, 4);
+        }
+
+        [Fact]
         public static void TestWriteArray()
         {
             var stream = new MemoryStream();
