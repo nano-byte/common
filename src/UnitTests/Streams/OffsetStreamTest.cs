@@ -61,13 +61,5 @@ namespace NanoByte.Common.Streams
             stream.ReadAll()
                   .Should().Equal(2, 3, 4);
         }
-
-        private class NonSeekableStream : DelegatingStream
-        {
-            public NonSeekableStream(Stream underlyingStream) : base(underlyingStream)
-            {}
-
-            public override bool CanSeek => false;
-        }
     }
 }
