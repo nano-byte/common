@@ -45,13 +45,21 @@ namespace NanoByte.Common.Collections
         /// The array.
         /// The length may be equal to or greater than the requested <see cref="Length"/>.
         /// </summary>
-        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         public T[] Array
             => _buffer ?? throw new ObjectDisposedException(GetType().Name);
 
         /// <summary>
         /// A view of the array with exactly the requested <see cref="Length"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
+        public ArraySegment<T> Segment
+            => new(Array, 0, Length);
+
+        /// <summary>
+        /// A view of the array with exactly the requested <see cref="Length"/>.
+        /// </summary>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/> has been called.</exception>
         public Span<T> Span
             => new(Array, 0, Length);
     }
