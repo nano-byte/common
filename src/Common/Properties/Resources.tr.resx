@@ -147,8 +147,14 @@
   <data name="FailedToDownload" xml:space="preserve">
     <value>{0} indirilemedi.</value>
   </data>
+  <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
+    <value>'{1}' içindeki '{0}' kayıt defteri anahtarı açılamadı.</value>
+  </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>'{0}' geri alınamadı.</value>
+  </data>
+  <data name="FailedToStart" xml:space="preserve">
+    <value>'{0}' başlatılamadı.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Anahtar zaten sözlükte var.</value>
+  </data>
+  <data name="LaunchNeedsAdmin" xml:space="preserve">
+    <value>'{0}' başlatmak için yönetici izinleri gerekli.</value>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
@@ -192,6 +201,9 @@
   <data name="ProblemLoading" xml:space="preserve">
     <value>'{0}' yüklenirken bir sorun çıktı.</value>
   </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>{0} dosyası okunuyor</value>
+  </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
   </data>
@@ -206,6 +218,9 @@
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Dosyayı açacak uygulamalar aranıyor</value>
+  </data>
+  <data name="SeelOffsetTooLarge" xml:space="preserve">
+    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Uygulamalar kapatılıyor</value>
@@ -242,6 +257,9 @@
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>"{0}" adındaki yöntem bulunamadı.</value>
+  </data>
+  <data name="UnableToReadBytesFromStream" xml:space="preserve">
+    <value>Akıştan {0} bayt okunamadı.</value>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Bu geri alma komutu yürürlükteki komutun işlenmesi bitene kadar yürütülemez.</value>
