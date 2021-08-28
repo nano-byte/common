@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using NanoByte.Common.Native;
@@ -35,7 +36,7 @@ namespace NanoByte.Common
             if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
             #endregion
 
-            Log.Debug("Launching process: " + startInfo.FileName.EscapeArgument() + " " + startInfo.Arguments);
+            Log.Debug("Launching process: " + startInfo.ToCommandLine());
             try
             {
                 return Process.Start(startInfo) ?? throw new IOException(string.Format(Resources.FailedToStart, startInfo.FileName));
@@ -155,13 +156,9 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Combines multiple strings into one for use as a Windows command-line argument using <see cref="EscapeArgument"/>.
+        /// Combines multiple strings into one for use as a command-line argument using <see cref="EscapeArgument"/>.
         /// </summary>
         /// <param name="parts">The strings to be combined.</param>
-        /// <remarks>
-        /// This corresponds to Windows' handling of command-line arguments as specified in:
-        /// https://docs.microsoft.com/en-us/cpp/cpp/main-function-command-line-args
-        /// </remarks>
         [Pure]
         public static string JoinEscapeArguments(this IEnumerable<string> parts)
         {
@@ -184,12 +181,8 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Escapes a string for use as a Windows command-line argument, making sure it is encapsulated within <c>"</c> if it contains whitespace characters.
+        /// Escapes a string for use as a command-line argument, making sure it is encapsulated within <c>"</c> if it contains whitespace characters.
         /// </summary>
-        /// <remarks>
-        /// This corresponds to Windows' handling of command-line arguments as specified in:
-        /// https://docs.microsoft.com/en-us/cpp/cpp/main-function-command-line-args
-        /// </remarks>
         [Pure]
         public static string EscapeArgument(this string value)
         {
@@ -224,6 +217,55 @@ namespace NanoByte.Common
             }
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Converts a start into a command-line with proper escaping.
+        /// </summary>
+        [Pure]
+        public static string ToCommandLine(this ProcessStartInfo startInfo)
+        {
+            #region Sanity checks
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
+            #endregion
+
+            return startInfo.FileName.EscapeArgument() + " " + startInfo.Arguments;
+        }
+
+        /// <summary>
+        /// Converts a command-line into a start info.
+        /// </summary>
+        [Pure]
+        public static ProcessStartInfo FromCommandLine(string commandLine)
+        {
+            #region Sanity checks
+            if (commandLine == null) throw new ArgumentNullException(nameof(commandLine));
+            #endregion
+
+            string fileName;
+            string arguments;
+            if (WindowsUtils.IsWindows)
+            {
+                string[] parts = WindowsUtils.SplitArgs(commandLine);
+                fileName = parts[0];
+                arguments = parts.Skip(1).JoinEscapeArguments();
+            }
+            else
+            {
+                if (commandLine.StartsWith("\""))
+                {
+                    string trimmedCommandLine = commandLine[1..];
+                    fileName = trimmedCommandLine.GetLeftPartAtFirstOccurrence("\" ");
+                    arguments = trimmedCommandLine.GetRightPartAtFirstOccurrence("\" ");
+                }
+                else
+                {
+                    string[] parts = commandLine.Split(new[] {' '}, count: 2);
+                    fileName = parts[0];
+                    arguments = parts.Length == 2 ? parts[1] : "";
+                }
+            }
+            return new(fileName, arguments) {UseShellExecute = false};
         }
     }
 }
