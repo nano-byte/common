@@ -1,13 +1,59 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Diagnostics;
+using System.IO;
 using FluentAssertions;
+using NanoByte.Common.Storage;
 using Xunit;
+
+#if NETFRAMEWORK
+using NanoByte.Common.Native;
+#endif
 
 namespace NanoByte.Common
 {
     public class ProcessUtilsTest
     {
+        [Fact]
+        public void TestAssembly()
+        {
+            string assemblyPath = Path.Combine(Locations.InstallBase,
+#if NETFRAMEWORK
+                "my assembly.exe"
+#else
+                "my assembly.dll"
+#endif
+            );
+
+            FileUtils.Touch(assemblyPath);
+            ProcessStartInfo startInfo;
+            try
+            {
+                startInfo = ProcessUtils.Assembly("my assembly", "my", "args");
+            }
+            finally
+            {
+                File.Delete(assemblyPath);
+            }
+
+#if NETFRAMEWORK
+            if (WindowsUtils.IsWindows)
+            {
+                startInfo.FileName.Should().Be(assemblyPath);
+                startInfo.Arguments.Should().Be("my args");
+            }
+            else
+            {
+                startInfo.FileName.Should().EndWith("mono");
+                startInfo.Arguments.Should().Be(assemblyPath.EscapeArgument() + " my args");
+            }
+#else
+            startInfo.FileName.Should().EndWith("dotnet");
+            startInfo.Arguments.Should().Be(assemblyPath.EscapeArgument() + " my args");
+#endif
+        }
+
         [Fact]
         public void TestJoinEscapeArguments()
         {

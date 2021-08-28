@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using NanoByte.Common.Collections;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
@@ -104,15 +105,29 @@ namespace NanoByte.Common
             if (arguments == null) throw new ArgumentNullException(nameof(arguments));
             #endregion
 
-            string appPath = Path.Combine(Locations.InstallBase, name + ".exe");
-            if (!File.Exists(appPath)) throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, name), appPath);
+            string executablePath = Path.Combine(Locations.InstallBase,
+#if NETFRAMEWORK
+                name + ".exe"
+#else
+                name + ".dll"
+#endif
+            );
+            if (!File.Exists(executablePath)) throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, name), executablePath);
 
-            // Only Windows can directly launch .NET executables, other platforms must run through Mono
-            var startInfo = WindowsUtils.IsWindows
-                ? new ProcessStartInfo(appPath, arguments.JoinEscapeArguments()) {UseShellExecute = false}
-                : new ProcessStartInfo("mono", appPath.EscapeArgument() + " " + arguments.JoinEscapeArguments()) {UseShellExecute = false};
+#if NETFRAMEWORK
+            if (!WindowsUtils.IsWindows)
+            {
+                arguments = arguments.Prepend(executablePath);
+                executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
+                if (!executablePath.EndsWith("mono")) executablePath = "mono";
+            }
+#else
+            arguments = arguments.Prepend(executablePath);
+            executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
+            if (!executablePath.EndsWith(WindowsUtils.IsWindows ? "\\dotnet.exe" : "/dotnet")) executablePath = "dotnet";
+#endif
 
-            return startInfo;
+            return new ProcessStartInfo(executablePath, arguments.JoinEscapeArguments()) {UseShellExecute = false};
         }
 
         /// <summary>
