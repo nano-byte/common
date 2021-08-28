@@ -267,5 +267,17 @@ namespace NanoByte.Common
             }
             return new(fileName, arguments) {UseShellExecute = false};
         }
+
+#if !NET20 && !NET40
+        /// <summary>
+        /// Deconstructs a <see cref="ProcessStartInfo"/> like a tuple.
+        /// </summary>
+        [Pure]
+        public static void Deconstruct(this ProcessStartInfo startInfo, out string fileName, out string arguments)
+        {
+            fileName = startInfo.FileName;
+            arguments = startInfo.Arguments;
+        }
+#endif
     }
 }
