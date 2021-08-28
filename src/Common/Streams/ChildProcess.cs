@@ -82,9 +82,6 @@ namespace NanoByte.Common.Streams
                 ErrorDialog = false
             };
 
-            // Suppress localization to enable programmatic parsing of output
-            startInfo.EnvironmentVariables["LANG"] = "C";
-
             return startInfo;
         }
 
