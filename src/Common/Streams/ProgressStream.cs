@@ -104,7 +104,7 @@ namespace NanoByte.Common.Streams
         private int Report(int count)
         {
             _cancellationToken.ThrowIfCancellationRequested();
-            _progress?.Report(CanSeek ? Position : Interlocked.Add(ref _counter, count));
+            _progress?.Report(Interlocked.Add(ref _counter, count));
             return count;
         }
     }
