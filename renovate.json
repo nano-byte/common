@@ -1,28 +1,29 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":disableDependencyDashboard"],
   "packageRules": [
     {
-      "packagePatterns": ["Test", "Assert", "Mock", "[Xx]unit", "Moq"],
+      "matchPackagePatterns": ["Test", "Assert", "Mock", "[Xx]unit", "Moq"],
       "groupName": "Testing deps",
       "automerge": true,
       "automergeType": "branch"
     },
     {
-      "packagePatterns": ["SourceLink"],
-      "packageNames": ["System.ValueTuple", "JetBrains.Annotations"],
+      "matchPackagePatterns": ["SourceLink"],
+      "matchPackageNames": ["System.ValueTuple", "JetBrains.Annotations"],
       "automerge": true,
       "automergeType": "branch"
     },
     {
-      "packagePatterns": ["^Microsoft\\.Extensions"],
+      "matchPackagePatterns": ["^Microsoft\\.Extensions"],
       "groupName": "Microsoft Extensions",
+      "automerge": true,
+      "automergeType": "branch",
       "separateMinorPatch": true
     },
     {
-      "packagePatterns": ["^Microsoft\\.Extensions"],
-      "updateTypes": ["major", "minor"],
+      "matchPackagePatterns": ["^Microsoft\\.Extensions"],
+      "matchUpdateTypes": ["major", "minor"],
       "enabled": false
     }
   ]
