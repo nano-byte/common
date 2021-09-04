@@ -25,7 +25,13 @@ namespace NanoByte.Common.Collections
             if (elements == null) throw new ArgumentNullException(nameof(elements));
             #endregion
 
-            list.AddRange(elements.Cast<TList>());
+            if (list is List<TList> x)
+                x.AddRange(elements.Cast<TList>());
+            else
+            {
+                foreach (var element in elements)
+                    list.Add(element);
+            }
         }
 
         /// <summary>
