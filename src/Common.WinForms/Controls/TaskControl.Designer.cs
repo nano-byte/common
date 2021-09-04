@@ -32,11 +32,11 @@ namespace NanoByte.Common.Controls
             this.labelOperation = new System.Windows.Forms.Label();
             this.progressBar = new NanoByte.Common.Controls.TaskProgressBar();
             this.progressLabel = new NanoByte.Common.Controls.TaskLabel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelOperation
             // 
+            this.labelOperation.AutoEllipsis = true;
             this.labelOperation.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelOperation.Location = new System.Drawing.Point(0, 0);
             this.labelOperation.Name = "labelOperation";
@@ -82,7 +82,5 @@ namespace NanoByte.Common.Controls
         private System.Windows.Forms.Label labelOperation;
         private Common.Controls.TaskProgressBar progressBar;
         private Common.Controls.TaskLabel progressLabel;
-        private System.Windows.Forms.ToolTip toolTip;
-
     }
 }

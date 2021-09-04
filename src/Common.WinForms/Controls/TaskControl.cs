@@ -21,11 +21,7 @@ namespace NanoByte.Common.Controls
         public string TaskName
         {
             get => labelOperation.Text;
-            set
-            {
-                labelOperation.Text = value;
-                toolTip.SetToolTip(labelOperation, labelOperation.Text); // Show as tooltip in case text is cut off
-            }
+            set => labelOperation.Text = value;
         }
 
         /// <summary>

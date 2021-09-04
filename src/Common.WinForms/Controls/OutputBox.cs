@@ -38,7 +38,6 @@ namespace NanoByte.Common.Controls
                 labelTitle = {Text = title},
                 textMessage = {Text = message.Replace("\n", Environment.NewLine)}
             };
-            outputBox.toolTip.SetToolTip(outputBox.labelTitle, outputBox.labelTitle.Text);
             // ReSharper disable once AccessToDisposedClosure
             outputBox.Shown += delegate { outputBox.SetForegroundWindow(); };
             outputBox.ShowDialog(owner);

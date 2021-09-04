@@ -33,7 +33,6 @@ namespace NanoByte.Common.Controls
             this.labelTitle = new System.Windows.Forms.Label();
             this.textMessage = new System.Windows.Forms.TextBox();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,6 +114,5 @@ namespace NanoByte.Common.Controls
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.TextBox textMessage;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
-        private System.Windows.Forms.ToolTip toolTip;
     }
 }
