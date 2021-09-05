@@ -12,7 +12,7 @@ using NanoByte.Common.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Uses <see cref="ILogger{TCategoryName}"/>, <see cref="ICredentialProvider"/> and <see cref="CancellationTokenSource"/> from <seealso cref="IServiceProvider"/> if available.
+    /// Uses <see cref="ILogger{TCategoryName}"/>, <see cref="ICredentialProvider"/> and <see cref="CancellationTokenSource"/> from <see cref="IServiceProvider"/> if available.
     /// Executes tasks silently and suppresses any questions.
     /// </summary>
     /// <seealso cref="ConfigurationCredentialProviderRegistration.ConfigureCredentials"/>

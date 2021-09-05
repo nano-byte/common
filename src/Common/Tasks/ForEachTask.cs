@@ -57,7 +57,7 @@ namespace NanoByte.Common.Tasks
     }
 
     /// <summary>
-    /// Provides a static factory method for <seealso cref="ForEachTask{T}"/> as an alternative to calling the constructor to exploit type inference.
+    /// Provides a static factory method for <see cref="ForEachTask{T}"/> as an alternative to calling the constructor to exploit type inference.
     /// </summary>
     public static class ForEachTask
     {

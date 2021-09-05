@@ -166,7 +166,7 @@ namespace NanoByte.Common.Storage
         /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
+        /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
         public static void SaveXml<T>(this T data, [Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
             where T : notnull
         {

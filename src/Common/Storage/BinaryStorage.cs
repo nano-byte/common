@@ -88,7 +88,7 @@ namespace NanoByte.Common.Storage
         /// <param name="path">The binary file to be written.</param>
         /// <exception cref="IOException">A problem occurred while writing the file.</exception>
         /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-        /// <remarks>Uses <seealso cref="AtomicWrite"/> internally.</remarks>
+        /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
         public static void SaveBinary<T>(this T data, [Localizable(false)] string path)
             where T : notnull
         {
