@@ -978,6 +978,10 @@ namespace NanoByte.Common.Storage
             {
                 return IsUnixFSFallback(path);
             }
+            catch (UnauthorizedAccessException)
+            {
+                return IsUnixFSFallback(path);
+            }
         }
 
         /// <summary>
