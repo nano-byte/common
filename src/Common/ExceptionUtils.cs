@@ -193,7 +193,7 @@ namespace NanoByte.Common
         /// <param name="action">The action to execute.</param>
         /// <param name="maxRetries">The maximum number of retries to attempt.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
-        public static void Retry<TException>(RetryAction action, int maxRetries = 2)
+        public static void Retry<TException>([InstantHandle] RetryAction action, int maxRetries = 2)
             where TException : Exception
         {
             #region Sanity checks
