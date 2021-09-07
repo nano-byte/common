@@ -160,7 +160,7 @@ namespace NanoByte.Common
         /// <param name="elements">The elements to apply the action for.</param>
         /// <param name="action">The action to apply to an element.</param>
         /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last exception is rethrown, other exceptions are logged")]
         public static void TryAny<T>([InstantHandle] this IEnumerable<T> elements, [InstantHandle] Action<T> action)
         {
             #region Sanity checks
@@ -285,7 +285,7 @@ namespace NanoByte.Common
         /// <param name="elements">The elements to apply the action for.</param>
         /// <param name="action">The action to apply to an element.</param>
         /// <exception cref="Exception">The exception thrown by <paramref name="action"/> for the last element of <paramref name="elements"/>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last excption is rethrown, other exceptions are logged")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Last exception is rethrown, other exceptions are logged")]
         public static async Task TryAnyAsync<T>(this IEnumerable<T> elements, Func<T, Task> action)
         {
             #region Sanity checks
