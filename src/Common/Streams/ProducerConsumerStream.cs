@@ -18,7 +18,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// The default for the maximum number of written but not read bytes the stream can buffer.
         /// </summary>
-        public const int DefaultBufferSize = 160 * 1024;
+        public const int DefaultBufferSize = 256 * 1024;
 
         /// <summary>Stores written but not yet read bytes as a ring buffer.</summary>
         private readonly ArrayBuffer<byte> _buffer;

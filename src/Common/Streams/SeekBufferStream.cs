@@ -19,7 +19,7 @@ namespace NanoByte.Common.Streams
         /// <summary>
         /// The default for the maximum number of bytes to buffer for seeking.
         /// </summary>
-        public const int DefaultBufferSize = 1024 * 1024;
+        public const int DefaultBufferSize = 256 * 1024;
 
         /// <summary>Stores already read bytes as a ring buffer.</summary>
         private readonly ArrayBuffer<byte> _buffer;
