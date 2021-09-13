@@ -2,8 +2,8 @@ PROJECT_NAME = "NanoByte.Common"
 PROJECT_NUMBER = $(VERSION)
 
 INPUT = . ../src
+STRIP_FROM_PATH = . ../src
 USE_MDFILE_AS_MAINPAGE = main.md
-STRIP_FROM_PATH = ../src
 RECURSIVE = YES
 EXCLUDE_PATTERNS = */UnitTests/* */Properties/* */obj/* */bin/* *.NativeMethods.cs */Backports/* */Samples/*
 PREDEFINED = NET

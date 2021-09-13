@@ -1,2 +1,2 @@
 //! \namespace NanoByte.Common.Tasks
-//! \brief Manage long-running tasks and track their progress. See: \ref md_tasks
+//! \brief \ref md_tasks "Task system" for managing long-running tasks and reporting progress to the user.
