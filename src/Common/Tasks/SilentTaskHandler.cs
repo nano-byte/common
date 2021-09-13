@@ -8,6 +8,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Executes tasks silently and suppresses any questions.
     /// </summary>
+    /// <remarks>This class is thread-safe.</remarks>
     public class SilentTaskHandler : TaskHandlerBase
     {
         public SilentTaskHandler()

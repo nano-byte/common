@@ -91,7 +91,7 @@ namespace NanoByte.Common
         }
 
         /// <summary>
-        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes after.
+        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes before.
         /// </summary>
         [Pure]
         public static bool EndsWith(this string value, string searchFor, [NotNullWhen(true)] out string? rest)

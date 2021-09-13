@@ -13,13 +13,12 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Common base class for <see cref="ITaskHandler"/> implementations.
     /// </summary>
+    /// <remarks>This class is thread-safe.</remarks>
     public abstract class TaskHandlerBase : ITaskHandler
     {
         /// <inheritdoc/>
         public virtual void Dispose()
-        {
-            CancellationTokenSource.Dispose();
-        }
+            => CancellationTokenSource.Dispose();
 
         /// <summary>
         /// Used to signal the <see cref="CancellationToken"/>.

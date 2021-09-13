@@ -14,11 +14,9 @@ using NanoByte.Common.Net;
 namespace NanoByte.Common.Tasks
 {
     /// <summary>
-    /// Used to execute and track <see cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
+    /// Used to run and track <see cref="ITask"/>s and ask the user questions. Specific implementations provide different kinds of user interfaces.
     /// </summary>
-    /// <remarks>
-    /// The methods may be called from a background thread. Implementations need to apply appropriate thread-synchronization to update UI elements.
-    /// </remarks>
+    /// <remarks>Implementations of this interface are thread-safe.</remarks>
     public interface ITaskHandler : IDisposable
     {
         /// <summary>
@@ -33,16 +31,12 @@ namespace NanoByte.Common.Tasks
         ICredentialProvider? CredentialProvider { get; }
 
         /// <summary>
-        /// Runs an <see cref="ITask"/> and tracks its progress. Returns once the task has been completed. The task may be executed on a different thread.
+        /// Runs an <see cref="ITask"/> and tracks its progress. Returns once the task has been completed.
         /// </summary>
         /// <param name="task">The task to be run. (<see cref="ITask.Run"/> or equivalent is called on it.)</param>
         /// <exception cref="OperationCanceledException">The user canceled the task.</exception>
         /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
         /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
-        /// <remarks>
-        /// This may be called multiple times concurrently but concurrent calls must not depend on each other.
-        /// The specific implementation of this method determines whether the tasks actually run concurrently or in sequence.
-        /// </remarks>
         void RunTask(ITask task);
 
         /// <summary>

@@ -11,6 +11,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Uses simple WinForms dialog boxes to inform the user about the progress of tasks.
     /// </summary>
+    /// <remarks>This class is thread-safe.</remarks>
     public class DialogTaskHandler : GuiTaskHandlerBase
     {
         private readonly Control _owner;

@@ -13,6 +13,7 @@ namespace NanoByte.Common.Tasks
     /// <summary>
     /// Informs the user about the progress of tasks and ask questions using ANSI console output.
     /// </summary>
+    /// <remarks>This class is thread-safe.</remarks>
     public class AnsiCliTaskHandler : CliTaskHandler
     {
         /// <inheritdoc/>

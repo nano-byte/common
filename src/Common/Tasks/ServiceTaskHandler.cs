@@ -15,6 +15,7 @@ namespace NanoByte.Common.Tasks
     /// Uses <see cref="ILogger{TCategoryName}"/>, <see cref="ICredentialProvider"/> and <see cref="CancellationTokenSource"/> from <see cref="IServiceProvider"/> if available.
     /// Executes tasks silently and suppresses any questions.
     /// </summary>
+    /// <remarks>This class is thread-safe.</remarks>
     /// <seealso cref="ConfigurationCredentialProviderRegistration.ConfigureCredentials"/>
     [CLSCompliant(false)]
     public class ServiceTaskHandler : SilentTaskHandler
