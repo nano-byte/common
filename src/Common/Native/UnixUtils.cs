@@ -173,7 +173,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         public static bool IsSymlink(
             [Localizable(false)] string path,
-            [NotNullWhen(true)] out string? target)
+            [MaybeNullWhen(false)] out string target)
         {
             if (IsSymlink(path ?? throw new ArgumentNullException(nameof(path))))
             {

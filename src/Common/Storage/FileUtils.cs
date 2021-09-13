@@ -820,7 +820,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink(
             [Localizable(false)] string path,
-            [NotNullWhen(true)] out string? target)
+            [MaybeNullWhen(false)] out string target)
         {
             if (UnixUtils.IsUnix)
             {
@@ -870,7 +870,7 @@ namespace NanoByte.Common.Storage
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink(
             this FileSystemInfo item,
-            [NotNullWhen(true)] out string? target)
+            [MaybeNullWhen(false)] out string target)
         {
             #region Sanity checks
             if (item == null) throw new ArgumentNullException(nameof(item));

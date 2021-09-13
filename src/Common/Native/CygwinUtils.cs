@@ -46,7 +46,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">Read access to the file was denied.</exception>
         public static bool IsSymlink(
             [Localizable(false)] string path,
-            [NotNullWhen(true)] out string? target)
+            [MaybeNullWhen(false)] out string target)
         {
             #region Sanity checks
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
