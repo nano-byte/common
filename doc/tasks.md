@@ -2,13 +2,13 @@
 
 The \ref NanoByte.Common.Tasks namespace provides a framework for managing long-running tasks and reporting progress to the user.
 
-### Tasks
+**Tasks**
 
 Tasks are represented using the \ref NanoByte.Common.Tasks.ITask "ITask" interface.
 
 This library provides general-purpose implementations such as \ref NanoByte.Common.Tasks.SimpleTask and \ref NanoByte.Common.Tasks.ForEachTask, as well as use-case specific ones such as \ref NanoByte.Common.Net.DownloadFile and \ref NanoByte.Common.Storage.ReadFile. You can also implement your own.
 
-### Handlers
+**Handlers**
 
 The \ref NanoByte.Common.Tasks.ITaskHandler "ITaskHandler" interface represents a user interface for reporting task progress as well as displaying prompts and outputs to the user. This library provides a number of implementations:
 
@@ -21,7 +21,7 @@ The \ref NanoByte.Common.Tasks.ITaskHandler "ITaskHandler" interface represents 
 Methods that wish to run `ITask`s should take an `ITaskHandler` as an input parameter.  
 To run an `ITask` pass it to the `ITaskHandler.RunTask()` method. This will then internally call `ITask.Run()` and take care of setting up progress tracking, cancellation, etc.. Additional methods such as `ITaskHandler.Ask()` can be used for user interaction.
 
-### Threading
+**Threading**
 
 `ITask`s provide no threading or asynchronicity concept by themselves. Their `.Run()` methods block until the tasks is complete. However, they can be cancelled from other threads via `CancellationToken`s.
 
@@ -29,7 +29,7 @@ To run an `ITask` pass it to the `ITaskHandler.RunTask()` method. This will then
 `ITaskHandler.RunTask()` blocks until the tasks is complete, however some implementations may perform the actual task execution on a separate thread.  
 `DialogTaskHandler.RunTask()` keeps the WinForms message loop pumping while a task is running, so calling this from the GUI thread will not freeze the GUI. However it does prevent user actions (other than canceling the task) via a modal dialog box.
 
-### Comparison with async/await
+**Comparison with async/await**
 
 While \ref NanoByte.Common.Tasks.ITask "ITask" has some superficial similarities with the `Task` class used by the C# `async`/`await` keywords, these two concepts should not be confused.
 
