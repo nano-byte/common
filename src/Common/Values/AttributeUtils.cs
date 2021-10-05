@@ -51,7 +51,7 @@ namespace NanoByte.Common.Values
         public static TType ConvertFromString<TType>(this string value)
             => (TType)TypeDescriptor
                      .GetConverter(typeof(TType))
-                     .ConvertFromInvariantString(value ?? throw new ArgumentNullException(nameof(value)));
+                     .ConvertFromInvariantString(value ?? throw new ArgumentNullException(nameof(value)))!;
 
         /// <summary>
         /// Uses the type converter for <typeparamref name="TType"/> (set by <see cref="TypeConverterAttribute"/>) to generate a string.

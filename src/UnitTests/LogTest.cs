@@ -23,7 +23,7 @@ namespace NanoByte.Common
         public void TestHandler()
         {
             var events = new List<(LogSeverity, string)>();
-            void Handler(LogSeverity severity, string message) => events!.Add((severity, message));
+            void Handler(LogSeverity severity, string message) => events.Add((severity, message));
 
             Log.Handler += Handler;
             try

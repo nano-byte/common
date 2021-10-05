@@ -136,7 +136,7 @@ namespace NanoByte.Common
         public static string? RemoveCharacters(this string? value, [InstantHandle] IEnumerable<char> characters)
             => value == null
                 ? null
-                : new string(value.Except(characters.Contains!).ToArray());
+                : new string(value.Except(characters.Contains).ToArray());
 
         /// <summary>
         /// Cuts off strings longer than <paramref name="maxLength"/> and replaces the rest with ellipsis (...).

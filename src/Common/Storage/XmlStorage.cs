@@ -113,6 +113,7 @@ namespace NanoByte.Common.Storage
         /// <param name="stream">The stream to write the encoded XML data to.</param>
         /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
         public static void SaveXml<T>(this T data, Stream stream, [Localizable(false)] string? stylesheet = null)
+            where T : notnull
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));

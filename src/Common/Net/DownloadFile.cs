@@ -99,7 +99,8 @@ namespace NanoByte.Common.Net
 
                     State = TaskState.Data;
                     ContentStarted = true;
-                    using var stream = new ProgressStream(response.GetResponseStream()!, new SynchronousProgress<long>(x => UnitsProcessed = x), CancellationToken);
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    using var stream = new ProgressStream(response.GetResponseStream(), new SynchronousProgress<long>(x => UnitsProcessed = x), CancellationToken);
                     if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
                     _callback(stream);
                     return;

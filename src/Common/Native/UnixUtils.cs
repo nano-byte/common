@@ -112,8 +112,8 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnixIOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void CreateHardlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
-            => new UnixFileInfo(targetPath ?? throw new ArgumentNullException(nameof(sourcePath)))
-               .CreateLink(sourcePath ?? throw new ArgumentNullException(nameof(targetPath)));
+            => new UnixFileInfo(targetPath ?? throw new ArgumentNullException(nameof(targetPath)))
+               .CreateLink(sourcePath ?? throw new ArgumentNullException(nameof(sourcePath)));
 
         /// <summary>
         /// Returns the Inode ID of a file.

@@ -42,7 +42,7 @@ namespace NanoByte.Common.Undo
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "The arguments are passed on to a different overload of the constructor")]
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Justification = "This is simply a comfort wrapper for extracting values from the event arguments")]
         public PropertyChangedCommand(object target, PropertyValueChangedEventArgs e)
-            : this(target, e.ChangedItem.PropertyDescriptor, e.OldValue, e.ChangedItem.Value)
+            : this(target, e.ChangedItem.PropertyDescriptor!, e.OldValue, e.ChangedItem.Value)
         {}
         #endregion
 
