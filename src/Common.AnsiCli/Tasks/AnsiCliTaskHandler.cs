@@ -128,7 +128,7 @@ namespace NanoByte.Common.Tasks
                 return;
             }
 
-            AnsiConsole.Render(AnsiCli.Title(title));
+            AnsiConsole.Write(AnsiCli.Title(title));
             if (message.EndsWith("\n")) AnsiConsole.Write(message);
             else AnsiConsole.WriteLine(message);
         }
@@ -147,14 +147,14 @@ namespace NanoByte.Common.Tasks
                 return;
             }
 
-            AnsiConsole.Render(AnsiCli.Title(title));
+            AnsiConsole.Write(AnsiCli.Title(title));
             if (typeof(T) == typeof(string) || typeof(Uri).IsAssignableFrom(typeof(T)))
             {
                 foreach (var entry in data)
                     AnsiConsole.WriteLine(entry?.ToString() ?? "");
             }
             else
-                AnsiConsole.Render(AnsiCli.Table(data));
+                AnsiConsole.Write(AnsiCli.Table(data));
         }
 
         /// <inheritdoc/>
@@ -171,8 +171,8 @@ namespace NanoByte.Common.Tasks
                 return;
             }
 
-            AnsiConsole.Render(AnsiCli.Title(title));
-            AnsiConsole.Render(AnsiCli.Tree(data));
+            AnsiConsole.Write(AnsiCli.Title(title));
+            AnsiConsole.Write(AnsiCli.Tree(data));
         }
     }
 }
