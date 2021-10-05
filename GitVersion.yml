@@ -13,3 +13,9 @@ branches:
     tag: rc
   hotfix:
     tag: rc
+
+  # Topic branches
+  renovate:
+    regex: renovate?[/-]
+    source-branches: ['master']
+    tag: alpha
