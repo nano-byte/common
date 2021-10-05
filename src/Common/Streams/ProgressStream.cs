@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Decorator that adds progress-reporting and cancellation to another <see cref="Stream"/>.
+    /// Decorator that adds progress-tracking and cancellation to another <see cref="Stream"/>.
     /// </summary>
     public sealed class ProgressStream : DelegatingStream
     {
@@ -34,11 +34,14 @@ namespace NanoByte.Common.Streams
 
         private long? _length;
 
-        /// <inheritdoc/>
-        public override long Length => _length ?? UnderlyingStream.Length;
+        /// <summary>
+        /// The length of the underlying stream if <see cref="Stream.CanSeek"/> is <c>true</c>. Otherwise, the number of bytes read or written so far.
+        /// This value can also be overriden by <see cref="SetLength"/>.
+        /// </summary>
+        public override long Length => _length ?? (UnderlyingStream.CanSeek ? UnderlyingStream.Length : _counter);
 
         /// <summary>
-        /// Overrides the <see cref="Stream.Length"/> provided by the underlying stream.
+        /// Overrides the value returned by <see cref="Length"/>. Does not affect the underlying stream.
         /// </summary>
         public override void SetLength(long value) => _length = value;
 
