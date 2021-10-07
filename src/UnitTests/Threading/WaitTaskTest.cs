@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NanoByte.Common.Tasks;
 using Xunit;
@@ -19,14 +20,13 @@ namespace NanoByte.Common.Threading
         {
             using var waitHandle = new ManualResetEvent(false);
             var task = new WaitTask("Test task", waitHandle);
-            var waitThread = new Thread(() => task.Run());
-            waitThread.Start();
+            var waitTask = Task.Run(() => task.Run());
 
             Thread.Sleep(100);
             task.State.Should().Be(TaskState.Started);
 
             waitHandle.Set();
-            waitThread.Join();
+            waitTask.Wait();
             task.State.Should().Be(TaskState.Complete);
         }
 
@@ -34,11 +34,10 @@ namespace NanoByte.Common.Threading
         public void TestCancel()
         {
             using var waitHandle = new ManualResetEvent(false);
-            // Monitor for a cancellation exception
             var task = new WaitTask("Test task", waitHandle);
             bool exceptionThrown = false;
             var cancellationTokenSource = new CancellationTokenSource();
-            var waitThread = new Thread(() =>
+            var waitTask = Task.Run(() =>
             {
                 try
                 {
@@ -51,10 +50,9 @@ namespace NanoByte.Common.Threading
             });
 
             // Start and then cancel the download
-            waitThread.Start();
             Thread.Sleep(100);
             cancellationTokenSource.Cancel();
-            waitThread.Join();
+            waitTask.Wait();
 
             exceptionThrown.Should().BeTrue(because: task.State.ToString());
         }

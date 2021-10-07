@@ -5,10 +5,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
+using NanoByte.Common.Threading;
 using Xunit;
 
 namespace NanoByte.Common.Net
@@ -62,7 +64,7 @@ namespace NanoByte.Common.Net
             var download = new DownloadFile(_server.FileUri, stream => stream.ReadAll());
             bool exceptionThrown = false;
             var cancellationTokenSource = new CancellationTokenSource();
-            var downloadThread = new Thread(() =>
+            var downloadTask = Task.Run(() =>
             {
                 try
                 {
@@ -75,10 +77,9 @@ namespace NanoByte.Common.Net
             });
 
             // Start and then cancel the download
-            downloadThread.Start();
             Thread.Sleep(100);
             cancellationTokenSource.Cancel();
-            downloadThread.Join();
+            downloadTask.Wait();
 
             exceptionThrown.Should().BeTrue(because: "Should throw OperationCanceledException");
         }
