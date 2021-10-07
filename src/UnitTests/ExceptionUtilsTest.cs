@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
@@ -209,35 +208,6 @@ namespace NanoByte.Common
                     await Task.Yield();
                     throw new IOException("Test exception");
                 }, maxRetries: 1)).Should().ThrowAsync<IOException>();
-        }
-
-        [Fact]
-        public void RetryStressTest()
-        {
-            var exceptions = new Exception[10];
-            var threads = new Thread[10];
-            for (int i = 0; i < threads.Length; i++)
-            {
-                int x = i;
-                threads[i] = new Thread(() =>
-                {
-                    try
-                    {
-                        ExceptionUtils.Retry<IOException>(
-                            delegate { throw new IOException("Test exception"); });
-                    }
-                    catch (Exception ex)
-                    {
-                        exceptions[x] = ex;
-                    }
-                });
-                threads[i].Start();
-            }
-
-            foreach (var thread in threads)
-                thread.Join();
-            foreach (var exception in exceptions)
-                exception.Should().BeOfType<IOException>();
         }
     }
 }
