@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
@@ -60,10 +61,10 @@ namespace NanoByte.Common.Storage
                 "d.nfo", // Specific file
                 subdirPath // Directory with implicit default wildcard
             }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
-                Path.Combine(tempDir, "a.txt"),
-                Path.Combine(tempDir, "b.txt"),
-                Path.Combine(tempDir, "d.nfo"),
-                Path.Combine(tempDir, subdirPath, "1.txt"));
+                Path.Combine(Environment.CurrentDirectory, "a.txt"),
+                Path.Combine(Environment.CurrentDirectory, "b.txt"),
+                Path.Combine(Environment.CurrentDirectory, "d.nfo"),
+                Path.Combine(Environment.CurrentDirectory, subdirPath, "1.txt"));
         }
     }
 }
