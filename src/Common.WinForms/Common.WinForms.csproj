@@ -29,21 +29,13 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net472'">
-    <Reference Include="TaskDialog">
-      <HintPath>..\..\lib\TaskDialog.dll</HintPath>
-    </Reference>
+    <Reference Include="TaskDialog" HintPath="..\..\lib\TaskDialog.dll" />
   </ItemGroup>
 
   <!-- Bundle 3rd party libs in NuGet package -->
   <ItemGroup Condition="'$(MSBuildRuntimeType)'!='Core'">
-    <None Include="..\..\lib\TaskDialog.*">
-      <Pack>true</Pack>
-      <PackagePath>lib/net45</PackagePath>
-    </None>
-    <None Include="..\..\lib\TaskDialog.*">
-      <Pack>true</Pack>
-      <PackagePath>lib/net472</PackagePath>
-    </None>
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />
+    <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net472" />
   </ItemGroup>
 
   <!-- Exclude files generated for Transifex -->
