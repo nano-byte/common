@@ -14,7 +14,7 @@ using System.Linq;
 using NanoByte.Common.Collections;
 #endif
 
-#if NET45 || NET472
+#if NET45 || NET461 || NET472
 using TaskDialog;
 #endif
 
