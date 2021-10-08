@@ -5,7 +5,7 @@
     <AssemblyName>NanoByte.Common.Samples.AnsiCli</AssemblyName>
     <RootNamespace>NanoByte.Common.Samples.AnsiCli</RootNamespace>
     <Description>Samples for NanoByte.Common.AnsiCli.</Description>
-    <TargetFrameworks>net472;net5.0</TargetFrameworks>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <IsPackable>False</IsPackable>

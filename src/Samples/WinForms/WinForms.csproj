@@ -5,7 +5,7 @@
     <AssemblyName>NanoByte.Common.Samples.WinForms</AssemblyName>
     <RootNamespace>NanoByte.Common.Samples.WinForms</RootNamespace>
     <Description>Samples for NanoByte.Common.WinForms.</Description>
-    <TargetFrameworks>net472;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
