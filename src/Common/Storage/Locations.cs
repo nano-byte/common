@@ -54,11 +54,29 @@ namespace NanoByte.Common.Storage
             return codeBase ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
         }
 
+        /// <summary>Thread-specific override for <see cref="PortableBase"/>.</summary>
+        [ThreadStatic]
+        private static string? _redirectBase;
+
+        /// <summary>
+        /// Temporarily overrides <see cref="IsPortable"/> and <see cref="PortableBase"/> for the current thread. Useful for unit tests.
+        /// </summary>
+        /// <param name="path">The <see cref="PortableBase"/> value to set.</param>
+        /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original values of <see cref="IsPortable"/> and <see cref="PortableBase"/>.</returns>
+        /// <exception cref="InvalidOperationException">This method has already been called on this thread.</exception>
+        public static IDisposable Redirect(string path)
+        {
+            _redirectBase = path;
+            return new Disposable(() => _redirectBase = null);
+        }
+
         /// <summary>
         /// The name of the flag file whose existence determines whether <see cref="IsPortable"/> is set to <c>true</c>.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
         public const string PortableFlagName = "_portable";
+
+        private static readonly bool _isPortable = File.Exists(Path.Combine(InstallBase, PortableFlagName));
 
         /// <summary>
         /// Indicates whether the application is currently operating in portable mode.
@@ -67,12 +85,14 @@ namespace NanoByte.Common.Storage
         ///   <para>Portable mode is activated by placing a file named <see cref="PortableFlagName"/> in <see cref="InstallBase"/>.</para>
         ///   <para>When portable mode is active files are stored and loaded from <see cref="PortableBase"/> instead of the user profile and system directories.</para>
         /// </remarks>
-        public static bool IsPortable { get; set; } = File.Exists(Path.Combine(InstallBase, PortableFlagName));
+        public static bool IsPortable
+            => _isPortable || _redirectBase != null;
 
         /// <summary>
-        /// The directory used for storing files if <see cref="IsPortable"/> is <c>true</c>. Defaults to <see cref="InstallBase"/>.
+        /// The directory used for storing files if <see cref="IsPortable"/> is <c>true</c>.
         /// </summary>
-        public static string PortableBase { get; set; } = InstallBase;
+        public static string PortableBase
+            => _redirectBase ?? InstallBase;
 
         /// <summary>
         /// Returns the value of an environment variable or a default value if it isn't set.
