@@ -10,7 +10,6 @@ using FluentAssertions;
 using NanoByte.Common.Storage;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
-using NanoByte.Common.Threading;
 using Xunit;
 
 namespace NanoByte.Common.Net
