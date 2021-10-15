@@ -252,9 +252,6 @@
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>Ihre Version von .NET unterstützt nicht TLS 1.2. Dies kann Verbindungsfehler beim Runterladen von Inhalt via HTTPS verursachen. Bitte führen Sie Windows Update aus, um die notwendigen Patches zu installieren.</value>
   </data>
-  <data name="UnableToLaunchBundled" xml:space="preserve">
-    <value>Die mitgelieferte {0}-Installation konnte nicht gestartet werden. Bitte installieren Sie die Anwendung neu.</value>
-  </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Die Assembly mit dem Namen "{0}" konnte nicht gefunden werden.</value>
   </data>

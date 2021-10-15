@@ -285,22 +285,7 @@ namespace NanoByte.Common.Native
         #endregion
 
         #region Mount point
-        private class Stat : ChildProcess
-        {
-            #region Singleton
-            public static readonly Stat Instance = new();
-
-            private Stat() {}
-            #endregion
-
-            protected override string AppBinary => "stat";
-
-            protected override string HandleStderr(string line) => throw new IOException(line);
-
-            public string FileSystem(string path) => Execute("--file-system", "--printf", "%T", path).TrimEnd('\n');
-
-            public string MountPoint(string path) => Execute("--printf", "%m", path).TrimEnd('\n');
-        }
+        private static readonly SubProcess _stat = new("stat");
 
         /// <summary>
         /// Determines the file system type a file or directory is stored on.
@@ -312,10 +297,10 @@ namespace NanoByte.Common.Native
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetFileSystem([Localizable(false)] string path)
         {
-            string fileSystem = Stat.Instance.FileSystem(path ?? throw new ArgumentNullException(nameof(path)));
+            string fileSystem = _stat.Run("--file-system", "--printf", "%T", path).TrimEnd('\n');
             if (fileSystem == "fuseblk")
             { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system
-                var fstabData = Syscall.getfsfile(Stat.Instance.MountPoint(path));
+                var fstabData = Syscall.getfsfile(_stat.Run("--printf", "%m", path).TrimEnd('\n'));
                 if (fstabData != null) return fstabData.fs_vfstype;
             }
             return fileSystem;

@@ -8,21 +8,15 @@ using Xunit;
 namespace NanoByte.Common.Streams
 {
     /// <summary>
-    /// Contains test methods for <see cref="ChildProcess"/>.
+    /// Contains test methods for <see cref="SubProcess"/>.
     /// </summary>
-    public class ChildProcessTest
+    public class SubProcessTest
     {
         [Fact]
         public void TestStringOutput()
         {
-            var control = new DummyControl();
-            string output = control.Execute();
+            string output = new SubProcess(WindowsUtils.IsWindows ? "attrib" : "ls").Run();
             output.Length.Should().BeGreaterThan(1);
-        }
-
-        private class DummyControl : ChildProcess
-        {
-            protected override string AppBinary => WindowsUtils.IsWindows ? "help" : "ls";
         }
     }
 }

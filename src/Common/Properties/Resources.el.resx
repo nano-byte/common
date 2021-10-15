@@ -234,9 +234,6 @@
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Το μήκος των στόχων πρέπει να είναι ίσο με το μήκος των παλιών τιμων</value>
   </data>
-  <data name="UnableToLaunchBundled" xml:space="preserve">
-    <value>Το πακέτο {0} εγκατάστασης δεν μπορεσε να ξεκινήσει. Παρακαλούμε εγκαταστήστε ξανά την εφαρμογή.</value>
-  </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Η διάταξη με το όνομα "{0}" δεν μπορεί να τοποθετηθει.</value>
   </data>

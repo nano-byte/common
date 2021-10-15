@@ -466,15 +466,6 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The bundled {0} installation could not be launched. Please reinstall the application..
-        /// </summary>
-        public static string UnableToLaunchBundled {
-            get {
-                return ResourceManager.GetString("UnableToLaunchBundled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The assembly named &quot;{0}&quot; could not be located..
         /// </summary>
         public static string UnableToLocateAssembly {
