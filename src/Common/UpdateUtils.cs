@@ -16,6 +16,27 @@ namespace NanoByte.Common
     public static class UpdateUtils
     {
         /// <summary>
+        /// Immediately invokes the specified <paramref name="action"/> with the <paramref name="value"/>. Useful for applying null-coalescing operator.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="action">The action to invoke.</param>
+        /// <example>
+        /// This allows you to write:
+        /// <code>
+        /// Uri? uri = nullableString?.To(x => new Uri(x);
+        /// </code>
+        /// Instead of:
+        /// <code>
+        /// Uri? uri = nullableString == null ? null : new Uri(nullableString);
+        /// </code>
+        /// </example>
+#if !NET20 && !NET40
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static TOut To<TIn, TOut>(this TIn value, [InstantHandle] Func<TIn, TOut> action)
+            => (action ?? throw new ArgumentNullException(nameof(action))).Invoke(value);
+
+        /// <summary>
         /// Updates a value and sets a boolean flag to <c>true</c> if the original value actually changed.
         /// </summary>
         /// <typeparam name="T">The type of data to update.</typeparam>

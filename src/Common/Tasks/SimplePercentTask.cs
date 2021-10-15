@@ -54,7 +54,7 @@ namespace NanoByte.Common.Tasks
         protected override void Execute()
         {
             CancellationTokenRegistration? RegisterCancellationCallBack()
-                => _cancellationCallback == null ? null : CancellationToken.Register(_cancellationCallback);
+                => _cancellationCallback?.To(CancellationToken.Register);
 
             UnitsTotal = 100;
             State = TaskState.Data;
