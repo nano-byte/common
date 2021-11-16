@@ -17,12 +17,7 @@ namespace NanoByte.Common.Native
     /// <remarks>Use <see cref="Mutex"/> or <see cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
     public sealed class AppMutex
     {
-        private readonly List<IntPtr> _handles;
-
-        private AppMutex(params IntPtr[] handles)
-        {
-            _handles = handles.ToList();
-        }
+        private readonly List<IntPtr> _handles = new();
 
         /// <summary>
         /// Creates or opens a mutex to signal that an application is running.
@@ -35,21 +30,27 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
-            if (!WindowsUtils.IsWindowsNT) return new AppMutex();
+            var appMutex = new AppMutex();
 
-            try
+            void TryAdd(string mutexName)
             {
-                return new AppMutex(
-                    WindowsMutex.Create(name, out _),
-                    WindowsMutex.Create("Global\\" + name, out _));
+                try
+                {
+                    appMutex._handles.Add(WindowsMutex.Create(mutexName, out _));
+                }
+                catch (Win32Exception ex)
+                {
+                    Log.Debug(ex);
+                }
             }
-            #region Error handling
-            catch (Win32Exception ex)
+
+            if (WindowsUtils.IsWindowsNT)
             {
-                Log.Warn(ex.Message);
-                return new AppMutex();
+                TryAdd(name);
+                TryAdd("Global\\" + name);
             }
-            #endregion
+
+            return appMutex;
         }
 
         /// <summary>
@@ -73,19 +74,23 @@ namespace NanoByte.Common.Native
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             #endregion
 
+            bool TryProbe(string mutexName)
+            {
+                try
+                {
+                    return WindowsMutex.Probe(mutexName);
+                }
+                catch (Win32Exception ex)
+                {
+                    Log.Debug(ex);
+                    return false;
+                }
+            }
+
             if (!WindowsUtils.IsWindowsNT) return false;
 
-            try
-            {
-                return WindowsMutex.Probe(name) || WindowsMutex.Probe("Global\\" + name);
-            }
-            #region Error handling
-            catch (Win32Exception ex)
-            {
-                Log.Warn(ex.Message);
-                return false;
-            }
-            #endregion
+            return TryProbe(name)
+                || TryProbe("Global\\" + name);
         }
     }
 }
