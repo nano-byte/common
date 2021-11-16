@@ -12,6 +12,19 @@ namespace NanoByte.Common.Controls
     public static class ControlExtensions
     {
         /// <summary>
+        /// Executes the given <paramref name="action"/> on the thread that owns this control and returns immediately.
+        /// </summary>
+        public static void BeginInvoke(this Control control, Action action)
+        {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+            #endregion
+
+            control.BeginInvoke(action);
+        }
+
+        /// <summary>
         /// Executes the given <paramref name="action"/> on the thread that owns this control and blocks until it is complete.
         /// </summary>
         public static void Invoke(this Control control, Action action)

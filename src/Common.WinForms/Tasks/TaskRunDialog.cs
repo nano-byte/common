@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
+using NanoByte.Common.Controls;
 using NanoByte.Common.Net;
 using NanoByte.Common.Properties;
 
@@ -79,11 +80,11 @@ namespace NanoByte.Common.Tasks
             {
                 Exception = ex;
                 _allowClose = true;
-                BeginInvoke(new Action(() =>
+                this.BeginInvoke(() =>
                 {
                     _allowClose = true;
                     Close();
-                }));
+                });
             }
         }
 

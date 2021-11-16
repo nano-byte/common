@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
+using NanoByte.Common.Controls;
 
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
@@ -196,11 +197,11 @@ namespace NanoByte.Common.Threading
 
             try
             {
-                form.Invoke(new Action(() =>
+                form.Invoke(() =>
                 {
                     Application.ExitThread();
                     form.Dispose();
-                }));
+                });
             }
             #region Error handling
             catch (InvalidOperationException ex)
