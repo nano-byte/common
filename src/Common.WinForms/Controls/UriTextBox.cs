@@ -104,7 +104,7 @@ namespace NanoByte.Common.Controls
         /// <returns>The dropped text.</returns>
         private static string GetDropText(DragEventArgs dragEventArgs)
         {
-            if (dragEventArgs.Data.GetDataPresent(DataFormats.FileDrop))
+            if (dragEventArgs.Data!.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = dragEventArgs.Data.GetData(DataFormats.FileDrop) as string[];
                 return (files ?? new string[0]).FirstOrDefault() ?? "";

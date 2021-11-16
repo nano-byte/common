@@ -31,17 +31,17 @@ namespace NanoByte.Common.Values.Design
         }
 
         /// <inheritdoc/>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc/>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
             => value is string stringValue
                 ? GetEnumFromString(stringValue)
-                : base.ConvertFrom(context, culture, value)!;
+                : base.ConvertFrom(context!, culture!, value)!;
 
         /// <inheritdoc/>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
             => value is Enum enumValue && destinationType == typeof(string)
                 ? enumValue.GetEnumAttributeValue((DescriptionAttribute attribute) => attribute.Description)
                 : base.ConvertTo(context, culture, value, destinationType)!;

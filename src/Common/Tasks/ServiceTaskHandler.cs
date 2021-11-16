@@ -65,16 +65,16 @@ namespace NanoByte.Common.Tasks
             switch (severity)
             {
                 case LogSeverity.Debug:
-                    _logger.LogDebug(message);
+                    _logger?.LogDebug(message);
                     break;
                 case LogSeverity.Info:
-                    _logger.LogInformation(message);
+                    _logger?.LogInformation(message);
                     break;
                 case LogSeverity.Warn:
-                    _logger.LogWarning(message);
+                    _logger?.LogWarning(message);
                     break;
                 case LogSeverity.Error:
-                    _logger.LogError(message);
+                    _logger?.LogError(message);
                     break;
             }
         }

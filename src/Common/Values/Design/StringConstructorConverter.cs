@@ -18,11 +18,11 @@ namespace NanoByte.Common.Values.Design
     public class StringConstructorConverter<T> : TypeConverter
     {
         /// <inheritdoc/>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc/>
-        public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         {
             if (value is string stringValue)
             {
@@ -39,11 +39,11 @@ namespace NanoByte.Common.Values.Design
                     }
                 }
             }
-            return base.ConvertFrom(context, culture, value);
+            return base.ConvertFrom(context!, culture!, value);
         }
 
         /// <inheritdoc/>
-        public override object? ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object? value, Type destinationType)
+        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
             => value != null && destinationType == typeof(string)
                 ? value.ToString()
                 : base.ConvertTo(context, culture, value, destinationType);

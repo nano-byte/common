@@ -24,35 +24,35 @@ namespace NanoByte.Common.Values.Design
     {
         #region Capabilities
         /// <inheritdoc/>
-        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) => true;
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext? context) => true;
 
         /// <inheritdoc/>
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context) => true;
+        public override bool GetPropertiesSupported(ITypeDescriptorContext? context) => true;
 
         /// <inheritdoc/>
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) =>
+        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext? context, object value, Attribute[]? attributes) =>
             TypeDescriptor.GetProperties(value, attributes);
 
         /// <inheritdoc/>
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) =>
-            destinationType == typeof(InstanceDescriptor) || base.CanConvertFrom(context, destinationType);
+        public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType) =>
+            destinationType == typeof(InstanceDescriptor) || base.CanConvertFrom(context, destinationType!);
 
         /// <inheritdoc/>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
             sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         #endregion
 
         #region Convert to
         /// <inheritdoc/>
-        public override object? ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         {
             if (culture == null) throw new ArgumentNullException(nameof(culture));
 
             if (destinationType == typeof(InstanceDescriptor))
-                return new InstanceDescriptor(GetConstructor(), GetArguments((T)value));
+                return new InstanceDescriptor(GetConstructor(), GetArguments((T)value!));
 
             if (destinationType == typeof(string))
-                return string.Join(GetElementSeparator(culture), GetValues((T)value, context, culture));
+                return string.Join(GetElementSeparator(culture), GetValues((T)value!, context, culture));
 
             return base.ConvertTo(context, culture, value, destinationType);
         }
@@ -60,11 +60,11 @@ namespace NanoByte.Common.Values.Design
 
         #region Convert from
         /// <inheritdoc/>
-        public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         {
             if (culture == null) throw new ArgumentNullException(nameof(culture));
 
-            if (value is not string sValue) return base.ConvertFrom(context, culture, value);
+            if (value is not string sValue) return base.ConvertFrom(context!, culture, value);
 
             sValue = sValue.Trim();
             if (sValue.Length == 0) return null;
@@ -77,7 +77,7 @@ namespace NanoByte.Common.Values.Design
 
         #region Create instance
         /// <inheritdoc/>
-        public override object CreateInstance(ITypeDescriptorContext context, IDictionary propertyValues) => GetObject(propertyValues);
+        public override object CreateInstance(ITypeDescriptorContext? context, IDictionary propertyValues) => GetObject(propertyValues);
         #endregion
 
         //--------------------//
@@ -104,10 +104,10 @@ namespace NanoByte.Common.Values.Design
         protected abstract object[] GetArguments(T value);
 
         /// <returns>The elements of <typeparamref name="T"/> converted to strings.</returns>
-        protected abstract string[] GetValues(T value, ITypeDescriptorContext context, CultureInfo culture);
+        protected abstract string[] GetValues(T? value, ITypeDescriptorContext? context, CultureInfo? culture);
 
         /// <returns>A new instance of <typeparamref name="T"/>.</returns>
-        protected abstract T GetObject(string[] values, CultureInfo culture);
+        protected abstract T GetObject(string[]? values, CultureInfo? culture);
 
         /// <returns>A new instance of <typeparamref name="T"/>.</returns>
         protected abstract T GetObject(IDictionary propertyValues);

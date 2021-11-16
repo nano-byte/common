@@ -33,27 +33,27 @@ namespace NanoByte.Common.Values.Design
         }
 
         /// <inheritdoc/>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
         /// <inheritdoc/>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
             => value is string stringValue
                 ? GetEnumFromString(stringValue)
-                : base.ConvertFrom(context, culture, value)!;
+                : base.ConvertFrom(context!, culture!, value)!;
 
         /// <inheritdoc/>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
             => value is Enum enumValue && destinationType == typeof(string)
                 ? enumValue.GetEnumAttributeValue((XmlEnumAttribute attribute) => attribute.Name ?? value.ToString()!)
                 : base.ConvertTo(context, culture, value, destinationType)!;
 
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) => true;
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) => true;
 
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) => true;
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) => true;
 
         private static readonly string[] _values = (from T value in Enum.GetValues(typeof(T)) select value.ConvertToString()).ToArray();
 
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) => new(_values);
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context) => new(_values);
     }
 }

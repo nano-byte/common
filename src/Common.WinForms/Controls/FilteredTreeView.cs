@@ -291,7 +291,7 @@ namespace NanoByte.Common.Controls
         private void treeView_AfterCheck(object? sender, TreeViewEventArgs e)
         {
             // Checking a parent will check all its children
-            foreach (var node in e.Node.Nodes.OfType<TreeNode>())
+            foreach (var node in e.Node!.Nodes.OfType<TreeNode>())
                 node.Checked = e.Node.Checked;
 
             // Maintain a list of currently checked bottom-level entries

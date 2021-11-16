@@ -49,7 +49,7 @@ namespace NanoByte.Common.Controls
 
         private void InputBox_DragDrop(object? sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data!.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = e.Data.GetData(DataFormats.FileDrop) as string[];
                 textInput.Text = (files ?? new string[0]).FirstOrDefault();
@@ -60,7 +60,7 @@ namespace NanoByte.Common.Controls
 
         private void InputBox_DragEnter(object? sender, DragEventArgs e)
         {
-            e.Effect = (e.Data.GetDataPresent(DataFormats.Text) || e.Data.GetDataPresent(DataFormats.FileDrop))
+            e.Effect = (e.Data!.GetDataPresent(DataFormats.Text) || e.Data.GetDataPresent(DataFormats.FileDrop))
                 ? DragDropEffects.Copy
                 : DragDropEffects.None;
         }
