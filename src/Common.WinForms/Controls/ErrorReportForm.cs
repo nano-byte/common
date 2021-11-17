@@ -114,26 +114,27 @@ namespace NanoByte.Common.Controls
 
             // Create WebClient for upload and register as component for automatic disposal
             var webClient = new WebClient();
-            if (components == null) components = new Container();
+            components ??= new Container();
             components.Add(webClient);
 
-            webClient.UploadFileCompleted += OnUploadFileCompleted;
-            webClient.UploadFileAsync(_uploadUri, GenerateReportFile());
-        }
+            webClient.UploadFileCompleted += (_, uploadEventArgs) =>
+            {
+                Cursor = Cursors.Default;
+                if (uploadEventArgs.Error == null)
+                {
+                    Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + EncodingUtils.Utf8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
+                    Close();
+                }
+                else
+                {
+                    Msg.Inform(this, uploadEventArgs.Error.Message, MsgSeverity.Error);
+                    commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
+                }
+            };
 
-        private void OnUploadFileCompleted(object uploadSender, UploadFileCompletedEventArgs uploadEventArgs)
-        {
-            Cursor = Cursors.Default;
-            if (uploadEventArgs.Error == null)
-            {
-                Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + EncodingUtils.Utf8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
-                Close();
-            }
-            else
-            {
-                Msg.Inform(this, uploadEventArgs.Error.Message, MsgSeverity.Error);
-                commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
-            }
+            using var tempFile = new TemporaryFile("error-report");
+            File.WriteAllText(tempFile, GenerateReport());
+            webClient.UploadFileAsync(_uploadUri, tempFile);
         }
 
         private void buttonCancel_Click(object? sender, EventArgs e) => Close();
@@ -144,21 +145,14 @@ namespace NanoByte.Common.Controls
         /// Generates a ZIP archive containing crash information.
         /// </summary>
         /// <returns></returns>
-        private string GenerateReportFile()
+        private string GenerateReport() => new ErrorReport
         {
-            var crashInfo = new ErrorReport
-            {
-                Application = AppInfo.Current,
-                OS = OSInfo.Current,
-                Exception = new ExceptionInfo(_exception),
-                Log = Log.Content,
-                Comments = commentBox.Text
-            };
-
-            string reportPath = Path.Combine(Path.GetTempPath(), Application.ProductName + " Error Report.xml");
-            crashInfo.SaveXml(reportPath);
-            return reportPath;
-        }
+            Application = AppInfo.Current,
+            OS = OSInfo.Current,
+            Exception = new ExceptionInfo(_exception),
+            Log = Log.Content,
+            Comments = commentBox.Text
+        }.ToXmlString();
         #endregion
     }
 }
