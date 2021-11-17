@@ -2,17 +2,22 @@
 // Licensed under the MIT License
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using NanoByte.Common.Info;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
+
+#if NET20 || NET40
+using System.ComponentModel;
+using System.Net;
+#else
+using System.Net.Http;
+#endif
 
 namespace NanoByte.Common.Controls
 {
@@ -107,6 +112,7 @@ namespace NanoByte.Common.Controls
         //--------------------//
 
         #region Buttons
+#if NET20 || NET40
         private void buttonReport_Click(object? sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
@@ -136,6 +142,30 @@ namespace NanoByte.Common.Controls
             File.WriteAllText(tempFile, GenerateReport());
             webClient.UploadFileAsync(_uploadUri, tempFile);
         }
+#else
+        private async void buttonReport_Click(object? sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = false;
+
+            try
+            {
+                using var httpClient = new HttpClient();
+                using var content = new MultipartFormDataContent {{new StringContent(GenerateReport()), "file", "error-report.xml"}};
+                using var response = await httpClient.PostAsync(_uploadUri, content);
+                response.EnsureSuccessStatusCode();
+
+                Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + await response.Content.ReadAsStringAsync(), MsgSeverity.Info);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                Msg.Inform(this, ex.Message, MsgSeverity.Error);
+                commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
+                Cursor = Cursors.Default;
+            }
+        }
+#endif
 
         private void buttonCancel_Click(object? sender, EventArgs e) => Close();
         #endregion
