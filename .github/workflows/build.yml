@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   windows:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       # Prepare
       - uses: actions/checkout@v2
