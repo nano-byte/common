@@ -104,10 +104,10 @@ namespace NanoByte.Common.Values.Design
         protected abstract object[] GetArguments(T value);
 
         /// <returns>The elements of <typeparamref name="T"/> converted to strings.</returns>
-        protected abstract string[] GetValues(T? value, ITypeDescriptorContext? context, CultureInfo? culture);
+        protected abstract string[] GetValues(T value, ITypeDescriptorContext? context, CultureInfo culture);
 
         /// <returns>A new instance of <typeparamref name="T"/>.</returns>
-        protected abstract T GetObject(string[]? values, CultureInfo? culture);
+        protected abstract T GetObject(string[] values, CultureInfo culture);
 
         /// <returns>A new instance of <typeparamref name="T"/>.</returns>
         protected abstract T GetObject(IDictionary propertyValues);
