@@ -5,11 +5,11 @@
     <AssemblyName>NanoByte.Common.AnsiCli</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Builds upon NanoByte.Common and adds ANSI console output.</Description>
-    <TargetFrameworks>net461;net472;netstandard2.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>net461;net472;netstandard2.1;net5.0;net6.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <NoWarn>$(NoWarn);CA1416</NoWarn><!-- Platform compatability -->
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1' Or '$(TargetFramework)'=='net5.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1' Or '$(TargetFramework)'=='net5.0' Or '$(TargetFramework)'=='net6.0'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>

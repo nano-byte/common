@@ -11,6 +11,7 @@ namespace NanoByte.Common.Controls
     /// </summary>
     public static class ControlExtensions
     {
+#if !NET6_0_OR_GREATER
         /// <summary>
         /// Executes the given <paramref name="action"/> on the thread that owns this control and returns immediately.
         /// </summary>
@@ -50,6 +51,7 @@ namespace NanoByte.Common.Controls
 
             return (T)control.Invoke(action);
         }
+#endif
 
         /// <summary>
         /// Returns the current DPI scaling factor relative to the default value of 96 DPI.

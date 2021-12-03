@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
       # Prepare
       - uses: actions/checkout@v2
@@ -80,7 +80,7 @@ jobs:
         id: gitversion
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.x'
+          dotnet-version: '6.0.x'
 
       # Build
       - name: Build (pre-release)

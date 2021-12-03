@@ -4,6 +4,7 @@
 using System;
 using System.Net;
 using NanoByte.Common.Info;
+#pragma warning disable 618
 
 namespace NanoByte.Common.Net
 {

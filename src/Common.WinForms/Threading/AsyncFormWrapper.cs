@@ -6,10 +6,13 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Forms;
-using NanoByte.Common.Controls;
 
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
+#endif
+
+#if !NET6_0_OR_GREATER
+using NanoByte.Common.Controls;
 #endif
 
 namespace NanoByte.Common.Threading

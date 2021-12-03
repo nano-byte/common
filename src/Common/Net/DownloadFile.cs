@@ -10,6 +10,7 @@ using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NanoByte.Common.Threading;
+#pragma warning disable 618
 
 namespace NanoByte.Common.Net
 {
