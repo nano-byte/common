@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Info
 {
@@ -93,11 +92,11 @@ namespace NanoByte.Common.Info
             var assemblyInfo = assembly.GetName();
             return new AppInfo
             {
-                Name = assembly.GetAttributeValue((AssemblyTitleAttribute x) => x.Title) ?? assemblyInfo.Name,
-                ProductName = assembly.GetAttributeValue((AssemblyProductAttribute x) => x.Product) ?? assemblyInfo.Name,
+                Name = assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? assemblyInfo.Name,
+                ProductName = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product ?? assemblyInfo.Name,
                 Version = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion?.GetLeftPartAtFirstOccurrence('+'), // trim Git commit hash
-                Description = assembly.GetAttributeValue((AssemblyDescriptionAttribute x) => x.Description),
-                Copyright = assembly.GetAttributeValue((AssemblyCopyrightAttribute x) => x.Copyright)
+                Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description,
+                Copyright = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright
             };
         }
     }

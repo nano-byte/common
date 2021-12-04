@@ -6,11 +6,11 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
-using NanoByte.Common.Values;
 
 namespace NanoByte.Common.Storage
 {
@@ -119,7 +119,8 @@ namespace NanoByte.Common.Storage
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
-            var serializer = new XmlSerializer(typeof(T));
+            var type = typeof(T);
+            var serializer = new XmlSerializer(type);
 
             var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
             {
@@ -133,7 +134,7 @@ namespace NanoByte.Common.Storage
             if (!string.IsNullOrEmpty(stylesheet))
                 xmlWriter.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet + "\"");
 
-            var qualifiedNames = GetQualifiedNames<T>();
+            var qualifiedNames = GetQualifiedNames(type);
             if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
             else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
 
@@ -146,12 +147,11 @@ namespace NanoByte.Common.Storage
             }
         }
 
-        private static XmlQualifiedName[] GetQualifiedNames<T>()
+        private static XmlQualifiedName[] GetQualifiedNames(Type type)
         {
-            var namespaceAttributes = AttributeUtils.GetAttributes<XmlNamespaceAttribute, T>();
-            var qualifiedNames = namespaceAttributes.Select(attr => attr.QualifiedName);
+            var qualifiedNames = type.GetCustomAttributes<XmlNamespaceAttribute>().Select(attr => attr.QualifiedName);
 
-            var rootAttribute = AttributeUtils.GetAttributes<XmlRootAttribute, T>().FirstOrDefault();
+            var rootAttribute = type.GetCustomAttribute<XmlRootAttribute>();
             if (rootAttribute != null) qualifiedNames = qualifiedNames.Concat(new[] {new XmlQualifiedName("", rootAttribute.Namespace)});
 
             return qualifiedNames.ToArray();

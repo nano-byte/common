@@ -36,6 +36,11 @@ The following types were introduced in .NET Framework 4.5 and are backported to 
 
 - `System.HashCode`
 
+The following extension methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
+
+- `.GetCustomAttribute<T>()`
+- `.GetCustomAttributes<T>()`
+
 **Platform attributes**
 
 The following types were introduced in .NET 5.0 and are backported to .NET Framework and .NET Standard:
