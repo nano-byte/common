@@ -108,18 +108,16 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Saves an object in an XML stream ending with a line break.
         /// </summary>
-        /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
         /// <param name="data">The object to be stored.</param>
         /// <param name="stream">The stream to write the encoded XML data to.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
-        public static void SaveXml<T>(this T data, Stream stream, [Localizable(false)] string? stylesheet = null)
-            where T : notnull
+        /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
+        public static void SaveXml(this object data, Stream stream, [Localizable(false)] string? stylesheet = null)
         {
             #region Sanity checks
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             #endregion
 
-            var type = typeof(T);
+            var type = data.GetType();
             var serializer = new XmlSerializer(type);
 
             var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
@@ -184,12 +182,10 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Returns an object as an XML string ending with a line break.
         /// </summary>
-        /// <typeparam name="T">The type of object to be saved in an XML string.</typeparam>
         /// <param name="data">The object to be stored.</param>
-        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
         /// <returns>A string containing the XML code.</returns>
-        public static string ToXmlString<T>(this T data, [Localizable(false)] string? stylesheet = null)
-            where T : notnull
+        public static string ToXmlString(this object data, [Localizable(false)] string? stylesheet = null)
         {
             using var stream = new MemoryStream();
             SaveXml(data, stream, stylesheet);
