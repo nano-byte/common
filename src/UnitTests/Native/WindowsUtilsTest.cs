@@ -10,11 +10,14 @@ namespace NanoByte.Common.Native
 {
     public class WindowsUtilsTest
     {
+        public WindowsUtilsTest()
+        {
+            Skip.IfNot(WindowsUtils.IsWindowsVista, "Can only test NTFS symlinks on Windows Vista or newer");
+        }
+
         [SkippableFact]
         public void TestCreateSymlinkFile()
         {
-            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
-
             using var tempDir = new TemporaryDirectory("unit-tests");
             string sourcePath = Path.Combine(tempDir, "symlink");
 
@@ -22,10 +25,9 @@ namespace NanoByte.Common.Native
             {
                 FileUtils.CreateSymlink(sourcePath, "target");
             }
-            catch (IOException)
+            catch (IOException) when (!WindowsUtils.IsAdministrator)
             {
-                Skip.IfNot(WindowsUtils.IsAdministrator, reason: "Cannot test NTFS symlinks due to insufficient privileges");
-                throw;
+                throw new SkipException("Cannot test NTFS symlinks due to insufficient privileges");
             }
 
             File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
@@ -36,8 +38,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestCreateSymlinkDirectory()
         {
-            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
-
             using var tempDir = new TemporaryDirectory("unit-tests");
             Directory.CreateDirectory(Path.Combine(tempDir, "target"));
             string sourcePath = Path.Combine(tempDir, "symlink");
@@ -46,10 +46,9 @@ namespace NanoByte.Common.Native
             {
                 FileUtils.CreateSymlink(sourcePath, "target");
             }
-            catch (IOException)
+            catch (IOException) when (!WindowsUtils.IsAdministrator)
             {
-                Skip.IfNot(WindowsUtils.IsAdministrator, reason: "Cannot test NTFS symlinks due to insufficient privileges");
-                throw;
+                throw new SkipException("Cannot test NTFS symlinks due to insufficient privileges");
             }
 
             Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
@@ -60,8 +59,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestIsNotSymlink()
         {
-            Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Can only test NTFS symlinks on Windows Vista or newer");
-
             using var tempFile = new TemporaryFile("unit-tests");
             WindowsUtils.IsSymlink(tempFile).Should().BeFalse();
         }

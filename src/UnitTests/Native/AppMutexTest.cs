@@ -12,14 +12,17 @@ namespace NanoByte.Common.Native
     /// </summary>
     public class AppMutexTest
     {
+        public AppMutexTest()
+        {
+            Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "AppMutexes are only available on the Windows NT platform.");
+        }
+
         /// <summary>
         /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create"/> and <see cref="AppMutex.Close"/> work correctly together.
         /// </summary>
         [SkippableFact]
         public void TestProbeCreateClose()
         {
-            Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "AppMutexes are only available on the Windows NT platform.");
-
             string mutexName = "unit-tests-" + Path.GetRandomFileName();
             AppMutex.Probe(mutexName).Should().BeFalse();
             var mutex = AppMutex.Create(mutexName);

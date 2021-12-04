@@ -10,11 +10,14 @@ namespace NanoByte.Common.Native
 {
     public class UnixUtilsTest
     {
+        public UnixUtilsTest()
+        {
+            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX APIs on Unixoid system");
+        }
+
         [SkippableFact]
         public void TestCreateSymlinkFile()
         {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
-
             using var tempDir = new TemporaryDirectory("unit-tests");
             File.WriteAllText(Path.Combine(tempDir, "target"), @"data");
             string sourcePath = Path.Combine(tempDir, "symlink");
@@ -31,8 +34,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestCreateSymlinkDirectory()
         {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
-
             using var tempDir = new TemporaryDirectory("unit-tests");
             Directory.CreateDirectory(Path.Combine(tempDir, "target"));
             string sourcePath = Path.Combine(tempDir, "symlink");
@@ -47,8 +48,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestIsNotSymlink()
         {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
-
             using var tempFile = new TemporaryFile("unit-tests");
             UnixUtils.IsSymlink(tempFile).Should().BeFalse();
         }
@@ -56,8 +55,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestSetExecutable()
         {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only set executable bits on Unixoid system");
-
             using var tempFile = new TemporaryFile("unit-tests");
             UnixUtils.IsExecutable(tempFile).Should().BeFalse(because: "File should not be executable yet");
 
@@ -72,8 +69,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestIsNotExecutable()
         {
-            Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test executable bits on Unixoid system");
-
             using var tempFile = new TemporaryFile("unit-tests");
             UnixUtils.IsExecutable(tempFile).Should().BeFalse();
         }

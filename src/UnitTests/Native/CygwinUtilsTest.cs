@@ -12,13 +12,18 @@ namespace NanoByte.Common.Native
 {
     public class CygwinUtilsTest
     {
+        public CygwinUtilsTest()
+        {
+            Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "Cygwin only exists on the Windows NT platform.");
+        }
+
         private static readonly byte[] _symlinkBytes
             = CygwinUtils.SymlinkCookie
                          .Concat(Encoding.Unicode.GetPreamble())
                          .Concat(Encoding.Unicode.GetBytes("target\0"))
                          .ToArray();
 
-        [Fact]
+        [SkippableFact]
         public void TestIsSymlinkNoMatch()
         {
             using var tempDir = new TemporaryDirectory("unit-tests");
@@ -33,8 +38,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestIsSymlinkMatch()
         {
-            Skip.IfNot(WindowsUtils.IsWindows, reason: "The 'system' file attribute can only be checked on the Windows platform.");
-
             using var tempDir = new TemporaryDirectory("unit-tests");
             string symlinkFile = Path.Combine(tempDir, "symlink");
             File.WriteAllBytes(symlinkFile, _symlinkBytes);
@@ -49,8 +52,6 @@ namespace NanoByte.Common.Native
         [SkippableFact]
         public void TestCreateSymlink()
         {
-            Skip.IfNot(WindowsUtils.IsWindows, reason: "The 'system' file attribute can only be set on the Windows platform.");
-
             using var tempDir = new TemporaryDirectory("unit-tests");
             string symlinkFile = Path.Combine(tempDir, "symlink");
             CygwinUtils.CreateSymlink(symlinkFile, "target");
