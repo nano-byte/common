@@ -90,8 +90,10 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is Windows (9x- or NT-based); <c>false</c> otherwise.
         /// </summary>
         public static bool IsWindows
-#if NET20 || NET40
-            => Environment.OSVersion.Platform == PlatformID.Win32Windows || Environment.OSVersion.Platform == PlatformID.Win32NT;
+#if NET
+            => OperatingSystem.IsWindows();
+#elif NET20 || NET40
+            => Environment.OSVersion.Platform is PlatformID.Win32Windows or PlatformID.Win32NT;
 #else
             => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #endif
@@ -101,40 +103,47 @@ namespace NanoByte.Common.Native
         /// </summary>
         public static bool IsWindowsNT
 #if NET20 || NET40
-            => Environment.OSVersion.Platform == PlatformID.Win32NT;
+            => Environment.OSVersion.Platform is PlatformID.Win32NT;
 #else
-            => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            => IsWindows;
+#endif
+
+        private static bool IsWindowsNTVersion(Version version)
+#if NET
+            => OperatingSystem.IsWindowsVersionAtLeast(version.Major, version.Minor, version.Build, version.Revision);
+#else
+            => IsWindowsNT && Environment.OSVersion.Version >= version;
 #endif
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows XP or newer; <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindowsXP => IsWindowsNT && Environment.OSVersion.Version >= new Version(5, 1);
+        public static bool IsWindowsXP => IsWindowsNTVersion(new(5, 1));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows Vista or newer; <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindowsVista => IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 0);
+        public static bool IsWindowsVista => IsWindowsNTVersion(new(6, 0));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 7 or newer; <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindows7 => IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 1);
+        public static bool IsWindows7 => IsWindowsNTVersion(new(6, 1));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 8 or newer; <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindows8 => IsWindowsNT && Environment.OSVersion.Version >= new Version(6, 2);
+        public static bool IsWindows8 => IsWindowsNTVersion(new(6, 2));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 10 or newer; <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindows10 => IsWindowsNT && Environment.OSVersion.Version >= new Version(10, 0);
+        public static bool IsWindows10 => IsWindowsNTVersion(new(10, 0));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 10 Anniversary Update (Redstone 1) or newer; <c>false</c> otherwise.
         /// </summary>
-        public static bool IsWindows10Redstone => IsWindowsNT && Environment.OSVersion.Version >= new Version(10, 0, 14393);
+        public static bool IsWindows10Redstone => IsWindowsNTVersion(new(10, 0, 14393));
 
         /// <summary>
         /// <c>true</c> if the current operating system supports UAC and it is enabled; <c>false</c> otherwise.
@@ -278,8 +287,7 @@ namespace NanoByte.Common.Native
         {
             get
             {
-                // Use high-accuracy kernel timing methods on NT
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                if (IsWindowsNT)
                 {
                     if (_performanceFrequency == 0)
                         SafeNativeMethods.QueryPerformanceFrequency(out _performanceFrequency);
@@ -287,8 +295,7 @@ namespace NanoByte.Common.Native
                     SafeNativeMethods.QueryPerformanceCounter(out long time);
                     return time / (double)_performanceFrequency;
                 }
-
-                return Environment.TickCount / 1000f;
+                else return Environment.TickCount / 1000f;
             }
         }
         #endregion

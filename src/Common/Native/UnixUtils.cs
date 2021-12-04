@@ -30,17 +30,21 @@ namespace NanoByte.Common.Native
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
         public static bool IsUnix
-            => Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == (PlatformID)128
-#if !NET20 && !NET40
-             || RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+#if NET
+            => OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD() || OperatingSystem.IsMacOS();
+#elif NET20 || NET40
+            => Environment.OSVersion.Platform is PlatformID.Unix or PlatformID.MacOSX or (PlatformID)128;
+#else
+            => RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #endif
-        ;
 
         /// <summary>
         /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
         public static bool IsMacOSX
-#if NET20 || NET40
+#if NET
+            => OperatingSystem.IsMacOS();
+#elif NET20 || NET40
             => IsUnix && OSName == "Darwin";
 #else
             => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
