@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using NanoByte.Common.Native;
@@ -136,7 +137,7 @@ namespace NanoByte.Common.Storage
             var directory = new DirectoryInfo(path);
             if (directory.Exists) return;
 
-            if (_secureSharedAcl != null)
+            if (WindowsUtils.IsWindowsNT && _secureSharedAcl != null)
             {
                 if (!WindowsUtils.IsAdministrator) throw new NotAdminException();
                 directory.Create(_secureSharedAcl);

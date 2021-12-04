@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Threading;
 using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
@@ -17,6 +18,7 @@ namespace NanoByte.Common.Native
     /// <remarks>
     /// See https://msdn.microsoft.com/en-us/library/windows/desktop/cc948910
     /// </remarks>
+    [SupportedOSPlatform("windows6.0")]
     public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposable
     {
         #region Win32 Error Codes

@@ -4,7 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Versioning;
 using System.Threading;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Threading
 {
@@ -28,7 +30,8 @@ namespace NanoByte.Common.Threading
             Log.Debug("Starting async thread: " + name);
 
             var thread = new Thread(execute) {Name = name};
-            thread.SetApartmentState(ApartmentState.STA); // Make COM work
+            if (WindowsUtils.IsWindows)
+                thread.SetApartmentState(ApartmentState.STA); // Make COM work
             thread.Start();
             return thread;
         }
@@ -57,6 +60,7 @@ namespace NanoByte.Common.Threading
         /// </summary>
         /// <param name="execute">The delegate to execute.</param>
         /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
+        [SupportedOSPlatform("windows")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
         public static void RunSta(Action execute)
         {
@@ -92,6 +96,7 @@ namespace NanoByte.Common.Threading
         /// <param name="execute">The delegate to execute.</param>
         /// <returns>The return value of <paramref name="execute"/></returns>
         /// <remarks>This is useful for code that needs to be executed in a Single-Threaded Apartment (e.g. WinForms code) when the calling thread is not set up to handle COM.</remarks>
+        [SupportedOSPlatform("windows")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on calling thread.")]
         public static T RunSta<T>(Func<T> execute)
         {

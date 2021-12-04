@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
@@ -351,6 +352,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Removes any custom ACLs a user may have set, restores ACL inheritance and sets the Administrators group as the owner.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public static void ResetAcl(this DirectoryInfo directoryInfo)
         {
             try
@@ -374,6 +376,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Helper method for <see cref="ResetAcl(DirectoryInfo)"/>.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         private static void ResetAcl<T>(Func<T> getAcl, Action<T> setAcl) where T : FileSystemSecurity
         {
             // Give ownership to administrators
@@ -393,6 +396,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Fixes ACLs that are not canonical (not ordered correctly).
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public static void CanonicalizeAcl(this ObjectSecurity objectSecurity)
         {
             #region Sanity checks
@@ -500,6 +504,7 @@ namespace NanoByte.Common.Storage
         }
 
         #region Helpers
+        [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
         private static void ToggleWriteProtectionUnix(this DirectoryInfo directory, bool enable)
         {
             try
@@ -529,6 +534,7 @@ namespace NanoByte.Common.Storage
             #endregion
         }
 
+        [SupportedOSPlatform("windows")]
         private static void ToggleWriteProtectionWinNT(this DirectoryInfo directory, bool enable)
         {
             try
@@ -988,6 +994,7 @@ namespace NanoByte.Common.Storage
         /// <summary>
         /// Checks whether a directory is located on a filesystem with support for executable bits by setting and reading them back.
         /// </summary>
+        [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
         private static bool IsUnixFSFallback([Localizable(false)] string path)
         {
             string probeFile = Path.Combine(path, ".unixfs_probe_" + Path.GetRandomFileName());

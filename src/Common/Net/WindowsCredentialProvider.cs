@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
+using System.Runtime.Versioning;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Net
@@ -11,6 +12,7 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Gets <see cref="NetworkCredential"/>s using the Windows Credential Manager.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public abstract class WindowsCredentialProvider : CredentialProviderBase
     {
         /// <inheritdoc/>

@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Text;
 using NanoByte.Common.Collections;
 using NanoByte.Common.Properties;
@@ -19,6 +20,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides access to Cygwin-related filesystem features. Cygwin provides Unix-like functionality on Windows systems.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public static class CygwinUtils
     {
         /// <summary>

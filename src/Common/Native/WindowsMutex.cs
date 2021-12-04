@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Native
@@ -11,6 +12,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides Windows-specific API calls for cross-process Mutexes.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public static partial class WindowsMutex
     {
         private const uint Synchronize = 0x00100000;

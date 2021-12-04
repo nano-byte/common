@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Runtime.Versioning;
 using Xunit;
 
 namespace NanoByte.Common.Native
@@ -8,6 +9,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Contains test methods for <see cref="WindowsRestartManager"/>.
     /// </summary>
+    [SupportedOSPlatform("windows6.0")]
     public class WindowsRestartManagerTest
     {
         public WindowsRestartManagerTest()

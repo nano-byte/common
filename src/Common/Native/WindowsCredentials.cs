@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace NanoByte.Common.Native
@@ -12,6 +13,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides an interface to the Windows Credentials API. Supported on Windows XP or newer.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public static partial class WindowsCredentials
     {
         /// <summary>

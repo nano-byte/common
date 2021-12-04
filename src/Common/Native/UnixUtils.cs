@@ -6,11 +6,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using Mono.Unix;
 using Mono.Unix.Native;
 using NanoByte.Common.Streams;
 
-#if !NET20 && !NET40
+#if !NET20 && !NET40 && !NET
 using System.Runtime.InteropServices;
 #endif
 
@@ -23,12 +24,14 @@ namespace NanoByte.Common.Native
     /// This class has a dependency on <c>Mono.Posix</c>.
     /// Make sure to check <see cref="IsUnix"/> before calling any methods in this class to avoid exceptions.
     /// </remarks>
+    [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
     public static class UnixUtils
     {
         #region OS
         /// <summary>
         /// <c>true</c> if the current operating system is a Unixoid system (e.g. Linux or MacOS X).
         /// </summary>
+        [SupportedOSPlatformGuard("linux"), SupportedOSPlatformGuard("freebsd"), SupportedOSPlatformGuard("macos")]
         public static bool IsUnix
 #if NET
             => OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD() || OperatingSystem.IsMacOS();
@@ -41,6 +44,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is MacOS X.
         /// </summary>
+        [SupportedOSPlatformGuard("macos")]
         public static bool IsMacOSX
 #if NET
             => OperatingSystem.IsMacOS();
@@ -53,6 +57,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if there is an X Server running or the current operating system is MacOS X.
         /// </summary>
+        [SupportedOSPlatformGuard("linux"), SupportedOSPlatformGuard("freebsd"), SupportedOSPlatformGuard("macos")]
         public static bool HasGui
             => IsUnix && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))
             || IsMacOSX;

@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using Microsoft.CSharp;
 using NanoByte.Common.Storage;
 
@@ -17,6 +18,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides helper methods for compiling .NET code at runtime.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public static class CompilerUtils
     {
         /// <summary>

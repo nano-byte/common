@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using FluentAssertions;
 using NanoByte.Common.Storage;
@@ -10,6 +11,7 @@ using Xunit;
 
 namespace NanoByte.Common.Native
 {
+    [SupportedOSPlatform("windows")]
     public class CygwinUtilsTest
     {
         public CygwinUtilsTest()

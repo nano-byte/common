@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Net;
+using System.Runtime.Versioning;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -14,6 +15,7 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Asks the user for <see cref="NetworkCredential"/>s using the Windows Credential Manager command-line interface.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class WindowsCliCredentialProvider : WindowsCredentialProvider
     {
         /// <inheritdoc/>

@@ -7,7 +7,7 @@
     <Description>Utility classes and data structures with an emphasis on integration with native Windows and Linux features, network and disk IO, advanced collections and undo/redo logic.</Description>
     <TargetFrameworks>net20;net40;net45;net461;net472;netstandard2.1;net5.0;net6.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
-    <NoWarn>$(NoWarn);CA1416;SYSLIB0014</NoWarn><!-- Platform compatability, deprecated WebClient -->
+    <NoWarn>$(NoWarn);SYSLIB0014</NoWarn><!-- deprecated WebClient -->
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

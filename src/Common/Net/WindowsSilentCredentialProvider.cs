@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Net;
+using System.Runtime.Versioning;
 using NanoByte.Common.Native;
 using NanoByte.Common.Properties;
 
@@ -14,6 +15,7 @@ namespace NanoByte.Common.Net
     /// <summary>
     /// Gets <see cref="NetworkCredential"/>s stored in the Windows Credential Manager. Does not show any UI for missing credentials.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class WindowsSilentCredentialProvider : WindowsCredentialProvider
     {
         /// <inheritdoc/>

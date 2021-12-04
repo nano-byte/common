@@ -2,12 +2,14 @@
 // Licensed under the MIT License
 
 using System.IO;
+using System.Runtime.Versioning;
 using FluentAssertions;
 using NanoByte.Common.Storage;
 using Xunit;
 
 namespace NanoByte.Common.Native
 {
+    [SupportedOSPlatform("windows6.0")]
     public class WindowsUtilsTest
     {
         public WindowsUtilsTest()

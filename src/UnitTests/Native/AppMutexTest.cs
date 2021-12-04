@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.IO;
+using System.Runtime.Versioning;
 using FluentAssertions;
 using Xunit;
 
@@ -10,6 +11,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Contains test methods for <see cref="AppMutex"/>.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class AppMutexTest
     {
         public AppMutexTest()

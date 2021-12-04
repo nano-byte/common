@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace NanoByte.Common.Native
 {
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows 7 or newer taskbar.
     /// </summary>
+    [SupportedOSPlatform("windows6.1")]
     [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global"), SuppressMessage("ReSharper", "UnusedMember.Local"), SuppressMessage("ReSharper", "EmptyGeneralCatchClause")]
     public static partial class WindowsTaskbar
     {

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -16,6 +17,7 @@ namespace NanoByte.Common.Native
     /// <summary>
     /// Provides helper methods and API calls specific to the Windows platform.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public static partial class WindowsUtils
     {
         #region Win32 Error Codes
@@ -52,11 +54,13 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that the requested application needs UAC elevation.
         /// </summary>
+        [SupportedOSPlatformGuard("windows")]
         internal const int Win32ErrorRequestedOperationRequiresElevation = 740;
 
         /// <summary>
         /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation was cancelled by the user.
         /// </summary>
+        [SupportedOSPlatformGuard("windows")]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
         internal const int Win32ErrorCancelled = 1223;
 
@@ -89,6 +93,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is Windows (9x- or NT-based); <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows")]
         public static bool IsWindows
 #if NET
             => OperatingSystem.IsWindows();
@@ -101,6 +106,7 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is a modern Windows version (NT-based); <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows")]
         public static bool IsWindowsNT
 #if NET20 || NET40
             => Environment.OSVersion.Platform is PlatformID.Win32NT;
@@ -108,6 +114,7 @@ namespace NanoByte.Common.Native
             => IsWindows;
 #endif
 
+        [SupportedOSPlatformGuard("windows")]
         private static bool IsWindowsNTVersion(Version version)
 #if NET
             => OperatingSystem.IsWindowsVersionAtLeast(version.Major, version.Minor, version.Build, version.Revision);
@@ -118,36 +125,43 @@ namespace NanoByte.Common.Native
         /// <summary>
         /// <c>true</c> if the current operating system is Windows XP or newer; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows5.1")]
         public static bool IsWindowsXP => IsWindowsNTVersion(new(5, 1));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows Vista or newer; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows6.0")]
         public static bool IsWindowsVista => IsWindowsNTVersion(new(6, 0));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 7 or newer; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows6.1")]
         public static bool IsWindows7 => IsWindowsNTVersion(new(6, 1));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 8 or newer; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows6.2")]
         public static bool IsWindows8 => IsWindowsNTVersion(new(6, 2));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 10 or newer; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows10.0")]
         public static bool IsWindows10 => IsWindowsNTVersion(new(10, 0));
 
         /// <summary>
         /// <c>true</c> if the current operating system is Windows 10 Anniversary Update (Redstone 1) or newer; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows10.0.14393")]
         public static bool IsWindows10Redstone => IsWindowsNTVersion(new(10, 0, 14393));
 
         /// <summary>
         /// <c>true</c> if the current operating system supports UAC and it is enabled; <c>false</c> otherwise.
         /// </summary>
+        [SupportedOSPlatformGuard("windows6.0")]
         public static bool HasUac => IsWindowsVista && RegistryUtils.GetDword(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", defaultValue: 1) == 1;
 
         /// <summary>
@@ -173,6 +187,7 @@ namespace NanoByte.Common.Native
         /// Indicates whether the current process is running in a GUI session (rather than, e.g., as a service or in an SSH session).
         /// Always <c>false</c> on non-Windows systems.
         /// </summary>
+        [SupportedOSPlatformGuard("windows")]
         public static bool IsGuiSession { get; } = IsWindows && DetectGuiSession();
 
         private static bool DetectGuiSession()
@@ -406,6 +421,7 @@ namespace NanoByte.Common.Native
         /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
         /// <exception cref="Win32Exception">Getting link information failed.</exception>
         /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
+        [SupportedOSPlatformGuard("windows6.0")]
         public static bool IsSymlink(
             [Localizable(false)] string path,
             [MaybeNullWhen(false)] out string target)
@@ -514,6 +530,7 @@ namespace NanoByte.Common.Native
         /// </summary>
         /// <param name="appID">The application ID to set.</param>
         /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
+        [SupportedOSPlatformGuard("windows6.1")]
         public static void SetCurrentProcessAppID(string appID)
         {
             #region Sanity checks

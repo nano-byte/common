@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading;
 using NanoByte.Common.Threading;
 
@@ -15,6 +16,7 @@ namespace NanoByte.Common.Native
     /// No-op on non-Windows platforms.
     /// </summary>
     /// <remarks>Use <see cref="Mutex"/> or <see cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
+    [SupportedOSPlatform("windows")]
     public sealed class AppMutex
     {
         private readonly List<IntPtr> _handles = new();
