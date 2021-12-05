@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Reflection;
 using JetBrains.Annotations;
 
 namespace NanoByte.Common.Values
@@ -13,15 +12,6 @@ namespace NanoByte.Common.Values
     /// </summary>
     public static class AttributeUtils
     {
-        /// <summary>
-        /// Gets the first <typeparamref name="TAttribute"/> attribute set on the <paramref name="target"/> enum value.
-        /// </summary>
-        [Pure]
-        public static TAttribute? GetEnumAttribute<TAttribute>(this Enum target) where TAttribute : Attribute
-            => target.GetType()
-                     .GetField((target ?? throw new ArgumentNullException(nameof(target))).ToString())
-                    ?.GetCustomAttribute<TAttribute>();
-
         /// <summary>
         /// Uses the type converter for <typeparamref name="TType"/> (set with <see cref="TypeConverterAttribute"/>) to parse a string.
         /// </summary>
