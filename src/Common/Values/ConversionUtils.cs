@@ -8,9 +8,9 @@ using JetBrains.Annotations;
 namespace NanoByte.Common.Values
 {
     /// <summary>
-    /// Provides helper methods for <see cref="Attribute"/>s.
+    /// Helpers for working with type converters.
     /// </summary>
-    public static class AttributeUtils
+    public static class ConversionUtils
     {
         /// <summary>
         /// Uses the type converter for <typeparamref name="TType"/> (set with <see cref="TypeConverterAttribute"/>) to parse a string.
