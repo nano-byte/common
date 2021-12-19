@@ -4,21 +4,20 @@
 using System.Diagnostics;
 using System.Reflection;
 
-namespace NanoByte.Common.Info
+namespace NanoByte.Common.Info;
+
+public class AppInfoTest
 {
-    public class AppInfoTest
+    [Fact]
+    public void GetsForCurrentLibrary()
     {
-        [Fact]
-        public void GetsForCurrentLibrary()
+        AppInfo.CurrentLibrary.Should().BeEquivalentTo(new AppInfo
         {
-            AppInfo.CurrentLibrary.Should().BeEquivalentTo(new AppInfo
-            {
-                Name = "NanoByte.Common.UnitTests",
-                ProductName = "NanoByte.Common.UnitTests",
-                Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion?.GetLeftPartAtFirstOccurrence('+'),
-                Description = "Unit test for NanoByte.Common.",
-                Copyright = "Copyright Bastian Eicher et al."
-            });
-        }
+            Name = "NanoByte.Common.UnitTests",
+            ProductName = "NanoByte.Common.UnitTests",
+            Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion?.GetLeftPartAtFirstOccurrence('+'),
+            Description = "Unit test for NanoByte.Common.",
+            Copyright = "Copyright Bastian Eicher et al."
+        });
     }
 }

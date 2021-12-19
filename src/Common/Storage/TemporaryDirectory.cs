@@ -1,56 +1,56 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common.Storage
+namespace NanoByte.Common.Storage;
+
+/// <summary>
+/// Disposable class to create a temporary directory and delete it again when disposed.
+/// </summary>
+public class TemporaryDirectory : IDisposable
 {
     /// <summary>
-    /// Disposable class to create a temporary directory and delete it again when disposed.
+    /// The fully qualified path of the temporary directory.
     /// </summary>
-    public class TemporaryDirectory : IDisposable
+    public string Path { get; }
+
+    public static implicit operator string(TemporaryDirectory dir) => dir.Path;
+
+    /// <summary>
+    /// Creates a uniquely named, empty temporary directory on disk.
+    /// </summary>
+    /// <param name="prefix">A short string the directory name should start with.</param>
+    /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="System.IO.Path.GetTempPath"/>.</exception>
+    /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
+    public TemporaryDirectory([Localizable(false)] string prefix)
     {
-        /// <summary>
-        /// The fully qualified path of the temporary directory.
-        /// </summary>
-        public string Path { get; }
+        #region Sanity checks
+        if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
+        #endregion
 
-        public static implicit operator string(TemporaryDirectory dir) => dir.Path;
+        Path = FileUtils.GetTempDirectory(prefix);
+    }
 
-        /// <summary>
-        /// Creates a uniquely named, empty temporary directory on disk.
-        /// </summary>
-        /// <param name="prefix">A short string the directory name should start with.</param>
-        /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="System.IO.Path.GetTempPath"/>.</exception>
-        /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
-        public TemporaryDirectory([Localizable(false)] string prefix)
+    /// <summary>
+    /// Deletes the temporary directory.
+    /// </summary>
+    public virtual void Dispose()
+    {
+        if (Directory.Exists(Path))
         {
-            #region Sanity checks
-            if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
+            try
+            {
+                // Write protection might prevent a directory from being deleted (especially on Unixoid systems)
+                FileUtils.DisableWriteProtection(Path);
+            }
+            #region Error handling
+            catch (IOException)
+            {}
+            catch (UnauthorizedAccessException)
+            {}
             #endregion
 
-            Path = FileUtils.GetTempDirectory(prefix);
-        }
-
-        /// <summary>
-        /// Deletes the temporary directory.
-        /// </summary>
-        public virtual void Dispose()
-        {
-            if (Directory.Exists(Path))
-            {
-                try
-                {
-                    // Write protection might prevent a directory from being deleted (especially on Unixoid systems)
-                    FileUtils.DisableWriteProtection(Path);
-                }
-                #region Error handling
-                catch (IOException)
-                {}
-                catch (UnauthorizedAccessException)
-                {}
-                #endregion
-
 #if DEBUG
-                Directory.Delete(Path, recursive: true);
+            Directory.Delete(Path, recursive: true);
 #else
                 try
                 {
@@ -65,7 +65,6 @@ namespace NanoByte.Common.Storage
                     Log.Warn(ex);
                 }
 #endif
-            }
         }
     }
 }

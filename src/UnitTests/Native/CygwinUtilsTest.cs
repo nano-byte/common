@@ -5,57 +5,56 @@ using System.Runtime.Versioning;
 using System.Text;
 using NanoByte.Common.Storage;
 
-namespace NanoByte.Common.Native
+namespace NanoByte.Common.Native;
+
+[SupportedOSPlatform("windows")]
+public class CygwinUtilsTest
 {
-    [SupportedOSPlatform("windows")]
-    public class CygwinUtilsTest
+    public CygwinUtilsTest()
     {
-        public CygwinUtilsTest()
-        {
-            Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "Cygwin only exists on the Windows NT platform.");
-        }
+        Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "Cygwin only exists on the Windows NT platform.");
+    }
 
-        private static readonly byte[] _symlinkBytes
-            = CygwinUtils.SymlinkCookie
-                         .Concat(Encoding.Unicode.GetPreamble())
-                         .Concat(Encoding.Unicode.GetBytes("target\0"))
-                         .ToArray();
+    private static readonly byte[] _symlinkBytes
+        = CygwinUtils.SymlinkCookie
+                     .Concat(Encoding.Unicode.GetPreamble())
+                     .Concat(Encoding.Unicode.GetBytes("target\0"))
+                     .ToArray();
 
-        [SkippableFact]
-        public void TestIsSymlinkNoMatch()
-        {
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            string normalFile = Path.Combine(tempDir, "normal");
-            FileUtils.Touch(normalFile);
+    [SkippableFact]
+    public void TestIsSymlinkNoMatch()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string normalFile = Path.Combine(tempDir, "normal");
+        FileUtils.Touch(normalFile);
 
-            CygwinUtils.IsSymlink(normalFile).Should().BeFalse();
+        CygwinUtils.IsSymlink(normalFile).Should().BeFalse();
 
-            CygwinUtils.IsSymlink(normalFile, out _).Should().BeFalse();
-        }
+        CygwinUtils.IsSymlink(normalFile, out _).Should().BeFalse();
+    }
 
-        [SkippableFact]
-        public void TestIsSymlinkMatch()
-        {
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            string symlinkFile = Path.Combine(tempDir, "symlink");
-            File.WriteAllBytes(symlinkFile, _symlinkBytes);
-            File.SetAttributes(symlinkFile, FileAttributes.System);
+    [SkippableFact]
+    public void TestIsSymlinkMatch()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string symlinkFile = Path.Combine(tempDir, "symlink");
+        File.WriteAllBytes(symlinkFile, _symlinkBytes);
+        File.SetAttributes(symlinkFile, FileAttributes.System);
 
-            CygwinUtils.IsSymlink(symlinkFile).Should().BeTrue();
+        CygwinUtils.IsSymlink(symlinkFile).Should().BeTrue();
 
-            CygwinUtils.IsSymlink(symlinkFile, out string? target).Should().BeTrue();
-            target.Should().Be("target");
-        }
+        CygwinUtils.IsSymlink(symlinkFile, out string? target).Should().BeTrue();
+        target.Should().Be("target");
+    }
 
-        [SkippableFact]
-        public void TestCreateSymlink()
-        {
-            using var tempDir = new TemporaryDirectory("unit-tests");
-            string symlinkFile = Path.Combine(tempDir, "symlink");
-            CygwinUtils.CreateSymlink(symlinkFile, "target");
+    [SkippableFact]
+    public void TestCreateSymlink()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string symlinkFile = Path.Combine(tempDir, "symlink");
+        CygwinUtils.CreateSymlink(symlinkFile, "target");
 
-            File.Exists(symlinkFile).Should().BeTrue();
-            File.ReadAllBytes(symlinkFile).Should().Equal(_symlinkBytes);
-        }
+        File.Exists(symlinkFile).Should().BeTrue();
+        File.ReadAllBytes(symlinkFile).Should().Equal(_symlinkBytes);
     }
 }

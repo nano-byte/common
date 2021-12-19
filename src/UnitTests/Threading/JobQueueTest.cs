@@ -1,21 +1,20 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common.Threading
+namespace NanoByte.Common.Threading;
+
+public class JobQueueTest
 {
-    public class JobQueueTest
+    [Fact]
+    public async Task RunsWork()
     {
-        [Fact]
-        public async Task RunsWork()
-        {
-            bool called = false;
+        bool called = false;
 
-            var workQueue = new JobQueue();
-            workQueue.Enqueue(() => called = true);
+        var workQueue = new JobQueue();
+        workQueue.Enqueue(() => called = true);
 
-            await Task.Delay(100);
+        await Task.Delay(100);
 
-            called.Should().BeTrue();
-        }
+        called.Should().BeTrue();
     }
 }

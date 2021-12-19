@@ -1,57 +1,56 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common.Collections
+namespace NanoByte.Common.Collections;
+
+/// <summary>
+/// Contains test methods for <see cref="MultiDictionary{TKey,TValue}"/>.
+/// </summary>
+public class MultiDictionaryTest
 {
-    /// <summary>
-    /// Contains test methods for <see cref="MultiDictionary{TKey,TValue}"/>.
-    /// </summary>
-    public class MultiDictionaryTest
+    [Fact]
+    public void TestAdd()
     {
-        [Fact]
-        public void TestAdd()
+        new MultiDictionary<string, int>
         {
-            new MultiDictionary<string, int>
-            {
-                {"A", 0},
-                {"B", 0},
-                {"A", 1},
-                {"B", 0}
-            }.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>>
-            {
-                ["A"] = new[] {0, 1},
-                ["B"] = new[] {0}
-            });
-        }
-
-        [Fact]
-        public void TestValues()
+            {"A", 0},
+            {"B", 0},
+            {"A", 1},
+            {"B", 0}
+        }.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>>
         {
-            new MultiDictionary<string, int>
-            {
-                {"A", 0},
-                {"B", 1},
-                {"C", 1}
-            }.Values.Should().BeEquivalentTo(new[] {0, 1, 1});
-        }
+            ["A"] = new[] {0, 1},
+            ["B"] = new[] {0}
+        });
+    }
 
-        [Fact]
-        public void TestRemove()
+    [Fact]
+    public void TestValues()
+    {
+        new MultiDictionary<string, int>
         {
-            var dict = new MultiDictionary<string, int>
-            {
-                {"A", 0},
-                {"A", 1},
-                {"B", 1}
-            };
+            {"A", 0},
+            {"B", 1},
+            {"C", 1}
+        }.Values.Should().BeEquivalentTo(new[] {0, 1, 1});
+    }
 
-            dict.Remove("A", 1).Should().BeTrue();
-            dict.Remove("B", 1).Should().BeTrue();
+    [Fact]
+    public void TestRemove()
+    {
+        var dict = new MultiDictionary<string, int>
+        {
+            {"A", 0},
+            {"A", 1},
+            {"B", 1}
+        };
 
-            dict.Remove("A", 2).Should().BeFalse();
-            dict.Remove("C", 0).Should().BeFalse();
+        dict.Remove("A", 1).Should().BeTrue();
+        dict.Remove("B", 1).Should().BeTrue();
 
-            dict.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>> {["A"] = new[] {0}});
-        }
+        dict.Remove("A", 2).Should().BeFalse();
+        dict.Remove("C", 0).Should().BeFalse();
+
+        dict.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>> {["A"] = new[] {0}});
     }
 }

@@ -1,21 +1,20 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common.Undo
+namespace NanoByte.Common.Undo;
+
+/// <summary>
+/// A executable command with an undo function.
+/// </summary>
+public interface IUndoCommand
 {
     /// <summary>
-    /// A executable command with an undo function.
+    /// Performs the desired action.
     /// </summary>
-    public interface IUndoCommand
-    {
-        /// <summary>
-        /// Performs the desired action.
-        /// </summary>
-        void Execute();
+    void Execute();
 
-        /// <summary>
-        /// Undoes changes made by <see cref="Execute"/>.
-        /// </summary>
-        void Undo();
-    }
+    /// <summary>
+    /// Undoes changes made by <see cref="Execute"/>.
+    /// </summary>
+    void Undo();
 }

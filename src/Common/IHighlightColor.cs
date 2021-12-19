@@ -3,16 +3,15 @@
 
 using System.Drawing;
 
-namespace NanoByte.Common
+namespace NanoByte.Common;
+
+/// <summary>
+/// An object that can be highlighted with a specific color in graphical representations.
+/// </summary>
+public interface IHighlightColor
 {
     /// <summary>
-    /// An object that can be highlighted with a specific color in graphical representations.
+    /// The color to highlight this object with in graphical representations. <see cref="Color.Empty"/> for no highlighting.
     /// </summary>
-    public interface IHighlightColor
-    {
-        /// <summary>
-        /// The color to highlight this object with in graphical representations. <see cref="Color.Empty"/> for no highlighting.
-        /// </summary>
-        Color HighlightColor { get; }
-    }
+    Color HighlightColor { get; }
 }

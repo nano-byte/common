@@ -1,42 +1,41 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common.Undo
+namespace NanoByte.Common.Undo;
+
+/// <summary>
+/// Contains test methods for <see cref="CommandCollector"/>.
+/// </summary>
+public class CommandCollectorTest
 {
-    /// <summary>
-    /// Contains test methods for <see cref="CommandCollector"/>.
-    /// </summary>
-    public class CommandCollectorTest
+    private class MockCommand : IUndoCommand
     {
-        private class MockCommand : IUndoCommand
-        {
-            public bool Executed { get; private set; }
+        public bool Executed { get; private set; }
 
-            public void Execute() => Executed = true;
+        public void Execute() => Executed = true;
 
-            public void Undo() => Executed = false;
-        }
+        public void Undo() => Executed = false;
+    }
 
-        /// <summary>
-        /// Makes sure <see cref="CommandCollector"/> correctly collects and composes commands.
-        /// </summary>
-        [Fact]
-        public void Test()
-        {
-            var collector = new CommandCollector();
+    /// <summary>
+    /// Makes sure <see cref="CommandCollector"/> correctly collects and composes commands.
+    /// </summary>
+    [Fact]
+    public void Test()
+    {
+        var collector = new CommandCollector();
 
-            var command1 = new MockCommand();
-            collector.Execute(command1);
-            command1.Executed.Should().BeTrue(because: "Should execute while collecting");
-            var command2 = new MockCommand();
-            collector.Execute(command2);
-            command2.Executed.Should().BeTrue(because: "Should execute while collecting");
+        var command1 = new MockCommand();
+        collector.Execute(command1);
+        command1.Executed.Should().BeTrue(because: "Should execute while collecting");
+        var command2 = new MockCommand();
+        collector.Execute(command2);
+        command2.Executed.Should().BeTrue(because: "Should execute while collecting");
 
-            var composite = collector.BuildComposite();
-            composite.Execute();
-            composite.Undo();
-            command1.Executed.Should().BeFalse(because: "Should undo as part of composite");
-            command2.Executed.Should().BeFalse(because: "Should undo as part of composite");
-        }
+        var composite = collector.BuildComposite();
+        composite.Execute();
+        composite.Undo();
+        command1.Executed.Should().BeFalse(because: "Should undo as part of composite");
+        command2.Executed.Should().BeFalse(because: "Should undo as part of composite");
     }
 }

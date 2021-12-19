@@ -1,24 +1,23 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-namespace NanoByte.Common.Streams
+namespace NanoByte.Common.Streams;
+
+/// <summary>
+/// Decorator that prevents a stream from being seeked.
+/// </summary>
+public class NonSeekableStream : DelegatingStream
 {
-    /// <summary>
-    /// Decorator that prevents a stream from being seeked.
-    /// </summary>
-    public class NonSeekableStream : DelegatingStream
-    {
-        public NonSeekableStream(Stream underlyingStream)
-            : base(underlyingStream)
-        {}
+    public NonSeekableStream(Stream underlyingStream)
+        : base(underlyingStream)
+    {}
 
-        /// <inheritdoc/>
-        public override bool CanSeek => false;
+    /// <inheritdoc/>
+    public override bool CanSeek => false;
 
-        /// <inheritdoc/>
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+    /// <inheritdoc/>
+    public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
-        /// <inheritdoc />
-        public override long Position { get => base.Position; set => throw new NotSupportedException(); }
-    }
+    /// <inheritdoc />
+    public override long Position { get => base.Position; set => throw new NotSupportedException(); }
 }
