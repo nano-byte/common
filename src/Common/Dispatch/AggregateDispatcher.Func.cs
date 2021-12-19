@@ -35,7 +35,7 @@ namespace NanoByte.Common.Dispatch
             if (function == null) throw new ArgumentNullException(nameof(function));
             #endregion
 
-            _delegates.Add(value => !(value is TSpecific specificValue) ? null : function(specificValue));
+            _delegates.Add(value => value is not TSpecific specificValue ? null : function(specificValue));
 
             return this;
         }
