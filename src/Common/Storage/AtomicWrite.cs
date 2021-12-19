@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.IO;
 using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Storage

@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using FluentAssertions;
-using Xunit;
-
 namespace NanoByte.Common.Collections
 {
     /// <summary>

@@ -1,9 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using NanoByte.Common;
 using NanoByte.Common.Tasks;
 

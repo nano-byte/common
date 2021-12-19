@@ -2,9 +2,6 @@
 // Licensed under the MIT License
 
 #if NET20 || NET40
-using System.Collections.Generic;
-using System.Linq;
-
 namespace System.Reflection
 {
     public static class CustomAttributeExtensions

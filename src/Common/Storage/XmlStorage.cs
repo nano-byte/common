@@ -1,15 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
-using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 
 namespace NanoByte.Common.Storage

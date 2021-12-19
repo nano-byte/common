@@ -1,11 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Collections;
-using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 

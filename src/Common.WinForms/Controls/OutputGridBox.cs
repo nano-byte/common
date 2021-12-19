@@ -1,12 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Controls

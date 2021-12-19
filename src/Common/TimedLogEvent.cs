@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Diagnostics;
 
 #if !NET20 && !NET40

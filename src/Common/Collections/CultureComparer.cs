@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace NanoByte.Common.Collections

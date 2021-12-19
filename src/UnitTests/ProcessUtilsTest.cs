@@ -2,10 +2,7 @@
 // Licensed under the MIT License
 
 using System.Diagnostics;
-using System.IO;
-using FluentAssertions;
 using NanoByte.Common.Storage;
-using Xunit;
 
 #if NETFRAMEWORK
 using NanoByte.Common.Native;

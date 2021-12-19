@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.ComponentModel;
-
 namespace NanoByte.Common
 {
     /// <summary>

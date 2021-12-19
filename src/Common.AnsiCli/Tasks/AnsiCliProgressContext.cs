@@ -1,10 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Threading.Tasks;
-using Spectre.Console;
-
 namespace NanoByte.Common.Tasks
 {
     /// <summary>

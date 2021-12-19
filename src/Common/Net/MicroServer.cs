@@ -1,14 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Threading;
 

@@ -1,10 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using FluentAssertions;
 using NanoByte.Common.Storage;
-using Xunit;
 
 namespace NanoByte.Common.Collections
 {

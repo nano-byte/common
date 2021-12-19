@@ -1,12 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using JetBrains.Annotations;
-
-#if NET20
-using System.Collections.Generic;
-#else
+#if !NET20
 using System.Collections.Concurrent;
 #endif
 

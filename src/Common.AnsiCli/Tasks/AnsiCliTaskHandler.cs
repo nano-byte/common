@@ -1,12 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using NanoByte.Common.Collections;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
-using Spectre.Console;
 
 namespace NanoByte.Common.Tasks
 {

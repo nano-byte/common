@@ -2,12 +2,7 @@
 // Licensed under the MIT License
 
 #if !NET20 && !NET40
-using System;
-using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using NanoByte.Common.Collections;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Streams
 {

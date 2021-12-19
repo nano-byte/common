@@ -1,19 +1,12 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
 using NanoByte.Common.Info;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
 using NanoByte.Common.Storage;
 
 #if NET20 || NET40
-using System.ComponentModel;
 using System.Net;
 #else
 using System.Net.Http;

@@ -28,5 +28,9 @@
   <ItemGroup Condition="'$(TargetFramework)'!='net6.0-windows'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
+  <!-- Global usings -->
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
 
 </Project>

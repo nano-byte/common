@@ -1,10 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Storage

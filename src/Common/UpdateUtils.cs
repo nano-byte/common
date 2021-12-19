@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using JetBrains.Annotations;
-
 #if !NET20 && !NET40
 using System.Runtime.CompilerServices;
 #endif

@@ -1,13 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.IO;
-using System.Threading;
-using FluentAssertions;
-using Moq;
-using Xunit;
-
 namespace NanoByte.Common.Streams
 {
     /// <summary>

@@ -2,9 +2,6 @@
 // Licensed under the MIT License
 
 #if NET20
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 namespace System.Threading
 {
     /// <summary>

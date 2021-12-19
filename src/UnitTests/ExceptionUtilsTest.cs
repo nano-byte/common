@@ -1,13 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
 
 #if NETFRAMEWORK
 using NanoByte.Common.Native;

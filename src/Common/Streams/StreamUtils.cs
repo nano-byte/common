@@ -1,15 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Reflection;
 using System.Text;
-using JetBrains.Annotations;
-using NanoByte.Common.Collections;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Streams
 {

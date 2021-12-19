@@ -1,10 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using FluentAssertions;
-using Xunit;
-
 namespace NanoByte.Common
 {
     public class UnixTimeTest

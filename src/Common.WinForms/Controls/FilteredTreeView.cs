@@ -1,16 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using NanoByte.Common.Collections;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {

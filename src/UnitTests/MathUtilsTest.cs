@@ -2,8 +2,6 @@
 // Licensed under the MIT License
 
 using System.Drawing;
-using FluentAssertions;
-using Xunit;
 
 namespace NanoByte.Common
 {

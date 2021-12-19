@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-
 namespace NanoByte.Common.Tasks
 {
     /// <summary>

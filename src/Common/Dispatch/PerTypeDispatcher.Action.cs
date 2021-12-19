@@ -1,12 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Dispatch
 {

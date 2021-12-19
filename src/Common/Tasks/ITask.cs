@@ -1,11 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.IO;
 using System.Net;
-using System.Threading;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks

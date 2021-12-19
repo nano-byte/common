@@ -1,11 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
 using Newtonsoft.Json;
 

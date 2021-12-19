@@ -1,15 +1,12 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Net
 {

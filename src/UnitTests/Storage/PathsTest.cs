@@ -1,12 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.IO;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
 namespace NanoByte.Common.Storage
 {
     /// <summary>

@@ -1,12 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
 using NanoByte.Common.Tasks;
-using Xunit;
 
 namespace NanoByte.Common.Threading
 {

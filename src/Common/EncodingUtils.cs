@@ -1,10 +1,8 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Security.Cryptography;
 using System.Text;
-using JetBrains.Annotations;
 
 namespace NanoByte.Common
 {

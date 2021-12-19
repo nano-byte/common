@@ -2,9 +2,6 @@
 // Licensed under the MIT License
 
 #if !NETFRAMEWORK
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NanoByte.Common.Net;

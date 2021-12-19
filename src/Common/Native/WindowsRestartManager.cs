@@ -1,13 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Runtime.Versioning;
-using System.Threading;
-using NanoByte.Common.Properties;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Native

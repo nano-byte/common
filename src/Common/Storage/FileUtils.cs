@@ -1,24 +1,12 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
-using JetBrains.Annotations;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
-
-#if NET20
-using NanoByte.Common.Values;
-#endif
 
 namespace NanoByte.Common.Storage
 {

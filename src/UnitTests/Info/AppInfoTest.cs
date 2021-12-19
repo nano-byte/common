@@ -3,8 +3,6 @@
 
 using System.Diagnostics;
 using System.Reflection;
-using FluentAssertions;
-using Xunit;
 
 namespace NanoByte.Common.Info
 {

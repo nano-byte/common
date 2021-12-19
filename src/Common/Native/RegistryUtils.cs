@@ -1,15 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Runtime.Versioning;
 using System.Security;
-using JetBrains.Annotations;
 using Microsoft.Win32;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Native
 {

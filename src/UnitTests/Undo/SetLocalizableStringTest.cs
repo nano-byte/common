@@ -2,9 +2,6 @@
 // Licensed under the MIT License
 
 using System.Globalization;
-using FluentAssertions;
-using NanoByte.Common.Collections;
-using Xunit;
 
 namespace NanoByte.Common.Undo
 {

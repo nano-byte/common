@@ -1,9 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Net;
-using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Net
 {

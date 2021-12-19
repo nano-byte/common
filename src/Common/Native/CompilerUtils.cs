@@ -2,12 +2,7 @@
 // Licensed under the MIT License
 
 #if NETFRAMEWORK
-using System;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using Microsoft.CSharp;

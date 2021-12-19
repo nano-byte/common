@@ -1,12 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Controls
 {

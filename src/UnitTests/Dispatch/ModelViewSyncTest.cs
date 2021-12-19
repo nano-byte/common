@@ -1,13 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using NanoByte.Common.Collections;
-using Xunit;
-
 namespace NanoByte.Common.Dispatch
 {
     /// <summary>

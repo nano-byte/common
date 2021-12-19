@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Windows.Forms;
-
 namespace NanoByte.Common.Controls
 {
     /// <summary>

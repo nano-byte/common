@@ -1,16 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
-using System.Windows.Forms;
 using NanoByte.Common.Net;
-using NanoByte.Common.Properties;
-
-#if !NET6_0_OR_GREATER
-using NanoByte.Common.Controls;
-#endif
 
 namespace NanoByte.Common.Tasks
 {

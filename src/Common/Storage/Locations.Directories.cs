@@ -1,11 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.IO;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Storage
 {

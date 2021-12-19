@@ -2,9 +2,7 @@
 // Licensed under the MIT License
 
 using System.Globalization;
-using FluentAssertions;
 using NanoByte.Common.Native;
-using Xunit;
 
 namespace NanoByte.Common.Collections
 {

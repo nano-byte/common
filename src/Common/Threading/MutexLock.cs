@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Threading;
-
 namespace NanoByte.Common.Threading
 {
     /// <summary>

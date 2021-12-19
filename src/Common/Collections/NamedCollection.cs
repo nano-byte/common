@@ -1,13 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
-using NanoByte.Common.Properties;
 
 namespace NanoByte.Common.Collections
 {

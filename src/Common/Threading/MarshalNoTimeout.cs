@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-
 #if !NET
 using System.Security.Permissions;
 #endif

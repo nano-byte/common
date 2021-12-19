@@ -1,18 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
-using System.Windows.Forms;
-
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
-#endif
-
-#if !NET6_0_OR_GREATER
-using NanoByte.Common.Controls;
 #endif
 
 namespace NanoByte.Common.Threading

@@ -1,15 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using NanoByte.Common.Controls;
-
-#if NET20
-using NanoByte.Common.Values;
-#endif
 
 namespace NanoByte.Common.Native
 {

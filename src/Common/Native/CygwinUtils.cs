@@ -1,19 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Runtime.Versioning;
 using System.Text;
-using NanoByte.Common.Collections;
-using NanoByte.Common.Properties;
 using NanoByte.Common.Streams;
-
-#if NET20
-using NanoByte.Common.Values;
-#endif
 
 namespace NanoByte.Common.Native
 {

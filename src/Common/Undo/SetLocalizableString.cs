@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Collections.Generic;
-using NanoByte.Common.Collections;
-
 namespace NanoByte.Common.Undo
 {
     /// <summary>

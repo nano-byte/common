@@ -1,11 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
-using FluentAssertions;
-using Xunit;
 
 namespace NanoByte.Common.Tasks
 {

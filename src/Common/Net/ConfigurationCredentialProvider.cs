@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 #if !NETFRAMEWORK
-using System;
 using System.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

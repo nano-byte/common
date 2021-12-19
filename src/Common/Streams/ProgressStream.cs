@@ -1,10 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.IO;
-using System.Threading;
-
 #if !NET20 && !NET40
 using System.Threading.Tasks;
 #endif

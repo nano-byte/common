@@ -1,18 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.Windows.Forms;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
-
-#if NET
-using System.Linq;
-using NanoByte.Common.Collections;
-#endif
 
 #if NET45 || NET461 || NET472
 using TaskDialog;

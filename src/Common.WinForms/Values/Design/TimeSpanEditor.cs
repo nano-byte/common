@@ -1,11 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
-using NanoByte.Common.Controls;
 
 #if !NET
 using System.Security.Permissions;

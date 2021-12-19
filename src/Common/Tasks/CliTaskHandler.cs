@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.IO;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
 

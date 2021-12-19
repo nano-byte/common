@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 #if !NET20 && !NET40
-using System;
 using System.Buffers;
 
 namespace NanoByte.Common.Collections

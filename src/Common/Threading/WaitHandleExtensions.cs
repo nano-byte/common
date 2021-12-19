@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Threading;
 using NanoByte.Common.Native;
 
 #if NET20

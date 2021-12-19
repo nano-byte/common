@@ -1,13 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
-using NanoByte.Common.Collections;
 
 namespace NanoByte.Common.Values
 {

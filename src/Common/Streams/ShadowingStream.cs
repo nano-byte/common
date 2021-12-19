@@ -1,15 +1,8 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.IO;
-using System.Threading;
-
 #if !NET20 && !NET40
 using System.Threading.Tasks;
-#endif
-
-#if !NETFRAMEWORK
-using System;
 #endif
 
 namespace NanoByte.Common.Streams

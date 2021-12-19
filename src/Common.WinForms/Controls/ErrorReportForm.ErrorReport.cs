@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.ComponentModel;
 using System.Xml.Serialization;
 using NanoByte.Common.Info;
 

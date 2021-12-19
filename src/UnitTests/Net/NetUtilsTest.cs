@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using Xunit;
-
 namespace NanoByte.Common.Net
 {
     /// <summary>

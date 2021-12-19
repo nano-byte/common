@@ -1,8 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using NanoByte.Common.Controls;
 using NanoByte.Common.Tasks;
 

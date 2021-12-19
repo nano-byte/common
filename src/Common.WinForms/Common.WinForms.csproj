@@ -33,6 +33,14 @@
     <Reference Include="TaskDialog" HintPath="..\..\lib\TaskDialog.dll" />
   </ItemGroup>
 
+  <!-- Global usings -->
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+    <Using Remove="System.Threading.Tasks" />
+    <Using Include="NanoByte.Common.Properties" />
+    <Using Include="NanoByte.Common.Controls" />
+  </ItemGroup>
+
   <!-- Bundle 3rd party libs in NuGet package -->
   <ItemGroup Condition="'$(MSBuildRuntimeType)'!='Core'">
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net45" />

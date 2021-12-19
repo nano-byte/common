@@ -88,7 +88,7 @@ namespace System.Diagnostics.CodeAnalysis
 [assembly: TypeForwardedTo(typeof(AllowNullAttribute))]
 [assembly: TypeForwardedTo(typeof(DisallowNullAttribute))]
 [assembly: TypeForwardedTo(typeof(MaybeNullAttribute))]
-[assembly: TypeForwardedTo(typeof(NotNullAttribute))]
+[assembly: TypeForwardedTo(typeof(System.Diagnostics.CodeAnalysis.NotNullAttribute))]
 [assembly: TypeForwardedTo(typeof(MaybeNullWhenAttribute))]
 [assembly: TypeForwardedTo(typeof(NotNullWhenAttribute))]
 [assembly: TypeForwardedTo(typeof(NotNullIfNotNullAttribute))]

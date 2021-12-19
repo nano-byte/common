@@ -21,4 +21,9 @@
     <PackageReference Include="Spectre.Console" Version="0.43.0" />
   </ItemGroup>
 
+  <!-- Global usings -->
+  <ItemGroup>
+    <Using Include="Spectre.Console" />
+  </ItemGroup>
+
 </Project>

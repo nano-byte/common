@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
 using System.Net;
 using NanoByte.Common.Info;
 #pragma warning disable 618

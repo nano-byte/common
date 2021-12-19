@@ -1,11 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using NanoByte.Common.Collections;
-
 namespace NanoByte.Common.Drawing
 {
     /// <summary>

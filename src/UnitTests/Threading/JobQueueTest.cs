@@ -1,10 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Threading.Tasks;
-using FluentAssertions;
-using Xunit;
-
 namespace NanoByte.Common.Threading
 {
     public class JobQueueTest

@@ -1,9 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Diagnostics.CodeAnalysis;
-using System.Windows.Forms;
-
 namespace NanoByte.Common.Controls
 {
     /// <summary>
@@ -16,5 +13,6 @@ namespace NanoByte.Common.Controls
         /// Returns the context menu for this object; can be <c>null</c>.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Creates a new object on each call")]
-        ContextMenuStrip? GetContextMenu();    }
+        ContextMenuStrip? GetContextMenu();
+    }
 }

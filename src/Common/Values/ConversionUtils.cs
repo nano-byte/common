@@ -1,10 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
-using JetBrains.Annotations;
-
 namespace NanoByte.Common.Values
 {
     /// <summary>

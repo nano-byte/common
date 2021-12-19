@@ -1,14 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using JetBrains.Annotations;
-using NanoByte.Common.Properties;
-
 namespace NanoByte.Common.Storage
 {
     /// <summary>

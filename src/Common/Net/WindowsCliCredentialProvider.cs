@@ -4,11 +4,6 @@
 using System.Net;
 using System.Runtime.Versioning;
 using NanoByte.Common.Native;
-using NanoByte.Common.Properties;
-
-#if NET20
-using NanoByte.Common.Values;
-#endif
 
 namespace NanoByte.Common.Net
 {

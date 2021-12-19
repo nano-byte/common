@@ -1,10 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Xml.Serialization;
 
 namespace NanoByte.Common.Values.Design

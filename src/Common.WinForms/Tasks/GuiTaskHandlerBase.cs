@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using NanoByte.Common.Collections;
-using NanoByte.Common.Controls;
 using NanoByte.Common.Native;
 using NanoByte.Common.Net;
 using NanoByte.Common.Threading;

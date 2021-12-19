@@ -1,10 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Windows.Forms;
-
 namespace NanoByte.Common.Undo
 {
     /// <summary>
