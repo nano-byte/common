@@ -1,0 +1,47 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../artifacts/Release",
+          "files": [
+            "net6.0/NanoByte.Common*.dll",
+            "net6.0-windows/NanoByte.Common.WinForms.dll"
+          ]
+        }
+      ],
+      "filter": "filterConfig.yml",
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "globalMetadata": {
+      "_baseUrl": "https://common.nano-byte.net/",
+      "_appTitle": "NanoByte.Common",
+      "_appFooter": "Copyright Bastian Eicher",
+      "_disableBreadcrumb": true,
+      "_enableNewTab": true
+    },
+    "content": [
+      {
+        "files": [
+          "*.md",
+          "toc.yml",
+          "api/*.yml"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "src": "../src/",
+        "files": [
+          "**/*.md"
+        ]
+      }
+    ],
+    "xrefService": [
+      "https://xref.docs.microsoft.com/query?uid={uid}"
+    ],
+    "dest": "../artifacts/Documentation"
+  }
+}

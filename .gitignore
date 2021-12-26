@@ -8,6 +8,8 @@
 /src/_ReSharper.*/
 /src/**/obj/
 /src/**/bin/
+/doc/obj/
+/doc/api/
 
 # Output
 /artifacts/

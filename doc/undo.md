@@ -1,16 +1,20 @@
+---
+uid: undo-system
+---
+
 # Undo system
 
-The \ref NanoByte.Common.Undo namespace provides a framework for adding undo/redo functionality to your applications.
+The <xref:NanoByte.Common.Undo> namespace provides a framework for adding undo/redo functionality to your applications.
 
-**Commands**
+## Commands
 
-Commands that can be executed and also undone are represented using the \ref NanoByte.Common.Undo.IUndoCommand "IUndoCommand" interface.
+Commands that can be executed and also undone are represented using the <xref:NanoByte.Common.Undo.IUndoCommand> interface.
 
-This library provides a number of implementations for common use cases such as \ref NanoByte.Common.Undo.SetValueCommand "SetValueCommand" and \ref NanoByte.Common.Undo.AddToCollection "AddToCollection", but you can also implement your own.
+This library provides a number of implementations for common use cases such as <xref:NanoByte.Common.Undo.SetValueCommand> and <xref:NanoByte.Common.Undo.AddToCollection>, but you can also implement your own.
 
-**Executors**
+## Executors
 
-Methods that wish to execute `IUndoCommand`s should take an \ref NanoByte.Common.Undo.ICommandExecutor "ICommandExecutor" as an input parameter.  
-To execute an `IUndoCommand` pass it to the `ICommandExecutor.Execute()` method. This will then internally call `IUndoCommand.Execute()` and record the command for later undo operations.
+Methods that wish to execute <xref:NanoByte.Common.Undo.IUndoCommand>s should take an <xref:NanoByte.Common.Undo.ICommandExecutor> as an input parameter.  
+To execute an <xref:NanoByte.Common.Undo.IUndoCommand> pass it to the [ICommandExecutor.Execute()](xref:NanoByte.Common.Undo.ICommandExecutor#NanoByte_Common_Undo_ICommandExecutor_Execute_NanoByte_Common_Undo_IUndoCommand_) method. This will then internally call [IUndoCommand.Execute()](xref:NanoByte.Common.Undo.IUndoCommand#NanoByte_Common_Undo_IUndoCommand_Execute) and record the command for later undo operations.
 
-The class \ref NanoByte.Common.Undo.CommandManager "CommandManager" implements the `ICommandExecutor` interface. You can expose this classes `.Undo()` and `.Redo()` methods to your users in your GUI.
+The class <xref:NanoByte.Common.Undo.CommandManager`1> implements the <xref:NanoByte.Common.Undo.ICommandExecutor> interface. You can expose this classes `.Undo()` and `.Redo()` methods to your users in your GUI.
