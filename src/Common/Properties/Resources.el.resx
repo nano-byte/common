@@ -186,7 +186,7 @@
   <data name="Password" xml:space="preserve">
     <value>Σύνθημα:</value>
   </data>
-  <data name="PleasEnterCredentials" xml:space="preserve">
+  <data name="PleaseEnterCredentials" xml:space="preserve">
     <value>Παρακαλούμε, εισάγετε login διαπιστευτήρια για {0}:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">

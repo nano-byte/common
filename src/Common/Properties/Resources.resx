@@ -195,7 +195,7 @@
   <data name="Password" xml:space="preserve">
     <value>Password:</value>
   </data>
-  <data name="PleasEnterCredentials" xml:space="preserve">
+  <data name="PleaseEnterCredentials" xml:space="preserve">
     <value>Please enter login credentials for {0}:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">

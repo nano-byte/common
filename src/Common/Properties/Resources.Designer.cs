@@ -297,9 +297,9 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please enter login credentials for {0}:.
         /// </summary>
-        public static string PleasEnterCredentials {
+        public static string PleaseEnterCredentials {
             get {
-                return ResourceManager.GetString("PleasEnterCredentials", resourceCulture);
+                return ResourceManager.GetString("PleaseEnterCredentials", resourceCulture);
             }
         }
         

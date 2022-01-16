@@ -195,7 +195,7 @@
   <data name="Password" xml:space="preserve">
     <value>Parola:</value>
   </data>
-  <data name="PleasEnterCredentials" xml:space="preserve">
+  <data name="PleaseEnterCredentials" xml:space="preserve">
     <value>Lütfen {0} için oturum açma kimlik bilgilerinizi yazın:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
