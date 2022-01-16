@@ -6,12 +6,17 @@ using System.Diagnostics;
 namespace NanoByte.Common.Streams;
 
 /// <summary>
-/// Runs a sub process with redirected stdin, stdout and stderr steams.
+/// Runs a sub/child process.
 /// </summary>
 public class SubProcess : ISubProcess
 {
     private readonly string _fileName;
     private readonly string? _arguments;
+
+    static SubProcess()
+    {
+        ProcessUtils.SanitizeEnvironmentVariables();
+    }
 
     /// <summary>
     /// Prepares a new sub process.
@@ -33,13 +38,31 @@ public class SubProcess : ISubProcess
     {}
 
     /// <inheritdoc/>
-    public string Run(Action<StreamWriter>? onStartup, params string[] arguments)
+    public Process Start(params string[] arguments)
     {
         #region Sanity checks
         if (arguments == null) throw new ArgumentNullException(nameof(arguments));
         #endregion
 
-        var process = GetStartInfo(arguments).Start();
+        return GetStartInfo(arguments).Start();
+    }
+
+    /// <inheritdoc/>
+    public void Run(params string[] arguments)
+    {
+        var process = Start(arguments);
+        process.WaitForExit();
+        HandleExitCode(process.ExitCode);
+    }
+
+    /// <inheritdoc/>
+    public string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
+    {
+        #region Sanity checks
+        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
+        #endregion
+
+        var process = GetStartInfo(arguments, redirect: true).Start();
         var stdin = process.StandardInput;
         var stdout = new StreamConsumer(process.StandardOutput);
         var stderr = new StreamConsumer(process.StandardError);
@@ -57,8 +80,8 @@ public class SubProcess : ISubProcess
         stderr.WaitForEnd();
         ReadStderr();
 
-        if (process.ExitCode != 0)
-            throw new InvalidOperationException($"{_fileName} exited with exit code {process.ExitCode}.");
+        process.WaitForExit();
+        HandleExitCode(process.ExitCode);
 
         return stdout.ToString();
     }
@@ -67,33 +90,34 @@ public class SubProcess : ISubProcess
     /// Creates the <see cref="ProcessStartInfo"/> used by <see cref="Run"/> to launch the process and redirect its input/output.
     /// </summary>
     /// <param name="arguments">The arguments to pass to the process at startup.</param>
-    protected virtual ProcessStartInfo GetStartInfo(params string[] arguments)
-    {
-        #region Sanity checks
-        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
-        #endregion
-
-        ProcessUtils.SanitizeEnvironmentVariables();
-
-        var startInfo = new ProcessStartInfo
+    /// <param name="redirect">Indicates whether stdin/stdout/stderr should be redirected.</param>
+    protected virtual ProcessStartInfo GetStartInfo(string[] arguments, bool redirect = false)
+        => new()
         {
             FileName = _fileName,
             Arguments = string.IsNullOrEmpty(_arguments)
                 ? arguments.JoinEscapeArguments()
                 : arguments + " " + arguments.JoinEscapeArguments(),
             UseShellExecute = false,
-            CreateNoWindow = true,
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            ErrorDialog = false
+            ErrorDialog = false,
+            CreateNoWindow = redirect,
+            RedirectStandardInput = redirect,
+            RedirectStandardOutput = redirect,
+            RedirectStandardError = redirect
         };
 
-        return startInfo;
+    /// <summary>
+    /// Hook for handling the <see cref="Process.ExitCode"/>.
+    /// </summary>
+    /// <param name="exitCode">The <see cref="Process.ExitCode"/>.</param>
+    protected virtual void HandleExitCode(int exitCode)
+    {
+        if (exitCode != 0)
+            throw new ExitCodeException(_fileName, exitCode);
     }
 
     /// <summary>
-    /// A hook for handling stderr messages from the process.
+    /// Hook for handling stderr messages from the process.
     /// </summary>
     /// <param name="line">The line written to stderr.</param>
     /// <param name="stdin">The stream writer providing access to stdin.</param>

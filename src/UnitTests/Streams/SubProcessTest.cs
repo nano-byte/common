@@ -11,9 +11,15 @@ namespace NanoByte.Common.Streams;
 public class SubProcessTest
 {
     [Fact]
-    public void TestStringOutput()
+    public void Run()
     {
-        string output = new SubProcess(WindowsUtils.IsWindows ? "attrib" : "ls").Run();
+        new SubProcess(WindowsUtils.IsWindows ? "attrib" : "ls").Run();
+    }
+
+    [Fact]
+    public void RunAndCapture()
+    {
+        string output = new SubProcess(WindowsUtils.IsWindows ? "attrib" : "ls").RunAndCapture();
         output.Length.Should().BeGreaterThan(1);
     }
 }

@@ -302,10 +302,10 @@ namespace NanoByte.Common.Native
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetFileSystem([Localizable(false)] string path)
         {
-            string fileSystem = _stat.Run("--file-system", "--printf", "%T", path).TrimEnd('\n');
+            string fileSystem = _stat.RunAndCapture("--file-system", "--printf", "%T", path).TrimEnd('\n');
             if (fileSystem == "fuseblk")
             { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system
-                var fstabData = Syscall.getfsfile(_stat.Run("--printf", "%m", path).TrimEnd('\n'));
+                var fstabData = Syscall.getfsfile(_stat.RunAndCapture("--printf", "%m", path).TrimEnd('\n'));
                 if (fstabData != null) return fstabData.fs_vfstype;
             }
             return fileSystem;
