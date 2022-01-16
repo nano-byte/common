@@ -313,6 +313,24 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; exited with exit code {1}..
+        /// </summary>
+        public static string ProcessExitCode {
+            get {
+                return ResourceManager.GetString("ProcessExitCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A process exited with an unexpected exit code..
+        /// </summary>
+        public static string ProcessExitCodeUnexpected {
+            get {
+                return ResourceManager.GetString("ProcessExitCodeUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reading file {0}.
         /// </summary>
         public static string ReadingFile {

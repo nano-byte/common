@@ -201,6 +201,12 @@
   <data name="ProblemLoading" xml:space="preserve">
     <value>Es gab ein Problem beim Laden von '{0}'.</value>
   </data>
+  <data name="ProcessExitCode" xml:space="preserve">
+    <value>'{0}' wurde mit dem Exit Code {1} beendet.</value>
+  </data>
+  <data name="ProcessExitCodeUnexpected" xml:space="preserve">
+    <value>Ein Prozess wurde mit einem unerwarteten Exit Code beendet.</value>
+  </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Lese Datei {0}</value>
   </data>
