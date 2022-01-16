@@ -135,6 +135,9 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
         if (exception == null) throw new ArgumentNullException(nameof(exception));
         #endregion
 
-        ThreadUtils.RunSta(() => ErrorBox.Show(null, exception, LogRtf));
+        if (Verbosity == Verbosity.Batch)
+            Log.Error(exception);
+        else
+            ThreadUtils.RunSta(() => ErrorBox.Show(null, exception, LogRtf));
     }
 }
