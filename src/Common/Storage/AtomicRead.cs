@@ -1,12 +1,10 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using NanoByte.Common.Threading;
-
 namespace NanoByte.Common.Storage;
 
 /// <summary>
-/// Ensures that a read operation for a file does not occur while an <see cref="AtomicWrite"/> for the same file is in progress.
+/// Ensures that a read operation for a file does not conflict with an <see cref="AtomicWrite"/> for the same file.
 /// </summary>
 /// <example><code>
 /// using (new AtomicRead(filePath))
@@ -14,7 +12,7 @@ namespace NanoByte.Common.Storage;
 /// </code></example>
 public sealed class AtomicRead : IDisposable
 {
-    private readonly MutexLock _lock;
+    private readonly IDisposable _lock;
 
     /// <summary>
     /// Prepares an atomic read operation.
@@ -22,11 +20,7 @@ public sealed class AtomicRead : IDisposable
     /// <param name="path">The path of the file that will be read.</param>
     public AtomicRead([Localizable(false)] string path)
     {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        #endregion
-
-        _lock = new("atomic-file-" + path.GetHashCode());
+        _lock = AtomicWrite.Lock(path ?? throw new ArgumentNullException(nameof(path)));
     }
 
     /// <inheritdoc/>

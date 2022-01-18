@@ -33,8 +33,6 @@ public sealed class AtomicWrite : IDisposable
     /// </summary>
     public bool IsCommitted { get; private set; }
 
-    private readonly MutexLock _lock;
-
     /// <summary>
     /// Prepares an atomic write operation.
     /// </summary>
@@ -49,8 +47,6 @@ public sealed class AtomicWrite : IDisposable
 
         // Prepend random string for temp file name
         WritePath = directory + Path.DirectorySeparatorChar + "temp." + Path.GetRandomFileName() + "." + Path.GetFileName(path);
-
-        _lock = new("atomic-file-" + path.GetHashCode());
     }
 
     /// <summary>
@@ -63,15 +59,21 @@ public sealed class AtomicWrite : IDisposable
     /// </summary>
     public void Dispose()
     {
+        if (!File.Exists(WritePath)) return;
+
         try
         {
-            if (File.Exists(WritePath) && IsCommitted)
-                ExceptionUtils.Retry<IOException>(delegate { FileUtils.Replace(WritePath, DestinationPath); });
+            if (!IsCommitted) return;
+
+            using (Lock(DestinationPath))
+                FileUtils.Replace(WritePath, DestinationPath);
         }
         finally
         {
-            _lock.Dispose();
-            if (File.Exists(WritePath)) File.Delete(WritePath);
+            File.Delete(WritePath);
         }
     }
+
+    internal static IDisposable Lock(string path)
+        => new MutexLock("atomic-file-" + path.GetHashCode());
 }

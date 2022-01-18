@@ -196,9 +196,9 @@ public static class FileUtils
 
         if (UnixUtils.IsUnix) UnixUtils.Rename(sourcePath, destinationPath);
         else if (WindowsUtils.IsWindowsXP) ReplaceNT();
-        else ReplaceSimple();
+        else ReplaceFallback();
 
-        void ReplaceSimple()
+        void ReplaceFallback()
         {
             string backupPath = Path.Combine(
                 Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
@@ -235,13 +235,16 @@ public static class FileUtils
 
             try
             {
-                File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
+                ExceptionUtils.Retry<IOException>(delegate
+                {
+                    File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
+                });
             }
             catch (IOException ex)
             {
-                Log.Debug("File.Replace() failed. Falling back to simple 'delete and move' in case we are running on a Windows version that does not support File.Replace() (e.g. Windows Azure).");
+                Log.Debug("File.Replace() failed, using fallback algorithm");
                 Log.Debug(ex);
-                ReplaceSimple();
+                ReplaceFallback();
             }
             finally
             {
