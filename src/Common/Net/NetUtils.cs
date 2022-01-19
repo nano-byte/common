@@ -33,25 +33,25 @@ public static class NetUtils
     }
 
     /// <summary>
-    /// Enables support for all available SSL/TLS versions.
+    /// Enables TLS 1.2 and TLS 1.3 support if available.
     /// </summary>
     public static void ConfigureTls()
     {
-        foreach (var protocol in Enum.GetValues(typeof(SecurityProtocolType)).Cast<SecurityProtocolType>())
+        try
         {
-            try
-            {
-                ServicePointManager.SecurityProtocol |= protocol;
-            }
-            catch (NotSupportedException)
-            {
-                // Skip any unsupported protocols
-            }
+            ServicePointManager.SecurityProtocol |= (SecurityProtocolType)3072; // TLS 1.2
+        }
+        catch (NotSupportedException)
+        {
+            Log.Warn(Resources.Tls12SupportMissing);
         }
 
-        const SecurityProtocolType tls12 = (SecurityProtocolType)3072;
-        if ((ServicePointManager.SecurityProtocol & tls12) != tls12)
-            Log.Warn(Resources.Tls12SupportMissing);
+        try
+        {
+            ServicePointManager.SecurityProtocol |= (SecurityProtocolType)12288; // TLS 1.3
+        }
+        catch (NotSupportedException)
+        {}
     }
 
     /// <summary>
