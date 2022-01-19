@@ -41,4 +41,10 @@ public interface IProcessLauncher
     /// <exception cref="NotAdminException">The target process requires elevation.</exception>
     /// <exception cref="ExitCodeException">The process exited with a non-zero <see cref="Process.ExitCode"/>.</exception>
     string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments);
+
+    /// <summary>
+    /// Creates the <see cref="ProcessStartInfo"/> used to launch the process.
+    /// </summary>
+    /// <param name="arguments">The arguments to pass to the process at startup.</param>
+    ProcessStartInfo GetStartInfo(params string[] arguments);
 }

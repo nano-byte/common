@@ -40,13 +40,7 @@ public class ProcessLauncher : IProcessLauncher
 
     /// <inheritdoc/>
     public Process Start(params string[] arguments)
-    {
-        #region Sanity checks
-        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
-        #endregion
-
-        return GetStartInfo(arguments).Start();
-    }
+        => GetStartInfo(arguments).Start();
 
     /// <inheritdoc/>
     public void Run(params string[] arguments)
@@ -59,11 +53,13 @@ public class ProcessLauncher : IProcessLauncher
     /// <inheritdoc/>
     public string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
     {
-        #region Sanity checks
-        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
-        #endregion
+        var startInfo = GetStartInfo(arguments);
+        startInfo.CreateNoWindow = true;
+        startInfo.RedirectStandardInput = true;
+        startInfo.RedirectStandardOutput = true;
+        startInfo.RedirectStandardError = true;
 
-        var process = GetStartInfo(arguments, redirect: true).Start();
+        var process = startInfo.Start();
         var stdin = process.StandardInput;
         var stdout = new StreamConsumer(process.StandardOutput);
         var stderr = new StreamConsumer(process.StandardError);
@@ -87,25 +83,23 @@ public class ProcessLauncher : IProcessLauncher
         return stdout.ToString();
     }
 
-    /// <summary>
-    /// Creates the <see cref="ProcessStartInfo"/> used by <see cref="Run"/> to launch the process and redirect its input/output.
-    /// </summary>
-    /// <param name="arguments">The arguments to pass to the process at startup.</param>
-    /// <param name="redirect">Indicates whether stdin/stdout/stderr should be redirected.</param>
-    protected virtual ProcessStartInfo GetStartInfo(string[] arguments, bool redirect = false)
-        => new()
+    /// <inheritdoc/>
+    public virtual ProcessStartInfo GetStartInfo(params string[] arguments)
+    {
+        #region Sanity checks
+        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
+        #endregion
+
+        return new()
         {
             FileName = _fileName,
             Arguments = string.IsNullOrEmpty(_arguments)
                 ? arguments.JoinEscapeArguments()
                 : arguments + " " + arguments.JoinEscapeArguments(),
             UseShellExecute = false,
-            ErrorDialog = false,
-            CreateNoWindow = redirect,
-            RedirectStandardInput = redirect,
-            RedirectStandardOutput = redirect,
-            RedirectStandardError = redirect
+            ErrorDialog = false
         };
+    }
 
     /// <summary>
     /// Hook for handling the <see cref="Process.ExitCode"/>.
