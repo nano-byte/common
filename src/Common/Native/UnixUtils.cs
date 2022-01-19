@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using Mono.Unix;
 using Mono.Unix.Native;
-using NanoByte.Common.Streams;
 
 #if !NET20 && !NET40 && !NET
 using System.Runtime.InteropServices;
@@ -290,7 +289,7 @@ namespace NanoByte.Common.Native
         #endregion
 
         #region Mount point
-        private static readonly SubProcess _stat = new("stat");
+        private static readonly ProcessLauncher _stat = new("stat");
 
         /// <summary>
         /// Determines the file system type a file or directory is stored on.

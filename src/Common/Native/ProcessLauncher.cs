@@ -2,18 +2,19 @@
 // Licensed under the MIT License
 
 using System.Diagnostics;
+using NanoByte.Common.Streams;
 
-namespace NanoByte.Common.Streams;
+namespace NanoByte.Common.Native;
 
 /// <summary>
-/// Runs a sub/child process.
+/// Runs a child process.
 /// </summary>
-public class SubProcess : ISubProcess
+public class ProcessLauncher : IProcessLauncher
 {
     private readonly string _fileName;
     private readonly string? _arguments;
 
-    static SubProcess()
+    static ProcessLauncher()
     {
         ProcessUtils.SanitizeEnvironmentVariables();
     }
@@ -23,7 +24,7 @@ public class SubProcess : ISubProcess
     /// </summary>
     /// <param name="fileName">The file name of the executable to run.</param>
     /// <param name="arguments">The default arguments to always pass to the executable.</param>
-    public SubProcess(string fileName, string? arguments = null)
+    public ProcessLauncher(string fileName, string? arguments = null)
     {
         _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
         _arguments = arguments;
@@ -33,7 +34,7 @@ public class SubProcess : ISubProcess
     /// Prepares a new sub process.
     /// </summary>
     /// <param name="startInfo">The file name of the executable to run and default arguments to always pass. Other information from the <see cref="ProcessStartInfo"/> is ignored!</param>
-    public SubProcess(ProcessStartInfo startInfo)
+    public ProcessLauncher(ProcessStartInfo startInfo)
         : this(startInfo.FileName, startInfo.Arguments)
     {}
 
