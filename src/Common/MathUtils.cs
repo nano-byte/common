@@ -31,6 +31,7 @@ public static class MathUtils
     public static long Modulo(this long value, long modulo)
     {
         long remainder = value % modulo;
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         return remainder < 0
             ? remainder + modulo
             : remainder;

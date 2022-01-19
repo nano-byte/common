@@ -41,6 +41,7 @@ public class EnumDescriptionConverter<T> : TypeConverter
     /// <inheritdoc/>
     public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         => value is Enum enumValue && destinationType == typeof(string)
+            // ReSharper disable once RedundantSuppressNullableWarningExpression
             ? enumValue.GetEnumAttribute<DescriptionAttribute>()?.Description ?? enumValue.ToString()!
             : base.ConvertTo(context, culture, value, destinationType)!;
 }
