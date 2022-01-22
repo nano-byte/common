@@ -38,7 +38,8 @@ public sealed partial class ErrorBox : Form
             Text = Application.ProductName,
             labelMessage = {Text = exception.Message},
             labelInnerMessage = {Text = GetInnerMessage(exception)},
-            textLog = {Rtf = logRtf.ToString()}
+            textLog = {Rtf = logRtf.ToString()},
+            ShowInTaskbar = owner == null
         };
         // ReSharper disable once AccessToDisposedClosure
         errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };

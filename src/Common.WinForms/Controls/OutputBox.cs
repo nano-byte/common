@@ -33,7 +33,8 @@ public sealed partial class OutputBox : Form
         {
             Text = Application.ProductName,
             labelTitle = {Text = title},
-            textMessage = {Text = message.Replace("\n", Environment.NewLine)}
+            textMessage = {Text = message.Replace("\n", Environment.NewLine)},
+            ShowInTaskbar = owner == null
         };
         // ReSharper disable once AccessToDisposedClosure
         outputBox.Shown += delegate { outputBox.SetForegroundWindow(); };

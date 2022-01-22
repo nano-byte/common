@@ -30,7 +30,11 @@ public sealed partial class OutputGridBox : Form
         if (data == null) throw new ArgumentNullException(nameof(data));
         #endregion
 
-        using var dialog = new OutputGridBox {Text = title};
+        using var dialog = new OutputGridBox
+        {
+            Text = title,
+            ShowInTaskbar = owner == null
+        };
         dialog.SetData(data);
 
         dialog.ShowDialog(owner);
