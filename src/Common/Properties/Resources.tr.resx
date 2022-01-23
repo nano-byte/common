@@ -196,10 +196,16 @@
     <value>Parola:</value>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Lütfen {0} için oturum açma kimlik bilgilerinizi yazın:</value>
+    <value>Lütfen {0} için oturum açma bilgilerinizi yazın:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
     <value>'{0}' yüklenirken bir sorun çıktı.</value>
+  </data>
+  <data name="ProcessExitCodeUnexpected" xml:space="preserve">
+    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
+  </data>
+  <data name="ProcessExitCode" xml:space="preserve">
+    <value>'{0}',  {1} çıkış koduyla kapandı.</value>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>{0} dosyası okunuyor</value>
