@@ -495,6 +495,9 @@ public static partial class WindowsUtils
         if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
             throw BuildException(Marshal.GetLastWin32Error());
 
+        if (fileInfo.FileIndexLow is 0 or uint.MaxValue && fileInfo.FileIndexHigh is 0 or uint.MaxValue)
+            throw new IOException($"The file system cannot provide a unique ID for '{path}'.");
+
         unchecked
         {
             return fileInfo.FileIndexLow + ((long)fileInfo.FileIndexHigh << 32);
