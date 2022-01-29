@@ -477,7 +477,7 @@ public static partial class WindowsUtils
     /// Returns the file ID of a file.
     /// </summary>
     /// <param name="path">The path of the file.</param>
-    /// <exception cref="IOException">There was an IO problem checking the files.</exception>
+    /// <exception cref="IOException">There was an IO problem checking the file.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
     /// <exception cref="Win32Exception">Checking the file failed.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>

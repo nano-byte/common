@@ -657,7 +657,7 @@ public static class FileUtils
     /// </summary>
     /// <param name="path1">The path of the first file.</param>
     /// <param name="path2">The path of the second file.</param>
-    /// <exception cref="IOException">Creating the files failed.</exception>
+    /// <exception cref="IOException">There was an IO problem checking the files.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
     public static bool AreHardlinked([Localizable(false)] string path1, [Localizable(false)] string path2)
         => GetFileID(path1) == GetFileID(path2);
@@ -666,7 +666,7 @@ public static class FileUtils
     /// Returns the file ID (on Windows) or Inode (on Unix) of a file.
     /// </summary>
     /// <param name="path">The path of the file.</param>
-    /// <exception cref="IOException">There was an IO problem checking the files.</exception>
+    /// <exception cref="IOException">There was an IO problem checking the file.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to check the files.</exception>
     public static long GetFileID([Localizable(false)] string path)
     {
