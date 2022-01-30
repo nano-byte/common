@@ -30,4 +30,10 @@ public class SilentTaskHandler : TaskHandlerBase
     /// <inheritdoc/>
     public override void Error(Exception exception)
         => Log.Error(exception);
+
+    /// <summary>
+    /// Cancels currently running <see cref="ITask"/>s.
+    /// </summary>
+    public void Cancel()
+        => CancellationTokenSource.Cancel();
 }
