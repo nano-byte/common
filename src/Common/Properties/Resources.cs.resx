@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Retourner</value>
-    <comment>Manually overriden.</comment>
+    <value>Zpět</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Manually overriden.</comment>
+    <value>Zrušit</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collection ne peut pas être ajoutée à elle-même.</value>
+    <value>Kolekci nelze přidat k sobě samé.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>La DACL ne peut pas être canonisée car cela entraînerait potentiellement une perte d'informations.</value>
+    <value>DACL nelze kanonizovat, protože by to potenciálně vedlo ke ztrátě informací.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp; Commentaire :</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Komentář:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copie des fichiers</value>
-    <comment>Manually overriden.</comment>
+    <value>Kopírování souborů</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copier dans le presse-papier</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopírování do schránky</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le directoire de destination existe déjà</value>
-    <comment>Manually overriden.</comment>
+    <value>Cílový adresář již existuje.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Chargement {0}</value>
-    <comment>Manually overriden.</comment>
+    <value>Stahování {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
+    <value>Pokud chcete, můžete v tomto poli uvést další informace o problému, například popis toho, co jste dělali v době, kdy k pádu došlo.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Rapport d'erreur</value>
-    <comment>Manually overriden.</comment>
+    <value>Hlášení o chybě</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Faire et ne pas faire de rapport</value>
+    <value>Do &amp;not report</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Une erreur inattendue s'est produite dans cette application. Vous pouvez nous aider à résoudre le problème en le signalant. S'il existe déjà une solution connue pour votre problème, elle sera affichée juste après l'envoi du rapport.</value>
+    <value>V této aplikaci došlo k neočekávané chybě. Nahlášením nám můžete pomoci problém odstranit. Pokud již existuje známá oprava vašeho problému, zobrazí se ihned po odeslání hlášení.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Rapport</value>
+    <value>&amp;Report</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été bien envoyé</value>
-    <comment>Manually overriden.</comment>
+    <value>Chybové hlášení bylo úspěšně odesláno.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Échec du téléchargement de {0}.</value>
+    <value>Nepodařilo se stáhnout {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossible d'ouvrir la sous-clé de registre '{0}' dans '{1}'.</value>
+    <value>Nepodařilo se otevřít podklíč registru '{0}' v '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Échec du rollback de '{0}'.</value>
+    <value>Nepodařilo se obnovit '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossible de démarrer '{0}'.</value>
+    <value>Nepodařilo se spustit '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui devait être téléchargé depuis {0} n'a pas la taille attendue. Il devait faire {1} octets mais il fait {2} octets.</value>
+    <value>Soubor, který měl být stažen z {0}, nemá očekávanou velikost. Měl mít {1} bajtů, ale ve skutečnosti měl {2} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Le fichier "{0}" n'a pas pu être trouvé.</value>
+    <value>Soubor "{0}" se nepodařilo najít.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Le répertoire de configuration '{0}' est probablement invalide.</value>
+    <value>Konfigurační adresář '{0}' je pravděpodobně neplatný.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Les informations d'identification de {0} sont incorrectes.</value>
+    <value>Přihlašovací údaje pro {0} jsou nesprávné.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>La clé était déjà présente dans le dictionnaire.</value>
+    <value>Klíč byl již ve slovníku přítomen.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Le lancement de '{0}' requiert des privilèges d'administrateur.</value>
+    <value>Spuštění '{0}' vyžaduje oprávnění správce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>La quantité maximale d'éléments dans la collection a été dépassée.</value>
+    <value>Bylo překročeno maximální množství prvků ve sbírce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Aucune action enregistrée pour '{0}'.</value>
+    <value>Pro položku '{0}' nebyla zaregistrována žádná akce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Non</value>
+    <value>Ne</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configuration du système ne peut pas être modifiée en mode portable.</value>
+    <value>Konfiguraci systému nelze upravovat v přenosném režimu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Cette méthode n'est disponible que sous Windows.</value>
+    <value>Tato metoda je k dispozici pouze v systému Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe :</value>
+    <value>Heslo:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Veuillez entrer les informations d'identification pour {0} :</value>
+    <value>Zadejte prosím přihlašovací údaje pro {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
-    <comment>Manually overriden.</comment>
+    <value>Došlo k problému při načítání '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' a quitté avec le code de sortie {1}.</value>
+    <value>'{0}' skončil s kódem ukončení {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Proces byl ukončen s neočekávaným kódem ukončení.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lecture du fichier {0}</value>
+    <value>Čtení souboru {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Tento příkaz nelze provést znovu, dokud není proveden příkaz zpět.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>valeur &amp;Reset</value>
+    <value>&amp;Reset hodnota</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Redémarrage des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Restartování aplikací</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Chercher</value>
-    <comment>Manually overriden.</comment>
+    <value>Vyhledávání</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Recherche de références de fichiers ouverts</value>
+    <value>Vyhledávání odkazů na otevřené soubory</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentative de lecture à partir de la position {0}. Cette position est éloignée de {1} octets de la position {2} du flux sous-jacent, mais le tampon de recherche ne peut prendre en compte qu'une différence de {3} octets.</value>
+    <value>Pokus o čtení z pozice {0}. Ta je {1} bajtů vzdálená od základní pozice proudu {2}, ale vyrovnávací paměť seek může pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Fermeture des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Vypínání aplikací</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>La source et la destination sont égales.</value>
+    <value>Zdroj a cíl jsou stejné.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Complete</value>
-    <comment>Manually overriden.</comment>
+    <value>Kompletní</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Traitement des données</value>
+    <value>Zpracování dat</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obtenir des en-têtes</value>
+    <value>Získání záhlaví</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Erreur IO</value>
+    <value>Chyba IO</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>Manually overriden.</comment>
+    <value>Připraveno</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>L'erreur du réseau</value>
-    <comment>Manually overriden.</comment>
+    <value>Chyba na webu</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
+    <value>Délka cílů se musí rovnat délce oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Détails techniques :</value>
+    <value>Technické detaily:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Votre version de .NET ne prend pas en charge TLS 1.2. Cela peut entraîner des erreurs de connexion lors du téléchargement de contenu via HTTPS. Veuillez exécuter Windows Update pour installer les correctifs nécessaires.</value>
+    <value>Vaše verze rozhraní .NET nepodporuje protokol TLS 1.2. To může způsobit chyby připojení při stahování obsahu prostřednictvím protokolu HTTPS. Spusťte Windows Update a nainstalujte potřebné záplaty.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>L'assemblage nommé "{0}" n'a pas pu être localisé.</value>
+    <value>Sestavu s názvem "{0}" se nepodařilo najít.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossible de lire {0} octets depuis le flux.</value>
+    <value>Nelze přečíst {0} bajtů z datového toku.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande réelle n'a pas été exécutée.</value>
+    <value>Tento příkaz zpět nelze provést, dokud není proveden skutečný příkaz.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Vos droits sont peut-être insuffisants.</value>
+    <value>Subsystému Unix se nepodařilo požadavek zpracovat. Možná nemáte dostatečná práva.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom de l'utilisateur :</value>
+    <value>Uživatelské jméno:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Ano</value>
     <comment>Automatically translated.</comment>
   </data>
 </root>

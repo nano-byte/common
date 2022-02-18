@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Back" xml:space="preserve">
+    <value>Späť</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušiť</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CannotAddCollectionToSelf" xml:space="preserve">
+    <value>Kolekciu nie je možné pridať k sebe.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CannotCanonicalizeDacl" xml:space="preserve">
+    <value>DACL nemožno kanonizovať, pretože by to potenciálne viedlo k strate informácií.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>&amp;Komentár:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CopyFiles" xml:space="preserve">
+    <value>Kopírovanie súborov</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>&amp;Kopírovanie do schránky</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="DestinationDirExist" xml:space="preserve">
+    <value>Cieľový adresár už existuje.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Sťahovanie {0}</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReporComment" xml:space="preserve">
+    <value>Ak chcete, môžete toto pole použiť na poskytnutie ďalších informácií o probléme, napríklad popisu toho, čo ste robili, keď došlo k zlyhaniu.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReport" xml:space="preserve">
+    <value>Správa o chybe</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportCancel" xml:space="preserve">
+    <value>Do &amp;not report</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportInfo" xml:space="preserve">
+    <value>V tejto aplikácii sa vyskytla neočakávaná chyba. Nahlásením problému nám môžete pomôcť s jeho odstránením. Ak už je známa oprava vášho problému, zobrazí sa hneď po odoslaní hlásenia.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportSend" xml:space="preserve">
+    <value>&amp;Report</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportSent" xml:space="preserve">
+    <value>Správa o chybe bola úspešne odoslaná.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToDownload" xml:space="preserve">
+    <value>Nepodarilo sa stiahnuť {0}.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
+    <value>Nepodarilo sa otvoriť podkľúč registra '{0}' v '{1}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToRollback" xml:space="preserve">
+    <value>Nepodarilo sa obnoviť '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToStart" xml:space="preserve">
+    <value>Nepodarilo sa spustiť '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FileNotExpectedSize" xml:space="preserve">
+    <value>Súbor, ktorý mal byť stiahnutý z {0}, nemá očakávanú veľkosť. Mal mať {1} bajtov, ale v skutočnosti mal {2} bajtov.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Súbor "{0}" sa nepodarilo nájsť.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="InvalidConfigDir" xml:space="preserve">
+    <value>Konfiguračný adresár '{0}' je pravdepodobne neplatný.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Prihlasovacie údaje pre {0} sú nesprávne.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="KeyAlreadyPresent" xml:space="preserve">
+    <value>Kľúč sa už nachádzal v slovníku.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="LaunchNeedsAdmin" xml:space="preserve">
+    <value>Spustenie '{0}' vyžaduje oprávnenia správcu.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="MaxElementsExceeded" xml:space="preserve">
+    <value>Maximálny počet prvkov v kolekcii bol prekročený.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="MissingDispatchAction" xml:space="preserve">
+    <value>Pre '{0}' nie je zaregistrovaná žiadna akcia.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nie</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="NoSystemConfigInPortableMode" xml:space="preserve">
+    <value>Konfiguráciu systému nemožno upravovať v prenosnom režime.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="OnlyAvailableOnWindows" xml:space="preserve">
+    <value>Táto metóda je k dispozícii len v systéme Windows.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Heslo:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="PleaseEnterCredentials" xml:space="preserve">
+    <value>Zadajte prihlasovacie údaje pre {0}:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ProblemLoading" xml:space="preserve">
+    <value>Nastal problém s načítaním '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ProcessExitCode" xml:space="preserve">
+    <value>'{0}' skončil s kódom ukončenia {1}.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ProcessExitCodeUnexpected" xml:space="preserve">
+    <value>Proces sa ukončil s neočakávaným kódom ukončenia.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>Čítanie súboru {0}</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="RedoNotAvailable" xml:space="preserve">
+    <value>Tento príkaz nemožno vykonať znova, kým sa nevykoná príkaz zrušenia.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ResetValue" xml:space="preserve">
+    <value>hodnota &amp;Reset</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="RestartingApps" xml:space="preserve">
+    <value>Reštartovanie aplikácií</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Vyhľadávanie</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="SearchingFileReferences" xml:space="preserve">
+    <value>Vyhľadávanie odkazov na otvorené súbory</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="SeekOffsetTooLarge" xml:space="preserve">
+    <value>Pokus o čítanie z pozície {0}. Táto pozícia je vzdialená {1} bajtov od základnej pozície toku {2}, ale vyrovnávacia pamäť dokáže pojať rozdiel iba {3} bajtov.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ShuttingDownApps" xml:space="preserve">
+    <value>Vypínanie aplikácií</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="SourceDestinationEqual" xml:space="preserve">
+    <value>Zdroj a cieľ sú rovnaké.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateComplete" xml:space="preserve">
+    <value>Kompletné</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateData" xml:space="preserve">
+    <value>Spracovanie údajov</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateHeader" xml:space="preserve">
+    <value>Získanie hlavičiek</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateIOError" xml:space="preserve">
+    <value>Chyba IO</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateReady" xml:space="preserve">
+    <value>Pripravené</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateWebError" xml:space="preserve">
+    <value>Chyba na webe</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="TargetsOldValuesLength" xml:space="preserve">
+    <value>Dĺžka cieľov sa musí rovnať dĺžke oldValues</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Technické údaje:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Tls12SupportMissing" xml:space="preserve">
+    <value>Vaša verzia .NET nepodporuje TLS 1.2. To môže spôsobiť chyby pripojenia pri preberaní obsahu prostredníctvom protokolu HTTPS. Spustite Windows Update a nainštalujte potrebné záplaty.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UnableToLocateAssembly" xml:space="preserve">
+    <value>Zostavu s názvom "{0}" sa nepodarilo nájsť.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UnableToReadBytesFromStream" xml:space="preserve">
+    <value>Nie je možné prečítať {0} bajtov z prúdu.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UndoNotAvailable" xml:space="preserve">
+    <value>Tento príkaz na zrušenie nie je možné vykonať, kým sa nevykoná skutočný príkaz.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UnixSubsystemFail" xml:space="preserve">
+    <value>Subsystému Unix sa nepodarilo spracovať požiadavku. Možno nemáte dostatočné práva.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Meno používateľa:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Áno</value>
+    <comment>Automatically Translated</comment>
+  </data>
+</root>

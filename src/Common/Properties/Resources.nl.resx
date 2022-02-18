@@ -59,55 +59,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Retourner</value>
-    <comment>Manually overriden.</comment>
+    <value>Terug</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Manually overriden.</comment>
+    <value>Annuleren</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collection ne peut pas être ajoutée à elle-même.</value>
+    <value>De verzameling kan niet aan zichzelf worden toegevoegd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>La DACL ne peut pas être canonisée car cela entraînerait potentiellement une perte d'informations.</value>
+    <value>De DACL kan niet worden gecanoniseerd omdat dit mogelijk tot verlies van informatie zou leiden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp; Commentaire :</value>
-    <comment>Manually overriden.</comment>
+    <value>commentaar:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copie des fichiers</value>
-    <comment>Manually overriden.</comment>
+    <value>Kopiëren van bestanden</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copier dans le presse-papier</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopiëren naar klembord</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le directoire de destination existe déjà</value>
-    <comment>Manually overriden.</comment>
+    <value>De doelmap bestaat al.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Chargement {0}</value>
-    <comment>Manually overriden.</comment>
+    <value>Aan het downloaden {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
+    <value>Als u wilt, kunt u dit veld gebruiken om extra informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Rapport d'erreur</value>
-    <comment>Manually overriden.</comment>
+    <value>Fout rapport</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Faire et ne pas faire de rapport</value>
+    <value>Wel &amp; niet melden</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Une erreur inattendue s'est produite dans cette application. Vous pouvez nous aider à résoudre le problème en le signalant. S'il existe déjà une solution connue pour votre problème, elle sera affichée juste après l'envoi du rapport.</value>
+    <value>Er is een onverwachte fout opgetreden in deze toepassing. U kunt ons helpen het probleem op te lossen door het te melden. Als er al een oplossing voor uw probleem bekend is, wordt deze direct na het verzenden van de melding weergegeven.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -115,187 +115,187 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été bien envoyé</value>
-    <comment>Manually overriden.</comment>
+    <value>Het foutrapport is succesvol verzonden.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Échec du téléchargement de {0}.</value>
+    <value>Het downloaden van {0} is mislukt.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossible d'ouvrir la sous-clé de registre '{0}' dans '{1}'.</value>
+    <value>Kan registersubkey '{0}' in '{1}' niet openen.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Échec du rollback de '{0}'.</value>
+    <value>Mislukt om '{0}' terug te draaien.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossible de démarrer '{0}'.</value>
+    <value>Mislukt om '{0}' te starten.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui devait être téléchargé depuis {0} n'a pas la taille attendue. Il devait faire {1} octets mais il fait {2} octets.</value>
+    <value>Het bestand dat gedownload had moeten worden van {0} heeft niet de verwachte grootte. Het had {1} bytes moeten zijn, maar was eigenlijk {2} bytes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Le fichier "{0}" n'a pas pu être trouvé.</value>
+    <value>Het bestand "{0}" kon niet gevonden worden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Le répertoire de configuration '{0}' est probablement invalide.</value>
+    <value>De configuratiemap '{0}' is waarschijnlijk ongeldig.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Les informations d'identification de {0} sont incorrectes.</value>
+    <value>De inloggegevens voor {0} zijn onjuist.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>La clé était déjà présente dans le dictionnaire.</value>
+    <value>De sleutel was al aanwezig in het woordenboek.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Le lancement de '{0}' requiert des privilèges d'administrateur.</value>
+    <value>Om '{0}' te starten zijn Administrator-rechten nodig.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>La quantité maximale d'éléments dans la collection a été dépassée.</value>
+    <value>Het maximum aantal elementen in de collectie is overschreden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Aucune action enregistrée pour '{0}'.</value>
+    <value>Geen actie geregistreerd voor '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Non</value>
+    <value>Geen</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configuration du système ne peut pas être modifiée en mode portable.</value>
+    <value>Systeemconfiguratie kan niet worden bewerkt in draagbare modus.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Cette méthode n'est disponible que sous Windows.</value>
+    <value>Deze methode is alleen beschikbaar onder Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe :</value>
+    <value>Wachtwoord:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Veuillez entrer les informations d'identification pour {0} :</value>
+    <value>Voer inloggegevens in voor {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
-    <comment>Manually overriden.</comment>
+    <value>Er was een probleem met het laden van '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' a quitté avec le code de sortie {1}.</value>
+    <value>{0}' is verlaten met exit code {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Een proces is afgesloten met een onverwachte exit code.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lecture du fichier {0}</value>
+    <value>Lezen van bestand {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Deze opdracht kan pas opnieuw worden uitgevoerd nadat de opdracht ongedaan maken is uitgevoerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>valeur &amp;Reset</value>
+    <value>&amp;Reset waarde</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Redémarrage des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Opnieuw opstarten van toepassingen</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Chercher</value>
-    <comment>Manually overriden.</comment>
+    <value>Zoeken op</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Recherche de références de fichiers ouverts</value>
+    <value>Zoeken naar open bestand referenties</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentative de lecture à partir de la position {0}. Cette position est éloignée de {1} octets de la position {2} du flux sous-jacent, mais le tampon de recherche ne peut prendre en compte qu'une différence de {3} octets.</value>
+    <value>Poging tot lezen vanaf positie {0}. Dit is {1} bytes verwijderd van de onderliggende stroom positie {2}, maar de zoekbuffer kan slechts een verschil van {3} bytes aan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Fermeture des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Afsluiten van toepassingen</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>La source et la destination sont égales.</value>
+    <value>Bron en bestemming zijn gelijk.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Complete</value>
-    <comment>Manually overriden.</comment>
+    <value>Compleet</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Traitement des données</value>
+    <value>Verwerking van gegevens</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obtenir des en-têtes</value>
+    <value>Het krijgen van headers</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Erreur IO</value>
+    <value>IO fout</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>Manually overriden.</comment>
+    <value>Klaar</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>L'erreur du réseau</value>
-    <comment>Manually overriden.</comment>
+    <value>Web fout</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
+    <value>Lengte van doelen moet gelijk zijn aan lengte van oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Détails techniques :</value>
+    <value>Technische details:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Votre version de .NET ne prend pas en charge TLS 1.2. Cela peut entraîner des erreurs de connexion lors du téléchargement de contenu via HTTPS. Veuillez exécuter Windows Update pour installer les correctifs nécessaires.</value>
+    <value>Uw versie van .NET ondersteunt TLS 1.2 niet. Dit kan verbindingsfouten veroorzaken bij het downloaden van inhoud via HTTPS. Voer Windows Update uit om de noodzakelijke patches te installeren.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>L'assemblage nommé "{0}" n'a pas pu être localisé.</value>
+    <value>De assembly met de naam "{0}" kon niet worden gevonden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossible de lire {0} octets depuis le flux.</value>
+    <value>Kan {0} bytes van de stream niet lezen.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande réelle n'a pas été exécutée.</value>
+    <value>Deze opdracht ongedaan maken kan pas worden uitgevoerd nadat de eigenlijke opdracht is uitgevoerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Vos droits sont peut-être insuffisants.</value>
+    <value>Het Unix subsysteem kon het verzoek niet verwerken. U hebt misschien onvoldoende rechten.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom de l'utilisateur :</value>
+    <value>Gebruikersnaam:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Ja</value>
     <comment>Automatically translated.</comment>
   </data>
 </root>

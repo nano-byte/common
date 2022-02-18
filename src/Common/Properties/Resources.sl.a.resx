@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Geri</value>
-    <comment>Manually overriden.</comment>
+    <value>Nazaj</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>İptal</value>
-    <comment>Manually overriden.</comment>
+    <value>Prekliči</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Bir koleksiyon kendi içine eklenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Zbirke ni mogoče dodati k sebi.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
-    <comment>Manually overriden.</comment>
+    <value>DACL ni mogoče kanonizirati, saj bi to lahko povzročilo izgubo informacij.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Yorum:</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Komentar:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Dosyalar kopyalanıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Kopiranje datotek</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Panoya kopyala</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopiraj v odložišče</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Hedef klasör zaten var.</value>
-    <comment>Manually overriden.</comment>
+    <value>Namembni imenik že obstaja.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>{0} indiriliyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Prenos {0}</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
-    <comment>Manually overriden.</comment>
+    <value>Če želite, lahko v tem polju navedete dodatne informacije o težavi, na primer opis, kaj ste počeli, ko je prišlo do okvare.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Hata bildirimi</value>
-    <comment>Manually overriden.</comment>
+    <value>Poročilo o napaki</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Bildir&amp;me</value>
-    <comment>Manually overriden.</comment>
+    <value>Ali &amp;ne poroča</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bu sorunu bize bildirerek çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, bildiriminiz gönderildikten hemen sonra görüntülenir.</value>
-    <comment>Manually overriden.</comment>
+    <value>V tej aplikaciji je prišlo do nepričakovane napake. Težavo nam lahko pomagate odpraviti tako, da jo prijavite. Če je za vašo težavo že znan popravek, bo prikazan takoj po pošiljanju poročila.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Bildir</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Report</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Hata raporu gönderildi.</value>
-    <comment>Manually overriden.</comment>
+    <value>Poročilo o napaki je bilo uspešno poslano.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>{0} indirilemedi.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ni uspelo prenesti {0}.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}' içindeki '{0}' kayıt defteri anahtarı açılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ni uspelo odpreti podključa registra '{0}' v '{1}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>'{0}' geri alınamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ni uspelo vrniti v prejšnje stanje '{0}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>'{0}' başlatılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ni uspelo zagnati '{0}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
-    <comment>Manually overriden.</comment>
+    <value>Datoteka, ki naj bi bila prenesena iz {0}, nima pričakovane velikosti. Imela naj bi {1} bajtov, v resnici pa {2} bajtov.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>"{0}" dosyası bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Datoteke "{0}" ni bilo mogoče najti.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Büyük olasılıkla '{0}' yapılandırma klasörü geçersiz.</value>
-    <comment>Manually overriden.</comment>
+    <value>Konfiguracijski imenik '{0}' je verjetno neveljaven.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
-    <comment>Manually overriden.</comment>
+    <value>Prijavni podatki za {0} so napačni.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Anahtar zaten sözlükte var.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ključ je bil že prisoten v slovarju.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}' başlatmak için yönetici izinleri gerekli.</value>
-    <comment>Manually overriden.</comment>
+    <value>Za zagon programa '{0}' so potrebni skrbniški privilegiji.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Največja količina elementov v zbirki je bila presežena.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}' için bir işlem kaydedilmemiş.</value>
-    <comment>Manually overriden.</comment>
+    <value>Za '{0}' ni registrirano nobeno dejanje.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Hayır</value>
-    <comment>Manually overriden.</comment>
+    <value>Ne</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Sistemske konfiguracije ni mogoče urejati v prenosnem načinu.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Tamam</value>
-    <comment>Manually overriden.</comment>
+    <value>V REDU</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Bu yöntem yalnız Windows üzerinde kullanılabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ta metoda je na voljo samo v sistemu Windows.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Parola:</value>
-    <comment>Manually overriden.</comment>
+    <value>Geslo:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Lütfen {0} için oturum açma bilgilerinizi yazın:</value>
-    <comment>Manually overriden.</comment>
+    <value>Vnesite prijavne podatke za {0}:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>'{0}' yüklenirken bir sorun çıktı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Pri nalaganju '{0}' je prišlo do težave.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}',  {1} çıkış koduyla kapandı.</value>
-    <comment>Manually overriden.</comment>
+    <value>'{0}' se je zaključil s kodo izhoda {1}.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
-    <comment>Manually overriden.</comment>
+    <value>Proces se je končal z nepričakovano kodo zaključka.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>{0} dosyası okunuyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Branje datoteke {0}</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Tega ukaza ni mogoče ponovno izvesti, dokler ni izveden ukaz razveljavitve.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>&amp;Değeri sıfırla</value>
-    <comment>Manually overriden.</comment>
+    <value>vrednost &amp;Reset</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Uygulamalar yeniden başlatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Ponovni zagon aplikacij</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Arama</value>
-    <comment>Manually overriden.</comment>
+    <value>Iskanje</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Dosyayı açacak uygulamalar aranıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Iskanje referenc odprtih datotek</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Poskus branja s položaja {0}. Ta je {1} bajtov oddaljen od položaja {2} osnovnega toka, vendar lahko iskalni buffer sprejme le razliko {3} bajtov.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Uygulamalar kapatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Izklop aplikacij</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Kaynak ve hedef eşit.</value>
-    <comment>Manually overriden.</comment>
+    <value>Vir in cilj sta enaka.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Tamamla</value>
-    <comment>Manually overriden.</comment>
+    <value>Popolnoma</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Veri işleniyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Obdelava podatkov</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Başlıklar alınıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Pridobivanje glave</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Giriş çıkış sorunu</value>
-    <comment>Manually overriden.</comment>
+    <value>Napaka IO</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Hazır</value>
-    <comment>Manually overriden.</comment>
+    <value>Pripravljen</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web sorunu</value>
-    <comment>Manually overriden.</comment>
+    <value>Spletna napaka</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
-    <comment>Manually overriden.</comment>
+    <value>Dolžina ciljev mora biti enaka dolžini oldValues</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Teknik ayrıntılar:</value>
-    <comment>Manually overriden.</comment>
+    <value>Tehnične podrobnosti:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>.NET sürümünüz TLS 1.2 sürümünü desteklemiyor. Bu durum HTTPS üzerinden içerik indirilirken sorun çıkmasına neden olabilir. Lütfen gerekli güncellemelerin kurulması için Windows Update uygulamasını çalıştırın.</value>
-    <comment>Manually overriden.</comment>
+    <value>Vaša različica .NET ne podpira TLS 1.2. To lahko povzroči napake povezave pri prenašanju vsebine prek protokola HTTPS. Zaženite program Windows Update, da namestite potrebne popravke.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}" adındaki yöntem bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Sestava z imenom "{0}" ni bilo mogoče najti.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Akıştan {0} bayt okunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ni mogoče prebrati {0} bajtov iz toka.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Bu geri alma komutu yürürlükteki komutun işlenmesi bitene kadar yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Tega ukaza razveljavitve ni mogoče izvesti, dokler ni izveden dejanski ukaz.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Unix alt sistemi isteği işleyemedi. İzinleriniz yeterli olmayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Podsistem Unix ni uspel obdelati zahteve. Morda nimate zadostnih pravic.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Kullanıcı adı:</value>
-    <comment>Manually overriden.</comment>
+    <value>Uporabniško ime:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Evet</value>
-    <comment>Manually overriden.</comment>
+    <value>Da</value>
+    <comment>Automatically Translated</comment>
   </data>
 </root>

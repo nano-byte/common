@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Zurück</value>
-    <comment>Manually overriden.</comment>
+    <value>Tillbaka</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
-    <comment>Manually overriden.</comment>
+    <value>Avbryt</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Die Collection kann nicht zu sich selbst hinzugefügt werden.</value>
-    <comment>Manually overriden.</comment>
+    <value>Samlingen kan inte läggas till sig själv.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Die DACL kann nicht in eine kanonische Form überfürht werden, da es dabei zu einem Informationsverlust kommen könnte.</value>
-    <comment>Manually overriden.</comment>
+    <value>DACL kan inte kanoniseras eftersom det skulle kunna leda till informationsförlust.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>&amp;Kommentar:</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Kopiere Dateien</value>
-    <comment>Manually overriden.</comment>
+    <value>Kopiering av filer</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>In Zwischenablage &amp;kopieren</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopiera till urklipp</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Das Zielverzeichnis existiert bereits.</value>
-    <comment>Manually overriden.</comment>
+    <value>Målkatalogen finns redan.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Lade {0} runter</value>
-    <comment>Manually overriden.</comment>
+    <value>Hämta {0}</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Wenn Sie möchten, können Sie dieses Feld nutzen, um zusätzliche Informationen über das Problem, wie zum Beispiel eine Beschreibung dessen was Sie zum Zeitpunkt des Absturzes gemacht, anzugeben.</value>
-    <comment>Manually overriden.</comment>
+    <value>Om du vill kan du använda det här fältet för att ge ytterligare information om problemet, t.ex. en beskrivning av vad du gjorde när kraschen inträffade.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Fehlerberichterstattung</value>
-    <comment>Manually overriden.</comment>
+    <value>Felrapport</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>&amp;Nicht berichten</value>
-    <comment>Manually overriden.</comment>
+    <value>Rapportera och inte rapportera</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Ein unerwarteter Fehler ist in dieser Anwendung aufgetreten. Sie können uns bei der Behebung des Problems helfen, indem Sie es melden. Falls es bereits eine bekannte Lösung für Ihr Problem gibt, wird sie unmittelbar nach dem Senden angezeigt.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ett oväntat fel har inträffat i den här ansökan. Du kan hjälpa oss att åtgärda problemet genom att rapportera det. Om det redan finns en känd lösning för ditt problem kommer den att visas direkt efter att du skickat rapporten.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Berichten</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Rapportera</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Der Fehlerbericht wurde erfolgreich versendet.</value>
-    <comment>Manually overriden.</comment>
+    <value>Felrapporten skickades framgångsrikt.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Download von {0} fehlgeschlagen.</value>
-    <comment>Manually overriden.</comment>
+    <value>Nedladdning av {0} misslyckades.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Konnte Registrierungs-Subschlüssel '{0}' in '{1}' nicht öffnen.</value>
-    <comment>Manually overriden.</comment>
+    <value>Misslyckades med att öppna registerundernyckeln '{0}' i '{1}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Konnte '{0}' nicht rückgängig machen.</value>
-    <comment>Manually overriden.</comment>
+    <value>Misslyckades med att återställa "{0}".</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Konnte '{0}' nicht starten.</value>
-    <comment>Manually overriden.</comment>
+    <value>Det gick inte att starta "{0}".</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Die Datei die von {0} runtergeladen werden sollte, hat nicht die erwartete Größe. Sollten {1} Bytes sein, waren aber {2} Bytes.</value>
-    <comment>Manually overriden.</comment>
+    <value>Filen som skulle hämtas från {0} har inte den förväntade storleken. Den skulle vara {1} bytes men var i själva verket {2} bytes.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Die Datei "{0}" konnte nicht gefunden werden.</value>
-    <comment>Manually overriden.</comment>
+    <value>Filen "{0}" kunde inte hittas.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Das Konfigurationsverzeichnis '{0}' ist vermutlich ungültig.</value>
-    <comment>Manually overriden.</comment>
+    <value>Konfigurationskatalogen "{0}" är förmodligen ogiltig.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Die Anmeldedaten für {0} sind ungültig.</value>
-    <comment>Manually overriden.</comment>
+    <value>Inloggningsuppgifterna för {0} är felaktiga.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Der Schlüssel befindet sich bereits im Dictionary.</value>
-    <comment>Manually overriden.</comment>
+    <value>Nyckeln fanns redan i ordlistan.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Der Start von '{0}' erfordert Administratorrechte.</value>
-    <comment>Manually overriden.</comment>
+    <value>För att starta "{0}" krävs administratörsrättigheter.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Die maximale Anzahl an Elementen in der Collection wurde überschritten.</value>
-    <comment>Manually overriden.</comment>
+    <value>Det maximala antalet element i samlingen har överskridits.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Keine Aktion für '{0}' registriert.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ingen åtgärd har registrerats för "{0}".</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Nein</value>
-    <comment>Manually overriden.</comment>
+    <value>Ingen</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Systemkonfiguration kann im Portable-Modus nicht bearbeitet werden.</value>
-    <comment>Manually overriden.</comment>
+    <value>Systemkonfigurationen kan inte redigeras i bärbart läge.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Diese Methode steht nur unter Windows zur Verfügung.</value>
-    <comment>Manually overriden.</comment>
+    <value>Den här metoden är endast tillgänglig i Windows.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Passwort:</value>
-    <comment>Manually overriden.</comment>
+    <value>Lösenord:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Bitte geben Sie Anmeldedaten für {0} ein:</value>
-    <comment>Manually overriden.</comment>
+    <value>Ange inloggningsuppgifter för {0}:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Es gab ein Problem beim Laden von '{0}'.</value>
-    <comment>Manually overriden.</comment>
+    <value>Det var ett problem med att ladda "{0}".</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' wurde mit dem Exit Code {1} beendet.</value>
-    <comment>Manually overriden.</comment>
+    <value>'{0}' avslutades med utgångskod {1}.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Ein Prozess wurde mit einem unerwarteten Exit Code beendet.</value>
-    <comment>Manually overriden.</comment>
+    <value>En process avslutades med en oväntad utgångskod.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lese Datei {0}</value>
-    <comment>Manually overriden.</comment>
+    <value>Läser fil {0}</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Dieser Befehl kann nicht erneut ausgeführt werden, bis der Rückgängig-Befehl ausgeführt wurde.</value>
-    <comment>Manually overriden.</comment>
+    <value>Det här kommandot kan inte utföras igen förrän kommandot för att ångra har utförts.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Wert &amp;zurücksetzen</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp; Återställ värde</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Starte Anwendungen neu</value>
-    <comment>Manually overriden.</comment>
+    <value>Omstart av program</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Suche</value>
-    <comment>Manually overriden.</comment>
+    <value>Sök på</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Suche nach offenen Dateireferenzen</value>
-    <comment>Manually overriden.</comment>
+    <value>Sökning efter referenser till öppna filer</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Es wurde versucht, von Position {0} zu lesen. Diese ist {1} Bytes von der zugrunde liegenden Stream-Position {2} entfernt, aber der Suchpuffer kann nur eine Differenz von {3} Bytes behandeln.</value>
-    <comment>Manually overriden.</comment>
+    <value>Försökte läsa från position {0}. Detta är {1} byte från den underliggande strömmen position {2}, men sökbufferten kan bara ta emot en skillnad på {3} byte.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Beende Anwendungen</value>
-    <comment>Manually overriden.</comment>
+    <value>Stänga av program</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Quelle und Ziel sind gleich.</value>
-    <comment>Manually overriden.</comment>
+    <value>Källa och destination är lika.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Abgeschlossen</value>
-    <comment>Manually overriden.</comment>
+    <value>Komplett</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Verarbeite Daten</value>
-    <comment>Manually overriden.</comment>
+    <value>Bearbetning av uppgifter</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Hole Header</value>
-    <comment>Manually overriden.</comment>
+    <value>Hämta rubriker</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>IO Fehler</value>
-    <comment>Manually overriden.</comment>
+    <value>IO-fel</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Bereit</value>
-    <comment>Manually overriden.</comment>
+    <value>Redo</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web Fehler</value>
-    <comment>Manually overriden.</comment>
+    <value>Webfel</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Length von targets muss gleich Length von oldValues sein</value>
-    <comment>Manually overriden.</comment>
+    <value>Längden på målen måste vara lika med längden på oldValues</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Technische Details:</value>
-    <comment>Manually overriden.</comment>
+    <value>Tekniska detaljer:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Ihre Version von .NET unterstützt nicht TLS 1.2. Dies kann Verbindungsfehler beim Runterladen von Inhalt via HTTPS verursachen. Bitte führen Sie Windows Update aus, um die notwendigen Patches zu installieren.</value>
-    <comment>Manually overriden.</comment>
+    <value>Din version av .NET stöder inte TLS 1.2. Detta kan orsaka anslutningsfel när du hämtar innehåll via HTTPS. Kör Windows Update för att installera de nödvändiga patcherna.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Die Assembly mit dem Namen "{0}" konnte nicht gefunden werden.</value>
-    <comment>Manually overriden.</comment>
+    <value>Samlingen som heter "{0}" kunde inte hittas.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Konnte nicht {0} Bytes vom Stream lesen.</value>
-    <comment>Manually overriden.</comment>
+    <value>Det går inte att läsa {0} bytes från strömmen.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Dieser Rückgängig-Befehl kann nicht ausgeführt werden, bis der eigentliche Befehl ausgeführt wurde.</value>
-    <comment>Manually overriden.</comment>
+    <value>Detta ångrakommando kan inte utföras förrän det faktiska kommandot har utförts.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Das Unix Subsystem war nicht in der Lage die Anfrage zu bearbeiten. Eventuell haben Sie unzureichende Rechte.</value>
-    <comment>Manually overriden.</comment>
+    <value>Unix-undersystemet misslyckades med att behandla begäran. Du kanske inte har tillräckliga rättigheter.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Benutzername:</value>
-    <comment>Manually overriden.</comment>
+    <value>Användarnamn:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
 </root>

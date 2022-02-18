@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Geri</value>
-    <comment>Manually overriden.</comment>
+    <value>Tagasi</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>İptal</value>
-    <comment>Manually overriden.</comment>
+    <value>Tühista</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Bir koleksiyon kendi içine eklenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Kollektsiooni ei saa iseendale lisada.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
-    <comment>Manually overriden.</comment>
+    <value>DACLi ei saa kanoniseerida, kuna see võib põhjustada teabe kadumist.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Yorum:</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kommentaar:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Dosyalar kopyalanıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Failide kopeerimine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Panoya kopyala</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopeeri lõikelauale</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Hedef klasör zaten var.</value>
-    <comment>Manually overriden.</comment>
+    <value>Sihtkataloog on juba olemas.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>{0} indiriliyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Allalaadimine {0}</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
-    <comment>Manually overriden.</comment>
+    <value>Kui soovite, võite kasutada seda välja, et esitada probleemi kohta lisateavet, näiteks kirjelduse selle kohta, mida te tegite õnnetuse toimumise ajal.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Hata bildirimi</value>
-    <comment>Manually overriden.</comment>
+    <value>Veateade</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Bildir&amp;me</value>
-    <comment>Manually overriden.</comment>
+    <value>Do &amp;not report</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bu sorunu bize bildirerek çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, bildiriminiz gönderildikten hemen sonra görüntülenir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Selles rakenduses on ilmnenud ootamatu viga. Te saate aidata meil probleemi parandada, teatades sellest. Kui teie probleemile on juba teadaolev lahendus, kuvatakse see kohe pärast teate saatmist.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Bildir</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Raport</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Hata raporu gönderildi.</value>
-    <comment>Manually overriden.</comment>
+    <value>Veateade saadeti edukalt.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>{0} indirilemedi.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ei õnnestunud alla laadida {0}.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}' içindeki '{0}' kayıt defteri anahtarı açılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Registri alamvõtme '{0}' avamine '{1}' registris ebaõnnestus.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>'{0}' geri alınamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Tagasivõtmine '{0}' ebaõnnestus.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>'{0}' başlatılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ei õnnestunud käivitada '{0}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
-    <comment>Manually overriden.</comment>
+    <value>Failil, mis pidi alla laadima {0}, ei ole oodatud suurust. See pidi olema {1} baiti, kuid tegelikult oli see {2} baiti.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>"{0}" dosyası bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Faili "{0}" ei leitud.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Büyük olasılıkla '{0}' yapılandırma klasörü geçersiz.</value>
-    <comment>Manually overriden.</comment>
+    <value>Konfiguratsioonikataloog '{0}' on tõenäoliselt kehtetu.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
-    <comment>Manually overriden.</comment>
+    <value>{0} sisselogimise andmed on valed.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Anahtar zaten sözlükte var.</value>
-    <comment>Manually overriden.</comment>
+    <value>Võti oli juba sõnaraamatus olemas.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}' başlatmak için yönetici izinleri gerekli.</value>
-    <comment>Manually overriden.</comment>
+    <value>'{0}' käivitamiseks on vaja administraatori õigusi.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Kollektsiooni maksimaalne elementide arv on ületatud.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}' için bir işlem kaydedilmemiş.</value>
-    <comment>Manually overriden.</comment>
+    <value>Tegevust '{0}' ei ole registreeritud.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Hayır</value>
-    <comment>Manually overriden.</comment>
+    <value>Ei</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Süsteemi konfiguratsiooni ei saa teisaldatavas režiimis muuta.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Tamam</value>
-    <comment>Manually overriden.</comment>
+    <value>OK</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Bu yöntem yalnız Windows üzerinde kullanılabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>See meetod on saadaval ainult Windowsis.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Parola:</value>
-    <comment>Manually overriden.</comment>
+    <value>Parool:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Lütfen {0} için oturum açma bilgilerinizi yazın:</value>
-    <comment>Manually overriden.</comment>
+    <value>Palun sisestage {0} sisselogimise andmed:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>'{0}' yüklenirken bir sorun çıktı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Tekkis probleem '{0}' laadimisel.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}',  {1} çıkış koduyla kapandı.</value>
-    <comment>Manually overriden.</comment>
+    <value>'{0}' väljus väljumiskoodiga {1}.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
-    <comment>Manually overriden.</comment>
+    <value>Protsess väljus ootamatu väljumiskoodiga.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>{0} dosyası okunuyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Faili {0} lugemine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Seda käsku ei saa uuesti sooritada enne, kui käsk undo on sooritatud.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>&amp;Değeri sıfırla</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Reset väärtus</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Uygulamalar yeniden başlatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Rakenduste taaskäivitamine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Arama</value>
-    <comment>Manually overriden.</comment>
+    <value>Otsi</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Dosyayı açacak uygulamalar aranıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Avatud failiviidete otsimine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Püüti lugeda positsioonilt {0}. See on {1} baiti kaugusel aluseks olevast voo positsioonist {2}, kuid otsimispuhver suudab vastu võtta ainult {3} baidi suuruse erinevuse.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Uygulamalar kapatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Rakenduste sulgemine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Kaynak ve hedef eşit.</value>
-    <comment>Manually overriden.</comment>
+    <value>Allikas ja sihtkoht on võrdsed.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Tamamla</value>
-    <comment>Manually overriden.</comment>
+    <value>Täielik</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Veri işleniyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Andmete töötlemine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Başlıklar alınıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Pealkirjade saamine</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Giriş çıkış sorunu</value>
-    <comment>Manually overriden.</comment>
+    <value>IO viga</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Hazır</value>
-    <comment>Manually overriden.</comment>
+    <value>Valmis</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web sorunu</value>
-    <comment>Manually overriden.</comment>
+    <value>Veebiviga</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
-    <comment>Manually overriden.</comment>
+    <value>Eesmärkide pikkus peab olema võrdne vanade väärtuste pikkusega</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Teknik ayrıntılar:</value>
-    <comment>Manually overriden.</comment>
+    <value>Tehnilised üksikasjad:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>.NET sürümünüz TLS 1.2 sürümünü desteklemiyor. Bu durum HTTPS üzerinden içerik indirilirken sorun çıkmasına neden olabilir. Lütfen gerekli güncellemelerin kurulması için Windows Update uygulamasını çalıştırın.</value>
-    <comment>Manually overriden.</comment>
+    <value>Teie .NET versioon ei toeta TLS 1.2. See võib HTTPS-i kaudu sisu allalaadimisel põhjustada ühendusvigu. Palun käivitage Windows Update, et paigaldada vajalikud parandused.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}" adındaki yöntem bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Koondist nimega "{0}" ei õnnestunud leida.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Akıştan {0} bayt okunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ei ole võimalik lugeda {0} baiti voost.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Bu geri alma komutu yürürlükteki komutun işlenmesi bitene kadar yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Seda tühistamiskäsklust ei saa teha enne, kui tegelik käsk on sooritatud.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Unix alt sistemi isteği işleyemedi. İzinleriniz yeterli olmayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Unixi allsüsteemil ei õnnestunud taotlust töödelda. Teil võib olla ebapiisavad õigused.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Kullanıcı adı:</value>
-    <comment>Manually overriden.</comment>
+    <value>Kasutajanimi:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Evet</value>
-    <comment>Manually overriden.</comment>
+    <value>Jah</value>
+    <comment>Automatically Translated</comment>
   </data>
 </root>

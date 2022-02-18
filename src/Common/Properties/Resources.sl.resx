@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Retourner</value>
-    <comment>Manually overriden.</comment>
+    <value>Nazaj</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Manually overriden.</comment>
+    <value>Prekliči</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collection ne peut pas être ajoutée à elle-même.</value>
+    <value>Zbirke ni mogoče dodati k sebi.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>La DACL ne peut pas être canonisée car cela entraînerait potentiellement une perte d'informations.</value>
+    <value>DACL ni mogoče kanonizirati, saj bi to lahko povzročilo izgubo informacij.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp; Commentaire :</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Komentar:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copie des fichiers</value>
-    <comment>Manually overriden.</comment>
+    <value>Kopiranje datotek</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copier dans le presse-papier</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopiraj v odložišče</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le directoire de destination existe déjà</value>
-    <comment>Manually overriden.</comment>
+    <value>Namembni imenik že obstaja.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Chargement {0}</value>
-    <comment>Manually overriden.</comment>
+    <value>Prenos {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
+    <value>Če želite, lahko v tem polju navedete dodatne informacije o težavi, na primer opis, kaj ste počeli, ko je prišlo do okvare.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Rapport d'erreur</value>
-    <comment>Manually overriden.</comment>
+    <value>Poročilo o napaki</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Faire et ne pas faire de rapport</value>
+    <value>Ali &amp;ne poroča</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Une erreur inattendue s'est produite dans cette application. Vous pouvez nous aider à résoudre le problème en le signalant. S'il existe déjà une solution connue pour votre problème, elle sera affichée juste après l'envoi du rapport.</value>
+    <value>V tej aplikaciji je prišlo do nepričakovane napake. Težavo nam lahko pomagate odpraviti tako, da jo prijavite. Če je za vašo težavo že znan popravek, bo prikazan takoj po pošiljanju poročila.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Rapport</value>
+    <value>&amp;Report</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été bien envoyé</value>
-    <comment>Manually overriden.</comment>
+    <value>Poročilo o napaki je bilo uspešno poslano.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Échec du téléchargement de {0}.</value>
+    <value>Ni uspelo prenesti {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossible d'ouvrir la sous-clé de registre '{0}' dans '{1}'.</value>
+    <value>Ni uspelo odpreti podključa registra '{0}' v '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Échec du rollback de '{0}'.</value>
+    <value>Ni uspelo vrniti v prejšnje stanje '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossible de démarrer '{0}'.</value>
+    <value>Ni uspelo zagnati '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui devait être téléchargé depuis {0} n'a pas la taille attendue. Il devait faire {1} octets mais il fait {2} octets.</value>
+    <value>Datoteka, ki naj bi bila prenesena iz {0}, nima pričakovane velikosti. Imela naj bi {1} bajtov, v resnici pa {2} bajtov.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Le fichier "{0}" n'a pas pu être trouvé.</value>
+    <value>Datoteke "{0}" ni bilo mogoče najti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Le répertoire de configuration '{0}' est probablement invalide.</value>
+    <value>Konfiguracijski imenik '{0}' je verjetno neveljaven.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Les informations d'identification de {0} sont incorrectes.</value>
+    <value>Prijavni podatki za {0} so napačni.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>La clé était déjà présente dans le dictionnaire.</value>
+    <value>Ključ je bil že prisoten v slovarju.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Le lancement de '{0}' requiert des privilèges d'administrateur.</value>
+    <value>Za zagon programa '{0}' so potrebni skrbniški privilegiji.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>La quantité maximale d'éléments dans la collection a été dépassée.</value>
+    <value>Največja količina elementov v zbirki je bila presežena.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Aucune action enregistrée pour '{0}'.</value>
+    <value>Za '{0}' ni registrirano nobeno dejanje.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Non</value>
+    <value>Ne</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configuration du système ne peut pas être modifiée en mode portable.</value>
+    <value>Sistemske konfiguracije ni mogoče urejati v prenosnem načinu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <value>V REDU</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Cette méthode n'est disponible que sous Windows.</value>
+    <value>Ta metoda je na voljo samo v sistemu Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe :</value>
+    <value>Geslo:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Veuillez entrer les informations d'identification pour {0} :</value>
+    <value>Vnesite prijavne podatke za {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
-    <comment>Manually overriden.</comment>
+    <value>Pri nalaganju '{0}' je prišlo do težave.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' a quitté avec le code de sortie {1}.</value>
+    <value>'{0}' se je zaključil s kodo izhoda {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Proces se je končal z nepričakovano kodo zaključka.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lecture du fichier {0}</value>
+    <value>Branje datoteke {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Tega ukaza ni mogoče ponovno izvesti, dokler ni izveden ukaz razveljavitve.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>valeur &amp;Reset</value>
+    <value>vrednost &amp;Reset</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Redémarrage des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Ponovni zagon aplikacij</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Chercher</value>
-    <comment>Manually overriden.</comment>
+    <value>Iskanje</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Recherche de références de fichiers ouverts</value>
+    <value>Iskanje referenc odprtih datotek</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentative de lecture à partir de la position {0}. Cette position est éloignée de {1} octets de la position {2} du flux sous-jacent, mais le tampon de recherche ne peut prendre en compte qu'une différence de {3} octets.</value>
+    <value>Poskus branja s položaja {0}. Ta je {1} bajtov oddaljen od položaja {2} osnovnega toka, vendar lahko iskalni buffer sprejme le razliko {3} bajtov.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Fermeture des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Izklop aplikacij</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>La source et la destination sont égales.</value>
+    <value>Vir in cilj sta enaka.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Complete</value>
-    <comment>Manually overriden.</comment>
+    <value>Popolnoma</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Traitement des données</value>
+    <value>Obdelava podatkov</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obtenir des en-têtes</value>
+    <value>Pridobivanje glave</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Erreur IO</value>
+    <value>Napaka IO</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>Manually overriden.</comment>
+    <value>Pripravljen</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>L'erreur du réseau</value>
-    <comment>Manually overriden.</comment>
+    <value>Spletna napaka</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
+    <value>Dolžina ciljev mora biti enaka dolžini oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Détails techniques :</value>
+    <value>Tehnične podrobnosti:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Votre version de .NET ne prend pas en charge TLS 1.2. Cela peut entraîner des erreurs de connexion lors du téléchargement de contenu via HTTPS. Veuillez exécuter Windows Update pour installer les correctifs nécessaires.</value>
+    <value>Vaša različica .NET ne podpira TLS 1.2. To lahko povzroči napake povezave pri prenašanju vsebine prek protokola HTTPS. Zaženite program Windows Update, da namestite potrebne popravke.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>L'assemblage nommé "{0}" n'a pas pu être localisé.</value>
+    <value>Sestava z imenom "{0}" ni bilo mogoče najti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossible de lire {0} octets depuis le flux.</value>
+    <value>Ni mogoče prebrati {0} bajtov iz toka.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande réelle n'a pas été exécutée.</value>
+    <value>Tega ukaza razveljavitve ni mogoče izvesti, dokler ni izveden dejanski ukaz.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Vos droits sont peut-être insuffisants.</value>
+    <value>Podsistem Unix ni uspel obdelati zahteve. Morda nimate zadostnih pravic.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom de l'utilisateur :</value>
+    <value>Uporabniško ime:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Da</value>
     <comment>Automatically translated.</comment>
   </data>
 </root>

@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Geri</value>
+    <value>Indietro</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>İptal</value>
+    <value>Annulla</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Bir koleksiyon kendi içine eklenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>La collezione non può essere aggiunta a se stessa.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
-    <comment>Manually overriden.</comment>
+    <value>Il DACL non può essere canonizzato poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Yorum:</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Commento:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Dosyalar kopyalanıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Copiare i file</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Panoya kopyala</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Copia negli appunti</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Hedef klasör zaten var.</value>
-    <comment>Manually overriden.</comment>
+    <value>La directory di destinazione esiste già.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>{0} indiriliyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Scaricare {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
-    <comment>Manually overriden.</comment>
+    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di ciò che stavi facendo quando si è verificato l'incidente.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Hata bildirimi</value>
-    <comment>Manually overriden.</comment>
+    <value>Rapporto di errore</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Bildir&amp;me</value>
-    <comment>Manually overriden.</comment>
+    <value>Fare &amp; non fare rapporto</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bu sorunu bize bildirerek çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, bildiriminiz gönderildikten hemen sonra görüntülenir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Si è verificato un errore inaspettato in questa applicazione. Puoi aiutarci a risolvere il problema segnalandolo. Se c'è già una soluzione nota per il tuo problema, sarà visualizzata subito dopo aver inviato la segnalazione.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Bildir</value>
-    <comment>Manually overriden.</comment>
+    <value>rapporto</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Hata raporu gönderildi.</value>
-    <comment>Manually overriden.</comment>
+    <value>Il rapporto di errore è stato inviato con successo.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>{0} indirilemedi.</value>
-    <comment>Manually overriden.</comment>
+    <value>Impossibile scaricare {0}.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}' içindeki '{0}' kayıt defteri anahtarı açılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Impossibile aprire la sottochiave di registro '{0}' in '{1}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>'{0}' geri alınamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Fallito il rollback di '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>'{0}' başlatılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Fallito l'avvio di '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
-    <comment>Manually overriden.</comment>
+    <value>Il file che doveva essere scaricato da {0} non ha la dimensione prevista. Doveva essere {1} byte ma in realtà era {2} byte.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>"{0}" dosyası bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Il file "{0}" non può essere trovato.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Büyük olasılıkla '{0}' yapılandırma klasörü geçersiz.</value>
-    <comment>Manually overriden.</comment>
+    <value>La directory di configurazione '{0}' probabilmente non è valida.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
-    <comment>Manually overriden.</comment>
+    <value>Le credenziali di accesso per {0} non sono corrette.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Anahtar zaten sözlükte var.</value>
-    <comment>Manually overriden.</comment>
+    <value>La chiave era già presente nel dizionario.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}' başlatmak için yönetici izinleri gerekli.</value>
-    <comment>Manually overriden.</comment>
+    <value>Il lancio di '{0}' richiede i privilegi di amministratore.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
-    <comment>Manually overriden.</comment>
+    <value>La quantità massima di elementi nella collezione è stata superata.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}' için bir işlem kaydedilmemiş.</value>
-    <comment>Manually overriden.</comment>
+    <value>Nessuna azione registrata per '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Hayır</value>
+    <value>No</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>La configurazione del sistema non può essere modificata in modalità portatile.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Tamam</value>
-    <comment>Manually overriden.</comment>
+    <value>OK</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Bu yöntem yalnız Windows üzerinde kullanılabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Questo metodo è disponibile solo su Windows.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Parola:</value>
-    <comment>Manually overriden.</comment>
+    <value>Password:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Lütfen {0} için oturum açma bilgilerinizi yazın:</value>
-    <comment>Manually overriden.</comment>
+    <value>Inserisci le credenziali di accesso per {0}:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>'{0}' yüklenirken bir sorun çıktı.</value>
-    <comment>Manually overriden.</comment>
+    <value>C'è stato un problema nel caricare '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}',  {1} çıkış koduyla kapandı.</value>
-    <comment>Manually overriden.</comment>
+    <value>'{0}' è uscito con il codice di uscita {1}.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
-    <comment>Manually overriden.</comment>
+    <value>Un processo è uscito con un codice di uscita inaspettato.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>{0} dosyası okunuyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Lettura del file {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Questo comando non può essere eseguito di nuovo finché non è stato eseguito il comando undo.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>&amp;Değeri sıfırla</value>
-    <comment>Manually overriden.</comment>
+    <value>valore &amp;Reset</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Uygulamalar yeniden başlatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Riavvio delle applicazioni</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Arama</value>
+    <value>Cerca</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Dosyayı açacak uygulamalar aranıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Ricerca di riferimenti di file aperti</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ha tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione {2} dello stream sottostante, ma il buffer di ricerca può accogliere solo una differenza di {3} byte.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Uygulamalar kapatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Chiudere le applicazioni</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Kaynak ve hedef eşit.</value>
-    <comment>Manually overriden.</comment>
+    <value>Sorgente e destinazione sono uguali.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Tamamla</value>
+    <value>Completo</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Veri işleniyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Elaborazione dei dati</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Başlıklar alınıyor</value>
-    <comment>Manually overriden.</comment>
+    <value>Ottenere le intestazioni</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Giriş çıkış sorunu</value>
+    <value>Errore IO</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Hazır</value>
-    <comment>Manually overriden.</comment>
+    <value>Pronto</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web sorunu</value>
+    <value>Errore web</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
-    <comment>Manually overriden.</comment>
+    <value>La lunghezza degli obiettivi deve essere uguale alla lunghezza di oldValues</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Teknik ayrıntılar:</value>
-    <comment>Manually overriden.</comment>
+    <value>Dettagli tecnici:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>.NET sürümünüz TLS 1.2 sürümünü desteklemiyor. Bu durum HTTPS üzerinden içerik indirilirken sorun çıkmasına neden olabilir. Lütfen gerekli güncellemelerin kurulması için Windows Update uygulamasını çalıştırın.</value>
-    <comment>Manually overriden.</comment>
+    <value>La tua versione di .NET non supporta TLS 1.2. Questo può causare errori di connessione quando si scaricano contenuti via HTTPS. Esegui Windows Update per installare le patch necessarie.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}" adındaki yöntem bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>L'assieme chiamato "{0}" non può essere localizzato.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Akıştan {0} bayt okunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value>Impossibile leggere {0} byte dal flusso.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Bu geri alma komutu yürürlükteki komutun işlenmesi bitene kadar yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value>Questo comando di annullamento non può essere eseguito finché non è stato eseguito il comando attuale.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Unix alt sistemi isteği işleyemedi. İzinleriniz yeterli olmayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value>Il sottosistema Unix non è riuscito ad elaborare la richiesta. Potresti avere diritti insufficienti.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Kullanıcı adı:</value>
-    <comment>Manually overriden.</comment>
+    <value>Nome utente:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Evet</value>
+    <value>Si</value>
     <comment>Manually overriden.</comment>
   </data>
 </root>

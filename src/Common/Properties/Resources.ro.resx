@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Retourner</value>
-    <comment>Manually overriden.</comment>
+    <value>Înapoi</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Manually overriden.</comment>
+    <value>Anulează</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collection ne peut pas être ajoutée à elle-même.</value>
+    <value>Colecția nu poate fi adăugată la ea însăși.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>La DACL ne peut pas être canonisée car cela entraînerait potentiellement une perte d'informations.</value>
+    <value>DACL nu poate fi canonicalizat, deoarece ar putea duce la o pierdere de informații.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp; Commentaire :</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Comentariu:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copie des fichiers</value>
-    <comment>Manually overriden.</comment>
+    <value>Copierea fișierelor</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copier dans le presse-papier</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Copiază în clipboard</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le directoire de destination existe déjà</value>
-    <comment>Manually overriden.</comment>
+    <value>Directorul de destinație există deja.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Chargement {0}</value>
-    <comment>Manually overriden.</comment>
+    <value>Descărcare {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
+    <value>Dacă doriți, puteți utiliza acest câmp pentru a furniza informații suplimentare despre problemă, cum ar fi o descriere a ceea ce făceați în momentul în care s-a produs accidentul.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Rapport d'erreur</value>
-    <comment>Manually overriden.</comment>
+    <value>Raport de eroare</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Faire et ne pas faire de rapport</value>
+    <value>Nu și nu raportați</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Une erreur inattendue s'est produite dans cette application. Vous pouvez nous aider à résoudre le problème en le signalant. S'il existe déjà une solution connue pour votre problème, elle sera affichée juste après l'envoi du rapport.</value>
+    <value>A apărut o eroare neașteptată în această aplicație. Ne puteți ajuta să rezolvăm problema raportând-o. Dacă există deja o soluție cunoscută pentru problema dvs., aceasta va fi afișată imediat după trimiterea raportului.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Rapport</value>
+    <value>&amp;Raport</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été bien envoyé</value>
-    <comment>Manually overriden.</comment>
+    <value>Raportul de eroare a fost trimis cu succes.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Échec du téléchargement de {0}.</value>
+    <value>Nu a reușit să descarce {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossible d'ouvrir la sous-clé de registre '{0}' dans '{1}'.</value>
+    <value>Nu s-a reușit deschiderea subcheie de registru '{0}' în '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Échec du rollback de '{0}'.</value>
+    <value>A eșuat să se facă rollback '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossible de démarrer '{0}'.</value>
+    <value>Nu a reușit să pornească '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui devait être téléchargé depuis {0} n'a pas la taille attendue. Il devait faire {1} octets mais il fait {2} octets.</value>
+    <value>Fișierul care trebuia să fie descărcat de la {0} nu are dimensiunea așteptată. Trebuia să fie de {1} octeți, dar de fapt a fost de {2} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Le fichier "{0}" n'a pas pu être trouvé.</value>
+    <value>Fișierul "{0}" nu a putut fi găsit.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Le répertoire de configuration '{0}' est probablement invalide.</value>
+    <value>Directorul de configurare "{0}" este probabil invalid.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Les informations d'identification de {0} sont incorrectes.</value>
+    <value>Datele de autentificare pentru {0} sunt incorecte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>La clé était déjà présente dans le dictionnaire.</value>
+    <value>Cheia era deja prezentă în dicționar.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Le lancement de '{0}' requiert des privilèges d'administrateur.</value>
+    <value>Lansarea '{0}' necesită privilegii de administrator.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>La quantité maximale d'éléments dans la collection a été dépassée.</value>
+    <value>Numărul maxim de elemente din colecție a fost depășit.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Aucune action enregistrée pour '{0}'.</value>
+    <value>Nu s-a înregistrat nicio acțiune pentru "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Non</value>
+    <value>Nu</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configuration du système ne peut pas être modifiée en mode portable.</value>
+    <value>Configurația sistemului nu poate fi editată în modul portabil.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Cette méthode n'est disponible que sous Windows.</value>
+    <value>Această metodă este disponibilă numai pe Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe :</value>
+    <value>Parola:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Veuillez entrer les informations d'identification pour {0} :</value>
+    <value>Vă rugăm să introduceți datele de autentificare pentru {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
-    <comment>Manually overriden.</comment>
+    <value>A existat o problemă la încărcarea '{0}'.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' a quitté avec le code de sortie {1}.</value>
+    <value>'{0}' a ieșit cu codul de ieșire {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Un proces a ieșit cu un cod de ieșire neașteptat.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lecture du fichier {0}</value>
+    <value>Citirea fișierului {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Această comandă nu poate fi executată din nou până când nu se execută comanda de anulare.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>valeur &amp;Reset</value>
+    <value>&amp;Reset valoare</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Redémarrage des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Repornirea aplicațiilor</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Chercher</value>
-    <comment>Manually overriden.</comment>
+    <value>Căutare</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Recherche de références de fichiers ouverts</value>
+    <value>Căutarea de referințe de fișiere deschise</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentative de lecture à partir de la position {0}. Cette position est éloignée de {1} octets de la position {2} du flux sous-jacent, mais le tampon de recherche ne peut prendre en compte qu'une différence de {3} octets.</value>
+    <value>A încercat să citească din poziția {0}. Aceasta se află la {1} octeți distanță de poziția {2} a fluxului subiacent, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Fermeture des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Închiderea aplicațiilor</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>La source et la destination sont égales.</value>
+    <value>Sursa și destinația sunt egale.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Complete</value>
-    <comment>Manually overriden.</comment>
+    <value>Complet</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Traitement des données</value>
+    <value>Prelucrarea datelor</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obtenir des en-têtes</value>
+    <value>Obținerea antetului</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Erreur IO</value>
+    <value>Eroare IO</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>Manually overriden.</comment>
+    <value>Gata</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>L'erreur du réseau</value>
-    <comment>Manually overriden.</comment>
+    <value>Eroare web</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
+    <value>Lungimea țintelor trebuie să fie egală cu lungimea oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Détails techniques :</value>
+    <value>Detalii tehnice:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Votre version de .NET ne prend pas en charge TLS 1.2. Cela peut entraîner des erreurs de connexion lors du téléchargement de contenu via HTTPS. Veuillez exécuter Windows Update pour installer les correctifs nécessaires.</value>
+    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate cauza erori de conexiune atunci când descărcați conținut prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>L'assemblage nommé "{0}" n'a pas pu être localisé.</value>
+    <value>Ansamblul numit "{0}" nu a putut fi localizat.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossible de lire {0} octets depuis le flux.</value>
+    <value>Nu se poate citi {0} octeți din flux.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande réelle n'a pas été exécutée.</value>
+    <value>Această comandă de anulare nu poate fi executată până când nu a fost executată comanda efectivă.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Vos droits sont peut-être insuffisants.</value>
+    <value>Subsistemul Unix nu a reușit să proceseze cererea. Este posibil să aveți drepturi insuficiente.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom de l'utilisateur :</value>
+    <value>Numele utilizatorului:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Da</value>
     <comment>Automatically translated.</comment>
   </data>
 </root>

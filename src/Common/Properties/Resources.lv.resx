@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Retourner</value>
-    <comment>Manually overriden.</comment>
+    <value>Atpakaļ</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Manually overriden.</comment>
+    <value>Atcelt</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collection ne peut pas être ajoutée à elle-même.</value>
+    <value>Kolekciju nevar pievienot pašai sev.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>La DACL ne peut pas être canonisée car cela entraînerait potentiellement une perte d'informations.</value>
+    <value>DACL nevar kanonizēt, jo tas, iespējams, radītu informācijas zudumu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp; Commentaire :</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Komentārs:</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copie des fichiers</value>
-    <comment>Manually overriden.</comment>
+    <value>Failu kopēšana</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copier dans le presse-papier</value>
-    <comment>Manually overriden.</comment>
+    <value>&amp;Kopēt uz starpliktuvi</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le directoire de destination existe déjà</value>
-    <comment>Manually overriden.</comment>
+    <value>Galamērķa direktorija jau pastāv.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Chargement {0}</value>
-    <comment>Manually overriden.</comment>
+    <value>Lejupielāde {0}</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
+    <value>Ja vēlaties, varat izmantot šo lauku, lai sniegtu papildu informāciju par problēmu, piemēram, aprakstu par to, ko darījāt, kad notika avārija.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Rapport d'erreur</value>
-    <comment>Manually overriden.</comment>
+    <value>Kļūdas ziņojums</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Faire et ne pas faire de rapport</value>
+    <value>Vai &amp;neziņot</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Une erreur inattendue s'est produite dans cette application. Vous pouvez nous aider à résoudre le problème en le signalant. S'il existe déjà une solution connue pour votre problème, elle sera affichée juste après l'envoi du rapport.</value>
+    <value>Šajā lietojumprogrammā ir notikusi neparedzēta kļūda. Jūs varat palīdzēt mums novērst problēmu, ziņojot par to. Ja jūsu problēmai jau ir zināms risinājums, tas tiks parādīts uzreiz pēc ziņojuma nosūtīšanas.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Rapport</value>
+    <value>&amp;Report</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été bien envoyé</value>
-    <comment>Manually overriden.</comment>
+    <value>Kļūdas ziņojums tika veiksmīgi nosūtīts.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Échec du téléchargement de {0}.</value>
+    <value>Neizdevās lejupielādēt {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossible d'ouvrir la sous-clé de registre '{0}' dans '{1}'.</value>
+    <value>Neizdevās atvērt reģistra atslēgas pakārtoto atslēgu '{0}' sadaļā '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Échec du rollback de '{0}'.</value>
+    <value>Neizdevās atjaunot '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossible de démarrer '{0}'.</value>
+    <value>Neizdevās palaist '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui devait être téléchargé depuis {0} n'a pas la taille attendue. Il devait faire {1} octets mais il fait {2} octets.</value>
+    <value>Failam, ko vajadzēja lejupielādēt no {0}, nav paredzētā izmēra. Vajadzēja būt {1} baits, bet patiesībā bija {2} baiti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Le fichier "{0}" n'a pas pu être trouvé.</value>
+    <value>Failu "{0}" neizdevās atrast.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Le répertoire de configuration '{0}' est probablement invalide.</value>
+    <value>Konfigurācijas direktorijs '{0}', iespējams, ir nederīgs.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Les informations d'identification de {0} sont incorrectes.</value>
+    <value>{0} pieteikšanās akreditācijas dati ir nepareizi.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>La clé était déjà présente dans le dictionnaire.</value>
+    <value>Atslēga jau bija atrodama vārdnīcā.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Le lancement de '{0}' requiert des privilèges d'administrateur.</value>
+    <value>Lai palaistu '{0}', nepieciešamas administratora tiesības.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>La quantité maximale d'éléments dans la collection a été dépassée.</value>
+    <value>Ir pārsniegts maksimālais elementu skaits kolekcijā.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Aucune action enregistrée pour '{0}'.</value>
+    <value>Nav reģistrēta neviena '{0}' darbība.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Non</value>
+    <value>Nē</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configuration du système ne peut pas être modifiée en mode portable.</value>
+    <value>Pārnēsājamā režīmā sistēmas konfigurāciju nevar rediģēt.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <value>LABI</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Cette méthode n'est disponible que sous Windows.</value>
+    <value>Šī metode ir pieejama tikai operētājsistēmā Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe :</value>
+    <value>Parole:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Veuillez entrer les informations d'identification pour {0} :</value>
+    <value>Lūdzu, ievadiet {0} pieteikšanās datus:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
-    <comment>Manually overriden.</comment>
+    <value>Radās problēma ar '{0}' ielādēšanu.</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' a quitté avec le code de sortie {1}.</value>
+    <value>'{0}' izgāja ar izejas kodu {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Process beidzās ar neparedzētu izejas kodu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lecture du fichier {0}</value>
+    <value>Failu lasīšana {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Šo komandu nevar izpildīt vēlreiz, kamēr nav izpildīta atcelšanas komanda.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>valeur &amp;Reset</value>
+    <value>&amp;Reset vērtība</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Redémarrage des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Programmu restartēšana</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Chercher</value>
-    <comment>Manually overriden.</comment>
+    <value>Meklēšana</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Recherche de références de fichiers ouverts</value>
+    <value>Atvērto failu atsauču meklēšana</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentative de lecture à partir de la position {0}. Cette position est éloignée de {1} octets de la position {2} du flux sous-jacent, mais le tampon de recherche ne peut prendre en compte qu'une différence de {3} octets.</value>
+    <value>Mēģināts nolasīt no pozīcijas {0}. Tas ir {1} baits attālumā no pamatā esošās straumes pozīcijas {2}, bet meklēšanas buferis var uzņemt tikai {3} baitu starpību.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Fermeture des applications</value>
-    <comment>Manually overriden.</comment>
+    <value>Programmu izslēgšana</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>La source et la destination sont égales.</value>
+    <value>Avots un galamērķis ir vienādi.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Complete</value>
-    <comment>Manually overriden.</comment>
+    <value>Pilnīga</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Traitement des données</value>
+    <value>Datu apstrāde</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obtenir des en-têtes</value>
+    <value>Virsrakstu iegūšana</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Erreur IO</value>
+    <value>IO kļūda</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>Manually overriden.</comment>
+    <value>Gatavs</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>L'erreur du réseau</value>
-    <comment>Manually overriden.</comment>
+    <value>Tīmekļa kļūda</value>
+    <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
+    <value>Mērķu garumam jābūt vienādam ar oldValues garumu</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Détails techniques :</value>
+    <value>Tehniskā informācija:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Votre version de .NET ne prend pas en charge TLS 1.2. Cela peut entraîner des erreurs de connexion lors du téléchargement de contenu via HTTPS. Veuillez exécuter Windows Update pour installer les correctifs nécessaires.</value>
+    <value>Jūsu .NET versija neatbalsta TLS 1.2. Tas var izraisīt savienojuma kļūdas, lejupielādējot saturu, izmantojot HTTPS. Lūdzu, palaidiet Windows Update, lai instalētu nepieciešamos labojumus.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>L'assemblage nommé "{0}" n'a pas pu être localisé.</value>
+    <value>Komplektācija ar nosaukumu "{0}" nav atrodama.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossible de lire {0} octets depuis le flux.</value>
+    <value>Nevar nolasīt {0} baitus no straumes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande réelle n'a pas été exécutée.</value>
+    <value>Šo atcelšanas komandu nevar izpildīt, kamēr nav izpildīta faktiskā komanda.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Vos droits sont peut-être insuffisants.</value>
+    <value>Unix apakšsistēmai neizdevās apstrādāt pieprasījumu. Iespējams, jums nav pietiekamu tiesību.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom de l'utilisateur :</value>
+    <value>Lietotāja vārds:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Jā</value>
     <comment>Automatically translated.</comment>
   </data>
 </root>
