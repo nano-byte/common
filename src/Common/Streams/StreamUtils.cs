@@ -260,7 +260,7 @@ public static class StreamUtils
 
 #if !NET20 && !NET40
     /// <summary>
-    /// Wraps a stream in <see cref="SeekBufferStream"/> unless it already <see cref="Stream.CanSeek"/>.
+    /// Adds seek buffering to a stream unless it already <see cref="Stream.CanSeek"/>.
     /// </summary>
     /// <param name="stream">The stream.</param>
     /// <param name="bufferSize">The maximum number of bytes to buffer for seeking.</param>
@@ -274,6 +274,19 @@ public static class StreamUtils
         return stream.CanSeek ? stream : new SeekBufferStream(stream, bufferSize);
     }
 #endif
+
+    /// <summary>
+    /// Overrides the value returned by <see cref="Stream.Length"/>.
+    /// </summary>
+    /// <param name="stream">The stream.</param>
+    /// <param name="length">The value to return for <see cref="Stream.Length"/>.</param>
+    [Pure]
+    public static Stream WithLength(this Stream stream, long length)
+    {
+        var result = new ProgressStream(stream);
+        result.SetLength(length);
+        return result;
+    }
 
     /// <summary>
     /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
