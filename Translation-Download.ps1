@@ -11,5 +11,3 @@ function download($slug, $pathBase) {
 }
 
 download common "$PSScriptRoot\src\Common\Properties\Resources"
-
-download window-common_winforms_errorreportform "$PSScriptRoot\src\Common.WinForms\Controls\ErrorReportForm"

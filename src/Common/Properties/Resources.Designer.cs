@@ -97,6 +97,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Comment:.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copying files.
         /// </summary>
         public static string CopyFiles {
@@ -129,6 +138,51 @@ namespace NanoByte.Common.Properties {
         public static string Downloading {
             get {
                 return ResourceManager.GetString("Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you whish, you can use this field to provide additional information about the problem, such as a description of what you were doing when the crash occurred..
+        /// </summary>
+        public static string ErrorReporComment {
+            get {
+                return ResourceManager.GetString("ErrorReporComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error report.
+        /// </summary>
+        public static string ErrorReport {
+            get {
+                return ResourceManager.GetString("ErrorReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do &amp;not report.
+        /// </summary>
+        public static string ErrorReportCancel {
+            get {
+                return ResourceManager.GetString("ErrorReportCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error has occurred in this application. You can help us fix the problem by reporting it. If there is already a known fix for your problem it will be displayed right after sending the report..
+        /// </summary>
+        public static string ErrorReportInfo {
+            get {
+                return ResourceManager.GetString("ErrorReportInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Report.
+        /// </summary>
+        public static string ErrorReportSend {
+            get {
+                return ResourceManager.GetString("ErrorReportSend", resourceCulture);
             }
         }
         
@@ -471,6 +525,15 @@ namespace NanoByte.Common.Properties {
         public static string TargetsOldValuesLength {
             get {
                 return ResourceManager.GetString("TargetsOldValuesLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technical details:.
+        /// </summary>
+        public static string TechnicalDetails {
+            get {
+                return ResourceManager.GetString("TechnicalDetails", resourceCulture);
             }
         }
         

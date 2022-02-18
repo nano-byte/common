@@ -129,6 +129,9 @@
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>Die DACL kann nicht in eine kanonische Form überfürht werden, da es dabei zu einem Informationsverlust kommen könnte.</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>&amp;Kommentar:</value>
+  </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Kopiere Dateien</value>
   </data>
@@ -140,6 +143,21 @@
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>Lade {0} runter</value>
+  </data>
+  <data name="ErrorReporComment" xml:space="preserve">
+    <value>Wenn Sie möchten, können Sie dieses Feld nutzen, um zusätzliche Informationen über das Problem, wie zum Beispiel eine Beschreibung dessen was Sie zum Zeitpunkt des Absturzes gemacht, anzugeben.</value>
+  </data>
+  <data name="ErrorReport" xml:space="preserve">
+    <value>Fehlerberichterstattung</value>
+  </data>
+  <data name="ErrorReportCancel" xml:space="preserve">
+    <value>&amp;Nicht berichten</value>
+  </data>
+  <data name="ErrorReportInfo" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist in dieser Anwendung aufgetreten. Sie können uns bei der Behebung des Problems helfen, indem Sie es melden. Falls es bereits eine bekannte Lösung für Ihr Problem gibt, wird sie unmittelbar nach dem Senden angezeigt.</value>
+  </data>
+  <data name="ErrorReportSend" xml:space="preserve">
+    <value>&amp;Berichten</value>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>Der Fehlerbericht wurde erfolgreich versendet.</value>
@@ -254,6 +272,9 @@
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Length von targets muss gleich Length von oldValues sein</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Technische Details:</value>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>Ihre Version von .NET unterstützt nicht TLS 1.2. Dies kann Verbindungsfehler beim Runterladen von Inhalt via HTTPS verursachen. Bitte führen Sie Windows Update aus, um die notwendigen Patches zu installieren.</value>

@@ -48,9 +48,4 @@
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net472" />
   </ItemGroup>
 
-  <!-- Exclude files generated for Transifex -->
-  <ItemGroup>
-    <EmbeddedResource Remove="**\*.filtered.resx" />
-  </ItemGroup>
-
 </Project>

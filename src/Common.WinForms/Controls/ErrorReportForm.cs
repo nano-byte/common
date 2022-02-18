@@ -39,6 +39,13 @@ public sealed partial class ErrorReportForm : Form
         #endregion
 
         InitializeComponent();
+        Text = Resources.ErrorReport;
+        infoLabel.Text = Resources.ErrorReportInfo;
+        detailsLabel.Text = Resources.TechnicalDetails;
+        commentBox.HintText = Resources.ErrorReporComment;
+        buttonReport.Text = Resources.ErrorReportSend;
+        buttonCancel.Text = Resources.ErrorReportCancel;
+
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
         Shown += delegate { this.SetForegroundWindow(); };
 

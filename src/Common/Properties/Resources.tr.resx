@@ -129,6 +129,9 @@
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>&amp;Yorum:</value>
+  </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Dosyalar kopyalanıyor</value>
   </data>
@@ -140,6 +143,21 @@
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>{0} indiriliyor</value>
+  </data>
+  <data name="ErrorReporComment" xml:space="preserve">
+    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
+  </data>
+  <data name="ErrorReport" xml:space="preserve">
+    <value>Hata bildirimi</value>
+  </data>
+  <data name="ErrorReportCancel" xml:space="preserve">
+    <value>Bildir&amp;me</value>
+  </data>
+  <data name="ErrorReportInfo" xml:space="preserve">
+    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bu sorunu bize bildirerek çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, bildiriminiz gönderildikten hemen sonra görüntülenir.</value>
+  </data>
+  <data name="ErrorReportSend" xml:space="preserve">
+    <value>&amp;Bildir</value>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>Hata raporu gönderildi.</value>
@@ -254,6 +272,9 @@
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Teknik ayrıntılar:</value>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>.NET sürümünüz TLS 1.2 sürümünü desteklemiyor. Bu durum HTTPS üzerinden içerik indirilirken sorun çıkmasına neden olabilir. Lütfen gerekli güncellemelerin kurulması için Windows Update uygulamasını çalıştırın.</value>
