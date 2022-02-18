@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[o:eicher:p:0install-win:r:common]
+type         = RESX
+source_file  = src/Common/Properties/Resources.resx
+file_filter  = src/Common/Properties/Resources.<lang>.o.resx

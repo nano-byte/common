@@ -1,0 +1,27 @@
+name: Translation
+on: push
+#  push:
+#    branches: [master]
+#    paths: [**.resx]
+
+jobs:
+  translation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Transifex Push
+        run: ./0install.sh run https://apps.0install.net/devel/transifex-cli.xml --token ${{secrets.TRANSIFEX_API_KEY}} push --source
+      - name: Transifex Pull
+        run: ./0install.sh run https://apps.0install.net/devel/transifex-cli.xml --token ${{secrets.TRANSIFEX_API_KEY}} pull --mode translator --all
+      - name: DeepL
+        uses: Yeah69/MrMeeseeks.ResXTranslationCombinator@main
+        env:
+          GITHUB_TOKEN: ${{github.token}}
+        with:
+          auth: ${{secrets.DEEPL_API_KEY}}
+          excludes-regex: .*ImageResources.*
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@main
+        with:
+          title: Update translations
+          commit-message: Updated translations
