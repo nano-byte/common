@@ -8,6 +8,7 @@ function get ($relativeUri, $filePath) {
 function download($slug, $pathBase) {
     get "resource/$slug/translation/el/?file" "$pathBase.el.resx"
     get "resource/$slug/translation/tr/?file" "$pathBase.tr.resx"
+    get "resource/$slug/translation/fr/?file" "$pathBase.fr.resx"
 }
 
 download common "$PSScriptRoot\src\Common\Properties\Resources"
