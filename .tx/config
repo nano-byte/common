@@ -1,0 +1,10 @@
+[main]
+host = https://www.transifex.com
+type = RESX
+source_lang = en
+lang_map = pt_PT: pt-PT, pt_BR: pt-BR, ro_RO: ro, da_DK: da, vi_VN: vi
+
+[o:eicher:p:0install-win:r:common]
+source_file = src/Common/Properties/Resources.resx
+file_filter = src/Common/Properties/Resources.<lang>.o.resx
+minimum_perc = 30
