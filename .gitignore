@@ -1,5 +1,6 @@
 *.user
 *.bak
+*.o.resx
 
 # Caches
 /src/.vs/
