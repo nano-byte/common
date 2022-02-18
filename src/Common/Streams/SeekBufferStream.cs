@@ -134,7 +134,7 @@ public sealed class SeekBufferStream : DelegatingStream
     {
         long longDiff = Position - _underlyingPosition;
         if (Math.Abs(longDiff) > _buffer.Length)
-            throw new IOException(string.Format(Resources.SeelOffsetTooLarge, Position, longDiff, _underlyingPosition, _buffer.Length));
+            throw new IOException(string.Format(Resources.SeekOffsetTooLarge, Position, longDiff, _underlyingPosition, _buffer.Length));
         int diff = (int)longDiff;
 
         switch (diff)

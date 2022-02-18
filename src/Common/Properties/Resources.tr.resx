@@ -201,11 +201,11 @@
   <data name="ProblemLoading" xml:space="preserve">
     <value>'{0}' yüklenirken bir sorun çıktı.</value>
   </data>
-  <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
-  </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}',  {1} çıkış koduyla kapandı.</value>
+  </data>
+  <data name="ProcessExitCodeUnexpected" xml:space="preserve">
+    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>{0} dosyası okunuyor</value>
@@ -225,7 +225,7 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Dosyayı açacak uygulamalar aranıyor</value>
   </data>
-  <data name="SeelOffsetTooLarge" xml:space="preserve">
+  <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

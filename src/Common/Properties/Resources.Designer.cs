@@ -387,9 +387,9 @@ namespace NanoByte.Common.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Attempted to read from position {0}. This is {1} bytes away from the underlying stream position {2}, but the seek buffer can only accomodate a difference of {3} bytes..
         /// </summary>
-        public static string SeelOffsetTooLarge {
+        public static string SeekOffsetTooLarge {
             get {
-                return ResourceManager.GetString("SeelOffsetTooLarge", resourceCulture);
+                return ResourceManager.GetString("SeekOffsetTooLarge", resourceCulture);
             }
         }
         

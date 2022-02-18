@@ -225,7 +225,7 @@
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Suche nach offenen Dateireferenzen</value>
   </data>
-  <data name="SeelOffsetTooLarge" xml:space="preserve">
+  <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>Es wurde versucht, von Position {0} zu lesen. Diese ist {1} Bytes von der zugrunde liegenden Stream-Position {2} entfernt, aber der Suchpuffer kann nur eine Differenz von {3} Bytes behandeln.</value>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
