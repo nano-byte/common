@@ -83,6 +83,15 @@ public class FileUtilsTest
         File.GetLastWriteTimeUtc(tempFile).Should().BeOnOrAfter(DateTime.UtcNow - TimeSpan.FromSeconds(2));
     }
 
+    [Fact]
+    public void TestCreate()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string testFile = Path.Combine(tempDir, "test");
+        FileUtils.Create(testFile, expectedSize: 8).Dispose();
+        File.Exists(testFile).Should().BeTrue();
+    }
+
     /// <summary>
     /// Creates a temporary file using <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
     /// </summary>

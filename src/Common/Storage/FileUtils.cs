@@ -99,6 +99,19 @@ public static class FileUtils
     }
     #endregion
 
+    /// <summary>
+    /// Creates or replaces a file. Pre-allocates the expected size of the file if possible.
+    /// </summary>
+    /// <returns>A stream for writing the file. No read access.</returns>
+    /// <param name="path">The path of the file.</param>
+    /// <param name="expectedSize">The initial allocation size in bytes for the file.</param>
+    public static FileStream Create([Localizable(false)] string path, long expectedSize)
+#if NET6_0_OR_GREATER
+        => new(path, new FileStreamOptions {Mode = FileMode.Create, Access = FileAccess.Write, Share = FileShare.None, PreallocationSize = expectedSize});
+#else
+        => new(path, FileMode.Create, FileAccess.Write, FileShare.None);
+#endif
+
     #region Time
     /// <summary>
     /// Determines the accuracy with which the filesystem underlying a specific directory can store file-changed times.
