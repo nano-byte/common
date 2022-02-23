@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Back" xml:space="preserve">
+    <value>Indietro</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancella</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CannotAddCollectionToSelf" xml:space="preserve">
+    <value>La collezione non può essere aggiunta a se stessa.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CannotCanonicalizeDacl" xml:space="preserve">
+    <value>Il DACL non può essere canonizzato poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Commento:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CopyFiles" xml:space="preserve">
+    <value>Copiare i file</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Copia negli appunti</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="DestinationDirExist" xml:space="preserve">
+    <value>La directory di destinazione esiste già.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Scaricare {0}</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReporComment" xml:space="preserve">
+    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di cosa stavi facendo quando si è verificato l'incidente.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReport" xml:space="preserve">
+    <value>Rapporto di errore</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportCancel" xml:space="preserve">
+    <value>Non segnalare</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportInfo" xml:space="preserve">
+    <value>Si è verificato un errore inaspettato in questa applicazione. Puoi aiutarci a risolvere il problema segnalandolo. Se c'è già una soluzione nota per il tuo problema, sarà visualizzata subito dopo aver inviato la segnalazione.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportSend" xml:space="preserve">
+    <value>Segnala</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ErrorReportSent" xml:space="preserve">
+    <value>Il rapporto di errore è stato inviato con successo.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToDownload" xml:space="preserve">
+    <value>Impossibile scaricare {0}.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
+    <value>Impossibile aprire la sottochiave di registro '{0}' in '{1}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToRollback" xml:space="preserve">
+    <value>Fallito il rollback '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FailedToStart" xml:space="preserve">
+    <value>Fallito l'avvio di '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FileNotExpectedSize" xml:space="preserve">
+    <value>Il file che doveva essere scaricato da {0} non ha la dimensione prevista. Doveva essere {1} byte ma in realtà era {2} byte.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Il file "{0}" non può essere trovato.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="InvalidConfigDir" xml:space="preserve">
+    <value>La directory di configurazione '{0}' non è probabilmente valida.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Le credenziali di accesso a {0} non sono corrette.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="KeyAlreadyPresent" xml:space="preserve">
+    <value>La chiave era già presente nel dizionario.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="LaunchNeedsAdmin" xml:space="preserve">
+    <value>Il lancio di '{0}' richiede i privilegi di amministratore.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="MaxElementsExceeded" xml:space="preserve">
+    <value>La quantità massima di elementi nella collezione è stata superata.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="MissingDispatchAction" xml:space="preserve">
+    <value>Nessuna azione registrata per '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="NoSystemConfigInPortableMode" xml:space="preserve">
+    <value>La configurazione del sistema non può essere modificata in modalità portatile.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="OnlyAvailableOnWindows" xml:space="preserve">
+    <value>Questo metodo è disponibile solo su Windows.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="PleaseEnterCredentials" xml:space="preserve">
+    <value>Inserisci le credenziali di accesso per {0}:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ProblemLoading" xml:space="preserve">
+    <value>C'è stato un problema nel caricare '{0}'.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ProcessExitCode" xml:space="preserve">
+    <value>'{0}' è uscito con il codice di uscita {1}.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ProcessExitCodeUnexpected" xml:space="preserve">
+    <value>Un processo è uscito con un codice di uscita inaspettato.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>Lettura del file {0}</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="RedoNotAvailable" xml:space="preserve">
+    <value>Questo comando non può essere eseguito di nuovo finché non è stato eseguito il comando undo.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ResetValue" xml:space="preserve">
+    <value>Valore di reset</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="RestartingApps" xml:space="preserve">
+    <value>Riavvio delle applicazioni</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Cerca</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="SearchingFileReferences" xml:space="preserve">
+    <value>Ricerca di riferimenti di file aperti</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="SeekOffsetTooLarge" xml:space="preserve">
+    <value>Si è tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può accomodare solo una differenza di {3} byte.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="ShuttingDownApps" xml:space="preserve">
+    <value>Chiudere le applicazioni</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="SourceDestinationEqual" xml:space="preserve">
+    <value>Sorgente e destinazione sono uguali.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateComplete" xml:space="preserve">
+    <value>Completa</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateData" xml:space="preserve">
+    <value>Elaborazione dei dati</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateHeader" xml:space="preserve">
+    <value>Ottenere le intestazioni</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateIOError" xml:space="preserve">
+    <value>Errore IO</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateReady" xml:space="preserve">
+    <value>Pronto</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="StateWebError" xml:space="preserve">
+    <value>Errore web</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="TargetsOldValuesLength" xml:space="preserve">
+    <value>La lunghezza degli obiettivi deve essere uguale alla lunghezza di oldValues</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="TechnicalDetails" xml:space="preserve">
+    <value>Dettagli tecnici:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Tls12SupportMissing" xml:space="preserve">
+    <value>La tua versione di .NET non supporta TLS 1.2. Questo può causare errori di connessione quando si scaricano contenuti via HTTPS. Esegui Windows Update per installare le patch necessarie.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UnableToLocateAssembly" xml:space="preserve">
+    <value>L'assemblaggio chiamato "{0}" non può essere localizzato.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UnableToReadBytesFromStream" xml:space="preserve">
+    <value>Impossibile leggere {0} byte dal flusso.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UndoNotAvailable" xml:space="preserve">
+    <value>Questo comando di annullamento non può essere eseguito finché non è stato eseguito il comando attuale.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UnixSubsystemFail" xml:space="preserve">
+    <value>Il sottosistema Unix non è riuscito ad elaborare la richiesta. Potresti avere diritti insufficienti.</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nome utente:</value>
+    <comment>Automatically Translated</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sì</value>
+    <comment>Automatically Translated</comment>
+  </data>
+</root>
