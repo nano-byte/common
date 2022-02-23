@@ -127,61 +127,61 @@
     <value>Die Collection kann nicht zu sich selbst hinzugefügt werden.</value>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Die DACL kann nicht in eine kanonische Form überfürht werden, da es dabei zu einem Informationsverlust kommen könnte.</value>
+    <value>Die DACL kann nicht kanonisiert werden, da dies möglicherweise zu einem Informationsverlust führen würde.</value>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>&amp;Kommentar:</value>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Kopiere Dateien</value>
+    <value>Kopieren von Dateien</value>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>In Zwischenablage &amp;kopieren</value>
+    <value>In die Zwischenablage &amp;kopieren</value>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Das Zielverzeichnis existiert bereits.</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Lade {0} runter</value>
+    <value>Herunterladen von {0}</value>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Wenn Sie möchten, können Sie dieses Feld nutzen, um zusätzliche Informationen über das Problem, wie zum Beispiel eine Beschreibung dessen was Sie zum Zeitpunkt des Absturzes gemacht, anzugeben.</value>
+    <value>Wenn Sie möchten, können Sie in diesem Feld zusätzliche Informationen über das Problem angeben, z. B. eine Beschreibung dessen, was Sie gerade taten, als der Absturz auftrat.</value>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Fehlerberichterstattung</value>
+    <value>Fehlerbericht</value>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>&amp;Nicht berichten</value>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Ein unerwarteter Fehler ist in dieser Anwendung aufgetreten. Sie können uns bei der Behebung des Problems helfen, indem Sie es melden. Falls es bereits eine bekannte Lösung für Ihr Problem gibt, wird sie unmittelbar nach dem Senden angezeigt.</value>
+    <value>In dieser Anwendung ist ein unerwarteter Fehler aufgetreten. Sie können uns helfen, das Problem zu beheben, indem Sie es melden. Wenn es bereits eine bekannte Lösung für Ihr Problem gibt, wird diese direkt nach dem Senden des Berichts angezeigt.</value>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
     <value>&amp;Berichten</value>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Der Fehlerbericht wurde erfolgreich versendet.</value>
+    <value>Der Fehlerbericht wurde erfolgreich gesendet.</value>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Download von {0} fehlgeschlagen.</value>
+    <value>Der Download von {0} ist fehlgeschlagen.</value>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Konnte Registrierungs-Subschlüssel '{0}' in '{1}' nicht öffnen.</value>
+    <value>Der Registrierungsunterschlüssel '{0}' in '{1}' konnte nicht geöffnet werden.</value>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>Konnte '{0}' nicht rückgängig machen.</value>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Konnte '{0}' nicht starten.</value>
+    <value>Der Start von '{0}' ist fehlgeschlagen.</value>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Die Datei die von {0} runtergeladen werden sollte, hat nicht die erwartete Größe. Sollten {1} Bytes sein, waren aber {2} Bytes.</value>
+    <value>Die Datei, die von {0} heruntergeladen werden sollte, hat nicht die erwartete Größe. Sie sollte {1} Bytes groß sein, war aber tatsächlich {2} Bytes groß.</value>
   </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>Die Datei "{0}" konnte nicht gefunden werden.</value>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Das Konfigurationsverzeichnis '{0}' ist vermutlich ungültig.</value>
+    <value>Das Konfigurationsverzeichnis '{0}' ist wahrscheinlich ungültig.</value>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Die Anmeldedaten für {0} sind ungültig.</value>
@@ -193,61 +193,61 @@
     <value>Der Start von '{0}' erfordert Administratorrechte.</value>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Die maximale Anzahl an Elementen in der Collection wurde überschritten.</value>
+    <value>Die maximale Anzahl von Elementen in der Collection wurde überschritten.</value>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Keine Aktion für '{0}' registriert.</value>
+    <value>Keine Aktion registriert für '{0}'.</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Nein</value>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Systemkonfiguration kann im Portable-Modus nicht bearbeitet werden.</value>
+    <value>Die Systemkonfiguration kann im Portable-Moduse nicht bearbeitet werden.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Diese Methode steht nur unter Windows zur Verfügung.</value>
+    <value>Diese Methode ist nur unter Windows verfügbar.</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Passwort:</value>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Bitte geben Sie Anmeldedaten für {0} ein:</value>
+    <value>Bitte geben Sie Ihre Anmeldedaten für {0} ein:</value>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Es gab ein Problem beim Laden von '{0}'.</value>
+    <value>Beim Laden von '{0}' ist ein Problem aufgetreten.</value>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' wurde mit dem Exit Code {1} beendet.</value>
+    <value>'{0}' wurde mit Exit-Code {1} beendet.</value>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Ein Prozess wurde mit einem unerwarteten Exit Code beendet.</value>
+    <value>Ein Prozess wurde mit einem unerwarteten Exit-Code beendet.</value>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lese Datei {0}</value>
+    <value>Datei {0} lesen</value>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Dieser Befehl kann nicht erneut ausgeführt werden, bis der Rückgängig-Befehl ausgeführt wurde.</value>
+    <value>Dieser Befehl kann erst wiederholt werden, wenn der Befehl zum Rückgängigmachen ausgeführt wurde.</value>
   </data>
   <data name="ResetValue" xml:space="preserve">
     <value>Wert &amp;zurücksetzen</value>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Starte Anwendungen neu</value>
+    <value>Neustart von Anwendungen</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Suche</value>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Suche nach offenen Dateireferenzen</value>
+    <value>Suche nach offenen Dateiverweisen</value>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Es wurde versucht, von Position {0} zu lesen. Diese ist {1} Bytes von der zugrunde liegenden Stream-Position {2} entfernt, aber der Suchpuffer kann nur eine Differenz von {3} Bytes behandeln.</value>
+    <value>Es wurde versucht, von der Position {0} zu lesen. Diese ist {1} Bytes von der zugrunde liegenden Stream-Position {2} entfernt, aber der Suchpuffer kann nur eine Differenz von {3} Bytes aufnehmen.</value>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Beende Anwendungen</value>
+    <value>Beenden von Anwendungen</value>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Quelle und Ziel sind gleich.</value>
@@ -256,19 +256,19 @@
     <value>Abgeschlossen</value>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Verarbeite Daten</value>
+    <value>Verarbeitung von Daten</value>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Hole Header</value>
+    <value>Header abrufen</value>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>IO Fehler</value>
+    <value>IO-Fehler</value>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Bereit</value>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web Fehler</value>
+    <value>Web-Fehler</value>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Length von targets muss gleich Length von oldValues sein</value>
@@ -277,19 +277,19 @@
     <value>Technische Details:</value>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Ihre Version von .NET unterstützt nicht TLS 1.2. Dies kann Verbindungsfehler beim Runterladen von Inhalt via HTTPS verursachen. Bitte führen Sie Windows Update aus, um die notwendigen Patches zu installieren.</value>
+    <value>Ihre Version von .NET unterstützt TLS 1.2 nicht. Dies kann zu Verbindungsfehlern beim Herunterladen von Inhalten über HTTPS führen. Bitte führen Sie Windows Update aus, um die erforderlichen Patches zu installieren.</value>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Die Assembly mit dem Namen "{0}" konnte nicht gefunden werden.</value>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Konnte nicht {0} Bytes vom Stream lesen.</value>
+    <value>Es war nicht möglich {0} Bytes aus dem Stream zu lesen.</value>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Dieser Rückgängig-Befehl kann nicht ausgeführt werden, bis der eigentliche Befehl ausgeführt wurde.</value>
+    <value>Dieser Rückgängig-Befehl kann nicht ausgeführt werden, bevor der eigentliche Befehl ausgeführt wurde.</value>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Das Unix Subsystem war nicht in der Lage die Anfrage zu bearbeiten. Eventuell haben Sie unzureichende Rechte.</value>
+    <value>Das Unix-Subsystem konnte die Anfrage nicht verarbeiten. Sie haben möglicherweise nicht genügend Rechte.</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Benutzername:</value>
