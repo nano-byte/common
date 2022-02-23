@@ -31,6 +31,9 @@ indent_style = tab
 [*.{md,resx,Designer.*}]
 trim_trailing_whitespace = false
 
+[*.resx]
+charset=utf-8-bom
+
 [*.cs]
 # Indentation
 csharp_indent_block_contents = true
