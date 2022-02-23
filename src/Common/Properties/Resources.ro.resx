@@ -59,243 +59,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Geri</value>
+    <value>Înapoi</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>İptal</value>
+    <value>Anulare</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Bir koleksiyon kendi içine eklenemez.</value>
+    <value>Colecția nu poate fi adăugată la ea însăși.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Yorum:</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Dosyalar kopyalanıyor</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Panoya kopyala</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Hedef klasör zaten var.</value>
+    <value>Directorul destinație există deja.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>{0} indiriliyor</value>
+    <value>Se descarcă {0}</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Hata bildirimi</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Bildir&amp;me</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bu sorunu bize bildirerek çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, bildiriminiz gönderildikten hemen sonra görüntülenir.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Bildir</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Hata raporu gönderildi.</value>
+    <value>Raportul de eroare a fost trimis cu succes.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>{0} indirilemedi.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}' içindeki '{0}' kayıt defteri anahtarı açılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>'{0}' geri alınamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>'{0}' başlatılamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
+    <value>Fișierul care a fost descărcat de la {0} nu are mărimea așteptată. Trebuia să aibă {1} octeți, dar are de fapt {2} octeți.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>"{0}" dosyası bulunamadı.</value>
+    <value>Fișierul "{0}" nu a fost găsit.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Büyük olasılıkla '{0}' yapılandırma klasörü geçersiz.</value>
+    <value>Directorul de configurare '{0}' e probabil invalid.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Anahtar zaten sözlükte var.</value>
+    <value>Cheia era deja prezentă în dicționar.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}' başlatmak için yönetici izinleri gerekli.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Bir koleksiyonda bulunabilecek en fazla bileşen sayısına ulaşıldı.</value>
+    <value>Numărul maxim de elemente din colecție a fost depășit.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}' için bir işlem kaydedilmemiş.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Hayır</value>
+    <value>Nu</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Sistem yapılandırması taşınabilir kipte düzenlenemez.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Tamam</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Bu yöntem yalnız Windows üzerinde kullanılabilir.</value>
+    <value>Metoda e disponibilă doar pentru Windows.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Parola:</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Lütfen {0} için oturum açma bilgilerinizi yazın:</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>'{0}' yüklenirken bir sorun çıktı.</value>
+    <value>A apărut o problemă la încărcarea '{0}'.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}',  {1} çıkış koduyla kapandı.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>{0} dosyası okunuyor</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Geri alma komutu işlenene kadar bu komut yeniden yürütülemez.</value>
+    <value>Această comandă nu poate fi rulată din nou până ce comanda de anulare nu a fost selectată.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>&amp;Değeri sıfırla</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Uygulamalar yeniden başlatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Arama</value>
+    <value>Caută</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Dosyayı açacak uygulamalar aranıyor</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Uygulamalar kapatılıyor</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Kaynak ve hedef eşit.</value>
+    <value>Sursa și destinația sunt aceleași.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Tamamla</value>
+    <value>Complet</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Veri işleniyor</value>
+    <value>Se procesează datele</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Başlıklar alınıyor</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Giriş çıkış sorunu</value>
+    <value>Eroare IO</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Hazır</value>
+    <value>Pregătit</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web sorunu</value>
+    <value>eroare Web</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Hedeflerin uzunluğu eski değerlerin uzunluğuna eşit olmalı</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Teknik ayrıntılar:</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>.NET sürümünüz TLS 1.2 sürümünü desteklemiyor. Bu durum HTTPS üzerinden içerik indirilirken sorun çıkmasına neden olabilir. Lütfen gerekli güncellemelerin kurulması için Windows Update uygulamasını çalıştırın.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}" adındaki yöntem bulunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Akıştan {0} bayt okunamadı.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Bu geri alma komutu yürürlükteki komutun işlenmesi bitene kadar yürütülemez.</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Unix alt sistemi isteği işleyemedi. İzinleriniz yeterli olmayabilir.</value>
+    <value>Subsistemul UNIX nu a procesat cererea. E posibil să aveți drepturi insuficiente.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Kullanıcı adı:</value>
-    <comment>Manually overriden.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Evet</value>
+    <value>Da</value>
     <comment>Manually overriden.</comment>
   </data>
 </root>

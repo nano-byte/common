@@ -60,242 +60,242 @@
   </resheader>
   <data name="Back" xml:space="preserve">
     <value>Πίσω</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Ακύρωση</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Η συλλογή δεν μπορεί να προστεθεί στην ίδια.</value>
-    <comment>Manually overriden.</comment>
+    <value>Η συλλογή δεν μπορεί να προστεθεί στον εαυτό της.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Το DACL δεν μπορεί να κανονικοποιηθει διότι θα μπορούσε δυνητικά να οδηγήσει σε απώλεια πληροφοριών.</value>
-    <comment>Manually overriden.</comment>
+    <value>Η DACL δεν μπορεί να κανονικοποιηθεί, καθώς αυτό θα οδηγούσε ενδεχομένως σε απώλεια πληροφοριών.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Σχόλιο:</value>
-    <comment>Manually overriden.</comment>
+    <value>Πώς:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Αντιγραφή αρχείων</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Αντιγραφή στο Πρόχειρο</value>
-    <comment>Manually overriden.</comment>
+    <value>Αντιγραφή στο πρόχειρο</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Ο κατάλογος προορισμού υπάρχει ήδη.</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>Λήψη {0}</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Αν επιθυμείτε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για την παροχή πρόσθετων πληροφοριών σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η συντριβή.</value>
-    <comment>Manually overriden.</comment>
+    <value>Αν θέλετε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για να δώσετε πρόσθετες πληροφορίες σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η συντριβή.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Αναφορά σφάλματος</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Καμμια αναφορα</value>
-    <comment>Manually overriden.</comment>
+    <value>Μην αναφέρετε</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Παρουσιάστηκε μη αναμενόμενο σφάλμα σε αυτή την εφαρμογή. Μπορείτε να μας βοηθήσετε να διορθώσουμε το πρόβλημα από την αναφορά αυτή. Αν υπάρχει ήδη μια γνωστή λύση για το πρόβλημά σας θα εμφανιστεί αμέσως μετά την αποστολή της αναφοράς.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ένα απροσδόκητο σφάλμα συνέβη σε αυτή την εφαρμογή. Μπορείτε να μας βοηθήσετε να διορθώσουμε το πρόβλημα αναφέροντάς το. Εάν υπάρχει ήδη γνωστή λύση για το πρόβλημά σας, θα εμφανιστεί αμέσως μετά την αποστολή της αναφοράς.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
     <value>Αναφορά</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>Η αναφορά σφάλματος στάλθηκε με επιτυχία.</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Αποτυχία λυψης {0}.</value>
-    <comment>Manually overriden.</comment>
+    <value>Απέτυχε η λήψη του {0}.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
     <value>Απέτυχε να ανοίξει το υποκλειδί μητρώου '{0}' στο '{1}'.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>Απέτυχε η επαναφορά '{0}'.</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
     <value>Απέτυχε η εκκίνηση του '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Το αρχείο που επρόκειτο να μεταφορτωθεί από {0} δεν έχει το αναμενόμενο μέγεθος. Υποτίθεται ότι είναι {1} bytes, αλλά στην πραγματικότητα ειναι {2} bytes.</value>
-    <comment>Manually overriden.</comment>
+    <value>Το αρχείο που υποτίθεται ότι θα κατέβαινε από το {0} δεν έχει το αναμενόμενο μέγεθος. Υποτίθεται ότι ήταν {1} bytes, αλλά στην πραγματικότητα ήταν {2} bytes.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Το αρχείο '{0}' δεν θα μπορεσε να βρεθεί.</value>
-    <comment>Manually overriden.</comment>
+    <value>Το αρχείο "{0}" δεν βρέθηκε.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Ο κατάλογος ρύθμισης '{0}' είναι μάλλον άκυρος.</value>
-    <comment>Manually overriden.</comment>
+    <value>Ο κατάλογος ρυθμίσεων '{0}' είναι πιθανώς άκυρος.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Τα διαπιστευτήρια σύνδεσης για {0} είναι εσφαλμένη.</value>
-    <comment>Manually overriden.</comment>
+    <value>Τα διαπιστευτήρια σύνδεσης για το {0} είναι λανθασμένα.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Το κλειδί υπάρχει ήδη στο λεξικό.</value>
-    <comment>Manually overriden.</comment>
+    <value>Το κλειδί υπήρχε ήδη στο λεξικό.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
     <value>Η εκκίνηση του '{0}' απαιτεί δικαιώματα διαχειριστή.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Έχει υπερβεί το ανώτατο ποσό των στοιχείων της συλλογής.</value>
-    <comment>Manually overriden.</comment>
+    <value>Έχει ξεπεραστεί η μέγιστη ποσότητα στοιχείων στη συλλογή.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Καμία ενέργεια δεν έχει καταχωρισθεί για '{0}'.</value>
-    <comment>Manually overriden.</comment>
+    <value>Δεν έχει καταχωρηθεί καμία ενέργεια για το '{0}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Οχι</value>
-    <comment>Manually overriden.</comment>
+    <value>Όχι</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Η διαμόρφωση του συστήματος δεν μπορεί να επεξεργαστεί σε φορητές λειτουργία.</value>
-    <comment>Manually overriden.</comment>
+    <value>Η διαμόρφωση του συστήματος δεν μπορεί να επεξεργαστεί σε φορητή λειτουργία.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Η μέθοδος αυτή είναι προς το παρόν διαθέσιμη μόνο στα Windows.</value>
-    <comment>Manually overriden.</comment>
+    <value>Αυτή η μέθοδος είναι διαθέσιμη μόνο στα Windows.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Σύνθημα:</value>
-    <comment>Manually overriden.</comment>
+    <value>Κωδικός πρόσβασης:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Παρακαλούμε, εισάγετε login διαπιστευτήρια για {0}:</value>
-    <comment>Manually overriden.</comment>
+    <value>Παρακαλούμε εισάγετε τα διαπιστευτήρια σύνδεσης για το {0}:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Υπήρξε ένα πρόβλημα φόρτωσης '{0}'.</value>
-    <comment>Manually overriden.</comment>
+    <value>Υπήρξε πρόβλημα στη φόρτωση του '{0}'.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}' εξήλθε με κωδικό εξόδου {1}.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
     <value>Μια διεργασία εξήλθε με μη αναμενόμενο κωδικό εξόδου.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Ανάγνωση αρχείου {0}</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>
-    <comment>Manually overriden.</comment>
+    <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά μέχρι να εκτελεστεί η εντολή αναίρεσης.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
     <value>Επαναφορά τιμής</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Επανεκκίνηση εφαρμογών</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Αναζήτηση</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Ψάχνοντας για ανοικτές αναφορές αρχείου</value>
-    <comment>Manually overriden.</comment>
+    <value>Αναζήτηση για αναφορές σε ανοικτά αρχεία</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>Προσπάθεια ανάγνωσης από τη θέση {0}. Αυτή η θέση απέχει {1} bytes από την υποκείμενη θέση {2}, αλλά ο απομονωτής αναζήτησης μπορεί να δεχτεί διαφορά μόνο {3} bytes.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Κλείσιμο εφαρμογών</value>
-    <comment>Manually overriden.</comment>
+    <value>Τερματισμός εφαρμογών</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Προέλευση και προορισμός είναι ίσα.</value>
-    <comment>Manually overriden.</comment>
+    <value>Η πηγή και ο προορισμός είναι ίσοι.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Ολοκλήρωση</value>
-    <comment>Manually overriden.</comment>
+    <value>Πλήρης</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Επεξεργασία δεδομένων</value>
-    <comment>Manually overriden.</comment>
+    <value>Δεδομένα επεξεργασίας</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Λήψη κεφαλίδων</value>
-    <comment>Manually overriden.</comment>
+    <value>Λήψη επικεφαλίδων</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>Σφάλμα IO</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Έτοιμο</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Σφάλμα στο Web</value>
-    <comment>Manually overriden.</comment>
+    <value>Σφάλμα Web</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Το μήκος των στόχων πρέπει να είναι ίσο με το μήκος των παλιών τιμων</value>
-    <comment>Manually overriden.</comment>
+    <value>Το μήκος των στόχων πρέπει να είναι ίσο με το μήκος των oldValues</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Τεχνικές λεπτομέρειες:</value>
-    <comment>Manually overriden.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>Η δική σας έκδοση του .NET δεν υποστηρίζει το TLS 1.2. Αυτό μπορεί να προκαλέσει σφάλματα σύνδεσης κατά τη λήψη περιεχομένου μέσω HTTPS. Εκτελέστε το Windows Update για να εγκαταστήσετε τις απαραίτητες διορθώσεις.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Η διάταξη με το όνομα "{0}" δεν μπορεί να τοποθετηθει.</value>
-    <comment>Manually overriden.</comment>
+    <value>Η συναρμολόγηση με το όνομα "{0}" δεν μπόρεσε να εντοπιστεί.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
     <value>Αδυναμία ανάγνωσης {0} bytes από τη ροή.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>
-    <comment>Manually overriden.</comment>
+    <value>Αυτή η εντολή αναίρεσης δεν μπορεί να εκτελεστεί μέχρι να εκτελεστεί η πραγματική εντολή.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Το υποσύστημα Unix δεν κατάφερε να επεξεργαστεί το αίτημα. Μπορεί να έχετε ανεπαρκή δικαιώματα.</value>
-    <comment>Manually overriden.</comment>
+    <value>Το υποσύστημα Unix απέτυχε να επεξεργαστεί την αίτηση. Μπορεί να μην έχετε επαρκή δικαιώματα.</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Όνομα Χρήστη:</value>
-    <comment>Manually overriden.</comment>
+    <value>Όνομα χρήστη:</value>
+    <comment>Automatically Translated</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Ναί</value>
-    <comment>Manually overriden.</comment>
+    <value>Ναι</value>
+    <comment>Automatically Translated</comment>
   </data>
 </root>
