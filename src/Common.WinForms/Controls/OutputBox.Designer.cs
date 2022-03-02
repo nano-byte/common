@@ -91,7 +91,6 @@ namespace NanoByte.Common.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonOK;
             this.ClientSize = new System.Drawing.Size(484, 252);
-            this.ControlBox = false;
             this.Controls.Add(this.pictureBoxIcon);
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.labelTitle);
@@ -100,6 +99,7 @@ namespace NanoByte.Common.Controls
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 160);
             this.Name = "OutputBox";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Output box";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();

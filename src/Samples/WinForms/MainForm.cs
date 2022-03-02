@@ -8,23 +8,33 @@ namespace NanoByte.Common.Samples.WinForms;
 
 public class MainForm : Form
 {
-    private readonly TaskProgressBar
-        _progressBar1 = new() {Location = new(10, 10)},
-        _progressBar2 = new() {Location = new(10, 60)};
-
     public MainForm()
     {
-        Controls.Add(_progressBar1);
-        Controls.Add(_progressBar2);
+        var progressBar1 = new TaskProgressBar {Location = new(10, 10)};
+        var progressBar2 = new TaskProgressBar {Location = new(10, 60)};
+
+        var outputButton = new Button {Text = "Output", Location = new(10, 100)};
+        outputButton.Click += delegate
+        {
+            OutputBox.Show(this, "Test", "Test message");
+        };
+
+        var outputGridButton = new Button {Text = "Grid", Location = new(10, 140)};
+        outputGridButton.Click += delegate
+        {
+            OutputGridBox.Show(this, "Test", new [] {"Test 1", "Test 2"});
+        };
+
+        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton});
 
         Shown += async delegate
         {
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(250);
-                _progressBar1.Report(new TaskSnapshot(TaskState.Data, unitsProcessed: i, unitsTotal: 10));
+                progressBar1.Report(new TaskSnapshot(TaskState.Data, unitsProcessed: i, unitsTotal: 10));
             }
-            _progressBar1.Report(new TaskSnapshot(TaskState.Complete));
+            progressBar1.Report(new TaskSnapshot(TaskState.Complete));
         };
 
         Shown += async delegate
@@ -32,9 +42,9 @@ public class MainForm : Form
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(500);
-                _progressBar2.Report(new TaskSnapshot(TaskState.Data, unitsProcessed: i, unitsTotal: 10));
+                progressBar2.Report(new TaskSnapshot(TaskState.Data, unitsProcessed: i, unitsTotal: 10));
             }
-            _progressBar2.Report(new TaskSnapshot(TaskState.Complete));
+            progressBar2.Report(new TaskSnapshot(TaskState.Complete));
         };
     }
 }

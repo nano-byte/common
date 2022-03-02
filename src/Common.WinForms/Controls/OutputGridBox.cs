@@ -16,6 +16,11 @@ public sealed partial class OutputGridBox : Form
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
     }
 
+    private void Form_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape) Close();
+    }
+
     /// <summary>
     /// Displays an output dialog with tabular data.
     /// </summary>
