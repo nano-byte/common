@@ -1,5 +1,6 @@
 *.user
 *.bak
+*.a.resx
 *.o.resx
 
 # Caches
