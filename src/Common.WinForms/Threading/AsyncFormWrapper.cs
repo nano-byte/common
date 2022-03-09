@@ -1,6 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if !NET20
+
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
 #endif
@@ -14,7 +16,7 @@ namespace NanoByte.Common.Threading;
 public sealed class AsyncFormWrapper<T> : IDisposable
     where T : Form
 {
-    private readonly Func<T> _init;
+    private readonly Lazy<T> _form;
 
     /// <summary>
     /// Creates a new asynchronous form wrapper.
@@ -22,43 +24,32 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <param name="init">Callback that creates an instance of the form for the message loop.</param>
     public AsyncFormWrapper(Func<T> init)
     {
-        _init = init ?? throw new ArgumentNullException(nameof(init));
-    }
+        #region Sanity checks
+        if (init == null) throw new ArgumentNullException(nameof(init));
+        #endregion
 
-    private readonly object _lock = new();
-
-    private T? _form;
-
-    [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "handle", Justification = "Need to retrieve value from Form.Handle to force window handle creation")]
-    [SuppressMessage("ReSharper", "UnusedVariable", MessageId = "handle", Justification = "Need to retrieve value from Form.Handle to force window handle creation")]
-    [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
-    private T InitializeForm()
-    {
-        lock (_lock)
+        _form = new(() =>
         {
-            if (_form != null) return _form;
-
             T form = null!;
-            using (var handleCreatedEvent = new ManualResetEvent(false))
+            using var handleCreatedEvent = new ManualResetEvent(false);
+            ThreadUtils.StartAsync(() =>
             {
-                ThreadUtils.StartAsync(() =>
-                {
-                    form = _init();
+                form = init();
 
-                    // Force creation of handle without showing the form
-                    var handle = form.Handle;
+                // Force creation of handle without showing the form
+                var _ = form.Handle;
 
-                    // Signal the calling thread the form is ready
-                    handleCreatedEvent.Set();
+                // Signal the calling thread the form is ready
+                // ReSharper disable once AccessToDisposedClosure
+                handleCreatedEvent.Set();
 
-                    // Run message loop (will take ownership of the form)
-                    Application.Run();
-                }, "AsyncFormWrapper");
+                // Run message loop (will take ownership of the form)
+                Application.Run();
+            }, "AsyncFormWrapper: " + typeof(T).Name);
 
-                handleCreatedEvent.WaitOne();
-            }
-            return _form = form;
-        }
+            handleCreatedEvent.WaitOne();
+            return form;
+        });
     }
 
     /// <summary>
@@ -68,10 +59,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public void Post(Action<T> action)
     {
-        var form = InitializeForm();
         try
         {
-            form.Invoke(action ?? throw new ArgumentNullException(nameof(action)), form);
+            _form.Value.Invoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
         catch (InvalidOperationException ex)
@@ -96,10 +86,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public TResult Post<TResult>(Func<T, TResult> action)
     {
-        var form = InitializeForm();
         try
         {
-            return (TResult)form.Invoke(action ?? throw new ArgumentNullException(nameof(action)), form);
+            return (TResult)_form.Value.Invoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
         catch (InvalidOperationException ex)
@@ -122,10 +111,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public void Send(Action<T> action)
     {
-        var form = InitializeForm();
         try
         {
-            form.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), form);
+            _form.Value.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
         catch (InvalidOperationException ex)
@@ -149,16 +137,11 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public void SendLow(Action<T> action)
     {
-        T form;
-        lock (_lock)
-        {
-            if (_form == null) return;
-            form = _form;
-        }
+        if (!_form.IsValueCreated) return;
 
         try
         {
-            form.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), form);
+            _form.Value.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
         catch (InvalidOperationException ex)
@@ -180,20 +163,14 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
     public void Close()
     {
-        T form;
-        lock (_lock)
-        {
-            if (_form == null) return;
-            form = _form;
-            _form = null;
-        }
+        if (!_form.IsValueCreated) return;
 
         try
         {
-            form.Invoke(() =>
+            _form.Value.Invoke(() =>
             {
                 Application.ExitThread();
-                form.Dispose();
+                _form.Value.Dispose();
             });
         }
         #region Error handling
@@ -225,3 +202,4 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <inheritdoc/>
     public void Dispose() => Close();
 }
+#endif
