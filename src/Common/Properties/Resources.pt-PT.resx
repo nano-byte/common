@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentativa de ler a partir da posição {0}. Isto é {1} bytes longe da posição do fluxo subjacente {2}, mas o tampão de procura só pode acomodar uma diferença de {3} bytes.</value>
+    <value>Tentativa de ler a partir da posição {0}. Isto é {1} bytes longe da posição do fluxo subjacente {2}, mas o buffer de procura só pode acomodar uma diferença de {3} bytes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
