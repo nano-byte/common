@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di ciò che stavi facendo quando si è verificato l'incidente.</value>
+    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di cosa stavi facendo quando si è verificato l'incidente.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Si è tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può accogliere solo una differenza di {3} byte.</value>
+    <value>Si è tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può accomodare solo una differenza di {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
