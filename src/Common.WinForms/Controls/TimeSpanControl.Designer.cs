@@ -21,9 +21,8 @@ namespace NanoByte.Common.Controls
         }
 
         #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -69,11 +68,7 @@ namespace NanoByte.Common.Controls
             // upDownHours
             // 
             this.upDownHours.Location = new System.Drawing.Point(84, 3);
-            this.upDownHours.Maximum = new decimal(new int[] {
-            23,
-            0,
-            0,
-            0});
+            this.upDownHours.Maximum = new decimal(new int[] { 23, 0, 0, 0 });
             this.upDownHours.Name = "upDownHours";
             this.upDownHours.Size = new System.Drawing.Size(35, 20);
             this.upDownHours.TabIndex = 2;
@@ -90,11 +85,7 @@ namespace NanoByte.Common.Controls
             // upDownMinutes
             // 
             this.upDownMinutes.Location = new System.Drawing.Point(133, 3);
-            this.upDownMinutes.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
+            this.upDownMinutes.Maximum = new decimal(new int[] { 59, 0, 0, 0 });
             this.upDownMinutes.Name = "upDownMinutes";
             this.upDownMinutes.Size = new System.Drawing.Size(35, 20);
             this.upDownMinutes.TabIndex = 4;
@@ -102,11 +93,7 @@ namespace NanoByte.Common.Controls
             // upDownSeconds
             // 
             this.upDownSeconds.Location = new System.Drawing.Point(182, 3);
-            this.upDownSeconds.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
+            this.upDownSeconds.Maximum = new decimal(new int[] { 59, 0, 0, 0 });
             this.upDownSeconds.Name = "upDownSeconds";
             this.upDownSeconds.Size = new System.Drawing.Size(35, 20);
             this.upDownSeconds.TabIndex = 6;
@@ -130,7 +117,6 @@ namespace NanoByte.Common.Controls
             ((System.ComponentModel.ISupportInitialize)(this.upDownSeconds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

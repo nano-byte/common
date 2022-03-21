@@ -21,14 +21,12 @@ namespace NanoByte.Common.Controls
         }
 
         #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.labelOperation = new System.Windows.Forms.Label();
             this.progressBar = new NanoByte.Common.Controls.TaskProgressBar();
             this.progressLabel = new NanoByte.Common.Controls.TaskLabel();
@@ -59,8 +57,8 @@ namespace NanoByte.Common.Controls
             this.progressLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.progressLabel.Location = new System.Drawing.Point(0, 35);
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(200, 17);
             this.progressLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.progressLabel.Size = new System.Drawing.Size(200, 17);
             this.progressLabel.TabIndex = 2;
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -74,7 +72,6 @@ namespace NanoByte.Common.Controls
             this.Name = "TaskControl";
             this.Size = new System.Drawing.Size(200, 54);
             this.ResumeLayout(false);
-
         }
 
         #endregion

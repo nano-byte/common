@@ -21,7 +21,6 @@ namespace NanoByte.Common.Controls
         }
 
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -36,9 +35,7 @@ namespace NanoByte.Common.Controls
             // 
             // labelPrompt
             // 
-            this.labelPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPrompt.AutoEllipsis = true;
             this.labelPrompt.BackColor = System.Drawing.SystemColors.Control;
             this.labelPrompt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
@@ -72,8 +69,7 @@ namespace NanoByte.Common.Controls
             // 
             // textInput
             // 
-            this.textInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.textInput.Location = new System.Drawing.Point(12, 84);
             this.textInput.Name = "textInput";
             this.textInput.Size = new System.Drawing.Size(320, 20);
@@ -86,7 +82,7 @@ namespace NanoByte.Common.Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(344, 120);
+            this.ClientSize = new System.Drawing.Size(344, 139);
             this.ControlBox = false;
             this.Controls.Add(this.textInput);
             this.Controls.Add(this.buttonCancel);
@@ -102,7 +98,6 @@ namespace NanoByte.Common.Controls
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.InputBox_DragEnter);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

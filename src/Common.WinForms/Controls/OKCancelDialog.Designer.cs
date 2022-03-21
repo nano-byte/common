@@ -21,7 +21,6 @@ namespace NanoByte.Common.Controls
         }
 
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -74,7 +73,6 @@ namespace NanoByte.Common.Controls
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Dialog";
             this.ResumeLayout(false);
-
         }
 
         #endregion

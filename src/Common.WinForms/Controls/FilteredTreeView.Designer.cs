@@ -21,15 +21,14 @@ namespace NanoByte.Common.Controls
         }
 
         #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.treeView = new System.Windows.Forms.TreeView();
-            this.textSearch = new Common.Controls.HintTextBox();
+            this.textSearch = new NanoByte.Common.Controls.HintTextBox();
             this.SuspendLayout();
             // 
             // treeView
@@ -66,7 +65,6 @@ namespace NanoByte.Common.Controls
             this.Size = new System.Drawing.Size(156, 181);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
