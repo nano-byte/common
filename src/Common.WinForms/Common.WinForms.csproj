@@ -12,8 +12,9 @@
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
-    <!-- .NET Core MSBuild does not support non-primitive resources (e.g., images) for .NET Framework -->
-    <TargetFrameworks>net5.0-windows;net6.0-windows</TargetFrameworks>
+    <!-- .NET Core MSBuild does not support legacy ResGen -->
+    <TargetFrameworks>net461;net472;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <GenerateResourceUsePreserializedResources>True</GenerateResourceUsePreserializedResources>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net5.0-windows' Or '$(TargetFramework)'=='net6.0-windows'">
@@ -31,6 +32,9 @@
   <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='net472'">
     <Reference Include="System.Net.Http" />
     <Reference Include="TaskDialog" HintPath="..\..\lib\TaskDialog.dll" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
   </ItemGroup>
 
   <!-- Global usings -->
