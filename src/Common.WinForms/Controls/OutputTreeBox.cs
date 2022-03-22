@@ -13,8 +13,10 @@ public sealed class OutputTreeBox<T> : Form
 {
     internal OutputTreeBox(NamedCollection<T> data, char separator)
     {
+        SuspendLayout();
+        AutoScaleDimensions = new SizeF(6F, 13F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(600, 450);
+        Padding = new Padding(12);
         Controls.Add(new FilteredTreeView<T>
         {
             Dock = DockStyle.Fill,
@@ -23,6 +25,7 @@ public sealed class OutputTreeBox<T> : Form
             Separator = separator
         });
         ShowIcon = false;
+        ResumeLayout(false);
     }
 }
 

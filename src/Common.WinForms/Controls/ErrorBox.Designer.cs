@@ -52,7 +52,7 @@ namespace NanoByte.Common.Controls
             // 
             this.labelMessage.AutoEllipsis = true;
             this.labelMessage.AutoSize = true;
-            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.labelMessage.Location = new System.Drawing.Point(3, 0);
             this.labelMessage.MinimumSize = new System.Drawing.Size(48, 48);
             this.labelMessage.Name = "labelMessage";

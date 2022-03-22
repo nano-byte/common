@@ -38,7 +38,6 @@ namespace NanoByte.Common.Controls
             this.labelPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPrompt.AutoEllipsis = true;
             this.labelPrompt.BackColor = System.Drawing.SystemColors.Control;
-            this.labelPrompt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.labelPrompt.Location = new System.Drawing.Point(12, 12);
             this.labelPrompt.Name = "labelPrompt";
             this.labelPrompt.Size = new System.Drawing.Size(244, 69);

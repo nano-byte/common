@@ -14,12 +14,11 @@ public sealed class PropertyGridForm : Form
         Text = value.ToString();
         AutoScaleDimensions = new SizeF(6F, 13F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(284, 262);
+        Padding = new Padding(12);
         Controls.Add(new ResettablePropertyGrid
         {
             Dock = DockStyle.Fill,
             Location = new Point(0, 0),
-            Size = new Size(284, 262),
             SelectedObject = value
         });
         ShowIcon = false;
