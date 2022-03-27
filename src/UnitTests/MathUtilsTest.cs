@@ -28,6 +28,7 @@ public class MathUtilsTest
     [Fact]
     public void TestSizeMultiply()
     {
-        new Size(2, 3).Multiply(2).Should().Be(new Size(4, 6));
+        new Size(2, 3).MultiplyAndRound(new SizeF(2, 3))
+                      .Should().Be(new Size(4, 9));
     }
 }

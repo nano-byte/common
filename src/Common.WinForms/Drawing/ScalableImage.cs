@@ -9,7 +9,7 @@ namespace NanoByte.Common.Drawing;
 public sealed class ScalableImage : IDisposable
 {
     private readonly Image _baseImage;
-    private readonly Dictionary<float, Image> _scaledImages = new();
+    private readonly Dictionary<SizeF, Image> _scaledImages = new();
 
     /// <summary>
     /// Creates a new scalable image.
@@ -23,8 +23,8 @@ public sealed class ScalableImage : IDisposable
     /// <summary>
     /// Returns a copy of the base image scaled by the specified <paramref name="factor"/>.
     /// </summary>
-    public Image Get(float factor)
-        => factor.EqualsTolerance(1)
+    public Image Get(SizeF factor)
+        => factor == new SizeF(1, 1)
             ? _baseImage
             : _scaledImages.GetOrAdd(factor, () => _baseImage.Scale(factor));
 

@@ -56,8 +56,10 @@ public static class MathUtils
         => Math.Abs(a - b) <= tolerance;
 
     /// <summary>
-    /// Multiplies a size with a linear <paramref name="factor"/>.
+    /// Multiplies a <see cref="Size"/> with a <see cref="SizeF"/> and then rounds the components to integer values.
     /// </summary>
-    public static Size Multiply(this Size size, float factor)
-        => new((int)(size.Width * factor), (int)(size.Height * factor));
+    public static Size MultiplyAndRound(this Size size, SizeF factor)
+        => new(
+            (int)Math.Round(size.Width * factor.Width),
+            (int)Math.Round(size.Height * factor.Height));
 }
