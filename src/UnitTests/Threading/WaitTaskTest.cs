@@ -17,9 +17,6 @@ public class WaitTaskTest
         var task = new WaitTask("Test task", waitHandle);
         var waitTask = Task.Run(() => task.Run());
 
-        Thread.Sleep(100);
-        task.State.Should().Be(TaskState.Started);
-
         waitHandle.Set();
         waitTask.Wait();
         task.State.Should().Be(TaskState.Complete);
