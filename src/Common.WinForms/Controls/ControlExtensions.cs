@@ -51,22 +51,26 @@ public static class ControlExtensions
 #endif
 
     /// <summary>
-    /// Returns the current DPI scaling factor relative to the default value of 96 DPI.
+    /// Returns the current auto-scaling factor.
     /// </summary>
-    public static float GetDpiScale(this Control control)
+    /// <remarks>
+    /// Assumes the default <see cref="ContainerControl.AutoScaleDimensions"/> of 6, 13.
+    /// Unlike <see cref="ContainerControl.AutoScaleFactor"/> this will retain the correct factor even after <see cref="ContainerControl.PerformAutoScale"/> has run.
+    /// </remarks>
+    public static SizeF GetScaleFactor(this ContainerControl control)
     {
         #region Sanity checks
         if (control == null) throw new ArgumentNullException(nameof(control));
         #endregion
 
-        try
-        {
-            using var graphics = control.CreateGraphics();
-            return graphics.DpiX / 96.0f;
-        }
-        catch
-        {
-            return 1;
-        }
+        return new(control.AutoScaleDimensions.Width / 6F, control.AutoScaleDimensions.Height / 13F);
     }
+
+    /// <summary>
+    /// Scales a <see cref="Size"/> according to the current auto-scaling factor.
+    /// </summary>
+    /// <param name="size">The size to scale.</param>
+    /// <param name="control">The control to get the scaling factor from.</param>
+    public static Size ApplyScale(this Size size, ContainerControl control)
+        => size.MultiplyAndRound(control.GetScaleFactor());
 }
