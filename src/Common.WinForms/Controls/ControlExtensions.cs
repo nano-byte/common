@@ -54,7 +54,7 @@ public static class ControlExtensions
     /// Returns the current auto-scaling factor.
     /// </summary>
     /// <remarks>
-    /// Assumes the default <see cref="ContainerControl.AutoScaleDimensions"/> of 6, 13.
+    /// Assumes the default <see cref="ContainerControl.AutoScaleDimensions"/> of 6, 13 for <see cref="AutoScaleMode.Font"/> or 96, 96 for  <see cref="AutoScaleMode.Dpi"/>.
     /// Unlike <see cref="ContainerControl.AutoScaleFactor"/> this will retain the correct factor even after <see cref="ContainerControl.PerformAutoScale"/> has run.
     /// </remarks>
     public static SizeF GetScaleFactor(this ContainerControl control)
@@ -63,7 +63,12 @@ public static class ControlExtensions
         if (control == null) throw new ArgumentNullException(nameof(control));
         #endregion
 
-        return new(control.AutoScaleDimensions.Width / 6F, control.AutoScaleDimensions.Height / 13F);
+        return control.AutoScaleMode switch
+        {
+            AutoScaleMode.Font => new SizeF(control.CurrentAutoScaleDimensions.Width / 6, control.CurrentAutoScaleDimensions.Height / 13),
+            AutoScaleMode.Dpi => new SizeF(control.CurrentAutoScaleDimensions.Width / 96, control.CurrentAutoScaleDimensions.Height / 96),
+            _ => new SizeF(1, 1)
+        };
     }
 
     /// <summary>
