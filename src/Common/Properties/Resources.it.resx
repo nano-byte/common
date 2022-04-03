@@ -60,11 +60,11 @@
   </resheader>
   <data name="Back" xml:space="preserve">
     <value>Indietro</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancella</value>
-    <comment>Automatically translated.</comment>
+    <value>Annulla</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>La collezione non può essere aggiunta a se stessa.</value>
@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di cosa stavi facendo quando si è verificato l'incidente.</value>
+    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di ciò che stavi facendo quando si è verificato l'incidente.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
@@ -168,7 +168,7 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>La configurazione del sistema non può essere modificata in modalità portatile.</value>
@@ -220,14 +220,14 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Cerca</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Ricerca di riferimenti di file aperti</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Si è tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può accomodare solo una differenza di {3} byte.</value>
+    <value>Si è tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può accogliere solo una differenza di {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -239,8 +239,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Completa</value>
-    <comment>Automatically translated.</comment>
+    <value>Completo</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
     <value>Elaborazione dei dati</value>
@@ -252,7 +252,7 @@
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>Errore IO</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Pronto</value>
@@ -260,7 +260,7 @@
   </data>
   <data name="StateWebError" xml:space="preserve">
     <value>Errore web</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>La lunghezza degli obiettivi deve essere uguale alla lunghezza di oldValues</value>
@@ -295,7 +295,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Sì</value>
-    <comment>Automatically translated.</comment>
+    <value>Si</value>
+    <comment>Manually overriden.</comment>
   </data>
 </root>
