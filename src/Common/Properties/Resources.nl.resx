@@ -71,7 +71,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet worden gecanoniseerd omdat dit mogelijk tot verlies van informatie zou leiden.</value>
+    <value>De DACL kan niet worden gecanoniseerd omdat dit mogelijk tot informatieverlies zou leiden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">

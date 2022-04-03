@@ -59,12 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Dos</value>
-    <comment>Automatically translated.</comment>
+    <value>Retourner</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>La collection ne peut pas être ajoutée à elle-même.</value>
@@ -75,24 +75,24 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Commentaire :</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp; Commentaire :</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copie de fichiers</value>
-    <comment>Automatically translated.</comment>
+    <value>Copie des fichiers</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copier dans le presse-papiers</value>
-    <comment>Automatically translated.</comment>
+    <value>Copier dans le presse-papier</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le répertoire de destination existe déjà.</value>
-    <comment>Automatically translated.</comment>
+    <value>Le directoire de destination existe déjà</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Téléchargement de {0}</value>
-    <comment>Automatically translated.</comment>
+    <value>Chargement {0}</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
     <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
@@ -100,7 +100,7 @@
   </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Rapport d'erreur</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>Ne pas signaler</value>
@@ -115,8 +115,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été envoyé avec succès.</value>
-    <comment>Automatically translated.</comment>
+    <value>Le rapport d'erreur a été bien envoyé</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
     <value>Échec du téléchargement de {0}.</value>
@@ -176,7 +176,7 @@
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Cette méthode n'est disponible que sous Windows.</value>
@@ -191,8 +191,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Il y a eu un problème lors du chargement de '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}' a quitté avec le code de sortie {1}.</value>
@@ -216,11 +216,11 @@
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Redémarrage des applications</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Recherche</value>
-    <comment>Automatically translated.</comment>
+    <value>Chercher</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Recherche de références de fichiers ouverts</value>
@@ -232,15 +232,15 @@
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Fermeture des applications</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>La source et la destination sont égales.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Compléter</value>
-    <comment>Automatically translated.</comment>
+    <value>Complete</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
     <value>Traitement des données</value>
@@ -256,11 +256,11 @@
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>Prêt</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Erreur web</value>
-    <comment>Automatically translated.</comment>
+    <value>L'erreur du réseau</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
