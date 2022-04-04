@@ -14,6 +14,7 @@ public sealed class OutputTreeBox<T> : Form
     internal OutputTreeBox(NamedCollection<T> data, char separator)
     {
         SuspendLayout();
+        Font = DefaultFonts.Modern;
         AutoScaleDimensions = new SizeF(6F, 13F);
         AutoScaleMode = AutoScaleMode.Font;
         Padding = new Padding(12);

@@ -39,6 +39,7 @@ public sealed partial class ErrorReportForm : Form
         #endregion
 
         InitializeComponent();
+        Font = DefaultFonts.Modern;
         Text = Resources.ErrorReport;
         infoLabel.Text = Resources.ErrorReportInfo;
         detailsLabel.Text = Resources.TechnicalDetails;

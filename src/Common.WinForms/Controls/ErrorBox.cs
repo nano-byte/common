@@ -14,6 +14,7 @@ public sealed partial class ErrorBox : Form
     private ErrorBox()
     {
         InitializeComponent();
+        Font = DefaultFonts.Modern;
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
     }
 

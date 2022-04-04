@@ -43,6 +43,7 @@
     <Using Remove="System.Threading.Tasks" />
     <Using Include="NanoByte.Common.Properties" />
     <Using Include="NanoByte.Common.Controls" />
+    <Using Include="NanoByte.Common.Drawing" />
   </ItemGroup>
 
   <!-- Bundle 3rd party libs in NuGet package -->

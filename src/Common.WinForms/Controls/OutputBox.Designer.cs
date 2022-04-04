@@ -49,7 +49,7 @@ namespace NanoByte.Common.Controls
             // 
             this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTitle.AutoEllipsis = true;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.labelTitle.Location = new System.Drawing.Point(70, 9);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(402, 48);
@@ -60,6 +60,7 @@ namespace NanoByte.Common.Controls
             // 
             this.textMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.textMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textMessage.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.textMessage.Location = new System.Drawing.Point(16, 60);
             this.textMessage.Multiline = true;
             this.textMessage.Name = "textMessage";

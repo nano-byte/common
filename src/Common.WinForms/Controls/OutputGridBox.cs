@@ -13,6 +13,7 @@ public sealed partial class OutputGridBox : Form
     private OutputGridBox()
     {
         InitializeComponent();
+        Font = DefaultFonts.Modern;
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
     }
 

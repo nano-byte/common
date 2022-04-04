@@ -11,6 +11,7 @@ public sealed class PropertyGridForm : Form
     private PropertyGridForm(object value)
     {
         SuspendLayout();
+        Font = DefaultFonts.Modern;
         Text = value.ToString();
         AutoScaleDimensions = new SizeF(6F, 13F);
         AutoScaleMode = AutoScaleMode.Font;

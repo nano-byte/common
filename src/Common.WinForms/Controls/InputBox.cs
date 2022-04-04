@@ -11,6 +11,7 @@ public sealed partial class InputBox : Form
     private InputBox()
     {
         InitializeComponent();
+        Font = DefaultFonts.Modern;
         buttonOK.Text = Resources.OK;
         buttonCancel.Text = Resources.Cancel;
     }

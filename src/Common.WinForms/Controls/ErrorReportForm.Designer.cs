@@ -41,7 +41,7 @@ namespace NanoByte.Common.Controls
             // infoLabel
             // 
             this.infoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.infoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.infoLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.infoLabel.Location = new System.Drawing.Point(12, 9);
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(507, 66);
@@ -61,7 +61,7 @@ namespace NanoByte.Common.Controls
             // detailsLabel
             // 
             this.detailsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.detailsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.detailsLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.detailsLabel.Location = new System.Drawing.Point(168, 78);
             this.detailsLabel.Name = "detailsLabel";
             this.detailsLabel.Size = new System.Drawing.Size(93, 38);
@@ -86,7 +86,7 @@ namespace NanoByte.Common.Controls
             // 
             this.commentLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.commentLabel.AutoSize = true;
-            this.commentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.commentLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.commentLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.commentLabel.Location = new System.Drawing.Point(264, 170);
             this.commentLabel.Name = "commentLabel";

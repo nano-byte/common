@@ -13,6 +13,7 @@ public sealed partial class OutputBox : Form
     private OutputBox()
     {
         InitializeComponent();
+        Font = DefaultFonts.Modern;
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
     }
 
