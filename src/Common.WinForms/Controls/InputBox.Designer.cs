@@ -89,7 +89,7 @@ namespace NanoByte.Common.Controls
             this.Controls.Add(this.labelPrompt);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(260, 155);
+            this.MinimumSize = new System.Drawing.Size(260, 170);
             this.Name = "InputBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "(Title)";
