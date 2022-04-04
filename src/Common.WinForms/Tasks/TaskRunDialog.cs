@@ -29,6 +29,7 @@ internal sealed partial class TaskRunDialog : Form
         #endregion
 
         InitializeComponent();
+        Font = DefaultFonts.Modern;
 
         buttonCancel.Text = Resources.Cancel;
         buttonCancel.Enabled = task.CanCancel;
