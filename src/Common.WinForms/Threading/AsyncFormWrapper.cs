@@ -111,6 +111,8 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public void Send(Action<T> action)
     {
+        if (_form.IsValueCreated && _form.Value.IsDisposed) throw new OperationCanceledException();
+
         try
         {
             _form.Value.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
@@ -163,7 +165,7 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
     public void Close()
     {
-        if (!_form.IsValueCreated) return;
+        if (!_form.IsValueCreated || _form.Value.IsDisposed) return;
 
         try
         {
