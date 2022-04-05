@@ -29,7 +29,7 @@ public static class ProcessUtils
         if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
         #endregion
 
-        Log.Debug("Launching process: " + startInfo.ToCommandLine());
+        Log.Debug($"Launching process: {startInfo.ToCommandLine()}");
         try
         {
             return Process.Start(startInfo) ?? throw new IOException(string.Format(Resources.FailedToStart, startInfo.FileName));
@@ -81,6 +81,7 @@ public static class ProcessUtils
 
         var process = Start(startInfo);
         process.WaitForExit();
+        Log.Debug($"Process finished with exit code {process.ExitCode}: {startInfo.ToCommandLine()}");
         return process.ExitCode;
     }
 
