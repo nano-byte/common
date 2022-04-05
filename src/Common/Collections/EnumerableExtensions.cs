@@ -48,7 +48,7 @@ namespace NanoByte.Common.Collections
 
             var set =
 #if !NET20
-                second as ISet<T> ??
+            second as ISet<T> ??
 #endif
                 new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
             return second.Any(set.Contains);

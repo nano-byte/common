@@ -71,25 +71,25 @@ public static class ExceptionUtils
         ExceptionDispatchInfo.Capture(exception).Throw();
         return exception;
 #else
-         var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
-         var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
-         exception.GetObjectData(serializationInfo, streamingContext);
+        var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
+        var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
+        exception.GetObjectData(serializationInfo, streamingContext);
 
-         try
-         {
-             var objectManager = new ObjectManager(null, streamingContext);
-             objectManager.RegisterObject(exception, 1, serializationInfo);
-             objectManager.DoFixups();
-         }
-         // Ignore if preserving stack trace is not possible
-         catch (SecurityException)
-         {}
-         catch (SerializationException)
-         {}
-         catch (TargetInvocationException)
-         {}
+        try
+        {
+            var objectManager = new ObjectManager(null, streamingContext);
+            objectManager.RegisterObject(exception, 1, serializationInfo);
+            objectManager.DoFixups();
+        }
+        // Ignore if preserving stack trace is not possible
+        catch (SecurityException)
+        {}
+        catch (SerializationException)
+        {}
+        catch (TargetInvocationException)
+        {}
 
-         throw exception;
+        throw exception;
 #endif
     }
 

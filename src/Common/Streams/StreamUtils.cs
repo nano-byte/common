@@ -126,7 +126,7 @@ public static class StreamUtils
         }
 
 #if NET20 || NET40
-            stream.Read(count);
+        stream.Read(count);
 #else
         var pool = System.Buffers.ArrayPool<byte>.Shared;
         byte[] buffer = pool.Rent(Math.Min(count, 64));
@@ -160,7 +160,7 @@ public static class StreamUtils
         #endregion
 
 #if NETFRAMEWORK
-            stream.Write(data, 0, data.Length);
+        stream.Write(data, 0, data.Length);
 #else
         stream.Write(data);
 #endif
@@ -229,14 +229,14 @@ public static class StreamUtils
         if (source.CanSeek) source.Position = 0;
 
 #if NET20
-            var buffer = new byte[81920];
-            int read;
-            long sum = 0;
-            do
-            {
-                sum += read = source.Read(buffer, 0, buffer.Length);
-                destination.Write(buffer, 0, read);
-            } while (read != 0);
+        var buffer = new byte[81920];
+        int read;
+        long sum = 0;
+        do
+        {
+            sum += read = source.Read(buffer, 0, buffer.Length);
+            destination.Write(buffer, 0, read);
+        } while (read != 0);
 #else
         source.CopyTo(destination);
 #endif

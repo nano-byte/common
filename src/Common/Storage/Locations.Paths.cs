@@ -253,7 +253,7 @@ partial class Locations
     /// </summary>
     private static string PathCombine(params string[] paths)
 #if NET20
-            => (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
+        => (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
 #else
         => Path.Combine(paths);
 #endif

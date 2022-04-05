@@ -27,7 +27,7 @@ public static class Paths
 
         foreach (string entry in paths)
         {
-            if (entry.Contains("*") || entry.Contains("?"))
+            if (entry.Contains('*') || entry.Contains('?'))
             {
                 string dewildcardedPath = entry.Replace("*", "x").Replace("?", "x");
                 string directory = Path.GetDirectoryName(Path.GetFullPath(dewildcardedPath)) ?? Directory.GetCurrentDirectory();

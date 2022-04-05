@@ -52,18 +52,18 @@ public class TemporaryDirectory : IDisposable
 #if DEBUG
             Directory.Delete(Path, recursive: true);
 #else
-                try
-                {
-                    Directory.Delete(Path, recursive: true);
-                }
-                catch (IOException ex)
-                {
-                    Log.Warn(ex);
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    Log.Warn(ex);
-                }
+            try
+            {
+                Directory.Delete(Path, recursive: true);
+            }
+            catch (IOException ex)
+            {
+                Log.Warn(ex);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Log.Warn(ex);
+            }
 #endif
         }
     }

@@ -99,7 +99,7 @@ public static class ProcessUtils
 
         string executablePath = Path.Combine(Locations.InstallBase,
 #if NETFRAMEWORK
-                name + ".exe"
+            name + ".exe"
 #else
             name + ".dll"
 #endif
@@ -107,12 +107,12 @@ public static class ProcessUtils
         if (!File.Exists(executablePath)) throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, name), executablePath);
 
 #if NETFRAMEWORK
-            if (!WindowsUtils.IsWindows)
-            {
-                arguments = arguments.Prepend(executablePath);
-                executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
-                if (!executablePath.EndsWith("mono")) executablePath = "mono";
-            }
+        if (!WindowsUtils.IsWindows)
+        {
+            arguments = arguments.Prepend(executablePath);
+            executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
+            if (!executablePath.EndsWith("mono")) executablePath = "mono";
+        }
 #else
         arguments = arguments.Prepend(executablePath);
         executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
