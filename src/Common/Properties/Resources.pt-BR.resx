@@ -60,91 +60,91 @@
   </resheader>
   <data name="Back" xml:space="preserve">
     <value>Voltar</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>A coleção não pode ser acrescentada a si mesma.</value>
-    <comment>Automatically translated.</comment>
+    <value>A coleção não pode ser adicionada nela mesma.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>O DACL não pode ser canonicalizado, pois poderia resultar em uma perda de informação.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Comente:</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Comentário:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Cópia de arquivos</value>
-    <comment>Automatically translated.</comment>
+    <value>Copiando arquivos</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Cópia para prancheta</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Copiar para área de transferência</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>O diretório de destino já existe.</value>
-    <comment>Automatically translated.</comment>
+    <value>A pasta de destino já existe.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Descarga {0}</value>
-    <comment>Automatically translated.</comment>
+    <value>Baixando {0}</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
     <value>Se desejar, você pode usar este campo para fornecer informações adicionais sobre o problema, tais como uma descrição do que você estava fazendo quando o acidente ocorreu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Relatório de erro</value>
-    <comment>Automatically translated.</comment>
+    <value>Reportar erro</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Não informar</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Não reportar</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
     <value>Ocorreu um erro inesperado nesta aplicação. Você pode nos ajudar a corrigir o problema relatando-o. Se já houver uma correção conhecida para seu problema, ela será exibida logo após o envio do relatório.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>Relatório</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Reportar</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>O relatório de erro foi enviado com sucesso.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Falha no download {0}.</value>
-    <comment>Automatically translated.</comment>
+    <value>Falha ao baixar {0}.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Falha ao abrir a subchave de registro '{0}' em '{1}'.</value>
-    <comment>Automatically translated.</comment>
+    <value>Falha ao abrir subchave do registro '{0}' em '{1}'.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Falha no recuo '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <value>Falha ao reverter '{0}'.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Falha em começar '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <value>Falha ao iniciar '{0}'.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>O arquivo que deveria ter sido baixado de {0} não tem o tamanho esperado. Devia ser {1} bytes, mas na verdade era {2} bytes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>O arquivo "{0}" não pôde ser encontrado.</value>
-    <comment>Automatically translated.</comment>
+    <value>O arquivo "{0}" não foi encontrado.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>O diretório de configuração '{0}' é provavelmente inválido.</value>
-    <comment>Automatically translated.</comment>
+    <value>A pasta de configuração '{0}' provavelmente é inválida.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>As credenciais de login para {0} estão incorretas.</value>
@@ -219,8 +219,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Busca</value>
-    <comment>Automatically translated.</comment>
+    <value>Pesquisar</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Busca de referências de arquivos abertos</value>

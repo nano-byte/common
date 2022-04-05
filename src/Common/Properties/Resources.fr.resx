@@ -168,7 +168,7 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>Non</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>La configuration du système ne peut pas être modifiée en mode portable.</value>
@@ -184,7 +184,7 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Mot de passe :</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
     <value>Veuillez entrer vos identifiants de connexion pour {0}:</value>
@@ -291,11 +291,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom de l'utilisateur :</value>
-    <comment>Automatically translated.</comment>
+    <value>Nom d'utilisateur :</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
 </root>

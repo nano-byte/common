@@ -179,7 +179,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Bu yöntem yalnız Windows üzerinde kullanılabilir.</value>
+    <value>Bu yöntem yalnızca Windows üzerinde kullanılabilir.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnız {3} bayt farkı karşılayabilir.</value>
+    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnızca {3} bayt farkı karşılayabilir.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
