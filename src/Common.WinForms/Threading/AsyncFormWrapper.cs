@@ -136,10 +136,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// </summary>
     /// <remarks>Does nothing if the <see cref="Form"/> was not yet created.</remarks>
     /// <param name="action">The action to execute; gets passed the <typeparamref name="T"/> instance.</param>
-    /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public void SendLow(Action<T> action)
     {
-        if (!_form.IsValueCreated) return;
+        if (!_form.IsValueCreated || _form.Value.IsDisposed) return;
 
         try
         {
@@ -148,13 +147,13 @@ public sealed class AsyncFormWrapper<T> : IDisposable
         #region Error handling
         catch (InvalidOperationException ex)
         {
+            // Don't worry if the form was already closing
             Log.Debug(ex);
-            throw new OperationCanceledException();
         }
         catch (InvalidAsynchronousStateException ex)
         {
+            // Don't worry if the form was already closing
             Log.Debug(ex);
-            throw new OperationCanceledException();
         }
         #endregion
     }
