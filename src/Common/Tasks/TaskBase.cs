@@ -90,6 +90,8 @@ public abstract class TaskBase : MarshalByRefObject, ITask
         #endregion
 
         State = TaskState.Complete;
+
+        cancellationToken.ThrowIfCancellationRequested();
     }
 
     #region Progress

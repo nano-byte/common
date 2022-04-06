@@ -42,9 +42,7 @@ public abstract class TaskHandlerBase : ITaskHandler
         if (task == null) throw new ArgumentNullException(nameof(task));
         #endregion
 
-        CancellationToken.ThrowIfCancellationRequested();
         task.Run(CancellationToken, CredentialProvider);
-        CancellationToken.ThrowIfCancellationRequested();
     }
 
     private readonly object _askInteractiveLock = new();
