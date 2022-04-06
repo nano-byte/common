@@ -44,7 +44,7 @@ public class ProcessLauncher : IProcessLauncher
 
     /// <inheritdoc/>
     public void Run(params string[] arguments)
-        => HandleExitCode(Start(arguments).WaitForExitCode());
+        => WaitForExit(Start(arguments));
 
     /// <inheritdoc/>
     public string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
@@ -73,7 +73,7 @@ public class ProcessLauncher : IProcessLauncher
         stderr.WaitForEnd();
         ReadStderr();
 
-        HandleExitCode(process.WaitForExitCode());
+        WaitForExit(process);
 
         return stdout.ToString();
     }
@@ -97,14 +97,10 @@ public class ProcessLauncher : IProcessLauncher
     }
 
     /// <summary>
-    /// Hook for handling the <see cref="Process.ExitCode"/>.
+    /// Hook for waiting for a process to exit and handle its exit code.
     /// </summary>
-    /// <param name="exitCode">The <see cref="Process.ExitCode"/>.</param>
-    protected virtual void HandleExitCode(int exitCode)
-    {
-        if (exitCode != 0)
-            throw new ExitCodeException(_fileName, exitCode);
-    }
+    protected virtual void WaitForExit(Process process)
+        => process.WaitForSuccess();
 
     /// <summary>
     /// Hook for handling stderr messages from the process.
