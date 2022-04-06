@@ -44,11 +44,7 @@ public class ProcessLauncher : IProcessLauncher
 
     /// <inheritdoc/>
     public void Run(params string[] arguments)
-    {
-        var process = Start(arguments);
-        process.WaitForExit();
-        HandleExitCode(process.ExitCode);
-    }
+        => HandleExitCode(Start(arguments).WaitForExitCode());
 
     /// <inheritdoc/>
     public string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
@@ -77,8 +73,7 @@ public class ProcessLauncher : IProcessLauncher
         stderr.WaitForEnd();
         ReadStderr();
 
-        process.WaitForExit();
-        HandleExitCode(process.ExitCode);
+        HandleExitCode(process.WaitForExitCode());
 
         return stdout.ToString();
     }

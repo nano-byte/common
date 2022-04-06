@@ -68,21 +68,38 @@ public static class ProcessUtils
     /// <summary>
     /// Starts a new <see cref="Process"/> and waits for it to complete. Handles and wraps <see cref="Win32Exception"/>s.
     /// </summary>
-    /// <returns>The exit code of the child process.</returns>
+    /// <returns>The exit code of the process.</returns>
     /// <exception cref="IOException">There was a problem launching the executable.</exception>
     /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
     /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
     /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
     public static int Run(this ProcessStartInfo startInfo)
+        => Start(startInfo ?? throw new ArgumentNullException(nameof(startInfo))).WaitForExitCode();
+
+    /// <summary>
+    /// Waits for a running <see cref="Process"/> to complete.
+    /// </summary>
+    /// <returns>The exit code of the process.</returns>
+    public static int WaitForExitCode(this Process process)
     {
         #region Sanity checks
-        if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
+        if (process == null) throw new ArgumentNullException(nameof(process));
         #endregion
 
-        var process = Start(startInfo);
         process.WaitForExit();
-        Log.Debug($"Process finished with exit code {process.ExitCode}: {startInfo.ToCommandLine()}");
+        Log.Debug($"Process finished with exit code {process.ExitCode}: {process.StartInfo.ToCommandLine()}");
         return process.ExitCode;
+    }
+
+    /// <summary>
+    /// Waits for a running <see cref="Process"/> to complete with an exit code of zero.
+    /// </summary>
+    /// <exception cref="ExitCodeException">The process exited with a non-zero <see cref="Process.ExitCode"/>.</exception>
+    public static void WaitForSuccess(this Process process)
+    {
+        int exitCode = process.WaitForExitCode();
+        if (exitCode != 0)
+            throw new ExitCodeException(process.StartInfo.ToCommandLine(), exitCode);
     }
 
     /// <summary>
