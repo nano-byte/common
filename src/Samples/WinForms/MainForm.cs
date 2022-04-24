@@ -25,7 +25,20 @@ public class MainForm : Form
             OutputGridBox.Show(this, "Test", new [] {"Test 1", "Test 2"});
         };
 
-        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton});
+        var dropDownButton = new Button {Text = "Drop-down", Location = new(10, 180)};
+        dropDownButton.Click += delegate
+        {
+            new DropDownContainer
+            {
+                Controls =
+                {
+                    new Button {Text = "Button 1", Location = new(10, 10)},
+                    new Button {Text = "Button 2", Location = new(10, 40)}
+                }
+            }.Show(dropDownButton);
+        };
+
+        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, dropDownButton});
 
         Shown += async delegate
         {
