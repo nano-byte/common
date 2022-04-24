@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>位置{0} から読み込もうとした。この位置は、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファは{3} バイトの差にしか対応できません。</value>
+    <value>位置{0} から読み込もうとしました。この位置は、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファは{3} バイトの差にしか対応できません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

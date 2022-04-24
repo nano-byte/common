@@ -279,7 +279,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Nie udało się odczytać ze strumienia {0} bajtów.</value>
+    <value>Nie można odczytać ze strumienia {0} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">

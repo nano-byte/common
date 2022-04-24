@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>Le directoire de destination existe déjà</value>
+    <value>Le directoire de destination existe déjà.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
@@ -115,7 +115,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Le rapport d'erreur a été bien envoyé</value>
+    <value>Le rapport d'erreur a été bien envoyé.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Un problème a été rencontré lors du chargement de '{0}'</value>
+    <value>Un problème a été rencontré lors du chargement de '{0}'.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
