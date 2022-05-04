@@ -95,6 +95,9 @@ public class AnsiCliTaskHandler : CliTaskHandler
     /// <inheritdoc/>
     protected override bool AskInteractive(string question, bool defaultAnswer)
     {
+        if (!AnsiCli.Error.Profile.Capabilities.Interactive)
+            return base.AskInteractive(question, defaultAnswer);
+
         lock (_progressContextLock)
         {
             // Avoid showing progress bars and input prompts at the same time
