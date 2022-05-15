@@ -71,7 +71,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Il DACL non può essere canonizzato poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
+    <value>Il DACL non può essere canonicalizzato, poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -79,7 +79,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copiare i file</value>
+    <value>Copia dei file</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReporComment" xml:space="preserve">
-    <value>Se vuoi, puoi usare questo campo per fornire ulteriori informazioni sul problema, come una descrizione di ciò che stavi facendo quando si è verificato l'incidente.</value>
+    <value>Se lo si desidera, è possibile utilizzare questo campo per fornire ulteriori informazioni sul problema, ad esempio una descrizione di ciò che si stava facendo quando si è verificato l'arresto anomalo.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
@@ -107,15 +107,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Si è verificato un errore inaspettato in questa applicazione. Puoi aiutarci a risolvere il problema segnalandolo. Se c'è già una soluzione nota per il tuo problema, sarà visualizzata subito dopo aver inviato la segnalazione.</value>
+    <value>Si è verificato un errore imprevisto in questa applicazione. Potete aiutarci a risolvere il problema segnalandolo. Se esiste già una soluzione nota per il problema, questa verrà visualizzata subito dopo l'invio della segnalazione.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>Segnala</value>
+    <value>Rapporto</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Il rapporto di errore è stato inviato con successo.</value>
+    <value>La segnalazione di errore è stata inviata con successo.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
@@ -127,7 +127,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Fallito il rollback '{0}'.</value>
+    <value>Fallito il rollback di '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -135,15 +135,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Il file che doveva essere scaricato da {0} non ha la dimensione prevista. Doveva essere {1} byte ma in realtà era {2} byte.</value>
+    <value>Il file che doveva essere scaricato da {0} non ha le dimensioni previste. Doveva essere {1} byte ma in realtà era {2} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Il file "{0}" non può essere trovato.</value>
+    <value>Il file "{0}" non è stato trovato.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>La directory di configurazione '{0}' non è probabilmente valida.</value>
+    <value>La directory di configurazione '{0}' probabilmente non è valida.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -155,11 +155,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Il lancio di '{0}' richiede i privilegi di amministratore.</value>
+    <value>L'avvio di '{0}' richiede i privilegi di amministratore.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>La quantità massima di elementi nella collezione è stata superata.</value>
+    <value>È stata superata la quantità massima di elementi nella raccolta.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
@@ -187,19 +187,19 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Inserisci le credenziali di accesso per {0}:</value>
+    <value>Inserire le credenziali di accesso per {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>C'è stato un problema nel caricare '{0}'.</value>
+    <value>Si è verificato un problema nel caricamento di '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' è uscito con il codice di uscita {1}.</value>
+    <value>'{0}' uscito con il codice di uscita {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processo è uscito con un codice di uscita inaspettato.</value>
+    <value>Un processo è uscito con un codice di uscita inatteso.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -207,7 +207,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Questo comando non può essere eseguito di nuovo finché non è stato eseguito il comando undo.</value>
+    <value>Questo comando non può essere eseguito nuovamente finché non è stato eseguito il comando di annullamento.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -223,19 +223,19 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Ricerca di riferimenti di file aperti</value>
+    <value>Ricerca di riferimenti a file aperti</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Si è tentato di leggere dalla posizione {0}. Questo è {1} byte lontano dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può accomodare solo una differenza di {3} byte.</value>
+    <value>Tentativo di lettura dalla posizione {0}. Questa posizione è distante {1} byte dalla posizione {2} del flusso sottostante, ma il buffer di ricerca può gestire solo una differenza di {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Chiudere le applicazioni</value>
+    <value>Chiusura delle applicazioni</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Sorgente e destinazione sono uguali.</value>
+    <value>La sorgente e la destinazione sono uguali.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -263,7 +263,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La lunghezza degli obiettivi deve essere uguale alla lunghezza di oldValues</value>
+    <value>La lunghezza degli obiettivi deve essere uguale alla lunghezza dei valori precedenti</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -271,23 +271,23 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>La tua versione di .NET non supporta TLS 1.2. Questo può causare errori di connessione quando si scaricano contenuti via HTTPS. Esegui Windows Update per installare le patch necessarie.</value>
+    <value>La versione di .NET in uso non supporta il protocollo TLS 1.2. Ciò potrebbe causare errori di connessione durante il download di contenuti tramite HTTPS. Eseguire Windows Update per installare le patch necessarie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>L'assemblaggio chiamato "{0}" non può essere localizzato.</value>
+    <value>Non è stato possibile individuare l'assieme denominato "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossibile leggere {0} byte dal flusso.</value>
+    <value>Impossibile leggere {0} byte dallo stream.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Questo comando di annullamento non può essere eseguito finché non è stato eseguito il comando attuale.</value>
+    <value>Questo comando di annullamento non può essere eseguito finché non è stato eseguito il comando vero e proprio.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Il sottosistema Unix non è riuscito ad elaborare la richiesta. Potresti avere diritti insufficienti.</value>
+    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. È possibile che i diritti dell'utente non siano sufficienti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
