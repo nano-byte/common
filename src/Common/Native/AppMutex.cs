@@ -37,7 +37,7 @@ public sealed class AppMutex
             }
             catch (Win32Exception ex)
             {
-                Log.Debug(ex);
+                Log.Debug($"Failed to create {nameof(AppMutex)} {name}", ex);
             }
         }
 
@@ -79,7 +79,7 @@ public sealed class AppMutex
             }
             catch (Win32Exception ex)
             {
-                Log.Debug(ex);
+                Log.Debug($"Failed to probe {nameof(AppMutex)} {name}", ex);
                 return false;
             }
         }

@@ -35,7 +35,7 @@ public static class RegistryUtils
         #region Error handling
         catch (SecurityException ex)
         {
-            Log.Warn(ex);
+            Log.Warn($"Failed to read registry DWORD value from {keyName}\\{valueName}", ex);
             return defaultValue;
         }
         #endregion
@@ -92,7 +92,7 @@ public static class RegistryUtils
         #region Error handling
         catch (SecurityException ex)
         {
-            Log.Warn(ex);
+            Log.Warn($"Failed to read registry string value from {keyName}\\{valueName}", ex);
             return defaultValue;
         }
         #endregion
@@ -255,7 +255,7 @@ public static class RegistryUtils
         #region Error handling
         catch (SecurityException ex)
         {
-            Log.Warn(ex);
+            Log.Warn($"Failed to get registry value names from {key.Name}", ex);
             return new string[0];
         }
         #endregion
@@ -284,7 +284,7 @@ public static class RegistryUtils
         #region Error handling
         catch (SecurityException ex)
         {
-            Log.Warn(ex);
+            Log.Warn($"Failed to get registry sub key names from {key.Name}", ex);
             return new string[0];
         }
         #endregion

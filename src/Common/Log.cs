@@ -13,8 +13,9 @@ namespace NanoByte.Common;
 /// </summary>
 /// <param name="severity">The type/severity of the entry.</param>
 /// <param name="message">The message text of the entry.</param>
+/// <param name="exception">An optional exception associated with the entry.</param>
 /// <seealso cref="Log.Handler"/>
-public delegate void LogEntryEventHandler(LogSeverity severity, string message);
+public delegate void LogEntryEventHandler(LogSeverity severity, string message, Exception? exception);
 
 /// <summary>
 /// Sends log messages to custom handlers or the console.
@@ -69,7 +70,7 @@ public static class Log
     private static readonly List<LogEntryEventHandler> _handlers = new()
     {
         // Default handler
-        (severity, message) =>
+        (severity, message, _) =>
         {
             void WriteLine(ConsoleColor color)
             {
@@ -83,6 +84,7 @@ public static class Log
                 {}
 
                 Console.Error.WriteLine(message);
+
                 try
                 {
                     Console.ResetColor();
@@ -146,87 +148,44 @@ public static class Log
     /// <summary>
     /// Writes information to help developers diagnose problems to the log.
     /// </summary>
-    public static void Debug(string message) => AddEntry(LogSeverity.Debug, message);
-
-    /// <summary>
-    /// Writes an exception as an <see cref="Debug(string)"/>.
-    /// </summary>
-    public static void Debug(Exception ex)
-    {
-        if (ex == null) throw new ArgumentNullException(nameof(ex));
-
-        Debug(ex.ToString());
-    }
+    public static void Debug(string message, Exception? exception = null) => AddEntry(LogSeverity.Debug, message, exception);
 
     /// <summary>
     /// Writes nice-to-know information to the log.
     /// </summary>
-    public static void Info(string message) => AddEntry(LogSeverity.Info, message);
-
-    /// <summary>
-    /// Writes an exception's message as a <see cref="Info(string)"/>.
-    /// </summary>
-    /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
-    public static void Info(Exception ex)
-    {
-        if (ex == null) throw new ArgumentNullException(nameof(ex));
-
-        Info(ex.GetMessageWithInner());
-        Debug(ex);
-    }
+    public static void Info(string message, Exception? exception = null) => AddEntry(LogSeverity.Info, message, exception);
 
     /// <summary>
     /// Writes a warning that doesn't have to be acted upon immediately to the log.
     /// </summary>
-    public static void Warn(string message) => AddEntry(LogSeverity.Warn, message);
+    public static void Warn(string message, Exception? exception = null) => AddEntry(LogSeverity.Warn, message, exception);
 
     /// <summary>
-    /// Writes an exception's message as a <see cref="Warn(string)"/>.
+    /// Writes a critical error that should be attended to the log.
     /// </summary>
-    /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
-    public static void Warn(Exception ex)
-    {
-        if (ex == null) throw new ArgumentNullException(nameof(ex));
-
-        Warn(ex.GetMessageWithInner());
-        Debug(ex);
-    }
-
-    /// <summary>
-    /// Writes a critical error that should be attended to to the log.
-    /// </summary>
-    public static void Error(string message) => AddEntry(LogSeverity.Error, message);
-
-    /// <summary>
-    /// Writes an exception's message as an <see cref="Error(string)"/>.
-    /// </summary>
-    /// <remarks>Also sends the entire exception to <see cref="Debug(Exception)"/>.</remarks>
-    public static void Error(Exception ex)
-    {
-        if (ex == null) throw new ArgumentNullException(nameof(ex));
-
-        Error(ex.GetMessageWithInner());
-        Debug(ex);
-    }
+    public static void Error(string message, Exception? exception = null) => AddEntry(LogSeverity.Error, message, exception);
 
     #region Helpers
     private static readonly object _lock = new();
 
-    private static void AddEntry(LogSeverity severity, string message)
+    private static void AddEntry(LogSeverity severity, string message, Exception? exception)
     {
         if (message == null) throw new ArgumentNullException(nameof(message));
 
-        string formattedMessage = "[" + FormatTimestamp(DateTime.Now) + "] " + FormatSeverity(severity) + ": " + UnifyWhitespace(message);
+        string logLine = "[" + DateTime.Now.ToString("T", CultureInfo.InvariantCulture) + "] "
+                       + severity.ToString().ToUpperInvariant() + ": "
+                       + Indent(message);
+        if (exception != null)
+            logLine += Environment.NewLine + "\t" + Indent(exception.ToString());
 
         lock (_lock)
         {
-            System.Diagnostics.Debug.Write(formattedMessage);
-
-            _sessionContent.AppendLine(formattedMessage);
+            System.Diagnostics.Debug.Write(logLine);
+            _sessionContent.AppendLine(logLine);
 
             try
             {
-                _fileWriter?.WriteLine(formattedMessage);
+                _fileWriter?.WriteLine(logLine);
             }
             #region Error handling
             catch (Exception ex)
@@ -237,24 +196,13 @@ public static class Log
             }
             #endregion
 
-            _handlers.Last()(severity, message);
+            if (exception != null && exception.Message != message)
+                message += Environment.NewLine + exception.Message;
+            _handlers.Last()(severity, message, exception);
         }
     }
 
-    private static string FormatTimestamp(DateTime timestamp)
-        => timestamp.ToString("T", CultureInfo.InvariantCulture);
-
-    private static string FormatSeverity(LogSeverity severity)
-        => severity switch
-        {
-            LogSeverity.Debug => "DEBUG",
-            LogSeverity.Info => "INFO",
-            LogSeverity.Warn => "WARN",
-            LogSeverity.Error => "ERROR",
-            _ => "UNKNOWN"
-        };
-
-    private static string UnifyWhitespace(string message)
+    private static string Indent(string message)
         => string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText());
     #endregion
 }

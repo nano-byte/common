@@ -44,7 +44,8 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
     /// </summary>
     /// <param name="severity">The type/severity of the entry.</param>
     /// <param name="message">The message text of the entry.</param>
-    protected virtual void LogHandler(LogSeverity severity, string message)
+    /// <param name="exception">An optional exception associated with the entry.</param>
+    protected virtual void LogHandler(LogSeverity severity, string message, Exception? exception)
     {
         switch (severity)
         {
@@ -61,6 +62,9 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
                 LogRtf.AppendPar(message, RtfColor.Red);
                 break;
         }
+
+        if (exception != null && Verbosity >= Verbosity.Debug)
+            LogRtf.AppendPar(exception.ToString(), RtfColor.Black);
     }
 
     /// <inheritdoc />
@@ -136,7 +140,7 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
         #endregion
 
         if (Verbosity == Verbosity.Batch)
-            Log.Error(exception);
+            Log.Error(exception.Message, exception);
         else
             ThreadUtils.RunSta(() => ErrorBox.Show(null, exception, LogRtf));
     }

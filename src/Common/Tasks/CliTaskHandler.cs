@@ -68,7 +68,8 @@ public class CliTaskHandler : TaskHandlerBase
     /// </summary>
     /// <param name="severity">The type/severity of the entry.</param>
     /// <param name="message">The message text of the entry.</param>
-    protected virtual void LogHandler(LogSeverity severity, string message)
+    /// <param name="exception">An optional exception associated with the entry.</param>
+    protected virtual void LogHandler(LogSeverity severity, string message, Exception? exception)
     {
         void WriteLine(ConsoleColor color)
         {
@@ -107,6 +108,9 @@ public class CliTaskHandler : TaskHandlerBase
                 WriteLine(ConsoleColor.Red);
                 break;
         }
+
+        if (exception != null && Verbosity >= Verbosity.Debug)
+            Console.Error.WriteLine(exception.ToString());
     }
 
     /// <inheritdoc />
@@ -167,5 +171,5 @@ public class CliTaskHandler : TaskHandlerBase
 
     /// <inheritdoc/>
     public override void Error(Exception exception)
-        => Log.Error(exception);
+        => Log.Error(exception.Message, exception);
 }

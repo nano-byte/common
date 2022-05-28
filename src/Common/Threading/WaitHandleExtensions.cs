@@ -22,7 +22,7 @@ public static class WaitHandleExtensions
     /// <param name="cancellationToken">Used to cancel waiting for the handle.</param>
     /// <exception cref="TimeoutException"><paramref name="millisecondsTimeout"/> elapsed without the handle being signalled.</exception>
     /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was signaled while waiting for the handle.</exception>
-    /// <remarks>Automatically handles <see cref="System.Threading.AbandonedMutexException"/> with <see cref="Log.Warn(Exception)"/>.</remarks>
+    /// <remarks>Automatically handles <see cref="System.Threading.AbandonedMutexException"/> with <see cref="Log.Warn"/>.</remarks>
     public static void WaitOne(this WaitHandle handle, CancellationToken cancellationToken, int millisecondsTimeout = -1)
     {
         try
@@ -49,10 +49,10 @@ public static class WaitHandleExtensions
                     throw new TimeoutException();
             }
         }
-        catch (AbandonedMutexException ex)
+        catch (AbandonedMutexException)
         {
-            // Abandoned mutexes also get acquired, but indicate something may have gone wrong elsewhere
-            Log.Warn(ex);
+            Log.Warn("Wait handle was abandoned by another instance");
+            // Abandoned mutexes get acquired despite exception
         }
     }
 }

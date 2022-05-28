@@ -57,21 +57,21 @@ public class ServiceTaskHandler : SilentTaskHandler
     }
 
     [SuppressMessage("ReSharper", "TemplateIsNotCompileTimeConstantProblem")]
-    private void LogHandler(LogSeverity severity, string message)
+    private void LogHandler(LogSeverity severity, string message, Exception? exception)
     {
         switch (severity)
         {
             case LogSeverity.Debug:
-                _logger?.LogDebug(message);
+                _logger?.LogDebug(exception, message);
                 break;
             case LogSeverity.Info:
-                _logger?.LogInformation(message);
+                _logger?.LogInformation(exception, message);
                 break;
             case LogSeverity.Warn:
-                _logger?.LogWarning(message);
+                _logger?.LogWarning(exception, message);
                 break;
             case LogSeverity.Error:
-                _logger?.LogError(message);
+                _logger?.LogError(exception, message);
                 break;
         }
     }

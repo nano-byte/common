@@ -205,8 +205,7 @@ public static class FileUtils
             }
             catch (IOException ex)
             {
-                Log.Debug("File.Replace() failed, using fallback algorithm");
-                Log.Debug(ex);
+                Log.Debug("File.Replace() failed, using fallback algorithm", ex);
                 ReplaceFallback();
             }
             finally
@@ -307,22 +306,18 @@ public static class FileUtils
     /// Removes any custom ACLs a user may have set, restores ACL inheritance and sets the Administrators group as the owner.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public static void ResetAcl(this DirectoryInfo directoryInfo)
+    public static void ResetAcl(this DirectoryInfo directory)
     {
         try
         {
-            directoryInfo.Walk(
+            directory.Walk(
                 dir => ResetAcl(dir.GetAccessControl, dir.SetAccessControl),
                 file => ResetAcl(file.GetAccessControl, file.SetAccessControl));
         }
         #region Error handling
-        catch (ArgumentException ex)
+        catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException)
         {
-            Log.Error(ex);
-        }
-        catch (IdentityNotMappedException ex)
-        {
-            Log.Error(ex);
+            Log.Error("Failed to reset ACLs for: " + directory.FullName, ex);
         }
         #endregion
     }
@@ -503,13 +498,9 @@ public static class FileUtils
             directory.SetAccessControl(acl);
         }
         #region Error handling
-        catch (ArgumentException ex)
+        catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException)
         {
-            Log.Error(ex);
-        }
-        catch (IdentityNotMappedException ex)
-        {
-            Log.Error(ex);
+            Log.Error($"Failed to {(enable ? "enable" : "disable")} write protection for: {directory.FullName}", ex);
         }
         #endregion
     }

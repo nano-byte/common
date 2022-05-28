@@ -43,13 +43,9 @@ public class TemporaryFile : IDisposable
             {
                 File.Delete(Path);
             }
-            catch (IOException ex)
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
             {
-                Log.Warn(ex);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                Log.Warn(ex);
+                Log.Warn("Failed to delete temporary file: " + Path, ex);
             }
         }
     }

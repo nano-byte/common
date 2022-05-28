@@ -18,14 +18,14 @@ public class LogTest
     [Fact]
     public void TestHandler()
     {
-        var events = new List<(LogSeverity, string)>();
-        void Handler(LogSeverity severity, string message) => events.Add((severity, message));
+        var events = new List<(LogSeverity, string, Exception?)>();
+        void Handler(LogSeverity severity, string message, Exception? exception) => events.Add((severity, message, exception));
 
         Log.Handler += Handler;
         try
         {
             Log.Info("Log Unit Test Token");
-            events.Should().Contain((LogSeverity.Info, "Log Unit Test Token"));
+            events.Should().Contain((LogSeverity.Info, "Log Unit Test Token", null));
         }
         finally
         {

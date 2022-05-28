@@ -135,8 +135,7 @@ public static class ExceptionUtils
                 catch (Exception ex)
                 {
                     // Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place
-                    Log.Error(string.Format(Resources.FailedToRollback, element));
-                    Log.Error(ex);
+                    Log.Error(string.Format(Resources.FailedToRollback, element), ex);
                 }
             }
 
@@ -170,10 +169,9 @@ public static class ExceptionUtils
                 action(enumerator.Current);
                 return;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (enumerator.MoveNext())
             {
-                if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
-                else throw; // Rethrow exception if there are no more elements
+                Log.Warn(ex.Message, ex);
             }
         }
     }
@@ -205,10 +203,8 @@ public static class ExceptionUtils
             }
             catch (TException ex)
             {
-                Log.Info(ex);
-
                 int delay = random.Next(50, 1000 * (1 << retryCounter));
-                Log.Info("Retrying in " + delay + " milliseconds");
+                Log.Info($"Retrying in {delay} milliseconds because of:", ex);
                 Thread.Sleep(delay);
 
                 retryCounter++;
@@ -260,8 +256,7 @@ public static class ExceptionUtils
                 catch (Exception ex)
                 {
                     // Suppress exceptions during rollback since they would hide the actual exception that caused the rollback in the first place
-                    Log.Error(string.Format(Resources.FailedToRollback, element));
-                    Log.Error(ex);
+                    Log.Error(string.Format(Resources.FailedToRollback, element), ex);
                 }
             }
 
@@ -295,10 +290,9 @@ public static class ExceptionUtils
                 await action(enumerator.Current).ConfigureAwait(true);
                 return;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (enumerator.MoveNext())
             {
-                if (enumerator.MoveNext()) Log.Error(ex); // Log exception and try next element
-                else throw; // Rethrow exception if there are no more elements
+                Log.Error("Caught error and trying next", ex);
             }
         }
     }
@@ -330,10 +324,8 @@ public static class ExceptionUtils
             }
             catch (TException ex)
             {
-                Log.Info(ex);
-
                 int delay = random.Next(50, 1000 * (1 << retryCounter));
-                Log.Info("Retrying in " + delay + " milliseconds");
+                Log.Info($"Retrying in {delay} milliseconds because of:", ex);
                 await Task.Delay(delay).ConfigureAwait(true);
 
                 retryCounter++;

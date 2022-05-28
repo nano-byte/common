@@ -10,7 +10,7 @@ namespace NanoByte.Common.Threading;
 /// Instead of <c>lock (_object) { code(); }</c> for per-process locking use
 /// <c>using (new MutexLock("name") { code(); }</c> for inter-process locking.
 /// </example>
-/// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn(Exception)"/>.</remarks>
+/// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn"/>.</remarks>
 public sealed class MutexLock : IDisposable
 {
     private readonly Mutex _mutex;
@@ -25,10 +25,10 @@ public sealed class MutexLock : IDisposable
         {
             _mutex.WaitOne();
         }
-        catch (AbandonedMutexException ex)
+        catch (AbandonedMutexException)
         {
-            // Abandoned mutexes also get acquired, but indicate something may have gone wrong elsewhere
-            Log.Warn(ex);
+            Log.Warn($"Mutex '{name}' was abandoned by another instance");
+            // Abandoned mutexes get acquired despite exception
         }
     }
 

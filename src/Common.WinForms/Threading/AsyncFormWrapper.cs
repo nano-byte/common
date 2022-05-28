@@ -64,14 +64,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
             _form.Value.Invoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
-        catch (InvalidOperationException ex)
+        catch (Exception ex) when (ex is InvalidOperationException or InvalidAsynchronousStateException)
         {
-            Log.Debug(ex);
-            throw new OperationCanceledException();
-        }
-        catch (InvalidAsynchronousStateException ex)
-        {
-            Log.Debug(ex);
+            Log.Debug($"Message post for {typeof(T).Name} ignored because it was already closed");
             throw new OperationCanceledException();
         }
         #endregion
@@ -91,14 +86,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
             return (TResult)_form.Value.Invoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
-        catch (InvalidOperationException ex)
+        catch (Exception ex) when (ex is InvalidOperationException or InvalidAsynchronousStateException)
         {
-            Log.Debug(ex);
-            throw new OperationCanceledException();
-        }
-        catch (InvalidAsynchronousStateException ex)
-        {
-            Log.Debug(ex);
+            Log.Debug($"Message post for {typeof(T).Name} ignored because it was already closed");
             throw new OperationCanceledException();
         }
         #endregion
@@ -118,14 +108,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
             _form.Value.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
-        catch (InvalidOperationException ex)
+        catch (Exception ex) when (ex is InvalidOperationException or InvalidAsynchronousStateException)
         {
-            Log.Debug(ex);
-            throw new OperationCanceledException();
-        }
-        catch (InvalidAsynchronousStateException ex)
-        {
-            Log.Debug(ex);
+            Log.Debug($"Message send for {typeof(T).Name} ignored because it was already closed");
             throw new OperationCanceledException();
         }
         #endregion
@@ -145,15 +130,9 @@ public sealed class AsyncFormWrapper<T> : IDisposable
             _form.Value.BeginInvoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling
-        catch (InvalidOperationException ex)
+        catch (Exception ex) when (ex is InvalidOperationException or InvalidAsynchronousStateException)
         {
-            // Don't worry if the form was already closing
-            Log.Debug(ex);
-        }
-        catch (InvalidAsynchronousStateException ex)
-        {
-            // Don't worry if the form was already closing
-            Log.Debug(ex);
+            Log.Debug($"Low-priority message send for {typeof(T).Name} ignored because it was already closed");
         }
         #endregion
     }
@@ -175,27 +154,19 @@ public sealed class AsyncFormWrapper<T> : IDisposable
             });
         }
         #region Error handling
-        catch (InvalidOperationException ex)
+        catch (Exception ex) when (ex is InvalidOperationException or InvalidAsynchronousStateException)
         {
-            // Don't worry if the form was already closing
-            Log.Debug(ex);
-        }
-        catch (InvalidAsynchronousStateException ex)
-        {
-            // Don't worry if the form was already closing
-            Log.Debug(ex);
+            Log.Debug($"Close request for {typeof(T).Name} ignored because it was already closed");
         }
 #if NETFRAMEWORK
         catch (RemotingException ex)
         {
-            // Remoting exceptions on clean-up are not critical
-            Log.Debug(ex);
+            Log.Debug($"Remoting error during close of {typeof(T).Name} ignored", ex);
         }
 #endif
-        catch (NullReferenceException ex)
+        catch (NullReferenceException)
         {
-            // Rare .NET bug
-            Log.Debug(ex);
+            Log.Debug("Workaround for .NET bug");
         }
         #endregion
     }

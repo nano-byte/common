@@ -126,7 +126,7 @@ public static partial class WindowsTaskbar
         #region Error handling
         catch (Exception ex)
         {
-            Log.Warn(ex);
+            Log.Warn("Failed to set taskbar progress state", ex);
         }
         #endregion
     }
@@ -150,7 +150,7 @@ public static partial class WindowsTaskbar
         #region Error handling
         catch (Exception ex)
         {
-            Log.Warn(ex);
+            Log.Warn("Failed to set taskbar progress value", ex);
         }
         #endregion
     }
@@ -188,7 +188,7 @@ public static partial class WindowsTaskbar
         #region Error handling
         catch (Exception ex)
         {
-            Log.Warn(ex);
+            Log.Warn("Failed to window application user model ID", ex);
         }
         #endregion
     }
@@ -226,7 +226,7 @@ public static partial class WindowsTaskbar
         #region Error handling
         catch (Exception ex)
         {
-            Log.Warn(ex);
+            Log.Warn("Failed to add links to taskbar jumplist", ex);
         }
         #endregion
     }
@@ -252,7 +252,7 @@ public static partial class WindowsTaskbar
         #region Error handling
         catch (Exception ex)
         {
-            Log.Warn(ex);
+            Log.Warn("Failed to prevent pinning a window", ex);
         }
         #endregion
     }

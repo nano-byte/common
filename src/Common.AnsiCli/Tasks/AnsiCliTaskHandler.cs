@@ -13,7 +13,7 @@ namespace NanoByte.Common.Tasks;
 public class AnsiCliTaskHandler : CliTaskHandler
 {
     /// <inheritdoc/>
-    protected override void LogHandler(LogSeverity severity, string message)
+    protected override void LogHandler(LogSeverity severity, string message, Exception? exception)
     {
         void WriteLine(ConsoleColor color)
             => AnsiCli.Error.WriteLine(message, new Style(color));
@@ -33,6 +33,9 @@ public class AnsiCliTaskHandler : CliTaskHandler
                 WriteLine(ConsoleColor.Red);
                 break;
         }
+
+        if (exception != null && Verbosity >= Verbosity.Debug)
+            AnsiCli.Error.WriteLine(exception.ToString());
     }
 
     /// <inheritdoc />

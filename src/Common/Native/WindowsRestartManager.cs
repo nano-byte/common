@@ -75,7 +75,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     private void DisposeNative()
     {
         int ret = NativeMethods.RmEndSession(_sessionHandle);
-        if (ret != 0) Log.Debug(BuildException(ret));
+        if (ret != 0) Log.Debug("Failed to end Windows Restart Manager session", BuildException(ret));
     }
 
     private void CancellationCallback() => NativeMethods.RmCancelCurrentTask(_sessionHandle);

@@ -298,7 +298,7 @@ static partial class WindowsTaskbar
             #region Error handling
             catch (Exception ex)
             {
-                Log.Warn(ex);
+                Log.Warn("Failed to initialize Windows Taskbar access", ex);
             }
             #endregion
         }
