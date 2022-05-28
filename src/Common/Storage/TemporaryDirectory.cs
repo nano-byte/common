@@ -42,16 +42,11 @@ public class TemporaryDirectory : IDisposable
                 // Write protection might prevent a directory from being deleted (especially on Unixoid systems)
                 FileUtils.DisableWriteProtection(Path);
             }
-            #region Error handling
             catch (IOException)
             {}
             catch (UnauthorizedAccessException)
             {}
-            #endregion
 
-#if DEBUG
-            Directory.Delete(Path, recursive: true);
-#else
             try
             {
                 Directory.Delete(Path, recursive: true);
@@ -64,7 +59,6 @@ public class TemporaryDirectory : IDisposable
             {
                 Log.Warn(ex);
             }
-#endif
         }
     }
 }

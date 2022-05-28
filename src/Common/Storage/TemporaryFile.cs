@@ -35,6 +35,20 @@ public class TemporaryFile : IDisposable
     /// </summary>
     public virtual void Dispose()
     {
-        if (File.Exists(Path)) File.Delete(Path);
+        if (File.Exists(Path))
+        {
+            try
+            {
+                File.Delete(Path);
+            }
+            catch (IOException ex)
+            {
+                Log.Warn(ex);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Log.Warn(ex);
+            }
+        }
     }
 }
