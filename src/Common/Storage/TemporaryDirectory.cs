@@ -19,15 +19,16 @@ public class TemporaryDirectory : IDisposable
     /// Creates a uniquely named, empty temporary directory on disk.
     /// </summary>
     /// <param name="prefix">A short string the directory name should start with.</param>
+    /// <param name="parentDirectory">The path of the parent directory the new directory should be created in. Leave <c>null</c> to use the default temp directory.</param>
     /// <exception cref="IOException">A problem occurred while creating the temporary directory.</exception>
     /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
-    public TemporaryDirectory([Localizable(false)] string prefix)
+    public TemporaryDirectory([Localizable(false)] string prefix, [Localizable(false)] string? parentDirectory = null)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
         #endregion
 
-        Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());
+        Path = System.IO.Path.Combine(parentDirectory ?? System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());
         Directory.CreateDirectory(Path);
     }
 
