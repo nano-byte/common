@@ -13,7 +13,7 @@ public class ReadFileTest
     [Fact]
     public void TestRun()
     {
-        var tempFile = new TemporaryFile("unit-tests");
+        using var tempFile = new TemporaryFile("unit-tests");
         File.WriteAllBytes(tempFile, new byte[] {1, 2, 3});
 
         ArraySegment<byte> data = default;
