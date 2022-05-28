@@ -4,7 +4,7 @@
 namespace NanoByte.Common.Storage;
 
 /// <summary>
-/// Disposable class to create a temporary directory and delete it again when disposed.
+/// Represents a temporary directory that is automatically deleted when the object is disposed.
 /// </summary>
 public class TemporaryDirectory : IDisposable
 {
@@ -19,7 +19,7 @@ public class TemporaryDirectory : IDisposable
     /// Creates a uniquely named, empty temporary directory on disk.
     /// </summary>
     /// <param name="prefix">A short string the directory name should start with.</param>
-    /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="System.IO.Path.GetTempPath"/>.</exception>
+    /// <exception cref="IOException">A problem occurred while creating the temporary directory.</exception>
     /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
     public TemporaryDirectory([Localizable(false)] string prefix)
     {
@@ -27,7 +27,8 @@ public class TemporaryDirectory : IDisposable
         if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
         #endregion
 
-        Path = FileUtils.GetTempDirectory(prefix);
+        Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());
+        Directory.CreateDirectory(Path);
     }
 
     /// <summary>

@@ -4,7 +4,7 @@
 namespace NanoByte.Common.Storage;
 
 /// <summary>
-/// Disposable class to create a temporary file and delete it again when disposed.
+/// Represents a temporary file that is automatically deleted when the object is disposed.
 /// </summary>
 public class TemporaryFile : IDisposable
 {
@@ -19,7 +19,7 @@ public class TemporaryFile : IDisposable
     /// Creates a uniquely named, empty temporary file on disk.
     /// </summary>
     /// <param name="prefix">A short string the directory name should start with.</param>
-    /// <exception cref="IOException">A problem occurred while creating a file in <see cref="System.IO.Path.GetTempPath"/>.</exception>
+    /// <exception cref="IOException">A problem occurred while creating the temporary file.</exception>
     /// <exception cref="UnauthorizedAccessException">Creating a file in <see cref="System.IO.Path.GetTempPath"/> is not permitted.</exception>
     public TemporaryFile([Localizable(false)] string prefix)
     {
@@ -27,7 +27,8 @@ public class TemporaryFile : IDisposable
         if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
         #endregion
 
-        Path = FileUtils.GetTempFile(prefix);
+        Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());
+        FileUtils.Touch(Path);
     }
 
     /// <summary>

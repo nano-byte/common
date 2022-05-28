@@ -93,32 +93,6 @@ public class FileUtilsTest
     }
 
     /// <summary>
-    /// Creates a temporary file using <see cref="FileUtils.GetTempFile"/>, ensures it is empty and deletes it again.
-    /// </summary>
-    [Fact]
-    public void TestGetTempFile()
-    {
-        string path = FileUtils.GetTempFile("unit-tests");
-        path.Should().NotBeNullOrEmpty();
-        File.Exists(path).Should().BeTrue();
-        File.ReadAllText(path).Should().Be("");
-        File.Delete(path);
-    }
-
-    /// <summary>
-    /// Creates a temporary directory using <see cref="FileUtils.GetTempDirectory"/>, ensures it is empty and deletes it again.
-    /// </summary>
-    [Fact]
-    public void TestGetTempDirectory()
-    {
-        string path = FileUtils.GetTempDirectory("unit-tests");
-        path.Should().NotBeNullOrEmpty();
-        Directory.Exists(path).Should().BeTrue();
-        Directory.GetFileSystemEntries(path).Should().BeEmpty();
-        Directory.Delete(path);
-    }
-
-    /// <summary>
     /// Ensures <see cref="FileUtils.Replace"/> correctly replaces the content of one file with that of another.
     /// </summary>
     [Fact]

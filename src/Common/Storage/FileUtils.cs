@@ -142,56 +142,6 @@ public static class FileUtils
     }
     #endregion
 
-    #region Temp
-    /// <summary>
-    /// Creates a uniquely named, empty temporary file on disk and returns the full path of that file.
-    /// </summary>
-    /// <param name="prefix">A short string the filename should start with.</param>
-    /// <returns>The full path of the newly created temporary file.</returns>
-    /// <exception cref="IOException">A problem occurred while creating a file in <see cref="Path.GetTempPath"/>.</exception>
-    /// <exception cref="UnauthorizedAccessException">Creating a file in <see cref="Path.GetTempPath"/> is not permitted.</exception>
-    /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
-    public static string GetTempFile([Localizable(false)] string prefix)
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
-        #endregion
-
-        // Make sure there are no name collisions
-        string path;
-        do
-        {
-            path = Path.Combine(Path.GetTempPath(), prefix + '-' + Path.GetRandomFileName());
-        } while (File.Exists(path));
-
-        // Create the file to ensure nobody else uses the name
-        File.WriteAllBytes(path, new byte[0]);
-
-        return path;
-    }
-
-    /// <summary>
-    /// Creates a uniquely named, empty temporary directory on disk and returns the full path of that directory.
-    /// </summary>
-    /// <param name="prefix">A short string the filename should start with.</param>
-    /// <returns>The full path of the newly created temporary directory.</returns>
-    /// <exception cref="IOException">A problem occurred while creating a directory in <see cref="Path.GetTempPath"/>.</exception>
-    /// <exception cref="UnauthorizedAccessException">Creating a directory in <see cref="Path.GetTempPath"/> is not permitted.</exception>
-    /// <remarks>Use this method, because <see cref="Path.GetTempFileName"/> exhibits buggy behaviour in some Mono versions.</remarks>
-    [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Delivers a new value on each call")]
-    public static string GetTempDirectory([Localizable(false)] string prefix)
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
-        #endregion
-
-        string tempDir = GetTempFile(prefix);
-        File.Delete(tempDir);
-        Directory.CreateDirectory(tempDir);
-        return tempDir;
-    }
-    #endregion
-
     #region Replace
     /// <summary>
     /// Replaces one file with another. Rolls back in case of problems. If the destination file does not exist yet, this acts like a simple rename.

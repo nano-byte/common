@@ -37,8 +37,8 @@ public class CopyDirectoryTest
     {
         Assert.Throws<ArgumentException>(() => new CopyDirectory("a", "a"));
 
-        string temp = FileUtils.GetTempDirectory("unit-tests");
-        Directory.Delete(temp);
+        var temp = new TemporaryDirectory("unit-tests");
+        temp.Dispose();
 
         new CopyDirectory(temp, "a").Invoking(x => x.Run())
                                     .Should().Throw<DirectoryNotFoundException>();
