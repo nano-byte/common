@@ -22,7 +22,7 @@ public class AnsiCliCredentialProvider : CredentialProviderBase
         if (WasReportedInvalid(uri))
             Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
 
-        AnsiCli.Error.WriteLine(Resources.PleaseEnterCredentials, uri.ToStringRfc());
+        AnsiCli.Error.WriteLine(string.Format(Resources.PleaseEnterCredentials, uri.ToStringRfc()));
         return new NetworkCredential(
             AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.UserName)),
             AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.Password) {IsSecret = true}));
