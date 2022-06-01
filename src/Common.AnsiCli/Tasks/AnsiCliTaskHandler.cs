@@ -40,9 +40,14 @@ public class AnsiCliTaskHandler : CliTaskHandler
 
     /// <inheritdoc />
     public override ICredentialProvider? CredentialProvider
-        => WindowsUtils.IsWindowsNT
-            ? base.CredentialProvider
-            : IsInteractive ? new AnsiCliCredentialProvider() : null;
+        => IsInteractive
+            ? WindowsUtils.IsWindowsNT
+                // Avoid simultaneous progress bars and input prompts
+                ? new WindowsCliCredentialProvider(RemoveProgressBar)
+                : new AnsiCliCredentialProvider(RemoveProgressBar)
+            : WindowsUtils.IsWindowsNT
+                ? new WindowsNonInteractiveCredentialProvider()
+                : null;
 
     private readonly object _progressContextLock = new();
     private AnsiCliProgressContext? _progressContext;
@@ -75,23 +80,16 @@ public class AnsiCliTaskHandler : CliTaskHandler
         lock (_progressContextLock)
         {
             if (_progressContext is {IsFinished: true})
-            {
-                _progressContext.Dispose();
-                _progressContext = null;
-            }
+                RemoveProgressBar();
         }
     }
 
-    /// <inheritdoc />
-    public override void Dispose()
+    private void RemoveProgressBar()
     {
-        try
+        lock (_progressContextLock)
         {
             _progressContext?.Dispose();
-        }
-        finally
-        {
-            base.Dispose();
+            _progressContext = null;
         }
     }
 
@@ -103,9 +101,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
 
         lock (_progressContextLock)
         {
-            // Avoid showing progress bars and input prompts at the same time
-            _progressContext?.Dispose();
-            _progressContext = null;
+            RemoveProgressBar(); // Avoid simultaneous progress bars and input prompts
 
             return AnsiCli.Prompt(
                        new TextPrompt<char>(question)
@@ -175,5 +171,18 @@ public class AnsiCliTaskHandler : CliTaskHandler
 
         AnsiConsole.Write(AnsiCli.Title(title));
         AnsiConsole.Write(AnsiCli.Tree(data));
+    }
+
+    /// <inheritdoc />
+    public override void Dispose()
+    {
+        try
+        {
+            RemoveProgressBar();
+        }
+        finally
+        {
+            base.Dispose();
+        }
     }
 }
