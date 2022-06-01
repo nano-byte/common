@@ -21,7 +21,7 @@ public class ShadowingStreamTest
     public void TestRead()
     {
         var buffer = new byte[3];
-        _stream.Read(buffer, 0, buffer.Length);
+        _ = _stream.Read(buffer, 0, buffer.Length);
         buffer.Should().Equal(0, 1, 2);
         _shadowStream.ReadAll().Should().Equal(0, 1, 2);
     }

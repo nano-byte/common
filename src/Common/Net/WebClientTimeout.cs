@@ -39,7 +39,7 @@ public class WebClientTimeout : WebClient
     {
         var request = base.GetWebRequest(address);
 
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (request != null)
             request.Timeout = _timeout;
 

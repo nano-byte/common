@@ -15,10 +15,10 @@ public class ProgressStreamTest
         var stream = new ProgressStream(new MemoryStream(new byte[5]), progressMock.Object);
         byte[] buffer = new byte[3];
 
-        stream.Read(buffer, 0, 3);
+        _ = stream.Read(buffer, 0, 3);
         progressMock.Verify(x => x.Report(3));
 
-        stream.Read(buffer, 0, 2);
+        _ = stream.Read(buffer, 0, 2);
         progressMock.Verify(x => x.Report(5));
     }
 
@@ -42,7 +42,7 @@ public class ProgressStreamTest
         var stream = new ProgressStream(new MemoryStream(new byte[5]), cancellationToken: cts.Token);
         byte[] buffer = new byte[2];
 
-        stream.Read(buffer, 0, 2);
+        _ = stream.Read(buffer, 0, 2);
 
         cts.Cancel();
         stream.Invoking(x => x.Read(buffer, 0, 2))

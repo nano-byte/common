@@ -26,7 +26,7 @@ public class ArrayUtilsTest
     public void TestSequencedEquals()
     {
         new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
-        new string[0].SequencedEquals(new string[0]).Should().BeTrue();
+        Array.Empty<string>().SequencedEquals(Array.Empty<string>()).Should().BeTrue();
         new[] {"A", "B", "C"}.SequencedEquals(new[] {"C", "B", "A"}).Should().BeFalse();
         new[] {"A", "B", "C"}.SequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
         new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B"}).Should().BeFalse();

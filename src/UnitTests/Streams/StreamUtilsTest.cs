@@ -20,7 +20,7 @@ public class StreamUtilsTest
     public void TestReadSegment()
     {
         var segment = new ArraySegment<byte>(new byte[5], 1, 3);
-        new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(segment);
+        _ = new MemoryStream(new byte[] {1, 2, 3, 4, 5}).Read(segment);
         segment.Should().Equal(1, 2, 3);
     }
 

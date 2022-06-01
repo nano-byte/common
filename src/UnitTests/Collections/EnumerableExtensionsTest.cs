@@ -14,15 +14,15 @@ public class EnumerableExtensionsTest
         new[] {1, 2}.ContainsAny(new[] {2}).Should().BeTrue();
         new[] {1, 2}.ContainsAny(new[] {2, 3}).Should().BeTrue();
         new[] {1, 2}.ContainsAny(new[] {3}).Should().BeFalse();
-        new int[0].ContainsAny(new[] {2}).Should().BeFalse();
-        new[] {1, 2}.ContainsAny(new int[0]).Should().BeFalse();
+        Array.Empty<int>().ContainsAny(new[] {2}).Should().BeFalse();
+        new[] {1, 2}.ContainsAny(Array.Empty<int>()).Should().BeFalse();
     }
 
     [Fact]
     public void TestSequencedEquals()
     {
         new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
-        new string[0].ToList().SequencedEquals(new string[0]).Should().BeTrue();
+        Array.Empty<string>().ToList().SequencedEquals(Array.Empty<string>()).Should().BeTrue();
         new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"C", "B", "A"}).Should().BeFalse();
         new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
         new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B"}).Should().BeFalse();
@@ -33,7 +33,7 @@ public class EnumerableExtensionsTest
     public void TestUnsequencedEquals()
     {
         new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
-        new string[0].UnsequencedEquals(new string[0]).Should().BeTrue();
+        Array.Empty<string>().UnsequencedEquals(Array.Empty<string>()).Should().BeTrue();
         new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"C", "B", "A"}).Should().BeTrue();
         new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
         new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B"}).Should().BeFalse();
@@ -44,7 +44,7 @@ public class EnumerableExtensionsTest
     public void TestGetSequencedHashCode()
     {
         new[] {"A", "B", "C"}.GetSequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetSequencedHashCode());
-        new string[0].GetSequencedHashCode().Should().Be(new string[0].GetSequencedHashCode());
+        Array.Empty<string>().GetSequencedHashCode().Should().Be(Array.Empty<string>().GetSequencedHashCode());
         new[] {"C", "B", "A"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
         new[] {"X", "Y", "Z"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
         new[] {"A", "B"}.GetSequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetSequencedHashCode());
@@ -54,7 +54,7 @@ public class EnumerableExtensionsTest
     public void TestGetUnsequencedHashCode()
     {
         new[] {"A", "B", "C"}.GetUnsequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
-        new string[0].GetUnsequencedHashCode().Should().Be(new string[0].GetUnsequencedHashCode());
+        Array.Empty<string>().GetUnsequencedHashCode().Should().Be(Array.Empty<string>().GetUnsequencedHashCode());
         new[] {"C", "B", "A"}.GetUnsequencedHashCode().Should().Be(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
         new[] {"X", "Y", "Z"}.GetUnsequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
         new[] {"A", "B"}.GetUnsequencedHashCode().Should().NotBe(new[] {"A", "B", "C"}.GetUnsequencedHashCode());
@@ -163,7 +163,7 @@ public class EnumerableExtensionsTest
     [Fact]
     public void TestPermutateEmpty()
     {
-        var permutations = new int[0].Permutate().ToList();
+        var permutations = Array.Empty<int>().Permutate().ToList();
         permutations[0].Should().BeEmpty();
     }
 }

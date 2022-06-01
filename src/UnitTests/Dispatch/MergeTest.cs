@@ -77,7 +77,7 @@ public class MergeTest
     {
         var list = new[] {new MergeTestData(mergeID: "1")};
 
-        Merge.ThreeWay(reference: new MergeTestData[0], theirs: list, mine: list,
+        Merge.ThreeWay(reference: Array.Empty<MergeTestData>(), theirs: list, mine: list,
             added: element => throw new AssertionFailedException(element + " should not be detected as added."),
             removed: element => throw new AssertionFailedException(element + " should not be detected as removed."));
     }

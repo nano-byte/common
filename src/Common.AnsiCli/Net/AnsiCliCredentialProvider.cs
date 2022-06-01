@@ -12,7 +12,7 @@ namespace NanoByte.Common.Net;
 public class AnsiCliCredentialProvider : ICredentialProvider
 {
     /// <inheritdoc/>
-    public NetworkCredential? GetCredential(Uri uri, bool previousIncorrect = false)
+    public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
     {
         #region Sanity checks
         if (uri == null) throw new ArgumentNullException(nameof(uri));

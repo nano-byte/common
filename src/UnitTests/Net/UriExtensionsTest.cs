@@ -32,11 +32,10 @@ public class UriExtensionsTest
         => new Uri("test", UriKind.Relative).EnsureTrailingSlash().Should().Be(
             new Uri("test/", UriKind.Relative));
 
-    [Fact]
-    public void TestGetLocalFilePath()
-    {
-        new Uri("http://test/test/my%20file.ext").GetLocalFileName().Should().Be("my file.ext");
-        new Uri("file:///test/my%20file.ext").GetLocalFileName().Should().Be("my file.ext");
-        new Uri("file:///test/").GetLocalFileName().Should().Be("test");
-    }
+    [Theory]
+    [InlineData("http://test/test/my%20file.ext", "my file.ext")]
+    [InlineData("file:///test/my%20file.ext", "my file.ext")]
+    [InlineData("file:///test/", "test")]
+    public void TestGetLocalFilePath(string uri, string path)
+        => new Uri(uri).GetLocalFileName().Should().Be(path);
 }
