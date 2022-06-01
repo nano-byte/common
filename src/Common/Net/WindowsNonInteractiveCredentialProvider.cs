@@ -8,10 +8,10 @@ using NanoByte.Common.Native;
 namespace NanoByte.Common.Net;
 
 /// <summary>
-/// Gets <see cref="NetworkCredential"/>s stored in the Windows Credential Manager. Does not show any UI for missing credentials.
+/// Gets <see cref="NetworkCredential"/>s stored in the Windows Credential Manager. Does not prompt for new credentials.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public class WindowsSilentCredentialProvider : WindowsCredentialProvider
+public class WindowsNonInteractiveCredentialProvider : WindowsCredentialProvider
 {
     /// <inheritdoc/>
     protected override NetworkCredential? Prompt(string target, WindowsCredentialsFlags flags)

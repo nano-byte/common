@@ -70,7 +70,7 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
     /// <inheritdoc />
     public override ICredentialProvider? CredentialProvider
         => WindowsUtils.IsWindowsNT
-            ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsSilentCredentialProvider()
+            ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
             : null;
 
     /// <inheritdoc/>

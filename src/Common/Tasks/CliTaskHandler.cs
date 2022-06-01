@@ -116,7 +116,7 @@ public class CliTaskHandler : TaskHandlerBase
     /// <inheritdoc />
     public override ICredentialProvider? CredentialProvider
         => WindowsUtils.IsWindowsNT
-            ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsSilentCredentialProvider()
+            ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
             : null;
 
 #if !NET20 && !NET40
