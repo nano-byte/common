@@ -39,13 +39,4 @@ public class UriExtensionsTest
         new Uri("file:///test/my%20file.ext").GetLocalFileName().Should().Be("my file.ext");
         new Uri("file:///test/").GetLocalFileName().Should().Be("test");
     }
-
-    [Fact]
-    public void TestGetBaseUri()
-    {
-        new Uri("http://domain/directory/file").GetBaseUri().Should().Be(new Uri("http://domain/directory/"));
-        new Uri("http://domain/directory/").GetBaseUri().Should().Be(new Uri("http://domain/directory/"));
-        new Uri("http://domain/file").GetBaseUri().Should().Be(new Uri("http://domain/"));
-        new Uri("http://domain").GetBaseUri().Should().Be(new Uri("http://domain/"));
-    }
 }

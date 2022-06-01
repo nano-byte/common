@@ -67,19 +67,4 @@ public static class UriExtensions
 
         return fileName;
     }
-
-    /// <summary>
-    /// Extracts the base part of an URI, i.e., the part that is used for resolving relative URIs.
-    /// </summary>
-    [Pure]
-    public static Uri GetBaseUri(this Uri uri)
-    {
-        #region Sanity checks
-        if (uri == null) throw new ArgumentNullException(nameof(uri));
-        #endregion
-
-        return new Uri(
-            new Uri(uri, new Uri("-", UriKind.Relative)).ToStringRfc()[..^1],
-            uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
-    }
 }
