@@ -14,10 +14,11 @@ namespace NanoByte.Common.Net;
 public class WindowsCliCredentialProvider : WindowsCredentialProvider
 {
     /// <inheritdoc/>
-    protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
+    protected override NetworkCredential GetCredential(string target, WindowsCredentialsFlags flags)
     {
         if (flags.HasFlag(WindowsCredentialsFlags.IncorrectPassword))
             Log.Error(string.Format(Resources.InvalidCredentials, target));
+
         return WindowsCredentials.PromptCli(target, flags);
     }
 }

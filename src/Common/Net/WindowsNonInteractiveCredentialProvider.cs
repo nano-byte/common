@@ -14,7 +14,7 @@ namespace NanoByte.Common.Net;
 public class WindowsNonInteractiveCredentialProvider : WindowsCredentialProvider
 {
     /// <inheritdoc/>
-    protected override NetworkCredential? Prompt(string target, WindowsCredentialsFlags flags)
+    protected override NetworkCredential? GetCredential(string target, WindowsCredentialsFlags flags)
     {
         if (flags.HasFlag(WindowsCredentialsFlags.IncorrectPassword))
         {

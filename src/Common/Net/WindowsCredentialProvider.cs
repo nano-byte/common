@@ -20,18 +20,22 @@ public abstract class WindowsCredentialProvider : CredentialProviderBase
         if (uri == null) throw new ArgumentNullException(nameof(uri));
         #endregion
 
+        // Use URI without path as credential target identifier
+        string target = new UriBuilder(uri) {Path = null, UserName = null, Password = null}.ToString();
+        Log.Debug($"Get credentials for {target} from Windows Credential Manager");
+
         var flags = WindowsCredentialsFlags.GenericCredentials | WindowsCredentialsFlags.ExcludeCertificates | WindowsCredentialsFlags.ShowSaveCheckBox;
         if (WasReportedInvalid(uri))
             flags |= WindowsCredentialsFlags.IncorrectPassword | WindowsCredentialsFlags.AlwaysShowUI;
 
-        return Prompt(uri.ToStringRfc(), flags);
+        return GetCredential(target, flags);
     }
 
     /// <summary>
     /// Performs the actual <see cref="WindowsCredentials"/> API call to prompt the user or the credential store for credentials.
     /// </summary>
-    /// <param name="target">A string uniquely identifying the target the credentials are intended for.</param>
+    /// <param name="target">A string identifying the target the credentials are intended for.</param>
     /// <param name="flags">Flags for configuring the prompt.</param>
     [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification = "Native API")]
-    protected abstract NetworkCredential? Prompt(string target, WindowsCredentialsFlags flags);
+    protected abstract NetworkCredential? GetCredential(string target, WindowsCredentialsFlags flags);
 }

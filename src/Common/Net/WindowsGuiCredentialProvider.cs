@@ -14,6 +14,6 @@ namespace NanoByte.Common.Net;
 public class WindowsGuiCredentialProvider : WindowsCredentialProvider
 {
     /// <inheritdoc/>
-    protected override NetworkCredential Prompt(string target, WindowsCredentialsFlags flags)
+    protected override NetworkCredential GetCredential(string target, WindowsCredentialsFlags flags)
         => WindowsCredentials.PromptGui(target, flags);
 }
