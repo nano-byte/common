@@ -79,65 +79,60 @@ public class DownloadFile : TaskBase
         }, bytesTotal)
     {}
 
+    /// <summary>
+    /// The HTTP Basic Auth credentials to use for downloading the file.
+    /// </summary>
+    private NetworkCredential? _credentials;
+
     /// <inheritdoc/>
     protected override void Execute()
     {
-        // Try once without credentials, then retry with if required
-        bool usedCredentials = false;
-        while (true)
+        var request = BuildRequest();
+
+        try
         {
-            var request = BuildRequest(usedCredentials);
+            State = TaskState.Header;
+            using var response = GetResponse(request);
+            HandleHeaders(response);
 
-            try
-            {
-                State = TaskState.Header;
-                using var response = GetResponse(request);
-                HandleHeaders(response);
+            State = TaskState.Data;
+            ContentStarted = true;
+            // ReSharper disable once AssignNullToNotNullAttribute
+            using var stream = new ProgressStream(response.GetResponseStream(), new SynchronousProgress<long>(x => UnitsProcessed = x), CancellationToken);
+            if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
+            _callback(stream);
+        }
+        catch (WebException ex) when (ex.Status == WebExceptionStatus.RequestCanceled)
+        {
+            throw new OperationCanceledException();
+        }
+        catch (WebException ex) when (ex.Response is HttpWebResponse {StatusCode: HttpStatusCode.Unauthorized} && CredentialProvider != null)
+        {
+            _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
+            if (_credentials == null) throw;
 
-                State = TaskState.Data;
-                ContentStarted = true;
-                // ReSharper disable once AssignNullToNotNullAttribute
-                using var stream = new ProgressStream(response.GetResponseStream(), new SynchronousProgress<long>(x => UnitsProcessed = x), CancellationToken);
-                if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
-                _callback(stream);
-                return;
-            }
-            catch (WebException ex)
-            {
-                switch (ex.Status)
-                {
-                    case WebExceptionStatus.RequestCanceled:
-                        throw new OperationCanceledException();
-
-                    case WebExceptionStatus.ProtocolError when ex.Response is HttpWebResponse {StatusCode: HttpStatusCode.Unauthorized} && CredentialProvider != null:
-                        if (usedCredentials)
-                            CredentialProvider.ReportInvalid(ex.Response.ResponseUri);
-                        else
-                        {
-                            usedCredentials = true;
-                            continue; // Retry
-                        }
-                        break;
-                }
-
-                // Wrap exception to add context
-                throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
-            }
+            Log.Info($"Retrying download for {Source} with credentials");
+            Execute();
+        }
+        catch (WebException ex)
+        {
+            // Wrap exception to add context
+            throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
         }
     }
 
-    private WebRequest BuildRequest(bool useCredentials)
+    private WebRequest BuildRequest()
     {
-        WebRequest request;
         try
         {
-            request = WebRequest.Create(Source);
+            var request = WebRequest.Create(Source);
             if (request is HttpWebRequest httpRequest)
             {
                 httpRequest.UserAgent = AppInfo.Current.NameVersion;
-                if (useCredentials) httpRequest.Credentials = CredentialProvider;
+                httpRequest.Credentials = _credentials;
                 if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             }
+            return request;
         }
         #region Error handling
         catch (NotSupportedException ex)
@@ -146,17 +141,13 @@ public class DownloadFile : TaskBase
             throw new WebException(ex.Message, ex);
         }
         #endregion
-
-        return request;
     }
 
     private WebResponse GetResponse(WebRequest request)
     {
         var responseHandler = request.BeginGetResponse(null!, null!);
-
         responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
-        var response = request.EndGetResponse(responseHandler);
-        return response;
+        return request.EndGetResponse(responseHandler);
     }
 
     private void HandleHeaders(WebResponse response)

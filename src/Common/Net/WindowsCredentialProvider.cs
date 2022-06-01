@@ -11,10 +11,10 @@ namespace NanoByte.Common.Net;
 /// Gets <see cref="NetworkCredential"/>s using the Windows Credential Manager.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public abstract class WindowsCredentialProvider : CredentialProviderBase
+public abstract class WindowsCredentialProvider : ICredentialProvider
 {
     /// <inheritdoc/>
-    public override NetworkCredential? GetCredential(Uri uri, string authType)
+    public NetworkCredential? GetCredential(Uri uri, bool previousIncorrect = false)
     {
         #region Sanity checks
         if (uri == null) throw new ArgumentNullException(nameof(uri));
@@ -25,7 +25,7 @@ public abstract class WindowsCredentialProvider : CredentialProviderBase
         Log.Debug($"Get credentials for {target} from Windows Credential Manager");
 
         var flags = WindowsCredentialsFlags.GenericCredentials | WindowsCredentialsFlags.ExcludeCertificates | WindowsCredentialsFlags.ShowSaveCheckBox;
-        if (WasReportedInvalid(uri))
+        if (previousIncorrect)
             flags |= WindowsCredentialsFlags.IncorrectPassword | WindowsCredentialsFlags.AlwaysShowUI;
 
         return GetCredential(target, flags);

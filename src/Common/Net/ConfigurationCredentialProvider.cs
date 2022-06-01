@@ -25,7 +25,7 @@ namespace NanoByte.Common.Net
             => _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
         /// <inheritdoc/>
-        public NetworkCredential GetCredential(Uri uri, string authType)
+        public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
         {
             #region Sanity checks
             if (uri == null) throw new ArgumentNullException(nameof(uri));
@@ -34,10 +34,6 @@ namespace NanoByte.Common.Net
             var cred = _configuration.GetSection(uri.ToStringRfc());
             return new NetworkCredential(cred["User"], cred["Password"]);
         }
-
-        /// <inheritdoc/>
-        public void ReportInvalid(Uri uri)
-        {}
     }
 
     /// <summary>

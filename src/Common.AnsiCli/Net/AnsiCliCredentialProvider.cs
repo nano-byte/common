@@ -9,17 +9,18 @@ namespace NanoByte.Common.Net;
 /// <summary>
 /// Asks the user for <see cref="NetworkCredential"/>s using an ANSI console prompt.
 /// </summary>
-public class AnsiCliCredentialProvider : CredentialProviderBase
+public class AnsiCliCredentialProvider : ICredentialProvider
 {
     /// <inheritdoc/>
-    public override NetworkCredential GetCredential(Uri uri, string authType)
+    public NetworkCredential? GetCredential(Uri uri, bool previousIncorrect = false)
     {
         #region Sanity checks
         if (uri == null) throw new ArgumentNullException(nameof(uri));
         #endregion
 
-        Log.Debug("Prompt for credentials on command-line: " + uri.ToStringRfc());
-        if (WasReportedInvalid(uri))
+        Log.Debug($"Prompt for credentials for {uri} on command-line");
+
+        if (previousIncorrect)
             Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
 
         AnsiCli.Error.WriteLine(string.Format(Resources.PleaseEnterCredentials, uri.ToStringRfc()));

@@ -9,10 +9,12 @@ namespace NanoByte.Common.Net;
 /// Asks the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s.
 /// </summary>
 /// <remarks>Implementations of this interface are thread-safe.</remarks>
-public interface ICredentialProvider : ICredentials
+public interface ICredentialProvider
 {
     /// <summary>
-    /// Report that the credentials that were retrieved for <paramref name="uri"/> were incorrect.
+    /// Returns <see cref="NetworkCredential"/>s for a specific <see cref="Uri"/>.
     /// </summary>
-    void ReportInvalid(Uri uri);
+    /// <param name="uri">The URI that the client is providing authentication for.</param>
+    /// <param name="previousIncorrect">Reports that the credentials previously returned by this provider were incorrect.</param>
+    NetworkCredential? GetCredential(Uri uri, bool previousIncorrect = false);
 }
