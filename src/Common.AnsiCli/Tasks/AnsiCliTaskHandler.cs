@@ -42,7 +42,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
     public override ICredentialProvider? CredentialProvider
         => WindowsUtils.IsWindowsNT
             ? base.CredentialProvider
-            : IsInteractive ? new CachedCredentialProvider(new AnsiCliCredentialProvider()) : null;
+            : IsInteractive ? new AnsiCliCredentialProvider() : null;
 
     private readonly object _progressContextLock = new();
     private AnsiCliProgressContext? _progressContext;
