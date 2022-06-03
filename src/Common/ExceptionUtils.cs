@@ -93,6 +93,30 @@ public static class ExceptionUtils
 #endif
     }
 
+#if !NET20
+    /// <summary>
+    /// Rethrows the last of the <see cref="AggregateException.InnerExceptions"/> and logs all others.
+    /// </summary>
+    /// <returns>This method never returns. You can "throw" the return value to satisfy the compiler's flow analysis if necessary.</returns>
+    [DoesNotReturn]
+    public static Exception RethrowLastInner(this AggregateException exception)
+    {
+        #region Sanity checks
+        if (exception == null) throw new ArgumentNullException(nameof(exception));
+        #endregion
+
+        for (int i = 0; i < exception.InnerExceptions.Count; i++)
+        {
+            if (i == exception.InnerExceptions.Count - 1)
+                exception.InnerExceptions[i].Rethrow();
+            else
+                Log.Error(exception.InnerExceptions[i].Message, exception.InnerExceptions[i]);
+        }
+
+        throw exception.Rethrow();
+    }
+#endif
+
     /// <summary>
     /// Applies an operation for all elements of a collection. Automatically applies rollback operations in case of an exception.
     /// </summary>

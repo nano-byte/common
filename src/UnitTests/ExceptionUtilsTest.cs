@@ -46,6 +46,14 @@ public class ExceptionUtilsTest
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void ThrowMockException() => throw new InvalidOperationException("Test exception");
 
+    [Fact]
+    public void RethrowLastInner()
+    {
+        new AggregateException(new InvalidOperationException("Test exception 1"), new ApplicationException("Test exception 2"))
+           .Invoking(x => x.RethrowLastInner())
+           .Should().Throw<ApplicationException>();
+    }
+
     /// <summary>
     /// Ensures that <see cref="ExceptionUtils.ApplyWithRollback{T}"/> correctly performs rollbacks on exceptions.
     /// </summary>
