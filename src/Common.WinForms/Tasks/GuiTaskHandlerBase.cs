@@ -68,10 +68,11 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
     }
 
     /// <inheritdoc />
-    public override ICredentialProvider? CredentialProvider
-        => WindowsUtils.IsWindowsNT
-            ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
-            : null;
+    public override ICredentialProvider CredentialProvider
+        => new NetrcCredentialProvider(
+            WindowsUtils.IsWindowsNT
+                ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
+                : null);
 
     /// <inheritdoc/>
     protected override bool IsInteractive
