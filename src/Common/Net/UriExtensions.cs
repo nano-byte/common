@@ -67,4 +67,13 @@ public static class UriExtensions
 
         return fileName;
     }
+
+    /// <summary>
+    /// Removes everything except the schema, host and port from the URI. Returns the original URI if it is not an absolute URI.
+    /// </summary>
+    [Pure]
+    public static Uri GetRoot(this Uri uri)
+        => uri is {IsAbsoluteUri: true, IsFile: false, IsUnc: false}
+            ? new UriBuilder {Scheme = uri.Scheme, Host = uri.Host, Port = uri.Port}.Uri
+            : uri;
 }

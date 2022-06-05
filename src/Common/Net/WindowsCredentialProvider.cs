@@ -20,8 +20,7 @@ public abstract class WindowsCredentialProvider : ICredentialProvider
         if (uri == null) throw new ArgumentNullException(nameof(uri));
         #endregion
 
-        // Use URI without path as credential target identifier
-        string target = new UriBuilder(uri) {Path = null, UserName = null, Password = null}.ToString();
+        string target = uri.GetRoot().ToStringRfc();
         Log.Debug($"Get credentials for {target} from Windows Credential Manager");
 
         var flags = WindowsCredentialsFlags.GenericCredentials | WindowsCredentialsFlags.ExcludeCertificates | WindowsCredentialsFlags.ShowSaveCheckBox;

@@ -38,4 +38,14 @@ public class UriExtensionsTest
     [InlineData("file:///test/", "test")]
     public void TestGetLocalFilePath(string uri, string path)
         => new Uri(uri).GetLocalFileName().Should().Be(path);
+
+    [Theory]
+    [InlineData("http://example.com/", "http://example.com/")]
+    [InlineData("http://example.com/test", "http://example.com/")]
+    [InlineData("http://example.com:80/test", "http://example.com:80/")]
+    [InlineData("http://example.com:8080/test", "http://example.com:8080/")]
+    [InlineData("./relative", "./relative")]
+    [InlineData("file:///test/", "file:///test/")]
+    public void TestGetRoot(string uri, string root)
+        => new Uri(uri, UriKind.RelativeOrAbsolute).GetRoot().Should().Be(new Uri(root, UriKind.RelativeOrAbsolute));
 }
