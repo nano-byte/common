@@ -48,6 +48,7 @@ public class AnsiCli
 
         foreach (var property in typeof(T).GetProperties())
         {
+            if (property.GetIndexParameters().Length != 0) continue;
             if (property.Name == nameof(IHighlightColor.HighlightColor)) continue;
             if (property.GetMethod == null) continue;
             var browsable = property.GetCustomAttribute<BrowsableAttribute>(inherit: true);
