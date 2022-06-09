@@ -241,30 +241,30 @@ public static class FileUtils
     /// <summary>
     /// Walks a directory structure recursively and performs an action for every directory and file encountered.
     /// </summary>
-    /// <param name="directory">The directory to walk.</param>
-    /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="directory"/>); can be <c>null</c>.</param>
+    /// <param name="element">The directory (or single file) to walk.</param>
+    /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="element"/>); can be <c>null</c>.</param>
     /// <param name="fileAction">The action to perform for every found file; can be <c>null</c>.</param>
     /// <param name="followDirSymlinks">If <c>true</c> recurse into directory symlinks; if <c>false</c> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
-    public static void Walk(this DirectoryInfo directory, [InstantHandle] Action<DirectoryInfo>? dirAction = null, [InstantHandle] Action<FileInfo>? fileAction = null, bool followDirSymlinks = false)
+    public static void Walk(this FileSystemInfo element, [InstantHandle] Action<DirectoryInfo>? dirAction = null, [InstantHandle] Action<FileInfo>? fileAction = null, bool followDirSymlinks = false)
     {
         #region Sanity checks
-        if (directory == null) throw new ArgumentNullException(nameof(directory));
+        if (element == null) throw new ArgumentNullException(nameof(element));
         #endregion
 
-        dirAction?.Invoke(directory);
-
-        if (fileAction != null)
+        switch (element)
         {
-            foreach (var file in directory.GetFiles())
-                fileAction(file);
-        }
+            case FileInfo file:
+                fileAction?.Invoke(file);
+                break;
 
-        foreach (var subDir in directory.GetDirectories())
-        {
-            if (followDirSymlinks || !IsSymlink(subDir.FullName))
-                Walk(subDir, dirAction, fileAction);
-            else
-                dirAction?.Invoke(subDir);
+            case DirectoryInfo directory:
+                dirAction?.Invoke(directory);
+                if (followDirSymlinks || !directory.IsSymlink(out _))
+                {
+                    foreach (var childElement in directory.GetFileSystemInfos())
+                        Walk(childElement, dirAction, fileAction);
+                }
+                break;
         }
     }
 

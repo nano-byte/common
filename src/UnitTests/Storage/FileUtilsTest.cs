@@ -167,6 +167,25 @@ public class FileUtilsTest
     }
 
     [Fact]
+    public void TestWalkSingleFile()
+    {
+        using var tempFile = new TemporaryFile("unit-tests");
+
+        // Set up delegate mocks
+        var dirCallbackMock = new Mock<IActionSimulator<string>>(MockBehavior.Strict);
+        var fileCallbackMock = new Mock<IActionSimulator<string>>(MockBehavior.Strict);
+        // ReSharper disable once AccessToDisposedClosure
+        fileCallbackMock.Setup(x => x.Execute(tempFile)).Verifiable();
+
+        new FileInfo(tempFile).Walk(
+            dir => dirCallbackMock.Object.Execute(dir.FullName),
+            file => fileCallbackMock.Object.Execute(file.FullName));
+
+        dirCallbackMock.Verify();
+        fileCallbackMock.Verify();
+    }
+
+    [Fact]
     public void TestWalkThroughPrefix()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
