@@ -443,7 +443,7 @@ public static class FileUtils
             // Remove classic read-only attributes
             try
             {
-                Walk(directory,
+                directory.Walk(
                     dir => dir.Attributes = FileAttributes.Normal,
                     file => file.IsReadOnly = false);
             }
@@ -458,7 +458,7 @@ public static class FileUtils
     {
         try
         {
-            Walk(directory,
+            directory.Walk(
                 dir =>
                 {
                     if (enable) UnixUtils.MakeReadOnly(dir.FullName);

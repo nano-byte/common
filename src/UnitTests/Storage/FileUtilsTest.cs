@@ -219,24 +219,17 @@ public class FileUtilsTest
         FileUtils.GetFilesRecursive(tempDir).Should().Equal(file1, file2);
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestWriteProtection()
     {
-        Skip.If(WindowsUtils.IsWindowsVista && !WindowsUtils.IsAdministrator, "Must be Admin to create symlinks on Windows");
-
         using var tempDir = new TemporaryDirectory("unit-tests");
-        File.WriteAllText(Path.Combine(tempDir, "file"), @"contents");
-        FileUtils.CreateSymlink(Path.Combine(tempDir, "symlink"), targetPath: "file");
+        FileUtils.Touch(Path.Combine(tempDir, "file"));
+        if (UnixUtils.IsUnix || (WindowsUtils.IsWindows && WindowsUtils.IsAdministrator))
+            FileUtils.CreateSymlink(Path.Combine(tempDir, "symlink"), targetPath: "file");
 
         FileUtils.EnableWriteProtection(tempDir);
-        try
-        {
-            Assert.Throws<UnauthorizedAccessException>(() => File.Delete(Path.Combine(tempDir, "file")));
-        }
-        finally
-        {
-            FileUtils.DisableWriteProtection(tempDir);
-        }
+        Assert.Throws<UnauthorizedAccessException>(() => File.Delete(Path.Combine(tempDir, "file")));
+        FileUtils.DisableWriteProtection(tempDir);
     }
 
     [Fact]
