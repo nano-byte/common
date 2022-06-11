@@ -54,7 +54,7 @@ The following types were introduced in .NET 5.0 and are backported to .NET Frame
 - <xref:System.Runtime.Versioning.SupportedOSPlatformAttribute>
 - <xref:System.Runtime.Versioning.UnsupportedOSPlatformAttribute>
 
-The following types were introduced in .NET 6.0 and are backported to .NET Framework, .NET Standard and .NET 5.0:
+The following types were introduced in .NET 6.0 and are backported to .NET Framework and .NET Standard:
 
 - <xref:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute>
 - <xref:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute>

@@ -5,7 +5,7 @@
     <AssemblyName>NanoByte.Common.WinForms</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Builds upon NanoByte.Common and adds various Windows Forms controls with an emphasis on progress reporting and data binding.</Description>
-    <TargetFrameworks>net20;net40;net45;net461;net472;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net45;net461;net472;net6.0-windows</TargetFrameworks>
     <UseWindowsForms>True</UseWindowsForms>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <SignAssembly>True</SignAssembly>
@@ -13,11 +13,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
     <!-- .NET Core MSBuild does not support legacy ResGen -->
-    <TargetFrameworks>net461;net472;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net461;net472;net6.0-windows</TargetFrameworks>
     <GenerateResourceUsePreserializedResources>True</GenerateResourceUsePreserializedResources>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0-windows' Or '$(TargetFramework)'=='net6.0-windows'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -26,7 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows' And '$(TargetFramework)'!='net6.0-windows'">
+  <ItemGroup Condition="'$(TargetFramework)'!='net6.0-windows'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='net472'">

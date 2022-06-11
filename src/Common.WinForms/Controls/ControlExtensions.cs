@@ -8,7 +8,7 @@ namespace NanoByte.Common.Controls;
 /// </summary>
 public static class ControlExtensions
 {
-#if !NET6_0_OR_GREATER
+#if !NET
     /// <summary>
     /// Executes the given <paramref name="action"/> on the thread that owns this control and returns immediately.
     /// </summary>

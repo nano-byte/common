@@ -106,7 +106,7 @@ public static class FileUtils
     /// <param name="path">The path of the file.</param>
     /// <param name="expectedSize">The initial allocation size in bytes for the file.</param>
     public static FileStream Create([Localizable(false)] string path, long expectedSize)
-#if NET6_0_OR_GREATER
+#if NET
         => new(path, new FileStreamOptions {Mode = FileMode.Create, Access = FileAccess.Write, Share = FileShare.None, PreallocationSize = expectedSize});
 #else
         => new(path, FileMode.Create, FileAccess.Write, FileShare.None);
