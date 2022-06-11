@@ -30,15 +30,14 @@ public sealed class RtfBuilder
     /// <param name="color">The color of the text.</param>
     public void AppendPar(string text, RtfColor color)
     {
-        text = (text ?? throw new ArgumentNullException(nameof(text))).Replace(@"\", @"\\").Replace(Environment.NewLine, "\\par\n");
-        _builder.AppendLine("\\cf" + ((int)color + 1) + " " + text + "\\par\\par\n");
+        string escapedText = (text ?? throw new ArgumentNullException(nameof(text)))
+              .Replace(@"\", @"\\")
+              .Replace(Environment.NewLine, "\\par\n")
+              .Replace("\n", "\\par\n");
+        _builder.AppendLine($"\\cf{(int)color + 1} {escapedText}\\par\\par\n");
     }
 
     /// <inheritdoc/>
     public override string ToString()
-    {
-        const string rtfHeader = "{\\rtf1\r\n{\\colortbl ;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue0;\\red255\\green255\\blue0;\\red255\\green106\\blue0;\\red255\\green0\\blue0;}\r\n";
-        const string rtfFooter = "}";
-        return rtfHeader + _builder + rtfFooter;
-    }
+        => $"{{\\rtf1\r\n{{\\colortbl ;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue0;\\red255\\green255\\blue0;\\red255\\green106\\blue0;\\red255\\green0\\blue0;}}\r\n{_builder}}}";
 }
