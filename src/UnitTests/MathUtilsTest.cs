@@ -10,13 +10,12 @@ namespace NanoByte.Common;
 /// </summary>
 public class MathUtilsTest
 {
-    [Fact]
-    public void TestModule()
-    {
-        3.Modulo(4).Should().Be(3);
-        3.Modulo(2).Should().Be(1);
-        (-1).Modulo(3).Should().Be(2);
-    }
+    [Theory]
+    [InlineData(3, 4, 3)]
+    [InlineData(3, 2, 1)]
+    [InlineData(-1, 3, 2)]
+    public void TestModule(int a, int b, int result)
+        => a.Modulo(b).Should().Be(result);
 
     [Fact]
     public void TestEqualsTolerance()

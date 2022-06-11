@@ -8,25 +8,29 @@ namespace NanoByte.Common;
 /// </summary>
 public class StringUtilsTest
 {
-    [Fact]
-    public void TestCompare()
-    {
-        StringUtils.EqualsIgnoreCase("abc", "abc").Should().BeTrue();
-        StringUtils.EqualsIgnoreCase("abc", "ABC").Should().BeTrue();
+    [Theory]
+    [InlineData("abc", "abc")]
+    [InlineData("abc", "ABC")]
+    public void EqualsIgnoreCase(string a, string b)
+        => StringUtils.EqualsIgnoreCase(a, b).Should().BeTrue();
 
-        StringUtils.EqualsIgnoreCase("abc", "123").Should().BeFalse();
-        StringUtils.EqualsIgnoreCase("abc", "abc ").Should().BeFalse();
-    }
+    [Theory]
+    [InlineData("abc", "123")]
+    [InlineData("abc", "abc ")]
+    public void NotEqualsIgnoreCase(string a, string b)
+        => StringUtils.EqualsIgnoreCase(a, b).Should().BeFalse();
 
-    [Fact]
-    public void TestContains()
-    {
-        "This is a test.".ContainsIgnoreCase("TEST").Should().BeTrue();
-        "This is a test.".ContainsIgnoreCase("test").Should().BeTrue();
+    [Theory]
+    [InlineData("This is a test.", "TEST")]
+    [InlineData("This is a test.", "test")]
+    public void ContainsIgnoreCase(string value, string searchFor)
+        => value.ContainsIgnoreCase(searchFor).Should().BeTrue();
 
-        "abc".ContainsIgnoreCase("123").Should().BeFalse();
-        "test".ContainsIgnoreCase("This is a test.").Should().BeFalse();
-    }
+    [Theory]
+    [InlineData("This is a test.", "123")]
+    [InlineData("test", "This is a test.")]
+    public void NotContainsIgnoreCase(string value, string searchFor)
+        => value.ContainsIgnoreCase(searchFor).Should().BeFalse();
 
     [Fact]
     public void TestStartsWith()
@@ -42,20 +46,21 @@ public class StringUtilsTest
         rest.Should().Be("rest: ");
     }
 
-    [Fact]
-    public void TestSplitMultilineText()
-    {
-        "123\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Linux-stlye linebreaks");
-        "123\rabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split old Mac-stlye linebreaks");
-        "123\r\nabc".SplitMultilineText().Should().Equal(new[] {"123", "abc"}, because: "Should split Windows-stlye linebreaks");
-    }
+    [Theory]
+    [InlineData("123\nabc", new[] {"123", "abc"}, "Should split Linux-style linebreaks")]
+    [InlineData("123\rabc", new[] {"123", "abc"}, "Should split Linux-style linebreaks")]
+    [InlineData("123\r\nabc", new[] {"123", "abc"}, "Should split Linux-style linebreaks")]
+    [InlineData("123", new[] {"123"}, "Should work with single lines")]
+    [InlineData("", new[] {""}, "Should work with empty strings")]
+    public void TestSplitMultilineText(string value, string[] result, string because)
+        => value.SplitMultilineText().Should().Equal(result, because);
 
-    [Fact]
-    public void TestJoin()
-    {
-        StringUtils.Join(" ", new[] {"part1"}).Should().Be("part1");
-        StringUtils.Join(" ", new[] {"part1", "part2"}).Should().Be("part1 part2");
-    }
+    [Theory]
+    [InlineData(new string[0], "")]
+    [InlineData(new[] {"part1"}, "part1")]
+    [InlineData(new[] {"part1", "part2"}, "part1 part2")]
+    public void TestJoin(string[] parts, string result)
+        => StringUtils.Join(" ", parts).Should().Be(result);
 
     [Fact]
     public void TestGetLeftRightPartChar()
@@ -78,7 +83,8 @@ public class StringUtilsTest
     }
 
     [Fact]
-    public void TestRemoveCharacters() => "a!b?".RemoveCharacters("!?").Should().Be("ab");
+    public void TestRemoveCharacters()
+        => "a!b?".RemoveCharacters("!?").Should().Be("ab");
 
     [Fact]
     public void TestTrimOverflow()
@@ -86,18 +92,6 @@ public class StringUtilsTest
         "abc".TrimOverflow(3).Should().Be("abc");
         "abc".TrimOverflow(4).Should().Be("abc");
         "abc".TrimOverflow(2).Should().Be("ab...");
-    }
-
-    [Fact]
-    public void TestEscapeArgument()
-    {
-        "".EscapeArgument().Should().Be("\"\"", because: "Empty strings need to be escaped in order not to vanish");
-        "test".EscapeArgument().Should().Be("test", because: "Simple strings shouldn't be modified");
-        "test1 test2".EscapeArgument().Should().Be("\"test1 test2\"", because: "Strings with whitespaces should be encapsulated");
-        "test1 test2\\".EscapeArgument().Should().Be("\"test1 test2\\\\\"", because: "Trailing backslashes should be escaped");
-        "test1\"test2".EscapeArgument().Should().Be("test1\\\"test2", because: "Quotation marks should be escaped");
-        "test1\\\\test2".EscapeArgument().Should().Be("test1\\\\test2", because: "Consecutive slashes without quotation marks should not be escaped");
-        "test1\\\"test2".EscapeArgument().Should().Be("test1\\\\\\\"test2", because: "Slashes with quotation marks should be escaped");
     }
 
     [Fact]

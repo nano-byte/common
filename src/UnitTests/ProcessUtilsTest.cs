@@ -51,20 +51,29 @@ public class ProcessUtilsTest
 #endif
     }
 
-    [Fact]
-    public void TestJoinEscapeArguments()
-    {
-        new[] {"part1"}.JoinEscapeArguments().Should().Be("part1");
-        new[] {"part1", "part2"}.JoinEscapeArguments().Should().Be("part1 part2");
-        new[] {"part1 \" part2", "part3"}.JoinEscapeArguments().Should().Be("\"part1 \\\" part2\" part3");
-    }
+    [Theory]
+    [InlineData(new[] {"part1"}, "part1")]
+    [InlineData(new[] {"part1", "part2"}, "part1 part2")]
+    [InlineData(new[] {"part1 \" part2", "part3"}, "\"part1 \\\" part2\" part3")]
+    public void TestJoinEscapeArguments(string[] parts, string result)
+        => parts.JoinEscapeArguments().Should().Be(result);
 
-    [Fact]
-    public void TestToCommandLine()
-    {
-        new ProcessStartInfo("executable", "my args").ToCommandLine().Should().Be("executable my args");
-        new ProcessStartInfo("my executable", "my args").ToCommandLine().Should().Be("\"my executable\" my args");
-    }
+    [Theory]
+    [InlineData("", "\"\"", "Empty strings need to be escaped in order not to vanish")]
+    [InlineData("test", "test", "Simple strings shouldn't be modified")]
+    [InlineData("test1 test2", "\"test1 test2\"", "Strings with whitespaces should be encapsulated")]
+    [InlineData("test1 test2\\", "\"test1 test2\\\\\"", "Trailing backslashes should be escaped")]
+    [InlineData("test1\"test2", "test1\\\"test2", "Quotation marks should be escaped")]
+    [InlineData("test1\\\\test2", "test1\\\\test2", "Consecutive slashes without quotation marks should not be escaped")]
+    [InlineData("test1\\\"test2", "test1\\\\\\\"test2", "Slashes with quotation marks should be escaped")]
+    public void TestEscapeArgument(string unescaped, string escaped, string because)
+        => unescaped.EscapeArgument().Should().Be(escaped, because);
+
+    [Theory]
+    [InlineData("executable", "my args", "executable my args")]
+    [InlineData("my executable", "my args", "\"my executable\" my args")]
+    public void TestToCommandLine(string executable, string args, string commandLine)
+        => new ProcessStartInfo(executable, args).ToCommandLine().Should().Be(commandLine);
 
     [Fact]
     public void TestFromCommandLine()
