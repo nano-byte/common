@@ -4,11 +4,6 @@
 using System.Net;
 using NanoByte.Common.Net;
 
-#if NETFRAMEWORK
-using System.Security.Principal;
-using NanoByte.Common.Native;
-#endif
-
 namespace NanoByte.Common.Tasks;
 
 /// <summary>
@@ -25,19 +20,6 @@ public abstract class TaskBase : MarshalByRefObject, ITask
 
     /// <inheritdoc/>
     public virtual bool CanCancel => true;
-
-#if NETFRAMEWORK
-    /// <summary>The identity of the user that originally created this task.</summary>
-    private readonly WindowsIdentity? _originalIdentity;
-#endif
-
-    protected TaskBase()
-    {
-#if NETFRAMEWORK
-        if (WindowsUtils.IsWindowsNT)
-            _originalIdentity = WindowsIdentity.GetCurrent();
-#endif
-    }
 
     /// <summary>Signaled when the user wishes to cancel the task execution.</summary>
     protected CancellationToken CancellationToken;
@@ -60,11 +42,7 @@ public abstract class TaskBase : MarshalByRefObject, ITask
 
         try
         {
-#if NETFRAMEWORK
-            // Run task with privileges of original user if possible
-            using (_originalIdentity?.Impersonate())
-#endif
-                Execute();
+            Execute();
         }
         #region Error handling
         catch (OperationCanceledException)
