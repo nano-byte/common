@@ -191,18 +191,7 @@ public static class ProcessUtils
         if (parts == null) throw new ArgumentNullException(nameof(parts));
         #endregion
 
-        var output = new StringBuilder();
-        bool first = true;
-        foreach (string part in parts)
-        {
-            // No separator before first or after last part
-            if (first) first = false;
-            else output.Append(' ');
-
-            output.Append(EscapeArgument(part));
-        }
-
-        return output.ToString();
+        return StringUtils.Join(" ", parts.Select(EscapeArgument));
     }
 
     /// <summary>
@@ -219,24 +208,24 @@ public static class ProcessUtils
 
         // Add leading quotation mark if there are whitespaces
         bool containsWhitespace = value.ContainsWhitespace();
-        var result = containsWhitespace ? new StringBuilder("\"", value.Length + 2) : new StringBuilder(value.Length);
+        StringBuilder result = containsWhitespace ? new("\"", value.Length + 2) : new(value.Length);
 
         // Split by quotation marks
         string[] parts = value.Split('"');
         for (int i = 0; i < parts.Length; i++)
         {
-            // Count slashes preceding the quotation mark
-            int slashesCount = parts[i].Length - parts[i].TrimEnd('\\').Length;
+            // Count backslashes preceding the quotation mark
+            int backslashCount = parts[i].Length - parts[i].TrimEnd('\\').Length;
 
             result.Append(parts[i]);
             if (i < parts.Length - 1)
             { // Not last part
-                for (int j = 0; j < slashesCount; j++) result.Append('\\'); // Double number of slashes
+                for (int j = 0; j < backslashCount; j++) result.Append('\\'); // Double number of backslashes
                 result.Append("\\\""); // Escaped quotation mark
             }
             else if (containsWhitespace)
             { // Last part if there are whitespaces
-                for (int j = 0; j < slashesCount; j++) result.Append('\\'); // Double number of slashes
+                for (int j = 0; j < backslashCount; j++) result.Append('\\'); // Double number of backslashes
                 result.Append('"'); // Non-escaped quotation mark
             }
         }
