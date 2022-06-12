@@ -107,6 +107,7 @@ public static class ProcessUtils
     /// </summary>
     /// <param name="name">The name of the assembly to launch (without the file extension).</param>
     /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
+    /// <exception cref="FileNotFoundException">The specified assembly could not be found.</exception>
     [Pure]
     public static ProcessStartInfo Assembly(string name, params string[] arguments)
     {
