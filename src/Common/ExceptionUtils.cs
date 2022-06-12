@@ -109,7 +109,7 @@ public static class ExceptionUtils
         {
             if (i == exception.InnerExceptions.Count - 1)
                 exception.InnerExceptions[i].Rethrow();
-            else
+            else if (exception.InnerExceptions[i] is not OperationCanceledException)
                 Log.Error(exception.InnerExceptions[i].Message, exception.InnerExceptions[i]);
         }
 
