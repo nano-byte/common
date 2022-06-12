@@ -20,7 +20,7 @@ public sealed class ProgressStream : DelegatingStream
     /// </summary>
     /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
     /// <param name="progress">Used to report back the number of bytes that have been read or written.</param>
-    /// <param name="cancellationToken">Used to signal when the user wishes to cancel the stream. If signaled read an write requests will start throwing <see cref="OperationCanceledException"/>.</param>
+    /// <param name="cancellationToken">Used to signal when the user wants to cancel the stream. If signaled read an write requests will start throwing <see cref="OperationCanceledException"/>.</param>
     public ProgressStream(Stream underlyingStream, IProgress<long>? progress = null, CancellationToken cancellationToken = default)
         : base(underlyingStream)
     {

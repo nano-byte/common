@@ -8,7 +8,7 @@ Newer versions of .NET often introduce features that can be backported to earlie
 
 ## Language features
 
-[LINQ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) was introduced in .NET Framework 3.5 and is backported to .NET Framework 2.0 by embedding [LinqBridge](http://www.albahari.com/nutshell/linqbridge.aspx).
+[LINQ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) was introduced in .NET Framework 3.5 and is backported to .NET Framework 2.0 (by embedding [LinqBridge](http://www.albahari.com/nutshell/linqbridge.aspx)).
 
 [Nullable reference types](https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references), [Ranges](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges) and [Records](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/records) were introduced in .NET (Core) and are backported to .NET Framework.
 

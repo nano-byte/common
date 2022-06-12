@@ -21,7 +21,7 @@ public abstract class TaskBase : MarshalByRefObject, ITask
     /// <inheritdoc/>
     public virtual bool CanCancel => true;
 
-    /// <summary>Signaled when the user wishes to cancel the task execution.</summary>
+    /// <summary>Signaled when the user wants to cancel the task execution.</summary>
     protected CancellationToken CancellationToken;
 
     /// <summary>Used to report back the task's progress.</summary>

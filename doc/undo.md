@@ -14,7 +14,7 @@ This library provides a number of implementations for common use cases such as <
 
 ## Executors
 
-Methods that wish to execute <xref:NanoByte.Common.Undo.IUndoCommand>s should take an <xref:NanoByte.Common.Undo.ICommandExecutor> as an input parameter.  
-To execute an <xref:NanoByte.Common.Undo.IUndoCommand> pass it to the [ICommandExecutor.Execute()](xref:NanoByte.Common.Undo.ICommandExecutor#NanoByte_Common_Undo_ICommandExecutor_Execute_NanoByte_Common_Undo_IUndoCommand_) method. This will then internally call [IUndoCommand.Execute()](xref:NanoByte.Common.Undo.IUndoCommand#NanoByte_Common_Undo_IUndoCommand_Execute) and record the command for later undo operations.
+Methods that want to execute <xref:NanoByte.Common.Undo.IUndoCommand>s should take an <xref:NanoByte.Common.Undo.ICommandExecutor> as an input parameter.  
+To execute an <xref:NanoByte.Common.Undo.IUndoCommand>, pass it to the [ICommandExecutor.Execute()](xref:NanoByte.Common.Undo.ICommandExecutor#NanoByte_Common_Undo_ICommandExecutor_Execute_NanoByte_Common_Undo_IUndoCommand_) method. This will then internally call [IUndoCommand.Execute()](xref:NanoByte.Common.Undo.IUndoCommand#NanoByte_Common_Undo_IUndoCommand_Execute) and record the command for later undo operations.
 
-The class <xref:NanoByte.Common.Undo.CommandManager`1> implements the <xref:NanoByte.Common.Undo.ICommandExecutor> interface. You can expose this classes `.Undo()` and `.Redo()` methods to your users in your GUI.
+The class <xref:NanoByte.Common.Undo.CommandManager`1> implements the <xref:NanoByte.Common.Undo.ICommandExecutor> interface. You can expose the `.Undo()` and `.Redo()` methods of this class to your users in your GUI.

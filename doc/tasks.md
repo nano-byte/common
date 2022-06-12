@@ -10,7 +10,7 @@ The <xref:NanoByte.Common.Tasks> namespace provides a framework for managing lon
 
 Tasks are represented using the <xref:NanoByte.Common.Tasks.ITask> interface.
 
-This library provides general-purpose implementations such as <xref:NanoByte.Common.Tasks.SimpleTask> and <xref:NanoByte.Common.Tasks.ForEachTask>, as well as use-case specific ones such as <xref:NanoByte.Common.Net.DownloadFile> and <xref:NanoByte.Common.Storage.ReadFile> You can also implement your own.
+This library provides general-purpose implementations such as <xref:NanoByte.Common.Tasks.SimpleTask> and <xref:NanoByte.Common.Tasks.ForEachTask>, as well as use-case specific ones such as <xref:NanoByte.Common.Net.DownloadFile> and <xref:NanoByte.Common.Storage.ReadFile>. You can also implement your own.
 
 ## Handlers
 
@@ -22,8 +22,8 @@ The <xref:NanoByte.Common.Tasks.ITaskHandler> interface represents a user interf
 - <xref:NanoByte.Common.Tasks.SilentTaskHandler> for background execution or unit tests
 - <xref:NanoByte.Common.Tasks.ServiceTaskHandler> for integration with [Microsoft.Extensions.DependencyInjection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)
 
-Methods that wish to run <xref:NanoByte.Common.Tasks.ITask>s should take an <xref:NanoByte.Common.Tasks.ITaskHandler> as an input parameter.  
-To run an <xref:NanoByte.Common.Tasks.ITask> pass it to the [ITaskHandler.RunTask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_) method. This will then internally call [ITask.Run()](xref:NanoByte.Common.Tasks.ITask#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__) and take care of setting up progress tracking, cancellation, etc.. Additional methods such as [ITaskHandler.Ask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_Ask_System_String_System_Nullable_System_Boolean__System_String_) can be used for user interaction.
+Methods that want to run <xref:NanoByte.Common.Tasks.ITask>s should take an <xref:NanoByte.Common.Tasks.ITaskHandler> as an input parameter.  
+To run an <xref:NanoByte.Common.Tasks.ITask>, pass it to the [ITaskHandler.RunTask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_) method. This will then internally call [ITask.Run()](xref:NanoByte.Common.Tasks.ITask#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__) and take care of setting up progress tracking, cancellation, etc.. Additional methods such as [ITaskHandler.Ask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_Ask_System_String_System_Nullable_System_Boolean__System_String_) can be used for user interaction.
 
 ## Threading
 
@@ -31,7 +31,7 @@ To run an <xref:NanoByte.Common.Tasks.ITask> pass it to the [ITaskHandler.RunTas
 
 <xref:NanoByte.Common.Tasks.ITaskHandler> implementations are thread-safe and support running multiple <xref:NanoByte.Common.Tasks.ITask>s concurrently.  
 [ITaskHandler.RunTask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_) blocks until the tasks is complete, however some implementations may perform the actual task execution on a separate thread.  
-<xref:NanoByte.Common.Tasks.DialogTaskHandler> keeps the WinForms message loop pumping while a task is running, so calling `.RunTask()` from the GUI thread will not freeze the GUI. However it does prevent user actions (other than canceling the task) via a modal dialog box.
+<xref:NanoByte.Common.Tasks.DialogTaskHandler> keeps the WinForms message loop pumping while a task is running, so calling `.RunTask()` from the GUI thread will not freeze the GUI. However it does prevent user interaction (other than canceling the task) via a modal dialog box.
 
 ## Comparison with async/await
 
