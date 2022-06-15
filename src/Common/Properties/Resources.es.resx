@@ -79,7 +79,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copia de archivos</value>
+    <value>Copiar archivos</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -123,7 +123,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Fallo al abrir la subclave del registro '{0}' en '{1}'.</value>
+    <value>Error al abrir la subclave del registro '{0}' en '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -139,7 +139,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>No se ha encontrado el archivo "{0}".</value>
+    <value>No se ha podido encontrar el archivo "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
@@ -207,7 +207,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Este comando no se puede volver a ejecutar hasta que se haya realizado el comando de deshacer.</value>
+    <value>Este comando no se puede volver a realizar hasta que se haya realizado el comando de deshacer.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
