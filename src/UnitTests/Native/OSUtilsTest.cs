@@ -13,7 +13,7 @@ public class OSUtilsTest
     [Fact]
     public void TestExpandVariablesCaseSensitive()
     {
-        var variables = new Dictionary<string, string>
+        var variables = new Dictionary<string, string?>
         {
             {"KEY1", "value1"},
             {"KEY2", "value2"},
@@ -58,7 +58,7 @@ public class OSUtilsTest
     [Fact]
     public void TestExpandVariablesEscaping()
     {
-        var variables = new Dictionary<string, string> {{"KEY", "value"}};
+        var variables = new Dictionary<string, string?> {{"KEY", "value"}};
 
         OSUtils.ExpandVariables("$KEY-$$KEY", variables).Should().Be("value-$KEY");
         OSUtils.ExpandVariables("$$KEY-$KEY", variables).Should().Be("$KEY-value");

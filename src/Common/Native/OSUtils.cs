@@ -21,7 +21,7 @@ public static class OSUtils
     /// <param name="value">The string containing variables to be expanded.</param>
     /// <param name="variables">The list of variables available for expansion.</param>
     /// <remarks>Supports default values for unset variables (<c>${VAR-default}</c>) and for unset or empty variables (<c>${VAR:-default}</c>).</remarks>
-    public static string ExpandVariables(string value, IDictionary<string, string> variables)
+    public static string ExpandVariables(string value, IDictionary<string, string?> variables)
     {
         if (value == null) throw new ArgumentNullException(nameof(value));
         if (variables == null) throw new ArgumentNullException(nameof(variables));
@@ -39,7 +39,7 @@ public static class OSUtils
             else
             {
                 parts = x.Groups[1].Value.Split('-');
-                if (variables.TryGetValue(parts[0], out ret))
+                if (variables.TryGetValue(parts[0], out ret) && ret != null)
                     return ret;
                 else if (parts.Length > 1)
                     return StringUtils.Join("-", parts.Skip(1));
@@ -57,7 +57,7 @@ public static class OSUtils
                 return x.Groups[1].Value;
 
             string key = x.Groups[1].Value;
-            if (variables.TryGetValue(key, out string? ret))
+            if (variables.TryGetValue(key, out string? ret) && ret != null)
                 return ret;
             else
             {
@@ -78,7 +78,7 @@ public static class OSUtils
         if (value == null) throw new ArgumentNullException(nameof(value));
         if (variables == null) throw new ArgumentNullException(nameof(variables));
 
-        var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        var dictionary = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
         foreach (string key in variables.Keys)
             dictionary[key] = variables[key]!;
 
