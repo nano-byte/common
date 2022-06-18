@@ -32,7 +32,7 @@ public sealed partial class ErrorBox : Form
         if (logRtf == null) throw new ArgumentNullException(nameof(logRtf));
         #endregion
 
-        Log.Error(exception.Message, exception);
+        Log.Debug("Showing error box", exception);
 
         using var errorBox = new ErrorBox
         {
