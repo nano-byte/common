@@ -47,11 +47,11 @@ public class ExceptionUtilsTest
     private static void ThrowMockException() => throw new InvalidOperationException("Test exception");
 
     [Fact]
-    public void RethrowLastInner()
+    public void RethrowFirstInner()
     {
         new AggregateException(new InvalidOperationException("Test exception 1"), new ApplicationException("Test exception 2"))
-           .Invoking(x => x.RethrowLastInner())
-           .Should().Throw<ApplicationException>();
+           .Invoking(x => x.RethrowFirstInner())
+           .Should().Throw<InvalidOperationException>();
     }
 
     /// <summary>

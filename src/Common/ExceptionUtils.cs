@@ -95,25 +95,26 @@ public static class ExceptionUtils
 
 #if !NET20
     /// <summary>
-    /// Rethrows the last of the <see cref="AggregateException.InnerExceptions"/> and logs all others.
+    /// Rethrows the first of the <see cref="AggregateException.InnerExceptions"/> and logs all others.
     /// </summary>
     /// <returns>This method never returns. You can "throw" the return value to satisfy the compiler's flow analysis if necessary.</returns>
     [DoesNotReturn]
-    public static Exception RethrowLastInner(this AggregateException exception)
+    public static Exception RethrowFirstInner(this AggregateException exception)
     {
         #region Sanity checks
         if (exception == null) throw new ArgumentNullException(nameof(exception));
         #endregion
 
-        for (int i = 0; i < exception.InnerExceptions.Count; i++)
+        var first = exception.InnerExceptions.FirstOrDefault() ?? exception;
+
+        foreach (var other in exception.InnerExceptions.Skip(1))
         {
-            if (i == exception.InnerExceptions.Count - 1)
-                exception.InnerExceptions[i].Rethrow();
-            else if (exception.InnerExceptions[i] is not OperationCanceledException)
-                Log.Error(exception.InnerExceptions[i].Message, exception.InnerExceptions[i]);
+            if (other is OperationCanceledException) {}
+            else if (other.GetType() == first.GetType()) Log.Info("Suppressed additional inner exception of same type", other);
+            else Log.Error(other.Message, other);
         }
 
-        throw exception.Rethrow();
+        throw first.Rethrow();
     }
 #endif
 
