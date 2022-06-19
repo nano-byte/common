@@ -39,7 +39,10 @@ public class ProcessLauncher : IProcessLauncher
 
     /// <inheritdoc/>
     public void Run(params string[] arguments)
-        => WaitForExit(Start(arguments));
+    {
+        var process = Start(arguments);
+        HandleExitCode(process.StartInfo, process.WaitForExitCode());
+    }
 
     /// <inheritdoc/>
     public string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
@@ -55,11 +58,16 @@ public class ProcessLauncher : IProcessLauncher
         var stdout = new StreamConsumer(process.StandardOutput);
         var stderr = new StreamConsumer(process.StandardError);
 
+        string? lastError = null;
+
         void ReadStderr()
         {
             string? line;
             while ((line = stderr.ReadLine()) != null)
+            {
+                lastError = line;
                 OnStderr(line, stdin);
+            }
         }
 
         onStartup?.Invoke(stdin);
@@ -68,7 +76,7 @@ public class ProcessLauncher : IProcessLauncher
         stderr.WaitForEnd();
         ReadStderr();
 
-        WaitForExit(process);
+        HandleExitCode(process.StartInfo, process.WaitForExitCode(), lastError);
 
         return stdout.ToString();
     }
@@ -92,10 +100,21 @@ public class ProcessLauncher : IProcessLauncher
     }
 
     /// <summary>
-    /// Hook for waiting for a process to exit and handle its exit code.
+    /// Hook for handling exit codes.
     /// </summary>
-    protected virtual void WaitForExit(Process process)
-        => process.WaitForSuccess();
+    /// <param name="startInfo">The start info used to launch the process that has now exited.</param>
+    /// <param name="exitCode">The <see cref="Process.ExitCode"/>.</param>
+    /// <param name="message">An optional error message.</param>
+    /// <exception cref="ExitCodeException"><paramref name="exitCode"/> had a non-zero value.</exception>
+    protected virtual void HandleExitCode(ProcessStartInfo startInfo, int exitCode, string? message = null)
+    {
+        if (exitCode == 0) return;
+
+        if (string.IsNullOrEmpty(message))
+            throw new ExitCodeException(startInfo, exitCode);
+        else
+            throw new ExitCodeException(message, exitCode);
+    }
 
     /// <summary>
     /// Hook for handling stderr messages from the process.
