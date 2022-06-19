@@ -98,8 +98,7 @@ public static class ProcessUtils
     public static void WaitForSuccess(this Process process)
     {
         int exitCode = process.WaitForExitCode();
-        if (exitCode != 0)
-            throw new ExitCodeException(process.StartInfo.ToCommandLine(), exitCode);
+        if (exitCode != 0) throw new ExitCodeException(process.StartInfo, exitCode);
     }
 
     /// <summary>
