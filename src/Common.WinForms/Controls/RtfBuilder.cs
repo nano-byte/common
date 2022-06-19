@@ -17,11 +17,16 @@ public enum RtfColor
 }
 
 /// <summary>
-/// Helps build an RTF-formatted string.
+/// Builds an RTF-formatted string with paragraphs.
 /// </summary>
 public sealed class RtfBuilder
 {
     private readonly StringBuilder _builder = new();
+
+    /// <summary>
+    /// Indicates whether the builder is currently empty (contains no paragraphs).
+    /// </summary>
+    public bool IsEmpty => _builder.Length == 0;
 
     /// <summary>
     /// Appends a new paragraph.

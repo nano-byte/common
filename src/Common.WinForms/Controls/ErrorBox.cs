@@ -33,13 +33,16 @@ public sealed partial class ErrorBox : Form
         Log.Debug("Showing error box", exception);
 
         string[] messageLines = exception.GetMessageWithInner().SplitMultilineText();
-        string? logRtf = log?.ToString();
         using var errorBox = new ErrorBox
         {
             Text = Application.ProductName,
             labelMessage = {Text = messageLines[0]},
             labelDetails = {Text = StringUtils.Join(Environment.NewLine, messageLines.Skip(1))},
-            textLog = {Rtf = logRtf, Visible = !string.IsNullOrEmpty(logRtf)},
+            textLog =
+            {
+                Rtf = log?.ToString(),
+                Visible = log is {IsEmpty: false}
+            },
             ShowInTaskbar = owner == null
         };
 
