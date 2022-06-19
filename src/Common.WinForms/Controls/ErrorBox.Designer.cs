@@ -32,7 +32,7 @@ namespace NanoByte.Common.Controls
             this.textLog = new System.Windows.Forms.RichTextBox();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.labelInnerMessage = new System.Windows.Forms.Label();
+            this.labelDetails = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +90,7 @@ namespace NanoByte.Common.Controls
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Controls.Add(this.labelMessage, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.textLog, 0, 2);
-            this.tableLayoutPanel.Controls.Add(this.labelInnerMessage, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.labelDetails, 0, 1);
             this.tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 3;
@@ -100,16 +100,16 @@ namespace NanoByte.Common.Controls
             this.tableLayoutPanel.Size = new System.Drawing.Size(460, 198);
             this.tableLayoutPanel.TabIndex = 4;
             // 
-            // labelInnerMessage
+            // labelDetails
             // 
-            this.labelInnerMessage.AutoSize = true;
-            this.labelInnerMessage.Location = new System.Drawing.Point(3, 48);
-            this.labelInnerMessage.Name = "labelInnerMessage";
-            this.labelInnerMessage.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.labelInnerMessage.Size = new System.Drawing.Size(82, 19);
-            this.labelInnerMessage.TabIndex = 1;
-            this.labelInnerMessage.Text = "(Inner message)";
-            this.labelInnerMessage.Click += new System.EventHandler(this.label_Click);
+            this.labelDetails.AutoSize = true;
+            this.labelDetails.Location = new System.Drawing.Point(3, 48);
+            this.labelDetails.Name = "labelDetails";
+            this.labelDetails.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.labelDetails.Size = new System.Drawing.Size(82, 19);
+            this.labelDetails.TabIndex = 1;
+            this.labelDetails.Text = "(Inner message)";
+            this.labelDetails.Click += new System.EventHandler(this.label_Click);
             // 
             // ErrorBox
             // 
@@ -141,6 +141,6 @@ namespace NanoByte.Common.Controls
         private System.Windows.Forms.RichTextBox textLog;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.Label labelInnerMessage;
+        private System.Windows.Forms.Label labelDetails;
     }
 }
