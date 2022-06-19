@@ -14,11 +14,6 @@ public class ProcessLauncher : IProcessLauncher
     private readonly string _fileName;
     private readonly string? _arguments;
 
-    static ProcessLauncher()
-    {
-        ProcessUtils.SanitizeEnvironmentVariables();
-    }
-
     /// <summary>
     /// Prepares a new sub process.
     /// </summary>

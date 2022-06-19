@@ -159,7 +159,7 @@ public static class ProcessUtils
     }
 
     /// <summary>
-    /// Workaround for environment variable problems, such variable names that differ only in case when running on Windows.
+    /// Workaround for environment variable problems, such variable names that differ only in casing when running on Windows.
     /// </summary>
     /// <remarks>Call this before any access to <see cref="ProcessStartInfo.EnvironmentVariables"/> to avoid <see cref="ArgumentException"/>s.</remarks>
     public static void SanitizeEnvironmentVariables()
@@ -175,7 +175,7 @@ public static class ProcessUtils
             }
             catch (ArgumentException ex)
             {
-                Log.Warn("Ignoring environment variable '" + entry.Key + "' in this process due to problem: " + ex.Message);
+                Log.Warn($"Ignoring environment variable '{entry.Key}' in this process.", ex);
                 Environment.SetEnvironmentVariable((string)entry.Key, null);
             }
         }
