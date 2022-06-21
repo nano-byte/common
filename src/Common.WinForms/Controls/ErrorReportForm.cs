@@ -130,7 +130,8 @@ public sealed partial class ErrorReportForm : Form
             Cursor = Cursors.Default;
             if (uploadEventArgs.Error == null)
             {
-                Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + EncodingUtils.Utf8.GetString(uploadEventArgs.Result), MsgSeverity.Info);
+                string message = EncodingUtils.Utf8.GetString(uploadEventArgs.Result);
+                Msg.Inform(this, string.IsNullOrEmpty(message) ? Resources.ErrorReportSent : message, MsgSeverity.Info);
                 Close();
             }
             else
@@ -157,7 +158,8 @@ public sealed partial class ErrorReportForm : Form
             using var response = await httpClient.PostAsync(_uploadUri, content);
             response.EnsureSuccessStatusCode();
 
-            Msg.Inform(this, Resources.ErrorReportSent + Environment.NewLine + await response.Content.ReadAsStringAsync(), MsgSeverity.Info);
+            string message = await response.Content.ReadAsStringAsync();
+            Msg.Inform(this, string.IsNullOrWhiteSpace(message) ? Resources.ErrorReportSent : message, MsgSeverity.Info);
             Close();
         }
         catch (Exception ex)
