@@ -94,7 +94,7 @@
     <value>Λήψη {0}</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Αν επιθυμείτε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για την παροχή πρόσθετων πληροφοριών σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η συντριβή.</value>
     <comment>Manually overriden.</comment>
   </data>

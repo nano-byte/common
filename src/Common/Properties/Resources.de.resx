@@ -94,7 +94,7 @@
     <value>Herunterladen von {0}</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Wenn Sie möchten, können Sie in diesem Feld zusätzliche Informationen über das Problem angeben, z. B. eine Beschreibung dessen, was Sie gerade taten, als der Absturz auftrat.</value>
     <comment>Manually overriden.</comment>
   </data>

@@ -94,7 +94,7 @@
     <value>Descargando {0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Si lo desea, puede utilizar este campo para proporcionar información adicional sobre el problema, como una descripción de lo que estaba haciendo cuando se produjo el accidente.</value>
     <comment>Automatically translated.</comment>
   </data>

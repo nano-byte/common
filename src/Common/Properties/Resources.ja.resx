@@ -94,7 +94,7 @@
     <value>ダウンロード{0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>必要に応じて、このフィールドを使用して、クラッシュが発生したときに何をしていたかなど、問題についての追加情報を提供することができます。</value>
     <comment>Automatically translated.</comment>
   </data>

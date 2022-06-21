@@ -94,7 +94,7 @@
     <value>Scaricare {0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Se lo si desidera, è possibile utilizzare questo campo per fornire ulteriori informazioni sul problema, ad esempio una descrizione di ciò che si stava facendo quando si è verificato l'arresto anomalo.</value>
     <comment>Automatically translated.</comment>
   </data>

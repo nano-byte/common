@@ -94,7 +94,7 @@
     <value>Chargement {0}</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
     <comment>Automatically translated.</comment>
   </data>

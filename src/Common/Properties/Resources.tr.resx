@@ -94,7 +94,7 @@
     <value>{0} indiriliyor</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
     <comment>Manually overriden.</comment>
   </data>

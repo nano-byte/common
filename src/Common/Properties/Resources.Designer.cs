@@ -142,11 +142,11 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you whish, you can use this field to provide additional information about the problem, such as a description of what you were doing when the crash occurred..
+        ///   Looks up a localized string similar to If you wish, you can use this field to provide additional information about the problem, such as a description of what you were doing when the crash occurred..
         /// </summary>
-        public static string ErrorReporComment {
+        public static string ErrorReportComment {
             get {
-                return ResourceManager.GetString("ErrorReporComment", resourceCulture);
+                return ResourceManager.GetString("ErrorReportComment", resourceCulture);
             }
         }
         

@@ -94,7 +94,7 @@
     <value>Pobieranie danych z witryny {0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
+  <data name="ErrorReportComment" xml:space="preserve">
     <value>Jeśli chcesz, możesz użyć tego pola, aby podać dodatkowe informacje na temat problemu, np. opis czynności wykonywanych w momencie wystąpienia awarii.</value>
     <comment>Automatically translated.</comment>
   </data>
