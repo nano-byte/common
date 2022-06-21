@@ -43,6 +43,7 @@ public sealed partial class ErrorReportForm : Form
         Text = Resources.ErrorReport;
         infoLabel.Text = Resources.ErrorReportInfo;
         detailsLabel.Text = Resources.TechnicalDetails;
+        commentLabel.Text = Resources.Comment;
         commentBox.HintText = Resources.ErrorReporComment;
         buttonReport.Text = Resources.ErrorReportSend;
         buttonCancel.Text = Resources.ErrorReportCancel;
