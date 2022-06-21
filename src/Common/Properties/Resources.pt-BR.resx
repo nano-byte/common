@@ -94,16 +94,16 @@
     <value>Baixando {0}</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReportComment" xml:space="preserve">
-    <value>Se desejar, você pode usar este campo para fornecer informações adicionais sobre o problema, como uma descrição do que você estava fazendo quando ocorreu a falha.</value>
-    <comment>Manually overriden.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Reportar erro</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>&amp;Não reportar</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>Se desejar, você pode usar este campo para fornecer informações adicionais sobre o problema, como uma descrição do que você estava fazendo quando ocorreu a falha.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
