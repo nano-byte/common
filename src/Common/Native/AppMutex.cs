@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Runtime.Versioning;
 using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Native;
@@ -11,7 +10,6 @@ namespace NanoByte.Common.Native;
 /// No-op on non-Windows platforms.
 /// </summary>
 /// <remarks>Use <see cref="Mutex"/> or <see cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
-[SupportedOSPlatform("windows")]
 public sealed class AppMutex : IDisposable
 {
     private readonly List<IntPtr> _handles = new();
@@ -55,6 +53,8 @@ public sealed class AppMutex : IDisposable
     /// </summary>
     public void Dispose()
     {
+        if (!WindowsUtils.IsWindowsNT) return;
+
         foreach (var handle in _handles.Where(handle => handle != IntPtr.Zero))
             WindowsMutex.Close(handle);
         _handles.Clear();
