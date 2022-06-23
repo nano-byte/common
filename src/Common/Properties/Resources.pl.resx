@@ -94,16 +94,16 @@
     <value>Pobieranie danych z witryny {0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>Jeśli chcesz, możesz użyć tego pola, aby podać dodatkowe informacje na temat problemu, np. opis czynności wykonywanych w momencie wystąpienia awarii.</value>
-    <comment>Automatically translated.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Raport o błędach</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>Nie zgłaszać</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>Jeśli chcesz, możesz użyć tego pola do podania dodatkowych informacji o problemie, np. opisu czynności wykonywanych w momencie wystąpienia awarii.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">

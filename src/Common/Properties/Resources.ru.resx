@@ -94,16 +94,16 @@
     <value>Загрузка {0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>При желании вы можете использовать это поле для предоставления дополнительной информации о проблеме, например, описания того, что вы делали, когда произошел сбой.</value>
-    <comment>Automatically translated.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Отчет об ошибке</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>Не сообщать</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>При желании вы можете использовать это поле для предоставления дополнительной информации о проблеме, например, описания того, что вы делали, когда произошел сбой.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">

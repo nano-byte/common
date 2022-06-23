@@ -94,16 +94,16 @@
     <value>Se descarcă {0}</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>Dacă doriți, puteți utiliza acest câmp pentru a furniza informații suplimentare despre problemă, cum ar fi o descriere a ceea ce făceați în momentul în care s-a produs accidentul.</value>
-    <comment>Automatically translated.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Raport de eroare</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>Nu raportați</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>Dacă doriți, puteți utiliza acest câmp pentru a furniza informații suplimentare despre problemă, cum ar fi o descriere a ceea ce făceați în momentul în care s-a produs accidentul.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">

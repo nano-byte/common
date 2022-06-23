@@ -94,16 +94,16 @@
     <value>Λήψη {0}</value>
     <comment>Manually overriden.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>Αν επιθυμείτε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για την παροχή πρόσθετων πληροφοριών σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η συντριβή.</value>
-    <comment>Manually overriden.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Αναφορά σφάλματος</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>Καμμια αναφορα</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>Αν επιθυμείτε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για την παροχή πρόσθετων πληροφοριών σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η συντριβή.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -124,7 +124,7 @@
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
     <value>Απέτυχε να ανοίξει το υποκλειδί μητρώου '{0}' στο '{1}'.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>Απέτυχε η επαναφορά '{0}'.</value>
@@ -132,7 +132,7 @@
   </data>
   <data name="FailedToStart" xml:space="preserve">
     <value>Απέτυχε η εκκίνηση του '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>Το αρχείο που επρόκειτο να μεταφορτωθεί από {0} δεν έχει το αναμενόμενο μέγεθος. Υποτίθεται ότι είναι {1} bytes, αλλά στην πραγματικότητα ειναι {2} bytes.</value>
@@ -156,7 +156,7 @@
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
     <value>Η εκκίνηση του '{0}' απαιτεί δικαιώματα διαχειριστή.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Έχει υπερβεί το ανώτατο ποσό των στοιχείων της συλλογής.</value>
@@ -196,15 +196,15 @@
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}' εξήλθε με κωδικό εξόδου {1}.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
     <value>Μια διεργασία εξήλθε με μη αναμενόμενο κωδικό εξόδου.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Ανάγνωση αρχείου {0}</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>
@@ -228,7 +228,7 @@
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>Προσπάθεια ανάγνωσης από τη θέση {0}. Αυτή η θέση απέχει {1} bytes από την υποκείμενη θέση {2}, αλλά ο απομονωτής αναζήτησης μπορεί να δεχτεί διαφορά μόνο {3} bytes.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Κλείσιμο εφαρμογών</value>
@@ -272,7 +272,7 @@
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>Η δική σας έκδοση του .NET δεν υποστηρίζει το TLS 1.2. Αυτό μπορεί να προκαλέσει σφάλματα σύνδεσης κατά τη λήψη περιεχομένου μέσω HTTPS. Εκτελέστε το Windows Update για να εγκαταστήσετε τις απαραίτητες διορθώσεις.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Η διάταξη με το όνομα "{0}" δεν μπορεί να τοποθετηθει.</value>
@@ -280,7 +280,7 @@
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
     <value>Αδυναμία ανάγνωσης {0} bytes από τη ροή.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>

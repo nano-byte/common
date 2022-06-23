@@ -94,16 +94,16 @@
     <value>Downloaden van {0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>Als u wilt, kunt u dit veld gebruiken om extra informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
-    <comment>Automatically translated.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Fout rapport</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>Niet melden</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>Als u wilt, kunt u dit veld gebruiken om extra informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">

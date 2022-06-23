@@ -144,8 +144,8 @@
   <data name="Downloading" xml:space="preserve">
     <value>Downloading {0}</value>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>If you whish, you can use this field to provide additional information about the problem, such as a description of what you were doing when the crash occurred.</value>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>If you wish, you can use this field to provide additional information about the problem, such as a description of what you were doing when the crash occurred.</value>
   </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>Error report</value>

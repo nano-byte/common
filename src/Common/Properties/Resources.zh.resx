@@ -94,16 +94,16 @@
     <value>下载{0}</value>
     <comment>Automatically translated.</comment>
   </data>
-  <data name="ErrorReporComment" xml:space="preserve">
-    <value>如果你愿意，你可以使用这个字段来提供有关问题的额外信息，例如描述崩溃发生时你正在做什么。</value>
-    <comment>Automatically translated.</comment>
-  </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>错误报告</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
     <value>不要报告</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="ErrorReportComment" xml:space="preserve">
+    <value>如果你愿意，你可以使用这个字段来提供有关问题的额外信息，例如描述崩溃发生时你正在做什么。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
