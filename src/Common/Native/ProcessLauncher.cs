@@ -11,24 +11,24 @@ namespace NanoByte.Common.Native;
 /// </summary>
 public class ProcessLauncher : IProcessLauncher
 {
-    private readonly string _fileName;
-    private readonly string? _arguments;
+    protected readonly string FileName;
+    protected readonly string? Arguments;
 
     /// <summary>
-    /// Prepares a new sub process.
+    /// Creates a new process launcher.
     /// </summary>
     /// <param name="fileName">The file name of the executable to run.</param>
     /// <param name="arguments">The default arguments to always pass to the executable.</param>
     public ProcessLauncher(string fileName, string? arguments = null)
     {
-        _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
-        _arguments = arguments;
+        FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
+        Arguments = arguments;
     }
 
     /// <summary>
-    /// Prepares a new sub process.
+    /// Creates a new process launcher.
     /// </summary>
-    /// <param name="startInfo">The file name of the executable to run and default arguments to always pass. Other information from the <see cref="ProcessStartInfo"/> is ignored!</param>
+    /// <param name="startInfo">Extracts <see cref="ProcessStartInfo.FileName"/> and <see cref="ProcessStartInfo.Arguments"/>. Other options are ignored.</param>
     public ProcessLauncher(ProcessStartInfo startInfo)
         : this(startInfo.FileName, startInfo.Arguments)
     {}
@@ -38,14 +38,14 @@ public class ProcessLauncher : IProcessLauncher
         => GetStartInfo(arguments).Start();
 
     /// <inheritdoc/>
-    public void Run(params string[] arguments)
+    public virtual void Run(params string[] arguments)
     {
         var process = Start(arguments);
         HandleExitCode(process.StartInfo, process.WaitForExitCode());
     }
 
     /// <inheritdoc/>
-    public string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
+    public virtual string RunAndCapture(Action<StreamWriter>? onStartup, params string[] arguments)
     {
         var startInfo = GetStartInfo(arguments);
         startInfo.CreateNoWindow = true;
@@ -59,11 +59,9 @@ public class ProcessLauncher : IProcessLauncher
         var stderr = new StreamConsumer(process.StandardError);
 
         string? lastError = null;
-
         void ReadStderr()
         {
-            string? line;
-            while ((line = stderr.ReadLine()) != null)
+            while (stderr.ReadLine() is {} line)
             {
                 lastError = line;
                 OnStderr(line, stdin);
@@ -90,8 +88,8 @@ public class ProcessLauncher : IProcessLauncher
 
         return new()
         {
-            FileName = _fileName,
-            Arguments = string.IsNullOrEmpty(_arguments)
+            FileName = FileName,
+            Arguments = string.IsNullOrEmpty(Arguments)
                 ? arguments.JoinEscapeArguments()
                 : arguments + " " + arguments.JoinEscapeArguments(),
             UseShellExecute = false,
@@ -122,5 +120,5 @@ public class ProcessLauncher : IProcessLauncher
     /// <param name="line">The line written to stderr.</param>
     /// <param name="stdin">The stream writer providing access to stdin.</param>
     protected virtual void OnStderr(string line, StreamWriter stdin)
-        => Log.Warn($"{_fileName}: {line}");
+        => Log.Warn($"{FileName}: {line}");
 }
