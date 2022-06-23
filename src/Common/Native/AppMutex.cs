@@ -12,7 +12,7 @@ namespace NanoByte.Common.Native;
 /// </summary>
 /// <remarks>Use <see cref="Mutex"/> or <see cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
 [SupportedOSPlatform("windows")]
-public sealed class AppMutex
+public sealed class AppMutex : IDisposable
 {
     private readonly List<IntPtr> _handles = new();
 
@@ -20,7 +20,7 @@ public sealed class AppMutex
     /// Creates or opens a mutex to signal that an application is running.
     /// </summary>
     /// <param name="name">The name to be used as a mutex identifier.</param>
-    /// <returns>The handle for the mutex. Can be used to <see cref="Close"/> it again. Will automatically be released once the process terminates.</returns>
+    /// <returns>The handle for the mutex. Can be used to close it again. Will automatically be released once the process terminates.</returns>
     public static AppMutex Create([Localizable(false)] string name)
     {
         #region Sanity checks
@@ -53,7 +53,7 @@ public sealed class AppMutex
     /// <summary>
     /// Closes the mutex handle, allowing it to be released if no other instances are running.
     /// </summary>
-    public void Close()
+    public void Dispose()
     {
         foreach (var handle in _handles.Where(handle => handle != IntPtr.Zero))
             WindowsMutex.Close(handle);

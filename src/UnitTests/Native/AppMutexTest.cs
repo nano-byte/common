@@ -17,7 +17,7 @@ public class AppMutexTest
     }
 
     /// <summary>
-    /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create"/> and <see cref="AppMutex.Close"/> work correctly together.
+    /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create"/> and <see cref="AppMutex.Dispose"/> work correctly together.
     /// </summary>
     [SkippableFact]
     public void TestProbeCreateClose()
@@ -26,7 +26,7 @@ public class AppMutexTest
         AppMutex.Probe(mutexName).Should().BeFalse();
         var mutex = AppMutex.Create(mutexName);
         AppMutex.Probe(mutexName).Should().BeTrue();
-        mutex.Close();
+        mutex.Dispose();
         AppMutex.Probe(mutexName).Should().BeFalse();
     }
 }
