@@ -18,10 +18,18 @@ public sealed class TaskLabel : Label, IProgress<TaskSnapshot>
     /// <inheritdoc/>
     public void Report(TaskSnapshot value)
     {
-        // Ensure execution on GUI thread
-        if (InvokeRequired)
+        try
         {
-            BeginInvoke(new Action<TaskSnapshot>(Report), value);
+            // Ensure execution on GUI thread
+            if (InvokeRequired)
+            {
+                BeginInvoke(Report, value);
+                return;
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            Log.Debug("Workaround for race condition in Control.InvokeRequired", ex);
             return;
         }
 
