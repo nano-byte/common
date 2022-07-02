@@ -50,20 +50,25 @@ public static partial class Locations
         return codeBase ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
     }
 
-    /// <summary>Thread-specific override for <see cref="PortableBase"/>.</summary>
+#if NET20 || NET40 || NET45
     [ThreadStatic]
     private static string? _redirectBase;
+    private static string? RedirectBase { get => _redirectBase; set => _redirectBase = value; }
+#else
+    private static readonly AsyncLocal<string?> _redirectBase = new();
+    private static string? RedirectBase { get => _redirectBase.Value; set => _redirectBase.Value = value; }
+#endif
 
     /// <summary>
-    /// Temporarily overrides <see cref="IsPortable"/> and <see cref="PortableBase"/> for the current thread. Useful for unit tests.
+    /// Temporarily overrides <see cref="IsPortable"/> and <see cref="PortableBase"/> for the current thread or async flow. Useful for unit tests.
     /// </summary>
     /// <param name="path">The <see cref="PortableBase"/> value to set.</param>
     /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original values of <see cref="IsPortable"/> and <see cref="PortableBase"/>.</returns>
     /// <exception cref="InvalidOperationException">This method has already been called on this thread.</exception>
     public static IDisposable Redirect(string path)
     {
-        _redirectBase = path;
-        return new Disposable(() => _redirectBase = null);
+        RedirectBase = path;
+        return new Disposable(() => RedirectBase = null);
     }
 
     /// <summary>
@@ -82,13 +87,13 @@ public static partial class Locations
     ///   <para>When portable mode is active files are stored and loaded from <see cref="PortableBase"/> instead of the user profile and system directories.</para>
     /// </remarks>
     public static bool IsPortable
-        => _isPortable || _redirectBase != null;
+        => _isPortable || RedirectBase != null;
 
     /// <summary>
     /// The directory used for storing files if <see cref="IsPortable"/> is <c>true</c>.
     /// </summary>
     public static string PortableBase
-        => _redirectBase ?? InstallBase;
+        => RedirectBase ?? InstallBase;
 
     /// <summary>
     /// Returns the value of an environment variable or a default value if it isn't set.
