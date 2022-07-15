@@ -53,12 +53,20 @@ public class SeekBufferStreamTest
     }
 
     [Fact]
-    public void CannotSeekForwardsTooFar()
+    public void CanSekForwardsBeyondBuffer()
     {
         var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
 
-        stream.Seek(4, SeekOrigin.Current);
-        stream.Invoking(x => x.Read(2))
-              .Should().Throw<IOException>();
+        stream.Seek(3, SeekOrigin.Current);
+        stream.Read(2).Should().Equal(4, 5);
+    }
+
+    [Fact]
+    public void CanSekForwardsWithZeroBuffer()
+    {
+        var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 0);
+
+        stream.Seek(3, SeekOrigin.Current);
+        stream.Read(2).Should().Equal(4, 5);
     }
 }

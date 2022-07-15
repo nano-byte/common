@@ -263,7 +263,7 @@ public static class StreamUtils
     /// Adds seek buffering to a stream unless it already <see cref="Stream.CanSeek"/>.
     /// </summary>
     /// <param name="stream">The stream.</param>
-    /// <param name="bufferSize">The maximum number of bytes to buffer for seeking.</param>
+    /// <param name="bufferSize">The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</param>
     [Pure]
     public static Stream WithSeekBuffer(this Stream stream, int bufferSize = SeekBufferStream.DefaultBufferSize)
     {

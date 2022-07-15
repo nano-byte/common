@@ -12,7 +12,7 @@ namespace NanoByte.Common.Streams;
 public sealed class SeekBufferStream : DelegatingStream
 {
     /// <summary>
-    /// The default for the maximum number of bytes to buffer for seeking.
+    /// The default for the maximum number of bytes to buffer for seeking backwards.
     /// </summary>
     public const int DefaultBufferSize = 256 * 1024;
 
@@ -23,11 +23,12 @@ public sealed class SeekBufferStream : DelegatingStream
     /// Creates a new seek buffer stream.
     /// </summary>
     /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
-    /// <param name="bufferSize">The maximum number of bytes to buffer for seeking.</param>
+    /// <param name="bufferSize">The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</param>
     public SeekBufferStream(Stream underlyingStream, int bufferSize = DefaultBufferSize)
         : base(underlyingStream)
     {
         if (!underlyingStream.CanRead) throw new ArgumentException("The underlying stream does not support reading.", nameof(underlyingStream));
+        if (bufferSize < 0) throw new ArgumentOutOfRangeException(nameof(bufferSize));
 
         _buffer = new(bufferSize);
     }
@@ -133,7 +134,7 @@ public sealed class SeekBufferStream : DelegatingStream
     private bool TryReadFromBuffer(Span<byte> output, out int read)
     {
         long longDiff = Position - _underlyingPosition;
-        if (Math.Abs(longDiff) > _buffer.Length)
+        if (-longDiff > _buffer.Length)
             throw new IOException(string.Format(Resources.SeekOffsetTooLarge, Position, longDiff, _underlyingPosition, _buffer.Length));
         int diff = (int)longDiff;
 
@@ -164,13 +165,17 @@ public sealed class SeekBufferStream : DelegatingStream
     /// <summary>
     /// The maximum number of bytes that may be read consecutively.
     /// </summary>
-    private int MaxRead => _buffer.Length - _nextWriteIndex;
+    private int MaxRead
+        => _buffer.Length == 0
+            ? int.MaxValue
+            : _buffer.Length - _nextWriteIndex;
 
     /// <summary>
     /// Writes <paramref name="data"/> to the buffer.
     /// </summary>
     private void WriteToBuffer(ReadOnlySpan<byte> data)
     {
+        if (_buffer.Length == 0) return;
         data.CopyTo(_buffer.Span[_nextWriteIndex..]);
         _nextWriteIndex = (_nextWriteIndex + data.Length).Modulo(_buffer.Length);
     }
