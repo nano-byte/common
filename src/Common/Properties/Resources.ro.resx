@@ -75,7 +75,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Comentarii:</value>
+    <value>Comentariu:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>A încercat să citească din poziția {0}. Aceasta se află la {1} octeți distanță de poziția de bază a fluxului {2}, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
+    <value>A încercat să citească din poziția {0}. Această poziție este la {1} octeți distanță de poziția de bază a fluxului {2}, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

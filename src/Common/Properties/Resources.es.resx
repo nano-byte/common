@@ -79,7 +79,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Copiar archivos</value>
+    <value>Copia de archivos</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -123,7 +123,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Error al abrir la subclave del registro '{0}' en '{1}'.</value>
+    <value>Fallo al abrir la subclave del registro '{0}' en '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">

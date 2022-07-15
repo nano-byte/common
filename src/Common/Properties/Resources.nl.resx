@@ -139,7 +139,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Het bestand "{0}" kon niet worden gevonden.</value>
+    <value>Het bestand "{0}" kon niet gevonden worden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
