@@ -49,8 +49,8 @@ public static class CollectionExtensions
     /// <summary>
     /// Removes multiple elements from the collection.
     /// </summary>
-    /// <seealso cref="List{T}.RemoveRange"/>
-    public static void RemoveRange<TCollection, TElements>(this ICollection<TCollection> collection, [InstantHandle] IEnumerable<TElements> elements)
+    /// <returns><c>true</c> if any elements where removed.</returns>
+    public static bool Remove<TCollection, TElements>(this ICollection<TCollection> collection, [InstantHandle] IEnumerable<TElements> elements)
         where TElements : TCollection
     {
         #region Sanity checks
@@ -58,8 +58,10 @@ public static class CollectionExtensions
         if (elements == null) throw new ArgumentNullException(nameof(elements));
         #endregion
 
+        bool removedAny = false;
         foreach (var element in elements)
-            collection.Remove(element);
+            removedAny |= collection.Remove(element);
+        return removedAny;
     }
 
     /// <summary>
