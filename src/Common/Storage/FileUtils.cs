@@ -17,6 +17,25 @@ public static class FileUtils
 {
     #region Paths
     /// <summary>
+    /// Determines whether two file-system paths point to the same location.
+    /// </summary>
+    /// <remarks>Applies path normalization. Does not resolve symlinks. Case-insensitive on Windows and macOS.</remarks>
+    [Pure]
+    public static bool PathEquals(string? path1, string? path2)
+    {
+        try
+        {
+            path1 = path1?.To(Path.GetFullPath);
+            path2 = path2?.To(Path.GetFullPath);
+        }
+        catch (ArgumentException) {}
+
+        return WindowsUtils.IsWindows || UnixUtils.IsMacOSX
+            ? StringUtils.EqualsIgnoreCase(path1, path2)
+            : path1 == path2;
+    }
+
+    /// <summary>
     /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
     /// </summary>
     [Pure]

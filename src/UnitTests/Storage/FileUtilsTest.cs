@@ -12,6 +12,40 @@ namespace NanoByte.Common.Storage;
 public class FileUtilsTest
 {
     [Fact]
+    public void TestPathEqualsAbsolutePath()
+        => FileUtils.PathEquals(Locations.InstallBase, Locations.InstallBase).Should().BeTrue();
+
+    [Fact]
+    public void TestPathEqualsRelativePath()
+        => FileUtils.PathEquals("abc", Path.Combine("xyz", "..", "abc")).Should().BeTrue();
+
+    [Fact]
+    public void TestPathEqualsWorkingDirectory()
+        => FileUtils.PathEquals("abc", Path.Combine(Directory.GetCurrentDirectory(), "abc")).Should().BeTrue();
+
+    [Fact]
+    public void TestPathEqualsDirectorySeparator()
+        => FileUtils.PathEquals("abc/def", Path.Combine("abc", "def")).Should().BeTrue();
+
+    [SkippableFact]
+    public void TestPathEqualsCaseSensitive()
+    {
+        Skip.If(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Windows and macOS use case-insensitive paths");
+        FileUtils.PathEquals("abc", "ABC").Should().BeFalse();
+    }
+
+    [SkippableFact]
+    public void TestPathEqualsCaseInsensitive()
+    {
+        Skip.IfNot(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Only Windows and macOS use case-insensitive paths");
+        FileUtils.PathEquals("abc", "ABC").Should().BeTrue();
+    }
+
+    [Fact]
+    public void TestPathEqualsFalse()
+        => FileUtils.PathEquals("abc", "xyz").Should().BeFalse();
+
+    [Fact]
     public void TestToNativePath()
         => "a/b".ToNativePath()
                 .Should().Be(Path.Combine("a", "b"));
