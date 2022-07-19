@@ -30,8 +30,7 @@ public static class CollectionExtensions
     /// <summary>
     /// Adds multiple elements to the collection.
     /// </summary>
-    /// <seealso cref="List{T}.AddRange"/>
-    public static void AddRange<TCollection, TElements>(this ICollection<TCollection> collection, [InstantHandle] IEnumerable<TElements> elements)
+    public static void Add<TCollection, TElements>(this ICollection<TCollection> collection, [InstantHandle] IEnumerable<TElements> elements)
         where TElements : TCollection
     {
         #region Sanity checks
@@ -39,8 +38,12 @@ public static class CollectionExtensions
         if (elements == null) throw new ArgumentNullException(nameof(elements));
         #endregion
 
-        foreach (var element in elements)
-            collection.Add(element);
+        if (collection is List<TElements> list) list.AddRange(elements);
+        else
+        {
+            foreach (var element in elements)
+                collection.Add(element);
+        }
     }
 
     /// <summary>
