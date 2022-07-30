@@ -171,6 +171,7 @@ public static class ExceptionUtils
     /// <summary>
     /// Applies an operation for the first possible element of a collection.
     /// If the operation succeeds the remaining elements are ignored. If the operation fails it is repeated for the next element.
+    /// If the operation fails with <see cref="OperationCanceledException"/>s no further elements are tried.
     /// </summary>
     /// <typeparam name="T">The type of elements to operate on.</typeparam>
     /// <param name="elements">The elements to apply the action for.</param>
@@ -194,7 +195,7 @@ public static class ExceptionUtils
                 action(enumerator.Current);
                 return;
             }
-            catch (Exception ex) when (enumerator.MoveNext())
+            catch (Exception ex) when (ex is not OperationCanceledException && enumerator.MoveNext())
             {
                 Log.Warn(ex.Message, ex);
             }
