@@ -51,7 +51,8 @@ namespace NanoByte.Common.Controls
             // pictureBox
             // 
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox.Image = global::NanoByte.Common.Properties.ImageResources.Warning;
+            this.pictureBox.BackgroundImage = global::NanoByte.Common.Properties.ImageResources.Warning;
+            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox.Location = new System.Drawing.Point(8, 78);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(250, 239);
