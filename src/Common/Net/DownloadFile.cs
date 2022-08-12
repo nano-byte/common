@@ -6,7 +6,10 @@ using NanoByte.Common.Info;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NanoByte.Common.Threading;
-#pragma warning disable 618
+
+#if NET
+using System.Net.Http;
+#endif
 
 namespace NanoByte.Common.Net;
 
@@ -85,9 +88,14 @@ public class DownloadFile : TaskBase
         try
         {
             State = TaskState.Header;
+#if NET
+            using var client = new HttpClient();
+            using var response = client.SendEnsureSuccess(request, CancellationToken);
+#else
             var responseHandler = request.BeginGetResponse(null!, null!);
             responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
             using var response =  request.EndGetResponse(responseHandler);
+#endif
 
             CancellationToken.ThrowIfCancellationRequested();
             HandleHeaders(response);
@@ -95,8 +103,12 @@ public class DownloadFile : TaskBase
             State = TaskState.Data;
             ContentStarted = true;
             using var stream = new ProgressStream(
+#if NET
+                response.Content.ReadAsStream(CancellationToken),
+#else
                 // ReSharper disable once AssignNullToNotNullAttribute
                 response.GetResponseStream(),
+#endif
                 new SynchronousProgress<long>(x => UnitsProcessed = x),
                 CancellationToken);
             if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
@@ -121,6 +133,21 @@ public class DownloadFile : TaskBase
         }
     }
 
+#if NET
+    private HttpRequestMessage BuildRequest()
+    {
+        try
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, Source)
+            {
+                Headers =
+                {
+                    UserAgent = {new(AppInfo.Current.Name ?? "dotnet", AppInfo.Current.Version)},
+                    CacheControl = new() {NoCache = NoCache},
+                    Authorization = _credentials?.ToBasicAuth()
+                }
+            };
+#else
     private WebRequest BuildRequest()
     {
         try
@@ -132,6 +159,7 @@ public class DownloadFile : TaskBase
                 httpRequest.Credentials = _credentials;
                 if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             }
+#endif
 
             return request;
         }
@@ -144,10 +172,17 @@ public class DownloadFile : TaskBase
         #endregion
     }
 
+#if NET
+    private void HandleHeaders(HttpResponseMessage response)
+    {
+        if (response.RequestMessage?.RequestUri is {} source) Source = source;
+        if (response.Content.Headers.ContentLength is {} contentLength)
+#else
     private void HandleHeaders(WebResponse response)
     {
         Source = response.ResponseUri;
         if (response.ContentLength is var contentLength and not -1)
+#endif
         {
             if (UnitsTotal == -1)
                 UnitsTotal = contentLength;
