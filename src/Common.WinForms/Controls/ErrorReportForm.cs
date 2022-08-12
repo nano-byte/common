@@ -158,7 +158,7 @@ public sealed partial class ErrorReportForm : Form
             using var response = await httpClient.PostAsync(_uploadUri, content);
             response.EnsureSuccessStatusCode();
 
-            string message = await response.Content.ReadAsStringAsync();
+            string message = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
             Msg.Inform(this, string.IsNullOrWhiteSpace(message) ? Resources.ErrorReportSent : message, MsgSeverity.Info);
             Close();
         }

@@ -92,13 +92,20 @@ public class DownloadFile : TaskBase
         try
         {
             State = TaskState.Header;
-            using var response = GetResponse(request);
+            var responseHandler = request.BeginGetResponse(null!, null!);
+            responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
+            using var response =  request.EndGetResponse(responseHandler);
+
+            CancellationToken.ThrowIfCancellationRequested();
             HandleHeaders(response);
 
             State = TaskState.Data;
             ContentStarted = true;
-            // ReSharper disable once AssignNullToNotNullAttribute
-            using var stream = new ProgressStream(response.GetResponseStream(), new SynchronousProgress<long>(x => UnitsProcessed = x), CancellationToken);
+            using var stream = new ProgressStream(
+                // ReSharper disable once AssignNullToNotNullAttribute
+                response.GetResponseStream(),
+                new SynchronousProgress<long>(x => UnitsProcessed = x),
+                CancellationToken);
             if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
             _callback(stream);
         }
@@ -132,6 +139,7 @@ public class DownloadFile : TaskBase
                 httpRequest.Credentials = _credentials;
                 if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             }
+
             return request;
         }
         #region Error handling
@@ -143,26 +151,20 @@ public class DownloadFile : TaskBase
         #endregion
     }
 
-    private WebResponse GetResponse(WebRequest request)
-    {
-        var responseHandler = request.BeginGetResponse(null!, null!);
-        responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
-        return request.EndGetResponse(responseHandler);
-    }
-
     private void HandleHeaders(WebResponse response)
     {
-        CancellationToken.ThrowIfCancellationRequested();
-
         ResponseHeaders = response.Headers;
 
-        // Update the source URL to reflect changes made by HTTP redirection
         Source = response.ResponseUri;
+        if (response.ContentLength is var contentLength and not -1)
+        {
+            if (UnitsTotal == -1)
+                UnitsTotal = contentLength;
+            else if (UnitsTotal != contentLength)
+                throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, UnitsTotal, contentLength));
 
-        if (UnitsTotal == -1 || response.ContentLength == -1) UnitsTotal = response.ContentLength;
-        else if (UnitsTotal != response.ContentLength)
-            throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, UnitsTotal, response.ContentLength));
-        if (response.ContentLength > BytesMaximum)
-            throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, BytesMaximum, response.ContentLength));
+            if (contentLength > BytesMaximum)
+                throw new WebException(string.Format(Resources.FileNotExpectedSize, Source, BytesMaximum, contentLength));
+        }
     }
 }
