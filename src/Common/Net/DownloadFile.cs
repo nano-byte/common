@@ -39,13 +39,6 @@ public class DownloadFile : TaskBase
     public bool NoCache { get; set; }
 
     /// <summary>
-    /// The HTTP header data returned by the server for the download request. An empty collection in case of an FTP download.
-    /// </summary>
-    /// <remarks>This value is always <c>null</c> until <see cref="TaskState.Data"/> has been reached.</remarks>
-    [Browsable(false)]
-    public WebHeaderCollection? ResponseHeaders { get; private set; }
-
-    /// <summary>
     /// Indicates whether the server has started sending content.
     /// </summary>
     public bool ContentStarted { get; private set; }
@@ -153,8 +146,6 @@ public class DownloadFile : TaskBase
 
     private void HandleHeaders(WebResponse response)
     {
-        ResponseHeaders = response.Headers;
-
         Source = response.ResponseUri;
         if (response.ContentLength is var contentLength and not -1)
         {
