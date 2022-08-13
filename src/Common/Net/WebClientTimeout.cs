@@ -1,9 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if !NET
 using System.Net;
 using NanoByte.Common.Info;
-#pragma warning disable 618
 
 namespace NanoByte.Common.Net;
 
@@ -49,3 +49,4 @@ public class WebClientTimeout : WebClient
         return request!;
     }
 }
+#endif
