@@ -127,7 +127,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Nie powiodło się przywrócenie stanu poprzedniego '{0}'.</value>
+    <value>Failed to rollback '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
