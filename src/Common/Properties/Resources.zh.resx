@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>试图从位置{0} 读取。这与底层数据流的位置{2} ，相差了{1} 字节，但寻找缓冲区只能容纳{3} 字节的差异。</value>
+    <value>试图从位置{0} 读取。这与底层数据流的位置{2} ，相差了{1} 字节，但寻求缓冲区只能容纳{3} 字节的差异。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
