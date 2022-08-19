@@ -10,23 +10,10 @@ namespace NanoByte.Common;
 /// <summary>
 /// Represents a point in time as the number of seconds since the Unix epoch (Unix timestamp).
 /// </summary>
+/// <param name="Seconds">The number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).</param>
 [Serializable]
-public struct UnixTime : ISerializable, IComparable<UnixTime>, IEquatable<UnixTime>
+public readonly record struct UnixTime(long Seconds) : ISerializable, IComparable<UnixTime>
 {
-    /// <summary>
-    /// The number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).
-    /// </summary>
-    public long Seconds { get; }
-
-    /// <summary>
-    /// Creates a new Unix timestamp.
-    /// </summary>
-    /// <param name="seconds">The number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).</param>
-    public UnixTime(long seconds)
-    {
-        Seconds = seconds;
-    }
-
     private UnixTime(SerializationInfo info, StreamingContext context)
         : this(info.GetInt64(nameof(Seconds)))
     {}
@@ -97,20 +84,6 @@ public struct UnixTime : ISerializable, IComparable<UnixTime>, IEquatable<UnixTi
     /// <inheritdoc/>
     public int CompareTo(UnixTime other)
         => Seconds.CompareTo(other.Seconds);
-
-    /// <inheritdoc/>
-    public bool Equals(UnixTime other)
-        => Seconds == other.Seconds;
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
-        => obj is UnixTime other && Equals(other);
-
-    public static bool operator ==(UnixTime t1, UnixTime t2)
-        => t1.Equals(t2);
-
-    public static bool operator !=(UnixTime t1, UnixTime t2)
-        => !t1.Equals(t2);
 
     /// <inheritdoc/>
     public override int GetHashCode()
