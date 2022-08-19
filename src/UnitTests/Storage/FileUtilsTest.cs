@@ -250,7 +250,7 @@ public class FileUtilsTest
         Directory.CreateDirectory(sub);
         FileUtils.Touch(file2);
 
-        FileUtils.GetFilesRecursive(tempDir).Should().Equal(file1, file2);
+        FileUtils.GetFilesRecursive(tempDir).Should().BeEquivalentTo(file1, file2);
     }
 
     [Fact]
