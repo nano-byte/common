@@ -11,15 +11,29 @@ public class ArrayUtilsTest
     [Fact]
     public void TestAppend()
     {
-        var strings = new[] {"A", "B"};
-        strings.Append("C").Should().Equal("A", "B", "C");
+        new[] {"A", "B"}.Append("C")
+                        .Should().Equal("A", "B", "C");
     }
 
     [Fact]
     public void TestPrepend()
     {
-        var strings = new[] {"B", "C"};
-        strings.Prepend("A").Should().Equal("A", "B", "C");
+        new[] {"B", "C"}.Prepend("A")
+                        .Should().Equal("A", "B", "C");
+    }
+
+    [Fact]
+    public void TestConcat()
+    {
+        new[] {"A", "B"}.Concat(new []{"C", "D"})
+                        .Should().Equal("A", "B", "C", "D");
+    }
+
+    [Fact]
+    public void TestConcatParams()
+    {
+        ArrayUtils.Concat(new[] { "A", "B" }, new[] { "C", "D" }, new[] { "E", "F" })
+                  .Should().Equal("A", "B", "C", "D", "E", "F");
     }
 
     [Fact]

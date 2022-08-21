@@ -41,6 +41,45 @@ public static class ArrayUtils
     }
 
     /// <summary>
+    /// Concatenates two array.
+    /// </summary>
+    [Pure]
+    public static T[] Concat<T>(this T[] first, T[] second)
+    {
+        #region Sanity checks
+        if (first == null) throw new ArgumentNullException(nameof(first));
+        if (second == null) throw new ArgumentNullException(nameof(second));
+        #endregion
+
+        var result = new T[first.Length + second.Length];
+        first.CopyTo(result, 0);
+        second.CopyTo(result, first.Length);
+
+        return result;
+    }
+
+    /// <summary>
+    /// Concatenates multiple arrays.
+    /// </summary>
+    [Pure]
+    public static T[] Concat<T>(params T[][] arrays)
+    {
+        #region Sanity checks
+        if (arrays == null) throw new ArgumentNullException(nameof(arrays));
+        #endregion
+
+        var result = new T[arrays.Sum(x => x.Length)];
+        int offset = 0;
+        foreach (var array in arrays)
+        {
+            array.CopyTo(result, offset);
+            offset += array.Length;
+        }
+
+        return result;
+    }
+
+    /// <summary>
     /// Determines whether two arrays contain the same elements in the same order.
     /// </summary>
     /// <param name="first">The first of the two collections to compare.</param>
