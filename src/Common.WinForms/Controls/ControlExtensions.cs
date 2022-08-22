@@ -1,6 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using static System.Math;
+
 namespace NanoByte.Common.Controls;
 
 /// <summary>
@@ -63,16 +65,10 @@ public static class ControlExtensions
         if (control == null) throw new ArgumentNullException(nameof(control));
         #endregion
 
-        if (control.CurrentAutoScaleDimensions is { Width: < 0 } or { Height: < 0 })
-        {
-            Log.Debug("Unable to determine current auto-scale dimensions");
-            return new(1, 1);
-        }
-
         return control.AutoScaleMode switch
         {
-            AutoScaleMode.Font => new(control.CurrentAutoScaleDimensions.Width / 6, control.CurrentAutoScaleDimensions.Height / 13),
-            AutoScaleMode.Dpi => new(control.CurrentAutoScaleDimensions.Width / 96, control.CurrentAutoScaleDimensions.Height / 96),
+            AutoScaleMode.Font => new(Max(1, control.CurrentAutoScaleDimensions.Width / 6), Max(1, control.CurrentAutoScaleDimensions.Height / 13)),
+            AutoScaleMode.Dpi => new(Max(1, control.CurrentAutoScaleDimensions.Width / 96), Max(1, control.CurrentAutoScaleDimensions.Height / 96)),
             _ => new(1, 1)
         };
     }
