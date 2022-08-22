@@ -102,10 +102,7 @@ public static partial class Locations
     /// <param name="defaultValue">The default value to return if the environment variable was not set.</param>
     /// <returns>The value of the environment variable or <paramref name="defaultValue"/>.</returns>
     private static string GetEnvironmentVariable(string variable, string defaultValue)
-    {
-        string? value = Environment.GetEnvironmentVariable(variable);
-        return string.IsNullOrEmpty(value) ? defaultValue : value;
-    }
+        => Environment.GetEnvironmentVariable(variable) is {Length: > 0} value ? value : defaultValue;
 
     #region ACL Security
     /// <summary>

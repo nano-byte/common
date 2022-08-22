@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Drawing;
+using static System.Math;
 
 #if !NET20 && !NET40
 using System.Runtime.CompilerServices;
@@ -44,7 +45,7 @@ public static class MathUtils
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public static bool EqualsTolerance(this float a, float b, float tolerance = 0.00001f)
-        => Math.Abs(a - b) <= tolerance;
+        => Abs(a - b) <= tolerance;
 
     /// <summary>
     /// Compares two floating-point values for equality, allowing for a certain <paramref name="tolerance"/>.
@@ -53,13 +54,13 @@ public static class MathUtils
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public static bool EqualsTolerance(this double a, double b, double tolerance = 0.00001)
-        => Math.Abs(a - b) <= tolerance;
+        => Abs(a - b) <= tolerance;
 
     /// <summary>
     /// Multiplies a <see cref="Size"/> with a <see cref="SizeF"/> and then rounds the components to integer values.
     /// </summary>
     public static Size MultiplyAndRound(this Size size, SizeF factor)
         => new(
-            (int)Math.Round(size.Width * factor.Width),
-            (int)Math.Round(size.Height * factor.Height));
+            (int)Round(size.Width * factor.Width),
+            (int)Round(size.Height * factor.Height));
 }

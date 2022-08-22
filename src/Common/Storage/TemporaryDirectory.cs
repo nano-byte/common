@@ -37,26 +37,25 @@ public class TemporaryDirectory : IDisposable
     /// </summary>
     public virtual void Dispose()
     {
-        if (Directory.Exists(Path))
-        {
-            try
-            {
-                // Write protection might prevent a directory from being deleted (especially on Unixoid systems)
-                FileUtils.DisableWriteProtection(Path);
-            }
-            catch (IOException)
-            {}
-            catch (UnauthorizedAccessException)
-            {}
+        if (!Directory.Exists(Path)) return;
 
-            try
-            {
-                Directory.Delete(Path, recursive: true);
-            }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
-            {
-                Log.Warn("Failed to delete temporary directory: " + Path, ex);
-            }
+        try
+        {
+            // Write protection might prevent a directory from being deleted (especially on Unixoid systems)
+            FileUtils.DisableWriteProtection(Path);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            Log.Info($"Failed to disable write protection for {Path}", ex);
+        }
+
+        try
+        {
+            Directory.Delete(Path, recursive: true);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            Log.Warn("Failed to delete temporary directory: " + Path, ex);
         }
     }
 }
