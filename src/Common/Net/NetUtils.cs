@@ -8,6 +8,10 @@ using System.Runtime.InteropServices;
 using System.Security;
 using NanoByte.Common.Native;
 
+#if NET
+using System.Net.Http;
+#endif
+
 namespace NanoByte.Common.Net;
 
 /// <summary>
@@ -21,14 +25,22 @@ public static class NetUtils
     /// <remarks>Uses classic Linux environment variables: http_proxy, http_proxy_user, http_proxy_pass</remarks>
     public static void ApplyProxy()
     {
-        string? httpProxy = Environment.GetEnvironmentVariable("http_proxy");
-        string? httpProxyUser = Environment.GetEnvironmentVariable("http_proxy_user");
-        string? httpProxyPass = Environment.GetEnvironmentVariable("http_proxy_pass");
-        if (!string.IsNullOrEmpty(httpProxy))
+        string? GetEnvVar(string name)
+            => Environment.GetEnvironmentVariable(name)
+            ?? Environment.GetEnvironmentVariable(name.ToUpperInvariant());
+
+        if (GetEnvVar("http_proxy") is {Length: > 0} address)
         {
-            WebRequest.DefaultWebProxy = string.IsNullOrEmpty(httpProxyUser)
-                ? new WebProxy(httpProxy)
-                : new WebProxy(httpProxy) {Credentials = new NetworkCredential(httpProxyUser, httpProxyPass)};
+            var proxy = new WebProxy(address);
+
+            if (GetEnvVar("http_proxy_user") is {Length: > 0} username
+             && GetEnvVar("http_proxy_pass") is {Length: > 0} password)
+                proxy.Credentials = new NetworkCredential(username, password);
+
+            WebRequest.DefaultWebProxy = proxy;
+#if NET
+            HttpClient.DefaultProxy = proxy;
+#endif
         }
     }
 
