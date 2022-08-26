@@ -480,12 +480,13 @@ public static class FileUtils
             directory.Walk(
                 dir =>
                 {
+                    if (UnixUtils.IsSymlink(dir.FullName)) return; // Cannot set permissions on symlinks
                     if (enable) UnixUtils.MakeReadOnly(dir.FullName);
                     else UnixUtils.MakeWritable(dir.FullName);
                 },
                 file =>
                 {
-                    if (UnixUtils.IsSymlink(file.FullName)) return; // Cannot set permissions on a POSIX symlink
+                    if (UnixUtils.IsSymlink(file.FullName)) return; // Cannot set permissions on symlinks
                     if (enable) UnixUtils.MakeReadOnly(file.FullName);
                     else UnixUtils.MakeWritable(file.FullName);
                 });
