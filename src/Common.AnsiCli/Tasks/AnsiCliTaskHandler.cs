@@ -13,30 +13,8 @@ namespace NanoByte.Common.Tasks;
 public class AnsiCliTaskHandler : CliTaskHandler
 {
     /// <inheritdoc/>
-    protected override void LogHandler(LogSeverity severity, string message, Exception? exception)
-    {
-        void WriteLine(ConsoleColor color)
-            => AnsiCli.Error.WriteLine(message, new Style(color));
-
-        switch (severity)
-        {
-            case LogSeverity.Debug when Verbosity >= Verbosity.Debug:
-                WriteLine(ConsoleColor.Blue);
-                break;
-            case LogSeverity.Info when Verbosity >= Verbosity.Verbose:
-                WriteLine(ConsoleColor.Green);
-                break;
-            case LogSeverity.Warn:
-                WriteLine(ConsoleColor.DarkYellow);
-                break;
-            case LogSeverity.Error:
-                WriteLine(ConsoleColor.Red);
-                break;
-        }
-
-        if (exception != null && Verbosity >= Verbosity.Debug)
-            AnsiCli.Error.WriteLine(exception.ToString());
-    }
+    protected override void DisplayLogEntry(LogSeverity severity, string message)
+        => AnsiCli.Error.WriteLine(message, new Style(GetLogColor(severity)));
 
     /// <inheritdoc />
     public override ICredentialProvider CredentialProvider

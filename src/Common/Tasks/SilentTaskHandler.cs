@@ -15,6 +15,12 @@ public class SilentTaskHandler : TaskHandlerBase
     }
 
     /// <summary>
+    /// Does nothing.
+    /// </summary>
+    protected override void DisplayLogEntry(LogSeverity severity, string message)
+    {}
+
+    /// <summary>
     /// Always returns <paramref name="defaultAnswer"/>.
     /// </summary>
     protected override bool AskInteractive(string question, bool defaultAnswer)
@@ -29,7 +35,7 @@ public class SilentTaskHandler : TaskHandlerBase
 
     /// <inheritdoc/>
     public override void Error(Exception exception)
-        => Log.Error(exception.Message, exception);
+        => Log.Error(exception);
 
     /// <summary>
     /// Cancels currently running <see cref="ITask"/>s.

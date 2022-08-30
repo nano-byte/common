@@ -22,7 +22,7 @@ public static class WaitHandleExtensions
     /// <param name="cancellationToken">Used to cancel waiting for the handle.</param>
     /// <exception cref="TimeoutException"><paramref name="millisecondsTimeout"/> elapsed without the handle being signalled.</exception>
     /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was signaled while waiting for the handle.</exception>
-    /// <remarks>Automatically handles <see cref="System.Threading.AbandonedMutexException"/> with <see cref="Log.Warn"/>.</remarks>
+    /// <remarks>Automatically handles <see cref="System.Threading.AbandonedMutexException"/> with <see cref="Log.Warn(string,System.Exception?)"/>.</remarks>
     public static void WaitOne(this WaitHandle handle, CancellationToken cancellationToken, int millisecondsTimeout = -1)
     {
         try

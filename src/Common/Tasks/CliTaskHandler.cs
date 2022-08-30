@@ -28,8 +28,6 @@ public class CliTaskHandler : TaskHandlerBase
             // Ignore problems caused by unusual terminal emulators
         }
         #endregion
-
-        Log.Handler += LogHandler;
     }
 
     /// <summary>
@@ -39,7 +37,6 @@ public class CliTaskHandler : TaskHandlerBase
     {
         try
         {
-            Log.Handler -= LogHandler;
             Console.CancelKeyPress -= CancelKeyPressHandler;
         }
         catch (IOException)
@@ -64,54 +61,42 @@ public class CliTaskHandler : TaskHandlerBase
     }
 
     /// <summary>
-    /// Prints <see cref="Log"/> messages to the <see cref="Console"/> based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
+    /// Prints <see cref="Log"/> entries to the <see cref="Console"/>.
     /// </summary>
-    /// <param name="severity">The type/severity of the entry.</param>
-    /// <param name="message">The message text of the entry.</param>
-    /// <param name="exception">An optional exception associated with the entry.</param>
-    protected virtual void LogHandler(LogSeverity severity, string message, Exception? exception)
+    protected override void DisplayLogEntry(LogSeverity severity, string message)
     {
-        void WriteLine(ConsoleColor color)
+        try
         {
-            try
-            {
-                Console.ForegroundColor = color;
-            }
-            catch (InvalidOperationException)
-            {}
-            catch (IOException)
-            {}
-
-            Console.Error.WriteLine(message);
-            try
-            {
-                Console.ResetColor();
-            }
-            catch (InvalidOperationException)
-            {}
-            catch (IOException)
-            {}
+            Console.ForegroundColor = GetLogColor(severity);
         }
+        catch (InvalidOperationException)
+        {}
+        catch (IOException)
+        {}
 
-        switch (severity)
+        Console.Error.WriteLine(message);
+        try
         {
-            case LogSeverity.Debug when Verbosity >= Verbosity.Debug:
-                WriteLine(ConsoleColor.Blue);
-                break;
-            case LogSeverity.Info when Verbosity >= Verbosity.Verbose:
-                WriteLine(ConsoleColor.Green);
-                break;
-            case LogSeverity.Warn:
-                WriteLine(ConsoleColor.DarkYellow);
-                break;
-            case LogSeverity.Error:
-                WriteLine(ConsoleColor.Red);
-                break;
+            Console.ResetColor();
         }
-
-        if (exception != null && Verbosity >= Verbosity.Debug)
-            Console.Error.WriteLine(exception.ToString());
+        catch (InvalidOperationException)
+        {}
+        catch (IOException)
+        {}
     }
+
+    /// <summary>
+    /// Determines the color to use for a log entry based on the <see cref="LogSeverity"/>.
+    /// </summary>
+    protected static ConsoleColor GetLogColor(LogSeverity severity)
+        => severity switch
+        {
+            LogSeverity.Debug => ConsoleColor.Blue,
+            LogSeverity.Info=> ConsoleColor.Green,
+            LogSeverity.Warn => ConsoleColor.DarkYellow,
+            LogSeverity.Error => ConsoleColor.Red,
+            _ => ConsoleColor.Black
+        };
 
     /// <inheritdoc />
     public override ICredentialProvider CredentialProvider
@@ -172,5 +157,5 @@ public class CliTaskHandler : TaskHandlerBase
 
     /// <inheritdoc/>
     public override void Error(Exception exception)
-        => Log.Error(exception.Message, exception);
+        => Log.Error(exception);
 }

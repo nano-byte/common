@@ -11,61 +11,28 @@ namespace NanoByte.Common.Tasks;
 public abstract class GuiTaskHandlerBase : TaskHandlerBase
 {
     /// <summary>
-    /// Creates a new GUI task handler.
-    /// Registers a <see cref="Log.Handler"/>.
-    /// </summary>
-    protected GuiTaskHandlerBase()
-    {
-        Log.Handler += LogHandler;
-    }
-
-    /// <summary>
-    /// Unregisters the <see cref="Log.Handler"/>.
-    /// </summary>
-    public override void Dispose()
-    {
-        try
-        {
-            Log.Handler -= LogHandler;
-        }
-        finally
-        {
-            base.Dispose();
-        }
-    }
-
-    /// <summary>
-    /// Stores log messages formatted in RTF for visualization.
+    /// Aggregated <see cref="Log"/> entries in rich-text form.
     /// </summary>
     protected readonly RtfBuilder LogRtf = new();
 
     /// <summary>
-    /// Records <see cref="Log"/> messages in an internal log based on their <see cref="LogSeverity"/> and the current <see cref="Verbosity"/> level.
+    /// Aggregates <see cref="Log"/> entries in <see cref="LogRtf"/> for later display.
     /// </summary>
-    /// <param name="severity">The type/severity of the entry.</param>
-    /// <param name="message">The message text of the entry.</param>
-    /// <param name="exception">An optional exception associated with the entry.</param>
-    protected virtual void LogHandler(LogSeverity severity, string message, Exception? exception)
-    {
-        switch (severity)
-        {
-            case LogSeverity.Debug when Verbosity >= Verbosity.Debug:
-                LogRtf.AppendPar(message, RtfColor.Blue);
-                break;
-            case LogSeverity.Info when Verbosity >= Verbosity.Verbose:
-                LogRtf.AppendPar(message, RtfColor.Green);
-                break;
-            case LogSeverity.Warn:
-                LogRtf.AppendPar(message, RtfColor.Orange);
-                break;
-            case LogSeverity.Error:
-                LogRtf.AppendPar(message, RtfColor.Red);
-                break;
-        }
+    protected override void DisplayLogEntry(LogSeverity severity, string message)
+        => LogRtf.AppendPar(message, GetLogColor(severity));
 
-        if (exception != null && Verbosity >= Verbosity.Debug)
-            LogRtf.AppendPar(exception.ToString(), RtfColor.Black);
-    }
+    /// <summary>
+    /// Determines the color to use for a log entry based on the <see cref="LogSeverity"/>.
+    /// </summary>
+    protected static RtfColor GetLogColor(LogSeverity severity)
+        => severity switch
+        {
+            LogSeverity.Debug => RtfColor.Blue,
+            LogSeverity.Info => RtfColor.Green,
+            LogSeverity.Warn => RtfColor.Orange,
+            LogSeverity.Error => RtfColor.Red,
+            _ => RtfColor.Black
+        };
 
     /// <inheritdoc />
     public override ICredentialProvider CredentialProvider
@@ -141,7 +108,7 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
         #endregion
 
         if (Verbosity == Verbosity.Batch)
-            Log.Error(exception.Message, exception);
+            Log.Error(exception);
         else
             ThreadUtils.RunSta(() => ErrorBox.Show(null, exception, LogRtf));
     }

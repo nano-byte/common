@@ -10,7 +10,7 @@ namespace NanoByte.Common.Threading;
 /// Instead of <c>lock (_object) { code(); }</c> for per-process locking use
 /// <c>using (new MutexLock("name") { code(); }</c> for inter-process locking.
 /// </example>
-/// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn"/>.</remarks>
+/// <remarks>Automatically handles <see cref="AbandonedMutexException"/> with <see cref="Log.Warn(string,System.Exception?)"/>.</remarks>
 public sealed class MutexLock : IDisposable
 {
     private readonly Mutex _mutex;

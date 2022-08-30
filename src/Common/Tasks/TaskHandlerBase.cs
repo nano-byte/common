@@ -11,9 +11,49 @@ namespace NanoByte.Common.Tasks;
 /// <remarks>This class is thread-safe.</remarks>
 public abstract class TaskHandlerBase : ITaskHandler
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Registers a <see cref="Log.Handler"/>.
+    /// </summary>
+    protected TaskHandlerBase()
+    {
+        Log.Handler += LogHandler;
+    }
+
+    /// <summary>
+    /// Unregisters the <see cref="Log.Handler"/>.
+    /// </summary>
     public virtual void Dispose()
-        => CancellationTokenSource.Dispose();
+    {
+        Log.Handler -= LogHandler;
+        CancellationTokenSource.Dispose();
+    }
+
+    /// <summary>
+    /// Called for each <see cref="Log"/> entry. Handles exception messages.
+    /// </summary>
+    /// <param name="severity">The type/severity of the entry.</param>
+    /// <param name="message">The message of the entry.</param>
+    /// <param name="exception">An optional exception associated with the entry.</param>
+    private void LogHandler(LogSeverity severity, string? message, Exception? exception)
+    {
+        if ((severity == LogSeverity.Debug && Verbosity < Verbosity.Debug)
+         || (severity == LogSeverity.Info && Verbosity < Verbosity.Verbose)) return;
+
+        if (exception == null) message ??= "";
+        else if (message == null) message = exception.GetMessageWithInner();
+        else message += Environment.NewLine + exception;
+        DisplayLogEntry(severity, message);
+
+        if (exception != null && Verbosity == Verbosity.Debug)
+            DisplayLogEntry(LogSeverity.Debug, exception.ToString());
+    }
+
+    /// <summary>
+    /// Hook called when a <see cref="Log"/> entry should be shown to the user.
+    /// </summary>
+    /// <param name="severity">The type/severity of the entry.</param>
+    /// <param name="message">The message of the entry including.</param>
+    protected abstract void DisplayLogEntry(LogSeverity severity, string message);
 
     /// <summary>
     /// Used to signal the <see cref="CancellationToken"/>.

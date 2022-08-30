@@ -197,7 +197,7 @@ public static class ExceptionUtils
             }
             catch (Exception ex) when (ex is not OperationCanceledException && enumerator.MoveNext())
             {
-                Log.Warn(ex.Message, ex);
+                Log.Warn(ex);
             }
         }
     }

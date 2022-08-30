@@ -18,8 +18,8 @@ public class LogTest
     [Fact]
     public void TestHandler()
     {
-        var events = new List<(LogSeverity, string, Exception?)>();
-        void Handler(LogSeverity severity, string message, Exception? exception) => events.Add((severity, message, exception));
+        var events = new List<(LogSeverity, string?, Exception?)>();
+        void Handler(LogSeverity severity, string? message, Exception? exception) => events.Add((severity, message, exception));
 
         Log.Handler += Handler;
         try

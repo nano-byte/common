@@ -12,10 +12,10 @@ namespace NanoByte.Common;
 /// Describes an event relating to an entry in the <see cref="Log"/>.
 /// </summary>
 /// <param name="severity">The type/severity of the entry.</param>
-/// <param name="message">The message text of the entry.</param>
+/// <param name="message">The message of the entry.</param>
 /// <param name="exception">An optional exception associated with the entry.</param>
 /// <seealso cref="Log.Handler"/>
-public delegate void LogEntryEventHandler(LogSeverity severity, string message, Exception? exception);
+public delegate void LogEntryEventHandler(LogSeverity severity, string? message, Exception? exception);
 
 /// <summary>
 /// Sends log messages to custom handlers or the console.
@@ -151,9 +151,19 @@ public static class Log
     public static void Debug(string message, Exception? exception = null) => AddEntry(LogSeverity.Debug, message, exception);
 
     /// <summary>
+    /// Writes information to help developers diagnose problems to the log.
+    /// </summary>
+    public static void Debug(Exception exception) => AddEntry(LogSeverity.Debug, null, exception);
+
+    /// <summary>
     /// Writes nice-to-know information to the log.
     /// </summary>
     public static void Info(string message, Exception? exception = null) => AddEntry(LogSeverity.Info, message, exception);
+
+    /// <summary>
+    /// Writes nice-to-know information to the log.
+    /// </summary>
+    public static void Info(Exception exception) => AddEntry(LogSeverity.Info, null, exception);
 
     /// <summary>
     /// Writes a warning that doesn't have to be acted upon immediately to the log.
@@ -161,48 +171,68 @@ public static class Log
     public static void Warn(string message, Exception? exception = null) => AddEntry(LogSeverity.Warn, message, exception);
 
     /// <summary>
-    /// Writes a critical error that should be attended to the log.
+    /// Writes a warning that doesn't have to be acted upon immediately to the log.
+    /// </summary>
+    public static void Warn(Exception exception) => AddEntry(LogSeverity.Warn, null, exception);
+
+    /// <summary>
+    /// Writes a critical error that should be attended to to the log.
     /// </summary>
     public static void Error(string message, Exception? exception = null) => AddEntry(LogSeverity.Error, message, exception);
 
-    #region Helpers
+    /// <summary>
+    /// Writes a critical error that should be attended to to the log.
+    /// </summary>
+    public static void Error(Exception exception) => AddEntry(LogSeverity.Error, null, exception);
+
     private static readonly object _lock = new();
 
-    private static void AddEntry(LogSeverity severity, string message, Exception? exception)
+    /// <summary>
+    /// Adds a log entry to the log file and sends it to the last entry in <see cref="_handlers"/>.
+    /// </summary>
+    private static void AddEntry(LogSeverity severity, string? message, Exception? exception)
     {
-        if (message == null) throw new ArgumentNullException(nameof(message));
+        string logLine = GetLogLine(severity, message, exception);
 
-        string logLine = "[" + DateTime.Now.ToString("T", CultureInfo.InvariantCulture) + "] "
-                       + severity.ToString().ToUpperInvariant() + ": "
-                       + Indent(message);
-        if (exception != null)
-            logLine += Environment.NewLine + "\t" + Indent(exception.ToString());
-
+        System.Diagnostics.Debug.Write(logLine);
         lock (_lock)
         {
-            System.Diagnostics.Debug.Write(logLine);
             _sessionContent.AppendLine(logLine);
-
-            try
-            {
-                _fileWriter?.WriteLine(logLine);
-            }
-            #region Error handling
-            catch (Exception ex)
-            {
-                _fileWriter = null;
-                Console.Error.WriteLine("Error writing to log file:");
-                Console.Error.WriteLine(ex);
-            }
-            #endregion
-
-            if (exception != null && exception.Message != message)
-                message += Environment.NewLine + exception.Message;
+            WriteToFile(logLine);
             _handlers.Last()(severity, message, exception);
         }
     }
 
-    private static string Indent(string message)
-        => string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText());
-    #endregion
+    /// <summary>
+    /// Builds a log line containing timestamp, severity, message and exception information.
+    /// </summary>
+    private static string GetLogLine(LogSeverity severity, string? message, Exception? exception)
+    {
+        if (exception == null) message ??= "";
+        else if (message == null) message = exception.ToString();
+        else message += Environment.NewLine + exception;
+
+        return "[" + DateTime.Now.ToString("T", CultureInfo.InvariantCulture) + "] "
+             + severity.ToString().ToUpperInvariant() + ": "
+             + string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText());
+    }
+
+    /// <summary>
+    /// Appends a line to the log file.
+    /// </summary>
+    private static void WriteToFile(string logLine)
+    {
+        try
+        {
+            _fileWriter?.WriteLine(logLine);
+        }
+        #region Error handling
+        catch (Exception ex)
+        {
+            _fileWriter = null;
+            Console.Error.WriteLine("Error writing to log file:");
+            Console.Error.WriteLine(ex);
+        }
+        #endregion
+    }
 }
