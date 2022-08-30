@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System.Net;
-using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks;
 
@@ -17,11 +16,6 @@ public interface ITaskHandler : IDisposable
     /// </summary>
     /// <remarks>Once this has been signalled this <see cref="ITaskHandler"/> cannot be reused, since any subsequently started <see cref="ITask"/>s will be cancelled immediately.</remarks>
     CancellationToken CancellationToken { get; }
-
-    /// <summary>
-    /// Used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <c>null</c>.
-    /// </summary>
-    ICredentialProvider? CredentialProvider { get; }
 
     /// <summary>
     /// Runs an <see cref="ITask"/> and tracks its progress. Returns once the task has been completed.

@@ -34,8 +34,8 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
             _ => RtfColor.Black
         };
 
-    /// <inheritdoc />
-    public override ICredentialProvider CredentialProvider
+    /// <inheritdoc/>
+    protected override ICredentialProvider CredentialProvider
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
                 ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsNonInteractiveCredentialProvider()

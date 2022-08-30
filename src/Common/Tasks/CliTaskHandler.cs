@@ -99,7 +99,7 @@ public class CliTaskHandler : TaskHandlerBase
         };
 
     /// <inheritdoc />
-    public override ICredentialProvider CredentialProvider
+    protected override ICredentialProvider CredentialProvider
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
                 ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsNonInteractiveCredentialProvider()

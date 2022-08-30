@@ -15,12 +15,10 @@ namespace NanoByte.Common.Tasks;
 /// <remarks>This class is thread-safe.</remarks>
 /// <seealso cref="ConfigurationCredentialProviderRegistration.ConfigureCredentials"/>
 [CLSCompliant(false)]
-public class ServiceTaskHandler : SilentTaskHandler
+public class ServiceTaskHandler : ITaskHandler
 {
     private readonly ILogger<ServiceTaskHandler>? _logger;
-
-    /// <inheritdoc />
-    public override ICredentialProvider? CredentialProvider { get; }
+    private readonly ICredentialProvider? _credentialProvider;
 
     /// <summary>
     /// Creates a new service task handler.
@@ -37,23 +35,16 @@ public class ServiceTaskHandler : SilentTaskHandler
         if (_logger != null)
             Log.Handler += LogHandler;
 
-        CancellationTokenSource = provider.GetService<CancellationTokenSource>() ?? new();
-        CredentialProvider = provider.GetService<ICredentialProvider>();
+        CancellationToken = provider.GetService<CancellationTokenSource>()?.Token ?? CancellationToken.None;
+        _credentialProvider = provider.GetService<ICredentialProvider>();
     }
 
     /// <summary>
     /// Unregisters the <see cref="Log.Handler"/>.
     /// </summary>
-    public override void Dispose()
+    public virtual void Dispose()
     {
-        try
-        {
-            Log.Handler -= LogHandler;
-        }
-        finally
-        {
-            base.Dispose();
-        }
+        Log.Handler -= LogHandler;
     }
 
     private void LogHandler(LogSeverity severity, string? message, Exception? exception)
@@ -67,5 +58,46 @@ public class ServiceTaskHandler : SilentTaskHandler
             _ => LogLevel.Critical
         }, exception, "{Message}", message ?? exception?.Message);
     }
+
+    /// <inheritdoc/>
+    public CancellationToken CancellationToken { get; }
+
+    /// <inheritdoc/>
+    public void RunTask(ITask task)
+        => task.Run(CancellationToken, _credentialProvider);
+
+    /// <summary>
+    /// Always returns <see cref="NanoByte.Common.Tasks.Verbosity.Batch"/>.
+    /// </summary>
+    public Verbosity Verbosity
+    {
+        get => Verbosity.Batch;
+        set {}
+    }
+
+    /// <summary>
+    /// Returns <paramref name="defaultAnswer"/> if specified or <c>false</c> otherwise.
+    /// </summary>
+    public bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+    {
+        _logger?.LogInformation("{Question}\nReturning: {Answer}", alternateMessage ?? question, defaultAnswer ?? false);
+        return defaultAnswer ?? false;
+    }
+
+    /// <inheritdoc/>
+    public void Output(string title, string message)
+        => _logger?.LogInformation("{Title}\n{Message}", title, message);
+
+    /// <inheritdoc/>
+    public void Output<T>(string title, IEnumerable<T> data)
+        => Output(title, StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? "")));
+
+    /// <inheritdoc/>
+    public void Output<T>(string title, NamedCollection<T> data) where T : INamed
+        => Output(title, data.AsEnumerable());
+
+    /// <inheritdoc/>
+    public void Error(Exception exception)
+        => _logger?.LogError(exception, "{Message}", exception.Message);
 }
 #endif

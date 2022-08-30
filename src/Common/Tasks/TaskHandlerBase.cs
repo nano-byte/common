@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Net;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks;
@@ -63,8 +64,10 @@ public abstract class TaskHandlerBase : ITaskHandler
     /// <inheritdoc/>
     public CancellationToken CancellationToken => CancellationTokenSource.Token;
 
-    /// <inheritdoc/>
-    public virtual ICredentialProvider? CredentialProvider => null;
+    /// <summary>
+    /// Used to ask the user or a keyring for <see cref="NetworkCredential"/>s for specific <see cref="Uri"/>s; can be <c>null</c>.
+    /// </summary>
+    protected virtual ICredentialProvider? CredentialProvider => null;
 
     /// <inheritdoc/>
     public Verbosity Verbosity { get; set; }

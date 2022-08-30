@@ -7,39 +7,58 @@ namespace NanoByte.Common.Tasks;
 /// Executes tasks silently and suppresses any questions.
 /// </summary>
 /// <remarks>This class is thread-safe.</remarks>
-public class SilentTaskHandler : TaskHandlerBase
+public class SilentTaskHandler : ITaskHandler
 {
-    public SilentTaskHandler()
-    {
-        Verbosity = Verbosity.Batch;
-    }
-
     /// <summary>
     /// Does nothing.
     /// </summary>
-    protected override void DisplayLogEntry(LogSeverity severity, string message)
-    {}
+    public void Dispose() {}
 
-    /// <summary>
-    /// Always returns <paramref name="defaultAnswer"/>.
-    /// </summary>
-    protected override bool AskInteractive(string question, bool defaultAnswer)
-    {
-        Log.Info($"Question: {question}\nAutomatic/silent answer: {defaultAnswer}");
-        return defaultAnswer;
-    }
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     /// <inheritdoc/>
-    public override void Output(string title, string message)
-        => Log.Info($"{title}\n{message}");
-
-    /// <inheritdoc/>
-    public override void Error(Exception exception)
-        => Log.Error(exception);
+    public CancellationToken CancellationToken => _cancellationTokenSource.Token;
 
     /// <summary>
     /// Cancels currently running <see cref="ITask"/>s.
     /// </summary>
-    public void Cancel()
-        => CancellationTokenSource.Cancel();
+    public void Cancel() => _cancellationTokenSource.Cancel();
+
+    /// <inheritdoc/>
+    public void RunTask(ITask task)
+        => task.Run(CancellationToken);
+
+    /// <summary>
+    /// Always returns <see cref="NanoByte.Common.Tasks.Verbosity.Batch"/>.
+    /// </summary>
+    public Verbosity Verbosity
+    {
+        get => Verbosity.Batch;
+        set {}
+    }
+
+    /// <summary>
+    /// Returns <paramref name="defaultAnswer"/> if specified or <c>false</c> otherwise.
+    /// </summary>
+    public bool Ask(string question, bool? defaultAnswer = null, string? alternateMessage = null)
+    {
+        Log.Info($"{alternateMessage ?? question}\nReturning: {defaultAnswer ?? false}");
+        return defaultAnswer ?? false;
+    }
+
+    /// <inheritdoc/>
+    public void Output(string title, string message)
+        => Log.Info($"{title}\n{message}");
+
+    /// <inheritdoc/>
+    public void Output<T>(string title, IEnumerable<T> data)
+        => Output(title, StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? "")));
+
+    /// <inheritdoc/>
+    public void Output<T>(string title, NamedCollection<T> data) where T : INamed
+        => Output(title, data.AsEnumerable());
+
+    /// <inheritdoc/>
+    public void Error(Exception exception)
+        => Log.Error(exception);
 }

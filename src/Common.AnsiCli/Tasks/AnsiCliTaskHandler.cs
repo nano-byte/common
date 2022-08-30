@@ -16,8 +16,8 @@ public class AnsiCliTaskHandler : CliTaskHandler
     protected override void DisplayLogEntry(LogSeverity severity, string message)
         => AnsiCli.Error.WriteLine(message, new Style(GetLogColor(severity)));
 
-    /// <inheritdoc />
-    public override ICredentialProvider CredentialProvider
+    /// <inheritdoc/>
+    protected override ICredentialProvider CredentialProvider
         => new NetrcCredentialProvider(
             IsInteractive
                 ? WindowsUtils.IsWindowsNT
