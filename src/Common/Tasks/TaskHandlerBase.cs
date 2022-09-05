@@ -40,10 +40,9 @@ public abstract class TaskHandlerBase : ITaskHandler
         if ((severity == LogSeverity.Debug && Verbosity < Verbosity.Debug)
          || (severity == LogSeverity.Info && Verbosity < Verbosity.Verbose)) return;
 
-        if (exception == null) message ??= "";
-        else if (message == null) message = exception.GetMessageWithInner();
-        else message += Environment.NewLine + exception;
-        DisplayLogEntry(severity, message);
+        DisplayLogEntry(
+            severity,
+            message: StringUtils.Join(Environment.NewLine, new[] {message, exception?.GetMessageWithInner()}.WhereNotNull()));
 
         if (exception != null && Verbosity == Verbosity.Debug)
             DisplayLogEntry(LogSeverity.Debug, exception.ToString());
