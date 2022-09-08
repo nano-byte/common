@@ -314,12 +314,14 @@ namespace NanoByte.Common.Native
         /// Determines the file system type a file or directory is stored on.
         /// </summary>
         /// <param name="path">The path of the file.</param>
-        /// <returns>The name of the file system in fstab format (e.g. ext3 or ntfs-3g).</returns>
+        /// <returns>The name of the file system in fstab format (e.g. ext3 or ntfs-3g); <c>null</c> if unable to determine.</returns>
         /// <remarks>Only works on Linux, not on other Unixes (e.g. MacOS X).</remarks>
         /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string GetFileSystem([Localizable(false)] string path)
+        public static string? GetFileSystem([Localizable(false)] string path)
         {
+            if (!IsLinux) return null;
+
             string fileSystem = _stat.RunAndCapture("--file-system", "--printf", "%T", path).TrimEnd('\n');
             if (fileSystem == "fuseblk")
             { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system

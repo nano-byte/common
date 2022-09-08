@@ -929,6 +929,7 @@ public static class FileUtils
 
         if (!path.EndsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture))) path += Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
         if (!Directory.Exists(path)) throw new DirectoryNotFoundException(string.Format(Resources.FileNotFound, path));
+
         if (!UnixUtils.IsUnix) return false;
 
         try
@@ -944,16 +945,12 @@ public static class FileUtils
                 // Windows Network Share
                 "smbfs" or "cifs" => false,
                 // Other
-                _ => true
+                _ => SupportsExecutableBits(path)
             };
         }
-        catch (IOException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException)
         {
-            return IsUnixFSFallback(path);
-        }
-        catch (UnauthorizedAccessException)
-        {
-            return IsUnixFSFallback(path);
+            return true;
         }
     }
 
@@ -961,7 +958,7 @@ public static class FileUtils
     /// Checks whether a directory is located on a filesystem with support for executable bits by setting and reading them back.
     /// </summary>
     [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
-    private static bool IsUnixFSFallback([Localizable(false)] string path)
+    private static bool SupportsExecutableBits([Localizable(false)] string path)
     {
         string probeFile = Path.Combine(path, ".unixfs_probe_" + Path.GetRandomFileName());
         Touch(probeFile);
@@ -972,21 +969,8 @@ public static class FileUtils
             if (UnixUtils.IsExecutable(probeFile)) return false;
 
             UnixUtils.SetExecutable(probeFile, true);
-            if (!UnixUtils.IsExecutable(probeFile)) return false;
-
-            return true;
+            return UnixUtils.IsExecutable(probeFile);
         }
-        #region Error handling
-        catch (InvalidOperationException ex)
-        {
-            throw new IOException(Resources.UnixSubsystemFail, ex);
-        }
-        catch (IOException ex)
-        {
-            throw new IOException(Resources.UnixSubsystemFail, ex);
-        }
-        #endregion
-
         finally
         {
             File.Delete(probeFile);
