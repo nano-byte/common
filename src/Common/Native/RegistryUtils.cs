@@ -370,8 +370,7 @@ public static class RegistryUtils
 #if !NET20 && !NET40
         if (Environment.Is64BitProcess)
         {
-            var result = Registry.LocalMachine.OpenSubKey(subkeyName);
-            if (result != null)
+            if (Registry.LocalMachine.OpenSubKey(subkeyName) is {} result)
             {
                 x64 = true;
                 return result;

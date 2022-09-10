@@ -143,8 +143,8 @@ public static class XmlStorage
     {
         var qualifiedNames = type.GetCustomAttributes<XmlNamespaceAttribute>().Select(attr => attr.QualifiedName);
 
-        var rootAttribute = type.GetCustomAttribute<XmlRootAttribute>();
-        if (rootAttribute != null) qualifiedNames = qualifiedNames.Concat(new[] {new XmlQualifiedName("", rootAttribute.Namespace)});
+        if (type.GetCustomAttribute<XmlRootAttribute>() is {} rootAttribute)
+            qualifiedNames = qualifiedNames.Concat(new[] {new XmlQualifiedName("", rootAttribute.Namespace)});
 
         return qualifiedNames.ToArray();
     }

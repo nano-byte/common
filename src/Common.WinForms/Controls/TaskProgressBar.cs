@@ -90,8 +90,7 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
     private void UpdateTaskbar(WindowsTaskbar.ProgressBarState state)
     {
         _formHandle ??= FindForm()?.Handle;
-        if (!_formHandle.HasValue) return;
-        var formHandle = _formHandle.Value;
+        if (_formHandle is not {} formHandle) return;
 
         // Ensure only one progress bar at a time controls a form's taskbar entry
         if (_taskbarOwners.GetOrAdd(formHandle, this) != this) return;

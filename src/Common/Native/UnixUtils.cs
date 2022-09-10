@@ -325,8 +325,8 @@ namespace NanoByte.Common.Native
             string fileSystem = _stat.RunAndCapture("--file-system", "--printf", "%T", path).TrimEnd('\n');
             if (fileSystem == "fuseblk")
             { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system
-                var fstabData = Syscall.getfsfile(_stat.RunAndCapture("--printf", "%m", path).TrimEnd('\n'));
-                if (fstabData != null) return fstabData.fs_vfstype;
+                if (Syscall.getfsfile(_stat.RunAndCapture("--printf", "%m", path).TrimEnd('\n')) is {} fstabData)
+                    return fstabData.fs_vfstype;
             }
             return fileSystem;
         }

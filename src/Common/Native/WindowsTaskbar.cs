@@ -284,8 +284,8 @@ public static partial class WindowsTaskbar
     private static IPropertyStore GetWindowPropertyStore(IntPtr hwnd)
     {
         var guid = new Guid(PropertyStoreGuid);
-        var exception =  Marshal.GetExceptionForHR(NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out var propStore));
-        if (exception != null) throw exception;
+        if (Marshal.GetExceptionForHR(NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out var propStore)) is {} exception)
+            throw exception;
         return propStore;
     }
 

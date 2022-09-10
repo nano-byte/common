@@ -24,8 +24,7 @@ public class StringConstructorConverter<T> : TypeConverter
     {
         if (value is string stringValue)
         {
-            var constructor = typeof(T).GetConstructor(new[] {typeof(string)});
-            if (constructor != null)
+            if (typeof(T).GetConstructor(new[] {typeof(string)}) is {} constructor)
             {
                 try
                 {

@@ -29,8 +29,7 @@ public class StreamConsumer
 
     private void ThreadStart()
     {
-        string? line;
-        while ((line = _reader.ReadLine()) != null)
+        while (_reader.ReadLine() is {} line)
         {
             lock (_lock)
                 _queue.Enqueue(line);
