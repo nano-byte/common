@@ -108,7 +108,7 @@ public class CliTaskHandler : TaskHandlerBase
 #if !NET20 && !NET40
     /// <inheritdoc/>
     protected override bool IsInteractive
-        => base.IsInteractive && !Console.IsErrorRedirected;
+        => base.IsInteractive && !Console.IsErrorRedirected && !Console.IsInputRedirected;
 #endif
 
     /// <inheritdoc/>
@@ -133,7 +133,7 @@ public class CliTaskHandler : TaskHandlerBase
         while (true)
         {
             Console.Error.Write(@"[Y/N]" + " ");
-            switch ((Console.ReadLine() ?? throw new IOException("input stream closed, unable to get user input")).ToLower())
+            switch ((Console.ReadLine() ?? throw new OperationCanceledException("stdin closed, unable to get answer to question")).ToLower())
             {
                 case "y" or "yes":
                     return true;

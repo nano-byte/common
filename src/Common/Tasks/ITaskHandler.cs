@@ -38,7 +38,7 @@ public interface ITaskHandler : IDisposable
     /// <param name="defaultAnswer">The default answer to preselect. May be chosen automatically if the user cannot be asked. <c>null</c> if the user must make the choice themselves.</param>
     /// <param name="alternateMessage">A message to output with <see cref="Log.Warn(string,System.Exception?)"/> when the <paramref name="defaultAnswer"/> is used instead of asking the user.</param>
     /// <returns><c>true</c> if the user answered with 'Yes'; <c>false</c> if the user answered with 'No'.</returns>
-    /// <exception cref="OperationCanceledException">Throw if the user answered with 'Cancel'.</exception>
+    /// <exception cref="OperationCanceledException">Throw if the user answered with 'Cancel' or if no answer can be obtained.</exception>
     bool Ask([Localizable(true)] string question, bool? defaultAnswer = null, [Localizable(true)] string? alternateMessage = null);
 
     /// <summary>

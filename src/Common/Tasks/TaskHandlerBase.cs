@@ -96,7 +96,7 @@ public abstract class TaskHandlerBase : ITaskHandler
         if (question == null) throw new ArgumentNullException(nameof(question));
         #endregion
 
-        if (IsInteractive || !defaultAnswer.HasValue)
+        if (IsInteractive)
         {
             lock (_askInteractiveLock)
             {
@@ -114,14 +114,15 @@ public abstract class TaskHandlerBase : ITaskHandler
                 }
             }
         }
-        else
+        else if (defaultAnswer is {} answer)
         {
             if (string.IsNullOrEmpty(alternateMessage))
-                Log.Info("Using default answer " + (defaultAnswer.Value ? "Yes" : "No") + " for question: " + question);
+                Log.Info("Using default answer " + (answer ? "Yes" : "No") + " for question: " + question);
             else
                 Log.Warn(alternateMessage);
-            return defaultAnswer.Value;
+            return answer;
         }
+        else throw new OperationCanceledException("Unable to ask question in non-interactive mode: " + question);
     }
 
     /// <summary>
