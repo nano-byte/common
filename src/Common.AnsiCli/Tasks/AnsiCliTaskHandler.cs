@@ -32,6 +32,10 @@ public class AnsiCliTaskHandler : CliTaskHandler
     private AnsiCliProgressContext? _progressContext;
 
     /// <inheritdoc/>
+    protected override bool IsInteractive
+        => base.IsInteractive && AnsiConsole.Profile.Capabilities.Interactive;
+
+    /// <inheritdoc/>
     public override void RunTask(ITask task)
     {
         #region Sanity checks
@@ -39,13 +43,6 @@ public class AnsiCliTaskHandler : CliTaskHandler
         #endregion
 
         Log.Info(task.Name);
-
-        if (!IsInteractive)
-        {
-            AnsiCli.Error.WriteLine(task.Name);
-            task.Run(CancellationToken, CredentialProvider);
-            return;
-        }
 
         IProgress<TaskSnapshot> progress;
         lock (_progressContextLock)
@@ -75,9 +72,6 @@ public class AnsiCliTaskHandler : CliTaskHandler
     /// <inheritdoc/>
     protected override bool AskInteractive(string question, bool defaultAnswer)
     {
-        if (!AnsiCli.Error.Profile.Capabilities.Interactive)
-            return base.AskInteractive(question, defaultAnswer);
-
         lock (_progressContextLock)
         {
             RemoveProgressBar(); // Avoid simultaneous progress bars and input prompts
