@@ -71,7 +71,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet worden gecanoniseerd omdat dit mogelijk tot verlies van informatie zou leiden.</value>
+    <value>De DACL kan niet worden gecanoniseerd, aangezien dat mogelijk tot informatieverlies zou leiden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -79,11 +79,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Kopiëren van bestanden</value>
+    <value>Bestanden kopiëren</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Kopieer naar klembord</value>
+    <value>Kopiëren naar klembord</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
@@ -91,11 +91,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Downloaden van {0}</value>
+    <value>Het downloaden van {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Fout rapport</value>
+    <value>Foutmelding</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
@@ -103,15 +103,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Als u wilt, kunt u dit veld gebruiken om extra informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
+    <value>Desgewenst kunt u dit veld gebruiken om aanvullende informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Er is een onverwachte fout opgetreden in deze toepassing. U kunt ons helpen het probleem op te lossen door het te melden. Als er al een oplossing voor uw probleem bekend is, wordt deze direct na het verzenden van de melding weergegeven.</value>
+    <value>Er is een onverwachte fout opgetreden in deze toepassing. U kunt ons helpen het probleem op te lossen door het te melden. Als er al een oplossing voor uw probleem bekend is, wordt deze direct na het versturen van de melding getoond.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>Verslag</value>
+    <value>Rapporteer</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
@@ -119,7 +119,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Het downloaden van {0} is mislukt.</value>
+    <value>Download mislukt {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
@@ -127,7 +127,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Mislukt met terugdraaien '{0}'.</value>
+    <value>Rollback '{0}' is niet gelukt.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -135,11 +135,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Het bestand dat gedownload had moeten worden van {0} heeft niet de verwachte grootte. Het had {1} bytes moeten zijn, maar het was eigenlijk {2} bytes.</value>
+    <value>Het bestand dat gedownload moest worden van {0} heeft niet de verwachte grootte. Het zou {1} bytes moeten zijn, maar het was eigenlijk {2} bytes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Het bestand "{0}" kon niet gevonden worden.</value>
+    <value>Het bestand "{0}" kon niet worden gevonden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
@@ -151,11 +151,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>De sleutel was al aanwezig in het woordenboek.</value>
+    <value>De sleutel stond al in het woordenboek.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Om '{0}' te starten zijn Administrator-rechten nodig.</value>
+    <value>Om '{0}' te starten zijn beheerdersrechten nodig.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -179,7 +179,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Deze methode is alleen beschikbaar onder Windows.</value>
+    <value>Deze methode is alleen beschikbaar op Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -187,7 +187,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Voer uw inloggegevens in voor {0}:</value>
+    <value>Voer inloggegevens in voor {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
@@ -195,7 +195,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' verlaten met exit code {1}.</value>
+    <value>.'{0}' exited with exit code {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -207,31 +207,31 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Deze opdracht kan pas opnieuw worden uitgevoerd nadat de opdracht ongedaan maken is uitgevoerd.</value>
+    <value>Dit commando kan niet opnieuw worden uitgevoerd totdat het commando ongedaan maken is uitgevoerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Reset waarde</value>
+    <value>Waarde terugzetten</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Opnieuw opstarten van toepassingen</value>
+    <value>Toepassingen opnieuw opstarten</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Zoeken op</value>
+    <value>Zoek op</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Zoeken naar open bestand referenties</value>
+    <value>Zoeken naar open bestandsreferenties</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Poging tot lezen vanaf positie {0}. Dit is {1} bytes verwijderd van de onderliggende stream positie {2}, maar de zoekbuffer kan slechts een verschil van {3} bytes aan.</value>
+    <value>Er is geprobeerd te lezen vanaf positie {0}. Dit is {1} bytes verwijderd van de onderliggende streampositie {2}, maar de zoekbuffer kan slechts een verschil van {3} bytes verwerken.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Afsluiten van toepassingen</value>
+    <value>Toepassingen afsluiten</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Compleet</value>
+    <value>Volledig</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
@@ -247,7 +247,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Het krijgen van headers</value>
+    <value>Headers krijgen</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
@@ -259,11 +259,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web fout</value>
+    <value>Webfout</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Lengte van doelen moet gelijk zijn aan lengte van oldValues</value>
+    <value>Lengte van doelen moet gelijk zijn aan Lengte van oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -271,11 +271,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Uw versie van .NET ondersteunt TLS 1.2 niet. Dit kan verbindingsfouten veroorzaken bij het downloaden van inhoud via HTTPS. Voer Windows Update uit om de noodzakelijke patches te installeren.</value>
+    <value>Uw versie van .NET ondersteunt TLS 1.2 niet. Dit kan verbindingsfouten veroorzaken bij het downloaden van inhoud via HTTPS. Voer Windows Update uit om de nodige patches te installeren.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>De assemblage met de naam "{0}" kon niet worden gelokaliseerd.</value>
+    <value>De assemblage genaamd "{0}" kon niet worden gelokaliseerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -283,11 +283,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Deze opdracht ongedaan maken kan pas worden uitgevoerd nadat de eigenlijke opdracht is uitgevoerd.</value>
+    <value>Deze ongedaanmaking kan pas worden uitgevoerd nadat de eigenlijke opdracht is uitgevoerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Het Unix subsysteem kon het verzoek niet verwerken. U hebt misschien onvoldoende rechten.</value>
+    <value>Het Unix-subsysteem heeft het verzoek niet verwerkt. Mogelijk heeft u onvoldoende rechten.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
