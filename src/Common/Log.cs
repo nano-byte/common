@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using NanoByte.Common.Info;
@@ -25,45 +26,71 @@ public static class Log
 {
     #region File Writer
     private static StreamWriter? _fileWriter;
+    private static readonly int _processId;
 
     [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "The static constructor is used to add an identification header to the log file")]
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Any kind of problems writing the log file should be ignored")]
     static Log()
     {
-        string filePath = Path.Combine(Path.GetTempPath(), $"{AppInfo.Current.Name} {Environment.UserName} Log.txt");
-
-        // Try to open the file for writing but give up right away if there are any problems
-        FileStream file;
         try
         {
-            file = new(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            _processId = Process.GetCurrentProcess().Id;
+
+            var file = new FileInfo(Path.Combine(Path.GetTempPath(), $"{AppInfo.Current.Name} {Environment.UserName} Log.txt"));
+            var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: file.Exists);
+            _fileWriter = new(
+                file.Open(
+                    file.Exists && file.Length > 1024 * 1024 // Reset log file when it reaches 1MB
+                        ? FileMode.Truncate
+                        : FileMode.Append,
+                    FileAccess.Write,
+                    FileShare.ReadWrite), // Allow concurrent writes to same file by other processes
+                encoding);
         }
-        catch
+        #region Error handling
+        catch (Exception ex)
         {
+            Console.Error.WriteLine("Error writing to log file:");
+            Console.Error.WriteLine(ex);
             return;
         }
+        #endregion
 
-        // Clear cache file once it reaches 1MB
-        if (file.Length > 1024 * 1024)
+        WriteToFile(string.Join(Environment.NewLine, new[]
         {
-            file.Dispose();
-            file = new(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+            "",
+            $"/// {AppInfo.Current.NameVersion}",
+            $"/// Install base: {Locations.InstallBase}",
+            $"/// Command-line args: {Environment.GetCommandLineArgs().JoinEscapeArguments()}",
+            $"/// Process {_processId} started at: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}",
+            ""
+        }));
+    }
+
+
+    /// <summary>
+    /// Appends a line to the log file.
+    /// </summary>
+    private static void WriteToFile(string logLine)
+    {
+        if (_fileWriter is not {} writer) return;
+
+        try
+        {
+            // Catch up in case other processes have been writing to the same file
+            writer.BaseStream.Seek(0, SeekOrigin.End);
+
+            writer.WriteLine(logLine);
+            writer.Flush();
         }
-
-        // When writing to a new file use UTF-8 with BOM, otherwise keep existing encoding
-        _fileWriter = (file.Length == 0 ? new StreamWriter(file, Encoding.UTF8) : new StreamWriter(file));
-        _fileWriter.AutoFlush = true;
-
-        // Go to end of file
-        _fileWriter.BaseStream.Seek(0, SeekOrigin.End);
-
-        // Add session identification block to the file
-        _fileWriter.WriteLine("");
-        _fileWriter.WriteLine("/// " + AppInfo.Current.NameVersion);
-        _fileWriter.WriteLine("/// Install base: " + Locations.InstallBase);
-        _fileWriter.WriteLine("/// Command-line args: " + Environment.GetCommandLineArgs().JoinEscapeArguments());
-        _fileWriter.WriteLine("/// Log session started at: " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
-        _fileWriter.WriteLine("");
+        #region Error handling
+        catch (Exception ex)
+        {
+            _fileWriter = null;
+            Console.Error.WriteLine("Error writing to log file:");
+            Console.Error.WriteLine(ex);
+        }
+        #endregion
     }
     #endregion
 
@@ -212,27 +239,6 @@ public static class Log
         else if (message == null) message = exception.ToString();
         else message += Environment.NewLine + exception;
 
-        return "[" + DateTime.Now.ToString("T", CultureInfo.InvariantCulture) + "] "
-             + severity.ToString().ToUpperInvariant() + ": "
-             + string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText());
-    }
-
-    /// <summary>
-    /// Appends a line to the log file.
-    /// </summary>
-    private static void WriteToFile(string logLine)
-    {
-        try
-        {
-            _fileWriter?.WriteLine(logLine);
-        }
-        #region Error handling
-        catch (Exception ex)
-        {
-            _fileWriter = null;
-            Console.Error.WriteLine("Error writing to log file:");
-            Console.Error.WriteLine(ex);
-        }
-        #endregion
+        return $"[{DateTime.Now.ToString("T", CultureInfo.InvariantCulture)}] {_processId} {severity.ToString().ToUpperInvariant()}: {string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText())}";
     }
 }
