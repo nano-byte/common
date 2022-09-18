@@ -58,6 +58,8 @@ public static class Log
         }
         #endregion
 
+        AppDomain.CurrentDomain.ProcessExit += delegate { CloseFile(); };
+
         WriteToFile(string.Join(Environment.NewLine, new[]
         {
             "",
@@ -88,11 +90,28 @@ public static class Log
         #region Error handling
         catch (Exception ex)
         {
-            _fileWriter = null;
             Console.Error.WriteLine("Error writing to log file:");
+            Console.Error.WriteLine(ex);
+            CloseFile();
+        }
+        #endregion
+    }
+
+    private static void CloseFile()
+    {
+        try
+        {
+            _fileWriter?.Dispose();
+        }
+        #region Error handling
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine("Error closing log file:");
             Console.Error.WriteLine(ex);
         }
         #endregion
+
+        _fileWriter = null;
     }
     #endregion
 
