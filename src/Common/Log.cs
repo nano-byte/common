@@ -36,11 +36,13 @@ public static class Log
         {
             _processId = Process.GetCurrentProcess().Id;
 
+            const int maxSize = 1024 * 1024; // 1MiB
             var file = new FileInfo(Path.Combine(Path.GetTempPath(), $"{AppInfo.Current.Name} {Environment.UserName} Log.txt"));
-            var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: file.Exists);
+            var encoding = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: !file.Exists || file.Length > maxSize);
             _fileWriter = new(
                 file.Open(
-                    file.Exists && file.Length > 1024 * 1024 // Reset log file when it reaches 1MB
+                    file.Exists && file.Length > maxSize
                         ? FileMode.Truncate
                         : FileMode.Append,
                     FileAccess.Write,
