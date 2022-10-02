@@ -44,19 +44,25 @@ public class AnsiCliTaskHandler : CliTaskHandler
 
         Log.Info(task.Name);
 
-        IProgress<TaskSnapshot> progress;
-        lock (_progressContextLock)
+        if (IsInteractive)
         {
-            _progressContext ??= new();
-            progress = _progressContext.Add(task.Name);
+            IProgress<TaskSnapshot> progress;
+            lock (_progressContextLock)
+            {
+                _progressContext ??= new();
+                progress = _progressContext.Add(task.Name);
+            }
+            task.Run(CancellationToken, CredentialProvider, progress);
+            lock (_progressContextLock)
+            {
+                if (_progressContext is {IsFinished: true})
+                    RemoveProgressBar();
+            }
         }
-
-        task.Run(CancellationToken, CredentialProvider, progress);
-
-        lock (_progressContextLock)
+        else
         {
-            if (_progressContext is {IsFinished: true})
-                RemoveProgressBar();
+            AnsiCli.Error.WriteLine(task.Name);
+            task.Run(CancellationToken, CredentialProvider);
         }
     }
 
