@@ -152,6 +152,16 @@ public class AnsiCliTaskHandler : CliTaskHandler
         AnsiConsole.Write(AnsiCli.Tree(data));
     }
 
+    /// <inheritdoc/>
+    public override void Error(Exception exception)
+    {
+        lock (_progressContextLock)
+        {
+            RemoveProgressBar(); // Avoid simultaneous progress bars and error outputs
+            base.Error(exception);
+        }
+    }
+
     /// <inheritdoc />
     public override void Dispose()
     {
