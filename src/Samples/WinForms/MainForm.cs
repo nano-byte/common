@@ -38,7 +38,24 @@ public class MainForm : Form
             }.Show(dropDownButton);
         };
 
-        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, dropDownButton});
+        var messageBoxesButton = new Button {Text = "Message boxes", Location = new(10, 220)};
+        messageBoxesButton.Click += delegate
+        {
+            if (Msg.OkCancel(this, "Continue?", MsgSeverity.Info, "OK\nContinue this", "Cancel\nAbort this"))
+            {
+                switch (Msg.YesNoCancel(this, "Good?", MsgSeverity.Info, "Yeah\nThis is good", "Nope\nThis is not good"))
+                {
+                    case DialogResult.Yes:
+                        Msg.Inform(this, "Good", MsgSeverity.Info);
+                        break;
+                    case DialogResult.No:
+                        Msg.Inform(this, "Not good", MsgSeverity.Info);
+                        break;
+                }
+            }
+        };
+
+        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, dropDownButton, messageBoxesButton});
 
         Shown += async delegate
         {
