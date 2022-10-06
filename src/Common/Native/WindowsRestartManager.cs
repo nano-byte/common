@@ -49,6 +49,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     /// </summary>
     /// <exception cref="Win32Exception">The Restart Manager API returned an error.</exception>
     /// <exception cref="PlatformNotSupportedException">The current platform does not support the Restart Manager. Needs Windows Vista or newer.</exception>
+    /// <exception cref="DllNotFoundException">The Restart Manager API is missing.</exception>
     public WindowsRestartManager()
     {
         if (!WindowsUtils.IsWindowsVista) throw new PlatformNotSupportedException();
