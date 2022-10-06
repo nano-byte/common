@@ -23,7 +23,7 @@ public class WindowsNonInteractiveCredentialProvider : WindowsCredentialProvider
         }
 
         return WindowsCredentials.IsCredentialStored(target)
-            ? WindowsCredentials.PromptGui(target, WindowsCredentialsFlags.None)
+            ? WindowsCredentials.PromptGui(target, flags)
             : null;
     }
 }
