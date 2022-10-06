@@ -33,100 +33,63 @@ public static class Msg
     /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
     /// <param name="text">The message to be displayed.</param>
     /// <param name="severity">How severe/important the message is.</param>
-    /// <param name="okCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option.</param>
-    /// <param name="cancelCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; can be <c>null</c>.</param>
+    /// <param name="okCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option; <c>null</c> for default.</param>
+    /// <param name="cancelCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; <c>null</c> for default.</param>
     /// <returns><c>true</c> if <paramref name="okCaption"/> was selected, <c>false</c> if <paramref name="cancelCaption"/> was selected.</returns>
     /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="okCaption"/> and <paramref name="cancelCaption"/> are not display to the user, so don't rely on them!</remarks>
-    public static bool OkCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string okCaption, [Localizable(true)] string? cancelCaption = null)
+    public static bool OkCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? okCaption = null, [Localizable(true)] string? cancelCaption = null)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
-        if (string.IsNullOrEmpty(okCaption)) throw new ArgumentNullException(nameof(okCaption));
         #endregion
 
-        var result = ShowTaskDialog(owner, text, severity, ok: okCaption, cancel: cancelCaption, canCancel: true)
+        var result = ShowTaskDialog(owner, text, severity, ok: okCaption ?? "OK", cancel: cancelCaption, canCancel: true)
                   ?? ShowMessageBox(owner, text, severity, MessageBoxButtons.OKCancel);
         return result == DialogResult.OK;
     }
 
     /// <summary>
-    /// Asks the user a OK/Cancel-question using a message box or task dialog.
-    /// </summary>
-    /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
-    /// <param name="text">The message to be displayed.</param>
-    /// <param name="severity">How severe/important the message is.</param>
-    /// <returns><c>true</c> if OK was selected, <c>false</c> if Cancel was selected.</returns>
-    /// <remarks>If a <see cref="MessageBox"/> is used, OK and Cancel are not display to the user, so don't rely on them!</remarks>
-    public static bool OkCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity)
-        => OkCancel(owner, text, severity, "OK", Resources.Cancel);
-
-    /// <summary>
     /// Asks the user to choose between two options (yes/no) using a message box or task dialog.
     /// </summary>
     /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
     /// <param name="text">The message to be displayed.</param>
     /// <param name="severity">How severe/important the message is.</param>
-    /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option.</param>
-    /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option.</param>
+    /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; <c>null</c> for default.</param>
+    /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; <c>null</c> for default.</param>
     /// <returns><c>true</c> if <paramref name="yesCaption"/> was chosen, <c>false</c> if <paramref name="noCaption"/> was chosen.</returns>
     /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
-    public static bool YesNo(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string yesCaption, [Localizable(true)] string noCaption)
+    public static bool YesNo(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? yesCaption = null, [Localizable(true)] string? noCaption = null)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
-        if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException(nameof(yesCaption));
-        if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException(nameof(noCaption));
         #endregion
 
-        var result = ShowTaskDialog(owner, text, severity, yes: yesCaption, no: noCaption)
+        var result = ShowTaskDialog(owner, text, severity, yes: yesCaption ?? Resources.Yes, no: noCaption ?? Resources.No)
                   ?? ShowMessageBox(owner, text, severity, MessageBoxButtons.YesNo);
         return result == DialogResult.Yes;
     }
 
     /// <summary>
-    /// Asks the user to choose between two options (yes/no) using a message box or task dialog.
-    /// </summary>
-    /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
-    /// <param name="text">The message to be displayed.</param>
-    /// <param name="severity">How severe/important the message is.</param>
-    public static bool YesNo(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity)
-        => YesNo(owner, text, severity, Resources.Yes, Resources.No);
-
-    /// <summary>
     /// Asks the user to choose between three options (yes/no/cancel) using a message box or task dialog.
     /// </summary>
     /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
     /// <param name="text">The message to be displayed.</param>
     /// <param name="severity">How severe/important the message is.</param>
-    /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option.</param>
-    /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option.</param>
+    /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; <c>null</c> for default.</param>
+    /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; <c>null</c> for default.</param>
     /// <returns><see cref="DialogResult.Yes"/> if <paramref name="yesCaption"/> was chosen,
     /// <see cref="DialogResult.No"/> if <paramref name="noCaption"/> was chosen,
     /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
     /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
-    public static DialogResult YesNoCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string yesCaption, [Localizable(true)] string noCaption)
+    public static DialogResult YesNoCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? yesCaption = null, [Localizable(true)] string? noCaption = null)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
-        if (string.IsNullOrEmpty(yesCaption)) throw new ArgumentNullException(nameof(yesCaption));
-        if (string.IsNullOrEmpty(noCaption)) throw new ArgumentNullException(nameof(noCaption));
         #endregion
 
-        return ShowTaskDialog(owner, text, severity, yes: yesCaption, no: noCaption, canCancel: true)
+        return ShowTaskDialog(owner, text, severity, yes: yesCaption ?? Resources.Yes, no: noCaption ?? Resources.No, canCancel: true)
             ?? ShowMessageBox(owner, text, severity, MessageBoxButtons.YesNoCancel);
     }
-
-    /// <summary>
-    /// Asks the user to choose between three options (yes/no/cancel) using a message box or task dialog.
-    /// </summary>
-    /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
-    /// <param name="text">The message to be displayed.</param>
-    /// <param name="severity">How severe/important the message is.</param>
-    /// <returns><see cref="DialogResult.Yes"/> if Yes was chosen,
-    /// <see cref="DialogResult.No"/> if No was chosen,
-    /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
-    public static DialogResult YesNoCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity)
-        => YesNoCancel(owner, text, severity, Resources.Yes, Resources.No);
 
     /// <summary>Displays a message using a <see cref="MessageBox"/>.</summary>
     /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
