@@ -223,11 +223,6 @@ public static class Msg
             Content = details
         };
 
-        if (buttons.Count != 0)
-        {
-            taskDialog.UseCommandLinks = true;
-            taskDialog.Buttons = buttons.ToArray();
-        }
         if (canCancel)
         {
             taskDialog.AllowDialogCancellation = true;
@@ -235,6 +230,11 @@ public static class Msg
                 taskDialog.CommonButtons = TaskDialogCommonButtons.Cancel;
             else
                 TryAddButton(DialogResult.Cancel, cancel);
+        }
+        if (buttons.Count != 0)
+        {
+            taskDialog.UseCommandLinks = true;
+            taskDialog.Buttons = buttons.ToArray();
         }
         if (severity >= MsgSeverity.Warn)
             taskDialog.DefaultButton = (int)(string.IsNullOrEmpty(no) ? DialogResult.No : DialogResult.Cancel);
