@@ -53,4 +53,15 @@ public class PropertyPointerTest
         pointer.Value = null;
         sample.Data.Should().BeNull();
     }
+
+    [Fact]
+    public void SetTemp()
+    {
+        var sample = new Sample {Data = "a"};
+
+        using (PropertyPointer.For(() => sample.Data).SetTemp("b"))
+            sample.Data.Should().Be("b");
+
+        sample.Data.Should().Be("a");
+    }
 }

@@ -32,6 +32,25 @@ public class PropertyPointer<T> : MarshalByRefObject
         _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
         _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
     }
+
+    /// <summary>
+    /// Temporarily changes the value of the property.
+    /// </summary>
+    /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original value of the property.</returns>
+    /// <example>
+    /// <code>
+    /// using (PropertyPointer.For(() => someProperty).SetTemp(someValue))
+    /// {
+    ///    // ...
+    /// }
+    /// </code>
+    /// </example>
+    public IDisposable SetTemp(T value)
+    {
+        var backup = Value;
+        Value = value;
+        return new Disposable(() => Value = backup);
+    }
 }
 
 /// <summary>
