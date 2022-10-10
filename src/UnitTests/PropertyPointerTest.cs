@@ -11,30 +11,46 @@ public class PropertyPointerTest
     }
 
     [Fact]
-    public void Conventional()
+    public void Delegate()
     {
         var sample = new Sample {Data = "a"};
-        var pointer = PropertyPointer.For(() => sample.Data, value => sample.Data = value, defaultValue: "a");
+        var pointer = PropertyPointer.For(() => sample.Data, value => sample.Data = value);
 
         pointer.Value.Should().Be("a");
-        pointer.IsDefaultValue.Should().BeTrue();
-
         pointer.Value = "b";
         sample.Data.Should().Be("b");
-        pointer.IsDefaultValue.Should().BeFalse();
+    }
+
+    [Fact]
+    public void DelegateNullable()
+    {
+        var sample = new Sample {Data = "a"};
+        var pointer = PropertyPointer.ForNullable(() => sample.Data, value => sample.Data = value);
+
+        pointer.Value.Should().Be("a");
+        pointer.Value = null;
+        sample.Data.Should().BeNull();
     }
 
     [Fact]
     public void ExpressionTree()
     {
         var sample = new Sample {Data = "a"};
-        var pointer = PropertyPointer.For(() => sample.Data, defaultValue: "a");
+        var pointer = PropertyPointer.For(() => sample.Data);
 
         pointer.Value.Should().Be("a");
-        pointer.IsDefaultValue.Should().BeTrue();
-
         pointer.Value = "b";
         sample.Data.Should().Be("b");
-        pointer.IsDefaultValue.Should().BeFalse();
+    }
+
+    [Fact]
+    public void ExpressionTreeNullable()
+    {
+        var sample = new Sample {Data = "a"};
+        var pointer = PropertyPointer.ForNullable(() => sample.Data);
+
+        pointer.Value.Should().Be("a");
+        pointer.Value = null;
+        sample.Data.Should().BeNull();
     }
 }

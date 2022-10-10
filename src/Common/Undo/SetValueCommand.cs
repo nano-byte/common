@@ -15,13 +15,13 @@ public class SetValueCommand<T> : SimpleCommand, IValueCommand
 {
     private readonly PropertyPointer<T> _pointer;
     private readonly T _newValue;
-    private T? _oldValue;
+    private T _oldValue = default!;
 
     /// <inheritdoc/>
     public object? Value => _newValue;
 
     /// <summary>
-    /// Creates a new value-setting command.
+    /// Creates a new command for setting a value.
     /// </summary>
     /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
     /// <param name="newValue">The new value to be set.</param>
@@ -44,7 +44,7 @@ public class SetValueCommand<T> : SimpleCommand, IValueCommand
     /// Restores the old value in the model.
     /// </summary>
     protected override void OnUndo()
-        => _pointer.Value = _oldValue!;
+        => _pointer.Value = _oldValue;
 }
 
 /// <summary>
@@ -53,7 +53,7 @@ public class SetValueCommand<T> : SimpleCommand, IValueCommand
 public static class SetValueCommand
 {
     /// <summary>
-    /// Creates a new value-setting command.
+    /// Creates a new command for setting a value.
     /// </summary>
     /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
     /// <param name="newValue">The new value to be set.</param>
@@ -62,23 +62,44 @@ public static class SetValueCommand
         => new(pointer, newValue);
 
     /// <summary>
-    /// Creates a new value-setting command.
+    /// Creates a new command for setting a value.
     /// </summary>
     /// <param name="getValue">A delegate that returns the current value.</param>
     /// <param name="setValue">A delegate that sets the value.</param>
     /// <param name="newValue">The new value to be set.</param>
     /// <typeparam name="T">The type of the value to set.</typeparam>
     public static SetValueCommand<T> For<T>(Func<T> getValue, Action<T> setValue, T newValue)
-        => For(PropertyPointer.For(getValue, setValue, default!), newValue);
+        where T : notnull
+        => new(PropertyPointer.For(getValue, setValue), newValue);
+
+    /// <summary>
+    /// Creates a new command for setting a nullable value.
+    /// </summary>
+    /// <param name="getValue">A delegate that returns the current value.</param>
+    /// <param name="setValue">A delegate that sets the value.</param>
+    /// <param name="newValue">The new value to be set.</param>
+    /// <typeparam name="T">The type of the value to set.</typeparam>
+    public static SetValueCommand<T?> ForNullable<T>(Func<T?> getValue, Action<T?> setValue, T? newValue)
+        => new(PropertyPointer.ForNullable(getValue, setValue), newValue);
 
 #if !NET20
     /// <summary>
-    /// Creates a new value-setting command.
+    /// Creates a new command for setting a value.
     /// </summary>
     /// <typeparam name="T">The type of value the property contains.</typeparam>
     /// <param name="expression">An expression pointing to the property.</param>
     /// <param name="newValue">The new value to be set.</param>
     public static SetValueCommand<T> For<T>(Expression<Func<T>> expression, T newValue)
-        => For(PropertyPointer.For(expression, default!), newValue);
+        where T : notnull
+        => new(PropertyPointer.For(expression), newValue);
+
+    /// <summary>
+    /// Creates a new command for setting a nullable value.
+    /// </summary>
+    /// <typeparam name="T">The type of value the property contains.</typeparam>
+    /// <param name="expression">An expression pointing to the property.</param>
+    /// <param name="newValue">The new value to be set.</param>
+    public static SetValueCommand<T?> ForNullable<T>(Expression<Func<T?>> expression, T? newValue)
+        => new(PropertyPointer.ForNullable(expression), newValue);
 #endif
 }
