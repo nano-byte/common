@@ -139,7 +139,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>No se ha podido encontrar el archivo "{0}".</value>
+    <value>No se ha encontrado el archivo "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">

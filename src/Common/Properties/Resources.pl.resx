@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Próbowano czytać z pozycji {0}. To jest {1} bajtów od pozycji {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
+    <value>Próbowano odczytać z pozycji {0}. To jest {1} bajtów od pozycji {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
