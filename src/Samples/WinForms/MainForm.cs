@@ -3,6 +3,7 @@
 
 using NanoByte.Common.Controls;
 using NanoByte.Common.Tasks;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Samples.WinForms;
 
@@ -19,13 +20,13 @@ public class MainForm : Form
             OutputBox.Show(this, "Test", "Test message");
         };
 
-        var outputGridButton = new Button {Text = "Grid", Location = new(10, 140)};
+        var outputGridButton = new Button {Text = "Grid", Location = new(10, 130)};
         outputGridButton.Click += delegate
         {
             OutputGridBox.Show(this, "Test", new [] {"Test 1", "Test 2"});
         };
 
-        var dropDownButton = new Button {Text = "Drop-down", Location = new(10, 180)};
+        var dropDownButton = new Button {Text = "Drop-down", Location = new(10, 160)};
         dropDownButton.Click += delegate
         {
             new DropDownContainer
@@ -38,7 +39,7 @@ public class MainForm : Form
             }.Show(dropDownButton);
         };
 
-        var messageBoxesButton = new Button {Text = "Message boxes", Location = new(10, 220)};
+        var messageBoxesButton = new Button {Text = "Message boxes", Location = new(10, 190)};
         messageBoxesButton.Click += delegate
         {
             if (Msg.OkCancel(this, "Continue?", MsgSeverity.Info, "OK\nContinue this", "Cancel\nAbort this"))
@@ -55,7 +56,15 @@ public class MainForm : Form
             }
         };
 
-        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, dropDownButton, messageBoxesButton});
+        var asyncFormButton = new Button {Text = "Async form", Location = new(10, 220)};
+        asyncFormButton.Click += async delegate
+        {
+            using var wrapper = new AsyncFormWrapper<MainForm>(() => new());
+            wrapper.Post(form => form.Show()); // Show form in the message loop
+            await Task.Delay(5000); // End message loop and close form after 5s
+        };
+
+        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, dropDownButton, messageBoxesButton, asyncFormButton});
 
         Shown += async delegate
         {
