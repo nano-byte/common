@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>A încercat să citească din poziția {0}. Aceasta se află la {1} octeți distanță de poziția de bază a fluxului {2}, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
+    <value>A încercat să citească din poziția {0}. Această poziție este la {1} octeți distanță de poziția de bază a fluxului {2}, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -271,7 +271,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate cauza erori de conexiune atunci când descărcați conținut prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
+    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate cauza erori de conectare atunci când descărcați conținut prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
