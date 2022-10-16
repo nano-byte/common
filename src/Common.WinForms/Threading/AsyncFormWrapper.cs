@@ -7,6 +7,8 @@
 using System.Runtime.Remoting;
 #endif
 
+using System.Threading.Tasks;
+
 namespace NanoByte.Common.Threading;
 
 /// <summary>
@@ -30,25 +32,34 @@ public sealed class AsyncFormWrapper<T> : IDisposable
 
         _form = new(() =>
         {
-            T form = null!;
-            using var handleCreatedEvent = new ManualResetEvent(false);
+            var formSource = new TaskCompletionSource<T>();
+
             ThreadUtils.StartAsync(() =>
             {
-                form = init();
-
-                // Force creation of handle without showing the form
-                var _ = form.Handle;
-
-                // Signal the calling thread the form is ready
-                // ReSharper disable once AccessToDisposedClosure
-                handleCreatedEvent.Set();
+                try
+                {
+                    var form = init();
+                    var _ = form.Handle; // Force creation of handle without showing the form
+                    formSource.SetResult(form);
+                }
+                catch (Exception e)
+                {
+                    formSource.SetException(e);
+                    return;
+                }
 
                 // Run message loop (will take ownership of the form)
                 Application.Run();
             }, "AsyncFormWrapper: " + typeof(T).Name);
 
-            handleCreatedEvent.WaitOne();
-            return form;
+            try
+            {
+                return formSource.Task.Result;
+            }
+            catch (AggregateException ex)
+            {
+                throw ex.RethrowFirstInner();
+            }
         });
     }
 
