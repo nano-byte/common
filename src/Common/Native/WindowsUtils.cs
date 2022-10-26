@@ -153,6 +153,12 @@ public static partial class WindowsUtils
     public static bool IsWindows10Redstone => IsWindowsNTVersion(new(10, 0, 14393));
 
     /// <summary>
+    /// <c>true</c> if the current operating system is Windows 10, Version 2004 or newer; <c>false</c> otherwise.
+    /// </summary>
+    [SupportedOSPlatformGuard("windows10.0.19041")]
+    public static bool IsWindows102004 => IsWindowsNTVersion(new(10, 0, 19041));
+
+    /// <summary>
     /// <c>true</c> if the current operating system is Windows 11 or newer; <c>false</c> otherwise.
     /// </summary>
     [SupportedOSPlatformGuard("windows10.0.22000")]
