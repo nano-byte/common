@@ -83,16 +83,77 @@ public static class NetUtils
     }
 
     /// <summary>
-    /// Determines whether an internet connection is currently available. May return false positives.
+    /// The current state of the internet connection.
     /// </summary>
-    public static bool IsInternetConnected => WindowsUtils.IsWindowsNT
-        ? SafeNativeMethods.InternetGetConnectedState(out _, 0)
-        : NetworkInterface.GetIsNetworkAvailable();
+    public static Connectivity InternetConnectivity
+    {
+        get
+        {
+            try
+            {
+                if (WindowsUtils.IsWindows102004 && SafeNativeMethods.GetNetworkConnectivityHint(out var connectivity) == 0)
+                {
+                    if (connectivity.ConnectivityLevel is not (SafeNativeMethods.NetworkConnectivityLevel.Unknown or SafeNativeMethods.NetworkConnectivityLevel.InternetAccess))
+                        return Connectivity.None;
+
+                    if (connectivity.ConnectivityCost is SafeNativeMethods.NetworkConnectivityCost.Fixed or SafeNativeMethods.NetworkConnectivityCost.Variable
+                     || connectivity.Roaming
+                     || connectivity.OverDataLimit)
+                        return Connectivity.Metered;
+
+                    return Connectivity.Normal;
+                }
+
+                if (WindowsUtils.IsWindowsNT)
+                    return SafeNativeMethods.InternetGetConnectedState(out _, 0) ? Connectivity.Normal : Connectivity.None;
+
+                return NetworkInterface.GetIsNetworkAvailable() ? Connectivity.Normal : Connectivity.None;
+            }
+            catch (Exception ex)
+            {
+                Log.Warn("Failed to determine internet state", ex);
+                return Connectivity.Normal;
+            }
+        }
+    }
 
     [SuppressUnmanagedCodeSecurity]
     private static class SafeNativeMethods
     {
         [DllImport("wininet", SetLastError = true)]
         public static extern bool InternetGetConnectedState(out int lpdwFlags, int dwReserved);
+
+        [DllImport("iphlpapi", SetLastError = false)]
+        public static extern uint GetNetworkConnectivityHint(out NetworkConnectivityHint connectivityHint);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct NetworkConnectivityHint
+        {
+            public NetworkConnectivityLevel ConnectivityLevel;
+            public NetworkConnectivityCost ConnectivityCost;
+            [MarshalAs(UnmanagedType.U1)] public bool ApproachingDataLimit;
+            [MarshalAs(UnmanagedType.U1)] public bool OverDataLimit;
+            [MarshalAs(UnmanagedType.U1)] public bool Roaming;
+        }
+
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+		public enum NetworkConnectivityCost
+		{
+            Unknown,
+			Unrestricted,
+			Fixed,
+			Variable
+		}
+
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+		public enum NetworkConnectivityLevel
+		{
+			Unknown,
+			None,
+			LocalAccess,
+			InternetAccess,
+			ConstrainedInternetAccess,
+			Hidden
+		}
     }
 }
