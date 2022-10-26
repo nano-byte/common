@@ -9,10 +9,8 @@ namespace NanoByte.Common.Tasks;
 /// <remarks>This class is thread-safe.</remarks>
 public class SilentTaskHandler : ITaskHandler
 {
-    /// <summary>
-    /// Does nothing.
-    /// </summary>
-    public void Dispose() {}
+    /// <inheritdoc/>
+    public void Dispose() => _cancellationTokenSource.Dispose();
 
     private readonly CancellationTokenSource _cancellationTokenSource = new();
 
