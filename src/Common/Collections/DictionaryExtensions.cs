@@ -120,6 +120,33 @@ namespace NanoByte.Common.Collections
 #endif
 
         /// <summary>
+        /// Attempts to add the specified key and value to the dictionary.
+        /// </summary>
+        /// <returns><c>true</c> if the key/value pair was added to the dictionary successfully; <c>false</c> false if the key already existed in the dictionary.</returns>
+        public static bool TryAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
+            where TKey : notnull
+        {
+            #region Sanity checks
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            #endregion
+
+#if NETSTANDARD || NET
+            if (dictionary is Dictionary<TKey, TValue> dict)
+                return dict.TryAdd(key, value);
+#endif
+
+            try
+            {
+                dictionary.Add(key, value);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Builds a <see cref="MultiDictionary{TKey,TValue}"/> from an enumerable.
         /// </summary>
         /// <param name="elements">The elements to build the dictionary from.</param>
