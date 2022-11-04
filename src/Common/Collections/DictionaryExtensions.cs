@@ -18,6 +18,7 @@ namespace NanoByte.Common.Collections
         public static void AddRange<TSourceKey, TSourceValue, TTargetKey, TTargetValue>(this IDictionary<TTargetKey, TTargetValue> target, [InstantHandle] IEnumerable<KeyValuePair<TSourceKey, TSourceValue>> source)
             where TSourceKey : TTargetKey
             where TSourceValue : TTargetValue
+            where TTargetKey : notnull
         {
             #region Sanity checks
             if (target == null) throw new ArgumentNullException(nameof(target));
@@ -37,10 +38,10 @@ namespace NanoByte.Common.Collections
         [Pure]
         [return: MaybeNull]
         public static TValue GetOrDefault<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key)
+            where TKey : notnull
         {
             #region Sanity checks
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            if (key == null) throw new ArgumentNullException(nameof(key));
             #endregion
 
             dictionary.TryGetValue(key, out var value);
@@ -56,10 +57,10 @@ namespace NanoByte.Common.Collections
         /// <returns>The existing element or the newly created element.</returns>
         /// <remarks>No superfluous calls to <paramref name="valueFactory"/> occur. Not thread-safe!</remarks>
         public static TValue GetOrAdd<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key, [InstantHandle] Func<TValue> valueFactory)
+            where TKey : notnull
         {
             #region Sanity checks
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            if (key == null) throw new ArgumentNullException(nameof(key));
             if (valueFactory == null) throw new ArgumentNullException(nameof(valueFactory));
             #endregion
 
@@ -75,11 +76,11 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
         /// <returns>The existing element or the newly created element.</returns>
         public static TValue GetOrAdd<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key)
+            where TKey : notnull
             where TValue : new()
         {
             #region Sanity checks
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            if (key == null) throw new ArgumentNullException(nameof(key));
             #endregion
 
             return dictionary.GetOrAdd(key, () => new TValue());
@@ -95,7 +96,12 @@ namespace NanoByte.Common.Collections
         /// <returns>The existing element or the newly created element.</returns>
         /// <remarks>Superfluous calls to <paramref name="valueFactory"/> may occur in case of read races. <see cref="IDisposable.Dispose"/> is called on superfluously created objects if implemented.</remarks>
         public static async Task<TValue> GetOrAddAsync<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key, Func<Task<TValue>> valueFactory)
+            where TKey : notnull
         {
+            #region Sanity checks
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            #endregion
+
             if (dictionary.TryGetValue(key, out var existingValue))
                 return existingValue;
 
@@ -143,6 +149,7 @@ namespace NanoByte.Common.Collections
         /// <param name="valueComparer">Controls how to compare values; leave <c>null</c> for default comparer.</param>
         [Pure]
         public static bool UnsequencedEquals<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> first, IDictionary<TKey, TValue> second, IEqualityComparer<TValue>? valueComparer = null)
+            where TKey : notnull
         {
             #region Sanity checks
             if (first == null) throw new ArgumentNullException(nameof(first));
@@ -172,6 +179,7 @@ namespace NanoByte.Common.Collections
         /// <seealso cref="UnsequencedEquals{TKey,TValue}"/>
         [Pure]
         public static int GetUnsequencedHashCode<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, IEqualityComparer<TValue>? valueComparer = null)
+            where TKey : notnull
         {
             #region Sanity checks
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
