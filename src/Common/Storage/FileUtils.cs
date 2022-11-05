@@ -308,15 +308,16 @@ public static class FileUtils
     /// Returns the full paths of all files in a directory and its subdirectories.
     /// </summary>
     /// <param name="path">The path of the directory to search for files.</param>
-    public static string[] GetFilesRecursive(string path)
+    /// <param name="followDirSymlinks">If <c>true</c> recurse into directory symlinks.</param>
+    public static IList<string> GetFilesRecursive(string path, bool followDirSymlinks = false)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
         #endregion
 
         var paths = new List<string>();
-        new DirectoryInfo(path).Walk(fileAction: file => paths.Add(file.FullName));
-        return paths.ToArray();
+        new DirectoryInfo(path).Walk(fileAction: file => paths.Add(file.FullName), followDirSymlinks: followDirSymlinks);
+        return paths;
     }
     #endregion
 
