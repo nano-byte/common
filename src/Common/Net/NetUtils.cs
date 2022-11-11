@@ -83,38 +83,37 @@ public static class NetUtils
     }
 
     /// <summary>
-    /// The current state of the internet connection.
+    /// Returns the current state of the internet connection.
+    /// When unsure assumes a connection is available.
     /// </summary>
-    public static Connectivity InternetConnectivity
+    public static Connectivity GetInternetConnectivity()
     {
-        get
+        try
         {
-            try
+            if (WindowsUtils.IsWindows102004 && SafeNativeMethods.GetNetworkConnectivityHint(out var connectivity) == 0)
             {
-                if (WindowsUtils.IsWindows102004 && SafeNativeMethods.GetNetworkConnectivityHint(out var connectivity) == 0)
-                {
-                    if (connectivity.ConnectivityLevel is not (SafeNativeMethods.NetworkConnectivityLevel.Unknown or SafeNativeMethods.NetworkConnectivityLevel.InternetAccess))
-                        return Connectivity.None;
+                if (connectivity.ConnectivityLevel is SafeNativeMethods.NetworkConnectivityLevel.None or SafeNativeMethods.NetworkConnectivityLevel.ConstrainedInternetAccess)
+                    return Connectivity.None;
 
-                    if (connectivity.ConnectivityCost is SafeNativeMethods.NetworkConnectivityCost.Fixed or SafeNativeMethods.NetworkConnectivityCost.Variable
-                     || connectivity.Roaming
-                     || connectivity.OverDataLimit)
-                        return Connectivity.Metered;
+                if (connectivity.ConnectivityCost is SafeNativeMethods.NetworkConnectivityCost.Fixed or SafeNativeMethods.NetworkConnectivityCost.Variable
+                 || connectivity.Roaming
+                 || connectivity.OverDataLimit)
+                    return Connectivity.Metered;
 
-                    return Connectivity.Normal;
-                }
-
-                if (WindowsUtils.IsWindowsNT)
-                    return SafeNativeMethods.InternetGetConnectedState(out _, 0) ? Connectivity.Normal : Connectivity.None;
-
-                return NetworkInterface.GetIsNetworkAvailable() ? Connectivity.Normal : Connectivity.None;
-            }
-            catch (Exception ex)
-            {
-                Log.Warn("Failed to determine internet state", ex);
                 return Connectivity.Normal;
             }
+
+            if (WindowsUtils.IsWindowsNT)
+                return SafeNativeMethods.InternetGetConnectedState(out _, 0) ? Connectivity.Normal : Connectivity.None;
         }
+        #region Error handling
+        catch (Exception ex)
+        {
+            Log.Debug("Problem detecting internet connectivity state", ex);
+        }
+        #endregion
+
+        return NetworkInterface.GetIsNetworkAvailable() ? Connectivity.Normal : Connectivity.None;
     }
 
     [SuppressUnmanagedCodeSecurity]
