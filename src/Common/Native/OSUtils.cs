@@ -2,6 +2,8 @@
 // Licensed under the MIT License
 
 using System.Collections.Specialized;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 
 namespace NanoByte.Common.Native;
@@ -83,5 +85,69 @@ public static class OSUtils
             dictionary[key] = variables[key]!;
 
         return ExpandVariables(value, dictionary);
+    }
+
+    /// <summary>
+    /// Asks the operating system not to enter idle mode.
+    /// Useful to avoid standby or hibernation during a long-running task.
+    /// </summary>
+    /// <param name="reason">Why the system should not enter idle mode.</param>
+    /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original state.</returns>
+    public static IDisposable? PreventIdle(string reason)
+    {
+        try
+        {
+            if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.SystemRequired);
+        }
+        #region Error handling
+        catch (Exception ex)
+        {
+            Log.Debug("Problem keeping system awake", ex);
+        }
+        #endregion
+
+        return null;
+    }
+
+    /// <summary>
+    /// Asks the operating system not to turn off the display.
+    /// </summary>
+    /// <param name="reason">Why the display should not be turned off.</param>
+    /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original state.</returns>
+    public static IDisposable? PreventDisplayOff(string reason)
+    {
+        try
+        {
+            if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.DisplayRequired);
+        }
+        #region Error handling
+        catch (Exception ex)
+        {
+            Log.Debug("Problem keeping display awake", ex);
+        }
+        #endregion
+
+        return null;
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static IDisposable? KeepAwakeWindows(NativeMethods.ExecutionState state)
+    {
+        var previous = NativeMethods.SetThreadExecutionState(NativeMethods.ExecutionState.Continuous | state);
+        return Marshal.GetLastWin32Error() == 0 ? new Disposable(() => NativeMethods.SetThreadExecutionState(previous)) : null;
+    }
+
+    private static class NativeMethods
+    {
+        [Flags]
+        public enum ExecutionState : uint
+        {
+            Continuous = 0x80000000,
+            SystemRequired = 0x00000001,
+            DisplayRequired = 0x00000002
+        }
+
+        [DllImport("kernel32", SetLastError = true)]
+        public static extern ExecutionState SetThreadExecutionState(ExecutionState esFlags);
     }
 }
