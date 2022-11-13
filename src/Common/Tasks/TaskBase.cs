@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Net;
+using NanoByte.Common.Native;
 using NanoByte.Common.Net;
 
 namespace NanoByte.Common.Tasks;
@@ -20,6 +21,11 @@ public abstract class TaskBase : MarshalByRefObject, ITask
 
     /// <inheritdoc/>
     public virtual bool CanCancel => true;
+
+    /// <summary>
+    /// Indicates whether this task should prevent the system from entering idle mode.
+    /// </summary>
+    protected virtual bool PreventIdle => true;
 
     /// <summary>Signaled when the user wants to cancel the task execution.</summary>
     protected CancellationToken CancellationToken;
@@ -42,7 +48,8 @@ public abstract class TaskBase : MarshalByRefObject, ITask
 
         try
         {
-            Execute();
+            using (PreventIdle ? OSUtils.PreventIdle(Name) : null)
+                Execute();
         }
         #region Error handling
         catch (OperationCanceledException)

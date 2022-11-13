@@ -20,6 +20,9 @@ public sealed class WaitTask : TaskBase
     public override string Name { get; }
 
     /// <inheritdoc/>
+    protected override bool PreventIdle => false;
+
+    /// <inheritdoc/>
     protected override bool UnitsByte => false;
 
     /// <summary>
