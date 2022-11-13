@@ -12,6 +12,11 @@ using NanoByte.Common.Native;
 using System.Net.Http;
 #endif
 
+#if NET
+using System.Threading.Tasks;
+using Tmds.DBus;
+#endif
+
 namespace NanoByte.Common.Net;
 
 /// <summary>
@@ -105,6 +110,17 @@ public static class NetUtils
 
             if (WindowsUtils.IsWindowsNT)
                 return SafeNativeMethods.InternetGetConnectedState(out _, 0) ? Connectivity.Normal : Connectivity.None;
+
+#if NET
+            if (UnixUtils.IsLinux)
+            {
+                var networkManager = Connection.System.CreateProxy<INetworkManager>("org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager");
+                if (networkManager.GetAsync<uint>("Connectivity").Result is INetworkManager.ConnectivityNone or INetworkManager.ConnectivityPortal)
+                    return Connectivity.None;
+                if (networkManager.GetAsync<uint>("Metered").Result is INetworkManager.MeteredYes or INetworkManager.MeteredGuessYes)
+                    return Connectivity.Metered;
+            }
+#endif
         }
         #region Error handling
         catch (Exception ex)
@@ -155,4 +171,16 @@ public static class NetUtils
 			Hidden
 		}
     }
+
+#if NET
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), SuppressMessage("ReSharper", "UnusedMember.Local")]
+    [DBusInterface("org.freedesktop.NetworkManager")]
+    internal interface INetworkManager : IDBusObject
+    {
+        const uint ConnectivityUnknown = 0, ConnectivityNone = 1, ConnectivityPortal = 2, ConnectivityLimited = 3, ConnectivityFull = 4;
+        const uint MeteredUnknown = 0, MeteredYes = 1, MeteredNo = 2, MeteredGuessYes = 3, MeteredGuessNo = 4;
+
+        Task<T> GetAsync<T>(string prop);
+    }
+#endif
 }

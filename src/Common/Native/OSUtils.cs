@@ -6,6 +6,12 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 
+#if NET
+using System.Threading.Tasks;
+using NanoByte.Common.Info;
+using Tmds.DBus;
+#endif
+
 namespace NanoByte.Common.Native;
 
 /// <summary>
@@ -98,6 +104,14 @@ public static class OSUtils
         try
         {
             if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.SystemRequired);
+
+#if NET
+            if (UnixUtils.IsLinux)
+            {
+                var login = Connection.System.CreateProxy<IManager>("org.freedesktop.login1", "/org/freedesktop/login1");
+                return login.InhibitAsync("idle", AppInfo.Current.Name ?? "App", reason, "block").Result;
+            }
+#endif
         }
         #region Error handling
         catch (Exception ex)
@@ -119,6 +133,15 @@ public static class OSUtils
         try
         {
             if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.DisplayRequired);
+
+#if NET
+            if (UnixUtils.IsLinux)
+            {
+                var screenSaver = Connection.Session.CreateProxy<IScreenSaver>("org.freedesktop.ScreenSaver", "/org/freedesktop/ScreenSaver");
+                uint cookie = screenSaver.InhibitAsync(AppInfo.Current.Name ?? "App", reason).Result;
+                return new Disposable(() => screenSaver.UnInhibitAsync(cookie));
+            }
+#endif
         }
         #region Error handling
         catch (Exception ex)
@@ -150,4 +173,21 @@ public static class OSUtils
         [DllImport("kernel32", SetLastError = true)]
         public static extern ExecutionState SetThreadExecutionState(ExecutionState esFlags);
     }
+
+#if NET
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), SuppressMessage("ReSharper", "InconsistentNaming")]
+    [DBusInterface("org.freedesktop.login1.Manager")]
+    internal interface IManager : IDBusObject
+    {
+        Task<CloseSafeHandle> InhibitAsync(string What, string Who, string Why, string Mode);
+    }
+
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), SuppressMessage("ReSharper", "InconsistentNaming")]
+    [DBusInterface("org.freedesktop.ScreenSaver")]
+    internal interface IScreenSaver : IDBusObject
+    {
+        Task<uint> InhibitAsync(string ApplicationName, string ReasonForInhibit);
+        Task UnInhibitAsync(uint Cookie);
+    }
+#endif
 }
