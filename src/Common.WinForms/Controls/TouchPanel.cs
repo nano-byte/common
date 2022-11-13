@@ -3,7 +3,7 @@
 
 using NanoByte.Common.Native;
 
-#if !NET
+#if NETFRAMEWORK
 using System.Security.Permissions;
 #endif
 
@@ -25,7 +25,7 @@ public class TouchPanel : Panel, ITouchControl
 
     protected override CreateParams CreateParams
     {
-#if !NET
+#if NETFRAMEWORK
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 #endif
         get
@@ -42,7 +42,7 @@ public class TouchPanel : Panel, ITouchControl
         WinFormsUtils.RegisterTouchWindow(this);
     }
 
-#if !NET
+#if NETFRAMEWORK
     [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 #endif
     protected override void WndProc(ref Message m)

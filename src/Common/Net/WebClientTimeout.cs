@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET
+#if NETFRAMEWORK
 using System.Net;
 using NanoByte.Common.Info;
 

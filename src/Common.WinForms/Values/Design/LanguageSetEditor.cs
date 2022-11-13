@@ -5,7 +5,7 @@ using System.Drawing.Design;
 using System.Globalization;
 using System.Windows.Forms.Design;
 
-#if !NET
+#if NETFRAMEWORK
 using System.Security.Permissions;
 #endif
 
@@ -14,7 +14,7 @@ namespace NanoByte.Common.Values.Design;
 /// <summary>
 /// An editor that can be associated with <see cref="LanguageSet"/> properties. Uses a <see cref="CheckedListBox"/>.
 /// </summary>
-#if !NET
+#if NETFRAMEWORK
 [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 #endif
 public class LanguageSetEditor : UITypeEditor

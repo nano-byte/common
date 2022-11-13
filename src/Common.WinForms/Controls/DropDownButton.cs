@@ -33,7 +33,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ContentAlignment = System.Drawing.ContentAlignment;
 
-#if !NET
+#if NETFRAMEWORK
 using System.Security.Permissions;
 #endif
 
@@ -304,7 +304,7 @@ public class DropDownButton : Button
             ControlPaint.DrawFocusRectangle(g, focusRect);
     }
 
-#if !NET
+#if NETFRAMEWORK
     [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 #endif
     protected override void WndProc(ref Message m)

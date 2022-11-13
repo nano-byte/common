@@ -1,4 +1,4 @@
-#if !NET
+#if NETFRAMEWORK
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 

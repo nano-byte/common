@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using NanoByte.Common.Native;
 
-#if !NET
+#if NETFRAMEWORK
 using System.Reflection;
 #endif
 
@@ -38,7 +38,7 @@ public static partial class Locations
     private static string GetInstallBase()
     {
         string? codeBase = null;
-#if !NET
+#if NETFRAMEWORK
         try
         {
             codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);

@@ -89,7 +89,7 @@ public sealed class SeekBufferStream : DelegatingStream
         return read;
     }
 
-#if !NETFRAMEWORK
+#if NET
     /// <inheritdoc/>
     public override int Read(Span<byte> buffer)
     {

@@ -76,7 +76,7 @@ public abstract class DelegatingStream : Stream
     public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => UnderlyingStream.WriteAsync(buffer, offset, count, cancellationToken);
 #endif
 
-#if !NETFRAMEWORK
+#if NET
     /// <inheritdoc/>
     public override int Read(Span<byte> buffer) => UnderlyingStream.Read(buffer);
 

@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET
+#if NETFRAMEWORK
 using System.Security.Permissions;
 #endif
 
@@ -12,7 +12,7 @@ namespace NanoByte.Common.Threading;
 /// </summary>
 public abstract class MarshalNoTimeout : MarshalByRefObject
 {
-#if !NET
+#if NETFRAMEWORK
     /// <inheritdoc/>
     [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.Infrastructure)]
     public override object? InitializeLifetimeService() => null;

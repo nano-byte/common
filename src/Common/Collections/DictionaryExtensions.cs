@@ -130,7 +130,7 @@ namespace NanoByte.Common.Collections
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
             #endregion
 
-#if NETSTANDARD || NET
+#if NET
             if (dictionary is Dictionary<TKey, TValue> dict)
                 return dict.TryAdd(key, value);
 #endif

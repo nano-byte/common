@@ -43,7 +43,7 @@ public sealed class ShadowingStream : DelegatingStream
     }
 #endif
 
-#if !NETFRAMEWORK
+#if NET
     /// <inheritdoc/>
     public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
     {

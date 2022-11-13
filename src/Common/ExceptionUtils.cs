@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using System.Security;
 #endif
 
-#if !NET
+#if NETFRAMEWORK
 using System.Diagnostics;
 #endif
 
@@ -368,10 +368,10 @@ public static class ExceptionUtils
     {
         try
         {
-#if NET
-            return new Random(Environment.ProcessId);
-#else
+#if NETFRAMEWORK
             return new Random(Process.GetCurrentProcess().Id);
+#else
+            return new Random(Environment.ProcessId);
 #endif
         }
         catch (Exception)

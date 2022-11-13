@@ -1,4 +1,4 @@
-﻿#if !NET
+﻿#if NETFRAMEWORK
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -18,7 +18,7 @@ namespace System.Runtime.Versioning
         public string PlatformName { get; }
     }
 
-#if !NET
+#if NETFRAMEWORK
     /// <summary>
     /// Records the platform that the project targeted.
     /// </summary>

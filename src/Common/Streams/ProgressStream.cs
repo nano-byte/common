@@ -68,7 +68,7 @@ public sealed class ProgressStream : DelegatingStream
         => CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationToken).Token;
 #endif
 
-#if !NETFRAMEWORK
+#if NET
     /// <inheritdoc/>
     public override int Read(Span<byte> buffer)
         => Report(UnderlyingStream.Read(buffer));

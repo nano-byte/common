@@ -4,7 +4,7 @@
 using System.Drawing.Design;
 using NanoByte.Common.Values.Design;
 
-#if !NET
+#if NETFRAMEWORK
 using System.Security.Permissions;
 #endif
 
@@ -37,7 +37,7 @@ public class ResettablePropertyGrid : PropertyGrid
         ContextMenuStrip = new ContextMenuStrip {Items = {_menuReset}};
     }
 
-#if !NET
+#if NETFRAMEWORK
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
 #endif
     protected override void OnSelectedGridItemChanged(SelectedGridItemChangedEventArgs e)

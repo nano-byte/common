@@ -47,14 +47,14 @@ The following <xref:System.Reflection.CustomAttributeExtensions> methods were in
 
 ## Platform attributes
 
-The following types were introduced in .NET 5.0 and are backported to .NET Framework and .NET Standard:
+The following types were introduced in .NET 5.0 and are backported to .NET Framework:
 
 - <xref:System.Runtime.Versioning.OSPlatformAttribute>
 - <xref:System.Runtime.Versioning.TargetPlatformAttribute>
 - <xref:System.Runtime.Versioning.SupportedOSPlatformAttribute>
 - <xref:System.Runtime.Versioning.UnsupportedOSPlatformAttribute>
 
-The following types were introduced in .NET 6.0 and are backported to .NET Framework and .NET Standard:
+The following types were introduced in .NET 6.0 and are backported to .NET Framework:
 
 - <xref:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute>
 - <xref:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute>
