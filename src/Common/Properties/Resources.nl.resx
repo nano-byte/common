@@ -67,7 +67,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>De collectie kan niet aan zichzelf worden toegevoegd.</value>
+    <value>De verzameling kan niet aan zichzelf worden toegevoegd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Foutmelding</value>
+    <value>Foutrapport</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">

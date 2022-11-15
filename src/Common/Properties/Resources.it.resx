@@ -103,7 +103,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Se lo si desidera, è possibile utilizzare questo campo per fornire ulteriori informazioni sul problema, ad esempio una descrizione di ciò che si stava facendo quando si è verificato l'arresto anomalo.</value>
+    <value>Se lo desiderate, potete utilizzare questo campo per fornire ulteriori informazioni sul problema, ad esempio una descrizione di ciò che stavate facendo quando si è verificato l'arresto anomalo.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. È possibile che i diritti dell'utente non siano sufficienti.</value>
+    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. È possibile che i diritti dell'utente siano insufficienti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
