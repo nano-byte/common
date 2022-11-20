@@ -226,7 +226,7 @@ public static class RegistryUtils
 
     private static void DeleteValue(RegistryKey root, string subkeyName, string valueName)
     {
-        using var subkey = root.OpenSubKey(subkeyName, writable: true);
+        using var subkey = root.TryOpenSubKey(subkeyName, writable: true);
         subkey?.DeleteValue(valueName, throwOnMissingValue: false);
     }
     #endregion
@@ -249,11 +249,11 @@ public static class RegistryUtils
 
         try
         {
-            using var subkey = key.OpenSubKey(subkeyName);
+            using var subkey = key.TryOpenSubKey(subkeyName);
             return subkey?.GetValueNames() ?? new string[0];
         }
         #region Error handling
-        catch (SecurityException ex)
+        catch (UnauthorizedAccessException ex)
         {
             Log.Warn($"Failed to get registry value names from {key.Name}", ex);
             return new string[0];
@@ -278,11 +278,11 @@ public static class RegistryUtils
 
         try
         {
-            using var subkey = key.OpenSubKey(subkeyName);
+            using var subkey = key.TryOpenSubKey(subkeyName);
             return subkey?.GetSubKeyNames() ?? new string[0];
         }
         #region Error handling
-        catch (SecurityException ex)
+        catch (UnauthorizedAccessException ex)
         {
             Log.Warn($"Failed to get registry sub key names from {key.Name}", ex);
             return new string[0];
@@ -293,7 +293,7 @@ public static class RegistryUtils
 
     #region Keys
     /// <summary>
-    /// Like <see cref="RegistryKey.OpenSubKey(string,bool)"/> but with no <c>null</c> return values.
+    /// Like <see cref="RegistryKey.OpenSubKey(string,bool)"/> but maps <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
     /// </summary>
     /// <param name="key">The key to open a subkey in.</param>
     /// <param name="subkeyName">The name of the subkey to open.</param>
@@ -301,7 +301,7 @@ public static class RegistryUtils
     /// <returns>The newly created subkey.</returns>
     /// <exception cref="IOException">Failed to open the key.</exception>
     /// <exception cref="UnauthorizedAccessException">Access to the key is not permitted.</exception>
-    public static RegistryKey OpenSubKeyChecked([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
+    public static RegistryKey? TryOpenSubKey([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
     {
         #region Sanity checks
         if (key == null) throw new ArgumentNullException(nameof(key));
@@ -310,8 +310,7 @@ public static class RegistryUtils
 
         try
         {
-            return key.OpenSubKey(subkeyName, writable)
-                ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
+            return key.OpenSubKey(subkeyName, writable);
         }
         #region Error handling
         catch (SecurityException ex)
@@ -321,6 +320,19 @@ public static class RegistryUtils
         }
         #endregion
     }
+
+    /// <summary>
+    /// Like <see cref="RegistryKey.OpenSubKey(string,bool)"/> but with no <c>null</c> return values.
+    /// </summary>
+    /// <param name="key">The key to open a subkey in.</param>
+    /// <param name="subkeyName">The name of the subkey to open.</param>
+    /// <param name="writable"><c>true</c> for write-access to the key.</param>
+    /// <returns>The newly created subkey.</returns>
+    /// <exception cref="IOException">Failed to open the key.</exception>
+    /// <exception cref="UnauthorizedAccessException">Access to the key is not permitted.</exception>
+    public static RegistryKey OpenSubKeyChecked([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
+        => key.TryOpenSubKey(subkeyName, writable)
+        ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
 
     /// <summary>
     /// Like <see cref="RegistryKey.CreateSubKey(string)"/> but with no <c>null</c> return values.
@@ -368,7 +380,7 @@ public static class RegistryUtils
 #if !NET20 && !NET40
         if (Environment.Is64BitProcess)
         {
-            if (Registry.LocalMachine.OpenSubKey(subkeyName) is {} result)
+            if (Registry.LocalMachine.TryOpenSubKey(subkeyName) is {} result)
             {
                 x64 = true;
                 return result;
