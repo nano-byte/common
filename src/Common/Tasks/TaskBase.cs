@@ -57,12 +57,7 @@ public abstract class TaskBase : MarshalByRefObject, ITask
             State = TaskState.Canceled;
             throw;
         }
-        catch (IOException)
-        {
-            State = TaskState.IOError;
-            throw;
-        }
-        catch (UnauthorizedAccessException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             State = TaskState.IOError;
             throw;

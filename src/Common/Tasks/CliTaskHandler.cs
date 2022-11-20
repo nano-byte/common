@@ -69,9 +69,7 @@ public class CliTaskHandler : TaskHandlerBase
         {
             Console.ForegroundColor = GetLogColor(severity);
         }
-        catch (InvalidOperationException)
-        {}
-        catch (IOException)
+        catch (Exception ex) when (ex is InvalidOperationException or IOException)
         {}
 
         Console.Error.WriteLine(message);
@@ -79,9 +77,7 @@ public class CliTaskHandler : TaskHandlerBase
         {
             Console.ResetColor();
         }
-        catch (InvalidOperationException)
-        {}
-        catch (IOException)
+        catch (Exception ex) when (ex is InvalidOperationException or IOException)
         {}
     }
 

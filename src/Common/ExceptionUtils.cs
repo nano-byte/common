@@ -82,11 +82,7 @@ public static class ExceptionUtils
             objectManager.DoFixups();
         }
         // Ignore if preserving stack trace is not possible
-        catch (SecurityException)
-        {}
-        catch (SerializationException)
-        {}
-        catch (TargetInvocationException)
+        catch (Exception ex) when (ex is SecurityException or SerializationException or TargetInvocationException)
         {}
 
         throw exception;
