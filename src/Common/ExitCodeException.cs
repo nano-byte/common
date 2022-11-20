@@ -24,10 +24,9 @@ public sealed class ExitCodeException : IOException
     /// <summary>
     /// Creates a new exit code exception.
     /// </summary>
-    /// <param name="startInfo">The start info used to launch the process that has now exited.</param>
-    /// <param name="exitCode">The <see cref="Process.ExitCode"/>.</param>
-    public ExitCodeException(ProcessStartInfo startInfo, int exitCode)
-        : this(string.Format(Resources.ProcessExitCode, startInfo.ToCommandLine(), exitCode), exitCode)
+    /// <param name="process">The process that has exited.</param>
+    public ExitCodeException(Process process)
+        : this(string.Format(Resources.ProcessExitCode, $"{process.StartInfo.ToCommandLine()} ({process.Id})", process.ExitCode), process.ExitCode)
     {}
 
     /// <summary>

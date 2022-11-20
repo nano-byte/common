@@ -41,7 +41,8 @@ public class ProcessLauncher : IProcessLauncher
     public virtual void Run(params string[] arguments)
     {
         var process = Start(arguments);
-        HandleExitCode(process.StartInfo, process.WaitForExitCode());
+        process.WaitForExit();
+        HandleExitCode(process);
     }
 
     /// <inheritdoc/>
@@ -74,7 +75,8 @@ public class ProcessLauncher : IProcessLauncher
         stderr.WaitForEnd();
         ReadStderr();
 
-        HandleExitCode(process.StartInfo, process.WaitForExitCode(), lastError);
+        process.WaitForExit();
+        HandleExitCode(process, lastError);
 
         return stdout.ToString();
     }
@@ -100,18 +102,17 @@ public class ProcessLauncher : IProcessLauncher
     /// <summary>
     /// Hook for handling exit codes.
     /// </summary>
-    /// <param name="startInfo">The start info used to launch the process that has now exited.</param>
-    /// <param name="exitCode">The <see cref="Process.ExitCode"/>.</param>
+    /// <param name="process">The process that has exited.</param>
     /// <param name="message">An optional error message.</param>
-    /// <exception cref="ExitCodeException"><paramref name="exitCode"/> had a non-zero value.</exception>
-    protected virtual void HandleExitCode(ProcessStartInfo startInfo, int exitCode, string? message = null)
+    /// <exception cref="ExitCodeException"><see cref="Process.ExitCode"/> had a non-zero value.</exception>
+    protected virtual void HandleExitCode(Process process, string? message = null)
     {
-        if (exitCode == 0) return;
+        if (process.ExitCode == 0) return;
 
         if (string.IsNullOrEmpty(message))
-            throw new ExitCodeException(startInfo, exitCode);
+            throw new ExitCodeException(process);
         else
-            throw new ExitCodeException(message, exitCode);
+            throw new ExitCodeException(message, process.ExitCode);
     }
 
     /// <summary>

@@ -87,7 +87,7 @@ public static class ProcessUtils
         #endregion
 
         process.WaitForExit();
-        Log.Debug($"Process finished with exit code {process.ExitCode}: {process.StartInfo.ToCommandLine()}");
+        Log.Debug($"Process {process.Id} finished with exit code {process.ExitCode}: {process.StartInfo.ToCommandLine()}");
         return process.ExitCode;
     }
 
@@ -97,8 +97,8 @@ public static class ProcessUtils
     /// <exception cref="ExitCodeException">The process exited with a non-zero <see cref="Process.ExitCode"/>.</exception>
     public static void WaitForSuccess(this Process process)
     {
-        int exitCode = process.WaitForExitCode();
-        if (exitCode != 0) throw new ExitCodeException(process.StartInfo, exitCode);
+        if (process.WaitForExitCode() != 0)
+            throw new ExitCodeException(process);
     }
 
     /// <summary>
