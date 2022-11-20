@@ -226,8 +226,8 @@ public static class RegistryUtils
 
     private static void DeleteValue(RegistryKey root, string subkeyName, string valueName)
     {
-        var key = root.OpenSubKey(subkeyName, writable: true);
-        key?.DeleteValue(valueName, throwOnMissingValue: false);
+        using var subkey = root.OpenSubKey(subkeyName, writable: true);
+        subkey?.DeleteValue(valueName, throwOnMissingValue: false);
     }
     #endregion
 
@@ -310,9 +310,8 @@ public static class RegistryUtils
 
         try
         {
-            var result = key.OpenSubKey(subkeyName, writable);
-            if (result == null) throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
-            return result;
+            return key.OpenSubKey(subkeyName, writable)
+                ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
         }
         #region Error handling
         catch (SecurityException ex)
@@ -340,9 +339,8 @@ public static class RegistryUtils
 
         try
         {
-            var result = key.CreateSubKey(subkeyName);
-            if (result == null) throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
-            return result;
+            return key.CreateSubKey(subkeyName)
+                ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
         }
         #region Error handling
         catch (SecurityException ex)
@@ -378,14 +376,14 @@ public static class RegistryUtils
             else
             {
                 x64 = false;
-                return OpenSubKeyChecked(Registry.LocalMachine, @"WOW6432Node\" + subkeyName);
+                return Registry.LocalMachine.OpenSubKeyChecked(@"WOW6432Node\" + subkeyName);
             }
         }
         else
 #endif
         {
             x64 = false;
-            return OpenSubKeyChecked(Registry.LocalMachine, subkeyName);
+            return Registry.LocalMachine.OpenSubKeyChecked(subkeyName);
         }
     }
     #endregion
