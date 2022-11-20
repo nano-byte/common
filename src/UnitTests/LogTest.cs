@@ -1,6 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Diagnostics;
+using NanoByte.Common.Info;
+
 namespace NanoByte.Common;
 
 /// <summary>
@@ -31,5 +34,17 @@ public class LogTest
         {
             Log.Handler -= Handler;
         }
+    }
+
+    [Fact]
+    public void TestReadLastErrorFrom()
+    {
+        string message = $"{nameof(Log.ReadLastErrorFrom)} test: {new Random().Next()}";
+
+        Log.Error("Dummy message");
+        Log.Error(message);
+
+        Log.ReadLastErrorFrom(AppInfo.Current.Name!, Process.GetCurrentProcess().Id)
+           .Should().Be(message);
     }
 }

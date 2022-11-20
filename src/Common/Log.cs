@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 using NanoByte.Common.Info;
 using NanoByte.Common.Storage;
 
@@ -37,7 +38,7 @@ public static class Log
             _processId = Process.GetCurrentProcess().Id;
 
             const int maxSize = 1024 * 1024; // 1MiB
-            var file = new FileInfo(Path.Combine(Path.GetTempPath(), $"{AppInfo.Current.Name} {Environment.UserName} Log.txt"));
+            var file = GetLogFile(AppInfo.Current.Name ?? Path.GetFileNameWithoutExtension(Environment.GetCommandLineArgs()[0]));
             var encoding = new UTF8Encoding(
                 encoderShouldEmitUTF8Identifier: !file.Exists || file.Length > maxSize);
             _fileWriter = new(
@@ -71,6 +72,8 @@ public static class Log
         }));
     }
 
+    private static FileInfo GetLogFile(string appName)
+        => new(Path.Combine(Path.GetTempPath(), $"{appName} {Environment.UserName} Log.txt"));
 
     /// <summary>
     /// Appends a line to the log file.
@@ -261,5 +264,33 @@ public static class Log
         else message += Environment.NewLine + exception;
 
         return $"[{DateTime.Now.ToString("T", CultureInfo.InvariantCulture)}] {_processId} {severity.ToString().ToUpperInvariant()}: {string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText())}";
+    }
+
+    /// <summary>
+    /// Tries to read the last error log line written by another process.
+    /// </summary>
+    /// <param name="appName">The name of the app to get a log line for.</param>
+    /// <param name="processId">The process ID to get a log line for. Leave <c>null</c> to get for any process ID.</param>
+    public static string? ReadLastErrorFrom(string appName, int? processId = null)
+    {
+        if (GetLogFile(appName) is not {Exists: true} file) return null;
+
+        var regEx = new Regex($@"\[\d\d:\d\d:\d\d\] {processId?.ToString(CultureInfo.InvariantCulture) ?? @"\d+"} ERROR: (.+)");
+        try
+        {
+            using var stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new StreamReader(stream);
+            string? result = null;
+            while (reader.ReadLine() is {} line)
+            {
+                if (regEx.Match(line) is {Success: true} match)
+                    result = match.Groups[1].Value;
+            }
+            return result;
+        }
+        catch
+        {
+            return null;
+        }
     }
 }
