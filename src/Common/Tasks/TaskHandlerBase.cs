@@ -35,7 +35,7 @@ public abstract class TaskHandlerBase : ITaskHandler
     /// <param name="severity">The type/severity of the entry.</param>
     /// <param name="message">The message of the entry.</param>
     /// <param name="exception">An optional exception associated with the entry.</param>
-    private void LogHandler(LogSeverity severity, string? message, Exception? exception)
+    protected virtual void LogHandler(LogSeverity severity, string? message, Exception? exception)
     {
         if ((severity == LogSeverity.Debug && Verbosity < Verbosity.Debug)
          || (severity == LogSeverity.Info && Verbosity < Verbosity.Verbose)) return;
