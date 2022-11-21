@@ -218,6 +218,10 @@
     <value>Riavvio delle applicazioni</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Riprova in {0} millisecondi a causa di:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Cerca</value>
     <comment>Manually overriden.</comment>

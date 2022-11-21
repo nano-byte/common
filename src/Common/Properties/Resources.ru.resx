@@ -218,6 +218,10 @@
     <value>Перезапуск приложений</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Повторная попытка через {0} миллисекунд из-за:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Поиск</value>
     <comment>Automatically translated.</comment>

@@ -218,6 +218,10 @@
     <value>アプリケーションの再始動</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>のため、{0} ミリ秒で再試行。</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>検索</value>
     <comment>Automatically translated.</comment>

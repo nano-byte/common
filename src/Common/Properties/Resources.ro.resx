@@ -218,6 +218,10 @@
     <value>Repornirea aplicațiilor</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Reîncercarea în {0} milisecunde din cauza:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Caută</value>
     <comment>Manually overriden.</comment>

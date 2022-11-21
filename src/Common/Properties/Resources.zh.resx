@@ -218,6 +218,10 @@
     <value>重新启动应用程序</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>在{0} milliseconds中重试，因为。</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>搜索</value>
     <comment>Automatically translated.</comment>

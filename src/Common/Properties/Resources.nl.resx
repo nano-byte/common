@@ -218,6 +218,10 @@
     <value>Toepassingen opnieuw opstarten</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Opnieuw proberen in {0} milliseconden vanwege:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Zoek op</value>
     <comment>Automatically translated.</comment>

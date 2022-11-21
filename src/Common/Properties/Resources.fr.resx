@@ -218,6 +218,10 @@
     <value>Redémarrage des applications</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Réessai dans {0} millisecondes à cause de :</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Chercher</value>
     <comment>Manually overriden.</comment>

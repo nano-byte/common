@@ -218,6 +218,10 @@
     <value>Reiniciando aplicativos</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Tente novamente em {0} milissegundos por causa disso:</value>
+    <comment>Manually overriden.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Pesquisar</value>
     <comment>Manually overriden.</comment>
