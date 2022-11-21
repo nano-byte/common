@@ -421,6 +421,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retrying in {0} milliseconds because of:.
+        /// </summary>
+        public static string RetryDelay {
+            get {
+                return ResourceManager.GetString("RetryDelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {

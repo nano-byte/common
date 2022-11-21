@@ -237,6 +237,9 @@
   <data name="RestartingApps" xml:space="preserve">
     <value>Restarting applications</value>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Retrying in {0} milliseconds because of:</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
