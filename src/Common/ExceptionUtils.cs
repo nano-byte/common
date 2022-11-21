@@ -273,7 +273,7 @@ public static class ExceptionUtils
             {
                 try
                 {
-                    await rollback(element).ConfigureAwait(true);
+                    await rollback(element).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
@@ -309,7 +309,7 @@ public static class ExceptionUtils
         {
             try
             {
-                await action(enumerator.Current).ConfigureAwait(true);
+                await action(enumerator.Current).ConfigureAwait(false);
                 return;
             }
             catch (Exception ex) when (enumerator.MoveNext())
@@ -342,7 +342,7 @@ public static class ExceptionUtils
         {
             try
             {
-                await action(lastAttempt: false).ConfigureAwait(true);
+                await action(lastAttempt: false).ConfigureAwait(false);
             }
             catch (TException ex)
             {
