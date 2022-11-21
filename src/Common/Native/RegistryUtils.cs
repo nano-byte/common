@@ -31,7 +31,7 @@ public static class RegistryUtils
 
         try
         {
-            return Registry.GetValue(keyName, valueName, defaultValue) as int? ?? defaultValue;
+            return ExceptionUtils.Retry<SecurityException, int>(() => Registry.GetValue(keyName, valueName, defaultValue) as int? ?? defaultValue);
         }
         #region Error handling
         catch (SecurityException ex)
@@ -57,7 +57,7 @@ public static class RegistryUtils
 
         try
         {
-            Registry.SetValue(keyName, valueName, value, RegistryValueKind.DWord);
+            ExceptionUtils.Retry<SecurityException>(() => Registry.SetValue(keyName, valueName, value, RegistryValueKind.DWord));
         }
         #region Error handling
         catch (SecurityException ex)
@@ -88,7 +88,7 @@ public static class RegistryUtils
 
         try
         {
-            return Registry.GetValue(keyName, valueName, defaultValue) as string ?? defaultValue;
+            return ExceptionUtils.Retry<SecurityException, string?>(() => Registry.GetValue(keyName, valueName, defaultValue) as string ?? defaultValue);
         }
         #region Error handling
         catch (SecurityException ex)
@@ -114,7 +114,7 @@ public static class RegistryUtils
 
         try
         {
-            Registry.SetValue(keyName, valueName, value, RegistryValueKind.String);
+            ExceptionUtils.Retry<SecurityException>(() => Registry.SetValue(keyName, valueName, value, RegistryValueKind.String));
         }
         #region Error handling
         catch (SecurityException ex)
@@ -292,7 +292,7 @@ public static class RegistryUtils
 
     #region Keys
     /// <summary>
-    /// Trys to open a registry key mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
+    /// Trys to open a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
     /// </summary>
     /// <param name="key">The key to open a subkey in.</param>
     /// <param name="subkeyName">The name of the subkey to open.</param>
@@ -308,7 +308,7 @@ public static class RegistryUtils
 
         try
         {
-            return key.OpenSubKey(subkeyName, writable);
+            return ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.OpenSubKey(subkeyName, writable));
         }
         #region Error handling
         catch (SecurityException ex)
@@ -320,7 +320,7 @@ public static class RegistryUtils
     }
 
     /// <summary>
-    /// Opens a registry key mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
+    /// Opens a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
     /// </summary>
     /// <param name="key">The key to open a subkey in.</param>
     /// <param name="subkeyName">The name of the subkey to open.</param>
@@ -333,7 +333,7 @@ public static class RegistryUtils
         ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
 
     /// <summary>
-    /// Creates a registry key mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
+    /// Creates a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
     /// </summary>
     /// <param name="key">The key to create a subkey in.</param>
     /// <param name="subkeyName">The name of the subkey to create.</param>
@@ -349,7 +349,7 @@ public static class RegistryUtils
 
         try
         {
-            return key.CreateSubKey(subkeyName)
+            return ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.CreateSubKey(subkeyName))
                 ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
         }
         #region Error handling
