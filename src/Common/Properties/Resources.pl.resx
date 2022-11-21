@@ -218,6 +218,10 @@
     <value>Ponowne uruchamianie aplikacji</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Retrying w {0} milisekundach z powodu:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Szukaj</value>
     <comment>Automatically translated.</comment>

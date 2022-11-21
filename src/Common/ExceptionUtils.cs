@@ -204,7 +204,6 @@ public static class ExceptionUtils
     /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
     /// <param name="action">The action to execute.</param>
     /// <param name="maxRetries">The maximum number of retries to attempt.</param>
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
     public static void Retry<TException>([InstantHandle] RetryAction action, int maxRetries = 2)
         where TException : Exception
     {
@@ -213,26 +212,22 @@ public static class ExceptionUtils
         #endregion
 
         var random = GetRandom();
-        int retryCounter = 0;
-        Retry:
-        if (retryCounter >= maxRetries)
-            action(lastAttempt: true);
-        else
+        for (int i = 0; i < maxRetries; i++)
         {
             try
             {
                 action(lastAttempt: false);
+                return;
             }
             catch (TException ex)
             {
-                int delay = random.Next(50, 1000 * (1 << retryCounter));
-                Log.Info($"Retrying in {delay} milliseconds because of:", ex);
+                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                Log.Info(string.Format(Resources.RetryDelay, delay), ex);
                 Thread.Sleep(delay);
-
-                retryCounter++;
-                goto Retry;
             }
         }
+
+        action(lastAttempt: true);
     }
 
 #if !NET20 && !NET40
@@ -325,7 +320,6 @@ public static class ExceptionUtils
     /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
     /// <param name="action">The action to execute.</param>
     /// <param name="maxRetries">The maximum number of retries to attempt.</param>
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
     public static async Task RetryAsync<TException>(RetryAsyncAction action, int maxRetries = 2)
         where TException : Exception
     {
@@ -334,32 +328,29 @@ public static class ExceptionUtils
         #endregion
 
         var random = GetRandom();
-        int retryCounter = 0;
-        Retry:
-        if (retryCounter >= maxRetries)
-            await action(lastAttempt: true).ConfigureAwait(false);
-        else
+        for (int i = 0; i < maxRetries; i++)
         {
             try
             {
-                await action(lastAttempt: false).ConfigureAwait(false);
+                await action(lastAttempt: false);
+                return;
             }
             catch (TException ex)
             {
-                int delay = random.Next(50, 1000 * (1 << retryCounter));
-                Log.Info($"Retrying in {delay} milliseconds because of:", ex);
-                await Task.Delay(delay).ConfigureAwait(true);
-
-                retryCounter++;
-                goto Retry;
+                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                Log.Info(string.Format(Resources.RetryDelay, delay), ex);
+                await Task.Delay(delay);
             }
         }
+
+        await action(lastAttempt: true);
     }
 #endif
 
     /// <summary>
     /// Uses process ID as a random seed to ensure we get different values than other competing processes on the same machine.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
     private static Random GetRandom()
     {
         try

@@ -218,6 +218,10 @@
     <value>Neustart von Anwendungen</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Erneuter Versuch in {0} Millisekunden wegen:</value>
+    <comment>Manually overriden.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Suche</value>
     <comment>Manually overriden.</comment>

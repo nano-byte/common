@@ -218,6 +218,10 @@
     <value>Reinício de aplicações</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Trituração em {0} milissegundos por causa de:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Pesquisa</value>
     <comment>Automatically translated.</comment>

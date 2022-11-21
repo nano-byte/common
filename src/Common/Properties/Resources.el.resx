@@ -218,6 +218,10 @@
     <value>Επανεκκίνηση εφαρμογών</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="RetryDelay" xml:space="preserve">
+    <value>Επανάληψη σε {0} χιλιοστά του δευτερολέπτου λόγω:</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Αναζήτηση</value>
     <comment>Manually overriden.</comment>
