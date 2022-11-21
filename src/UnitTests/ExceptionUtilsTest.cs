@@ -110,20 +110,23 @@ public class ExceptionUtilsTest
 
     [Fact]
     public void TestRetryPassOnLastAttempt()
-        => ExceptionUtils.Retry<InvalidOperationException>(lastAttempt =>
+    {
+        int count = 0;
+        ExceptionUtils.Retry<InvalidOperationException>(() =>
         {
-            if (!lastAttempt) throw new InvalidOperationException("Test exception");
+            if (count++ < 2) throw new InvalidOperationException("Test exception");
         });
+    }
 
     [Fact]
     public void TestRetryDoubleFail()
         => Assert.Throws<InvalidOperationException>(() => ExceptionUtils.Retry<InvalidOperationException>(
-            delegate { throw new InvalidOperationException("Test exception"); }, maxRetries: 1));
+            () => throw new InvalidOperationException("Test exception"), maxRetries: 1));
 
     [Fact]
     public void TestRetryOtherExceptionType()
         => Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
-            delegate { throw new IOException("Test exception"); }, maxRetries: 1));
+            () => throw new IOException("Test exception"), maxRetries: 1));
 
     /// <summary>
     /// Ensures that <see cref="ExceptionUtils.ApplyWithRollbackAsync{T}"/> correctly performs rollbacks on exceptions.
@@ -184,11 +187,15 @@ public class ExceptionUtilsTest
     }
 
     [Fact]
-    public async Task TestRetryAsyncPassOnLastAttempt() => await ExceptionUtils.RetryAsync<InvalidOperationException>(async lastAttempt =>
+    public async Task TestRetryAsyncPassOnLastAttempt()
     {
-        await Task.Yield();
-        if (!lastAttempt) throw new InvalidOperationException("Test exception");
-    });
+        int count = 0;
+        await ExceptionUtils.RetryAsync<InvalidOperationException>(async () =>
+        {
+            await Task.Yield();
+            if (++count < 2) throw new InvalidOperationException("Test exception");
+        });
+    }
 
     [Fact]
     public async Task TestRetryAsyncDoubleFail()

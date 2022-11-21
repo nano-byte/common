@@ -17,22 +17,6 @@ using System.Diagnostics;
 namespace NanoByte.Common;
 
 /// <summary>
-/// Delegate used by <see cref="ExceptionUtils.Retry{TException}"/>.
-/// </summary>
-/// <param name="lastAttempt">Indicates whether this retry run is the last attempt before giving up and passing the exception through.</param>
-/// <seealso cref="ExceptionUtils.Retry{TException}"/>
-public delegate void RetryAction(bool lastAttempt);
-
-#if !NET20 && !NET40
-/// <summary>
-/// Delegate used by <see cref="ExceptionUtils.RetryAsync{TException}"/>.
-/// </summary>
-/// <param name="lastAttempt">Indicates whether this retry run is the last attempt before giving up and passing the exception through.</param>
-/// <seealso cref="ExceptionUtils.Retry{TException}"/>
-public delegate Task RetryAsyncAction(bool lastAttempt);
-#endif
-
-/// <summary>
 /// Provides helper methods related to <see cref="Exception"/>s.
 /// </summary>
 public static class ExceptionUtils
@@ -204,7 +188,7 @@ public static class ExceptionUtils
     /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
     /// <param name="action">The action to execute.</param>
     /// <param name="maxRetries">The maximum number of retries to attempt.</param>
-    public static void Retry<TException>([InstantHandle] RetryAction action, int maxRetries = 2)
+    public static void Retry<TException>([InstantHandle] Action action, int maxRetries = 2)
         where TException : Exception
     {
         #region Sanity checks
@@ -216,7 +200,7 @@ public static class ExceptionUtils
         {
             try
             {
-                action(lastAttempt: false);
+                action();
                 return;
             }
             catch (TException ex)
@@ -227,7 +211,7 @@ public static class ExceptionUtils
             }
         }
 
-        action(lastAttempt: true);
+        action();
     }
 
 #if !NET20 && !NET40
@@ -320,7 +304,7 @@ public static class ExceptionUtils
     /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
     /// <param name="action">The action to execute.</param>
     /// <param name="maxRetries">The maximum number of retries to attempt.</param>
-    public static async Task RetryAsync<TException>(RetryAsyncAction action, int maxRetries = 2)
+    public static async Task RetryAsync<TException>(Func<Task> action, int maxRetries = 2)
         where TException : Exception
     {
         #region Sanity checks
@@ -332,7 +316,7 @@ public static class ExceptionUtils
         {
             try
             {
-                await action(lastAttempt: false);
+                await action();
                 return;
             }
             catch (TException ex)
@@ -343,7 +327,7 @@ public static class ExceptionUtils
             }
         }
 
-        await action(lastAttempt: true);
+        await action();
     }
 #endif
 

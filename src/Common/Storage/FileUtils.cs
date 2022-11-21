@@ -217,10 +217,7 @@ public static class FileUtils
 
             try
             {
-                ExceptionUtils.Retry<IOException>(delegate
-                {
-                    File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true);
-                });
+                ExceptionUtils.Retry<IOException>(() => File.Replace(sourcePath, destinationPath, backupPath, ignoreMetadataErrors: true));
             }
             catch (IOException ex)
             {

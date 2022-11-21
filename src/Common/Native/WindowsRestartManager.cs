@@ -178,11 +178,22 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     }
 
     private void ShutdownAppsWork(PercentProgressCallback progressCallback)
-        => ExceptionUtils.Retry<IOException>(lastAttempt =>
+    {
+        void Shutdown(bool force)
         {
-            int ret = NativeMethods.RmShutdown(_sessionHandle, lastAttempt ? NativeMethods.RM_SHUTDOWN_TYPE.RmForceShutdown : 0, progressCallback);
+            int ret = NativeMethods.RmShutdown(_sessionHandle, force ? NativeMethods.RM_SHUTDOWN_TYPE.RmForceShutdown : 0, progressCallback);
             if (ret != 0) throw BuildException(ret);
-        }, maxRetries: 3);
+        }
+
+        try
+        {
+            ExceptionUtils.Retry<IOException>(() => Shutdown(false));
+        }
+        catch (IOException)
+        {
+            Shutdown(force: true);
+        }
+    }
     #endregion
 
     #region Restart
