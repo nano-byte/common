@@ -130,25 +130,6 @@ public class EnumerableExtensionsTest
     }
 
     [Fact]
-    public async Task TestForEachAsync()
-        => await new TaskFactory(CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskContinuationOptions.None, new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler)
-                .StartNew(async () =>
-                 {
-                     int runningTasksCount = 0;
-                     await Enumerable.Range(1, 100).ForEachAsync(async _ =>
-                     {
-                         runningTasksCount++;
-                         await Task.Delay(10);
-                         runningTasksCount.Should().BeLessOrEqualTo(2);
-                         runningTasksCount--;
-                     }, maxParallel: 2);
-                 }).Unwrap();
-
-    [Fact]
-    public async Task ForEachAsyncShouldRejectDefaultScheduler()
-        => await Assert.ThrowsAsync<InvalidOperationException>(() => Enumerable.Range(1, 100).ForEachAsync(_ => Task.CompletedTask));
-
-    [Fact]
     public void TestPermutate()
     {
         var permutations = new[] {1, 2, 3}.Permutate().ToList();

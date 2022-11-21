@@ -1,10 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
-using System.Threading.Tasks;
-#endif
-
 namespace NanoByte.Common.Collections
 {
     /// <summary>
@@ -343,41 +339,6 @@ namespace NanoByte.Common.Collections
                 sorted.Add(node);
             }
         }
-
-#if !NET20 && !NET40
-        /// <summary>
-        /// Runs asynchronous operations for each element in an enumeration. Runs multiple tasks using cooperative multitasking.
-        /// </summary>
-        /// <param name="enumerable">The input elements to enumerate over.</param>
-        /// <param name="taskFactory">Creates a <see cref="Task"/> for each input element.</param>
-        /// <param name="maxParallel">The maximum number of <see cref="Task"/>s to run in parallel. Use 0 or lower for unbounded.</param>
-        /// <exception cref="InvalidOperationException"><see cref="TaskScheduler.Current"/> is equal to <see cref="TaskScheduler.Default"/>.</exception>
-        /// <remarks>
-        /// <see cref="SynchronizationContext.Current"/> must not be null.
-        /// The synchronization context is required to ensure that task continuations are scheduled sequentially and do not run in parallel.
-        /// </remarks>
-        public static async Task ForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> taskFactory, int maxParallel = 0)
-        {
-            if (TaskScheduler.Current == TaskScheduler.Default)
-                throw new InvalidOperationException("TaskScheduler.Current must not be equal to TaskScheduler.Default value when using ForEachAsync().");
-
-            var tasks = new List<Task>(maxParallel);
-
-            foreach (var task in enumerable.Select(taskFactory))
-            {
-                tasks.Add(task);
-
-                if (tasks.Count == maxParallel)
-                {
-                    var completedTask = await Task.WhenAny(tasks.ToArray()).ConfigureAwait(false);
-                    await completedTask.ConfigureAwait(false); // observe exceptions
-                    tasks.Remove(completedTask);
-                }
-            }
-
-            await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
-        }
-#endif
 
         /// <summary>
         /// Generates all possible permutations of a set of <paramref name="elements"/>.
