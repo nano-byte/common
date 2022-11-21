@@ -214,6 +214,39 @@ public static class ExceptionUtils
         action();
     }
 
+    /// <summary>
+    /// Executes a delegate and automatically retries it using exponential back-off if a specific type of exception was raised.
+    /// </summary>
+    /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
+    /// <typeparam name="TResult">The type of result the <paramref name="function"/> produces.</typeparam>
+    /// <param name="function">The function to execute.</param>
+    /// <param name="maxRetries">The maximum number of retries to attempt.</param>
+    /// <returns>The result of <paramref name="function"/>.</returns>
+    public static TResult Retry<TException, TResult>([InstantHandle] Func<TResult> function, int maxRetries = 2)
+        where TException : Exception
+    {
+        #region Sanity checks
+        if (function == null) throw new ArgumentNullException(nameof(function));
+        #endregion
+
+        var random = GetRandom();
+        for (int i = 0; i < maxRetries; i++)
+        {
+            try
+            {
+                function();
+            }
+            catch (TException ex)
+            {
+                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                Log.Info(string.Format(Resources.RetryDelay, delay), ex);
+                Thread.Sleep(delay);
+            }
+        }
+
+        return function();
+    }
+
 #if !NET20 && !NET40
     /// <summary>
     /// Applies an operation for all elements of a collection. Automatically applies rollback operations in case of an exception.
@@ -328,6 +361,39 @@ public static class ExceptionUtils
         }
 
         await action();
+    }
+
+    /// <summary>
+    /// Executes an asynchronous and automatically retries it using exponential back-off if a specific type of exception was raised.
+    /// </summary>
+    /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
+    /// <typeparam name="TResult">The type of result the <paramref name="function"/> produces.</typeparam>
+    /// <param name="function">The function to execute.</param>
+    /// <param name="maxRetries">The maximum number of retries to attempt.</param>
+    /// <returns>The result of <paramref name="function"/>.</returns>
+    public static async Task<TResult> Retry<TException, TResult>([InstantHandle] Func<Task<TResult>> function, int maxRetries = 2)
+        where TException : Exception
+    {
+        #region Sanity checks
+        if (function == null) throw new ArgumentNullException(nameof(function));
+        #endregion
+
+        var random = GetRandom();
+        for (int i = 0; i < maxRetries; i++)
+        {
+            try
+            {
+                return await function();
+            }
+            catch (TException ex)
+            {
+                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                Log.Info(string.Format(Resources.RetryDelay, delay), ex);
+                await Task.Delay(delay);
+            }
+        }
+
+        return await function();
     }
 #endif
 
