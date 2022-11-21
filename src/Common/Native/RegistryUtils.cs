@@ -252,7 +252,7 @@ public static class RegistryUtils
             return subkey?.GetValueNames() ?? new string[0];
         }
         #region Error handling
-        catch (SecurityException ex)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to get registry value names from {key.Name}", ex);
             return new string[0];
@@ -281,7 +281,7 @@ public static class RegistryUtils
             return subkey?.GetSubKeyNames() ?? new string[0];
         }
         #region Error handling
-        catch (SecurityException ex)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to get registry sub key names from {key.Name}", ex);
             return new string[0];
