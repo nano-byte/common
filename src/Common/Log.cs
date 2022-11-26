@@ -1,149 +1,18 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using NanoByte.Common.Info;
-using NanoByte.Common.Storage;
 
 namespace NanoByte.Common;
-
-/// <summary>
-/// Describes an event relating to an entry in the <see cref="Log"/>.
-/// </summary>
-/// <param name="severity">The type/severity of the entry.</param>
-/// <param name="message">The message of the entry.</param>
-/// <param name="exception">An optional exception associated with the entry.</param>
-/// <seealso cref="Log.Handler"/>
-public delegate void LogEntryEventHandler(LogSeverity severity, string? message, Exception? exception);
 
 /// <summary>
 /// A simple logging system. Writes to an in-memory buffer and a plain text file.
 /// Allows additional handlers to be registered (e.g., for console or GUI output).
 /// </summary>
-public static class Log
+public static partial class Log
 {
-    #region File Writer
-    private static StreamWriter? _fileWriter;
-    private static readonly int _processId;
-
-    [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "The static constructor is used to add an identification header to the log file")]
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Any kind of problems writing the log file should be ignored")]
-    static Log()
-    {
-        try
-        {
-            _processId = Process.GetCurrentProcess().Id;
-
-            const int maxSize = 1024 * 1024; // 1MiB
-            var file = GetLogFile(AppInfo.Current.Name ?? Path.GetFileNameWithoutExtension(Environment.GetCommandLineArgs()[0]));
-            var encoding = new UTF8Encoding(
-                encoderShouldEmitUTF8Identifier: !file.Exists || file.Length > maxSize);
-            _fileWriter = new(
-                file.Open(
-                    file.Exists && file.Length > maxSize
-                        ? FileMode.Truncate
-                        : FileMode.Append,
-                    FileAccess.Write,
-                    FileShare.ReadWrite), // Allow concurrent writes to same file by other processes
-                encoding);
-        }
-        #region Error handling
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine("Error writing to log file:");
-            Console.Error.WriteLine(ex);
-            return;
-        }
-        #endregion
-
-        AppDomain.CurrentDomain.ProcessExit += delegate { CloseFile(); };
-
-        WriteToFile(string.Join(Environment.NewLine, new[]
-        {
-            "",
-            $"/// {AppInfo.Current.NameVersion}",
-            $"/// Install base: {Locations.InstallBase}",
-            $"/// Command-line args: {Environment.GetCommandLineArgs().JoinEscapeArguments()}",
-            $"/// Process {_processId} started at: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}",
-            ""
-        }));
-    }
-
-    private static FileInfo GetLogFile(string appName)
-        => new(Path.Combine(Path.GetTempPath(), $"{appName} {Environment.UserName} Log.txt"));
-
-    /// <summary>
-    /// Appends a line to the log file.
-    /// </summary>
-    private static void WriteToFile(string logLine)
-    {
-        if (_fileWriter is not {} writer) return;
-
-        try
-        {
-            // Catch up in case other processes have been writing to the same file
-            writer.BaseStream.Seek(0, SeekOrigin.End);
-
-            writer.WriteLine(logLine);
-            writer.Flush();
-        }
-        #region Error handling
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine("Error writing to log file:");
-            Console.Error.WriteLine(ex);
-            CloseFile();
-        }
-        #endregion
-    }
-
-    private static void CloseFile()
-    {
-        try
-        {
-            _fileWriter?.Dispose();
-        }
-        #region Error handling
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine("Error closing log file:");
-            Console.Error.WriteLine(ex);
-        }
-        #endregion
-
-        _fileWriter = null;
-    }
-    #endregion
-
-    private static readonly List<LogEntryEventHandler> _handlers = new();
-
-    /// <summary>
-    /// Invoked when a new entry is added to the log.
-    /// Only the newest (last) registered handler is invoked.
-    /// <see cref="Console"/> output is used as a fallback if no handlers are registered.
-    /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
-    public static event LogEntryEventHandler? Handler
-    {
-        add
-        {
-            lock (_lock)
-            {
-                if (value == null) return;
-                _sessionContent = new(); // Reset per session (indicated by new handler)
-                _handlers.Add(value);
-            }
-        }
-        remove
-        {
-            if (value == null) return;
-            lock (_lock) _handlers.Remove(value);
-        }
-    }
-
     private static StringBuilder _sessionContent = new();
 
     /// <summary>
@@ -201,7 +70,7 @@ public static class Log
     private static readonly object _lock = new();
 
     /// <summary>
-    /// Adds a log entry to the log file and sends it to the last entry in <see cref="_handlers"/>.
+    /// Adds a log entry.
     /// </summary>
     private static void AddEntry(LogSeverity severity, string? message, Exception? exception)
     {
