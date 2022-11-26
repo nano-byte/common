@@ -20,8 +20,8 @@ namespace NanoByte.Common;
 public delegate void LogEntryEventHandler(LogSeverity severity, string? message, Exception? exception);
 
 /// <summary>
-/// Sends log messages to custom handlers or the console.
-/// Additionally writes to <see cref="System.Diagnostics.Debug"/>, an in-memory buffer and a plain text file.
+/// A simple logging system. Writes to an in-memory buffer and a plain text file.
+/// Allows additional handlers to be registered (e.g., for console or GUI output).
 /// </summary>
 public static class Log
 {
@@ -118,45 +118,7 @@ public static class Log
     }
     #endregion
 
-    private static readonly List<LogEntryEventHandler> _handlers = new()
-    {
-        // Default handler
-        (severity, message, _) =>
-        {
-            void WriteLine(ConsoleColor color)
-            {
-                try
-                {
-                    Console.ForegroundColor = color;
-                }
-                catch (InvalidOperationException)
-                {}
-                catch (IOException)
-                {}
-
-                Console.Error.WriteLine(message);
-
-                try
-                {
-                    Console.ResetColor();
-                }
-                catch (InvalidOperationException)
-                {}
-                catch (IOException)
-                {}
-            }
-
-            switch (severity)
-            {
-                case LogSeverity.Warn:
-                    WriteLine(ConsoleColor.DarkYellow);
-                    break;
-                case LogSeverity.Error:
-                    WriteLine(ConsoleColor.Red);
-                    break;
-            }
-        }
-    };
+    private static readonly List<LogEntryEventHandler> _handlers = new();
 
     /// <summary>
     /// Invoked when a new entry is added to the log.
@@ -250,7 +212,7 @@ public static class Log
         {
             _sessionContent.AppendLine(logLine);
             WriteToFile(logLine);
-            _handlers.Last()(severity, message, exception);
+            _handlers.LastOrDefault()?.Invoke(severity, message, exception);
         }
     }
 
