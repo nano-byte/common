@@ -12,10 +12,10 @@ namespace NanoByte.Common;
 public class LogTest
 {
     [Fact]
-    public void TestContent()
+    public void TestBuffer()
     {
         Log.Info("Log Unit Test Token");
-        Log.Content.Contains("Log Unit Test Token").Should().BeTrue();
+        Log.GetBuffer().Should().Contain("Log Unit Test Token");
     }
 
     [Fact]

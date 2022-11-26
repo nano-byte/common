@@ -184,7 +184,7 @@ public sealed partial class ErrorReportForm : Form
         Application = AppInfo.Current,
         OS = OSInfo.Current,
         Exception = new ExceptionInfo(_exception),
-        Log = Log.Content,
+        Log = Log.GetBuffer(),
         Comments = commentBox.Text
     }.ToXmlString();
     #endregion

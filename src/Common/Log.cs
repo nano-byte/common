@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace NanoByte.Common;
@@ -13,20 +12,6 @@ namespace NanoByte.Common;
 /// </summary>
 public static partial class Log
 {
-    private static StringBuilder _sessionContent = new();
-
-    /// <summary>
-    /// Collects all log entries from this application session.
-    /// </summary>
-    public static string Content
-    {
-        get
-        {
-            lock (_lock)
-                return _sessionContent.ToString();
-        }
-    }
-
     /// <summary>
     /// Writes information to help developers diagnose problems to the log.
     /// </summary>
@@ -79,7 +64,7 @@ public static partial class Log
         System.Diagnostics.Debug.Write(logLine);
         lock (_lock)
         {
-            _sessionContent.AppendLine(logLine);
+            AddToBuffer(logLine);
             WriteToFile(logLine);
             _handlers.LastOrDefault()?.Invoke(severity, message, exception);
         }

@@ -29,7 +29,7 @@ partial class Log
             lock (_lock)
             {
                 if (value == null) return;
-                _sessionContent = new(); // Reset per session (indicated by new handler)
+                ResetBuffer();
                 _handlers.Add(value);
             }
         }
