@@ -20,13 +20,22 @@ public class MainForm : Form
             OutputBox.Show(this, "Test", "Test message");
         };
 
-        var outputGridButton = new Button {Text = "Grid", Location = new(10, 130)};
+        var outputGridButton = new Button {Text = "Grid", Location = new(90, 100)};
         outputGridButton.Click += delegate
         {
             OutputGridBox.Show(this, "Test", new [] {"Test 1", "Test 2"});
         };
 
-        var dropDownButton = new Button {Text = "Drop-down", Location = new(10, 160)};
+        var errorButton = new Button {Text = "Error", Location = new(170, 100)};
+        errorButton.Click += delegate
+        {
+            var rtf = new RtfBuilder();
+            rtf.AppendPar("Blue", RtfColor.Blue);
+            rtf.AppendPar("Red", RtfColor.Red);
+            ErrorBox.Show(this, new Exception("Sample error"), rtf);
+        };
+
+        var dropDownButton = new Button {Text = "Drop-down", Location = new(10, 130)};
         dropDownButton.Click += delegate
         {
             new DropDownContainer
@@ -39,7 +48,7 @@ public class MainForm : Form
             }.Show(dropDownButton);
         };
 
-        var messageBoxesButton = new Button {Text = "Message boxes", Location = new(10, 190)};
+        var messageBoxesButton = new Button {Text = "Message boxes", Location = new(10, 160)};
         messageBoxesButton.Click += delegate
         {
             if (Msg.OkCancel(this, "Continue?", MsgSeverity.Info, "OK\nContinue this", "Cancel\nAbort this"))
@@ -56,7 +65,7 @@ public class MainForm : Form
             }
         };
 
-        var asyncFormButton = new Button {Text = "Async form", Location = new(10, 220)};
+        var asyncFormButton = new Button {Text = "Async form", Location = new(10, 190), Width = 150};
         asyncFormButton.Click += async delegate
         {
             using var wrapper = new AsyncFormWrapper<MainForm>(() => new());
@@ -64,7 +73,7 @@ public class MainForm : Form
             await Task.Delay(5000); // End message loop and close form after 5s
         };
 
-        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, dropDownButton, messageBoxesButton, asyncFormButton});
+        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton});
 
         Shown += async delegate
         {
