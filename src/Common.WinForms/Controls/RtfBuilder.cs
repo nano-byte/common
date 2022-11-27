@@ -21,12 +21,12 @@ public enum RtfColor
 /// </summary>
 public sealed class RtfBuilder
 {
-    private readonly StringBuilder _builder = new();
+    private readonly List<KeyValuePair<string, RtfColor>> _paragraphs = new();
 
     /// <summary>
     /// Indicates whether the builder is currently empty (contains no paragraphs).
     /// </summary>
-    public bool IsEmpty => _builder.Length == 0;
+    public bool IsEmpty => _paragraphs.Count == 0;
 
     /// <summary>
     /// Appends a new paragraph.
@@ -34,15 +34,23 @@ public sealed class RtfBuilder
     /// <param name="text">The text in the paragraph.</param>
     /// <param name="color">The color of the text.</param>
     public void AppendPar(string text, RtfColor color)
-    {
-        string escapedText = (text ?? throw new ArgumentNullException(nameof(text)))
-              .Replace(@"\", @"\\")
-              .Replace(Environment.NewLine, "\\par\n")
-              .Replace("\n", "\\par\n");
-        _builder.AppendLine($"\\cf{(int)color + 1} {escapedText}\\par\\par\n");
-    }
+        => _paragraphs.Add(new(text, color));
 
     /// <inheritdoc/>
     public override string ToString()
-        => $"{{\\rtf1\r\n{{\\colortbl ;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue0;\\red255\\green255\\blue0;\\red255\\green106\\blue0;\\red255\\green0\\blue0;}}\r\n{_builder}}}";
+    {
+        var builder = new StringBuilder("{\\rtf1\r\n{\\colortbl ;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue0;\\red255\\green255\\blue0;\\red255\\green106\\blue0;\\red255\\green0\\blue0;}\r\n");
+        foreach (var (text, color) in _paragraphs)
+        {
+            builder.Append("\\cf");
+            builder.Append((int)color + 1);
+            builder.Append(" ");
+            builder.Append(text.Replace(@"\", @"\\")
+                               .Replace(Environment.NewLine, "\\par\n")
+                               .Replace("\n", "\\par\n"));
+            builder.Append("\\par\\par\n");
+        }
+        builder.Append("}");
+        return builder.ToString();
+    }
 }
