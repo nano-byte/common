@@ -1,7 +1,7 @@
 ﻿<Project>
 
+  <!-- Build configuration -->
   <PropertyGroup>
-    <!-- Build configuration -->
     <LangVersion>10.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>annotations</Nullable>
@@ -12,14 +12,20 @@
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <NoWarn>$(NoWarn);1591</NoWarn><!-- Missing XML comments -->
+  </PropertyGroup>
 
-    <!-- Metadata -->
+  <!-- NuGet Metadata -->
+  <PropertyGroup>
     <Authors>Bastian Eicher</Authors>
     <Copyright>Copyright Bastian Eicher et al.</Copyright>
+    <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
     <PackageProjectUrl>https://common.nano-byte.net/</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <!-- Build-time dependencies -->
   <ItemGroup>
