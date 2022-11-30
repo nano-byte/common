@@ -53,7 +53,7 @@ public static class OSUtils
                     return StringUtils.Join("-", parts.Skip(1));
                 else
                 {
-                    Log.Warn($"Variable '{parts[0]}' not set. Defaulting to empty string.");
+                    Log.Info($"Variable '{parts[0]}' not set. Defaulting to empty string.");
                     return "";
                 }
             }
@@ -69,7 +69,7 @@ public static class OSUtils
                 return ret;
             else
             {
-                Log.Warn($"Variable '{key}' not set. Defaulting to empty string.");
+                Log.Info($"Variable '{key}' not set. Defaulting to empty string.");
                 return "";
             }
         });
