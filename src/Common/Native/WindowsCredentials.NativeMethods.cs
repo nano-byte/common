@@ -11,8 +11,8 @@ namespace NanoByte.Common.Native
     {
         private const int ErrorNoSuchLogonSession = 1312;
 
-        private const int MaxUsernameLength = 512;
-        private const int MaxPasswordLength = 256;
+        private const int MaxUsernameLength = 513;
+        private const int MaxPasswordLength = 257;
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         private struct CredUIInfo

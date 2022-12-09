@@ -49,12 +49,10 @@ public static partial class WindowsCredentials
 
         if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();
 
-        var usernameBuffer = new StringBuilder(1000);
-        var passwordBuffer = new StringBuilder(1000);
-
         var credUI = CreateCredUIInfo(owner, title, message);
+        StringBuilder usernameBuffer = new(MaxUsernameLength + 1), passwordBuffer = new(MaxPasswordLength + 1);
         bool persist = true;
-        int result = NativeMethods.CredUIPromptForCredentials(ref credUI, target, IntPtr.Zero, 0, usernameBuffer, MaxUsernameLength, passwordBuffer, MaxPasswordLength, ref persist, flags);
+        int result = NativeMethods.CredUIPromptForCredentials(ref credUI, target, IntPtr.Zero, 0, usernameBuffer, usernameBuffer.Capacity, passwordBuffer, passwordBuffer.Capacity, ref persist, flags);
         HandleResult(result);
 
         return new NetworkCredential(usernameBuffer.ToString(), passwordBuffer.ToString());
@@ -75,11 +73,9 @@ public static partial class WindowsCredentials
 
         if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();
 
-        var usernameBuffer = new StringBuilder(1000);
-        var passwordBuffer = new StringBuilder(1000);
-
+        StringBuilder usernameBuffer = new(MaxUsernameLength + 1), passwordBuffer = new(MaxPasswordLength + 1);
         bool persist = true;
-        int result = NativeMethods.CredUICmdLinePromptForCredentials(target, IntPtr.Zero, 0, usernameBuffer, MaxUsernameLength, passwordBuffer, MaxPasswordLength, ref persist, flags);
+        int result = NativeMethods.CredUICmdLinePromptForCredentials(target, IntPtr.Zero, 0, usernameBuffer, usernameBuffer.Capacity, passwordBuffer, passwordBuffer.Capacity, ref persist, flags);
         HandleResult(result);
 
         return new NetworkCredential(usernameBuffer.ToString(), passwordBuffer.ToString());
