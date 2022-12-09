@@ -12,6 +12,8 @@ Newer versions of .NET often introduce features that can be backported to earlie
 
 [Nullable reference types](https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references), [Ranges](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges) and [Records](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/records) were introduced in .NET (Core) and are backported to .NET Framework.
 
+[Required members](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-11.0/required-members) were introduced in .NET 7.0 and are backported to .NET 6.0 and .NET Framework.
+
 ## Collections
 
 The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:
