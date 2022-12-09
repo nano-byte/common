@@ -105,7 +105,7 @@ public class UriTextBox : HintTextBox
             return (files ?? new string[0]).FirstOrDefault() ?? "";
         }
         if (dragEventArgs.Data.GetDataPresent(DataFormats.Text))
-            return (string)dragEventArgs.Data.GetData(DataFormats.Text);
+            return (string)dragEventArgs.Data.GetData(DataFormats.Text)!;
 
         return "";
     }

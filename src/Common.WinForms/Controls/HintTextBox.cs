@@ -98,6 +98,7 @@ public class HintTextBox : TextBox
     }
 
     /// <inheritdoc/>
+    [AllowNull]
     public override string Text
     {
         get => IsHintTextVisible ? "" : base.Text;

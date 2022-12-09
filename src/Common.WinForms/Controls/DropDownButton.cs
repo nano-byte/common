@@ -366,7 +366,7 @@ public class DropDownButton : Button
 
     private void SetButtonDrawState()
     {
-        if (Bounds.Contains(Parent.PointToClient(Cursor.Position)))
+        if (Parent != null && Bounds.Contains(Parent.PointToClient(Cursor.Position)))
             State = PushButtonState.Hot;
         else if (Focused)
             State = PushButtonState.Default;

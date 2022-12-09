@@ -23,7 +23,7 @@ public class DropDownContainer : UserControl
     /// Closes the drop down.
     /// </summary>
     public void Close()
-        => Parent.Dispose();
+        => Parent?.Dispose();
 
     protected override bool ProcessDialogKey(Keys keyData)
     {

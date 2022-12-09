@@ -50,7 +50,7 @@ public sealed partial class InputBox : Form
             textInput.Text = (files ?? new string[0]).FirstOrDefault();
         }
         else if (e.Data.GetDataPresent(DataFormats.Text))
-            textInput.Text = (string)e.Data.GetData(DataFormats.Text);
+            textInput.Text = (string)e.Data.GetData(DataFormats.Text)!;
     }
 
     private void InputBox_DragEnter(object? sender, DragEventArgs e)
