@@ -5,8 +5,8 @@
         {
           "src": "../artifacts/Release",
           "files": [
-            "net6.0/NanoByte.Common*.dll",
-            "net6.0-windows/NanoByte.Common.WinForms.dll"
+            "net7.0/NanoByte.Common*.dll",
+            "net7.0-windows/NanoByte.Common.WinForms.dll"
           ]
         }
       ],
