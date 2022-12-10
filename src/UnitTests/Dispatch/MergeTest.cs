@@ -29,7 +29,7 @@ public class MergeTest
         public static IEnumerable<MergeTestData> BuildList(params string[] mergeIDs)
             => mergeIDs.Select(mergeID => new MergeTestData(mergeID)).ToList();
 
-        public override string ToString() => MergeID + " (" + Data + ")";
+        public override string ToString() => $"{MergeID} ({Data})";
 
         #region Equality
         public bool Equals(MergeTestData? other)
@@ -78,8 +78,8 @@ public class MergeTest
         var list = new[] {new MergeTestData(mergeID: "1")};
 
         Merge.ThreeWay(reference: Array.Empty<MergeTestData>(), theirs: list, mine: list,
-            added: element => throw new AssertionFailedException(element + " should not be detected as added."),
-            removed: element => throw new AssertionFailedException(element + " should not be detected as removed."));
+            added: element => throw new AssertionFailedException($"{element} should not be detected as added."),
+            removed: element => throw new AssertionFailedException($"{element} should not be detected as removed."));
     }
 
     /// <summary>

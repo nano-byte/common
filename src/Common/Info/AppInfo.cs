@@ -36,7 +36,7 @@ public struct AppInfo
     /// The <see cref="Name"/> and <see cref="Version"/> combined.
     /// </summary>
     [XmlIgnore]
-    public string NameVersion => Name + " " + Version;
+    public string NameVersion => $"{Name} {Version}";
 
     /// <summary>
     /// The copyright information for the application.

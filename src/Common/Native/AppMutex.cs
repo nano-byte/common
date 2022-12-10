@@ -42,7 +42,7 @@ public sealed class AppMutex : IDisposable
         if (WindowsUtils.IsWindowsNT)
         {
             TryAdd(name);
-            TryAdd("Global\\" + name);
+            TryAdd($@"Global\{name}");
         }
 
         return appMutex;
@@ -87,6 +87,6 @@ public sealed class AppMutex : IDisposable
         if (!WindowsUtils.IsWindowsNT) return false;
 
         return TryProbe(name)
-            || TryProbe("Global\\" + name);
+            || TryProbe($@"Global\{name}");
     }
 }

@@ -46,7 +46,7 @@ namespace NanoByte.Common.Native
                 {
                     var error = compilerResults.Errors[0];
                     if (error.ErrorNumber == "CS0016") throw new IOException(error.ErrorText);
-                    else throw new InvalidOperationException("Compilation error " + error.ErrorNumber + " in line " + error.Line + Environment.NewLine + error.ErrorText);
+                    else throw new InvalidOperationException($"Compilation error {error.ErrorNumber} in line {error.Line}{Environment.NewLine}{error.ErrorText}");
                 }
             }
         }
@@ -60,12 +60,12 @@ namespace NanoByte.Common.Native
         {
             if (Environment.Version.Major == 4)
             { // C# 4.0/5.0 (.NET 4.0/4.5)
-                compilerParameters.CompilerOptions += " /win32manifest:" + manifestFilePath.EscapeArgument();
+                compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
                 return new CSharpCodeProvider();
             }
             else if (File.Exists(Path.Combine(WindowsUtils.GetNetFxDirectory(WindowsUtils.NetFx35), "csc.exe")))
             { // C# 3.0 (.NET 3.5)
-                compilerParameters.CompilerOptions += " /win32manifest:" + manifestFilePath.EscapeArgument();
+                compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
                 return NewCSharpCodeProvider(WindowsUtils.NetFx35);
             }
             else

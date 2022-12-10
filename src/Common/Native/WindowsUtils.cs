@@ -608,7 +608,7 @@ public static partial class WindowsUtils
         if (!IsWindowsVista) return;
 
         int ret = NativeMethods.RegisterApplicationRestart(arguments, NativeMethods.RestartFlags.NONE);
-        if (ret != 0) Log.Warn("Failed to register application for restart with arguments: " + arguments);
+        if (ret != 0) Log.Warn($"Failed to register application for restart with arguments: {arguments}");
     }
 
     /// <summary>

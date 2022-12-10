@@ -15,7 +15,7 @@ public class TransparentCacheTest
         var cache = new TransparentCache<string, string>(input =>
         {
             callCounter++;
-            return input + "X";
+            return $"{input}X";
         });
 
         cache["input"].Should().Be("inputX");

@@ -64,7 +64,7 @@ public readonly struct TaskSnapshot
             TaskState.Header => Resources.StateHeader,
             TaskState.Data when UnitsTotal == -1 && UnitsProcessed == 0 => Resources.StateData,
             TaskState.Data when UnitsTotal == -1 => UnitsToString(UnitsProcessed),
-            TaskState.Data => UnitsToString(UnitsProcessed) + @" / " + UnitsToString(UnitsTotal),
+            TaskState.Data => $"{UnitsToString(UnitsProcessed)} / {UnitsToString(UnitsTotal)}",
             TaskState.Complete => Resources.StateComplete,
             TaskState.WebError => Resources.StateWebError,
             TaskState.IOError => Resources.StateIOError,

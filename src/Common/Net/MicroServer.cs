@@ -71,7 +71,7 @@ public sealed class MicroServer : IDisposable
         {
             try
             {
-                string prefix = "http://localhost:" + port++ + "/";
+                string prefix = $"http://localhost:{port++}/";
                 var listener = new HttpListener();
                 listener.Prefixes.Add(prefix);
                 listener.Start();
@@ -118,7 +118,7 @@ public sealed class MicroServer : IDisposable
     private void HandleRequest(HttpListenerContext context)
     {
         // Only return one specific file
-        if (context.Request.RawUrl != "/" + _resourceName)
+        if (context.Request.RawUrl != $"/{_resourceName}")
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
             return;

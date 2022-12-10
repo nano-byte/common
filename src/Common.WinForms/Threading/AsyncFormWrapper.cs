@@ -50,7 +50,7 @@ public sealed class AsyncFormWrapper<T> : IDisposable
 
                 // Run message loop (will take ownership of the form)
                 Application.Run();
-            }, "AsyncFormWrapper: " + typeof(T).Name);
+            }, $"AsyncFormWrapper: {typeof(T).Name}");
 
             try
             {

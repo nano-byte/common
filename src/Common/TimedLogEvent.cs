@@ -46,7 +46,7 @@ public struct TimedLogEvent : IDisposable
     public void Dispose()
     {
         _timer.Stop();
-        Log.Info(_entry + " => " + (float)_timer.Elapsed.TotalSeconds + "s");
+        Log.Info($"{_entry} => {_timer.Elapsed.TotalSeconds}s");
     }
     #endregion
 }

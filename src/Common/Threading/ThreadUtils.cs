@@ -23,7 +23,7 @@ public static class ThreadUtils
         if (execute == null) throw new ArgumentNullException(nameof(execute));
         #endregion
 
-        Log.Debug("Starting async thread: " + name);
+        Log.Debug($"Starting async thread: {name}");
 
         var thread = new Thread(execute) {Name = name};
         if (WindowsUtils.IsWindows)
@@ -44,7 +44,7 @@ public static class ThreadUtils
         if (execute == null) throw new ArgumentNullException(nameof(execute));
         #endregion
 
-        Log.Debug("Starting background thread: " + name);
+        Log.Debug($"Starting background thread: {name}");
 
         var thread = new Thread(execute) {Name = name, IsBackground = true};
         thread.Start();

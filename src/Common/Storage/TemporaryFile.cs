@@ -45,7 +45,7 @@ public class TemporaryFile : IDisposable
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            Log.Warn("Failed to delete temporary file: " + Path, ex);
+            Log.Warn($"Failed to delete temporary file: {Path}", ex);
         }
     }
 }

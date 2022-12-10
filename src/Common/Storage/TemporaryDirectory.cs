@@ -55,7 +55,7 @@ public class TemporaryDirectory : IDisposable
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            Log.Warn("Failed to delete temporary directory: " + Path, ex);
+            Log.Warn($"Failed to delete temporary directory: {Path}", ex);
         }
     }
 }

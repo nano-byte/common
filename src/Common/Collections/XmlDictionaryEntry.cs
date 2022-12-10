@@ -58,7 +58,7 @@ public sealed class XmlDictionaryEntry : IEquatable<XmlDictionaryEntry>, IClonea
 
     #region Conversion
     /// <inheritdoc/>
-    public override string ToString() => Key + ": " + Value;
+    public override string ToString() => $"{Key}: {Value}";
     #endregion
 
     #region Equality

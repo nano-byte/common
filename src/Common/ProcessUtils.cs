@@ -117,9 +117,9 @@ public static class ProcessUtils
 
         string executablePath = Path.Combine(Locations.InstallBase,
 #if NETFRAMEWORK
-            name + ".exe"
+            $"{name}.exe"
 #else
-            name + ".dll"
+            $"{name}.dll"
 #endif
         );
         if (!File.Exists(executablePath)) throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, name), executablePath);
@@ -243,7 +243,7 @@ public static class ProcessUtils
         if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
         #endregion
 
-        return startInfo.FileName.EscapeArgument() + " " + startInfo.Arguments;
+        return $"{startInfo.FileName.EscapeArgument()} {startInfo.Arguments}";
     }
 
     /// <summary>

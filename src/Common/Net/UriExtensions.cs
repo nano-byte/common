@@ -35,7 +35,7 @@ public static class UriExtensions
         string escapedString = uri.ToStringRfc();
         return escapedString.EndsWith("/")
             ? uri
-            : new Uri(escapedString + "/", uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
+            : new Uri($"{escapedString}/", uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
     }
 
     /// <summary>

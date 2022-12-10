@@ -100,7 +100,7 @@ public abstract class TaskHandlerBase : ITaskHandler
         {
             lock (_askInteractiveLock)
             {
-                Log.Debug("Question: " + question);
+                Log.Debug($"Question: {question}");
                 try
                 {
                     bool answer = AskInteractive(question, defaultAnswer ?? false);
@@ -117,12 +117,12 @@ public abstract class TaskHandlerBase : ITaskHandler
         else if (defaultAnswer is {} answer)
         {
             if (string.IsNullOrEmpty(alternateMessage))
-                Log.Info("Using default answer " + (answer ? "Yes" : "No") + " for question: " + question);
+                Log.Info($"Using default answer {(answer ? "Yes" : "No")} for question: {question}");
             else
                 Log.Warn(alternateMessage);
             return answer;
         }
-        else throw new OperationCanceledException("Unable to ask question in non-interactive mode: " + question);
+        else throw new OperationCanceledException($"Unable to ask question in non-interactive mode: {question}");
     }
 
     /// <summary>

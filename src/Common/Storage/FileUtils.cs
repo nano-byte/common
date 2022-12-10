@@ -184,7 +184,7 @@ public static class FileUtils
         {
             string backupPath = Path.Combine(
                 Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
-                "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
+                $"backup.{Path.GetRandomFileName()}.{Path.GetFileName(destinationPath)}");
 
             if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
             try
@@ -213,7 +213,7 @@ public static class FileUtils
 
             string backupPath = Path.Combine(
                 Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
-                "backup." + Path.GetRandomFileName() + "." + Path.GetFileName(destinationPath));
+                $"backup.{Path.GetRandomFileName()}.{Path.GetFileName(destinationPath)}");
 
             try
             {
@@ -334,7 +334,7 @@ public static class FileUtils
         #region Error handling
         catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException)
         {
-            Log.Error("Failed to reset ACLs for: " + directory.FullName, ex);
+            Log.Error($"Failed to reset ACLs for: {directory.FullName}", ex);
         }
         #endregion
     }
@@ -958,7 +958,7 @@ public static class FileUtils
     [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
     private static bool SupportsExecutableBits([Localizable(false)] string path)
     {
-        string probeFile = Path.Combine(path, ".unixfs_probe_" + Path.GetRandomFileName());
+        string probeFile = Path.Combine(path, $".unixfs_probe_{Path.GetRandomFileName()}");
         Touch(probeFile);
 
         try
@@ -995,8 +995,8 @@ public static class FileUtils
 
         if (!File.Exists(path)) throw new FileNotFoundException(string.Format(Resources.FileNotFound, path), path);
 
-        if (WindowsUtils.IsWindowsNT) return WindowsUtils.ReadAllBytes(path + ":" + name);
-        else if (UnixUtils.IsUnix) return UnixUtils.GetXattr(path, "user." + name);
+        if (WindowsUtils.IsWindowsNT) return WindowsUtils.ReadAllBytes($"{path}:{name}");
+        else if (UnixUtils.IsUnix) return UnixUtils.GetXattr(path, $"user.{name}");
         else throw new PlatformNotSupportedException();
     }
 
@@ -1024,7 +1024,7 @@ public static class FileUtils
         {
             try
             {
-                WindowsUtils.WriteAllBytes(path + ":" + name, data);
+                WindowsUtils.WriteAllBytes($"{path}:{name}", data);
             }
             #region Error handling
             catch (Win32Exception ex)
@@ -1034,7 +1034,7 @@ public static class FileUtils
             }
             #endregion
         }
-        else if (UnixUtils.IsUnix) UnixUtils.SetXattr(path, "user." + name, data);
+        else if (UnixUtils.IsUnix) UnixUtils.SetXattr(path, $"user.{name}", data);
         else throw new PlatformNotSupportedException();
     }
     #endregion

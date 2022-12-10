@@ -50,7 +50,7 @@ public class DialogTaskHandler : GuiTaskHandlerBase
         // Treat questions that default to "Yes" as less severe than those that default to "No"
         var severity = defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn;
 
-        Log.Debug("Question: " + question);
+        Log.Debug($"Question: {question}");
         switch (_owner.Invoke(() => Msg.YesNoCancel(_owner, question, severity)))
         {
             case DialogResult.Yes:

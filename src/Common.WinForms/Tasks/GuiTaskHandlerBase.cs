@@ -48,7 +48,7 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
     /// <inheritdoc/>
     protected override bool AskInteractive(string question, bool defaultAnswer)
     {
-        Log.Debug("Question: " + question);
+        Log.Debug($"Question: {question}");
 
         // Treat questions that default to "Yes" as less severe than those that default to "No"
         var severity = defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn;

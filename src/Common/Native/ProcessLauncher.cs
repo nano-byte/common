@@ -93,7 +93,7 @@ public class ProcessLauncher : IProcessLauncher
             FileName = FileName,
             Arguments = string.IsNullOrEmpty(Arguments)
                 ? arguments.JoinEscapeArguments()
-                : arguments + " " + arguments.JoinEscapeArguments(),
+                : $"{arguments} {arguments.JoinEscapeArguments()}",
             UseShellExecute = false,
             ErrorDialog = false
         };

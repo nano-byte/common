@@ -22,7 +22,7 @@ public class AppMutexTest
     [SkippableFact]
     public void TestProbeCreateClose()
     {
-        string mutexName = "unit-tests-" + Path.GetRandomFileName();
+        string mutexName = $"unit-tests-{Path.GetRandomFileName()}";
         AppMutex.Probe(mutexName).Should().BeFalse();
         var mutex = AppMutex.Create(mutexName);
         AppMutex.Probe(mutexName).Should().BeTrue();

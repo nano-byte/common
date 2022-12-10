@@ -284,10 +284,10 @@ public static class StringUtils
         provider ??= CultureInfo.CurrentCulture;
         return value switch
         {
-            >= 1073741824 => string.Format(provider, "{0:0.00}", value / 1073741824f) + " GB",
-            >= 1048576 => string.Format(provider, "{0:0.00}", value / 1048576f) + " MB",
-            >= 1024 => string.Format(provider, "{0:0.00}", value / 1024f) + " KB",
-            _ => value + " Bytes"
+            >= 1073741824 => $"{string.Format(provider, "{0:0.00}", value / 1073741824f)} GB",
+            >= 1048576 => $"{string.Format(provider, "{0:0.00}", value / 1048576f)} MB",
+            >= 1024 => $"{string.Format(provider, "{0:0.00}", value / 1024f)} KB",
+            _ => $"{value} Bytes"
         };
     }
 

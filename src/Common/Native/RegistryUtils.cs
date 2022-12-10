@@ -215,13 +215,13 @@ public static class RegistryUtils
 
         if (machineWide)
         {
-            DeleteValue(Registry.LocalMachine, @"SOFTWARE\" + subkeyName, valueName);
+            DeleteValue(Registry.LocalMachine, $@"SOFTWARE\{subkeyName}", valueName);
 #if !NET20 && !NET40
-            if (Environment.Is64BitProcess) DeleteValue(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\" + subkeyName, valueName);
+            if (Environment.Is64BitProcess) DeleteValue(Registry.LocalMachine, $@"SOFTWARE\Wow6432Node\{subkeyName}", valueName);
 #endif
         }
         else
-            DeleteValue(Registry.CurrentUser, @"SOFTWARE\" + subkeyName, valueName);
+            DeleteValue(Registry.CurrentUser, $@"SOFTWARE\{subkeyName}", valueName);
     }
 
     private static void DeleteValue(RegistryKey root, string subkeyName, string valueName)
@@ -388,7 +388,7 @@ public static class RegistryUtils
             else
             {
                 x64 = false;
-                return Registry.LocalMachine.OpenSubKeyChecked(@"WOW6432Node\" + subkeyName);
+                return Registry.LocalMachine.OpenSubKeyChecked($@"WOW6432Node\{subkeyName}");
             }
         }
         else

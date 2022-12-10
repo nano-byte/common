@@ -59,7 +59,7 @@ public class LanguageSet : SortedSet<CultureInfo>
             }
             catch (ArgumentException)
             {
-                Log.Warn("Unknown language code: " + language);
+                Log.Warn($"Unknown language code: {language}");
                 language = CultureInfo.InvariantCulture;
             }
             yield return language;

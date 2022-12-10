@@ -43,11 +43,11 @@ public class ProcessUtilsTest
         else
         {
             startInfo.FileName.Should().EndWith("mono");
-            startInfo.Arguments.Should().Be(assemblyPath.EscapeArgument() + " my args");
+            startInfo.Arguments.Should().Be($"{assemblyPath.EscapeArgument()} my args");
         }
 #else
         startInfo.FileName.Should().EndWith("dotnet");
-        startInfo.Arguments.Should().Be(assemblyPath.EscapeArgument() + " my args");
+        startInfo.Arguments.Should().Be($"{assemblyPath.EscapeArgument()} my args");
 #endif
     }
 

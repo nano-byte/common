@@ -29,7 +29,7 @@ public class NetrcCredentialProvider : ICredentialProvider
         {
             if (previousIncorrect)
             {
-                Log.Error(string.Format(Resources.InvalidCredentials, uri.Host + "@.netrc"));
+                Log.Error(string.Format(Resources.InvalidCredentials, $"{uri.Host}@.netrc"));
                 return _innerProvider?.GetCredential(uri);
             }
 

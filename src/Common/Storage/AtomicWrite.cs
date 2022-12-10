@@ -46,7 +46,7 @@ public sealed class AtomicWrite : IDisposable
         if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
         // Prepend random string for temp file name
-        WritePath = directory + Path.DirectorySeparatorChar + "temp." + Path.GetRandomFileName() + "." + Path.GetFileName(path);
+        WritePath = $"{directory}{Path.DirectorySeparatorChar}temp.{Path.GetRandomFileName()}.{Path.GetFileName(path)}";
     }
 
     /// <summary>

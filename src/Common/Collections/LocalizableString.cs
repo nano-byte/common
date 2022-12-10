@@ -63,14 +63,14 @@ public sealed class LocalizableString : IEquatable<LocalizableString>, ICloneabl
             }
             catch (ArgumentException)
             {
-                Log.Error("Ignoring unknown language code: " + value);
+                Log.Error($"Ignoring unknown language code: {value}");
             }
         }
     }
 
     #region Conversion
     /// <inheritdoc/>
-    public override string ToString() => Value + " (" + Language + ")";
+    public override string ToString() => $"{Value} ({Language})";
     #endregion
 
     #region Equality

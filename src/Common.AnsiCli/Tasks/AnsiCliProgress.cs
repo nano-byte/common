@@ -39,7 +39,7 @@ public class AnsiCliProgress : MarshalByRefObject, IProgress<TaskSnapshot>
 
             case TaskState.WebError or TaskState.IOError or TaskState.Canceled:
                 _progressTask.IsIndeterminate = true;
-                _progressTask.Description = value.State + ": " + _progressTask.Description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 32);
+                _progressTask.Description = $"{value.State}: {_progressTask.Description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 32)}";
                 break;
         }
     }
