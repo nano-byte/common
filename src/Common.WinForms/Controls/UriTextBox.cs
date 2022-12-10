@@ -9,7 +9,7 @@ namespace NanoByte.Common.Controls;
 /// A <see cref="HintTextBox"/> designed specifically for entering URIs.
 /// </summary>
 /// <remarks>Will turn red for invalid input and green for valid input. Will not allow focus to be lost for invalid input.</remarks>
-[Description("A HintTextBox designed specifically for entering URIs.")]
+[Description("""A HintTextBox designed specifically for entering URIs.""")]
 public class UriTextBox : HintTextBox
 {
     #region Events
@@ -48,13 +48,13 @@ public class UriTextBox : HintTextBox
     /// <summary>
     /// When set to <c>true</c> only URIs starting with "http:" or "https:" will be considered valid.
     /// </summary>
-    [DefaultValue(false), Description("When set to true only URIs starting with \"http:\" or \"https:\" will be considered valid."), Category("Behavior")]
+    [DefaultValue(false), Description("""When set to true only URIs starting with "http:" or "https:" will be considered valid."""), Category("Behavior")]
     public bool HttpOnly { get; set; }
 
     /// <summary>
     /// When set to <c>true</c> relative URIs are accepted.
     /// </summary>
-    [DefaultValue(false), Description("When set to true relative URIs are accepted."), Category("Behavior")]
+    [DefaultValue(false), Description("""When set to true relative URIs are accepted."""), Category("Behavior")]
     public bool AllowRelative { get; set; }
 
     /// <summary>

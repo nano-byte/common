@@ -96,7 +96,7 @@ public class DropDownButton : Button
     /// Splits the button into a conventional "button" part and a "drop down" part rather than treating the entire button as a "drop down" button.
     /// </summary>
     [DefaultValue(false)]
-    [Description("Splits the button into a conventional \"button\" part and a \"drop down\" part rather than treating the entire button as a \"drop down\" button.")]
+    [Description("""Splits the button into a conventional "button" part and a "drop down" part rather than treating the entire button as a "drop down" button.""")]
     public bool ShowSplit
     {
         get => _showSplit;

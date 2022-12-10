@@ -37,9 +37,15 @@ public class XmlStorageTest
 
     [Fact]
     public void TestToXmlString()
-        => new TestData {Data = "Hello"}.ToXmlString().Should().Be("<?xml version=\"1.0\"?>\n<TestData>\n  <Data>Hello</Data>\n</TestData>\n");
+        => new TestData {Data = "Hello"}.ToXmlString().Replace("\n", "\r\n").Should().Be("""
+            <?xml version="1.0"?>
+            <TestData>
+              <Data>Hello</Data>
+            </TestData>
+
+            """);
 
     [Fact]
     public void TestFromXmlString()
-        => XmlStorage.FromXmlString<TestData>("<?xml version=\"1.0\"?><TestData><Data>Hello</Data></TestData>").Data.Should().Be("Hello");
+        => XmlStorage.FromXmlString<TestData>("""<?xml version="1.0"?><TestData><Data>Hello</Data></TestData>""").Data.Should().Be("Hello");
 }

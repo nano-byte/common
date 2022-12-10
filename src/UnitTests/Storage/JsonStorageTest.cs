@@ -36,9 +36,9 @@ public class JsonStorageTest
 
     [Fact]
     public void TestToJsonString()
-        => new TestData {Data = "Hello"}.ToJsonString().Should().Be("{\"Data\":\"Hello\"}");
+        => new TestData {Data = "Hello"}.ToJsonString().Should().Be("""{"Data":"Hello"}""");
 
     [Fact]
     public void TestFromJsonString()
-        => JsonStorage.FromJsonString<TestData>("{\"Data\":\"Hello\"}").Data.Should().Be("Hello");
+        => JsonStorage.FromJsonString<TestData>("""{"Data":"Hello"}""").Data.Should().Be("Hello");
 }
