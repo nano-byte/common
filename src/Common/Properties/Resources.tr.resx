@@ -219,7 +219,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Nedeniyle {0} milisaniye içinde yeniden deneyin:</value>
+    <value>Şu nedenle {0} milisaniye sonra yeniden denenecek:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
