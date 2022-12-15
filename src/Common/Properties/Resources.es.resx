@@ -71,7 +71,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>El DACL no puede ser canonizado ya que potencialmente resultaría en una pérdida de información.</value>
+    <value>El DACL no puede canonizarse, ya que potencialmente supondría una pérdida de información.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -91,11 +91,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Descargando {0}</value>
+    <value>Descargar {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Informe de errores</value>
+    <value>Informe de error</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
@@ -107,7 +107,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Se ha producido un error inesperado en esta aplicación. Puedes ayudarnos a solucionar el problema informando de él. Si ya existe una solución conocida para su problema, se mostrará justo después de enviar el informe.</value>
+    <value>Se ha producido un error inesperado en esta aplicación. Puedes ayudarnos a solucionar el problema informándonos de ello. Si ya existe una solución conocida para tu problema, se mostrará justo después de enviar el informe.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -115,23 +115,23 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>El informe de error se ha enviado con éxito.</value>
+    <value>El informe de error se ha enviado correctamente.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>No se ha podido descargar {0}.</value>
+    <value>Error al descargar {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Error al abrir la subclave del registro '{0}' en '{1}'.</value>
+    <value>Error al abrir la subclave de registro '{0}' en '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Fallo en la reversión de '{0}'.</value>
+    <value>Error al revertir '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Fallo en el inicio de '{0}'.</value>
+    <value>Error al iniciar '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -155,15 +155,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>El lanzamiento de '{0}' requiere privilegios de administrador.</value>
+    <value>Para iniciar '{0}' se necesitan privilegios de administrador.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Se ha superado la cantidad máxima de elementos en la colección.</value>
+    <value>Se ha superado la cantidad máxima de elementos de la colección.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>No se ha registrado ninguna acción para '{0}'.</value>
+    <value>No hay acción registrada para '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -187,11 +187,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Por favor, introduzca las credenciales de acceso a {0}:</value>
+    <value>Por favor, introduzca sus credenciales de acceso para {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Hubo un problema al cargar '{0}'.</value>
+    <value>Ha habido un problema al cargar '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
@@ -203,27 +203,27 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Lectura del archivo {0}</value>
+    <value>Archivo de lectura {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Este comando no se puede volver a realizar hasta que se haya realizado el comando de deshacer.</value>
+    <value>Este comando no se puede volver a ejecutar hasta que se haya ejecutado el comando de deshacer.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Valor de reposición</value>
+    <value>Restablecer valor</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Reinicio de aplicaciones</value>
+    <value>Reiniciar aplicaciones</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Reintento en {0} milisegundos por:</value>
+    <value>Reintentando en {0} milisegundos debido a:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Busque en</value>
+    <value>Buscar en</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
@@ -243,7 +243,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Completa</value>
+    <value>Complete</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obtención de cabeceras</value>
+    <value>Obtener cabeceras</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
@@ -275,11 +275,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Su versión de .NET no soporta TLS 1.2. Esto puede causar errores de conexión al descargar contenido a través de HTTPS. Por favor, ejecute Windows Update para instalar los parches necesarios.</value>
+    <value>Su versión de .NET no es compatible con TLS 1.2. Esto puede causar errores de conexión al descargar contenido a través de HTTPS. Ejecute Windows Update para instalar los parches necesarios.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>No se ha podido localizar el conjunto denominado "{0}".</value>
+    <value>El ensamblaje llamado "{0}" no pudo ser localizado.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Este comando de deshacer no se puede realizar hasta que se haya realizado el comando real.</value>
+    <value>Este comando de deshacer no se puede ejecutar hasta que se haya ejecutado el comando real.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
