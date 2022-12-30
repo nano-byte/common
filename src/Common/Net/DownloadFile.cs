@@ -169,6 +169,13 @@ public class DownloadFile : TaskBase
             // Wrap exception since only certain exception types are allowed
             throw new WebException(ex.Message, ex);
         }
+#if NETFRAMEWORK
+        catch (System.Configuration.ConfigurationErrorsException ex)
+        {
+            // Wrap exception since only certain exception types are allowed
+            throw new WebException(ex.Message, ex);
+        }
+#endif
         #endregion
     }
 
