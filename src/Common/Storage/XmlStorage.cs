@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Serialization;
 using NanoByte.Common.Streams;
@@ -35,7 +36,7 @@ public static class XmlStorage
         if (stream.CanSeek) stream.Position = 0;
         try
         {
-            return (T)new XmlSerializer(typeof(T)).Deserialize(stream)!;
+            return (T)GetSerializer(typeof(T)).Deserialize(stream)!;
         }
         #region Error handling
         catch (InvalidOperationException ex)
@@ -112,7 +113,6 @@ public static class XmlStorage
         #endregion
 
         var type = data.GetType();
-        var serializer = new XmlSerializer(type);
 
         var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
         {
@@ -128,6 +128,7 @@ public static class XmlStorage
                 type="text/xsl" href="{stylesheet}"
                 """);
 
+        var serializer = GetSerializer(type);
         var qualifiedNames = GetQualifiedNames(type);
         if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
         else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
@@ -192,4 +193,7 @@ public static class XmlStorage
         const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
         return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
     }
+
+    private static XmlSerializer GetSerializer(Type type)
+        => ExceptionUtils.Retry<COMException, XmlSerializer>(() => new XmlSerializer(type));
 }
