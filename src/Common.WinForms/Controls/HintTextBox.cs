@@ -125,6 +125,9 @@ public class HintTextBox : TextBox
         get => _hintText;
         set
         {
+            if (AccessibleName == null || AccessibleName == _hintText)
+                AccessibleName = value;
+
             _hintText = value;
 
             // Update the hint text on-screen if it is already visible

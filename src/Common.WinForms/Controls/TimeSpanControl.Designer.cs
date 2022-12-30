@@ -49,6 +49,7 @@ namespace NanoByte.Common.Controls
             // 
             // labelDays
             // 
+            this.labelDays.AccessibleName = "Days";
             this.labelDays.AutoSize = true;
             this.labelDays.Location = new System.Drawing.Point(49, 5);
             this.labelDays.Name = "labelDays";
@@ -58,6 +59,7 @@ namespace NanoByte.Common.Controls
             // 
             // labelColon1
             // 
+            this.labelColon1.AccessibleRole = AccessibleRole.None;
             this.labelColon1.AutoSize = true;
             this.labelColon1.Location = new System.Drawing.Point(121, 5);
             this.labelColon1.Name = "labelColon1";
@@ -67,6 +69,7 @@ namespace NanoByte.Common.Controls
             // 
             // upDownHours
             // 
+            this.upDownHours.AccessibleName = "Hours";
             this.upDownHours.Location = new System.Drawing.Point(84, 3);
             this.upDownHours.Maximum = new decimal(new int[] { 23, 0, 0, 0 });
             this.upDownHours.Name = "upDownHours";
@@ -75,6 +78,7 @@ namespace NanoByte.Common.Controls
             // 
             // labelColon2
             // 
+            this.labelColon2.AccessibleRole = AccessibleRole.None;
             this.labelColon2.AutoSize = true;
             this.labelColon2.Location = new System.Drawing.Point(170, 5);
             this.labelColon2.Name = "labelColon2";
@@ -84,6 +88,7 @@ namespace NanoByte.Common.Controls
             // 
             // upDownMinutes
             // 
+            this.upDownMinutes.AccessibleName = "Minutes";
             this.upDownMinutes.Location = new System.Drawing.Point(133, 3);
             this.upDownMinutes.Maximum = new decimal(new int[] { 59, 0, 0, 0 });
             this.upDownMinutes.Name = "upDownMinutes";
@@ -92,6 +97,7 @@ namespace NanoByte.Common.Controls
             // 
             // upDownSeconds
             // 
+            this.upDownSeconds.AccessibleName = "Seconds";
             this.upDownSeconds.Location = new System.Drawing.Point(182, 3);
             this.upDownSeconds.Maximum = new decimal(new int[] { 59, 0, 0, 0 });
             this.upDownSeconds.Name = "upDownSeconds";

@@ -61,7 +61,11 @@ public class DropDownButton : Button
     #endregion
 
     #region Constructor
-    public DropDownButton() => AutoSize = true;
+    public DropDownButton()
+    {
+        AutoSize = true;
+        AccessibleRole = AccessibleRole.SplitButton;
+    }
     #endregion
 
     #region Properties
