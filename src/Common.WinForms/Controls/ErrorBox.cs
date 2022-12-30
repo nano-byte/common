@@ -32,7 +32,8 @@ public sealed partial class ErrorBox : Form
 
         Log.Debug("Showing error box", exception);
 
-        string[] messageLines = exception.GetMessageWithInner().SplitMultilineText();
+        string message = exception.GetMessageWithInner();
+        string[] messageLines = message.SplitMultilineText();
         using var errorBox = new ErrorBox
         {
             Text = Application.ProductName,
@@ -48,7 +49,17 @@ public sealed partial class ErrorBox : Form
 
         // ReSharper disable once AccessToDisposedClosure
         errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
-        errorBox.ShowDialog(owner);
+        try
+        {
+            errorBox.ShowDialog(owner);
+        }
+        catch (Exception ex)
+        {
+            Log.Error("Failed to show error box", ex);
+
+            // Use simple message box as last ditch effort to still show the original error message to the user
+            Msg.Inform(owner, message, MsgSeverity.Error);
+        }
     }
 
     private void label_Click(object? sender, EventArgs e)
