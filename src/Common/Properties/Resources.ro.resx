@@ -71,7 +71,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nu poate fi canonicalizat, deoarece aceasta ar putea duce la pierderea de informații.</value>
+    <value>DACL nu poate fi canonicalizat, deoarece aceasta ar putea duce la o pierdere de informații.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -275,7 +275,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate cauza erori de conexiune atunci când descărcați conținut prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
+    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate cauza erori de conectare atunci când descărcați conținut prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
