@@ -332,7 +332,7 @@ public static class FileUtils
                 file => ResetAcl(file.GetAccessControl, file.SetAccessControl));
         }
         #region Error handling
-        catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException)
+        catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException or InvalidOperationException or NotImplementedException)
         {
             Log.Error($"Failed to reset ACLs for: {directory.FullName}", ex);
         }
@@ -516,7 +516,7 @@ public static class FileUtils
             directory.SetAccessControl(acl);
         }
         #region Error handling
-        catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException or InvalidOperationException)
+        catch (Exception ex) when (ex is ArgumentException or IdentityNotMappedException or InvalidOperationException or NotImplementedException)
         {
             // Wrap exception since only certain exception types are allowed
             throw new IOException($"Failed to {(enable ? "enable" : "disable")} write protection for: {directory.FullName}", ex);
