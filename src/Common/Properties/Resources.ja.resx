@@ -123,7 +123,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>{1}' のレジストリサブキー '{0}' を開くことができませんでした。</value>
+    <value>レジストリのサブキー '{0}' を '{1}' で開くことができませんでした。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
