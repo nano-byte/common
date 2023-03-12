@@ -9,7 +9,7 @@
       "automergeType": "branch"
     },
     {
-      "matchPackagePatterns": ["SourceLink"],
+      "matchPackagePatterns": ["gittools", "SourceLink"],
       "matchPackageNames": ["System.ValueTuple", "JetBrains.Annotations"],
       "automerge": true,
       "automergeType": "branch"
