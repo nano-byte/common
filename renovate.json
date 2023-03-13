@@ -10,7 +10,7 @@
     },
     {
       "matchPackagePatterns": ["gittools", "SourceLink"],
-      "matchPackageNames": ["System.ValueTuple", "JetBrains.Annotations"],
+      "matchPackageNames": ["System.ValueTuple", "Tmds.DBus", "JetBrains.Annotations"],
       "automerge": true,
       "automergeType": "branch"
     },
