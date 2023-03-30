@@ -4,6 +4,10 @@
 using System.Runtime.Versioning;
 using NanoByte.Common.Native;
 
+#if !NET20 && !NET40
+using System.Threading.Tasks;
+#endif
+
 namespace NanoByte.Common.Threading;
 
 /// <summary>
@@ -122,4 +126,55 @@ public static class ThreadUtils
         error?.Rethrow();
         return result;
     }
+
+#if !NET20 && !NET40
+    /// <summary>
+    /// Runs an asynchronous task and blocks until it completes.
+    /// Avoids deadlocks by ignoring the <see cref="SynchronizationContext"/>.
+    /// </summary>
+    /// <param name="action">Callback for starting the task.</param>
+    public static void RunTask(Func<Task> action)
+    {
+        var synchronizationContext = SynchronizationContext.Current;
+        SynchronizationContext.SetSynchronizationContext(null);
+
+        try
+        {
+            action().Wait();
+        }
+        catch (AggregateException ex)
+        {
+            throw ex.RethrowFirstInner();
+        }
+        finally
+        {
+            SynchronizationContext.SetSynchronizationContext(synchronizationContext);
+        }
+
+    }
+
+    /// <summary>
+    /// Runs an asynchronous task and blocks until it completes.
+    /// Avoids deadlocks by ignoring the <see cref="SynchronizationContext"/>.
+    /// </summary>
+    /// <param name="action">Callback for starting the task.</param>
+    public static T RunTask<T>(Func<Task<T>> action)
+    {
+        var synchronizationContext = SynchronizationContext.Current;
+        SynchronizationContext.SetSynchronizationContext(null);
+
+        try
+        {
+            return action().Result;
+        }
+        catch (AggregateException ex)
+        {
+            throw ex.RethrowFirstInner();
+        }
+        finally
+        {
+            SynchronizationContext.SetSynchronizationContext(synchronizationContext);
+        }
+    }
+#endif
 }
