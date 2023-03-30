@@ -80,6 +80,20 @@ public class DownloadFile : TaskBase
     /// </summary>
     private NetworkCredential? _credentials;
 
+#if !NET20 && !NET40
+    private static readonly HttpClient _httpClient = new(
+#if NETFRAMEWORK
+        new HttpClientHandler
+        {
+#else
+        new SocketsHttpHandler {
+            PooledConnectionLifetime = TimeSpan.FromMinutes(1),
+#endif
+            AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+        }
+    );
+    #endif
+
     /// <inheritdoc/>
     protected override void Execute()
     {
@@ -89,8 +103,7 @@ public class DownloadFile : TaskBase
         {
             State = TaskState.Header;
 #if !NET20 && !NET40
-            using var client = new HttpClient();
-            using var response = client.SendEnsureSuccess(request, CancellationToken);
+            using var response = _httpClient.SendEnsureSuccess(request, CancellationToken);
 #else
             var responseHandler = request.BeginGetResponse(null!, null!);
             responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
