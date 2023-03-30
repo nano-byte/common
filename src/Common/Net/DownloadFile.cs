@@ -7,7 +7,7 @@ using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NanoByte.Common.Threading;
 
-#if NET
+#if !NET20 && !NET40
 using System.Net.Http;
 #endif
 
@@ -88,7 +88,7 @@ public class DownloadFile : TaskBase
         try
         {
             State = TaskState.Header;
-#if NET
+#if !NET20 && !NET40
             using var client = new HttpClient();
             using var response = client.SendEnsureSuccess(request, CancellationToken);
 #else
@@ -103,7 +103,7 @@ public class DownloadFile : TaskBase
             State = TaskState.Data;
             ContentStarted = true;
             using var stream = new ProgressStream(
-#if NET
+#if !NET20 && !NET40
                 response.Content.ReadAsStream(CancellationToken),
 #else
                 // ReSharper disable once AssignNullToNotNullAttribute
@@ -133,7 +133,7 @@ public class DownloadFile : TaskBase
         }
     }
 
-#if NET
+#if !NET20 && !NET40
     private HttpRequestMessage BuildRequest()
     {
         try
@@ -179,7 +179,7 @@ public class DownloadFile : TaskBase
         #endregion
     }
 
-#if NET
+#if !NET20 && !NET40
     private void HandleHeaders(HttpResponseMessage response)
     {
         if (response.RequestMessage?.RequestUri is {} source) Source = source;

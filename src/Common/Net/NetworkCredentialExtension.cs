@@ -1,7 +1,7 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if NET
+#if !NET20 && !NET40
 using System.Net;
 using System.Net.Http.Headers;
 

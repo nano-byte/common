@@ -1,9 +1,13 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if NET
+#if !NET20 && !NET40
 using System.Net;
 using System.Net.Http;
+
+#if NETFRAMEWORK
+using NanoByte.Common.Threading;
+#endif
 
 namespace NanoByte.Common.Net;
 
@@ -21,7 +25,11 @@ public static class HttpClientExtensions
         HttpResponseMessage? response = null;
         try
         {
+#if NETFRAMEWORK
+            response = ThreadUtils.RunTask(() => client.SendAsync(request, cancellationToken));
+#else
             response = client.Send(request, cancellationToken);
+#endif
             response.EnsureSuccessStatusCode();
             return response;
         }
@@ -35,5 +43,15 @@ public static class HttpClientExtensions
         }
         #endregion
     }
+
+    /// <summary>
+    /// Reads the content as a stream.
+    /// </summary>
+    public static Stream ReadAsStream(this HttpContent content, CancellationToken cancellationToken = default)
+#if NETFRAMEWORK
+        => ThreadUtils.RunTask(content.ReadAsStreamAsync);
+#else
+        => content.ReadAsStream(cancellationToken);
+#endif
 }
 #endif
