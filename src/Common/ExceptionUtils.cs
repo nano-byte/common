@@ -85,6 +85,8 @@ public static class ExceptionUtils
         if (exception == null) throw new ArgumentNullException(nameof(exception));
         #endregion
 
+        exception = exception.Flatten();
+
         var first = exception.InnerExceptions.FirstOrDefault() ?? exception;
 
         foreach (var other in exception.InnerExceptions.Skip(1))
