@@ -175,17 +175,16 @@ public sealed partial class ErrorReportForm : Form
     #endregion
 
     #region Generate report
-    /// <summary>
-    /// Generates a ZIP archive containing crash information.
-    /// </summary>
-    /// <returns></returns>
-    private string GenerateReport() => new ErrorReport
-    {
-        Application = AppInfo.Current,
-        OS = OSInfo.Current,
-        Exception = new ExceptionInfo(_exception),
-        Log = Log.GetBuffer(),
-        Comments = commentBox.Text
-    }.ToXmlString();
+    private string GenerateReport()
+        => new ErrorReport
+           {
+               Application = AppInfo.Current,
+               OS = OSInfo.Current,
+               Exception = new ExceptionInfo(_exception),
+               Log = Log.GetBuffer(),
+               Comments = commentBox.Text
+           }
+          .ToXmlString()
+          .Replace(Environment.UserName, "[USERNAME]");
     #endregion
 }
