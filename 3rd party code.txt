@@ -3,11 +3,6 @@ https://github.com/mono/mono/tree/master/mcs/class/Mono.Posix
 MIT license: http://opensource.org/licenses/MIT
 Pre-compiled managed DLL taken from GTK# 2.12: Mono.Posix.dll (used as reference assembly)
 
-ICSharpCode.SharpZipLib (patched)
-http://www.icsharpcode.net/OpenSource/SharpZipLib/ + https://github.com/nano-byte/SharpZipLib
-GNU GPL with GNU Classpath exception
-NuGet package: ICSharpCode.SharpZipLib.Patched
-
 TaskDialog
 http://www.codeproject.com/KB/vista/TaskDialogWinForms.aspx
 Public domain
