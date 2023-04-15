@@ -126,7 +126,7 @@ public static class ListExtensions
                     added.AddLast(newElement);
                     newCounter++;
                     break;
-                case 0: // old == new
+                default: // old == new
                     oldCounter++;
                     newCounter++;
                     break;
