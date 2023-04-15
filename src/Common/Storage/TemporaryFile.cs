@@ -13,6 +13,9 @@ public class TemporaryFile : IDisposable
     /// </summary>
     public string Path { get; }
 
+    /// <summary>Returns <see cref="Path"/>.</summary>
+    public override string ToString() => Path;
+
     public static implicit operator string(TemporaryFile file) => file.Path;
 
     /// <summary>
