@@ -44,7 +44,7 @@
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
-    <PackageReference Include="Tmds.DBus" Version="0.14.0" />
+    <PackageReference Include="Tmds.DBus" Version="0.15.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
