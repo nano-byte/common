@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 #if !NET20 && !NET40
+using System.Net;
 using System.Net.Http;
 
 #if NETFRAMEWORK
@@ -11,7 +12,7 @@ using NanoByte.Common.Threading;
 namespace NanoByte.Common.Net;
 
 /// <summary>
-/// Provides extension methods for <see cref="HttpClient"/>.
+/// Provides extension methods for <see cref="HttpClient"/> and related classes.
 /// </summary>
 public static class HttpClientExtensions
 {
@@ -35,5 +36,12 @@ public static class HttpClientExtensions
 #else
         => content.ReadAsStream(cancellationToken);
 #endif
+
+    /// <summary>
+    /// Converts a <see cref="HttpRequestException"/> into a <see cref="WebException"/>.
+    /// </summary>
+    public static WebException AsWebException(this HttpRequestException exception)
+        => exception.InnerException as WebException
+        ?? new WebException(exception.Message, exception.InnerException);
 }
 #endif
