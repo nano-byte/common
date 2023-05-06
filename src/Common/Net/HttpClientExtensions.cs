@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 #if !NET20 && !NET40
-using System.Net;
 using System.Net.Http;
 
 #if NETFRAMEWORK
@@ -17,32 +16,15 @@ namespace NanoByte.Common.Net;
 public static class HttpClientExtensions
 {
     /// <summary>
-    /// Sends an HTTP request and ensures that the result is successful.
+    /// Sends an HTTP request and waits for the result is synchronously.
     /// </summary>
-    /// <exception cref="WebException">The request failed or returned a non-2xx status code.</exception>
-    public static HttpResponseMessage SendEnsureSuccess(this HttpClient client, HttpRequestMessage request, CancellationToken cancellationToken = default)
-    {
-        HttpResponseMessage? response = null;
-        try
-        {
+    /// <exception cref="HttpRequestException">The request failed due to a network, DNS or certificate issue.</exception>
+    public static HttpResponseMessage Send(this HttpClient client, HttpRequestMessage request, CancellationToken cancellationToken = default)
 #if NETFRAMEWORK
-            response = ThreadUtils.RunTask(() => client.SendAsync(request, cancellationToken));
+        => ThreadUtils.RunTask(() => client.SendAsync(request, cancellationToken));
 #else
-            response = client.Send(request, cancellationToken);
+        => client.Send(request, cancellationToken);
 #endif
-            response.EnsureSuccessStatusCode();
-            return response;
-        }
-        #region Error handling
-        catch (HttpRequestException ex)
-        {
-            response?.Dispose();
-
-            // Wrap exception since only certain exception types are allowed
-            throw new WebException(ex.Message, ex);
-        }
-        #endregion
-    }
 
     /// <summary>
     /// Reads the content as a stream.

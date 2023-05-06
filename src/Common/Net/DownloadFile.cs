@@ -103,11 +103,11 @@ public class DownloadFile : TaskBase
         {
             State = TaskState.Header;
 #if !NET20 && !NET40
-            using var response = _httpClient.SendEnsureSuccess(request, CancellationToken);
+            using var response = _httpClient.Send(request, CancellationToken).EnsureSuccessStatusCode();
 #else
             var responseHandler = request.BeginGetResponse(null!, null!);
             responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
-            using var response =  request.EndGetResponse(responseHandler);
+            using var response = request.EndGetResponse(responseHandler);
 #endif
 
             CancellationToken.ThrowIfCancellationRequested();
@@ -127,23 +127,42 @@ public class DownloadFile : TaskBase
             if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
             _callback(stream);
         }
-        catch (WebException ex) when (ex.Status == WebExceptionStatus.RequestCanceled)
+        #region Error handling
+#if NET
+        catch (HttpRequestException ex)
         {
-            throw new OperationCanceledException();
-        }
-        catch (WebException ex) when (ex.Response is HttpWebResponse {StatusCode: HttpStatusCode.Unauthorized} && CredentialProvider != null)
+            var statusCode = ex.StatusCode;
+#elif !NET20 && !NET40
+        catch (HttpRequestException ex)
         {
-            _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
-            if (_credentials == null) throw;
+            var webException = ex.InnerException as WebException;
+            var statusCode = (webException?.Response as HttpWebResponse)?.StatusCode;
+#else
+        catch (WebException webException)
+        {
+            var statusCode = (webException.Response as HttpWebResponse)?.StatusCode;
+#endif
 
-            Log.Info($"Retrying download for {Source} with credentials");
-            Execute();
+            if (CredentialProvider != null && statusCode == HttpStatusCode.Unauthorized)
+            {
+                _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
+                if (_credentials == null) throw;
+                Log.Info($"Retrying download for {Source} with credentials");
+                Execute();
+                return;
+            }
+
+            // Wrap exception to add context and since only certain exception types are allowed
+            throw new WebException(string.Format(Resources.FailedToDownload, Source),
+#if NET
+                ex);
+#elif !NET20 && !NET40
+                (Exception)webException ?? ex, webException?.Status ?? default, webException?.Response);
+#else
+                webException, webException.Status, webException.Response);
+#endif
         }
-        catch (WebException ex)
-        {
-            // Wrap exception to add context
-            throw new WebException(string.Format(Resources.FailedToDownload, Source), ex, ex.Status, ex.Response);
-        }
+        #endregion
     }
 
 #if !NET20 && !NET40
