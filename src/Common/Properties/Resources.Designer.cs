@@ -69,6 +69,36 @@ namespace NanoByte.Common.Properties {
             }
         }
         
+        public static string Bytes {
+            get {
+                return ResourceManager.GetString("Bytes", resourceCulture);
+            }
+        }
+        
+        public static string BytesGibi {
+            get {
+                return ResourceManager.GetString("BytesGibi", resourceCulture);
+            }
+        }
+        
+        public static string BytesKibi {
+            get {
+                return ResourceManager.GetString("BytesKibi", resourceCulture);
+            }
+        }
+        
+        public static string BytesMebi {
+            get {
+                return ResourceManager.GetString("BytesMebi", resourceCulture);
+            }
+        }
+        
+        public static string BytesTebi {
+            get {
+                return ResourceManager.GetString("BytesTebi", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>

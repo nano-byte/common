@@ -120,6 +120,21 @@
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} bytes</value>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} GiB</value>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} TiB</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

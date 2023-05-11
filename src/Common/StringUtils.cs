@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Globalization;
 using System.Security.Cryptography;
 
 #if NET20
@@ -280,16 +279,14 @@ public static class StringUtils
     /// <param name="value">The value in bytes.</param>
     /// <param name="provider">Provides culture-specific formatting information.</param>
     public static string FormatBytes(this long value, IFormatProvider? provider = null)
-    {
-        provider ??= CultureInfo.CurrentCulture;
-        return value switch
+        => value switch
         {
-            >= 1073741824 => $"{string.Format(provider, "{0:0.00}", value / 1073741824f)} GB",
-            >= 1048576 => $"{string.Format(provider, "{0:0.00}", value / 1048576f)} MB",
-            >= 1024 => $"{string.Format(provider, "{0:0.00}", value / 1024f)} KB",
-            _ => $"{value} Bytes"
+            >= 1024L*1024L*1024L*1024L => string.Format(provider, Resources.BytesTebi, value / 1024f / 1024f / 1024f / 1024f),
+            >= 1024L*1024L*1024L => string.Format(provider, Resources.BytesGibi, value / 1024f / 1024f / 1024f),
+            >= 1024L*1024L => string.Format(provider, Resources.BytesMebi, value / 1024f / 1024f),
+            >= 1024L =>string.Format(provider, Resources.BytesKibi, value / 1024f),
+            _ => string.Format(provider, Resources.Bytes, value),
         };
-    }
 
     /// <summary>
     /// Returns a string filled with random human-readable ASCII characters based on a cryptographic random number generator.
