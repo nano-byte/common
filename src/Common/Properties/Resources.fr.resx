@@ -62,6 +62,26 @@
     <value>Retourner</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} octets</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} Gio</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} Kio</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} Mio</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} Tio</value>
+    <comment>Manually overriden.</comment>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
     <comment>Manually overriden.</comment>
@@ -71,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>La DACL ne peut pas être canonisée car cela entraînerait potentiellement une perte d'informations.</value>
+    <value>Le DACL ne peut pas être canonisé car cela entraînerait potentiellement une perte d'informations.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -103,7 +123,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, comme une description de ce que vous faisiez lorsque le crash s'est produit.</value>
+    <value>Si vous le souhaitez, vous pouvez utiliser ce champ pour fournir des informations supplémentaires sur le problème, telles qu'une description de ce que vous faisiez lorsque le crash s'est produit.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -119,11 +139,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Échec du téléchargement de {0}.</value>
+    <value>Le téléchargement de {0} a échoué.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossible d'ouvrir la sous-clé de registre '{0}' dans '{1}'.</value>
+    <value>Échec de l'ouverture de la sous-clé de registre '{0}' dans '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -131,11 +151,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossible de démarrer '{0}'.</value>
+    <value>Échec du démarrage de '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui était censé être téléchargé à partir de {0} n'a pas la taille attendue. Il devait être de {1} octets mais était en fait de {2} octets.</value>
+    <value>Le fichier qui devait être téléchargé à partir de {0} n'a pas la taille prévue. Il devait être de {1} octets mais était en fait de {2} octets.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
@@ -143,7 +163,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Le répertoire de configuration '{0}' est probablement invalide.</value>
+    <value>Le répertoire de configuration '{0}' n'est probablement pas valide.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -155,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Le lancement de '{0}' nécessite des privilèges d'administrateur.</value>
+    <value>Le lancement de "{0}" nécessite des privilèges d'administrateur.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -187,7 +207,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Veuillez entrer vos identifiants de connexion pour {0}:</value>
+    <value>Veuillez saisir vos identifiants de connexion pour {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
@@ -195,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' a quitté avec le code de sortie {1}.</value>
+    <value>'{0}' est sorti avec le code de sortie {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -207,11 +227,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Cette commande ne peut être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Valeur de réinitialisation</value>
+    <value>Remise à zéro de la valeur</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -267,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des oldValues</value>
+    <value>La longueur des cibles doit être égale à la longueur des anciennes valeurs</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -283,15 +303,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossible de lire {0} octets à partir du flux.</value>
+    <value>Impossible de lire {0} bytes à partir du flux.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande réelle n'a pas été exécutée.</value>
+    <value>Cette commande d'annulation ne peut pas être exécutée tant que la commande actuelle n'a pas été exécutée.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Vos droits sont peut-être insuffisants.</value>
+    <value>Le sous-système Unix n'a pas réussi à traiter la demande. Il se peut que vos droits soient insuffisants.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

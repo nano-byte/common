@@ -62,12 +62,32 @@
     <value>Powrót</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} bajtów</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} GiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0,00} TiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Zbiór nie może być dodany do siebie.</value>
+    <value>Kolekcja nie może być dodana do siebie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">

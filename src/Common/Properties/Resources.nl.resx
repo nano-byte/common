@@ -62,6 +62,26 @@
     <value>Terug</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} bytes</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} GiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} TiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuleren</value>
     <comment>Automatically translated.</comment>
@@ -95,7 +115,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Foutrapport</value>
+    <value>Foutmelding</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
@@ -207,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Dit commando kan niet opnieuw worden uitgevoerd totdat het commando ongedaan maken is uitgevoerd.</value>
+    <value>Deze opdracht kan niet opnieuw worden uitgevoerd totdat de opdracht tot ongedaan maken is uitgevoerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">

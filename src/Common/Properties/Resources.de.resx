@@ -62,6 +62,26 @@
     <value>Zurück</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} Bytes</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} GiB</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+    <comment>Manually overriden.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} TiB</value>
+    <comment>Manually overriden.</comment>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
     <comment>Manually overriden.</comment>
