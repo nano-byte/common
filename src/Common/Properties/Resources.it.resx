@@ -62,6 +62,26 @@
     <value>Indietro</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} byte</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} GiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} TiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annulla</value>
     <comment>Manually overriden.</comment>
@@ -103,7 +123,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Se lo desiderate, potete utilizzare questo campo per fornire ulteriori informazioni sul problema, ad esempio una descrizione di ciò che stavate facendo quando si è verificato l'arresto anomalo.</value>
+    <value>Se lo si desidera, è possibile utilizzare questo campo per fornire ulteriori informazioni sul problema, ad esempio una descrizione di ciò che si stava facendo quando si è verificato l'arresto anomalo.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -291,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. È possibile che i diritti dell'utente siano insufficienti.</value>
+    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. È possibile che i diritti dell'utente non siano sufficienti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

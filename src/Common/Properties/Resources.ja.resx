@@ -59,7 +59,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>背面</value>
+    <value>バック</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00}バイト</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} GIB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} TiB</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
@@ -67,11 +87,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>コレクションはそれ自身に追加することはできません。</value>
+    <value>コレクションは、それ自体に追加することはできません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACLは、情報が失われる可能性があるため、正規化することができない。</value>
+    <value>DACLは、情報を失う可能性があるため、正規化することができません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -87,7 +107,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>保存先ディレクトリがすでに存在する。</value>
+    <value>保存先ディレクトリはすでに存在しています。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
@@ -95,7 +115,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>エラー報告</value>
+    <value>エラーレポート</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
@@ -103,11 +123,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>このフィールドには、クラッシュが発生したときに何をしていたかなど、問題についての追加情報を入力することができます。</value>
+    <value>必要であれば、このフィールドを使用して、クラッシュが発生したときに何をしていたかなど、問題についての追加情報を提供することができます。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>このアプリケーションで予期せぬエラーが発生しました。この問題を報告することで、私たちが問題を解決するのを助けることができます。もし、その問題に対する既知の修正方法がある場合は、レポート送信後すぐに表示されます。</value>
+    <value>このアプリケーションで予期せぬエラーが発生しました。この問題を報告することで、問題を解決することができます。あなたの問題に対する既知の修正方法がある場合は、レポートを送信した直後に表示されます。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -115,11 +135,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>エラーメッセージの送信に成功しました。</value>
+    <value>エラーレポートが正常に送信されました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>ダウンロードに失敗しました{0}.</value>
+    <value>{0} のダウンロードに失敗しました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
@@ -135,7 +155,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} からダウンロードしたはずのファイルが期待したサイズにならない。{1} バイトのはずが、実際は{2} バイトでした。</value>
+    <value>{0} からダウンロードするはずのファイルが、期待したサイズにならない。{1} バイトのはずが、実際は{2} バイトだった。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
@@ -159,11 +179,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>コレクション内の要素の最大量を超えました。</value>
+    <value>コレクションに含まれる要素の最大量を超えました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>{0}' のアクションが登録されていません。</value>
+    <value>{0}' に登録されているアクションはありません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -187,11 +207,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>{0} のログイン情報を入力してください。</value>
+    <value>{0} のログイン認証情報を入力してください：</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>問題が発生しました '{0}' をロードします。</value>
+    <value>{0}' を読み込むのに問題が発生しました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
@@ -199,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>プロセスが予期しない終了コードで終了した。</value>
+    <value>予期せぬ終了コードでプロセスが終了した。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -207,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>このコマンドは、元に戻すコマンドを実行するまで、再度実行することはできません。</value>
+    <value>このコマンドは、元に戻すコマンドを実行するまでは、再度実行することはできません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -215,11 +235,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>アプリケーションの再始動</value>
+    <value>アプリケーションを再起動する</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>のため、{0} ミリ秒で再試行。</value>
+    <value>のため、{0} ミリ秒でリトライ：</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -231,7 +251,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>位置{0} から読み込もうとしました。この位置は、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファは{3} バイトの差にしか対応できません。</value>
+    <value>位置{0} から読み込もうとしました。この位置は、下層ストリームの位置{2} から{1} バイト離れていますが、シークバッファは{3} バイトの差しか対応することができません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -255,11 +275,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>にゅうしゅつりょくエラー</value>
+    <value>入出力エラー</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>レディ</value>
+    <value>準備完了</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
@@ -271,23 +291,23 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>技術的な詳細</value>
+    <value>技術的な詳細はこちら</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>お使いの.NETのバージョンは、TLS 1.2をサポートしていません。このため、HTTPSでコンテンツをダウンロードする際に、接続エラーが発生する可能性があります。Windows Updateを実行し、必要なパッチをインストールしてください。</value>
+    <value>お使いの.NETのバージョンは、TLS 1.2をサポートしていません。そのため、HTTPSでコンテンツをダウンロードする際に、接続エラーが発生する可能性があります。Windows Updateを実行し、必要なパッチをインストールしてください。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>アセンブリ名 "{0}" が見つかりません。</value>
+    <value>{0}" という名前のアセンブリを見つけることができませんでした。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>ストリームから{0} バイトを読み取れませんでした。</value>
+    <value>ストリームから{0} バイトを読み取ることができません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>このアンドゥコマンドは、実際のコマンドを実行するまでは実行できません。</value>
+    <value>このアンドゥコマンドは、実際のコマンドが実行されるまでは実行できません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
@@ -295,7 +315,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>ユーザー名です。</value>
+    <value>ユーザー名です：</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">

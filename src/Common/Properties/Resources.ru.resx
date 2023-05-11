@@ -62,6 +62,26 @@
     <value>Назад</value>
     <comment>Automatically translated.</comment>
   </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>{0:0.00} байт</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesGibi" xml:space="preserve">
+    <value>{0:0.00} Гигабайт</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesKibi" xml:space="preserve">
+    <value>{0:0.00} KiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesMebi" xml:space="preserve">
+    <value>{0:0.00} MiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
+  <data name="BytesTebi" xml:space="preserve">
+    <value>{0:0.00} TiB</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
     <comment>Automatically translated.</comment>
