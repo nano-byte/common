@@ -32,4 +32,44 @@ public class ForEachTaskTest
                    .Invoking(x => x.Run())
                    .Should().Throw<WebException>();
     }
+
+    [Fact]
+    public void TestRollbackException()
+    {
+        var applyCalledFor = new List<int>();
+        var rollbackCalledFor = new List<int>();
+        ForEachTask.Create("Test task", new[] {1, 2, 3},
+                        action: value =>
+                        {
+                            applyCalledFor.Add(value);
+                            if (value == 2) throw new ArgumentException("Test exception");
+                        },
+                        rollback: rollbackCalledFor.Add)
+                   .Invoking(x => x.Run())
+                   .Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
+
+        applyCalledFor.Should().Equal(1, 2);
+        rollbackCalledFor.Should().Equal(2, 1);
+    }
+
+    [Fact]
+    public void TestRollbackCancellation()
+    {
+        var cts = new CancellationTokenSource();
+
+        var applyCalledFor = new List<int>();
+        var rollbackCalledFor = new List<int>();
+        ForEachTask.Create("Test task", new[] {1, 2, 3},
+                        action: value =>
+                        {
+                            applyCalledFor.Add(value);
+                            if (value == 2) cts.Cancel();
+                        },
+                        rollback: rollbackCalledFor.Add)
+                   .Invoking(x => x.Run(cts.Token))
+                   .Should().Throw<OperationCanceledException>();
+
+        applyCalledFor.Should().Equal(1, 2);
+        rollbackCalledFor.Should().Equal(2, 1);
+    }
 }

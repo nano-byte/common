@@ -55,27 +55,6 @@ public class ExceptionUtilsTest
     }
 
     /// <summary>
-    /// Ensures that <see cref="ExceptionUtils.ApplyWithRollback{T}"/> correctly performs rollbacks on exceptions.
-    /// </summary>
-    [Fact]
-    public void TestApplyWithRollback()
-    {
-        var applyCalledFor = new List<int>();
-        var rollbackCalledFor = new List<int>();
-        new Action(() => new[] {1, 2, 3}.ApplyWithRollback(
-                apply: value =>
-                {
-                    applyCalledFor.Add(value);
-                    if (value == 2) throw new ArgumentException("Test exception");
-                },
-                rollback: rollbackCalledFor.Add))
-           .Should().Throw<ArgumentException>(because: "Exceptions should be passed through after rollback.");
-
-        applyCalledFor.Should().Equal(1, 2);
-        rollbackCalledFor.Should().Equal(2, 1);
-    }
-
-    /// <summary>
     /// Ensures that <see cref="ExceptionUtils.TryAny{T}"/> correctly handles fail conditions followed by success conditions.
     /// </summary>
     [Fact]
@@ -127,30 +106,6 @@ public class ExceptionUtilsTest
     public void TestRetryOtherExceptionType()
         => Assert.Throws<IOException>(() => ExceptionUtils.Retry<InvalidOperationException>(
             () => throw new IOException("Test exception"), maxRetries: 1));
-
-    /// <summary>
-    /// Ensures that <see cref="ExceptionUtils.ApplyWithRollbackAsync{T}"/> correctly performs rollbacks on exceptions.
-    /// </summary>
-    [Fact]
-    public async Task TestApplyWithRollbackAsync()
-    {
-        var applyCalledFor = new List<int>();
-        var rollbackCalledFor = new List<int>();
-        await new Func<Task>(async () => await new[] {1, 2, 3}.ApplyWithRollbackAsync(
-            apply: async value =>
-            {
-                await Task.Yield();
-                applyCalledFor.Add(value);
-                if (value == 2) throw new ArgumentException("Test exception");
-            }, rollback: async x =>
-            {
-                await Task.Yield();
-                rollbackCalledFor.Add(x);
-            })).Should().ThrowAsync<ArgumentException>(because: "Exceptions should be passed through after rollback.");
-
-        applyCalledFor.Should().Equal(1, 2);
-        rollbackCalledFor.Should().Equal(2, 1);
-    }
 
     /// <summary>
     /// Ensures that <see cref="ExceptionUtils.TryAnyAsync{T}"/> correctly handles fail conditions followed by success conditions.
