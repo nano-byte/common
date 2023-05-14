@@ -16,7 +16,7 @@ public class ForEachTaskTest
         var target = new[] {"element1", "element2", "element2"};
         var calledFor = new List<string>();
 
-        var task = new ForEachTask<string>("Test task", target, calledFor.Add);
+        var task = ForEachTask.Create("Test task", target, calledFor.Add);
         task.Run();
 
         calledFor.Should().Equal(target);
@@ -25,11 +25,11 @@ public class ForEachTaskTest
     [Fact]
     public void TestExceptionPassing()
     {
-        new ForEachTask<string>("Test task", new[] {""}, delegate { throw new IOException("Test exception"); })
-           .Invoking(x => x.Run())
-           .Should().Throw<IOException>();
-        new ForEachTask<string>("Test task", new[] {""}, delegate { throw new WebException("Test exception"); })
-           .Invoking(x => x.Run())
-           .Should().Throw<WebException>();
+        ForEachTask.Create("Test task", new[] { "" }, _ => throw new IOException("Test exception"))
+                   .Invoking(x => x.Run())
+                   .Should().Throw<IOException>();
+        ForEachTask.Create("Test task", new[] {""}, _ => throw new WebException("Test exception"))
+                   .Invoking(x => x.Run())
+                   .Should().Throw<WebException>();
     }
 }
