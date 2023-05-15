@@ -63,7 +63,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00} 5 bayt</value>
+    <value>{0:0.00} bayt</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">

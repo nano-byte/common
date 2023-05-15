@@ -71,7 +71,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="BytesKibi" xml:space="preserve">
-    <value>{0:0.00} KiB</value>
+    <value>{KiB</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="BytesMebi" xml:space="preserve">
@@ -79,7 +79,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="BytesTebi" xml:space="preserve">
-    <value>{0:0.00} TiB</value>
+    <value>{TiB</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
