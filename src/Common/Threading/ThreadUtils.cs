@@ -131,8 +131,10 @@ public static class ThreadUtils
     /// <summary>
     /// Runs an asynchronous task and blocks until it completes.
     /// Avoids deadlocks by ignoring the <see cref="SynchronizationContext"/>.
+    /// Rethrows exceptions thrown inside task without <see cref="AggregateException"/> wrapper.
     /// </summary>
     /// <param name="action">Callback for starting the task.</param>
+    /// <exception cref="TaskCanceledException">The task was cancelled.</exception>
     public static void RunTask(Func<Task> action)
     {
         var synchronizationContext = SynchronizationContext.Current;
@@ -156,8 +158,10 @@ public static class ThreadUtils
     /// <summary>
     /// Runs an asynchronous task and blocks until it completes.
     /// Avoids deadlocks by ignoring the <see cref="SynchronizationContext"/>.
+    /// Rethrows exceptions thrown inside task without <see cref="AggregateException"/> wrapper.
     /// </summary>
     /// <param name="action">Callback for starting the task.</param>
+    /// <exception cref="TaskCanceledException">The task was cancelled.</exception>
     public static T RunTask<T>(Func<Task<T>> action)
     {
         var synchronizationContext = SynchronizationContext.Current;
