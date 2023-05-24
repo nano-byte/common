@@ -91,7 +91,10 @@ public class DownloadFile : TaskBase
 #endif
             AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
         }
-    );
+    )
+    {
+        Timeout = Timeout.InfiniteTimeSpan
+    };
     #endif
 
     /// <inheritdoc/>
