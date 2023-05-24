@@ -103,7 +103,8 @@ public class DownloadFile : TaskBase
         {
             State = TaskState.Header;
 #if !NET20 && !NET40
-            using var response = _httpClient.Send(request, CancellationToken).EnsureSuccessStatusCode();
+            using var response = _httpClient.Send(request, HttpCompletionOption.ResponseHeadersRead, CancellationToken);
+            response.EnsureSuccessStatusCode();
 #else
             var responseHandler = request.BeginGetResponse(null!, null!);
             responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
