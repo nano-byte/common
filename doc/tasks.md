@@ -10,7 +10,7 @@ The <xref:NanoByte.Common.Tasks> namespace provides a framework for managing lon
 
 Tasks are represented using the <xref:NanoByte.Common.Tasks.ITask> interface.
 
-This library provides general-purpose implementations such as <xref:NanoByte.Common.Tasks.SimpleTask> and <xref:NanoByte.Common.Tasks.ForEachTask>, as well as use-case specific ones such as <xref:NanoByte.Common.Net.DownloadFile> and <xref:NanoByte.Common.Storage.ReadFile>. You can also implement your own.
+This library provides general-purpose implementations such as <xref:NanoByte.Common.Tasks.ActionTask> and <xref:NanoByte.Common.Tasks.ForEachTask>, as well as use-case specific ones such as <xref:NanoByte.Common.Net.DownloadFile> and <xref:NanoByte.Common.Storage.ReadFile>. You can also implement your own.
 
 ## Handlers
 

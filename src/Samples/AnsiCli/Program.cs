@@ -14,7 +14,7 @@ Log.Info("info");
 Log.Warn("warn");
 Log.Error("error");
 
-handler.RunTask(new SimpleTask("Waiting", () => Thread.Sleep(2000)));
+handler.RunTask(new ActionTask("Waiting", () => Thread.Sleep(2000)));
 
 Parallel.For(2, 5, x =>
 {

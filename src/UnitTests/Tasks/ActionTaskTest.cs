@@ -6,16 +6,16 @@ using System.Net;
 namespace NanoByte.Common.Tasks;
 
 /// <summary>
-/// Contains test methods for <see cref="SimpleTask"/>.
+/// Contains test methods for <see cref="ActionTask"/>.
 /// </summary>
-public class SimpleTaskTest
+public class ActionTaskTest
 {
     [Fact]
     public void TestCallback()
     {
         bool called = false;
 
-        var task = new SimpleTask("Test task", () => called = true);
+        var task = new ActionTask("Test task", () => called = true);
         task.Run();
 
         called.Should().BeTrue();
@@ -24,9 +24,9 @@ public class SimpleTaskTest
     [Fact]
     public void TestExceptionPassing()
     {
-        new SimpleTask("Test task", () => throw new IOException("Test exception"))
+        new ActionTask("Test task", () => throw new IOException("Test exception"))
            .Invoking(x => x.Run()).Should().Throw<IOException>();
-        new SimpleTask("Test task", () => throw new WebException("Test exception"))
+        new ActionTask("Test task", () => throw new WebException("Test exception"))
            .Invoking(x => x.Run()).Should().Throw<WebException>();
     }
 }
