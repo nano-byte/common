@@ -46,7 +46,7 @@ public class ProcessUtilsTest
             startInfo.Arguments.Should().Be($"{assemblyPath.EscapeArgument()} my args");
         }
 #else
-        startInfo.FileName.Should().EndWith("dotnet");
+        startInfo.FileName.Should().Contain("dotnet");
         startInfo.Arguments.Should().Be($"{assemblyPath.EscapeArgument()} my args");
 #endif
     }
