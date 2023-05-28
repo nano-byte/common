@@ -174,7 +174,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
         if (handler == null) throw new ArgumentNullException(nameof(handler));
         #endregion
 
-        handler.RunTask(new SimplePercentTask(Resources.ShuttingDownApps, ShutdownAppsWork, CancellationCallback));
+        handler.RunTask(new PercentageTask(Resources.ShuttingDownApps, ShutdownAppsWork, CancellationCallback));
     }
 
     private void ShutdownAppsWork(PercentProgressCallback progressCallback)
@@ -209,7 +209,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
         if (handler == null) throw new ArgumentNullException(nameof(handler));
         #endregion
 
-        handler.RunTask(new SimplePercentTask(Resources.RestartingApps, RestartAppsWork, CancellationCallback));
+        handler.RunTask(new PercentageTask(Resources.RestartingApps, RestartAppsWork, CancellationCallback));
     }
 
     private void RestartAppsWork(PercentProgressCallback progressCallback)

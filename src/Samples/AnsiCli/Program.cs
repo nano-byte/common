@@ -19,7 +19,7 @@ handler.RunTask(new ActionTask("Waiting", () => Thread.Sleep(2000)));
 Parallel.For(2, 5, x =>
 {
     // ReSharper disable once AccessToDisposedClosure
-    handler.RunTask(new SimplePercentTask("Doing stuff", callback =>
+    handler.RunTask(new PercentageTask("Doing stuff", callback =>
     {
         for (int i = 0; i < 100; i += x)
         {
