@@ -48,4 +48,30 @@ public class WaitTaskTest
 
         exceptionThrown.Should().BeTrue(because: task.State.ToString());
     }
+
+    [Fact]
+    public void TestCancelNoHandle()
+    {
+        var task = new WaitTask("Test task");
+        bool exceptionThrown = false;
+        var cancellationTokenSource = new CancellationTokenSource();
+        var waitTask = Task.Run(() =>
+        {
+            try
+            {
+                task.Run(cancellationTokenSource.Token);
+            }
+            catch (OperationCanceledException)
+            {
+                exceptionThrown = true;
+            }
+        });
+
+        // Start and then cancel the download
+        Thread.Sleep(100);
+        cancellationTokenSource.Cancel();
+        waitTask.Wait();
+
+        exceptionThrown.Should().BeTrue(because: task.State.ToString());
+    }
 }
