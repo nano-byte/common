@@ -135,7 +135,7 @@ static partial class WindowsUtils
             public short PrintNameLength;
             public uint Flags;
 
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16 * 1204)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16 * 1023)]
             public char[] PathBuffer;
         }
 
