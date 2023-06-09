@@ -14,7 +14,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
 {
     /// <inheritdoc/>
     protected override void DisplayLogEntry(LogSeverity severity, string message)
-        => AnsiCli.Error.WriteLine(message, new Style(GetLogColor(severity)));
+        => AnsiCli.Error.WriteLine(message.EscapeMarkup(), new Style(GetLogColor(severity)));
 
     /// <inheritdoc/>
     protected override ICredentialProvider CredentialProvider
@@ -61,7 +61,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
         }
         else
         {
-            AnsiCli.Error.WriteLine(task.Name);
+            AnsiCli.Error.WriteLine(task.Name.EscapeMarkup());
             task.Run(CancellationToken, CredentialProvider);
         }
     }
@@ -105,9 +105,9 @@ public class AnsiCliTaskHandler : CliTaskHandler
             return;
         }
 
-        AnsiConsole.Write(AnsiCli.Title(title));
-        if (message.EndsWith("\n")) AnsiConsole.Write(message);
-        else AnsiConsole.WriteLine(message);
+        AnsiConsole.WriteLine(AnsiCli.Title(title));
+        if (message.EndsWith("\n")) AnsiConsole.Write(message.EscapeMarkup());
+        else AnsiConsole.WriteLine(message.EscapeMarkup());
     }
 
     /// <inheritdoc/>
@@ -124,11 +124,11 @@ public class AnsiCliTaskHandler : CliTaskHandler
             return;
         }
 
-        AnsiConsole.Write(AnsiCli.Title(title));
+        AnsiConsole.WriteLine(AnsiCli.Title(title));
         if (typeof(T) == typeof(string) || typeof(Uri).IsAssignableFrom(typeof(T)))
         {
             foreach (var entry in data)
-                AnsiConsole.WriteLine(entry?.ToString() ?? "");
+                AnsiConsole.WriteLine(entry?.ToString().EscapeMarkup() ?? "");
         }
         else
             AnsiConsole.Write(AnsiCli.Table(data));
@@ -148,7 +148,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
             return;
         }
 
-        AnsiConsole.Write(AnsiCli.Title(title));
+        AnsiConsole.WriteLine(AnsiCli.Title(title));
         AnsiConsole.Write(AnsiCli.Tree(data));
     }
 

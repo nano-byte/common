@@ -44,6 +44,6 @@ public sealed class AnsiCliProgressContext : IDisposable
     /// <returns>A handle for updating the state of the progress bar.</returns>
     public IProgress<TaskSnapshot> Add(string description)
         => new AnsiCliProgress(_context.AddTask(
-            description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 24),
+            description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 24).EscapeMarkup(),
             new() {AutoStart = false}));
 }
