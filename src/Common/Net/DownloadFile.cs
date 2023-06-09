@@ -100,15 +100,28 @@ public class DownloadFile : TaskBase
     /// <inheritdoc/>
     protected override void Execute()
     {
-        var request = BuildRequest();
-
         try
         {
             State = TaskState.Header;
 #if !NET20 && !NET40
-            using var response = _httpClient.Send(request, HttpCompletionOption.ResponseHeadersRead, CancellationToken);
+            using var response = _httpClient.Send(new(HttpMethod.Get, Source)
+            {
+                Headers =
+                {
+                    UserAgent = { new(AppInfo.Current.Name ?? "dotnet", AppInfo.Current.Version) },
+                    CacheControl = new() { NoCache = NoCache },
+                    Authorization = _credentials?.ToBasicAuth()
+                }
+            }, HttpCompletionOption.ResponseHeadersRead, CancellationToken);
             response.EnsureSuccessStatusCode();
 #else
+            var request = WebRequest.Create(Source);
+            if (request is HttpWebRequest httpRequest)
+            {
+                httpRequest.UserAgent = AppInfo.Current.NameVersion;
+                httpRequest.Credentials = _credentials;
+                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
+            }
             var responseHandler = request.BeginGetResponse(null!, null!);
             responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
             using var response = request.EndGetResponse(responseHandler);
@@ -166,40 +179,6 @@ public class DownloadFile : TaskBase
                 webException, webException.Status, webException.Response);
 #endif
         }
-        #endregion
-    }
-
-#if !NET20 && !NET40
-    private HttpRequestMessage BuildRequest()
-    {
-        try
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, Source)
-            {
-                Headers =
-                {
-                    UserAgent = {new(AppInfo.Current.Name ?? "dotnet", AppInfo.Current.Version)},
-                    CacheControl = new() {NoCache = NoCache},
-                    Authorization = _credentials?.ToBasicAuth()
-                }
-            };
-#else
-    private WebRequest BuildRequest()
-    {
-        try
-        {
-            var request = WebRequest.Create(Source);
-            if (request is HttpWebRequest httpRequest)
-            {
-                httpRequest.UserAgent = AppInfo.Current.NameVersion;
-                httpRequest.Credentials = _credentials;
-                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
-            }
-#endif
-
-            return request;
-        }
-        #region Error handling
         catch (NotSupportedException ex)
         {
             // Wrap exception since only certain exception types are allowed
