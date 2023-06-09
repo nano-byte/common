@@ -1,6 +1,8 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Net;
+
 namespace NanoByte.Common.Tasks;
 
 /// <summary>
@@ -8,6 +10,21 @@ namespace NanoByte.Common.Tasks;
 /// </summary>
 public static class TaskHandlerExtensions
 {
+    /// <summary>
+    /// Runs an <see cref="IResultTask{T}"/> and returns it's result once it has been completed.
+    /// </summary>
+    /// <param name="handler">The task handler.</param>
+    /// <param name="task">The task to be run. (<see cref="ITask.Run"/> or equivalent is called on it.)</param>
+    /// <returns>The <see cref="IResultTask{T}.Result"/>.</returns>
+    /// <exception cref="OperationCanceledException">The user canceled the task.</exception>
+    /// <exception cref="IOException">The task ended with <see cref="TaskState.IOError"/>.</exception>
+    /// <exception cref="WebException">The task ended with <see cref="TaskState.WebError"/>.</exception>
+    public static T RunTaskAndReturn<T>(this ITaskHandler handler, ResultTask<T> task)
+    {
+        handler.RunTask(task);
+        return task.Result;
+    }
+
     /// <summary>
     /// Displays multi-line text to the user unless <see cref="Verbosity"/> is <see cref="Tasks.Verbosity.Batch"/>.
     /// </summary>

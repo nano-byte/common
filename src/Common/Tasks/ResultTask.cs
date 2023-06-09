@@ -8,7 +8,7 @@ namespace NanoByte.Common.Tasks;
 /// <summary>
 /// A task that executes a callback and the provides a result. Only completion is reported, no intermediate progress.
 /// </summary>
-public sealed class ResultTask<T> : TaskBase
+public sealed class ResultTask<T> : TaskBase, IResultTask<T>
 {
     /// <inheritdoc/>
     public override string Name { get; }
@@ -18,10 +18,7 @@ public sealed class ResultTask<T> : TaskBase
 
     private T _result = default!;
 
-    /// <summary>
-    /// The result of the task.
-    /// </summary>
-    /// <exception cref="InvalidOperationException">The task is not <see cref="TaskState.Complete"/>.</exception>
+    /// <inheritdoc/>
     public T Result
         => State == TaskState.Complete
             ? _result
