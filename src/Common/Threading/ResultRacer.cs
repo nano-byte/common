@@ -14,7 +14,7 @@ public class ResultRacer<T>
     where T : notnull
 {
     private readonly TaskCompletionSource<T> _completion = new();
-    private readonly CancellationToken _externalCancellation;
+    private CancellationToken _externalCancellation;
     private readonly CancellationTokenSource _competitionCancellation;
 
     /// <summary>
