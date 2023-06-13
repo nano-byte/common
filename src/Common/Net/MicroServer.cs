@@ -1,35 +1,27 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if !NET20 && !NET40
 using System.Net;
-using System.Net.Sockets;
 using NanoByte.Common.Streams;
-using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Net;
 
 /// <summary>
-/// Provides a minimalistic HTTP web server that can provide only a single file. Useful for testing download code.
+/// A minimalistic HTTP server that only serves a single file on localhost. Useful for unit tests.
 /// </summary>
-public sealed class MicroServer : IDisposable
+[CLSCompliant(false)]
+public sealed class MicroServer : HttpServer
 {
-    #region Constants
-    /// <summary>The lowest port the server tries listening on.</summary>
-    private const int MinimumPort = 50222;
-
-    /// <summary>The highest port the server tries listening on.</summary>
-    private const int MaxmimumPort = 50734;
-    #endregion
-
     /// <summary>
     /// The URL under which the server root can be reached. Usually you should use <see cref="FileUri"/> instead.
     /// </summary>
-    public Uri ServerUri { get; }
+    public Uri ServerUri => new($"http://localhost:{Port}/");
 
     /// <summary>
     /// The complete URL under which the server provides its file.
     /// </summary>
-    public Uri FileUri { get; }
+    public Uri FileUri => new(ServerUri, _resourceName);
 
     /// <summary>
     /// The content of the file to be served under <see cref="FileUri"/>.
@@ -42,80 +34,21 @@ public sealed class MicroServer : IDisposable
     public bool Slow { get; set; }
 
     private readonly string _resourceName;
-    private readonly HttpListener _listener;
 
     /// <summary>
-    /// Starts a HTTP web server that listens on a random port.
+    /// Starts serving a single file via HTTP on localhost.
     /// </summary>
     /// <param name="resourceName">The HTTP resource name under which to provide the content.</param>
     /// <param name="fileContent">The content of the file to serve.</param>
-    [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings")]
-    public MicroServer([Localizable(false)] string resourceName, Stream fileContent)
+    public MicroServer([Localizable(false)] string resourceName, Stream fileContent) : base(localOnly: true)
     {
         _resourceName = resourceName;
         FileContent = fileContent;
 
-        _listener = StartListening();
-        ServerUri = new(_listener.Prefixes.Last());
-        FileUri = new(ServerUri, resourceName);
-
-        ThreadUtils.StartBackground(ListenLoop, name: "MicroServer.Listen");
+        StartHandlingRequests();
     }
 
-    private static HttpListener StartListening()
-    {
-        int port = MinimumPort;
-
-        // Keep incrementing port number until we find a free one
-        while (true)
-        {
-            try
-            {
-                string prefix = $"http://localhost:{port++}/";
-                var listener = new HttpListener();
-                listener.Prefixes.Add(prefix);
-                listener.Start();
-                return listener;
-            }
-            catch (HttpListenerException) when (port <= MaxmimumPort)
-            {}
-            catch (SocketException) when (port <= MaxmimumPort)
-            {}
-        }
-    }
-
-    /// <summary>
-    /// Stops listening for incoming HTTP connections.
-    /// </summary>
-    public void Dispose() => _listener.Close();
-
-    /// <summary>
-    /// Waits for HTTP requests and responds to them if they ask for "file".
-    /// </summary>
-    private void ListenLoop()
-    {
-        while (_listener.IsListening)
-        {
-            try
-            {
-                var context = _listener.GetContext();
-                HandleRequest(context);
-                context.Response.OutputStream.Close();
-            }
-            #region Error handling
-            catch (HttpListenerException)
-            {
-                return;
-            }
-            catch (InvalidOperationException)
-            {
-                return;
-            }
-            #endregion
-        }
-    }
-
-    private void HandleRequest(HttpListenerContext context)
+    protected override void HandleRequest(HttpListenerContext context)
     {
         // Only return one specific file
         if (context.Request.RawUrl != $"/{_resourceName}")
@@ -145,3 +78,4 @@ public sealed class MicroServer : IDisposable
         }
     }
 }
+#endif
