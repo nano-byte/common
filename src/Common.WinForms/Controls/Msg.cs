@@ -4,7 +4,7 @@
 using System.Globalization;
 using NanoByte.Common.Native;
 
-#if NET45 || NET461 || NET472
+#if NET45 || NET462 || NET472
 using TaskDialog;
 #endif
 

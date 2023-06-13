@@ -5,7 +5,7 @@
     <AssemblyName>NanoByte.Common</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Utility classes and data structures with an emphasis on integration with native Windows and Linux features, network and disk IO, advanced collections and undo/redo logic.</Description>
-    <TargetFrameworks>net20;net40;net45;net461;net472;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net20;net40;net45;net462;net472;net6.0;net7.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <NoWarn>$(NoWarn);SYSLIB0014</NoWarn><!-- deprecated WebClient -->
     <SignAssembly>True</SignAssembly>
@@ -13,7 +13,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
     <!-- .NET Core MSBuild does not support legacy ResGen -->
-    <TargetFrameworks>net461;net472;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net462;net472;net6.0;net7.0</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net6.0' Or '$(TargetFramework)'=='net7.0'">
@@ -26,14 +26,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net461'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net462'">
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='net472'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net462' Or '$(TargetFramework)'=='net472'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net461' Or '$(TargetFramework)'=='net472'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net462' Or '$(TargetFramework)'=='net472'">
     <Reference Include="System.Net.Http" Pack="False" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
   </ItemGroup>
