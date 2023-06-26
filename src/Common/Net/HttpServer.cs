@@ -30,7 +30,6 @@ public abstract class HttpServer : IDisposable
     /// <param name="localOnly"><c>true</c> to only respond to requests from the local machine instead of the network.</param>
     /// <exception cref="WebException">Unable to serve on the specified <paramref name="port"/>.</exception>
     /// <exception cref="NotAdminException">Needs admin rights to serve HTTP requests.</exception>
-    /// <exception cref="ArgumentOutOfRangeException"><paramref name="port"/> is not a valid TCP port number.</exception>
     protected HttpServer(ushort port = 0, bool localOnly = false)
     {
         // Use separate port ranges for local-only and public to avoid conflicting http.sys registrations
