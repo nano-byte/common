@@ -33,8 +33,8 @@ public abstract class HttpServer : IDisposable
     protected HttpServer(ushort port = 0, bool localOnly = false)
     {
         // Use separate port ranges for local-only and public to avoid conflicting http.sys registrations
-        ushort minRandomPort = localOnly ? (ushort)50000 : (ushort)54999;
-        ushort maxRandomPort = localOnly ? (ushort)55000 : (ushort)60000;
+        ushort minRandomPort = localOnly ? (ushort)50000 : (ushort)55000;
+        ushort maxRandomPort = localOnly ? (ushort)54999 : (ushort)59999;
 
         var random = new Random();
         try
