@@ -34,8 +34,8 @@ public class AnsiCli
     /// <summary>
     /// Formats text as a title.
     /// </summary>
-    public static string Title(string title)
-        => $"[bold underline]{title.EscapeMarkup()}[/]";
+    public static IRenderable Title(string title)
+        => new Paragraph(title, new Style(decoration: Decoration.Bold | Decoration.Underline)).Append(Environment.NewLine);
 
     /// <summary>
     /// Formats data as a table.
@@ -70,7 +70,7 @@ public class AnsiCli
             {
                 var value = getter.Invoke(row, Array.Empty<object?>());
                 return new Text(
-                    value?.ToString().EscapeMarkup() ?? "",
+                    value?.ToString() ?? "",
                     new Style(foreground, link: (value as Uri)?.ToStringRfc()));
             }));
         }
