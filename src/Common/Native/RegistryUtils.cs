@@ -132,28 +132,6 @@ public static class RegistryUtils
     /// <summary>
     /// Reads a string value from one of the SOFTWARE keys in the registry.
     /// </summary>
-    /// <remarks>Checks HKLM/SOFTWARE, HKLM/SOFTWARE/Wow6432Node and HKCU/SOFTWARE in that order.</remarks>
-    /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
-    /// <param name="valueName">The name of the value to read.</param>
-    /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
-    /// <exception cref="IOException">Registry access failed.</exception>
-    [Pure]
-    [return: NotNullIfNotNull("defaultValue")]
-    public static string? GetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, [Localizable(false)] string? defaultValue = null)
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
-        #endregion
-
-        return
-            GetString(HklmSoftwareKey + subkeyName, valueName,
-                GetString(HklmWowSoftwareKey + subkeyName, valueName,
-                    GetString(HkcuSoftwareKey + subkeyName, valueName, defaultValue)));
-    }
-
-    /// <summary>
-    /// Reads a string value from one of the SOFTWARE keys in the registry.
-    /// </summary>
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to read.</param>
     /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to read from HCKU/SOFTWARE.</param>
