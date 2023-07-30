@@ -20,7 +20,6 @@ public static class RegistryUtils
     /// <param name="keyName">The full path of the key to read from.</param>
     /// <param name="valueName">The name of the value to read.</param>
     /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
-    /// <exception cref="IOException">The key does not exist.</exception>
     /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
     [Pure]
     public static int GetDword([Localizable(false)] string keyName, [Localizable(false)] string? valueName, int defaultValue = 0)
@@ -76,7 +75,6 @@ public static class RegistryUtils
     /// <param name="keyName">The full path of the key to read from.</param>
     /// <param name="valueName">The name of the value to read.</param>
     /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
-    /// <exception cref="IOException">The key does not exist.</exception>
     /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
     [Pure]
     [return: NotNullIfNotNull("defaultValue")]
@@ -159,7 +157,6 @@ public static class RegistryUtils
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to read.</param>
     /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to read from HCKU/SOFTWARE.</param>
-    /// <exception cref="IOException">The key does not exist.</exception>
     [Pure]
     public static string? GetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, bool machineWide)
     {
@@ -180,7 +177,6 @@ public static class RegistryUtils
     /// <param name="valueName">The name of the value to write.</param>
     /// <param name="value">The value to write.</param>
     /// <param name="machineWide"><c>true</c> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to write to HCKU/SOFTWARE.</param>
-    /// <exception cref="IOException">The key does not exist.</exception>
     /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
     public static void SetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, [Localizable(false)] string value, bool machineWide = false)
     {
@@ -205,7 +201,6 @@ public static class RegistryUtils
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to delete.</param>
     /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to delete from HCKU/SOFTWARE.</param>
-    /// <exception cref="IOException">The key does not exist.</exception>
     public static void DeleteSoftwareValue([Localizable(false)] string subkeyName, [Localizable(false)] string valueName, bool machineWide)
     {
         #region Sanity checks
@@ -266,7 +261,6 @@ public static class RegistryUtils
     /// <param name="key">The root key to look within.</param>
     /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
     /// <returns>A list of key names; an empty array if the key does not exist.</returns>
-    /// <exception cref="IOException">The key does not exist.</exception>
     [Pure]
     public static string[] GetSubKeyNames([Localizable(false)] RegistryKey key, [Localizable(false)] string subkeyName)
     {
