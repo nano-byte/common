@@ -176,15 +176,18 @@ public sealed partial class ErrorReportForm : Form
 
     #region Generate report
     private string GenerateReport()
-        => new ErrorReport
-           {
-               Application = AppInfo.Current,
-               OS = OSInfo.Current,
-               Exception = new ExceptionInfo(_exception),
-               Log = Log.GetBuffer(),
-               Comments = commentBox.Text
-           }
-          .ToXmlString()
-          .Replace(Environment.UserName, "[USERNAME]");
+    {
+        string report = new ErrorReport
+        {
+            Application = AppInfo.Current,
+            OS = OSInfo.Current,
+            Exception = new ExceptionInfo(_exception),
+            Log = Log.GetBuffer(),
+            Comments = commentBox.Text
+        }.ToXmlString();
+        return Environment.UserName.Length > 1
+            ? report.Replace(Environment.UserName, "[USERNAME]")
+            : report;
+    }
     #endregion
 }
