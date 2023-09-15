@@ -79,7 +79,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="BytesTebi" xml:space="preserve">
-    <value>{0:0,00} TiB</value>
+    <value>{0:0.00} TiB</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
@@ -87,7 +87,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Kolekcja nie może być dodana do siebie.</value>
+    <value>Kolekcja nie może zostać dodana do samej siebie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Uwagi:</value>
+    <value>Komentarz:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -123,11 +123,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Jeśli chcesz, możesz użyć tego pola, aby podać dodatkowe informacje na temat problemu, takie jak opis tego, co robiłeś, gdy wystąpiła awaria.</value>
+    <value>Jeśli chcesz, możesz użyć tego pola, aby podać dodatkowe informacje o problemie, takie jak opis tego, co robiłeś, gdy wystąpiła awaria.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>W tej aplikacji wystąpił nieoczekiwany błąd. Możesz pomóc nam rozwiązać ten problem, zgłaszając go. Jeśli istnieje już znana poprawka do Twojego problemu, zostanie ona wyświetlona zaraz po wysłaniu raportu.</value>
+    <value>W tej aplikacji wystąpił nieoczekiwany błąd. Możesz pomóc nam naprawić problem, zgłaszając go. Jeśli znane jest już rozwiązanie problemu, zostanie ono wyświetlone zaraz po wysłaniu zgłoszenia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -147,7 +147,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Failed to rollback '{0}'.</value>
+    <value>Nie udało się przywrócić '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -155,11 +155,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Plik, który miał być pobrany ze strony {0} nie ma oczekiwanego rozmiaru. Miał być {1} bajtów, ale w rzeczywistości był {2} bajtów.</value>
+    <value>Plik, który miał zostać pobrany ze strony {0}, nie ma oczekiwanego rozmiaru. Miał mieć rozmiar {1} bajtów, ale w rzeczywistości miał {2} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Nie udało się znaleźć pliku "{0}".</value>
+    <value>Nie można znaleźć pliku "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
@@ -167,11 +167,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Dane uwierzytelniające do logowania na stronie {0} są nieprawidłowe.</value>
+    <value>Dane logowania do serwisu {0} są nieprawidłowe.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Klucz ten był już obecny w słowniku.</value>
+    <value>Klucz był już obecny w słowniku.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
@@ -179,11 +179,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Została przekroczona maksymalna ilość elementów w kolekcji.</value>
+    <value>Maksymalna ilość elementów w kolekcji została przekroczona.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Brak akcji zarejestrowanej dla '{0}'.</value>
+    <value>Brak zarejestrowanej akcji dla '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -207,11 +207,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Proszę podać dane do logowania dla {0}:</value>
+    <value>Wprowadź dane logowania dla {0}:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>There was a problem loading '{0}'.</value>
+    <value>Wystąpił problem z załadowaniem '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
@@ -219,39 +219,39 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Proces zakończył się z nieoczekiwanym kodem zakończenia.</value>
+    <value>Proces zakończył działanie z nieoczekiwanym kodem zakończenia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Czytanie pliku {0}</value>
+    <value>Odczyt pliku {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Tego polecenia nie można wykonać ponownie, dopóki nie zostanie wykonane polecenie undo.</value>
+    <value>Polecenia tego nie można wykonać ponownie, dopóki nie zostanie wykonane polecenie cofnięcia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Wartość zerowa</value>
+    <value>Wartość resetowania</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Ponowne uruchamianie aplikacji</value>
+    <value>Restartowanie aplikacji</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Retrying w {0} milisekundach z powodu:</value>
+    <value>Ponowna próba za {0} milisekund z powodu:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Szukaj</value>
+    <value>Wyszukiwanie</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Wyszukiwanie odniesień do plików otwartych</value>
+    <value>Wyszukiwanie odniesień do otwartych plików</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Próbowano odczytać z pozycji {0}. To jest {1} bajtów od pozycji {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
+    <value>Podjęto próbę odczytu z pozycji {0}. Jest ona oddalona o {1} bajtów od bazowej pozycji strumienia {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -263,7 +263,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Pełny</value>
+    <value>Kompletny</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
@@ -275,43 +275,43 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Błąd IO</value>
+    <value>Błąd wejścia-wyjścia</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Gotowe</value>
+    <value>Gotowy</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Błąd sieciowy</value>
+    <value>Błąd sieci</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Długość celów musi być równa długości oldValues</value>
+    <value>Długość wartości docelowych musi być równa długości oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Dane techniczne:</value>
+    <value>Szczegóły techniczne:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Twoja wersja .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania zawartości przez HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
+    <value>Twoja wersja .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania zawartości za pośrednictwem protokołu HTTPS. Uruchom Windows Update, aby zainstalować niezbędne poprawki.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Nie udało się zlokalizować zespołu o nazwie "{0}".</value>
+    <value>Nie można znaleźć zespołu o nazwie "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Nie udało się odczytać ze strumienia {0} bajtów.</value>
+    <value>Nie można odczytać {0} bajtów ze strumienia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>To polecenie cofnięcia nie może być wykonane, dopóki nie zostanie wykonane właściwe polecenie.</value>
+    <value>Polecenia cofnięcia nie można wykonać przed wykonaniem właściwego polecenia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Podsystem Unix nie zdołał przetworzyć żądania. Być może masz niewystarczające uprawnienia.</value>
+    <value>Podsystem Unix nie przetworzył żądania. Możesz mieć niewystarczające uprawnienia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
