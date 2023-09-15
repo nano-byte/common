@@ -67,7 +67,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">
-    <value>{0:0.00} Гигабайт</value>
+    <value>{0:0.00} ГБ</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="BytesKibi" xml:space="preserve">
@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL не может быть канонизирован, так как это может привести к потере информации.</value>
+    <value>DACL не может быть канонизирован, поскольку это может привести к потере информации.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -103,7 +103,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Копировать в буфер обмена</value>
+    <value>Копирование в буфер обмена</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
@@ -115,7 +115,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Отчет об ошибке</value>
+    <value>Отчет об ошибках</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
@@ -123,11 +123,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>При желании вы можете использовать это поле для предоставления дополнительной информации о проблеме, например, описания того, что вы делали, когда произошел сбой.</value>
+    <value>При желании вы можете использовать это поле для предоставления дополнительной информации о проблеме, например, описания того, что вы делали в момент возникновения сбоя.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>В этом приложении произошла непредвиденная ошибка. Вы можете помочь нам устранить проблему, сообщив о ней. Если для вашей проблемы уже есть известное решение, оно будет показано сразу после отправки сообщения.</value>
+    <value>В этом приложении произошла непредвиденная ошибка. Вы можете помочь нам устранить проблему, сообщив о ней. Если для вашей проблемы уже существует известное решение, оно будет показано сразу после отправки сообщения.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -143,7 +143,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Не удалось открыть подзаголовок реестра '{0}' в '{1}'.</value>
+    <value>Не удалось открыть подключ реестра '{0}' в '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -155,15 +155,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Файл, который должен был быть загружен с {0}, не имеет ожидаемого размера. Он должен был быть {1} байт, но на самом деле оказался {2} байт.</value>
+    <value>Файл, который должен был быть загружен с сайта {0}, не имеет ожидаемого размера. Он должен был быть размером {1} байт, но на самом деле оказался размером {2} байт.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Файл "{0}" не может быть найден.</value>
+    <value>Файл "{0}" найти не удалось.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Каталог конфигурации '{0}', вероятно, недействителен.</value>
+    <value>Вероятно, каталог конфигурации '{0}' является недопустимым.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -175,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Запуск '{0}' требует привилегий администратора.</value>
+    <value>Для запуска '{0}' требуются привилегии администратора.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Не зарегистрировано действие для '{0}'.</value>
+    <value>Для '{0}' не зарегистрировано ни одного действия.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Конфигурация системы не может быть отредактирована в портативном режиме.</value>
+    <value>Редактирование конфигурации системы в портативном режиме невозможно.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Этот метод доступен только в Windows.</value>
+    <value>Этот метод доступен только в операционной системе Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' завершена с кодом выхода {1}.</value>
+    <value>'{0}' завершился с кодом выхода {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Эта команда не может быть выполнена повторно, пока не будет выполнена команда отмены.</value>
+    <value>Эта команда не может быть выполнена повторно до тех пор, пока не будет выполнена команда отмены.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Попытка чтения с позиции {0}. Это {1} байт от позиции базового потока {2}, но буфер поиска может выдержать разницу только в {3} байт.</value>
+    <value>Попытка чтения с позиции {0}. Это {1} байт по сравнению с базовой позицией потока {2}, но буфер поиска может выдержать разницу только в {3} байт.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -279,7 +279,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Готовый</value>
+    <value>Готовые</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
@@ -295,11 +295,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Ваша версия .NET не поддерживает TLS 1.2. Это может привести к ошибкам подключения при загрузке содержимого через HTTPS. Пожалуйста, запустите Windows Update для установки необходимых исправлений.</value>
+    <value>Ваша версия .NET не поддерживает TLS 1.2. Это может приводить к ошибкам подключения при загрузке содержимого по протоколу HTTPS. Запустите Windows Update для установки необходимых исправлений.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Не удалось найти сборку с именем "{0}".</value>
+    <value>Сборка с именем "{0}" не может быть найдена.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -307,11 +307,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Эта команда отмены не может быть выполнена до тех пор, пока не будет выполнена фактическая команда.</value>
+    <value>Эта команда отмены не может быть выполнена до тех пор, пока не будет выполнена настоящая команда.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Подсистема Unix не смогла обработать запрос. Возможно, у вас недостаточно прав.</value>
+    <value>Подсистеме Unix не удалось обработать запрос. Возможно, у вас недостаточно прав.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

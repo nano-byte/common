@@ -155,7 +155,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Le fichier qui devait être téléchargé à partir de {0} n'a pas la taille prévue. Il devait être de {1} octets mais était en fait de {2} octets.</value>
+    <value>Le fichier qui devait être téléchargé à partir de {0} n'a pas la taille attendue. Il devait être de {1} octets mais était en fait de {2} octets.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Aucune action enregistrée pour '{0}'.</value>
+    <value>Aucune action n'est enregistrée pour '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">

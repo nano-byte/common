@@ -87,7 +87,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>A colecção não pode ser adicionada a si própria.</value>
+    <value>A coleção não pode ser adicionada a si própria.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -107,7 +107,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>O directório de destino já existe.</value>
+    <value>O diretório de destino já existe.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
@@ -127,7 +127,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Ocorreu um erro inesperado nesta aplicação. Pode ajudar-nos a resolver o problema comunicando-o. Se já existir uma correcção conhecida para o seu problema, esta será apresentada logo após o envio do relatório.</value>
+    <value>Ocorreu um erro inesperado nesta aplicação. Pode ajudar-nos a resolver o problema comunicando-o. Se já existir uma correção conhecida para o seu problema, esta será apresentada logo após o envio do relatório.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -163,7 +163,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>O directório de configuração '{0}' é provavelmente inválido.</value>
+    <value>O diretório de configuração '{0}' é provavelmente inválido.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -179,11 +179,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>O número máximo de elementos da colecção foi ultrapassado.</value>
+    <value>O número máximo de elementos da coleção foi ultrapassado.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Nenhuma acção registada para '{0}'.</value>
+    <value>Nenhuma ação registada para '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>O comprimento dos alvos deve ser igual ao comprimento de oldValues</value>
+    <value>O comprimento dos objectivos deve ser igual ao comprimento de oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Este comando de anulação não pode ser executado até que o comando actual tenha sido executado.</value>
+    <value>Este comando de anulação não pode ser executado até que o comando atual tenha sido executado.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
