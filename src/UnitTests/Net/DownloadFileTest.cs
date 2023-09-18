@@ -50,7 +50,7 @@ public class DownloadFileTest : IDisposable
     }
 
     [Fact]
-    public void TestCancel()
+    public async Task TestCancel()
     {
         // Prepare a very slow download of the file and monitor for a cancellation exception
         _server.Slow = true;
@@ -72,7 +72,7 @@ public class DownloadFileTest : IDisposable
         // Start and then cancel the download
         Thread.Sleep(100);
         cancellationTokenSource.Cancel();
-        downloadTask.Wait();
+        await downloadTask;
 
         exceptionThrown.Should().BeTrue(because: "Should throw OperationCanceledException");
     }

@@ -11,19 +11,19 @@ namespace NanoByte.Common.Threading;
 public class WaitTaskTest
 {
     [Fact]
-    public void TestWait()
+    public async Task TestWait()
     {
         using var waitHandle = new ManualResetEvent(false);
         var task = new WaitTask("Test task", waitHandle);
         var waitTask = Task.Run(() => task.Run());
 
         waitHandle.Set();
-        waitTask.Wait();
+        await waitTask;
         task.State.Should().Be(TaskState.Complete);
     }
 
     [Fact]
-    public void TestCancel()
+    public async Task TestCancel()
     {
         using var waitHandle = new ManualResetEvent(false);
         var task = new WaitTask("Test task", waitHandle);
@@ -44,13 +44,13 @@ public class WaitTaskTest
         // Start and then cancel the download
         Thread.Sleep(100);
         cancellationTokenSource.Cancel();
-        waitTask.Wait();
+        await waitTask;
 
         exceptionThrown.Should().BeTrue(because: task.State.ToString());
     }
 
     [Fact]
-    public void TestCancelNoHandle()
+    public async Task TestCancelNoHandle()
     {
         var task = new WaitTask("Test task");
         bool exceptionThrown = false;
@@ -70,7 +70,7 @@ public class WaitTaskTest
         // Start and then cancel the download
         Thread.Sleep(100);
         cancellationTokenSource.Cancel();
-        waitTask.Wait();
+        await waitTask;
 
         exceptionThrown.Should().BeTrue(because: task.State.ToString());
     }
