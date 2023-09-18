@@ -94,6 +94,7 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     {
         try
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             return (TResult)_form.Value.Invoke(action ?? throw new ArgumentNullException(nameof(action)), _form.Value);
         }
         #region Error handling

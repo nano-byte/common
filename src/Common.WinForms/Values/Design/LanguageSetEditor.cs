@@ -23,6 +23,7 @@ public class LanguageSetEditor : UITypeEditor
     public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context) => UITypeEditorEditStyle.DropDown;
 
     /// <inheritdoc/>
+    // ReSharper disable once NullnessAnnotationConflictWithJetBrainsAnnotations
     public override object EditValue(ITypeDescriptorContext? context, IServiceProvider provider, object? value)
     {
         #region Sanity checks

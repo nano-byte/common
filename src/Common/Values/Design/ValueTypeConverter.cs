@@ -57,6 +57,7 @@ public abstract class ValueTypeConverter<T> : TypeConverter where T : struct
 
     #region Convert from
     /// <inheritdoc/>
+    // ReSharper disable once NullnessAnnotationConflictWithJetBrainsAnnotations
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         if (culture == null) throw new ArgumentNullException(nameof(culture));

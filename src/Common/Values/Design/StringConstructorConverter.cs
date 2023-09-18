@@ -20,6 +20,7 @@ public class StringConstructorConverter<T> : TypeConverter
         => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
     /// <inheritdoc/>
+    // ReSharper disable once NullnessAnnotationConflictWithJetBrainsAnnotations
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         if (value is string stringValue)
