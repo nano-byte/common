@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Globalization;
+using System.Runtime.InteropServices;
 using NanoByte.Common.Native;
 
 #if NET45 || NET462 || NET472
@@ -207,14 +208,13 @@ public static class Msg
             int result = owner == null ? taskDialog.Show() : taskDialog.Show(owner);
             return (DialogResult)result;
         }
-        catch (BadImageFormatException)
+        #region Error handling
+        catch (Exception ex) when (ex is COMException or BadImageFormatException or EntryPointNotFoundException)
         {
+            Log.Info("Failed to show TaskDialog, falling back to MessageBox", ex);
             return null;
         }
-        catch (EntryPointNotFoundException)
-        {
-            return null;
-        }
+        #endregion
 #endif
 #endif
     }
