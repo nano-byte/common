@@ -179,7 +179,7 @@ public class DownloadFile : TaskBase
                 webException, webException.Status, webException.Response);
 #endif
         }
-        catch (NotSupportedException ex)
+        catch (Exception ex) when (ex is NotSupportedException or ArgumentOutOfRangeException)
         {
             // Wrap exception since only certain exception types are allowed
             throw new WebException(ex.Message, ex);
