@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Principal;
 using System.Text;
+using static System.Environment;
+using static System.IO.Path;
 
 namespace NanoByte.Common.Native;
 
@@ -113,7 +115,7 @@ public static partial class WindowsUtils
 #if NET
             => OperatingSystem.IsWindowsVersionAtLeast(version.Major, version.Minor, version.Build, version.Revision);
 #else
-        => IsWindowsNT && Environment.OSVersion.Version >= version;
+        => IsWindowsNT && OSVersion.Version >= version;
 #endif
 
     /// <summary>
@@ -248,12 +250,12 @@ public static partial class WindowsUtils
         if (string.IsNullOrEmpty(version)) throw new ArgumentNullException(nameof(version));
         #endregion
 
-        string microsoftDotNetDir = Path.Combine(
-            Environment.GetEnvironmentVariable("windir") ?? @"C:\Windows",
+        string microsoftDotNetDir = Combine(
+            GetEnvironmentVariable("windir") ?? @"C:\Windows",
             "Microsoft.NET");
-        string framework32Dir = Path.Combine(microsoftDotNetDir, "Framework");
-        string framework64Dir = Path.Combine(microsoftDotNetDir, "Framework64");
-        return Path.Combine(
+        string framework32Dir = Combine(microsoftDotNetDir, "Framework");
+        string framework64Dir = Combine(microsoftDotNetDir, "Framework64");
+        return Combine(
             Directory.Exists(framework64Dir) ? framework64Dir : framework32Dir,
             version);
     }
@@ -316,7 +318,7 @@ public static partial class WindowsUtils
                 SafeNativeMethods.QueryPerformanceCounter(out long time);
                 return time / (double)_performanceFrequency;
             }
-            else return Environment.TickCount / 1000f;
+            else return TickCount / 1000f;
         }
     }
     #endregion
@@ -397,7 +399,7 @@ public static partial class WindowsUtils
             ? NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
             : NativeMethods.CreateSymbolicLinkFlags.NONE;
 
-        if (Directory.Exists(Path.Combine(Path.GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath)))
+        if (Directory.Exists(Combine(GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath)))
             flags |= NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_DIRECTORY;
 
         if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, flags))
@@ -438,7 +440,7 @@ public static partial class WindowsUtils
 
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = NativeMethods.CreateFile(Path.GetFullPath(path), 0, 0, IntPtr.Zero, FileMode.Open, NativeMethods.FILE_FLAG_OPEN_REPARSE_POINT | NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero);
+        using var handle = NativeMethods.CreateFile(GetFullPath(path), 0, 0, IntPtr.Zero, FileMode.Open, NativeMethods.FILE_FLAG_OPEN_REPARSE_POINT | NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
 

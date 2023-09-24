@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using NanoByte.Common.Native;
+using static System.IO.Path;
 
 namespace NanoByte.Common.Storage;
 
@@ -84,14 +85,14 @@ partial class Locations
         {
             if (machineWide)
             {
-                appPath = Path.Combine(SystemCacheDir, appName);
+                appPath = Combine(SystemCacheDir, appName);
                 CreateSecureMachineWideDir(appPath);
             }
             else
             {
                 appPath = IsPortable
-                    ? Path.Combine(PortableBase, "cache")
-                    : Path.Combine(UserCacheDir, appName);
+                    ? Combine(PortableBase, "cache")
+                    : Combine(UserCacheDir, appName);
             }
         }
         #region Error handling
@@ -102,11 +103,11 @@ partial class Locations
         }
         #endregion
 
-        string path = Path.Combine(appPath, resourceCombined);
+        string path = Combine(appPath, resourceCombined);
 
         // Ensure the directory exists
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-        return Path.GetFullPath(path);
+        return GetFullPath(path);
     }
 }
