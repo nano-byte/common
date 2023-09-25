@@ -15,6 +15,13 @@ public class WindowsUtilsTest
     }
 
     [SkippableFact]
+    public void TestGetFolderPath()
+    {
+        WindowsUtils.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+                    .Should().Be(@"C:\ProgramData");
+    }
+
+    [SkippableFact]
     public void TestCreateSymlinkFile()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");

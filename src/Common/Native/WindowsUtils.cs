@@ -5,8 +5,11 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Principal;
 using System.Text;
+using NanoByte.Common.Storage;
 using static System.Environment;
+using static System.Environment.SpecialFolder;
 using static System.IO.Path;
+using Resources = NanoByte.Common.Properties.Resources;
 
 namespace NanoByte.Common.Native;
 
@@ -324,6 +327,56 @@ public static partial class WindowsUtils
     #endregion
 
     #region File system
+    /// <summary>
+    /// Gets the path to the specified system folder.
+    /// Uses well-known environment variables and hard-coded paths as fallbacks when necessary.
+    /// </summary>
+    /// <exception cref="IOException">The folder could not be resolved to a path.</exception>
+    public static string GetFolderPath(SpecialFolder folder)
+    {
+        try
+        {
+            if (Environment.GetFolderPath(folder
+#if !NET20 || NET40
+                    , SpecialFolderOption.DoNotVerify
+#endif
+                ) is {Length: >0} path)
+                return path;
+        }
+        #region Error handling
+        catch (ArgumentException)
+        {
+            // Environment.GetFolderPath() internally tries to validate some ACLs, which can sometimes fail with ArgumentException
+        }
+        #endregion
+
+        // Fallback rules
+        return folder switch
+        {
+            ProgramFiles => GetEnvironmentVariable("ProgramFiles") ?? @"C:\Program Files",
+#if !NET20 || NET40
+            ProgramFilesX86 => Is64BitProcess
+                ? GetEnvironmentVariable("ProgramFiles(x86)") ?? @"C:\Program Files (x86)"
+                : GetFolderPath(ProgramFiles),
+            Windows => GetEnvironmentVariable("windir") ?? @"C:\Windows",
+            CommonDesktopDirectory => Combine(GetEnvironmentVariable("PUBLIC") ?? @"C:\Users\Public", "Desktop"),
+            CommonApplicationData => GetEnvironmentVariable("ProgramData") ?? @"C:\ProgramData",
+            CommonStartMenu => Combine(GetFolderPath(CommonApplicationData), @"Microsoft\Windows\Start Menu"),
+            CommonPrograms => Combine(GetFolderPath(CommonStartMenu), "Programs"),
+            CommonStartup => Combine(GetFolderPath(CommonPrograms), "Startup"),
+            UserProfile => Locations.HomeDir,
+#endif
+            DesktopDirectory or Desktop => Combine(Locations.HomeDir, "Desktop"),
+            LocalApplicationData => GetEnvironmentVariable("LOCALAPPDATA") ?? Combine(Locations.HomeDir, @"AppData\Local"),
+            ApplicationData => GetEnvironmentVariable("APPDATA") ?? Combine(Locations.HomeDir, @"AppData\Roaming"),
+            StartMenu => Combine(GetFolderPath(ApplicationData), @"Microsoft\Windows\Start Menu"),
+            Programs => Combine(GetFolderPath(StartMenu), "Programs"),
+            Startup => Combine(GetFolderPath(Programs), "Startup"),
+            SendTo => Combine(GetFolderPath(ApplicationData), @"Microsoft\SendTo"),
+            _ => throw new IOException($"Unable to resolve {folder} to a path.")
+        };
+    }
+
     /// <summary>
     /// Reads the entire contents of a file using the Win32 API.
     /// </summary>
