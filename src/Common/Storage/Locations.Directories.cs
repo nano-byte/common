@@ -11,7 +11,9 @@ partial class Locations
     /// <summary>
     /// The home/profile directory of the current user.
     /// </summary>
-    public static string HomeDir => Environment.GetEnvironmentVariable(WindowsUtils.IsWindows ? "userprofile" : "HOME") ?? "";
+    public static string HomeDir => WindowsUtils.IsWindows
+        ? Environment.GetEnvironmentVariable("USERPROFILE") ?? Combine(@"C:\Users", Environment.UserName)
+        : Environment.GetEnvironmentVariable("HOME") ?? Combine("/home", Environment.UserName);
 
     /// <summary>
     /// The directory to store per-user settings (can roam across different machines).
