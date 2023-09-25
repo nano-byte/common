@@ -95,15 +95,6 @@ public static partial class Locations
     public static string PortableBase
         => RedirectBase ?? InstallBase;
 
-    /// <summary>
-    /// Returns the value of an environment variable or a default value if it isn't set.
-    /// </summary>
-    /// <param name="variable">The name of the environment variable to retrieve.</param>
-    /// <param name="defaultValue">The default value to return if the environment variable was not set.</param>
-    /// <returns>The value of the environment variable or <paramref name="defaultValue"/>.</returns>
-    private static string GetEnvironmentVariable(string variable, string defaultValue)
-        => Environment.GetEnvironmentVariable(variable) is {Length: > 0} value ? value : defaultValue;
-
     #region ACL Security
     /// <summary>
     /// ACL that gives normal users read and execute access and admins and the the system full access.

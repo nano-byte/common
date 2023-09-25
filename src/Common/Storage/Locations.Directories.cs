@@ -2,7 +2,9 @@
 // Licensed under the MIT License
 
 using NanoByte.Common.Native;
+using static System.Environment.SpecialFolder;
 using static System.IO.Path;
+using Resources = NanoByte.Common.Properties.Resources;
 
 namespace NanoByte.Common.Storage;
 
@@ -19,51 +21,68 @@ partial class Locations
     /// The directory to store per-user settings (can roam across different machines).
     /// </summary>
     /// <remarks>On Windows this is <c>%appdata%</c>, on Linux it usually is <c>~/.config</c>.</remarks>
-    public static string UserConfigDir => GetEnvironmentVariable("XDG_CONFIG_HOME", WindowsUtils.IsWindows
-        ? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-        : Path.Combine(HomeDir, ".config"));
+    public static string UserConfigDir => GetDir(
+        envVar: "XDG_CONFIG_HOME",
+        posixPath: Combine(HomeDir, ".config"),
+        windowsFolder: ApplicationData);
 
     /// <summary>
     /// The directory to store per-user data files (should not roam across different machines).
     /// </summary>
     /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.local/share</c>.</remarks>
-    public static string UserDataDir => GetEnvironmentVariable("XDG_DATA_HOME", WindowsUtils.IsWindows
-        ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
-        : Path.Combine(HomeDir, ".local/share"));
+    public static string UserDataDir => GetDir(
+        envVar: "XDG_DATA_HOME",
+        posixPath: Combine(HomeDir, ".local/share"),
+        windowsFolder: LocalApplicationData);
 
     /// <summary>
     /// The directory to store per-user non-essential data (should not roam across different machines).
     /// </summary>
     /// <remarks>On Windows this is <c>%localappdata%</c>, on Linux it usually is <c>~/.cache</c>.</remarks>
-    public static string UserCacheDir => GetEnvironmentVariable("XDG_CACHE_HOME", WindowsUtils.IsWindows
-        ? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
-        : Path.Combine(HomeDir, ".cache"));
+    public static string UserCacheDir => GetDir(
+        envVar: "XDG_CACHE_HOME",
+        posixPath: Combine(HomeDir, ".cache"),
+        windowsFolder: LocalApplicationData);
 
     /// <summary>
     /// The directories to store machine-wide settings.
     /// </summary>
     /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
     /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/etc/xdg</c>.</remarks>
-    public static string SystemConfigDirs => GetEnvironmentVariable("XDG_CONFIG_DIRS", WindowsUtils.IsWindows
-        ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-        : "/etc/xdg");
+    public static string SystemConfigDirs => GetDir(
+        envVar: "XDG_CONFIG_DIRS",
+        posixPath: "/etc/xdg",
+        windowsFolder: CommonApplicationData);
 
     /// <summary>
     /// The directories to store machine-wide data files (should not roam across different machines).
     /// </summary>
     /// <returns>Directories separated by <see cref="Path.PathSeparator"/> sorted by decreasing importance.</returns>
     /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it usually is <c>/usr/local/share:/usr/share</c>.</remarks>
-    public static string SystemDataDirs => GetEnvironmentVariable("XDG_DATA_DIRS", WindowsUtils.IsWindows
-        ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-        : "/usr/local/share" + Path.PathSeparator + "/usr/share");
+    public static string SystemDataDirs => GetDir(
+        envVar: "XDG_DATA_DIRS",
+        posixPath: "/usr/local/share" + PathSeparator + "/usr/share",
+        windowsFolder: CommonApplicationData);
 
     /// <summary>
     /// The directory to store machine-wide non-essential data.
     /// </summary>
     /// <remarks>On Windows this is <c>CommonApplicationData</c>, on Linux it is <c>/var/cache</c>.</remarks>
-    public static string SystemCacheDir => WindowsUtils.IsWindows
-        ? Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-        : "/var/cache";
+    public static string SystemCacheDir => GetDir(
+        posixPath: "/var/cache",
+        windowsFolder: CommonApplicationData);
+
+    private static string GetDir(string envVar, string posixPath, Environment.SpecialFolder windowsFolder)
+        => Environment.GetEnvironmentVariable(envVar) is {Length: > 0} value
+            ? value
+            : GetDir(posixPath, windowsFolder);
+
+    private static string GetDir(string posixPath, Environment.SpecialFolder windowsFolder)
+    {
+        if (WindowsUtils.IsWindows) return WindowsUtils.GetFolderPath(windowsFolder);
+        else if (UnixUtils.IsUnix) return posixPath;
+        else throw new PlatformNotSupportedException("Must be either Windows or POSIX.");
+    }
 
     /// <summary>
     /// Returns a path for a cache directory (should not roam across different machines).
