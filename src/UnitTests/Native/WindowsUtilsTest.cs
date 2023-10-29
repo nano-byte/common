@@ -15,6 +15,13 @@ public class WindowsUtilsTest
     }
 
     [SkippableFact]
+    public void TestSplitArgs()
+    {
+        WindowsUtils.SplitArgs("\"first part\" second \"\\\"third part\\\"\"")
+                    .Should().Equal("first part", "second", "\"third part\"");
+    }
+
+    [SkippableFact]
     public void TestGetFolderPath()
     {
         WindowsUtils.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
