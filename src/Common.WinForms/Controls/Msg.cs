@@ -2,10 +2,10 @@
 // Licensed under the MIT License
 
 using System.Globalization;
-using System.Runtime.InteropServices;
 using NanoByte.Common.Native;
 
 #if NET45 || NET462 || NET472
+using System.Runtime.InteropServices;
 using TaskDialog;
 #endif
 

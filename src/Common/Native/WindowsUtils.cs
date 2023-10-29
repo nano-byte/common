@@ -95,9 +95,9 @@ public static partial class WindowsUtils
     [SupportedOSPlatformGuard("windows")]
     public static bool IsWindows
 #if NET
-            => OperatingSystem.IsWindows();
+        => OperatingSystem.IsWindows();
 #elif NET20 || NET40
-            => Environment.OSVersion.Platform is PlatformID.Win32Windows or PlatformID.Win32NT;
+        => Environment.OSVersion.Platform is PlatformID.Win32Windows or PlatformID.Win32NT;
 #else
         => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #endif
@@ -108,7 +108,7 @@ public static partial class WindowsUtils
     [SupportedOSPlatformGuard("windows")]
     public static bool IsWindowsNT
 #if NET20 || NET40
-            => Environment.OSVersion.Platform is PlatformID.Win32NT;
+        => Environment.OSVersion.Platform is PlatformID.Win32NT;
 #else
         => IsWindows;
 #endif
@@ -116,7 +116,7 @@ public static partial class WindowsUtils
     [SupportedOSPlatformGuard("windows")]
     private static bool IsWindowsNTVersion(Version version)
 #if NET
-            => OperatingSystem.IsWindowsVersionAtLeast(version.Major, version.Minor, version.Build, version.Revision);
+        => OperatingSystem.IsWindowsVersionAtLeast(version.Major, version.Minor, version.Build, version.Revision);
 #else
         => IsWindowsNT && OSVersion.Version >= version;
 #endif
@@ -198,8 +198,7 @@ public static partial class WindowsUtils
     /// Indicates whether the current process is running in a GUI session (rather than, e.g., as a service or in an SSH session).
     /// Always <c>false</c> on non-Windows systems.
     /// </summary>
-    [SupportedOSPlatformGuard("windows")]
-    public static bool IsGuiSession { get; } = IsWindows && DetectGuiSession();
+    public static bool IsGuiSession { get; } = DetectGuiSession();
 
     private static bool DetectGuiSession()
     {

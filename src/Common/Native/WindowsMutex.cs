@@ -64,7 +64,7 @@ public static partial class WindowsMutex
             return Marshal.GetLastWin32Error() switch
             {
                 WindowsUtils.Win32ErrorFileNotFound => false, // No existing mutex found
-                { } code => throw new Win32Exception(code)
+                var code => throw new Win32Exception(code)
             };
         }
 
