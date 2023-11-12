@@ -219,7 +219,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı</value>
+    <value>Bir işlem beklenmeyen bir çıkış koduyla kapandı.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">

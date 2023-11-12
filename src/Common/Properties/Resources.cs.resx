@@ -175,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Spuštění '{0}' vyžaduje oprávnění správce.</value>
+    <value>Spuštění stránky '{0}' vyžaduje oprávnění správce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Vaše verze rozhraní .NET nepodporuje protokol TLS 1.2. To může způsobit chyby připojení při stahování obsahu přes HTTPS. Spusťte Windows Update a nainstalujte potřebné záplaty.</value>
+    <value>Vaše verze rozhraní .NET nepodporuje protokol TLS 1.2. To může způsobit chyby připojení při stahování obsahu prostřednictvím protokolu HTTPS. Spusťte Windows Update a nainstalujte potřebné záplaty.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Tento příkaz zpět nelze provést, dokud není proveden skutečný příkaz.</value>
+    <value>Tento příkaz nelze provést, dokud není proveden skutečný příkaz.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' 종료 코드 {1} 로 종료됩니다.</value>
+    <value>'{0}' 종료 코드 {1} 로 종료됨 .</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>다음 때문에 {0} 밀리초 후에 다시 시도합니다:</value>
+    <value>{0} 밀리초 후에 다시 시도 중입니다:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
