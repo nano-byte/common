@@ -99,7 +99,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Kopieren von Dateien</value>
+    <value>Dateien werden kopiert</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -111,7 +111,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Herunterladen von {0}</value>
+    <value>{0} wird heruntergeladen</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
@@ -119,19 +119,19 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>&amp;Nicht berichten</value>
+    <value>&amp;Nicht melden</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Wenn Sie möchten, können Sie in diesem Feld zusätzliche Informationen über das Problem angeben, z. B. eine Beschreibung dessen, was Sie gerade taten, als der Absturz auftrat.</value>
+    <value>Optional: Sie können in diesem Feld zusätzliche Informationen zu dem Problem angeben, z. B. was Sie während des Absturzes gerade gemacht haben.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>In dieser Anwendung ist ein unerwarteter Fehler aufgetreten. Sie können uns helfen, das Problem zu beheben, indem Sie es melden. Wenn es bereits eine bekannte Lösung für Ihr Problem gibt, wird diese direkt nach dem Senden des Berichts angezeigt.</value>
+    <value>In dieser Anwendung ist ein unerwarteter Fehler aufgetreten. Wenn Sie das Problem melden, können wir es leichter beheben. Wenn eine Lösung bereits bekannt ist, wird diese direkt angezeigt, nachdem Sie das Problem gemeldet haben.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Berichten</value>
+    <value>&amp;Melden</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
@@ -139,7 +139,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Der Download von {0} ist fehlgeschlagen.</value>
+    <value>{0} konnte nicht heruntergeladen werden.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
@@ -155,11 +155,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Die Datei, die von {0} heruntergeladen werden sollte, hat nicht die erwartete Größe. Sie sollte {1} Bytes groß sein, war aber tatsächlich {2} Bytes groß.</value>
+    <value>Die von {0} herunterzuladende Datei hat nicht die erwartete Dateigröße. Die Datei sollte {1} Bytes groß sein, war aber tatsächlich {2} Bytes groß.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Die Datei "{0}" konnte nicht gefunden werden.</value>
+    <value>Die Datei '{0}' konnte nicht gefunden werden.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
@@ -167,7 +167,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Die Anmeldedaten für {0} sind ungültig.</value>
+    <value>Die Anmeldedaten für {0} sind nicht korrekt.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
@@ -223,7 +223,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Datei {0} lesen</value>
+    <value>Datei {0} wird gelesen</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
@@ -235,7 +235,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Neustart von Anwendungen</value>
+    <value>Anwendungen werden neu gestartet</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
@@ -247,7 +247,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Suche nach offenen Dateiverweisen</value>
+    <value>Offene Dateiverweise werden gesucht</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
@@ -255,7 +255,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Beenden von Anwendungen</value>
+    <value>Anwendungen werden beendet</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
@@ -267,11 +267,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Verarbeitung von Daten</value>
+    <value>Daten werden verarbeitet</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Header abrufen</value>
+    <value>Header werden abgerufen</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Web-Fehler</value>
+    <value>Webfehler</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">

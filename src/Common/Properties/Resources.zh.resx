@@ -60,31 +60,31 @@
   </resheader>
   <data name="Back" xml:space="preserve">
     <value>返回</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00}字节</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} bytes</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">
-    <value>{0:0.00}吉比特</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} GiB</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesKibi" xml:space="preserve">
-    <value>{0:0.00}千字节</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} KiB</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesMebi" xml:space="preserve">
-    <value>{0:0.00}兆字节</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} MiB</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesTebi" xml:space="preserve">
-    <value>{0:0.00}钛白粉</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} TiB</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>取消</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>集合不能添加到自身。</value>
@@ -95,52 +95,52 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>评论：</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;评论</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>复制文件</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>复制到剪贴板</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;复制到剪贴板</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>目标目录已存在。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>下载{0}</value>
-    <comment>Automatically translated.</comment>
+    <value>下载 {0}</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
     <value>错误报告</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>不要报告</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;不报告</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>如果您愿意，可以使用此字段提供有关问题的其他信息，例如描述崩溃发生时您正在做什么。</value>
-    <comment>Automatically translated.</comment>
+    <value>你还可以在此字段中输入有关问题的其他信息，例如在崩溃时你所进行的操作。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>此应用程序出现意外错误。您可以通过报告帮助我们解决问题。如果您的问题已经有已知的修复方法，则会在发送报告后立即显示。</value>
-    <comment>Automatically translated.</comment>
+    <value>此应用程序出现意外错误。你可以通过发送报告帮助我们解决问题。如果你的问题已存在解决方案，则会在发送报告后立即显示。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>报告</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;报告</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>错误报告已成功发送。</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>下载失败{0} 。</value>
-    <comment>Automatically translated.</comment>
+    <value>下载 {0} 失败 。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
     <value>在 "{1}"中打开注册表子键 "{0}"失败。</value>
@@ -155,20 +155,20 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>本应从{0} 下载的文件与预期大小不符。本来应该是{1} 字节，但实际上是{2} 字节。</value>
-    <comment>Automatically translated.</comment>
+    <value>要从 {0} 下载的文件没有预期的大小。文件大小本应是 {1} 个字节，但实际上是 {2} 个字节。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>找不到文件 "{0}"。</value>
-    <comment>Automatically translated.</comment>
+    <value>找不到文件'{0}'。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>配置目录{0} 可能无效。</value>
-    <comment>Automatically translated.</comment>
+    <value>配置目录'{0}'可能无效。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>{0} 的登录凭证不正确。</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>该键已存在于字典中。</value>
@@ -187,8 +187,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>没有</value>
-    <comment>Automatically translated.</comment>
+    <value>否</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>在便携模式下无法编辑系统配置。</value>
@@ -196,23 +196,23 @@
   </data>
   <data name="OK" xml:space="preserve">
     <value>好的</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>此方法仅适用于 Windows 系统。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>密码</value>
-    <comment>Automatically translated.</comment>
+    <value>密码：</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>请输入{0} 的登录凭证：</value>
-    <comment>Automatically translated.</comment>
+    <value>请输入 {0} 的登录凭证：</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>加载 '{0}' 时出现问题。</value>
-    <comment>Automatically translated.</comment>
+    <value>加载'{0}'时出现问题。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}' 已退出，退出代码为{1}.</value>
@@ -223,8 +223,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>读取文件{0}</value>
-    <comment>Automatically translated.</comment>
+    <value>读取文件 {0}</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>在执行撤消命令之前，不能再次执行该命令。</value>
@@ -236,10 +236,10 @@
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>重启应用程序</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>在{0} 毫秒内重试，原因是</value>
+    <value>在{0} 毫秒内重试，因为：</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -248,7 +248,7 @@
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>搜索打开的文件引用</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>试图从位置{0} 读取数据。{1} {2} 字节，但寻道缓冲区只能容纳{3} 字节的差值。</value>
@@ -256,43 +256,43 @@
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>关闭应用程序</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>来源地和目的地相等。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>完整</value>
-    <comment>Automatically translated.</comment>
+    <value>完成</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
     <value>处理数据</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
     <value>获取标题</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>IO 错误</value>
-    <comment>Automatically translated.</comment>
+    <value>输入输出（IO）错误</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
     <value>准备就绪</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
     <value>网页错误</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>目标的长度必须等于 oldValues 的长度</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>技术细节</value>
-    <comment>Automatically translated.</comment>
+    <value>技术细节：</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>您的 .NET 版本不支持 TLS 1.2。这可能会导致通过 HTTPS 下载内容时出现连接错误。请运行 Windows Update 安装必要的补丁程序。</value>
@@ -315,11 +315,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>用户名</value>
-    <comment>Automatically translated.</comment>
+    <value>用户名：</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>是</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
 </root>

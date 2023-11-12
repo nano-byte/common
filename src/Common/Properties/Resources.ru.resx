@@ -60,31 +60,31 @@
   </resheader>
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00} байт</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} Б</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">
-    <value>{0:0.00} ГБ</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} ГиБ</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesKibi" xml:space="preserve">
-    <value>{0:0.00} KiB</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} КиБ</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesMebi" xml:space="preserve">
-    <value>{0:0.00} MiB</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} МиБ</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesTebi" xml:space="preserve">
-    <value>{0:0.00} TiB</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} ТиБ</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>Коллекция не может быть добавлена к самой себе.</value>
@@ -95,16 +95,16 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Комментарий:</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Комментарий:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Копирование файлов</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Копирование в буфер обмена</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Копировать в буфер обмена</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Каталог назначения уже существует.</value>
@@ -112,35 +112,35 @@
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>Загрузка {0}</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Отчет об ошибках</value>
-    <comment>Automatically translated.</comment>
+    <value>Отчет об ошибке</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Не сообщать</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Не отправлять</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>При желании вы можете использовать это поле для предоставления дополнительной информации о проблеме, например, описания того, что вы делали в момент возникновения сбоя.</value>
-    <comment>Automatically translated.</comment>
+    <value>Вы можете использовать это поле, чтобы предоставить дополнительную информацию о проблеме, например описать, что вы делали, когда произошел сбой.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>В этом приложении произошла непредвиденная ошибка. Вы можете помочь нам устранить проблему, сообщив о ней. Если для вашей проблемы уже существует известное решение, оно будет показано сразу после отправки сообщения.</value>
-    <comment>Automatically translated.</comment>
+    <value>В этом приложении произошла непредвиденная ошибка. Вы можете помочь нам устранить проблему, сообщив о ней. Если для вашей проблемы уже существует известное решение, оно будет показано сразу после отправки отчета.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>Отчет</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Отправить</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>Отчет об ошибке был отправлен успешно.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
     <value>Не удалось загрузить {0}.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
     <value>Не удалось открыть подключ реестра '{0}' в '{1}'.</value>
@@ -155,20 +155,20 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Файл, который должен был быть загружен с сайта {0}, не имеет ожидаемого размера. Он должен был быть размером {1} байт, но на самом деле оказался размером {2} байт.</value>
-    <comment>Automatically translated.</comment>
+    <value>Размер файла, который должен быть загружен с {0}, отличается от ожидаемого. Файл должен иметь размер {1} байт, но имеет размер {2} байт.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Файл "{0}" найти не удалось.</value>
-    <comment>Automatically translated.</comment>
+    <value>Не удалось найти файл "{0}".</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
     <value>Вероятно, каталог конфигурации '{0}' является недопустимым.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Учетные данные для входа в систему {0} указаны неверно.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Ключ уже присутствовал в словаре.</value>
@@ -188,7 +188,7 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>Редактирование конфигурации системы в портативном режиме невозможно.</value>
@@ -196,7 +196,7 @@
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Этот метод доступен только в операционной системе Windows.</value>
@@ -204,15 +204,15 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль:</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Пожалуйста, введите учетные данные для входа в систему {0}:</value>
-    <comment>Automatically translated.</comment>
+    <value>Введите учетные данные для входа в {0}:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
     <value>Возникла проблема с загрузкой '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}' завершился с кодом выхода {1}.</value>
@@ -224,7 +224,7 @@
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Чтение файла {0}</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Эта команда не может быть выполнена повторно до тех пор, пока не будет выполнена команда отмены.</value>
@@ -236,7 +236,7 @@
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Перезапуск приложений</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
     <value>Повторная попытка через {0} миллисекунд из-за:</value>
@@ -248,7 +248,7 @@
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Поиск ссылок на открытые файлы</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>Попытка чтения с позиции {0}. Это {1} байт по сравнению с базовой позицией потока {2}, но буфер поиска может выдержать разницу только в {3} байт.</value>
@@ -256,43 +256,43 @@
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Завершение работы приложений</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Источник и пункт назначения равны.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Полный</value>
-    <comment>Automatically translated.</comment>
+    <value>Выполнено</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
     <value>Обработка данных</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
     <value>Получение заголовков</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
     <value>Ошибка ввода-вывода</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Готовые</value>
-    <comment>Automatically translated.</comment>
+    <value>Готово</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Веб-ошибка</value>
-    <comment>Automatically translated.</comment>
+    <value>Ошибка загрузки</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Длина целей должна быть равна длине oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Технические детали:</value>
-    <comment>Automatically translated.</comment>
+    <value>Технические подробности:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>Ваша версия .NET не поддерживает TLS 1.2. Это может приводить к ошибкам подключения при загрузке содержимого по протоколу HTTPS. Запустите Windows Update для установки необходимых исправлений.</value>
@@ -316,10 +316,10 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Имя пользователя:</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
 </root>

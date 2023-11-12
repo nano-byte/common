@@ -60,51 +60,51 @@
   </resheader>
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00} bajtów</value>
-    <comment>Automatically translated.</comment>
+    <value>{0:0.00} B</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">
     <value>{0:0.00} GiB</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesKibi" xml:space="preserve">
     <value>{0:0.00} KiB</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesMebi" xml:space="preserve">
     <value>{0:0.00} MiB</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="BytesTebi" xml:space="preserve">
     <value>{0:0.00} TiB</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
     <value>Kolekcja nie może zostać dodana do samej siebie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nie może być kanonizowany, ponieważ potencjalnie spowodowałoby to utratę informacji.</value>
+    <value>DACL nie można kanonizować, ponieważ potencjalnie spowodowałoby to utratę informacji.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Komentarz:</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Komentarz:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
     <value>Kopiowanie plików</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Kopiuj do schowka</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Kopiuj do schowka</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Katalog docelowy już istnieje.</value>
@@ -112,35 +112,35 @@
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>Pobieranie {0}</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Raport o błędach</value>
-    <comment>Automatically translated.</comment>
+    <value>Raport o błędzie</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Nie zgłaszać</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Nie wysyłaj</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Jeśli chcesz, możesz użyć tego pola, aby podać dodatkowe informacje o problemie, takie jak opis tego, co robiłeś, gdy wystąpiła awaria.</value>
-    <comment>Automatically translated.</comment>
+    <value>W tym polu możesz podać dodatkowe informacje o napotkanym problemie, na przykład opis tego, jakie działania poprzedziły wystąpienie błędu.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>W tej aplikacji wystąpił nieoczekiwany błąd. Możesz pomóc nam naprawić problem, zgłaszając go. Jeśli znane jest już rozwiązanie problemu, zostanie ono wyświetlone zaraz po wysłaniu zgłoszenia.</value>
-    <comment>Automatically translated.</comment>
+    <value>W aplikacji wystąpił nieoczekiwany błąd. Zgłaszając problem, pomożesz nam go rozwiązać. Jeśli rozwiązanie problemu jest już znane, zostanie ono wyświetlone natychmiast po wysłaniu zgłoszenia.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>Raport</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Wyślij</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Raport o błędzie został wysłany pomyślnie.</value>
-    <comment>Automatically translated.</comment>
+    <value>Raport o błędach został wysłany pomyślnie.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
     <value>Nie udało się pobrać {0}.</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
     <value>Nie udało się otworzyć podklucza rejestru '{0}' w '{1}'.</value>
@@ -155,20 +155,20 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Plik, który miał zostać pobrany ze strony {0}, nie ma oczekiwanego rozmiaru. Miał mieć rozmiar {1} bajtów, ale w rzeczywistości miał {2} bajtów.</value>
-    <comment>Automatically translated.</comment>
+    <value>Plik, który miał zostać pobrany z {0}, nie ma wymaganego rozmiaru. Rozmiar pliku powinien wynosić {1} bajtów, jednak w rzeczywistości jest on równy {2} bajtów.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Nie można znaleźć pliku "{0}".</value>
-    <comment>Automatically translated.</comment>
+    <value>Plik „{0}” nie został znaleziony.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Katalog konfiguracyjny '{0}' jest prawdopodobnie nieprawidłowy.</value>
-    <comment>Automatically translated.</comment>
+    <value>Katalog konfiguracyjny „{0}” może być nieprawidłowy.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>Dane logowania do serwisu {0} są nieprawidłowe.</value>
-    <comment>Automatically translated.</comment>
+    <value>Dane logowania do {0} są nieprawidłowe.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
     <value>Klucz był już obecny w słowniku.</value>
@@ -188,7 +188,7 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>Nie</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
     <value>Konfiguracja systemu nie może być edytowana w trybie przenośnym.</value>
@@ -196,7 +196,7 @@
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
     <value>Ta metoda jest dostępna tylko w systemie Windows.</value>
@@ -204,15 +204,15 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło:</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
     <value>Wprowadź dane logowania dla {0}:</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Wystąpił problem z załadowaniem '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <value>Wystąpił problem z załadowaniem „{0}”.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
     <value>'{0}' zakończono z kodem wyjścia {1}.</value>
@@ -223,8 +223,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Odczyt pliku {0}</value>
-    <comment>Automatically translated.</comment>
+    <value>Trwa odczyt pliku {0}</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Polecenia tego nie można wykonać ponownie, dopóki nie zostanie wykonane polecenie cofnięcia.</value>
@@ -236,7 +236,7 @@
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Restartowanie aplikacji</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
     <value>Ponowna próba za {0} milisekund z powodu:</value>
@@ -248,43 +248,43 @@
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Wyszukiwanie odniesień do otwartych plików</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
     <value>Podjęto próbę odczytu z pozycji {0}. Jest ona oddalona o {1} bajtów od bazowej pozycji strumienia {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Zamykanie aplikacji</value>
-    <comment>Automatically translated.</comment>
+    <value>Trwa zamykanie aplikacji</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
     <value>Źródło i miejsce docelowe są równe.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Kompletny</value>
-    <comment>Automatically translated.</comment>
+    <value>Zakończono</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
     <value>Przetwarzanie danych</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
     <value>Pobieranie nagłówków</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Błąd wejścia-wyjścia</value>
-    <comment>Automatically translated.</comment>
+    <value>Błąd wejścia/wyjścia</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Gotowy</value>
-    <comment>Automatically translated.</comment>
+    <value>Gotowe</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
     <value>Błąd sieci</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
     <value>Długość wartości docelowych musi być równa długości oldValues</value>
@@ -292,7 +292,7 @@
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Szczegóły techniczne:</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
     <value>Twoja wersja .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania zawartości za pośrednictwem protokołu HTTPS. Uruchom Windows Update, aby zainstalować niezbędne poprawki.</value>
@@ -315,11 +315,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nazwa użytkownika:</value>
-    <comment>Automatically translated.</comment>
+    <value>Nazwa użytkownika</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>
-    <comment>Automatically translated.</comment>
+    <comment>Manually overriden.</comment>
   </data>
 </root>
