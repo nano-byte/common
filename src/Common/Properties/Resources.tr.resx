@@ -115,27 +115,27 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Hata bildirimi</value>
+    <value>Hata raporu</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>Bildir&amp;me</value>
+    <value>Rapora &amp;gerek yok</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Dilerseniz bu alanı kullanarak, sorun ortaya çıktığı sırada yapmakta olduğunuz işlemler gibi ayrıntıları bize iletebilirsiniz.</value>
+    <value>Çökme meydana geldiğinde ne tür işlemler yaptığını açıklamak gibi sorunla ilgili ek bilgileri bu alana girebilirsin.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Bu uygulamada beklenmeyen bir sorun çıktı. Bu sorunu bize bildirerek çözmemize yardımcı olabilirsiniz. Sorun için geçerli bir çözüm varsa, bildiriminiz gönderildikten hemen sonra görüntülenir.</value>
+    <value>Bu uygulamada beklenmeyen bir hata oluştu. Sorunu raporlayarak düzeltmemize yardımcı olabilirsin. Karşılaştığın sorun için bilinen bir çözüm varsa raporu gönderdikten hemen sonra ilgili çözüm görüntülenir.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Bildir</value>
+    <value>&amp;Raporla</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Hata raporu gönderildi.</value>
+    <value>Hata raporu başarıyla gönderildi.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
@@ -155,19 +155,19 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>{0} üzerinden indirilen dosya beklenen boyutta değil. Boyutun {1} bayt boyutunda olması beklenirken {2} bayt boyutunda.</value>
+    <value>{0} adresinden indirilecek olan dosya beklenen boyuta sahip değil. Dosyanın {1} bayt olması gerekiyordu ama {2} bayt boyutunda.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>"{0}" dosyası bulunamadı.</value>
+    <value>'{0}' dosyası bulunamadı.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Büyük olasılıkla '{0}' yapılandırma klasörü geçersiz.</value>
+    <value>Yapılandırma dizini '{0}' muhtemelen geçersiz.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>{0} için oturum açma kimlik bilgileri yanlış.</value>
+    <value>{0} için giriş bilgileri yanlış.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
@@ -203,15 +203,15 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Parola:</value>
+    <value>Şifre:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Lütfen {0} için oturum açma bilgilerinizi yazın:</value>
+    <value>Lütfen {0} için giriş bilgilerini gir:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>'{0}' yüklenirken bir sorun çıktı.</value>
+    <value>'{0}' yüklenirken bir sorun oluştu.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
@@ -247,7 +247,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Dosyayı açacak uygulamalar aranıyor</value>
+    <value>Açık dosya referansları aranıyor</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
@@ -263,7 +263,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Tamamla</value>
+    <value>Tamamlandı</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
@@ -271,11 +271,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Başlıklar alınıyor</value>
+    <value>Onay bilgisi alınıyor</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>Giriş çıkış sorunu</value>
+    <value>GÇ hatası</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Site sorunu</value>
+    <value>Web hatası</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">

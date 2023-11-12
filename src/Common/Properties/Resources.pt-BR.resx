@@ -103,7 +103,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Copiar para área de transferência</value>
+    <value>&amp;Copiar para a área de transferência</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
@@ -111,35 +111,35 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Baixando {0}</value>
+    <value>Fazendo download de {0}</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Reportar erro</value>
+    <value>Relatório de erros</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>&amp;Não reportar</value>
+    <value>&amp;Não relatar problema</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Se desejar, você pode usar este campo para fornecer informações adicionais sobre o problema, como uma descrição do que você estava fazendo quando ocorreu a falha.</value>
+    <value>Esse campo pode ser usado para fornecer informações adicionais sobre o problema, como uma descrição do que você estava fazendo quando ocorreu a falha.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Ocorreu um erro inesperado neste aplicativo. Você pode nos ajudar a corrigir o problema relatando-o. Se já houver uma correção conhecida para o seu problema, ela será exibida logo após o envio do relatório.</value>
+    <value>Ocorreu um erro inesperado neste aplicativo. Você pode nos ajudar a corrigir o problema enviando um relatório de erros. Se já houver uma solução conhecida para o problema, ela será apresentada logo após o envio do relatório.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Reportar</value>
+    <value>&amp;Relatar problema</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>O relatório de erro foi enviado com sucesso.</value>
+    <value>O relatório de erros foi enviado com sucesso.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Falha ao baixar {0}.</value>
+    <value>Falha no download de {0}.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
@@ -155,7 +155,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>O arquivo que deveria ser baixado de {0} não possui o tamanho esperado. Era para ser {1} bytes, mas na verdade era {2} bytes.</value>
+    <value>O arquivo que deveria ter sido baixado de {0} não tem o tamanho esperado. O arquivo deveria ter {1} bytes, mas tem {2} bytes.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
@@ -163,11 +163,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>A pasta de configuração '{0}' provavelmente é inválida.</value>
+    <value>O diretório de configuração "{0}" provavelmente é inválido.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>As credenciais de login para {0} estão incorretas.</value>
+    <value>Os dados de login para {0} estão incorretos.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
@@ -207,11 +207,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Entre as credenciais de login para {0}:</value>
+    <value>Digite os dados de login para {0}:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Ocorreu um problema ao carregar '{0}'.</value>
+    <value>Houve um problema ao carregar "{0}".</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
@@ -247,7 +247,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Procurando por referências de arquivos abertos</value>
+    <value>Buscando referências de arquivos abertos</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
@@ -263,7 +263,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Completo</value>
+    <value>Concluído</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Erro da web</value>
+    <value>Erro web</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
