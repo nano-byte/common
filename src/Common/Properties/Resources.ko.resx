@@ -59,11 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Terug</value>
+    <value>뒤로</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00} bytes</value>
+    <value>{0:0.00} 바이트</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">
@@ -83,243 +83,243 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuleren</value>
+    <value>취소</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>De verzameling kan niet aan zichzelf worden toegevoegd.</value>
+    <value>컬렉션은 컬렉션 자체에 추가할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet gecanoniseerd worden omdat dit mogelijk zou leiden tot verlies van informatie.</value>
+    <value>DACL은 잠재적으로 정보 손실을 초래할 수 있으므로 표준화할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Toelichten:</value>
+    <value>&amp;설명:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Bestanden worden gekopieerd</value>
+    <value>파일 복사 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Kopiëren naar klembord</value>
+    <value>&amp;클립보드에 복사</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>De doelmap bestaat al.</value>
+    <value>대상 디렉터리가 이미 존재합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>{0} wordt gedownload</value>
+    <value>{0} 다운로드 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Foutrapport</value>
+    <value>오류 보고</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>&amp;Niet melden</value>
+    <value>&amp;보고 안 함</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Indien gewenst kunt u dit veld gebruiken om aanvullende informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
+    <value>이 필드에는 충돌이 발생했을 때 수행한 작업에 대한 설명 등 문제와 관련된 추가 정보를 입력할 수 있습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Er is een onverwachte fout opgetreden in deze applicatie. U kunt ons helpen het probleem op te lossen door het bij ons te melden. Als er voor uw probleem al een oplossing bekend is, wordt deze direct na het verzenden van het rapport weergegeven.</value>
+    <value>이 애플리케이션에서 예기치 않은 오류가 발생했습니다. 오류를 보고하여 문제 해결에 도움을 줄 수 있습니다. 문제에 대하여 이미 알려진 해결 방법이 존재하는 경우 보고서 전송 직후 해당 방법이 표시됩니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Melden</value>
+    <value>&amp;보고</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Het foutrapport is succesvol verzonden.</value>
+    <value>오류 보고서가 성공적으로 전송되었습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Downloaden van {0} is mislukt.</value>
+    <value>{0} 다운로드에 실패했습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Faalde in het openen van registersubkey '{0}' in '{1}'.</value>
+    <value>'{1}' 에서 레지스트리 하위 키 '{0}' 를 열지 못했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Rollback '{0}' is niet gelukt.</value>
+    <value>'{0}' 롤백에 실패했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Niet gelukt om '{0}' te starten.</value>
+    <value>'{0}'을(를) 시작하지 못했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Het bestand dat zou worden gedownload van {0} heeft niet de verwachte grootte. Het had {1} bytes moeten zijn, maar was eigenlijk {2} bytes.</value>
+    <value>{0}에서 다운로드할 파일이 예상 크기와 다릅니다. 예상 크기는 {1}바이트였으나 실제 크기는 {2}바이트였습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Het bestand "{0}" kon niet worden gevonden.</value>
+    <value>"{0}" 파일을 찾을 수 없습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>De configuratiemap "{0}" is waarschijnlijk ongeldig.</value>
+    <value>'{0}'가 유효하지 않은 구성 디렉토리일 수 있습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>De inloggegevens voor {0} zijn onjuist.</value>
+    <value>{0}에 대한 로그인 자격 증명이 올바르지 않습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>De sleutel was al aanwezig in het woordenboek.</value>
+    <value>키는 이미 사전에 있었습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Om '{0}' te starten heb je beheerdersrechten nodig.</value>
+    <value>'{0}'를 실행하려면 관리자 권한이 필요합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Het maximum aantal elementen in de verzameling is overschreden.</value>
+    <value>컬렉션의 최대 요소 수를 초과했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Geen actie geregistreerd voor '{0}'.</value>
+    <value>'{0}' 에 등록된 작업이 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Nee</value>
+    <value>아니요</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Systeemconfiguratie kan niet worden bewerkt in draagbare modus.</value>
+    <value>휴대용 모드에서는 시스템 구성을 편집할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>확인</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Deze methode is alleen beschikbaar op Windows.</value>
+    <value>이 방법은 Windows에서만 사용할 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Wachtwoord:</value>
+    <value>비밀번호:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Voer de inloggegevens in voor {0}:</value>
+    <value>{0}에 대한 로그인 자격 증명을 입력하세요:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Er is een probleem opgetreden bij het laden van "{0}".</value>
+    <value>'{0}' 로드 중 문제가 발생했습니다.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' afgesloten met exitcode {1}.</value>
+    <value>'{0}' 종료 코드 {1} 로 종료됨 .</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Een proces is afgesloten met een onverwachte exitcode.</value>
+    <value>프로세스가 예기치 않은 종료 코드로 종료되었습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Bestand {0} wordt gelezen</value>
+    <value>{0} 파일 읽는 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Deze opdracht kan niet opnieuw worden uitgevoerd totdat de opdracht ongedaan maken is uitgevoerd.</value>
+    <value>실행 취소 명령을 수행하기 전까지는 이 명령을 다시 수행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Waarde resetten</value>
+    <value>값 재설정</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Toepassingen worden opnieuw opgestart</value>
+    <value>애플리케이션 다시 시작 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Opnieuw proberen in {0} milliseconden vanwege:</value>
+    <value>{0} 밀리초 후에 다시 시도 중입니다:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Zoek op</value>
+    <value>검색</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Zoeken naar open bestandsreferenties</value>
+    <value>열려 있는 파일 참조 검색 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Er is geprobeerd te lezen vanaf positie {0}. Dit is {1} bytes verwijderd van de onderliggende streampositie {2}, maar de zoekbuffer kan slechts een verschil van {3} bytes verwerken.</value>
+    <value>{0} 위치에서 읽기를 시도했습니다. 이는 기본 스트림 위치 {2} 에서 {1} 바이트 떨어져 있지만 검색 버퍼는 {3} 바이트의 차이만 수용할 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Toepassingen worden afgesloten</value>
+    <value>애플리케이션 종료 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Bron en bestemming zijn gelijk.</value>
+    <value>출처와 목적지가 동일합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Compleet</value>
+    <value>완료</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Gegevens worden verwerkt</value>
+    <value>데이터 처리 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Headers worden opgehaald</value>
+    <value>헤더 가져오는 중</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>IO-fout</value>
+    <value>IO 오류</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Gereed</value>
+    <value>준비됨</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Webfout</value>
+    <value>웹 오류</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Lengte van doelen moet gelijk zijn aan Lengte van oldValues</value>
+    <value>대상의 길이는 오래된 값의 길이와 같아야 합니다</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Technische details:</value>
+    <value>기술적 세부 정보:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Uw versie van .NET ondersteunt TLS 1.2 niet. Dit kan verbindingsfouten veroorzaken bij het downloaden van inhoud via HTTPS. Voer Windows Update uit om de nodige patches te installeren.</value>
+    <value>사용 중인 .NET 버전이 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows 업데이트를 실행하여 필요한 패치를 설치하세요.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>De assembly met de naam "{0}" kon niet worden gevonden.</value>
+    <value>"{0}"라는 어셈블리를 찾을 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Kan {0} bytes niet van de stream lezen.</value>
+    <value>스트림에서 {0} 바이트를 읽을 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Deze opdracht kan pas ongedaan worden gemaakt nadat de eigenlijke opdracht is uitgevoerd.</value>
+    <value>이 실행 취소 명령은 실제 명령이 수행될 때까지 수행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Het Unix-subsysteem heeft het verzoek niet verwerkt. Mogelijk hebt u onvoldoende rechten.</value>
+    <value>유닉스 하위 시스템에서 요청을 처리하지 못했습니다. 권한이 충분하지 않을 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Gebruikersnaam:</value>
+    <value>사용자 이름:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Ja</value>
+    <value>네</value>
     <comment>Manually overriden.</comment>
   </data>
 </root>

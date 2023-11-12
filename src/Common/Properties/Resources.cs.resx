@@ -59,11 +59,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>Terug</value>
+    <value>Zpět</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00} bytes</value>
+    <value>{0:0.00} bajtů</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="BytesGibi" xml:space="preserve">
@@ -83,115 +83,115 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuleren</value>
+    <value>Zrušit</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>De verzameling kan niet aan zichzelf worden toegevoegd.</value>
+    <value>Kolekci nelze přidat k sobě samé.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet gecanoniseerd worden omdat dit mogelijk zou leiden tot verlies van informatie.</value>
+    <value>DACL nelze kanonizovat, protože by to potenciálně vedlo ke ztrátě informací.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Toelichten:</value>
+    <value>&amp;Komentář:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Bestanden worden gekopieerd</value>
+    <value>Kopíruju soubory</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>&amp;Kopiëren naar klembord</value>
+    <value>&amp;Zkopírovat do schránky</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>De doelmap bestaat al.</value>
+    <value>Cílový adresář již existuje.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>{0} wordt gedownload</value>
+    <value>{0} se stahuje</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Foutrapport</value>
+    <value>Hlášení o chybě</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
-    <value>&amp;Niet melden</value>
+    <value>&amp;Neohlašovat</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Indien gewenst kunt u dit veld gebruiken om aanvullende informatie over het probleem te geven, zoals een beschrijving van wat u aan het doen was toen de crash zich voordeed.</value>
+    <value>Pokud chcete, můžete do tohoto pole zadat další informace o problému, např. co jste během pádu systému dělali.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Er is een onverwachte fout opgetreden in deze applicatie. U kunt ons helpen het probleem op te lossen door het bij ons te melden. Als er voor uw probleem al een oplossing bekend is, wordt deze direct na het verzenden van het rapport weergegeven.</value>
+    <value>V této aplikaci došlo k neočekávané chybě. Nahlášením nám můžete pomoci problém odstranit. Pokud již existuje známá oprava vašeho problému, zobrazí se hned po odeslání hlášení.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Melden</value>
+    <value>&amp;Nahlásit</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
-    <value>Het foutrapport is succesvol verzonden.</value>
+    <value>Hlášení o chybě bylo úspěšně odesláno.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Downloaden van {0} is mislukt.</value>
+    <value>{0} se nepodařilo stáhnout.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Faalde in het openen van registersubkey '{0}' in '{1}'.</value>
+    <value>Nepodařilo se otevřít podklíč registru '{0}' v '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Rollback '{0}' is niet gelukt.</value>
+    <value>Nepodařilo se vrátit zpět '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Niet gelukt om '{0}' te starten.</value>
+    <value>Nepodařilo se spustit '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Het bestand dat zou worden gedownload van {0} heeft niet de verwachte grootte. Het had {1} bytes moeten zijn, maar was eigenlijk {2} bytes.</value>
+    <value>Soubor, který měl být stažen z {0}, nemá očekávanou velikost. Soubor měl mít velikost{1} bajtů, ale ve skutečnosti to bylo jen {2} bajtů.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Het bestand "{0}" kon niet worden gevonden.</value>
+    <value>Soubor ‚‚{0}‘‘ se nepodařilo najít.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>De configuratiemap "{0}" is waarschijnlijk ongeldig.</value>
+    <value>Konfigurační adresář ‚‚{0}‘‘ je pravděpodobně neplatný.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
-    <value>De inloggegevens voor {0} zijn onjuist.</value>
+    <value>Přihlašovací údaje pro {0} jsou nesprávné.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>De sleutel was al aanwezig in het woordenboek.</value>
+    <value>Klíč byl již ve slovníku přítomen.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Om '{0}' te starten heb je beheerdersrechten nodig.</value>
+    <value>Spuštění stránky '{0}' vyžaduje oprávnění správce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Het maximum aantal elementen in de verzameling is overschreden.</value>
+    <value>Bylo překročeno maximální množství prvků ve sbírce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Geen actie geregistreerd voor '{0}'.</value>
+    <value>Pro položku '{0}' nebyla zaregistrována žádná akce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Nee</value>
+    <value>Ne</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Systeemconfiguratie kan niet worden bewerkt in draagbare modus.</value>
+    <value>Konfiguraci systému nelze upravovat v přenosném režimu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -199,127 +199,127 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Deze methode is alleen beschikbaar op Windows.</value>
+    <value>Tato metoda je k dispozici pouze v systému Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Wachtwoord:</value>
+    <value>Heslo:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
-    <value>Voer de inloggegevens in voor {0}:</value>
+    <value>Zadejte přihlašovací údaje pro {0}:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Er is een probleem opgetreden bij het laden van "{0}".</value>
+    <value>Došlo k problému při nahrávání ‚‚{0}‘‘.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' afgesloten met exitcode {1}.</value>
+    <value>'{0}' ukončeno s kódem ukončení {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Een proces is afgesloten met een onverwachte exitcode.</value>
+    <value>Proces byl ukončen s neočekávaným kódem ukončení.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Bestand {0} wordt gelezen</value>
+    <value>Soubor {0}se načítá</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Deze opdracht kan niet opnieuw worden uitgevoerd totdat de opdracht ongedaan maken is uitgevoerd.</value>
+    <value>Tento příkaz nelze provést znovu, dokud není proveden příkaz zpět.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Waarde resetten</value>
+    <value>Vynulování hodnoty</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Toepassingen worden opnieuw opgestart</value>
+    <value>Restartuju aplikaci</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Opnieuw proberen in {0} milliseconden vanwege:</value>
+    <value>Opakování pokusu za {0} milisekund z důvodu:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Zoek op</value>
+    <value>Vyhledávání</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Zoeken naar open bestandsreferenties</value>
+    <value>Vyhledávám odkazy na veřejně přístupné soubory</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Er is geprobeerd te lezen vanaf positie {0}. Dit is {1} bytes verwijderd van de onderliggende streampositie {2}, maar de zoekbuffer kan slechts een verschil van {3} bytes verwerken.</value>
+    <value>Pokus o čtení z pozice {0}. Ta je {1} bajtů vzdálená od základní pozice proudu {2}, ale vyrovnávací paměť seek dokáže pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Toepassingen worden afgesloten</value>
+    <value>Vypínám aplikace</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Bron en bestemming zijn gelijk.</value>
+    <value>Zdroj a cíl jsou stejné.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Compleet</value>
+    <value>Dokončeno</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Gegevens worden verwerkt</value>
+    <value>Zpracovávám data</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Headers worden opgehaald</value>
+    <value>Načítám záhlaví</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>IO-fout</value>
+    <value>V/V chyba (i/o error)</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
-    <value>Gereed</value>
+    <value>Připraveno</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Webfout</value>
+    <value>Chyba při stahování</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Lengte van doelen moet gelijk zijn aan Lengte van oldValues</value>
+    <value>Délka cílů se musí rovnat délce oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Technische details:</value>
+    <value>Technické detaily:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Uw versie van .NET ondersteunt TLS 1.2 niet. Dit kan verbindingsfouten veroorzaken bij het downloaden van inhoud via HTTPS. Voer Windows Update uit om de nodige patches te installeren.</value>
+    <value>Vaše verze rozhraní .NET nepodporuje protokol TLS 1.2. To může způsobit chyby připojení při stahování obsahu prostřednictvím protokolu HTTPS. Spusťte Windows Update a nainstalujte potřebné záplaty.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>De assembly met de naam "{0}" kon niet worden gevonden.</value>
+    <value>Sestavu s názvem "{0}" se nepodařilo najít.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Kan {0} bytes niet van de stream lezen.</value>
+    <value>Nelze přečíst {0} bajtů z datového toku.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Deze opdracht kan pas ongedaan worden gemaakt nadat de eigenlijke opdracht is uitgevoerd.</value>
+    <value>Tento příkaz nelze provést, dokud není proveden skutečný příkaz.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Het Unix-subsysteem heeft het verzoek niet verwerkt. Mogelijk hebt u onvoldoende rechten.</value>
+    <value>Subsystému Unix se nepodařilo požadavek zpracovat. Možná nemáte dostatečná práva.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Gebruikersnaam:</value>
+    <value>Uživatelské jméno:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Ja</value>
+    <value>Ano</value>
     <comment>Manually overriden.</comment>
   </data>
 </root>
