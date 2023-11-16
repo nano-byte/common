@@ -6,20 +6,13 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// An undo command that adds an element to a collection.
 /// </summary>
+/// <param name="collection">The collection to be modified.</param>
+/// <param name="element">The element to be added to <paramref name="collection"/>.</param>
 /// <typeparam name="T">The type of elements the collection contains.</typeparam>
 [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "The complete name is not ambiguous.")]
-public sealed class AddToCollection<T> : CollectionCommand<T>
+public sealed class AddToCollection<T>(ICollection<T> collection, T element) : CollectionCommand<T>(collection, element)
     where T : notnull
 {
-    /// <summary>
-    /// Creates a new add to collection command.
-    /// </summary>
-    /// <param name="collection">The collection to be modified.</param>
-    /// <param name="element">The element to be added to <paramref name="collection"/>.</param>
-    public AddToCollection(ICollection<T> collection, T element)
-        : base(collection, element)
-    {}
-
     /// <summary>
     /// Adds the element to the collection.
     /// </summary>

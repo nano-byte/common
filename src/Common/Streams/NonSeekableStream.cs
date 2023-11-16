@@ -6,12 +6,9 @@ namespace NanoByte.Common.Streams;
 /// <summary>
 /// Decorator that prevents a stream from being seeked.
 /// </summary>
-public class NonSeekableStream : DelegatingStream
+/// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
+public class NonSeekableStream(Stream underlyingStream) : DelegatingStream(underlyingStream)
 {
-    public NonSeekableStream(Stream underlyingStream)
-        : base(underlyingStream)
-    {}
-
     /// <inheritdoc/>
     public override bool CanSeek => false;
 

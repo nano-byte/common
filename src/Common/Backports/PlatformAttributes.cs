@@ -23,13 +23,8 @@ namespace System.Runtime.Versioning
     /// Records the platform that the project targeted.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly,
-                    AllowMultiple = false, Inherited = false)]
-    public sealed class TargetPlatformAttribute : OSPlatformAttribute
-    {
-        public TargetPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
-    }
+        AllowMultiple = false, Inherited = false)]
+    public sealed class TargetPlatformAttribute(string platformName) : OSPlatformAttribute(platformName);
 
     /// <summary>
     /// Records the operating system (and minimum version) that supports an API. Multiple attributes can be
@@ -52,13 +47,8 @@ namespace System.Runtime.Versioning
                     AttributeTargets.Module |
                     AttributeTargets.Property |
                     AttributeTargets.Struct,
-                    AllowMultiple = true, Inherited = false)]
-    public sealed class SupportedOSPlatformAttribute : OSPlatformAttribute
-    {
-        public SupportedOSPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
-    }
+        AllowMultiple = true, Inherited = false)]
+    public sealed class SupportedOSPlatformAttribute(string platformName) : OSPlatformAttribute(platformName);
 
     /// <summary>
     /// Marks APIs that were removed in a given operating system version.
@@ -78,13 +68,8 @@ namespace System.Runtime.Versioning
                     AttributeTargets.Module |
                     AttributeTargets.Property |
                     AttributeTargets.Struct,
-                    AllowMultiple = true, Inherited = false)]
-    public sealed class UnsupportedOSPlatformAttribute : OSPlatformAttribute
-    {
-        public UnsupportedOSPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
-    }
+        AllowMultiple = true, Inherited = false)]
+    public sealed class UnsupportedOSPlatformAttribute(string platformName) : OSPlatformAttribute(platformName);
 #endif
 
     /// <summary>
@@ -100,13 +85,8 @@ namespace System.Runtime.Versioning
     [AttributeUsage(AttributeTargets.Field |
                     AttributeTargets.Method |
                     AttributeTargets.Property,
-                    AllowMultiple = true, Inherited = false)]
-    public sealed class SupportedOSPlatformGuardAttribute : OSPlatformAttribute
-    {
-        public SupportedOSPlatformGuardAttribute(string platformName) : base(platformName)
-        {
-        }
-    }
+        AllowMultiple = true, Inherited = false)]
+    public sealed class SupportedOSPlatformGuardAttribute(string platformName) : OSPlatformAttribute(platformName);
 
     /// <summary>
     /// Annotates the custom guard field, property or method with an unsupported platform name and optional version.
@@ -121,13 +101,8 @@ namespace System.Runtime.Versioning
     [AttributeUsage(AttributeTargets.Field |
                     AttributeTargets.Method |
                     AttributeTargets.Property,
-                    AllowMultiple = true, Inherited = false)]
-    public sealed class UnsupportedOSPlatformGuardAttribute : OSPlatformAttribute
-    {
-        public UnsupportedOSPlatformGuardAttribute(string platformName) : base(platformName)
-        {
-        }
-    }
+        AllowMultiple = true, Inherited = false)]
+    public sealed class UnsupportedOSPlatformGuardAttribute(string platformName) : OSPlatformAttribute(platformName);
 }
 #else
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.Versioning.TargetPlatformAttribute))]

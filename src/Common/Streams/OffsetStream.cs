@@ -6,16 +6,9 @@ namespace NanoByte.Common.Streams;
 /// <summary>
 /// Decorator that transparently applies an offset to another <see cref="Stream"/>.
 /// </summary>
-public sealed class OffsetStream : DelegatingStream
+/// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
+public sealed class OffsetStream(Stream underlyingStream) : DelegatingStream(underlyingStream)
 {
-    /// <summary>
-    /// Creates a new offset stream.
-    /// </summary>
-    /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
-    public OffsetStream(Stream underlyingStream)
-        : base(underlyingStream)
-    {}
-
     private int _offset;
 
     /// <summary>

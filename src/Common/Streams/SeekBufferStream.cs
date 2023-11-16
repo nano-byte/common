@@ -9,7 +9,10 @@ namespace NanoByte.Common.Streams;
 /// <summary>
 /// Decorator that adds seek buffering to another <see cref="Stream"/>.
 /// </summary>
-public sealed class SeekBufferStream : DelegatingStream
+/// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
+/// <param name="bufferSize">The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</param>
+public sealed class SeekBufferStream(Stream underlyingStream, int bufferSize = SeekBufferStream.DefaultBufferSize)
+    : DelegatingStream(underlyingStream.CanRead ? underlyingStream : throw new ArgumentException("The underlying stream does not support reading.", nameof(underlyingStream)))
 {
     /// <summary>
     /// The default for the maximum number of bytes to buffer for seeking backwards.
@@ -17,21 +20,7 @@ public sealed class SeekBufferStream : DelegatingStream
     public const int DefaultBufferSize = 256 * 1024;
 
     /// <summary>Stores already read bytes as a ring buffer.</summary>
-    private readonly ArrayBuffer<byte> _buffer;
-
-    /// <summary>
-    /// Creates a new seek buffer stream.
-    /// </summary>
-    /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
-    /// <param name="bufferSize">The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</param>
-    public SeekBufferStream(Stream underlyingStream, int bufferSize = DefaultBufferSize)
-        : base(underlyingStream)
-    {
-        if (!underlyingStream.CanRead) throw new ArgumentException("The underlying stream does not support reading.", nameof(underlyingStream));
-        if (bufferSize < 0) throw new ArgumentOutOfRangeException(nameof(bufferSize));
-
-        _buffer = new(bufferSize);
-    }
+    private readonly ArrayBuffer<byte> _buffer = new(bufferSize >= 0 ? bufferSize : throw new ArgumentOutOfRangeException(nameof(bufferSize)));
 
     /// <inheritdoc/>
     protected override void Dispose(bool disposing)

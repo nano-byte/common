@@ -10,21 +10,13 @@ namespace NanoByte.Common.Streams;
 /// <summary>
 /// Forwards all requests to another <see cref="System.IO.Stream"/>s. Useful as a base class for decorators/wrappers.
 /// </summary>
-public abstract class DelegatingStream : Stream
+/// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
+public abstract class DelegatingStream(Stream underlyingStream) : Stream
 {
     /// <summary>
     /// Underlying stream to delegate to.
     /// </summary>
-    protected readonly Stream UnderlyingStream;
-
-    /// <summary>
-    /// Creates a new delegating stream.
-    /// </summary>
-    /// <param name="underlyingStream">Underlying stream to delegate to. Will be disposed together with this stream.</param>
-    protected DelegatingStream(Stream underlyingStream)
-    {
-        UnderlyingStream = underlyingStream ?? throw new ArgumentNullException(nameof(underlyingStream));
-    }
+    protected readonly Stream UnderlyingStream = underlyingStream ?? throw new ArgumentNullException(nameof(underlyingStream));
 
     /// <inheritdoc/>
     public override bool CanRead => UnderlyingStream.CanRead;

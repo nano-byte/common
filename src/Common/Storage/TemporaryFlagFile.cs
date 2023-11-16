@@ -7,13 +7,8 @@ namespace NanoByte.Common.Storage;
 /// A temporary directory with a file that may or may not exist to indicate whether a certain condition is true or false.
 /// </summary>
 [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
-public class TemporaryFlagFile : TemporaryDirectory
+public class TemporaryFlagFile(string prefix) : TemporaryDirectory(prefix)
 {
-    /// <inheritdoc/>
-    public TemporaryFlagFile(string prefix)
-        : base(prefix)
-    {}
-
     /// <summary>
     /// The fully qualified path of the flag file.
     /// </summary>

@@ -9,7 +9,7 @@ namespace NanoByte.Common.Collections;
 /// A keyed collection (pseudo-dictionary) of <see cref="INamed"/> objects. Case-insensitive!
 /// </summary>
 /// <remarks>Elements are automatically maintained in an alphabetically sorted order. Suitable for XML serialization.</remarks>
-public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable<NamedCollection<T>>
+public class NamedCollection<T>() : KeyedCollection<string, T>(StringComparer.OrdinalIgnoreCase), ICloneable<NamedCollection<T>>
     where T : INamed
 {
     #region Events
@@ -18,13 +18,6 @@ public class NamedCollection<T> : KeyedCollection<string, T>, ICloneable<NamedCo
 
     private void OnCollectionChanged() => CollectionChanged?.Invoke(this);
     #endregion
-
-    /// <summary>
-    /// Creates a new named collection.
-    /// </summary>
-    public NamedCollection()
-        : base(StringComparer.OrdinalIgnoreCase)
-    {}
 
     /// <summary>
     /// Creates a new named collection pre-filled with elements.

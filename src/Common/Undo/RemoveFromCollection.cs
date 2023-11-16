@@ -6,20 +6,13 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// An undo command that removes an element from a collection.
 /// </summary>
+/// <param name="collection">The collection to be modified.</param>
+/// <param name="element">The element to be removed from <paramref name="collection"/>.</param>
 /// <typeparam name="T">The type of elements the collection contains.</typeparam>
 [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "The complete name is not ambiguous.")]
-public sealed class RemoveFromCollection<T> : CollectionCommand<T>
+public sealed class RemoveFromCollection<T>(ICollection<T> collection, T element) : CollectionCommand<T>(collection, element)
     where T : notnull
 {
-    /// <summary>
-    /// Creates a new remove from collection command.
-    /// </summary>
-    /// <param name="collection">The collection to be modified.</param>
-    /// <param name="element">The element to be removed from <paramref name="collection"/>.</param>
-    public RemoveFromCollection(ICollection<T> collection, T element)
-        : base(collection, element)
-    {}
-
     /// <summary>
     /// Removes the element from the collection.
     /// </summary>

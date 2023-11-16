@@ -6,17 +6,11 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Moves the content of a directory to a new location preserving file timestamps, symlinks and hard links.
 /// </summary>
-public class MoveDirectory : CopyDirectory
+/// <param name="sourcePath">The path of source directory. Must exist!</param>
+/// <param name="destinationPath">The path of the target directory. May exist.</param>>
+public class MoveDirectory([Localizable(false)] string sourcePath, [Localizable(false)] string destinationPath)
+    : CopyDirectory(sourcePath, destinationPath)
 {
-    /// <summary>
-    /// Creates a new directory move task.
-    /// </summary>
-    /// <param name="sourcePath">The path of source directory. Must exist!</param>
-    /// <param name="destinationPath">The path of the target directory. May exist.</param>>
-    public MoveDirectory([Localizable(false)] string sourcePath, [Localizable(false)] string destinationPath)
-        : base(sourcePath, destinationPath)
-    {}
-
     protected override void Execute()
     {
         base.Execute();
