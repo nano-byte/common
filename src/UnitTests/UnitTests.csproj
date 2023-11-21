@@ -37,6 +37,7 @@
 
   <!-- Global usings -->
   <ItemGroup>
+    <Using Include="System.Net.Http" />
     <Using Include="Xunit" />
     <Using Include="FluentAssertions" />
     <Using Include="Moq" />
