@@ -80,7 +80,7 @@ public class MainForm : Form
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(250);
-                progressBar1.Report(new TaskSnapshot(TaskState.Data, unitsProcessed: i, unitsTotal: 10));
+                progressBar1.Report(new TaskSnapshot(TaskState.Data, UnitsProcessed: i, UnitsTotal: 10));
             }
             progressBar1.Report(new TaskSnapshot(TaskState.Complete));
         };
@@ -90,7 +90,7 @@ public class MainForm : Form
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(500);
-                progressBar2.Report(new TaskSnapshot(TaskState.Data, unitsProcessed: i, unitsTotal: 10));
+                progressBar2.Report(new TaskSnapshot(TaskState.Data, UnitsProcessed: i, UnitsTotal: 10));
             }
             progressBar2.Report(new TaskSnapshot(TaskState.Complete));
         };

@@ -6,45 +6,13 @@ namespace NanoByte.Common.Tasks;
 /// <summary>
 /// Represents a progress snapshot of an <see cref="ITask"/>.
 /// </summary>
+/// <param name="State">The current State of the task.</param>
+/// <param name="UnitsByte"><c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes; <c>false</c> if they are measured in generic units.</param>
+/// <param name="UnitsProcessed">The number of units that have been processed so far.</param>
+/// <param name="UnitsTotal">The total number of units that are to be processed; -1 for unknown.</param>
 [Serializable]
-public readonly struct TaskSnapshot
+public readonly record struct TaskSnapshot(TaskState State, bool UnitsByte = false, long UnitsProcessed = 0, long UnitsTotal = -1)
 {
-    /// <summary>
-    /// The current State of the task.
-    /// </summary>
-    public TaskState State { get; }
-
-    /// <summary>
-    /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
-    /// <c>false</c> if they are measured in generic units.
-    /// </summary>
-    public bool UnitsByte { get; }
-
-    /// <summary>
-    /// The number of units that have been processed so far.
-    /// </summary>
-    public long UnitsProcessed { get; }
-
-    /// <summary>
-    /// The total number of units that are to be processed; -1 for unknown.
-    /// </summary>
-    public long UnitsTotal { get; }
-
-    /// <summary>
-    /// Create a new progress snapshot.
-    /// </summary>
-    /// <param name="state">The current State of the task.</param>
-    /// <param name="unitsByte"><c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes; <c>false</c> if they are measured in generic units.</param>
-    /// <param name="unitsProcessed">The number of units that have been processed so far.</param>
-    /// <param name="unitsTotal">The total number of units that are to be processed; -1 for unknown.</param>
-    public TaskSnapshot(TaskState state, bool unitsByte = false, long unitsProcessed = 0, long unitsTotal = -1)
-    {
-        State = state;
-        UnitsByte = unitsByte;
-        UnitsProcessed = unitsProcessed;
-        UnitsTotal = unitsTotal;
-    }
-
     /// <summary>
     /// The progress of the task as a value between 0 and 1; -1 when unknown.
     /// </summary>
