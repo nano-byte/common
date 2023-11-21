@@ -10,7 +10,7 @@ namespace NanoByte.Common;
 /// <summary>
 /// Helper methods for ANSI console rendering.
 /// </summary>
-public class AnsiCli
+public static class AnsiCli
 {
     /// <summary>
     /// Used to write to the standard error stream.
