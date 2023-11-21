@@ -12,24 +12,12 @@ namespace NanoByte.Common.Dispatch;
 /// Useful for maintaining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
 /// Generated View representations will automatically be disposed on removal, if they implement <see cref="IDisposable"/>.
 /// </remarks>
-public sealed class ModelViewSync<TModel, TView> : IDisposable
+/// <param name="model">The Model that can change on its own accord.</param>
+/// <param name="view">The View that is to be automatically updated to reflect changes in the Model.</param>
+public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> model, ICollection<TView> view) : IDisposable
     where TModel : class, IChangeNotify<TModel>
     where TView : class
 {
-    private readonly MonitoredCollection<TModel> _model;
-    private readonly ICollection<TView> _view;
-
-    /// <summary>
-    /// Creates a new Model-View synchronizer.
-    /// </summary>
-    /// <param name="model">The Model that can change on its own accord.</param>
-    /// <param name="view">The View that is to be automatically updated to reflect changes in the Model.</param>
-    public ModelViewSync(MonitoredCollection<TModel> model, ICollection<TView> view)
-    {
-        _model = model ?? throw new ArgumentNullException(nameof(model));
-        _view = view ?? throw new ArgumentNullException(nameof(view));
-    }
-
     private bool _initialized;
 
     /// <summary>
@@ -39,11 +27,11 @@ public sealed class ModelViewSync<TModel, TView> : IDisposable
     {
         if (_initialized) return;
 
-        foreach (var element in _model)
+        foreach (var element in model)
             OnAdded(element);
 
-        _model.Added += OnAdded;
-        _model.Removed += OnRemoved;
+        model.Added += OnAdded;
+        model.Removed += OnRemoved;
 
         _initialized = true;
     }
@@ -52,10 +40,10 @@ public sealed class ModelViewSync<TModel, TView> : IDisposable
     {
         _initialized = false;
 
-        _model.Added -= OnAdded;
-        _model.Removed -= OnRemoved;
+        model.Added -= OnAdded;
+        model.Removed -= OnRemoved;
 
-        foreach (var element in _model)
+        foreach (var element in model)
             OnRemoved(element);
     }
 
@@ -76,7 +64,7 @@ public sealed class ModelViewSync<TModel, TView> : IDisposable
 
         foreach (var representation in _createDispatcher.Dispatch(element))
         {
-            _view.Add(representation);
+            view.Add(representation);
             _modelToView.Add(element, representation);
             _viewToModel.Add(representation, element);
         }
@@ -91,7 +79,7 @@ public sealed class ModelViewSync<TModel, TView> : IDisposable
 
         foreach (var representation in _modelToView[element])
         {
-            _view.Remove(representation);
+            view.Remove(representation);
             _viewToModel.Remove(representation);
 
             var disposable = representation as IDisposable;

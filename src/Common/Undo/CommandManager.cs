@@ -8,8 +8,10 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// Executes <see cref="IUndoCommand"/>s for editing a specific object and allows undo/redo operations.
 /// </summary>
+/// <param name="target">The object being edited.</param>
+/// <param name="path">The path of the file the <paramref name="target"/> was loaded from. <c>null</c> if none.</param>
 /// <typeparam name="T">The type of the object being edited.</typeparam>
-public class CommandManager<T> : ICommandManager<T>
+public class CommandManager<T>(T target, string? path = null) : ICommandManager<T>
     where T : class
 {
     private readonly Stack<IUndoCommand>
@@ -17,7 +19,7 @@ public class CommandManager<T> : ICommandManager<T>
         _redoStack = new();
 
     /// <inheritdoc/>
-    public T? Target { get; set; }
+    public T? Target { get; set; } = target ?? throw new ArgumentNullException(nameof(target));
 
     /// <inheritdoc/>
     public event Action? TargetUpdated;
@@ -25,18 +27,7 @@ public class CommandManager<T> : ICommandManager<T>
     /// <summary>
     /// The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.
     /// </summary>
-    public string? Path { get; set; }
-
-    /// <summary>
-    /// Creates a new command manager.
-    /// </summary>
-    /// <param name="target">The object being edited.</param>
-    /// <param name="path">The path of the file the <paramref name="target"/> was loaded from. <c>null</c> if none.</param>
-    public CommandManager(T target, string? path = null)
-    {
-        Target = target ?? throw new ArgumentNullException(nameof(target));
-        Path = path;
-    }
+    public string? Path { get; set; } = path;
 
     /// <inheritdoc/>
     public bool UndoEnabled { get; private set; }

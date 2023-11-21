@@ -8,21 +8,12 @@ namespace NanoByte.Common.Dispatch;
 /// <summary>
 /// Splits collections into multiple buckets based on predicate matching. The first matching predicate wins. Create with <see cref="Bucketizer.Bucketize{T}"/>.
 /// </summary>
+/// <param name="elements">The elements to be bucketized.</param>
 /// <typeparam name="T">The common base type of all objects to be bucketized.</typeparam>
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-public class Bucketizer<T> : IEnumerable<BucketRule<T>>
+public class Bucketizer<T>(IEnumerable<T> elements) : IEnumerable<BucketRule<T>>
 {
-    private readonly IEnumerable<T> _elements;
     private readonly List<BucketRule<T>> _rules = new();
-
-    /// <summary>
-    /// Creates a new predicate-matching bucketizer.
-    /// </summary>
-    /// <param name="elements">The elements to be bucketized.</param>
-    internal Bucketizer(IEnumerable<T> elements)
-    {
-        _elements = elements ?? throw new ArgumentNullException(nameof(elements));
-    }
 
     /// <summary>
     /// Adds a new bucket rule.
@@ -44,7 +35,7 @@ public class Bucketizer<T> : IEnumerable<BucketRule<T>>
     /// </summary>
     public void Run()
     {
-        foreach (var element in _elements)
+        foreach (var element in elements)
         {
             var matchedRule = _rules.FirstOrDefault(rule => rule.Predicate(element));
             matchedRule?.Bucket.Add(element);

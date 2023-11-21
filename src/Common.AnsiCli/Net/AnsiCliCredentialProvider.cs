@@ -9,19 +9,9 @@ namespace NanoByte.Common.Net;
 /// <summary>
 /// Asks the user for <see cref="NetworkCredential"/>s using an ANSI console prompt.
 /// </summary>
-public class AnsiCliCredentialProvider : ICredentialProvider
+/// <param name="beforePrompt">An optional callback to be invoked right before the user is prompted for credentials</param>
+public class AnsiCliCredentialProvider(Action? beforePrompt = null) : ICredentialProvider
 {
-    private readonly Action? _beforePrompt;
-
-    /// <summary>
-    /// Creates a new ANSI CLI credential provider.
-    /// </summary>
-    /// <param name="beforePrompt">An optional callback to be invoked right before the user is prompted for credentials</param>
-    public AnsiCliCredentialProvider(Action? beforePrompt = null)
-    {
-        _beforePrompt = beforePrompt;
-    }
-
     /// <inheritdoc/>
     public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
     {
@@ -34,7 +24,7 @@ public class AnsiCliCredentialProvider : ICredentialProvider
         if (previousIncorrect)
             Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
 
-        _beforePrompt?.Invoke();
+        beforePrompt?.Invoke();
         AnsiCli.Error.WriteLine(string.Format(Resources.PleaseEnterCredentials, uri.ToStringRfc()));
         return new NetworkCredential(
             AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.UserName)),

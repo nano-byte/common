@@ -6,28 +6,19 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// An undo command that sets a <see cref="LocalizableString"/> in a <see cref="LocalizableStringCollection"/>.
 /// </summary>
-public sealed class SetLocalizableString : SimpleCommand
+/// <param name="collection">The collection to be modified.</param>
+/// <param name="element">The entry to be set in the <paramref name="collection"/>.</param>
+public sealed class SetLocalizableString(LocalizableStringCollection collection, LocalizableString element) : SimpleCommand
 {
     /// <summary>
     /// The collection to be modified.
     /// </summary>
-    private readonly LocalizableStringCollection _collection;
+    private readonly LocalizableStringCollection _collection = collection;
 
     /// <summary>
     /// The element to be added or removed from <see cref="_collection"/>.
     /// </summary>
-    private readonly LocalizableString _entry;
-
-    /// <summary>
-    /// Creates a new localizable string command.
-    /// </summary>
-    /// <param name="collection">The collection to be modified.</param>
-    /// <param name="element">The entry to be set in the <paramref name="collection"/>.</param>
-    public SetLocalizableString(LocalizableStringCollection collection, LocalizableString element)
-    {
-        _collection = collection;
-        _entry = element;
-    }
+    private readonly LocalizableString _entry = element;
 
     private string? _previousValue;
 

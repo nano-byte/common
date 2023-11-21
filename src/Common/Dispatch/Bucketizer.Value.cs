@@ -8,25 +8,14 @@ namespace NanoByte.Common.Dispatch;
 /// <summary>
 /// Splits collections into multiple buckets based on value-mapping. Create with <see cref="Bucketizer.Bucketize{TElement,TValue}"/>.
 /// </summary>
+/// <param name="elements">The elements to be bucketized.</param>
+/// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
 /// <typeparam name="TElement">The common base type of all objects to be bucketized.</typeparam>
 /// <typeparam name="TValue">The type of the values to be matched.</typeparam>
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-public class Bucketizer<TElement, TValue> : IEnumerable<BucketRule<TElement, TValue>>
+public class Bucketizer<TElement, TValue>(IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever) : IEnumerable<BucketRule<TElement, TValue>>
 {
     private readonly List<BucketRule<TElement, TValue>> _rules = new();
-    private readonly IEnumerable<TElement> _elements;
-    private readonly Func<TElement, TValue> _valueRetriever;
-
-    /// <summary>
-    /// Creates a new value-mapping bucketizer.
-    /// </summary>
-    /// <param name="elements">The elements to be bucketized.</param>
-    /// <param name="valueRetriever">A function to map elements to their according values used for bucketization.</param>
-    internal Bucketizer(IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever)
-    {
-        _elements = elements ?? throw new ArgumentNullException(nameof(elements));
-        _valueRetriever = valueRetriever ?? throw new ArgumentNullException(nameof(valueRetriever));
-    }
 
     /// <summary>
     /// Adds a new bucket rule.
@@ -46,9 +35,9 @@ public class Bucketizer<TElement, TValue> : IEnumerable<BucketRule<TElement, TVa
     /// </summary>
     public void Run()
     {
-        foreach (var element in _elements)
+        foreach (var element in elements)
         {
-            var value = _valueRetriever(element);
+            var value = valueRetriever(element);
 
             var matchedRule = _rules.FirstOrDefault(rule => Equals(rule.Value, value));
             matchedRule?.Bucket.Add(element);

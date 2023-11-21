@@ -9,24 +9,15 @@ namespace NanoByte.Common.Collections
     /// <summary>
     /// An array rented from the <see cref="ArrayPool{T}"/>.
     /// </summary>
-    public sealed class ArrayBuffer<T> : IDisposable
+    /// <param name="length">The desired array length.</param>
+    public sealed class ArrayBuffer<T>(int length) : IDisposable
     {
         /// <summary>
         /// The requested length of the array.
         /// </summary>
-        public int Length { get; }
+        public int Length { get; } = length;
 
-        private T[]? _buffer;
-
-        /// <summary>
-        /// Rents an array from the <see cref="ArrayPool{T}"/>.
-        /// </summary>
-        /// <param name="length">The desired array length.</param>
-        public ArrayBuffer(int length)
-        {
-            Length = length;
-            _buffer = ArrayPool<T>.Shared.Rent(length);
-        }
+        private T[]? _buffer = ArrayPool<T>.Shared.Rent(length);
 
         /// <summary>
         /// Returns the array to the <see cref="ArrayPool{T}"/>.

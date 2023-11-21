@@ -7,39 +7,32 @@ namespace NanoByte.Common.Tasks;
 /// Reports task progress updates using ANSI console output.
 /// </summary>
 /// <seealso cref="AnsiCliProgressContext"/>
-public class AnsiCliProgress : MarshalByRefObject, IProgress<TaskSnapshot>
+public class AnsiCliProgress(ProgressTask progressTask) : MarshalByRefObject, IProgress<TaskSnapshot>
 {
-    private readonly ProgressTask _progressTask;
-
-    internal AnsiCliProgress(ProgressTask progressTask)
-    {
-        _progressTask = progressTask;
-    }
-
     /// <inheritdoc/>
     public void Report(TaskSnapshot value)
     {
         switch (value.State)
         {
             case TaskState.Started:
-                _progressTask.IsIndeterminate = true;
-                _progressTask.StartTask();
+                progressTask.IsIndeterminate = true;
+                progressTask.StartTask();
                 break;
 
             case TaskState.Data when value.UnitsTotal > 0:
-                _progressTask.MaxValue = value.UnitsTotal;
-                _progressTask.IsIndeterminate = false;
-                _progressTask.Increment(value.UnitsProcessed - _progressTask.Value);
+                progressTask.MaxValue = value.UnitsTotal;
+                progressTask.IsIndeterminate = false;
+                progressTask.Increment(value.UnitsProcessed - progressTask.Value);
                 break;
 
             case TaskState.Complete:
-                _progressTask.Increment(_progressTask.MaxValue - _progressTask.Value);
-                _progressTask.StopTask();
+                progressTask.Increment(progressTask.MaxValue - progressTask.Value);
+                progressTask.StopTask();
                 break;
 
             case TaskState.WebError or TaskState.IOError or TaskState.Canceled:
-                _progressTask.IsIndeterminate = true;
-                _progressTask.Description = $"[red]{value.State}[/]: {_progressTask.Description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 32).EscapeMarkup()}";
+                progressTask.IsIndeterminate = true;
+                progressTask.Description = $"[red]{value.State}[/]: {progressTask.Description.TrimOverflow(maxLength: AnsiCli.Error.Profile.Width - 32).EscapeMarkup()}";
                 break;
         }
     }

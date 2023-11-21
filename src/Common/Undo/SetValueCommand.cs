@@ -10,41 +10,30 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// An undo command that uses a delegates for getting and setting values from a backing model.
 /// </summary>
+/// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
+/// <param name="newValue">The new value to be set.</param>
 /// <typeparam name="T">The type of the value to set.</typeparam>
-public class SetValueCommand<T> : SimpleCommand, IValueCommand
+public class SetValueCommand<T>(PropertyPointer<T> pointer, T newValue) : SimpleCommand, IValueCommand
 {
-    private readonly PropertyPointer<T> _pointer;
-    private readonly T _newValue;
     private T _oldValue = default!;
 
     /// <inheritdoc/>
-    public object? Value => _newValue;
-
-    /// <summary>
-    /// Creates a new command for setting a value.
-    /// </summary>
-    /// <param name="pointer">The object controlling how to read/write the value to be modified.</param>
-    /// <param name="newValue">The new value to be set.</param>
-    public SetValueCommand(PropertyPointer<T> pointer, T newValue)
-    {
-        _newValue = newValue;
-        _pointer = pointer ?? throw new ArgumentNullException(nameof(pointer));
-    }
+    public object? Value => newValue;
 
     /// <summary>
     /// Sets the new value in the model.
     /// </summary>
     protected override void OnExecute()
     {
-        _oldValue = _pointer.Value;
-        _pointer.Value = _newValue;
+        _oldValue = pointer.Value;
+        pointer.Value = newValue;
     }
 
     /// <summary>
     /// Restores the old value in the model.
     /// </summary>
     protected override void OnUndo()
-        => _pointer.Value = _oldValue;
+        => pointer.Value = _oldValue;
 }
 
 /// <summary>

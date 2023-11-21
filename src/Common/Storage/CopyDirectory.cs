@@ -6,26 +6,16 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Copies the content of a directory to a new location preserving file timestamps, symlinks and hard links.
 /// </summary>
-public class CopyDirectory : ReadDirectoryBase
+/// <param name="sourcePath">The path of source directory. Must exist!</param>
+/// <param name="destinationPath">The path of the target directory.</param>
+public class CopyDirectory(
+    [Localizable(false)] string sourcePath,
+    [Localizable(false)] string destinationPath)
+    : ReadDirectoryBase(sourcePath)
 {
-    private readonly DirectoryInfo _destination;
-
-    /// <summary>
-    /// Creates a new directory copy task.
-    /// </summary>
-    /// <param name="sourcePath">The path of source directory. Must exist!</param>
-    /// <param name="destinationPath">The path of the target directory.</param>
-    public CopyDirectory([Localizable(false)] string sourcePath, [Localizable(false)] string destinationPath)
-        : base(sourcePath)
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
-        if (string.IsNullOrEmpty(destinationPath)) throw new ArgumentNullException(nameof(destinationPath));
-        if (sourcePath == destinationPath) throw new ArgumentException(Resources.SourceDestinationEqual);
-        #endregion
-
-        _destination = new(destinationPath);
-    }
+    private readonly DirectoryInfo _destination = new(destinationPath == sourcePath
+        ? throw new ArgumentException(Resources.SourceDestinationEqual)
+        : destinationPath);
 
     /// <inheritdoc/>
     public override string Name => Resources.CopyFiles;

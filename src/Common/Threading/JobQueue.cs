@@ -6,21 +6,12 @@ namespace NanoByte.Common.Threading;
 /// <summary>
 /// Runs jobs on a single background thread that is started and stopped on demand.
 /// </summary>
-public class JobQueue
+/// <param name="cancellationToken">Used to stop processing jobs.</param>
+public class JobQueue(CancellationToken cancellationToken = default)
 {
-    private readonly CancellationToken _cancellationToken;
     private readonly object _lock = new();
     private readonly Queue<Action> _jobs = new();
     private bool _threadRunning;
-
-    /// <summary>
-    /// Creates a new job queue.
-    /// </summary>
-    /// <param name="cancellationToken">Used to stop processing jobs.</param>
-    public JobQueue(CancellationToken cancellationToken = default)
-    {
-        _cancellationToken = cancellationToken;
-    }
 
     /// <summary>
     /// Adds a job to the work queue.
@@ -56,10 +47,10 @@ public class JobQueue
             }
 
 #if !NET20
-            using (new CancellationGuard(_cancellationToken))
+            using (new CancellationGuard(cancellationToken))
 #endif
             {
-                if (_cancellationToken.IsCancellationRequested) return;
+                if (cancellationToken.IsCancellationRequested) return;
                 job();
             }
         }

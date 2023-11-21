@@ -11,27 +11,15 @@ namespace NanoByte.Common;
 /// <summary>
 /// Wraps delegate-based access to a property.
 /// </summary>
+/// <param name="getValue">A delegate that returns the current value.</param>
+/// <param name="setValue">A delegate that sets the value.</param>
 /// <typeparam name="T">The type of value the property contains.</typeparam>
-public class PropertyPointer<T> : MarshalByRefObject
+public class PropertyPointer<T>(Func<T> getValue, Action<T> setValue) : MarshalByRefObject
 {
-    private readonly Func<T> _getValue;
-    private readonly Action<T> _setValue;
-
     /// <summary>
     /// Transparent access to the wrapper value.
     /// </summary>
-    public T Value { get => _getValue(); set => _setValue(value); }
-
-    /// <summary>
-    /// Creates a property pointer.
-    /// </summary>
-    /// <param name="getValue">A delegate that returns the current value.</param>
-    /// <param name="setValue">A delegate that sets the value.</param>
-    public PropertyPointer(Func<T> getValue, Action<T> setValue)
-    {
-        _getValue = getValue ?? throw new ArgumentNullException(nameof(getValue));
-        _setValue = setValue ?? throw new ArgumentNullException(nameof(setValue));
-    }
+    public T Value { get => getValue(); set => setValue(value); }
 
     /// <summary>
     /// Temporarily changes the value of the property.

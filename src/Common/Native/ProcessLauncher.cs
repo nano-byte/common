@@ -9,21 +9,12 @@ namespace NanoByte.Common.Native;
 /// <summary>
 /// Runs a child process.
 /// </summary>
-public class ProcessLauncher : IProcessLauncher
+/// <param name="fileName">The file name of the executable to run.</param>
+/// <param name="arguments">The default arguments to always pass to the executable.</param>
+public class ProcessLauncher(string fileName, string? arguments = null) : IProcessLauncher
 {
-    protected readonly string FileName;
-    protected readonly string? Arguments;
-
-    /// <summary>
-    /// Creates a new process launcher.
-    /// </summary>
-    /// <param name="fileName">The file name of the executable to run.</param>
-    /// <param name="arguments">The default arguments to always pass to the executable.</param>
-    public ProcessLauncher(string fileName, string? arguments = null)
-    {
-        FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
-        Arguments = arguments;
-    }
+    protected readonly string FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
+    protected readonly string? Arguments = arguments;
 
     /// <summary>
     /// Creates a new process launcher.

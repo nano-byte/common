@@ -9,23 +9,13 @@ namespace NanoByte.Common.Dispatch;
 /// Calls different action delegates based on the runtime types of objects.
 /// Types must be exact matches. Inheritance is not considered.
 /// </summary>
+/// <param name="ignoreMissing"><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</param>
 /// <typeparam name="TBase">The common base type of all objects to be dispatched.</typeparam>
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-public class PerTypeDispatcher<TBase> : IEnumerable<KeyValuePair<Type, Action<object>>> where TBase : class
+public class PerTypeDispatcher<TBase>(bool ignoreMissing) : IEnumerable<KeyValuePair<Type, Action<object>>>
+    where TBase : class
 {
     private readonly Dictionary<Type, Action<object>> _map = new();
-
-    /// <summary><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</summary>
-    private readonly bool _ignoreMissing;
-
-    /// <summary>
-    /// Creates a new dispatcher.
-    /// </summary>
-    /// <param name="ignoreMissing"><c>true</c> to silently ignore dispatch attempts on unknown types; <c>false</c> to throw exceptions.</param>
-    public PerTypeDispatcher(bool ignoreMissing)
-    {
-        _ignoreMissing = ignoreMissing;
-    }
 
     /// <summary>
     /// Adds a dispatch delegate.
@@ -48,7 +38,7 @@ public class PerTypeDispatcher<TBase> : IEnumerable<KeyValuePair<Type, Action<ob
     /// Dispatches an element to the delegate matching the type. Set up with <see cref="Add{TSpecific}"/> first.
     /// </summary>
     /// <param name="element">The element to be dispatched.</param>
-    /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <c>false</c>.</exception>
+    /// <exception cref="KeyNotFoundException">No delegate matching the <paramref name="element"/> type was <see cref="Add{TSpecific}"/>ed.</exception>
     public void Dispatch(TBase element)
     {
         #region Sanity checks
@@ -57,14 +47,14 @@ public class PerTypeDispatcher<TBase> : IEnumerable<KeyValuePair<Type, Action<ob
 
         var type = element.GetType();
         if (_map.TryGetValue(type, out var action)) action(element);
-        else if (!_ignoreMissing) throw new KeyNotFoundException(string.Format(Resources.MissingDispatchAction, type.Name));
+        else if (!ignoreMissing) throw new KeyNotFoundException(string.Format(Resources.MissingDispatchAction, type.Name));
     }
 
     /// <summary>
     /// Dispatches for each element in a collection. Set up with <see cref="Add{TSpecific}"/> first.
     /// </summary>
     /// <param name="elements">The elements to be dispatched.</param>
-    /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed and <see cref="_ignoreMissing"/> is <c>false</c>.</exception>
+    /// <exception cref="KeyNotFoundException">No delegate matching one of the element types was <see cref="Add{TSpecific}"/>ed.</exception>
     public void Dispatch([InstantHandle] IEnumerable<TBase> elements)
     {
         #region Sanity checks

@@ -6,19 +6,12 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// Combines multiple <see cref="IUndoCommand"/>s into a single atomic transaction.
 /// </summary>
-public class CompositeCommand : SimpleCommand
+/// <param name="commands">The commands to be contained inside the transaction.</param>
+public class CompositeCommand(params IUndoCommand[] commands) : SimpleCommand
 {
-    private readonly IUndoCommand[] _commands;
+    private readonly IUndoCommand[] _commands = commands.ToArray(); // Defensive copy
 
-    /// <summary>
-    /// Creates a new composite command.
-    /// </summary>
-    /// <param name="commands">The commands to be contained inside the transaction.</param>
-    public CompositeCommand(params IUndoCommand[] commands)
-    {
-        // Defensive copy
-        _commands = (commands ?? throw new ArgumentNullException(nameof(commands))).ToArray();
-    }
+    // Defensive copy
 
     /// <summary>
     /// Executes all the contained <see cref="IUndoCommand"/>s in order.

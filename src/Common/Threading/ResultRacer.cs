@@ -9,23 +9,13 @@ namespace NanoByte.Common.Threading;
 /// <summary>
 /// Helper for racing multiple operations against each other, providing the result of the first one that finishes.
 /// </summary>
+/// <param name="cancellationToken">Used to cancel all pending operations.</param>
 /// <typeparam name="T">The type of the result.</typeparam>
-public class ResultRacer<T>
+public class ResultRacer<T>(CancellationToken cancellationToken = default)
     where T : notnull
 {
     private readonly TaskCompletionSource<T> _completion = new();
-    private CancellationToken _externalCancellation;
-    private readonly CancellationTokenSource _competitionCancellation;
-
-    /// <summary>
-    /// Creates a helper for racing multiple operations against each other.
-    /// </summary>
-    /// <param name="cancellationToken">Used to cancel all pending operations.</param>
-    public ResultRacer(CancellationToken cancellationToken = default)
-    {
-        _externalCancellation = cancellationToken;
-        _competitionCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-    }
+    private readonly CancellationTokenSource _competitionCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
     /// <summary>
     /// Trys to set a result, racing against other calls of this method.
@@ -85,7 +75,7 @@ public class ResultRacer<T>
     public T GetResult()
     {
         var task = _completion.Task;
-        task.Wait(_externalCancellation);
+        task.Wait(cancellationToken);
         return task.Result;
     }
 
@@ -96,12 +86,12 @@ public class ResultRacer<T>
     {
         var task = _completion.Task;
 #if NET
-        return await task.WaitAsync(_externalCancellation);
+        return await task.WaitAsync(cancellationToken);
 #else
         var cancellationCompletion = new TaskCompletionSource<bool>();
-        using (_externalCancellation.Register(() => cancellationCompletion.SetCanceled()))
+        using (cancellationToken.Register(() => cancellationCompletion.SetCanceled()))
             await Task.WhenAny(task, cancellationCompletion.Task);
-        _externalCancellation.ThrowIfCancellationRequested();
+        cancellationToken.ThrowIfCancellationRequested();
         return await task;
 #endif
     }

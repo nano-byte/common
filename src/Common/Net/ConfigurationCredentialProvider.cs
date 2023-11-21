@@ -11,19 +11,11 @@ namespace NanoByte.Common.Net;
 /// <summary>
 /// Gets credentials from <see cref="IConfiguration"/>.
 /// </summary>
+/// <param name="configuration">The configuration containing credentials. Each URI must be a subsection with <c>User</c> and <c>Password</c> values.</param>
 /// <seealso cref="ConfigurationCredentialProviderRegistration.ConfigureCredentials"/>
 [CLSCompliant(false)]
-public class ConfigurationCredentialProvider : ICredentialProvider
+public class ConfigurationCredentialProvider(IConfiguration configuration) : ICredentialProvider
 {
-    private readonly IConfiguration _configuration;
-
-    /// <summary>
-    /// Creates a new configuration credential provider.
-    /// </summary>
-    /// <param name="configuration">The configuration containing credentials. Each URI must be a subsection with <c>User</c> and <c>Password</c> values.</param>
-    public ConfigurationCredentialProvider(IConfiguration configuration)
-        => _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
     /// <inheritdoc/>
     public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
     {
@@ -31,7 +23,7 @@ public class ConfigurationCredentialProvider : ICredentialProvider
         if (uri == null) throw new ArgumentNullException(nameof(uri));
         #endregion
 
-        var cred = _configuration.GetSection(uri.ToStringRfc());
+        var cred = configuration.GetSection(uri.ToStringRfc());
         return new NetworkCredential(cred["User"], cred["Password"]);
     }
 }

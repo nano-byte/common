@@ -8,21 +8,13 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Recursively iterates over all elements in a directory.
 /// </summary>
-public abstract class ReadDirectoryBase : TaskBase
+/// <param name="path">The path of the directory to read.</param>
+public abstract class ReadDirectoryBase([Localizable(false)] string path) : TaskBase
 {
     /// <summary>
     /// The directory to read.
     /// </summary>
-    protected readonly DirectoryInfo Source;
-
-    /// <summary>
-    /// Creates a new directory read task.
-    /// </summary>
-    /// <param name="path">The path of the directory to read.</param>
-    protected ReadDirectoryBase([Localizable(false)] string path)
-    {
-        Source = new(Path.GetFullPath(path));
-    }
+    protected readonly DirectoryInfo Source = new(Path.GetFullPath(path));
 
     /// <inheritdoc/>
     protected override bool UnitsByte => true;
