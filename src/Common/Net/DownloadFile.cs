@@ -163,10 +163,12 @@ public class DownloadFile : TaskBase
             if (CredentialProvider != null && statusCode == HttpStatusCode.Unauthorized)
             {
                 _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
-                if (_credentials == null) throw;
-                Log.Info($"Retrying download for {Source} with credentials");
-                Execute();
-                return;
+                if (_credentials != null)
+                {
+                    Log.Info($"Retrying download for {Source} with credentials");
+                    Execute();
+                    return;
+                }
             }
 
             // Wrap exception to add context and since only certain exception types are allowed
