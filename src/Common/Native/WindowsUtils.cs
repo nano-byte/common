@@ -196,7 +196,6 @@ public static partial class WindowsUtils
 
     /// <summary>
     /// Indicates whether the current process is running in a GUI session (rather than, e.g., as a service or in an SSH session).
-    /// Always <c>false</c> on non-Windows systems.
     /// </summary>
     public static bool IsGuiSession { get; } = DetectGuiSession();
 
