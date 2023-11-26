@@ -34,23 +34,24 @@ public sealed partial class ErrorBox : Form
 
         string message = exception.GetMessageWithInner();
         string[] messageLines = message.SplitMultilineText();
-        using var errorBox = new ErrorBox
-        {
-            Text = Application.ProductName,
-            labelMessage = {Text = messageLines[0]},
-            labelDetails = {Text = StringUtils.Join(Environment.NewLine, messageLines.Skip(1))},
-            textLog =
-            {
-                Rtf = log?.ToString(),
-                Visible = log is {IsEmpty: false}
-            },
-            ShowInTaskbar = owner == null
-        };
-
-        // ReSharper disable once AccessToDisposedClosure
-        errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
         try
         {
+            using var errorBox = new ErrorBox
+            {
+                Text = Application.ProductName,
+                labelMessage = {Text = messageLines[0]},
+                labelDetails = {Text = StringUtils.Join(Environment.NewLine, messageLines.Skip(1))},
+                textLog =
+                {
+                    Rtf = log?.ToString(),
+                    Visible = log is {IsEmpty: false}
+                },
+                ShowInTaskbar = owner == null
+            };
+
+            // ReSharper disable once AccessToDisposedClosure
+            errorBox.Shown += delegate { errorBox.SetForegroundWindow(); };
+
             errorBox.ShowDialog(owner);
         }
         catch (Exception ex)
