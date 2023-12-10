@@ -3,6 +3,8 @@
 
 using NanoByte.Common.Native;
 using NanoByte.Common.Tasks;
+using static NanoByte.Common.Tasks.TaskState;
+using static NanoByte.Common.Native.WindowsTaskbar.ProgressBarState;
 
 #if !NET20
 using System.Collections.Concurrent;
@@ -40,44 +42,25 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
 
         Value = value.Value switch
         {
-            _ when value.State == TaskState.Complete => 100,
+            _ when value.State == Complete => 100,
             <= 0 => 0,
             >= 1 => 100,
             _ => (int)(value.Value * 100)
         };
 
-        switch (value.State)
+        var state = value.State switch
         {
-            case TaskState.Ready:
-                Style = ProgressBarStyle.Continuous;
-                UpdateTaskbar(WindowsTaskbar.ProgressBarState.NoProgress);
-                break;
-
-            case TaskState.Started or TaskState.Header:
-                Style = ProgressBarStyle.Marquee;
-                UpdateTaskbar(WindowsTaskbar.ProgressBarState.Indeterminate);
-                break;
-
-            case TaskState.Data when value.UnitsTotal == -1:
-                Style = ProgressBarStyle.Marquee;
-                UpdateTaskbar(WindowsTaskbar.ProgressBarState.Indeterminate);
-                break;
-
-            case TaskState.Data:
-                Style = ProgressBarStyle.Continuous;
-                UpdateTaskbar(WindowsTaskbar.ProgressBarState.Normal);
-                break;
-
-            case TaskState.IOError or TaskState.WebError:
-                Style = ProgressBarStyle.Continuous;
-                UpdateTaskbar(WindowsTaskbar.ProgressBarState.Error);
-                break;
-
-            case TaskState.Complete:
-                Style = ProgressBarStyle.Continuous;
-                UpdateTaskbar(WindowsTaskbar.ProgressBarState.NoProgress);
-                break;
-        }
+            Started or Header => Indeterminate,
+            Data when value.UnitsTotal == -1 => Indeterminate,
+            Data => Normal,
+            Complete => NoProgress,
+            WebError or IOError => Error,
+            _ => NoProgress,
+        };
+        UpdateTaskbar(state);
+        Style = state == Indeterminate
+            ? ProgressBarStyle.Marquee
+            : ProgressBarStyle.Continuous;
     }
 
 #if NET20
@@ -98,7 +81,7 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
         WindowsTaskbar.SetProgressState(formHandle, state);
         WindowsTaskbar.SetProgressValue(formHandle, Value, 100);
 
-        if (state is (WindowsTaskbar.ProgressBarState.NoProgress or WindowsTaskbar.ProgressBarState.Error))
+        if (state is NoProgress or Error)
             _taskbarOwners.TryRemove(formHandle, out _);
     }
 #endif
