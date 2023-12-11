@@ -26,20 +26,21 @@ public sealed class TaskLabel : Label, IProgress<TaskSnapshot>
                 BeginInvoke(Report, value);
                 return;
             }
-        }
-        catch (InvalidOperationException ex)
-        {
-            Log.Debug("Workaround for race condition in Control.InvokeRequired", ex);
-            return;
-        }
 
-        Text = value.ToString();
+            Text = value.ToString();
 
-        ForeColor = value.State switch
+            ForeColor = value.State switch
+            {
+                TaskState.Complete => Color.Green,
+                TaskState.WebError or TaskState.IOError => Color.Red,
+                _ => SystemColors.ControlText
+            };
+        }
+        #region Error handling
+        catch (Exception ex) when (ex is InvalidOperationException or Win32Exception)
         {
-            TaskState.Complete => Color.Green,
-            TaskState.WebError or TaskState.IOError => Color.Red,
-            _ => SystemColors.ControlText
-        };
+            Log.Debug("Failed to update progress label", ex);
+        }
+        #endregion
     }
 }

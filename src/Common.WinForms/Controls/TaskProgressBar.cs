@@ -33,34 +33,35 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
                 BeginInvoke(Report, value);
                 return;
             }
-        }
-        catch (InvalidOperationException ex)
-        {
-            Log.Debug("Workaround for race condition in Control.InvokeRequired", ex);
-            return;
-        }
 
-        Value = value.Value switch
-        {
-            _ when value.State == Complete => 100,
-            <= 0 => 0,
-            >= 1 => 100,
-            _ => (int)(value.Value * 100)
-        };
+            Value = value.Value switch
+            {
+                _ when value.State == Complete => 100,
+                <= 0 => 0,
+                >= 1 => 100,
+                _ => (int)(value.Value * 100)
+            };
 
-        var state = value.State switch
+            var state = value.State switch
+            {
+                Started or Header => Indeterminate,
+                Data when value.UnitsTotal == -1 => Indeterminate,
+                Data => Normal,
+                Complete => NoProgress,
+                WebError or IOError => Error,
+                _ => NoProgress,
+            };
+            UpdateTaskbar(state);
+            Style = state == Indeterminate
+                ? ProgressBarStyle.Marquee
+                : ProgressBarStyle.Continuous;
+        }
+        #region Error handling
+        catch (Exception ex) when (ex is InvalidOperationException or Win32Exception)
         {
-            Started or Header => Indeterminate,
-            Data when value.UnitsTotal == -1 => Indeterminate,
-            Data => Normal,
-            Complete => NoProgress,
-            WebError or IOError => Error,
-            _ => NoProgress,
-        };
-        UpdateTaskbar(state);
-        Style = state == Indeterminate
-            ? ProgressBarStyle.Marquee
-            : ProgressBarStyle.Continuous;
+            Log.Debug("Failed to update progress bar", ex);
+        }
+        #endregion
     }
 
 #if NET20
