@@ -121,15 +121,16 @@ public static class NetUtils
                     return Connectivity.Metered;
             }
 #endif
+
+            return NetworkInterface.GetIsNetworkAvailable() ? Connectivity.Normal : Connectivity.None;
         }
         #region Error handling
         catch (Exception ex)
         {
             Log.Debug("Problem detecting internet connectivity state", ex);
+            return Connectivity.Normal;
         }
         #endregion
-
-        return NetworkInterface.GetIsNetworkAvailable() ? Connectivity.Normal : Connectivity.None;
     }
 
     [SuppressUnmanagedCodeSecurity]
