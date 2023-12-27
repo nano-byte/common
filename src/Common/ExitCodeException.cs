@@ -2,7 +2,10 @@
 // Licensed under the MIT License
 
 using System.Diagnostics;
+
+#if !NET8_0_OR_GREATER
 using System.Runtime.Serialization;
+#endif
 
 #if NETFRAMEWORK
 using System.Security.Permissions;
@@ -13,7 +16,9 @@ namespace NanoByte.Common;
 /// <summary>
 /// Indicates that a <see cref="Process"/> exited with an unexpected <see cref="Process.ExitCode"/>.
 /// </summary>
+#if !NET8_0_OR_GREATER
 [Serializable]
+#endif
 public sealed class ExitCodeException : IOException
 {
     /// <summary>
@@ -56,6 +61,7 @@ public sealed class ExitCodeException : IOException
     {}
 
     #region Serialization
+#if !NET8_0_OR_GREATER
     /// <summary>
     /// Deserializes an exception.
     /// </summary>
@@ -83,5 +89,6 @@ public sealed class ExitCodeException : IOException
 
         base.GetObjectData(info, context);
     }
+#endif
     #endregion
 }

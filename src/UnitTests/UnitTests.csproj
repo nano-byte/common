@@ -5,14 +5,14 @@
     <AssemblyName>NanoByte.Common.UnitTests</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Unit test for NanoByte.Common.</Description>
-    <TargetFrameworks>net48;net7.0</TargetFrameworks>
+    <TargetFrameworks>net48;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <IsPackable>False</IsPackable>
     <DeterministicSourcePaths>False</DeterministicSourcePaths>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework)=='net7.0'">
+  <PropertyGroup Condition="$(TargetFramework)=='net8.0'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>

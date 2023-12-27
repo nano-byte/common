@@ -2,9 +2,12 @@
 // Licensed under the MIT License
 
 using System.Globalization;
-using System.Runtime.Serialization;
 using System.Text;
 using NanoByte.Common.Values.Design;
+
+#if !NET8_0_OR_GREATER
+using System.Runtime.Serialization;
+#endif
 
 namespace NanoByte.Common.Collections;
 
@@ -13,7 +16,9 @@ namespace NanoByte.Common.Collections;
 /// </summary>
 /// <remarks>Uses Unix-style language codes with an underscore (_) separator.</remarks>
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "A Set is a special case of a Collection.")]
+#if !NET8_0_OR_GREATER
 [Serializable]
+#endif
 [TypeConverter(typeof(StringConstructorConverter<LanguageSet>))]
 public class LanguageSet : SortedSet<CultureInfo>
 {
@@ -41,9 +46,11 @@ public class LanguageSet : SortedSet<CultureInfo>
         : this(ParseString(value))
     {}
 
+#if !NET8_0_OR_GREATER
     protected LanguageSet(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {}
+#endif
 
     private static IEnumerable<CultureInfo> ParseString(string value)
     {
