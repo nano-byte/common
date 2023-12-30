@@ -29,8 +29,7 @@ public class ModelViewSyncTest
         public event Action<ModelBase>? ChangedRebuild;
     }
 
-    private class SpecificModel : ModelBase
-    {}
+    private class SpecificModel : ModelBase;
 
     private abstract class ViewBase : IDisposable
     {
@@ -41,8 +40,7 @@ public class ModelViewSyncTest
         public void Dispose() => Disposed = true;
     }
 
-    private class SpecificView : ViewBase
-    {}
+    private class SpecificView : ViewBase;
     #endregion
 
     [Fact]

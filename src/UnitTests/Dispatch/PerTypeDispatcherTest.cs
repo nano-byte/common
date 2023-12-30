@@ -8,14 +8,11 @@ namespace NanoByte.Common.Dispatch;
 /// </summary>
 public class PerTypeDispatcherTest
 {
-    private abstract class Base
-    {}
+    private abstract class Base;
 
-    private class Sub1 : Base
-    {}
+    private class Sub1 : Base;
 
-    private class Sub2 : Base
-    {}
+    private class Sub2 : Base;
 
     [Fact]
     public void TestDispatchAction()

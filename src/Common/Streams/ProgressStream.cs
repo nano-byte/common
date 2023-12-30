@@ -41,13 +41,13 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
 
 #if !NET20 && !NET40
     /// <inheritdoc/>
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => Report(await UnderlyingStream.ReadAsync(buffer, offset, count, CombineTokens(cancellationToken)));
+    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken ct)
+        => Report(await UnderlyingStream.ReadAsync(buffer, offset, count, CombineTokens(ct)));
 
     /// <inheritdoc/>
-    public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken ct)
     {
-        await UnderlyingStream.WriteAsync(buffer, offset, count, CombineTokens(cancellationToken));
+        await UnderlyingStream.WriteAsync(buffer, offset, count, CombineTokens(ct));
         Report(count);
     }
 
@@ -61,8 +61,8 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
         => Report(UnderlyingStream.Read(buffer));
 
     /// <inheritdoc/>
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        => Report(await UnderlyingStream.ReadAsync(buffer, CombineTokens(cancellationToken)));
+    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken ct = default)
+        => Report(await UnderlyingStream.ReadAsync(buffer, CombineTokens(ct)));
 
     /// <inheritdoc/>
     public override void Write(ReadOnlySpan<byte> buffer)
@@ -72,9 +72,9 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
     }
 
     /// <inheritdoc/>
-    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken ct = default)
     {
-        await UnderlyingStream.WriteAsync(buffer, CombineTokens(cancellationToken));
+        await UnderlyingStream.WriteAsync(buffer, CombineTokens(ct));
         Report(buffer.Length);
     }
 #endif

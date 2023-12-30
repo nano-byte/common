@@ -25,7 +25,7 @@ public sealed class ScalableImage(Image image) : IDisposable
     public void Dispose()
     {
         image.Dispose();
-        foreach (var image in _scaledImages.Values)
-            image.Dispose();
+        foreach (var img in _scaledImages.Values)
+            img.Dispose();
     }
 }
