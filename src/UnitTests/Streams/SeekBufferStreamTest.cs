@@ -8,7 +8,7 @@ namespace NanoByte.Common.Streams;
 /// </summary>
 public class SeekBufferStreamTest
 {
-    private static readonly byte[] _data = {1, 2, 3, 4, 5};
+    private static readonly byte[] _data = [1, 2, 3, 4, 5];
 
     [Fact]
     public void SeekBackwards()

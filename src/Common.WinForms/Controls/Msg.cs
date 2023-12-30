@@ -132,7 +132,7 @@ public static class Msg
             _ => TaskDialogIcon.Information
         };
 
-        string[] splitText = text.Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
+        string[] splitText = text.Replace("\r\n", "\n").Split(['\n'], 2);
         string heading = splitText[0];
         string? details = (splitText.Length == 2) ? splitText[1] : null;
 
@@ -142,7 +142,7 @@ public static class Msg
         {
 #if NET
             if (string.IsNullOrEmpty(caption)) return;
-            string[] captionSplit = caption.Replace("\r\n", "\n").Split(new[] {'\n'}, 2);
+            string[] captionSplit = caption.Replace("\r\n", "\n").Split(['\n'], 2);
             buttons.Add(new TaskDialogCommandLinkButton(captionSplit[0], (captionSplit.Length == 2) ? captionSplit[1] : null) {Tag = result});
 #else
             if (!string.IsNullOrEmpty(caption))

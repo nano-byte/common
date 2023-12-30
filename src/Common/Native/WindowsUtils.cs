@@ -274,10 +274,10 @@ public static partial class WindowsUtils
     public static string[] SplitArgs(string? commandLine)
     {
         if (string.IsNullOrEmpty(commandLine)) return new string[0];
-        if (!IsWindows) return new[] {commandLine};
+        if (!IsWindows) return [commandLine];
 
         var ptrToSplitArgs = SafeNativeMethods.CommandLineToArgvW(commandLine, out int numberOfArgs);
-        if (ptrToSplitArgs == IntPtr.Zero) return new[] {commandLine};
+        if (ptrToSplitArgs == IntPtr.Zero) return [commandLine];
 
         try
         {

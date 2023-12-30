@@ -14,7 +14,7 @@ public delegate void LogEntryEventHandler(LogSeverity severity, string? message,
 
 partial class Log
 {
-    private static readonly List<LogEntryEventHandler> _handlers = new();
+    private static readonly List<LogEntryEventHandler> _handlers = [];
 
     /// <summary>
     /// Invoked when a new entry is added to the log.

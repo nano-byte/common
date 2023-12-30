@@ -46,15 +46,14 @@ partial class Log
 
         AppDomain.CurrentDomain.ProcessExit += delegate { CloseFile(); };
 
-        WriteToFile(string.Join(Environment.NewLine, new[]
-        {
+        WriteToFile(string.Join(Environment.NewLine, [
             "",
             $"/// {AppInfo.Current.NameVersion}",
             $"/// Install base: {Locations.InstallBase}",
             $"/// Command-line args: {Environment.GetCommandLineArgs().JoinEscapeArguments()}",
             $"/// Process {_processId} started at: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}",
             ""
-        }));
+        ]));
     }
 
     private static FileInfo GetLogFile(string appName)

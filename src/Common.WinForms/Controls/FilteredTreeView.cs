@@ -103,7 +103,7 @@ public sealed partial class FilteredTreeView<T> : UserControl
         }
     }
 
-    private readonly HashSet<T> _checkedEntries = new();
+    private readonly HashSet<T> _checkedEntries = [];
 
     /// <summary>
     /// Returns a list of all <see cref="INamed"/> objects currently marked with a check box.

@@ -14,7 +14,7 @@ namespace NanoByte.Common.Dispatch;
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 public class PerTypeDispatcher<TBase, TResult> : IEnumerable<KeyValuePair<Type, Func<TBase, TResult>>> where TBase : class
 {
-    private readonly Dictionary<Type, Func<TBase, TResult>> _map = new();
+    private readonly Dictionary<Type, Func<TBase, TResult>> _map = [];
 
     /// <summary>
     /// Adds a dispatch delegate.

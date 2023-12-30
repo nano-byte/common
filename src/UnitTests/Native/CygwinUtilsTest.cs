@@ -16,10 +16,7 @@ public class CygwinUtilsTest
     }
 
     private static readonly byte[] _symlinkBytes
-        = CygwinUtils.SymlinkCookie
-                     .Concat(Encoding.Unicode.GetPreamble())
-                     .Concat(Encoding.Unicode.GetBytes("target\0"))
-                     .ToArray();
+        = [..CygwinUtils.SymlinkCookie, ..Encoding.Unicode.GetPreamble(), ..Encoding.Unicode.GetBytes("target\0")];
 
     [SkippableFact]
     public void TestIsSymlinkNoMatch()

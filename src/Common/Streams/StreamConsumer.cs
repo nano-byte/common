@@ -13,7 +13,7 @@ namespace NanoByte.Common.Streams;
 public class StreamConsumer
 {
     private readonly object _lock = new();
-    private readonly Queue<string> _queue = new();
+    private readonly Queue<string> _queue = [];
     private readonly StreamReader _reader;
     private readonly Thread _thread;
 

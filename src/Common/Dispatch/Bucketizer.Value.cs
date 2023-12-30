@@ -15,7 +15,7 @@ namespace NanoByte.Common.Dispatch;
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 public class Bucketizer<TElement, TValue>(IEnumerable<TElement> elements, Func<TElement, TValue> valueRetriever) : IEnumerable<BucketRule<TElement, TValue>>
 {
-    private readonly List<BucketRule<TElement, TValue>> _rules = new();
+    private readonly List<BucketRule<TElement, TValue>> _rules = [];
 
     /// <summary>
     /// Adds a new bucket rule.

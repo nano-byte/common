@@ -21,7 +21,7 @@ public enum RtfColor
 /// </summary>
 public sealed class RtfBuilder
 {
-    private readonly List<KeyValuePair<string, RtfColor>> _paragraphs = new();
+    private readonly List<KeyValuePair<string, RtfColor>> _paragraphs = [];
 
     /// <summary>
     /// Indicates whether the builder is currently empty (contains no paragraphs).

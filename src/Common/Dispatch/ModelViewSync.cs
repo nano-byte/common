@@ -47,9 +47,9 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
             OnRemoved(element);
     }
 
-    private readonly MultiDictionary<TModel, TView> _modelToView = new();
+    private readonly MultiDictionary<TModel, TView> _modelToView = [];
 
-    private readonly Dictionary<TView, TModel> _viewToModel = new();
+    private readonly Dictionary<TView, TModel> _viewToModel = [];
 
     /// <summary>
     /// All View representations created by the synchronizer.

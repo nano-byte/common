@@ -17,10 +17,10 @@ namespace NanoByte.Common.Collections
         where TKey : notnull
     {
 #if NET20
-        private readonly Dictionary<TKey, TValue> _lookup = new();
+        private readonly Dictionary<TKey, TValue> _lookup = [];
         private readonly object _lock = new();
 #else
-        private readonly ConcurrentDictionary<TKey, TValue> _lookup = new();
+        private readonly ConcurrentDictionary<TKey, TValue> _lookup = [];
 #endif
 
         /// <summary>

@@ -39,11 +39,11 @@ public class ArrayUtilsTest
     [Fact]
     public void TestSequencedEquals()
     {
-        new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
+        new[] {"A", "B", "C"}.SequencedEquals(["A", "B", "C"]).Should().BeTrue();
         Array.Empty<string>().SequencedEquals(Array.Empty<string>()).Should().BeTrue();
-        new[] {"A", "B", "C"}.SequencedEquals(new[] {"C", "B", "A"}).Should().BeFalse();
-        new[] {"A", "B", "C"}.SequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
-        new[] {"A", "B", "C"}.SequencedEquals(new[] {"A", "B"}).Should().BeFalse();
-        new[] {new object()}.SequencedEquals(new[] {new object()}).Should().BeFalse();
+        new[] {"A", "B", "C"}.SequencedEquals(["C", "B", "A"]).Should().BeFalse();
+        new[] {"A", "B", "C"}.SequencedEquals(["X", "Y", "Z"]).Should().BeFalse();
+        new[] {"A", "B", "C"}.SequencedEquals(["A", "B"]).Should().BeFalse();
+        new[] {new object()}.SequencedEquals([new object()]).Should().BeFalse();
     }
 }

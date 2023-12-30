@@ -14,7 +14,7 @@ public class ReadFileTest
     public void TestRun()
     {
         using var tempFile = new TemporaryFile("unit-tests");
-        File.WriteAllBytes(tempFile, new byte[] {1, 2, 3});
+        File.WriteAllBytes(tempFile, [1, 2, 3]);
 
         ArraySegment<byte> data = default;
         new ReadFile(tempFile, stream => data = stream.ReadAll()).Run();

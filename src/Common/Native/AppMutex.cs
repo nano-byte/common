@@ -12,7 +12,7 @@ namespace NanoByte.Common.Native;
 /// <remarks>Use <see cref="Mutex"/> or <see cref="MutexLock"/> instead for synchronizing access to shared resources.</remarks>
 public sealed class AppMutex : IDisposable
 {
-    private readonly List<IntPtr> _handles = new();
+    private readonly List<IntPtr> _handles = [];
 
     /// <summary>
     /// Creates or opens a mutex to signal that an application is running.

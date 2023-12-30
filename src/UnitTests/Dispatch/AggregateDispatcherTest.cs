@@ -19,8 +19,8 @@ public class AggregateDispatcherTest
     {
         var dispatcher = new AggregateDispatcher<Base, string>
         {
-            (Sub1 _) => new[] {"sub1"},
-            (Sub2 _) => new[] {"sub2"}
+            (Sub1 _) => ["sub1"],
+            (Sub2 _) => ["sub2"]
         };
 
         dispatcher.Dispatch(new Sub1()).Should().Equal("sub1");

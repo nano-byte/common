@@ -84,7 +84,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
 
             return AnsiCli.Prompt(
                        new TextPrompt<char>(question)
-                          .AddChoices(new[] {'y', 'n'})
+                          .AddChoices(['y', 'n'])
                           .DefaultValue(defaultAnswer ? 'y' : 'n'),
                        CancellationToken)
                 == 'y';

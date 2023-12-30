@@ -10,7 +10,7 @@ namespace NanoByte.Common.Threading;
 public class JobQueue(CancellationToken cancellationToken = default)
 {
     private readonly object _lock = new();
-    private readonly Queue<Action> _jobs = new();
+    private readonly Queue<Action> _jobs = [];
     private bool _threadRunning;
 
     /// <summary>

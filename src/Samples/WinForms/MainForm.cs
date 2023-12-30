@@ -73,7 +73,7 @@ public class MainForm : Form
             await Task.Delay(5000); // End message loop and close form after 5s
         };
 
-        Controls.AddRange(new Control[] {progressBar1, progressBar2, outputButton, outputGridButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton});
+        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton]);
 
         Shown += async delegate
         {

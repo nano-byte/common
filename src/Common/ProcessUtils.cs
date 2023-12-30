@@ -127,12 +127,12 @@ public static class ProcessUtils
 #if NETFRAMEWORK
         if (!WindowsUtils.IsWindows)
         {
-            arguments = arguments.Prepend(executablePath);
+            arguments = [executablePath, ..arguments];
             executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
             if (!executablePath.EndsWith("mono")) executablePath = "mono";
         }
 #else
-        arguments = arguments.Prepend(executablePath);
+        arguments = [executablePath, ..arguments];
         executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
         if (!executablePath.EndsWith(WindowsUtils.IsWindows ? "\\dotnet.exe" : "/dotnet")) executablePath = "dotnet";
 #endif
@@ -274,7 +274,7 @@ public static class ProcessUtils
             }
             else
             {
-                string[] parts = commandLine.Split(new[] {' '}, count: 2);
+                string[] parts = commandLine.Split([' '], count: 2);
                 fileName = parts[0];
                 arguments = parts.Length == 2 ? parts[1] : "";
             }

@@ -15,7 +15,7 @@ namespace NanoByte.Common.Dispatch;
 public class AggregateDispatcher<TBase, TResult> : IEnumerable<Func<TBase, IEnumerable<TResult>>>
     where TBase : class
 {
-    private readonly List<Func<TBase, IEnumerable<TResult>?>> _delegates = new();
+    private readonly List<Func<TBase, IEnumerable<TResult>?>> _delegates = [];
 
     /// <summary>
     /// Adds a dispatch delegate.

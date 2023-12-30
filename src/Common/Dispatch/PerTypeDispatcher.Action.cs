@@ -15,7 +15,7 @@ namespace NanoByte.Common.Dispatch;
 public class PerTypeDispatcher<TBase>(bool ignoreMissing) : IEnumerable<KeyValuePair<Type, Action<object>>>
     where TBase : class
 {
-    private readonly Dictionary<Type, Action<object>> _map = new();
+    private readonly Dictionary<Type, Action<object>> _map = [];
 
     /// <summary>
     /// Adds a dispatch delegate.

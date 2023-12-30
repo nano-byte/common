@@ -11,7 +11,7 @@ public class CommandCollector : ICommandExecutor
     /// <inheritdoc/>
     public string? Path { get; set; }
 
-    private readonly List<IUndoCommand> _commands = new();
+    private readonly List<IUndoCommand> _commands = [];
 
     /// <summary>
     /// Store an <see cref="IUndoCommand"/> for later execution.

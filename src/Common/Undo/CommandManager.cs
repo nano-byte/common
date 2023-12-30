@@ -15,8 +15,8 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
     where T : class
 {
     private readonly Stack<IUndoCommand>
-        _undoStack = new(),
-        _redoStack = new();
+        _undoStack = [],
+        _redoStack = [];
 
     /// <inheritdoc/>
     public T? Target { get; set; } = target ?? throw new ArgumentNullException(nameof(target));

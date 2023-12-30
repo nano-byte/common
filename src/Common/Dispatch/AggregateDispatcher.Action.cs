@@ -14,7 +14,7 @@ namespace NanoByte.Common.Dispatch;
 public class AggregateDispatcher<TBase> : IEnumerable<Action<TBase>>
     where TBase : class
 {
-    private readonly List<Action<TBase>> _delegates = new();
+    private readonly List<Action<TBase>> _delegates = [];
 
     /// <summary>
     /// Adds a dispatch delegate.

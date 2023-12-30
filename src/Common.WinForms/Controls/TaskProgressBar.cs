@@ -69,7 +69,7 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
     {}
 #else
     private IntPtr? _formHandle;
-    private static readonly ConcurrentDictionary<IntPtr, TaskProgressBar> _taskbarOwners = new();
+    private static readonly ConcurrentDictionary<IntPtr, TaskProgressBar> _taskbarOwners = [];
 
     private void UpdateTaskbar(WindowsTaskbar.ProgressBarState state)
     {

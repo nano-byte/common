@@ -18,10 +18,7 @@ public static class ArrayUtils
         if (array == null) throw new ArgumentNullException(nameof(array));
         #endregion
 
-        var result = new T[array.Length + 1];
-        Array.Copy(array, result, array.Length);
-        result[array.Length] = element;
-        return result;
+        return [..array, element];
     }
 
     /// <summary>
@@ -34,10 +31,7 @@ public static class ArrayUtils
         if (array == null) throw new ArgumentNullException(nameof(array));
         #endregion
 
-        var result = new T[array.Length + 1];
-        Array.Copy(array, 0, result, 1, array.Length);
-        result[0] = element;
-        return result;
+        return [element, ..array];
     }
 
     /// <summary>
@@ -51,11 +45,7 @@ public static class ArrayUtils
         if (second == null) throw new ArgumentNullException(nameof(second));
         #endregion
 
-        var result = new T[first.Length + second.Length];
-        first.CopyTo(result, 0);
-        second.CopyTo(result, first.Length);
-
-        return result;
+        return [..first, ..second];
     }
 
     /// <summary>

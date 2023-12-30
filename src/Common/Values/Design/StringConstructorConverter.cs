@@ -25,11 +25,11 @@ public class StringConstructorConverter<T> : TypeConverter
     {
         if (value is string stringValue)
         {
-            if (typeof(T).GetConstructor(new[] {typeof(string)}) is {} constructor)
+            if (typeof(T).GetConstructor([typeof(string)]) is {} constructor)
             {
                 try
                 {
-                    return string.IsNullOrEmpty(stringValue) ? null : constructor.Invoke(new object[] {stringValue});
+                    return string.IsNullOrEmpty(stringValue) ? null : constructor.Invoke([stringValue]);
                 }
                 catch (Exception ex) when (ex.InnerException != null)
                 {

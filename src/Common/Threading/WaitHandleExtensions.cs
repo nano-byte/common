@@ -34,11 +34,10 @@ public static class WaitHandleExtensions
                 return;
             }
 
-            switch (WaitHandle.WaitAny(new[]
-            {
-                handle ?? throw new ArgumentNullException(nameof(handle)),
-                cancellationToken.WaitHandle
-            }, millisecondsTimeout, exitContext: false))
+            switch (WaitHandle.WaitAny([
+                        handle ?? throw new ArgumentNullException(nameof(handle)),
+                        cancellationToken.WaitHandle
+                    ], millisecondsTimeout, exitContext: false))
             {
                 case 0:
                     return;

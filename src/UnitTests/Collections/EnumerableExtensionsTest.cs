@@ -81,7 +81,7 @@ public class EnumerableExtensionsTest
     [Fact]
     public void TestTrySelectPassException()
     {
-        string[] strings = {"1", "2", "c", "4"};
+        string[] strings = ["1", "2", "c", "4"];
         bool callbackCalled = false;
         strings.Invoking(x => x.TrySelect(int.Parse, (ArgumentException _) => callbackCalled = true).ToList())
                .Should().Throw<FormatException>();
@@ -91,7 +91,7 @@ public class EnumerableExtensionsTest
     [Fact]
     public void TestTrySelectCatchException()
     {
-        string[] strings = {"1", "2", "c", "4"};
+        string[] strings = ["1", "2", "c", "4"];
         bool callbackCalled = false;
         strings.TrySelect(int.Parse, (FormatException _) => callbackCalled = true)
                .Should().Equal(1, 2, 4);
@@ -114,7 +114,7 @@ public class EnumerableExtensionsTest
 
     private class Element
     {
-        public readonly List<Element> Children = new();
+        public readonly List<Element> Children = [];
     }
 
     [Fact]
