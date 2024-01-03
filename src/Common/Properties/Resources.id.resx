@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Setel ulang nilai</value>
+    <value>Atur ulang nilai</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Mencoba membaca dari posisi {0}. Ini berjarak {1} byte dari posisi aliran yang mendasari {2}, tetapi buffer pencarian hanya dapat mengakomodasi perbedaan sebesar {3} byte.</value>
+    <value>Mencoba membaca dari posisi {0}. Ini adalah {1} byte dari posisi aliran yang mendasari {2}, tetapi buffer pencarian hanya dapat mengakomodasi perbedaan sebesar {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Versi .NET Anda tidak mendukung TLS 1.2. Hal ini dapat menyebabkan kesalahan koneksi saat mengunduh konten melalui HTTPS. Silakan jalankan Pembaruan Windows untuk menginstal tambalan yang diperlukan.</value>
+    <value>Versi .NET Anda tidak mendukung TLS 1.2. Ini dapat menyebabkan kesalahan koneksi saat mengunduh konten melalui HTTPS. Silakan jalankan Pembaruan Windows untuk menginstal tambalan yang diperlukan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -303,11 +303,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Tidak dapat membaca {0} byte dari aliran.</value>
+    <value>Tidak dapat membaca {0} byte dari stream.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Perintah undo ini tidak dapat dilakukan sampai perintah yang sebenarnya telah dilakukan.</value>
+    <value>Perintah undo ini tidak dapat dilakukan sampai perintah yang sesungguhnya dilakukan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

@@ -87,11 +87,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Kolekcja nie może zostać dodana do samej siebie.</value>
+    <value>Kolekcji nie można dodawać do siebie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nie można kanonizować, ponieważ potencjalnie spowodowałoby to utratę informacji.</value>
+    <value>DACL nie może być kanonizowany, ponieważ potencjalnie spowodowałoby to utratę informacji.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Brak zarejestrowanej akcji dla '{0}'.</value>
+    <value>Nie zarejestrowano żadnego działania dla '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Proces zakończył działanie z nieoczekiwanym kodem zakończenia.</value>
+    <value>Proces zakończył się z nieoczekiwanym kodem zakończenia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Wartość resetowania</value>
+    <value>Resetowanie wartości</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Ponowna próba za {0} milisekund z powodu:</value>
+    <value>Ponowne próby w {0} milisekundach z powodu:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Podjęto próbę odczytu z pozycji {0}. Jest ona oddalona o {1} bajtów od bazowej pozycji strumienia {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
+    <value>Podjęto próbę odczytu z pozycji {0}. Jest ona oddalona o {1} bajtów od podstawowej pozycji strumienia {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Długość wartości docelowych musi być równa długości oldValues</value>
+    <value>Długość wartości docelowych musi być równa długości starych wartości</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Twoja wersja .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania zawartości za pośrednictwem protokołu HTTPS. Uruchom Windows Update, aby zainstalować niezbędne poprawki.</value>
+    <value>Twoja wersja .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania zawartości przez HTTPS. Uruchom Windows Update, aby zainstalować niezbędne poprawki.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Podsystem Unix nie przetworzył żądania. Możesz mieć niewystarczające uprawnienia.</value>
+    <value>Podsystem Unix nie przetworzył żądania. Być może masz niewystarczające uprawnienia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

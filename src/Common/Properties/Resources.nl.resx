@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>De verzameling kan niet aan zichzelf worden toegevoegd.</value>
+    <value>De collectie kan niet aan zichzelf worden toegevoegd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Faalde in het openen van registersubkey '{0}' in '{1}'.</value>
+    <value>Mislukt bij het openen van registersubsleutel '{0}' in '{1}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -151,7 +151,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Niet gelukt om '{0}' te starten.</value>
+    <value>Het is niet gelukt om '{0}' te starten.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -179,7 +179,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Het maximum aantal elementen in de verzameling is overschreden.</value>
+    <value>Het maximum aantal elementen in de collectie is overschreden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' afgesloten met exitcode {1}.</value>
+    <value>{0}' afgesloten met exitcode {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -243,7 +243,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Zoek op</value>
+    <value>Zoeken op</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">

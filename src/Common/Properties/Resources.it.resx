@@ -151,7 +151,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Fallito l'avvio di '{0}'.</value>
+    <value>Impossibile avviare '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -179,7 +179,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>È stata superata la quantità massima di elementi nella raccolta.</value>
+    <value>È stata superata la quantità massima di elementi della collezione.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' uscito con il codice di uscita {1}.</value>
+    <value>'{0}' è uscito con il codice di uscita {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -227,11 +227,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Questo comando non può essere eseguito nuovamente finché non è stato eseguito il comando di annullamento.</value>
+    <value>Questo comando non può essere eseguito nuovamente finché non è stato eseguito il comando Annulla.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Valore di reset</value>
+    <value>Azzeramento del valore</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Riprova in {0} millisecondi a causa di:</value>
+    <value>Riproduzione in {0} millisecondi a causa di:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentativo di lettura dalla posizione {0}. Questa posizione è distante {1} byte dalla posizione {2} del flusso sottostante, ma il buffer di ricerca può gestire solo una differenza di {3} byte.</value>
+    <value>Tentativo di lettura dalla posizione {0}. Questa posizione è distante {1} byte dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può gestire solo una differenza di {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -303,7 +303,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossibile leggere {0} byte dallo stream.</value>
+    <value>Impossibile leggere {0} byte dal flusso.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. È possibile che i diritti dell'utente non siano sufficienti.</value>
+    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. I diritti dell'utente potrebbero essere insufficienti.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Kolekci nelze přidat k sobě samé.</value>
+    <value>Sbírku nelze přidávat k sobě.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -171,11 +171,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Klíč byl již ve slovníku přítomen.</value>
+    <value>Klíč byl již přítomen ve slovníku.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Spuštění stránky '{0}' vyžaduje oprávnění správce.</value>
+    <value>Spuštění '{0}' vyžaduje oprávnění správce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Pro položku '{0}' nebyla zaregistrována žádná akce.</value>
+    <value>Pro adresu '{0}' není registrována žádná akce.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Konfiguraci systému nelze upravovat v přenosném režimu.</value>
+    <value>V přenosném režimu nelze upravovat konfiguraci systému.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Proces byl ukončen s neočekávaným kódem ukončení.</value>
+    <value>Proces skončil s neočekávaným kódem ukončení.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Vynulování hodnoty</value>
+    <value>Obnovení hodnoty</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Pokus o čtení z pozice {0}. Ta je {1} bajtů vzdálená od základní pozice proudu {2}, ale vyrovnávací paměť seek dokáže pojmout pouze rozdíl {3} bajtů.</value>
+    <value>Pokus o čtení z pozice {0}. Ta je {1} bajtů vzdálená od základní pozice datového toku {2}, ale vyrovnávací paměť seek dokáže pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Zdroj a cíl jsou stejné.</value>
+    <value>Zdroj a cíl jsou si rovny.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Vaše verze rozhraní .NET nepodporuje protokol TLS 1.2. To může způsobit chyby připojení při stahování obsahu prostřednictvím protokolu HTTPS. Spusťte Windows Update a nainstalujte potřebné záplaty.</value>
+    <value>Vaše verze rozhraní .NET nepodporuje TLS 1.2. To může způsobit chyby připojení při stahování obsahu prostřednictvím protokolu HTTPS. Spusťte Windows Update a nainstalujte potřebné záplaty.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Tento příkaz nelze provést, dokud není proveden skutečný příkaz.</value>
+    <value>Tento příkaz zpět nelze provést, dokud není proveden skutečný příkaz.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

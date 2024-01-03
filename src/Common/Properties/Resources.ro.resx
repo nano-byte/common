@@ -91,11 +91,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nu poate fi canonicalizat, deoarece aceasta ar putea duce la pierderea de informații.</value>
+    <value>DACL nu poate fi canonicalizat, deoarece ar putea duce la o pierdere de informații.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Comentariu:</value>
+    <value>Comentarii:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -115,7 +115,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReport" xml:space="preserve">
-    <value>Raport de eroare</value>
+    <value>Raport de erori</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportCancel" xml:space="preserve">
@@ -127,7 +127,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>A apărut o eroare neașteptată în această aplicație. Ne puteți ajuta să rezolvăm problema raportând-o. Dacă există deja o soluție cunoscută pentru problema dvs., aceasta va fi afișată imediat după trimiterea raportului.</value>
+    <value>O eroare neașteptată a apărut în această aplicație. Ne puteți ajuta să rezolvăm problema prin raportarea acesteia. Dacă există deja o soluție cunoscută pentru problema dvs., aceasta va fi afișată imediat după trimiterea raportului.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -139,7 +139,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>Nu a reușit să descarce {0}.</value>
+    <value>Nu s-a reușit descărcarea {0}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
@@ -147,7 +147,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>A eșuat să se facă rollback '{0}'.</value>
+    <value>Nu s-a reușit să se facă rollback '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -203,7 +203,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Parola:</value>
+    <value>Parolă:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="PleaseEnterCredentials" xml:space="preserve">
@@ -223,7 +223,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Citirea fișierului {0}</value>
+    <value>Fișier de citire {0}</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Valoarea de resetare</value>
+    <value>Resetarea valorii</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -247,7 +247,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Căutarea de referințe de fișiere deschise</value>
+    <value>Căutarea referințelor de fișiere deschise</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
@@ -271,7 +271,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Obținerea antetului</value>
+    <value>Obținerea de anteturi</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Lungimea țintelor trebuie să fie egală cu lungimea oldValues</value>
+    <value>Lungimea țintelor trebuie să fie egală cu lungimea lui oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
