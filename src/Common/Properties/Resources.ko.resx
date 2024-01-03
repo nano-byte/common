@@ -171,11 +171,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>키는 이미 사전에 있었습니다.</value>
+    <value>키는 이미 사전에 존재했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}'를 실행하려면 관리자 권한이 필요합니다.</value>
+    <value>'{0}'을 실행하려면 관리자 권한이 필요합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}' 에 등록된 작업이 없습니다.</value>
+    <value>'{0}' 에 대해 등록된 작업이 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -215,11 +215,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' 종료 코드 {1} 로 종료됨 .</value>
+    <value>'{0}' 종료 코드 {1} 로 종료됨.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>프로세스가 예기치 않은 종료 코드로 종료되었습니다.</value>
+    <value>예기치 않은 종료 코드로 종료된 프로세스.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>{0} 밀리초 후에 다시 시도 중입니다:</value>
+    <value>다음 때문에 {0} 밀리초 후에 다시 시도합니다:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>출처와 목적지가 동일합니다.</value>
+    <value>소스와 대상은 동일합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>대상의 길이는 오래된 값의 길이와 같아야 합니다</value>
+    <value>대상의 길이는 oldValues의 길이와 같아야 합니다</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">

@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>El DACL no puede canonizarse, ya que potencialmente supondría una pérdida de información.</value>
+    <value>El DACL no puede canonicalizarse, ya que potencialmente supondría una pérdida de información.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -175,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Para iniciar '{0}' se necesitan privilegios de administrador.</value>
+    <value>El inicio de '{0}' requiere privilegios de administrador.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>No hay acción registrada para '{0}'.</value>
+    <value>Ninguna acción registrada para '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un proceso salió con un código de salida inesperado.</value>
+    <value>Un proceso sale con un código de salida inesperado.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Reintentando en {0} milisegundos debido a:</value>
+    <value>Reintento en {0} milisegundos debido a:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -303,15 +303,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>No se ha podido leer {0} bytes del flujo.</value>
+    <value>No se puede leer {0} bytes del flujo.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Este comando de deshacer no se puede ejecutar hasta que se haya ejecutado el comando real.</value>
+    <value>Este comando de deshacer no puede ejecutarse hasta que se haya ejecutado el comando real.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>El subsistema Unix no ha podido procesar la solicitud. Es posible que no tenga suficientes derechos.</value>
+    <value>El subsistema Unix no ha podido procesar la solicitud. Es posible que sus derechos sean insuficientes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

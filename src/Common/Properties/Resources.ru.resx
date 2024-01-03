@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Коллекция не может быть добавлена к самой себе.</value>
+    <value>Коллекция не может быть добавлена сама в себя.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -175,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Для запуска '{0}' требуются привилегии администратора.</value>
+    <value>Для запуска '{0}' требуются права администратора.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Редактирование конфигурации системы в портативном режиме невозможно.</value>
+    <value>Конфигурация системы не может быть отредактирована в портативном режиме.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Этот метод доступен только в операционной системе Windows.</value>
+    <value>Этот метод доступен только в Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Эта команда не может быть выполнена повторно до тех пор, пока не будет выполнена команда отмены.</value>
+    <value>Эта команда не может быть выполнена повторно, пока не будет выполнена команда отмены.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Повторная попытка через {0} миллисекунд из-за:</value>
+    <value>Повторная попытка в {0} миллисекунд из-за:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Попытка чтения с позиции {0}. Это {1} байт по сравнению с базовой позицией потока {2}, но буфер поиска может выдержать разницу только в {3} байт.</value>
+    <value>Попытка чтения с позиции {0}. Это {1} байт от позиции базового потока {2}, но буфер поиска может выдержать разницу только в {3} байт.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Источник и пункт назначения равны.</value>
+    <value>Источник и место назначения равны.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Ваша версия .NET не поддерживает TLS 1.2. Это может приводить к ошибкам подключения при загрузке содержимого по протоколу HTTPS. Запустите Windows Update для установки необходимых исправлений.</value>
+    <value>Ваша версия .NET не поддерживает TLS 1.2. Это может привести к ошибкам подключения при загрузке содержимого через HTTPS. Запустите Windows Update, чтобы установить необходимые исправления.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Эта команда отмены не может быть выполнена до тех пор, пока не будет выполнена настоящая команда.</value>
+    <value>Команда отмены не может быть выполнена до тех пор, пока не будет выполнена настоящая команда.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
