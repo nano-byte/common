@@ -39,6 +39,7 @@ jobs:
           source-lang: en
           localization-filter: cs;el;es;fr;id;it;ja;ko;nl;pl;pt-PT;ro;ru;zh
           excludes-regex: .*ImageResources.*
+          context: Software user interface with menus, buttons and progress bars.
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
