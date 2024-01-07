@@ -39,7 +39,7 @@ public readonly record struct UnixTime(long Seconds) : ISerializable, IComparabl
     private const long EpochTicks = 62135596800;
 
     /// <summary>
-    /// Converts a number of <paramref name="dateTime"/> to a Unix timestamp.
+    /// Converts a <paramref name="dateTime"/> to a Unix timestamp.
     /// </summary>
 #if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
