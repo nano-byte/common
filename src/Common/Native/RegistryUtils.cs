@@ -336,6 +336,37 @@ public static class RegistryUtils
     }
 
     /// <summary>
+    /// Recursively deletes a registry key. Does not throw exceptions.
+    /// </summary>
+    /// <param name="key">The key to containing the subkey to delete.</param>
+    /// <param name="subkeyName">The name of the subkey to delete.</param>
+    /// <returns><c>true</c> if the key was deleted or didn't exist; <c>false</c> if the deletion failed.</returns>
+    public static bool TryDeleteSubKey(this RegistryKey key, [Localizable(false)] string subkeyName)
+    {
+        try
+        {
+            key.DeleteSubKeyTree(subkeyName
+#if !NET20
+                , throwOnMissingSubKey: false
+#endif
+            );
+            return true;
+        }
+        #region Error handling
+        catch (ArgumentException)
+        {
+            // Key does not exist
+            return true;
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
+        {
+            Log.Warn($"Failed to delete {key}\\{subkeyName}", ex);
+            return false;
+        }
+        #endregion
+    }
+
+    /// <summary>
     /// Opens a HKEY_LOCAL_MACHINE key in the registry for reading, first trying to find the 64-bit version of it, then falling back to the 32-bit version.
     /// </summary>
     /// <param name="subkeyName">The path to the key below HKEY_LOCAL_MACHINE.</param>
