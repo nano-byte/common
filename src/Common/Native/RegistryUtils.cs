@@ -212,7 +212,7 @@ public static class RegistryUtils
     /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
     /// <returns>A list of value names; an empty array if the key does not exist.</returns>
     [Pure]
-    public static string[] GetValueNames([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName)
+    public static string[] GetValueNames(this RegistryKey key, [Localizable(false)] string subkeyName)
     {
         #region Sanity checks
         if (key == null) throw new ArgumentNullException(nameof(key));
@@ -271,7 +271,7 @@ public static class RegistryUtils
     /// <param name="writable"><c>true</c> for write-access to the key.</param>
     /// <returns>The opened subkey; <c>null</c> if it does not exist.</returns>
     /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
-    public static RegistryKey? TryOpenSubKey([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
+    public static RegistryKey? TryOpenSubKey(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
     {
         #region Sanity checks
         if (key == null) throw new ArgumentNullException(nameof(key));
@@ -300,7 +300,7 @@ public static class RegistryUtils
     /// <returns>The opened subkey.</returns>
     /// <exception cref="IOException">The key does not exist.</exception>
     /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
-    public static RegistryKey OpenSubKeyChecked([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
+    public static RegistryKey OpenSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
         => ExceptionUtils.Retry<IOException, RegistryKey>(
             () => key.TryOpenSubKey(subkeyName, writable)
                ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key)));
@@ -313,7 +313,7 @@ public static class RegistryUtils
     /// <returns>The newly created subkey.</returns>
     /// <exception cref="IOException">Failed to create the key.</exception>
     /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
-    public static RegistryKey CreateSubKeyChecked([Localizable(false)] this RegistryKey key, [Localizable(false)] string subkeyName)
+    public static RegistryKey CreateSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName)
     {
         #region Sanity checks
         if (key == null) throw new ArgumentNullException(nameof(key));
