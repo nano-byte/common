@@ -47,7 +47,7 @@ public sealed partial class InputBox : Form
         if (e.Data!.GetDataPresent(DataFormats.FileDrop))
         {
             var files = e.Data.GetData(DataFormats.FileDrop) as string[];
-            textInput.Text = (files ?? new string[0]).FirstOrDefault();
+            textInput.Text = (files ?? []).FirstOrDefault();
         }
         else if (e.Data.GetDataPresent(DataFormats.Text))
             textInput.Text = (string)e.Data.GetData(DataFormats.Text)!;

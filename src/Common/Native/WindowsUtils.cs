@@ -273,7 +273,7 @@ public static partial class WindowsUtils
     /// </returns>
     public static string[] SplitArgs(string? commandLine)
     {
-        if (string.IsNullOrEmpty(commandLine)) return new string[0];
+        if (string.IsNullOrEmpty(commandLine)) return [];
         if (!IsWindows) return [commandLine];
 
         var ptrToSplitArgs = SafeNativeMethods.CommandLineToArgvW(commandLine, out int numberOfArgs);

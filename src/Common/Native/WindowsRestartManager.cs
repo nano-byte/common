@@ -94,7 +94,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
         if (files == null) throw new ArgumentNullException(nameof(files));
         #endregion
 
-        int ret = NativeMethods.RmRegisterResources(_sessionHandle, (uint)files.Length, files, 0, new NativeMethods.RM_UNIQUE_PROCESS[0], 0, new string[0]);
+        int ret = NativeMethods.RmRegisterResources(_sessionHandle, (uint)files.Length, files, 0, new NativeMethods.RM_UNIQUE_PROCESS[0], 0, []);
         if (ret != 0) throw BuildException(ret);
     }
     #endregion

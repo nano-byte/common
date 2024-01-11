@@ -222,13 +222,13 @@ public static class RegistryUtils
         try
         {
             using var subkey = key.TryOpenSubKey(subkeyName);
-            return subkey?.GetValueNames() ?? new string[0];
+            return subkey?.GetValueNames() ?? [];
         }
         #region Error handling
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to get registry value names from {key.Name}", ex);
-            return new string[0];
+            return [];
         }
         #endregion
     }
@@ -250,13 +250,13 @@ public static class RegistryUtils
         try
         {
             using var subkey = key.TryOpenSubKey(subkeyName);
-            return subkey?.GetSubKeyNames() ?? new string[0];
+            return subkey?.GetSubKeyNames() ?? [];
         }
         #region Error handling
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to get registry sub key names from {key.Name}", ex);
-            return new string[0];
+            return [];
         }
         #endregion
     }

@@ -102,7 +102,7 @@ public class UriTextBox : HintTextBox
         if (dragEventArgs.Data!.GetDataPresent(DataFormats.FileDrop))
         {
             var files = dragEventArgs.Data.GetData(DataFormats.FileDrop) as string[];
-            return (files ?? new string[0]).FirstOrDefault() ?? "";
+            return (files ?? []).FirstOrDefault() ?? "";
         }
         if (dragEventArgs.Data.GetDataPresent(DataFormats.Text))
             return (string)dragEventArgs.Data.GetData(DataFormats.Text)!;
