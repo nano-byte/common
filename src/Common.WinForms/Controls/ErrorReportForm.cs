@@ -92,7 +92,9 @@ public sealed partial class ErrorReportForm : Form
 
         AppDomain.CurrentDomain.UnhandledException += (_, e) =>
         {
-            Report(e.ExceptionObject as Exception ?? new Exception("Unknown error"), uploadUri);
+            var exception = e.ExceptionObject as Exception ?? new Exception("Unknown error");
+            if (exception is FileNotFoundException && exception.Message.Contains("PublicKeyToken=")) ErrorBox.Show(null, exception); // Do not generate error reports for missing assemblies
+            else Report(exception, uploadUri);
             Process.GetCurrentProcess().Kill();
         };
     }
