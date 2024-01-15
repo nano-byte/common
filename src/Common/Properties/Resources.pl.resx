@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Podsystem Unix nie przetworzył żądania. Być może masz niewystarczające uprawnienia.</value>
+    <value>Podsystem Unix nie przetworzył żądania. Możesz mieć niewystarczające uprawnienia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

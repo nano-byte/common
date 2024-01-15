@@ -179,7 +179,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>已超过集合中元素的最大数量。</value>
+    <value>已超过收集元素的最大数量。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
