@@ -25,8 +25,14 @@ public class AnsiCliTaskHandler : CliTaskHandler
                     ? new WindowsCliCredentialProvider(beforePrompt: RemoveProgressBar)
                     : new WindowsNonInteractiveCredentialProvider()
                 : IsInteractive
+#if NET
+                    ? new KeyringCredentialProvider(new AnsiCliCredentialProvider(RemoveProgressBar))
+                    : new KeyringCredentialProvider()
+#else
                     ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar)
-                    : null);
+                    : null
+#endif
+        );
 
 #if NET9_0_OR_GREATER
     private static readonly Lock _progressContextLock = new();
