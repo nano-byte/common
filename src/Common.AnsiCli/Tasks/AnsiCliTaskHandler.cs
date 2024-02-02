@@ -19,13 +19,12 @@ public class AnsiCliTaskHandler : CliTaskHandler
     /// <inheritdoc/>
     protected override ICredentialProvider CredentialProvider
         => new NetrcCredentialProvider(
-            IsInteractive
-                ? WindowsUtils.IsWindowsNT
-                    // Avoid simultaneous progress bars and input prompts
+            WindowsUtils.IsWindowsNT
+                ? IsInteractive
                     ? new WindowsCliCredentialProvider(RemoveProgressBar)
-                    : new AnsiCliCredentialProvider(RemoveProgressBar)
-                : WindowsUtils.IsWindowsNT
-                    ? new WindowsNonInteractiveCredentialProvider()
+                    : new WindowsNonInteractiveCredentialProvider()
+                : IsInteractive
+                    ? new AnsiCliCredentialProvider(RemoveProgressBar)
                     : null);
 
     private readonly object _progressContextLock = new();
