@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using NanoByte.Common.Info;
 using NanoByte.Common.Native;
 using NanoByte.Common.Storage;
@@ -93,11 +94,19 @@ public sealed partial class ErrorReportForm : Form
         AppDomain.CurrentDomain.UnhandledException += (_, e) =>
         {
             var exception = e.ExceptionObject as Exception ?? new Exception("Unknown error");
-            if (exception is FileNotFoundException && exception.Message.Contains("PublicKeyToken=")) ErrorBox.Show(null, exception); // Do not generate error reports for missing assemblies
-            else Report(exception, uploadUri);
+            if (ShouldReport(exception)) Report(exception, uploadUri);
+            else ErrorBox.Show(null, exception);
             Process.GetCurrentProcess().Kill();
         };
     }
+
+    private static bool ShouldReport(Exception exception)
+        => !IsExternalProblem(exception)
+        && !IsExternalProblem(exception.InnerException);
+
+    private static bool IsExternalProblem(Exception? ex)
+        => ex is ExternalException or SEHException
+        || (ex is FileNotFoundException && ex.Message.Contains("PublicKeyToken="));
 
     /// <summary>
     /// Displays the error reporting form.
