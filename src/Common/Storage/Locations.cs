@@ -41,7 +41,11 @@ public static partial class Locations
 #if NETFRAMEWORK
         try
         {
-            codeBase = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().EscapedCodeBase).LocalPath);
+            var assembly = Assembly.GetExecutingAssembly();
+            codeBase = Path.GetDirectoryName(
+                new Uri(assembly.EscapedCodeBase) is { IsFile: true, LocalPath: var path }
+                    ? path
+                    : assembly.Location);
         }
         catch (PlatformNotSupportedException)
         {}
