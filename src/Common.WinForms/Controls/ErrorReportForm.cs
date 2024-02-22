@@ -105,7 +105,7 @@ public sealed partial class ErrorReportForm : Form
         && !IsExternalProblem(exception.InnerException);
 
     private static bool IsExternalProblem(Exception? ex)
-        => ex is ExternalException or SEHException
+        => ex is ExternalException or SEHException or OutOfMemoryException
         || (ex is FileNotFoundException && ex.Message.Contains("PublicKeyToken="));
 
     /// <summary>
