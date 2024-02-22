@@ -75,6 +75,8 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
 
     private void DisposeNative()
     {
+        if (_sessionHandle == default) return; // Might be unset due to exception thrown in constructor
+
         int ret = NativeMethods.RmEndSession(_sessionHandle);
         if (ret != 0) Log.Debug("Failed to end Windows Restart Manager session", BuildException(ret));
     }
