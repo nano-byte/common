@@ -61,8 +61,8 @@ public class MergeTest
         ICollection<int> toRemove = new List<int>();
         ICollection<int> toAdd = new List<int>();
         Merge.TwoWay(
-            theirs: new[] {16, 8, 4},
-            mine: new[] {1, 2, 4},
+            theirs: [16, 8, 4],
+            mine: [1, 2, 4],
             added: toAdd.Add, removed: toRemove.Add);
 
         toAdd.Should().Equal(16, 8);
@@ -77,7 +77,7 @@ public class MergeTest
     {
         var list = new[] {new MergeTestData(mergeID: "1")};
 
-        Merge.ThreeWay(reference: Array.Empty<MergeTestData>(), theirs: list, mine: list,
+        Merge.ThreeWay(reference: [], theirs: list, mine: list,
             added: element => throw new AssertionFailedException($"{element} should not be detected as added."),
             removed: element => throw new AssertionFailedException($"{element} should not be detected as removed."));
     }
@@ -107,21 +107,21 @@ public class MergeTest
     public void TestMergeModify()
     {
         var reference = MergeTestData.BuildList("a", "b", "c", "d", "e");
-        var theirs = new[]
+        var theirs = new MergeTestData[]
         {
-            new MergeTestData(mergeID: "a"),
-            new MergeTestData(mergeID: "b", data: "123", timestamp: new DateTime(2000, 1, 1)),
-            new MergeTestData(mergeID: "c"),
-            new MergeTestData(mergeID: "d", data: "456", timestamp: new DateTime(2000, 1, 1)),
-            new MergeTestData(mergeID: "e", data: "789", timestamp: new DateTime(2999, 1, 1))
+            new(mergeID: "a"),
+            new(mergeID: "b", data: "123", timestamp: new DateTime(2000, 1, 1)),
+            new(mergeID: "c"),
+            new(mergeID: "d", data: "456", timestamp: new DateTime(2000, 1, 1)),
+            new(mergeID: "e", data: "789", timestamp: new DateTime(2999, 1, 1))
         };
-        var mine = new[]
+        var mine = new MergeTestData[]
         {
-            new MergeTestData(mergeID: "a"),
-            new MergeTestData(mergeID: "b"),
-            new MergeTestData(mergeID: "c", data: "abc", timestamp: new DateTime(2000, 1, 1)),
-            new MergeTestData(mergeID: "d", data: "def", timestamp: new DateTime(2999, 1, 1)),
-            new MergeTestData(mergeID: "e", data: "ghi", timestamp: new DateTime(2000, 1, 1))
+            new(mergeID: "a"),
+            new(mergeID: "b"),
+            new(mergeID: "c", data: "abc", timestamp: new DateTime(2000, 1, 1)),
+            new(mergeID: "d", data: "def", timestamp: new DateTime(2999, 1, 1)),
+            new(mergeID: "e", data: "ghi", timestamp: new DateTime(2000, 1, 1))
         };
 
         var toRemove = new List<MergeTestData>();

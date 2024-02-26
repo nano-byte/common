@@ -68,5 +68,5 @@ public class MultiDictionary<TKey, TValue> : Dictionary<TKey, HashSet<TValue>>
     /// <returns>A list of elements with the specified key. Empty list if the key was not found.</returns>
     [CollectionAccess(CollectionAccessType.Read)]
     public new IEnumerable<TValue> this[TKey key]
-        => TryGetValue(key, out var result) ? result : Enumerable.Empty<TValue>();
+        => TryGetValue(key, out var result) ? result : [];
 }

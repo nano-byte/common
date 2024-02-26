@@ -19,8 +19,8 @@ public class MultiDictionaryTest
             {"B", 0}
         }.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>>
         {
-            ["A"] = new[] {0, 1},
-            ["B"] = new[] {0}
+            ["A"] = [0, 1],
+            ["B"] = [0]
         });
     }
 
@@ -32,7 +32,7 @@ public class MultiDictionaryTest
             {"A", 0},
             {"B", 1},
             {"C", 1}
-        }.Values.Should().BeEquivalentTo(new[] {0, 1, 1});
+        }.Values.Should().BeEquivalentTo([0, 1, 1]);
     }
 
     [Fact]
@@ -51,6 +51,6 @@ public class MultiDictionaryTest
         dict.Remove("A", 2).Should().BeFalse();
         dict.Remove("C", 0).Should().BeFalse();
 
-        dict.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>> {["A"] = new[] {0}});
+        dict.Should().BeEquivalentTo(new Dictionary<string, IEnumerable<int>> {["A"] = [0]});
     }
 }

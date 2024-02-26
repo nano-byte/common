@@ -145,7 +145,7 @@ namespace NanoByte.Common.Collections
         /// </summary>
         [LinqTunnel]
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumeration, T element)
-            => enumeration.Except(new[] {element});
+            => enumeration.Except([element]);
 
         /// <summary>
         /// Flattens a list of lists.

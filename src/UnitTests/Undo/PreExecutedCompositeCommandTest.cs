@@ -39,9 +39,9 @@ public class PreExecutedCompositeCommandTest
         executeCalls.Should().BeEmpty(because: "First execution should do nothing");
 
         command.Undo();
-        undoCalls.Should().Equal(new[] {2, 1, 0}, because: "Child commands should be undone in descending order");
+        undoCalls.Should().Equal([2, 1, 0], because: "Child commands should be undone in descending order");
 
         command.Execute();
-        executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
+        executeCalls.Should().Equal([0, 1, 2], because: "Child commands should be executed in ascending order");
     }
 }

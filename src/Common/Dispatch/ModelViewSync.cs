@@ -137,6 +137,6 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
     {
         if (create == null) throw new ArgumentNullException(nameof(create));
 
-        RegisterMultiple(element => new[] {create(element)}, update);
+        RegisterMultiple(element => [create(element)], update);
     }
 }

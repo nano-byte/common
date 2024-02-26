@@ -101,9 +101,9 @@ public static class ArrayUtils
     {
         if (segment.Array == null)
 #if NET20 || NET40 || NET45
-                return new T[0];
+            return new T[0];
 #else
-            return Array.Empty<T>();
+            return [];
 #endif
 
         if (segment.Offset == 0 && segment.Count == segment.Array.Length)

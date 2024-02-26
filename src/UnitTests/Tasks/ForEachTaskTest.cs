@@ -25,10 +25,10 @@ public class ForEachTaskTest
     [Fact]
     public void TestExceptionPassing()
     {
-        ForEachTask.Create("Test task", new[] { "" }, _ => throw new IOException("Test exception"))
+        ForEachTask.Create("Test task", [""], _ => throw new IOException("Test exception"))
                    .Invoking(x => x.Run())
                    .Should().Throw<IOException>();
-        ForEachTask.Create("Test task", new[] {""}, _ => throw new WebException("Test exception"))
+        ForEachTask.Create("Test task", [""], _ => throw new WebException("Test exception"))
                    .Invoking(x => x.Run())
                    .Should().Throw<WebException>();
     }
@@ -38,7 +38,7 @@ public class ForEachTaskTest
     {
         var applyCalledFor = new List<int>();
         var rollbackCalledFor = new List<int>();
-        ForEachTask.Create("Test task", new[] {1, 2, 3},
+        ForEachTask.Create("Test task", [1, 2, 3],
                         action: value =>
                         {
                             applyCalledFor.Add(value);
@@ -59,7 +59,7 @@ public class ForEachTaskTest
 
         var applyCalledFor = new List<int>();
         var rollbackCalledFor = new List<int>();
-        ForEachTask.Create("Test task", new[] {1, 2, 3},
+        ForEachTask.Create("Test task", [1, 2, 3],
                         action: value =>
                         {
                             applyCalledFor.Add(value);

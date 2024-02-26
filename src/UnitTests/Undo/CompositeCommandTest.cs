@@ -34,10 +34,10 @@ public class CompositeCommandTest
             new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2)));
 
         command.Execute();
-        executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
+        executeCalls.Should().Equal([0, 1, 2], because: "Child commands should be executed in ascending order");
 
         command.Undo();
-        undoCalls.Should().Equal(new[] {2, 1, 0}, because: "Child commands should be undone in descending order");
+        undoCalls.Should().Equal([2, 1, 0], because: "Child commands should be undone in descending order");
     }
 
     [Fact]
@@ -51,8 +51,8 @@ public class CompositeCommandTest
             new MockCommand(() => throw new OperationCanceledException(), () => undoCalls.Add(2)));
 
         command.Invoking(x => x.Execute()).Should().Throw<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
-        executeCalls.Should().Equal(new[] {0, 1}, because: "After an exception the rest of the commands should not be executed");
-        undoCalls.Should().Equal(new[] {1, 0}, because: "After an exception all successful executions should be undone");
+        executeCalls.Should().Equal([0, 1], because: "After an exception the rest of the commands should not be executed");
+        undoCalls.Should().Equal([1, 0], because: "After an exception all successful executions should be undone");
     }
 
     [Fact]
@@ -66,12 +66,12 @@ public class CompositeCommandTest
             new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2)));
 
         command.Execute();
-        executeCalls.Should().Equal(new[] {0, 1, 2}, because: "Child commands should be executed in ascending order");
+        executeCalls.Should().Equal([0, 1, 2], because: "Child commands should be executed in ascending order");
 
         executeCalls.Clear();
         command.Invoking(x => x.Undo()).Should().Throw<OperationCanceledException>(because: "Exceptions should be passed through after rollback");
-        undoCalls.Should().Equal(new[] {2, 1}, because: "After an exception the rest of the undoes should not be performed");
-        executeCalls.Should().Equal(new[] {1, 2}, because: "After an exception all successful undoes should be re-executed");
+        undoCalls.Should().Equal([2, 1], because: "After an exception the rest of the undoes should not be performed");
+        executeCalls.Should().Equal([1, 2], because: "After an exception all successful undoes should be re-executed");
     }
 
     [Fact]

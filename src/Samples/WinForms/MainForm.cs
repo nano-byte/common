@@ -23,7 +23,7 @@ public class MainForm : Form
         var outputGridButton = new Button {Text = "Grid", Location = new(90, 100)};
         outputGridButton.Click += delegate
         {
-            OutputGridBox.Show(this, "Test", new [] {"Test 1", "Test 2"});
+            OutputGridBox.Show(this, "Test", ["Test 1", "Test 2"]);
         };
 
         var errorButton = new Button {Text = "Error", Location = new(170, 100)};

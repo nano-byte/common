@@ -68,7 +68,7 @@ public static class AnsiCli
 
             table.AddRow(getters.Select(getter =>
             {
-                var value = getter.Invoke(row, Array.Empty<object?>());
+                var value = getter.Invoke(row, []);
                 return new Text(
                     value?.ToString() ?? "",
                     new Style(foreground, link: (value as Uri)?.ToStringRfc()));
