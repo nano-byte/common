@@ -63,8 +63,6 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'!='net6.0' And '$(TargetFramework)'!='net7.0' And '$(TargetFramework)'!='net8.0'">
     <Reference Include="System.Configuration" Pack="False" />
-    <!-- Used as a Reference Assembly, not distributed with NuGet package -->
-    <Reference Include="Mono.Posix" HintPath="..\..\lib\Mono.Posix.dll" Private="False" />
   </ItemGroup>
 
   <!-- Global usings -->
