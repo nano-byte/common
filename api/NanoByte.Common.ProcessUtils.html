@@ -1,0 +1,790 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ProcessUtils
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ProcessUtils
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.ProcessUtils">
+  
+  
+  <h1 id="NanoByte_Common_ProcessUtils" data-uid="NanoByte.Common.ProcessUtils" class="text-break">Class ProcessUtils
+  </h1>
+  <div class="markdown level0 summary"><p>Provides methods for launching child processes.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">ProcessUtils</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.html">NanoByte.Common</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_ProcessUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ProcessUtils : Object</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_AsAdmin_" data-uid="NanoByte.Common.ProcessUtils.AsAdmin*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_AsAdmin_System_Diagnostics_ProcessStartInfo_" data-uid="NanoByte.Common.ProcessUtils.AsAdmin(System.Diagnostics.ProcessStartInfo)">AsAdmin(ProcessStartInfo)</h4>
+  <div class="markdown level1 summary"><p>Modifies a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a> to request elevation to Administrator on Windows using UAC.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ProcessStartInfo AsAdmin(this ProcessStartInfo startInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td><span class="parametername">startInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></td>
+        <td><p>The current operating system does not support UAC or it is disabled..</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_Assembly_" data-uid="NanoByte.Common.ProcessUtils.Assembly*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_Assembly_System_String_System_String___" data-uid="NanoByte.Common.ProcessUtils.Assembly(System.String,System.String[])">Assembly(String, String[])</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a> for launching an assembly located in <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_InstallBase">InstallBase</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ProcessStartInfo Assembly(string name, params string[] arguments)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the assembly to launch (without the file extension).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>[]</td>
+        <td><span class="parametername">arguments</span></td>
+        <td><p>The command-line arguments to pass to the assembly.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>The specified assembly could not be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_Deconstruct_" data-uid="NanoByte.Common.ProcessUtils.Deconstruct*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_Deconstruct_System_Diagnostics_ProcessStartInfo_System_String__System_String__" data-uid="NanoByte.Common.ProcessUtils.Deconstruct(System.Diagnostics.ProcessStartInfo,System.String@,System.String@)">Deconstruct(ProcessStartInfo, out String, out String)</h4>
+  <div class="markdown level1 summary"><p>Deconstructs a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a> like a tuple.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Deconstruct(this ProcessStartInfo startInfo, out string fileName, out string arguments)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td><span class="parametername">startInfo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">fileName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">arguments</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_EscapeArgument_" data-uid="NanoByte.Common.ProcessUtils.EscapeArgument*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_EscapeArgument_System_String_" data-uid="NanoByte.Common.ProcessUtils.EscapeArgument(System.String)">EscapeArgument(String)</h4>
+  <div class="markdown level1 summary"><p>Escapes a string for use as a command-line argument, making sure it is encapsulated within <code>&quot;</code> if it contains whitespace characters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string EscapeArgument(this string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_FromCommandLine_" data-uid="NanoByte.Common.ProcessUtils.FromCommandLine*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_FromCommandLine_System_String_" data-uid="NanoByte.Common.ProcessUtils.FromCommandLine(System.String)">FromCommandLine(String)</h4>
+  <div class="markdown level1 summary"><p>Converts a command-line into a start info.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ProcessStartInfo FromCommandLine(string commandLine)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">commandLine</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_JoinEscapeArguments_" data-uid="NanoByte.Common.ProcessUtils.JoinEscapeArguments*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_JoinEscapeArguments_System_Collections_Generic_IEnumerable_System_String__" data-uid="NanoByte.Common.ProcessUtils.JoinEscapeArguments(System.Collections.Generic.IEnumerable{System.String})">JoinEscapeArguments(IEnumerable&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Combines multiple strings into one for use as a command-line argument using <a class="xref" href="NanoByte.Common.ProcessUtils.html#NanoByte_Common_ProcessUtils_EscapeArgument_System_String_">EscapeArgument(String)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string JoinEscapeArguments(this IEnumerable&lt;string&gt; parts)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td><span class="parametername">parts</span></td>
+        <td><p>The strings to be combined.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_Run_" data-uid="NanoByte.Common.ProcessUtils.Run*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_Run_System_Diagnostics_ProcessStartInfo_" data-uid="NanoByte.Common.ProcessUtils.Run(System.Diagnostics.ProcessStartInfo)">Run(ProcessStartInfo)</h4>
+  <div class="markdown level1 summary"><p>Starts a new <span class="xref">System.Diagnostics.Process</span> and waits for it to complete. Handles and wraps <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int Run(this ProcessStartInfo startInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td><span class="parametername">startInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><p>The exit code of the process.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem launching the executable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>The executable file could not be found.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.NotAdminException.html">NotAdminException</a></td>
+        <td><p>The target process requires elevation but the UAC prompt could not be displayed because <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo.useshellexecute#system-diagnostics-processstartinfo-useshellexecute">UseShellExecute</a> is <code>false</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.OperationCanceledException</span></td>
+        <td><p>The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_SanitizeEnvironmentVariables_" data-uid="NanoByte.Common.ProcessUtils.SanitizeEnvironmentVariables*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_SanitizeEnvironmentVariables" data-uid="NanoByte.Common.ProcessUtils.SanitizeEnvironmentVariables">SanitizeEnvironmentVariables()</h4>
+  <div class="markdown level1 summary"><p>Workaround for environment variable problems, such variable names that differ only in casing when running on Windows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SanitizeEnvironmentVariables()</code></pre>
+  </div>
+  <h5 id="NanoByte_Common_ProcessUtils_SanitizeEnvironmentVariables_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call this before any access to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo.environmentvariables#system-diagnostics-processstartinfo-environmentvariables">EnvironmentVariables</a> to avoid <span class="xref">System.ArgumentException</span>s.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_Start_" data-uid="NanoByte.Common.ProcessUtils.Start*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_Start_System_Diagnostics_ProcessStartInfo_" data-uid="NanoByte.Common.ProcessUtils.Start(System.Diagnostics.ProcessStartInfo)">Start(ProcessStartInfo)</h4>
+  <div class="markdown level1 summary"><p>Starts a new <span class="xref">System.Diagnostics.Process</span> and runs it in parallel with this one. Handles and wraps <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Process Start(this ProcessStartInfo startInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td><span class="parametername">startInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Diagnostics.Process</span></td>
+        <td><p>The newly launched process.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem launching the executable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>The executable file could not be found.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.NotAdminException.html">NotAdminException</a></td>
+        <td><p>The target process requires elevation but the UAC prompt could not be displayed because <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo.useshellexecute#system-diagnostics-processstartinfo-useshellexecute">UseShellExecute</a> is <code>false</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.OperationCanceledException</span></td>
+        <td><p>The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_Start_" data-uid="NanoByte.Common.ProcessUtils.Start*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_Start_System_String_System_String___" data-uid="NanoByte.Common.ProcessUtils.Start(System.String,System.String[])">Start(String, String[])</h4>
+  <div class="markdown level1 summary"><p>Starts a new <span class="xref">System.Diagnostics.Process</span> and runs it in parallel with this one. Handles and wraps <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Process Start(string fileName, params string[] arguments)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">fileName</span></td>
+        <td><p>The path of the file to open or executable to launch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>[]</td>
+        <td><span class="parametername">arguments</span></td>
+        <td><p>The command-line arguments to pass to the executable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Diagnostics.Process</span></td>
+        <td><p>The newly launched process; <code>null</code> if an existing process was reused.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem launching the executable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>The executable file could not be found.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.NotAdminException.html">NotAdminException</a></td>
+        <td><p>The target process requires elevation but the UAC prompt could not be displayed because <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo.useshellexecute#system-diagnostics-processstartinfo-useshellexecute">UseShellExecute</a> is <code>false</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.OperationCanceledException</span></td>
+        <td><p>The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_ToCommandLine_" data-uid="NanoByte.Common.ProcessUtils.ToCommandLine*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_ToCommandLine_System_Diagnostics_ProcessStartInfo_" data-uid="NanoByte.Common.ProcessUtils.ToCommandLine(System.Diagnostics.ProcessStartInfo)">ToCommandLine(ProcessStartInfo)</h4>
+  <div class="markdown level1 summary"><p>Converts a start into a command-line with proper escaping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToCommandLine(this ProcessStartInfo startInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processstartinfo">ProcessStartInfo</a></td>
+        <td><span class="parametername">startInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_WaitForExitCode_" data-uid="NanoByte.Common.ProcessUtils.WaitForExitCode*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_WaitForExitCode_System_Diagnostics_Process_" data-uid="NanoByte.Common.ProcessUtils.WaitForExitCode(System.Diagnostics.Process)">WaitForExitCode(Process)</h4>
+  <div class="markdown level1 summary"><p>Waits for a running <span class="xref">System.Diagnostics.Process</span> to complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int WaitForExitCode(this Process process)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Diagnostics.Process</span></td>
+        <td><span class="parametername">process</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><p>The exit code of the process.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_ProcessUtils_WaitForSuccess_" data-uid="NanoByte.Common.ProcessUtils.WaitForSuccess*"></a>
+  <h4 id="NanoByte_Common_ProcessUtils_WaitForSuccess_System_Diagnostics_Process_" data-uid="NanoByte.Common.ProcessUtils.WaitForSuccess(System.Diagnostics.Process)">WaitForSuccess(Process)</h4>
+  <div class="markdown level1 summary"><p>Waits for a running <span class="xref">System.Diagnostics.Process</span> to complete with an exit code of zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WaitForSuccess(this Process process)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Diagnostics.Process</span></td>
+        <td><span class="parametername">process</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.ExitCodeException.html">ExitCodeException</a></td>
+        <td><p>The process exited with a non-zero <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.process.exitcode#system-diagnostics-process-exitcode">ExitCode</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Merge
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Merge
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Dispatch.Merge">
+  
+  
+  <h1 id="NanoByte_Common_Dispatch_Merge" data-uid="NanoByte.Common.Dispatch.Merge" class="text-break">Class Merge
+  </h1>
+  <div class="markdown level0 summary"><p>Provides utility methods for merging <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>s.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">Merge</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Dispatch.html">NanoByte.Common.Dispatch</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Dispatch_Merge_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Merge : Object</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Dispatch_Merge_ThreeWay_" data-uid="NanoByte.Common.Dispatch.Merge.ThreeWay*"></a>
+  <h4 id="NanoByte_Common_Dispatch_Merge_ThreeWay__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Action___0__System_Action___0__" data-uid="NanoByte.Common.Dispatch.Merge.ThreeWay``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Action{``0})">ThreeWay&lt;T&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, Action&lt;T&gt;, Action&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Performs a 3-way merge on a set of collections. Changes between <code data-dev-comment-type="paramref" class="paramref">reference</code> and <code data-dev-comment-type="paramref" class="paramref">theirs</code> as they apply to <code data-dev-comment-type="paramref" class="paramref">mine</code> are emitted using callback delegates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ThreeWay&lt;T&gt;(IEnumerable&lt;T&gt; reference, IEnumerable&lt;T&gt; theirs, IEnumerable&lt;T&gt; mine, Action&lt;T&gt; added, Action&lt;T&gt; removed)
+    where T : class, IMergeable&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">reference</span></td>
+        <td><p>A common baseline from which both <code data-dev-comment-type="paramref" class="paramref">theirs</code> and <code data-dev-comment-type="paramref" class="paramref">mine</code> were modified.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">theirs</span></td>
+        <td><p>The foreign list with changes that shall be merged in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">mine</span></td>
+        <td><p>The local list that shall be updated with foreign changes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</td>
+        <td><span class="parametername">added</span></td>
+        <td><p>Called for every element that should be added to <code data-dev-comment-type="paramref" class="paramref">mine</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</td>
+        <td><span class="parametername">removed</span></td>
+        <td><p>Called for every element that should be removed from <code data-dev-comment-type="paramref" class="paramref">mine</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Dispatch_Merge_ThreeWay__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Action___0__System_Action___0___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Modified elements are handled by calling <code data-dev-comment-type="paramref" class="paramref">removed</code> for the old state and <code data-dev-comment-type="paramref" class="paramref">added</code> for the new state.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Dispatch_Merge_ThreeWay_" data-uid="NanoByte.Common.Dispatch.Merge.ThreeWay*"></a>
+  <h4 id="NanoByte_Common_Dispatch_Merge_ThreeWay__3_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_ICollection___1__System_Collections_Generic_ICollection___2__" data-uid="NanoByte.Common.Dispatch.Merge.ThreeWay``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.ICollection{``1},System.Collections.Generic.ICollection{``2})">ThreeWay&lt;T, TAdded, TRemoved&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, ICollection&lt;TAdded&gt;, ICollection&lt;TRemoved&gt;)</h4>
+  <div class="markdown level1 summary"><p>Performs a 3-way merge on a set of collections. Changes between <code data-dev-comment-type="paramref" class="paramref">reference</code> and <code data-dev-comment-type="paramref" class="paramref">theirs</code> as they apply to <code data-dev-comment-type="paramref" class="paramref">mine</code> are recorded using differential lists.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ThreeWay&lt;T, TAdded, TRemoved&gt;(IEnumerable&lt;T&gt; reference, IEnumerable&lt;T&gt; theirs, IEnumerable&lt;T&gt; mine, ICollection&lt;TAdded&gt; added, ICollection&lt;TRemoved&gt; removed)
+    where T : class, IMergeable&lt;T&gt;, TAdded, TRemoved</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">reference</span></td>
+        <td><p>A common baseline from which both <code data-dev-comment-type="paramref" class="paramref">theirs</code> and <code data-dev-comment-type="paramref" class="paramref">mine</code> were modified.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">theirs</span></td>
+        <td><p>The foreign list with changes that shall be merged in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">mine</span></td>
+        <td><p>The local list that shall be updated with foreign changes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;TAdded&gt;</td>
+        <td><span class="parametername">added</span></td>
+        <td><p>All elements that should be added to <code data-dev-comment-type="paramref" class="paramref">mine</code> are added to this list.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;TRemoved&gt;</td>
+        <td><span class="parametername">removed</span></td>
+        <td><p>All elements that should be removed from <code data-dev-comment-type="paramref" class="paramref">mine</code> are added to this list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TAdded</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRemoved</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Dispatch_Merge_ThreeWay__3_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_ICollection___1__System_Collections_Generic_ICollection___2___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Modified elements are handled by adding to <code data-dev-comment-type="paramref" class="paramref">removed</code> for the old state and to <code data-dev-comment-type="paramref" class="paramref">added</code> for the new state.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Dispatch_Merge_TwoWay_" data-uid="NanoByte.Common.Dispatch.Merge.TwoWay*"></a>
+  <h4 id="NanoByte_Common_Dispatch_Merge_TwoWay__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Action___0__System_Action___0__" data-uid="NanoByte.Common.Dispatch.Merge.TwoWay``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Action{``0})">TwoWay&lt;T&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, Action&lt;T&gt;, Action&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Performs a 2-way merge on two collections. Changes required to <code data-dev-comment-type="paramref" class="paramref">theirs</code> to reflect <code data-dev-comment-type="paramref" class="paramref">mine</code> are emitted using callback delegates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void TwoWay&lt;T&gt;(IEnumerable&lt;T&gt; theirs, IEnumerable&lt;T&gt; mine, Action&lt;T&gt; added, Action&lt;T&gt; removed)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">theirs</span></td>
+        <td><p>The foreign list with changes that shall be merged in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">mine</span></td>
+        <td><p>The local list that shall be updated with foreign changes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</td>
+        <td><span class="parametername">added</span></td>
+        <td><p>Called for every element that should be added to <code data-dev-comment-type="paramref" class="paramref">mine</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</td>
+        <td><span class="parametername">removed</span></td>
+        <td><p>Called for every element that should be removed from <code data-dev-comment-type="paramref" class="paramref">mine</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Dispatch_Merge_TwoWay__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Action___0__System_Action___0___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">theirs</code> and <code data-dev-comment-type="paramref" class="paramref">mine</code> should use an internal hashmap for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains#system-collections-generic-icollection-1-contains(-0)">Contains(T)</a> for better performance.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Dispatch_Merge_TwoWay_" data-uid="NanoByte.Common.Dispatch.Merge.TwoWay*"></a>
+  <h4 id="NanoByte_Common_Dispatch_Merge_TwoWay__3_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_ICollection___1__System_Collections_Generic_ICollection___2__" data-uid="NanoByte.Common.Dispatch.Merge.TwoWay``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.ICollection{``1},System.Collections.Generic.ICollection{``2})">TwoWay&lt;T, TAdded, TRemoved&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, ICollection&lt;TAdded&gt;, ICollection&lt;TRemoved&gt;)</h4>
+  <div class="markdown level1 summary"><p>Performs a 2-way merge on two collections. Changes required to <code data-dev-comment-type="paramref" class="paramref">theirs</code> to reflect <code data-dev-comment-type="paramref" class="paramref">mine</code> are recorded using differential lists.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void TwoWay&lt;T, TAdded, TRemoved&gt;(IEnumerable&lt;T&gt; theirs, IEnumerable&lt;T&gt; mine, ICollection&lt;TAdded&gt; added, ICollection&lt;TRemoved&gt; removed)
+    where T : class, TAdded, TRemoved</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">theirs</span></td>
+        <td><p>The foreign list with changes that shall be merged in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">mine</span></td>
+        <td><p>The local list that shall be updated with foreign changes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;TAdded&gt;</td>
+        <td><span class="parametername">added</span></td>
+        <td><p>All elements that should be added to <code data-dev-comment-type="paramref" class="paramref">mine</code> are added to this list.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;TRemoved&gt;</td>
+        <td><span class="parametername">removed</span></td>
+        <td><p>All elements that should be removed from <code data-dev-comment-type="paramref" class="paramref">mine</code> are added to this list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TAdded</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRemoved</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Dispatch_Merge_TwoWay__3_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_ICollection___1__System_Collections_Generic_ICollection___2___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">theirs</code> and <code data-dev-comment-type="paramref" class="paramref">mine</code> should use an internal hashmap for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains#system-collections-generic-icollection-1-contains(-0)">Contains(T)</a> for better performance.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

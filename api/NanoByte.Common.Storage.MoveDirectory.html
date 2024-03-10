@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MoveDirectory
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MoveDirectory
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Storage.MoveDirectory">
+  
+  
+  <h1 id="NanoByte_Common_Storage_MoveDirectory" data-uid="NanoByte.Common.Storage.MoveDirectory" class="text-break">Class MoveDirectory
+  </h1>
+  <div class="markdown level0 summary"><p>Moves the content of a directory to a new location preserving file timestamps, symlinks and hard links.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="NanoByte.Common.Tasks.TaskBase.html">TaskBase</a></div>
+    <div class="level2"><a class="xref" href="NanoByte.Common.Storage.ReadDirectoryBase.html">ReadDirectoryBase</a></div>
+    <div class="level3"><a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html">CopyDirectory</a></div>
+    <div class="level4"><span class="xref">MoveDirectory</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_HandleDirectory_System_IO_DirectoryInfo_">CopyDirectory.HandleDirectory(DirectoryInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_HandleFile_System_IO_FileInfo_System_IO_FileInfo_">CopyDirectory.HandleFile(FileInfo, FileInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_Name">CopyDirectory.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_UnitsByte">CopyDirectory.UnitsByte</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_Overwrite">CopyDirectory.Overwrite</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.ReadDirectoryBase.html#NanoByte_Common_Storage_ReadDirectoryBase_Source">ReadDirectoryBase.Source</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Storage.ReadDirectoryBase.html#NanoByte_Common_Storage_ReadDirectoryBase_FollowSymlinks">ReadDirectoryBase.FollowSymlinks</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_CancellationToken">TaskBase.CancellationToken</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_CredentialProvider">TaskBase.CredentialProvider</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__">TaskBase.Run(CancellationToken, ICredentialProvider, IProgress&lt;TaskSnapshot&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_Tag">TaskBase.Tag</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_CanCancel">TaskBase.CanCancel</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_PreventIdle">TaskBase.PreventIdle</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_State">TaskBase.State</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_UnitsProcessed">TaskBase.UnitsProcessed</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_UnitsTotal">TaskBase.UnitsTotal</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Storage.html">NanoByte.Common.Storage</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Storage_MoveDirectory_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MoveDirectory : CopyDirectory, ITask</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Storage_MoveDirectory__ctor_" data-uid="NanoByte.Common.Storage.MoveDirectory.#ctor*"></a>
+  <h4 id="NanoByte_Common_Storage_MoveDirectory__ctor_System_String_System_String_" data-uid="NanoByte.Common.Storage.MoveDirectory.#ctor(System.String,System.String)">MoveDirectory(String, String)</h4>
+  <div class="markdown level1 summary"><p>Moves the content of a directory to a new location preserving file timestamps, symlinks and hard links.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MoveDirectory(string sourcePath, string destinationPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">sourcePath</span></td>
+        <td><p>The path of source directory. Must exist!</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">destinationPath</span></td>
+        <td><p>The path of the target directory. May exist.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Storage_MoveDirectory_CopyFile_" data-uid="NanoByte.Common.Storage.MoveDirectory.CopyFile*"></a>
+  <h4 id="NanoByte_Common_Storage_MoveDirectory_CopyFile_System_IO_FileInfo_System_IO_FileInfo_" data-uid="NanoByte.Common.Storage.MoveDirectory.CopyFile(System.IO.FileInfo,System.IO.FileInfo)">CopyFile(FileInfo, FileInfo)</h4>
+  <div class="markdown level1 summary"><p>Copies a single file from one location to another. Can be overridden to modify the copying behavior.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void CopyFile(FileInfo sourceFile, FileInfo destinationFile)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a></td>
+        <td><span class="parametername">sourceFile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a></td>
+        <td><span class="parametername">destinationFile</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_CopyFile_System_IO_FileInfo_System_IO_FileInfo_">CopyDirectory.CopyFile(FileInfo, FileInfo)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>A problem occurred while copying the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>Read access to the <code data-dev-comment-type="paramref" class="paramref">sourceFile</code> or write access to the <code data-dev-comment-type="paramref" class="paramref">destinationFile</code> is not permitted.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_MoveDirectory_Execute_" data-uid="NanoByte.Common.Storage.MoveDirectory.Execute*"></a>
+  <h4 id="NanoByte_Common_Storage_MoveDirectory_Execute" data-uid="NanoByte.Common.Storage.MoveDirectory.Execute">Execute()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Execute()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Storage.CopyDirectory.html#NanoByte_Common_Storage_CopyDirectory_Execute">CopyDirectory.Execute()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(Object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(Object, Stream, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, String, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

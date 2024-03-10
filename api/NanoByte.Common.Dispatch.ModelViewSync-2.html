@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ModelViewSync&lt;TModel, TView&gt;
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ModelViewSync&lt;TModel, TView&gt;
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2">
+  
+  
+  <h1 id="NanoByte_Common_Dispatch_ModelViewSync_2" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2" class="text-break">Class ModelViewSync&lt;TModel, TView&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Keeps two collections of different types in sync based on mapping rules.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">ModelViewSync&lt;TModel, TView&gt;</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Dispatch.html">NanoByte.Common.Dispatch</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Dispatch_ModelViewSync_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ModelViewSync&lt;TModel, TView&gt; : Object where TModel : class, IChangeNotify&lt;TModel&gt; where TView : class</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TModel</span></td>
+        <td><p>The common base type of elements in the model.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TView</span></td>
+        <td><p>The common base type of representations in the view.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Dispatch_ModelViewSync_2_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Useful for maintaining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
+Generated View representations will automatically be disposed on removal, if they implement <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>.</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2__ctor_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.#ctor*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2__ctor_NanoByte_Common_Collections_MonitoredCollection__0__System_Collections_Generic_ICollection__1__" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.#ctor(NanoByte.Common.Collections.MonitoredCollection{`0},System.Collections.Generic.ICollection{`1})">ModelViewSync(MonitoredCollection&lt;TModel&gt;, ICollection&lt;TView&gt;)</h4>
+  <div class="markdown level1 summary"><p>Keeps two collections of different types in sync based on mapping rules.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ModelViewSync(MonitoredCollection&lt;TModel&gt; model, ICollection&lt;TView&gt; view)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Collections.MonitoredCollection-1.html">MonitoredCollection</a>&lt;TModel&gt;</td>
+        <td><span class="parametername">model</span></td>
+        <td><p>The Model that can change on its own accord.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;TView&gt;</td>
+        <td><span class="parametername">view</span></td>
+        <td><p>The View that is to be automatically updated to reflect changes in the Model.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Dispatch_ModelViewSync_2__ctor_NanoByte_Common_Collections_MonitoredCollection__0__System_Collections_Generic_ICollection__1___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Useful for maintaining View representations for a set of mutable Model elements in a Model-View-Controller/Presenter design.
+Generated View representations will automatically be disposed on removal, if they implement <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>.</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2_Representations_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Representations*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2_Representations" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Representations">Representations</h4>
+  <div class="markdown level1 summary"><p>All View representations created by the synchronizer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;TView&gt; Representations { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TView&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2_Dispose_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Dispose*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2_Dispose" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2_Initialize_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Initialize*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2_Initialize" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Must be called once, after all relevant mapping rules have been registered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+  </div>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2_Lookup_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Lookup*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2_Lookup__1_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Lookup(`1)">Lookup(TView)</h4>
+  <div class="markdown level1 summary"><p>Looks up the Model element a View representation was created for.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TModel Lookup(TView representation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TView</span></td>
+        <td><span class="parametername">representation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keynotfoundexception">KeyNotFoundException</a></td>
+        <td><p>There is no match.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2_Register_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Register*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2_Register__2_System_Func___0___1__System_Action___0___1__" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.Register``2(System.Func{``0,``1},System.Action{``0,``1})">Register&lt;TSpecificModel, TSpecificView&gt;(Func&lt;TSpecificModel, TSpecificView&gt;, Action&lt;TSpecificModel, TSpecificView&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a mapping rule for a specific type of Model element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Register&lt;TSpecificModel, TSpecificView&gt;(Func&lt;TSpecificModel, TSpecificView&gt; create, Action&lt;TSpecificModel, TSpecificView&gt; update = null)
+    where TSpecificModel : class, TModel where TSpecificView : class, TView</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSpecificModel, TSpecificView&gt;</td>
+        <td><span class="parametername">create</span></td>
+        <td><p>Callback that creates a View representation for a given Model element.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;TSpecificModel, TSpecificView&gt;</td>
+        <td><span class="parametername">update</span></td>
+        <td><p>Callback that updates a View representation based on the state of a given Model element; can be <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSpecificModel</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TSpecificView</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Dispatch_ModelViewSync_2_RegisterMultiple_" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.RegisterMultiple*"></a>
+  <h4 id="NanoByte_Common_Dispatch_ModelViewSync_2_RegisterMultiple__2_System_Func___0_System_Collections_Generic_IEnumerable___1___System_Action___0___1__" data-uid="NanoByte.Common.Dispatch.ModelViewSync`2.RegisterMultiple``2(System.Func{``0,System.Collections.Generic.IEnumerable{``1}},System.Action{``0,``1})">RegisterMultiple&lt;TSpecificModel, TSpecificView&gt;(Func&lt;TSpecificModel, IEnumerable&lt;TSpecificView&gt;&gt;, Action&lt;TSpecificModel, TSpecificView&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a mapping rule for a specific type of Model element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RegisterMultiple&lt;TSpecificModel, TSpecificView&gt;(Func&lt;TSpecificModel, IEnumerable&lt;TSpecificView&gt;&gt; create, Action&lt;TSpecificModel, TSpecificView&gt; update = null)
+    where TSpecificModel : class, TModel where TSpecificView : class, TView</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSpecificModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TSpecificView&gt;&gt;</td>
+        <td><span class="parametername">create</span></td>
+        <td><p>Callback that creates a set of 0..n View representations for a given Model element.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;TSpecificModel, TSpecificView&gt;</td>
+        <td><span class="parametername">update</span></td>
+        <td><p>Callback that updates a specific View representation based on the state of a given Model element; can be <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TSpecificModel</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TSpecificView</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(Object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(Object, Stream, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, String, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

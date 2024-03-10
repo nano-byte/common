@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Task system | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Task system | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="task-system">
+<h1 id="task-system">Task system</h1>
+
+<p>The <a class="xref" href="api/NanoByte.Common.Tasks.html">NanoByte.Common.Tasks</a> namespace provides a framework for managing long-running tasks and reporting progress to the user.</p>
+<h2 id="tasks">Tasks</h2>
+<p>Tasks are represented using the <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a> interface.</p>
+<p>This library provides general-purpose implementations such as <a class="xref" href="api/NanoByte.Common.Tasks.ActionTask.html">ActionTask</a> and <a class="xref" href="api/NanoByte.Common.Tasks.ForEachTask.html">ForEachTask</a>, as well as use-case specific ones such as <a class="xref" href="api/NanoByte.Common.Net.DownloadFile.html">DownloadFile</a> and <a class="xref" href="api/NanoByte.Common.Storage.ReadFile.html">ReadFile</a>. You can also implement your own.</p>
+<h2 id="handlers">Handlers</h2>
+<p>The <a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> interface represents a user interface for reporting task progress as well as displaying prompts and outputs to the user. This library provides a number of implementations:</p>
+<ul>
+<li><a class="xref" href="api/NanoByte.Common.Tasks.CliTaskHandler.html">CliTaskHandler</a> for a basic command-line interface</li>
+<li><a class="xref" href="api/NanoByte.Common.Tasks.AnsiCliTaskHandler.html">AnsiCliTaskHandler</a> for a more advanced command-line interface using ANSI codes</li>
+<li><a class="xref" href="api/NanoByte.Common.Tasks.DialogTaskHandler.html">DialogTaskHandler</a> for a graphical interface using WinForms dialog boxes</li>
+<li><a class="xref" href="api/NanoByte.Common.Tasks.SilentTaskHandler.html">SilentTaskHandler</a> for background execution or unit tests</li>
+<li><a class="xref" href="api/NanoByte.Common.Tasks.ServiceTaskHandler.html">ServiceTaskHandler</a> for integration with <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">Microsoft.Extensions.DependencyInjection</a></li>
+</ul>
+<p>Methods that want to run <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a>s should take an <a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> as an input parameter.<br>To run an <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a>, pass it to the <a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">ITaskHandler.RunTask()</a> method. This will then internally call <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__">ITask.Run()</a> and take care of setting up progress tracking, cancellation, etc.. Additional methods such as <a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_Ask_System_String_System_Nullable_System_Boolean__System_String_">ITaskHandler.Ask()</a> can be used for user interaction.</p>
+<h2 id="threading">Threading</h2>
+<p><a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a>s provide no threading or asynchronicity concept by themselves. Their <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__">.Run()</a> methods block until the tasks is complete. However, they can be cancelled from other threads via <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>s.</p>
+<p><a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> implementations are thread-safe and support running multiple <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a>s concurrently.<br><a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">ITaskHandler.RunTask()</a> blocks until the tasks is complete, however some implementations may perform the actual task execution on a separate thread.<br><a class="xref" href="api/NanoByte.Common.Tasks.DialogTaskHandler.html">DialogTaskHandler</a> keeps the WinForms message loop pumping while a task is running, so calling <code>.RunTask()</code> from the GUI thread will not freeze the GUI. However it does prevent user interaction (other than canceling the task) via a modal dialog box.</p>
+<h2 id="comparison-with-asyncawait">Comparison with async/await</h2>
+<p>While <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a> has some superficial similarities with the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a> class used by the C# <code>async</code>/<code>await</code> keywords, these two concepts should not be confused.</p>
+<p>The <code>async</code>/<code>await</code> keywords are part of the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model">Task Asynchronous Programming model</a> (TAP). The TAP provides an abstraction over asynchronous code, enabling the execution of continuations after tasks have completed. This is intended to increase the performance and responsiveness of applications. Many TAP methods accept <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>s to signal that a task should be cancelled and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.progress-1">Progress&lt;T&gt;</a> to report a task&#39;s progress.</p>
+<p>NanoByte.Common&#39;s Task system is intended for managing long-running tasks. It provides an abstraction over UIs for interacting with such tasks. It uses the same <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.progress-1">Progress&lt;T&gt;</a> as the TAP, but takes care of managing them internally for most use cases.</p>
+<p>As a rule of thumb:</p>
+<ul>
+<li>Use <code>await</code> and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a> if you want to trigger a short task from a GUI thread.</li>
+<li>Use <a class="xref" href="api/NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">ITaskHandler.RunTask()</a> and <a class="xref" href="api/NanoByte.Common.Tasks.ITask.html">ITask</a> if you want to run a longer task on a non-GUI thread (potentially reporting back to a GUI thread).</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/nano-byte/common/blob/heads/tags/2.18.3/doc/tasks.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

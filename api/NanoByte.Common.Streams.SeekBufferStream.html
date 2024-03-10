@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SeekBufferStream
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SeekBufferStream
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Streams.SeekBufferStream">
+  
+  
+  <h1 id="NanoByte_Common_Streams_SeekBufferStream" data-uid="NanoByte.Common.Streams.SeekBufferStream" class="text-break">Class SeekBufferStream
+  </h1>
+  <div class="markdown level0 summary"><p>Decorator that adds seek buffering to another <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html">DelegatingStream</a></div>
+    <div class="level2"><span class="xref">SeekBufferStream</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_UnderlyingStream">DelegatingStream.UnderlyingStream</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Flush">DelegatingStream.Flush()</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_SetLength_System_Int64_">DelegatingStream.SetLength(Int64)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Write_System_Byte___System_Int32_System_Int32_">DelegatingStream.Write(Byte[], Int32, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_FlushAsync_System_Threading_CancellationToken_">DelegatingStream.FlushAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_WriteAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_">DelegatingStream.WriteAsync(Byte[], Int32, Int32, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Write_System_ReadOnlySpan_System_Byte__">DelegatingStream.Write(ReadOnlySpan&lt;Byte&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_">DelegatingStream.WriteAsync(ReadOnlyMemory&lt;Byte&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_CanRead">DelegatingStream.CanRead</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_CanWrite">DelegatingStream.CanWrite</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Length">DelegatingStream.Length</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_CanTimeout">DelegatingStream.CanTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_ReadTimeout">DelegatingStream.ReadTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_WriteTimeout">DelegatingStream.WriteTimeout</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Streams.html">NanoByte.Common.Streams</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Streams_SeekBufferStream_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class SeekBufferStream : DelegatingStream</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream__ctor_" data-uid="NanoByte.Common.Streams.SeekBufferStream.#ctor*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream__ctor_System_IO_Stream_System_Int32_" data-uid="NanoByte.Common.Streams.SeekBufferStream.#ctor(System.IO.Stream,System.Int32)">SeekBufferStream(Stream, Int32)</h4>
+  <div class="markdown level1 summary"><p>Decorator that adds seek buffering to another <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SeekBufferStream(Stream underlyingStream, int bufferSize = 262144)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
+        <td><span class="parametername">underlyingStream</span></td>
+        <td><p>Underlying stream to delegate to. Will be disposed together with this stream.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">bufferSize</span></td>
+        <td><p>The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_DefaultBufferSize" data-uid="NanoByte.Common.Streams.SeekBufferStream.DefaultBufferSize">DefaultBufferSize</h4>
+  <div class="markdown level1 summary"><p>The default for the maximum number of bytes to buffer for seeking backwards.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DefaultBufferSize = 262144</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_CanSeek_" data-uid="NanoByte.Common.Streams.SeekBufferStream.CanSeek*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_CanSeek" data-uid="NanoByte.Common.Streams.SeekBufferStream.CanSeek">CanSeek</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool CanSeek { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_CanSeek">DelegatingStream.CanSeek</a></div>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_Position_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Position*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_Position" data-uid="NanoByte.Common.Streams.SeekBufferStream.Position">Position</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override long Position { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Position">DelegatingStream.Position</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_Dispose_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Dispose*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_Dispose_System_Boolean_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Dispose_System_Boolean_">DelegatingStream.Dispose(Boolean)</a></div>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_Read_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Read*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_Read_System_Byte___System_Int32_System_Int32_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Read(System.Byte[],System.Int32,System.Int32)">Read(Byte[], Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int Read(byte[] buffer, int offset, int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Read_System_Byte___System_Int32_System_Int32_">DelegatingStream.Read(Byte[], Int32, Int32)</a></div>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_Read_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Read*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_Read_System_Span_System_Byte__" data-uid="NanoByte.Common.Streams.SeekBufferStream.Read(System.Span{System.Byte})">Read(Span&lt;Byte&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int Read(Span&lt;byte&gt; buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<span class="xref">System.Byte</span>&gt;</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Read_System_Span_System_Byte__">DelegatingStream.Read(Span&lt;Byte&gt;)</a></div>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_ReadAsync_" data-uid="NanoByte.Common.Streams.SeekBufferStream.ReadAsync*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_" data-uid="NanoByte.Common.Streams.SeekBufferStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">ReadAsync(Byte[], Int32, Int32, CancellationToken)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task&lt;int&gt; ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_">DelegatingStream.ReadAsync(Byte[], Int32, Int32, CancellationToken)</a></div>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_ReadAsync_" data-uid="NanoByte.Common.Streams.SeekBufferStream.ReadAsync*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_ReadAsync_System_Memory_System_Byte__System_Threading_CancellationToken_" data-uid="NanoByte.Common.Streams.SeekBufferStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">ReadAsync(Memory&lt;Byte&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ValueTask&lt;int&gt; ReadAsync(Memory&lt;byte&gt; buffer, CancellationToken cancellationToken = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<span class="xref">System.Byte</span>&gt;</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_ReadAsync_System_Memory_System_Byte__System_Threading_CancellationToken_">DelegatingStream.ReadAsync(Memory&lt;Byte&gt;, CancellationToken)</a></div>
+  
+  
+  <a id="NanoByte_Common_Streams_SeekBufferStream_Seek_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Seek*"></a>
+  <h4 id="NanoByte_Common_Streams_SeekBufferStream_Seek_System_Int64_System_IO_SeekOrigin_" data-uid="NanoByte.Common.Streams.SeekBufferStream.Seek(System.Int64,System.IO.SeekOrigin)">Seek(Int64, SeekOrigin)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override long Seek(long offset, SeekOrigin origin)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.seekorigin">SeekOrigin</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Streams.DelegatingStream.html#NanoByte_Common_Streams_DelegatingStream_Seek_System_Int64_System_IO_SeekOrigin_">DelegatingStream.Seek(Int64, SeekOrigin)</a></div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(Object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(Object, Stream, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, String, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

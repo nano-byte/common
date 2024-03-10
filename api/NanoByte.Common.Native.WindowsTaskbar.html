@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class WindowsTaskbar
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class WindowsTaskbar
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Native.WindowsTaskbar">
+  
+  
+  <h1 id="NanoByte_Common_Native_WindowsTaskbar" data-uid="NanoByte.Common.Native.WindowsTaskbar" class="text-break">Class WindowsTaskbar
+  </h1>
+  <div class="markdown level0 summary"><p>Provides helper methods and API calls specific to the Windows 7 or newer taskbar.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">WindowsTaskbar</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Native.html">NanoByte.Common.Native</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Native_WindowsTaskbar_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class WindowsTaskbar : Object</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Native_WindowsTaskbar_AddTaskLinks_" data-uid="NanoByte.Common.Native.WindowsTaskbar.AddTaskLinks*"></a>
+  <h4 id="NanoByte_Common_Native_WindowsTaskbar_AddTaskLinks_System_String_System_Collections_Generic_IEnumerable_NanoByte_Common_Native_WindowsTaskbar_ShellLink__" data-uid="NanoByte.Common.Native.WindowsTaskbar.AddTaskLinks(System.String,System.Collections.Generic.IEnumerable{NanoByte.Common.Native.WindowsTaskbar.ShellLink})">AddTaskLinks(String, IEnumerable&lt;WindowsTaskbar.ShellLink&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds user-task links to the taskbar jumplist. Any existing task links are removed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddTaskLinks(string appID, IEnumerable&lt;WindowsTaskbar.ShellLink&gt; links)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">appID</span></td>
+        <td><p>The application ID of the jumplist to add the task to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.ShellLink.html">WindowsTaskbar.ShellLink</a>&gt;</td>
+        <td><span class="parametername">links</span></td>
+        <td><p>The links to add to the jumplist.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Native_WindowsTaskbar_PreventPinning_" data-uid="NanoByte.Common.Native.WindowsTaskbar.PreventPinning*"></a>
+  <h4 id="NanoByte_Common_Native_WindowsTaskbar_PreventPinning_System_IntPtr_" data-uid="NanoByte.Common.Native.WindowsTaskbar.PreventPinning(System.IntPtr)">PreventPinning(IntPtr)</h4>
+  <div class="markdown level1 summary"><p>Prevents a specific window from being pinned to the taskbar.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PreventPinning(IntPtr hwnd)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></td>
+        <td><span class="parametername">hwnd</span></td>
+        <td><p>A handle to the window to prevent from being pinned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Native_WindowsTaskbar_SetProgressState_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressState*"></a>
+  <h4 id="NanoByte_Common_Native_WindowsTaskbar_SetProgressState_System_IntPtr_NanoByte_Common_Native_WindowsTaskbar_ProgressBarState_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressState(System.IntPtr,NanoByte.Common.Native.WindowsTaskbar.ProgressBarState)">SetProgressState(IntPtr, WindowsTaskbar.ProgressBarState)</h4>
+  <div class="markdown level1 summary"><p>Sets the state of the taskbar progress indicator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetProgressState(IntPtr handle, WindowsTaskbar.ProgressBarState state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></td>
+        <td><span class="parametername">handle</span></td>
+        <td><p>The handle of the window whose taskbar button contains the progress indicator.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.html">WindowsTaskbar.ProgressBarState</a></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>The state of the progress indicator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Native_WindowsTaskbar_SetProgressValue_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressValue*"></a>
+  <h4 id="NanoByte_Common_Native_WindowsTaskbar_SetProgressValue_System_IntPtr_System_Int32_System_Int32_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressValue(System.IntPtr,System.Int32,System.Int32)">SetProgressValue(IntPtr, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the value of the taskbar progress indicator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetProgressValue(IntPtr handle, int currentValue, int maximumValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></td>
+        <td><span class="parametername">handle</span></td>
+        <td><p>The handle of the window whose taskbar button contains the progress indicator.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">currentValue</span></td>
+        <td><p>The current value of the progress indicator.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">maximumValue</span></td>
+        <td><p>The value <code data-dev-comment-type="paramref" class="paramref">currentValue</code> will have when the operation is complete.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Native_WindowsTaskbar_SetWindowAppID_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetWindowAppID*"></a>
+  <h4 id="NanoByte_Common_Native_WindowsTaskbar_SetWindowAppID_System_IntPtr_System_String_System_String_System_String_System_String_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetWindowAppID(System.IntPtr,System.String,System.String,System.String,System.String)">SetWindowAppID(IntPtr, String, String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Sets a specific window&apos;s explicit application user model ID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetWindowAppID(IntPtr hwnd, string appID, string relaunchCommand = null, string relaunchIcon = null, string relaunchName = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></td>
+        <td><span class="parametername">hwnd</span></td>
+        <td><p>A handle to the window to set the ID for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">appID</span></td>
+        <td><p>The application ID to set.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">relaunchCommand</span></td>
+        <td><p>The command to use for relaunching this specific window if it was pinned to the taskbar; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">relaunchIcon</span></td>
+        <td><p>The icon to use for pinning this specific window to the taskbar (written as Path,ResourceIndex); can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">relaunchName</span></td>
+        <td><p>The user-friendly name to associate with <code data-dev-comment-type="paramref" class="paramref">relaunchCommand</code>; can be <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Native_WindowsTaskbar_SetWindowAppID_System_IntPtr_System_String_System_String_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The application ID is used to group related windows in the taskbar.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

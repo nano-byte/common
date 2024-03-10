@@ -1,0 +1,479 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FilteredTreeView&lt;T&gt;
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FilteredTreeView&lt;T&gt;
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Controls.FilteredTreeView`1">
+  
+  
+  <h1 id="NanoByte_Common_Controls_FilteredTreeView_1" data-uid="NanoByte.Common.Controls.FilteredTreeView`1" class="text-break">Class FilteredTreeView&lt;T&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Displays a list of <a class="xref" href="NanoByte.Common.INamed.html">INamed</a>s objects in a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.treeview">TreeView</a> with incremental search.
+An automatic hierarchy is generated based on a <a class="xref" href="NanoByte.Common.Controls.FilteredTreeView-1.html#NanoByte_Common_Controls_FilteredTreeView_1_Separator">Separator</a> character.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">FilteredTreeView&lt;T&gt;</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Controls.html">NanoByte.Common.Controls</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.WinForms.dll</h6>
+  <h5 id="NanoByte_Common_Controls_FilteredTreeView_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class FilteredTreeView&lt;T&gt; : UserControl where T : INamed</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of <a class="xref" href="NanoByte.Common.INamed.html">INamed</a> object to list.
+Special support for types implementing <a class="xref" href="NanoByte.Common.IHighlightColor.html">IHighlightColor</a> and/or <a class="xref" href="NanoByte.Common.Controls.IContextMenu.html">IContextMenu</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1__ctor_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.#ctor*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1__ctor" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.#ctor">FilteredTreeView()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FilteredTreeView()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_CheckBoxes_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.CheckBoxes*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_CheckBoxes" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.CheckBoxes">CheckBoxes</h4>
+  <div class="markdown level1 summary"><p>Controls whether check boxes are displayed for every entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CheckBoxes { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_CheckedEntries_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.CheckedEntries*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_CheckedEntries" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.CheckedEntries">CheckedEntries</h4>
+  <div class="markdown level1 summary"><p>Returns a list of all <a class="xref" href="NanoByte.Common.INamed.html">INamed</a> objects currently marked with a check box.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;T&gt; CheckedEntries { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Controls_FilteredTreeView_1_CheckedEntries_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Does NOT create a defensive copy. Take care to only add valid elements when modifying. Call <a class="xref" href="NanoByte.Common.Controls.FilteredTreeView-1.html#NanoByte_Common_Controls_FilteredTreeView_1_UpdateList_System_Object_">UpdateList(Object)</a> after changing.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_Nodes_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.Nodes*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_Nodes" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.Nodes">Nodes</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="NanoByte.Common.INamed.html">INamed</a> (and optionally <a class="xref" href="NanoByte.Common.Controls.IContextMenu.html">IContextMenu</a>) objects to be listed in the tree.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NamedCollection&lt;T&gt; Nodes { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Collections.NamedCollection-1.html">NamedCollection</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_SelectedEntry_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.SelectedEntry*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_SelectedEntry" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.SelectedEntry">SelectedEntry</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="NanoByte.Common.INamed.html">INamed</a> object currently selected in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.treeview">TreeView</a>; <code>null</code> for no selection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T SelectedEntry { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_Separator_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.Separator*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_Separator" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.Separator">Separator</h4>
+  <div class="markdown level1 summary"><p>The character used to split <a class="xref" href="NanoByte.Common.INamed.html#NanoByte_Common_INamed_Name">Name</a>s into tree levels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public char Separator { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_ShowSearchBox_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.ShowSearchBox*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_ShowSearchBox" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.ShowSearchBox">ShowSearchBox</h4>
+  <div class="markdown level1 summary"><p>Toggle the visibility of the search box.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowSearchBox { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_Dispose_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.Dispose*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_Dispose_System_Boolean_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Clean up any resources being used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td><p>true if managed resources should be disposed; otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Controls_FilteredTreeView_1_UpdateList_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.UpdateList*"></a>
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_UpdateList_System_Object_" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.UpdateList(System.Object)">UpdateList(Object)</h4>
+  <div class="markdown level1 summary"><p>Updates the filtered <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.treeview">TreeView</a> representation of <a class="xref" href="NanoByte.Common.Controls.FilteredTreeView-1.html#NanoByte_Common_Controls_FilteredTreeView_1_Nodes">Nodes</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateList(object sender = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">sender</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Controls_FilteredTreeView_1_UpdateList_System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called automatically internally.</p>
+</div>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_CheckedEntriesChanged" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.CheckedEntriesChanged">CheckedEntriesChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs whenever the content of <a class="xref" href="NanoByte.Common.Controls.FilteredTreeView-1.html#NanoByte_Common_Controls_FilteredTreeView_1_CheckedEntries">CheckedEntries</a> has changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler CheckedEntriesChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler">EventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_SelectedEntryChanged" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.SelectedEntryChanged">SelectedEntryChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs whenever <a class="xref" href="NanoByte.Common.Controls.FilteredTreeView-1.html#NanoByte_Common_Controls_FilteredTreeView_1_SelectedEntry">SelectedEntry</a> has been changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler SelectedEntryChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler">EventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="NanoByte_Common_Controls_FilteredTreeView_1_SelectionConfirmed" data-uid="NanoByte.Common.Controls.FilteredTreeView`1.SelectionConfirmed">SelectionConfirmed</h4>
+  <div class="markdown level1 summary"><p>Occurs when the user has confirmed the <a class="xref" href="NanoByte.Common.Controls.FilteredTreeView-1.html#NanoByte_Common_Controls_FilteredTreeView_1_SelectedEntry">SelectedEntry</a> via double-clicking or pressing Enter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler SelectionConfirmed</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler">EventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(Object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(Object, Stream, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, String, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
