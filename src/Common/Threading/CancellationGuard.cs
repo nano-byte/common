@@ -20,6 +20,7 @@ namespace NanoByte.Common.Threading;
 /// </code>
 /// </example>
 [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
+[MustDisposeResource]
 public class CancellationGuard : IDisposable
 {
     private CancellationTokenRegistration _registration;

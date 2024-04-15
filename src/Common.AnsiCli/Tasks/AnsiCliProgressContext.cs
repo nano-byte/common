@@ -6,6 +6,7 @@ namespace NanoByte.Common.Tasks;
 /// <summary>
 /// Container for one or more ANSI console progress bars.
 /// </summary>
+[MustDisposeResource]
 public sealed class AnsiCliProgressContext : IDisposable
 {
     private readonly TaskCompletionSource<bool> _completion = new();

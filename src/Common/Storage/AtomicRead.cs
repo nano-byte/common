@@ -11,6 +11,7 @@ namespace NanoByte.Common.Storage;
 /// using (new AtomicRead(filePath))
 ///     return File.ReadAllBytes(filePath);
 /// </code></example>
+[MustDisposeResource]
 public sealed class AtomicRead([Localizable(false)] string path) : IDisposable
 {
     private readonly IDisposable _lock = AtomicWrite.Lock(path ?? throw new ArgumentNullException(nameof(path)));

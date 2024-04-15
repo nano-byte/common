@@ -6,6 +6,7 @@ namespace NanoByte.Common;
 /// <summary>
 /// Common base class for operations that are first staged and then either committed or rolled back.
 /// </summary>
+[MustDisposeResource]
 public abstract class StagedOperation : IDisposable
 {
     /// <summary>

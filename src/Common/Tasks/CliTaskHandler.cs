@@ -10,6 +10,7 @@ namespace NanoByte.Common.Tasks;
 /// Informs the user about the progress of tasks and ask questions using console output.
 /// </summary>
 /// <remarks>This class is thread-safe.</remarks>
+[MustDisposeResource]
 public class CliTaskHandler : TaskHandlerBase
 {
     /// <summary>

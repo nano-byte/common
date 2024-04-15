@@ -7,6 +7,7 @@ namespace NanoByte.Common;
 /// Invokes a callback on <see cref="Dispose"/>.
 /// </summary>
 /// <param name="callback">The callback to invoke on <see cref="Dispose"/>.</param>
+[MustDisposeResource]
 public sealed class Disposable(Action callback) : IDisposable
 {
     /// <summary>

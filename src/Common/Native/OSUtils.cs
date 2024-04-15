@@ -99,6 +99,7 @@ public static class OSUtils
     /// </summary>
     /// <param name="reason">Why the system should not enter idle mode.</param>
     /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original state.</returns>
+    [MustDisposeResource]
     public static IDisposable? PreventIdle(string reason)
     {
         try
@@ -128,6 +129,7 @@ public static class OSUtils
     /// </summary>
     /// <param name="reason">Why the display should not be turned off.</param>
     /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original state.</returns>
+    [MustDisposeResource]
     public static IDisposable? PreventDisplayOff(string reason)
     {
         try
@@ -154,6 +156,7 @@ public static class OSUtils
     }
 
     [SupportedOSPlatform("windows")]
+    [MustDisposeResource]
     private static IDisposable? KeepAwakeWindows(NativeMethods.ExecutionState state)
     {
         var previous = NativeMethods.SetThreadExecutionState(NativeMethods.ExecutionState.Continuous | state);

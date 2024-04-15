@@ -8,6 +8,7 @@ namespace NanoByte.Common.Tasks;
 /// Common base class for WinForms <see cref="ITaskHandler"/> implementations.
 /// </summary>
 /// <remarks>This class is thread-safe.</remarks>
+[MustDisposeResource]
 public abstract class GuiTaskHandlerBase : TaskHandlerBase
 {
     /// <summary>

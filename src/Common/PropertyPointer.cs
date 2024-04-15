@@ -33,6 +33,7 @@ public class PropertyPointer<T>(Func<T> getValue, Action<T> setValue) : MarshalB
     /// }
     /// </code>
     /// </example>
+    [MustDisposeResource]
     public IDisposable SetTemp(T value)
     {
         var backup = Value;

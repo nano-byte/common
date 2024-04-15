@@ -69,6 +69,7 @@ public static partial class Locations
     /// <param name="path">The <see cref="PortableBase"/> value to set.</param>
     /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original values of <see cref="IsPortable"/> and <see cref="PortableBase"/>.</returns>
     /// <exception cref="InvalidOperationException">This method has already been called on this thread.</exception>
+    [MustDisposeResource]
     public static IDisposable Redirect(string path)
     {
         RedirectBase = path;

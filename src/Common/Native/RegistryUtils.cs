@@ -271,6 +271,7 @@ public static class RegistryUtils
     /// <param name="writable"><c>true</c> for write-access to the key.</param>
     /// <returns>The opened subkey; <c>null</c> if it does not exist.</returns>
     /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
+    [MustDisposeResource]
     public static RegistryKey? TryOpenSubKey(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
     {
         #region Sanity checks
@@ -300,6 +301,7 @@ public static class RegistryUtils
     /// <returns>The opened subkey.</returns>
     /// <exception cref="IOException">The key does not exist.</exception>
     /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
+    [MustDisposeResource]
     public static RegistryKey OpenSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
         => ExceptionUtils.Retry<IOException, RegistryKey>(
             () => key.TryOpenSubKey(subkeyName, writable)
@@ -313,6 +315,7 @@ public static class RegistryUtils
     /// <returns>The newly created subkey.</returns>
     /// <exception cref="IOException">Failed to create the key.</exception>
     /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
+    [MustDisposeResource]
     public static RegistryKey CreateSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName)
     {
         #region Sanity checks
@@ -374,6 +377,7 @@ public static class RegistryUtils
     /// <returns>The opened registry key.</returns>
     /// <exception cref="IOException">The key does not exist.</exception>
     /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
+    [MustDisposeResource]
     public static RegistryKey OpenHklmKey([Localizable(false)] string subkeyName, out bool x64)
     {
         #region Sanity checks

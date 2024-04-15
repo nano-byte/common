@@ -10,6 +10,7 @@ namespace NanoByte.Common.Tasks;
 /// Common base class for <see cref="ITaskHandler"/> implementations.
 /// </summary>
 /// <remarks>This class is thread-safe.</remarks>
+[MustDisposeResource]
 public abstract class TaskHandlerBase : ITaskHandler
 {
     /// <summary>

@@ -16,6 +16,7 @@ namespace NanoByte.Common.Storage;
 /// }
 /// </code></example>
 /// <seealso cref="AtomicRead"/>
+[MustDisposeResource]
 public sealed class AtomicWrite : IDisposable
 {
     /// <summary>
@@ -74,6 +75,7 @@ public sealed class AtomicWrite : IDisposable
         }
     }
 
+    [MustDisposeResource]
     internal static IDisposable Lock(string path)
         => new MutexLock("atomic-file-" + path.GetHashCode());
 }

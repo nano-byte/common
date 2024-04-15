@@ -15,6 +15,7 @@ namespace NanoByte.Common.Tasks;
 /// <remarks>This class is thread-safe.</remarks>
 /// <seealso cref="ConfigurationCredentialProviderRegistration.ConfigureCredentials"/>
 [CLSCompliant(false)]
+[MustDisposeResource]
 public class ServiceTaskHandler : ITaskHandler
 {
     private readonly ILogger<ServiceTaskHandler>? _logger;

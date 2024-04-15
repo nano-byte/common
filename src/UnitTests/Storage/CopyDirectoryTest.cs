@@ -153,6 +153,7 @@ public class CopyDirectoryTest
             .Should().Equal(File.ReadAllBytes(Path.Combine(destination, "subdir", "file")));
     }
 
+    [MustDisposeResource]
     internal static TemporaryDirectory CreateTestDir()
     {
         var tempDir = new TemporaryDirectory("unit-tests");

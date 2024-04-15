@@ -13,6 +13,7 @@ namespace NanoByte.Common.Net;
 /// A simple HTTP server.
 /// </summary>
 [CLSCompliant(false)]
+[MustDisposeResource]
 public abstract class HttpServer : IDisposable
 {
     private readonly HttpListener _listener;

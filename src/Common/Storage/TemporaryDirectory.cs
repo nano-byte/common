@@ -6,6 +6,7 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Represents a temporary directory that is automatically deleted when the object is disposed.
 /// </summary>
+[MustDisposeResource]
 public class TemporaryDirectory : IDisposable
 {
     /// <summary>

@@ -14,6 +14,7 @@ namespace NanoByte.Common.Dispatch;
 /// </remarks>
 /// <param name="model">The Model that can change on its own accord.</param>
 /// <param name="view">The View that is to be automatically updated to reflect changes in the Model.</param>
+[MustDisposeResource]
 public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> model, ICollection<TView> view) : IDisposable
     where TModel : class, IChangeNotify<TModel>
     where TView : class

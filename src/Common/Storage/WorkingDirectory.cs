@@ -6,6 +6,7 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Changes the current working working directory until the object is disposed.
 /// </summary>
+[MustDisposeResource]
 public sealed class WorkingDirectory : IDisposable
 {
     private readonly string _previousWorkingDirectory;
