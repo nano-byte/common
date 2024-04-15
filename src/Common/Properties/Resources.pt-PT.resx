@@ -175,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>O arranque do '{0}' requer privilégios de administrador.</value>
+    <value>O lançamento do '{0}' requer privilégios de administrador.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
