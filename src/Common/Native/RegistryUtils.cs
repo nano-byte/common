@@ -11,7 +11,7 @@ namespace NanoByte.Common.Native;
 /// Provides utility and extension methods for <see cref="Registry"/> access.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public static class RegistryUtils
+public static partial class RegistryUtils
 {
     #region DWORD
     /// <summary>
@@ -405,5 +405,20 @@ public static class RegistryUtils
             return Registry.LocalMachine.OpenSubKeyChecked(subkeyName);
         }
     }
+
+#if !NET20
+    /// <summary>
+    /// Returns the last write time of the registry key.
+    /// </summary>
+    /// <param name="key">The key to get the last write time for.</param>
+    /// <exception cref="IOException">The key does not exist.</exception>
+    /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
+    public static DateTime GetLastWriteTime(this RegistryKey key)
+    {
+        int ret = NativeMethods.RegQueryInfoKey(key.Handle, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, out long ftLastWriteTime);
+        if (ret != 0) throw WindowsUtils.BuildException(ret);
+        return DateTime.FromFileTime(ftLastWriteTime);
+    }
+#endif
     #endregion
 }
