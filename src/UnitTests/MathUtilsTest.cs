@@ -30,4 +30,13 @@ public class MathUtilsTest
         new Size(2, 3).MultiplyAndRound(new SizeF(2, 3))
                       .Should().Be(new Size(4, 9));
     }
+
+    [Fact]
+    public void TestXOr()
+    {
+        byte[] array1 = [0x01, 0x10];
+        byte[] array2 = [0x10, 0x11];
+        MathUtils.XOr(array1, array2)
+                 .Should().BeEquivalentTo([0x11, 0x01]);
+    }
 }

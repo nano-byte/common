@@ -63,4 +63,18 @@ public static class MathUtils
         => new(
             (int)Round(size.Width * factor.Width),
             (int)Round(size.Height * factor.Height));
+
+    /// <summary>
+    /// Combines two byte arrays via Exclusive Or.
+    /// </summary>
+    public static byte[] XOr(byte[] array1, byte[] array2)
+    {
+        #region Sanity checks
+        if (array1.Length != array2.Length) throw new ArgumentException("Length of both arrays must be equal.", nameof(array1));
+        #endregion
+
+        byte[] result = array1.ToArray();
+        for (int i = 0; i < array2.Length; i++) result[i] ^= array2[i];
+        return result;
+    }
 }
