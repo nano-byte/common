@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Msg
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Msg
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Controls.Msg">
+  
+  
+  <h1 id="NanoByte_Common_Controls_Msg" data-uid="NanoByte.Common.Controls.Msg" class="text-break">Class Msg
+  </h1>
+  <div class="markdown level0 summary"><p>Provides easier access to typical <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.messagebox">MessageBox</a> configurations and automatically upgrades to TaskDialogs when available.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">Msg</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Controls.html">NanoByte.Common.Controls</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.WinForms.dll</h6>
+  <h5 id="NanoByte_Common_Controls_Msg_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Msg : Object</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Controls_Msg_Inform_" data-uid="NanoByte.Common.Controls.Msg.Inform*"></a>
+  <h4 id="NanoByte_Common_Controls_Msg_Inform_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_" data-uid="NanoByte.Common.Controls.Msg.Inform(System.Windows.Forms.IWin32Window,System.String,NanoByte.Common.Controls.MsgSeverity)">Inform(IWin32Window, String, MsgSeverity)</h4>
+  <div class="markdown level1 summary"><p>Displays a message to the user using a message box or task dialog.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Inform(IWin32Window owner, string text, MsgSeverity severity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.iwin32window">IWin32Window</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>The parent window the displayed window is modal to; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The message to be displayed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Controls.MsgSeverity.html">MsgSeverity</a></td>
+        <td><span class="parametername">severity</span></td>
+        <td><p>How severe/important the message is.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Controls_Msg_OkCancel_" data-uid="NanoByte.Common.Controls.Msg.OkCancel*"></a>
+  <h4 id="NanoByte_Common_Controls_Msg_OkCancel_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_System_String_System_String_" data-uid="NanoByte.Common.Controls.Msg.OkCancel(System.Windows.Forms.IWin32Window,System.String,NanoByte.Common.Controls.MsgSeverity,System.String,System.String)">OkCancel(IWin32Window, String, MsgSeverity, String, String)</h4>
+  <div class="markdown level1 summary"><p>Asks the user a OK/Cancel-question using a message box or task dialog.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool OkCancel(IWin32Window owner, string text, MsgSeverity severity, string okCaption = null, string cancelCaption = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.iwin32window">IWin32Window</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>The parent window the displayed window is modal to; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The message to be displayed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Controls.MsgSeverity.html">MsgSeverity</a></td>
+        <td><span class="parametername">severity</span></td>
+        <td><p>How severe/important the message is.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">okCaption</span></td>
+        <td><p>The title and a short description (separated by a linebreak) of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-ok">OK</a> option; <code>null</code> for default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">cancelCaption</span></td>
+        <td><p>The title and a short description (separated by a linebreak) of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-cancel">Cancel</a> option; <code>null</code> for default.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">okCaption</code> was selected, <code>false</code> if <code data-dev-comment-type="paramref" class="paramref">cancelCaption</code> was selected.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Controls_Msg_OkCancel_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.messagebox">MessageBox</a> is used, <code data-dev-comment-type="paramref" class="paramref">okCaption</code> and <code data-dev-comment-type="paramref" class="paramref">cancelCaption</code> are not display to the user, so don&apos;t rely on them!</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Controls_Msg_YesNo_" data-uid="NanoByte.Common.Controls.Msg.YesNo*"></a>
+  <h4 id="NanoByte_Common_Controls_Msg_YesNo_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_System_String_System_String_" data-uid="NanoByte.Common.Controls.Msg.YesNo(System.Windows.Forms.IWin32Window,System.String,NanoByte.Common.Controls.MsgSeverity,System.String,System.String)">YesNo(IWin32Window, String, MsgSeverity, String, String)</h4>
+  <div class="markdown level1 summary"><p>Asks the user to choose between two options (yes/no) using a message box or task dialog.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool YesNo(IWin32Window owner, string text, MsgSeverity severity, string yesCaption = null, string noCaption = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.iwin32window">IWin32Window</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>The parent window the displayed window is modal to; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The message to be displayed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Controls.MsgSeverity.html">MsgSeverity</a></td>
+        <td><span class="parametername">severity</span></td>
+        <td><p>How severe/important the message is.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">yesCaption</span></td>
+        <td><p>The title and a short description (separated by a linebreak) of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-yes">Yes</a> option; <code>null</code> for default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">noCaption</span></td>
+        <td><p>The title and a short description (separated by a linebreak) of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-no">No</a> option; <code>null</code> for default.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">yesCaption</code> was chosen, <code>false</code> if <code data-dev-comment-type="paramref" class="paramref">noCaption</code> was chosen.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Controls_Msg_YesNo_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.messagebox">MessageBox</a> is used, <code data-dev-comment-type="paramref" class="paramref">yesCaption</code> and <code data-dev-comment-type="paramref" class="paramref">noCaption</code> are not display to the user, so don&apos;t rely on them!</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Controls_Msg_YesNoCancel_" data-uid="NanoByte.Common.Controls.Msg.YesNoCancel*"></a>
+  <h4 id="NanoByte_Common_Controls_Msg_YesNoCancel_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_System_String_System_String_" data-uid="NanoByte.Common.Controls.Msg.YesNoCancel(System.Windows.Forms.IWin32Window,System.String,NanoByte.Common.Controls.MsgSeverity,System.String,System.String)">YesNoCancel(IWin32Window, String, MsgSeverity, String, String)</h4>
+  <div class="markdown level1 summary"><p>Asks the user to choose between three options (yes/no/cancel) using a message box or task dialog.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DialogResult YesNoCancel(IWin32Window owner, string text, MsgSeverity severity, string yesCaption = null, string noCaption = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.iwin32window">IWin32Window</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>The parent window the displayed window is modal to; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The message to be displayed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Controls.MsgSeverity.html">MsgSeverity</a></td>
+        <td><span class="parametername">severity</span></td>
+        <td><p>How severe/important the message is.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">yesCaption</span></td>
+        <td><p>The title and a short description (separated by a linebreak) of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-yes">Yes</a> option; <code>null</code> for default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">noCaption</span></td>
+        <td><p>The title and a short description (separated by a linebreak) of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-no">No</a> option; <code>null</code> for default.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult">DialogResult</a></td>
+        <td><p><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-yes">Yes</a> if <code data-dev-comment-type="paramref" class="paramref">yesCaption</code> was chosen,
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-no">No</a> if <code data-dev-comment-type="paramref" class="paramref">noCaption</code> was chosen,
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.dialogresult#system-windows-forms-dialogresult-cancel">Cancel</a> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Controls_Msg_YesNoCancel_System_Windows_Forms_IWin32Window_System_String_NanoByte_Common_Controls_MsgSeverity_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.messagebox">MessageBox</a> is used, <code data-dev-comment-type="paramref" class="paramref">yesCaption</code> and <code data-dev-comment-type="paramref" class="paramref">noCaption</code> are not display to the user, so don&apos;t rely on them!</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

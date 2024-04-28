@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TaskBase
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TaskBase
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Tasks.TaskBase">
+  
+  
+  <h1 id="NanoByte_Common_Tasks_TaskBase" data-uid="NanoByte.Common.Tasks.TaskBase" class="text-break">Class TaskBase
+  </h1>
+  <div class="markdown level0 summary"><p>Abstract base class for <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a> implementations.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">TaskBase</span></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Net.DownloadFile.html">DownloadFile</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Storage.ReadDirectoryBase.html">ReadDirectoryBase</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Storage.ReadFile.html">ReadFile</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Streams.ReadStream.html">ReadStream</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Tasks.ActionTask.html">ActionTask</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Tasks.ForEachTask-1.html">ForEachTask&lt;T&gt;</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Tasks.PercentageTask.html">PercentageTask</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Tasks.ResultTask-1.html">ResultTask&lt;T&gt;</a></div>
+      <div class="level2"><a class="xref" href="NanoByte.Common.Threading.WaitTask.html">WaitTask</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Tasks.html">NanoByte.Common.Tasks</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Tasks_TaskBase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class TaskBase : MarshalByRefObject, ITask</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase__ctor_" data-uid="NanoByte.Common.Tasks.TaskBase.#ctor*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase__ctor" data-uid="NanoByte.Common.Tasks.TaskBase.#ctor">TaskBase()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TaskBase()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="NanoByte_Common_Tasks_TaskBase_CancellationToken" data-uid="NanoByte.Common.Tasks.TaskBase.CancellationToken">CancellationToken</h4>
+  <div class="markdown level1 summary"><p>Signaled when the user wants to cancel the task execution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CancellationToken CancellationToken</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="NanoByte_Common_Tasks_TaskBase_CredentialProvider" data-uid="NanoByte.Common.Tasks.TaskBase.CredentialProvider">CredentialProvider</h4>
+  <div class="markdown level1 summary"><p>Used to retrieve credentials for specific <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>s on demand; can be <code>null</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ICredentialProvider CredentialProvider</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Net.ICredentialProvider.html">ICredentialProvider</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_CanCancel_" data-uid="NanoByte.Common.Tasks.TaskBase.CanCancel*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_CanCancel" data-uid="NanoByte.Common.Tasks.TaskBase.CanCancel">CanCancel</h4>
+  <div class="markdown level1 summary"><p>Indicates whether this task can be canceled once it has been started.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool CanCancel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_Name_" data-uid="NanoByte.Common.Tasks.TaskBase.Name*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_Name" data-uid="NanoByte.Common.Tasks.TaskBase.Name">Name</h4>
+  <div class="markdown level1 summary"><p>A name describing the task in human-readable form.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract string Name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_PreventIdle_" data-uid="NanoByte.Common.Tasks.TaskBase.PreventIdle*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_PreventIdle" data-uid="NanoByte.Common.Tasks.TaskBase.PreventIdle">PreventIdle</h4>
+  <div class="markdown level1 summary"><p>Indicates whether this task should prevent the system from entering idle mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool PreventIdle { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_State_" data-uid="NanoByte.Common.Tasks.TaskBase.State*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_State" data-uid="NanoByte.Common.Tasks.TaskBase.State">State</h4>
+  <div class="markdown level1 summary"><p>The current State of the task.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TaskState State { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Tasks.TaskState.html">TaskState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_Tag_" data-uid="NanoByte.Common.Tasks.TaskBase.Tag*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_Tag" data-uid="NanoByte.Common.Tasks.TaskBase.Tag">Tag</h4>
+  <div class="markdown level1 summary"><p>An object used to associate the task with a specific process; can be <code>null</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Tag { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_UnitsByte_" data-uid="NanoByte.Common.Tasks.TaskBase.UnitsByte*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_UnitsByte" data-uid="NanoByte.Common.Tasks.TaskBase.UnitsByte">UnitsByte</h4>
+  <div class="markdown level1 summary"><p><code>true</code> if <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_UnitsProcessed">UnitsProcessed</a> and <a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_UnitsTotal">UnitsTotal</a> are measured in bytes;
+<code>false</code> if they are measured in generic units.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract bool UnitsByte { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_UnitsProcessed_" data-uid="NanoByte.Common.Tasks.TaskBase.UnitsProcessed*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_UnitsProcessed" data-uid="NanoByte.Common.Tasks.TaskBase.UnitsProcessed">UnitsProcessed</h4>
+  <div class="markdown level1 summary"><p>The number of units that have been processed so far.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected long UnitsProcessed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_UnitsTotal_" data-uid="NanoByte.Common.Tasks.TaskBase.UnitsTotal*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_UnitsTotal" data-uid="NanoByte.Common.Tasks.TaskBase.UnitsTotal">UnitsTotal</h4>
+  <div class="markdown level1 summary"><p>The total number of units that are to be processed; -1 for unknown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected long UnitsTotal { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_Execute_" data-uid="NanoByte.Common.Tasks.TaskBase.Execute*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_Execute" data-uid="NanoByte.Common.Tasks.TaskBase.Execute">Execute()</h4>
+  <div class="markdown level1 summary"><p>The actual code to be executed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void Execute()</code></pre>
+  </div>
+  <h5 id="NanoByte_Common_Tasks_TaskBase_Execute_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><a class="xref" href="NanoByte.Common.Tasks.TaskBase.html#NanoByte_Common_Tasks_TaskBase_State">State</a> is automatically set
+to <a class="xref" href="NanoByte.Common.Tasks.TaskState.html#NanoByte_Common_Tasks_TaskState_Started">Started</a> before calling this method,
+to <a class="xref" href="NanoByte.Common.Tasks.TaskState.html#NanoByte_Common_Tasks_TaskState_Complete">Complete</a> after a successful exit and
+to an appropriate error state in case on an exception.
+You can set additional <a class="xref" href="NanoByte.Common.Tasks.TaskState.html">TaskState</a>s during execution.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The operation was canceled.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>The task ended with <a class="xref" href="NanoByte.Common.Tasks.TaskState.html#NanoByte_Common_Tasks_TaskState_IOError">IOError</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.webexception">WebException</a></td>
+        <td><p>The task ended with <a class="xref" href="NanoByte.Common.Tasks.TaskState.html#NanoByte_Common_Tasks_TaskState_WebError">WebError</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Tasks_TaskBase_Run_" data-uid="NanoByte.Common.Tasks.TaskBase.Run*"></a>
+  <h4 id="NanoByte_Common_Tasks_TaskBase_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__" data-uid="NanoByte.Common.Tasks.TaskBase.Run(System.Threading.CancellationToken,NanoByte.Common.Net.ICredentialProvider,System.IProgress{NanoByte.Common.Tasks.TaskSnapshot})">Run(CancellationToken, ICredentialProvider, IProgress&lt;TaskSnapshot&gt;)</h4>
+  <div class="markdown level1 summary"><p>Runs the task and blocks until it is complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Run(CancellationToken cancellationToken = null, ICredentialProvider credentialProvider = null, IProgress&lt;TaskSnapshot&gt; progress = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>Used to receive a signal (e.g. from another thread) when the user wants to cancel the task.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NanoByte.Common.Net.ICredentialProvider.html">ICredentialProvider</a></td>
+        <td><span class="parametername">credentialProvider</span></td>
+        <td><p>Object used to retrieve credentials for specific <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>s on demand; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iprogress-1">IProgress</a>&lt;<a class="xref" href="NanoByte.Common.Tasks.TaskSnapshot.html">TaskSnapshot</a>&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Used to report back the task&apos;s progress (e.g. to another thread).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The task was canceled from another thread.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>The task ended with <a class="xref" href="NanoByte.Common.Tasks.TaskState.html#NanoByte_Common_Tasks_TaskState_IOError">IOError</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.webexception">WebException</a></td>
+        <td><p>The task ended with <a class="xref" href="NanoByte.Common.Tasks.TaskState.html#NanoByte_Common_Tasks_TaskState_WebError">WebError</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Tasks_TaskBase_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot___seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">RunTask</a>(<a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>)</div>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(Object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(Object, Stream, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, String, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

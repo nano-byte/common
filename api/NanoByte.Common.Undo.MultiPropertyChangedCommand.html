@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MultiPropertyChangedCommand
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MultiPropertyChangedCommand
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand">
+  
+  
+  <h1 id="NanoByte_Common_Undo_MultiPropertyChangedCommand" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand" class="text-break">Class MultiPropertyChangedCommand
+  </h1>
+  <div class="markdown level0 summary"><p>An undo command that handles multiple changed properties - usually used with a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.propertygrid">PropertyGrid</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="NanoByte.Common.Undo.FirstExecuteCommand.html">FirstExecuteCommand</a></div>
+    <div class="level2"><a class="xref" href="NanoByte.Common.Undo.PreExecutedCommand.html">PreExecutedCommand</a></div>
+    <div class="level3"><span class="xref">MultiPropertyChangedCommand</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="NanoByte.Common.Undo.IUndoCommand.html">IUndoCommand</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="NanoByte.Common.Undo.PreExecutedCommand.html#NanoByte_Common_Undo_PreExecutedCommand_OnFirstExecute">PreExecutedCommand.OnFirstExecute()</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Undo.FirstExecuteCommand.html#NanoByte_Common_Undo_FirstExecuteCommand_Execute">FirstExecuteCommand.Execute()</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Undo.FirstExecuteCommand.html#NanoByte_Common_Undo_FirstExecuteCommand_Undo">FirstExecuteCommand.Undo()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Undo.html">NanoByte.Common.Undo</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.WinForms.dll</h6>
+  <h5 id="NanoByte_Common_Undo_MultiPropertyChangedCommand_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MultiPropertyChangedCommand : PreExecutedCommand, IUndoCommand</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Undo_MultiPropertyChangedCommand__ctor_" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.#ctor*"></a>
+  <h4 id="NanoByte_Common_Undo_MultiPropertyChangedCommand__ctor_System_Object___System_ComponentModel_PropertyDescriptor_System_Object___System_Object_" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.#ctor(System.Object[],System.ComponentModel.PropertyDescriptor,System.Object[],System.Object)">MultiPropertyChangedCommand(Object[], PropertyDescriptor, Object[], Object)</h4>
+  <div class="markdown level1 summary"><p>Initializes the command after the properties were first changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiPropertyChangedCommand(object[] targets, PropertyDescriptor property, object[] oldValues, object newValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>[]</td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>The objects the property belongs to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertydescriptor">PropertyDescriptor</a></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>The property that was changed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>[]</td>
+        <td><span class="parametername">oldValues</span></td>
+        <td><p>The property&apos;s old values.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">newValue</span></td>
+        <td><p>The property&apos;s current value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Undo_MultiPropertyChangedCommand__ctor_" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.#ctor*"></a>
+  <h4 id="NanoByte_Common_Undo_MultiPropertyChangedCommand__ctor_System_Object___System_Windows_Forms_GridItem_System_Object___" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.#ctor(System.Object[],System.Windows.Forms.GridItem,System.Object[])">MultiPropertyChangedCommand(Object[], GridItem, Object[])</h4>
+  <div class="markdown level1 summary"><p>Initializes the command after the property was first changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object[] oldValues)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>[]</td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>The objects the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.propertygrid.selectedobject#system-windows-forms-propertygrid-selectedobject">SelectedObject</a> is target at.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.griditem">GridItem</a></td>
+        <td><span class="parametername">gridItem</span></td>
+        <td><p>The grid item representing the property being changed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>[]</td>
+        <td><span class="parametername">oldValues</span></td>
+        <td><p>The property&apos;s old values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Undo_MultiPropertyChangedCommand_OnRedo_" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.OnRedo*"></a>
+  <h4 id="NanoByte_Common_Undo_MultiPropertyChangedCommand_OnRedo" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.OnRedo">OnRedo()</h4>
+  <div class="markdown level1 summary"><p>Set the changed property value again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnRedo()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Undo.FirstExecuteCommand.html#NanoByte_Common_Undo_FirstExecuteCommand_OnRedo">FirstExecuteCommand.OnRedo()</a></div>
+  
+  
+  <a id="NanoByte_Common_Undo_MultiPropertyChangedCommand_OnUndo_" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.OnUndo*"></a>
+  <h4 id="NanoByte_Common_Undo_MultiPropertyChangedCommand_OnUndo" data-uid="NanoByte.Common.Undo.MultiPropertyChangedCommand.OnUndo">OnUndo()</h4>
+  <div class="markdown level1 summary"><p>Restore the original property values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUndo()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="NanoByte.Common.Undo.FirstExecuteCommand.html#NanoByte_Common_Undo_FirstExecuteCommand_OnUndo">FirstExecuteCommand.OnUndo()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.Undo.IUndoCommand.html">IUndoCommand</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(Object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(Object, Stream, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, String, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="NanoByte.Common.Undo.MultiPropertyTracker.html">MultiPropertyTracker</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

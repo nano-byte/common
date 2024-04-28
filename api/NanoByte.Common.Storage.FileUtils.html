@@ -1,0 +1,1944 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FileUtils
+   | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FileUtils
+   | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NanoByte.Common.Storage.FileUtils">
+  
+  
+  <h1 id="NanoByte_Common_Storage_FileUtils" data-uid="NanoByte.Common.Storage.FileUtils" class="text-break">Class FileUtils
+  </h1>
+  <div class="markdown level0 summary"><p>Provides filesystem-related helper methods.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">FileUtils</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="NanoByte.Common.Storage.html">NanoByte.Common.Storage</a></h6>
+  <h6><strong>Assembly</strong>: NanoByte.Common.dll</h6>
+  <h5 id="NanoByte_Common_Storage_FileUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class FileUtils : Object</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_AreHardlinked_" data-uid="NanoByte.Common.Storage.FileUtils.AreHardlinked*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_AreHardlinked_System_String_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.AreHardlinked(System.String,System.String)">AreHardlinked(String, String)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two files are hardlinked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AreHardlinked(string path1, string path2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path1</span></td>
+        <td><p>The path of the first file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path2</span></td>
+        <td><p>The path of the second file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was an IO problem checking the files.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to check the files.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_CanonicalizeAcl_" data-uid="NanoByte.Common.Storage.FileUtils.CanonicalizeAcl*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_CanonicalizeAcl_System_Security_AccessControl_ObjectSecurity_" data-uid="NanoByte.Common.Storage.FileUtils.CanonicalizeAcl(System.Security.AccessControl.ObjectSecurity)">CanonicalizeAcl(ObjectSecurity)</h4>
+  <div class="markdown level1 summary"><p>Fixes ACLs that are not canonical (not ordered correctly).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CanonicalizeAcl(this ObjectSecurity objectSecurity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.accesscontrol.objectsecurity">ObjectSecurity</a></td>
+        <td><span class="parametername">objectSecurity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_Create_" data-uid="NanoByte.Common.Storage.FileUtils.Create*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_Create_System_String_System_Int64_" data-uid="NanoByte.Common.Storage.FileUtils.Create(System.String,System.Int64)">Create(String, Int64)</h4>
+  <div class="markdown level1 summary"><p>Creates or replaces a file. Pre-allocates the expected size of the file if possible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FileStream Create(string path, long expectedSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">expectedSize</span></td>
+        <td><p>The initial allocation size in bytes for the file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filestream">FileStream</a></td>
+        <td><p>A stream for writing the file. No read access.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_CreateHardlink_" data-uid="NanoByte.Common.Storage.FileUtils.CreateHardlink*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_CreateHardlink_System_String_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.CreateHardlink(System.String,System.String)">CreateHardlink(String, String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new hard link between two files.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CreateHardlink(string sourcePath, string targetPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">sourcePath</span></td>
+        <td><p>The path of the link to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">targetPath</span></td>
+        <td><p>The absolute path of the existing file to point to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>Creating the hard link failed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to create the hard link.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></td>
+        <td><p>This method is called on a system with no hard link support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_CreateSymlink_" data-uid="NanoByte.Common.Storage.FileUtils.CreateSymlink*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_CreateSymlink_System_String_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.CreateSymlink(System.String,System.String)">CreateSymlink(String, String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new symbolic link to a file or directory.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CreateSymlink(string sourcePath, string targetPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">sourcePath</span></td>
+        <td><p>The path of the link to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">targetPath</span></td>
+        <td><p>The path of the existing file or directory to point to (relative to <code data-dev-comment-type="paramref" class="paramref">sourcePath</code>).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>Creating the symbolic link failed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to create the symbolic link.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></td>
+        <td><p>This method is called on a system with no symbolic link support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_DetermineTimeAccuracy_" data-uid="NanoByte.Common.Storage.FileUtils.DetermineTimeAccuracy*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_DetermineTimeAccuracy_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.DetermineTimeAccuracy(System.String)">DetermineTimeAccuracy(String)</h4>
+  <div class="markdown level1 summary"><p>Determines the accuracy with which the filesystem underlying a specific directory can store file-changed times.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int DetermineTimeAccuracy(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the directory to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><p>The accuracy in number of seconds. (i.e. 0 = perfect, 1 = may be off by up to one second)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.directorynotfoundexception">DirectoryNotFoundException</a></td>
+        <td><p>The specified directory doesn&apos;t exist.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>Writing to the directory fails.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to write to the directory.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_DisableWriteProtection_" data-uid="NanoByte.Common.Storage.FileUtils.DisableWriteProtection*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_DisableWriteProtection_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.DisableWriteProtection(System.String)">DisableWriteProtection(String)</h4>
+  <div class="markdown level1 summary"><p>Removes whatever means the current platform provides to prevent write access to a directory (read-only attribute, ACLs, Unix octals, etc.).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DisableWriteProtection(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The directory to unprotect.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_DisableWriteProtection_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>May do nothing if the platform doesn&apos;t provide any known protection mechanisms.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem removing the write protection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to remove the write protection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_EnableWriteProtection_" data-uid="NanoByte.Common.Storage.FileUtils.EnableWriteProtection*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_EnableWriteProtection_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.EnableWriteProtection(System.String)">EnableWriteProtection(String)</h4>
+  <div class="markdown level1 summary"><p>Uses the best means the current platform provides to prevent further write access to a directory (read-only attribute, ACLs, Unix octals, etc.).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void EnableWriteProtection(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The directory to protect.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_EnableWriteProtection_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>May do nothing if the platform doesn&apos;t provide any known protection mechanisms.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem applying the write protection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to apply the write protection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_ExistsCaseSensitive_" data-uid="NanoByte.Common.Storage.FileUtils.ExistsCaseSensitive*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_ExistsCaseSensitive_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.ExistsCaseSensitive(System.String)">ExistsCaseSensitive(String)</h4>
+  <div class="markdown level1 summary"><p>Like <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.file.exists#system-io-file-exists(system-string)">Exists(String)</a> but case-sensitive, even on Windows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ExistsCaseSensitive(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_GetFileID_" data-uid="NanoByte.Common.Storage.FileUtils.GetFileID*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_GetFileID_System_IO_FileInfo_" data-uid="NanoByte.Common.Storage.FileUtils.GetFileID(System.IO.FileInfo)">GetFileID(FileInfo)</h4>
+  <div class="markdown level1 summary"><p>Returns the file ID (on Windows) or Inode (on Unix) of a file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long GetFileID(this FileInfo file)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a></td>
+        <td><span class="parametername">file</span></td>
+        <td><p>The file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was an IO problem checking the files.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to check the files.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_GetFileID_" data-uid="NanoByte.Common.Storage.FileUtils.GetFileID*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_GetFileID_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.GetFileID(System.String)">GetFileID(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the file ID (on Windows) or Inode (on Unix) of a file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long GetFileID(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was an IO problem checking the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to check the files.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_GetFilesRecursive_" data-uid="NanoByte.Common.Storage.FileUtils.GetFilesRecursive*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_GetFilesRecursive_System_String_System_Boolean_" data-uid="NanoByte.Common.Storage.FileUtils.GetFilesRecursive(System.String,System.Boolean)">GetFilesRecursive(String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Returns the full paths of all files in a directory and its subdirectories.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IList&lt;string&gt; GetFilesRecursive(string path, bool followDirSymlinks = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the directory to search for files.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">followDirSymlinks</span></td>
+        <td><p>If <code>true</code> recurse into directory symlinks.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsBreakoutPath_" data-uid="NanoByte.Common.Storage.FileUtils.IsBreakoutPath*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsBreakoutPath_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.IsBreakoutPath(System.String)">IsBreakoutPath(String)</h4>
+  <div class="markdown level1 summary"><p>Determines whether a path might escape its parent directory (by being absolute or using ..).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsBreakoutPath(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsExecutable_" data-uid="NanoByte.Common.Storage.FileUtils.IsExecutable*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsExecutable_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.IsExecutable(System.String)">IsExecutable(String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a file is marked as Unix-executable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsExecutable(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">path</code> points to an executable; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_IsExecutable_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Will return <code>false</code> for non-existing files. Will always return <code>false</code> on non-Unixoid systems.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to query the file&apos;s properties.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsRegularFile_" data-uid="NanoByte.Common.Storage.FileUtils.IsRegularFile*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsRegularFile_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.IsRegularFile(System.String)">IsRegularFile(String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a file is a regular file (i.e. not a device file, symbolic link, etc.).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsRegularFile(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">path</code> points to a regular file; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_IsRegularFile_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Will return <code>false</code> for non-existing files.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to query the file&apos;s properties.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsSymlink_" data-uid="NanoByte.Common.Storage.FileUtils.IsSymlink*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsSymlink_System_IO_FileSystemInfo_System_String__" data-uid="NanoByte.Common.Storage.FileUtils.IsSymlink(System.IO.FileSystemInfo,System.String@)">IsSymlink(FileSystemInfo, out String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a file is a Unix symbolic link.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSymlink(this FileSystemInfo item, out string target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filesysteminfo">FileSystemInfo</a></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>The file to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Returns the target the symbolic link points to if it exists.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">item</code> points to a symbolic link; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was an IO problem reading the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>Read access to the file was denied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsSymlink_" data-uid="NanoByte.Common.Storage.FileUtils.IsSymlink*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsSymlink_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.IsSymlink(System.String)">IsSymlink(String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a file is a symbolic link.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSymlink(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the file to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">path</code> points to a symbolic link; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was an IO problem reading the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>Read access to the file was denied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsSymlink_" data-uid="NanoByte.Common.Storage.FileUtils.IsSymlink*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsSymlink_System_String_System_String__" data-uid="NanoByte.Common.Storage.FileUtils.IsSymlink(System.String,System.String@)">IsSymlink(String, out String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a file is a symbolic link.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSymlink(string path, out string target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the file to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Returns the target the symbolic link points to if it exists.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">path</code> points to a symbolic link; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was an IO problem reading the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>Read access to the file was denied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_IsUnixFS_" data-uid="NanoByte.Common.Storage.FileUtils.IsUnixFS*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_IsUnixFS_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.IsUnixFS(System.String)">IsUnixFS(String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a directory is located on a filesystem with support for Unixoid features such as executable bits.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsUnixFS(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">path</code> points to directory on a Unixoid filesystem; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_IsUnixFS_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Will always return <code>false</code> on non-Unixoid systems.
+Only requires read access on Linux to determine file system.
+Requires write access on other Unixes (e.g. MacOS X).</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.directorynotfoundexception">DirectoryNotFoundException</a></td>
+        <td><p>The specified directory doesn&apos;t exist.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>Checking the directory failed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient right to stat to the directory.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_PathEquals_" data-uid="NanoByte.Common.Storage.FileUtils.PathEquals*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_PathEquals_System_String_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.PathEquals(System.String,System.String)">PathEquals(String, String)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two file-system paths point to the same location.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool PathEquals(string path1, string path2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_PathEquals_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Applies path normalization. Does not resolve symlinks. Case-insensitive on Windows and macOS.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_ReadExtendedMetadata_" data-uid="NanoByte.Common.Storage.FileUtils.ReadExtendedMetadata*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_ReadExtendedMetadata_System_String_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.ReadExtendedMetadata(System.String,System.String)">ReadExtendedMetadata(String, String)</h4>
+  <div class="markdown level1 summary"><p>Reads metadata from an NTFS Alternate Data Stream (Windows) or extended file attribute (Unixoid).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] ReadExtendedMetadata(string path, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the file the Alternate Data Stream is associated with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the metadata stream.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><p>The contents of the metadata stream; <code>null</code> if the file exists but the stream specified by <code data-dev-comment-type="paramref" class="paramref">name</code> does not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>The file specified by <code data-dev-comment-type="paramref" class="paramref">path</code> does not exist.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem reading the metadata stream.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></td>
+        <td><p>The current operating system provides no method for storing extended metadata.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_ReadFirstLine_" data-uid="NanoByte.Common.Storage.FileUtils.ReadFirstLine*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_ReadFirstLine_System_IO_FileInfo_System_Text_Encoding_" data-uid="NanoByte.Common.Storage.FileUtils.ReadFirstLine(System.IO.FileInfo,System.Text.Encoding)">ReadFirstLine(FileInfo, Encoding)</h4>
+  <div class="markdown level1 summary"><p>Reads the first line of text from a file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReadFirstLine(this FileInfo file, Encoding encoding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a></td>
+        <td><span class="parametername">file</span></td>
+        <td><p>The file to read from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></td>
+        <td><span class="parametername">encoding</span></td>
+        <td><p>The text encoding to use for reading.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><p>The first line of text in the file; <code>null</code> if decoding does not work on the contents.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>A problem occurred while reading the file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>Read access to the file is not permitted.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_RelativeTo_" data-uid="NanoByte.Common.Storage.FileUtils.RelativeTo*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_RelativeTo_System_IO_FileSystemInfo_System_IO_FileSystemInfo_" data-uid="NanoByte.Common.Storage.FileUtils.RelativeTo(System.IO.FileSystemInfo,System.IO.FileSystemInfo)">RelativeTo(FileSystemInfo, FileSystemInfo)</h4>
+  <div class="markdown level1 summary"><p>Returns a relative path pointing to <code data-dev-comment-type="paramref" class="paramref">target</code> from <code data-dev-comment-type="paramref" class="paramref">baseRef</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string RelativeTo(this FileSystemInfo target, FileSystemInfo baseRef)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filesysteminfo">FileSystemInfo</a></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filesysteminfo">FileSystemInfo</a></td>
+        <td><span class="parametername">baseRef</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_Replace_" data-uid="NanoByte.Common.Storage.FileUtils.Replace*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_Replace_System_String_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.Replace(System.String,System.String)">Replace(String, String)</h4>
+  <div class="markdown level1 summary"><p>Replaces one file with another. Rolls back in case of problems. If the destination file does not exist yet, this acts like a simple rename.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Replace(string sourcePath, string destinationPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">sourcePath</span></td>
+        <td><p>The path of source directory.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">destinationPath</span></td>
+        <td><p>The path of the target directory. Must reside on the same filesystem as <code data-dev-comment-type="paramref" class="paramref">sourcePath</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p><code data-dev-comment-type="paramref" class="paramref">sourcePath</code> and <code data-dev-comment-type="paramref" class="paramref">destinationPath</code> are equal.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>The file could not be replaced.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>The read or write access to one of the files was denied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_ResetAcl_" data-uid="NanoByte.Common.Storage.FileUtils.ResetAcl*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_ResetAcl_System_IO_DirectoryInfo_" data-uid="NanoByte.Common.Storage.FileUtils.ResetAcl(System.IO.DirectoryInfo)">ResetAcl(DirectoryInfo)</h4>
+  <div class="markdown level1 summary"><p>Removes any custom ACLs a user may have set, restores ACL inheritance and sets the Administrators group as the owner.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ResetAcl(this DirectoryInfo directory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.directoryinfo">DirectoryInfo</a></td>
+        <td><span class="parametername">directory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_SetExecutable_" data-uid="NanoByte.Common.Storage.FileUtils.SetExecutable*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_SetExecutable_System_String_System_Boolean_" data-uid="NanoByte.Common.Storage.FileUtils.SetExecutable(System.String,System.Boolean)">SetExecutable(String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Marks a file as Unix-executable or not Unix-executable. Only works on Unixoid systems!</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetExecutable(string path, bool executable)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The file to mark as executable or not executable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">executable</span></td>
+        <td><p><code>true</code> to mark the file as executable, <code>true</code> to mark it as not executable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p><code data-dev-comment-type="paramref" class="paramref">path</code> points to a file that does not exist or cannot be accessed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to change the file&apos;s properties.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></td>
+        <td><p>This method is called on a non-Unixoid system.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_ToNativePath_" data-uid="NanoByte.Common.Storage.FileUtils.ToNativePath*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_ToNativePath_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.ToNativePath(System.String)">ToNativePath(String)</h4>
+  <div class="markdown level1 summary"><p>Replaces Unix-style directory slashes with <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.path.directoryseparatorchar#system-io-path-directoryseparatorchar">DirectorySeparatorChar</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToNativePath(this string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_Touch_" data-uid="NanoByte.Common.Storage.FileUtils.Touch*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_Touch_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.Touch(System.String)">Touch(String)</h4>
+  <div class="markdown level1 summary"><p>Sets the &quot;last modified&quot; timestamp for a file to now. Creates a new empty file if it does not exist yet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Touch(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>Creating the file or updating its timestamp failed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to create the file or update its timestamp.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_ToUnixPath_" data-uid="NanoByte.Common.Storage.FileUtils.ToUnixPath*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_ToUnixPath_System_String_" data-uid="NanoByte.Common.Storage.FileUtils.ToUnixPath(System.String)">ToUnixPath(String)</h4>
+  <div class="markdown level1 summary"><p>Replaces <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.path.directoryseparatorchar#system-io-path-directoryseparatorchar">DirectorySeparatorChar</a> with Unix-style directory slashes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToUnixPath(this string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_Walk_" data-uid="NanoByte.Common.Storage.FileUtils.Walk*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_Walk_System_IO_FileSystemInfo_System_Action_System_IO_DirectoryInfo__System_Action_System_IO_FileInfo__System_Boolean_" data-uid="NanoByte.Common.Storage.FileUtils.Walk(System.IO.FileSystemInfo,System.Action{System.IO.DirectoryInfo},System.Action{System.IO.FileInfo},System.Boolean)">Walk(FileSystemInfo, Action&lt;DirectoryInfo&gt;, Action&lt;FileInfo&gt;, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Walks a directory structure recursively and performs an action for every directory and file encountered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Walk(this FileSystemInfo element, Action&lt;DirectoryInfo&gt; dirAction = null, Action&lt;FileInfo&gt; fileAction = null, bool followDirSymlinks = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filesysteminfo">FileSystemInfo</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The directory (or single file) to walk.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.directoryinfo">DirectoryInfo</a>&gt;</td>
+        <td><span class="parametername">dirAction</span></td>
+        <td><p>The action to perform for every found directory (including the starting <code data-dev-comment-type="paramref" class="paramref">element</code>); can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a>&gt;</td>
+        <td><span class="parametername">fileAction</span></td>
+        <td><p>The action to perform for every found file; can be <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">followDirSymlinks</span></td>
+        <td><p>If <code>true</code> recurse into directory symlinks; if <code>false</code> only execute <code data-dev-comment-type="paramref" class="paramref">dirAction</code> for directory symlinks but do not recurse.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_WalkThroughPrefix_" data-uid="NanoByte.Common.Storage.FileUtils.WalkThroughPrefix*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_WalkThroughPrefix_System_IO_DirectoryInfo_" data-uid="NanoByte.Common.Storage.FileUtils.WalkThroughPrefix(System.IO.DirectoryInfo)">WalkThroughPrefix(DirectoryInfo)</h4>
+  <div class="markdown level1 summary"><p>Skips through any directories that only contain a single subdirectory and no files.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DirectoryInfo WalkThroughPrefix(this DirectoryInfo directory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.directoryinfo">DirectoryInfo</a></td>
+        <td><span class="parametername">directory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.directoryinfo">DirectoryInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="NanoByte_Common_Storage_FileUtils_WalkThroughPrefix_System_IO_DirectoryInfo__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Ignores files that start with a dot.</p>
+</div>
+  
+  
+  <a id="NanoByte_Common_Storage_FileUtils_WriteExtendedMetadata_" data-uid="NanoByte.Common.Storage.FileUtils.WriteExtendedMetadata*"></a>
+  <h4 id="NanoByte_Common_Storage_FileUtils_WriteExtendedMetadata_System_String_System_String_System_Byte___" data-uid="NanoByte.Common.Storage.FileUtils.WriteExtendedMetadata(System.String,System.String,System.Byte[])">WriteExtendedMetadata(String, String, Byte[])</h4>
+  <div class="markdown level1 summary"><p>Writes metadata to an NTFS Alternate Data Stream (Windows) or extended file attribute (Unixoid).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteExtendedMetadata(string path, string name, byte[] data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The path of the file to associate the metadata with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the metadata stream.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The data to write to the metadata stream.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>The file specified by <code data-dev-comment-type="paramref" class="paramref">path</code> does not exist.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>There was a problem writing the metadata stream.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></td>
+        <td><p>You have insufficient rights to write the metadata.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></td>
+        <td><p>The current operating system provides no method for storing extended metadata.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

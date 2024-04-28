@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Backports | NanoByte.Common </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Backports | NanoByte.Common ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="backports">
+<h1 id="backports">Backports</h1>
+
+<p>Newer versions of .NET often introduce features that can be backported to earlier versions. NanoByte.Common simplifies this by embedding commonly used backports. Simply adding a reference to NanoByte.Common to a project targeting an older .NET version allows you to use these features.</p>
+<h2 id="language-features">Language features</h2>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> was introduced in .NET Framework 3.5 and is backported to .NET Framework 2.0 (by embedding <a href="http://www.albahari.com/nutshell/linqbridge.aspx">LinqBridge</a>).</p>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">Nullable reference types</a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges">Ranges</a> and <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/records">Records</a> were introduced in .NET (Core) and are backported to .NET Framework.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-11.0/required-members">Required members</a> were introduced in .NET 7.0 and are backported to .NET 6.0 and .NET Framework.</p>
+<h2 id="collections">Collections</h2>
+<p>The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet&lt;T&gt;</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a></li>
+</ul>
+<h2 id="cancellation">Cancellation</h2>
+<p>The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource">CancellationTokenSource</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokenregistration">CancellationTokenRegistration</a></li>
+</ul>
+<h2 id="progress">Progress</h2>
+<p>The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iprogress-1">IProgress&lt;T&gt;</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.progress-1">Progress&lt;T&gt;</a></li>
+</ul>
+<h2 id="utils">Utils</h2>
+<p>The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.hashcode">HashCode</a></li>
+</ul>
+<p>The following <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.customattributeextensions">CustomAttributeExtensions</a> methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:</p>
+<ul>
+<li><code>.GetCustomAttribute&lt;T&gt;()</code></li>
+<li><code>.GetCustomAttributes&lt;T&gt;()</code></li>
+</ul>
+<h2 id="platform-attributes">Platform attributes</h2>
+<p>The following types were introduced in .NET 5.0 and are backported to .NET Framework:</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.versioning.osplatformattribute">OSPlatformAttribute</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.versioning.targetplatformattribute">TargetPlatformAttribute</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.versioning.supportedosplatformattribute">SupportedOSPlatformAttribute</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformattribute">UnsupportedOSPlatformAttribute</a></li>
+</ul>
+<p>The following types were introduced in .NET 6.0 and are backported to .NET Framework:</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.versioning.supportedosplatformguardattribute">SupportedOSPlatformGuardAttribute</a></li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformguardattribute">UnsupportedOSPlatformGuardAttribute</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/nano-byte/common/blob/heads/tags/2.18.4/doc/backports.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright Bastian Eicher
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

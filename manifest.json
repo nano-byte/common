@@ -1,0 +1,3140 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/common/common/doc",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.AnsiCli.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.AnsiCli.html",
+          "hash": "NeV0mdOLV0eXTXy3xyQL4sSS9kVF3nCdx7v8x5o3MrM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ArrayBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ArrayBuffer-1.html",
+          "hash": "dkEPpoPNlr3kDIbwqCVnTRT9at7LidBrMoWDFg3hMFY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ArrayUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ArrayUtils.html",
+          "hash": "O4LodKnS96dB27H1KR+t9vTOzyXv7ZmdZdYTe3rcS0c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.CollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.CollectionExtensions.html",
+          "hash": "/1faF34ZDP095O4Oth8B1Wu2DI3ES0nLmY+vn9jrBRM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ConcurrentSet-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ConcurrentSet-1.html",
+          "hash": "oIElxVhnw/1GGxbOU+3rOj33wQGflCN/N+uSK4gyuZ0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.CultureComparer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.CultureComparer.html",
+          "hash": "arHSqSCELVFV9W81mTnwaJzpdmuBMcJ++x7baey7Xww="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.DefaultComparer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.DefaultComparer-1.html",
+          "hash": "aCNy+SDTnq2woLM3saUVEw2ejmOppOtAY+VHIe4rKrw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.DictionaryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.DictionaryExtensions.html",
+          "hash": "gZgu/0qxDV/ZlevsDhSAAQBDSb2DQER6Q1ztSv6lit4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.EnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.EnumerableExtensions.html",
+          "hash": "Hg+xpiGeOLmgwNCj3aN8LuI7f4aNwcQRjAqIL48N/Wg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.LanguageSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.LanguageSet.html",
+          "hash": "B1CL7rD4lZ5Mc+LDsXNJU9g1UdDuMO5FiawVTbZDlXk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ListExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ListExtensions.html",
+          "hash": "FGWOx8kygVk6WRZsCotuhrzRfTz0tAyFkKmdVA9JGT4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.LocalizableString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.LocalizableString.html",
+          "hash": "8LrXG/p+rPgYyVoBGn30wFDpMIqUQtfFKX3aM8EYvUo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.LocalizableStringCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.LocalizableStringCollection.html",
+          "hash": "1s1dcHXvTFCiz3L2gRRN+qJlZKyNOswAaikX+/FWFwk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.MonitoredCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.MonitoredCollection-1.html",
+          "hash": "bfFKr+wwgOOi3QzWbDb4eI/IkRDpRx10PNF0INNVEzc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.MultiDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.MultiDictionary-2.html",
+          "hash": "esLag5AifVVcxiK7SYBlcFXH9sVzaxj2iWiPrdAp85Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.NamedCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.NamedCollection-1.html",
+          "hash": "v6wMO+tdPe1KxwChyCEkSk5LzsvxEGdox2CHCFoAjwY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.StackExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.StackExtensions.html",
+          "hash": "QI5YdBHNEtUUCTy4GVswFrl2DdedhWtZiAXesp3SUCE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.TransparentCache-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.TransparentCache-2.html",
+          "hash": "VxO74KigA1RNnlLydATwuTVoIt9a3tJ1QDGgtxc9De8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.TransparentCacheBase-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.TransparentCacheBase-2.html",
+          "hash": "HSp7R9SF+7zatxByhXa7B6sWunlF5iY4dsitoRCe9HI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.XmlDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.XmlDictionary.html",
+          "hash": "vnvgSxpzNPz/fJ1QvR7Div7F+tkBX5tIsftSZNKmP/8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.XmlDictionaryEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.XmlDictionaryEntry.html",
+          "hash": "SZ13Job0C0I12XRCRZ8tQwY4yOkWjvNh/O+mdZOrLB8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.html",
+          "hash": "AbnW6s/fYL3eqK/nik2utzS1/39FZrVtkVsD6tlPI3k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ControlExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ControlExtensions.html",
+          "hash": "MGBIw7EdnhqzsqG1yn8SPcIGU/7T7XkD45Hwb6m7lOA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.DropDownButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.DropDownButton.html",
+          "hash": "qUIS4RXq+kYeEpvvwMxb8IbNcWFl8mLf/cAsuWOV8L0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.DropDownContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.DropDownContainer.html",
+          "hash": "kNzSYuHbWk9Xfo9tXno4dPpW8vJ8G/OoZ+17By3GGo8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ErrorBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ErrorBox.html",
+          "hash": "YnQuOq8Saqtg5EqRDkIVNZ47JRhI357KcfK/YEsql0U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ErrorReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ErrorReport.html",
+          "hash": "rsLKzkhYx8zobn1VQycyG8RKeB/0A7Y56nhD5PZIApA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ErrorReportForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ErrorReportForm.html",
+          "hash": "ZNeC7UILOnPuvLm9V4T3+2OHK1IBflnrwizZ02sxX40="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.FilteredTreeView-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.FilteredTreeView-1.html",
+          "hash": "s2qrRCAHGL80CFvCCdudIg+h6/K3IPf8E/CP2BY/69o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.HintTextBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.HintTextBox.html",
+          "hash": "PRjMsgHlQJhvwzT+HebKGrP9bUaicfKw9k1PGX+zeUs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.IContextMenu.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.IContextMenu.html",
+          "hash": "vZ0L7yvGLh4t8qMDhAO/8KMioxHmDyM8ZgqSfX+ugvY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.IEditorDialog-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.IEditorDialog-1.html",
+          "hash": "GpD1gHEHRoPUYk1P4o+uaOXLmsRIcHtPKEnm0oPqWow="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ITouchControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ITouchControl.html",
+          "hash": "vCwf2oDhTaEn10uwbQRjV52XVl1Ge5X6jG4giBPon8Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.InputBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.InputBox.html",
+          "hash": "iN+TmSLPejb/kp7YbNBEB0iWg+O4bsUM0y7dlO/2hww="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.Msg.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.Msg.html",
+          "hash": "LMXiFWcp0VC+JJfsLSiW3nDxcKT8MNK4aKx5SbnByuM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.MsgSeverity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.MsgSeverity.html",
+          "hash": "2arz4tHFr6ykKFB0DBr/hJpzL9E5BTaILIjuXGtLefQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OKCancelDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OKCancelDialog.html",
+          "hash": "jFUBrlJOGm8N9zvWScVrIYQtXcnLU3f3bXqEdEw0gK4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputBox.html",
+          "hash": "U1nFJVs+6tYWaUCRbNamfdd+8Yn/HzViud6/18KzjY8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputGridBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputGridBox.html",
+          "hash": "ztunGqmXyKxpN93kByrL4jX4kZypisOuDcsL7wG1dRE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputTreeBox-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputTreeBox-1.html",
+          "hash": "4mYHkC7ku5pf2BSan5924rSw/FOAD0uhajWtTziSC1k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputTreeBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputTreeBox.html",
+          "hash": "yd6tQzE2Hz+MGsdcL8HQ/kWGcmJU26LDA9Iorunr5kk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.PropertyGridForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.PropertyGridForm.html",
+          "hash": "/Cj5ovA6agUGat5BbnjmflxG7vV5GUGNrQL2r9jXXHo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ResettablePropertyGrid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ResettablePropertyGrid.html",
+          "hash": "NYxbDx97B8RKvEIf5q6eKBJxPBi4IjS//ab//Sa9pmw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.RtfBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.RtfBuilder.html",
+          "hash": "ylpIiDy2mQnPr084tWrgoRClLP7HE8QCl7wkj3ZMYi4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.RtfColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.RtfColor.html",
+          "hash": "va6sh/htmet+aVefQ+taFYZMnthQJlOktEdUtYPXoNg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TaskControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TaskControl.html",
+          "hash": "pdM9NoBxOnZh8CKd5EfqA4pFOiNeYC5qsGZ1s/JKz/U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TaskLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TaskLabel.html",
+          "hash": "/5fYUxVgcPxeu9LkgxrYpeiL6rXCsO14IqdwoOd1ZIM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TaskProgressBar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TaskProgressBar.html",
+          "hash": "lvrGXP5Whs9XlR/5j9CYzFISEsO5FqJvTgsGLby7KbE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TimeSpanControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TimeSpanControl.html",
+          "hash": "Enb2BnGGnTTeL7CHFfZSd2fbxTeNgu/OuwUvSaREepM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchEventArgs.html",
+          "hash": "lvBamiEemrprNC3jKtrVgvEZP+veQwDk0ebkA4doxhU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchEventMask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchEventMask.html",
+          "hash": "kKJgTxB+JexYxITGW5kpbK7UFt120zHn0R3aYdZPLyg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchForm.html",
+          "hash": "JzJocpU+XBC5l1EgnKN+WJ7fhvYpXLaYBt+N3fL2Z7o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchPanel.html",
+          "hash": "96Veolr2mUYJlDbtCVi7xmpfSVg69xP9iLqD84skUcM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.UriTextBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.UriTextBox.html",
+          "hash": "paKBl+H1NuCamHJy3gGdoTqbtBxNoZb6N9qmy/+blkw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.html",
+          "hash": "4puv50T0uocnbw/Sjwk2eoQCfuYmPglmp6KiW+M8Fco="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-1.html",
+          "hash": "iVaygjJamVaMoHXGkSWLNqMndESqMVetji1INBgs2wo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-2.html",
+          "hash": "m7AcYKkjsEY2mdbH2pJ/66/VT7rX8Y+qcUugn7CgvOs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.BucketRule-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.BucketRule-1.html",
+          "hash": "nVZgMQ7pE8UNJBKXYCQFQJBmOE56MZ5c7cVJmVckcW8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.BucketRule-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.BucketRule-2.html",
+          "hash": "J3OcStXpSZSDuXpOddiwOZgISmgsHctt9qu1Tt2Pmjk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-1.html",
+          "hash": "CbHY1vnOos50nU2wPpGiZZfbBjMyu444mVRdKXGVmKM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-2.html",
+          "hash": "m2WpHWGPIE2Sp+XeF1KSLpA4eXO4snmQ6kcNYKXEdVk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Bucketizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Bucketizer.html",
+          "hash": "BM3TUBP3kS3hu/q4c16KVv5gLwm2Ygj9WJu709gHoec="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.IChangeNotify-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.IChangeNotify-1.html",
+          "hash": "CcRY6fL6CZ6MoMcX4ZJdv9YnoDI3w34x0IuNvcpfd8s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.IMergeable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.IMergeable-1.html",
+          "hash": "PcjjPu9t72Qqfz8YiifEIPmOPQDTzVxykoXH+ZAYROA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Merge.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Merge.html",
+          "hash": "FWwOpdLAmV7cgy1BLioVXFFwuFjxKJhj57fGtSOIDRs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.ModelViewSync-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.ModelViewSync-2.html",
+          "hash": "PEsX0LQEMXycmCCmK55AF3Xe8hoCIHzsJmaVRHSInTE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-1.html",
+          "hash": "zTrLjUvMWwmMgCI2h/sZMwpfvNWe4V5hGlPoKnyB58I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-2.html",
+          "hash": "Lvb4+N/tTCkxdVcXQn8khQy3z8VC1HpOaBjV9H9eLRg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.html",
+          "hash": "ep0YNYiXoNHPn70UhaEy/ZmNj0Dn+u025BFdL7uhitY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Disposable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Disposable.html",
+          "hash": "Mlk8gj/Lq0n6KoMmGsJY0H2bhw1HwDxaKGdNG61jNoE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.DefaultFonts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.DefaultFonts.html",
+          "hash": "uTVynOUsT0I6sS2XudH0lEY4v9NRU7fZuyExmXtAUDI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.ImageExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.ImageExtensions.html",
+          "hash": "vMSa6/HVWOKtWSkf65Ra+twzB4diWgu6Oedt01xXTjg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.ScalableImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.ScalableImage.html",
+          "hash": "EPuHjho1V3MmUZJ2/vXPk2meGotFgxWympAGwk2Yc3Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.html",
+          "hash": "us5lSHEY2UZ0iylQBW6V1AFq1ruO3zraD7QgG9qHpKE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.EncodingUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.EncodingUtils.html",
+          "hash": "efizH8YAX9RBGehreUccYVidQZREHJkU6qwmwPBdksI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ExceptionUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ExceptionUtils.html",
+          "hash": "b+jVGTBfM3aXoywA55eKuaw7UyH6ijmKL7oak+h+Y10="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ExitCodeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ExitCodeException.html",
+          "hash": "o+VG+OISkSZj8Xi3BgdEQWCESKoG3VMhOR9MuNJJi5A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ICloneable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ICloneable-1.html",
+          "hash": "bxMJaL4vZo29QZeQzUZYUqKDcLo9wDxh/mfSwQw224w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.IHighlightColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.IHighlightColor.html",
+          "hash": "9pRAlLNA1eAutsWIHWEVS9wpL/SXLNifqU2PQBv8mUM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.INamed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.INamed.html",
+          "hash": "EELoulVQq8qVbOs4B9muRueOXKkfmIBmheSGTJaLUlg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.AppInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.AppInfo.html",
+          "hash": "0P2f435/eDQAV17nZRG7ckI7DGTmZ6NKE/GggpxNQ2s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.ExceptionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.ExceptionInfo.html",
+          "hash": "F/vJvroxlHgcfFv5nM0eAT4dr89WzhN9dLLGqX3lUqY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.OSInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.OSInfo.html",
+          "hash": "CF8M0hzH4oI85dWzaNvmKOkW902eqB4yHO8PEzzSl4U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.html",
+          "hash": "180PH4mz1B2KcmOwSb8N0nE8QEtp9hR4emfU/gHdhGo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Log.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Log.html",
+          "hash": "GW65bNODdfYcfVMjPPg302Uk2ZzDfUsChAqBzz9v5Vg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.LogEntryEventHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.LogEntryEventHandler.html",
+          "hash": "MO1cQS61jiamDpjopgOVqejS1/v54VHvfrqeZzTbLHE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.LogSeverity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.LogSeverity.html",
+          "hash": "n+l29lpR/leFcKzw+oEqFBRIIkO7QSzohWIHCXGYvpc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.MathUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.MathUtils.html",
+          "hash": "AeqNRvlBH3AX5xOx7U0Ecl6HBt5MKMTS0xfO7kAOd9k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Named.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Named.html",
+          "hash": "6o4wemQXwFRZ7zNRsU3P1QPnUa+qCXHxyNmp0RicKPc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.AppMutex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.AppMutex.html",
+          "hash": "EHRXFgpUOt+7jjHVRaSFKELKSTit++DwU60yR4wdfPg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.CygwinUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.CygwinUtils.html",
+          "hash": "gs5Ydw26Eh/mtUCOjbT3EjxKWIEkMFIM1HibxABdEPk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.IProcessLauncher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.IProcessLauncher.html",
+          "hash": "aF2lBrbODRBZhnlK+67ARMiAFnTcW8yYpcWWf4zFnkE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.OSUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.OSUtils.html",
+          "hash": "6lfTO6gP7NG6K86BNHByrxFNQPvjidlHQnONHjHcUyY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.ProcessLauncher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.ProcessLauncher.html",
+          "hash": "g9/I8ayMqJ5vdXv0x3XSHTixhqH7DTLT2ABrhqc8ss0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.ProcessLauncherExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.ProcessLauncherExtensions.html",
+          "hash": "KQHgplTcTLe1A4p21sBH9fxyHm8X1AeR8KAlD3DvJW4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.RegistryUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.RegistryUtils.html",
+          "hash": "/GN9tkjrEdAH+iM74zCeBtjXcJcpVLLrLNwgXgkgKNg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.UnixUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.UnixUtils.html",
+          "hash": "ug8dSLEk2D+Z/p56ADSG3D80XYlniDNJCIJO8qjSJN8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WinFormsUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WinFormsUtils.html",
+          "hash": "Q1Cde5zbfaQA65Nc/RKRtghWz37J2gk1U/E293mhmmA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowMessage.html",
+          "hash": "ctTTLMp08kUw9babLfsjgC2MkdN6pK+oqfj7i2v49HY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsCredentials.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsCredentials.html",
+          "hash": "HElKAYS6PyT++YgdF+ADakMIVHpHQx2G7HJCLUyIZEE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsCredentialsFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsCredentialsFlags.html",
+          "hash": "L7HqeaiiGuVxE1sV3WxapwTTEeeqbggsIS6+znUxZ00="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsMutex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsMutex.html",
+          "hash": "xid8LyfihwFnjnSCvElOMkxwqrQVHEEQnVKJj0nw/Uc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsRestartManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsRestartManager.html",
+          "hash": "OfLh51av0+anJbTfvZt9BQYeqr0XAHAkWIyBwDO0rAs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.html",
+          "hash": "yHuBzo/ZwAZClDI9coRcoFzRMjPFmTz1KR2Quk94ibM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ShellLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ShellLink.html",
+          "hash": "17anHzdRvnEBfNNSgDIDAGDwc7hN9p+IqIzA7pKPO/I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.html",
+          "hash": "P9JdR7gd2dgG6rBSsW7GFPwhOgL07HeXojo2TrG6zZE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsUtils.html",
+          "hash": "2lJsLt5nbnbg4mOHT1xXjH4bmI5OupIfXq1k+Ks4zG0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.html",
+          "hash": "3xVLpu+0wphH7PfIwINHqdlwZE88cRISQvsaDwDPD/Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.AnsiCliCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.AnsiCliCredentialProvider.html",
+          "hash": "Cp1//SxKYD1GHPPsY6TjXZNJmLCrY6iofKi/n6B7ctk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.ConfigurationCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.ConfigurationCredentialProvider.html",
+          "hash": "3wtBj/zinM3iuD+lIgh2hg0f9YLedYAPKY56McNBbpk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.ConfigurationCredentialProviderRegistration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.ConfigurationCredentialProviderRegistration.html",
+          "hash": "kBjpko3p2T4CWHt6Pw7bdx0+LuZbcJBbh6nPwT6muAI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.Connectivity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.Connectivity.html",
+          "hash": "3KHSKsEu9CeqOhwgs66RG2TD6hquc41ZJ8kiOBKjVEk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.DownloadFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.DownloadFile.html",
+          "hash": "LcRCOazJB1ThLnWUhE/Vvohde3Uk/t6XFAOJjUft7ho="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.HttpClientExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.HttpClientExtensions.html",
+          "hash": "ObYXX8g5bq3nsJskzJfMj6aU44jEJS0Naz/KpYsiASM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.HttpServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.HttpServer.html",
+          "hash": "/x1WGFR8lnM+MEl0f2YDfLL6k3Svl+Rrtdw1GTOXFXs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.ICredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.ICredentialProvider.html",
+          "hash": "GVC1cHRn+kmtXTiuHpfs0JyHRFmsa2dHA5fjTTtHj2g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.MicroServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.MicroServer.html",
+          "hash": "cda0XB0DYgujhglgYz8U5lzmF3HQXzw+mYUhOZiiOEo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.NetUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.NetUtils.html",
+          "hash": "r9aoqpkoUGwfUPDbtNaYq37rVzzfls+lX//IeMcwW0c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.Netrc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.Netrc.html",
+          "hash": "8nw2URqbDqHyduks0vFCrbmOXTj2DPqq+qNC2gWN98A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.NetrcCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.NetrcCredentialProvider.html",
+          "hash": "JcFoP6oz3mlad6+6mQKssgr7ZAx1AR3+cGWC/hVTdRI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.NetworkCredentialExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.NetworkCredentialExtension.html",
+          "hash": "LR1UFpmzKa5QeQPjFBx1y7OiCabh5ZpriUfae4M6zy8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.UriExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.UriExtensions.html",
+          "hash": "AQpNqGR+GLXT9HTtRgRxoObA+teogE/ZPDzquOBHkco="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsCliCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsCliCredentialProvider.html",
+          "hash": "3yadLrHmaLyKaOHYiYkalMqNKPBwSCNxPPXjAaxP1/M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsCredentialProvider.html",
+          "hash": "+Vy6K0caKxkh5uQ5yAyLVropLvzKJcpG+d51e2IpTGI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsGuiCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsGuiCredentialProvider.html",
+          "hash": "+SFJjwe5zgvS3sHv20S4F951j6CDXcWdnwSVy9dWuj4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider.html",
+          "hash": "3nOAVfn1eUiUqN18qWIm3rucL3rJmqI+YElPv6+Deyw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.html",
+          "hash": "eao8oUZVZgsFFL48soksve6reUrjm1shaZi4R1AkM/4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.NotAdminException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.NotAdminException.html",
+          "hash": "JfpYB7iA5a9CGdstTKfWAGQGGWycJPOs+Kptyd/JHII="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ProcessUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ProcessUtils.html",
+          "hash": "DCdUBCVJN7HV1j2Qn5MDkiV286YRrTD7C5SB3T028Xs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Properties.Resources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Properties.Resources.html",
+          "hash": "3GKXciI4Dx7phMeVLOI9+OjAdaBh5xdAXAjwkcJMgrM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Properties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Properties.html",
+          "hash": "tmoyIJtGFNxgS8Ckb3DmM7Anw1GDx4lW0LPl07VRNCw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.PropertyPointer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.PropertyPointer-1.html",
+          "hash": "fRVfCweSUiAmKTuoxQ2WzVdCfkPTb0N0T/9EEgbtpdM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.PropertyPointer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.PropertyPointer.html",
+          "hash": "rJbuvC95WT6QrXhY+yTGpaeUk0y2fvHpUzlounFn7ks="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.StagedOperation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.StagedOperation.html",
+          "hash": "YKQkEEIi29WuPGcazWUyH2u9LTz1D3Z1PnaJF9TPQBs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.AtomicRead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.AtomicRead.html",
+          "hash": "g5oW+T6fIdRG2RCqxM4RebuQo8BDSDSjmL6aE3r4pe8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.AtomicWrite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.AtomicWrite.html",
+          "hash": "So8TGrZG2r5CTkKX8JPpyFn2sLiVg6GEYvC6T9Qm2RI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.CopyDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.CopyDirectory.html",
+          "hash": "qhVsEHU37920Mb/7jRXNLutTN8EYdJDq/kekty/J6+U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.FileUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.FileUtils.html",
+          "hash": "6w/eASHrxQMa/YCGpuUPvcKpjBJVFa7TM//YJAE2WSQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.JsonStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.JsonStorage.html",
+          "hash": "mt2TYVJv/iej007v3FOcyXEH3MrVotpiMnZKvFU/N5Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.Locations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.Locations.html",
+          "hash": "MgP5W7HaoXTWGvt+vs5Q29TJIXpqt/IWbbybMd9OiM8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.MoveDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.MoveDirectory.html",
+          "hash": "UIbH7Yqj8QKk/pftWxTmhfbk8eRAhGSYp4pggepJdHc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.Paths.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.Paths.html",
+          "hash": "4gOxTVvUAIUGK8NAsxZ+iAatCE3mXZeGiQsfZgw4JQk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.ReadDirectoryBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.ReadDirectoryBase.html",
+          "hash": "JOuMrLiQQZ0xeLyzbvodo2ukGlX4hxRwAjNPDtNOvs8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.ReadFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.ReadFile.html",
+          "hash": "3hzwkKAX0X0W49uvS6V9+/MANXBl5A6sX4nB24ywrg4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryDirectory.html",
+          "hash": "MNK5D2psLSndEW7KVu4gTYZ8Yk5Tqx7CxYiJ8neV0t8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryFile.html",
+          "hash": "WdnSxFO5y5mhEfJNaYteFZ1S+f20OJzxMYovFnT5FlY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryFlagFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryFlagFile.html",
+          "hash": "xve8jhTL3ype6vkYfHa3tPCGULq7A4sSEieI9LXg/U0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryWorkingDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryWorkingDirectory.html",
+          "hash": "ZEDK3VoUdtEnwSeO4tCcEq06cRlb+5K98lvm+mMrkFI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.WorkingDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.WorkingDirectory.html",
+          "hash": "UQpLl/BQfUsYFxLGFGnx2ec+mdfb0h52kecDdzvtmk4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.XmlNamespaceAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.XmlNamespaceAttribute.html",
+          "hash": "bj35f9V+iwbDTa1b4me8OHtei9uiWpVI0Hkq56kUp+0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.XmlStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.XmlStorage.html",
+          "hash": "6scgm2V1FTgTmWyfkmqbIB66jZ3Pa7ky27H3YSRN3dw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.html",
+          "hash": "Gr+EasDZO0Xu7fHdZQVZ/B3EMFD65xMxn7W4RQSdzDE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.DelegatingStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.DelegatingStream.html",
+          "hash": "Y1WzvF8QzQrIsQtpM2i46OHKIHnjQ29OtPCzhaWrNRk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.NonSeekableStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.NonSeekableStream.html",
+          "hash": "Ab7uSM2CtGRcwzSSjKR+fcbRHpnv4kOJVd9Dvri6daA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.OffsetStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.OffsetStream.html",
+          "hash": "Taf4F9WjC8/n497PFMBRGsAKBVtEbcBq2h+c4VDaK70="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.ProgressStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.ProgressStream.html",
+          "hash": "iTmb9VPTO0U6Ht/od/gfmQ84niAkh0QRTKus4TShMpg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.ReadStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.ReadStream.html",
+          "hash": "tzscAeZdK8ZGC8YrZr29tGhcW7uFZPKnPZwdam0fJp0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.SeekBufferStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.SeekBufferStream.html",
+          "hash": "Uw2o8nqJg9EjdfxvwwRoOVq1UVvTyO4ceB+7RIuO/xI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.ShadowingStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.ShadowingStream.html",
+          "hash": "iUUdjayII4Hadicwcnmm6z8Ypg9CRPgjU5Dm6o5I/08="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.StreamConsumer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.StreamConsumer.html",
+          "hash": "/oYPxEPbkgPmEb0bexNeAsLZIZBqOyBCdKODQ3CCNkQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.StreamUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.StreamUtils.html",
+          "hash": "Mk/PgHCCvpzn8/0hIu4B9e7VOYBovhTKWkOfzp2DC9I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.html",
+          "hash": "H0Kmg+4mZ+o3GPLvjeSg7QISmgRey/hfFSLXjSZsXiQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.StringUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.StringUtils.html",
+          "hash": "AqB61V0BkOSQYwOIY3EPw76Y2phno/hjfVdgt4o6T2Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ActionTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ActionTask.html",
+          "hash": "Jxk0Qp2CslsBw6JyQutT9C6RNrMDFprQIdtTOhqB5+4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgress.html",
+          "hash": "lwvsAGC+iS+0hoB9fVl3e9FzR2x5mDt9YChlgMjh1HU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgressContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgressContext.html",
+          "hash": "s2+kskIEpqlegY2lxxcPDQvXNzOtw9htCj67RiwuK+0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.AnsiCliTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.AnsiCliTaskHandler.html",
+          "hash": "OXEEMGyXICMliKdj2U5amsHStJ06tRMNP2I872oQ7VQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.CliProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.CliProgress.html",
+          "hash": "S7MYIG8uxJOiIerJPsplRYggQPDgGY9yBS8mVGuue2o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.CliTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.CliTaskHandler.html",
+          "hash": "BHjRwrW/Zwv723KvvLVIENRUF1W9jdlvjvILVKkTaxg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.DeferredProgress-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.DeferredProgress-1.html",
+          "hash": "yt4exsnnIuvumG50P0UEZWR5FsqAkV74nkq0EvEgElg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.DialogTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.DialogTaskHandler.html",
+          "hash": "ik75WzsCaQAyB6fkhLFGXfqAodGljhOadV75+JlyvGs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ForEachTask-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ForEachTask-1.html",
+          "hash": "fefhh36pCCtiCu8XLz+K/c1vjCW13HoYfboxkVPqGB0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ForEachTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ForEachTask.html",
+          "hash": "kz9p7iXJTW3ouprE5jt60yewc5G+IMrd4Bi4p+g6lDc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.GuiTaskHandlerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.GuiTaskHandlerBase.html",
+          "hash": "mUKrK/l9Yw1TsF5OeQeGf49sTI+eIOU5Sdujl/6JKhs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.IResultTask-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.IResultTask-1.html",
+          "hash": "1HtvZWKLELE8Q2n/S70ZPb5NHGRP+3StbHQ/vxhjoog="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ITask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ITask.html",
+          "hash": "b3PoZhXQmtxZizj3UvScqWkn3COUR9W3qXstFllttt4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ITaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ITaskHandler.html",
+          "hash": "LYSjOoEE1pqMb1MSeY4tunBOiOCeUnOcG4zXNzlp5KI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.PercentProgressCallback.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.PercentProgressCallback.html",
+          "hash": "slhqjouGENvp6xDo0dyITPknNq6K5zAw7By84PR6rhs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.PercentageTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.PercentageTask.html",
+          "hash": "dRuw5KJty4kvnDdVTAkgTsNKStQda8Sq5KnAJ6hYx3I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ResultTask-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ResultTask-1.html",
+          "hash": "o2CjIfjtkF1PmMRP3AB6qJLY42Zw6MiCNIgU2QNH28o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ResultTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ResultTask.html",
+          "hash": "cYZrDRkfALyfarvVdzrGyuZuZy8EuB5NV4bQp8T6i9E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ServiceTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ServiceTaskHandler.html",
+          "hash": "gThO/Q/xWILWtMiDXD1JPUrq8QSkYcnMd5DpfF3EuD8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.SilentTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.SilentTaskHandler.html",
+          "hash": "Gv2UAe86Is99f8JC0bdIqDX+9TF6Q/Z0D8w0o1McSWA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskBase.html",
+          "hash": "ufbomp9tV7UNo5yDenSyq1PNn7Kn2lwLIpdMueVphIg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskHandlerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskHandlerBase.html",
+          "hash": "IfshOx8xBnZ/lqT6ms+sJzXEZVzvrlMz5EejM0AVybQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskHandlerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskHandlerExtensions.html",
+          "hash": "ZTvRwP1CsZ8a/94iYuA5VCLRuXbnJJjYqFAbaRhFiGg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskSnapshot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskSnapshot.html",
+          "hash": "WmAk/dlnJerExhnMvl8awRdjDH7BmZcYETAHukzKv+g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskState.html",
+          "hash": "e+tcq2t/YBrMv/Is1u2RUDhsfh9kabc0jc9eB4cHpIA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.Verbosity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.Verbosity.html",
+          "hash": "360qSxad362l0a31felgwwXKVssXBIODO+bwe7FnZI4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.html",
+          "hash": "hWyTqHj7cF+0ooincMC1qx0rK+4Lg2KjM/pmR87QurU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ActionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ActionExtensions.html",
+          "hash": "Cc1N1EOLdYIseFWa6gAD1vB/kEKKygzL4FW2E52FRXA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.AsyncFormWrapper-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.AsyncFormWrapper-1.html",
+          "hash": "pGGWJVCuB7nsECVWmtY2bmSjR20UPSbzWgSNpD2nvpg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.CancellationGuard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.CancellationGuard.html",
+          "hash": "8ajdMUxqxpQM6gauV2ezdv/C1kJpr5dzySQXPYcUUiU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.FuncExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.FuncExtensions.html",
+          "hash": "b6rA5HNJW3XHzxfPJL/L/ExKHNzFR7vJtpPIvdhK46I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.JobQueue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.JobQueue.html",
+          "hash": "DOEKnRRocjRrNyuJ4Uee5UtaSv9jvDQoYQQHV1Mtdl0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.MarshalNoTimeout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.MarshalNoTimeout.html",
+          "hash": "cBMYYRIYt3XGgy003JEeHCfS7xmtgHoJH/XUyaUJoiw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.MutexLock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.MutexLock.html",
+          "hash": "m6X3Ousp5nhL+lLkUxGIKjalhkExyeX/rH3vn7VslsA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ResultRacer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ResultRacer-1.html",
+          "hash": "EWcNJVmPw3SInbwjyHwKt8GGwPNcfUUIJBJ6OQa2ukQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ResultRacer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ResultRacer.html",
+          "hash": "jJ4k7hFKvv24a1HQ4FkcZO3pNht4riCiFSBLBw5mvCM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.StressTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.StressTest.html",
+          "hash": "tZw5IsSh1ujklWhpxpqjT4Sw/m8MdyPIfzulnu7921I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.SynchronousProgress-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.SynchronousProgress-1.html",
+          "hash": "spnzsueAAWEg3k5nU6nmVAhzYyCPt/GIicKlN+jhMtk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ThreadUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ThreadUtils.html",
+          "hash": "DmEYcBK8QGHF6f3bYEaU80nVSut4+OA2MsgcSJT8xt8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.WaitHandleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.WaitHandleExtensions.html",
+          "hash": "sSWyW/pRTYfm2azSfNhem4qQu2N/xJelAbs8l6XOwsc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.WaitTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.WaitTask.html",
+          "hash": "p8d12ujLTNaSzXi3Kd2YKMlz+CBh5X4UTXe/8C3UikQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.html",
+          "hash": "eNYkmvj2YX7Ayagl//WdRi+3EeIemsm8bwwVfJwGTuk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.TimedLogEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.TimedLogEvent.html",
+          "hash": "d21fHevVzOfUpWAFB5noZxLgLA6tMyTEqLNMXMOYZlo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.AddToCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.AddToCollection-1.html",
+          "hash": "QTLnNvs7/OU16Vdj/0DdxVKVbohgD0K6hl5OPbo2UcQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.AddToCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.AddToCollection.html",
+          "hash": "UQlXq56NRxCC08VDEHmQyBSE3LzofLWvnpET0kOLJz8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CollectionCommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CollectionCommand-1.html",
+          "hash": "mGCscx1QWfBaDyZQEPdnqmRqbWjzZEslwVq249BV5d8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CommandCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CommandCollector.html",
+          "hash": "zMr3ZhQumVezGNYKzh19L/MKJNl6hQZN+s6onF+DJaQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CommandManager-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CommandManager-1.html",
+          "hash": "GWB8WrNCrIFuiIDTEw69cVUWSD8kAwZrwpfnZdaio24="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CommandManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CommandManager.html",
+          "hash": "OYImNhzlM6O17jMAlqkP71Uluwt8Si2ZAVdI9jLhGPU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CompositeCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CompositeCommand.html",
+          "hash": "Wqp65J8KVvmqhCyXEtxbkK3Xx45zUCC7TvSWJD/hZbU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ConcurrentCommandExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ConcurrentCommandExecutor.html",
+          "hash": "IVUgHlGlbuY4Mj+faEeXBxKzPkaHyO2zSPGBsNfYhPM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.FirstExecuteCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.FirstExecuteCommand.html",
+          "hash": "t+jwCJdwflnRGZqrGBpDs+uI+Ew5AazBs36hXdXK76c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ICommandExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ICommandExecutor.html",
+          "hash": "8tA903DGuw4bcn4p9kLu3Mfr12Uc5U8MqQXbgndWrhU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ICommandManager-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ICommandManager-1.html",
+          "hash": "G7AnsHNnBLbrJN0b+qUQauxtqaDAMpAOsY2TzeKQa3U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.IUndoCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.IUndoCommand.html",
+          "hash": "7X07eT7c7Cbk+O4HET8UrmCAL0AvrJw7PbM/NChezFE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.IValueCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.IValueCommand.html",
+          "hash": "QO6ubFE+C/3cXEH1I2LnzZojlUXLnFPfxXZRb9WO+LI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.MultiPropertyChangedCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.MultiPropertyChangedCommand.html",
+          "hash": "5JMRZkKwnaFB3nJpVhDtpE7hAn4hm7vu9MP476Fqlfo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.MultiPropertyTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.MultiPropertyTracker.html",
+          "hash": "rWG2zBKV0TYjz41WF5WlFsjpX2cPfSp5Hp+WseK6zh4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.PreExecutedCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.PreExecutedCommand.html",
+          "hash": "0AM21OBGnK75MJ19wSPpV5aAoZytPQgzub0WtD+L08E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.PreExecutedCompositeCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.PreExecutedCompositeCommand.html",
+          "hash": "xHYTmpOTshXv8Eag3S5WBR7rOC9Nx3Cs954IvFIIplM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.PropertyChangedCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.PropertyChangedCommand.html",
+          "hash": "CXo84Ctvx8Fm5+bzWNcWeEZ8SbENVKpaF6Leuech5jI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection-1.html",
+          "hash": "VYIvZNn/klQTNbBxkfMhai7MuYojlx4E8ADQ683Gkbk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection.html",
+          "hash": "4C5KKgx3gBfrRTTPGhjrQg6dxsZhBxUP6vGbWszU0Js="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ReplaceInList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ReplaceInList-1.html",
+          "hash": "+9VqJ7Y9I2Cv0O8sEhzo3zxBqAVUiEmu+XXAROUL4wc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ReplaceInList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ReplaceInList.html",
+          "hash": "sxjaYdTKBptMCUKD8L3k+xw1mNQFnp+1QzUFbJo3tu8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetInList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetInList-1.html",
+          "hash": "PDYDWFgx1VnYK1pFbz1mqghssZeh2pblj2UtnAvujko="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetInList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetInList.html",
+          "hash": "rR8Xg5363vuPwbuFtMp5wFUlT6PEqWosJrK4EDyhCh4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetLocalizableString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetLocalizableString.html",
+          "hash": "yccV+QKR5StCrKfS2y/ahcA6NqRaukuS4zfG/997kYw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetValueCommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetValueCommand-1.html",
+          "hash": "yKCdj4CHqRVIQT6/Ss2B0alnnr0e8tW9NEQ5hon1VWU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetValueCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetValueCommand.html",
+          "hash": "2oK4DyBtYETzKuU9axPmPuCsTIPOXATGhW2ZCobleAU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SimpleCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SimpleCommand.html",
+          "hash": "svca/aXdmnsqG5aY2CFx4nAwDpsapcsnIIHKTn9hs1w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SimpleCommandExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SimpleCommandExecutor.html",
+          "hash": "ESJsPepNDv0LcrShTkAGcOZ4mLYgdqhT6AUBxK0q+zU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.html",
+          "hash": "E5vWFUQf+zuJRVcPDJO+ihVPrB4zU9RpTu8CeAGlrAo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.UnixTime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.UnixTime.html",
+          "hash": "ja88qZHJo8xhkW0HW1F7utT/xoW/SRqBv78LrCPtd0g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.UpdateUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.UpdateUtils.html",
+          "hash": "5iEZ2jM+Nj7E6bOpuAA0JS1RnOVNiUSVVSLeZEM2BwU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.ConversionUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.ConversionUtils.html",
+          "hash": "oNkXn3mLDiTEMb0LuEzFZMFQwtb0meyMAXW+i5kmRyU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.EnumDescriptionConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.EnumDescriptionConverter-1.html",
+          "hash": "hGLZAvEZzAJfFFaUHNxwUVcGAsJ+hozZeCFDduRFxX8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.EnumXmlConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.EnumXmlConverter-1.html",
+          "hash": "UCqQOdSbAyngRDYPdnpSluEf9u70NY5AadnFP1XmSGE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.LanguageSetEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.LanguageSetEditor.html",
+          "hash": "bzMJI9jmsBqQFaD6D/JmqD8Qxpwy/QoZqfssbpilGqo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.StringConstructorConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.StringConstructorConverter-1.html",
+          "hash": "x9J8WBG4Jyw9OAINFOc6/K3N1jCB4vTYbVAdt3aOVrA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.TimeSpanEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.TimeSpanEditor.html",
+          "hash": "wcqMEuBqYnBItYB5/64LSRiQFCdqiUCdS/g4Ne3DGVk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.ValueTypeConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.ValueTypeConverter-1.html",
+          "hash": "fNlDYn+EbBxo20nQ7fMX5kfqMcfYAEWaMX4UqEHDcjI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.html",
+          "hash": "wSpKIoLcpy2VT0KrcAAmV/7HNkvXsOL5vbu+LWBkV5U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.EnumExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.EnumExtensions.html",
+          "hash": "6CWFFrjexajmlvF72GeaRvfiZBAvtCVlA0zZPHp6PYo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.KeyEqualityComparer-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.KeyEqualityComparer-2.html",
+          "hash": "5vSx7gKpCMbSedjGIIlqGechTEz+xApkx/KeYpHmOqQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Languages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Languages.html",
+          "hash": "3OIPnqJTvBv8WWFvYwesrHh7NZJh7sZEIsCVKnFd3xo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.html",
+          "hash": "ecOEnK2/Uu3Rk+czm4YzqJVV7Pn6HZoYhF4w/yU2L7s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.html",
+          "hash": "/KZlGJug7RMMHRVBjYFco3BoqH+BxAq/NhEgEr7RsbE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "6kwgZGcmAI060hJGKWjXH9Dkp7q5XxPNNrpHVi85/Ps="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "backports.md",
+      "output": {
+        ".html": {
+          "relative_path": "backports.html",
+          "hash": "g6H+7AMeVyz1pghD6SMRZ72nkPs93cgJRotdGIBsz/k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "qxBmNeQIu1lkF1A0PYVsmDihIHUWB4ed9ue9bJezNOE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "tasks.html",
+          "hash": "qMpuM5xeZfAmgzo7FLwmDvncW+0Cc1MYERu/g4tcSgA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "Lzf/KSJfpwQotfBPECUM2tWXJQNnPPwCSQ7G+hOkI9g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "undo.md",
+      "output": {
+        ".html": {
+          "relative_path": "undo.html",
+          "hash": "UzaA/oNw4lcKGtz/q8KWm1AXDNQ8MsxOnMDFfK1AmWg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 4,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 266,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
