@@ -41,7 +41,7 @@ public static class Msg
     public static bool OkCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? okCaption = null, [Localizable(true)] string? cancelCaption = null)
     {
         #region Sanity checks
-        if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
+        if (text == null) throw new ArgumentNullException(nameof(text));
         #endregion
 
         var result = ShowTaskDialog(owner, text, severity, ok: okCaption ?? "OK", cancel: cancelCaption, canCancel: true)
@@ -62,7 +62,7 @@ public static class Msg
     public static bool YesNo(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? yesCaption = null, [Localizable(true)] string? noCaption = null)
     {
         #region Sanity checks
-        if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
+        if (text == null) throw new ArgumentNullException(nameof(text));
         #endregion
 
         var result = ShowTaskDialog(owner, text, severity, yes: yesCaption ?? Resources.Yes, no: noCaption ?? Resources.No)
@@ -85,7 +85,7 @@ public static class Msg
     public static DialogResult YesNoCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? yesCaption = null, [Localizable(true)] string? noCaption = null)
     {
         #region Sanity checks
-        if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
+        if (text == null) throw new ArgumentNullException(nameof(text));
         #endregion
 
         return ShowTaskDialog(owner, text, severity, yes: yesCaption ?? Resources.Yes, no: noCaption ?? Resources.No, canCancel: true)

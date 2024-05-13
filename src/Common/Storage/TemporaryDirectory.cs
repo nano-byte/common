@@ -29,7 +29,7 @@ public class TemporaryDirectory : IDisposable
     public TemporaryDirectory([Localizable(false)] string prefix, [Localizable(false)] string? parentDirectory = null)
     {
         #region Sanity checks
-        if (string.IsNullOrEmpty(prefix)) throw new ArgumentNullException(nameof(prefix));
+        if (prefix == null) throw new ArgumentNullException(nameof(prefix));
         #endregion
 
         Path = System.IO.Path.Combine(parentDirectory ?? System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());

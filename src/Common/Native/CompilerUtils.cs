@@ -27,7 +27,7 @@ namespace NanoByte.Common.Native
             #region Sanity checks
             if (compilerParameters == null) throw new ArgumentNullException(nameof(compilerParameters));
             if (string.IsNullOrEmpty(code)) throw new ArgumentNullException(nameof(code));
-            if (string.IsNullOrEmpty(manifest)) throw new ArgumentNullException(nameof(manifest));
+            if (manifest == null) throw new ArgumentNullException(nameof(manifest));
             #endregion
 
             // Make sure the containing directory exists

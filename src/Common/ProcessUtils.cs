@@ -111,7 +111,7 @@ public static class ProcessUtils
     public static ProcessStartInfo Assembly(string name, params string[] arguments)
     {
         #region Sanity checks
-        if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+        if (name == null) throw new ArgumentNullException(nameof(name));
         if (arguments == null) throw new ArgumentNullException(nameof(arguments));
         #endregion
 
