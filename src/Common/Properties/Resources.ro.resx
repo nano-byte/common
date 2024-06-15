@@ -247,7 +247,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Căutarea de referințe de fișiere deschise</value>
+    <value>Căutarea referințelor de fișiere deschise</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
