@@ -27,22 +27,22 @@ The following types were introduced in .NET Framework 4.0 and are backported to 
 
 - <xref:System.Threading.CancellationToken>
 - <xref:System.Threading.CancellationTokenSource>
-- <xref:System.Threading.CancellationTokenRegistration>
+- [CancellationTokenRegistration](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokenregistration)
 
 ## Progress
 
 The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
 - <xref:System.IProgress`1>
-- <xref:System.Progress`1>
+- [Progress<T>](https://learn.microsoft.com/dotnet/api/system.progress-1)
 
 ## Utils
 
 The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
-- <xref:System.HashCode>
+- [HashCode](https://learn.microsoft.com/dotnet/api/system.hashcode)
 
-The following <xref:System.Reflection.CustomAttributeExtensions> methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
+The following [CustomAttributeExtensions](https://learn.microsoft.com/dotnet/api/system.reflection.customattributeextensions) methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
 - `.GetCustomAttribute<T>()`
 - `.GetCustomAttributes<T>()`
@@ -51,12 +51,12 @@ The following <xref:System.Reflection.CustomAttributeExtensions> methods were in
 
 The following types were introduced in .NET 5.0 and are backported to .NET Framework:
 
-- <xref:System.Runtime.Versioning.OSPlatformAttribute>
-- <xref:System.Runtime.Versioning.TargetPlatformAttribute>
-- <xref:System.Runtime.Versioning.SupportedOSPlatformAttribute>
-- <xref:System.Runtime.Versioning.UnsupportedOSPlatformAttribute>
+- [OSPlatformAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.osplatformattribute)
+- [TargetPlatformAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.targetplatformattribute)
+- [SupportedOSPlatformAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.supportedosplatformattribute)
+- [UnsupportedOSPlatformAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformattribute)
 
 The following types were introduced in .NET 6.0 and are backported to .NET Framework:
 
-- <xref:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute>
-- <xref:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute>
+- [SupportedOSPlatformGuardAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.supportedosplatformguardattribute)
+- [UnsupportedOSPlatformGuardAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformguardattribute)
