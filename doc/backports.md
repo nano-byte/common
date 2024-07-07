@@ -27,22 +27,22 @@ The following types were introduced in .NET Framework 4.0 and are backported to 
 
 - <xref:System.Threading.CancellationToken>
 - <xref:System.Threading.CancellationTokenSource>
-- <xref:System.Threading.CancellationTokenRegistration>
+- [CancellationTokenRegistration](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtokenregistration)
 
 ## Progress
 
 The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
 - <xref:System.IProgress`1>
-- <xref:System.Progress`1>
+- [System.Progress<T>](https://learn.microsoft.com/en-us/dotnet/api/system.progress-1)
 
 ## Utils
 
 The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
-- <xref:System.HashCode>
+- [System.HashCode](https://learn.microsoft.com/en-us/dotnet/api/system.hashcode)
 
-The following <xref:System.Reflection.CustomAttributeExtensions> methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
+The following [CustomAttributeExtensions](https://learn.microsoft.com/en-us/dotnet/api/system.reflection.customattributeextensions) methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
 - `.GetCustomAttribute<T>()`
 - `.GetCustomAttributes<T>()`

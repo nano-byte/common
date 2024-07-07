@@ -20,7 +20,7 @@ The <xref:NanoByte.Common.Tasks.ITaskHandler> interface represents a user interf
 - <xref:NanoByte.Common.Tasks.AnsiCliTaskHandler> for a more advanced command-line interface using ANSI codes
 - <xref:NanoByte.Common.Tasks.DialogTaskHandler> for a graphical interface using WinForms dialog boxes
 - <xref:NanoByte.Common.Tasks.SilentTaskHandler> for background execution or unit tests
-- <xref:NanoByte.Common.Tasks.ServiceTaskHandler> for integration with [Microsoft.Extensions.DependencyInjection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)
+- `ServiceTaskHandler` for integration with [Microsoft.Extensions.DependencyInjection](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)
 
 Methods that want to run <xref:NanoByte.Common.Tasks.ITask>s should take an <xref:NanoByte.Common.Tasks.ITaskHandler> as an input parameter.  
 To run an <xref:NanoByte.Common.Tasks.ITask>, pass it to the [ITaskHandler.RunTask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_) method. This will then internally call [ITask.Run()](xref:NanoByte.Common.Tasks.ITask#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__) and take care of setting up progress tracking, cancellation, etc.. Additional methods such as [ITaskHandler.Ask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_Ask_System_String_System_Nullable_System_Boolean__System_String_) can be used for user interaction.
