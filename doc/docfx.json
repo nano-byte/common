@@ -3,11 +3,9 @@
     {
       "src": [
         {
-          "src": "../artifacts/Release",
-          "files": [
-            "net8.0/NanoByte.Common*.dll",
-            "net8.0-windows/NanoByte.Common.WinForms.dll"
-          ]
+          "src": "../src",
+          "files": ["*/*.csproj"],
+          "exclude": ["UnitTests/*", "Samples/*"]
         }
       ],
       "filter": "filterConfig.yml",
@@ -34,13 +32,17 @@
     "overwrite": [
       {
         "src": "../src/",
-        "files": [
-          "**/*.md"
-        ]
+        "files": ["**/*.md"]
       }
     ],
     "xrefService": [
       "https://xref.docs.microsoft.com/query?uid={uid}"
+    ],
+    "postProcessors": ["ExtractSearchIndex"],
+    "template": [
+      "default",
+      "modern",
+      "template"
     ],
     "dest": "../artifacts/Documentation"
   }

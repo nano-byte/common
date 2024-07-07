@@ -9,7 +9,7 @@
       "automergeType": "branch"
     },
     {
-      "matchPackagePatterns": ["gittools", "SourceLink"],
+      "matchPackagePatterns": ["gittools", "docfx", "SourceLink"],
       "matchPackageNames": ["System.ValueTuple", "Tmds.DBus", "JetBrains.Annotations"],
       "automerge": true,
       "automergeType": "branch"
