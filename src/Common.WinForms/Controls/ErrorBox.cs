@@ -33,7 +33,7 @@ public sealed partial class ErrorBox : Form
         Log.Debug("Showing error box", exception);
 
         string message = exception.GetMessageWithInner();
-        string[] messageLines = message.SplitMultilineText();
+        var messageLines = message.SplitMultilineText().ToList();
         try
         {
             using var errorBox = new ErrorBox

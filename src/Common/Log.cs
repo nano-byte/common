@@ -79,7 +79,7 @@ public static partial class Log
         else if (message == null) message = exception.ToString();
         else message += Environment.NewLine + exception;
 
-        return $"[{DateTime.Now.ToString("T", CultureInfo.InvariantCulture)}] {_processId} {severity.ToString().ToUpperInvariant()}: {string.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText())}";
+        return $"[{DateTime.Now.ToString("T", CultureInfo.InvariantCulture)}] {_processId} {severity.ToString().ToUpperInvariant()}: {StringUtils.Join(Environment.NewLine + "\t", message.Trim().SplitMultilineText())}";
     }
 
     /// <summary>

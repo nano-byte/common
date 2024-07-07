@@ -146,9 +146,8 @@ public static class StringUtils
     /// Splits a multiline string to several strings and returns the result as a string array.
     /// </summary>
     [Pure]
-    public static string[] SplitMultilineText(this string value)
+    public static IEnumerable<string> SplitMultilineText(this string value)
     {
-        var result = new List<string>();
         string[] split1 = value.Split('\n');
         string[] split2 = value.Split('\r');
         string[] split = split1.Length >= split2.Length ? split1 : split2;
@@ -157,14 +156,12 @@ public static class StringUtils
         {
             // Never add any \r or \n to the single lines
             if (line.EndsWithIgnoreCase("\r") || line.EndsWithIgnoreCase("\n"))
-                result.Add(line[..^1]);
+                yield return line[..^1];
             else if (line.StartsWithIgnoreCase("\n") || line.StartsWithIgnoreCase("\r"))
-                result.Add(line[1..]);
+                yield return line[1..];
             else
-                result.Add(line);
+                yield return line;
         }
-
-        return result.ToArray();
     }
 
     /// <summary>
