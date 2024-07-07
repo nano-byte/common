@@ -37,9 +37,9 @@ To run an <xref:NanoByte.Common.Tasks.ITask>, pass it to the [ITaskHandler.RunTa
 
 While <xref:NanoByte.Common.Tasks.ITask> has some superficial similarities with the <xref:System.Threading.Tasks.Task> class used by the C# `async`/`await` keywords, these two concepts should not be confused.
 
-The `async`/`await` keywords are part of the [Task Asynchronous Programming model](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model) (TAP). The TAP provides an abstraction over asynchronous code, enabling the execution of continuations after tasks have completed. This is intended to increase the performance and responsiveness of applications. Many TAP methods accept <xref:System.Threading.CancellationToken>s to signal that a task should be cancelled and <xref:System.Progress`1> to report a task's progress.
+The `async`/`await` keywords are part of the [Task Asynchronous Programming model](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model) (TAP). The TAP provides an abstraction over asynchronous code, enabling the execution of continuations after tasks have completed. This is intended to increase the performance and responsiveness of applications. Many TAP methods accept <xref:System.Threading.CancellationToken>s to signal that a task should be cancelled and <xref:System.IProgress`1> to report a task's progress.
 
-NanoByte.Common's Task system is intended for managing long-running tasks. It provides an abstraction over UIs for interacting with such tasks. It uses the same <xref:System.Threading.CancellationToken> and <xref:System.Progress`1> as the TAP, but takes care of managing them internally for most use cases.
+NanoByte.Common's Task system is intended for managing long-running tasks. It provides an abstraction over UIs for interacting with such tasks. It uses the same <xref:System.Threading.CancellationToken> and <xref:System.IProgress`1> as the TAP, but takes care of managing them internally for most use cases.
 
 As a rule of thumb:
 

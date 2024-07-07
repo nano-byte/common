@@ -21,7 +21,7 @@ public sealed class XmlDictionaryEntry : IEquatable<XmlDictionaryEntry>, IClonea
     /// <summary>
     /// The unique text key. Warning: If this is changed the <see cref="XmlDictionary"/> must be rebuilt in order to update its internal hash table.
     /// </summary>
-    /// <exception cref="InvalidOperationException">The new key value already exists in the <see cref="Parent"/> dictionary.</exception>
+    /// <exception cref="InvalidOperationException">The new key value already exists in the parent dictionary.</exception>
     [XmlAttribute("key")]
     public string Key
     {
