@@ -87,12 +87,12 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>该程序集不能自行添加。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>不能对 DACL 进行规范化，因为这可能会导致信息丢失。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>评论:</value>
@@ -107,8 +107,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>目标目录已经存在。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>下载 {0}</value>
@@ -143,16 +143,16 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>在 "{1}"中打开注册表子键 "{0}"失败。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>回滚失败 '{0}'。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>启动 "{0}"失败。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>要从 {0} 下载的文件没有预期的大小。文件大小本应是 {1} 个字节，但实际上是 {2} 个字节。</value>
@@ -171,36 +171,36 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>关键字已经存在于字典中。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>启动{0} 需要管理员权限。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>已超过收集元素的最大数量。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>没有为 "{0}"注册任何操作。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="No" xml:space="preserve">
     <value>否</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>便携模式下无法编辑系统配置。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>好的</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>这种方法仅适用于 Windows 系统。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Password" xml:space="preserve">
     <value>密码：</value>
@@ -215,52 +215,52 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' 已退出，退出代码为{1}.</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>进程以意外的退出代码退出。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>读取文件 {0}</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>在执行撤消命令之前，不能再次执行该命令。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>重置值</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>重启应用程序</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>由于以下原因，重试时间为{0} 毫秒：</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>搜索</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>搜索打开的文件引用</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>试图从位置{0} 读取数据。{1} {2} 字节，但寻道缓冲区只能容纳{3} 字节的差值。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>关闭应用程序</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>源和目标相等。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
     <value>完成</value>
@@ -287,32 +287,32 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>目标的长度必须等于 oldValues 的长度</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>技术细节：</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>您的 .NET 版本不支持 TLS 1.2。这可能会导致通过 HTTPS 下载内容时出现连接错误。请运行 Windows Update 安装必要的补丁程序。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>无法找到名为 "{0}" 的程序集。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>无法从数据流中读取{0} 字节。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>在执行实际命令之前，无法执行撤销命令。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Unix 子系统未能处理请求。您的权限可能不足。</value>
-    <comment>Automatically translated.</comment>
+    <value></value>
+    <comment>Neither a manually overriden nor an automatically translated value found</comment>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>用户名：</value>
