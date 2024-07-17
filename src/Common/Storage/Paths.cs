@@ -31,8 +31,7 @@ public static class Paths
             {
                 string dewildcardedPath = entry.Replace("*", "x").Replace("?", "x");
                 string directory = Path.GetDirectoryName(Path.GetFullPath(dewildcardedPath)) ?? Directory.GetCurrentDirectory();
-                string filePattern = Path.GetFileName(entry);
-                if (string.IsNullOrEmpty(filePattern)) filePattern = defaultPattern;
+                string filePattern = Path.GetFileName(entry).EmptyAsNull() ?? defaultPattern;
                 result.AddRange(Directory.GetFiles(directory, filePattern).Select(file => new FileInfo(Path.GetFullPath(file))));
             }
             else if (File.Exists(entry)) result.Add(new(Path.GetFullPath(entry)));

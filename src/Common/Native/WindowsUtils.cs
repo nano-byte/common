@@ -338,7 +338,7 @@ public static partial class WindowsUtils
 #if !NET20 || NET40
                     , SpecialFolderOption.DoNotVerify
 #endif
-                ) is {Length: >0} path)
+                ).EmptyAsNull() is {} path)
                 return path;
         }
         #region Error handling

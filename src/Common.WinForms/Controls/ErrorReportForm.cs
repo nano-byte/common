@@ -142,7 +142,7 @@ public sealed partial class ErrorReportForm : Form
             if (uploadEventArgs.Error == null)
             {
                 string message = EncodingUtils.Utf8.GetString(uploadEventArgs.Result);
-                Msg.Inform(this, string.IsNullOrEmpty(message) ? Resources.ErrorReportSent : message, MsgSeverity.Info);
+                Msg.Inform(this, message.EmptyAsNull() ?? Resources.ErrorReportSent, MsgSeverity.Info);
                 Close();
             }
             else

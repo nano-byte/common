@@ -271,6 +271,12 @@ public static class StringUtils
     }
 
     /// <summary>
+    /// Maps empty strings to null.
+    /// </summary>
+    [Pure]
+    public static string? EmptyAsNull(this string? value) => string.IsNullOrEmpty(value) ? null : value;
+
+    /// <summary>
     /// Formats a byte number in human-readable form (KB, MB, GB).
     /// </summary>
     /// <param name="value">The value in bytes.</param>

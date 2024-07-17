@@ -83,6 +83,14 @@ public class StringUtilsTest
     }
 
     [Fact]
+    public void TestEmptyAsNull()
+    {
+        "test".EmptyAsNull().Should().Be("test");
+        "".EmptyAsNull().Should().BeNull();
+        ((string?)null).EmptyAsNull().Should().BeNull();
+    }
+
+    [Fact]
     public void TestRemoveCharacters()
         => "a!b?".RemoveCharacters("!?").Should().Be("ab");
 

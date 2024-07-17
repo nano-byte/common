@@ -30,16 +30,16 @@ public static class NetUtils
     /// <remarks>Uses classic Linux environment variables: http_proxy, http_proxy_user, http_proxy_pass</remarks>
     public static void ApplyProxy()
     {
-        string? GetEnvVar(string name)
-            => Environment.GetEnvironmentVariable(name)
-            ?? Environment.GetEnvironmentVariable(name.ToUpperInvariant());
+        static string? GetEnvVar(string name)
+            => (Environment.GetEnvironmentVariable(name)
+            ?? Environment.GetEnvironmentVariable(name.ToUpperInvariant())).EmptyAsNull();
 
-        if (GetEnvVar("http_proxy") is {Length: > 0} address)
+        if (GetEnvVar("http_proxy") is {} address)
         {
             var proxy = new WebProxy(address);
 
-            if (GetEnvVar("http_proxy_user") is {Length: > 0} username
-             && GetEnvVar("http_proxy_pass") is {Length: > 0} password)
+            if (GetEnvVar("http_proxy_user") is {} username
+             && GetEnvVar("http_proxy_pass") is {} password)
                 proxy.Credentials = new NetworkCredential(username, password);
 
             WebRequest.DefaultWebProxy = proxy;

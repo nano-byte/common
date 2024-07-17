@@ -73,9 +73,8 @@ partial class Locations
         windowsFolder: CommonApplicationData);
 
     private static string GetDir(string envVar, string posixPath, Environment.SpecialFolder windowsFolder)
-        => Environment.GetEnvironmentVariable(envVar) is {Length: > 0} value
-            ? value
-            : GetDir(posixPath, windowsFolder);
+        => Environment.GetEnvironmentVariable(envVar).EmptyAsNull()
+        ?? GetDir(posixPath, windowsFolder);
 
     private static string GetDir(string posixPath, Environment.SpecialFolder windowsFolder)
     {
