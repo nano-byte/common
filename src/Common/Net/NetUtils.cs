@@ -41,6 +41,14 @@ public static class NetUtils
             HttpClient.DefaultProxy = proxy;
 #endif
         }
+        else
+        {
+            if (WebRequest.DefaultWebProxy is {} defaultWebProxy)
+                defaultWebProxy.Credentials = CredentialCache.DefaultCredentials;
+#if NET
+            HttpClient.DefaultProxy.Credentials = CredentialCache.DefaultCredentials;
+#endif
+        }
     }
 
     private static Uri? GetProxyAddress()
