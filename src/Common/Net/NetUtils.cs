@@ -30,17 +30,11 @@ public static class NetUtils
     /// <remarks>Uses classic Linux environment variables: http_proxy, http_proxy_user, http_proxy_pass</remarks>
     public static void ApplyProxy()
     {
-        static string? GetEnvVar(string name)
-            => (Environment.GetEnvironmentVariable(name)
-            ?? Environment.GetEnvironmentVariable(name.ToUpperInvariant())).EmptyAsNull();
-
-        if (GetEnvVar("http_proxy") is {} address)
+        if (GetProxyAddress() is {} address)
         {
             var proxy = new WebProxy(address);
-
-            if (GetEnvVar("http_proxy_user") is {} username
-             && GetEnvVar("http_proxy_pass") is {} password)
-                proxy.Credentials = new NetworkCredential(username, password);
+            if (GetProxyCredentials() is {} credentials)
+                proxy.Credentials = credentials;
 
             WebRequest.DefaultWebProxy = proxy;
 #if NET
@@ -48,6 +42,19 @@ public static class NetUtils
 #endif
         }
     }
+
+    private static Uri? GetProxyAddress()
+        => GetEnvVar("http_proxy") is {} value ? new(value) : null;
+
+    private static NetworkCredential? GetProxyCredentials()
+        => GetEnvVar("http_proxy_user") is {} username
+        && GetEnvVar("http_proxy_pass") is {} password
+            ? new(username, password)
+            : null;
+
+    private static string? GetEnvVar(string name)
+        => (Environment.GetEnvironmentVariable(name)
+         ?? Environment.GetEnvironmentVariable(name.ToUpperInvariant())).EmptyAsNull();
 
     /// <summary>
     /// Enables TLS 1.2 and TLS 1.3 support if available.
