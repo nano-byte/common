@@ -39,7 +39,7 @@ public static class StringUtils
         => char.ToLowerInvariant(c1) == char.ToLowerInvariant(c2);
 
     /// <summary>
-    /// Compares strings using case sensitive, invariant culture comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
+    /// Compares strings using case-sensitive, invariant culture comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
     /// </summary>
     [Pure]
 #if !NET20 && !NET40
