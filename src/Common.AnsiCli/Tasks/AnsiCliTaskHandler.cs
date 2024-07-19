@@ -22,10 +22,10 @@ public class AnsiCliTaskHandler : CliTaskHandler
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
                 ? IsInteractive
-                    ? new WindowsCliCredentialProvider(RemoveProgressBar)
+                    ? new WindowsCliCredentialProvider(beforePrompt: RemoveProgressBar)
                     : new WindowsNonInteractiveCredentialProvider()
                 : IsInteractive
-                    ? new AnsiCliCredentialProvider(RemoveProgressBar)
+                    ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar)
                     : null);
 
     private readonly object _progressContextLock = new();
