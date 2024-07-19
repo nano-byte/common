@@ -101,6 +101,7 @@ public class DownloadFile : TaskBase
     /// <inheritdoc/>
     protected override void Execute()
     {
+        HttpStatusCode? statusCode = null;
         try
         {
             State = TaskState.Header;
@@ -114,6 +115,7 @@ public class DownloadFile : TaskBase
                     Authorization = _credentials?.ToBasicAuth()
                 }
             }, HttpCompletionOption.ResponseHeadersRead, CancellationToken);
+            statusCode = response.StatusCode;
             response.EnsureSuccessStatusCode();
 #else
             var request = WebRequest.Create(Source);
@@ -149,16 +151,16 @@ public class DownloadFile : TaskBase
 #if NET
         catch (HttpRequestException ex)
         {
-            var statusCode = ex.StatusCode;
+            statusCode ??= ex.StatusCode;
 #elif !NET20 && !NET40
         catch (HttpRequestException ex)
         {
             var webException = ex.InnerException as WebException;
-            var statusCode = (webException?.Response as HttpWebResponse)?.StatusCode;
+            statusCode ??= (webException?.Response as HttpWebResponse)?.StatusCode;
 #else
         catch (WebException webException)
         {
-            var statusCode = (webException.Response as HttpWebResponse)?.StatusCode;
+            statusCode ??= (webException.Response as HttpWebResponse)?.StatusCode;
 #endif
 
             if (RetryWithCredentials(statusCode))
