@@ -68,9 +68,6 @@ partial class Log
 
         try
         {
-            // Catch up in case other processes have been writing to the same file
-            writer.BaseStream.Seek(0, SeekOrigin.End);
-
             writer.WriteLine(logLine);
             writer.Flush();
         }
