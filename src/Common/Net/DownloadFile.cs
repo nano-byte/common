@@ -96,7 +96,7 @@ public class DownloadFile : TaskBase
     {
         Timeout = Timeout.InfiniteTimeSpan
     };
-    #endif
+#endif
 
     /// <inheritdoc/>
     protected override void Execute()
@@ -105,7 +105,18 @@ public class DownloadFile : TaskBase
         try
         {
             State = TaskState.Header;
-#if !NET20 && !NET40
+#if NET20 || NET40
+            var request = WebRequest.Create(Source);
+            if (request is HttpWebRequest httpRequest)
+            {
+                httpRequest.UserAgent = AppInfo.Current.NameVersion;
+                httpRequest.Credentials = _credentials;
+                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
+            }
+            var responseHandler = request.BeginGetResponse(null!, null!);
+            responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
+            using var response = request.EndGetResponse(responseHandler);
+#else
             using var response = _httpClient.Send(new(HttpMethod.Get, Source)
             {
                 Headers =
@@ -117,17 +128,6 @@ public class DownloadFile : TaskBase
             }, HttpCompletionOption.ResponseHeadersRead, CancellationToken);
             statusCode = response.StatusCode;
             response.EnsureSuccessStatusCode();
-#else
-            var request = WebRequest.Create(Source);
-            if (request is HttpWebRequest httpRequest)
-            {
-                httpRequest.UserAgent = AppInfo.Current.NameVersion;
-                httpRequest.Credentials = _credentials;
-                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
-            }
-            var responseHandler = request.BeginGetResponse(null!, null!);
-            responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
-            using var response = request.EndGetResponse(responseHandler);
 #endif
 
             CancellationToken.ThrowIfCancellationRequested();
@@ -136,11 +136,11 @@ public class DownloadFile : TaskBase
             State = TaskState.Data;
             ContentStarted = true;
             using var stream = new ProgressStream(
-#if !NET20 && !NET40
-                response.Content.ReadAsStream(CancellationToken),
-#else
+#if NET20 || NET40
                 // ReSharper disable once AssignNullToNotNullAttribute
                 response.GetResponseStream(),
+#else
+                response.Content.ReadAsStream(CancellationToken),
 #endif
                 new SynchronousProgress<long>(x => UnitsProcessed = x),
                 CancellationToken);
@@ -148,19 +148,17 @@ public class DownloadFile : TaskBase
             _callback(stream);
         }
         #region Error handling
-#if NET
-        catch (HttpRequestException ex)
-        {
-            statusCode ??= ex.StatusCode;
-#elif !NET20 && !NET40
-        catch (HttpRequestException ex)
-        {
-            var webException = ex.InnerException as WebException;
-            statusCode ??= (webException?.Response as HttpWebResponse)?.StatusCode;
-#else
+#if NET20 || NET40
         catch (WebException webException)
         {
-            statusCode ??= (webException.Response as HttpWebResponse)?.StatusCode;
+            statusCode = (webException.Response as HttpWebResponse)?.StatusCode;
+#else
+        catch (HttpRequestException ex)
+        {
+#if NETFRAMEWORK
+            var webException = ex.InnerException as WebException;
+            statusCode ??= (webException?.Response as HttpWebResponse)?.StatusCode;
+#endif
 #endif
 
             if (RetryWithCredentials(statusCode))
@@ -172,12 +170,12 @@ public class DownloadFile : TaskBase
 
             // Wrap exception to add context and since only certain exception types are allowed
             throw new WebException(string.Format(Resources.FailedToDownload, Source),
-#if NET
-                ex);
-#elif !NET20 && !NET40
-                (Exception)webException ?? ex, webException?.Status ?? default, webException?.Response);
-#else
+#if NET20 || NET40
                 webException, webException.Status, webException.Response);
+#elif NETFRAMEWORK
+                (Exception?)webException ?? ex, webException?.Status ?? default, webException?.Response);
+#else
+                ex);
 #endif
         }
         catch (Exception ex) when (ex is NotSupportedException or ArgumentOutOfRangeException)
@@ -198,14 +196,14 @@ public class DownloadFile : TaskBase
                 _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
                 return _credentials != null;
 
-#if NET
-            case HttpStatusCode.ProxyAuthenticationRequired when HttpClient.DefaultProxy.GetProxy(Source) is {} proxy:
-                HttpClient.DefaultProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: HttpClient.DefaultProxy.HasCustomCredentials());
-                return HttpClient.DefaultProxy.Credentials != null;
-#else
+#if NETFRAMEWORK
             case HttpStatusCode.ProxyAuthenticationRequired when WebRequest.DefaultWebProxy?.GetProxy(Source) is {} proxy:
                 WebRequest.DefaultWebProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: WebRequest.DefaultWebProxy.HasCustomCredentials());
                 return WebRequest.DefaultWebProxy.Credentials != null;
+#else
+            case HttpStatusCode.ProxyAuthenticationRequired when HttpClient.DefaultProxy.GetProxy(Source) is {} proxy:
+                HttpClient.DefaultProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: HttpClient.DefaultProxy.HasCustomCredentials());
+                return HttpClient.DefaultProxy.Credentials != null;
 #endif
 
             default:
@@ -213,16 +211,16 @@ public class DownloadFile : TaskBase
         }
     }
 
-#if !NET20 && !NET40
-    private void HandleHeaders(HttpResponseMessage response)
-    {
-        if (response.RequestMessage?.RequestUri is {} source) Source = source;
-        if (response.Content.Headers.ContentLength is {} contentLength)
-#else
+#if NET20 || NET40
     private void HandleHeaders(WebResponse response)
     {
         Source = response.ResponseUri;
         if (response.ContentLength is var contentLength and not -1)
+#else
+    private void HandleHeaders(HttpResponseMessage response)
+    {
+        if (response.RequestMessage?.RequestUri is {} source) Source = source;
+        if (response.Content.Headers.ContentLength is {} contentLength)
 #endif
         {
             if (UnitsTotal == -1)
