@@ -12,6 +12,8 @@ namespace NanoByte.Common.Net;
 /// <param name="beforePrompt">An optional callback to be invoked right before the user is prompted for credentials</param>
 public class AnsiCliCredentialProvider(Action? beforePrompt = null) : ICredentialProvider
 {
+    private static readonly object _lock = new();
+
     /// <inheritdoc/>
     public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
     {
@@ -25,9 +27,13 @@ public class AnsiCliCredentialProvider(Action? beforePrompt = null) : ICredentia
             Log.Error(string.Format(Resources.InvalidCredentials, uri.ToStringRfc()));
 
         beforePrompt?.Invoke();
-        AnsiCli.Error.WriteLine(string.Format(Resources.PleaseEnterCredentials, uri.ToStringRfc()));
-        return new NetworkCredential(
-            AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.UserName)),
-            AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.Password) {IsSecret = true}));
+
+        lock (_lock)
+        {
+            AnsiCli.Error.WriteLine(string.Format(Resources.PleaseEnterCredentials, uri.ToStringRfc()));
+            return new NetworkCredential(
+                AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.UserName)),
+                AnsiCli.Error.Prompt(new TextPrompt<string>(Resources.Password) {IsSecret = true}));
+        }
     }
 }

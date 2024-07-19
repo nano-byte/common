@@ -13,7 +13,12 @@ namespace NanoByte.Common.Net;
 [SupportedOSPlatform("windows")]
 public class WindowsGuiCredentialProvider : WindowsCredentialProvider
 {
+    private static readonly object _lock = new();
+
     /// <inheritdoc/>
     protected override NetworkCredential GetCredential(string target, WindowsCredentialsFlags flags)
-        => WindowsCredentials.PromptGui(target, flags);
+    {
+        lock (_lock)
+            return WindowsCredentials.PromptGui(target, flags);
+    }
 }

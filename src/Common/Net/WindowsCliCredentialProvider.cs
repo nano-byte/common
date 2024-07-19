@@ -14,6 +14,8 @@ namespace NanoByte.Common.Net;
 [SupportedOSPlatform("windows")]
 public class WindowsCliCredentialProvider(Action? beforePrompt = null) : WindowsCredentialProvider
 {
+    private static readonly object _lock = new();
+
     /// <inheritdoc/>
     protected override NetworkCredential GetCredential(string target, WindowsCredentialsFlags flags)
     {
@@ -21,6 +23,8 @@ public class WindowsCliCredentialProvider(Action? beforePrompt = null) : Windows
             Log.Error(string.Format(Resources.InvalidCredentials, target));
 
         beforePrompt?.Invoke();
-        return WindowsCredentials.PromptCli(target, flags);
+
+        lock (_lock)
+            return WindowsCredentials.PromptCli(target, flags);
     }
 }
