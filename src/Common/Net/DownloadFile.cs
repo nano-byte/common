@@ -86,7 +86,8 @@ public class DownloadFile : TaskBase
         new HttpClientHandler
         {
 #else
-        new SocketsHttpHandler {
+        new SocketsHttpHandler
+        {
             PooledConnectionLifetime = TimeSpan.FromMinutes(1),
 #endif
             AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
