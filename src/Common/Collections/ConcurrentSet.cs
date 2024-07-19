@@ -79,25 +79,27 @@ namespace NanoByte.Common.Collections
             => collection.Select(x => new KeyValuePair<T, bool>(x, false));
 
         /// <inheritdoc/>
+        [MustDisposeResource]
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => _dictionary.Keys.GetEnumerator();
 
         /// <inheritdoc/>
+        [MustDisposeResource]
         public IEnumerator GetEnumerator() => ((IEnumerable)_dictionary).GetEnumerator();
 
         /// <inheritdoc/>
-        public void Add(T item) => _dictionary.TryAdd(item, false);
+        public void Add(T item) => _dictionary.TryAdd(item ?? throw new ArgumentNullException(nameof(item)), false);
 
         /// <inheritdoc/>
         public void Clear() => _dictionary.Clear();
 
         /// <inheritdoc/>
-        public bool Contains(T item) => _dictionary.ContainsKey(item);
+        public bool Contains(T item) => _dictionary.ContainsKey(item?? throw new ArgumentNullException(nameof(item)));
 
         /// <inheritdoc/>
         public void CopyTo(T[] array, int arrayIndex) => _dictionary.Keys.CopyTo(array, arrayIndex);
 
         /// <inheritdoc/>
-        public bool Remove(T item) => _dictionary.TryRemove(item, out _);
+        public bool Remove(T item) => _dictionary.TryRemove(item?? throw new ArgumentNullException(nameof(item)), out _);
 
         /// <inheritdoc/>
         public int Count => _dictionary.Count;
