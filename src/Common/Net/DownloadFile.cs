@@ -196,6 +196,16 @@ public class DownloadFile : TaskBase
                 _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
                 return _credentials != null;
 
+#if NET
+            case HttpStatusCode.ProxyAuthenticationRequired when HttpClient.DefaultProxy.GetProxy(Source) is {} proxy:
+                HttpClient.DefaultProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: HttpClient.DefaultProxy.HasCustomCredentials());
+                return HttpClient.DefaultProxy.Credentials != null;
+#else
+            case HttpStatusCode.ProxyAuthenticationRequired when WebRequest.DefaultWebProxy?.GetProxy(Source) is {} proxy:
+                WebRequest.DefaultWebProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: WebRequest.DefaultWebProxy.HasCustomCredentials());
+                return WebRequest.DefaultWebProxy.Credentials != null;
+#endif
+
             default:
                 return false;
         }
