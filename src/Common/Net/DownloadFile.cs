@@ -161,15 +161,11 @@ public class DownloadFile : TaskBase
             var statusCode = (webException.Response as HttpWebResponse)?.StatusCode;
 #endif
 
-            if (CredentialProvider != null && statusCode == HttpStatusCode.Unauthorized)
+            if (RetryWithCredentials(statusCode))
             {
-                _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
-                if (_credentials != null)
-                {
-                    Log.Info($"Retrying download for {Source} with credentials");
-                    Execute();
-                    return;
-                }
+                Log.Info($"Retrying download for {Source} with credentials");
+                Execute();
+                return;
             }
 
             // Wrap exception to add context and since only certain exception types are allowed
@@ -188,6 +184,21 @@ public class DownloadFile : TaskBase
             throw new WebException(ex.Message, ex);
         }
         #endregion
+    }
+
+    private bool RetryWithCredentials(HttpStatusCode? statusCode)
+    {
+        if (CredentialProvider == null) return false;
+
+        switch (statusCode)
+        {
+            case HttpStatusCode.Unauthorized:
+                _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
+                return _credentials != null;
+
+            default:
+                return false;
+        }
     }
 
 #if !NET20 && !NET40
