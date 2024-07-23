@@ -44,9 +44,9 @@ public static class NetUtils
         else
         {
             if (WebRequest.DefaultWebProxy is {} defaultWebProxy)
-                defaultWebProxy.Credentials = CredentialCache.DefaultCredentials;
+                defaultWebProxy.Credentials ??= CredentialCache.DefaultCredentials;
 #if NET
-            HttpClient.DefaultProxy.Credentials = CredentialCache.DefaultCredentials;
+            HttpClient.DefaultProxy.Credentials ??= CredentialCache.DefaultCredentials;
 #endif
         }
     }
