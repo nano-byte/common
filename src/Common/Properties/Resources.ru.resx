@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL не может быть канонизирован, так как это может привести к потере информации.</value>
+    <value>DACL не может быть канонизирован, поскольку это может привести к потере информации.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
