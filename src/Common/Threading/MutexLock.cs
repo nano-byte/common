@@ -14,6 +14,7 @@ namespace NanoByte.Common.Threading;
 [MustDisposeResource]
 public sealed class MutexLock : IDisposable
 {
+    private readonly string _name;
     private readonly Mutex _mutex;
 
     /// <summary>
@@ -21,6 +22,7 @@ public sealed class MutexLock : IDisposable
     /// </summary>
     public MutexLock(string name)
     {
+        _name = name;
         _mutex = new(false, name);
         try
         {
@@ -36,11 +38,16 @@ public sealed class MutexLock : IDisposable
     /// <summary>
     /// Releases the <see cref="Mutex"/>.
     /// </summary>
+    /// <remarks>Must be called from the same thread that instantiated this object.</remarks>
     public void Dispose()
     {
         try
         {
             _mutex.ReleaseMutex();
+        }
+        catch (ApplicationException ex)
+        {
+            Log.Warn($"Failed to release mutex '{_name}' because it is owned by another thread", ex);
         }
         finally
         {
