@@ -31,7 +31,17 @@ public abstract class ReadDirectoryBase([Localizable(false)] string path) : Task
         var directories = new List<DirectoryInfo>();
 
         State = TaskState.Header;
-        EnumerateElements(Source, files, directories);
+        try
+        {
+            EnumerateElements(Source, files, directories);
+        }
+        #region Error handling
+        catch (ArgumentException ex)
+        {
+            // Wrap exception since only certain exception types are allowed
+            throw new IOException(ex.Message, ex);
+        }
+        #endregion
         UnitsTotal = files.Sum(file => file.Length);
 
         State = TaskState.Data;
