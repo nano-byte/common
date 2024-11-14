@@ -62,6 +62,7 @@ internal sealed partial class TaskRunDialog : Form
     /// <summary>
     /// An exception thrown by <see cref="ITask.Run"/>, if any.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Exception? Exception { get; private set; }
 
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are rethrown on the UI thread.")]

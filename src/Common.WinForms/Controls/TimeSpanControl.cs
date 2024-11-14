@@ -11,6 +11,7 @@ public partial class TimeSpanControl : UserControl
     /// <summary>
     /// The time span currently represented by the control.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public TimeSpan Value
     {
         get => new((int)upDownDays.Value, (int)upDownHours.Value, (int)upDownMinutes.Value, (int)upDownSeconds.Value);

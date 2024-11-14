@@ -70,6 +70,7 @@ public class DropDownButton : Button
 
     #region Properties
     [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public override ContextMenuStrip? ContextMenuStrip { get => DropDownMenuStrip; set => DropDownMenuStrip = value; }
 
     [DefaultValue(null)]

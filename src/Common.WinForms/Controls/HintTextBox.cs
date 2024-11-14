@@ -99,6 +99,7 @@ public class HintTextBox : TextBox
 
     /// <inheritdoc/>
     [AllowNull]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public override string Text
     {
         get => IsHintTextVisible ? "" : base.Text;
