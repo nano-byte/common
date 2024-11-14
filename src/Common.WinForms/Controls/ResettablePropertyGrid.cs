@@ -28,7 +28,7 @@ public class ResettablePropertyGrid : PropertyGrid
     {
         _menuReset.Click += delegate
         {
-            var oldValue = SelectedGridItem.Value;
+            var oldValue = SelectedGridItem?.Value;
             ResetSelectedProperty();
             OnPropertyValueChanged(new PropertyValueChangedEventArgs(SelectedGridItem, oldValue));
         };
@@ -46,7 +46,10 @@ public class ResettablePropertyGrid : PropertyGrid
         if (e == null) throw new ArgumentNullException(nameof(e));
         #endregion
 
-        _menuReset.Enabled = e.NewSelection?.PropertyDescriptor != null && e.NewSelection.Parent != null && e.NewSelection.PropertyDescriptor.CanResetValue(e.NewSelection.Parent.Value ?? SelectedObject);
+        _menuReset.Enabled =
+            e.NewSelection is { PropertyDescriptor: not null, Parent: not null }
+         && (e.NewSelection.Parent.Value ?? SelectedObject) is {} value
+         && e.NewSelection.PropertyDescriptor.CanResetValue(value);
 
         base.OnSelectedGridItemChanged(e);
     }
