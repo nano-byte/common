@@ -36,8 +36,7 @@ namespace NanoByte.Common.Collections
         /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
         /// <returns>The existing element or the default value of <typeparamref name="TValue"/>.</returns>
         [Pure]
-        [return: MaybeNull]
-        public static TValue GetOrDefault<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue? GetOrDefault<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key)
             where TKey : notnull
         {
             #region Sanity checks
