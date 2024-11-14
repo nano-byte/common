@@ -160,10 +160,10 @@ public sealed partial class FilteredTreeView<T> : UserControl
 
     private void treeView_AfterSelect(object? sender, TreeViewEventArgs e)
     {
-        string name = treeView.SelectedNode.Name;
+        string? name = treeView.SelectedNode?.Name;
 
         // Don't use the property, to prevent a loop
-        _selectedEntry = _nodes != null && _nodes.Contains(name) ? _nodes[name] : default;
+        _selectedEntry = _nodes != null && name != null && _nodes.Contains(name) ? _nodes[name] : default;
         OnSelectedEntryChanged();
     }
 
