@@ -3,7 +3,7 @@
 
 using System.Diagnostics;
 
-#if !NET8_0_OR_GREATER
+#if !NET
 using System.Runtime.Serialization;
 #endif
 
@@ -16,7 +16,7 @@ namespace NanoByte.Common;
 /// <summary>
 /// Indicates that a <see cref="Process"/> exited with an unexpected <see cref="Process.ExitCode"/>.
 /// </summary>
-#if !NET8_0_OR_GREATER
+#if !NET
 [Serializable]
 #endif
 public sealed class ExitCodeException : IOException
@@ -61,7 +61,7 @@ public sealed class ExitCodeException : IOException
     {}
 
     #region Serialization
-#if !NET8_0_OR_GREATER
+#if !NET
     /// <summary>
     /// Deserializes an exception.
     /// </summary>

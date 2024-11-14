@@ -409,7 +409,7 @@ public static partial class WindowsUtils
     /// <exception cref="UnauthorizedAccessException">Write access to the file was denied.</exception>
     /// <exception cref="Win32Exception">There was a problem writing the file.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-    /// <remarks>This method works like <see cref="File.WriteAllBytes"/>, but bypasses .NET's file path validation logic.</remarks>
+    /// <remarks>This method works like <see cref="File.WriteAllBytes(string,byte[])"/>, but bypasses .NET's file path validation logic.</remarks>
     public static void WriteAllBytes([Localizable(false)] string path, byte[] data)
     {
         #region Sanity checks

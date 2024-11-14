@@ -5,14 +5,14 @@
     <AssemblyName>NanoByte.Common.Samples.WinForms</AssemblyName>
     <RootNamespace>NanoByte.Common.Samples.WinForms</RootNamespace>
     <Description>Samples for NanoByte.Common.WinForms.</Description>
-    <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;net9.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <IsPackable>False</IsPackable>
     <DeterministicSourcePaths>False</DeterministicSourcePaths>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common.WinForms\Common.WinForms.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'!='net8.0-windows'">
+  <ItemGroup Condition="'$(TargetFramework)'!='net9.0-windows'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <!-- Global usings -->

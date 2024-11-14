@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET8_0_OR_GREATER
+#if !NET
 using System.Runtime.Serialization;
 #endif
 
@@ -10,7 +10,7 @@ namespace NanoByte.Common;
 /// <summary>
 /// Like a <see cref="UnauthorizedAccessException"/> but with the additional hint that retrying the operation as an administrator would fix the problem.
 /// </summary>
-#if !NET8_0_OR_GREATER
+#if !NET
 [Serializable]
 #endif
 public class NotAdminException : UnauthorizedAccessException
@@ -28,7 +28,7 @@ public class NotAdminException : UnauthorizedAccessException
         : base(message)
     {}
 
-#if !NET8_0_OR_GREATER
+#if !NET
     /// <inheritdoc/>
     protected NotAdminException(SerializationInfo info, StreamingContext context)
         : base(info, context)
