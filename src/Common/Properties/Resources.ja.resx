@@ -107,7 +107,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>保存先のディレクトリはすでに存在しています。</value>
+    <value>保存先のディレクトリはすでに存在します。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
