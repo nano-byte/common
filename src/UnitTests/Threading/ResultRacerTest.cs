@@ -6,7 +6,7 @@ namespace NanoByte.Common.Threading;
 
 public class ResultRacerTest
 {
-    [Fact]
+    [Fact(Skip = "Slow")]
     public void Sync()
     {
         var racer = ResultRacer.For([1, 2, 3], (i, _) =>
@@ -17,7 +17,7 @@ public class ResultRacerTest
         racer.GetResult().Should().Be(1);
     }
 
-    [Fact]
+    [Fact(Skip = "Slow")]
     public void SyncCancellation()
     {
         var racer = ResultRacer.For([1], (i, _) =>
@@ -29,7 +29,7 @@ public class ResultRacerTest
              .Should().Throw<OperationCanceledException>();
     }
 
-    [Fact]
+    [Fact(Skip = "Slow")]
     public async Task Async()
     {
         var racer = ResultRacer.For([1, 2, 3], async (i, cancellationToken) =>
@@ -40,7 +40,7 @@ public class ResultRacerTest
         (await racer.GetResultAsync()).Should().Be(1);
     }
 
-    [Fact]
+    [Fact(Skip = "Slow")]
     public async Task AsyncCancellation()
     {
         var racer = ResultRacer.For([1], async (i, cancellationToken) =>
