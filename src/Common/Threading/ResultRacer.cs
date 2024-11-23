@@ -83,18 +83,7 @@ public class ResultRacer<T>(CancellationToken cancellationToken = default)
     /// Waits until at least one call to <see cref="TrySetResult"/> or <see cref="TrySetResultAsync"/> succeeded and returns its result.
     /// </summary>
     public async Task<T> GetResultAsync()
-    {
-        var task = _completion.Task;
-#if NET
-        return await task.WaitAsync(cancellationToken);
-#else
-        var cancellationCompletion = new TaskCompletionSource<bool>();
-        using (cancellationToken.Register(() => cancellationCompletion.SetCanceled()))
-            await Task.WhenAny(task, cancellationCompletion.Task);
-        cancellationToken.ThrowIfCancellationRequested();
-        return await task;
-#endif
-    }
+        => await _completion.Task.WaitAsync(cancellationToken);
 }
 
 /// <summary>
