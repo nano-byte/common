@@ -28,7 +28,11 @@ public class AnsiCliTaskHandler : CliTaskHandler
                     ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar)
                     : null);
 
-    private readonly object _progressContextLock = new();
+#if NET9_0_OR_GREATER
+    private static readonly Lock _progressContextLock = new();
+#else
+    private static readonly object _progressContextLock = new();
+#endif
     private AnsiCliProgressContext? _progressContext;
 
     /// <inheritdoc/>

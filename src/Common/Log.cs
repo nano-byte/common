@@ -52,7 +52,11 @@ public static partial class Log
     /// </summary>
     public static void Error(Exception exception) => AddEntry(LogSeverity.Error, null, exception);
 
+#if NET9_0_OR_GREATER
+    private static readonly Lock _lock = new();
+#else
     private static readonly object _lock = new();
+#endif
 
     /// <summary>
     /// Adds a log entry.

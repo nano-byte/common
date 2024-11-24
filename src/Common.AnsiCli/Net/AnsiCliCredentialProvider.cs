@@ -12,7 +12,11 @@ namespace NanoByte.Common.Net;
 /// <param name="beforePrompt">An optional callback to be invoked right before the user is prompted for credentials</param>
 public class AnsiCliCredentialProvider(Action? beforePrompt = null) : ICredentialProvider
 {
+#if NET9_0_OR_GREATER
+    private static readonly Lock _lock = new();
+#else
     private static readonly object _lock = new();
+#endif
 
     /// <inheritdoc/>
     public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
