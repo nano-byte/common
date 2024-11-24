@@ -55,15 +55,21 @@ public static class ProcessUtils
     /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
     /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
     /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-    public static Process Start(string fileName, params string[] arguments)
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));
-        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
-        #endregion
+    public static Process Start(string fileName, IEnumerable<string> arguments)
+        => new ProcessStartInfo(fileName, arguments.JoinEscapeArguments()).Start();
 
-        return new ProcessStartInfo(fileName, arguments.JoinEscapeArguments()).Start();
-    }
+    /// <summary>
+    /// Starts a new <see cref="Process"/> and runs it in parallel with this one. Handles and wraps <see cref="Win32Exception"/>s.
+    /// </summary>
+    /// <param name="fileName">The path of the file to open or executable to launch.</param>
+    /// <param name="arguments">The command-line arguments to pass to the executable.</param>
+    /// <returns>The newly launched process; <c>null</c> if an existing process was reused.</returns>
+    /// <exception cref="IOException">There was a problem launching the executable.</exception>
+    /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
+    /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
+    /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
+    public static Process Start(string fileName, params string[] arguments)
+        => Start(fileName, arguments.AsEnumerable());
 
     /// <summary>
     /// Starts a new <see cref="Process"/> and waits for it to complete. Handles and wraps <see cref="Win32Exception"/>s.
@@ -108,7 +114,7 @@ public static class ProcessUtils
     /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
     /// <exception cref="FileNotFoundException">The specified assembly could not be found.</exception>
     [Pure]
-    public static ProcessStartInfo Assembly(string name, params string[] arguments)
+    public static ProcessStartInfo Assembly(string name, IEnumerable<string> arguments)
     {
         #region Sanity checks
         if (name == null) throw new ArgumentNullException(nameof(name));
@@ -139,6 +145,16 @@ public static class ProcessUtils
 
         return new ProcessStartInfo(executablePath, arguments.JoinEscapeArguments()) {UseShellExecute = false};
     }
+
+    /// <summary>
+    /// Creates a <see cref="ProcessStartInfo"/> for launching an assembly located in <see cref="Locations.InstallBase"/>.
+    /// </summary>
+    /// <param name="name">The name of the assembly to launch (without the file extension).</param>
+    /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
+    /// <exception cref="FileNotFoundException">The specified assembly could not be found.</exception>
+    [Pure]
+    public static ProcessStartInfo Assembly(string name, params string[] arguments)
+        => Assembly(name, arguments.AsEnumerable());
 
     /// <summary>
     /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows using UAC.
