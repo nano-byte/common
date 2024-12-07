@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class EnumXmlConverter&lt;T&gt; | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class EnumXmlConverter&lt;T&gt; | NanoByte.Common ">
+      
+      <meta name="description" content="Type converter for s annotated with s.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.19.1/apiSpec/new?filename=NanoByte_Common_Values_Design_EnumXmlConverter_1.md&amp;value=---%0Auid%3A%20NanoByte.Common.Values.Design.EnumXmlConverter%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1">
+
+
+
+  <h1 id="NanoByte_Common_Values_Design_EnumXmlConverter_1" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1" class="text-break">
+Class EnumXmlConverter&lt;T&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Values.html">Values</a>.<a class="xref" href="NanoByte.Common.Values.Design.html">Design</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Type converter for <span class="xref">System.Enum</span>s annotated with <span class="xref">System.Xml.Serialization.XmlEnumAttribute</span>s.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EnumXmlConverter&lt;T&gt; : TypeConverter where T : struct</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type the converter is used for.</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">TypeConverter</span></div>
+      <div><span class="xref">EnumXmlConverter&lt;T&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_IO_Stream_">BinaryStorage.SaveBinary&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_String_">BinaryStorage.SaveBinary&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml_System_Object_System_IO_Stream_System_String_">XmlStorage.SaveXml(object, Stream, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString_System_Object_System_String_">XmlStorage.ToXmlString(object, string?)</a>
+  </div>
+  </dd></dl>
+
+
+  <h2 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_examples">Examples</h2>
+  <p>Add this attribute to the <span class="xref">System.Enum</span>:</p>
+<pre><code class="lang-csharp">[TypeConverter(typeof(XmlEnumConverter&lt;NameOfEnum&gt;))]</code></pre>
+
+
+  <h2 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p><span class="xref">System.Xml.Serialization.XmlEnumAttribute.Name</span> is used as the case-insensitive string representation (falls back to element name).</p>
+</div>
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Values_Design_EnumXmlConverter_1_CanConvertFrom_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.CanConvertFrom*"></a>
+
+  <h3 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_CanConvertFrom_System_ComponentModel_ITypeDescriptorContext_System_Type_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+  CanConvertFrom(ITypeDescriptorContext?, Type)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns whether this converter can convert an object of the given type to the type of this converter, using the specified context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <span class="xref">ITypeDescriptorContext</span></dt>
+    <dd><p>An <span class="xref">System.ComponentModel.ITypeDescriptorContext</span> that provides a format context.</p>
+</dd>
+    <dt><code>sourceType</code> <span class="xref">Type</span></dt>
+    <dd><p>A <span class="xref">System.Type</span> that represents the type you want to convert from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p>true if this converter can perform the conversion; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Values_Design_EnumXmlConverter_1_ConvertFrom_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.ConvertFrom*"></a>
+
+  <h3 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_ConvertFrom_System_ComponentModel_ITypeDescriptorContext_System_Globalization_CultureInfo_System_Object_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+  ConvertFrom(ITypeDescriptorContext?, CultureInfo?, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the given object to the type of this converter, using the specified context and culture information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <span class="xref">ITypeDescriptorContext</span></dt>
+    <dd><p>An <span class="xref">System.ComponentModel.ITypeDescriptorContext</span> that provides a format context.</p>
+</dd>
+    <dt><code>culture</code> <span class="xref">CultureInfo</span></dt>
+    <dd><p>The <span class="xref">System.Globalization.CultureInfo</span> to use as the current culture.</p>
+</dd>
+    <dt><code>value</code> <span class="xref">object</span></dt>
+    <dd><p>The <span class="xref">object</span> to convert.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">object</span></dt>
+    <dd><p>An <span class="xref">object</span> that represents the converted value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">NotSupportedException</span></dt>
+    <dd><p>The conversion cannot be performed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Values_Design_EnumXmlConverter_1_ConvertTo_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.ConvertTo*"></a>
+
+  <h3 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_ConvertTo_System_ComponentModel_ITypeDescriptorContext_System_Globalization_CultureInfo_System_Object_System_Type_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+  ConvertTo(ITypeDescriptorContext?, CultureInfo?, object?, Type)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the given value object to the specified type, using the specified context and culture information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <span class="xref">ITypeDescriptorContext</span></dt>
+    <dd><p>An <span class="xref">System.ComponentModel.ITypeDescriptorContext</span> that provides a format context.</p>
+</dd>
+    <dt><code>culture</code> <span class="xref">CultureInfo</span></dt>
+    <dd><p>A <span class="xref">System.Globalization.CultureInfo</span>. If null is passed, the current culture is assumed.</p>
+</dd>
+    <dt><code>value</code> <span class="xref">object</span></dt>
+    <dd><p>The <span class="xref">object</span> to convert.</p>
+</dd>
+    <dt><code>destinationType</code> <span class="xref">Type</span></dt>
+    <dd><p>The <span class="xref">System.Type</span> to convert the <code class="paramref">value</code> parameter to.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">object</span></dt>
+    <dd><p>An <span class="xref">object</span> that represents the converted value.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentNullException</span></dt>
+    <dd><p>The <code class="paramref">destinationType</code> parameter is null.</p>
+</dd>
+    <dt><span class="xref">NotSupportedException</span></dt>
+    <dd><p>The conversion cannot be performed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Values_Design_EnumXmlConverter_1_GetStandardValues_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.GetStandardValues*"></a>
+
+  <h3 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_GetStandardValues_System_ComponentModel_ITypeDescriptorContext_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)">
+  GetStandardValues(ITypeDescriptorContext?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a collection of standard values for the data type this type converter is designed for when provided with a format context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <span class="xref">ITypeDescriptorContext</span></dt>
+    <dd><p>An <span class="xref">System.ComponentModel.ITypeDescriptorContext</span> that provides a format context that can be used to extract additional information about the environment from which this converter is invoked. This parameter or properties of this parameter can be null.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TypeConverter</span>.<span class="xref">StandardValuesCollection</span></dt>
+    <dd><p>A <span class="xref">System.ComponentModel.TypeConverter.StandardValuesCollection</span> that holds a standard set of valid values, or null if the data type does not support a standard set of values.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Values_Design_EnumXmlConverter_1_GetStandardValuesExclusive_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.GetStandardValuesExclusive*"></a>
+
+  <h3 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_GetStandardValuesExclusive_System_ComponentModel_ITypeDescriptorContext_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)">
+  GetStandardValuesExclusive(ITypeDescriptorContext?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns whether the collection of standard values returned from <span class="xref">System.ComponentModel.TypeConverter.GetStandardValues()</span> is an exclusive list of possible values, using the specified context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <span class="xref">ITypeDescriptorContext</span></dt>
+    <dd><p>An <span class="xref">System.ComponentModel.ITypeDescriptorContext</span> that provides a format context.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p>true if the <span class="xref">System.ComponentModel.TypeConverter.StandardValuesCollection</span> returned from <span class="xref">System.ComponentModel.TypeConverter.GetStandardValues()</span> is an exhaustive list of possible values; false if other values are possible.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Values_Design_EnumXmlConverter_1_GetStandardValuesSupported_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.GetStandardValuesSupported*"></a>
+
+  <h3 id="NanoByte_Common_Values_Design_EnumXmlConverter_1_GetStandardValuesSupported_System_ComponentModel_ITypeDescriptorContext_" data-uid="NanoByte.Common.Values.Design.EnumXmlConverter`1.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)">
+  GetStandardValuesSupported(ITypeDescriptorContext?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns whether this object supports a standard set of values that can be picked from a list, using the specified context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool GetStandardValuesSupported(ITypeDescriptorContext? context)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <span class="xref">ITypeDescriptorContext</span></dt>
+    <dd><p>An <span class="xref">System.ComponentModel.ITypeDescriptorContext</span> that provides a format context.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p>true if <span class="xref">System.ComponentModel.TypeConverter.GetStandardValues()</span> should be called to find a common set of values the object supports; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.19.1/src/Common/Values/Design/EnumXmlConverter.cs/#L18" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
