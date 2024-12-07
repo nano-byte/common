@@ -186,7 +186,7 @@ public static class ExceptionUtils
         {
             try
             {
-                function();
+                return function();
             }
             catch (TException ex)
             {
