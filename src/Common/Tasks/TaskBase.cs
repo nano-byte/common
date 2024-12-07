@@ -75,10 +75,8 @@ public abstract class TaskBase : MarshalByRefObject, ITask
     }
 
     #region Progress
-    private TaskState _state;
-
     /// <summary>The current State of the task.</summary>
-    protected internal TaskState State { get => _state; protected set => value.To(ref _state, OnProgressChanged); }
+    protected internal TaskState State { get; protected set => value.To(ref field, OnProgressChanged); }
 
     /// <summary>
     /// <c>true</c> if <see cref="UnitsProcessed"/> and <see cref="UnitsTotal"/> are measured in bytes;
@@ -86,10 +84,8 @@ public abstract class TaskBase : MarshalByRefObject, ITask
     /// </summary>
     protected abstract bool UnitsByte { get; }
 
-    private long _unitsProcessed;
-
     /// <summary>The number of units that have been processed so far.</summary>
-    protected long UnitsProcessed { get => _unitsProcessed; set => value.To(ref _unitsProcessed, OnProgressChangedThrottled); }
+    protected long UnitsProcessed { get; set => value.To(ref field, OnProgressChangedThrottled); }
 
     private long _unitsTotal = -1;
 
@@ -99,7 +95,7 @@ public abstract class TaskBase : MarshalByRefObject, ITask
     /// <summary>
     /// Informs the caller of the current progress, if a callback was registered.
     /// </summary>
-    private void OnProgressChanged() => _progress?.Report(new(_state, UnitsByte, _unitsProcessed, _unitsTotal));
+    private void OnProgressChanged() => _progress?.Report(new(State, UnitsByte, UnitsProcessed, _unitsTotal));
 
     private DateTime _lastProgress;
     private static readonly TimeSpan _progressRate = TimeSpan.FromMilliseconds(250);
@@ -114,7 +110,7 @@ public abstract class TaskBase : MarshalByRefObject, ITask
         var now = DateTime.Now;
         if ((now - _lastProgress) < _progressRate) return;
 
-        _progress.Report(new(_state, UnitsByte, _unitsProcessed, _unitsTotal));
+        _progress.Report(new(State, UnitsByte, UnitsProcessed, _unitsTotal));
         _lastProgress = now;
     }
     #endregion
