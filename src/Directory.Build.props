@@ -2,7 +2,7 @@
 
   <!-- Build configuration -->
   <PropertyGroup>
-    <LangVersion>13.0</LangVersion>
+    <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
