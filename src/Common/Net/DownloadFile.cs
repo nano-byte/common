@@ -6,7 +6,9 @@ using NanoByte.Common.Info;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NanoByte.Common.Threading;
-
+#if NETFRAMEWORK
+using System.Configuration;
+#endif
 #if !NET20 && !NET40
 using System.Net.Http;
 #endif
@@ -178,6 +180,13 @@ public class DownloadFile : TaskBase
                 ex);
 #endif
         }
+#if NETFRAMEWORK
+        catch (ConfigurationErrorsException ex)
+        {
+            // Wrap exception since only certain exception types are allowed
+            throw new WebException(ex.Message, ex);
+        }
+#endif
         catch (Exception ex) when (ex is NotSupportedException or ArgumentOutOfRangeException)
         {
             // Wrap exception since only certain exception types are allowed
