@@ -27,6 +27,7 @@
     },
     {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
+      "matchPackageNames": ["System.Memory"],
       "matchUpdateTypes": ["major", "minor"],
       "enabled": false
     }
