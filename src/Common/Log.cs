@@ -43,12 +43,12 @@ public static partial class Log
     public static void Warn(Exception exception) => AddEntry(LogSeverity.Warn, null, exception);
 
     /// <summary>
-    /// Writes a critical error that should be attended to to the log.
+    /// Writes a critical error that should be attended to the log.
     /// </summary>
     public static void Error(string message, Exception? exception = null) => AddEntry(LogSeverity.Error, message, exception);
 
     /// <summary>
-    /// Writes a critical error that should be attended to to the log.
+    /// Writes a critical error that should be attended to the log.
     /// </summary>
     public static void Error(Exception exception) => AddEntry(LogSeverity.Error, null, exception);
 
