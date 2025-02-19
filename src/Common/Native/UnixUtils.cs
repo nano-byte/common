@@ -88,7 +88,7 @@ namespace NanoByte.Common.Native
             {
 #if NET
                 Syscall.uname(out var buffer);
-                return buffer.sysname;
+                return buffer.sysname ?? "unknown";
 #else
                 throw new PlatformNotSupportedException();
 #endif
@@ -105,16 +105,16 @@ namespace NanoByte.Common.Native
             {
 #if NET
                 Syscall.uname(out var buffer);
-                string cpuType = buffer.machine;
+                string? cpuType = buffer.machine;
 
                 // Normalize names
-                return cpuType switch
+                return buffer.machine switch
                 {
                     "x86" => "i386",
                     "amd64" => "x86_64",
                     "Power Macintosh" => "ppc",
                     "i86pc" => "i686",
-                    _ => cpuType
+                    _ => cpuType ?? "unknown"
                 };
 #else
                 throw new PlatformNotSupportedException();

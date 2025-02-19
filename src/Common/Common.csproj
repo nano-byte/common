@@ -7,7 +7,7 @@
     <Description>Utility classes and data structures with an emphasis on integration with native Windows and Linux features, network and disk IO, advanced collections and undo/redo logic.</Description>
     <TargetFrameworks>net20;net40;net45;net462;net472;net8.0;net9.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
-    <NoWarn>$(NoWarn);SYSLIB0014</NoWarn><!-- deprecated WebClient -->
+    <NoWarn>$(NoWarn);SYSLIB0014;NU5104</NoWarn><!-- deprecated WebClient, pre-release version of Mono.Posix -->
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -49,7 +49,7 @@
     <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
+    <PackageReference Include="Mono.Posix" Version="7.1.0-final.1.21458.1" />
     <PackageReference Include="Tmds.DBus" Version="0.21.2" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
