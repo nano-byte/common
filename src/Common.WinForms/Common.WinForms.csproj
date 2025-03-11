@@ -34,7 +34,7 @@
     <Reference Include="TaskDialog" HintPath="..\..\lib\TaskDialog.dll" />
   </ItemGroup>
   <ItemGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
-    <PackageReference Include="System.Resources.Extensions" Version="9.0.2" />
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.3" />
   </ItemGroup>
 
   <!-- Global usings -->
