@@ -31,7 +31,7 @@
     },
     {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
-      "matchPackageNames": ["System.Memory"],
+      "matchPackageNames": ["System.Memory", "System.ValueTuple"],
       "matchUpdateTypes": ["major", "minor"],
       "enabled": false
     }
