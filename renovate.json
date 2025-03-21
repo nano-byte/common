@@ -26,6 +26,10 @@
       "separateMinorPatch": true
     },
     {
+      "matchPackageNames": ["System.Memory", "System.Runtime.CompilerServices.Unsafe"],
+      "groupName": "System.Memory"
+    },
+    {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
       "matchPackageNames": ["System.Memory"],
       "matchUpdateTypes": ["major", "minor"],
