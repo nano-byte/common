@@ -16,7 +16,7 @@ namespace NanoByte.Common.Values.Design;
 /// </example>
 /// <remarks><see cref="XmlEnumAttribute.Name"/> is used as the case-insensitive string representation (falls back to element name).</remarks>
 public class EnumXmlConverter<T> : TypeConverter
-    where T : struct
+    where T : struct, Enum
 {
     private static object GetEnumFromString(string stringValue)
     {
@@ -28,6 +28,10 @@ public class EnumXmlConverter<T> : TypeConverter
         }
         return Enum.Parse(typeof(T), stringValue, ignoreCase: true);
     }
+
+    private static string GetStringFromEnum(Enum enumValue)
+        // ReSharper disable once RedundantSuppressNullableWarningExpression
+        => enumValue.GetEnumAttribute<XmlEnumAttribute>()?.Name ?? enumValue.ToString()!;
 
     /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
@@ -43,15 +47,20 @@ public class EnumXmlConverter<T> : TypeConverter
     /// <inheritdoc/>
     public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         => value is Enum enumValue && destinationType == typeof(string)
-            // ReSharper disable once RedundantSuppressNullableWarningExpression
-            ? enumValue.GetEnumAttribute<XmlEnumAttribute>()?.Name ?? enumValue.ToString()!
+            ? GetStringFromEnum(enumValue)
             : base.ConvertTo(context, culture, value, destinationType)!;
 
     public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) => true;
 
     public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) => true;
 
-    private static readonly string[] _values = (from T value in Enum.GetValues(typeof(T)) select value.ConvertToString()).ToArray();
+    private static readonly string[] _values =
+#if NETFRAMEWORK
+        Enum.GetValues(typeof(T)).Cast<T>()
+#else
+        Enum.GetValues<T>()
+#endif
+            .Select(x => GetStringFromEnum(x)).ToArray();
 
     public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context) => new(_values);
 }
