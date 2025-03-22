@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using NanoByte.Common.Native;
 
-#if NETFRAMEWORK
+#if NET20 || NET40 || NET45
 using System.Reflection;
 #endif
 
@@ -37,8 +37,8 @@ public static partial class Locations
 
     private static string GetInstallBase()
     {
+#if NET20 || NET40 || NET45
         string? codeBase = null;
-#if NETFRAMEWORK
         try
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -49,9 +49,11 @@ public static partial class Locations
         }
         catch (PlatformNotSupportedException)
         {}
-#endif
 
         return codeBase ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
+#else
+        return AppContext.BaseDirectory;
+#endif
     }
 
 #if NET20 || NET40 || NET45
