@@ -6,6 +6,7 @@ namespace NanoByte.Common.Collections;
 /// <summary>
 /// Contains test methods for <see cref="MultiDictionary{TKey,TValue}"/>.
 /// </summary>
+[SuppressMessage("ReSharper", "DuplicateKeyCollectionInitialization")]
 public class MultiDictionaryTest
 {
     [Fact]
