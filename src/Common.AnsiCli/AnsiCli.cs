@@ -46,7 +46,7 @@ public static class AnsiCli
         var table = new Table().RoundedBorder();
         var getters = new List<MethodInfo>();
 
-        foreach (var property in typeof(T).GetProperties())
+        foreach (var property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
             if (property.GetIndexParameters().Length != 0) continue;
             if (property.Name == nameof(IHighlightColor.HighlightColor)) continue;
