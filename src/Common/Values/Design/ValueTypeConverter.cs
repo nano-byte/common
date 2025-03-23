@@ -17,6 +17,7 @@ namespace NanoByte.Common.Values.Design;
 ///   Add this attribute to the struct:
 ///   <code>[TypeConverter(typeof(ClassDerivedFromThisOne))]</code>
 /// </example>
+[RequiresUnreferencedCode("Uses reflection to discover properties.")]
 public abstract class ValueTypeConverter<T> : TypeConverter where T : struct
 {
     #region Capabilities

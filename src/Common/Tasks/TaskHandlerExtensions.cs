@@ -45,7 +45,7 @@ public static class TaskHandlerExtensions
     /// <param name="title">A title for the data.</param>
     /// <param name="data">The data to display.</param>
     /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-    public static void OutputLow<T>(this ITaskHandler handler, [Localizable(true)] string title, IEnumerable<T> data)
+    public static void OutputLow<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(this ITaskHandler handler, [Localizable(true)] string title, IEnumerable<T> data)
     {
         if (handler.Verbosity > Verbosity.Batch) handler.Output(title, data);
         else Log.Info($"{title}:\n{StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? ""))}");
@@ -58,7 +58,7 @@ public static class TaskHandlerExtensions
     /// <param name="title">A title for the data.INamed</param>
     /// <param name="data">The data to display.</param>
     /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
-    public static void OutputLow<T>(this ITaskHandler handler, [Localizable(true)] string title, NamedCollection<T> data)
+    public static void OutputLow<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(this ITaskHandler handler, [Localizable(true)] string title, NamedCollection<T> data)
         where T : INamed
     {
         if (handler.Verbosity > Verbosity.Batch) handler.Output(title, data);

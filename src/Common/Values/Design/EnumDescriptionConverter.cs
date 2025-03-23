@@ -14,7 +14,7 @@ namespace NanoByte.Common.Values.Design;
 ///   <code>[TypeConverter(typeof(DescriptionEnumConverter&lt;NameOfEnum&gt;))]</code>
 /// </example>
 /// <remarks><see cref="DescriptionAttribute.Description"/> is used as the case-insensitive string representation (falls back to element name).</remarks>
-public class EnumDescriptionConverter<T> : TypeConverter
+public class EnumDescriptionConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T> : TypeConverter
     where T : struct
 {
     private static object GetEnumFromString(string stringValue)

@@ -41,7 +41,7 @@ public static class AnsiCli
     /// Formats data as a table.
     /// </summary>
     /// <param name="data">The data to format.</param>
-    public static IRenderable Table<T>(IEnumerable<T> data)
+    public static IRenderable Table<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(IEnumerable<T> data)
     {
         var table = new Table().RoundedBorder();
         var getters = new List<MethodInfo>();
@@ -84,7 +84,7 @@ public static class AnsiCli
     /// <param name="data">The data to show as nodes in the tree.</param>
     /// <param name="separator">The character used to split <see cref="INamed.Name"/>s into tree levels.</param>
     [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
-    public static IRenderable Tree<T>(NamedCollection<T> data, char separator = Named.TreeSeparator)
+    public static IRenderable Tree<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(NamedCollection<T> data, char separator = Named.TreeSeparator)
         where T : INamed
     {
         static IRenderable Node(T entry) => Table(new NamedCollection<T> {entry});

@@ -13,7 +13,7 @@ namespace NanoByte.Common.Values.Design;
 ///   Add this attribute to the type:
 ///   <code>[TypeConverter(typeof(StringConstructorConverter&lt;NameOfType&gt;))]</code>
 /// </example>
-public class StringConstructorConverter<T> : TypeConverter
+public class StringConstructorConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T> : TypeConverter
 {
     /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)

@@ -12,6 +12,9 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Provides easy serialization to XML files.
 /// </summary>
+#if NET
+[UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "[DynamicallyAccessedMembers] captures top-level types, library users are expected to manually root transient dependencies.")]
+#endif
 public static class XmlStorage
 {
     /// <summary>
@@ -27,7 +30,7 @@ public static class XmlStorage
     /// <returns>The loaded object.</returns>
     /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T LoadXml<T>(Stream stream)
+    public static T LoadXml<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Stream stream)
     {
         #region Sanity checks
         if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -58,7 +61,7 @@ public static class XmlStorage
     /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
     /// <remarks>Uses <see cref="AtomicRead"/> internally.</remarks>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T LoadXml<T>([Localizable(false)] string path)
+    public static T LoadXml<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>([Localizable(false)] string path)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -89,7 +92,7 @@ public static class XmlStorage
     /// <returns>The loaded object.</returns>
     /// <exception cref="InvalidDataException">A problem occurred while deserializing the XML data.</exception>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T FromXmlString<T>([Localizable(false)] string data)
+    public static T FromXmlString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>([Localizable(false)] string data)
     {
         #region Sanity checks
         if (data == null) throw new ArgumentNullException(nameof(data));
@@ -106,7 +109,7 @@ public static class XmlStorage
     /// <param name="data">The object to be stored.</param>
     /// <param name="stream">The stream to write the encoded XML data to.</param>
     /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
-    public static void SaveXml(this object data, Stream stream, [Localizable(false)] string? stylesheet = null)
+    public static void SaveXml<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, Stream stream, [Localizable(false)] string? stylesheet = null) where T : notnull
     {
         #region Sanity checks
         if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -162,7 +165,7 @@ public static class XmlStorage
     /// <exception cref="IOException">A problem occurred while writing the file.</exception>
     /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
     /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
-    public static void SaveXml<T>(this T data, [Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
+    public static void SaveXml<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
         where T : notnull
     {
         #region Sanity checks
@@ -181,7 +184,7 @@ public static class XmlStorage
     /// <param name="data">The object to be stored.</param>
     /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
     /// <returns>A string containing the XML code.</returns>
-    public static string ToXmlString(this object data, [Localizable(false)] string? stylesheet = null)
+    public static string ToXmlString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string? stylesheet = null) where T : notnull
     {
         using var stream = new MemoryStream();
         SaveXml(data, stream, stylesheet);

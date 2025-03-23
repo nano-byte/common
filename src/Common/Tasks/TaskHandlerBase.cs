@@ -139,7 +139,7 @@ public abstract class TaskHandlerBase : ITaskHandler
     public abstract void Output(string title, string message);
 
     /// <inheritdoc/>
-    public virtual void Output<T>(string title, IEnumerable<T> data)
+    public virtual void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(string title, IEnumerable<T> data)
     {
         #region Sanity checks
         if (title == null) throw new ArgumentNullException(nameof(title));
@@ -150,7 +150,7 @@ public abstract class TaskHandlerBase : ITaskHandler
     }
 
     /// <inheritdoc />
-    public virtual void Output<T>(string title, NamedCollection<T> data)
+    public virtual void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(string title, NamedCollection<T> data)
         where T : INamed
     {
         #region Sanity checks

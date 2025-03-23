@@ -9,8 +9,9 @@
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0' Or '$(TargetFramework)'=='net9.0'">
-    <!-- Run nullability analysis only on annotated frameworks -->
+    <!-- Run nullability and trimming analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
+    <IsTrimmable>True</IsTrimmable>
   </PropertyGroup>
 
   <!-- Dependencies -->

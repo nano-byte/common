@@ -115,7 +115,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
     }
 
     /// <inheritdoc/>
-    public override void Output<T>(string title, IEnumerable<T> data)
+    public override void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(string title, IEnumerable<T> data)
     {
         #region Sanity checks
         if (title == null) throw new ArgumentNullException(nameof(title));
@@ -139,7 +139,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
     }
 
     /// <inheritdoc/>
-    public override void Output<T>(string title, NamedCollection<T> data)
+    public override void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(string title, NamedCollection<T> data)
     {
         #region Sanity checks
         if (title == null) throw new ArgumentNullException(nameof(title));

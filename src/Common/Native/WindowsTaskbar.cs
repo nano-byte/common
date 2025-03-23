@@ -10,6 +10,7 @@ namespace NanoByte.Common.Native;
 /// Provides helper methods and API calls specific to the Windows 7 or newer taskbar.
 /// </summary>
 [SupportedOSPlatform("windows6.1")]
+[RequiresUnreferencedCode("Uses COM interop.")]
 [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global"), SuppressMessage("ReSharper", "UnusedMember.Local"), SuppressMessage("ReSharper", "EmptyGeneralCatchClause")]
 public static partial class WindowsTaskbar
 {

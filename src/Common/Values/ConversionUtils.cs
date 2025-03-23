@@ -6,6 +6,7 @@ namespace NanoByte.Common.Values;
 /// <summary>
 /// Helpers for working with type converters.
 /// </summary>
+[RequiresUnreferencedCode("Uses reflection to discover the converter type.")]
 public static class ConversionUtils
 {
     /// <summary>

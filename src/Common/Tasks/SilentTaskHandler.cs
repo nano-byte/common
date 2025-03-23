@@ -50,11 +50,11 @@ public class SilentTaskHandler : ITaskHandler
         => Log.Info($"{title}\n{message}");
 
     /// <inheritdoc/>
-    public void Output<T>(string title, IEnumerable<T> data)
+    public void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(string title, IEnumerable<T> data)
         => Output(title, StringUtils.Join(Environment.NewLine, data.Select(x => x?.ToString() ?? "")));
 
     /// <inheritdoc/>
-    public void Output<T>(string title, NamedCollection<T> data) where T : INamed
+    public void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(string title, NamedCollection<T> data) where T : INamed
         => Output(title, data.AsEnumerable());
 
     /// <inheritdoc/>
