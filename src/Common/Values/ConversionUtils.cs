@@ -6,13 +6,16 @@ namespace NanoByte.Common.Values;
 /// <summary>
 /// Helpers for working with type converters.
 /// </summary>
-[RequiresUnreferencedCode("Uses reflection to discover the converter type.")]
+#if NET
+[UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Getting converters is trim compatible when avoiding Nullable<T>.")]
+#endif
 public static class ConversionUtils
 {
     /// <summary>
     /// Uses the type converter for <typeparamref name="TType"/> (set with <see cref="TypeConverterAttribute"/>) to parse a string.
     /// </summary>
-    public static TType ConvertFromString<TType>(this string value)
+    public static TType ConvertFromString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TType>(this string value)
+        where TType : notnull
         => (TType)TypeDescriptor
                  .GetConverter(typeof(TType))
                  .ConvertFromInvariantString(value ?? throw new ArgumentNullException(nameof(value)))!;
@@ -21,9 +24,10 @@ public static class ConversionUtils
     /// Uses the type converter for <typeparamref name="TType"/> (set with <see cref="TypeConverterAttribute"/>) to generate a string.
     /// </summary>
     [Pure]
-    public static string ConvertToString<TType>(this TType value)
+    public static string ConvertToString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TType>(this TType value)
+        where TType : notnull
         => TypeDescriptor
           .GetConverter(typeof(TType))
-          .ConvertToInvariantString(value ?? throw new ArgumentNullException(nameof(value)))
+          .ConvertToInvariantString(value)
         ?? "";
 }
