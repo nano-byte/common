@@ -6,9 +6,7 @@ namespace NanoByte.Common.Values;
 /// <summary>
 /// Helpers for working with type converters.
 /// </summary>
-#if NET
 [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Getting converters is trim compatible when avoiding Nullable<T>.")]
-#endif
 public static class ConversionUtils
 {
     /// <summary>

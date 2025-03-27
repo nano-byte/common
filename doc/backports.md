@@ -57,6 +57,7 @@ The following types were introduced in .NET 5.0 and are backported to .NET Frame
 - [UnsupportedOSPlatformAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformattribute)
 - [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicallyaccessedmembersattribute)
 - [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.requiresunreferencedcodeattribute)
+- [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unconditionalsuppressmessageattribute)
 
 The following types were introduced in .NET 6.0 and are backported to .NET Framework:
 

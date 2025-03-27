@@ -12,9 +12,7 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Provides easy serialization to XML files.
 /// </summary>
-#if NET
 [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "[DynamicallyAccessedMembers] captures top-level types, library users are expected to manually root transient dependencies.")]
-#endif
 public static class XmlStorage
 {
     /// <summary>
