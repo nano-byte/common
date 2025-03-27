@@ -88,11 +88,18 @@ public struct AppInfo
         if (assembly == null) return new AppInfo();
 
         var assemblyInfo = assembly.GetName();
+        string? path = assembly.Location.EmptyAsNull() // unset for single-file deployments
+#if NET
+                    ?? Environment.ProcessPath
+#endif
+            ;
+
         return new AppInfo
         {
             Name = assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? assemblyInfo.Name,
             ProductName = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product ?? assemblyInfo.Name,
-            Version = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion?.GetLeftPartAtFirstOccurrence('+'), // trim Git commit hash
+            Version = path?.To(FileVersionInfo.GetVersionInfo).ProductVersion?.GetLeftPartAtFirstOccurrence('+') // trim Git commit hash
+                   ?? assemblyInfo.Version?.ToString(),
             Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description,
             Copyright = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright
         };
