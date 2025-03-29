@@ -40,7 +40,7 @@ public class ArrayUtilsTest
     public void TestSequencedEquals()
     {
         new[] {"A", "B", "C"}.SequencedEquals(["A", "B", "C"]).Should().BeTrue();
-        Array.Empty<string>().SequencedEquals(Array.Empty<string>()).Should().BeTrue();
+        Array.Empty<string>().SequencedEquals([]).Should().BeTrue();
         new[] {"A", "B", "C"}.SequencedEquals(["C", "B", "A"]).Should().BeFalse();
         new[] {"A", "B", "C"}.SequencedEquals(["X", "Y", "Z"]).Should().BeFalse();
         new[] {"A", "B", "C"}.SequencedEquals(["A", "B"]).Should().BeFalse();

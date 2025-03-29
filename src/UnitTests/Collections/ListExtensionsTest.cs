@@ -32,7 +32,7 @@ public class ListExtensionsTest
     [Fact]
     public void TestGetAddedElements()
     {
-        new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(new[] {"A", "C", "E", "G"}).Should().Equal("B", "H");
-        new[] {"C", "D"}.GetAddedElements(new[] {"A", "D"}).Should().Equal("C");
+        new[] {"A", "B", "C", "E", "G", "H"}.GetAddedElements(["A", "C", "E", "G"]).Should().Equal("B", "H");
+        new[] {"C", "D"}.GetAddedElements(["A", "D"]).Should().Equal("C");
     }
 }

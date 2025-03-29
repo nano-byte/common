@@ -11,33 +11,33 @@ public class EnumerableExtensionsTest
     [Fact]
     public void TestContainsAny()
     {
-        new[] {1, 2}.ContainsAny(new[] {2}).Should().BeTrue();
-        new[] {1, 2}.ContainsAny(new[] {2, 3}).Should().BeTrue();
-        new[] {1, 2}.ContainsAny(new[] {3}).Should().BeFalse();
-        Array.Empty<int>().ContainsAny(new[] {2}).Should().BeFalse();
+        new[] {1, 2}.ContainsAny([2]).Should().BeTrue();
+        new[] {1, 2}.ContainsAny([2, 3]).Should().BeTrue();
+        new[] {1, 2}.ContainsAny([3]).Should().BeFalse();
+        Array.Empty<int>().ContainsAny([2]).Should().BeFalse();
         new[] {1, 2}.ContainsAny(Array.Empty<int>()).Should().BeFalse();
     }
 
     [Fact]
     public void TestSequencedEquals()
     {
-        new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
+        new[] {"A", "B", "C"}.ToList().SequencedEquals(["A", "B", "C"]).Should().BeTrue();
         Array.Empty<string>().ToList().SequencedEquals(Array.Empty<string>()).Should().BeTrue();
-        new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"C", "B", "A"}).Should().BeFalse();
-        new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
-        new[] {"A", "B", "C"}.ToList().SequencedEquals(new[] {"A", "B"}).Should().BeFalse();
-        new[] {new object()}.ToList().SequencedEquals(new[] {new object()}).Should().BeFalse();
+        new[] {"A", "B", "C"}.ToList().SequencedEquals(["C", "B", "A"]).Should().BeFalse();
+        new[] {"A", "B", "C"}.ToList().SequencedEquals(["X", "Y", "Z"]).Should().BeFalse();
+        new[] {"A", "B", "C"}.ToList().SequencedEquals(["A", "B"]).Should().BeFalse();
+        new[] {new object()}.ToList().SequencedEquals([new object()]).Should().BeFalse();
     }
 
     [Fact]
     public void TestUnsequencedEquals()
     {
-        new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B", "C"}).Should().BeTrue();
+        new[] {"A", "B", "C"}.UnsequencedEquals(["A", "B", "C"]).Should().BeTrue();
         Array.Empty<string>().UnsequencedEquals(Array.Empty<string>()).Should().BeTrue();
-        new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"C", "B", "A"}).Should().BeTrue();
-        new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"X", "Y", "Z"}).Should().BeFalse();
-        new[] {"A", "B", "C"}.UnsequencedEquals(new[] {"A", "B"}).Should().BeFalse();
-        new[] {new object()}.UnsequencedEquals(new[] {new object()}).Should().BeFalse();
+        new[] {"A", "B", "C"}.UnsequencedEquals(["C", "B", "A"]).Should().BeTrue();
+        new[] {"A", "B", "C"}.UnsequencedEquals(["X", "Y", "Z"]).Should().BeFalse();
+        new[] {"A", "B", "C"}.UnsequencedEquals(["A", "B"]).Should().BeFalse();
+        new[] {new object()}.UnsequencedEquals([new object()]).Should().BeFalse();
     }
 
     [Fact]

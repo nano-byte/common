@@ -23,12 +23,11 @@ public class PathsTest
         File.WriteAllText(Path.Combine(subdirPath, "1.txt"), @"1");
         File.WriteAllText(Path.Combine(subdirPath, "2.inf"), @"a");
 
-        Paths.ResolveFiles(new[]
-        {
+        Paths.ResolveFiles([
             Path.Combine(tempDir, "*.txt"), // Wildcard
             Path.Combine(tempDir, "d.nfo"), // Specific file
             subdirPath // Directory with implicit default wildcard
-        }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
+        ], "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
             Path.Combine(tempDir, "a.txt"),
             Path.Combine(tempDir, "b.txt"),
             Path.Combine(tempDir, "d.nfo"),
@@ -49,12 +48,11 @@ public class PathsTest
         File.WriteAllText(Path.Combine(subdirPath, "1.txt"), @"1");
         File.WriteAllText(Path.Combine(subdirPath, "2.inf"), @"a");
 
-        Paths.ResolveFiles(new[]
-        {
+        Paths.ResolveFiles([
             "*.txt", // Wildcard
             "d.nfo", // Specific file
             subdirPath // Directory with implicit default wildcard
-        }, "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
+        ], "*.txt").Select(x => x.FullName).Should().BeEquivalentTo(
             Path.Combine(Environment.CurrentDirectory, "a.txt"),
             Path.Combine(Environment.CurrentDirectory, "b.txt"),
             Path.Combine(Environment.CurrentDirectory, "d.nfo"),

@@ -28,12 +28,11 @@ public class PreExecutedCompositeCommandTest
     {
         var executeCalls = new List<int>(3);
         var undoCalls = new List<int>(3);
-        var command = new PreExecutedCompositeCommand(new IUndoCommand[]
-        {
+        var command = new PreExecutedCompositeCommand([
             new MockCommand(() => executeCalls.Add(0), () => undoCalls.Add(0)),
             new MockCommand(() => executeCalls.Add(1), () => undoCalls.Add(1)),
             new MockCommand(() => executeCalls.Add(2), () => undoCalls.Add(2))
-        });
+        ]);
 
         command.Execute();
         executeCalls.Should().BeEmpty(because: "First execution should do nothing");

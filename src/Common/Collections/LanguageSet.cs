@@ -57,7 +57,7 @@ public class LanguageSet : SortedSet<CultureInfo>
         if (string.IsNullOrEmpty(value)) yield break;
 
         // Replace list by parsing input string split by spaces
-        foreach (string langCode in value.Split(new [] {' '}, StringSplitOptions.RemoveEmptyEntries))
+        foreach (string langCode in value.Split([' '], StringSplitOptions.RemoveEmptyEntries))
         {
             CultureInfo? language = null;
             try

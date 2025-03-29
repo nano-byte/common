@@ -39,7 +39,7 @@ public class Netrc : Dictionary<string, NetworkCredential>
         }
 
         foreach (string token in File.ReadAllText(path)
-                                     .Split(new[] {' ', '\n', '\r', '\t'}, StringSplitOptions.RemoveEmptyEntries))
+                                     .Split([' ', '\n', '\r', '\t'], StringSplitOptions.RemoveEmptyEntries))
         {
             switch (previousToken)
             {
