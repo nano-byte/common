@@ -52,7 +52,7 @@ public static partial class Locations
 
         return codeBase ?? AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 #else
-        return AppContext.BaseDirectory;
+        return AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 #endif
     }
 
