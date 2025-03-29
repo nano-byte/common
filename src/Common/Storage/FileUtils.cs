@@ -25,8 +25,8 @@ public static class FileUtils
     {
         try
         {
-            path1 = path1?.To(Path.GetFullPath);
-            path2 = path2?.To(Path.GetFullPath);
+            path1 = path1?.To(Path.GetFullPath).TrimEnd(Path.DirectorySeparatorChar);
+            path2 = path2?.To(Path.GetFullPath).TrimEnd(Path.DirectorySeparatorChar);
         }
         catch (ArgumentException) {}
 

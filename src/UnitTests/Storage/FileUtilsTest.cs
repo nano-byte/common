@@ -27,6 +27,10 @@ public class FileUtilsTest
     public void TestPathEqualsDirectorySeparator()
         => FileUtils.PathEquals("abc/def", Path.Combine("abc", "def")).Should().BeTrue();
 
+    [Fact]
+    public void TestPathEqualsTrailingSLash()
+        => FileUtils.PathEquals(Locations.InstallBase, Locations.InstallBase + "/").Should().BeTrue();
+
     [SkippableFact]
     public void TestPathEqualsCaseSensitive()
     {
