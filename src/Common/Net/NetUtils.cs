@@ -10,9 +10,6 @@ using NanoByte.Common.Native;
 
 #if NET
 using System.Net.Http;
-#endif
-
-#if NET
 using System.Threading.Tasks;
 using Tmds.DBus;
 #endif
@@ -30,25 +27,38 @@ public static class NetUtils
     /// <remarks>Uses classic Linux environment variables: http_proxy, http_proxy_user, http_proxy_pass</remarks>
     public static void ApplyProxy()
     {
-        if (GetProxyAddress() is {} address)
+#if NETFRAMEWORK
+        try
         {
-            var proxy = new WebProxy(address);
-            if (GetProxyCredentials() is {} credentials)
-                proxy.Credentials = credentials;
+#endif
+            if (GetProxyAddress() is {} address)
+            {
+                var proxy = new WebProxy(address);
+                if (GetProxyCredentials() is {} credentials)
+                    proxy.Credentials = credentials;
 
-            WebRequest.DefaultWebProxy = proxy;
+                WebRequest.DefaultWebProxy = proxy;
 #if NET
-            HttpClient.DefaultProxy = proxy;
+                HttpClient.DefaultProxy = proxy;
 #endif
+            }
+            else
+            {
+                if (WebRequest.DefaultWebProxy is {} defaultWebProxy)
+                    defaultWebProxy.Credentials ??= CredentialCache.DefaultCredentials;
+#if NET
+                HttpClient.DefaultProxy.Credentials ??= CredentialCache.DefaultCredentials;
+#endif
+            }
+#if NETFRAMEWORK
         }
-        else
+        #region Error handling
+        catch (System.Configuration.ConfigurationErrorsException ex)
         {
-            if (WebRequest.DefaultWebProxy is {} defaultWebProxy)
-                defaultWebProxy.Credentials ??= CredentialCache.DefaultCredentials;
-#if NET
-            HttpClient.DefaultProxy.Credentials ??= CredentialCache.DefaultCredentials;
-#endif
+            Log.Warn("Failed to apply proxy configuration due problems with .NET Framework machine configuration", ex);
         }
+        #endregion
+#endif
     }
 
     private static Uri? GetProxyAddress()
