@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Shared/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/AnsiCli/AnsiCli.csproj" />
+    <Project Path="Samples/WinForms/WinForms.csproj" />
+  </Folder>
+  <Project Path="Common/Common.csproj" />
+  <Project Path="Common.AnsiCli/Common.AnsiCli.csproj" />
+  <Project Path="Common.WinForms/Common.WinForms.csproj" />
+  <Project Path="UnitTests/UnitTests.csproj" />
+</Solution>
