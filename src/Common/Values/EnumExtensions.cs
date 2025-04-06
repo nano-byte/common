@@ -45,7 +45,7 @@ public static class EnumExtensions
     /// Gets the first <typeparamref name="TAttribute"/> attribute set on the <paramref name="target"/> enum value.
     /// </summary>
     [Pure]
-    public static TAttribute? GetEnumAttribute<TAttribute>(this Enum target) where TAttribute : Attribute
+    public static TAttribute? GetEnumAttribute<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TAttribute>(this Enum target) where TAttribute : Attribute
         => target.GetType()
                  .GetField((target ?? throw new ArgumentNullException(nameof(target))).ToString())
                 ?.GetCustomAttribute<TAttribute>();
