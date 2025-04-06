@@ -145,7 +145,7 @@ public static class NetUtils
                 return SafeNativeMethods.InternetGetConnectedState(out _, 0) ? Connectivity.Normal : Connectivity.None;
 
 #if NET
-            if (UnixUtils.IsLinux)
+            if (UnixUtils.IsLinux && Guards.NotTrimmed)
             {
                 var networkManager = Connection.System.CreateProxy<INetworkManager>("org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager");
                 if (networkManager.GetAsync<uint>("Connectivity").Result is INetworkManager.ConnectivityNone or INetworkManager.ConnectivityPortal)

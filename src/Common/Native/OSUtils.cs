@@ -107,7 +107,7 @@ public static class OSUtils
             if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.SystemRequired);
 
 #if NET
-            if (UnixUtils.IsLinux)
+            if (UnixUtils.IsLinux && Guards.NotTrimmed)
             {
                 var login = Connection.System.CreateProxy<IManager>("org.freedesktop.login1", "/org/freedesktop/login1");
                 return login.InhibitAsync("idle", AppInfo.Current.Name ?? "App", reason, "block").Result;
@@ -137,7 +137,7 @@ public static class OSUtils
             if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.DisplayRequired);
 
 #if NET
-            if (UnixUtils.IsLinux)
+            if (UnixUtils.IsLinux && Guards.NotTrimmed)
             {
                 var screenSaver = Connection.Session.CreateProxy<IScreenSaver>("org.freedesktop.ScreenSaver", "/org/freedesktop/ScreenSaver");
                 uint cookie = screenSaver.InhibitAsync(AppInfo.Current.Name ?? "App", reason).Result;
