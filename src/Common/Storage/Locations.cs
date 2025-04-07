@@ -104,7 +104,7 @@ public static partial class Locations
 
     #region ACL Security
     /// <summary>
-    /// ACL that gives normal users read and execute access and admins and the the system full access.
+    /// ACL that gives normal users read and execute access and admins and the system full access.
     /// </summary>
     private static readonly DirectorySecurity? _secureSharedAcl;
 

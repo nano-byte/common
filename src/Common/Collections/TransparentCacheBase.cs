@@ -54,7 +54,7 @@ namespace NanoByte.Common.Collections
         protected abstract TValue Retrieve(TKey key);
 
         /// <summary>
-        /// Removes the the entry with the specified <paramref name="key"/> from the cache.
+        /// Removes the entry with the specified <paramref name="key"/> from the cache.
         /// </summary>
         /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
         [CollectionAccess(CollectionAccessType.ModifyExistingContent)]

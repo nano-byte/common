@@ -17,7 +17,7 @@ public sealed partial class InputBox : Form
     }
 
     /// <summary>
-    /// Displays an input box asking the the user to input some text.
+    /// Displays an input box asking the user to input some text.
     /// </summary>
     /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
     /// <param name="title">The window title to use.</param>
