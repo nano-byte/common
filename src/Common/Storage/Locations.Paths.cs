@@ -1,7 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if !NET
 using System.Reflection;
+#endif
 
 namespace NanoByte.Common.Storage;
 
@@ -237,8 +239,18 @@ partial class Locations
 
         try
         {
-            return new[] {InstallBase, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!}
-                  .Concat((Environment.GetEnvironmentVariable("PATH") ?? "").Split(Path.PathSeparator))
+            IEnumerable<string?> directories =
+            [
+                InstallBase,
+#if NET
+                Path.GetDirectoryName(Environment.ProcessPath),
+#else
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.EmptyAsNull()),
+#endif
+                ..(Environment.GetEnvironmentVariable("PATH") ?? "").Split([Path.PathSeparator], StringSplitOptions.RemoveEmptyEntries)
+            ];
+            return directories
+                  .WhereNotNull()
                   .Select(x => Path.Combine(x, fileName))
                   .First(File.Exists);
         }
