@@ -495,7 +495,7 @@ public static partial class WindowsUtils
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
 
-        if (!NativeMethods.DeviceIoControl(handle, NativeMethods.FSCTL_GET_REPARSE_POINT, IntPtr.Zero, 0, out var buffer, Marshal.SizeOf(typeof(NativeMethods.REPARSE_DATA_BUFFER)), out _, IntPtr.Zero))
+        if (!NativeMethods.DeviceIoControl(handle, NativeMethods.FSCTL_GET_REPARSE_POINT, IntPtr.Zero, 0, out var buffer, Marshal.SizeOf(new NativeMethods.REPARSE_DATA_BUFFER()), out _, IntPtr.Zero))
         {
             int error = Marshal.GetLastWin32Error();
             if (error == Win32ErrorNotAReparsePoint)
