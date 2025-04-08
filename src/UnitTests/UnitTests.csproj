@@ -6,6 +6,7 @@
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Unit test for NanoByte.Common.</Description>
     <TargetFrameworks>net48;net9.0</TargetFrameworks>
+    <SignAssembly>False</SignAssembly>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <IsPackable>False</IsPackable>
     <DeterministicSourcePaths>False</DeterministicSourcePaths>

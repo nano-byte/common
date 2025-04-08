@@ -8,6 +8,7 @@
     <TargetFrameworks>net48;net9.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
+    <SignAssembly>False</SignAssembly>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <IsPackable>False</IsPackable>
     <DeterministicSourcePaths>False</DeterministicSourcePaths>

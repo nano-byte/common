@@ -8,8 +8,6 @@
     <TargetFrameworks>net20;net40;net45;net462;net472;net8.0;net9.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <NoWarn>$(NoWarn);SYSLIB0014;NU5104</NoWarn><!-- deprecated WebClient, pre-release version of Mono.Posix -->
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Core'">
     <!-- .NET Core MSBuild does not support legacy ResGen -->
