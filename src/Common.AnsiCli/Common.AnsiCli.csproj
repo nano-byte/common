@@ -11,7 +11,7 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0' Or '$(TargetFramework)'=='net9.0'">
     <!-- Run nullability and trimming analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
-    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
   <!-- Dependencies -->

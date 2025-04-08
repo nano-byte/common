@@ -83,6 +83,7 @@ public struct AppInfo
     /// <summary>
     /// Loads application information for a specific <see cref="Assembly"/>.
     /// </summary>
+    [UnconditionalSuppressMessage("SingleFile", "IL3000", Justification = "Automatic fallback to Environment.ProcessPath.")]
     public static AppInfo Load(Assembly? assembly)
     {
         if (assembly == null) return new AppInfo();
