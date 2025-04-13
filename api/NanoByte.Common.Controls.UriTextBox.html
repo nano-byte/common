@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class UriTextBox | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class UriTextBox | NanoByte.Common ">
+      
+      <meta name="description" content="A  designed specifically for entering URIs.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.19.9/apiSpec/new?filename=NanoByte_Common_Controls_UriTextBox.md&amp;value=---%0Auid%3A%20NanoByte.Common.Controls.UriTextBox%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Controls.UriTextBox">
+
+
+
+  <h1 id="NanoByte_Common_Controls_UriTextBox" data-uid="NanoByte.Common.Controls.UriTextBox" class="text-break">
+Class UriTextBox  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.WinForms.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html">HintTextBox</a> designed specifically for entering URIs.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class UriTextBox : HintTextBox</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">MarshalByRefObject</span></div>
+      <div><span class="xref">Component</span></div>
+      <div><span class="xref">Control</span></div>
+      <div><span class="xref">TextBoxBase</span></div>
+      <div><span class="xref">TextBox</span></div>
+      <div><a class="xref" href="NanoByte.Common.Controls.HintTextBox.html">HintTextBox</a></div>
+      <div><span class="xref">UriTextBox</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_OnEnter_System_EventArgs_">HintTextBox.OnEnter(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_OnLeave_System_EventArgs_">HintTextBox.OnLeave(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_OnTextChanged_System_EventArgs_">HintTextBox.OnTextChanged(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_OnBackColorChanged_System_EventArgs_">HintTextBox.OnBackColorChanged(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_ClearButtonClicked">HintTextBox.ClearButtonClicked</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_OnClearButtonClicked_System_EventArgs_">HintTextBox.OnClearButtonClicked(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_ForeColor">HintTextBox.ForeColor</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_Text">HintTextBox.Text</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_HintText">HintTextBox.HintText</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_IsHintTextVisible">HintTextBox.IsHintTextVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="NanoByte.Common.Controls.HintTextBox.html#NanoByte_Common_Controls_HintTextBox_ShowClearButton">HintTextBox.ShowClearButton</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_IO_Stream_">BinaryStorage.SaveBinary&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_String_">BinaryStorage.SaveBinary&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_IO_Stream_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, Stream, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString__1___0_System_String_">XmlStorage.ToXmlString&lt;T&gt;(T, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Controls.ControlExtensions.html#NanoByte_Common_Controls_ControlExtensions_BeginInvoke_System_Windows_Forms_Control_System_Action_">ControlExtensions.BeginInvoke(Control, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Controls.ControlExtensions.html#NanoByte_Common_Controls_ControlExtensions_Invoke_System_Windows_Forms_Control_System_Action_">ControlExtensions.Invoke(Control, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Controls.ControlExtensions.html#NanoByte_Common_Controls_ControlExtensions_Invoke__1_System_Windows_Forms_Control_System_Func___0__">ControlExtensions.Invoke&lt;T&gt;(Control, Func&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Native.WinFormsUtils.html#NanoByte_Common_Native_WinFormsUtils_EnableWindowDrag_System_Windows_Forms_Control_">WinFormsUtils.EnableWindowDrag(Control)</a>
+  </div>
+  </dd></dl>
+
+
+
+  <h2 id="NanoByte_Common_Controls_UriTextBox_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Will turn red for invalid input and green for valid input. Will not allow focus to be lost for invalid input.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox__ctor_" data-uid="NanoByte.Common.Controls.UriTextBox.#ctor*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox__ctor" data-uid="NanoByte.Common.Controls.UriTextBox.#ctor">
+  UriTextBox()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UriTextBox()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_AllowRelative_" data-uid="NanoByte.Common.Controls.UriTextBox.AllowRelative*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_AllowRelative" data-uid="NanoByte.Common.Controls.UriTextBox.AllowRelative">
+  AllowRelative
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>When set to <code>true</code> relative URIs are accepted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AllowRelative { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_HttpOnly_" data-uid="NanoByte.Common.Controls.UriTextBox.HttpOnly*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_HttpOnly" data-uid="NanoByte.Common.Controls.UriTextBox.HttpOnly">
+  HttpOnly
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>When set to <code>true</code> only URIs starting with &quot;http:&quot; or &quot;https:&quot; will be considered valid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HttpOnly { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_IsValid_" data-uid="NanoByte.Common.Controls.UriTextBox.IsValid*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_IsValid" data-uid="NanoByte.Common.Controls.UriTextBox.IsValid">
+  IsValid
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the currently entered text is a valid URI.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsValid { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_Uri_" data-uid="NanoByte.Common.Controls.UriTextBox.Uri*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_Uri" data-uid="NanoByte.Common.Controls.UriTextBox.Uri">
+  Uri
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The <a class="xref" href="NanoByte.Common.Controls.UriTextBox.html#NanoByte_Common_Controls_UriTextBox_Uri">Uri</a> represented by this text box.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Browsable(false)]
+public Uri? Uri { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Uri</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Controls_UriTextBox_Uri_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>It is always safe to set this property. It is safe to read this property after validation has been performed.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">UriFormatException</span></dt>
+    <dd><p>Trying to read while <span class="xref">System.Windows.Forms.TextBox.Text</span> is not a well-formed <a class="xref" href="NanoByte.Common.Controls.UriTextBox.html#NanoByte_Common_Controls_UriTextBox_Uri">Uri</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_OnDragDrop_" data-uid="NanoByte.Common.Controls.UriTextBox.OnDragDrop*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_OnDragDrop_System_Windows_Forms_DragEventArgs_" data-uid="NanoByte.Common.Controls.UriTextBox.OnDragDrop(System.Windows.Forms.DragEventArgs)">
+  OnDragDrop(DragEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.DragDrop</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnDragDrop(DragEventArgs drgevent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>drgevent</code> <span class="xref">DragEventArgs</span></dt>
+    <dd><p>A <span class="xref">System.Windows.Forms.DragEventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_OnDragEnter_" data-uid="NanoByte.Common.Controls.UriTextBox.OnDragEnter*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_OnDragEnter_System_Windows_Forms_DragEventArgs_" data-uid="NanoByte.Common.Controls.UriTextBox.OnDragEnter(System.Windows.Forms.DragEventArgs)">
+  OnDragEnter(DragEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.DragEnter</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnDragEnter(DragEventArgs drgevent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>drgevent</code> <span class="xref">DragEventArgs</span></dt>
+    <dd><p>A <span class="xref">System.Windows.Forms.DragEventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_UriTextBox_ValidateUri_" data-uid="NanoByte.Common.Controls.UriTextBox.ValidateUri*"></a>
+
+  <h3 id="NanoByte_Common_Controls_UriTextBox_ValidateUri_System_String_" data-uid="NanoByte.Common.Controls.UriTextBox.ValidateUri(System.String)">
+  ValidateUri(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if a text represents a valid <a class="xref" href="NanoByte.Common.Controls.UriTextBox.html#NanoByte_Common_Controls_UriTextBox_Uri">Uri</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool ValidateUri(string text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>text</code> <span class="xref">string</span></dt>
+    <dd><p>Text to check.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.19.9/src/Common.WinForms/Controls/UriTextBox.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
