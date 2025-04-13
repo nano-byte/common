@@ -18,22 +18,22 @@ Newer versions of .NET often introduce features that can be backported to earlie
 
 The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:
 
-- <xref:System.Collections.Generic.HashSet`1>
-- <xref:System.Collections.Generic.SortedSet`1>
+- [HashSet<T>](https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1)
+- [SortedSet<T>](https://learn.microsoft.com/dotnet/api/system.collections.generic.sortedset-1)
 
 ## Cancellation
 
 The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:
 
-- <xref:System.Threading.CancellationToken>
-- <xref:System.Threading.CancellationTokenSource>
+- [CancellationToken](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken)
+- [CancellationTokenSource](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource)
 - [CancellationTokenRegistration](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokenregistration)
 
 ## Progress
 
 The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
-- <xref:System.IProgress`1>
+- [IProgress<T>](https://learn.microsoft.com/dotnet/api/system.iprogress-1)
 - [Progress<T>](https://learn.microsoft.com/dotnet/api/system.progress-1)
 
 ## Utils
@@ -57,7 +57,7 @@ The following types were introduced in .NET 5.0 and are backported to .NET Frame
 - [UnsupportedOSPlatformAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformattribute)
 - [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicallyaccessedmembersattribute)
 - [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.requiresunreferencedcodeattribute)
-   [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.requiresdynamiccodeattribute)
+- [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.requiresdynamiccodeattribute)
 - [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unconditionalsuppressmessageattribute)
 
 The following types were introduced in .NET 6.0 and are backported to .NET Framework:
