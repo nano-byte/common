@@ -175,7 +175,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>El inicio de '{0}' requiere privilegios de administrador.</value>
+    <value>La ejecución de '{0}' requiere privilegios de administrador.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
