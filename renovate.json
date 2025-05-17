@@ -20,6 +20,7 @@
     },
     {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
+      "matchPackageNames": ["System.Resources.Extensions"],
       "groupName": "Microsoft Extensions",
       "automerge": true,
       "automergeType": "branch",
@@ -31,7 +32,7 @@
     },
     {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
-      "matchPackageNames": ["System.Memory", "System.ValueTuple"],
+      "matchPackageNames": ["System.Resources.Extensions", "System.Memory", "System.ValueTuple"],
       "matchUpdateTypes": ["major", "minor"],
       "enabled": false
     }
