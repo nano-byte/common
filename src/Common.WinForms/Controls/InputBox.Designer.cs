@@ -43,6 +43,7 @@ namespace NanoByte.Common.Controls
             this.labelPrompt.Size = new System.Drawing.Size(244, 69);
             this.labelPrompt.TabIndex = 0;
             this.labelPrompt.Text = "(Prompt)";
+            this.labelPrompt.UseMnemonic = false;
             // 
             // buttonOK
             // 

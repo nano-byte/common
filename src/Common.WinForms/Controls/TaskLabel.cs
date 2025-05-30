@@ -28,6 +28,7 @@ public sealed class TaskLabel : Label, IProgress<TaskSnapshot>
             }
 
             Text = value.ToString();
+            UseMnemonic = false;
 
             ForeColor = value.State switch
             {

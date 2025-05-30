@@ -60,6 +60,7 @@ namespace NanoByte.Common.Controls
             this.labelMessage.Size = new System.Drawing.Size(136, 48);
             this.labelMessage.TabIndex = 0;
             this.labelMessage.Text = "(Message)";
+            this.labelMessage.UseMnemonic = false;
             this.labelMessage.Click += new System.EventHandler(this.label_Click);
             // 
             // textLog
@@ -109,6 +110,7 @@ namespace NanoByte.Common.Controls
             this.labelDetails.Size = new System.Drawing.Size(82, 19);
             this.labelDetails.TabIndex = 1;
             this.labelDetails.Text = "(Inner message)";
+            this.labelDetails.UseMnemonic = false;
             this.labelDetails.Click += new System.EventHandler(this.label_Click);
             // 
             // ErrorBox
