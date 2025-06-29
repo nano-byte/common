@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DropDownButton | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DropDownButton | NanoByte.Common ">
+      
+      <meta name="description" content="A  with an additional drop-down menu.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.19.10/apiSpec/new?filename=NanoByte_Common_Controls_DropDownButton.md&amp;value=---%0Auid%3A%20NanoByte.Common.Controls.DropDownButton%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Controls.DropDownButton">
+
+
+
+  <h1 id="NanoByte_Common_Controls_DropDownButton" data-uid="NanoByte.Common.Controls.DropDownButton" class="text-break">
+Class DropDownButton  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.WinForms.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A <span class="xref">System.Windows.Forms.Button</span> with an additional drop-down menu.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DropDownButton : Button</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">MarshalByRefObject</span></div>
+      <div><span class="xref">Component</span></div>
+      <div><span class="xref">Control</span></div>
+      <div><span class="xref">ButtonBase</span></div>
+      <div><span class="xref">Button</span></div>
+      <div><span class="xref">DropDownButton</span></div>
+    </dd>
+  </dl>
+
+
+
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_IO_Stream_">BinaryStorage.SaveBinary&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_String_">BinaryStorage.SaveBinary&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_IO_Stream_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, Stream, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString__1___0_System_String_">XmlStorage.ToXmlString&lt;T&gt;(T, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(object, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Native.WinFormsUtils.html#NanoByte_Common_Native_WinFormsUtils_AddShieldIcon_System_Windows_Forms_Button_">WinFormsUtils.AddShieldIcon(Button)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Controls.ControlExtensions.html#NanoByte_Common_Controls_ControlExtensions_BeginInvoke_System_Windows_Forms_Control_System_Action_">ControlExtensions.BeginInvoke(Control, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Controls.ControlExtensions.html#NanoByte_Common_Controls_ControlExtensions_Invoke_System_Windows_Forms_Control_System_Action_">ControlExtensions.Invoke(Control, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Controls.ControlExtensions.html#NanoByte_Common_Controls_ControlExtensions_Invoke__1_System_Windows_Forms_Control_System_Func___0__">ControlExtensions.Invoke&lt;T&gt;(Control, Func&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Native.WinFormsUtils.html#NanoByte_Common_Native_WinFormsUtils_EnableWindowDrag_System_Windows_Forms_Control_">WinFormsUtils.EnableWindowDrag(Control)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton__ctor_" data-uid="NanoByte.Common.Controls.DropDownButton.#ctor*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton__ctor" data-uid="NanoByte.Common.Controls.DropDownButton.#ctor">
+  DropDownButton()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DropDownButton()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_ContextMenuStrip_" data-uid="NanoByte.Common.Controls.DropDownButton.ContextMenuStrip*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_ContextMenuStrip" data-uid="NanoByte.Common.Controls.DropDownButton.ContextMenuStrip">
+  ContextMenuStrip
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <span class="xref">System.Windows.Forms.ContextMenuStrip</span> associated with this control.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Browsable(false)]
+public override ContextMenuStrip? ContextMenuStrip { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ContextMenuStrip</span></dt>
+    <dd><p>The <span class="xref">System.Windows.Forms.ContextMenuStrip</span> for this control, or null if there is no <span class="xref">System.Windows.Forms.ContextMenuStrip</span>. The default is null.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_DropDownMenuStrip_" data-uid="NanoByte.Common.Controls.DropDownButton.DropDownMenuStrip*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_DropDownMenuStrip" data-uid="NanoByte.Common.Controls.DropDownButton.DropDownMenuStrip">
+  DropDownMenuStrip
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContextMenuStrip? DropDownMenuStrip { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ContextMenuStrip</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_ShowSplit_" data-uid="NanoByte.Common.Controls.DropDownButton.ShowSplit*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_ShowSplit" data-uid="NanoByte.Common.Controls.DropDownButton.ShowSplit">
+  ShowSplit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Splits the button into a conventional &quot;button&quot; part and a &quot;drop down&quot; part rather than treating the entire button as a &quot;drop down&quot; button.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowSplit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_GetPreferredSize_" data-uid="NanoByte.Common.Controls.DropDownButton.GetPreferredSize*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_GetPreferredSize_System_Drawing_Size_" data-uid="NanoByte.Common.Controls.DropDownButton.GetPreferredSize(System.Drawing.Size)">
+  GetPreferredSize(Size)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieves the size of a rectangular area into which a control can be fitted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Size GetPreferredSize(Size proposedSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>proposedSize</code> <span class="xref">Size</span></dt>
+    <dd><p>The custom-sized area for a control.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Size</span></dt>
+    <dd><p>An ordered pair of type <span class="xref">System.Drawing.Size</span> representing the width and height of a rectangle.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_IsInputKey_" data-uid="NanoByte.Common.Controls.DropDownButton.IsInputKey*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_IsInputKey_System_Windows_Forms_Keys_" data-uid="NanoByte.Common.Controls.DropDownButton.IsInputKey(System.Windows.Forms.Keys)">
+  IsInputKey(Keys)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified key is a regular input key or a special key that requires preprocessing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override bool IsInputKey(Keys keyData)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyData</code> <span class="xref">Keys</span></dt>
+    <dd><p>One of the <span class="xref">System.Windows.Forms.Keys</span> values.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p>true if the specified key is a regular input key; otherwise, false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnEnabledChanged_" data-uid="NanoByte.Common.Controls.DropDownButton.OnEnabledChanged*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnEnabledChanged_System_EventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnEnabledChanged(System.EventArgs)">
+  OnEnabledChanged(EventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.EnabledChanged</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnEnabledChanged(EventArgs e)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>e</code> <span class="xref">EventArgs</span></dt>
+    <dd><p>An <span class="xref">System.EventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnGotFocus_" data-uid="NanoByte.Common.Controls.DropDownButton.OnGotFocus*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnGotFocus_System_EventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnGotFocus(System.EventArgs)">
+  OnGotFocus(EventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.GotFocus</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnGotFocus(EventArgs e)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>e</code> <span class="xref">EventArgs</span></dt>
+    <dd><p>An <span class="xref">System.EventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnKeyDown_" data-uid="NanoByte.Common.Controls.DropDownButton.OnKeyDown*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnKeyDown_System_Windows_Forms_KeyEventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnKeyDown(System.Windows.Forms.KeyEventArgs)">
+  OnKeyDown(KeyEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L155"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnKeyDown(KeyEventArgs kevent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>kevent</code> <span class="xref">KeyEventArgs</span></dt>
+    <dd><p>A <span class="xref">System.Windows.Forms.KeyEventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnKeyUp_" data-uid="NanoByte.Common.Controls.DropDownButton.OnKeyUp*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnKeyUp_System_Windows_Forms_KeyEventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnKeyUp(System.Windows.Forms.KeyEventArgs)">
+  OnKeyUp(KeyEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnKeyUp(KeyEventArgs kevent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>kevent</code> <span class="xref">KeyEventArgs</span></dt>
+    <dd><p>A <span class="xref">System.Windows.Forms.KeyEventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnLostFocus_" data-uid="NanoByte.Common.Controls.DropDownButton.OnLostFocus*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnLostFocus_System_EventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnLostFocus(System.EventArgs)">
+  OnLostFocus(EventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnLostFocus(EventArgs e)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>e</code> <span class="xref">EventArgs</span></dt>
+    <dd><p>An <span class="xref">System.EventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnMouseDown_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseDown*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnMouseDown_System_Windows_Forms_MouseEventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+  OnMouseDown(MouseEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseDown(MouseEventArgs e)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>e</code> <span class="xref">MouseEventArgs</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnMouseEnter_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseEnter*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnMouseEnter_System_EventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseEnter(System.EventArgs)">
+  OnMouseEnter(EventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.OnMouseEnter(System.EventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseEnter(EventArgs e)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>e</code> <span class="xref">EventArgs</span></dt>
+    <dd><p>An <span class="xref">System.EventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnMouseLeave_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseLeave*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnMouseLeave_System_EventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseLeave(System.EventArgs)">
+  OnMouseLeave(EventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseLeave(EventArgs e)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>e</code> <span class="xref">EventArgs</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnMouseUp_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseUp*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnMouseUp_System_Windows_Forms_MouseEventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+  OnMouseUp(MouseEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseUp(MouseEventArgs mevent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mevent</code> <span class="xref">MouseEventArgs</span></dt>
+    <dd><p>A <span class="xref">System.Windows.Forms.MouseEventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_OnPaint_" data-uid="NanoByte.Common.Controls.DropDownButton.OnPaint*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_OnPaint_System_Windows_Forms_PaintEventArgs_" data-uid="NanoByte.Common.Controls.DropDownButton.OnPaint(System.Windows.Forms.PaintEventArgs)">
+  OnPaint(PaintEventArgs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">System.Windows.Forms.ButtonBase.OnPaint(System.Windows.Forms.PaintEventArgs)</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPaint(PaintEventArgs pevent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pevent</code> <span class="xref">PaintEventArgs</span></dt>
+    <dd><p>A <span class="xref">System.Windows.Forms.PaintEventArgs</span> that contains the event data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_ShowDropDownMenu_" data-uid="NanoByte.Common.Controls.DropDownButton.ShowDropDownMenu*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_ShowDropDownMenu" data-uid="NanoByte.Common.Controls.DropDownButton.ShowDropDownMenu">
+  ShowDropDownMenu()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L441"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ShowDropDownMenu()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Controls_DropDownButton_WndProc_" data-uid="NanoByte.Common.Controls.DropDownButton.WndProc*"></a>
+
+  <h3 id="NanoByte_Common_Controls_DropDownButton_WndProc_System_Windows_Forms_Message__" data-uid="NanoByte.Common.Controls.DropDownButton.WndProc(System.Windows.Forms.Message@)">
+  WndProc(ref Message)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Processes Windows messages.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+protected override void WndProc(ref Message m)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>m</code> <span class="xref">Message</span></dt>
+    <dd><p>The Windows <span class="xref">System.Windows.Forms.Message</span> to process.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.19.10/src/Common.WinForms/Controls/DropDownButton.cs/#L45" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
