@@ -193,6 +193,58 @@ public static class MathUtils
     public static double RadianToDegree(this double value) => value * (180 / PI);
 
     /// <summary>
+    /// Performs smooth (trigonometric) interpolation between two or more values.
+    /// </summary>
+    /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length.</param>
+    /// <param name="values">The value checkpoints.</param>
+    [Pure]
+    public static float InterpolateTrigonometric(this float factor, params float[] values)
+    {
+        if (values.Length < 2) throw new ArgumentException("You need to pass at least two values.", nameof(values));
+
+        // Handle value overflows
+        if (factor <= 0) return values[0];
+        if (factor >= values.Length - 1) return values[^1];
+
+        // Isolate index shift from factor
+        int index = (int)factor;
+
+        // Remove index shift from factor
+        factor -= index;
+
+        // Apply sinus smoothing to factor
+        factor = (float)(-0.5 * Cos(factor * PI) + 0.5);
+
+        return values[index] + factor * (values[index + 1] - values[index]);
+    }
+
+    /// <summary>
+    /// Performs smooth (trigonometric) interpolation between two or more values.
+    /// </summary>
+    /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length.</param>
+    /// <param name="values">The value checkpoints.</param>
+    [Pure]
+    public static double InterpolateTrigonometric(double factor, params double[] values)
+    {
+        if (values.Length < 2) throw new ArgumentException("You need to pass at least two values.", nameof(values));
+
+        // Handle value overflows
+        if (factor <= 0) return values[0];
+        if (factor >= values.Length - 1) return values[^1];
+
+        // Isolate index shift from factor
+        int index = (int)Floor(factor);
+
+        // Remove index shift from factor
+        factor -= index;
+
+        // Apply sinus smoothing to factor
+        factor = -0.5 * Cos(factor * PI) + 0.5;
+
+        return values[index] + factor * (values[index + 1] - values[index]);
+    }
+
+    /// <summary>
     /// Combines two byte arrays via Exclusive Or.
     /// </summary>
     [Pure]
