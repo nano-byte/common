@@ -161,6 +161,38 @@ public static class MathUtils
             (int)Round(size.Height * factor.Height));
 
     /// <summary>
+    /// Converts an angle in degrees to radians.
+    /// </summary>
+    /// <param name="value">The angle in degrees.</param>
+    /// <returns>The angle in radians.</returns>
+    [Pure]
+    public static float DegreeToRadian(this float value) => value * ((float)PI / 180);
+
+    /// <summary>
+    /// Converts an angle in degrees to radians.
+    /// </summary>
+    /// <param name="value">The angle in degrees.</param>
+    /// <returns>The angle in radians.</returns>
+    [Pure]
+    public static double DegreeToRadian(this double value) => value * (PI / 180);
+
+    /// <summary>
+    /// Converts an angle in radians to degrees.
+    /// </summary>
+    /// <param name="value">The angle in radians.</param>
+    /// <returns>The angle in degrees.</returns>
+    [Pure]
+    public static float RadianToDegree(this float value) => value * (180 / (float)PI);
+
+    /// <summary>
+    /// Converts an angle in radians to degrees.
+    /// </summary>
+    /// <param name="value">The angle in radians.</param>
+    /// <returns>The angle in degrees.</returns>
+    [Pure]
+    public static double RadianToDegree(this double value) => value * (180 / PI);
+
+    /// <summary>
     /// Combines two byte arrays via Exclusive Or.
     /// </summary>
     [Pure]
