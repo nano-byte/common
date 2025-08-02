@@ -245,6 +245,30 @@ public static class MathUtils
     }
 
     /// <summary>
+    /// Generates a Gaussian kernel.
+    /// </summary>
+    /// <param name="sigma">The standard deviation of the Gaussian distribution.</param>
+    /// <param name="kernelSize">The size of the kernel. Should be an uneven number.</param>
+    [Pure]
+    public static double[] GaussKernel(double sigma, int kernelSize)
+    {
+        var kernel = new double[kernelSize];
+        double sum = 0;
+        for (int i = 0; i < kernel.Length; i++)
+        {
+            // ReSharper disable once PossibleLossOfFraction
+            double x = i - kernelSize / 2;
+            sum += kernel[i] = Exp(-x * x / (2 * sigma * sigma));
+        }
+
+        // Normalize
+        for (int i = 0; i < kernel.Length; i++)
+            kernel[i] /= sum;
+
+        return kernel;
+    }
+
+    /// <summary>
     /// Combines two byte arrays via Exclusive Or.
     /// </summary>
     [Pure]
