@@ -22,9 +22,7 @@ public static class MathUtils
     public static int Modulo(this int value, int modulo)
     {
         int remainder = value % modulo;
-        return remainder < 0
-            ? remainder + modulo
-            : remainder;
+        return remainder < 0 ? remainder + modulo : remainder;
     }
 
     /// <summary>
@@ -34,10 +32,28 @@ public static class MathUtils
     public static long Modulo(this long value, long modulo)
     {
         long remainder = value % modulo;
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-        return remainder < 0
-            ? remainder + modulo
-            : remainder;
+        return remainder < 0 ? remainder + modulo : remainder;
+    }
+
+    /// <summary>
+    /// Calculates the mathematical modulo of a value.
+    /// </summary>
+    [Pure]
+    public static float Modulo(this float value, float modulo)
+    {
+        float remainder = value % modulo;
+        return remainder < 0 ? remainder + modulo : remainder;
+    }
+
+    /// <summary>
+    /// Calculates the mathematical modulo of a value.
+    /// </summary>
+    [Pure]
+    public static double Modulo(this double value, double modulo)
+    {
+        double remainder = value % modulo;
+        return remainder < 0 ? remainder + modulo : remainder;
+    }
     }
 
     /// <summary>
