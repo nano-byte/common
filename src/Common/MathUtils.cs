@@ -54,6 +54,81 @@ public static class MathUtils
         double remainder = value % modulo;
         return remainder < 0 ? remainder + modulo : remainder;
     }
+
+    /// <summary>
+    /// Makes a value stay within a certain range.
+    /// </summary>
+    /// <param name="value">The number to clamp.</param>
+    /// <param name="min">The minimum number to return.</param>
+    /// <param name="max">The maximum number to return.</param>
+    /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    [Pure]
+    public static int Clamp(this int value, int min = 0, int max = 1)
+    {
+        if (value < min) return min;
+        if (value > max) return max;
+        if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+    }
+
+    /// <summary>
+    /// Makes a value stay within a certain range.
+    /// </summary>
+    /// <param name="value">The number to clamp.</param>
+    /// <param name="min">The minimum number to return.</param>
+    /// <param name="max">The maximum number to return.</param>
+    /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    [Pure]
+    public static long Clamp(this long value, long min = 0, long max = 1)
+    {
+        if (value < min) return min;
+        if (value > max) return max;
+        if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+    }
+
+    /// <summary>
+    /// Makes a value stay within a certain range.
+    /// </summary>
+    /// <param name="value">The number to clamp.</param>
+    /// <param name="min">The minimum number to return.</param>
+    /// <param name="max">The maximum number to return.</param>
+    /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    [Pure]
+    public static float Clamp(this float value, float min = 0, float max = 1)
+    {
+        if (value < min) return min;
+        if (value > max) return max;
+        if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+    }
+
+    /// <summary>
+    /// Makes a value stay within a certain range.
+    /// </summary>
+    /// <param name="value">The number to clamp.</param>
+    /// <param name="min">The minimum number to return.</param>
+    /// <param name="max">The maximum number to return.</param>
+    /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    [Pure]
+    public static double Clamp(this double value, double min = 0, double max = 1)
+    {
+        if (value < min) return min;
+        if (value > max) return max;
+        if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
     }
 
     /// <summary>
