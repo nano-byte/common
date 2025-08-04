@@ -1,6 +1,6 @@
 # NanoByte.Common
 
-[![Build](https://github.com/nano-byte/common/workflows/Build/badge.svg?branch=master)](https://github.com/nano-byte/common/actions?query=workflow%3ABuild)
+[![Build](https://github.com/nano-byte/common/actions/workflows/build.yml/badge.svg)](https://github.com/nano-byte/common/actions/workflows/build.yml)
 [![API documentation](https://img.shields.io/badge/api-docs-orange.svg)](https://common.nano-byte.net/)
 
 [![NanoByte.Common](https://img.shields.io/nuget/v/NanoByte.Common.svg)](https://www.nuget.org/packages/NanoByte.Common/)  
