@@ -31,6 +31,7 @@ public static class UpdateUtils
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
     public static TOut To<TIn, TOut>(this TIn value, [InstantHandle] Func<TIn, TOut> action)
+        where TIn : notnull
         => (action ?? throw new ArgumentNullException(nameof(action))).Invoke(value);
 
     /// <summary>
