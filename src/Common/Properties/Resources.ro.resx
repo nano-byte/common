@@ -251,7 +251,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>A încercat să citească de la poziția {0}. Aceasta se află la {1} octeți distanță de poziția fluxului de bază {2}, dar bufferul de căutare nu poate suporta decât o diferență de {3} octeți.</value>
+    <value>A încercat să citească de la poziția {0}. Aceasta este la {1} octeți distanță de poziția fluxului de bază {2}, dar bufferul de căutare nu poate suporta decât o diferență de {3} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
