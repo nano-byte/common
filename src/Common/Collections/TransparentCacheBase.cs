@@ -5,35 +5,35 @@
 using System.Collections.Concurrent;
 #endif
 
-namespace NanoByte.Common.Collections
+namespace NanoByte.Common.Collections;
+
+/// <summary>
+/// Transparently caches retrieval requests, passed through to a template method on first request.
+/// </summary>
+/// <remarks>This class is thread-safe.</remarks>
+/// <typeparam name="TKey">The type of keys used to request values.</typeparam>
+/// <typeparam name="TValue">The type of values returned.</typeparam>
+public abstract class TransparentCacheBase<TKey, TValue>
+    where TKey : notnull
 {
-    /// <summary>
-    /// Transparently caches retrieval requests, passed through to a template method on first request.
-    /// </summary>
-    /// <remarks>This class is thread-safe.</remarks>
-    /// <typeparam name="TKey">The type of keys used to request values.</typeparam>
-    /// <typeparam name="TValue">The type of values returned.</typeparam>
-    public abstract class TransparentCacheBase<TKey, TValue>
-        where TKey : notnull
-    {
 #if NET20
         private readonly Dictionary<TKey, TValue> _lookup = [];
         private readonly object _lock = new();
 #else
-        private readonly ConcurrentDictionary<TKey, TValue> _lookup = [];
+    private readonly ConcurrentDictionary<TKey, TValue> _lookup = [];
 #endif
 
-        /// <summary>
-        /// Retrieves a value from the cache.
-        /// </summary>
-        [CollectionAccess(CollectionAccessType.Read)]
-        public TValue this[TKey key]
+    /// <summary>
+    /// Retrieves a value from the cache.
+    /// </summary>
+    [CollectionAccess(CollectionAccessType.Read)]
+    public TValue this[TKey key]
+    {
+        get
         {
-            get
-            {
-                #region Sanity checks
-                if (key == null) throw new ArgumentNullException(nameof(key));
-                #endregion
+            #region Sanity checks
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            #endregion
 
 #if NET20
                 lock (_lock)
@@ -43,41 +43,40 @@ namespace NanoByte.Common.Collections
                     return result;
                 }
 #else
-                return _lookup.GetOrAdd(key, Retrieve);
+            return _lookup.GetOrAdd(key, Retrieve);
 #endif
-            }
         }
+    }
 
-        /// <summary>
-        /// Template method used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.
-        /// </summary>
-        protected abstract TValue Retrieve(TKey key);
+    /// <summary>
+    /// Template method used to retrieve values not yet in the cache. Usually only called once per key. May be called multiple times in multi-threaded scenarios.
+    /// </summary>
+    protected abstract TValue Retrieve(TKey key);
 
-        /// <summary>
-        /// Removes the entry with the specified <paramref name="key"/> from the cache.
-        /// </summary>
-        /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
-        [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
-        public bool Remove(TKey key)
-        {
+    /// <summary>
+    /// Removes the entry with the specified <paramref name="key"/> from the cache.
+    /// </summary>
+    /// <returns><c>true</c> if a matching entry was found and removed; <c>false</c> if no matching entry was in the cache.</returns>
+    [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
+    public bool Remove(TKey key)
+    {
 #if NET20
             lock (_lock)
                 return _lookup.Remove(key);
 #else
-            return _lookup.TryRemove(key, out _);
+        return _lookup.TryRemove(key, out _);
 #endif
-        }
+    }
 
-        /// <summary>
-        /// Removes all entries from the cache.
-        /// </summary>
-        [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
-        public void Clear()
-        {
+    /// <summary>
+    /// Removes all entries from the cache.
+    /// </summary>
+    [CollectionAccess(CollectionAccessType.ModifyExistingContent)]
+    public void Clear()
+    {
 #if NET20
             lock (_lock)
 #endif
-            _lookup.Clear();
-        }
+        _lookup.Clear();
     }
 }
