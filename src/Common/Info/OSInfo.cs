@@ -16,10 +16,22 @@ namespace NanoByte.Common.Info;
 public struct OSInfo
 {
     /// <summary>
-    /// The operating system platform (e.g. Windows NT).
+    /// The operating system platform (e.g., <c>Win32NT</c> or <c>win</c>).
     /// </summary>
     [XmlAttribute("platform")]
     public string Platform;
+
+    /// <summary>
+    /// The version of the operating system (e.g., <c>6.0</c> for Vista).
+    /// </summary>
+    [XmlAttribute("version")]
+    public string Version;
+
+    /// <summary>
+    /// The version of .NET running the current process.
+    /// </summary>
+    [XmlAttribute("dotnet-version")]
+    public string DotNetVersion;
 
 #if !NET20 && !NET40
     /// <summary>
@@ -36,40 +48,22 @@ public struct OSInfo
 #endif
 
     /// <summary>
-    /// The version of the operating system (e.g. 6.0 for Vista).
-    /// </summary>
-    [XmlAttribute("version")]
-    public string Version;
-
-    /// <summary>
-    /// The service pack level (e.g. "Service Pack 1").
-    /// </summary>
-    [XmlAttribute("service-pack"), DefaultValue("")]
-    public string ServicePack;
-
-    /// <summary>
-    /// The version of .NET.
-    /// </summary>
-    [XmlAttribute("framework-version")]
-    public string FrameworkVersion;
-
-    /// <summary>
     /// Information about the current operating system.
     /// </summary>
     public static OSInfo Current { get; } = GetCurrent();
 
     private static OSInfo GetCurrent() => new()
     {
-#if NET20 || NET40
-        FrameworkVersion = Environment.Version.ToString(),
-        Platform = Environment.OSVersion.Platform.ToString(),
+#if NET
+        Platform = RuntimeInformation.RuntimeIdentifier.GetLeftPartAtFirstOccurrence('-'),
 #else
-        FrameworkVersion = RuntimeInformation.FrameworkDescription,
-        Platform = RuntimeInformation.OSDescription,
+        Platform = Environment.OSVersion.Platform.ToString(),
+#endif
+        Version = Environment.OSVersion.Version.ToString(),
+        DotNetVersion = Environment.Version.ToString(),
+#if !NET20 && !NET40
         OSArchitecture = RuntimeInformation.OSArchitecture,
         ProcessArchitecture = RuntimeInformation.ProcessArchitecture,
 #endif
-        Version = Environment.OSVersion.Version.ToString(),
-        ServicePack = Environment.OSVersion.ServicePack
     };
 }
