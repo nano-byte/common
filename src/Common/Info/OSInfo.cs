@@ -48,7 +48,7 @@ public struct OSInfo
     public string ServicePack;
 
     /// <summary>
-    /// The version of the operating system (e.g. 6.0 for Vista).
+    /// The version of .NET.
     /// </summary>
     [XmlAttribute("framework-version")]
     public string FrameworkVersion;
