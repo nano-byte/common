@@ -61,8 +61,8 @@ public struct OSInfo
     private static OSInfo GetCurrent() => new()
     {
 #if NET20 || NET40
-            FrameworkVersion = Environment.Version.ToString(),
-            Platform = Environment.OSVersion.Platform.ToString(),
+        FrameworkVersion = Environment.Version.ToString(),
+        Platform = Environment.OSVersion.Platform.ToString(),
 #else
         FrameworkVersion = RuntimeInformation.FrameworkDescription,
         Platform = RuntimeInformation.OSDescription,
