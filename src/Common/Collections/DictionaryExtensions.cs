@@ -29,6 +29,7 @@ public static class DictionaryExtensions
             target.Add(key, value);
     }
 
+#if !NET
     /// <summary>
     /// Returns an existing element with a specific key from a dictionary or the value type's default value if it is missing.
     /// </summary>
@@ -36,16 +37,41 @@ public static class DictionaryExtensions
     /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
     /// <returns>The existing element or the default value of <typeparamref name="TValue"/>.</returns>
     [Pure]
-    public static TValue? GetOrDefault<TKey, TValue>([InstantHandle] this IDictionary<TKey, TValue> dictionary, TKey key)
-        where TKey : notnull
+    public static TValue? GetValueOrDefault<TKey, TValue>(
+#if NET20 || NET40
+        this IDictionary<TKey, TValue> dictionary,
+
+#else
+        this IReadOnlyDictionary<TKey, TValue> dictionary,
+#endif
+        TKey key)
+        => dictionary.GetValueOrDefault(key, default!);
+
+    /// <summary>
+    /// Returns an existing element with a specific key from a dictionary or a default value if it is missing.
+    /// </summary>
+    /// <param name="dictionary">The dictionary to get an element from.</param>
+    /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
+    /// <param name="defaultValue">The default value to return if the element is missing.</param>
+    /// <returns>The existing element or <paramref name="defaultValue"/>.</returns>
+    [Pure]
+    public static TValue GetValueOrDefault<TKey, TValue>(
+#if NET20 || NET40
+        this IDictionary<TKey, TValue> dictionary,
+
+#else
+        this IReadOnlyDictionary<TKey, TValue> dictionary,
+#endif
+        TKey key,
+        TValue defaultValue)
     {
         #region Sanity checks
         if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
         #endregion
 
-        dictionary.TryGetValue(key, out var value);
-        return value;
+        return dictionary.TryGetValue(key, out TValue? value) ? value : defaultValue;
     }
+#endif
 
     /// <summary>
     /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.

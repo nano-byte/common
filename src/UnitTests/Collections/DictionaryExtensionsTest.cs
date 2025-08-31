@@ -9,11 +9,21 @@ namespace NanoByte.Common.Collections;
 public class DictionaryExtensionsTest
 {
     [Fact]
-    public void TestGetOrDefault()
+    public void TestGetValueOrDefaultNullable()
     {
         var dict = new Dictionary<string, string> {{"x", "a"}};
-        dict.GetOrDefault("x").Should().Be("a");
-        dict.GetOrDefault("y").Should().BeNull();
+        dict.GetValueOrDefault("x").Should().Be("a");
+        dict.GetValueOrDefault("y").Should().BeNull();
+        dict.GetValueOrDefault("y", "default").Should().Be("default");
+    }
+
+    [Fact]
+    public void TestGetValueOrDefaultNonNullable()
+    {
+        var dict = new Dictionary<string, int> {{"x", 1}};
+        dict.GetValueOrDefault("x").Should().Be(1);
+        dict.GetValueOrDefault("y").Should().Be(0);
+        dict.GetValueOrDefault("y", 2).Should().Be(2);
     }
 
     [Fact]
