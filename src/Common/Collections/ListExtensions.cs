@@ -96,7 +96,7 @@ public static class ListExtensions
     /// <param name="newList">The new list of elements; can be <c>null</c> (will be treated as an empty list).</param>
     /// <param name="oldList">The original list of elements; can be <c>null</c> (will be treated as an empty list).</param>
     /// <param name="comparer">An object that compares to elements to determine which one is bigger.</param>
-    /// <returns>An list of elements that were added.</returns>
+    /// <returns>A list of elements that were added.</returns>
     /// <remarks>Elements that are present in <paramref name="oldList"/> but not in <paramref name="newList"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
     [Pure]
     public static IList<T> GetAddedElements<T>(this IList<T>? newList, IList<T>? oldList, IComparer<T> comparer)
@@ -143,7 +143,7 @@ public static class ListExtensions
     /// </summary>
     /// <param name="newList">The new list of elements; can be <c>null</c> (will be treated as an empty list).</param>
     /// <param name="oldList">The original list of elements; can be <c>null</c> (will be treated as an empty list).</param>
-    /// <returns>An list of elements that were added.</returns>
+    /// <returns>A list of elements that were added.</returns>
     /// <remarks>Elements that are present in <paramref name="oldList"/> but not in <paramref name="newList"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
     [Pure]
     public static IList<T> GetAddedElements<T>(this IList<T>? newList, IList<T>? oldList)
