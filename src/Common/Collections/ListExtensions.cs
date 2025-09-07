@@ -99,7 +99,11 @@ public static class ListExtensions
     /// <returns>A list of elements that were added.</returns>
     /// <remarks>Elements that are present in <paramref name="oldList"/> but not in <paramref name="newList"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
     [Pure]
+#if NET20 || NET40
     public static IList<T> GetAddedElements<T>(this IList<T>? newList, IList<T>? oldList, IComparer<T> comparer)
+#else
+    public static IReadOnlyList<T> GetAddedElements<T>(this IReadOnlyList<T>? newList, IReadOnlyList<T>? oldList, IComparer<T> comparer)
+#endif
     {
         if (newList == null) return new T[0];
         if (oldList == null) return newList;
@@ -146,6 +150,10 @@ public static class ListExtensions
     /// <returns>A list of elements that were added.</returns>
     /// <remarks>Elements that are present in <paramref name="oldList"/> but not in <paramref name="newList"/> are ignored. Elements that are equal for <see cref="IComparable{T}.CompareTo"/> but have been otherwise modified will be added.</remarks>
     [Pure]
+#if NET20 || NET40
     public static IList<T> GetAddedElements<T>(this IList<T>? newList, IList<T>? oldList)
+#else
+    public static IReadOnlyList<T> GetAddedElements<T>(this IReadOnlyList<T>? newList, IReadOnlyList<T>? oldList)
+#endif
         where T : IComparable<T>, IEquatable<T> => GetAddedElements(newList, oldList, DefaultComparer<T>.Instance);
 }
