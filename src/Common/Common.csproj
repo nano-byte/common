@@ -22,7 +22,7 @@
 
   <!-- Dependencies -->
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="JetBrains.Annotations" Version="2025.2.2" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
