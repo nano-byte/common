@@ -19,7 +19,7 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Spectre.Console" Version="0.51.1" />
+    <PackageReference Include="Spectre.Console" Version="0.52.0" />
   </ItemGroup>
 
   <!-- Global usings -->
