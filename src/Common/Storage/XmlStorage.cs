@@ -194,6 +194,17 @@ public static class XmlStorage
         return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
     }
 
+    /// <summary>
+    /// Global overrides for XML serialization.
+    /// </summary>
+    /// <remarks>
+    /// Changing this value or its properties is not thread-safe.
+    /// When set to a non-null value, pre-generated XML serialization assemblies (sgen) are not used.
+    /// </remarks>
+    public static XmlAttributeOverrides? Overrides { get; set; }
+
     private static XmlSerializer GetSerializer(Type type)
-        => ExceptionUtils.Retry<COMException, XmlSerializer>(() => new XmlSerializer(type));
+        => Overrides == null
+            ? ExceptionUtils.Retry<COMException, XmlSerializer>(() => new XmlSerializer(type))
+            : new(type, Overrides);
 }
