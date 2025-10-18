@@ -9,6 +9,8 @@ namespace NanoByte.Common.Storage;
 /// <summary>
 /// Provides easy serialization to JSON files.
 /// </summary>
+[UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "[DynamicallyAccessedMembers] captures top-level types, library users are expected to manually root transient dependencies.")]
+[RequiresDynamicCode("JSON serialization requires dynamically creating types.")]
 public static class JsonStorage
 {
     /// <summary>
@@ -19,7 +21,7 @@ public static class JsonStorage
     /// <returns>The loaded object.</returns>
     /// <exception cref="InvalidDataException">A problem occurred while deserializing the JSON data.</exception>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T LoadJson<T>(Stream stream)
+    public static T LoadJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(Stream stream)
     {
         #region Sanity checks
         if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -53,7 +55,7 @@ public static class JsonStorage
     /// <exception cref="InvalidDataException">A problem occurred while deserializing the JSON data.</exception>
     /// <remarks>Uses <see cref="AtomicRead"/> internally.</remarks>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T LoadJson<T>([Localizable(false)] string path)
+    public static T LoadJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>([Localizable(false)] string path)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -84,7 +86,7 @@ public static class JsonStorage
     /// <returns>The loaded object.</returns>
     /// <exception cref="InvalidDataException">A problem occurred while deserializing the JSON data.</exception>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T FromJsonString<T>([Localizable(false)] string data)
+    public static T FromJsonString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>([Localizable(false)] string data)
     {
         #region Sanity checks
         if (data == null) throw new ArgumentNullException(nameof(data));
@@ -102,7 +104,7 @@ public static class JsonStorage
     /// <param name="data">The JSON string to be parsed.</param>
     /// <param name="anonymousType">An instance of the anonymous type to parse to.</param>
     /// <returns>The deserialized object.</returns>
-    public static T FromJsonString<T>(string data, T anonymousType)
+    public static T FromJsonString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(string data, T anonymousType)
         => JsonConvert.DeserializeAnonymousType(
                data ?? throw new ArgumentNullException(nameof(data)),
                anonymousType ?? throw new ArgumentNullException(nameof(anonymousType)))
@@ -114,7 +116,7 @@ public static class JsonStorage
     /// <typeparam name="T">The type of object to be saved in an JSON stream.</typeparam>
     /// <param name="data">The object to be stored.</param>
     /// <param name="stream">The stream to write the encoded JSON data to.</param>
-    public static void SaveJson<T>(this T data, Stream stream)
+    public static void SaveJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, Stream stream)
     {
         #region Sanity checks
         if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -135,7 +137,7 @@ public static class JsonStorage
     /// <exception cref="IOException">A problem occurred while writing the file.</exception>
     /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
     /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
-    public static void SaveJson<T>(this T data, [Localizable(false)] string path)
+    public static void SaveJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string path)
         where T : notnull
     {
         #region Sanity checks
@@ -154,7 +156,7 @@ public static class JsonStorage
     /// <typeparam name="T">The type of object to be saved in an JSON string.</typeparam>
     /// <param name="data">The object to be stored.</param>
     /// <returns>A string containing the JSON code.</returns>
-    public static string ToJsonString<T>(this T data)
+    public static string ToJsonString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data)
         where T : notnull
     {
         using var stream = new MemoryStream();
@@ -169,7 +171,7 @@ public static class JsonStorage
     /// <param name="data">The object to be parsed again.</param>
     /// <returns>The deserialized object.</returns>
     [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    public static T ReparseAsJson<T>(this object data)
+    public static T ReparseAsJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this object data)
         => FromJsonString<T>(data.ToJsonString());
 
     /// <summary>
@@ -179,6 +181,6 @@ public static class JsonStorage
     /// <param name="data">The object to be parsed again.</param>
     /// <param name="anonymousType">An instance of the anonymous type to parse to.</param>
     /// <returns>The deserialized object.</returns>
-    public static T ReparseAsJson<T>(this object data, T anonymousType)
+    public static T ReparseAsJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this object data, T anonymousType)
         => FromJsonString(data.ToJsonString(), anonymousType);
 }
