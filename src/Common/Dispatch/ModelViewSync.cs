@@ -110,13 +110,16 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
         where TSpecificModel : class, TModel
         where TSpecificView : class, TView
     {
+        #region Sanity checks
         if (create == null) throw new ArgumentNullException(nameof(create));
+        #endregion
 
 #if NET20
-            _createDispatcher.Add<TSpecificModel>(element => create(element).OfType<TView>());
+        _createDispatcher.Add<TSpecificModel>(element => create(element).OfType<TView>());
 #else
         _createDispatcher.Add(create);
 #endif
+
         if (update != null)
         {
             _updateDispatcher.Add((TSpecificModel element) =>
@@ -136,7 +139,9 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
         where TSpecificModel : class, TModel
         where TSpecificView : class, TView
     {
+        #region Sanity checks
         if (create == null) throw new ArgumentNullException(nameof(create));
+        #endregion
 
         RegisterMultiple(element => [create(element)], update);
     }
