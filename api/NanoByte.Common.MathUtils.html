@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MathUtils | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MathUtils | NanoByte.Common ">
+      
+      <meta name="description" content="Provides math-related utility functions.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.20.4/apiSpec/new?filename=NanoByte_Common_MathUtils.md&amp;value=---%0Auid%3A%20NanoByte.Common.MathUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.MathUtils">
+
+
+
+  <h1 id="NanoByte_Common_MathUtils" data-uid="NanoByte.Common.MathUtils" class="text-break">
+Class MathUtils  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides math-related utility functions.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class MathUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">MathUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_MathUtils_Clamp_" data-uid="NanoByte.Common.MathUtils.Clamp*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Clamp_System_Double_System_Double_System_Double_" data-uid="NanoByte.Common.MathUtils.Clamp(System.Double,System.Double,System.Double)">
+  Clamp(double, double, double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Makes a value stay within a certain range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static double Clamp(this double value, double min = 0, double max = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">double</span></dt>
+    <dd><p>The number to clamp.</p>
+</dd>
+    <dt><code>min</code> <span class="xref">double</span></dt>
+    <dd><p>The minimum number to return.</p>
+</dd>
+    <dt><code>max</code> <span class="xref">double</span></dt>
+    <dd><p>The maximum number to return.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">double</span></dt>
+    <dd><p>The <code class="paramref">value</code> if it was in range, otherwise <code class="paramref">min</code> or <code class="paramref">max</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Clamp_" data-uid="NanoByte.Common.MathUtils.Clamp*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Clamp_System_Int32_System_Int32_System_Int32_" data-uid="NanoByte.Common.MathUtils.Clamp(System.Int32,System.Int32,System.Int32)">
+  Clamp(int, int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Makes a value stay within a certain range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static int Clamp(this int value, int min = 0, int max = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">int</span></dt>
+    <dd><p>The number to clamp.</p>
+</dd>
+    <dt><code>min</code> <span class="xref">int</span></dt>
+    <dd><p>The minimum number to return.</p>
+</dd>
+    <dt><code>max</code> <span class="xref">int</span></dt>
+    <dd><p>The maximum number to return.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The <code class="paramref">value</code> if it was in range, otherwise <code class="paramref">min</code> or <code class="paramref">max</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Clamp_" data-uid="NanoByte.Common.MathUtils.Clamp*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Clamp_System_Int64_System_Int64_System_Int64_" data-uid="NanoByte.Common.MathUtils.Clamp(System.Int64,System.Int64,System.Int64)">
+  Clamp(long, long, long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Makes a value stay within a certain range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static long Clamp(this long value, long min = 0, long max = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">long</span></dt>
+    <dd><p>The number to clamp.</p>
+</dd>
+    <dt><code>min</code> <span class="xref">long</span></dt>
+    <dd><p>The minimum number to return.</p>
+</dd>
+    <dt><code>max</code> <span class="xref">long</span></dt>
+    <dd><p>The maximum number to return.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">long</span></dt>
+    <dd><p>The <code class="paramref">value</code> if it was in range, otherwise <code class="paramref">min</code> or <code class="paramref">max</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Clamp_" data-uid="NanoByte.Common.MathUtils.Clamp*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Clamp_System_Single_System_Single_System_Single_" data-uid="NanoByte.Common.MathUtils.Clamp(System.Single,System.Single,System.Single)">
+  Clamp(float, float, float)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Makes a value stay within a certain range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static float Clamp(this float value, float min = 0, float max = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">float</span></dt>
+    <dd><p>The number to clamp.</p>
+</dd>
+    <dt><code>min</code> <span class="xref">float</span></dt>
+    <dd><p>The minimum number to return.</p>
+</dd>
+    <dt><code>max</code> <span class="xref">float</span></dt>
+    <dd><p>The maximum number to return.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">float</span></dt>
+    <dd><p>The <code class="paramref">value</code> if it was in range, otherwise <code class="paramref">min</code> or <code class="paramref">max</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_DegreeToRadian_" data-uid="NanoByte.Common.MathUtils.DegreeToRadian*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_DegreeToRadian_System_Double_" data-uid="NanoByte.Common.MathUtils.DegreeToRadian(System.Double)">
+  DegreeToRadian(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts an angle in degrees to radians.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static double DegreeToRadian(this double value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">double</span></dt>
+    <dd><p>The angle in degrees.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">double</span></dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_DegreeToRadian_" data-uid="NanoByte.Common.MathUtils.DegreeToRadian*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_DegreeToRadian_System_Single_" data-uid="NanoByte.Common.MathUtils.DegreeToRadian(System.Single)">
+  DegreeToRadian(float)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts an angle in degrees to radians.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static float DegreeToRadian(this float value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">float</span></dt>
+    <dd><p>The angle in degrees.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">float</span></dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_EqualsTolerance_" data-uid="NanoByte.Common.MathUtils.EqualsTolerance*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_EqualsTolerance_System_Double_System_Double_System_Double_" data-uid="NanoByte.Common.MathUtils.EqualsTolerance(System.Double,System.Double,System.Double)">
+  EqualsTolerance(double, double, double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compares two floating-point values for equality, allowing for a certain <code class="paramref">tolerance</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static bool EqualsTolerance(this double a, double b, double tolerance = 1E-05)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <span class="xref">double</span></dt>
+    <dd></dd>
+    <dt><code>b</code> <span class="xref">double</span></dt>
+    <dd></dd>
+    <dt><code>tolerance</code> <span class="xref">double</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_EqualsTolerance_" data-uid="NanoByte.Common.MathUtils.EqualsTolerance*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_EqualsTolerance_System_Single_System_Single_System_Single_" data-uid="NanoByte.Common.MathUtils.EqualsTolerance(System.Single,System.Single,System.Single)">
+  EqualsTolerance(float, float, float)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compares two floating-point values for equality, allowing for a certain <code class="paramref">tolerance</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static bool EqualsTolerance(this float a, float b, float tolerance = 1E-05)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <span class="xref">float</span></dt>
+    <dd></dd>
+    <dt><code>b</code> <span class="xref">float</span></dt>
+    <dd></dd>
+    <dt><code>tolerance</code> <span class="xref">float</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_GaussKernel_" data-uid="NanoByte.Common.MathUtils.GaussKernel*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_GaussKernel_System_Double_System_Int32_" data-uid="NanoByte.Common.MathUtils.GaussKernel(System.Double,System.Int32)">
+  GaussKernel(double, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Generates a Gaussian kernel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static double[] GaussKernel(double sigma, int kernelSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sigma</code> <span class="xref">double</span></dt>
+    <dd><p>The standard deviation of the Gaussian distribution.</p>
+</dd>
+    <dt><code>kernelSize</code> <span class="xref">int</span></dt>
+    <dd><p>The size of the kernel. Should be an uneven number.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">double</span>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_InterpolateTrigonometric_" data-uid="NanoByte.Common.MathUtils.InterpolateTrigonometric*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_InterpolateTrigonometric_System_Double_System_Double___" data-uid="NanoByte.Common.MathUtils.InterpolateTrigonometric(System.Double,System.Double[])">
+  InterpolateTrigonometric(double, params double[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Performs smooth (trigonometric) interpolation between two or more values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static double InterpolateTrigonometric(double factor, params double[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>factor</code> <span class="xref">double</span></dt>
+    <dd><p>A factor between 0 and <code class="paramref">values</code>.Length.</p>
+</dd>
+    <dt><code>values</code> <span class="xref">double</span>[]</dt>
+    <dd><p>The value checkpoints.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">double</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_InterpolateTrigonometric_" data-uid="NanoByte.Common.MathUtils.InterpolateTrigonometric*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_InterpolateTrigonometric_System_Single_System_Single___" data-uid="NanoByte.Common.MathUtils.InterpolateTrigonometric(System.Single,System.Single[])">
+  InterpolateTrigonometric(float, params float[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Performs smooth (trigonometric) interpolation between two or more values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static float InterpolateTrigonometric(this float factor, params float[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>factor</code> <span class="xref">float</span></dt>
+    <dd><p>A factor between 0 and <code class="paramref">values</code>.Length.</p>
+</dd>
+    <dt><code>values</code> <span class="xref">float</span>[]</dt>
+    <dd><p>The value checkpoints.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">float</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Modulo_" data-uid="NanoByte.Common.MathUtils.Modulo*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Modulo_System_Double_System_Double_" data-uid="NanoByte.Common.MathUtils.Modulo(System.Double,System.Double)">
+  Modulo(double, double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the mathematical modulo of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static double Modulo(this double value, double modulo)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">double</span></dt>
+    <dd></dd>
+    <dt><code>modulo</code> <span class="xref">double</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">double</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Modulo_" data-uid="NanoByte.Common.MathUtils.Modulo*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Modulo_System_Int32_System_Int32_" data-uid="NanoByte.Common.MathUtils.Modulo(System.Int32,System.Int32)">
+  Modulo(int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the mathematical modulo of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static int Modulo(this int value, int modulo)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">int</span></dt>
+    <dd></dd>
+    <dt><code>modulo</code> <span class="xref">int</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Modulo_" data-uid="NanoByte.Common.MathUtils.Modulo*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Modulo_System_Int64_System_Int64_" data-uid="NanoByte.Common.MathUtils.Modulo(System.Int64,System.Int64)">
+  Modulo(long, long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the mathematical modulo of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static long Modulo(this long value, long modulo)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">long</span></dt>
+    <dd></dd>
+    <dt><code>modulo</code> <span class="xref">long</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">long</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_Modulo_" data-uid="NanoByte.Common.MathUtils.Modulo*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_Modulo_System_Single_System_Single_" data-uid="NanoByte.Common.MathUtils.Modulo(System.Single,System.Single)">
+  Modulo(float, float)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the mathematical modulo of a value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static float Modulo(this float value, float modulo)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">float</span></dt>
+    <dd></dd>
+    <dt><code>modulo</code> <span class="xref">float</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">float</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_MultiplyAndRound_" data-uid="NanoByte.Common.MathUtils.MultiplyAndRound*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_MultiplyAndRound_System_Drawing_Size_System_Drawing_SizeF_" data-uid="NanoByte.Common.MathUtils.MultiplyAndRound(System.Drawing.Size,System.Drawing.SizeF)">
+  MultiplyAndRound(Size, SizeF)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Multiplies a <span class="xref">System.Drawing.Size</span> with a <span class="xref">System.Drawing.SizeF</span> and then rounds the components to integer values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Size MultiplyAndRound(this Size size, SizeF factor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>size</code> <span class="xref">Size</span></dt>
+    <dd></dd>
+    <dt><code>factor</code> <span class="xref">SizeF</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Size</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_RadianToDegree_" data-uid="NanoByte.Common.MathUtils.RadianToDegree*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_RadianToDegree_System_Double_" data-uid="NanoByte.Common.MathUtils.RadianToDegree(System.Double)">
+  RadianToDegree(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts an angle in radians to degrees.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static double RadianToDegree(this double value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">double</span></dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">double</span></dt>
+    <dd><p>The angle in degrees.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_MathUtils_RadianToDegree_" data-uid="NanoByte.Common.MathUtils.RadianToDegree*"></a>
+
+  <h3 id="NanoByte_Common_MathUtils_RadianToDegree_System_Single_" data-uid="NanoByte.Common.MathUtils.RadianToDegree(System.Single)">
+  RadianToDegree(float)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts an angle in radians to degrees.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static float RadianToDegree(this float value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">float</span></dt>
+    <dd><p>The angle in radians.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">float</span></dt>
+    <dd><p>The angle in degrees.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.20.4/src/Common/MathUtils.cs/#L16" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
