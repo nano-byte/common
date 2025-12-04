@@ -135,7 +135,7 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
     /// </summary>
     /// <param name="create">Callback that creates a View representation for a given Model element.</param>
     /// <param name="update">Callback that updates a View representation based on the state of a given Model element; can be <c>null</c>.</param>
-    public void Register<TSpecificModel, TSpecificView>(Func<TSpecificModel, TSpecificView> create, Action<TSpecificModel, TSpecificView>? update = null)
+    public void Register<TSpecificModel, TSpecificView>(Func<TSpecificModel, TSpecificView?> create, Action<TSpecificModel, TSpecificView>? update = null)
         where TSpecificModel : class, TModel
         where TSpecificView : class, TView
     {
@@ -143,6 +143,6 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
         if (create == null) throw new ArgumentNullException(nameof(create));
         #endregion
 
-        RegisterMultiple(element => [create(element)], update);
+        RegisterMultiple(element => create(element) is {} x ? [x] : [], update);
     }
 }
