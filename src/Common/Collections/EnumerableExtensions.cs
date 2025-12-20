@@ -324,15 +324,13 @@ public static class EnumerableExtensions
 
     private static void TopologicalSortVisit<T>(T node, HashSet<T> visited, List<T> sorted, Func<T, IEnumerable<T>> getDependencies)
     {
-        if (visited.Contains(node))
+        if (!visited.Add(node))
         {
             if (!sorted.Contains(node))
                 throw new InvalidDataException($"Cyclic dependency found at: {node}");
         }
         else
         {
-            visited.Add(node);
-
             foreach (var dep in getDependencies(node))
                 TopologicalSortVisit(dep, visited, sorted, getDependencies);
 
