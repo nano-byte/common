@@ -55,50 +55,65 @@ partial class WinFormsUtils
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool ReleaseCapture();
 
-        [DllImport("user32")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool RegisterTouchWindow(IntPtr hWnd, uint ulFlags);
+        // Gesture-related constants
+        public const int GestureConfigAll = 0x00000001; // GC_ALLGESTURES
 
-        [DllImport("user32")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetTouchInputInfo(IntPtr hTouchInput, int cInputs, [In, Out] TouchInput[] pInputs, int cbSize);
+        // Gesture IDs
+        public const int GestureIdBegin = 1;
+        public const int GestureIdEnd = 2;
+        public const int GestureIdZoom = 3;
+        public const int GestureIdPan = 4;
+        public const int GestureIdRotate = 5;
+        public const int GestureIdTwoFingerTap = 6;
+        public const int GestureIdPressAndTap = 7;
 
-        [Flags]
-        public enum TouchEvents
+        // Gesture flags
+        public const int GestureFlagBegin = 0x00000001;
+        public const int GestureFlagInertia = 0x00000002;
+        public const int GestureFlagEnd = 0x00000004;
+
+        [StructLayout(LayoutKind.Sequential)]
+        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
+        public struct GestureConfig
         {
-            Move = 0x0001, // TOUCHEVENTF_MOVE
-            Down = 0x0002, // TOUCHEVENTF_DOWN
-            Up = 0x0004, // TOUCHEVENTF_UP
-            InRange = 0x0008, // TOUCHEVENTF_INRANGE
-            Primary = 0x0010, // TOUCHEVENTF_PRIMARY
-            NoCoalesce = 0x0020, // TOUCHEVENTF_NOCOALESCE
-            Palm = 0x0080 // TOUCHEVENTF_PALM
+            public int dwID;    // gesture ID
+            public int dwWant;  // settings related to gesture ID that are to be turned on
+            public int dwBlock; // settings related to gesture ID that are to be turned off
         }
 
         [StructLayout(LayoutKind.Sequential)]
         [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
-        public struct TouchInput
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
+        public struct Points
         {
-            public int x, y;
-            public IntPtr hSource;
-            public int dwID;
-            public TouchEvents dwFlags;
-            public TouchEventMask dwMask;
-            public int dwTime;
-            public IntPtr dwExtraInfo;
-            public int cxContact;
-            public int cyContact;
+            public short x;
+            public short y;
         }
 
         [StructLayout(LayoutKind.Sequential)]
         [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
-        private struct Points
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
+        public struct GestureInfo
         {
-            public short x, y;
+            public int cbSize;              // size, in bytes, of this structure
+            public int dwFlags;             // see GF_* flags
+            public int dwID;                // gesture ID, see GID_* defines
+            public IntPtr hwndTarget;       // handle to window targeted by this gesture
+            [MarshalAs(UnmanagedType.Struct)]
+            public Points ptsLocation;      // current location of this gesture
+            public int dwInstanceID;        // internally used
+            public int dwSequenceID;        // internally used
+            public long ullArguments;       // arguments for gestures whose arguments fit in 8 BYTES
+            public int cbExtraArgs;         // size, in bytes, of extra arguments, if any, that accompany this gesture
         }
 
         [DllImport("user32")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern void CloseTouchInputHandle(IntPtr lParam);
+        public static extern bool SetGestureConfig(IntPtr hWnd, int dwReserved, int cIDs, ref GestureConfig pGestureConfig, int cbSize);
+
+        [DllImport("user32")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetGestureInfo(IntPtr hGestureInfo, ref GestureInfo pGestureInfo);
     }
 }
