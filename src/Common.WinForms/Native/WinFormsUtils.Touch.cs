@@ -10,11 +10,11 @@ partial class WinFormsUtils
     // Note: The following code is based on Windows 7 Touch Gesture API
     // See: https://github.com/microsoft/Windows-classic-samples/blob/main/Samples/Win7Samples/Touch/MTGestures/CS/MTGestures.cs
 
-    private static readonly int _gestureConfigSize = Marshal.SizeOf(new NativeMethods.GestureConfig());
-    private static readonly int _gestureInfoSize = Marshal.SizeOf(new NativeMethods.GestureInfo());
+    private static readonly int _gestureConfigSize = Marshal.SizeOf<NativeMethods.GestureConfig>();
 
     /// <summary>
     /// Registers a control to receive gesture events.
+    /// This method is kept for API compatibility but gesture configuration is done automatically.
     /// </summary>
     /// <param name="control">The control to register.</param>
     public static void RegisterGestureWindow(Control control)
@@ -84,7 +84,7 @@ partial class WinFormsUtils
 
         if (m.Msg != WM_GESTURE) return false;
 
-        var gi = new NativeMethods.GestureInfo { cbSize = _gestureInfoSize };
+        var gi = new NativeMethods.GestureInfo { cbSize = Marshal.SizeOf<NativeMethods.GestureInfo>() };
 
         if (!NativeMethods.GetGestureInfo(m.LParam, ref gi))
             return false;
@@ -104,7 +104,9 @@ partial class WinFormsUtils
             case NativeMethods.GestureIdPan:
                 if (onPan != null)
                 {
-                    // ullArguments contains the pan distance in the lower 32 bits (X and Y packed)
+                    // ullArguments contains the total pan distance as two 32-bit signed integers:
+                    // Lower 32 bits = X distance (horizontal pan)
+                    // Upper 32 bits = Y distance (vertical pan)
                     var args = new PanGestureEventArgs
                     {
                         LocationX = location.X,

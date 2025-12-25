@@ -1,6 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System;
+
 namespace NanoByte.Common.Controls;
 
 /// <summary>
