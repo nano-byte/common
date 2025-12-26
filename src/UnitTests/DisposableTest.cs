@@ -20,7 +20,7 @@ public class DisposableTest
     }
 
     [Fact]
-    public void CallsCallbackOnlyOnce()
+    public void CallsCallbackMultipleTimes()
     {
         int callCount = 0;
         var disposable = new Disposable(() => callCount++);

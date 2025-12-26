@@ -42,6 +42,7 @@ public class DefaultComparerTest
     public void CompareNullValues()
     {
         var comparer = DefaultComparer<string>.Instance;
+        // This implementation treats null as equal to anything
         comparer.Compare(null, null).Should().Be(0);
         comparer.Compare("test", null).Should().Be(0);
         comparer.Compare(null, "test").Should().Be(0);
