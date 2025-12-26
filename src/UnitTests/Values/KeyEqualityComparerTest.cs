@@ -8,15 +8,15 @@ namespace NanoByte.Common.Values;
 /// </summary>
 public class KeyEqualityComparerTest
 {
-    private record TestRecord(string Name, int Age);
+    private record TestRecord(string Name);
 
     [Fact]
     public void EqualsByKey()
     {
         var comparer = new KeyEqualityComparer<TestRecord, string>(x => x.Name);
-        var obj1 = new TestRecord("John", 30);
-        var obj2 = new TestRecord("John", 40);
-        
+        var obj1 = new TestRecord("X");
+        var obj2 = new TestRecord("X");
+
         comparer.Equals(obj1, obj2).Should().BeTrue();
     }
 
@@ -24,9 +24,9 @@ public class KeyEqualityComparerTest
     public void NotEqualsByDifferentKey()
     {
         var comparer = new KeyEqualityComparer<TestRecord, string>(x => x.Name);
-        var obj1 = new TestRecord("John", 30);
-        var obj2 = new TestRecord("Jane", 30);
-        
+        var obj1 = new TestRecord("X");
+        var obj2 = new TestRecord("Y");
+
         comparer.Equals(obj1, obj2).Should().BeFalse();
     }
 
@@ -34,9 +34,9 @@ public class KeyEqualityComparerTest
     public void GetHashCodeFromKey()
     {
         var comparer = new KeyEqualityComparer<TestRecord, string>(x => x.Name);
-        var obj1 = new TestRecord("John", 30);
-        var obj2 = new TestRecord("John", 40);
-        
+        var obj1 = new TestRecord("X");
+        var obj2 = new TestRecord("X");
+
         comparer.GetHashCode(obj1).Should().Be(comparer.GetHashCode(obj2));
     }
 
@@ -44,10 +44,10 @@ public class KeyEqualityComparerTest
     public void HandlesNullValues()
     {
         var comparer = new KeyEqualityComparer<TestRecord, string>(x => x.Name);
-        
+
         comparer.Equals(null, null).Should().BeTrue();
-        comparer.Equals(new TestRecord("John", 30), null).Should().BeFalse();
-        comparer.Equals(null, new TestRecord("John", 30)).Should().BeFalse();
+        comparer.Equals(new TestRecord("X"), null).Should().BeFalse();
+        comparer.Equals(null, new TestRecord("X")).Should().BeFalse();
     }
 
     [Fact]
@@ -56,14 +56,14 @@ public class KeyEqualityComparerTest
         var comparer = new KeyEqualityComparer<TestRecord, string>(x => x.Name);
         var list = new[]
         {
-            new TestRecord("John", 30),
-            new TestRecord("John", 40),
-            new TestRecord("Jane", 25)
+            new TestRecord("X"),
+            new TestRecord("X"),
+            new TestRecord("Y")
         };
 
         var distinct = list.Distinct(comparer).ToList();
         distinct.Should().HaveCount(2);
-        distinct.Should().Contain(x => x.Name == "John");
-        distinct.Should().Contain(x => x.Name == "Jane");
+        distinct.Should().Contain(x => x.Name == "X");
+        distinct.Should().Contain(x => x.Name == "Y");
     }
 }

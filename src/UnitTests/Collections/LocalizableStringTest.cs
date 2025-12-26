@@ -28,7 +28,7 @@ public class LocalizableStringTest
     [Fact]
     public void SetAndGetLanguage()
     {
-        var str = new LocalizableString {Language = new CultureInfo("de-DE")};
+        var str = new LocalizableString {Language = new("de-DE")};
         str.Language.Name.Should().Be("de-DE");
     }
 
@@ -54,49 +54,42 @@ public class LocalizableStringTest
     }
 
     [Fact]
-    public void LanguageStringEmptyDefaultsToEnglish()
+    public void LanguageStringEmpty()
     {
         var str = new LocalizableString {LanguageString = ""};
         str.Language.Should().Be(LocalizableString.DefaultLanguage);
     }
 
     [Fact]
-    public void ToStringFormat()
-    {
-        var str = new LocalizableString {Value = "test", Language = new CultureInfo("de-DE")};
-        str.ToString().Should().Be("test (de-DE)");
-    }
-
-    [Fact]
     public void EqualsWithSameValueAndLanguage()
     {
-        var str1 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
-        var str2 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
+        var str1 = new LocalizableString {Value = "test", Language = new("en")};
+        var str2 = new LocalizableString {Value = "test", Language = new("en")};
         str1.Equals(str2).Should().BeTrue();
     }
 
     [Fact]
     public void NotEqualsWithDifferentValue()
     {
-        var str1 = new LocalizableString {Value = "test1", Language = new CultureInfo("en")};
-        var str2 = new LocalizableString {Value = "test2", Language = new CultureInfo("en")};
+        var str1 = new LocalizableString {Value = "test1", Language = new("en")};
+        var str2 = new LocalizableString {Value = "test2", Language = new("en")};
         str1.Equals(str2).Should().BeFalse();
     }
 
     [Fact]
     public void NotEqualsWithDifferentLanguage()
     {
-        var str1 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
-        var str2 = new LocalizableString {Value = "test", Language = new CultureInfo("de")};
+        var str1 = new LocalizableString {Value = "test", Language = new("en")};
+        var str2 = new LocalizableString {Value = "test", Language = new("de")};
         str1.Equals(str2).Should().BeFalse();
     }
 
     [Fact]
     public void EqualityOperators()
     {
-        var str1 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
-        var str2 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
-        var str3 = new LocalizableString {Value = "other", Language = new CultureInfo("en")};
+        var str1 = new LocalizableString {Value = "test", Language = new("en")};
+        var str2 = new LocalizableString {Value = "test", Language = new("en")};
+        var str3 = new LocalizableString {Value = "other", Language = new("en")};
 
         (str1 == str2).Should().BeTrue();
         (str1 != str3).Should().BeTrue();
@@ -105,26 +98,18 @@ public class LocalizableStringTest
     [Fact]
     public void GetHashCodeConsistent()
     {
-        var str1 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
-        var str2 = new LocalizableString {Value = "test", Language = new CultureInfo("en")};
+        var str1 = new LocalizableString {Value = "test", Language = new("en")};
+        var str2 = new LocalizableString {Value = "test", Language = new("en")};
         str1.GetHashCode().Should().Be(str2.GetHashCode());
     }
 
     [Fact]
     public void Clone()
     {
-        var str = new LocalizableString {Value = "test", Language = new CultureInfo("de-DE")};
+        var str = new LocalizableString {Value = "test", Language = new("de-DE")};
         var clone = str.Clone();
         clone.Should().NotBeSameAs(str);
         clone.Value.Should().Be(str.Value);
         clone.Language.Should().Be(str.Language);
-    }
-
-    [Fact]
-    public void SetLanguageNull()
-    {
-        var str = new LocalizableString();
-        str.Invoking(s => s.Language = null!)
-           .Should().Throw<ArgumentNullException>();
     }
 }

@@ -33,7 +33,7 @@ public class EnumExtensionsTest
     [InlineData(TestFlagsEnum.ReadWrite, TestFlagsEnum.Execute, false)]
     [InlineData(TestFlagsEnum.Read, TestFlagsEnum.Write, false)]
     public void HasFlagEnum(TestFlagsEnum enumRef, TestFlagsEnum flag, bool expected)
-        => enumRef.HasFlag((Enum)flag).Should().Be(expected);
+        => enumRef.HasFlag(flag).Should().Be(expected);
 
     [Theory]
     [InlineData((ushort)3, (ushort)1, true)]
@@ -51,8 +51,7 @@ public class EnumExtensionsTest
     public void HasFlagInt(int enumRef, int flag, bool expected)
         => enumRef.HasFlag(flag).Should().Be(expected);
 
-    [Description("Test Description")]
-    public enum AttributeTestEnum
+    private enum AttributeTestEnum
     {
         [Description("Value Description")]
         ValueWithAttribute,

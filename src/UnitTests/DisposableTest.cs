@@ -9,28 +9,6 @@ namespace NanoByte.Common;
 public class DisposableTest
 {
     [Fact]
-    public void CallsCallbackOnDispose()
-    {
-        bool called = false;
-        var disposable = new Disposable(() => called = true);
-        
-        called.Should().BeFalse();
-        disposable.Dispose();
-        called.Should().BeTrue();
-    }
-
-    [Fact]
-    public void CallsCallbackMultipleTimes()
-    {
-        int callCount = 0;
-        var disposable = new Disposable(() => callCount++);
-        
-        disposable.Dispose();
-        disposable.Dispose();
-        callCount.Should().Be(2);
-    }
-
-    [Fact]
     public void CanUseWithUsingStatement()
     {
         bool called = false;

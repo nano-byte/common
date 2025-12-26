@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 #if !NET20 && !NET40
-
 namespace NanoByte.Common.Collections;
 
 /// <summary>
@@ -83,5 +82,4 @@ public class ArrayBufferTest
         buffer.Dispose();
     }
 }
-
 #endif
