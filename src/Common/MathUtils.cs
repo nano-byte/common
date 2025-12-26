@@ -133,6 +133,24 @@ public static class MathUtils
     }
 
     /// <summary>
+    /// Linearly interpolates between two values.
+    /// </summary>
+    /// <param name="start">The start value.</param>
+    /// <param name="end">The end value.</param>
+    /// <param name="factor">The interpolation factor. Typically in the range 0-1. Values outside this range will extrapolate.</param>
+    public static float Lerp(float start, float end, float factor)
+        => start + (end - start) * factor;
+
+    /// <summary>
+    /// Linearly interpolates between two values.
+    /// </summary>
+    /// <param name="start">The start value.</param>
+    /// <param name="end">The end value.</param>
+    /// <param name="factor">The interpolation factor. Typically in the range 0-1. Values outside this range will extrapolate.</param>
+    public static double Lerp(double start, double end, double factor)
+        => start + (end - start) * factor;
+
+    /// <summary>
     /// Compares two floating-point values for equality, allowing for a certain <paramref name="tolerance"/>.
     /// </summary>
 #if !NET20 && !NET40
