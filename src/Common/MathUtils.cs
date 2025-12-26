@@ -143,6 +143,17 @@ public static class MathUtils
         => start + (end - start) * factor;
 
     /// <summary>
+    /// Interpolates between two values with easing.
+    /// </summary>
+    /// <param name="start">The start value.</param>
+    /// <param name="end">The end value.</param>
+    /// <param name="factor">The interpolation factor. Values outside the range 0-1 will be clamped.</param>
+    /// <param name="function">The easing function.</param>
+    [Pure]
+    public static double InterpolateEased(double start, double end, double factor, EasingFunction function = Sinusoidal)
+        => Lerp(start, end, EaseInOut(factor));
+
+    /// <summary>
     /// Linearly interpolates between two values.
     /// </summary>
     /// <param name="start">The start value.</param>
