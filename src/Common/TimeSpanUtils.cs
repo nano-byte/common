@@ -11,6 +11,7 @@ public static class TimeSpanUtils
     /// <summary>
     /// Like <see cref="TimeSpan.FromSeconds(double)"/>, but with higher-than-millisecond accuracy.
     /// </summary>
+    [Pure]
     public static TimeSpan FromSecondsAccurate(double seconds)
 #if NETFRAMEWORK
         => TimeSpan.FromTicks((long)(seconds * TimeSpan.TicksPerSecond));
@@ -21,6 +22,7 @@ public static class TimeSpanUtils
     /// <summary>
     /// Multiplies the timespan by a factor.
     /// </summary>
+    [Pure]
     public static TimeSpan Multiply(this TimeSpan timeSpan, double factor)
 #if NETFRAMEWORK
         => TimeSpan.FromTicks((long)(timeSpan.Ticks * factor));
@@ -31,6 +33,7 @@ public static class TimeSpanUtils
     /// <summary>
     /// Divides the timespan by a factor.
     /// </summary>
+    [Pure]
     public static TimeSpan Divide(this TimeSpan timeSpan, double factor)
 #if NETFRAMEWORK
         => TimeSpan.FromTicks((long)(timeSpan.Ticks / factor));
@@ -41,6 +44,7 @@ public static class TimeSpanUtils
     /// <summary>
     /// Divides two timespans, returning the quotient.
     /// </summary>
+    [Pure]
     public static double Divide(this TimeSpan timeSpan, TimeSpan other)
 #if NETFRAMEWORK
         => timeSpan.Ticks / (double)other.Ticks;

@@ -138,6 +138,7 @@ public static class MathUtils
     /// <param name="start">The start value.</param>
     /// <param name="end">The end value.</param>
     /// <param name="factor">The interpolation factor. Typically in the range 0-1. Values outside this range will extrapolate.</param>
+    [Pure]
     public static float Lerp(float start, float end, float factor)
         => start + (end - start) * factor;
 
@@ -147,6 +148,7 @@ public static class MathUtils
     /// <param name="start">The start value.</param>
     /// <param name="end">The end value.</param>
     /// <param name="factor">The interpolation factor. Typically in the range 0-1. Values outside this range will extrapolate.</param>
+    [Pure]
     public static double Lerp(double start, double end, double factor)
         => start + (end - start) * factor;
 
@@ -214,6 +216,7 @@ public static class MathUtils
     /// <summary>
     /// Applies an ease-in function to the given normalized value (0–1).
     /// </summary>
+    [Pure]
     public static double EaseIn(double value, EasingFunction function = Sinusoidal)
     {
         value = value.Clamp();
@@ -233,6 +236,7 @@ public static class MathUtils
     /// <summary>
     /// Applies an ease-out function to the given normalized value (0–1).
     /// </summary>
+    [Pure]
     public static double EaseOut(double value, EasingFunction function = Sinusoidal)
     {
         value = value.Clamp();
@@ -252,6 +256,7 @@ public static class MathUtils
     /// <summary>
     /// Applies an ease-in-out function to the given normalized value (0–1).
     /// </summary>
+    [Pure]
     public static double EaseInOut(double value, EasingFunction function = Sinusoidal)
     {
         value = value.Clamp();
