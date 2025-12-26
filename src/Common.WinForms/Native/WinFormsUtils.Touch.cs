@@ -10,7 +10,7 @@ partial class WinFormsUtils
     // Note: The following code is based on Windows 7 Touch Gesture API
     // See: https://github.com/microsoft/Windows-classic-samples/blob/main/Samples/Win7Samples/Touch/MTGestures/CS/MTGestures.cs
 
-    private static readonly int _gestureConfigSize = Marshal.SizeOf<NativeMethods.GestureConfig>();
+    private static readonly int _gestureConfigSize = Marshal.SizeOf(typeof(NativeMethods.GestureConfig));
 
     /// <summary>
     /// Registers a control to receive gesture events.
@@ -84,7 +84,7 @@ partial class WinFormsUtils
 
         if (m.Msg != WM_GESTURE) return false;
 
-        var gi = new NativeMethods.GestureInfo { cbSize = Marshal.SizeOf<NativeMethods.GestureInfo>() };
+        var gi = new NativeMethods.GestureInfo { cbSize = Marshal.SizeOf(typeof(NativeMethods.GestureInfo)) };
 
         if (!NativeMethods.GetGestureInfo(m.LParam, ref gi))
             return false;
