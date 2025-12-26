@@ -26,10 +26,6 @@
  * Modified by: Bastian Eicher, 2011-2016
  */
 
-using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ContentAlignment = System.Drawing.ContentAlignment;
 
