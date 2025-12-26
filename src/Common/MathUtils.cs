@@ -3,6 +3,7 @@
 
 using System.Drawing;
 using static System.Math;
+using static NanoByte.Common.EasingFunction;
 
 #if !NET20 && !NET40
 using System.Runtime.CompilerServices;
@@ -193,55 +194,64 @@ public static class MathUtils
     public static double RadianToDegree(this double value) => value * (180 / PI);
 
     /// <summary>
-    /// Performs smooth (trigonometric) interpolation between two or more values.
+    /// Applies an ease-in function to the given normalized value (0–1).
     /// </summary>
-    /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length.</param>
-    /// <param name="values">The value checkpoints.</param>
-    [Pure]
-    public static float InterpolateTrigonometric(this float factor, params float[] values)
+    public static double EaseIn(double value, EasingFunction function = Sinusoidal)
     {
-        if (values.Length < 2) throw new ArgumentException("You need to pass at least two values.", nameof(values));
+        value = value.Clamp();
 
-        // Handle value overflows
-        if (factor <= 0) return values[0];
-        if (factor >= values.Length - 1) return values[^1];
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
+        if (value == 1) return 1;
 
-        // Isolate index shift from factor
-        int index = (int)factor;
-
-        // Remove index shift from factor
-        factor -= index;
-
-        // Apply sinus smoothing to factor
-        factor = (float)(-0.5 * Cos(factor * PI) + 0.5);
-
-        return values[index] + factor * (values[index + 1] - values[index]);
+        return function switch
+        {
+            Sinusoidal => 1 - Cos(value * PI * 0.5),
+            Cubic => value * value * value,
+            Quintic => value * value * value * value * value,
+            _ => throw new ArgumentOutOfRangeException(nameof(function))
+        };
     }
 
     /// <summary>
-    /// Performs smooth (trigonometric) interpolation between two or more values.
+    /// Applies an ease-out function to the given normalized value (0–1).
     /// </summary>
-    /// <param name="factor">A factor between 0 and <paramref name="values"/>.Length.</param>
-    /// <param name="values">The value checkpoints.</param>
-    [Pure]
-    public static double InterpolateTrigonometric(double factor, params double[] values)
+    public static double EaseOut(double value, EasingFunction function = Sinusoidal)
     {
-        if (values.Length < 2) throw new ArgumentException("You need to pass at least two values.", nameof(values));
+        value = value.Clamp();
 
-        // Handle value overflows
-        if (factor <= 0) return values[0];
-        if (factor >= values.Length - 1) return values[^1];
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
+        if (value == 1) return 1;
 
-        // Isolate index shift from factor
-        int index = (int)Floor(factor);
+        return function switch
+        {
+            Sinusoidal => Sin(value * PI * 0.5),
+            Cubic => 1 - Pow(1d - value, 3),
+            Quintic => 1 - Pow(1d - value, 5),
+            _ => throw new ArgumentOutOfRangeException(nameof(function))
+        };
+    }
 
-        // Remove index shift from factor
-        factor -= index;
+    /// <summary>
+    /// Applies an ease-in-out function to the given normalized value (0–1).
+    /// </summary>
+    public static double EaseInOut(double value, EasingFunction function = Sinusoidal)
+    {
+        value = value.Clamp();
 
-        // Apply sinus smoothing to factor
-        factor = -0.5 * Cos(factor * PI) + 0.5;
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
+        if (value == 1) return 1;
 
-        return values[index] + factor * (values[index + 1] - values[index]);
+        return function switch
+        {
+            Sinusoidal => 0.5 - Cos(value * PI) * 0.5,
+            Cubic => value < 0.5
+                ? 4 * value * value * value
+                : 1 - Pow(-2 * value + 2, 3) * 0.5,
+            Quintic => value < 0.5d
+                ? 16 * value * value * value * value * value
+                : 1 - Pow(-2 * value + 2, 5) * 0.5,
+            _ => throw new ArgumentOutOfRangeException(nameof(function))
+        };
     }
 
     /// <summary>

@@ -65,4 +65,58 @@ public class MathUtilsTest
         new Size(2, 3).MultiplyAndRound(new SizeF(2, 3))
                       .Should().Be(new Size(4, 9));
     }
+
+    [Fact]
+    public void Ease_Sinusoidal_AtBounds()
+    {
+        MathUtils.EaseIn(0).Should().Be(0);
+        MathUtils.EaseIn(1).Should().Be(1);
+
+        MathUtils.EaseOut(0).Should().Be(0);
+        MathUtils.EaseOut(1).Should().Be(1);
+
+        MathUtils.EaseInOut(0).Should().Be(0);
+        MathUtils.EaseInOut(1).Should().Be(1);
+    }
+
+    [Fact]
+    public void Ease_Cubic_KnownValues()
+    {
+        MathUtils.EaseIn(0.5, EasingFunction.Cubic).Should().BeApproximately(0.125, precision: 1e-6);
+        MathUtils.EaseOut(0.5, EasingFunction.Cubic).Should().BeApproximately(0.875, precision: 1e-6);
+        MathUtils.EaseInOut(0.5, EasingFunction.Cubic).Should().BeApproximately(0.5, precision: 1e-6);
+    }
+
+    [Fact]
+    public void Ease_Quintic_KnownValues()
+    {
+        MathUtils.EaseIn(0.5, EasingFunction.Quintic).Should().BeApproximately(0.03125, precision: 1e-6);
+        MathUtils.EaseOut(0.5, EasingFunction.Quintic).Should().BeApproximately(0.96875, precision: 1e-6);
+        MathUtils.EaseInOut(0.5, EasingFunction.Quintic).Should().BeApproximately(0.5, precision: 1e-6);
+    }
+
+    [Theory]
+    [InlineData(EasingFunction.Sinusoidal)]
+    [InlineData(EasingFunction.Cubic)]
+    [InlineData(EasingFunction.Quintic)]
+    public void Ease_IsMonotonic(EasingFunction function)
+    {
+        AssertMonotonic(v => MathUtils.EaseIn(v, function));
+        AssertMonotonic(v => MathUtils.EaseOut(v, function));
+        AssertMonotonic(v => MathUtils.EaseInOut(v, function));
+    }
+
+    private static void AssertMonotonic(Func<double, double> easingFunc)
+    {
+        double last = 0;
+
+        for (int i = 1; i <= 100; i++)
+        {
+            double value = i / 100.0;
+            double eased = easingFunc(value);
+
+            eased.Should().BeGreaterOrEqualTo(last);
+            last = eased;
+        }
+    }
 }
