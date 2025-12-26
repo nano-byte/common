@@ -26,7 +26,7 @@ public static class BitwiseUtils
     /// </summary>
     [CLSCompliant(false)]
     [Pure]
-    public static short LoWord(uint l)
+    public static short LoWord(this uint l)
     {
         unchecked
         {
@@ -38,7 +38,7 @@ public static class BitwiseUtils
     /// Extracts the low-order word (first 16 bits) of a 32-bit integer.
     /// </summary>
     [Pure]
-    public static short LoWord(int l)
+    public static short LoWord(this int l)
     {
         unchecked
         {
@@ -51,7 +51,7 @@ public static class BitwiseUtils
     /// </summary>
     [CLSCompliant(false)]
     [Pure]
-    public static short HiWord(uint l)
+    public static short HiWord(this uint l)
     {
         unchecked
         {
@@ -63,7 +63,7 @@ public static class BitwiseUtils
     /// Extracts the high-order word (last 16 bits) of a 32-bit integer.
     /// </summary>
     [Pure]
-    public static short HiWord(int l)
+    public static short HiWord(this int l)
     {
         unchecked
         {
@@ -77,7 +77,7 @@ public static class BitwiseUtils
     /// <param name="b">The byte to extract from.</param>
     /// <returns>The high-order nibble as an integer.</returns>
     [Pure]
-    public static int HiNibble(byte b) => b >> 4;
+    public static int HiNibble(this byte b) => b >> 4;
 
     /// <summary>
     /// Extracts the low-order nibble (last 4 bits) of a byte.
@@ -85,7 +85,7 @@ public static class BitwiseUtils
     /// <param name="b">The byte to extract from.</param>
     /// <returns>The low-order nibble as an integer.</returns>
     [Pure]
-    public static int LoNibble(byte b) => b & 15;
+    public static int LoNibble(this byte b) => b & 15;
 
     /// <summary>
     /// Combines a high nibble and a low nibble (4 bits) into a single byte.
