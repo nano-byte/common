@@ -9,7 +9,8 @@
         }
       ],
       "filter": "filterConfig.yml",
-      "dest": "api"
+      "dest": "api",
+      "filter": "filterConfig.yml"
     }
   ],
   "build": {

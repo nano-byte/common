@@ -1,3 +1,4 @@
 apiRules:
   - exclude:
-      uidRegex: ^System\. # Backports
+      uidRegex: ^System\.Object
+      type: Type
