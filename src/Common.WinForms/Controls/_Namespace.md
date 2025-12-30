@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Controls
-summary: *content
+summary: WinForms controls and forms designed to simplify common UI designs.
 ---
-WinForms controls and forms designed to simplify common UI designs.

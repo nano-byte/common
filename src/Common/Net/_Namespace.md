@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Net
-summary: *content
+summary: Network communication.
 ---
-Network communication.

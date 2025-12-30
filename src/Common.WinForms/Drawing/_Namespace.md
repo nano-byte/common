@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Drawing
-summary: *content
+summary: Helpers for manipulating images
 ---
-Helpers for manipulating images

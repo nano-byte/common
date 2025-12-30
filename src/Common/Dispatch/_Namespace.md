@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Dispatch
-summary: *content
+summary: Functionality like double dispatch and two/three-way merging.
 ---
-Functionality like double dispatch and two/three-way merging.

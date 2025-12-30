@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common
-summary: *content
+summary: Generic utility classes, interfaces, etc. that are applicable to a wide range of different applications.
 ---
-Generic utility classes, interfaces, etc. that are applicable to a wide range of different applications.

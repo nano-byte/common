@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Native
-summary: *content
+summary: Utility classes that provide OS-specific helper functions.
 ---
-Utility classes that provide OS-specific helper functions.

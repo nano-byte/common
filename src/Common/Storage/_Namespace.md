@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Storage
-summary: *content
+summary: File system access and serialization.
 ---
-File system access and serialization.

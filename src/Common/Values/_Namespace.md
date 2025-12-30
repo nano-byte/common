@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Values
-summary: *content
+summary: Data structures and helpers for Value Types.
 ---
-Data structures and helpers for Value Types.

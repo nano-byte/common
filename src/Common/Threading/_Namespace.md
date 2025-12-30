@@ -1,5 +1,4 @@
 ---
 uid: NanoByte.Common.Threading
-summary: *content
+summary: Helpers for working with threads.
 ---
-Helpers for working with threads.
