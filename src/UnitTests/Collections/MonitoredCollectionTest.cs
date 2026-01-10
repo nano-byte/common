@@ -34,11 +34,13 @@ public class MonitoredCollectionTest
     public void RemoveRaisesEvents()
     {
         var collection = new MonitoredCollection<string> {"test"};
+        int changedCount = 0;
         int removingCount = 0;
         int removedCount = 0;
         string? removingItem = null;
         string? removedItem = null;
 
+        collection.Changed += () => changedCount++;
         collection.Removing += item =>
         {
             removingCount++;
@@ -52,6 +54,7 @@ public class MonitoredCollectionTest
 
         collection.Remove("test");
 
+        changedCount.Should().Be(1);
         removingCount.Should().Be(1);
         removingItem.Should().Be("test");
         removedCount.Should().Be(1);

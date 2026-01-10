@@ -122,6 +122,7 @@ public class MonitoredCollection<T> : Collection<T>
         OnRemoving(oldItem);
         base.RemoveItem(index);
         OnRemoved(oldItem);
+        OnChanged();
     }
 
     /// <inheritdoc/>
