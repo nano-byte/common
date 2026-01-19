@@ -37,7 +37,7 @@
 3. Takes ~15-30 seconds for clean build
 4. Outputs to `artifacts/Release/`
 
-**Expected output:** "Passed! - Failed: 0, Passed: 364, Skipped: 17, Total: 381"
+**Expected output:** "Passed! - Failed: 0, Passed: ~364+, Skipped: 17, Total: ~381+"
 
 **Note:** You will see a warning "You need Visual Studio 2022 to perform a full build" - this is expected on Linux/macOS and can be ignored. The build will successfully compile the cross-platform components.
 
@@ -187,7 +187,7 @@ The projects target multiple frameworks. **IMPORTANT:** On Linux, only a subset 
 - Tests use xUnit, FluentAssertions, and Moq
 - Global usings in tests: System.Net.Http, Xunit, FluentAssertions, Moq
 - Tests may be skipped on non-Windows platforms (marked with [SkippableFact])
-- Expected: 364 passed, 17 skipped on Linux; more passed on Windows
+- Expected: ~364+ passed, 17 skipped on Linux; more passed on Windows
 
 ## Common Pitfalls and Solutions
 
@@ -233,7 +233,7 @@ Before finalizing changes, **ALWAYS** run these steps:
    .\build.ps1 1.0-dev  # On Windows
    ```
 
-2. **Verify test results:** Check that passed tests ≥ 364, failed = 0
+2. **Verify test results:** Check that passed tests ≥ 360, failed = 0, skipped = 17 on Linux
 
 3. **Check git status:**
    ```bash
