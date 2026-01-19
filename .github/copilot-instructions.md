@@ -136,9 +136,9 @@ Requires DocFX 2.78.4 (auto-restored via .config/dotnet-tools.json).
 ### Multi-Targeting Details
 
 The projects target multiple frameworks. **IMPORTANT:** On Linux, only a subset can be built:
-- **Common**: net20, net40, net45, net462, net472, net8.0, net9.0 (Linux: net462, net472, net8.0, net9.0 only)
+- **Common**: net20, net40, net45, net462, net472, net8.0, net9.0 (requires VS MSBuild on Windows; .NET Core MSBuild builds net462+)
 - **Common.AnsiCli**: net462, net472, net8.0, net9.0
-- **Common.WinForms**: net20, net40, net45, net462, net472, net8.0-windows, net9.0-windows (Windows only)
+- **Common.WinForms**: net20, net40, net45, net462, net472, net8.0-windows, net9.0-windows (Windows with VS MSBuild only)
 - **UnitTests**: net48, net9.0 (Linux: net9.0 only)
 
 ## Continuous Integration
