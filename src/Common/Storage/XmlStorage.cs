@@ -115,8 +115,9 @@ public static class XmlStorage
 
         var type = data.GetType();
 
-        var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
+        using var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
         {
+            CloseOutput = false,
             Encoding = EncodingUtils.Utf8,
             Indent = true,
             IndentChars = "  ",
