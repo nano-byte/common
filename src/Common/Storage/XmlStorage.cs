@@ -40,6 +40,11 @@ public static class XmlStorage
             return (T)GetSerializer(typeof(T)).Deserialize(stream)!;
         }
         #region Error handling
+        catch (InvalidOperationException ex) when (ex.InnerException is {} innerException and not XmlException)
+        {
+            // Unwrap exceptions thrown by stream (e.g., IOException)
+            throw innerException.Rethrow();
+        }
         catch (InvalidOperationException ex)
         {
             // Convert exception type
@@ -124,24 +129,36 @@ public static class XmlStorage
             NewLineChars = "\n"
         });
 
-        // Add stylesheet processor instruction
-        if (!string.IsNullOrEmpty(stylesheet))
-            xmlWriter.WriteProcessingInstruction("xml-stylesheet", $"""
-                type="text/xsl" href="{stylesheet}"
-                """);
-
-        var serializer = GetSerializer(type);
-        var qualifiedNames = GetQualifiedNames(type);
-        if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
-        else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
-
-        // End file with line break
-        xmlWriter.Flush();
-        if (xmlWriter.Settings != null)
+        try
         {
-            byte[] newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
-            stream.Write(newLine, 0, newLine.Length);
+            // Add stylesheet processor instruction
+            if (!string.IsNullOrEmpty(stylesheet))
+            {
+                xmlWriter.WriteProcessingInstruction("xml-stylesheet", $"""
+                    type="text/xsl" href="{stylesheet}"
+                    """);
+            }
+
+            var serializer = GetSerializer(type);
+            var qualifiedNames = GetQualifiedNames(type);
+            if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
+            else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
+
+            // End file with line break
+            xmlWriter.Flush();
+            if (xmlWriter.Settings != null)
+            {
+                byte[] newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
+                stream.Write(newLine, 0, newLine.Length);
+            }
         }
+        #region Error handling
+        catch (InvalidOperationException ex) when (ex.InnerException is { } innerException and not XmlException)
+        {
+            // Unwrap exceptions thrown by stream (e.g., IOException)
+            throw innerException.Rethrow();
+        }
+        #endregion
     }
 
     private static XmlQualifiedName[] GetQualifiedNames(Type type)
