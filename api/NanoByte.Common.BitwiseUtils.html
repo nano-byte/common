@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class BitwiseUtils | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class BitwiseUtils | NanoByte.Common ">
+      
+      <meta name="description" content="Provides utility functions for bitwise operations.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_BitwiseUtils.md&amp;value=---%0Auid%3A%20NanoByte.Common.BitwiseUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.BitwiseUtils">
+
+
+
+  <h1 id="NanoByte_Common_BitwiseUtils" data-uid="NanoByte.Common.BitwiseUtils" class="text-break">
+Class BitwiseUtils  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides utility functions for bitwise operations.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class BitwiseUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">BitwiseUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_BitwiseUtils_CombineHiLoNibble_" data-uid="NanoByte.Common.BitwiseUtils.CombineHiLoNibble*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_CombineHiLoNibble_System_Int32_System_Int32_" data-uid="NanoByte.Common.BitwiseUtils.CombineHiLoNibble(System.Int32,System.Int32)">
+  CombineHiLoNibble(int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Combines a high nibble and a low nibble (4 bits) into a single byte.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static byte CombineHiLoNibble(int high, int low)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>high</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>low</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_HiNibble_" data-uid="NanoByte.Common.BitwiseUtils.HiNibble*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_HiNibble_System_Byte_" data-uid="NanoByte.Common.BitwiseUtils.HiNibble(System.Byte)">
+  HiNibble(byte)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts the high-order nibble (first 4 bits) of a byte.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static int HiNibble(this byte b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>b</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd><p>The byte to extract from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The high-order nibble as an integer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_HiWord_" data-uid="NanoByte.Common.BitwiseUtils.HiWord*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_HiWord_System_Int32_" data-uid="NanoByte.Common.BitwiseUtils.HiWord(System.Int32)">
+  HiWord(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts the high-order word (last 16 bits) of a 32-bit integer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static short HiWord(this int l)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>l</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int16">short</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_HiWord_" data-uid="NanoByte.Common.BitwiseUtils.HiWord*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_HiWord_System_UInt32_" data-uid="NanoByte.Common.BitwiseUtils.HiWord(System.UInt32)">
+  HiWord(uint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts the high-order word (last 16 bits) of a 32-bit integer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[CLSCompliant(false)]
+[Pure]
+public static short HiWord(this uint l)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>l</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int16">short</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_LoNibble_" data-uid="NanoByte.Common.BitwiseUtils.LoNibble*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_LoNibble_System_Byte_" data-uid="NanoByte.Common.BitwiseUtils.LoNibble(System.Byte)">
+  LoNibble(byte)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts the low-order nibble (last 4 bits) of a byte.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static int LoNibble(this byte b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>b</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd><p>The byte to extract from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The low-order nibble as an integer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_LoWord_" data-uid="NanoByte.Common.BitwiseUtils.LoWord*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_LoWord_System_Int32_" data-uid="NanoByte.Common.BitwiseUtils.LoWord(System.Int32)">
+  LoWord(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts the low-order word (first 16 bits) of a 32-bit integer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static short LoWord(this int l)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>l</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int16">short</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_LoWord_" data-uid="NanoByte.Common.BitwiseUtils.LoWord*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_LoWord_System_UInt32_" data-uid="NanoByte.Common.BitwiseUtils.LoWord(System.UInt32)">
+  LoWord(uint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts the low-order word (first 16 bits) of a 32-bit integer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[CLSCompliant(false)]
+[Pure]
+public static short LoWord(this uint l)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>l</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int16">short</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_BitwiseUtils_XOr_" data-uid="NanoByte.Common.BitwiseUtils.XOr*"></a>
+
+  <h3 id="NanoByte_Common_BitwiseUtils_XOr_System_Byte___System_Byte___" data-uid="NanoByte.Common.BitwiseUtils.XOr(System.Byte[],System.Byte[])">
+  XOr(byte[], byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Combines two byte arrays via Exclusive Or.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static byte[] XOr(byte[] array1, byte[] array2)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>array1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>array2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/BitwiseUtils.cs/#L9" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

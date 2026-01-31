@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WindowsUtils | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WindowsUtils | NanoByte.Common ">
+      
+      <meta name="description" content="Provides helper methods and API calls specific to the Windows platform.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Native_WindowsUtils.md&amp;value=---%0Auid%3A%20NanoByte.Common.Native.WindowsUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Native.WindowsUtils">
+
+
+
+  <h1 id="NanoByte_Common_Native_WindowsUtils" data-uid="NanoByte.Common.Native.WindowsUtils" class="text-break">
+Class WindowsUtils  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.NativeMethods.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Native.html">Native</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides helper methods and API calls specific to the Windows platform.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class WindowsUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">WindowsUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_NetFx20" data-uid="NanoByte.Common.Native.WindowsUtils.NetFx20">
+  NetFx20
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory version number for .NET Framework 2.0. This release includes the C# 2.0 compiler and the CLR 2.0 runtime.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NetFx20 = &quot;v2.0.50727&quot;</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_NetFx30" data-uid="NanoByte.Common.Native.WindowsUtils.NetFx30">
+  NetFx30
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory version number for .NET Framework 3.0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NetFx30 = &quot;v3.0&quot;</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_NetFx35" data-uid="NanoByte.Common.Native.WindowsUtils.NetFx35">
+  NetFx35
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory version number for .NET Framework 3.5. This release includes the C# 3.0 compiler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NetFx35 = &quot;v3.5&quot;</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_NetFx40" data-uid="NanoByte.Common.Native.WindowsUtils.NetFx40">
+  NetFx40
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L240"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory version number for .NET Framework 4.x.  This release includes a C# 4.0+ compiler and the CLR 4.0 runtime.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NetFx40 = &quot;v4.0.30319&quot;</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_AbsoluteTime_" data-uid="NanoByte.Common.Native.WindowsUtils.AbsoluteTime*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_AbsoluteTime" data-uid="NanoByte.Common.Native.WindowsUtils.AbsoluteTime">
+  AbsoluteTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A time index in seconds that continuously increases.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double AbsoluteTime { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_AbsoluteTime_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Depending on the operating system this may be the time of the system clock or the time since the system booted.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_CurrentProcessPath_" data-uid="NanoByte.Common.Native.WindowsUtils.CurrentProcessPath*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_CurrentProcessPath" data-uid="NanoByte.Common.Native.WindowsUtils.CurrentProcessPath">
+  CurrentProcessPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines the path of the executable the current process was launched from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string CurrentProcessPath { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_HasUac_" data-uid="NanoByte.Common.Native.WindowsUtils.HasUac*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_HasUac" data-uid="NanoByte.Common.Native.WindowsUtils.HasUac">
+  HasUac
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system supports UAC and it is enabled; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasUac { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsAdministrator_" data-uid="NanoByte.Common.Native.WindowsUtils.IsAdministrator*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsAdministrator" data-uid="NanoByte.Common.Native.WindowsUtils.IsAdministrator">
+  IsAdministrator
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the current user is an administrator. Always returns <code>true</code> on non-Windows NT systems.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsAdministrator { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsGuiSession_" data-uid="NanoByte.Common.Native.WindowsUtils.IsGuiSession*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsGuiSession" data-uid="NanoByte.Common.Native.WindowsUtils.IsGuiSession">
+  IsGuiSession
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the current process is running in a GUI session (rather than, e.g., as a service or in an SSH session).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsGuiSession { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows">
+  IsWindows
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows (9x- or NT-based); <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows10_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows10*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows10" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows10">
+  IsWindows10
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows 10 or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows10 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows102004_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows102004*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows102004" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows102004">
+  IsWindows102004
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows 10, Version 2004 or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows102004 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows10Redstone_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows10Redstone*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows10Redstone" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows10Redstone">
+  IsWindows10Redstone
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows 10 Anniversary Update (Redstone 1) or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows10Redstone { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows11_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows11*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows11" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows11">
+  IsWindows11
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows 11 or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows11 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows7_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows7*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows7" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows7">
+  IsWindows7
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows 7 or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows7 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindows8_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows8*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindows8" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindows8">
+  IsWindows8
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows 8 or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindows8 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindowsNT_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindowsNT*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindowsNT" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindowsNT">
+  IsWindowsNT
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is a modern Windows version (NT-based); <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindowsNT { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindowsVista_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindowsVista*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindowsVista" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindowsVista">
+  IsWindowsVista
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows Vista or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindowsVista { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsWindowsXP_" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindowsXP*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsWindowsXP" data-uid="NanoByte.Common.Native.WindowsUtils.IsWindowsXP">
+  IsWindowsXP
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p><code>true</code> if the current operating system is Windows XP or newer; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWindowsXP { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_AttachConsole_" data-uid="NanoByte.Common.Native.WindowsUtils.AttachConsole*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_AttachConsole" data-uid="NanoByte.Common.Native.WindowsUtils.AttachConsole">
+  AttachConsole()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to attach to a command-line console owned by the parent process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AttachConsole()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the console was successfully attached; <code>false</code> if the parent process did not own a console.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_BroadcastMessage_" data-uid="NanoByte.Common.Native.WindowsUtils.BroadcastMessage*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_BroadcastMessage_System_Int32_" data-uid="NanoByte.Common.Native.WindowsUtils.BroadcastMessage(System.Int32)">
+  BroadcastMessage(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L642"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sends a message of a specific type to all windows in the current session.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BroadcastMessage(int messageID)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>messageID</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>A unique ID number used to identify the message type session-wide.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_CreateHardlink_" data-uid="NanoByte.Common.Native.WindowsUtils.CreateHardlink*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_CreateHardlink_System_String_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.CreateHardlink(System.String,System.String)">
+  CreateHardlink(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L529"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a hard link between two files.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CreateHardlink(string sourcePath, string targetPath)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourcePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the link to create.</p>
+</dd>
+    <dt><code>targetPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The absolute path of the existing file to point to.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_CreateHardlink_System_String_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Only available on Windows 2000 or newer.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>There was an IO problem creating the hard link.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>You have insufficient rights to create the hard link.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a></dt>
+    <dd><p>The hard link creation failed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows NT.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_CreateSymlink_" data-uid="NanoByte.Common.Native.WindowsUtils.CreateSymlink*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_CreateSymlink_System_String_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.CreateSymlink(System.String,System.String)">
+  CreateSymlink(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a symbolic link for a file or directory.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CreateSymlink(string sourcePath, string targetPath)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourcePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the link to create.</p>
+</dd>
+    <dt><code>targetPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the existing file or directory to point to (relative to <code class="paramref">sourcePath</code>).</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>There was an IO problem creating the symlink.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>You have insufficient rights to create the symbolic link.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a></dt>
+    <dd><p>The symbolic link creation failed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_GetFileID_" data-uid="NanoByte.Common.Native.WindowsUtils.GetFileID*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_GetFileID_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.GetFileID(System.String)">
+  GetFileID(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L549"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the file ID of a file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long GetFileID(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>There was an IO problem checking the file.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>You have insufficient rights to check the files.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a></dt>
+    <dd><p>Checking the file failed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows NT.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_GetFolderPath_" data-uid="NanoByte.Common.Native.WindowsUtils.GetFolderPath*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_GetFolderPath_System_Environment_SpecialFolder_" data-uid="NanoByte.Common.Native.WindowsUtils.GetFolderPath(System.Environment.SpecialFolder)">
+  GetFolderPath(SpecialFolder)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L333"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the path to the specified system folder.
+Uses well-known environment variables and hard-coded paths as fallbacks when necessary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetFolderPath(Environment.SpecialFolder folder)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>folder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.environment">Environment</a>.<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.environment.specialfolder">SpecialFolder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The folder could not be resolved to a path.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_GetNetFxDirectory_" data-uid="NanoByte.Common.Native.WindowsUtils.GetNetFxDirectory*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_GetNetFxDirectory_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.GetNetFxDirectory(System.String)">
+  GetNetFxDirectory(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the .NET Framework root directory for a specific version of the .NET Framework. Does not verify the directory actually exists!</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetNetFxDirectory(string version)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The full .NET version number including the leading &quot;v&quot;. Use predefined constants when possible.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path to the .NET Framework root directory.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_GetNetFxDirectory_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Returns 64-bit directories if on 64-bit Windows is <code>true</code>.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsSymlink_" data-uid="NanoByte.Common.Native.WindowsUtils.IsSymlink*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsSymlink_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.IsSymlink(System.String)">
+  IsSymlink(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L470"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks whether a file is an NTFS symbolic link.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSymlink(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file to check.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if <code class="paramref">path</code> points to a symbolic link; <code>false</code> otherwise.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_IsSymlink_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Will return <code>false</code> for non-existing files.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>There was an IO problem getting link information.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>You have insufficient rights to get link information.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a></dt>
+    <dd><p>Getting link information failed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_IsSymlink_" data-uid="NanoByte.Common.Native.WindowsUtils.IsSymlink*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_IsSymlink_System_String_System_String__" data-uid="NanoByte.Common.Native.WindowsUtils.IsSymlink(System.String,System.String@)">
+  IsSymlink(string, out string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L483"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks whether a file is an NTFS symbolic link.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSymlink(string path, out string target)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file to check.</p>
+</dd>
+    <dt><code>target</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Returns the target the symbolic link points to if it exists.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if <code class="paramref">path</code> points to a symbolic link; <code>false</code> otherwise.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>There was an IO problem getting link information.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>You have insufficient rights to get link information.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a></dt>
+    <dd><p>Getting link information failed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_MoveFileOnReboot_" data-uid="NanoByte.Common.Native.WindowsUtils.MoveFileOnReboot*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_MoveFileOnReboot_System_String_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.MoveFileOnReboot(System.String,System.String)">
+  MoveFileOnReboot(string, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L578"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Moves a file on the next reboot of the OS. Replaces existing files.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void MoveFileOnReboot(string sourcePath, string? destinationPath)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourcePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The source path to move the file from.</p>
+</dd>
+    <dt><code>destinationPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The destination path to move the file to. <code>null</code> to delete the file instead of moving it.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_MoveFileOnReboot_System_String_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Useful for replacing in-use files.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_NotifyAssocChanged_" data-uid="NanoByte.Common.Native.WindowsUtils.NotifyAssocChanged*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_NotifyAssocChanged" data-uid="NanoByte.Common.Native.WindowsUtils.NotifyAssocChanged">
+  NotifyAssocChanged()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L610"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Informs the Windows shell that changes were made to the file association data in the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;ReSharper&quot;, &quot;InconsistentNaming&quot;)]
+public static void NotifyAssocChanged()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_NotifyAssocChanged_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This should be called immediately after the changes in order to trigger a refresh of the Explorer UI.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_NotifyEnvironmentChanged_" data-uid="NanoByte.Common.Native.WindowsUtils.NotifyEnvironmentChanged*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_NotifyEnvironmentChanged" data-uid="NanoByte.Common.Native.WindowsUtils.NotifyEnvironmentChanged">
+  NotifyEnvironmentChanged()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L621"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;ReSharper&quot;, &quot;InconsistentNaming&quot;)]
+public static void NotifyEnvironmentChanged()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_ReadAllBytes_" data-uid="NanoByte.Common.Native.WindowsUtils.ReadAllBytes*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_ReadAllBytes_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.ReadAllBytes(System.String)">
+  ReadAllBytes(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L385"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads the entire contents of a file using the Win32 API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[]? ReadAllBytes(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file to read.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The contents of the file as a byte array; <code>null</code> if there was a problem reading the file.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_ReadAllBytes_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method works like <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.file.readallbytes">ReadAllBytes(string)</a>, but bypasses .NET's file path validation logic.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_RegisterApplicationRestart_" data-uid="NanoByte.Common.Native.WindowsUtils.RegisterApplicationRestart*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_RegisterApplicationRestart_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.RegisterApplicationRestart(System.String)">
+  RegisterApplicationRestart(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L655"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Registers the current application for automatic restart after updates or crashes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterApplicationRestart(string arguments)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>arguments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The command-line arguments to pass to the application on restart. Must not be empty!</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_RegisterWindowMessage_" data-uid="NanoByte.Common.Native.WindowsUtils.RegisterWindowMessage*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_RegisterWindowMessage_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.RegisterWindowMessage(System.String)">
+  RegisterWindowMessage(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L636"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Registers a new message type that can be sent to windows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RegisterWindowMessage(string message)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A unique string used to identify the message type session-wide.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>A unique ID number used to identify the message type session-wide.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_SetCurrentProcessAppID_" data-uid="NanoByte.Common.Native.WindowsUtils.SetCurrentProcessAppID*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_SetCurrentProcessAppID_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.SetCurrentProcessAppID(System.String)">
+  SetCurrentProcessAppID(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L595"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the current process' explicit application user model ID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetCurrentProcessAppID(string appID)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appID</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The application ID to set.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_SetCurrentProcessAppID_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The application ID is used to group related windows in the taskbar.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_SplitArgs_" data-uid="NanoByte.Common.Native.WindowsUtils.SplitArgs*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_SplitArgs_System_String_" data-uid="NanoByte.Common.Native.WindowsUtils.SplitArgs(System.String)">
+  SplitArgs(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to split a command-line into individual arguments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string[] SplitArgs(string? commandLine)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>commandLine</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The command-line to be split.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>An array of individual arguments.
+Will return the entire command-line as one argument when not running on Windows or if splitting failed for some other reason.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_UnregisterApplicationRestart_" data-uid="NanoByte.Common.Native.WindowsUtils.UnregisterApplicationRestart*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_UnregisterApplicationRestart" data-uid="NanoByte.Common.Native.WindowsUtils.UnregisterApplicationRestart">
+  UnregisterApplicationRestart()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unregisters the current application for automatic restart after updates or crashes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UnregisterApplicationRestart()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsUtils_WriteAllBytes_" data-uid="NanoByte.Common.Native.WindowsUtils.WriteAllBytes*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsUtils_WriteAllBytes_System_String_System_Byte___" data-uid="NanoByte.Common.Native.WindowsUtils.WriteAllBytes(System.String,System.Byte[])">
+  WriteAllBytes(string, byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the entire contents of a byte array to a file using the Win32 API. Existing files with the same name are overwritten.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteAllBytes(string path, byte[] data)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file to write to.</p>
+</dd>
+    <dt><code>data</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The data to write to the file.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsUtils_WriteAllBytes_System_String_System_Byte____remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method works like <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.file.writeallbytes">WriteAllBytes(string, byte[])</a>, but bypasses .NET's file path validation logic.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>There was an IO problem writing the file.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Write access to the file was denied.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.win32exception">Win32Exception</a></dt>
+    <dd><p>There was a problem writing the file.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.platformnotsupportedexception">PlatformNotSupportedException</a></dt>
+    <dd><p>This method is called on a platform other than Windows.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsUtils.NativeMethods.cs/#L15" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

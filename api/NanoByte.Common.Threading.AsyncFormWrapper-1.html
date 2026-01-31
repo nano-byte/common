@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class AsyncFormWrapper&lt;T&gt; | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class AsyncFormWrapper&lt;T&gt; | NanoByte.Common ">
+      
+      <meta name="description" content="Lazily starts a separate thread with a message loop for a .">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Threading_AsyncFormWrapper_1.md&amp;value=---%0Auid%3A%20NanoByte.Common.Threading.AsyncFormWrapper%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1">
+
+
+
+  <h1 id="NanoByte_Common_Threading_AsyncFormWrapper_1" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1" class="text-break">
+Class AsyncFormWrapper&lt;T&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Threading.html">Threading</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.WinForms.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Lazily starts a separate thread with a message loop for a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.form">Form</a>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class AsyncFormWrapper&lt;T&gt; : IDisposable where T : Form</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of the form to wrap.</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">AsyncFormWrapper&lt;T&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_IO_Stream_">BinaryStorage.SaveBinary&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_String_">BinaryStorage.SaveBinary&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_IO_Stream_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, Stream, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString__1___0_System_String_">XmlStorage.ToXmlString&lt;T&gt;(T, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__1___0___0__System_Action_">UpdateUtils.To&lt;T&gt;(T, ref T, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__1___0___0__System_Boolean__">UpdateUtils.To&lt;T&gt;(T, ref T, ref bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__1___0___0__System_Boolean__System_Boolean__">UpdateUtils.To&lt;T&gt;(T, ref T, ref bool, ref bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(object, T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1__ctor_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.#ctor*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1__ctor_System_Func__0__" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.#ctor(System.Func{`0})">
+  AsyncFormWrapper(Func&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new asynchronous form wrapper.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsyncFormWrapper(Func&lt;T&gt; init)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>init</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;T&gt;</dt>
+    <dd><p>Callback that creates an instance of the form for the message loop.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1_Close_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Close*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1_Close" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Close">
+  Close()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Closes the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.form">Form</a> and stops the message loop.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Threading_AsyncFormWrapper_1_Close_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Does nothing if the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.form">Form</a> was not yet created.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1_Dispose_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Dispose*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1_Dispose" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Dispose">
+  Dispose()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1_Post_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Post*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1_Post_System_Action__0__" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Post(System.Action{`0})">
+  Post(Action&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Starts the message loop if it is not running yet and executes an action on its thread waiting for it to complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Post(Action&lt;T&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</dt>
+    <dd><p>The action to execute; gets passed the <code class="typeparamref">T</code> instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></dt>
+    <dd><p>The form was closed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1_Post_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Post*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1_Post__1_System_Func__0___0__" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Post``1(System.Func{`0,``0})">
+  Post&lt;TResult&gt;(Func&lt;T, TResult&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Starts the message loop if it is not running yet and executes an action on its thread waiting for it to complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TResult Post&lt;TResult&gt;(Func&lt;T, TResult&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, TResult&gt;</dt>
+    <dd><p>A delegate that is passed the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.form">Form</a> instance and returns a result.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TResult</span></dt>
+    <dd><p>The result returned by <code class="paramref">action</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResult</code></dt>
+    <dd><p>The type of the result returned by <code class="paramref">action</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></dt>
+    <dd><p>The form was closed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1_Send_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Send*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1_Send_System_Action__0__" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.Send(System.Action{`0})">
+  Send(Action&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Starts the message loop if it is not running yet and executes an action on its thread without waiting for it to complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Send(Action&lt;T&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</dt>
+    <dd><p>The action to execute; gets passed the <code class="typeparamref">T</code> instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></dt>
+    <dd><p>The form was closed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Threading_AsyncFormWrapper_1_SendLow_" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.SendLow*"></a>
+
+  <h3 id="NanoByte_Common_Threading_AsyncFormWrapper_1_SendLow_System_Action__0__" data-uid="NanoByte.Common.Threading.AsyncFormWrapper`1.SendLow(System.Action{`0})">
+  SendLow(Action&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L136"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes an action on the message loop thread without waiting for it to complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SendLow(Action&lt;T&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</dt>
+    <dd><p>The action to execute; gets passed the <code class="typeparamref">T</code> instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Threading_AsyncFormWrapper_1_SendLow_System_Action__0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Does nothing if the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.form">Form</a> was not yet created.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common.WinForms/Threading/AsyncFormWrapper.cs/#L18" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

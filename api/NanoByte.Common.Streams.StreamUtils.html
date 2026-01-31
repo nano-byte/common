@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class StreamUtils | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class StreamUtils | NanoByte.Common ">
+      
+      <meta name="description" content="Provides -related helper methods.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Streams_StreamUtils.md&amp;value=---%0Auid%3A%20NanoByte.Common.Streams.StreamUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Streams.StreamUtils">
+
+
+
+  <h1 id="NanoByte_Common_Streams_StreamUtils" data-uid="NanoByte.Common.Streams.StreamUtils" class="text-break">
+Class StreamUtils  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Streams.html">Streams</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>-related helper methods.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class StreamUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">StreamUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_AsArray_" data-uid="NanoByte.Common.Streams.StreamUtils.AsArray*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_AsArray_System_IO_Stream_" data-uid="NanoByte.Common.Streams.StreamUtils.AsArray(System.IO.Stream)">
+  AsArray(Stream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The entire content of a stream as an array. Seeks to the beginning of the stream if <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>. Avoids copying the underlying array if possible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] AsArray(this Stream stream)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_CopyEmbeddedToFile_" data-uid="NanoByte.Common.Streams.StreamUtils.CopyEmbeddedToFile*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_CopyEmbeddedToFile_System_Type_System_String_System_String_" data-uid="NanoByte.Common.Streams.StreamUtils.CopyEmbeddedToFile(System.Type,System.String,System.String)">
+  CopyEmbeddedToFile(Type, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L395"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies an embedded resource to a file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyEmbeddedToFile(this Type type, string name, string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>A type that is located in the same namespace as the embedded resource.</p>
+</dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the embedded resource.</p>
+</dd>
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The specified embedded resource does not exist.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_CopyToEx_" data-uid="NanoByte.Common.Streams.StreamUtils.CopyToEx*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_CopyToEx_System_IO_Stream_System_IO_Stream_" data-uid="NanoByte.Common.Streams.StreamUtils.CopyToEx(System.IO.Stream,System.IO.Stream)">
+  CopyToEx(Stream, Stream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies the content of one stream to another. Seeks to the beginning of the <code class="paramref">source</code> stream if <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Naming&quot;, &quot;CA1711:IdentifiersShouldNotHaveIncorrectSuffix&quot;)]
+public static void CopyToEx(this Stream source, Stream destination)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The source stream to copy from.</p>
+</dd>
+    <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The destination stream to copy to.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_CopyToFile_" data-uid="NanoByte.Common.Streams.StreamUtils.CopyToFile*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_CopyToFile_System_IO_Stream_System_String_" data-uid="NanoByte.Common.Streams.StreamUtils.CopyToFile(System.IO.Stream,System.String)">
+  CopyToFile(Stream, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L250"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the entire content of a stream to a file. Seeks to the beginning of the <code class="paramref">stream</code> if <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyToFile(this Stream stream, string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the file to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_GetEmbeddedBytes_" data-uid="NanoByte.Common.Streams.StreamUtils.GetEmbeddedBytes*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_GetEmbeddedBytes_System_Type_System_String_" data-uid="NanoByte.Common.Streams.StreamUtils.GetEmbeddedBytes(System.Type,System.String)">
+  GetEmbeddedBytes(Type, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns an embedded resource as a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static byte[] GetEmbeddedBytes(this Type type, string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>A type that is located in the same namespace as the embedded resource.</p>
+</dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the embedded resource.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The specified embedded resource does not exist.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_GetEmbeddedStream_" data-uid="NanoByte.Common.Streams.StreamUtils.GetEmbeddedStream*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_GetEmbeddedStream_System_Type_System_String_" data-uid="NanoByte.Common.Streams.StreamUtils.GetEmbeddedStream(System.Type,System.String)">
+  GetEmbeddedStream(Type, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns an embedded resource as a stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Stream GetEmbeddedStream(this Type type, string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>A type that is located in the same namespace as the embedded resource.</p>
+</dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the embedded resource.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The specified embedded resource does not exist.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_GetEmbeddedString_" data-uid="NanoByte.Common.Streams.StreamUtils.GetEmbeddedString*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_GetEmbeddedString_System_Type_System_String_System_Text_Encoding_" data-uid="NanoByte.Common.Streams.StreamUtils.GetEmbeddedString(System.Type,System.String,System.Text.Encoding)">
+  GetEmbeddedString(Type, string, Encoding?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L376"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns an embedded resource as a string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static string GetEmbeddedString(this Type type, string name, Encoding? encoding = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>A type that is located in the same namespace as the embedded resource.</p>
+</dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the embedded resource.</p>
+</dd>
+    <dt><code>encoding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></dt>
+    <dd><p>The encoding of the string; leave <code>null</code> to default to <a class="xref" href="NanoByte.Common.EncodingUtils.html#NanoByte_Common_EncodingUtils_Utf8">Utf8</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The specified embedded resource does not exist.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_Read_" data-uid="NanoByte.Common.Streams.StreamUtils.Read*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_Read_System_IO_Stream_System_ArraySegment_System_Byte__" data-uid="NanoByte.Common.Streams.StreamUtils.Read(System.IO.Stream,System.ArraySegment{System.Byte})">
+  Read(Stream, ArraySegment&lt;byte&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a sequence of bytes from the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int Read(this Stream stream, ArraySegment&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.arraysegment-1">ArraySegment</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The buffer to read the bytes into.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The bytes read from the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The desired number of bytes could not be read from the stream.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_Read_" data-uid="NanoByte.Common.Streams.StreamUtils.Read*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_Read_System_IO_Stream_System_Int32_" data-uid="NanoByte.Common.Streams.StreamUtils.Read(System.IO.Stream,System.Int32)">
+  Read(Stream, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a fixed number of bytes from a stream starting from the current offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] Read(this Stream stream, int count)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes to read.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The bytes read from the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The desired number of bytes could not be read from the stream.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_ReadAll_" data-uid="NanoByte.Common.Streams.StreamUtils.ReadAll*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_ReadAll_System_IO_Stream_" data-uid="NanoByte.Common.Streams.StreamUtils.ReadAll(System.IO.Stream)">
+  ReadAll(Stream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads the entire content of a stream. Seeks to the beginning of the stream if <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArraySegment&lt;byte&gt; ReadAll(this Stream stream)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.arraysegment-1">ArraySegment</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The entire content of the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_ReadToString_" data-uid="NanoByte.Common.Streams.StreamUtils.ReadToString*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_ReadToString_System_IO_Stream_System_Text_Encoding_" data-uid="NanoByte.Common.Streams.StreamUtils.ReadToString(System.IO.Stream,System.Text.Encoding)">
+  ReadToString(Stream, Encoding?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReadToString(this Stream stream, Encoding? encoding = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+    <dt><code>encoding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></dt>
+    <dd><p>The encoding of the string; leave <code>null</code> to default to <a class="xref" href="NanoByte.Common.EncodingUtils.html#NanoByte_Common_EncodingUtils_Utf8">Utf8</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A entire content of the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_Skip_" data-uid="NanoByte.Common.Streams.StreamUtils.Skip*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_Skip_System_IO_Stream_System_Int32_" data-uid="NanoByte.Common.Streams.StreamUtils.Skip(System.IO.Stream,System.Int32)">
+  Skip(Stream, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Skips a number of bytes in the stream.
+Uses <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.seek">Seek(long, SeekOrigin)</a> if supported, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.read">Read(byte[], int, int)</a> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Skip(this Stream stream, int count)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes to skip.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The desired number of bytes could not be skipped in the stream.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_ToMemory_" data-uid="NanoByte.Common.Streams.StreamUtils.ToMemory*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_ToMemory_System_IO_Stream_" data-uid="NanoByte.Common.Streams.StreamUtils.ToMemory(System.IO.Stream)">
+  ToMemory(Stream)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies the entire content of a stream to a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a>. Seeks to the beginning of the stream if <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MemoryStream ToMemory(this Stream stream)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A new stream or the original <code class="paramref">stream</code> if it was already a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_ToStream_" data-uid="NanoByte.Common.Streams.StreamUtils.ToStream*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_ToStream_System_ArraySegment_System_Byte__System_Boolean_" data-uid="NanoByte.Common.Streams.StreamUtils.ToStream(System.ArraySegment{System.Byte},System.Boolean)">
+  ToStream(ArraySegment&lt;byte&gt;, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a> using the existing array segment as the underlying storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static MemoryStream ToStream(this ArraySegment&lt;byte&gt; segment, bool writable = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>segment</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.arraysegment-1">ArraySegment</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The array segment to create the stream from.</p>
+</dd>
+    <dt><code>writable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Controls whether the stream is writable (i.e., can modify the array).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_ToStream_" data-uid="NanoByte.Common.Streams.StreamUtils.ToStream*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_ToStream_System_Byte___System_Boolean_" data-uid="NanoByte.Common.Streams.StreamUtils.ToStream(System.Byte[],System.Boolean)">
+  ToStream(byte[], bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a> using the existing array as the underlying storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static MemoryStream ToStream(this byte[] array, bool writable = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>array</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The array to create the stream from.</p>
+</dd>
+    <dt><code>writable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Controls whether the stream is writable (i.e., can modify the array).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_ToStream_" data-uid="NanoByte.Common.Streams.StreamUtils.ToStream*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_ToStream_System_String_System_Text_Encoding_" data-uid="NanoByte.Common.Streams.StreamUtils.ToStream(System.String,System.Text.Encoding)">
+  ToStream(string, Encoding?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a> and fills it with string data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static MemoryStream ToStream(this string data, Encoding? encoding = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The data to fill the stream with.</p>
+</dd>
+    <dt><code>encoding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></dt>
+    <dd><p>The encoding of the string; leave <code>null</code> to default to <a class="xref" href="NanoByte.Common.EncodingUtils.html#NanoByte_Common_EncodingUtils_Utf8">Utf8</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A filled stream with the position set to zero.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_TryRead_" data-uid="NanoByte.Common.Streams.StreamUtils.TryRead*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_TryRead_System_IO_Stream_System_Int32_" data-uid="NanoByte.Common.Streams.StreamUtils.TryRead(System.IO.Stream,System.Int32)">
+  TryRead(Stream, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a fixed number of bytes from a stream starting from the current offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[]? TryRead(this Stream stream, int count)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to read from.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes to read.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The bytes read from the stream; <code>null</code> if the desired number of bytes could not be read from the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_WithLength_" data-uid="NanoByte.Common.Streams.StreamUtils.WithLength*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_WithLength_System_IO_Stream_System_Int64_" data-uid="NanoByte.Common.Streams.StreamUtils.WithLength(System.IO.Stream,System.Int64)">
+  WithLength(Stream, long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Overrides the value returned by <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.length">Length</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Stream WithLength(this Stream stream, long length)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream.</p>
+</dd>
+    <dt><code>length</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The value to return for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.length">Length</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_WithSeekBuffer_" data-uid="NanoByte.Common.Streams.StreamUtils.WithSeekBuffer*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_WithSeekBuffer_System_IO_Stream_System_Int32_" data-uid="NanoByte.Common.Streams.StreamUtils.WithSeekBuffer(System.IO.Stream,System.Int32)">
+  WithSeekBuffer(Stream, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds seek buffering to a stream unless it already <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.canseek">CanSeek</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static Stream WithSeekBuffer(this Stream stream, int bufferSize = 262144)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream.</p>
+</dd>
+    <dt><code>bufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_Write_" data-uid="NanoByte.Common.Streams.StreamUtils.Write*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_Write_System_IO_Stream_System_ArraySegment_System_Byte__" data-uid="NanoByte.Common.Streams.StreamUtils.Write(System.IO.Stream,System.ArraySegment{System.Byte})">
+  Write(Stream, ArraySegment&lt;byte&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the entire contents of a buffer to a stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Write(this Stream stream, ArraySegment&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to write to.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.arraysegment-1">ArraySegment</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The buffer containing the bytes to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Streams_StreamUtils_Write_" data-uid="NanoByte.Common.Streams.StreamUtils.Write*"></a>
+
+  <h3 id="NanoByte_Common_Streams_StreamUtils_Write_System_IO_Stream_System_Byte___" data-uid="NanoByte.Common.Streams.StreamUtils.Write(System.IO.Stream,System.Byte[])">
+  Write(Stream, params byte[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L155"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the entire contents of an array to a stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Write(this Stream stream, params byte[] data)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to write to.</p>
+</dd>
+    <dt><code>data</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The array containing the bytes to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Streams/StreamUtils.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

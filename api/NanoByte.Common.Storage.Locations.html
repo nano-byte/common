@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Locations | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Locations | NanoByte.Common ">
+      
+      <meta name="description" content="Provides easy access to platform-specific common directories for storing settings and application data.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Storage_Locations.md&amp;value=---%0Auid%3A%20NanoByte.Common.Storage.Locations%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Storage.Locations">
+
+
+
+  <h1 id="NanoByte_Common_Storage_Locations" data-uid="NanoByte.Common.Storage.Locations" class="text-break">
+Class Locations  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Storage.html">Storage</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides easy access to platform-specific common directories for storing settings and application data.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Locations</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">Locations</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+  <h2 id="NanoByte_Common_Storage_Locations_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Uses <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.environment">Environment.SpecialFolder</a> on Windows and the freedesktop.org basedir spec (XDG) on Linux.
+See <a href="http://freedesktop.org/wiki/Standards/basedir-spec">http://freedesktop.org/wiki/Standards/basedir-spec</a></p>
+</div>
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="NanoByte_Common_Storage_Locations_PortableFlagName" data-uid="NanoByte.Common.Storage.Locations.PortableFlagName">
+  PortableFlagName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The name of the flag file whose existence determines whether <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is set to <code>true</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Naming&quot;, &quot;CA1726:UsePreferredTerms&quot;, MessageId = &quot;Flag&quot;)]
+public const string PortableFlagName = &quot;_portable&quot;</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NanoByte_Common_Storage_Locations_HomeDir_" data-uid="NanoByte.Common.Storage.Locations.HomeDir*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_HomeDir" data-uid="NanoByte.Common.Storage.Locations.HomeDir">
+  HomeDir
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The home/profile directory of the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string HomeDir { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_InstallBase_" data-uid="NanoByte.Common.Storage.Locations.InstallBase*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_InstallBase" data-uid="NanoByte.Common.Storage.Locations.InstallBase">
+  InstallBase
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory the application binaries are located in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string InstallBase { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_InstallBase_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Uses the location of the NanoByte.Common DLL, not the calling EXE. Walks up one directory level if placed within a dir called &quot;lib&quot;.
+Works with ngened and shadow copied assemblies. Does not work with GACed assemblies.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_IsPortable_" data-uid="NanoByte.Common.Storage.Locations.IsPortable*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_IsPortable" data-uid="NanoByte.Common.Storage.Locations.IsPortable">
+  IsPortable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the application is currently operating in portable mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsPortable { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_IsPortable_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Portable mode is activated by placing a file named <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_PortableFlagName">PortableFlagName</a> in <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_InstallBase">InstallBase</a>.</p>
+<p>When portable mode is active files are stored and loaded from <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_PortableBase">PortableBase</a> instead of the user profile and system directories.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_PortableBase_" data-uid="NanoByte.Common.Storage.Locations.PortableBase*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_PortableBase" data-uid="NanoByte.Common.Storage.Locations.PortableBase">
+  PortableBase
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory used for storing files if <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string PortableBase { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_SystemCacheDir_" data-uid="NanoByte.Common.Storage.Locations.SystemCacheDir*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_SystemCacheDir" data-uid="NanoByte.Common.Storage.Locations.SystemCacheDir">
+  SystemCacheDir
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory to store machine-wide non-essential data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SystemCacheDir { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_SystemCacheDir_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>On Windows this is <code>CommonApplicationData</code>, on Linux it is <code>/var/cache</code>.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_SystemConfigDirs_" data-uid="NanoByte.Common.Storage.Locations.SystemConfigDirs*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_SystemConfigDirs" data-uid="NanoByte.Common.Storage.Locations.SystemConfigDirs">
+  SystemConfigDirs
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directories to store machine-wide settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SystemConfigDirs { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Directories separated by <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.path.pathseparator">PathSeparator</a> sorted by decreasing importance.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_SystemConfigDirs_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>On Windows this is <code>CommonApplicationData</code>, on Linux it usually is <code>/etc/xdg</code>.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_SystemDataDirs_" data-uid="NanoByte.Common.Storage.Locations.SystemDataDirs*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_SystemDataDirs" data-uid="NanoByte.Common.Storage.Locations.SystemDataDirs">
+  SystemDataDirs
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directories to store machine-wide data files (should not roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SystemDataDirs { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Directories separated by <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.path.pathseparator">PathSeparator</a> sorted by decreasing importance.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_SystemDataDirs_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>On Windows this is <code>CommonApplicationData</code>, on Linux it usually is <code>/usr/local/share:/usr/share</code>.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_UserCacheDir_" data-uid="NanoByte.Common.Storage.Locations.UserCacheDir*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_UserCacheDir" data-uid="NanoByte.Common.Storage.Locations.UserCacheDir">
+  UserCacheDir
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory to store per-user non-essential data (should not roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string UserCacheDir { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_UserCacheDir_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>On Windows this is <code>%localappdata%</code>, on Linux it usually is <code>~/.cache</code>.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_UserConfigDir_" data-uid="NanoByte.Common.Storage.Locations.UserConfigDir*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_UserConfigDir" data-uid="NanoByte.Common.Storage.Locations.UserConfigDir">
+  UserConfigDir
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory to store per-user settings (can roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string UserConfigDir { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_UserConfigDir_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>On Windows this is <code>%appdata%</code>, on Linux it usually is <code>~/.config</code>.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_UserDataDir_" data-uid="NanoByte.Common.Storage.Locations.UserDataDir*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_UserDataDir" data-uid="NanoByte.Common.Storage.Locations.UserDataDir">
+  UserDataDir
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The directory to store per-user data files (should not roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string UserDataDir { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_UserDataDir_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>On Windows this is <code>%localappdata%</code>, on Linux it usually is <code>~/.local/share</code>.</p>
+</div>
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetCacheDirPath_" data-uid="NanoByte.Common.Storage.Locations.GetCacheDirPath*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetCacheDirPath_System_String_System_Boolean_System_String___" data-uid="NanoByte.Common.Storage.Locations.GetCacheDirPath(System.String,System.Boolean,System.String[])">
+  GetCacheDirPath(string, bool, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Directories.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a path for a cache directory (should not roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetCacheDirPath(string appName, bool machineWide, params string[] resource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of application. Used as part of the path, unless <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</dd>
+    <dt><code>machineWide</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the directory should be machine-wide.</p>
+</dd>
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>The directory name of the resource to be stored.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A fully qualified directory path. The directory is guaranteed to already exist.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>A problem occurred while creating a directory.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Creating a directory is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetInstalledFilePath_" data-uid="NanoByte.Common.Storage.Locations.GetInstalledFilePath*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetInstalledFilePath_System_String_" data-uid="NanoByte.Common.Storage.Locations.GetInstalledFilePath(System.String)">
+  GetInstalledFilePath(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to locate a file either in <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_InstallBase">InstallBase</a>, the location of the NanoByte.Common.dll or in the PATH.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetInstalledFilePath(string fileName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fileName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The file name of the file to search for.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The fully qualified path of the first located instance of the file.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The file could not be found.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetLoadConfigPaths_" data-uid="NanoByte.Common.Storage.Locations.GetLoadConfigPaths*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetLoadConfigPaths_System_String_System_Boolean_System_String___" data-uid="NanoByte.Common.Storage.Locations.GetLoadConfigPaths(System.String,System.Boolean,System.String[])">
+  GetLoadConfigPaths(string, bool, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a list of paths for loading a configuration resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;string&gt; GetLoadConfigPaths(string appName, bool isFile, params string[] resource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of application. Used as part of the path, unless <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</dd>
+    <dt><code>isFile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the last part of <code class="paramref">resource</code> refers to a file instead of a directory.</p>
+</dd>
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>The path elements (directory and/or file names) of the resource to be loaded.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A list of fully qualified paths to use to load the resource sorted by decreasing importance.
+This list will always reflect the current state in the filesystem and can not be modified! It may be empty.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetLoadDataPaths_" data-uid="NanoByte.Common.Storage.Locations.GetLoadDataPaths*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetLoadDataPaths_System_String_System_Boolean_System_String___" data-uid="NanoByte.Common.Storage.Locations.GetLoadDataPaths(System.String,System.Boolean,System.String[])">
+  GetLoadDataPaths(string, bool, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L189"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a list of paths for loading a data resource (should not roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;string&gt; GetLoadDataPaths(string appName, bool isFile, params string[] resource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of application. Used as part of the path, unless <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</dd>
+    <dt><code>isFile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the last part of <code class="paramref">resource</code> refers to a file instead of a directory.</p>
+</dd>
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>The path elements (directory and/or file names) of the resource to be loaded.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A list of fully qualified paths to use to load the resource sorted by decreasing importance.
+This list will always reflect the current state in the filesystem and can not be modified! It may be empty.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetSaveConfigPath_" data-uid="NanoByte.Common.Storage.Locations.GetSaveConfigPath*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetSaveConfigPath_System_String_System_Boolean_System_String___" data-uid="NanoByte.Common.Storage.Locations.GetSaveConfigPath(System.String,System.Boolean,System.String[])">
+  GetSaveConfigPath(string, bool, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a path for storing a configuration resource (can roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSaveConfigPath(string appName, bool isFile, params string[] resource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of application. Used as part of the path, unless <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</dd>
+    <dt><code>isFile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the last part of <code class="paramref">resource</code> refers to a file instead of a directory.</p>
+</dd>
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>The path elements (directory and/or file names) of the resource to be stored.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>A problem occurred while creating a directory.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Creating a directory is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetSaveDataPath_" data-uid="NanoByte.Common.Storage.Locations.GetSaveDataPath*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetSaveDataPath_System_String_System_Boolean_System_String___" data-uid="NanoByte.Common.Storage.Locations.GetSaveDataPath(System.String,System.Boolean,System.String[])">
+  GetSaveDataPath(string, bool, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L149"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a path for storing a data resource (should not roam across different machines).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSaveDataPath(string appName, bool isFile, params string[] resource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of application. Used as part of the path, unless <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</dd>
+    <dt><code>isFile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the last part of <code class="paramref">resource</code> refers to a file instead of a directory.</p>
+</dd>
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>The path elements (directory and/or file names) of the resource to be stored.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>A problem occurred while creating a directory.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Creating a directory is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_GetSaveSystemConfigPath_" data-uid="NanoByte.Common.Storage.Locations.GetSaveSystemConfigPath*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_GetSaveSystemConfigPath_System_String_System_Boolean_System_String___" data-uid="NanoByte.Common.Storage.Locations.GetSaveSystemConfigPath(System.String,System.Boolean,System.String[])">
+  GetSaveSystemConfigPath(string, bool, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a path for storing a system-wide configuration resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSaveSystemConfigPath(string appName, bool isFile, params string[] resource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of application. Used as part of the path, unless <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> is <code>true</code>.</p>
+</dd>
+    <dt><code>isFile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the last part of <code class="paramref">resource</code> refers to a file instead of a directory.</p>
+</dd>
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>The path elements (directory and/or file names) of the resource to be stored.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A fully qualified path to use to store the resource. Directories are guaranteed to already exist; files are not.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>A problem occurred while creating a directory.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Creating a directory is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_OverrideInstallBase_" data-uid="NanoByte.Common.Storage.Locations.OverrideInstallBase*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_OverrideInstallBase_System_String_" data-uid="NanoByte.Common.Storage.Locations.OverrideInstallBase(System.String)">
+  OverrideInstallBase(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Override the automatically determined <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_InstallBase">InstallBase</a> with a custom <code class="paramref">path</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void OverrideInstallBase(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Storage_Locations_OverrideInstallBase_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Use with caution. Be aware of possible race conditions. Intended for unit testing, runtime relocation, etc..</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Storage_Locations_Redirect_" data-uid="NanoByte.Common.Storage.Locations.Redirect*"></a>
+
+  <h3 id="NanoByte_Common_Storage_Locations_Redirect_System_String_" data-uid="NanoByte.Common.Storage.Locations.Redirect(System.String)">
+  Redirect(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Temporarily overrides <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> and <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_PortableBase">PortableBase</a> for the current thread or async flow. Useful for unit tests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MustDisposeResource]
+public static IDisposable Redirect(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_PortableBase">PortableBase</a> value to set.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></dt>
+    <dd><p>Call <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">Dispose()</a> to restore the original values of <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_IsPortable">IsPortable</a> and <a class="xref" href="NanoByte.Common.Storage.Locations.html#NanoByte_Common_Storage_Locations_PortableBase">PortableBase</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>This method has already been called on this thread.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Storage/Locations.Paths.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

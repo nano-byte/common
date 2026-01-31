@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class RegistryUtils | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class RegistryUtils | NanoByte.Common ">
+      
+      <meta name="description" content="Provides utility and extension methods for  access.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Native_RegistryUtils.md&amp;value=---%0Auid%3A%20NanoByte.Common.Native.RegistryUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Native.RegistryUtils">
+
+
+
+  <h1 id="NanoByte_Common_Native_RegistryUtils" data-uid="NanoByte.Common.Native.RegistryUtils" class="text-break">
+Class RegistryUtils  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegitryUtils.NativeMethods.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Native.html">Native</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides utility and extension methods for <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registry">Registry</a> access.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class RegistryUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">RegistryUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_CreateSubKeyChecked_" data-uid="NanoByte.Common.Native.RegistryUtils.CreateSubKeyChecked*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_CreateSubKeyChecked_Microsoft_Win32_RegistryKey_System_String_" data-uid="NanoByte.Common.Native.RegistryUtils.CreateSubKeyChecked(Microsoft.Win32.RegistryKey,System.String)">
+  CreateSubKeyChecked(RegistryKey, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a registry key with retries and mapping <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securityexception">SecurityException</a>s to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MustDisposeResource]
+public static RegistryKey CreateSubKeyChecked(this RegistryKey key, string subkeyName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The key to create a subkey in.</p>
+</dd>
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the subkey to create.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The newly created subkey.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>Failed to create the key.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Write access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_DeleteSoftwareValue_" data-uid="NanoByte.Common.Native.RegistryUtils.DeleteSoftwareValue*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_DeleteSoftwareValue_System_String_System_String_System_Boolean_" data-uid="NanoByte.Common.Native.RegistryUtils.DeleteSoftwareValue(System.String,System.String,System.Boolean)">
+  DeleteSoftwareValue(string, string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Deletes a value from one of the SOFTWARE keys in the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteSoftwareValue(string subkeyName, string valueName, bool machineWide)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the key relative to the SOFTWARE key.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to delete.</p>
+</dd>
+    <dt><code>machineWide</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <code>false</code> to delete from HCKU/SOFTWARE.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_RegistryUtils_DeleteSoftwareValue_System_String_System_String_System_Boolean__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Does not throw an exception for missing keys or values.</p>
+</div>
+
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_GetDword_" data-uid="NanoByte.Common.Native.RegistryUtils.GetDword*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_GetDword_System_String_System_String_System_Int32_" data-uid="NanoByte.Common.Native.RegistryUtils.GetDword(System.String,System.String,System.Int32)">
+  GetDword(string, string?, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a DWORD value from the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static int GetDword(string keyName, string? valueName, int defaultValue = 0)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The full path of the key to read from.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to read.</p>
+</dd>
+    <dt><code>defaultValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The default value to return if the key or value does not exist.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Read access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_GetLastWriteTime_" data-uid="NanoByte.Common.Native.RegistryUtils.GetLastWriteTime*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_GetLastWriteTime_Microsoft_Win32_RegistryKey_" data-uid="NanoByte.Common.Native.RegistryUtils.GetLastWriteTime(Microsoft.Win32.RegistryKey)">
+  GetLastWriteTime(RegistryKey)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the last write time of the registry key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DateTime GetLastWriteTime(this RegistryKey key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The key to get the last write time for.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The key does not exist.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Read access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_GetSoftwareString_" data-uid="NanoByte.Common.Native.RegistryUtils.GetSoftwareString*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_GetSoftwareString_System_String_System_String_System_Boolean_" data-uid="NanoByte.Common.Native.RegistryUtils.GetSoftwareString(System.String,System.String,System.Boolean)">
+  GetSoftwareString(string, string?, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a string value from one of the SOFTWARE keys in the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static string? GetSoftwareString(string subkeyName, string? valueName, bool machineWide)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the key relative to the SOFTWARE key.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to read.</p>
+</dd>
+    <dt><code>machineWide</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <code>false</code> to read from HCKU/SOFTWARE.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_GetString_" data-uid="NanoByte.Common.Native.RegistryUtils.GetString*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_GetString_System_String_System_String_System_String_" data-uid="NanoByte.Common.Native.RegistryUtils.GetString(System.String,System.String,System.String)">
+  GetString(string, string?, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a string value from the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static string? GetString(string keyName, string? valueName, string? defaultValue = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The full path of the key to read from.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to read.</p>
+</dd>
+    <dt><code>defaultValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The default value to return if the key or value does not exist.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Read access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_GetSubKeyNames_" data-uid="NanoByte.Common.Native.RegistryUtils.GetSubKeyNames*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_GetSubKeyNames_Microsoft_Win32_RegistryKey_System_String_" data-uid="NanoByte.Common.Native.RegistryUtils.GetSubKeyNames(Microsoft.Win32.RegistryKey,System.String)">
+  GetSubKeyNames(RegistryKey, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieves the names of all subkeys within a specific subkey of a registry root.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static string[] GetSubKeyNames(RegistryKey key, string subkeyName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The root key to look within.</p>
+</dd>
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the subkey below <code class="paramref">key</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>A list of key names; an empty array if the key does not exist.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_GetValueNames_" data-uid="NanoByte.Common.Native.RegistryUtils.GetValueNames*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_GetValueNames_Microsoft_Win32_RegistryKey_System_String_" data-uid="NanoByte.Common.Native.RegistryUtils.GetValueNames(Microsoft.Win32.RegistryKey,System.String)">
+  GetValueNames(RegistryKey, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieves the names of all values within a specific subkey of a registry root.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Pure]
+public static string[] GetValueNames(this RegistryKey key, string subkeyName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The root key to look within.</p>
+</dd>
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the subkey below <code class="paramref">key</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>A list of value names; an empty array if the key does not exist.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_OpenHklmKey_" data-uid="NanoByte.Common.Native.RegistryUtils.OpenHklmKey*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_OpenHklmKey_System_String_System_Boolean__" data-uid="NanoByte.Common.Native.RegistryUtils.OpenHklmKey(System.String,System.Boolean@)">
+  OpenHklmKey(string, out bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Opens a HKEY_LOCAL_MACHINE key in the registry for reading, first trying to find the 64-bit version of it, then falling back to the 32-bit version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MustDisposeResource]
+public static RegistryKey OpenHklmKey(string subkeyName, out bool x64)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path to the key below HKEY_LOCAL_MACHINE.</p>
+</dd>
+    <dt><code>x64</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Indicates whether a 64-bit key was opened.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The opened registry key.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The key does not exist.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Read access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_OpenSubKeyChecked_" data-uid="NanoByte.Common.Native.RegistryUtils.OpenSubKeyChecked*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_OpenSubKeyChecked_Microsoft_Win32_RegistryKey_System_String_System_Boolean_" data-uid="NanoByte.Common.Native.RegistryUtils.OpenSubKeyChecked(Microsoft.Win32.RegistryKey,System.String,System.Boolean)">
+  OpenSubKeyChecked(RegistryKey, string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Opens a registry key with retries and mapping <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securityexception">SecurityException</a>s to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MustDisposeResource]
+public static RegistryKey OpenSubKeyChecked(this RegistryKey key, string subkeyName, bool writable = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The key to open a subkey in.</p>
+</dd>
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the subkey to open.</p>
+</dd>
+    <dt><code>writable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> for write-access to the key.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The opened subkey.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>The key does not exist.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>The requested access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_SetDword_" data-uid="NanoByte.Common.Native.RegistryUtils.SetDword*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_SetDword_System_String_System_String_System_Int32_" data-uid="NanoByte.Common.Native.RegistryUtils.SetDword(System.String,System.String,System.Int32)">
+  SetDword(string, string?, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a DWORD value in the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetDword(string keyName, string? valueName, int value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The full path of the key to write to.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to write.</p>
+</dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The value to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Write access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_SetSoftwareString_" data-uid="NanoByte.Common.Native.RegistryUtils.SetSoftwareString*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_SetSoftwareString_System_String_System_String_System_String_System_Boolean_" data-uid="NanoByte.Common.Native.RegistryUtils.SetSoftwareString(System.String,System.String,System.String,System.Boolean)">
+  SetSoftwareString(string, string?, string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a string value in one or more of the SOFTWARE keys in the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetSoftwareString(string subkeyName, string? valueName, string value, bool machineWide = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The path of the key relative to the SOFTWARE key.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to write.</p>
+</dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The value to write.</p>
+</dd>
+    <dt><code>machineWide</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <code>false</code> to write to HCKU/SOFTWARE.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Write access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_SetString_" data-uid="NanoByte.Common.Native.RegistryUtils.SetString*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_SetString_System_String_System_String_System_String_" data-uid="NanoByte.Common.Native.RegistryUtils.SetString(System.String,System.String,System.String)">
+  SetString(string, string?, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a string value in the registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetString(string keyName, string? valueName, string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The full path of the key to write to.</p>
+</dd>
+    <dt><code>valueName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the value to write.</p>
+</dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The value to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>Write access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_TryDeleteSubKey_" data-uid="NanoByte.Common.Native.RegistryUtils.TryDeleteSubKey*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_TryDeleteSubKey_Microsoft_Win32_RegistryKey_System_String_" data-uid="NanoByte.Common.Native.RegistryUtils.TryDeleteSubKey(Microsoft.Win32.RegistryKey,System.String)">
+  TryDeleteSubKey(RegistryKey, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recursively deletes a registry key. Does not throw exceptions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryDeleteSubKey(this RegistryKey key, string subkeyName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The key to containing the subkey to delete.</p>
+</dd>
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the subkey to delete.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the key was deleted or didn't exist; <code>false</code> if the deletion failed.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_RegistryUtils_TryOpenSubKey_" data-uid="NanoByte.Common.Native.RegistryUtils.TryOpenSubKey*"></a>
+
+  <h3 id="NanoByte_Common_Native_RegistryUtils_TryOpenSubKey_Microsoft_Win32_RegistryKey_System_String_System_Boolean_" data-uid="NanoByte.Common.Native.RegistryUtils.TryOpenSubKey(Microsoft.Win32.RegistryKey,System.String,System.Boolean)">
+  TryOpenSubKey(RegistryKey, string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegistryUtils.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Trys to open a registry key with retries and mapping <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securityexception">SecurityException</a>s to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MustDisposeResource]
+public static RegistryKey? TryOpenSubKey(this RegistryKey key, string subkeyName, bool writable = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The key to open a subkey in.</p>
+</dd>
+    <dt><code>subkeyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the subkey to open.</p>
+</dd>
+    <dt><code>writable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> for write-access to the key.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registrykey">RegistryKey</a></dt>
+    <dd><p>The opened subkey; <code>null</code> if it does not exist.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
+    <dd><p>The requested access to the key is not permitted.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/RegitryUtils.NativeMethods.cs/#L9" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

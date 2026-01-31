@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace NanoByte.Common.Native | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace NanoByte.Common.Native | NanoByte.Common ">
+      
+      <meta name="description" content="Utility classes that provide OS-specific helper functions.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/_Namespace.md/#L2">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Native">
+
+  <h1 id="NanoByte_Common_Native" data-uid="NanoByte.Common.Native" class="text-break">Namespace NanoByte.Common.Native</h1>
+  <div class="markdown level0 summary"><p>Utility classes that provide OS-specific helper functions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.AppMutex.html">AppMutex</a></dt>
+      <dd><p>Provides a cross-process object allowing easy detection of application instances (e.g., for use by installers and update tools).
+No-op on non-Windows platforms.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.CompilerUtils.html">CompilerUtils</a></dt>
+      <dd><p>Provides helper methods for compiling .NET code at runtime.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.CygwinUtils.html">CygwinUtils</a></dt>
+      <dd><p>Provides access to Cygwin-related filesystem features. Cygwin provides Unix-like functionality on Windows systems.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.OSUtils.html">OSUtils</a></dt>
+      <dd><p>Provides helper methods related to operating system functionality across multiple platforms.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.ProcessLauncher.html">ProcessLauncher</a></dt>
+      <dd><p>Runs a child process.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.ProcessLauncherExtensions.html">ProcessLauncherExtensions</a></dt>
+      <dd><p>Extension methods for <a class="xref" href="NanoByte.Common.Native.IProcessLauncher.html">IProcessLauncher</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.RegistryUtils.html">RegistryUtils</a></dt>
+      <dd><p>Provides utility and extension methods for <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.win32.registry">Registry</a> access.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.UnixUtils.html">UnixUtils</a></dt>
+      <dd><p>Provides helper methods for Unix-specific features of the Mono library.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WinFormsUtils.html">WinFormsUtils</a></dt>
+      <dd><p>Provides helper methods and API calls specific to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system">System.Windows.Forms</a> UI toolkit.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsCredentials.html">WindowsCredentials</a></dt>
+      <dd><p>Provides an interface to the Windows Credentials API. Supported on Windows XP or newer.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsMutex.html">WindowsMutex</a></dt>
+      <dd><p>Provides Windows-specific API calls for cross-process Mutexes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsRestartManager.html">WindowsRestartManager</a></dt>
+      <dd><p>Provides an interface to the Windows Restart Manager. Supported on Windows Vista or newer.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.html">WindowsTaskbar</a></dt>
+      <dd><p>Provides helper methods and API calls specific to the Windows 7 or newer taskbar.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsUtils.html">WindowsUtils</a></dt>
+      <dd><p>Provides helper methods and API calls specific to the Windows platform.</p>
+</dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.ShellLink.html">WindowsTaskbar.ShellLink</a></dt>
+      <dd><p>Represents a shell link targeting a file.</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.IProcessLauncher.html">IProcessLauncher</a></dt>
+      <dd><p>Runs an external process.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowMessage.html">WindowMessage</a></dt>
+      <dd><p>Values for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.message.msg">Msg</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsCredentialsFlags.html">WindowsCredentialsFlags</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.html">WindowsTaskbar.ProgressBarState</a></dt>
+      <dd><p>Represents the thumbnail progress bar state.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/_Namespace.md/#L2" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

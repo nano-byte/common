@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MultiDictionary&lt;TKey, TValue&gt; | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MultiDictionary&lt;TKey, TValue&gt; | NanoByte.Common ">
+      
+      <meta name="description" content="A dictionary that allows a key to reference multiple values.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Collections_MultiDictionary_2.md&amp;value=---%0Auid%3A%20NanoByte.Common.Collections.MultiDictionary%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Collections.MultiDictionary`2">
+
+
+
+  <h1 id="NanoByte_Common_Collections_MultiDictionary_2" data-uid="NanoByte.Common.Collections.MultiDictionary`2" class="text-break">
+Class MultiDictionary&lt;TKey, TValue&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Collections/MultiDictionary.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Collections.html">Collections</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A dictionary that allows a key to reference multiple values.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class MultiDictionary&lt;TKey, TValue&gt; : Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;, IDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;, ICollection&lt;KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;&gt;, IDictionary, ICollection, IReadOnlyDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;, IReadOnlyCollection&lt;KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;&gt;, IEnumerable&lt;KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;&gt;, IEnumerable, ISerializable, IDeserializationCallback where TKey : notnull</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TKey</code></dt>
+    <dd><p>The type to use as a key to identify entries in the dictionary.</p>
+</dd>
+    <dt><code>TValue</code></dt>
+    <dd><p>The type to use as elements to store in the dictionary.</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;</div>
+      <div><span class="xref">MultiDictionary&lt;TKey, TValue&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.idictionary">IDictionary</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.ideserializationcallback">IDeserializationCallback</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.add">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Add(TKey, HashSet&lt;TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.clear">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.containskey">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.ContainsKey(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.containsvalue">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.ContainsValue(HashSet&lt;TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getenumerator">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.GetObjectData(SerializationInfo, StreamingContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.ondeserialization">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.OnDeserialization(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.remove">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Remove(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trygetvalue">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.TryGetValue(TKey, out HashSet&lt;TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.comparer">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Comparer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.count">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Count</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.keys">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Keys</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.values">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Values</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.item">Dictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.this[TKey]</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_IO_Stream_">BinaryStorage.SaveBinary&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.BinaryStorage.html#NanoByte_Common_Storage_BinaryStorage_SaveBinary__1___0_System_String_">BinaryStorage.SaveBinary&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_IO_Stream_">JsonStorage.SaveJson&lt;T&gt;(T, Stream)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_SaveJson__1___0_System_String_">JsonStorage.SaveJson&lt;T&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ToJsonString__1___0_">JsonStorage.ToJsonString&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_IO_Stream_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, Stream, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_SaveXml__1___0_System_String_System_String_">XmlStorage.SaveXml&lt;T&gt;(T, string, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.XmlStorage.html#NanoByte_Common_Storage_XmlStorage_ToXmlString__1___0_System_String_">XmlStorage.ToXmlString&lt;T&gt;(T, string?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__1___0___0__System_Action_">UpdateUtils.To&lt;T&gt;(T, ref T, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__1___0___0__System_Boolean__">UpdateUtils.To&lt;T&gt;(T, ref T, ref bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__1___0___0__System_Boolean__System_Boolean__">UpdateUtils.To&lt;T&gt;(T, ref T, ref bool, ref bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.UpdateUtils.html#NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__">UpdateUtils.To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Values.ConversionUtils.html#NanoByte_Common_Values_ConversionUtils_ConvertToString__1___0_">ConversionUtils.ConvertToString&lt;TType&gt;(TType)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.CollectionExtensions.html#NanoByte_Common_Collections_CollectionExtensions_AddIfNew__1_System_Collections_Generic_ICollection___0____0_">CollectionExtensions.AddIfNew&lt;T&gt;(ICollection&lt;T&gt;, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.CollectionExtensions.html#NanoByte_Common_Collections_CollectionExtensions_Add__2_System_Collections_Generic_ICollection___0__System_Collections_Generic_IEnumerable___1__">CollectionExtensions.Add&lt;TCollection, TElements&gt;(ICollection&lt;TCollection&gt;, IEnumerable&lt;TElements&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.CollectionExtensions.html#NanoByte_Common_Collections_CollectionExtensions_RemoveAll__1_System_Collections_Generic_ICollection___0__System_Func___0_System_Boolean__">CollectionExtensions.RemoveAll&lt;T&gt;(ICollection&lt;T&gt;, Func&lt;T, bool&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.CollectionExtensions.html#NanoByte_Common_Collections_CollectionExtensions_Remove__2_System_Collections_Generic_ICollection___0__System_Collections_Generic_IEnumerable___1__">CollectionExtensions.Remove&lt;TCollection, TElements&gt;(ICollection&lt;TCollection&gt;, IEnumerable&lt;TElements&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_AddRange__4_System_Collections_Generic_IDictionary___2___3__System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair___0___1___">DictionaryExtensions.AddRange&lt;TSourceKey, TSourceValue, TTargetKey, TTargetValue&gt;(IDictionary&lt;TTargetKey, TTargetValue&gt;, IEnumerable&lt;KeyValuePair&lt;TSourceKey, TSourceValue&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_GetOrAddAsync__2_System_Collections_Generic_IDictionary___0___1____0_System_Func_System_Threading_Tasks_Task___1___">DictionaryExtensions.GetOrAddAsync&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, TKey, Func&lt;Task&lt;TValue&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_GetOrAdd__2_System_Collections_Generic_IDictionary___0___1____0_">DictionaryExtensions.GetOrAdd&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, TKey)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_GetOrAdd__2_System_Collections_Generic_IDictionary___0___1____0_System_Func___1__">DictionaryExtensions.GetOrAdd&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, TKey, Func&lt;TValue&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_GetUnsequencedHashCode__2_System_Collections_Generic_IDictionary___0___1__System_Collections_Generic_IEqualityComparer___1__">DictionaryExtensions.GetUnsequencedHashCode&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, IEqualityComparer&lt;TValue&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_TryAdd__2_System_Collections_Generic_IDictionary___0___1____0___1_">DictionaryExtensions.TryAdd&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, TKey, TValue)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_UnsequencedEquals__2_System_Collections_Generic_IDictionary___0___1__System_Collections_Generic_IDictionary___0___1__System_Collections_Generic_IEqualityComparer___1__">DictionaryExtensions.UnsequencedEquals&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, IDictionary&lt;TKey, TValue&gt;, IEqualityComparer&lt;TValue&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_ToMultiDictionary__3_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Func___0___2__">DictionaryExtensions.ToMultiDictionary&lt;TSource, TKey, TValue&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TSource, TValue&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_ContainsAny__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEqualityComparer___0__">EnumerableExtensions.ContainsAny&lt;T&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, IEqualityComparer&lt;T&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_ContainsOrEmpty__1_System_Collections_Generic_IEnumerable___0____0_">EnumerableExtensions.ContainsOrEmpty&lt;T&gt;(IEnumerable&lt;T&gt;, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_DistinctBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__">EnumerableExtensions.DistinctBy&lt;T, TKey&gt;(IEnumerable&lt;T&gt;, Func&lt;T, TKey&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_Except__1_System_Collections_Generic_IEnumerable___0____0_">EnumerableExtensions.Except&lt;T&gt;(IEnumerable&lt;T&gt;, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_Except__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__">EnumerableExtensions.Except&lt;T&gt;(IEnumerable&lt;T&gt;, Func&lt;T, bool&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_GetSequencedHashCode__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEqualityComparer___0__">EnumerableExtensions.GetSequencedHashCode&lt;T&gt;(IEnumerable&lt;T&gt;, IEqualityComparer&lt;T&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_GetUnsequencedHashCode__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEqualityComparer___0__">EnumerableExtensions.GetUnsequencedHashCode&lt;T&gt;(IEnumerable&lt;T&gt;, IEqualityComparer&lt;T&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_MaxBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IComparer___1__">EnumerableExtensions.MaxBy&lt;T, TValue&gt;(IEnumerable&lt;T&gt;, Func&lt;T, TValue&gt;, IComparer&lt;TValue&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_MinBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IComparer___1__">EnumerableExtensions.MinBy&lt;T, TValue&gt;(IEnumerable&lt;T&gt;, Func&lt;T, TValue&gt;, IComparer&lt;TValue&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_Permutate__1_System_Collections_Generic_IEnumerable___0__">EnumerableExtensions.Permutate&lt;T&gt;(IEnumerable&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_SequencedEquals__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEqualityComparer___0__">EnumerableExtensions.SequencedEquals&lt;T&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, IEqualityComparer&lt;T&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_TopologicalSort__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.TopologicalSort&lt;T&gt;(IEnumerable&lt;T&gt;, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_TrySelect__3_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Action___2__">EnumerableExtensions.TrySelect&lt;TSource, TResult, TException&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TResult&gt;, Action&lt;TException&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.EnumerableExtensions.html#NanoByte_Common_Collections_EnumerableExtensions_UnsequencedEquals__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEqualityComparer___0__">EnumerableExtensions.UnsequencedEquals&lt;T&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;, IEqualityComparer&lt;T&gt;?)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Dispatch.Bucketizer.html#NanoByte_Common_Dispatch_Bucketizer_Bucketize__1_System_Collections_Generic_IEnumerable___0__">Bucketizer.Bucketize&lt;T&gt;(IEnumerable&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Dispatch.Bucketizer.html#NanoByte_Common_Dispatch_Bucketizer_Bucketize__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__">Bucketizer.Bucketize&lt;TElement, TValue&gt;(IEnumerable&lt;TElement&gt;, Func&lt;TElement, TValue&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.ExceptionUtils.html#NanoByte_Common_ExceptionUtils_TryAnyAsync__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Threading_Tasks_Task__">ExceptionUtils.TryAnyAsync&lt;T&gt;(IEnumerable&lt;T&gt;, Func&lt;T, Task&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.ExceptionUtils.html#NanoByte_Common_ExceptionUtils_TryAny__1_System_Collections_Generic_IEnumerable___0__System_Action___0__">ExceptionUtils.TryAny&lt;T&gt;(IEnumerable&lt;T&gt;, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_GetValueOrDefault__2_System_Collections_Generic_IReadOnlyDictionary___0___1____0_">DictionaryExtensions.GetValueOrDefault&lt;TKey, TValue&gt;(IReadOnlyDictionary&lt;TKey, TValue&gt;, TKey)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Collections.DictionaryExtensions.html#NanoByte_Common_Collections_DictionaryExtensions_GetValueOrDefault__2_System_Collections_Generic_IReadOnlyDictionary___0___1____0___1_">DictionaryExtensions.GetValueOrDefault&lt;TKey, TValue&gt;(IReadOnlyDictionary&lt;TKey, TValue&gt;, TKey, TValue)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object_">JsonStorage.ReparseAsJson&lt;T&gt;(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="NanoByte.Common.Storage.JsonStorage.html#NanoByte_Common_Storage_JsonStorage_ReparseAsJson__1_System_Object___0_">JsonStorage.ReparseAsJson&lt;T&gt;(object, T)</a>
+  </div>
+  </dd></dl>
+
+
+
+  <h2 id="NanoByte_Common_Collections_MultiDictionary_2_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This structure internally uses hash maps, so most operations run in O(1).</p>
+</div>
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="NanoByte_Common_Collections_MultiDictionary_2_Item_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Item*"></a>
+
+  <h3 id="NanoByte_Common_Collections_MultiDictionary_2_Item__0_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Item(`0)">
+  this[TKey]
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Collections/MultiDictionary.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a collection containing the values with the specified key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[CollectionAccess(CollectionAccessType.Read)]
+public IEnumerable&lt;TValue&gt; this[TKey key] { get; }</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>The key of the element to get.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TValue&gt;</dt>
+    <dd><p>A list of elements with the specified key. Empty list if the key was not found.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Collections_MultiDictionary_2_Values_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Values*"></a>
+
+  <h3 id="NanoByte_Common_Collections_MultiDictionary_2_Values" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Values">
+  Values
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Collections/MultiDictionary.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A collection containing the values in the dictionary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[CollectionAccess(CollectionAccessType.Read)]
+public IEnumerable&lt;TValue&gt; Values { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TValue&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Collections_MultiDictionary_2_Add_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Add*"></a>
+
+  <h3 id="NanoByte_Common_Collections_MultiDictionary_2_Add__0__1_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Add(`0,`1)">
+  Add(TKey, TValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Collections/MultiDictionary.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds an element with the provided key and value to the dictionary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[CollectionAccess(CollectionAccessType.UpdatedContent)]
+public void Add(TKey key, TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>The key of the element to add.</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>The value of the element to add.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Collections_MultiDictionary_2_Remove_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Remove*"></a>
+
+  <h3 id="NanoByte_Common_Collections_MultiDictionary_2_Remove__0__1_" data-uid="NanoByte.Common.Collections.MultiDictionary`2.Remove(`0,`1)">
+  Remove(TKey, TValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Collections/MultiDictionary.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes an element with the provided key and value from the dictionary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[CollectionAccess(CollectionAccessType.ModifyExistingContent)]
+public bool Remove(TKey key, TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>The key of the element to remove.</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>The value of the element to remove.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if any elements were successfully removed; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Collections/MultiDictionary.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

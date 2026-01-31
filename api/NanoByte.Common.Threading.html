@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace NanoByte.Common.Threading | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace NanoByte.Common.Threading | NanoByte.Common ">
+      
+      <meta name="description" content="Helpers for working with threads.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Threading/_Namespace.md/#L2">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Threading">
+
+  <h1 id="NanoByte_Common_Threading" data-uid="NanoByte.Common.Threading" class="text-break">Namespace NanoByte.Common.Threading</h1>
+  <div class="markdown level0 summary"><p>Helpers for working with threads.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.ActionExtensions.html">ActionExtensions</a></dt>
+      <dd><p>Provides extension methods for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action&lt;T&gt;</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.AsyncFormWrapper-1.html">AsyncFormWrapper&lt;T&gt;</a></dt>
+      <dd><p>Lazily starts a separate thread with a message loop for a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.forms.form">Form</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.CancellationGuard.html">CancellationGuard</a></dt>
+      <dd><p>Ensures that a block of code running on a background thread cleanly exits before a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource.cancel#system-threading-cancellationtokensource-cancel">Cancel()</a> call completes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.FuncExtensions.html">FuncExtensions</a></dt>
+      <dd><p>Provides extension methods for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func&lt;T, TResult&gt;</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.JobQueue.html">JobQueue</a></dt>
+      <dd><p>Runs jobs on a single background thread that is started and stopped on demand.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.MarshalNoTimeout.html">MarshalNoTimeout</a></dt>
+      <dd><p>Derive from this class to enable remoting without timeouts. Keeps remoting object alive as long as process is running.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.MutexLock.html">MutexLock</a></dt>
+      <dd><p>Provides a wrapper around <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.mutex">Mutex</a> that automatically acquires on creating and releases on <a class="xref" href="NanoByte.Common.Threading.MutexLock.html#NanoByte_Common_Threading_MutexLock_Dispose">Dispose()</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.ResultRacer.html">ResultRacer</a></dt>
+      <dd><p>Helper for racing multiple operations against each other, providing the result of the first one that finishes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.ResultRacer-1.html">ResultRacer&lt;T&gt;</a></dt>
+      <dd><p>Helper for racing multiple operations against each other, providing the result of the first one that finishes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.StressTest.html">StressTest</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.SynchronousProgress-1.html">SynchronousProgress&lt;T&gt;</a></dt>
+      <dd><p>Reports progress updates using callbacks/events. Performs the callbacks immediately on the same thread.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.TaskExtensions.html">TaskExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.ThreadUtils.html">ThreadUtils</a></dt>
+      <dd><p>Provides helper methods for launching <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.thread">Thread</a>s.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.WaitHandleExtensions.html">WaitHandleExtensions</a></dt>
+      <dd><p>Provides extension methods for <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.waithandle">WaitHandle</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Threading.WaitTask.html">WaitTask</a></dt>
+      <dd><p>Waits for a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.waithandle">WaitHandle</a> to become available or the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to be triggered.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Threading/_Namespace.md/#L2" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

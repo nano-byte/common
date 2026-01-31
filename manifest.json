@@ -1,0 +1,4069 @@
+{
+  "source_base_path": "D:/a/common/common/doc",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.AnsiCli.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.AnsiCli.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.AnsiCli",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.AnsiCli.yml\" sourcestartlinenumber=\"1\">Helper methods for ANSI console rendering.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.BitwiseUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.BitwiseUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.BitwiseUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.BitwiseUtils.yml\" sourcestartlinenumber=\"1\">Provides utility functions for bitwise operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ArrayBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ArrayBuffer-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.ArrayBuffer<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.ArrayBuffer-1.yml\" sourcestartlinenumber=\"1\">An array rented from the <xref href=\"System.Buffers.ArrayPool%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ArrayUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ArrayUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.ArrayUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.ArrayUtils.yml\" sourcestartlinenumber=\"1\">Provides array-related helper methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.CollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.CollectionExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.CollectionExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.CollectionExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Collections.Generic.ICollection%601\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ConcurrentSet-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ConcurrentSet-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.ConcurrentSet<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.ConcurrentSet-1.yml\" sourcestartlinenumber=\"1\">Represents a thread-safe set of values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.CultureComparer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.CultureComparer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.CultureComparer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.CultureComparer.yml\" sourcestartlinenumber=\"1\">This compares two <xref href=\"System.Globalization.CultureInfo\" data-throw-if-not-resolved=\"false\"></xref>s by alphabetically comparing their string representations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.DefaultComparer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.DefaultComparer-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.DefaultComparer<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.DefaultComparer-1.yml\" sourcestartlinenumber=\"1\">Compares objects using their <xref href=\"System.IComparable\" data-throw-if-not-resolved=\"false\"></xref> implementation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.DictionaryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.DictionaryExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.DictionaryExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.DictionaryExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Collections.Generic.Dictionary%602\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.EnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.EnumerableExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.EnumerableExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.EnumerableExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.LanguageSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.LanguageSet.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.LanguageSet",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.LanguageSet.yml\" sourcestartlinenumber=\"1\">A set of languages that can be serialized as a simple space-separated list of ISO language codes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.ListExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.ListExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.ListExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.ListExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Collections.Generic.List%601\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.LocalizableString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.LocalizableString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.LocalizableString",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.LocalizableString.yml\" sourcestartlinenumber=\"1\">A string with an associated language that can be XML serialized to an element with an xml:lang tag.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.LocalizableStringCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.LocalizableStringCollection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.LocalizableStringCollection",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.LocalizableStringCollection.yml\" sourcestartlinenumber=\"1\">A collection of <xref href=\"NanoByte.Common.Collections.LocalizableString\" data-throw-if-not-resolved=\"false\"></xref>s with language-search methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.MonitoredCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.MonitoredCollection-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.MonitoredCollection<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.MonitoredCollection-1.yml\" sourcestartlinenumber=\"1\">A collection that can easily be monitored for changes via events.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.MultiDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.MultiDictionary-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.MultiDictionary<TKey, TValue>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.MultiDictionary-2.yml\" sourcestartlinenumber=\"1\">A dictionary that allows a key to reference multiple values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.NamedCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.NamedCollection-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.NamedCollection<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.NamedCollection-1.yml\" sourcestartlinenumber=\"1\">A keyed collection (pseudo-dictionary) of <xref href=\"NanoByte.Common.INamed\" data-throw-if-not-resolved=\"false\"></xref> objects. Case-insensitive!</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.StackExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.StackExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.StackExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.StackExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Collections.Generic.Stack%601\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.TransparentCache-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.TransparentCache-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.TransparentCache<TKey, TValue>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.TransparentCache-2.yml\" sourcestartlinenumber=\"1\">Transparently caches retrieval requests, passed through to a callback on first request.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.TransparentCacheBase-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.TransparentCacheBase-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.TransparentCacheBase<TKey, TValue>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.TransparentCacheBase-2.yml\" sourcestartlinenumber=\"1\">Transparently caches retrieval requests, passed through to a template method on first request.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.XmlDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.XmlDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.XmlDictionary",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.XmlDictionary.yml\" sourcestartlinenumber=\"1\">A string dictionary that supports data-binding and can be XML serialized.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.XmlDictionaryEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.XmlDictionaryEntry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections.XmlDictionaryEntry",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Collections.XmlDictionaryEntry.yml\" sourcestartlinenumber=\"1\">A key-value string pair for <xref href=\"NanoByte.Common.Collections.XmlDictionary\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Collections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Collections.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Collections",
+      "Summary": "<p sourcefile=\"../src/Common/Collections/_Namespace.md\" sourcestartlinenumber=\"1\">Specialized collection types supplementing System.Collections.Generic.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ControlExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ControlExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.ControlExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.ControlExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Windows.Forms.Control\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.DropDownButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.DropDownButton.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.DropDownButton",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.DropDownButton.yml\" sourcestartlinenumber=\"1\">A <xref href=\"System.Windows.Forms.Button\" data-throw-if-not-resolved=\"false\"></xref> with an additional drop-down menu.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.DropDownContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.DropDownContainer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.DropDownContainer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.DropDownContainer.yml\" sourcestartlinenumber=\"1\">A custom drop-down that can contain arbitrary controls instead of just a menu.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ErrorBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ErrorBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.ErrorBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.ErrorBox.yml\" sourcestartlinenumber=\"1\">A dialog displaying an error message and details.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ErrorReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ErrorReport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.ErrorReport",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.ErrorReport.yml\" sourcestartlinenumber=\"1\">Wraps information about an crash in a serializer-friendly format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ErrorReportForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ErrorReportForm.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.ErrorReportForm",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.ErrorReportForm.yml\" sourcestartlinenumber=\"1\">Presents the user with a friendly interface in case of an error, offering to report it to the developers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.FilteredTreeView-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.FilteredTreeView-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.FilteredTreeView<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.FilteredTreeView-1.yml\" sourcestartlinenumber=\"1\">Displays a list of <xref href=\"NanoByte.Common.INamed\" data-throw-if-not-resolved=\"false\"></xref>s objects in a <xref href=\"System.Windows.Forms.TreeView\" data-throw-if-not-resolved=\"false\"></xref> with incremental search.\nAn automatic hierarchy is generated based on a <xref href=\"NanoByte.Common.Controls.FilteredTreeView%601.Separator\" data-throw-if-not-resolved=\"false\"></xref> character.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.HintTextBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.HintTextBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.HintTextBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.HintTextBox.yml\" sourcestartlinenumber=\"1\">A special <xref href=\"System.Windows.Forms.TextBox\" data-throw-if-not-resolved=\"false\"></xref> that displays a <xref href=\"NanoByte.Common.Controls.HintTextBox.HintText\" data-throw-if-not-resolved=\"false\"></xref> when <xref href=\"System.Windows.Forms.TextBox.Text\" data-throw-if-not-resolved=\"false\"></xref> is empty and a clear button when it is not.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.IContextMenu.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.IContextMenu.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.IContextMenu",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.IContextMenu.yml\" sourcestartlinenumber=\"1\">An object that can provide its own context menu.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.IEditorDialog-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.IEditorDialog-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.IEditorDialog<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.IEditorDialog-1.yml\" sourcestartlinenumber=\"1\">Provides an interface to a dialog that edits a single object.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ITouchControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ITouchControl.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.ITouchControl",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.ITouchControl.yml\" sourcestartlinenumber=\"1\">A control that can raise touch events.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.InputBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.InputBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.InputBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.InputBox.yml\" sourcestartlinenumber=\"1\">Shows a simple dialog asking the user to input some text.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.Msg.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.Msg.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.Msg",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.Msg.yml\" sourcestartlinenumber=\"1\">Provides easier access to typical <xref href=\"System.Windows.Forms.MessageBox\" data-throw-if-not-resolved=\"false\"></xref> configurations and automatically upgrades to TaskDialogs when available.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.MsgSeverity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.MsgSeverity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.MsgSeverity",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.MsgSeverity.yml\" sourcestartlinenumber=\"1\">How severe/important a message is.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OKCancelDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OKCancelDialog.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.OKCancelDialog",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.OKCancelDialog.yml\" sourcestartlinenumber=\"1\">A base-class for creating fixed-size dialog boxes with an OK and a Cancel button.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.OutputBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.OutputBox.yml\" sourcestartlinenumber=\"1\">A simple dialog displaying selectable multi-line text.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputGridBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputGridBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.OutputGridBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.OutputGridBox.yml\" sourcestartlinenumber=\"1\">Displays tabular data to the user.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputTreeBox-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputTreeBox-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.OutputTreeBox<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.OutputTreeBox-1.yml\" sourcestartlinenumber=\"1\">Displays tree data to the user.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.OutputTreeBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.OutputTreeBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.OutputTreeBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.OutputTreeBox.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Controls.OutputTreeBox%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.PropertyGridForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.PropertyGridForm.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.PropertyGridForm",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.PropertyGridForm.yml\" sourcestartlinenumber=\"1\">Contains a single property grid for manipulating the properties of an object.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.ResettablePropertyGrid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.ResettablePropertyGrid.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.ResettablePropertyGrid",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.ResettablePropertyGrid.yml\" sourcestartlinenumber=\"1\">A <xref href=\"System.Windows.Forms.PropertyGrid\" data-throw-if-not-resolved=\"false\"></xref> that provides a &quot;reset value&quot; option in its context menu.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.RtfBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.RtfBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.RtfBuilder",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.RtfBuilder.yml\" sourcestartlinenumber=\"1\">Builds an RTF-formatted string with paragraphs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.RtfColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.RtfColor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.RtfColor",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TaskControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TaskControl.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TaskControl",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TaskControl.yml\" sourcestartlinenumber=\"1\">Combines a <xref href=\"NanoByte.Common.Controls.TaskProgressBar\" data-throw-if-not-resolved=\"false\"></xref> and a <xref href=\"NanoByte.Common.Controls.TaskLabel\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TaskLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TaskLabel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TaskLabel",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TaskLabel.yml\" sourcestartlinenumber=\"1\">A progress label that takes <xref href=\"NanoByte.Common.Tasks.TaskSnapshot\" data-throw-if-not-resolved=\"false\"></xref> inputs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TaskProgressBar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TaskProgressBar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TaskProgressBar",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TaskProgressBar.yml\" sourcestartlinenumber=\"1\">A progress bar that takes <xref href=\"NanoByte.Common.Tasks.TaskSnapshot\" data-throw-if-not-resolved=\"false\"></xref> inputs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TimeSpanControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TimeSpanControl.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TimeSpanControl",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TimeSpanControl.yml\" sourcestartlinenumber=\"1\">Allows the input of a <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> using <xref href=\"System.Windows.Forms.NumericUpDown\" data-throw-if-not-resolved=\"false\"></xref> boxes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchEventArgs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TouchEventArgs",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TouchEventArgs.yml\" sourcestartlinenumber=\"1\">Event information about a touch event.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchEventMask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchEventMask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TouchEventMask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TouchEventMask.yml\" sourcestartlinenumber=\"1\">Mask indicating which fields in <xref href=\"NanoByte.Common.Controls.TouchEventArgs\" data-throw-if-not-resolved=\"false\"></xref> are valid.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchForm.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TouchForm",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TouchForm.yml\" sourcestartlinenumber=\"1\">Represents a window that reacts to touch input on Windows 7 or newer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.TouchPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.TouchPanel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.TouchPanel",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.TouchPanel.yml\" sourcestartlinenumber=\"1\">Represents a panel that reacts to touch input on Windows 7 or newer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.UriTextBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.UriTextBox.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls.UriTextBox",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Controls.UriTextBox.yml\" sourcestartlinenumber=\"1\">A <xref href=\"NanoByte.Common.Controls.HintTextBox\" data-throw-if-not-resolved=\"false\"></xref> designed specifically for entering URIs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Controls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Controls.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Controls",
+      "Summary": "<p sourcefile=\"../src/Common.WinForms/Controls/_Namespace.md\" sourcestartlinenumber=\"1\">WinForms controls and forms designed to simplify common UI designs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.AggregateDispatcher<TBase>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.AggregateDispatcher-1.yml\" sourcestartlinenumber=\"1\">Calls different action delegates based on the runtime types of objects.\nCalls multiple delegates when they all match a type (through inheritance).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.AggregateDispatcher-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.AggregateDispatcher<TBase, TResult>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.AggregateDispatcher-2.yml\" sourcestartlinenumber=\"1\">Calls different function delegates (with enumerable return values) based on the runtime types of objects.\nAggregates results when multiple delegates match a type (through inheritance).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.BucketRule-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.BucketRule-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.BucketRule<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.BucketRule-1.yml\" sourcestartlinenumber=\"1\">A rule for <xref href=\"NanoByte.Common.Dispatch.Bucketizer%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.BucketRule-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.BucketRule-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.BucketRule<TElement, TValue>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.BucketRule-2.yml\" sourcestartlinenumber=\"1\">A rule for <xref href=\"NanoByte.Common.Dispatch.Bucketizer%602\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.Bucketizer<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.Bucketizer-1.yml\" sourcestartlinenumber=\"1\">Splits collections into multiple buckets based on predicate matching. The first matching predicate wins. Create with <xref href=\"NanoByte.Common.Dispatch.Bucketizer.Bucketize%60%601(System.Collections.Generic.IEnumerable%7b%60%600%7d)\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Bucketizer-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.Bucketizer<TElement, TValue>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.Bucketizer-2.yml\" sourcestartlinenumber=\"1\">Splits collections into multiple buckets based on value-mapping. Create with <xref href=\"NanoByte.Common.Dispatch.Bucketizer.Bucketize%60%602(System.Collections.Generic.IEnumerable%7b%60%600%7d%2cSystem.Func%7b%60%600%2c%60%601%7d)\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Bucketizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Bucketizer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.Bucketizer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.Bucketizer.yml\" sourcestartlinenumber=\"1\">Contains extension methods for creating bucketizers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.IChangeNotify-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.IChangeNotify-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.IChangeNotify<TSender>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.IChangeNotify-1.yml\" sourcestartlinenumber=\"1\">An object that can notify interested parties of changes in properties of interest.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.IMergeable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.IMergeable-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.IMergeable<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.IMergeable-1.yml\" sourcestartlinenumber=\"1\">An equatable element that can be merged using 3-way merging.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.Merge.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.Merge.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.Merge",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.Merge.yml\" sourcestartlinenumber=\"1\">Provides utility methods for merging <xref href=\"System.Collections.Generic.ICollection%601\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.ModelViewSync-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.ModelViewSync-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.ModelViewSync<TModel, TView>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.ModelViewSync-2.yml\" sourcestartlinenumber=\"1\">Keeps two collections of different types in sync based on mapping rules.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.PerTypeDispatcher<TBase>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.PerTypeDispatcher-1.yml\" sourcestartlinenumber=\"1\">Calls different action delegates based on the runtime types of objects.\nTypes must be exact matches. Inheritance is not considered.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.PerTypeDispatcher-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch.PerTypeDispatcher<TBase, TResult>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Dispatch.PerTypeDispatcher-2.yml\" sourcestartlinenumber=\"1\">Calls different function delegates (with return values) based on the runtime types of objects.\nTypes must be exact matches. Inheritance is not considered.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Dispatch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Dispatch.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Dispatch",
+      "Summary": "<p sourcefile=\"../src/Common/Dispatch/_Namespace.md\" sourcestartlinenumber=\"1\">Functionality like double dispatch and two/three-way merging.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Disposable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Disposable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Disposable",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Disposable.yml\" sourcestartlinenumber=\"1\">Invokes a callback on <xref href=\"NanoByte.Common.Disposable.Dispose\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.DefaultFonts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.DefaultFonts.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Drawing.DefaultFonts",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Drawing.DefaultFonts.yml\" sourcestartlinenumber=\"1\">Common fonts used in WinForms.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.ImageExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.ImageExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Drawing.ImageExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Drawing.ImageExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Drawing.Image\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.ScalableImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.ScalableImage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Drawing.ScalableImage",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Drawing.ScalableImage.yml\" sourcestartlinenumber=\"1\">Wraps an <xref href=\"System.Drawing.Image\" data-throw-if-not-resolved=\"false\"></xref> and provides and caches scaled versions of it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Drawing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Drawing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Drawing",
+      "Summary": "<p sourcefile=\"../src/Common.WinForms/Drawing/_Namespace.md\" sourcestartlinenumber=\"1\">Helpers for manipulating images</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.EasingFunction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.EasingFunction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.EasingFunction",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.EasingFunction.yml\" sourcestartlinenumber=\"1\">The easing function to use.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.EncodingUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.EncodingUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.EncodingUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.EncodingUtils.yml\" sourcestartlinenumber=\"1\">Helper methods for encoding strings, decoding byte arrays, calculating hashes, etc..</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ExceptionUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ExceptionUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.ExceptionUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.ExceptionUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods related to <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ExitCodeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ExitCodeException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.ExitCodeException",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.ExitCodeException.yml\" sourcestartlinenumber=\"1\">Indicates that a <xref href=\"System.Diagnostics.Process\" data-throw-if-not-resolved=\"false\"></xref> exited with an unexpected <xref href=\"System.Diagnostics.Process.ExitCode\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ICloneable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ICloneable-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.ICloneable<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.ICloneable-1.yml\" sourcestartlinenumber=\"1\">Supports cloning.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.IHighlightColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.IHighlightColor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.IHighlightColor",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.IHighlightColor.yml\" sourcestartlinenumber=\"1\">An object that can be highlighted with a specific color in graphical representations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.INamed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.INamed.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.INamed",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.INamed.yml\" sourcestartlinenumber=\"1\">An entity that has a unique name that can be used for identification in lists and trees.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.AppInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.AppInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Info.AppInfo",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Info.AppInfo.yml\" sourcestartlinenumber=\"1\">Wraps information about an application in a serializer-friendly format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.ExceptionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.ExceptionInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Info.ExceptionInfo",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Info.ExceptionInfo.yml\" sourcestartlinenumber=\"1\">Wraps information about an exception in a serializer-friendly format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.OSInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.OSInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Info.OSInfo",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Info.OSInfo.yml\" sourcestartlinenumber=\"1\">Wraps information about an operating system in a serializer-friendly format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Info.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Info.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Info",
+      "Summary": "<p sourcefile=\"../src/Common/Info/_Namespace.md\" sourcestartlinenumber=\"1\">Data structures providing diagnostic information about the application, the operating system, etc..</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Log.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Log.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Log",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Log.yml\" sourcestartlinenumber=\"1\">A simple logging system. Writes to an in-memory buffer and a plain text file.\nAllows additional handlers to be registered (e.g., for console or GUI output).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.LogEntryEventHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.LogEntryEventHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.LogEntryEventHandler",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.LogEntryEventHandler.yml\" sourcestartlinenumber=\"1\">Describes an event relating to an entry in the <xref href=\"NanoByte.Common.Log\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.LogSeverity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.LogSeverity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.LogSeverity",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.LogSeverity.yml\" sourcestartlinenumber=\"1\">Describes how severe/important a <xref href=\"NanoByte.Common.Log\" data-throw-if-not-resolved=\"false\"></xref> entry is.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.MathUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.MathUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.MathUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.MathUtils.yml\" sourcestartlinenumber=\"1\">Provides math-related utility functions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Named.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Named.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Named",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Named.yml\" sourcestartlinenumber=\"1\">Static companion for <xref href=\"NanoByte.Common.INamed\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.AppMutex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.AppMutex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.AppMutex",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.AppMutex.yml\" sourcestartlinenumber=\"1\">Provides a cross-process object allowing easy detection of application instances (e.g., for use by installers and update tools).\nNo-op on non-Windows platforms.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.CompilerUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.CompilerUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.CompilerUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.CompilerUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods for compiling .NET code at runtime.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.CygwinUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.CygwinUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.CygwinUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.CygwinUtils.yml\" sourcestartlinenumber=\"1\">Provides access to Cygwin-related filesystem features. Cygwin provides Unix-like functionality on Windows systems.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.IProcessLauncher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.IProcessLauncher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.IProcessLauncher",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.IProcessLauncher.yml\" sourcestartlinenumber=\"1\">Runs an external process.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.OSUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.OSUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.OSUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.OSUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods related to operating system functionality across multiple platforms.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.ProcessLauncher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.ProcessLauncher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.ProcessLauncher",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.ProcessLauncher.yml\" sourcestartlinenumber=\"1\">Runs a child process.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.ProcessLauncherExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.ProcessLauncherExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.ProcessLauncherExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.ProcessLauncherExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for <xref href=\"NanoByte.Common.Native.IProcessLauncher\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.RegistryUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.RegistryUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.RegistryUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.RegistryUtils.yml\" sourcestartlinenumber=\"1\">Provides utility and extension methods for <xref href=\"Microsoft.Win32.Registry\" data-throw-if-not-resolved=\"false\"></xref> access.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.UnixUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.UnixUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.UnixUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.UnixUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods for Unix-specific features of the Mono library.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WinFormsUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WinFormsUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WinFormsUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WinFormsUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods and API calls specific to the <xref href=\"System.Windows.Forms\" data-throw-if-not-resolved=\"false\"></xref> UI toolkit.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowMessage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowMessage",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowMessage.yml\" sourcestartlinenumber=\"1\">Values for <xref href=\"System.Windows.Forms.Message.Msg\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsCredentials.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsCredentials.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsCredentials",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsCredentials.yml\" sourcestartlinenumber=\"1\">Provides an interface to the Windows Credentials API. Supported on Windows XP or newer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsCredentialsFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsCredentialsFlags.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsCredentialsFlags",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsMutex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsMutex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsMutex",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsMutex.yml\" sourcestartlinenumber=\"1\">Provides Windows-specific API calls for cross-process Mutexes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsRestartManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsRestartManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsRestartManager",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsRestartManager.yml\" sourcestartlinenumber=\"1\">Provides an interface to the Windows Restart Manager. Supported on Windows Vista or newer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsTaskbar.ProgressBarState",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.yml\" sourcestartlinenumber=\"1\">Represents the thumbnail progress bar state.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ShellLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.ShellLink.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsTaskbar.ShellLink",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsTaskbar.ShellLink.yml\" sourcestartlinenumber=\"1\">Represents a shell link targeting a file.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsTaskbar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsTaskbar",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsTaskbar.yml\" sourcestartlinenumber=\"1\">Provides helper methods and API calls specific to the Windows 7 or newer taskbar.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.WindowsUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.WindowsUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native.WindowsUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Native.WindowsUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods and API calls specific to the Windows platform.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Native.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Native.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Native",
+      "Summary": "<p sourcefile=\"../src/Common/Native/_Namespace.md\" sourcestartlinenumber=\"1\">Utility classes that provide OS-specific helper functions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.AnsiCliCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.AnsiCliCredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.AnsiCliCredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.AnsiCliCredentialProvider.yml\" sourcestartlinenumber=\"1\">Asks the user for <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s using an ANSI console prompt.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.Connectivity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.Connectivity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.Connectivity",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.Connectivity.yml\" sourcestartlinenumber=\"1\">State of a network connection.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.DownloadFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.DownloadFile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.DownloadFile",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.DownloadFile.yml\" sourcestartlinenumber=\"1\">Downloads a file from a specific internet address to a stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.HttpClientExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.HttpClientExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.HttpClientExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.HttpClientExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Net.Http.HttpClient\" data-throw-if-not-resolved=\"false\"></xref> and related classes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.HttpServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.HttpServer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.HttpServer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.HttpServer.yml\" sourcestartlinenumber=\"1\">A simple HTTP server.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.ICredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.ICredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.ICredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.ICredentialProvider.yml\" sourcestartlinenumber=\"1\">Asks the user or a keyring for <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s for specific <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.MicroServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.MicroServer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.MicroServer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.MicroServer.yml\" sourcestartlinenumber=\"1\">A minimalistic HTTP server that only serves a single file on localhost. Useful for unit tests.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.NetUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.NetUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.NetUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.NetUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods for the <xref href=\"System.Net\" data-throw-if-not-resolved=\"false\"></xref> subsystem.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.Netrc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.Netrc.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.Netrc",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.Netrc.yml\" sourcestartlinenumber=\"1\">Represents data loaded from a .netrc file as a map from host names to credentials.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.NetrcCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.NetrcCredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.NetrcCredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.NetrcCredentialProvider.yml\" sourcestartlinenumber=\"1\">Gets credentials from <xref href=\"NanoByte.Common.Net.Netrc\" data-throw-if-not-resolved=\"false\"></xref> if possible. Falls back to another provider otherwise.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.NetworkCredentialExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.NetworkCredentialExtension.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.NetworkCredentialExtension",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.NetworkCredentialExtension.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.UriExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.UriExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.UriExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.UriExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WebProxyExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WebProxyExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.WebProxyExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.WebProxyExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsCliCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsCliCredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.WindowsCliCredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.WindowsCliCredentialProvider.yml\" sourcestartlinenumber=\"1\">Asks the user for <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s using the Windows Credential Manager command-line interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsCredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.WindowsCredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.WindowsCredentialProvider.yml\" sourcestartlinenumber=\"1\">Gets <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s using the Windows Credential Manager.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsGuiCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsGuiCredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.WindowsGuiCredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.WindowsGuiCredentialProvider.yml\" sourcestartlinenumber=\"1\">Asks the user for <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s using the Windows Credential Manager GUI.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider.yml\" sourcestartlinenumber=\"1\">Gets <xref href=\"System.Net.NetworkCredential\" data-throw-if-not-resolved=\"false\"></xref>s stored in the Windows Credential Manager. Does not prompt for new credentials.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Net.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Net.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Net",
+      "Summary": "<p sourcefile=\"../src/Common/Net/_Namespace.md\" sourcestartlinenumber=\"1\">Network communication.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.NotAdminException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.NotAdminException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.NotAdminException",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.NotAdminException.yml\" sourcestartlinenumber=\"1\">Like a <xref href=\"System.UnauthorizedAccessException\" data-throw-if-not-resolved=\"false\"></xref> but with the additional hint that retrying the operation as an administrator would fix the problem.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.ProcessUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.ProcessUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.ProcessUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.ProcessUtils.yml\" sourcestartlinenumber=\"1\">Provides methods for launching child processes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Properties.Resources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Properties.Resources.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Properties.Resources",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Properties.Resources.yml\" sourcestartlinenumber=\"1\">A strongly-typed resource class, for looking up localized strings, etc.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Properties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Properties.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Properties",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.PropertyPointer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.PropertyPointer-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.PropertyPointer<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.PropertyPointer-1.yml\" sourcestartlinenumber=\"1\">Wraps delegate-based access to a property.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.PropertyPointer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.PropertyPointer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.PropertyPointer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.PropertyPointer.yml\" sourcestartlinenumber=\"1\">Provides factory methods for <xref href=\"NanoByte.Common.PropertyPointer%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.StagedOperation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.StagedOperation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.StagedOperation",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.StagedOperation.yml\" sourcestartlinenumber=\"1\">Common base class for operations that are first staged and then either committed or rolled back.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.AtomicRead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.AtomicRead.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.AtomicRead",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.AtomicRead.yml\" sourcestartlinenumber=\"1\">Ensures that a read operation for a file does not conflict with an <xref href=\"NanoByte.Common.Storage.AtomicWrite\" data-throw-if-not-resolved=\"false\"></xref> for the same file.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.AtomicWrite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.AtomicWrite.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.AtomicWrite",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.AtomicWrite.yml\" sourcestartlinenumber=\"1\">Provides a temporary path to write to and atomically inserts it at the destination location on disposal (if <xref href=\"NanoByte.Common.Storage.AtomicWrite.Commit\" data-throw-if-not-resolved=\"false\"></xref> was called).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.BinaryStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.BinaryStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.BinaryStorage",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.BinaryStorage.yml\" sourcestartlinenumber=\"1\">Provides easy serialization to binary files (optionally wrapped in ZIP archives).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.CopyDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.CopyDirectory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.CopyDirectory",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.CopyDirectory.yml\" sourcestartlinenumber=\"1\">Copies the content of a directory to a new location preserving file timestamps, symlinks and hard links.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.FileUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.FileUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.FileUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.FileUtils.yml\" sourcestartlinenumber=\"1\">Provides filesystem-related helper methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.JsonStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.JsonStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.JsonStorage",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.JsonStorage.yml\" sourcestartlinenumber=\"1\">Provides easy serialization to JSON files.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.Locations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.Locations.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.Locations",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.Locations.yml\" sourcestartlinenumber=\"1\">Provides easy access to platform-specific common directories for storing settings and application data.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.MoveDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.MoveDirectory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.MoveDirectory",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.MoveDirectory.yml\" sourcestartlinenumber=\"1\">Moves the content of a directory to a new location preserving file timestamps, symlinks and hard links.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.Paths.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.Paths.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.Paths",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.Paths.yml\" sourcestartlinenumber=\"1\">Helper methods for resolving file system paths.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.ReadDirectoryBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.ReadDirectoryBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.ReadDirectoryBase",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.ReadDirectoryBase.yml\" sourcestartlinenumber=\"1\">Recursively iterates over all elements in a directory.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.ReadFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.ReadFile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.ReadFile",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.ReadFile.yml\" sourcestartlinenumber=\"1\">Reads a file from disk to a stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryDirectory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.TemporaryDirectory",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.TemporaryDirectory.yml\" sourcestartlinenumber=\"1\">Represents a temporary directory that is automatically deleted when the object is disposed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryFile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.TemporaryFile",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.TemporaryFile.yml\" sourcestartlinenumber=\"1\">Represents a temporary file that is automatically deleted when the object is disposed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryFlagFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryFlagFile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.TemporaryFlagFile",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.TemporaryFlagFile.yml\" sourcestartlinenumber=\"1\">A temporary directory with a file that may or may not exist to indicate whether a certain condition is true or false.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.TemporaryWorkingDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.TemporaryWorkingDirectory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.TemporaryWorkingDirectory",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.TemporaryWorkingDirectory.yml\" sourcestartlinenumber=\"1\">Like <xref href=\"NanoByte.Common.Storage.TemporaryDirectory\" data-throw-if-not-resolved=\"false\"></xref> but also sets the current working directory to <xref href=\"NanoByte.Common.Storage.TemporaryDirectory.Path\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.WorkingDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.WorkingDirectory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.WorkingDirectory",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.WorkingDirectory.yml\" sourcestartlinenumber=\"1\">Changes the current working working directory until the object is disposed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.XmlNamespaceAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.XmlNamespaceAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.XmlNamespaceAttribute",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.XmlNamespaceAttribute.yml\" sourcestartlinenumber=\"1\">Allows you to specify a <xref href=\"System.Xml.XmlQualifiedName\" data-throw-if-not-resolved=\"false\"></xref> (namespace short-name) for <xref href=\"NanoByte.Common.Storage.XmlStorage\" data-throw-if-not-resolved=\"false\"></xref> to use.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.XmlStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.XmlStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage.XmlStorage",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Storage.XmlStorage.yml\" sourcestartlinenumber=\"1\">Provides easy serialization to XML files.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Storage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Storage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Storage",
+      "Summary": "<p sourcefile=\"../src/Common/Storage/_Namespace.md\" sourcestartlinenumber=\"1\">File system access and serialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.DelegatingStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.DelegatingStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.DelegatingStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.DelegatingStream.yml\" sourcestartlinenumber=\"1\">Forwards all requests to another <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>s. Useful as a base class for decorators/wrappers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.NonSeekableStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.NonSeekableStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.NonSeekableStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.NonSeekableStream.yml\" sourcestartlinenumber=\"1\">Decorator that prevents a stream from being seeked.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.OffsetStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.OffsetStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.OffsetStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.OffsetStream.yml\" sourcestartlinenumber=\"1\">Decorator that transparently applies an offset to another <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.ProgressStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.ProgressStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.ProgressStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.ProgressStream.yml\" sourcestartlinenumber=\"1\">Decorator that adds progress-tracking and cancellation to another <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.ReadStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.ReadStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.ReadStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.ReadStream.yml\" sourcestartlinenumber=\"1\">Reads the contents of a stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.SeekBufferStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.SeekBufferStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.SeekBufferStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.SeekBufferStream.yml\" sourcestartlinenumber=\"1\">Decorator that adds seek buffering to another <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.ShadowingStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.ShadowingStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.ShadowingStream",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.ShadowingStream.yml\" sourcestartlinenumber=\"1\">Decorator that copies all bytes read from a <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> to another <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.StreamConsumer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.StreamConsumer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.StreamConsumer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.StreamConsumer.yml\" sourcestartlinenumber=\"1\">Continuously reads lines from a <xref href=\"System.IO.StreamReader\" data-throw-if-not-resolved=\"false\"></xref> using a background thread while providing them to a foreground thread on demand.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.StreamUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.StreamUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams.StreamUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Streams.StreamUtils.yml\" sourcestartlinenumber=\"1\">Provides <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>-related helper methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Streams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Streams.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Streams",
+      "Summary": "<p sourcefile=\"../src/Common/Streams/_Namespace.md\" sourcestartlinenumber=\"1\">Filter streams and utility classes with helper functions for stream handling.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.StringUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.StringUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.StringUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.StringUtils.yml\" sourcestartlinenumber=\"1\">Provides additional or simplified string functions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ActionTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ActionTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ActionTask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ActionTask.yml\" sourcestartlinenumber=\"1\">A task that executes an <xref href=\"System.Action\" data-throw-if-not-resolved=\"false\"></xref> that can be canceled. Only completion is reported, no intermediate progress.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgress.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.AnsiCliProgress",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.AnsiCliProgress.yml\" sourcestartlinenumber=\"1\">Reports task progress updates using ANSI console output.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgressContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.AnsiCliProgressContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.AnsiCliProgressContext",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.AnsiCliProgressContext.yml\" sourcestartlinenumber=\"1\">Container for one or more ANSI console progress bars.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.AnsiCliTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.AnsiCliTaskHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.AnsiCliTaskHandler",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.AnsiCliTaskHandler.yml\" sourcestartlinenumber=\"1\">Informs the user about the progress of tasks and ask questions using ANSI console output.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.CliProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.CliProgress.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.CliProgress",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.CliProgress.yml\" sourcestartlinenumber=\"1\">Reports task progress updates using console output.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.CliTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.CliTaskHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.CliTaskHandler",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.CliTaskHandler.yml\" sourcestartlinenumber=\"1\">Informs the user about the progress of tasks and ask questions using console output.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.DeferredProgress-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.DeferredProgress-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.DeferredProgress<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.DeferredProgress-1.yml\" sourcestartlinenumber=\"1\">Remembers the latest call made to <xref href=\"NanoByte.Common.Tasks.DeferredProgress%601.Report(%600)\" data-throw-if-not-resolved=\"false\"></xref>. Forwards that call (if any) and all future calls to a target <xref href=\"System.IProgress%601\" data-throw-if-not-resolved=\"false\"></xref> implementation once it is set.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.DialogTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.DialogTaskHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.DialogTaskHandler",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.DialogTaskHandler.yml\" sourcestartlinenumber=\"1\">Uses simple WinForms dialog boxes to inform the user about the progress of tasks.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ForEachTask-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ForEachTask-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ForEachTask<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ForEachTask-1.yml\" sourcestartlinenumber=\"1\">A task that executes an action once for each element of a collection.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ForEachTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ForEachTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ForEachTask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ForEachTask.yml\" sourcestartlinenumber=\"1\">Provides a static factory method for <xref href=\"NanoByte.Common.Tasks.ForEachTask%601\" data-throw-if-not-resolved=\"false\"></xref> as an alternative to calling the constructor to exploit type inference.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.GuiTaskHandlerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.GuiTaskHandlerBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.GuiTaskHandlerBase",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.GuiTaskHandlerBase.yml\" sourcestartlinenumber=\"1\">Common base class for WinForms <xref href=\"NanoByte.Common.Tasks.ITaskHandler\" data-throw-if-not-resolved=\"false\"></xref> implementations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.IResultTask-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.IResultTask-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.IResultTask<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.IResultTask-1.yml\" sourcestartlinenumber=\"1\">A task the provides a result.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ITask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ITask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ITask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ITask.yml\" sourcestartlinenumber=\"1\">Represents an operation that can be cancelled and have its progress tracked.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ITaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ITaskHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ITaskHandler",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ITaskHandler.yml\" sourcestartlinenumber=\"1\">Used to run and track <xref href=\"NanoByte.Common.Tasks.ITask\" data-throw-if-not-resolved=\"false\"></xref>s and ask the user questions. Specific implementations provide different kinds of user interfaces.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.PercentProgressCallback.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.PercentProgressCallback.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.PercentProgressCallback",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.PercentProgressCallback.yml\" sourcestartlinenumber=\"1\">A callback to be called by a workload to report its progress in percent.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.PercentageTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.PercentageTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.PercentageTask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.PercentageTask.yml\" sourcestartlinenumber=\"1\">A task that executes an <xref href=\"System.Action%601\" data-throw-if-not-resolved=\"false\"></xref> and reports progress in percent.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ResultTask-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ResultTask-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ResultTask<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ResultTask-1.yml\" sourcestartlinenumber=\"1\">A task that executes a callback and the provides a result. Only completion is reported, no intermediate progress.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.ResultTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.ResultTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.ResultTask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.ResultTask.yml\" sourcestartlinenumber=\"1\">Provides a static factory method for <xref href=\"NanoByte.Common.Tasks.ResultTask%601\" data-throw-if-not-resolved=\"false\"></xref> as an alternative to calling the constructor to exploit type inference.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.SilentTaskHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.SilentTaskHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.SilentTaskHandler",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.SilentTaskHandler.yml\" sourcestartlinenumber=\"1\">Executes tasks silently and suppresses any questions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.TaskBase",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.TaskBase.yml\" sourcestartlinenumber=\"1\">Abstract base class for <xref href=\"NanoByte.Common.Tasks.ITask\" data-throw-if-not-resolved=\"false\"></xref> implementations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskHandlerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskHandlerBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.TaskHandlerBase",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.TaskHandlerBase.yml\" sourcestartlinenumber=\"1\">Common base class for <xref href=\"NanoByte.Common.Tasks.ITaskHandler\" data-throw-if-not-resolved=\"false\"></xref> implementations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskHandlerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskHandlerExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.TaskHandlerExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.TaskHandlerExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for <xref href=\"NanoByte.Common.Tasks.ITaskHandler\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskSnapshot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskSnapshot.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.TaskSnapshot",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.TaskSnapshot.yml\" sourcestartlinenumber=\"1\">Represents a progress snapshot of an <xref href=\"NanoByte.Common.Tasks.ITask\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.TaskState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.TaskState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.TaskState",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Tasks.TaskState.yml\" sourcestartlinenumber=\"1\">Represents different states a (usually Web- or IO-related) task can be in.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.Verbosity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.Verbosity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks.Verbosity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Tasks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Tasks.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Tasks",
+      "Summary": "<p sourcefile=\"../src/Common/Tasks/_Namespace.md\" sourcestartlinenumber=\"1\">Task system for managing long-running tasks and reporting progress to the user.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ActionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ActionExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.ActionExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.ActionExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Action%601\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.AsyncFormWrapper-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.AsyncFormWrapper-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.AsyncFormWrapper<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.AsyncFormWrapper-1.yml\" sourcestartlinenumber=\"1\">Lazily starts a separate thread with a message loop for a <xref href=\"System.Windows.Forms.Form\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.CancellationGuard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.CancellationGuard.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.CancellationGuard",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.CancellationGuard.yml\" sourcestartlinenumber=\"1\">Ensures that a block of code running on a background thread cleanly exits before a <xref href=\"System.Threading.CancellationTokenSource.Cancel\" data-throw-if-not-resolved=\"false\"></xref> call completes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.FuncExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.FuncExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.FuncExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.FuncExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Func%602\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.JobQueue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.JobQueue.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.JobQueue",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.JobQueue.yml\" sourcestartlinenumber=\"1\">Runs jobs on a single background thread that is started and stopped on demand.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.MarshalNoTimeout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.MarshalNoTimeout.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.MarshalNoTimeout",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.MarshalNoTimeout.yml\" sourcestartlinenumber=\"1\">Derive from this class to enable remoting without timeouts. Keeps remoting object alive as long as process is running.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.MutexLock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.MutexLock.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.MutexLock",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.MutexLock.yml\" sourcestartlinenumber=\"1\">Provides a wrapper around <xref href=\"System.Threading.Mutex\" data-throw-if-not-resolved=\"false\"></xref> that automatically acquires on creating and releases on <xref href=\"NanoByte.Common.Threading.MutexLock.Dispose\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ResultRacer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ResultRacer-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.ResultRacer<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.ResultRacer-1.yml\" sourcestartlinenumber=\"1\">Helper for racing multiple operations against each other, providing the result of the first one that finishes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ResultRacer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ResultRacer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.ResultRacer",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.ResultRacer.yml\" sourcestartlinenumber=\"1\">Helper for racing multiple operations against each other, providing the result of the first one that finishes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.StressTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.StressTest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.StressTest",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.SynchronousProgress-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.SynchronousProgress-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.SynchronousProgress<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.SynchronousProgress-1.yml\" sourcestartlinenumber=\"1\">Reports progress updates using callbacks/events. Performs the callbacks immediately on the same thread.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.TaskExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.TaskExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.TaskExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.ThreadUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.ThreadUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.ThreadUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.ThreadUtils.yml\" sourcestartlinenumber=\"1\">Provides helper methods for launching <xref href=\"System.Threading.Thread\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.WaitHandleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.WaitHandleExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.WaitHandleExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.WaitHandleExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for <xref href=\"System.Threading.WaitHandle\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.WaitTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.WaitTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading.WaitTask",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Threading.WaitTask.yml\" sourcestartlinenumber=\"1\">Waits for a <xref href=\"System.Threading.WaitHandle\" data-throw-if-not-resolved=\"false\"></xref> to become available or the <xref href=\"System.Threading.CancellationToken\" data-throw-if-not-resolved=\"false\"></xref> to be triggered.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Threading.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Threading.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Threading",
+      "Summary": "<p sourcefile=\"../src/Common/Threading/_Namespace.md\" sourcestartlinenumber=\"1\">Helpers for working with threads.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.TimeSpanUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.TimeSpanUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.TimeSpanUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.TimeSpanUtils.yml\" sourcestartlinenumber=\"1\">Helper methods for <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.TimedLogEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.TimedLogEvent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.TimedLogEvent",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.TimedLogEvent.yml\" sourcestartlinenumber=\"1\">Structure that allows you to log timed execution blocks.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.AddToCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.AddToCollection-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.AddToCollection<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.AddToCollection-1.yml\" sourcestartlinenumber=\"1\">An undo command that adds an element to a collection.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.AddToCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.AddToCollection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.AddToCollection",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.AddToCollection.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Undo.AddToCollection%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CollectionCommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CollectionCommand-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.CollectionCommand<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.CollectionCommand-1.yml\" sourcestartlinenumber=\"1\">An undo command that adds or removes an element from a collection.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CommandCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CommandCollector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.CommandCollector",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.CommandCollector.yml\" sourcestartlinenumber=\"1\">Executes <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s and collects them into a <xref href=\"NanoByte.Common.Undo.CompositeCommand\" data-throw-if-not-resolved=\"false\"></xref> allowing a combined undo later on.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CommandManager-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CommandManager-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.CommandManager<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.CommandManager-1.yml\" sourcestartlinenumber=\"1\">Executes <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s for editing a specific object and allows undo/redo operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CommandManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CommandManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.CommandManager",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.CommandManager.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Undo.ICommandManager%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.CompositeCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.CompositeCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.CompositeCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.CompositeCommand.yml\" sourcestartlinenumber=\"1\">Combines multiple <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s into a single atomic transaction.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ConcurrentCommandExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ConcurrentCommandExecutor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.ConcurrentCommandExecutor",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.ConcurrentCommandExecutor.yml\" sourcestartlinenumber=\"1\">Decorator for <xref href=\"NanoByte.Common.Undo.ICommandExecutor\" data-throw-if-not-resolved=\"false\"></xref> that adds locking for thread-safety.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.FirstExecuteCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.FirstExecuteCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.FirstExecuteCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.FirstExecuteCommand.yml\" sourcestartlinenumber=\"1\">An undo command that does something different on the first call to <xref href=\"NanoByte.Common.Undo.FirstExecuteCommand.Execute\" data-throw-if-not-resolved=\"false\"></xref> than on subsequent redo calls.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ICommandExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ICommandExecutor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.ICommandExecutor",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.ICommandExecutor.yml\" sourcestartlinenumber=\"1\">Executes <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ICommandManager-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ICommandManager-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.ICommandManager<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.ICommandManager-1.yml\" sourcestartlinenumber=\"1\">Executes <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s for editing a specific object and allows undo/redo operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.IUndoCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.IUndoCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.IUndoCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.IUndoCommand.yml\" sourcestartlinenumber=\"1\">A executable command with an undo function.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.IValueCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.IValueCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.IValueCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.IValueCommand.yml\" sourcestartlinenumber=\"1\">A command that exposes the value it will set.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.MultiPropertyChangedCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.MultiPropertyChangedCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.MultiPropertyChangedCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.MultiPropertyChangedCommand.yml\" sourcestartlinenumber=\"1\">An undo command that handles multiple changed properties - usually used with a <xref href=\"System.Windows.Forms.PropertyGrid\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.MultiPropertyTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.MultiPropertyTracker.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.MultiPropertyTracker",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.MultiPropertyTracker.yml\" sourcestartlinenumber=\"1\">Tracks values in <xref href=\"System.Windows.Forms.PropertyGrid\" data-throw-if-not-resolved=\"false\"></xref>s in order to be able to generate <xref href=\"NanoByte.Common.Undo.MultiPropertyChangedCommand\" data-throw-if-not-resolved=\"false\"></xref>s after a property was changed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.PreExecutedCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.PreExecutedCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.PreExecutedCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.PreExecutedCommand.yml\" sourcestartlinenumber=\"1\">An undo command that does nothing on the first <xref href=\"NanoByte.Common.Undo.IUndoCommand.Execute\" data-throw-if-not-resolved=\"false\"></xref> call, because the action was already performed beforehand</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.PreExecutedCompositeCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.PreExecutedCompositeCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.PreExecutedCompositeCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.PreExecutedCompositeCommand.yml\" sourcestartlinenumber=\"1\">Combines multiple already executed <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s into a single atomic transaction.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.PropertyChangedCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.PropertyChangedCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.PropertyChangedCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.PropertyChangedCommand.yml\" sourcestartlinenumber=\"1\">An undo command that handles a changed property - usually used with a <xref href=\"System.Windows.Forms.PropertyGrid\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.RemoveFromCollection<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.RemoveFromCollection-1.yml\" sourcestartlinenumber=\"1\">An undo command that removes an element from a collection.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.RemoveFromCollection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.RemoveFromCollection",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.RemoveFromCollection.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Undo.RemoveFromCollection%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ReplaceInList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ReplaceInList-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.ReplaceInList<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.ReplaceInList-1.yml\" sourcestartlinenumber=\"1\">An undo command that replaces an element in a list with a new one.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.ReplaceInList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.ReplaceInList.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.ReplaceInList",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.ReplaceInList.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Undo.ReplaceInList%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetInList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetInList-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SetInList<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SetInList-1.yml\" sourcestartlinenumber=\"1\">Replaces an entry in a <xref href=\"System.Collections.Generic.IList%601\" data-throw-if-not-resolved=\"false\"></xref> with a new one.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetInList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetInList.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SetInList",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SetInList.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Undo.SetInList%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetLocalizableString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetLocalizableString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SetLocalizableString",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SetLocalizableString.yml\" sourcestartlinenumber=\"1\">An undo command that sets a <xref href=\"NanoByte.Common.Collections.LocalizableString\" data-throw-if-not-resolved=\"false\"></xref> in a <xref href=\"NanoByte.Common.Collections.LocalizableStringCollection\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetValueCommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetValueCommand-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SetValueCommand<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SetValueCommand-1.yml\" sourcestartlinenumber=\"1\">An undo command that uses a delegates for getting and setting values from a backing model.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SetValueCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SetValueCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SetValueCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SetValueCommand.yml\" sourcestartlinenumber=\"1\">Factory methods for <xref href=\"NanoByte.Common.Undo.SetValueCommand%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SimpleCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SimpleCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SimpleCommand",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SimpleCommand.yml\" sourcestartlinenumber=\"1\">An undo command that automatically tracks when <xref href=\"NanoByte.Common.Undo.SimpleCommand.Execute\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"NanoByte.Common.Undo.SimpleCommand.Undo\" data-throw-if-not-resolved=\"false\"></xref> can be called.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.SimpleCommandExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.SimpleCommandExecutor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo.SimpleCommandExecutor",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Undo.SimpleCommandExecutor.yml\" sourcestartlinenumber=\"1\">Executes <xref href=\"NanoByte.Common.Undo.IUndoCommand\" data-throw-if-not-resolved=\"false\"></xref>s without any additional handling.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Undo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Undo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Undo",
+      "Summary": "<p sourcefile=\"../src/Common/Undo/_Namespace.md\" sourcestartlinenumber=\"1\">framework for adding undo/redo functionality to your applications, based on the Command pattern.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.UnixTime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.UnixTime.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.UnixTime",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.UnixTime.yml\" sourcestartlinenumber=\"1\">Represents a point in time as the number of seconds since the Unix epoch (Unix timestamp).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.UpdateUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.UpdateUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.UpdateUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.UpdateUtils.yml\" sourcestartlinenumber=\"1\">Provides neat little code-shortcuts for updating properties.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.ConversionUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.ConversionUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.ConversionUtils",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.ConversionUtils.yml\" sourcestartlinenumber=\"1\">Helpers for working with type converters.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.EnumDescriptionConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.EnumDescriptionConverter-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design.EnumDescriptionConverter<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Design.EnumDescriptionConverter-1.yml\" sourcestartlinenumber=\"1\">Type converter for <xref href=\"System.Enum\" data-throw-if-not-resolved=\"false\"></xref>s annotated with <xref href=\"System.ComponentModel.DescriptionAttribute\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.EnumXmlConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.EnumXmlConverter-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design.EnumXmlConverter<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Design.EnumXmlConverter-1.yml\" sourcestartlinenumber=\"1\">Type converter for <xref href=\"System.Enum\" data-throw-if-not-resolved=\"false\"></xref>s annotated with <xref href=\"System.Xml.Serialization.XmlEnumAttribute\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.LanguageSetEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.LanguageSetEditor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design.LanguageSetEditor",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Design.LanguageSetEditor.yml\" sourcestartlinenumber=\"1\">An editor that can be associated with <xref href=\"NanoByte.Common.Collections.LanguageSet\" data-throw-if-not-resolved=\"false\"></xref> properties. Uses a <xref href=\"System.Windows.Forms.CheckedListBox\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.StringConstructorConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.StringConstructorConverter-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design.StringConstructorConverter<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Design.StringConstructorConverter-1.yml\" sourcestartlinenumber=\"1\">Generic type converter for classes that have a constructor with a single string argument and a corresponding <xref href=\"System.Object.ToString\" data-throw-if-not-resolved=\"false\"></xref> implementation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.TimeSpanEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.TimeSpanEditor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design.TimeSpanEditor",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Design.TimeSpanEditor.yml\" sourcestartlinenumber=\"1\">An editor that can be associated with <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> properties. Uses <xref href=\"NanoByte.Common.Controls.TimeSpanControl\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.ValueTypeConverter-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.ValueTypeConverter-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design.ValueTypeConverter<T>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Design.ValueTypeConverter-1.yml\" sourcestartlinenumber=\"1\">Abstract base-class for easily creating a <xref href=\"System.ComponentModel.TypeConverter\" data-throw-if-not-resolved=\"false\"></xref> for a struct (value type).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Design.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Design.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Design",
+      "Summary": "<p sourcefile=\"../src/Common/Values/Design/_Namespace.md\" sourcestartlinenumber=\"1\"><xref href=\"System.ComponentModel.TypeConverter\" data-throw-if-not-resolved=\"True\" data-raw-source=\"&lt;xref:System.ComponentModel.TypeConverter&gt;\" sourcefile=\"../src/Common/Values/Design/_Namespace.md\" sourcestartlinenumber=\"1\"></xref>s used for serialization and to provide a better runtime experience when using <xref href=\"System.Windows.Forms.PropertyGrid\" data-throw-if-not-resolved=\"True\" data-raw-source=\"&lt;xref:System.Windows.Forms.PropertyGrid&gt;\" sourcefile=\"../src/Common/Values/Design/_Namespace.md\" sourcestartlinenumber=\"1\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.EnumExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.EnumExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.EnumExtensions",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.EnumExtensions.yml\" sourcestartlinenumber=\"1\">Contains extension methods for <xref href=\"System.Enum\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.KeyEqualityComparer-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.KeyEqualityComparer-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.KeyEqualityComparer<T, TKey>",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.KeyEqualityComparer-2.yml\" sourcestartlinenumber=\"1\">Specifies the equality of objects based on the equality of a key extracted from the objects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.Languages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.Languages.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values.Languages",
+      "Summary": "<p sourcefile=\"api/NanoByte.Common.Values.Languages.yml\" sourcestartlinenumber=\"1\">Provides <xref href=\"System.Globalization.CultureInfo\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.Values.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.Values.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common.Values",
+      "Summary": "<p sourcefile=\"../src/Common/Values/_Namespace.md\" sourcestartlinenumber=\"1\">Data structures and helpers for Value Types.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/NanoByte.Common.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NanoByte.Common.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "NanoByte.Common",
+      "Summary": "<p sourcefile=\"../src/Common/_Namespace.md\" sourcestartlinenumber=\"1\">Generic utility classes, interfaces, etc. that are applicable to a wide range of different applications.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.AllowNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.AllowNullAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.AllowNullAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.AllowNullAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that null is allowed as an input even if the corresponding type disallows it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.DisallowNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.DisallowNullAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.DisallowNullAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.DisallowNullAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that null is disallowed as an input even if the corresponding type allows it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.yml\" sourcestartlinenumber=\"1\">Applied to a method that will never return under any circumstance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.yml\" sourcestartlinenumber=\"1\">Specifies the types of members that are dynamically accessed.</p>\n<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.yml\" sourcestartlinenumber=\"3\">This enumeration has a <xref href=\"System.FlagsAttribute\" data-throw-if-not-resolved=\"false\"></xref> attribute that allows a\nbitwise combination of its member values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.yml\" sourcestartlinenumber=\"1\">Indicates that certain members on a specified <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> are accessed dynamically,\nfor example through <xref href=\"System.Reflection\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.MaybeNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.MaybeNullAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.MaybeNullAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.MaybeNullAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that an output may be null even if the corresponding type disallows it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that when a method returns <xref href=\"System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue\" data-throw-if-not-resolved=\"false\"></xref>, the parameter may be null even if the corresponding type disallows it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.MemberNotNullAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that the method or property will ensure that the listed field and property members have not-<a href=\"https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null\">null</a> values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that the method or property will ensure that the listed field and property members have non-<a href=\"https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null\">null</a> values when returning with the specified return value condition.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.NotNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.NotNullAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.NotNullAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.NotNullAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that an output will not be null even if the corresponding type allows it. Specifies that an input argument was not null when the call returns.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that the output will be non-null if the named parameter is non-null.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.NotNullWhenAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that when a method returns <xref href=\"System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue\" data-throw-if-not-resolved=\"false\"></xref>, the parameter will not be null even if the corresponding type allows it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.yml\" sourcestartlinenumber=\"1\">Indicates that the specified method requires the ability to generate new code at runtime,\nfor example through <xref href=\"System.Reflection\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.yml\" sourcestartlinenumber=\"1\">Indicates that the specified method requires dynamic access to code that is not referenced\nstatically, for example through <xref href=\"System.Reflection\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that this constructor sets all required members for the current type, and callers\ndo not need to set any required members themselves.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute",
+      "Summary": "<p sourcefile=\"api/System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.yml\" sourcestartlinenumber=\"1\">Suppresses reporting of a specific rule violation, allowing multiple suppressions on a\nsingle code artifact.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Diagnostics.CodeAnalysis.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Diagnostics.CodeAnalysis.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Diagnostics.CodeAnalysis",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Index.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Index.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Index",
+      "Summary": "<p sourcefile=\"api/System.Index.yml\" sourcestartlinenumber=\"1\">Represent a type can be used to index a collection either from the start or the end.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Range.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Range.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Range",
+      "Summary": "<p sourcefile=\"api/System.Range.yml\" sourcestartlinenumber=\"1\">Represent a range has start and end indexes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.yml\" sourcestartlinenumber=\"1\">Indicates that compiler support for a particular feature is required for the location where this attribute is applied.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.CompilerServices.RequiredMemberAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.CompilerServices.RequiredMemberAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.CompilerServices.RequiredMemberAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.CompilerServices.RequiredMemberAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that a type has required members or that a member is required.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.CompilerServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.CompilerServices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.CompilerServices",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.OSPlatformAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.OSPlatformAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning.OSPlatformAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.Versioning.OSPlatformAttribute.yml\" sourcestartlinenumber=\"1\">Base type for all platform-specific API attributes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.SupportedOSPlatformAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.SupportedOSPlatformAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning.SupportedOSPlatformAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.Versioning.SupportedOSPlatformAttribute.yml\" sourcestartlinenumber=\"1\">Records the operating system (and minimum version) that supports an API. Multiple attributes can be\napplied to indicate support on multiple operating systems.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning.SupportedOSPlatformGuardAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.yml\" sourcestartlinenumber=\"1\">Annotates a custom guard field, property or method with a supported platform name and optional version.\nMultiple attributes can be applied to indicate guard for multiple supported platforms.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.TargetPlatformAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.TargetPlatformAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning.TargetPlatformAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.Versioning.TargetPlatformAttribute.yml\" sourcestartlinenumber=\"1\">Records the platform that the project targeted.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.UnsupportedOSPlatformAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.UnsupportedOSPlatformAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning.UnsupportedOSPlatformAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.Versioning.UnsupportedOSPlatformAttribute.yml\" sourcestartlinenumber=\"1\">Marks APIs that were removed in a given operating system version.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute",
+      "Summary": "<p sourcefile=\"api/System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.yml\" sourcestartlinenumber=\"1\">Annotates the custom guard field, property or method with an unsupported platform name and optional version.\nMultiple attributes can be applied to indicate guard for multiple unsupported platforms.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Runtime.Versioning.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Runtime.Versioning.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System.Runtime.Versioning",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "System",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "backports.md",
+      "output": {
+        ".html": {
+          "relative_path": "backports.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

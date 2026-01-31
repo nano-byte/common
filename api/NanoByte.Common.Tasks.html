@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace NanoByte.Common.Tasks | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace NanoByte.Common.Tasks | NanoByte.Common ">
+      
+      <meta name="description" content="Task system for managing long-running tasks and reporting progress to the user.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Tasks/_Namespace.md/#L2">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Tasks">
+
+  <h1 id="NanoByte_Common_Tasks" data-uid="NanoByte.Common.Tasks" class="text-break">Namespace NanoByte.Common.Tasks</h1>
+  <div class="markdown level0 summary"><p>Task system for managing long-running tasks and reporting progress to the user.</p>
+</div>
+  <div class="markdown level0 conceptual"><h2 id="tasks">Tasks</h2>
+<p>Tasks are represented using the <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a> interface.</p>
+<p>This library provides general-purpose implementations such as <a class="xref" href="NanoByte.Common.Tasks.ActionTask.html">ActionTask</a> and <a class="xref" href="NanoByte.Common.Tasks.ForEachTask.html">ForEachTask</a>, as well as use-case specific ones such as <a class="xref" href="NanoByte.Common.Net.DownloadFile.html">DownloadFile</a> and <a class="xref" href="NanoByte.Common.Storage.ReadFile.html">ReadFile</a>. You can also implement your own.</p>
+<h2 id="handlers">Handlers</h2>
+<p>The <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> interface represents a user interface for reporting task progress as well as displaying prompts and outputs to the user. This library provides a number of implementations:</p>
+<ul>
+<li><a class="xref" href="NanoByte.Common.Tasks.CliTaskHandler.html">CliTaskHandler</a> for a basic command-line interface</li>
+<li><a class="xref" href="NanoByte.Common.Tasks.AnsiCliTaskHandler.html">AnsiCliTaskHandler</a> for a more advanced command-line interface using ANSI codes</li>
+<li><a class="xref" href="NanoByte.Common.Tasks.DialogTaskHandler.html">DialogTaskHandler</a> for a graphical interface using WinForms dialog boxes</li>
+<li><a class="xref" href="NanoByte.Common.Tasks.SilentTaskHandler.html">SilentTaskHandler</a> for background execution or unit tests</li>
+<li><code>ServiceTaskHandler</code> for integration with <a href="https://docs.microsoft.com/dotnet/core/extensions/dependency-injection">Microsoft.Extensions.DependencyInjection</a></li>
+</ul>
+<p>Methods that want to run <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>s should take an <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> as an input parameter.<br>
+To run an <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>, pass it to the <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">ITaskHandler.RunTask()</a> method. This will then internally call <a class="xref" href="NanoByte.Common.Tasks.ITask.html#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__">ITask.Run()</a> and take care of setting up progress tracking, cancellation, etc.. Additional methods such as <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_Ask_System_String_System_Nullable_System_Boolean__System_String_">ITaskHandler.Ask()</a> can be used for user interaction.</p>
+<h2 id="threading">Threading</h2>
+<p><a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>s provide no threading or asynchronicity concept by themselves. Their <a class="xref" href="NanoByte.Common.Tasks.ITask.html#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__">.Run()</a> methods block until the tasks is complete. However, they can be cancelled from other threads via <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>s.</p>
+<p><a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> implementations are thread-safe and support running multiple <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>s concurrently.<br>
+<a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">ITaskHandler.RunTask()</a> blocks until the tasks is complete, however some implementations may perform the actual task execution on a separate thread.<br>
+<a class="xref" href="NanoByte.Common.Tasks.DialogTaskHandler.html">DialogTaskHandler</a> keeps the WinForms message loop pumping while a task is running, so calling <code>.RunTask()</code> from the GUI thread will not freeze the GUI. However it does prevent user interaction (other than canceling the task) via a modal dialog box.</p>
+<h2 id="comparison-with-asyncawait">Comparison with async/await</h2>
+<p>While <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a> has some superficial similarities with the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a> class used by the C# <code>async</code>/<code>await</code> keywords, these two concepts should not be confused.</p>
+<p>The <code>async</code>/<code>await</code> keywords are part of the <a href="https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model">Task Asynchronous Programming model</a> (TAP). The TAP provides an abstraction over asynchronous code, enabling the execution of continuations after tasks have completed. This is intended to increase the performance and responsiveness of applications. Many TAP methods accept <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>s to signal that a task should be cancelled and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iprogress-1">IProgress&lt;T&gt;</a> to report a task's progress.</p>
+<p>NanoByte.Common's Task system is intended for managing long-running tasks. It provides an abstraction over UIs for interacting with such tasks. It uses the same <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iprogress-1">IProgress&lt;T&gt;</a> as the TAP, but takes care of managing them internally for most use cases.</p>
+<p>As a rule of thumb:</p>
+<ul>
+<li>Use <code>await</code> and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a> if you want to trigger a short task from a GUI thread.</li>
+<li>Use <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_">ITaskHandler.RunTask()</a> and <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a> if you want to run a longer task on a non-GUI thread (potentially reporting back to a GUI thread).</li>
+</ul>
+<h2 id="api">API</h2>
+</div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ActionTask.html">ActionTask</a></dt>
+      <dd><p>A task that executes an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a> that can be canceled. Only completion is reported, no intermediate progress.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.AnsiCliProgress.html">AnsiCliProgress</a></dt>
+      <dd><p>Reports task progress updates using ANSI console output.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.AnsiCliProgressContext.html">AnsiCliProgressContext</a></dt>
+      <dd><p>Container for one or more ANSI console progress bars.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.AnsiCliTaskHandler.html">AnsiCliTaskHandler</a></dt>
+      <dd><p>Informs the user about the progress of tasks and ask questions using ANSI console output.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.CliProgress.html">CliProgress</a></dt>
+      <dd><p>Reports task progress updates using console output.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.CliTaskHandler.html">CliTaskHandler</a></dt>
+      <dd><p>Informs the user about the progress of tasks and ask questions using console output.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.DeferredProgress-1.html">DeferredProgress&lt;T&gt;</a></dt>
+      <dd><p>Remembers the latest call made to <a class="xref" href="NanoByte.Common.Tasks.DeferredProgress-1.html#NanoByte_Common_Tasks_DeferredProgress_1_Report__0_">Report(T)</a>. Forwards that call (if any) and all future calls to a target <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iprogress-1">IProgress&lt;T&gt;</a> implementation once it is set.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.DialogTaskHandler.html">DialogTaskHandler</a></dt>
+      <dd><p>Uses simple WinForms dialog boxes to inform the user about the progress of tasks.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ForEachTask.html">ForEachTask</a></dt>
+      <dd><p>Provides a static factory method for <a class="xref" href="NanoByte.Common.Tasks.ForEachTask-1.html">ForEachTask&lt;T&gt;</a> as an alternative to calling the constructor to exploit type inference.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ForEachTask-1.html">ForEachTask&lt;T&gt;</a></dt>
+      <dd><p>A task that executes an action once for each element of a collection.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.GuiTaskHandlerBase.html">GuiTaskHandlerBase</a></dt>
+      <dd><p>Common base class for WinForms <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> implementations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.PercentageTask.html">PercentageTask</a></dt>
+      <dd><p>A task that executes an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action&lt;T&gt;</a> and reports progress in percent.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ResultTask.html">ResultTask</a></dt>
+      <dd><p>Provides a static factory method for <a class="xref" href="NanoByte.Common.Tasks.ResultTask-1.html">ResultTask&lt;T&gt;</a> as an alternative to calling the constructor to exploit type inference.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ResultTask-1.html">ResultTask&lt;T&gt;</a></dt>
+      <dd><p>A task that executes a callback and the provides a result. Only completion is reported, no intermediate progress.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.SilentTaskHandler.html">SilentTaskHandler</a></dt>
+      <dd><p>Executes tasks silently and suppresses any questions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.TaskBase.html">TaskBase</a></dt>
+      <dd><p>Abstract base class for <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a> implementations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.TaskHandlerBase.html">TaskHandlerBase</a></dt>
+      <dd><p>Common base class for <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a> implementations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.TaskHandlerExtensions.html">TaskHandlerExtensions</a></dt>
+      <dd><p>Extension methods for <a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a></p>
+</dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.TaskSnapshot.html">TaskSnapshot</a></dt>
+      <dd><p>Represents a progress snapshot of an <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>.</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.IResultTask-1.html">IResultTask&lt;T&gt;</a></dt>
+      <dd><p>A task the provides a result.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a></dt>
+      <dd><p>Represents an operation that can be cancelled and have its progress tracked.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.ITaskHandler.html">ITaskHandler</a></dt>
+      <dd><p>Used to run and track <a class="xref" href="NanoByte.Common.Tasks.ITask.html">ITask</a>s and ask the user questions. Specific implementations provide different kinds of user interfaces.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.TaskState.html">TaskState</a></dt>
+      <dd><p>Represents different states a (usually Web- or IO-related) task can be in.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.Verbosity.html">Verbosity</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="delegates">
+Delegates
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="NanoByte.Common.Tasks.PercentProgressCallback.html">PercentProgressCallback</a></dt>
+      <dd><p>A callback to be called by a workload to report its progress in percent.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Tasks/_Namespace.md/#L2" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

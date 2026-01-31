@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class UpdateUtils | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class UpdateUtils | NanoByte.Common ">
+      
+      <meta name="description" content="Provides neat little code-shortcuts for updating properties.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_UpdateUtils.md&amp;value=---%0Auid%3A%20NanoByte.Common.UpdateUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.UpdateUtils">
+
+
+
+  <h1 id="NanoByte_Common_UpdateUtils" data-uid="NanoByte.Common.UpdateUtils" class="text-break">
+Class UpdateUtils  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides neat little code-shortcuts for updating properties.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class UpdateUtils</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">UpdateUtils</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_UpdateUtils_Swap_" data-uid="NanoByte.Common.UpdateUtils.Swap*"></a>
+
+  <h3 id="NanoByte_Common_UpdateUtils_Swap__1___0____0__" data-uid="NanoByte.Common.UpdateUtils.Swap``1(``0@,``0@)">
+  Swap&lt;T&gt;(ref T, ref T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Swaps the content of two fields.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Swap&lt;T&gt;(ref T value1, ref T value2)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value1</code> <span class="xref">T</span></dt>
+    <dd><p>The first field which will afterwards carry the content of <code class="paramref">value2</code>.</p>
+</dd>
+    <dt><code>value2</code> <span class="xref">T</span></dt>
+    <dd><p>The first field which will afterwards carry the content of <code class="paramref">value1</code>.</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of objects to swap.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_UpdateUtils_To_" data-uid="NanoByte.Common.UpdateUtils.To*"></a>
+
+  <h3 id="NanoByte_Common_UpdateUtils_To__1___0___0__System_Action_" data-uid="NanoByte.Common.UpdateUtils.To``1(``0,``0@,System.Action)">
+  To&lt;T&gt;(T, ref T, Action)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a value and calls back a delegate if the original value actually changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void To&lt;T&gt;(this T value, ref T original, Action updated)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">T</span></dt>
+    <dd><p>The new value.</p>
+</dd>
+    <dt><code>original</code> <span class="xref">T</span></dt>
+    <dd><p>The original value to update.</p>
+</dd>
+    <dt><code>updated</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></dt>
+    <dd><p>Gets called if value is different from original.</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of data to update.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_UpdateUtils_To_" data-uid="NanoByte.Common.UpdateUtils.To*"></a>
+
+  <h3 id="NanoByte_Common_UpdateUtils_To__1___0___0__System_Boolean__" data-uid="NanoByte.Common.UpdateUtils.To``1(``0,``0@,System.Boolean@)">
+  To&lt;T&gt;(T, ref T, ref bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a value and sets a boolean flag to <code>true</code> if the original value actually changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void To&lt;T&gt;(this T value, ref T original, ref bool updated)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">T</span></dt>
+    <dd><p>The new value.</p>
+</dd>
+    <dt><code>original</code> <span class="xref">T</span></dt>
+    <dd><p>The original value to update.</p>
+</dd>
+    <dt><code>updated</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Gets set to <code>true</code> if value is different from original.</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of data to update.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_UpdateUtils_To_" data-uid="NanoByte.Common.UpdateUtils.To*"></a>
+
+  <h3 id="NanoByte_Common_UpdateUtils_To__1___0___0__System_Boolean__System_Boolean__" data-uid="NanoByte.Common.UpdateUtils.To``1(``0,``0@,System.Boolean@,System.Boolean@)">
+  To&lt;T&gt;(T, ref T, ref bool, ref bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a value and sets two boolean flags to <code>true</code> if the original value actually changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void To&lt;T&gt;(this T value, ref T original, ref bool updated1, ref bool updated2)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">T</span></dt>
+    <dd><p>The new value.</p>
+</dd>
+    <dt><code>original</code> <span class="xref">T</span></dt>
+    <dd><p>The original value to update.</p>
+</dd>
+    <dt><code>updated1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Gets set to <code>true</code> if value is different from original.</p>
+</dd>
+    <dt><code>updated2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Gets set to <code>true</code> if value is different from original.</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The type of data to update.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_UpdateUtils_To_" data-uid="NanoByte.Common.UpdateUtils.To*"></a>
+
+  <h3 id="NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1__" data-uid="NanoByte.Common.UpdateUtils.To``2(``0,System.Func{``0,``1})">
+  To&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Immediately invokes the specified <code class="paramref">action</code> with the <code class="paramref">value</code>. Useful for applying null-coalescing operator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TOut To&lt;TIn, TOut&gt;(this TIn value, Func&lt;TIn, TOut&gt; action) where TIn : notnull</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">TIn</span></dt>
+    <dd><p>The value.</p>
+</dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TIn, TOut&gt;</dt>
+    <dd><p>The action to invoke.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TOut</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TIn</code></dt>
+    <dd></dd>
+    <dt><code>TOut</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_UpdateUtils_To__2___0_System_Func___0___1___examples">Examples</h4>
+  <p>This allows you to write:</p>
+<pre><code class="lang-csharp">Uri? uri = nullableString?.To(x =&gt; new Uri(x);</code></pre>
+<p>Instead of:</p>
+<pre><code class="lang-csharp">Uri? uri = nullableString == null ? null : new Uri(nullableString);</code></pre>
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/UpdateUtils.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

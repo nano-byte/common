@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WindowsTaskbar | NanoByte.Common </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WindowsTaskbar | NanoByte.Common ">
+      
+      <meta name="description" content="Provides helper methods and API calls specific to the Windows 7 or newer taskbar.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/nano-byte/common/new/2.21.2/apiSpec/new?filename=NanoByte_Common_Native_WindowsTaskbar.md&amp;value=---%0Auid%3A%20NanoByte.Common.Native.WindowsTaskbar%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="NanoByte.Common.Native.WindowsTaskbar">
+
+
+
+  <h1 id="NanoByte_Common_Native_WindowsTaskbar" data-uid="NanoByte.Common.Native.WindowsTaskbar" class="text-break">
+Class WindowsTaskbar  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.NativeMethods.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="NanoByte.html">NanoByte</a>.<a class="xref" href="NanoByte.Common.html">Common</a>.<a class="xref" href="NanoByte.Common.Native.html">Native</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>NanoByte.Common.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides helper methods and API calls specific to the Windows 7 or newer taskbar.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[RequiresUnreferencedCode(&quot;Uses COM interop.&quot;)]
+[SuppressMessage(&quot;ReSharper&quot;, &quot;SuspiciousTypeConversion.Global&quot;)]
+[SuppressMessage(&quot;ReSharper&quot;, &quot;UnusedMember.Local&quot;)]
+[SuppressMessage(&quot;ReSharper&quot;, &quot;EmptyGeneralCatchClause&quot;)]
+public static class WindowsTaskbar</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">WindowsTaskbar</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="NanoByte_Common_Native_WindowsTaskbar_AddTaskLinks_" data-uid="NanoByte.Common.Native.WindowsTaskbar.AddTaskLinks*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsTaskbar_AddTaskLinks_System_String_System_Collections_Generic_IEnumerable_NanoByte_Common_Native_WindowsTaskbar_ShellLink__" data-uid="NanoByte.Common.Native.WindowsTaskbar.AddTaskLinks(System.String,System.Collections.Generic.IEnumerable{NanoByte.Common.Native.WindowsTaskbar.ShellLink})">
+  AddTaskLinks(string, IEnumerable&lt;ShellLink&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds user-task links to the taskbar jumplist. Any existing task links are removed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Design&quot;, &quot;CA1031:DoNotCatchGeneralExceptionTypes&quot;, Justification = &quot;COM calls throw unpredictable exceptions and this methods successful execution is not critical.&quot;)]
+public static void AddTaskLinks(string appID, IEnumerable&lt;WindowsTaskbar.ShellLink&gt; links)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appID</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The application ID of the jumplist to add the task to.</p>
+</dd>
+    <dt><code>links</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.html">WindowsTaskbar</a>.<a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.ShellLink.html">ShellLink</a>&gt;</dt>
+    <dd><p>The links to add to the jumplist.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsTaskbar_PreventPinning_" data-uid="NanoByte.Common.Native.WindowsTaskbar.PreventPinning*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsTaskbar_PreventPinning_System_IntPtr_" data-uid="NanoByte.Common.Native.WindowsTaskbar.PreventPinning(System.IntPtr)">
+  PreventPinning(IntPtr)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Prevents a specific window from being pinned to the taskbar.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Design&quot;, &quot;CA1031:DoNotCatchGeneralExceptionTypes&quot;, Justification = &quot;COM calls throw unpredictable exceptions and this methods successful execution is not critical.&quot;)]
+public static void PreventPinning(IntPtr hwnd)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hwnd</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></dt>
+    <dd><p>A handle to the window to prevent from being pinned.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsTaskbar_SetProgressState_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressState*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsTaskbar_SetProgressState_System_IntPtr_NanoByte_Common_Native_WindowsTaskbar_ProgressBarState_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressState(System.IntPtr,NanoByte.Common.Native.WindowsTaskbar.ProgressBarState)">
+  SetProgressState(IntPtr, ProgressBarState)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the state of the taskbar progress indicator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Design&quot;, &quot;CA1031:DoNotCatchGeneralExceptionTypes&quot;, Justification = &quot;COM calls throw unpredictable exceptions and this methods successful execution is not critical.&quot;)]
+public static void SetProgressState(IntPtr handle, WindowsTaskbar.ProgressBarState state)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>handle</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></dt>
+    <dd><p>The handle of the window whose taskbar button contains the progress indicator.</p>
+</dd>
+    <dt><code>state</code> <a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.html">WindowsTaskbar</a>.<a class="xref" href="NanoByte.Common.Native.WindowsTaskbar.ProgressBarState.html">ProgressBarState</a></dt>
+    <dd><p>The state of the progress indicator.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsTaskbar_SetProgressValue_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressValue*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsTaskbar_SetProgressValue_System_IntPtr_System_Int32_System_Int32_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetProgressValue(System.IntPtr,System.Int32,System.Int32)">
+  SetProgressValue(IntPtr, int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the value of the taskbar progress indicator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Design&quot;, &quot;CA1031:DoNotCatchGeneralExceptionTypes&quot;, Justification = &quot;COM calls throw unpredictable exceptions and this methods successful execution is not critical.&quot;)]
+public static void SetProgressValue(IntPtr handle, int currentValue, int maximumValue)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>handle</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></dt>
+    <dd><p>The handle of the window whose taskbar button contains the progress indicator.</p>
+</dd>
+    <dt><code>currentValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The current value of the progress indicator.</p>
+</dd>
+    <dt><code>maximumValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The value <code class="paramref">currentValue</code> will have when the operation is complete.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="NanoByte_Common_Native_WindowsTaskbar_SetWindowAppID_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetWindowAppID*"></a>
+
+  <h3 id="NanoByte_Common_Native_WindowsTaskbar_SetWindowAppID_System_IntPtr_System_String_System_String_System_String_System_String_" data-uid="NanoByte.Common.Native.WindowsTaskbar.SetWindowAppID(System.IntPtr,System.String,System.String,System.String,System.String)">
+  SetWindowAppID(IntPtr, string, string?, string?, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a specific window's explicit application user model ID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SuppressMessage(&quot;Microsoft.Design&quot;, &quot;CA1031:DoNotCatchGeneralExceptionTypes&quot;, Justification = &quot;COM calls throw unpredictable exceptions and this methods successful execution is not critical.&quot;)]
+public static void SetWindowAppID(IntPtr hwnd, string appID, string? relaunchCommand = null, string? relaunchIcon = null, string? relaunchName = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hwnd</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">IntPtr</a></dt>
+    <dd><p>A handle to the window to set the ID for.</p>
+</dd>
+    <dt><code>appID</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The application ID to set.</p>
+</dd>
+    <dt><code>relaunchCommand</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The command to use for relaunching this specific window if it was pinned to the taskbar; can be <code>null</code>.</p>
+</dd>
+    <dt><code>relaunchIcon</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The icon to use for pinning this specific window to the taskbar (written as Path,ResourceIndex); can be <code>null</code>.</p>
+</dd>
+    <dt><code>relaunchName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The user-friendly name to associate with <code class="paramref">relaunchCommand</code>; can be <code>null</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="NanoByte_Common_Native_WindowsTaskbar_SetWindowAppID_System_IntPtr_System_String_System_String_System_String_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The application ID is used to group related windows in the taskbar.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nano-byte/common/blob/2.21.2/src/Common/Native/WindowsTaskbar.NativeMethods.cs/#L14" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright Bastian Eicher
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
