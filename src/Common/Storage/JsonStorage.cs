@@ -146,7 +146,7 @@ public static class JsonStorage
 
         using var atomic = new AtomicWrite(path);
         using (var fileStream = File.Create(atomic.WritePath))
-            SaveJson(data, fileStream);
+            data.SaveJson(fileStream);
         atomic.Commit();
     }
 
@@ -160,7 +160,7 @@ public static class JsonStorage
         where T : notnull
     {
         using var stream = new MemoryStream();
-        SaveJson(data, stream);
+        data.SaveJson(stream);
         return stream.ReadToString();
     }
 

@@ -190,7 +190,7 @@ public static class XmlStorage
 
         using var atomic = new AtomicWrite(path);
         using (var fileStream = File.Create(atomic.WritePath))
-            SaveXml(data, fileStream, stylesheet);
+            data.SaveXml(fileStream, stylesheet);
         atomic.Commit();
     }
 
@@ -203,7 +203,7 @@ public static class XmlStorage
     public static string ToXmlString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string? stylesheet = null) where T : notnull
     {
         using var stream = new MemoryStream();
-        SaveXml(data, stream, stylesheet);
+        data.SaveXml(stream, stylesheet);
         string result = stream.ReadToString();
 
         // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
