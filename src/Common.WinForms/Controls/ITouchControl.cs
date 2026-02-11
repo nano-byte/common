@@ -4,22 +4,32 @@
 namespace NanoByte.Common.Controls;
 
 /// <summary>
-/// A control that can raise touch events.
+/// A control that can raise touch gesture events.
 /// </summary>
 public interface ITouchControl
 {
     /// <summary>
-    /// Raised when the user begins touching the screen.
+    /// Raised when the user performs a pan gesture.
     /// </summary>
-    event EventHandler<TouchEventArgs> TouchDown;
+    event EventHandler<PanGestureEventArgs> Pan;
 
     /// <summary>
-    /// Raised when the user stops touching the screen.
+    /// Raised when the user performs a zoom gesture.
     /// </summary>
-    event EventHandler<TouchEventArgs> TouchUp;
+    event EventHandler<ZoomGestureEventArgs> Zoom;
 
     /// <summary>
-    /// Raised when the user moves fingers while touching the screen.
+    /// Raised when the user performs a rotate gesture.
     /// </summary>
-    event EventHandler<TouchEventArgs> TouchMove;
+    event EventHandler<RotateGestureEventArgs> Rotate;
+
+    /// <summary>
+    /// Raised when the user performs a two-finger tap gesture.
+    /// </summary>
+    event EventHandler<TapGestureEventArgs> Tap;
+
+    /// <summary>
+    /// Raised when the user performs a press and tap gesture.
+    /// </summary>
+    event EventHandler<PressAndTapGestureEventArgs> PressAndTap;
 }
