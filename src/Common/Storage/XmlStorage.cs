@@ -40,10 +40,10 @@ public static class XmlStorage
             return (T)GetSerializer(typeof(T)).Deserialize(stream)!;
         }
         #region Error handling
-        catch (InvalidOperationException ex) when (ex.InnerException is {} innerException and not XmlException)
+        catch (InvalidOperationException ex) when (ex.InnerException is IOException or UnauthorizedAccessException)
         {
-            // Unwrap exceptions thrown by stream (e.g., IOException)
-            throw innerException.Rethrow();
+            // Unwrap exceptions commonly thrown by stream/file access
+            throw ex.InnerException.Rethrow();
         }
         catch (InvalidOperationException ex)
         {
@@ -153,10 +153,10 @@ public static class XmlStorage
             }
         }
         #region Error handling
-        catch (InvalidOperationException ex) when (ex.InnerException is { } innerException and not XmlException)
+        catch (InvalidOperationException ex) when (ex.InnerException is IOException or UnauthorizedAccessException)
         {
-            // Unwrap exceptions thrown by stream (e.g., IOException)
-            throw innerException.Rethrow();
+            // Unwrap exceptions commonly thrown by stream/file access
+            throw ex.InnerException.Rethrow();
         }
         #endregion
     }
