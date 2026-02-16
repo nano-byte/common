@@ -13,14 +13,14 @@ public class WindowsRestartManagerTest
 {
     public WindowsRestartManagerTest()
     {
-        Skip.IfNot(WindowsUtils.IsWindowsVista, reason: "Restart Manager only available on Windows Vista or higher");
+        Assert.SkipUnless(WindowsUtils.IsWindowsVista, reason: "Restart Manager only available on Windows Vista or higher");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestListApps()
     {
         using var restartManager = new WindowsRestartManager();
         restartManager.RegisterResources(@"C:\Windows\explorer.exe");
-        restartManager.ListApps();
+        restartManager.ListApps(TestContext.Current.CancellationToken);
     }
 }

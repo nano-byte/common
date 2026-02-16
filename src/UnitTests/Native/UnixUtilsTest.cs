@@ -11,10 +11,10 @@ public class UnixUtilsTest
 {
     public UnixUtilsTest()
     {
-        Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX APIs on Unixoid system");
+        Assert.SkipUnless(UnixUtils.IsUnix, reason: "Can only test POSIX APIs on Unixoid system");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestCreateSymlinkFile()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
@@ -30,7 +30,7 @@ public class UnixUtilsTest
         UnixUtils.IsRegularFile(sourcePath).Should().BeFalse(because: "Should not detect symlink as regular file");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestCreateSymlinkDirectory()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
@@ -44,14 +44,14 @@ public class UnixUtilsTest
         "target".Should().Be(contents, because: "Should retrieve relative link target");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestIsNotSymlink()
     {
         using var tempFile = new TemporaryFile("unit-tests");
         UnixUtils.IsSymlink(tempFile).Should().BeFalse();
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestSetExecutable()
     {
         using var tempFile = new TemporaryFile("unit-tests");
@@ -65,7 +65,7 @@ public class UnixUtilsTest
         UnixUtils.IsExecutable(tempFile).Should().BeFalse(because: "File should no longer be executable");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestIsNotExecutable()
     {
         using var tempFile = new TemporaryFile("unit-tests");

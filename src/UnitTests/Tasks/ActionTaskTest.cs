@@ -16,7 +16,7 @@ public class ActionTaskTest
         bool called = false;
 
         var task = new ActionTask("Test task", () => called = true);
-        task.Run();
+        task.Run(TestContext.Current.CancellationToken);
 
         called.Should().BeTrue();
     }
@@ -25,8 +25,8 @@ public class ActionTaskTest
     public void TestExceptionPassing()
     {
         new ActionTask("Test task", () => throw new IOException("Test exception"))
-           .Invoking(x => x.Run()).Should().Throw<IOException>();
+           .Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<IOException>();
         new ActionTask("Test task", () => throw new WebException("Test exception"))
-           .Invoking(x => x.Run()).Should().Throw<WebException>();
+           .Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<WebException>();
     }
 }

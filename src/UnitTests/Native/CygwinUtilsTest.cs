@@ -12,13 +12,13 @@ public class CygwinUtilsTest
 {
     public CygwinUtilsTest()
     {
-        Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "Cygwin only exists on the Windows NT platform.");
+        Assert.SkipUnless(WindowsUtils.IsWindowsNT, reason: "Cygwin only exists on the Windows NT platform.");
     }
 
     private static readonly byte[] _symlinkBytes
         = [..CygwinUtils.SymlinkCookie, ..Encoding.Unicode.GetPreamble(), ..Encoding.Unicode.GetBytes("target\0")];
 
-    [SkippableFact]
+    [Fact]
     public void TestIsSymlinkNoMatch()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
@@ -30,7 +30,7 @@ public class CygwinUtilsTest
         CygwinUtils.IsSymlink(normalFile, out _).Should().BeFalse();
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestIsSymlinkMatch()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
@@ -44,7 +44,7 @@ public class CygwinUtilsTest
         target.Should().Be("target");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestCreateSymlink()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");

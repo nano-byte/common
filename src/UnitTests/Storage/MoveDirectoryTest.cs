@@ -19,7 +19,7 @@ public class MoveDirectoryTest
         using var destination = new TemporaryDirectory("unit-tests");
         Directory.Delete(destination);
 
-        new MoveDirectory(source, destination).Run();
+        new MoveDirectory(source, destination).Run(TestContext.Current.CancellationToken);
         File.Exists(Path.Combine(destination, "subdir", "file")).Should().BeTrue();
         File.GetLastWriteTimeUtc(Path.Combine(destination, "subdir", "file"))
             .Should().Be(new DateTime(2000, 1, 1), because: "Last-write time for copied file");

@@ -31,17 +31,17 @@ public class FileUtilsTest
     public void TestPathEqualsTrailingSLash()
         => FileUtils.PathEquals(Locations.InstallBase, Locations.InstallBase + "/").Should().BeTrue();
 
-    [SkippableFact]
+    [Fact]
     public void TestPathEqualsCaseSensitive()
     {
-        Skip.If(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Windows and macOS use case-insensitive paths");
+        Assert.SkipWhen(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Windows and macOS use case-insensitive paths");
         FileUtils.PathEquals("abc", "ABC").Should().BeFalse();
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestPathEqualsCaseInsensitive()
     {
-        Skip.IfNot(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Only Windows and macOS use case-insensitive paths");
+        Assert.SkipUnless(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Only Windows and macOS use case-insensitive paths");
         FileUtils.PathEquals("abc", "ABC").Should().BeTrue();
     }
 

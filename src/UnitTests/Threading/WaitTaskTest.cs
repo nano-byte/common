@@ -15,7 +15,7 @@ public class WaitTaskTest
     {
         using var waitHandle = new ManualResetEvent(false);
         var task = new WaitTask("Test task", waitHandle);
-        var waitTask = Task.Run(() => task.Run());
+        var waitTask = Task.Run(() => task.Run(TestContext.Current.CancellationToken), TestContext.Current.CancellationToken);
 
         waitHandle.Set();
         await waitTask;
@@ -39,7 +39,7 @@ public class WaitTaskTest
             {
                 exceptionThrown = true;
             }
-        });
+        }, TestContext.Current.CancellationToken);
 
         // Start and then cancel the download
         Thread.Sleep(100);
@@ -65,7 +65,7 @@ public class WaitTaskTest
             {
                 exceptionThrown = true;
             }
-        });
+        }, TestContext.Current.CancellationToken);
 
         // Start and then cancel the download
         Thread.Sleep(100);

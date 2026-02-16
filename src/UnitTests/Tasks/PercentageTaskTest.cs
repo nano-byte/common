@@ -16,7 +16,7 @@ public class PercentageTaskTest
         bool called = false;
 
         var task = new PercentageTask("Test task", _ => called = true);
-        task.Run();
+        task.Run(TestContext.Current.CancellationToken);
 
         called.Should().BeTrue();
     }
@@ -25,8 +25,8 @@ public class PercentageTaskTest
     public void TestExceptionPassing()
     {
         new PercentageTask("Test task", _ => throw new IOException("Test exception"))
-           .Invoking(x => x.Run()).Should().Throw<IOException>();
+           .Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<IOException>();
         new PercentageTask("Test task", _ => throw new WebException("Test exception"))
-           .Invoking(x => x.Run()).Should().Throw<WebException>();
+           .Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<WebException>();
     }
 }
