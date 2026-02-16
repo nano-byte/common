@@ -11,24 +11,24 @@ public class WindowsUtilsTest
 {
     public WindowsUtilsTest()
     {
-        Skip.IfNot(WindowsUtils.IsWindowsVista, "Can only test NTFS symlinks on Windows Vista or newer");
+        Assert.SkipUnless(WindowsUtils.IsWindowsVista, "Can only test NTFS symlinks on Windows Vista or newer");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestSplitArgs()
     {
         WindowsUtils.SplitArgs("\"first part\" second \"\\\"third part\\\"\"")
                     .Should().Equal("first part", "second", "\"third part\"");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestGetFolderPath()
     {
         WindowsUtils.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                     .Should().Be(@"C:\ProgramData");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestCreateSymlinkFile()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
@@ -40,7 +40,7 @@ public class WindowsUtilsTest
         }
         catch (IOException) when (!WindowsUtils.IsAdministrator)
         {
-            throw new SkipException("Cannot test NTFS symlinks due to insufficient privileges");
+            throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
         }
 
         File.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like file");
@@ -48,7 +48,7 @@ public class WindowsUtilsTest
         target.Should().Be("target");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestCreateSymlinkDirectory()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
@@ -61,7 +61,7 @@ public class WindowsUtilsTest
         }
         catch (IOException) when (!WindowsUtils.IsAdministrator)
         {
-            throw new SkipException("Cannot test NTFS symlinks due to insufficient privileges");
+            throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
         }
 
         Directory.Exists(sourcePath).Should().BeTrue(because: "Symlink should look like directory");
@@ -69,7 +69,7 @@ public class WindowsUtilsTest
         target.Should().Be("target");
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestIsNotSymlink()
     {
         using var tempFile = new TemporaryFile("unit-tests");

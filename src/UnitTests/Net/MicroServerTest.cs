@@ -17,9 +17,9 @@ public class MicroServerTest
         {
             using var server = new MicroServer("file", content.ToStream());
             using var client = new HttpClient();
-            using var response = client.Send(new(HttpMethod.Get, server.FileUri));
+            using var response = client.Send(new(HttpMethod.Get, server.FileUri), TestContext.Current.CancellationToken);
             response.EnsureSuccessStatusCode();
-            response.Content.ReadAsStream().ReadToString().Should().Be(content);
+            response.Content.ReadAsStream(TestContext.Current.CancellationToken).ReadToString().Should().Be(content);
         });
     }
 }

@@ -28,7 +28,7 @@ public class DownloadFileTest : IDisposable
         // Download the file
         ArraySegment<byte> data = default;
         var download = new DownloadFile(_server.FileUri, stream => data = stream.ReadAll());
-        download.Run();
+        download.Run(TestContext.Current.CancellationToken);
 
         // Ensure the download was successful and the file is identical
         download.State.Should().Be(TaskState.Complete);
@@ -42,7 +42,7 @@ public class DownloadFileTest : IDisposable
 
         // Download the file
         var download = new DownloadFile(_server.FileUri, tempFile);
-        download.Run();
+        download.Run(TestContext.Current.CancellationToken);
 
         // Ensure the download was successful and the file is identical
         download.State.Should().Be(TaskState.Complete);
@@ -67,7 +67,7 @@ public class DownloadFileTest : IDisposable
             {
                 exceptionThrown = true;
             }
-        });
+        }, TestContext.Current.CancellationToken);
 
         // Start and then cancel the download
         Thread.Sleep(100);
@@ -81,13 +81,13 @@ public class DownloadFileTest : IDisposable
     public void TestFileMissing()
     {
         var download = new DownloadFile(new Uri(_server.ServerUri, "wrong"), stream => stream.ReadAll());
-        download.Invoking(x => x.Run()).Should().Throw<WebException>();
+        download.Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<WebException>();
     }
 
     [Fact]
     public void TestIncorrectSize()
     {
         var download = new DownloadFile(_server.FileUri, stream => stream.ReadAll(), bytesTotal: 1024);
-        download.Invoking(x => x.Run()).Should().Throw<WebException>();
+        download.Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<WebException>();
     }
 }

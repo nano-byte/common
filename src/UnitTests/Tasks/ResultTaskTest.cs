@@ -14,7 +14,7 @@ public class ResultTaskTest
     public void TestCallback()
     {
         var task = ResultTask.Create("Test task", () => true);
-        task.Run();
+        task.Run(TestContext.Current.CancellationToken);
 
         task.Result.Should().BeTrue();
     }
@@ -23,8 +23,8 @@ public class ResultTaskTest
     public void TestExceptionPassing()
     {
         new ResultTask<bool>("Test task", () => throw new IOException("Test exception"))
-           .Invoking(x => x.Run()).Should().Throw<IOException>();
+           .Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<IOException>();
         new ResultTask<bool>("Test task", () => throw new WebException("Test exception"))
-           .Invoking(x => x.Run()).Should().Throw<WebException>();
+           .Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<WebException>();
     }
 }

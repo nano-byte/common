@@ -17,7 +17,7 @@ public class ReadFileTest
         File.WriteAllBytes(tempFile, [1, 2, 3]);
 
         ArraySegment<byte> data = default;
-        new ReadFile(tempFile, stream => data = stream.ReadAll()).Run();
+        new ReadFile(tempFile, stream => data = stream.ReadAll()).Run(TestContext.Current.CancellationToken);
         data.Should().Equal(1, 2, 3);
     }
 }

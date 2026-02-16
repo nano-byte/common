@@ -21,7 +21,7 @@ public class CopyDirectoryTest
         using var destination = new TemporaryDirectory("unit-tests");
         Directory.Delete(destination);
 
-        new CopyDirectory(source, destination).Run();
+        new CopyDirectory(source, destination).Run(TestContext.Current.CancellationToken);
 
         File.ReadAllBytes(Path.Combine(destination, "subdir", "file"))
             .Should().Equal(File.ReadAllBytes(Path.Combine(source, "subdir", "file")));
@@ -40,7 +40,7 @@ public class CopyDirectoryTest
         var temp = new TemporaryDirectory("unit-tests");
         temp.Dispose();
 
-        new CopyDirectory(temp, "a").Invoking(x => x.Run())
+        new CopyDirectory(temp, "a").Invoking(x => x.Run(TestContext.Current.CancellationToken))
                                     .Should().Throw<DirectoryNotFoundException>();
     }
 
@@ -53,7 +53,7 @@ public class CopyDirectoryTest
         using var source = CreateTestDir();
         using var destination = CreateTestDir();
 
-        new CopyDirectory(source, destination).Invoking(x => x.Run())
+        new CopyDirectory(source, destination).Invoking(x => x.Run(TestContext.Current.CancellationToken))
                                               .Should().Throw<IOException>("Should not overwrite existing directory.");
     }
 
@@ -71,7 +71,7 @@ public class CopyDirectoryTest
         File.WriteAllText(Path.Combine(subdir2, "file"), @"B");
         File.SetLastWriteTimeUtc(Path.Combine(subdir2, "file"), new DateTime(2002, 1, 1));
 
-        new CopyDirectory(source, destination) {Overwrite = true}.Run();
+        new CopyDirectory(source, destination) {Overwrite = true}.Run(TestContext.Current.CancellationToken);
 
         File.ReadAllBytes(Path.Combine(destination, "subdir", "file"))
             .Should().Equal(File.ReadAllBytes(Path.Combine(source, "subdir", "file")));
@@ -83,10 +83,10 @@ public class CopyDirectoryTest
     /// <summary>
     /// Ensures <see cref="CopyDirectory"/> correctly copies symlinks.
     /// </summary>
-    [SkippableFact]
+    [Fact]
     public void CopySymlinks()
     {
-        Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
+        Assert.SkipUnless(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
 
         using var source = CreateTestDir();
         FileUtils.CreateSymlink(
@@ -98,7 +98,7 @@ public class CopyDirectoryTest
 
         using var destination = new TemporaryDirectory("unit-tests");
 
-        new CopyDirectory(source, destination).Run();
+        new CopyDirectory(source, destination).Run(TestContext.Current.CancellationToken);
 
         FileUtils.IsSymlink(Path.Combine(destination, "dir-symlink"), out string? symlinkTarget).Should().BeTrue();
         symlinkTarget.Should().Be("subdir");
@@ -110,7 +110,7 @@ public class CopyDirectoryTest
     /// <summary>
     /// Ensures <see cref="CopyDirectory"/> correctly copies hardlinks.
     /// </summary>
-    [SkippableFact]
+    [Fact]
     public void CopyHardlinks()
     {
         using var source = CreateTestDir();
@@ -120,7 +120,7 @@ public class CopyDirectoryTest
 
         using var destination = new TemporaryDirectory("unit-tests");
 
-        new CopyDirectory(source, destination).Run();
+        new CopyDirectory(source, destination).Run(TestContext.Current.CancellationToken);
 
         FileUtils.AreHardlinked(
                       Path.Combine(destination, "hardlink"),
@@ -131,10 +131,10 @@ public class CopyDirectoryTest
     /// <summary>
     /// Ensures <see cref="CopyDirectory"/> correctly follows symlinks.
     /// </summary>
-    [SkippableFact]
+    [Fact]
     public void FollowSymlinks()
     {
-        Skip.IfNot(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
+        Assert.SkipUnless(UnixUtils.IsUnix, reason: "Can only test POSIX symlinks on Unixoid system");
 
         using var source = CreateTestDir();
         FileUtils.CreateSymlink(sourcePath: Path.Combine(source, "dir-symlink"), targetPath: "subdir");
@@ -142,7 +142,7 @@ public class CopyDirectoryTest
 
         using var destination = new TemporaryDirectory("unit-tests");
 
-        new CopyDirectory(source, destination) {FollowSymlinks = true}.Run();
+        new CopyDirectory(source, destination) {FollowSymlinks = true}.Run(TestContext.Current.CancellationToken);
 
         FileUtils.IsSymlink(Path.Combine(destination, "dir-symlink"), out _).Should().BeFalse();
         File.ReadAllBytes(Path.Combine(destination, "dir-symlink", "file"))

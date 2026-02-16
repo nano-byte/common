@@ -64,10 +64,10 @@ public class LanguageSetTest
         new LanguageSet {"fr"}.ContainsAny(new LanguageSet {"de", "en"}, ignoreCountry: true).Should().BeFalse();
     }
 
-    [SkippableFact]
+    [Fact]
     public void TestInvalidCultureInSet()
     {
-        Skip.IfNot(WindowsUtils.IsWindows, reason: "Non-Windows systems may not have a .NET language/culture database installed.");
+        Assert.SkipUnless(WindowsUtils.IsWindows, reason: "Non-Windows systems may not have a .NET language/culture database installed.");
 
         new LanguageSet("invalid en").Should().Equal(new LanguageSet {CultureInfo.InvariantCulture, new CultureInfo("en")});
     }

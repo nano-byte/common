@@ -13,7 +13,7 @@ public class JobQueueTest
         var workQueue = new JobQueue();
         workQueue.Enqueue(() => called = true);
 
-        await Task.Delay(100);
+        await Task.Delay(100, TestContext.Current.CancellationToken);
 
         called.Should().BeTrue();
     }

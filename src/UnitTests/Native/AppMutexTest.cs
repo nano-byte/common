@@ -13,13 +13,13 @@ public class AppMutexTest
 {
     public AppMutexTest()
     {
-        Skip.IfNot(WindowsUtils.IsWindowsNT, reason: "AppMutexes are only available on the Windows NT platform.");
+        Assert.SkipUnless(WindowsUtils.IsWindowsNT, reason: "AppMutexes are only available on the Windows NT platform.");
     }
 
     /// <summary>
     /// Ensures the methods <see cref="AppMutex.Probe"/>, <see cref="AppMutex.Create"/> and <see cref="AppMutex.Dispose"/> work correctly together.
     /// </summary>
-    [SkippableFact]
+    [Fact]
     public void TestProbeCreateClose()
     {
         string mutexName = $"unit-tests-{Path.GetRandomFileName()}";

@@ -11,11 +11,11 @@ public class RegistryUtilsTest
 {
     public RegistryUtilsTest()
     {
-        Skip.IfNot(WindowsUtils.IsWindows, "Can only test registry functions on Windows or newer");
+        Assert.SkipUnless(WindowsUtils.IsWindows, "Can only test registry functions on Windows or newer");
     }
 
 #if !NET20
-    [SkippableFact]
+    [Fact]
     public void TestGetLastWriteTime()
     {
         Registry.CurrentUser.GetLastWriteTime()

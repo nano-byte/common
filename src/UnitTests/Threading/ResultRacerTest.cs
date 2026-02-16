@@ -13,7 +13,7 @@ public class ResultRacerTest
         {
             Thread.Sleep(i * 100);
             return i;
-        });
+        }, TestContext.Current.CancellationToken);
         racer.GetResult().Should().Be(1);
     }
 
@@ -36,7 +36,7 @@ public class ResultRacerTest
         {
             await Task.Delay(i * 100, cancellationToken);
             return i;
-        });
+        }, TestContext.Current.CancellationToken);
         (await racer.GetResultAsync()).Should().Be(1);
     }
 
