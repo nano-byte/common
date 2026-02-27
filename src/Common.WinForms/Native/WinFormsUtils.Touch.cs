@@ -7,94 +7,186 @@ namespace NanoByte.Common.Native;
 
 partial class WinFormsUtils
 {
-    // Note: The following code is based on Windows API Code Pack for Microsoft .NET Framework 1.0.1
+    // Note: The following code is based on Windows 7 Touch Gesture API
+    // See: https://github.com/microsoft/Windows-classic-samples/blob/main/Samples/Win7Samples/Touch/MTGestures/CS/MTGestures.cs
+
+    private static readonly int _gestureConfigSize = Marshal.SizeOf(typeof(NativeMethods.GestureConfig));
 
     /// <summary>
-    /// Registers a control as a receiver for touch events.
+    /// Registers a control to receive gesture events.
+    /// This method is kept for API compatibility but gesture configuration is done automatically.
     /// </summary>
     /// <param name="control">The control to register.</param>
-    public static void RegisterTouchWindow(Control control)
+    public static void RegisterGestureWindow(Control control)
     {
         #region Sanity checks
         if (control == null) throw new ArgumentNullException(nameof(control));
         #endregion
 
-        if (WindowsUtils.IsWindows7) NativeMethods.RegisterTouchWindow(control.Handle, 0);
+        // Gesture configuration is done in response to WM_GESTURENOTIFY
+        // No registration call is needed upfront
     }
 
-    private static readonly int _touchInputSize = Marshal.SizeOf(new NativeMethods.TouchInput());
+    /// <summary>
+    /// Configures which gestures are enabled for a window.
+    /// </summary>
+    /// <param name="hWnd">Handle to the window.</param>
+    public static void ConfigureGestures(IntPtr hWnd)
+    {
+        if (!WindowsUtils.IsWindows7) return;
+
+        var gc = new NativeMethods.GestureConfig
+        {
+            dwID = 0,                                  // gesture ID
+            dwWant = NativeMethods.GestureConfigAll,  // enable all gestures
+            dwBlock = 0                                // block no gestures
+        };
+
+        NativeMethods.SetGestureConfig(
+            hWnd,
+            0,
+            1,
+            ref gc,
+            _gestureConfigSize);
+    }
 
     /// <summary>
-    /// Handles touch-related <see cref="Control.WndProc"/> <see cref="Message"/>s.
+    /// Handles gesture-related <see cref="Control.WndProc"/> <see cref="Message"/>s.
     /// </summary>
     /// <param name="m">The message to handle.</param>
     /// <param name="sender">The object to send possible events from.</param>
-    /// <param name="onTouchDown">The event handler to call for touch down events; can be <c>null</c>.</param>
-    /// <param name="onTouchMove">The event handler to call for touch move events; can be <c>null</c>.</param>
-    /// <param name="onTouchUp">The event handler to call for touch up events; can be <c>null</c>.</param>
+    /// <param name="onPan">The event handler to call for pan gestures; can be <c>null</c>.</param>
+    /// <param name="onZoom">The event handler to call for zoom gestures; can be <c>null</c>.</param>
+    /// <param name="onRotate">The event handler to call for rotate gestures; can be <c>null</c>.</param>
+    /// <param name="onTap">The event handler to call for two-finger tap gestures; can be <c>null</c>.</param>
+    /// <param name="onPressAndTap">The event handler to call for press and tap gestures; can be <c>null</c>.</param>
+    /// <returns><c>true</c> if the message was handled; otherwise <c>false</c>.</returns>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public static void HandleTouchMessage(ref Message m, object? sender, EventHandler<TouchEventArgs>? onTouchDown, EventHandler<TouchEventArgs>? onTouchMove, EventHandler<TouchEventArgs>? onTouchUp)
+    public static bool HandleGestureMessage(
+        ref Message m,
+        object? sender,
+        EventHandler<PanGestureEventArgs>? onPan,
+        EventHandler<ZoomGestureEventArgs>? onZoom,
+        EventHandler<RotateGestureEventArgs>? onRotate,
+        EventHandler<TapGestureEventArgs>? onTap,
+        EventHandler<PressAndTapGestureEventArgs>? onPressAndTap)
     {
-        const int WM_TOUCHMOVE = 0x0240, WM_TOUCHDOWN = 0x0241, WM_TOUCHUP = 0x0242;
+        const int WM_GESTURENOTIFY = 0x011A;
+        const int WM_GESTURE = 0x0119;
 
-        if (!WindowsUtils.IsWindows7) return;
-        if (m.Msg != WM_TOUCHDOWN && m.Msg != WM_TOUCHMOVE && m.Msg != WM_TOUCHUP) return;
+        if (!WindowsUtils.IsWindows7) return false;
 
-        // More than one touchinput may be associated with a touch message,
-        // so an array is needed to get all event information.
-        short inputCount = (short)(m.WParam.ToInt32() & 0xffff); // Number of touch inputs, actual per-contact messages
-
-        if (inputCount < 0) return;
-        var inputs = new NativeMethods.TouchInput[inputCount];
-
-        // Unpack message parameters into the array of TOUCHINPUT structures, each
-        // representing a message for one single contact.
-        //Exercise2-Task1-Step3
-        if (!NativeMethods.GetTouchInputInfo(m.LParam, inputCount, inputs, _touchInputSize))
-            return;
-
-        // For each contact, dispatch the message to the appropriate message
-        // handler.
-        // Note that for WM_TOUCHDOWN you can get down & move notifications
-        // and for WM_TOUCHUP you can get up & move notifications
-        // WM_TOUCHMOVE will only contain move notifications
-        // and up & down notifications will never come in the same message
-        for (int i = 0; i < inputCount; i++)
+        if (m.Msg == WM_GESTURENOTIFY)
         {
-            NativeMethods.TouchInput ti = inputs[i];
-
-            // Assign a handler to this message.
-            EventHandler<TouchEventArgs>? handler = null; // Touch event handler
-            if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Down)) handler = onTouchDown;
-            else if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Up)) handler = onTouchUp;
-            else if (ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Move)) handler = onTouchMove;
-
-            // Convert message parameters into touch event arguments and handle the event.
-            if (handler != null)
-            {
-                // TOUCHINFO point coordinates and contact size is in 1/100 of a pixel; convert it to pixels.
-                // Also convert screen to client coordinates.
-                var te = new TouchEventArgs
-                {
-                    ContactY = ti.cyContact / 100,
-                    ContactX = ti.cxContact / 100,
-                    ID = ti.dwID,
-                    LocationX = ti.x / 100,
-                    LocationY = ti.y / 100,
-                    Time = ti.dwTime,
-                    Mask = ti.dwMask,
-                    InRange = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.InRange),
-                    Primary = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Primary),
-                    NoCoalesce = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.NoCoalesce),
-                    Palm = ti.dwFlags.HasFlag(NativeMethods.TouchEvents.Palm)
-                };
-
-                handler(sender, te);
-
-                m.Result = new IntPtr(1); // Indicate to Windows that the message was handled
-            }
+            ConfigureGestures(m.HWnd);
+            return true;
         }
 
-        NativeMethods.CloseTouchInputHandle(m.LParam);
+        if (m.Msg != WM_GESTURE) return false;
+
+        var gi = new NativeMethods.GestureInfo { cbSize = Marshal.SizeOf(typeof(NativeMethods.GestureInfo)) };
+
+        if (!NativeMethods.GetGestureInfo(m.LParam, ref gi))
+            return false;
+
+        // Convert screen coordinates to client coordinates
+        var location = Control.FromHandle(m.HWnd)?.PointToClient(new Point(gi.ptsLocation.x, gi.ptsLocation.y)) ?? new Point(gi.ptsLocation.x, gi.ptsLocation.y);
+
+        var flags = (GestureFlags)gi.dwFlags;
+
+        switch (gi.dwID)
+        {
+            case NativeMethods.GestureIdBegin:
+            case NativeMethods.GestureIdEnd:
+                // These are informational only
+                break;
+
+            case NativeMethods.GestureIdPan:
+                if (onPan != null)
+                {
+                    // ullArguments contains the total pan distance as two 32-bit signed integers:
+                    // Lower 32 bits = X distance (horizontal pan)
+                    // Upper 32 bits = Y distance (vertical pan)
+                    var args = new PanGestureEventArgs
+                    {
+                        LocationX = location.X,
+                        LocationY = location.Y,
+                        Flags = flags,
+                        SequenceId = gi.dwSequenceID,
+                        PanDistanceX = (int)(gi.ullArguments & 0xFFFFFFFF),
+                        PanDistanceY = (int)((gi.ullArguments >> 32) & 0xFFFFFFFF)
+                    };
+                    onPan(sender, args);
+                }
+                break;
+
+            case NativeMethods.GestureIdZoom:
+                if (onZoom != null)
+                {
+                    var args = new ZoomGestureEventArgs
+                    {
+                        LocationX = location.X,
+                        LocationY = location.Y,
+                        Flags = flags,
+                        SequenceId = gi.dwSequenceID,
+                        Distance = gi.ullArguments
+                    };
+                    onZoom(sender, args);
+                }
+                break;
+
+            case NativeMethods.GestureIdRotate:
+                if (onRotate != null)
+                {
+                    var args = new RotateGestureEventArgs
+                    {
+                        LocationX = location.X,
+                        LocationY = location.Y,
+                        Flags = flags,
+                        SequenceId = gi.dwSequenceID,
+                        Angle = ArgToRadians(gi.ullArguments)
+                    };
+                    onRotate(sender, args);
+                }
+                break;
+
+            case NativeMethods.GestureIdTwoFingerTap:
+                if (onTap != null)
+                {
+                    var args = new TapGestureEventArgs
+                    {
+                        LocationX = location.X,
+                        LocationY = location.Y,
+                        Flags = flags,
+                        SequenceId = gi.dwSequenceID
+                    };
+                    onTap(sender, args);
+                }
+                break;
+
+            case NativeMethods.GestureIdPressAndTap:
+                if (onPressAndTap != null)
+                {
+                    var args = new PressAndTapGestureEventArgs
+                    {
+                        LocationX = location.X,
+                        LocationY = location.Y,
+                        Flags = flags,
+                        SequenceId = gi.dwSequenceID
+                    };
+                    onPressAndTap(sender, args);
+                }
+                break;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Converts from "binary radians" to traditional radians.
+    /// </summary>
+    private static double ArgToRadians(long arg)
+    {
+        return ((arg / 65535.0) * 4.0 * Math.PI) - 2.0 * Math.PI;
     }
 }
