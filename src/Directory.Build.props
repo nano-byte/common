@@ -4,6 +4,7 @@
   <PropertyGroup>
     <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnableWindowsTargeting>True</EnableWindowsTargeting>
     <Nullable>annotations</Nullable>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <OutputType>Library</OutputType>

@@ -11,6 +11,5 @@ else
     dotnet="../0install.sh run --version 9.0.200.. https://apps.0install.net/dotnet/sdk.xml"
 fi
 
-# Build (without WinForms)
-$dotnet msbuild -v:Quiet -t:Restore -t:Build -p:Configuration=Release -p:Version=${1:-1.0.0-pre} Common
-$dotnet msbuild -v:Quiet -t:Restore -t:Build -p:Configuration=Release -p:Version=${1:-1.0.0-pre} UnitTests
+# Build
+$dotnet msbuild -v:Quiet -t:Restore -t:Build -p:Configuration=Release -p:Version=${1:-1.0.0-pre}
