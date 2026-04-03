@@ -62,16 +62,16 @@ public static class AnsiCli
         foreach (var row in data)
         {
             var color = (row as IHighlightColor)?.HighlightColor ?? default;
-            var foreground = (color == default)
+            var style = new Style((color == default)
                 ? Color.Default
-                : new Color(color.R, color.G, color.B);
+                : new Color(color.R, color.G, color.B));
 
             table.AddRow(getters.Select(getter =>
             {
-                var value = getter.Invoke(row, []);
-                return new Text(
-                    value?.ToString() ?? "",
-                    new Style(foreground, link: (value as Uri)?.ToStringRfc()));
+                object? value = getter.Invoke(row, []);
+                return new Paragraph(
+                    value?.ToString() ?? "", style,
+                    link: value is Uri uri ? new Link(uri.ToStringRfc()) : null);
             }));
         }
 

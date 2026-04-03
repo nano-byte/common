@@ -31,9 +31,8 @@ Parallel.For(2, 5, x =>
 
 handler.Output("Table", new Data[]
 {
-    new ("a", "b"),
-    new ("x", "y")
+    new ("Website", new Uri("https://0install.net/")),
+    new ("Docs", new Uri("https://docs.0install.net/")),
 });
 
-// ReSharper disable once CheckNamespace
-record Data(string Column1, string Column2);
+record Data(string Name, Uri Address);
