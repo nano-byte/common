@@ -8,6 +8,8 @@ namespace NanoByte.Common.Collections;
 /// </summary>
 [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
 [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This class behaves like a dictionary but doesn't implement the corresponding interfaces because that would prevent XML serialization")]
+[RequiresUnreferencedCode("Raises ListChanged events with PropertyDescriptors, which may require unreferenced code.")]
+[RequiresDynamicCode("XML serialization requires runtime code generation.")]
 [Serializable]
 public class XmlDictionary : BindingList<XmlDictionaryEntry>, ICloneable<XmlDictionary>
 {

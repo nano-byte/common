@@ -120,7 +120,8 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
     }
 
     /// <inheritdoc/>
-    [RequiresUnreferencedCode("XML serialization reflection to discover properties.")]
+    [RequiresUnreferencedCode("XML serialization uses reflection to discover properties.")]
+    [RequiresDynamicCode("XML serialization requires runtime code generation.")]
     public virtual void Save(string path)
     {
         if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
@@ -139,7 +140,8 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
     /// <exception cref="IOException">A problem occurs while reading the file.</exception>
     /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
     /// <exception cref="InvalidDataException">A problem occurs while deserializing the XML data.</exception>
-    [RequiresUnreferencedCode("XML serialization reflection to discover properties.")]
+    [RequiresUnreferencedCode("XML serialization uses reflection to discover properties.")]
+    [RequiresDynamicCode("XML serialization requires runtime code generation.")]
     public static CommandManager<T> Load(string path)
         => new(XmlStorage.LoadXml<T>(path), path);
 }

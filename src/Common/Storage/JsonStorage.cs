@@ -10,7 +10,7 @@ namespace NanoByte.Common.Storage;
 /// Provides easy serialization to JSON files.
 /// </summary>
 [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "[DynamicallyAccessedMembers] captures top-level types, library users are expected to manually root transient dependencies.")]
-[RequiresDynamicCode("JSON serialization requires dynamically creating types.")]
+[RequiresDynamicCode("JSON serialization requires runtime code generation.")]
 public static class JsonStorage
 {
     /// <summary>

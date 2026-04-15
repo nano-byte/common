@@ -54,6 +54,7 @@ public interface ICommandManager<T> : ICommandExecutor
     /// <param name="path">The file to save to.</param>
     /// <exception cref="IOException">A problem occurs while writing the file.</exception>
     /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-    [RequiresUnreferencedCode("XML serialization reflection to discover properties.")]
+    [RequiresUnreferencedCode("XML serialization uses reflection to discover properties.")]
+    [RequiresDynamicCode("XML serialization requires runtime code generation.")]
     void Save(string path);
 }
