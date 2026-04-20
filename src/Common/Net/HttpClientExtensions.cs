@@ -49,6 +49,12 @@ public static class HttpClientExtensions
 #endif
 
     /// <summary>
+    /// Determines whether an exception is an <see cref="HttpRequestException"/>, even if there are assembly version mismatches.
+    /// </summary>
+    public static bool IsHttpRequestException(this Exception exception)
+        => exception is HttpRequestException || exception.GetType().Name == nameof(HttpRequestException);
+
+    /// <summary>
     /// Unwraps a <see cref="WebException"/> if it is the <see cref="Exception.InnerException"/>; otherwise wraps the exception in a <see cref="WebException"/>.
     /// </summary>
     public static WebException AsWebException(this Exception exception)

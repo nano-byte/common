@@ -155,7 +155,7 @@ public class DownloadFile : TaskBase
         {
             statusCode = (webException.Response as HttpWebResponse)?.StatusCode;
 #else
-        catch (HttpRequestException ex)
+        catch (Exception ex) when (ex.IsHttpRequestException())
         {
 #if NETFRAMEWORK
             var webException = ex.InnerException as WebException;
