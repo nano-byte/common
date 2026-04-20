@@ -49,9 +49,9 @@ public static class HttpClientExtensions
 #endif
 
     /// <summary>
-    /// Converts a <see cref="HttpRequestException"/> into a <see cref="WebException"/>.
+    /// Unwraps a <see cref="WebException"/> if it is the <see cref="Exception.InnerException"/>; otherwise wraps the exception in a <see cref="WebException"/>.
     /// </summary>
-    public static WebException AsWebException(this HttpRequestException exception)
+    public static WebException AsWebException(this Exception exception)
         => exception.InnerException as WebException
         ?? new WebException(exception.Message, exception.InnerException);
 }
