@@ -35,7 +35,7 @@ public static class HttpClientExtensions
 #if NETFRAMEWORK
         => ThreadUtils.RunTask(() => client.SendAsync(request, completionOption, cancellationToken));
 #else
-        => client.Send(request, cancellationToken);
+        => client.Send(request, completionOption, cancellationToken);
 #endif
 
     /// <summary>
