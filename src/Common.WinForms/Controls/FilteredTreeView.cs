@@ -114,6 +114,8 @@ public sealed partial class FilteredTreeView<T> : UserControl
 
     private char _separator = Named.TreeSeparator;
 
+    private Font? _boldFont;
+
     /// <summary>
     /// The character used to split <see cref="INamed.Name"/>s into tree levels.
     /// </summary>
@@ -240,7 +242,7 @@ public sealed partial class FilteredTreeView<T> : UserControl
         if (color != default)
         {
             finalNode.ForeColor = color;
-            finalNode.NodeFont = new Font(treeView.Font, FontStyle.Bold);
+            finalNode.NodeFont = _boldFont ??= new Font(treeView.Font, FontStyle.Bold);
         }
 
         // Attach the context menu if one is set
