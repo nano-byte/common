@@ -64,7 +64,7 @@ public static class NetUtils
     private static Uri? GetProxyAddress()
     {
         if (GetEnvVar("http_proxy") is not {} value) return null;
-        if (Uri.TryCreate(value, UriKind.Absolute, out var address))
+        if (!Uri.TryCreate(value, UriKind.Absolute, out var address))
         {
             Log.Warn("Unable to parse http_proxy value as URI: " + value);
             return null;
