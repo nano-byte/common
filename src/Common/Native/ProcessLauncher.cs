@@ -84,7 +84,7 @@ public class ProcessLauncher(string fileName, string? arguments = null) : IProce
             FileName = FileName,
             Arguments = string.IsNullOrEmpty(Arguments)
                 ? arguments.JoinEscapeArguments()
-                : $"{arguments} {arguments.JoinEscapeArguments()}",
+                : $"{Arguments} {arguments.JoinEscapeArguments()}",
             UseShellExecute = false,
             ErrorDialog = false
         };
