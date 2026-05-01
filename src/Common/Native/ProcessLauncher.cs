@@ -31,7 +31,7 @@ public class ProcessLauncher(string fileName, string? arguments = null) : IProce
     /// <inheritdoc/>
     public virtual void Run(params string[] arguments)
     {
-        var process = Start(arguments);
+        using var process = Start(arguments);
         process.WaitForExit();
         HandleExitCode(process);
     }
@@ -45,7 +45,7 @@ public class ProcessLauncher(string fileName, string? arguments = null) : IProce
         startInfo.RedirectStandardOutput = true;
         startInfo.RedirectStandardError = true;
 
-        var process = startInfo.Start();
+        using var process = startInfo.Start();
         var stdin = process.StandardInput;
         var stdout = new StreamConsumer(process.StandardOutput);
         var stderr = new StreamConsumer(process.StandardError);
