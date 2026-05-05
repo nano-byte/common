@@ -2,7 +2,6 @@
 // Licensed under the MIT License
 
 using System.Collections;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
 using NanoByte.Common.Native;
@@ -174,25 +173,33 @@ public static class ProcessUtils
     }
 
     /// <summary>
-    /// Workaround for environment variable problems, such variable names that differ only in casing when running on Windows.
+    /// Workaround for environment variable problems, like variable names that differ only in casing when running on Windows.
     /// </summary>
     /// <remarks>Call this before any access to <see cref="ProcessStartInfo.EnvironmentVariables"/> to avoid <see cref="ArgumentException"/>s.</remarks>
     public static void SanitizeEnvironmentVariables()
     {
         if (!WindowsUtils.IsWindows) return;
 
-        var dict = new StringDictionary();
+        var groups = new Dictionary<string, List<DictionaryEntry>>(StringComparer.OrdinalIgnoreCase);
         foreach (DictionaryEntry entry in Environment.GetEnvironmentVariables())
         {
-            try
-            {
-                dict.Add((string)entry.Key, (string?)entry.Value);
-            }
-            catch (ArgumentException ex)
-            {
-                Log.Warn($"Ignoring environment variable '{entry.Key}' in this process.", ex);
+            string key = (string)entry.Key;
+            if (groups.TryGetValue(key, out var list))
+                list.Add(entry);
+            else
+                groups[key] = [entry];
+        }
+
+        foreach (var (_, entries) in groups)
+        {
+            if (entries.Count <= 1)
+                continue;
+
+            var canonical = entries.OrderBy(x => (string)x.Key, StringComparer.Ordinal).First();
+
+            foreach (var entry in entries)
                 Environment.SetEnvironmentVariable((string)entry.Key, null);
-            }
+            Environment.SetEnvironmentVariable((string)canonical.Key, canonical.Value as string);
         }
     }
 
