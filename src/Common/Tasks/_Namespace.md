@@ -23,10 +23,10 @@ To run an <xref:NanoByte.Common.Tasks.ITask>, pass it to the [ITaskHandler.RunTa
 
 ## Threading
 
-<xref:NanoByte.Common.Tasks.ITask>s provide no threading or asynchronicity concept by themselves. Their [.Run()](xref:NanoByte.Common.Tasks.ITask#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__) methods block until the tasks is complete. However, they can be cancelled from other threads via <xref:System.Threading.CancellationToken>s.
+<xref:NanoByte.Common.Tasks.ITask>s provide no threading or asynchronicity concept by themselves. Their [.Run()](xref:NanoByte.Common.Tasks.ITask#NanoByte_Common_Tasks_ITask_Run_System_Threading_CancellationToken_NanoByte_Common_Net_ICredentialProvider_System_IProgress_NanoByte_Common_Tasks_TaskSnapshot__) methods block until the task is complete. However, they can be cancelled from other threads via <xref:System.Threading.CancellationToken>s.
 
 <xref:NanoByte.Common.Tasks.ITaskHandler> implementations are thread-safe and support running multiple <xref:NanoByte.Common.Tasks.ITask>s concurrently.  
-[ITaskHandler.RunTask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_) blocks until the tasks is complete, however some implementations may perform the actual task execution on a separate thread.  
+[ITaskHandler.RunTask()](xref:NanoByte.Common.Tasks.ITaskHandler#NanoByte_Common_Tasks_ITaskHandler_RunTask_NanoByte_Common_Tasks_ITask_) blocks until the task is complete, however some implementations may perform the actual task execution on a separate thread.  
 <xref:NanoByte.Common.Tasks.DialogTaskHandler> keeps the WinForms message loop pumping while a task is running, so calling `.RunTask()` from the GUI thread will not freeze the GUI. However it does prevent user interaction (other than canceling the task) via a modal dialog box.
 
 ## Comparison with async/await

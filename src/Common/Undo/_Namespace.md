@@ -1,6 +1,6 @@
 ---
 uid: NanoByte.Common.Undo
-summary: framework for adding undo/redo functionality to your applications, based on the Command pattern.
+summary: Framework for adding undo/redo functionality to your applications, based on the Command pattern.
 ---
 ## Commands
 

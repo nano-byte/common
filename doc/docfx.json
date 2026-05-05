@@ -8,7 +8,6 @@
           "exclude": ["UnitTests/*", "Samples/*"]
         }
       ],
-      "filter": "filterConfig.yml",
       "dest": "api",
       "filter": "filterConfig.yml"
     }
