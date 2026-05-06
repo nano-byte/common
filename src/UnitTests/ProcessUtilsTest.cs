@@ -10,6 +10,7 @@ using NanoByte.Common.Native;
 
 namespace NanoByte.Common;
 
+[Collection(nameof(Locations))]
 public class ProcessUtilsTest
 {
     [Fact]
