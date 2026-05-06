@@ -13,7 +13,10 @@ public class FileUtilsTest
 {
     [Fact]
     public void TestPathEqualsAbsolutePath()
-        => FileUtils.PathEquals(Locations.InstallBase, Locations.InstallBase).Should().BeTrue();
+    {
+        string path = WindowsUtils.IsWindows ? @"C:\some\path" : "/some/path";
+        FileUtils.PathEquals(path, path).Should().BeTrue();
+    }
 
     [Fact]
     public void TestPathEqualsRelativePath()
@@ -29,7 +32,10 @@ public class FileUtilsTest
 
     [Fact]
     public void TestPathEqualsTrailingSLash()
-        => FileUtils.PathEquals(Locations.InstallBase, Locations.InstallBase + "/").Should().BeTrue();
+        => FileUtils.PathEquals(
+                         WindowsUtils.IsWindows ? @"C:\some\path" : "/some/path",
+                         WindowsUtils.IsWindows ? @"C:\some\path\" : "/some/path/")
+                    .Should().BeTrue();
 
     [Fact]
     public void TestPathEqualsCaseSensitive()
