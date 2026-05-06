@@ -84,7 +84,7 @@ public static partial class Locations
     [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
     public const string PortableFlagName = "_portable";
 
-    private static readonly bool _isPortable = File.Exists(Path.Combine(InstallBase, PortableFlagName));
+    private static readonly bool _isPortable = File.Exists(Paths.Combine(InstallBase, PortableFlagName));
 
     /// <summary>
     /// Indicates whether the application is currently operating in portable mode.

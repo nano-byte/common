@@ -120,7 +120,7 @@ public static class ProcessUtils
         if (arguments == null) throw new ArgumentNullException(nameof(arguments));
         #endregion
 
-        string executablePath = Path.Combine(Locations.InstallBase,
+        string executablePath = Paths.Combine(Locations.InstallBase,
 #if NETFRAMEWORK
             $"{name}.exe"
 #else

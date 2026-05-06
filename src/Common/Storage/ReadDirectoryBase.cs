@@ -14,7 +14,7 @@ public abstract class ReadDirectoryBase([Localizable(false)] string path) : Task
     /// <summary>
     /// The directory to read.
     /// </summary>
-    protected readonly DirectoryInfo Source = new(Path.GetFullPath(path));
+    protected readonly DirectoryInfo Source = new(Paths.Absolute(path));
 
     /// <inheritdoc/>
     protected override bool UnitsByte => true;

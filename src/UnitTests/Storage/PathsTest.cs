@@ -1,6 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using NanoByte.Common.Native;
+
 namespace NanoByte.Common.Storage;
 
 /// <summary>
@@ -9,6 +11,56 @@ namespace NanoByte.Common.Storage;
 [Collection("WorkingDir")]
 public class PathsTest
 {
+    [Fact]
+    public void TestCombine()
+    {
+        Paths.Combine("a", "b").Should().Be(Path.Combine("a", "b"));
+        Paths.Combine("a", "b", "c").Should().Be(Path.Combine("a", "b", "c"));
+    }
+
+    [Fact]
+    public void TestAbsolute()
+    {
+        Paths.Absolute("test.txt").Should().Be(Path.GetFullPath("test.txt"));
+    }
+
+    [Fact]
+    public void TestIsAbsolute()
+    {
+        Paths.IsAbsolute("test.txt").Should().BeFalse();
+        if (WindowsUtils.IsWindows)
+            Paths.IsAbsolute(@"C:\test.txt").Should().BeTrue();
+        else
+            Paths.IsAbsolute("/test.txt").Should().BeTrue();
+    }
+
+    [Fact]
+    public void TestParent()
+    {
+        Paths.Parent(Path.Combine("a", "b")).Should().Be(Paths.Absolute("a"));
+    }
+
+    [Fact]
+    public void TestFileName()
+    {
+        Paths.FileName(Path.Combine("a", "b")).Should().Be("b");
+    }
+
+#if NETFRAMEWORK
+    [Fact]
+    public void TestInvalidCharacters()
+    {
+        char invalidChar = Path.GetInvalidPathChars()[0];
+        string invalidPath = "test" + invalidChar + "test";
+
+        new Action(() => Paths.Combine("a", invalidPath)).Should().Throw<IOException>();
+        new Action(() => Paths.Absolute(invalidPath)).Should().Throw<IOException>();
+        new Action(() => Paths.IsAbsolute(invalidPath)).Should().Throw<IOException>();
+        new Action(() => Paths.Parent(invalidPath)).Should().Throw<IOException>();
+        new Action(() => Paths.FileName(invalidPath)).Should().Throw<IOException>();
+    }
+#endif
+
     [Fact]
     public void TestGetFilesAbsolute()
     {

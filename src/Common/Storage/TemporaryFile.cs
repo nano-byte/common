@@ -32,7 +32,7 @@ public class TemporaryFile : IDisposable
         if (prefix == null) throw new ArgumentNullException(nameof(prefix));
         #endregion
 
-        Path = System.IO.Path.Combine(parentDirectory ?? System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());
+        Path = Paths.Combine(parentDirectory ?? System.IO.Path.GetTempPath(), prefix + '-' +  System.IO.Path.GetRandomFileName());
         FileUtils.Touch(Path);
     }
 

@@ -12,7 +12,7 @@ public class TemporaryFlagFile(string prefix) : TemporaryDirectory(prefix)
     /// <summary>
     /// The fully qualified path of the flag file.
     /// </summary>
-    public new string Path => System.IO.Path.Combine(base.Path, "flag");
+    public new string Path => Paths.Combine(base.Path, "flag");
 
     /// <summary>Returns <see cref="Path"/>.</summary>
     public override string ToString() => Path;

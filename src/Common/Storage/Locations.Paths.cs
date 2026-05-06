@@ -25,13 +25,13 @@ partial class Locations
         if (resource == null) throw new ArgumentNullException(nameof(resource));
         #endregion
 
-        string resourceCombined = PathCombine(resource);
+        string resourceCombined = Paths.Combine(resource);
         string path;
         try
         {
             path = IsPortable
-                ? PathCombine(PortableBase, "config", resourceCombined)
-                : PathCombine(UserConfigDir, appName, resourceCombined);
+                ? Paths.Combine(PortableBase, "config", resourceCombined)
+                : Paths.Combine(UserConfigDir, appName, resourceCombined);
         }
         #region Error handling
         catch (ArgumentException ex)
@@ -42,10 +42,10 @@ partial class Locations
         #endregion
 
         // Ensure the directory part of the path exists
-        string dirPath = isFile ? (Path.GetDirectoryName(path) ?? path) : path;
+        string dirPath = isFile ? Paths.Parent(path) : Paths.Absolute(path);
         if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
 
-        return Path.GetFullPath(path);
+        return Paths.Absolute(path);
     }
 
     /// <summary>
@@ -67,11 +67,11 @@ partial class Locations
         if (IsPortable) throw new IOException(Resources.NoSystemConfigInPortableMode);
 
         string systemConfigDir = SystemConfigDirs.Split(Path.PathSeparator).Last();
-        string resourceCombined = PathCombine(resource);
+        string resourceCombined = Paths.Combine(resource);
         string path;
         try
         {
-            path = PathCombine(systemConfigDir, appName, resourceCombined);
+            path = Paths.Combine(systemConfigDir, appName, resourceCombined);
         }
         #region Error handling
         catch (ArgumentException ex)
@@ -82,10 +82,10 @@ partial class Locations
         #endregion
 
         // Ensure the directory part of the path exists
-        string dirPath = isFile ? (Path.GetDirectoryName(path) ?? path) : path;
+        string dirPath = isFile ? Paths.Parent(path) : Paths.Absolute(path);
         CreateSecureMachineWideDir(dirPath);
 
-        return Path.GetFullPath(path);
+        return Paths.Absolute(path);
     }
 
     /// <summary>
@@ -105,14 +105,14 @@ partial class Locations
         if (resource == null) throw new ArgumentNullException(nameof(resource));
         #endregion
 
-        string resourceCombined = PathCombine(resource);
+        string resourceCombined = Paths.Combine(resource);
         string path;
         if (IsPortable)
         {
             // Check in portable base directory
-            path = PathCombine(PortableBase, "config", resourceCombined);
+            path = Paths.Combine(PortableBase, "config", resourceCombined);
             if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
-                yield return Path.GetFullPath(path);
+                yield return Paths.Absolute(path);
         }
         else
         {
@@ -121,7 +121,7 @@ partial class Locations
             {
                 try
                 {
-                    path = PathCombine(dirPath, appName, resourceCombined);
+                    path = Paths.Combine(dirPath, appName, resourceCombined);
                 }
                 #region Error handling
                 catch (ArgumentException ex)
@@ -132,7 +132,7 @@ partial class Locations
                 #endregion
 
                 if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
-                    yield return Path.GetFullPath(path);
+                    yield return Paths.Absolute(path);
             }
         }
     }
@@ -153,13 +153,13 @@ partial class Locations
         if (resource == null) throw new ArgumentNullException(nameof(resource));
         #endregion
 
-        string resourceCombined = PathCombine(resource);
+        string resourceCombined = Paths.Combine(resource);
         string path;
         try
         {
             path = IsPortable
-                ? PathCombine(PortableBase, "data", resourceCombined)
-                : PathCombine(UserDataDir, appName, resourceCombined);
+                ? Paths.Combine(PortableBase, "data", resourceCombined)
+                : Paths.Combine(UserDataDir, appName, resourceCombined);
         }
         #region Error handling
         catch (ArgumentException ex)
@@ -170,10 +170,10 @@ partial class Locations
         #endregion
 
         // Ensure the directory part of the path exists
-        string dirPath = isFile ? (Path.GetDirectoryName(path) ?? path) : path;
+        string dirPath = isFile ? Paths.Parent(path) : Paths.Absolute(path);
         if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
 
-        return Path.GetFullPath(path);
+        return Paths.Absolute(path);
     }
 
     /// <summary>
@@ -193,14 +193,14 @@ partial class Locations
         if (resource == null) throw new ArgumentNullException(nameof(resource));
         #endregion
 
-        string resourceCombined = PathCombine(resource);
+        string resourceCombined = Paths.Combine(resource);
         string path;
         if (IsPortable)
         {
             // Check in portable base directory
-            path = PathCombine(PortableBase, "data", resourceCombined);
+            path = Paths.Combine(PortableBase, "data", resourceCombined);
             if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
-                yield return Path.GetFullPath(path);
+                yield return Paths.Absolute(path);
         }
         else
         {
@@ -209,7 +209,7 @@ partial class Locations
             {
                 try
                 {
-                    path = PathCombine(dirPath, appName, resourceCombined);
+                    path = Paths.Combine(dirPath, appName, resourceCombined);
                 }
                 #region Error handling
                 catch (ArgumentException ex)
@@ -220,7 +220,7 @@ partial class Locations
                 #endregion
 
                 if ((isFile && File.Exists(path)) || (!isFile && Directory.Exists(path)))
-                    yield return Path.GetFullPath(path);
+                    yield return Paths.Absolute(path);
             }
         }
     }
@@ -251,7 +251,7 @@ partial class Locations
             ];
             return directories
                   .WhereNotNull()
-                  .Select(x => Path.Combine(x, fileName))
+                  .Select(x => Paths.Combine(x, fileName))
                   .First(File.Exists);
         }
         catch (InvalidOperationException)
@@ -259,14 +259,4 @@ partial class Locations
             throw new IOException(string.Format(Resources.FileNotFound, fileName));
         }
     }
-
-    /// <summary>
-    /// Combines an array of strings into a path.
-    /// </summary>
-    private static string PathCombine(params string[] paths)
-#if NET20
-        => (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
-#else
-        => Path.Combine(paths);
-#endif
 }

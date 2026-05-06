@@ -57,7 +57,7 @@ partial class Log
     }
 
     private static FileInfo GetLogFile(string appName)
-        => new(Path.Combine(Path.GetTempPath(), $"{appName} {Environment.UserName} Log.txt"));
+        => new(Paths.Combine(Path.GetTempPath(), $"{appName} {Environment.UserName} Log.txt"));
 
     /// <summary>
     /// Appends a line to the log file.

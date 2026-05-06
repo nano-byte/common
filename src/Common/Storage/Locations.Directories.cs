@@ -99,7 +99,7 @@ partial class Locations
         if (resource == null) throw new ArgumentNullException(nameof(resource));
         #endregion
 
-        string resourceCombined = PathCombine(resource);
+        string resourceCombined = Paths.Combine(resource);
         string appPath;
         try
         {

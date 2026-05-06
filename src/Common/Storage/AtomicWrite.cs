@@ -43,11 +43,11 @@ public sealed class AtomicWrite : IDisposable
         DestinationPath = path ?? throw new ArgumentNullException(nameof(path));
 
         // Make sure the containing directory exists
-        string? directory = Path.GetDirectoryName(Path.GetFullPath(path));
-        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory)) Directory.CreateDirectory(directory);
+        string directory = Paths.Parent(path);
+        if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
         // Prepend random string for temp file name
-        WritePath = $"{directory}{Path.DirectorySeparatorChar}temp.{Path.GetRandomFileName()}.{Path.GetFileName(path)}";
+        WritePath = $"{directory}{Path.DirectorySeparatorChar}temp.{Path.GetRandomFileName()}.{Paths.FileName(path)}";
     }
 
     /// <summary>

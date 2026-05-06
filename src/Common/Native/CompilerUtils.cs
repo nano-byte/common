@@ -31,8 +31,8 @@ namespace NanoByte.Common.Native
             #endregion
 
             // Make sure the containing directory exists
-            string directory = Path.GetDirectoryName(Path.GetFullPath(compilerParameters.OutputAssembly));
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory)) Directory.CreateDirectory(directory);
+            string directory = Paths.Parent(compilerParameters.OutputAssembly);
+            if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
             using (new WorkingDirectory(Environment.SystemDirectory)) // Prevent DLLs in current working directory from influencing build
             {
@@ -63,7 +63,7 @@ namespace NanoByte.Common.Native
                 compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
                 return new CSharpCodeProvider();
             }
-            else if (File.Exists(Path.Combine(WindowsUtils.GetNetFxDirectory(WindowsUtils.NetFx35), "csc.exe")))
+            else if (File.Exists(Paths.Combine(WindowsUtils.GetNetFxDirectory(WindowsUtils.NetFx35), "csc.exe")))
             { // C# 3.0 (.NET 3.5)
                 compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
                 return NewCSharpCodeProvider(WindowsUtils.NetFx35);

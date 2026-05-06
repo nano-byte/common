@@ -14,7 +14,7 @@ public class Netrc : Dictionary<string, NetworkCredential>
     /// <summary>
     /// The default path for the <c>.netrc</c> file. Usually in the home directory. Can be overriden via <c>NETRC</c> environment variable.
     /// </summary>
-    public static string DefaultPath { get; } = Environment.GetEnvironmentVariable("NETRC") ?? Path.Combine(Locations.HomeDir, ".netrc");
+    public static string DefaultPath { get; } = Environment.GetEnvironmentVariable("NETRC") ?? Paths.Combine(Locations.HomeDir, ".netrc");
 
     /// <summary>
     /// Loads credentials from a .netrc file.

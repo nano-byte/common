@@ -25,8 +25,8 @@ public static class FileUtils
     {
         try
         {
-            path1 = path1?.To(Path.GetFullPath).TrimEnd(Path.DirectorySeparatorChar);
-            path2 = path2?.To(Path.GetFullPath).TrimEnd(Path.DirectorySeparatorChar);
+            path1 = path1?.To(Paths.Absolute).TrimEnd(Path.DirectorySeparatorChar);
+            path2 = path2?.To(Paths.Absolute).TrimEnd(Path.DirectorySeparatorChar);
         }
         catch (ArgumentException) {}
 
@@ -98,7 +98,7 @@ public static class FileUtils
 
         return File.Exists(path)
                // Make sure the file found is a string-exact match
-            && Directory.GetFiles(Path.GetDirectoryName(path) ?? Directory.GetCurrentDirectory(), Path.GetFileName(path)).Contains(path);
+            && Directory.GetFiles(Paths.Parent(path), Paths.FileName(path)).Contains(path);
     }
     #endregion
 
@@ -150,7 +150,7 @@ public static class FileUtils
 
         // Prepare a file name and fake change time
         var referenceTime = new DateTime(2000, 1, 1, 0, 0, 1); // 1 second past mid-night on 1st of January 2000
-        string tempFile = Path.Combine(path, Path.GetRandomFileName());
+        string tempFile = Paths.Combine(path, Path.GetRandomFileName());
 
         File.WriteAllText(tempFile, @"a");
         File.SetLastWriteTimeUtc(tempFile, referenceTime);
@@ -182,9 +182,9 @@ public static class FileUtils
 
         void ReplaceFallback()
         {
-            string backupPath = Path.Combine(
-                Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
-                $"backup.{Path.GetRandomFileName()}.{Path.GetFileName(destinationPath)}");
+            string backupPath = Paths.Combine(
+                Paths.Parent(destinationPath),
+                $"backup.{Path.GetRandomFileName()}.{Paths.FileName(destinationPath)}");
 
             if (File.Exists(destinationPath)) File.Move(destinationPath, backupPath);
             try
@@ -211,9 +211,9 @@ public static class FileUtils
                 return;
             }
 
-            string backupPath = Path.Combine(
-                Path.GetDirectoryName(Path.GetFullPath(destinationPath))!,
-                $"backup.{Path.GetRandomFileName()}.{Path.GetFileName(destinationPath)}");
+            string backupPath = Paths.Combine(
+                Paths.Parent(destinationPath),
+                $"backup.{Path.GetRandomFileName()}.{Paths.FileName(destinationPath)}");
 
             try
             {
@@ -958,7 +958,7 @@ public static class FileUtils
     [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
     private static bool SupportsExecutableBits([Localizable(false)] string path)
     {
-        string probeFile = Path.Combine(path, $".unixfs_probe_{Path.GetRandomFileName()}");
+        string probeFile = Paths.Combine(path, $".unixfs_probe_{Path.GetRandomFileName()}");
         Touch(probeFile);
 
         try

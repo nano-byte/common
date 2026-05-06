@@ -109,5 +109,5 @@ public class CopyDirectory(
     }
 
     private string PathInDestination(FileSystemInfo element)
-        => Path.Combine(_destination.FullName, element.RelativeTo(Source));
+        => Paths.Combine(_destination.FullName, element.RelativeTo(Source));
 }
