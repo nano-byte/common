@@ -56,9 +56,12 @@ public static class UriExtensions
     /// </summary>
     [Pure]
     public static string GetLocalFileName(this Uri uri)
-        => Path.GetFileName(uri.LocalPath).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
-        ?? Path.GetFileName(Path.GetDirectoryName(uri.LocalPath)!).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
-        ?? "file.ext";
+    {
+        string uriLocalPath = uri.LocalPath.RemoveCharacters(Path.GetInvalidPathChars());
+        return Path.GetFileName(uriLocalPath).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
+            ?? Path.GetFileName(Path.GetDirectoryName(uriLocalPath)!).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
+            ?? "file.ext";
+    }
 
     /// <summary>
     /// Removes everything except the schema, host and port from the URI. Returns the original URI if it is not an absolute URI.
