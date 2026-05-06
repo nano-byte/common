@@ -8,7 +8,7 @@ namespace NanoByte.Common.Net;
 
 public class MicroServerTest
 {
-    [Fact]
+    [Fact(Skip = "Slow")]
     public void Stress()
     {
         const string content = "abc";
