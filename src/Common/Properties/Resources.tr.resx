@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kurallı olamaz.</value>
+    <value>Bilgi kaybı ile sonuçlanabileceğinden DACL kanonik biçime dönüştürülemez.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}',  {1} çıkış koduyla kapandı.</value>
+    <value>'{0}', {1} çıkış koduyla kapandı.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -299,7 +299,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}" adındaki yöntem bulunamadı.</value>
+    <value>"{0}" adındaki assembly bulunamadı.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">

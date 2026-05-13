@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>A DACL não pode ser canonizada, pois poderia resultar em perda de informações.</value>
+    <value>A DACL não pode ser canonicalizada, pois poderia resultar em perda de informações.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Tente novamente em {0} milissegundos por causa disso:</value>
+    <value>Nova tentativa em {0} milissegundos por causa de:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">

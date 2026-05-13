@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Die Systemkonfiguration kann im Portable-Moduse nicht bearbeitet werden.</value>
+    <value>Die Systemkonfiguration kann im Portable-Modus nicht bearbeitet werden.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="OK" xml:space="preserve">

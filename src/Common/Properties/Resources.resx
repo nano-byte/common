@@ -262,7 +262,7 @@
     <value>Searching for open file references</value>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Attempted to read from position {0}. This is {1} bytes away from the underlying stream position {2}, but the seek buffer can only accomodate a difference of {3} bytes.</value>
+    <value>Attempted to read from position {0}. This is {1} bytes away from the underlying stream position {2}, but the seek buffer can only accommodate a difference of {3} bytes.</value>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Shutting down applications</value>
