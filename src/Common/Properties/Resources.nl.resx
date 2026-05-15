@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Toelichten:</value>
+    <value>&amp;Opmerking:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -175,8 +175,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Om '{0}' te starten heb je beheerdersrechten nodig.</value>
-    <comment>Automatically translated.</comment>
+    <value>Om '{0}' te starten hebt u beheerdersrechten nodig.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Het maximum aantal elementen in de collectie is overschreden.</value>
@@ -215,8 +215,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>{0}' afgesloten met exitcode {1}.</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}' afgesloten met exitcode {1}.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
     <value>Een proces is afgesloten met een onverwachte exitcode.</value>
@@ -243,8 +243,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Zoeken op</value>
-    <comment>Automatically translated.</comment>
+    <value>Zoeken</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Zoeken naar open bestandsreferenties</value>

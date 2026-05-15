@@ -99,7 +99,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>Kopíruju soubory</value>
+    <value>Kopírování souborů</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -155,15 +155,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Soubor, který měl být stažen z {0}, nemá očekávanou velikost. Soubor měl mít velikost{1} bajtů, ale ve skutečnosti to bylo jen {2} bajtů.</value>
+    <value>Soubor, který měl být stažen z {0}, nemá očekávanou velikost. Soubor měl mít velikost {1} bajtů, ale ve skutečnosti to bylo jen {2} bajtů.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Soubor ‚‚{0}‘‘ se nepodařilo najít.</value>
+    <value>Soubor „{0}" se nepodařilo najít.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Konfigurační adresář ‚‚{0}‘‘ je pravděpodobně neplatný.</value>
+    <value>Konfigurační adresář „{0}" je pravděpodobně neplatný.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -183,8 +183,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Pro adresu '{0}' není registrována žádná akce.</value>
-    <comment>Automatically translated.</comment>
+    <value>Pro '{0}' není registrována žádná akce.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="No" xml:space="preserve">
     <value>Ne</value>
@@ -211,7 +211,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Došlo k problému při nahrávání ‚‚{0}‘‘.</value>
+    <value>Došlo k problému při nahrávání „{0}".</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
@@ -223,7 +223,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Soubor {0}se načítá</value>
+    <value>Soubor {0} se načítá</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
@@ -235,7 +235,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>Restartuju aplikaci</value>
+    <value>Restartování aplikací</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
@@ -247,7 +247,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>Vyhledávám odkazy na veřejně přístupné soubory</value>
+    <value>Vyhledávání odkazů na otevřené soubory</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
@@ -255,7 +255,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>Vypínám aplikace</value>
+    <value>Vypínání aplikací</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
@@ -267,7 +267,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>Zpracovávám data</value>
+    <value>Zpracování dat</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
@@ -275,7 +275,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
-    <value>V/V chyba (i/o error)</value>
+    <value>V/V chyba</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateReady" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Chyba při stahování</value>
+    <value>Webová chyba</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">

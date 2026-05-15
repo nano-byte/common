@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Commenta:</value>
+    <value>&amp;Commento:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -127,7 +127,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
-    <value>Si è verificato un errore imprevisto durante questa applicazione. Segnalalo per aiutarci a risolverlo. Se c'è già una soluzione, comparirà dopo aver inviato il report.</value>
+    <value>Si è verificato un errore imprevisto in questa applicazione. Segnalalo per aiutarci a risolverlo. Se c'è già una soluzione, comparirà dopo aver inviato il report.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
@@ -239,8 +239,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Riproduzione in {0} millisecondi a causa di:</value>
-    <comment>Automatically translated.</comment>
+    <value>Nuovo tentativo tra {0} millisecondi a causa di:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Cerca</value>
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentativo di lettura dalla posizione {0}. Questa posizione è distante {1} byte dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può gestire solo una differenza di {3} byte.</value>
+    <value>Tentativo di lettura dalla posizione {0}. Questa posizione è distante {1} byte dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può contenere solo una differenza di {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

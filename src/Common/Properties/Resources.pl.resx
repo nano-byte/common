@@ -239,8 +239,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Ponowne próby w {0} milisekundach z powodu:</value>
-    <comment>Automatically translated.</comment>
+    <value>Ponowienie próby za {0} milisekund z powodu:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Wyszukiwanie</value>
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Podjęto próbę odczytu z pozycji {0}. Jest ona oddalona o {1} bajtów od podstawowej pozycji strumienia {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
+    <value>Podjęto próbę odczytu z pozycji {0}. Jest ona oddalona o {1} bajtów od bazowej pozycji strumienia {2}, ale bufor wyszukiwania może pomieścić tylko różnicę {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -299,8 +299,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Nie można znaleźć zespołu o nazwie "{0}".</value>
-    <comment>Automatically translated.</comment>
+    <value>Nie można znaleźć zestawu o nazwie "{0}".</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
     <value>Nie można odczytać {0} bajtów ze strumienia.</value>

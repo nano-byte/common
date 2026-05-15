@@ -87,8 +87,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Koleksi tidak dapat ditambahkan sendiri.</value>
-    <comment>Automatically translated.</comment>
+    <value>Koleksi tidak dapat ditambahkan ke dirinya sendiri.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>DACL tidak dapat dikanonik karena berpotensi mengakibatkan hilangnya informasi.</value>
@@ -131,7 +131,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>&amp;Laporan</value>
+    <value>&amp;Laporkan</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Mencoba membaca dari posisi {0}. Ini adalah {1} byte dari posisi aliran yang mendasari {2}, tetapi buffer pencarian hanya dapat mengakomodasi perbedaan sebesar {3} byte.</value>
+    <value>Mencoba membaca dari posisi {0}. Posisi ini berjarak {1} byte dari posisi stream yang mendasari {2}, tetapi buffer pencarian hanya dapat mengakomodasi perbedaan sebesar {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;Comentar:</value>
+    <value>&amp;Comentario:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -219,8 +219,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un proceso sale con un código de salida inesperado.</value>
-    <comment>Automatically translated.</comment>
+    <value>Un proceso ha salido con un código de salida inesperado.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Leyendo archivo {0}</value>
@@ -243,8 +243,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Buscar en</value>
-    <comment>Automatically translated.</comment>
+    <value>Buscar</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Buscando referencias de archivos abiertos</value>
@@ -263,7 +263,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
-    <value>Completar</value>
+    <value>Completado</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
@@ -303,8 +303,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>No se puede leer {0} bytes del flujo.</value>
-    <comment>Automatically translated.</comment>
+    <value>No se pueden leer {0} bytes del flujo.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Este comando de deshacer no puede ejecutarse hasta que se haya ejecutado el comando real.</value>
