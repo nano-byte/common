@@ -87,8 +87,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>该程序集不能自行添加。</value>
-    <comment>Automatically translated.</comment>
+    <value>该集合不能添加到自身。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>不能对 DACL 进行规范化，因为这可能会导致信息丢失。</value>
@@ -99,7 +99,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>复制文件</value>
+    <value>正在复制文件</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -139,7 +139,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToDownload" xml:space="preserve">
-    <value>下载 {0} 失败 。</value>
+    <value>下载 {0} 失败。</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
@@ -179,8 +179,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>已超过收集元素的最大数量。</value>
-    <comment>Automatically translated.</comment>
+    <value>已超过集合元素的最大数量。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
     <value>没有为 "{0}"注册任何操作。</value>
@@ -215,8 +215,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' 已退出，退出代码为{1}.</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}' 已退出，退出代码为 {1}。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
     <value>进程以意外的退出代码退出。</value>
@@ -235,7 +235,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
-    <value>重启应用程序</value>
+    <value>正在重启应用程序</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
@@ -251,11 +251,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>试图从位置{0} 读取数据。{1} {2} 字节，但寻道缓冲区只能容纳{3} 字节的差值。</value>
-    <comment>Automatically translated.</comment>
+    <value>试图从位置 {0} 读取数据。该位置距离底层流位置 {2} 有 {1} 字节，但寻道缓冲区只能容纳 {3} 字节的差值。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
-    <value>关闭应用程序</value>
+    <value>正在关闭应用程序</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
@@ -267,11 +267,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateData" xml:space="preserve">
-    <value>处理数据</value>
+    <value>正在处理数据</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>获取标题</value>
+    <value>获取标头</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>网页错误</value>
+    <value>Web 错误</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">

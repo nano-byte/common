@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>コレクションは、それ自身に追加することはできません。</value>
+    <value>コレクションは、それ自体に追加することはできません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -99,7 +99,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
-    <value>複数のファイルをコピー中</value>
+    <value>ファイルをコピー中</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
@@ -107,7 +107,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>保存先のディレクトリは既に存在します。</value>
+    <value>保存先のディレクトリはすでに存在します。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
@@ -143,16 +143,16 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>{1}' 内のレジストリサブキー '{0}' を開けませんでした。</value>
-    <comment>Automatically translated.</comment>
+    <value>'{1}' 内のレジストリサブキー '{0}' を開けませんでした。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>{0}' のロールバックに失敗しました。</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}' のロールバックに失敗しました。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>{0}' の起動に失敗しました。</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}' の起動に失敗しました。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>{0}からダウンロードされるファイルが予想のサイズと異なります。予想のサイズは{1}バイトですが、実際は{2}バイトです。</value>
@@ -163,7 +163,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>「{0}」は無効なディレクトリ構造である可能性があります。</value>
+    <value>「{0}」は無効な設定ディレクトリである可能性があります。</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -175,16 +175,16 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>{0}' を起動するには、管理者権限が必要です。</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}' を起動するには、管理者権限が必要です。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>コレクション内の要素の最大量を超えました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>{0}' のアクションは登録されていません。</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}' のアクションは登録されていません。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="No" xml:space="preserve">
     <value>いいえ</value>
@@ -231,27 +231,27 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>リセット値</value>
-    <comment>Automatically translated.</comment>
+    <value>値をリセット</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>アプリケーションを再起動中</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>{0} ミリ秒で再試行：</value>
-    <comment>Automatically translated.</comment>
+    <value>{0} ミリ秒後に再試行：</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>検索</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
-    <value>開いているリファレンスファイルを検索中</value>
+    <value>開いているファイル参照を検索中</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} の位置から読み込もうとした。この位置は{2} のストリーム位置から{1} バイト離れていますが、シーク・バッファは{3} バイトの差しか許容できません。</value>
+    <value>{0} の位置から読み込もうとした。この位置は、下層のストリーム位置{2} から{1} バイト離れていますが、シーク・バッファは{3} バイトの差にしか対応できません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>ウェブ上のエラー</value>
+    <value>Webエラー</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
@@ -299,8 +299,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>{0}" という名前のアセンブリが見つかりません。</value>
-    <comment>Automatically translated.</comment>
+    <value>"{0}" という名前のアセンブリが見つかりません。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
     <value>ストリームから{0} バイトを読み取れない。</value>

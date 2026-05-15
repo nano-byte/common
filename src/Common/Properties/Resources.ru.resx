@@ -239,8 +239,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Повторная попытка в {0} миллисекунд из-за:</value>
-    <comment>Automatically translated.</comment>
+    <value>Повторная попытка через {0} миллисекунд из-за:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Поиск</value>
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Попытка чтения с позиции {0}. Это {1} байт от позиции базового потока {2}, но буфер поиска может выдержать разницу только в {3} байт.</value>
+    <value>Попытка чтения с позиции {0}. Это {1} байт от позиции базового потока {2}, но буфер поиска может вместить только разницу в {3} байт.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>Ошибка загрузки</value>
+    <value>Веб-ошибка</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">

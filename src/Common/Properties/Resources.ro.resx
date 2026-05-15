@@ -131,8 +131,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportSend" xml:space="preserve">
-    <value>Raport</value>
-    <comment>Automatically translated.</comment>
+    <value>Raportează</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportSent" xml:space="preserve">
     <value>Raportul de eroare a fost trimis cu succes.</value>
@@ -147,8 +147,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>A eșuat reluarea '{0}'.</value>
-    <comment>Automatically translated.</comment>
+    <value>A eșuat revenirea '{0}'.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
     <value>Nu a reușit să pornească '{0}'.</value>
@@ -199,7 +199,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Metoda e disponibilă doar pentru Windows.</value>
+    <value>Metoda e disponibilă doar pe Windows.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -223,8 +223,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
-    <value>Fișier de citire {0}</value>
-    <comment>Automatically translated.</comment>
+    <value>Se citește fișierul {0}</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>Această comandă nu poate fi rulată din nou până ce comanda de anulare nu a fost selectată.</value>
@@ -251,7 +251,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>A încercat să citească de la poziția {0}. Aceasta este la {1} octeți distanță de poziția fluxului de bază {2}, dar bufferul de căutare nu poate suporta decât o diferență de {3} octeți.</value>
+    <value>A încercat să citească de la poziția {0}. Aceasta se află la {1} octeți distanță de poziția fluxului de bază {2}, dar bufferul de căutare poate găzdui doar o diferență de {3} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -283,7 +283,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateWebError" xml:space="preserve">
-    <value>eroare Web</value>
+    <value>Eroare Web</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
@@ -303,8 +303,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Imposibilitatea de a citi {0} bytes din flux.</value>
-    <comment>Automatically translated.</comment>
+    <value>Nu se pot citi {0} octeți din flux.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
     <value>Această comandă de anulare nu poate fi executată până când nu a fost executată comanda efectivă.</value>

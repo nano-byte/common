@@ -95,7 +95,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>&amp;설명:</value>
+    <value>&amp;코멘트:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="CopyFiles" xml:space="preserve">
@@ -215,12 +215,12 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' 종료 코드로 종료 {1}.</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}'이(가) 종료 코드 {1}(으)로 종료되었습니다.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>예기치 않은 종료 코드로 종료된 프로세스.</value>
-    <comment>Automatically translated.</comment>
+    <value>프로세스가 예기치 않은 종료 코드로 종료되었습니다.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>{0} 파일 읽는 중</value>
