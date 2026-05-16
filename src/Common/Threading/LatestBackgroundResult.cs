@@ -11,7 +11,7 @@ namespace NanoByte.Common.Threading;
 /// </summary>
 /// <typeparam name="T">The type of result produced by the calculation.</typeparam>
 /// <remarks>Starting a new computation automatically cancels and discards any in-progress one.</remarks>
-internal sealed class LatestBackgroundResult<T> where T : class
+public sealed class LatestBackgroundResult<T> where T : class
 {
 #if NET9_0_OR_GREATER
     private readonly Lock _lock = new();
