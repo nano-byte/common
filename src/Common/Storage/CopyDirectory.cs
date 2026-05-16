@@ -92,7 +92,7 @@ public class CopyDirectory(
 
         destinationFile.Refresh();
         destinationFile.Attributes &= ~(FileAttributes.ReadOnly | FileAttributes.Hidden);
-        destinationFile.LastWriteTimeUtc = destinationFile.LastWriteTimeUtc;
+        destinationFile.LastWriteTimeUtc = sourceFile.LastWriteTimeUtc;
     }
 
     /// <summary>
