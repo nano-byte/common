@@ -36,9 +36,11 @@ public static class XmlStorage
         #endregion
 
         if (stream.CanSeek) stream.Position = 0;
+
+        using var reader = XmlReader.Create(stream);
         try
         {
-            return (T)GetSerializer(typeof(T)).Deserialize(stream)!;
+            return (T)GetSerializer(typeof(T)).Deserialize(reader)!;
         }
         #region Error handling
         catch (InvalidOperationException ex) when (ex.InnerException is IOException or UnauthorizedAccessException)
@@ -49,10 +51,18 @@ public static class XmlStorage
         catch (InvalidOperationException ex)
         {
             // Convert exception type
-            throw new InvalidDataException(ex.Message, ex.InnerException) {Source = ex.Source};
+            throw new InvalidDataException(ex.Message, AttachLineInfo(ex.InnerException, reader)) {Source = ex.Source};
         }
         #endregion
     }
+
+    private static Exception? AttachLineInfo(Exception? inner, XmlReader reader)
+        => inner switch
+        {
+            not null and not XmlException when reader is IXmlLineInfo lineInfo && lineInfo.HasLineInfo()
+                => new XmlException(inner.Message, inner, lineInfo.LineNumber, lineInfo.LinePosition),
+            _ => inner
+        };
 
     /// <summary>
     /// Loads an object from an XML file.
