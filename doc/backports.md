@@ -38,9 +38,7 @@ The following types were introduced in .NET Framework 4.5 and are backported to 
 
 ## Utils
 
-The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
-
-- [HashCode](https://learn.microsoft.com/dotnet/api/system.hashcode)
+[HashCode](https://learn.microsoft.com/dotnet/api/system.hashcode) was introduced in .NET Core 2.1 / .NET Standard 2.1 and is backported to .NET Framework.
 
 The following [CustomAttributeExtensions](https://learn.microsoft.com/dotnet/api/system.reflection.customattributeextensions) methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
 
