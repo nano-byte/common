@@ -91,10 +91,10 @@ public sealed class LatestBackgroundResult<T> where T : class
                 lock (_lock)
                 {
                     if (cts == _cts) _cts = null;
+                    cts.Dispose();
                 }
-                cts.Dispose();
             }
-        }, cts.Token);
+        }, CancellationToken.None);
     }
 }
 #endif
