@@ -45,6 +45,29 @@ public static class ListExtensions
     }
 
     /// <summary>
+    /// Determines the index of a specific element instance in a list, comparing by reference identity.
+    /// </summary>
+    /// <param name="list">The list to search.</param>
+    /// <param name="element">The element instance to locate.</param>
+    /// <returns>The index of <paramref name="element"/> in the <paramref name="list"/>; <c>-1</c> if not found.</returns>
+    /// <remarks>Unlike <see cref="IList{T}.IndexOf"/> this targets the exact instance even when the list contains other elements that are equal by value.</remarks>
+    [Pure]
+    public static int IndexOfByReference<T>(this IList<T> list, T element)
+    {
+        #region Sanity checks
+        if (list == null) throw new ArgumentNullException(nameof(list));
+        #endregion
+
+        if (typeof(T).IsValueType) return list.IndexOf(element);
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (ReferenceEquals(list[i], element)) return i;
+        }
+        return -1;
+    }
+
+    /// <summary>
     /// Adds or replaces an element in a list using a key selector for comparison.
     /// </summary>
     /// <param name="list">The list to update.</param>
