@@ -155,7 +155,7 @@ public static class MathUtils
     /// <param name="function">The easing function.</param>
     [Pure]
     public static double InterpolateEased(double start, double end, double factor, EasingFunction function = Sinusoidal)
-        => Lerp(start, end, EaseInOut(factor));
+        => Lerp(start, end, EaseInOut(factor, function));
 
     /// <summary>
     /// Linearly interpolates between two values.
