@@ -63,12 +63,13 @@ public static class MathUtils
     /// <param name="min">The minimum number to return.</param>
     /// <param name="max">The maximum number to return.</param>
     /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="min"/> was larger than <paramref name="max"/>.</exception>
     [Pure]
     public static int Clamp(this int value, int min = 0, int max = 1)
     {
-        if (value < min) return min;
-        if (value > max) return max;
+        #region Sanity checks
         if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+        #endregion
 
         if (value < min) return min;
         if (value > max) return max;
@@ -82,12 +83,13 @@ public static class MathUtils
     /// <param name="min">The minimum number to return.</param>
     /// <param name="max">The maximum number to return.</param>
     /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="min"/> was larger than <paramref name="max"/>.</exception>
     [Pure]
     public static long Clamp(this long value, long min = 0, long max = 1)
     {
-        if (value < min) return min;
-        if (value > max) return max;
+        #region Sanity checks
         if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+        #endregion
 
         if (value < min) return min;
         if (value > max) return max;
@@ -101,12 +103,13 @@ public static class MathUtils
     /// <param name="min">The minimum number to return.</param>
     /// <param name="max">The maximum number to return.</param>
     /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="min"/> was larger than <paramref name="max"/>.</exception>
     [Pure]
     public static float Clamp(this float value, float min = 0, float max = 1)
     {
-        if (value < min) return min;
-        if (value > max) return max;
+        #region Sanity checks
         if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+        #endregion
 
         if (value < min) return min;
         if (value > max) return max;
@@ -120,12 +123,13 @@ public static class MathUtils
     /// <param name="min">The minimum number to return.</param>
     /// <param name="max">The maximum number to return.</param>
     /// <returns>The <paramref name="value"/> if it was in range, otherwise <paramref name="min"/> or <paramref name="max"/>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="min"/> was larger than <paramref name="max"/>.</exception>
     [Pure]
     public static double Clamp(this double value, double min = 0, double max = 1)
     {
-        if (value < min) return min;
-        if (value > max) return max;
+        #region Sanity checks
         if (min > max) throw new ArgumentException("The min value may not be larger than the max value.", nameof(min));
+        #endregion
 
         if (value < min) return min;
         if (value > max) return max;
