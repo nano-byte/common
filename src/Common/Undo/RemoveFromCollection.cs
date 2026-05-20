@@ -13,15 +13,36 @@ namespace NanoByte.Common.Undo;
 public sealed class RemoveFromCollection<T>(ICollection<T> collection, T element) : CollectionCommand<T>(collection, element)
     where T : notnull
 {
+    private int _index = -1;
+
     /// <summary>
     /// Removes the element from the collection.
     /// </summary>
-    protected override void OnExecute() => Collection.Remove(Element);
+    protected override void OnExecute()
+    {
+        // Remember the position so OnUndo can restore the element to its original index
+        // instead of appending it to the end.
+        if (Collection is IList<T> list)
+        {
+            if (_index < 0) _index = list.IndexOfByReference(Element);
+            if (_index >= 0)
+            {
+                list.RemoveAt(_index);
+                return;
+            }
+        }
+
+        Collection.Remove(Element);
+    }
 
     /// <summary>
     /// Adds the element to the collection.
     /// </summary>
-    protected override void OnUndo() => Collection.Add(Element);
+    protected override void OnUndo()
+    {
+        if (_index >= 0 && Collection is IList<T> list) list.Insert(_index, Element);
+        else Collection.Add(Element);
+    }
 }
 
 /// <summary>

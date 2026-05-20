@@ -37,4 +37,23 @@ public class CollectionTest
         collection.Should().Contain("b");
         collection.Should().Contain("c");
     }
+
+    /// <summary>
+    /// Makes sure <see cref="RemoveFromCollection{T}"/> restores the original position when undoing.
+    /// </summary>
+    [Fact]
+    public void TestRemoveFromCollectionRestoresPosition()
+    {
+        var collection = new List<string> {"a", "b", "c"};
+        var command = new RemoveFromCollection<string>(collection, "b");
+
+        command.Execute();
+        collection.Should().Equal("a", "c");
+
+        command.Undo();
+        collection.Should().Equal("a", "b", "c");
+
+        command.Execute();
+        collection.Should().Equal("a", "c");
+    }
 }
