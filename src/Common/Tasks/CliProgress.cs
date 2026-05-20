@@ -25,17 +25,10 @@ public class CliProgress : MarshalByRefObject, IProgress<TaskSnapshot>
 
         int currentValue = value.State == TaskState.Complete
             ? Width
-            : Clamp(value.Value * Width, 0, Width);
+            : (int)(value.Value * Width).Clamp(0, Width);
         currentValue.To(ref _currentValue, () => needsDraw = true);
 
         if (needsDraw) Draw(value);
-    }
-
-    private static int Clamp(double value, int min, int max)
-    {
-        if (value < min) return min;
-        if (value > max) return max;
-        return (int)value;
     }
 
     private void Draw(TaskSnapshot value)
