@@ -158,7 +158,7 @@ public static class ProcessUtils
     /// <summary>
     /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows using UAC.
     /// </summary>
-    /// <exception cref="PlatformNotSupportedException">The current operating system does not support UAC or it is disabled..</exception>
+    /// <exception cref="PlatformNotSupportedException">The current operating system does not support UAC or it is disabled.</exception>
     public static ProcessStartInfo AsAdmin(this ProcessStartInfo startInfo)
     {
         #region Sanity checks

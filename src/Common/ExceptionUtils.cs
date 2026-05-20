@@ -266,7 +266,7 @@ public static class ExceptionUtils
     }
 
     /// <summary>
-    /// Executes an asynchronous and automatically retries it using exponential back-off if a specific type of exception was raised.
+    /// Executes an asynchronous delegate and automatically retries it using exponential back-off if a specific type of exception was raised.
     /// </summary>
     /// <typeparam name="TException">The type of exception to trigger a retry.</typeparam>
     /// <typeparam name="TResult">The type of result the <paramref name="function"/> produces.</typeparam>

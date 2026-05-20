@@ -31,7 +31,7 @@ public static class EnumerableExtensions
     /// Determines whether one enumeration of elements contains any of the elements in another.
     /// </summary>
     /// <param name="first">The first of the two enumerations to compare.</param>
-    /// <param name="second">The first of the two enumerations to compare.</param>
+    /// <param name="second">The second of the two enumerations to compare.</param>
     /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
     /// <returns><c>true</c> if <paramref name="first"/> contains any element from <paramref name="second"/>. <c>false</c> if <paramref name="first"/> or <paramref name="second"/> is empty.</returns>
     [Pure]
@@ -63,7 +63,7 @@ public static class EnumerableExtensions
     /// Determines whether two enumerations contain the same elements in the same order.
     /// </summary>
     /// <param name="first">The first of the two enumerations to compare.</param>
-    /// <param name="second">The first of the two enumerations to compare.</param>
+    /// <param name="second">The second of the two enumerations to compare.</param>
     /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
     [Pure]
     public static bool SequencedEquals<T>([InstantHandle] this IEnumerable<T> first, [InstantHandle] IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
@@ -82,7 +82,7 @@ public static class EnumerableExtensions
     /// Determines whether two enumerations contain the same elements disregarding the order they are in.
     /// </summary>
     /// <param name="first">The first of the two enumerations to compare.</param>
-    /// <param name="second">The first of the two enumerations to compare.</param>
+    /// <param name="second">The second of the two enumerations to compare.</param>
     /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
     [Pure]
     public static bool UnsequencedEquals<T>([InstantHandle] this IEnumerable<T> first, [InstantHandle] IEnumerable<T> second, IEqualityComparer<T>? comparer = null)
@@ -272,7 +272,7 @@ public static class EnumerableExtensions
     /// </summary>
     /// <typeparam name="TSource">The type of the input elements.</typeparam>
     /// <typeparam name="TResult">The type of the output elements.</typeparam>
-    /// <typeparam name="TException">The type of exceptions to handle..</typeparam>
+    /// <typeparam name="TException">The type of exceptions to handle.</typeparam>
     /// <param name="source">The elements to map.</param>
     /// <param name="selector">The selector to execute for each <paramref name="source"/> element.</param>
     /// <param name="exceptionHandler">A Callback to be invoked when a <typeparamref name="TException"/> is caught.</param>

@@ -60,7 +60,7 @@ public interface ITaskHandler : IDisposable
     /// <summary>
     /// Displays tree-like data to the user.
     /// </summary>
-    /// <param name="title">A title for the data.INamed</param>
+    /// <param name="title">A title for the data.</param>
     /// <param name="data">The data to display.</param>
     /// <remarks>Implementations may close the UI as a side effect. Therefore this should be your last call on the handler.</remarks>
     void Output<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>([Localizable(true)] string title, NamedCollection<T> data)

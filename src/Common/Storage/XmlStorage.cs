@@ -217,7 +217,7 @@ public static class XmlStorage
         data.SaveXml(stream, stylesheet);
         string result = stream.ReadToString();
 
-        // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-dik
+        // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-disk
         const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
         const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
         return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
