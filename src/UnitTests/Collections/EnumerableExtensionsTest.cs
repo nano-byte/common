@@ -1,6 +1,10 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+#if NET
+using System.Collections.Frozen;
+#endif
+
 namespace NanoByte.Common.Collections;
 
 /// <summary>
@@ -9,14 +13,56 @@ namespace NanoByte.Common.Collections;
 public class EnumerableExtensionsTest
 {
     [Fact]
-    public void TestContainsAny()
+    public void TestContainsAnyArray()
     {
         new[] {1, 2}.ContainsAny([2]).Should().BeTrue();
         new[] {1, 2}.ContainsAny([2, 3]).Should().BeTrue();
         new[] {1, 2}.ContainsAny([3]).Should().BeFalse();
         Array.Empty<int>().ContainsAny([2]).Should().BeFalse();
-        new[] {1, 2}.ContainsAny(Array.Empty<int>()).Should().BeFalse();
+        new[] {1, 2}.ContainsAny([]).Should().BeFalse();
     }
+
+    [Fact]
+    public void TestContainsAnyFirstIsSet()
+    {
+        new HashSet<int> {1, 2}.ContainsAny([2]).Should().BeTrue();
+        new HashSet<int> {1, 2}.ContainsAny([2, 3]).Should().BeTrue();
+        new HashSet<int> {1, 2}.ContainsAny([3]).Should().BeFalse();
+        new HashSet<int>().ContainsAny([2]).Should().BeFalse();
+        new HashSet<int> {1, 2}.ContainsAny([]).Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestContainsAnySecondIsSet()
+    {
+        new[] {1, 2}.ContainsAny(new HashSet<int> {2}).Should().BeTrue();
+        new[] {1, 2}.ContainsAny(new HashSet<int> {2, 3}).Should().BeTrue();
+        new[] {1, 2}.ContainsAny(new HashSet<int> {3}).Should().BeFalse();
+        Array.Empty<int>().ContainsAny(new HashSet<int> {2}).Should().BeFalse();
+        new[] {1, 2}.ContainsAny(new HashSet<int>()).Should().BeFalse();
+    }
+
+#if NET
+    [Fact]
+    public void TestContainsAnyFirstIsReadOnlySet()
+    {
+        new[] {1, 2}.ToFrozenSet().ContainsAny([2]).Should().BeTrue();
+        new[] {1, 2}.ToFrozenSet().ContainsAny([2, 3]).Should().BeTrue();
+        new[] {1, 2}.ToFrozenSet().ContainsAny([3]).Should().BeFalse();
+        Array.Empty<int>().ToFrozenSet().ContainsAny([2]).Should().BeFalse();
+        new[] {1, 2}.ToFrozenSet().ContainsAny([]).Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestContainsAnySecondIsReadOnlySet()
+    {
+        new[] {1, 2}.ContainsAny(new[] {2}.ToFrozenSet()).Should().BeTrue();
+        new[] {1, 2}.ContainsAny(new[] {2, 3}.ToFrozenSet()).Should().BeTrue();
+        new[] {1, 2}.ContainsAny(new[] {3}.ToFrozenSet()).Should().BeFalse();
+        Array.Empty<int>().ContainsAny(new[] {2}.ToFrozenSet()).Should().BeFalse();
+        new[] {1, 2}.ContainsAny(Array.Empty<int>().ToFrozenSet()).Should().BeFalse();
+    }
+#endif
 
     [Fact]
     public void TestSequencedEquals()

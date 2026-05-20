@@ -42,12 +42,21 @@ public static class EnumerableExtensions
         if (second == null) throw new ArgumentNullException(nameof(second));
         #endregion
 
-        var set =
-#if !NET20
-            second as ISet<T> ??
+#if NET
+        if (comparer == null)
+        {
+            if (first is IReadOnlySet<T> readOnlySet1) return second.Any(readOnlySet1.Contains);
+            if (second is IReadOnlySet<T> readOnlySet2) return first.Any(readOnlySet2.Contains);
+        }
+#elif !NET20
+        if (comparer == null)
+        {
+            if (first is ISet<T> set1) return second.Any(set1.Contains);
+            if (second is ISet<T> set2) return first.Any(set2.Contains);
+        }
 #endif
-            new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
-        return second.Any(set.Contains);
+        var hashSet = new HashSet<T>(first, comparer ?? EqualityComparer<T>.Default);
+        return second.Any(hashSet.Contains);
     }
 
     /// <summary>
