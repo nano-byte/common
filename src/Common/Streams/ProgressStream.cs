@@ -42,17 +42,21 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
 #if !NET20 && !NET40
     /// <inheritdoc/>
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken ct)
-        => Report(await UnderlyingStream.ReadAsync(buffer, offset, count, CombineTokens(ct)));
+    {
+        using var cts = CombineTokens(ct);
+        return Report(await UnderlyingStream.ReadAsync(buffer, offset, count, cts.Token));
+    }
 
     /// <inheritdoc/>
     public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken ct)
     {
-        await UnderlyingStream.WriteAsync(buffer, offset, count, CombineTokens(ct));
+        using var cts = CombineTokens(ct);
+        await UnderlyingStream.WriteAsync(buffer, offset, count, cts.Token);
         Report(count);
     }
 
-    private CancellationToken CombineTokens(CancellationToken otherToken)
-        => CancellationTokenSource.CreateLinkedTokenSource(otherToken, cancellationToken).Token;
+    private CancellationTokenSource CombineTokens(CancellationToken otherToken)
+        => CancellationTokenSource.CreateLinkedTokenSource(otherToken, cancellationToken);
 #endif
 
 #if NET
@@ -62,7 +66,10 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
 
     /// <inheritdoc/>
     public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken ct = default)
-        => Report(await UnderlyingStream.ReadAsync(buffer, CombineTokens(ct)));
+    {
+        using var cts = CombineTokens(ct);
+        return Report(await UnderlyingStream.ReadAsync(buffer, cts.Token));
+    }
 
     /// <inheritdoc/>
     public override void Write(ReadOnlySpan<byte> buffer)
@@ -74,7 +81,8 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
     /// <inheritdoc/>
     public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken ct = default)
     {
-        await UnderlyingStream.WriteAsync(buffer, CombineTokens(ct));
+        using var cts = CombineTokens(ct);
+        await UnderlyingStream.WriteAsync(buffer, cts.Token);
         Report(buffer.Length);
     }
 #endif
