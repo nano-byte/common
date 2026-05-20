@@ -14,12 +14,18 @@ namespace NanoByte.Common.Undo;
 public class ReplaceInList<T>(IList<T> list, T oldElement, T newElement) : SimpleCommand, IValueCommand
     where T : notnull
 {
+    private int _index = -1;
+
     /// <inheritdoc/>
     public object Value => newElement;
 
-    protected override void OnExecute() => list[list.IndexOf(oldElement)] = newElement;
+    protected override void OnExecute()
+    {
+        if (_index < 0) _index = list.IndexOfByReference(oldElement);
+        list[_index] = newElement;
+    }
 
-    protected override void OnUndo() => list[list.IndexOf(newElement)] = oldElement;
+    protected override void OnUndo() => list[_index] = oldElement;
 }
 
 /// <summary>
