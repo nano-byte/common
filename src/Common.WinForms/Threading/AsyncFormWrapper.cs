@@ -113,7 +113,7 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <exception cref="OperationCanceledException">The form was closed.</exception>
     public void Send(Action<T> action)
     {
-        if (_form.IsValueCreated && _form.Value.IsDisposed) throw new OperationCanceledException();
+        if (_form is { IsValueCreated: true, Value.IsDisposed: true }) throw new OperationCanceledException();
 
         try
         {

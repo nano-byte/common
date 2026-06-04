@@ -28,9 +28,7 @@ partial class Log
                 encoderShouldEmitUTF8Identifier: !file.Exists || file.Length > maxSize);
             _fileWriter = new(
                 file.Open(
-                    file.Exists && file.Length > maxSize
-                        ? FileMode.Truncate
-                        : FileMode.Append,
+                    file is { Exists: true, Length: > maxSize } ? FileMode.Truncate : FileMode.Append,
                     FileAccess.Write,
                     FileShare.ReadWrite), // Allow concurrent writes to same file by other processes
                 encoding);
