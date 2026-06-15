@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta, ancak tarama ara belleği yalnızca {3} bayt farkı karşılayabilir.</value>
+    <value>{0} konumundan okunmaya çalışıldı. Bu konum {2} temel akış konumundan {1} bayt uzakta. Ancak tarama ara belleği yalnızca {3} bayt farkı karşılayabilir.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -299,7 +299,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}" adındaki assembly bulunamadı.</value>
+    <value>"{0}" adındaki yordam bulunamadı.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">

@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL tidak dapat dikanonik karena berpotensi mengakibatkan hilangnya informasi.</value>
+    <value>DACL tidak dapat dikanonisasikan karena hal itu berpotensi mengakibatkan hilangnya informasi.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -147,7 +147,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Gagal mengembalikan '{0}'.</value>
+    <value>Gagal melakukan rollback '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -171,15 +171,15 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Kuncinya sudah ada dalam kamus.</value>
+    <value>Kata kunci tersebut sudah ada di kamus.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Meluncurkan '{0}' memerlukan hak istimewa Administrator.</value>
+    <value>Untuk menjalankan '{0}', diperlukan hak akses Administrator.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Jumlah maksimum elemen dalam koleksi sudah terlampaui.</value>
+    <value>Jumlah maksimum elemen dalam koleksi telah terlampaui.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Metode ini hanya tersedia pada Windows.</value>
+    <value>Metode ini hanya tersedia di Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Proses keluar dengan kode keluar yang tidak diharapkan.</value>
+    <value>Sebuah proses berakhir dengan kode keluar yang tidak terduga.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Perintah ini tidak dapat dilakukan lagi sampai perintah undo dilakukan.</value>
+    <value>Perintah ini tidak dapat dijalankan lagi sampai perintah undo telah dijalankan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -239,11 +239,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Mencoba kembali dalam {0} milidetik karena:</value>
+    <value>Mencoba lagi dalam {0} milidetik karena:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Pencarian</value>
+    <value>Cari</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Mencoba membaca dari posisi {0}. Posisi ini berjarak {1} byte dari posisi stream yang mendasari {2}, tetapi buffer pencarian hanya dapat mengakomodasi perbedaan sebesar {3} byte.</value>
+    <value>Mencoba membaca dari posisi {0}. Ini berjarak {1} byte dari posisi aliran dasar {2}, tetapi buffer pencarian hanya dapat menampung selisih sebesar {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Sumber dan tujuan adalah sama.</value>
+    <value>Sumber dan tujuan sama.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Panjang target harus sama dengan Panjang nilai lama</value>
+    <value>Panjang target harus sama dengan panjang oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -295,23 +295,23 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Versi .NET Anda tidak mendukung TLS 1.2. Ini dapat menyebabkan kesalahan koneksi saat mengunduh konten melalui HTTPS. Silakan jalankan Pembaruan Windows untuk menginstal tambalan yang diperlukan.</value>
+    <value>Versi .NET Anda tidak mendukung TLS 1.2. Hal ini dapat menyebabkan kesalahan koneksi saat mengunduh konten melalui HTTPS. Silakan jalankan Windows Update untuk menginstal patch yang diperlukan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Rakitan bernama "{0}" tidak dapat ditemukan.</value>
+    <value>File assembly bernama "{0}" tidak dapat ditemukan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Tidak dapat membaca {0} byte dari stream.</value>
+    <value>Tidak dapat membaca {0} byte dari aliran.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Perintah undo ini tidak dapat dilakukan sampai perintah yang sesungguhnya dilakukan.</value>
+    <value>Perintah undo ini tidak dapat dijalankan sampai perintah yang sebenarnya telah dijalankan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Subsistem Unix gagal memproses permintaan. Anda mungkin memiliki hak yang tidak memadai.</value>
+    <value>Subsistem Unix gagal memproses permintaan. Anda mungkin tidak memiliki hak akses yang cukup.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

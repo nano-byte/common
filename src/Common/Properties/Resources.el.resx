@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Προσπάθησε να διαβάσει από τη θέση {0}. Αυτή απέχει {1} bytes από την υποκείμενη θέση {2}, αλλά ο απομονωτής αναζήτησης μπορεί να δεχτεί διαφορά μόνο {3} bytes.</value>
+    <value>Προσπάθησε να διαβάσει από τη θέση {0}. Αυτή απέχει {1} byte από τη θέση του υποκείμενου ρεύματος {2}, αλλά ο buffer αναζήτησης μπορεί να φιλοξενήσει μόνο μια διαφορά {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
