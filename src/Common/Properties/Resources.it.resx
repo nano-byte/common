@@ -87,11 +87,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collezione non può essere aggiunta a se stessa.</value>
+    <value>La raccolta non può essere aggiunta a se stessa.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>Il DACL non può essere canonicalizzato, poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
+    <value>Il DACL non può essere canonicalizzato poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -143,15 +143,15 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Impossibile aprire la sottochiave di registro '{0}' in '{1}'.</value>
+    <value>Impossibile aprire la sottochiave di registro "{0}" in "{1}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Fallito il rollback di '{0}'.</value>
+    <value>Impossibile ripristinare '{0}'.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Impossibile avviare '{0}'.</value>
+    <value>Impossibile avviare "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -175,15 +175,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>L'avvio di '{0}' richiede i privilegi di amministratore.</value>
+    <value>Per avviare "{0}" sono necessari i privilegi di amministratore.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>È stata superata la quantità massima di elementi della collezione.</value>
+    <value>È stato superato il numero massimo di elementi nella raccolta.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Nessuna azione registrata per '{0}'.</value>
+    <value>Nessuna azione registrata per "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configurazione del sistema non può essere modificata in modalità portatile.</value>
+    <value>La configurazione di sistema non può essere modificata in modalità portatile.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -215,11 +215,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' è uscito con il codice di uscita {1}.</value>
+    <value>'{0}' è terminato con codice di uscita {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processo è uscito con un codice di uscita inatteso.</value>
+    <value>Un processo è terminato con un codice di uscita imprevisto.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Azzeramento del valore</value>
+    <value>Reimposta valore</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentativo di lettura dalla posizione {0}. Questa posizione è distante {1} byte dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può contenere solo una differenza di {3} byte.</value>
+    <value>Tentativo di lettura dalla posizione {0}. Si tratta di un {1} i di byte di distanza dalla posizione del flusso sottostante {2}, ma il buffer di ricerca può gestire solo una differenza di {3} i di byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>La sorgente e la destinazione sono uguali.</value>
+    <value>Origine e destinazione sono uguali.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La lunghezza degli obiettivi deve essere uguale alla lunghezza dei valori precedenti</value>
+    <value>La lunghezza dei target deve essere uguale alla lunghezza di oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -295,23 +295,23 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>La versione di .NET in uso non supporta il protocollo TLS 1.2. Ciò potrebbe causare errori di connessione durante il download di contenuti tramite HTTPS. Eseguire Windows Update per installare le patch necessarie.</value>
+    <value>La tua versione di .NET non supporta TLS 1.2. Ciò potrebbe causare errori di connessione durante il download di contenuti tramite HTTPS. Esegui Windows Update per installare le patch necessarie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Non è stato possibile individuare l'assieme denominato "{0}".</value>
+    <value>Impossibile individuare l'assembly denominato "{0}".</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Impossibile leggere {0} byte dal flusso.</value>
+    <value>Impossibile leggere {0} byte dallo stream.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Questo comando di annullamento non può essere eseguito finché non è stato eseguito il comando vero e proprio.</value>
+    <value>Questo comando di annullamento non può essere eseguito finché il comando effettivo non è stato eseguito.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. I diritti dell'utente potrebbero essere insufficienti.</value>
+    <value>Il sottosistema Unix non è riuscito a elaborare la richiesta. Potresti non disporre dei diritti necessari.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

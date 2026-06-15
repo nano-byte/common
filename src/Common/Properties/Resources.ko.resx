@@ -87,11 +87,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>컬렉션은 컬렉션 자체에 추가할 수 없습니다.</value>
+    <value>이 컬렉션은 자체에 추가될 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL은 잠재적으로 정보 손실을 초래할 수 있으므로 표준화할 수 없습니다.</value>
+    <value>DACL은 정보 손실을 초래할 가능성이 있으므로 정규화할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}'에서 레지스트리 하위 키 '{0}'를 열지 못했습니다.</value>
+    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'를 열 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -151,7 +151,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>'{0}'를 시작하지 못했습니다.</value>
+    <value>'{0}'을(를) 시작할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -171,11 +171,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>키는 이미 사전에 있었습니다.</value>
+    <value>해당 키는 이미 사전에 존재했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}'를 실행하려면 관리자 권한이 필요합니다.</value>
+    <value>'{0}'을 실행하려면 관리자 권한이 필요합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}' 에 등록된 작업이 없습니다.</value>
+    <value>'{0}'에 대한 동작이 등록되어 있지 않습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -227,11 +227,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>이 명령은 실행 취소 명령이 수행될 때까지 다시 수행할 수 없습니다.</value>
+    <value>실행 취소 명령을 수행하기 전까지는 이 명령을 다시 실행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>값 재설정</value>
+    <value>값 초기화</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>다음 때문에 {0} 밀리초 후에 다시 시도합니다:</value>
+    <value>다음과 같은 이유로 {0} 밀리초 후에 재시도 중입니다:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>{0} 위치에서 읽기를 시도했습니다. 이는 기본 스트림 위치 {2} 에서 {1} 바이트 떨어져 있지만 탐색 버퍼는 {3} 바이트의 차이만 수용할 수 있습니다.</value>
+    <value>위치 {0} 에서 읽기를 시도했습니다. 이는 기본 스트림 위치 {2} 에서 {1} 바이트 떨어져 있지만, 탐색 버퍼는 {3} 바이트의 차이만 수용할 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>소스와 대상은 동일합니다.</value>
+    <value>소스와 대상이 동일합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>대상의 길이는 oldValues의 길이와 같아야 합니다</value>
+    <value>대상 값의 길이는 oldValues의 길이와 같아야 합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>사용 중인 .NET 버전이 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows 업데이트를 실행하여 필요한 패치를 설치하세요.</value>
+    <value>사용 중인 .NET 버전은 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows Update를 실행하여 필요한 패치를 설치하십시오.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -307,11 +307,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>이 실행 취소 명령은 실제 명령이 수행될 때까지 수행할 수 없습니다.</value>
+    <value>실제 명령이 실행되기 전까지는 이 실행 취소 명령을 수행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>유닉스 하위 시스템에서 요청을 처리하지 못했습니다. 권한이 충분하지 않을 수 있습니다.</value>
+    <value>유닉스 서브시스템에서 요청을 처리하지 못했습니다. 권한이 부족할 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

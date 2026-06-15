@@ -87,11 +87,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La colección no puede añadirse a sí misma.</value>
+    <value>La colección no se puede añadir a sí misma.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>El DACL no puede canonicalizarse, ya que potencialmente supondría una pérdida de información.</value>
+    <value>El DACL no se puede canonizar, ya que ello podría dar lugar a una pérdida de información.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -143,15 +143,15 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Error al abrir la subclave de registro '{0}' en '{1}'.</value>
+    <value>No se ha podido abrir la subclave del Registro «{0} » en «{1} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Error al revertir '{0}'.</value>
+    <value>No se ha podido revertir «{0} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Error al iniciar '{0}'.</value>
+    <value>No se ha podido iniciar «{0} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -175,15 +175,15 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>El inicio de '{0}' requiere privilegios de administrador.</value>
+    <value>Para iniciar «{0} » se necesitan privilegios de administrador.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Se ha superado la cantidad máxima de elementos de la colección.</value>
+    <value>Se ha superado el número máximo de elementos de la colección.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>Ninguna acción registrada para '{0}'.</value>
+    <value>No hay ninguna acción registrada para «{0} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Este método sólo está disponible en Windows.</value>
+    <value>Este método solo está disponible en Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' salió con el código de salida {1}.</value>
+    <value>«{0} » se cerró con el código de salida « {1} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Reintento en {0} milisegundos debido a:</value>
+    <value>Se volverá a intentar en {0} milisegundos debido a:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Se ha intentado leer desde la posición {0}. Esto es {1} bytes de distancia de la posición de flujo subyacente {2}, pero el búfer de búsqueda sólo puede acomodar una diferencia de {3} bytes.</value>
+    <value>Se ha intentado leer desde la posición {0}. Esto se encuentra a una distanci {1} es de la posición del flujo subyacente {2}, pero el búfer de búsqueda solo puede admitir una diferencia de {3} bytes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -295,11 +295,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Su versión de .NET no es compatible con TLS 1.2. Esto puede causar errores de conexión al descargar contenido a través de HTTPS. Ejecute Windows Update para instalar los parches necesarios.</value>
+    <value>Tu versión de .NET no es compatible con TLS 1.2. Esto puede provocar errores de conexión al descargar contenido a través de HTTPS. Ejecuta Windows Update para instalar los parches necesarios.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>El ensamblaje llamado "{0}" no pudo ser localizado.</value>
+    <value>No se ha podido localizar el ensamblado denominado «{0} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -307,11 +307,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Este comando de deshacer no puede ejecutarse hasta que se haya ejecutado el comando real.</value>
+    <value>Este comando de deshacer no se puede ejecutar hasta que se haya ejecutado el comando correspondiente.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>El subsistema Unix no ha podido procesar la solicitud. Es posible que sus derechos sean insuficientes.</value>
+    <value>El subsistema Unix no ha podido procesar la solicitud. Es posible que no tengas los derechos suficientes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
