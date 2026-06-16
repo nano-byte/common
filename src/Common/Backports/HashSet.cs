@@ -725,5 +725,5 @@ namespace System.Collections.Generic
     }
 }
 #else
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.Generic.HashSet<>))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(HashSet<>))]
 #endif

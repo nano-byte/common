@@ -726,5 +726,5 @@ namespace System.Collections.Generic
     }
 }
 #else
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Collections.Generic.SortedSet<>))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(SortedSet<>))]
 #endif

@@ -102,5 +102,5 @@ namespace System
     }
 }
 #else
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Progress<>))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(Progress<>))]
 #endif

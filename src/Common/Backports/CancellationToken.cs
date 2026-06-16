@@ -2,8 +2,6 @@
 // Licensed under the MIT License
 
 #if NET20
-using System.Threading;
-
 namespace System.Threading
 {
     /// <summary>
@@ -60,5 +58,5 @@ namespace System.Threading
     }
 }
 #else
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Threading.CancellationToken))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(CancellationToken))]
 #endif

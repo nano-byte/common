@@ -31,5 +31,5 @@ namespace System.Threading
     }
 }
 #else
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Threading.CancellationTokenRegistration))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(CancellationTokenRegistration))]
 #endif
