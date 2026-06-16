@@ -1,12 +1,16 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Drawing;
+using System.Runtime.Versioning;
+
 namespace NanoByte.Common.Drawing;
 
 /// <summary>
 /// Wraps an <see cref="Image"/> and provides and caches scaled versions of it.
 /// </summary>
 /// <param name="image">The base image.</param>
+[SupportedOSPlatform("windows6.1")]
 public sealed class ScalableImage(Image image) : IDisposable
 {
     private readonly Dictionary<SizeF, Image> _scaledImages = [];

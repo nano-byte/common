@@ -1,11 +1,15 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Drawing;
+using System.Runtime.Versioning;
+
 namespace NanoByte.Common.Drawing;
 
 /// <summary>
 /// Common fonts used in WinForms.
 /// </summary>
+[SupportedOSPlatform("windows6.1")]
 public static class DefaultFonts
 {
     /// <summary>

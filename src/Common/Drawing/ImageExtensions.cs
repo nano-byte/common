@@ -1,13 +1,16 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Versioning;
 
 namespace NanoByte.Common.Drawing;
 
 /// <summary>
 /// Provides extension methods for <see cref="Image"/>s.
 /// </summary>
+[SupportedOSPlatform("windows6.1")]
 public static class ImageExtensions
 {
     /// <summary>
