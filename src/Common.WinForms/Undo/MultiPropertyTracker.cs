@@ -30,7 +30,7 @@ public class MultiPropertyTracker
     private void SelectionChanged(object? sender, SelectedGridItemChangedEventArgs e)
     {
         // Only handle property selections
-        if (e.NewSelection == null || e.NewSelection.GridItemType != GridItemType.Property)
+        if (e.NewSelection is not { GridItemType: GridItemType.Property })
         {
             _oldValues = null;
             return;
