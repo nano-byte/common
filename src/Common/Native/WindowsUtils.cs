@@ -356,7 +356,7 @@ public static partial class WindowsUtils
             ProgramFilesX86 => Is64BitProcess
                 ? GetEnvironmentVariable("ProgramFiles(x86)") ?? @"C:\Program Files (x86)"
                 : GetFolderPath(ProgramFiles),
-            Windows => GetEnvironmentVariable("windir") ?? @"C:\Windows",
+            System.Environment.SpecialFolder.Windows => GetEnvironmentVariable("windir") ?? @"C:\Windows",
             CommonDesktopDirectory => Combine(GetEnvironmentVariable("PUBLIC") ?? @"C:\Users\Public", "Desktop"),
             CommonApplicationData => GetEnvironmentVariable("ProgramData") ?? @"C:\ProgramData",
             CommonStartMenu => Combine(GetFolderPath(CommonApplicationData), @"Microsoft\Windows\Start Menu"),
