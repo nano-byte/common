@@ -164,6 +164,7 @@ public sealed partial class ErrorReportForm : Form
 
         try
         {
+            // ReSharper disable once ShortLivedHttpClient
             using var httpClient = new HttpClient();
             using var content = new MultipartFormDataContent {{new StringContent(GenerateReport()), "file", "error-report.xml"}};
             using var response = await httpClient.PostAsync(_uploadUri, content);

@@ -26,11 +26,10 @@ public class WorkingDirectoryTest
         string original = Directory.GetCurrentDirectory();
 
         string changedTo;
-        string tempPath;
         using (var temp = new TemporaryWorkingDirectory("unit-tests"))
         {
             changedTo = Directory.GetCurrentDirectory();
-            tempPath = temp.Path;
+            _ = temp.Path;
             Directory.Exists(temp.Path).Should().BeTrue();
         }
 

@@ -109,7 +109,6 @@ public static class Msg
         {
             MsgSeverity.Warn => MessageBoxIcon.Warning,
             MsgSeverity.Error => MessageBoxIcon.Error,
-            MsgSeverity.Info => MessageBoxIcon.Information,
             _ => MessageBoxIcon.Information
         };
 
@@ -128,7 +127,6 @@ public static class Msg
         {
             MsgSeverity.Warn => TaskDialogIcon.Warning,
             MsgSeverity.Error => TaskDialogIcon.Error,
-            MsgSeverity.Info => TaskDialogIcon.Information,
             _ => TaskDialogIcon.Information
         };
 

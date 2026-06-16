@@ -54,6 +54,7 @@ public class StagedOperationTest
     [Fact]
     public void StageCannotBeCalledTwice()
     {
+        // ReSharper disable once NotDisposedResource
         var op = new MockStagedOperation();
         op.Stage();
 
@@ -63,6 +64,7 @@ public class StagedOperationTest
     [Fact]
     public void CommitWithoutStageThrows()
     {
+        // ReSharper disable once NotDisposedResource
         var op = new MockStagedOperation();
 
         op.Invoking(x => x.Commit()).Should().Throw<InvalidOperationException>();
@@ -71,6 +73,7 @@ public class StagedOperationTest
     [Fact]
     public void CommitCannotBeCalledTwice()
     {
+        // ReSharper disable once NotDisposedResource
         var op = new MockStagedOperation();
         op.Stage();
         op.Commit();

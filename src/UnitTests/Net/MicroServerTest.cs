@@ -16,6 +16,7 @@ public class MicroServerTest
         StressTest.Run(() =>
         {
             using var server = new MicroServer("file", content.ToStream());
+            // ReSharper disable once ShortLivedHttpClient
             using var client = new HttpClient();
             using var response = client.Send(new(HttpMethod.Get, server.FileUri), TestContext.Current.CancellationToken);
             response.EnsureSuccessStatusCode();

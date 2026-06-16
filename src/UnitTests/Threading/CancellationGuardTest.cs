@@ -42,6 +42,7 @@ public class CancellationGuardTest
     public void DisposeWithoutCancelDoesNotThrow()
     {
         using var cts = new CancellationTokenSource();
+        // ReSharper disable once NotDisposedResource
         var guard = new CancellationGuard(cts.Token);
 
         guard.Invoking(g => g.Dispose()).Should().NotThrow();
