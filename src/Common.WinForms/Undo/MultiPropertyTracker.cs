@@ -57,9 +57,8 @@ public class MultiPropertyTracker
     /// <param name="changedItem">The property grid item that was changed.</param>
     /// <exception cref="InvalidOperationException">No change was recorded yet.</exception>
     public IUndoCommand GetCommand(GridItem changedItem)
-        => new MultiPropertyChangedCommand(
+        => MoveOutOfNested(changedItem).ToMultiPropertyChangedCommand(
             _propertyGrid.SelectedObjects,
-            MoveOutOfNested(changedItem),
             _oldValues ?? throw new InvalidOperationException("No change was recorded yet."));
 
     /// <summary>
