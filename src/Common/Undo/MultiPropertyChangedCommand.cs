@@ -4,9 +4,9 @@
 namespace NanoByte.Common.Undo;
 
 /// <summary>
-/// An undo command that handles multiple changed properties - usually used with a <see cref="PropertyGrid"/>.
+/// An undo command that handles multiple changed properties.
 /// </summary>
-/// <seealso cref="MultiPropertyTracker"/>
+[RequiresUnreferencedCode("Performs reflection to get and set property values.")]
 public class MultiPropertyChangedCommand : PreExecutedCommand
 {
     private readonly object[] _targets;
@@ -29,18 +29,6 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
         if (targets.Length != oldValues.Length) throw new ArgumentException(Resources.TargetsOldValuesLength, nameof(targets));
         _newValue = newValue;
     }
-
-    /// <summary>
-    /// Initializes the command after the property was first changed.
-    /// </summary>
-    /// <param name="targets">The objects the <see cref="PropertyGrid.SelectedObject"/> is target at.</param>
-    /// <param name="gridItem">The grid item representing the property being changed.</param>
-    /// <param name="oldValues">The property's old values.</param>
-    [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "The arguments are passed on to a different overload of the constructor")]
-    [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Justification = "This is simply a comfort wrapper for extracting values from the event arguments")]
-    public MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object?[] oldValues)
-        : this(targets, gridItem.PropertyDescriptor!, oldValues, gridItem.Value)
-    {}
 
     /// <summary>
     /// Set the changed property value again.
