@@ -8,15 +8,12 @@ namespace NanoByte.Common.Undo;
 /// </summary>
 public class MultiPropertyTracker
 {
-    #region Variables
     /// <summary>The property grid being tracked.</summary>
     private readonly PropertyGrid _propertyGrid;
 
     /// <summary>Contains backups of property values.</summary>
     private object?[]? _oldValues;
-    #endregion
 
-    #region Constructor
     /// <summary>
     /// Creates a new multi-property tracker.
     /// </summary>
@@ -26,9 +23,7 @@ public class MultiPropertyTracker
         _propertyGrid = propertyGrid ?? throw new ArgumentNullException(nameof(propertyGrid));
         propertyGrid.SelectedGridItemChanged += SelectionChanged;
     }
-    #endregion
 
-    #region Events
     /// <summary>
     /// Reacts to any focus change in the <see cref="PropertyGrid"/> and creates backups of the current values before the user can change them.
     /// </summary>
@@ -55,9 +50,7 @@ public class MultiPropertyTracker
             _oldValues[i] = item.GetType().GetProperty(property)!.GetValue(item, null);
         }
     }
-    #endregion
 
-    #region Command
     /// <summary>
     /// Creates an undo command representing a property change the <see cref="PropertyGrid"/> has just performed.
     /// </summary>
@@ -68,9 +61,7 @@ public class MultiPropertyTracker
             _propertyGrid.SelectedObjects,
             MoveOutOfNested(changedItem),
             _oldValues ?? throw new InvalidOperationException("No change was recorded yet."));
-    #endregion
 
-    #region Helpers
     /// <summary>
     /// Moves up a hierarchy of nested properties to the top element that is still a property.
     /// </summary>
@@ -80,5 +71,4 @@ public class MultiPropertyTracker
             item = item.Parent;
         return item;
     }
-    #endregion
 }

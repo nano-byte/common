@@ -9,14 +9,11 @@ namespace NanoByte.Common.Undo;
 /// <seealso cref="MultiPropertyTracker"/>
 public class MultiPropertyChangedCommand : PreExecutedCommand
 {
-    #region Variables
     private readonly object[] _targets;
     private readonly PropertyDescriptor _property;
     private readonly object?[] _oldValues;
     private readonly object? _newValue;
-    #endregion
 
-    #region Constructor
     /// <summary>
     /// Initializes the command after the properties were first changed.
     /// </summary>
@@ -44,11 +41,7 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
     public MultiPropertyChangedCommand(object[] targets, GridItem gridItem, object?[] oldValues)
         : this(targets, gridItem.PropertyDescriptor!, oldValues, gridItem.Value)
     {}
-    #endregion
 
-    //--------------------//
-
-    #region Undo / Redo
     /// <summary>
     /// Set the changed property value again.
     /// </summary>
@@ -68,5 +61,4 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
             // Use reflection to get the specific property for each object and set the corresponding old value for each
             _targets[i].GetType().GetProperty(_property.Name)!.SetValue(_targets[i], _oldValues[i], null);
     }
-    #endregion
 }
