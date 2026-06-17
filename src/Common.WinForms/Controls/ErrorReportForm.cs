@@ -46,16 +46,7 @@ public sealed partial class ErrorReportForm : Form
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
         Shown += delegate { this.SetForegroundWindow(); };
 
-        // A missing file as the root is more important than the secondary exceptions it causes
-        if (exception.InnerException is FileNotFoundException)
-            exception = exception.InnerException;
-
-        // Make the message simpler for missing files
-        detailsBox.Text = exception is FileNotFoundException ? exception.Message.Replace("\n", Environment.NewLine) : exception.ToString();
-
-        // Append inner exceptions
-        if (exception.InnerException != null)
-            detailsBox.Text += Environment.NewLine + Environment.NewLine + exception.InnerException;
+        detailsBox.Text = exception.ToString();
     }
 
     private static readonly object _monitoringLock = new();
