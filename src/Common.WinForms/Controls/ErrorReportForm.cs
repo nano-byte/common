@@ -2,15 +2,11 @@
 // Licensed under the MIT License
 
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using NanoByte.Common.Info;
 using NanoByte.Common.Native;
-using NanoByte.Common.Storage;
 
 #if NET20 || NET40
 using System.Net;
-#else
-using System.Net.Http;
+using NanoByte.Common.Storage;
 #endif
 
 namespace NanoByte.Common.Controls;
@@ -73,19 +69,11 @@ public sealed partial class ErrorReportForm : Form
         AppDomain.CurrentDomain.UnhandledException += (_, e) =>
         {
             var exception = e.ExceptionObject as Exception ?? new Exception("Unknown error");
-            if (ShouldReport(exception)) Report(exception, uploadUri);
+            if (ErrorReport.ShouldReport(exception)) Report(exception, uploadUri);
             else ErrorBox.Show(null, exception);
             Process.GetCurrentProcess().Kill();
         };
     }
-
-    private static bool ShouldReport(Exception exception)
-        => !IsExternalProblem(exception)
-        && !IsExternalProblem(exception.InnerException);
-
-    private static bool IsExternalProblem(Exception? ex)
-        => ex is ExternalException or SEHException or OutOfMemoryException
-        || (ex is FileNotFoundException && ex.Message.Contains("PublicKeyToken="));
 
     /// <summary>
     /// Displays the error reporting form.
@@ -128,7 +116,7 @@ public sealed partial class ErrorReportForm : Form
         };
 
         using var tempFile = new TemporaryFile("error-report");
-        File.WriteAllText(tempFile, GenerateReport());
+        File.WriteAllText(tempFile, ErrorReport.Generate(_exception, commentBox.Text).ToXmlStringAnonymized());
         webClient.UploadFileAsync(_uploadUri, tempFile);
     }
 #else
@@ -139,13 +127,8 @@ public sealed partial class ErrorReportForm : Form
 
         try
         {
-            // ReSharper disable once ShortLivedHttpClient
-            using var httpClient = new HttpClient();
-            using var content = new MultipartFormDataContent {{new StringContent(GenerateReport()), "file", "error-report.xml"}};
-            using var response = await httpClient.PostAsync(_uploadUri, content);
-            response.EnsureSuccessStatusCode();
-
-            string message = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
+            var report = ErrorReport.Generate(_exception, commentBox.Text);
+            string message = await report.SendAsync(_uploadUri);
             Msg.Inform(this, string.IsNullOrWhiteSpace(message) ? Resources.ErrorReportSent : message, MsgSeverity.Info);
             Close();
         }
@@ -159,19 +142,4 @@ public sealed partial class ErrorReportForm : Form
 #endif
 
     private void buttonCancel_Click(object? sender, EventArgs e) => Close();
-
-    private string GenerateReport()
-    {
-        string report = new ErrorReport
-        {
-            Application = AppInfo.Current,
-            OS = OSInfo.Current,
-            Exception = new ExceptionInfo(_exception),
-            Log = Log.GetBuffer(),
-            Comments = commentBox.Text
-        }.ToXmlString();
-        return Environment.UserName.Length > 1
-            ? report.Replace(Environment.UserName, "[USERNAME]")
-            : report;
-    }
 }
