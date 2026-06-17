@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build config -->
+  <PropertyGroup>
+    <AssemblyName>NanoByte.Common.Samples.EtoForms</AssemblyName>
+    <RootNamespace>NanoByte.Common.Samples.EtoForms</RootNamespace>
+    <Description>Samples for NanoByte.Common.EtoForms.</Description>
+    <SignAssembly>False</SignAssembly>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <IsPackable>False</IsPackable>
+    <DeterministicSourcePaths>False</DeterministicSourcePaths>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'=='Windows_NT'">
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>True</UseWindowsForms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'!='Windows_NT'">
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common.EtoForms\Common.EtoForms.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(OS)'=='Windows_NT'">
+    <PackageReference Include="Eto.Platform.Windows" Version="2.11.0" />
+    <Using Remove="System.Drawing" />
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <PackageReference Include="Eto.Platform.Mac64" Version="2.11.0" />
+    <Content Include="Icon.icns" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <PackageReference Include="Eto.Platform.Gtk" Version="2.11.0" />
+  </ItemGroup>
+
+</Project>

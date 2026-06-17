@@ -4,11 +4,14 @@
   </Folder>
   <Folder Name="/Samples/">
     <Project Path="Samples/AnsiCli/AnsiCli.csproj" />
+    <Project Path="Samples/EtoForms/EtoForms.csproj" />
+    <Project Path="Samples/EtoForms.Worker/EtoForms.Worker.csproj" />
     <Project Path="Samples/WinForms/WinForms.csproj" />
     <Project Path="Samples/WinForms.Worker/WinForms.Worker.csproj" />
   </Folder>
   <Project Path="Common/Common.csproj" />
   <Project Path="Common.AnsiCli/Common.AnsiCli.csproj" />
+  <Project Path="Common.EtoForms/Common.EtoForms.csproj" />
   <Project Path="Common.WinForms/Common.WinForms.csproj" />
   <Project Path="UnitTests/UnitTests.csproj" />
 </Solution>

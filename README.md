@@ -20,6 +20,9 @@
 - progress reporting and
 - data binding.
 
+[![NanoByte.Common.EtoForms](https://img.shields.io/nuget/v/NanoByte.Common.EtoForms.svg)](https://www.nuget.org/packages/NanoByte.Common.EtoForms/)  
+**NanoByte.Common.EtoForms** adds cross-platform GUI controls powered by [Eto.Forms](https://github.com/picoe/Eto).
+
 ## Building
 
 The source code is in [`src/`](src/), config for building the API documentation is in [`doc/`](doc/) and generated build artifacts are placed in `artifacts/`. The source code does not contain version numbers. Instead the version is determined during CI using [GitVersion](https://gitversion.net/).
