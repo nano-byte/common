@@ -19,3 +19,5 @@ This website documents the [API](xref:NanoByte.Common) of the NanoByte.Common Nu
 
 - [progress reporting](xref:NanoByte.Common.Tasks) and
 - [data binding](xref:NanoByte.Common.Controls).
+
+**[NanoByte.Common.EtoForms](https://www.nuget.org/packages/NanoByte.Common.EtoForms/)** adds cross-platform GUI controls powered by [Eto.Forms](https://github.com/picoe/Eto).
