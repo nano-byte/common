@@ -6,22 +6,11 @@ namespace NanoByte.Common.Tasks;
 /// <summary>
 /// Uses simple WinForms dialog boxes to inform the user about the progress of tasks.
 /// </summary>
+/// <param name="owner">The parent control for any dialogs created by the handler; <c>null</c> to show them parentless (e.g. for an initially headless tool, in which case it must be used from an STA thread).</param>
 /// <remarks>This class is thread-safe.</remarks>
 [MustDisposeResource]
-public class DialogTaskHandler : GuiTaskHandlerBase
+public class DialogTaskHandler(Control? owner = null) : GuiTaskHandlerBase
 {
-    private readonly Control _owner;
-
-    /// <summary>
-    /// Creates a new dialog task handler.
-    /// Registers a <see cref="Log.Handler"/>.
-    /// </summary>
-    /// <param name="owner">The parent window for any dialogs created by the handler.</param>
-    public DialogTaskHandler(Control owner)
-    {
-        _owner = owner;
-    }
-
     /// <inheritdoc/>
     public override void RunTask(ITask task)
     {
@@ -32,10 +21,10 @@ public class DialogTaskHandler : GuiTaskHandlerBase
         Log.Info(task.Name);
 
         Exception? ex = null;
-        _owner.Invoke(() =>
+        Invoke(() =>
         {
             using var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource);
-            dialog.ShowDialog(_owner);
+            dialog.ShowDialog(owner);
             ex = dialog.Exception;
         });
         ex?.Rethrow();
@@ -52,7 +41,7 @@ public class DialogTaskHandler : GuiTaskHandlerBase
         var severity = defaultAnswer ? MsgSeverity.Info : MsgSeverity.Warn;
 
         Log.Debug($"Question: {question}");
-        switch (_owner.Invoke(() => Msg.YesNoCancel(_owner, question, severity)))
+        switch (Invoke(() => Msg.YesNoCancel(owner, question, severity)))
         {
             case DialogResult.Yes:
                 Log.Debug("Answer: Yes");
@@ -75,7 +64,7 @@ public class DialogTaskHandler : GuiTaskHandlerBase
         if (message == null) throw new ArgumentNullException(nameof(message));
         #endregion
 
-        _owner.Invoke(() => OutputBox.Show(_owner, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
+        Invoke(() => OutputBox.Show(owner, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
     }
 
     /// <inheritdoc/>
@@ -86,7 +75,7 @@ public class DialogTaskHandler : GuiTaskHandlerBase
         if (data == null) throw new ArgumentNullException(nameof(data));
         #endregion
 
-        _owner.Invoke(() => OutputGridBox.Show(_owner, title, data));
+        Invoke(() => OutputGridBox.Show(owner, title, data));
     }
 
     public override void Error(Exception exception)
@@ -95,6 +84,21 @@ public class DialogTaskHandler : GuiTaskHandlerBase
         if (exception == null) throw new ArgumentNullException(nameof(exception));
         #endregion
 
-        _owner.Invoke(() => ErrorBox.Show(_owner, exception, LogRtf));
+        Invoke(() => ErrorBox.Show(owner, exception, LogRtf));
     }
+
+    private void Invoke(Action action)
+    {
+        if (owner == null) action();
+        else owner.Invoke(action);
+    }
+
+    private TResult Invoke<TResult>(Func<TResult> action)
+        => owner == null
+            ? action()
+            :
+#if NETFRAMEWORK
+                (TResult)
+#endif
+                owner.Invoke(action);
 }

@@ -14,7 +14,7 @@ internal sealed partial class TaskRunDialog : Form
     private readonly Thread _taskThread;
     private readonly ICredentialProvider? _credentialProvider;
     private readonly CancellationTokenSource _cancellationTokenSource;
-    private readonly Progress<TaskSnapshot> _progress = new();
+    private readonly Progress<TaskSnapshot> _progress;
 
     /// <summary>
     /// Creates a new task tracking dialog.
@@ -34,6 +34,8 @@ internal sealed partial class TaskRunDialog : Form
         buttonCancel.Text = Resources.Cancel;
         buttonCancel.Enabled = task.CanCancel;
         Text = task.Name;
+
+        _progress = new(); // Capture WindowsFormsSynchronizationContext created above
 
         _task = task;
         _taskThread = new Thread(RunTask);
