@@ -73,7 +73,29 @@ public class MainForm : Form
             await Task.Delay(5000); // End message loop and close form after 5s
         };
 
-        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton]);
+        var taskButton = new Button {Text = "Run task in dialog", Location = new(10, 220), Width = 150};
+        taskButton.Click += delegate
+        {
+            using var handler = new DialogTaskHandler(this);
+            try
+            {
+                handler.RunTask(new ActionTask("Sample task", cancellationToken =>
+                {
+                    for (int i = 0; i < 30; i++)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        Thread.Sleep(100);
+                    }
+                }));
+                Msg.Inform(this, "Task completed", MsgSeverity.Info);
+            }
+            catch (OperationCanceledException)
+            {
+                Msg.Inform(this, "Task canceled", MsgSeverity.Warn);
+            }
+        };
+
+        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton, taskButton]);
 
         Shown += async delegate
         {
