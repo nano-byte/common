@@ -20,12 +20,9 @@ namespace NanoByte.Common.Controls;
 /// </summary>
 public sealed partial class ErrorReportForm : Form
 {
-    #region Variables
     private readonly Exception _exception;
     private readonly Uri _uploadUri;
-    #endregion
 
-    #region Constructor
     /// <summary>
     /// Prepares reporting an error.
     /// </summary>
@@ -60,9 +57,7 @@ public sealed partial class ErrorReportForm : Form
         if (exception.InnerException != null)
             detailsBox.Text += Environment.NewLine + Environment.NewLine + exception.InnerException;
     }
-    #endregion
 
-    #region Static access
     private static readonly object _monitoringLock = new();
 
     /// <summary>
@@ -113,11 +108,7 @@ public sealed partial class ErrorReportForm : Form
         if (Application.MessageLoop) form.ShowDialog();
         else Application.Run(form);
     }
-    #endregion
 
-    //--------------------//
-
-    #region Buttons
 #if NET20 || NET40
     private void buttonReport_Click(object? sender, EventArgs e)
     {
@@ -177,9 +168,7 @@ public sealed partial class ErrorReportForm : Form
 #endif
 
     private void buttonCancel_Click(object? sender, EventArgs e) => Close();
-    #endregion
 
-    #region Generate report
     private string GenerateReport()
     {
         string report = new ErrorReport
@@ -194,5 +183,4 @@ public sealed partial class ErrorReportForm : Form
             ? report.Replace(Environment.UserName, "[USERNAME]")
             : report;
     }
-    #endregion
 }
