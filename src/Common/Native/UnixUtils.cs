@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 
 #if NET
+using System.Diagnostics;
 using Mono.Unix;
 using Mono.Unix.Native;
 #endif
@@ -121,6 +122,35 @@ public static class UnixUtils
 #endif
         }
     }
+    #endregion
+
+    #region Exec
+#if NET
+    /// <summary>
+    /// Replaces the currently running process with a new one.
+    /// </summary>
+    /// <param name="path">The path or file name (resolved via <c>PATH</c> if it contains no slash) of the executable to run.</param>
+    /// <param name="arguments">The command-line arguments to pass to the executable .</param>
+    /// <remarks>Inherits the current process' environment variables and working directory. Does not return on success; set any desired environment variables and <see cref="Environment.CurrentDirectory"/> beforehand.</remarks>
+    /// <exception cref="IOException">The call failed (e.g., the executable was not found).</exception>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    [DoesNotReturn]
+    public static void Exec([Localizable(false)] string path, [Localizable(false)] params string[] arguments)
+    {
+            if (path == null) throw new ArgumentNullException(nameof(path));
+
+            // argv must be null-terminated
+            string?[] argv = new string?[arguments.Length + 2];
+            argv[0] = path;
+            Array.Copy(arguments, 0, argv, 1, arguments.Length);
+            argv[^1] = null;
+
+            if (Syscall.execvp(path, argv!) == -1)
+                throw new UnixIOException(Stdlib.GetLastError());
+
+            throw new UnreachableException();
+    }
+#endif
     #endregion
 
     #region Links
