@@ -22,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common.WinForms\Common.WinForms.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'!='net10.0-windows'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net48'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <!-- Global usings -->
