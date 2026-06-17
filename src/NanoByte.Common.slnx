@@ -5,6 +5,7 @@
   <Folder Name="/Samples/">
     <Project Path="Samples/AnsiCli/AnsiCli.csproj" />
     <Project Path="Samples/WinForms/WinForms.csproj" />
+    <Project Path="Samples/WinForms.Worker/WinForms.Worker.csproj" />
   </Folder>
   <Project Path="Common/Common.csproj" />
   <Project Path="Common.AnsiCli/Common.AnsiCli.csproj" />

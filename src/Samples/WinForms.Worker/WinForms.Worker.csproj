@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build config -->
+  <PropertyGroup>
+    <AssemblyName>NanoByte.Common.Samples.WinForms.Worker</AssemblyName>
+    <RootNamespace>NanoByte.Common.Samples.WinForms.Worker</RootNamespace>
+    <Description>Worker-thread sample for NanoByte.Common.WinForms.</Description>
+    <TargetFrameworks>net48;net10.0-windows</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <SignAssembly>False</SignAssembly>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <IsPackable>False</IsPackable>
+    <DeterministicSourcePaths>False</DeterministicSourcePaths>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-windows'">
+    <!-- Run nullability analysis only on annotated frameworks -->
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common.WinForms\Common.WinForms.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net48'">
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <!-- Global usings -->
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
+
+</Project>
