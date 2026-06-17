@@ -4,7 +4,7 @@
 using System.Xml.Serialization;
 using NanoByte.Common.Info;
 
-namespace NanoByte.Common.Controls;
+namespace NanoByte.Common;
 
 /// <summary>
 /// Wraps information about an crash in a serializer-friendly format.
