@@ -18,7 +18,6 @@ namespace NanoByte.Common.Controls;
 /// <summary>
 /// Presents the user with a friendly interface in case of an error, offering to report it to the developers.
 /// </summary>
-/// <remarks>This class should only be used by <see cref="System.Windows.Forms"/> applications.</remarks>
 public sealed partial class ErrorReportForm : Form
 {
     #region Variables
@@ -34,10 +33,8 @@ public sealed partial class ErrorReportForm : Form
     /// <param name="uploadUri">The URI to upload error reports to.</param>
     private ErrorReportForm(Exception exception, Uri uploadUri)
     {
-        #region Sanity checks
-        if (exception == null) throw new ArgumentNullException(nameof(exception));
-        if (uploadUri == null) throw new ArgumentNullException(nameof(uploadUri));
-        #endregion
+        _exception = exception ?? throw new ArgumentNullException(nameof(exception));
+        _uploadUri = uploadUri ?? throw new ArgumentNullException(nameof(uploadUri));
 
         InitializeComponent();
         Font = DefaultFonts.Modern;
@@ -52,8 +49,6 @@ public sealed partial class ErrorReportForm : Form
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
         Shown += delegate { this.SetForegroundWindow(); };
 
-        _exception = exception;
-
         // A missing file as the root is more important than the secondary exceptions it causes
         if (exception.InnerException is FileNotFoundException)
             exception = exception.InnerException;
@@ -64,8 +59,6 @@ public sealed partial class ErrorReportForm : Form
         // Append inner exceptions
         if (exception.InnerException != null)
             detailsBox.Text += Environment.NewLine + Environment.NewLine + exception.InnerException;
-
-        _uploadUri = uploadUri;
     }
     #endregion
 

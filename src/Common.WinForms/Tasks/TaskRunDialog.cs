@@ -24,9 +24,7 @@ internal sealed partial class TaskRunDialog : Form
     /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
     public TaskRunDialog(ITask task, ICredentialProvider? credentialProvider, CancellationTokenSource cancellationTokenSource)
     {
-        #region Sanity checks
-        if (task == null) throw new ArgumentNullException(nameof(task));
-        #endregion
+        _task = task ?? throw new ArgumentNullException(nameof(task));
 
         InitializeComponent();
         Font = DefaultFonts.Modern;
@@ -37,7 +35,6 @@ internal sealed partial class TaskRunDialog : Form
 
         _progress = new(); // Capture WindowsFormsSynchronizationContext created above
 
-        _task = task;
         _taskThread = new Thread(RunTask);
         _cancellationTokenSource = cancellationTokenSource;
         _credentialProvider = credentialProvider;
