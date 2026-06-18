@@ -8,19 +8,11 @@ namespace NanoByte.Common.Undo;
 /// </summary>
 public class PreExecutedCompositeCommandTest
 {
-    private class MockCommand : IUndoCommand
+    private class MockCommand(Action executeCallback, Action undoCallback) : IUndoCommand
     {
-        private readonly Action _executeCallback, _undoCallback;
+        public void Execute() => executeCallback();
 
-        public MockCommand(Action executeCallback, Action undoCallback)
-        {
-            _executeCallback = executeCallback;
-            _undoCallback = undoCallback;
-        }
-
-        public void Execute() => _executeCallback();
-
-        public void Undo() => _undoCallback();
+        public void Undo() => undoCallback();
     }
 
     [Fact]
