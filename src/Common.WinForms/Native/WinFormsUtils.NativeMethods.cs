@@ -54,51 +54,5 @@ partial class WinFormsUtils
         [DllImport("user32")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool ReleaseCapture();
-
-        [DllImport("user32")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool RegisterTouchWindow(IntPtr hWnd, uint ulFlags);
-
-        [DllImport("user32")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetTouchInputInfo(IntPtr hTouchInput, int cInputs, [In, Out] TouchInput[] pInputs, int cbSize);
-
-        [Flags]
-        public enum TouchEvents
-        {
-            Move = 0x0001, // TOUCHEVENTF_MOVE
-            Down = 0x0002, // TOUCHEVENTF_DOWN
-            Up = 0x0004, // TOUCHEVENTF_UP
-            InRange = 0x0008, // TOUCHEVENTF_INRANGE
-            Primary = 0x0010, // TOUCHEVENTF_PRIMARY
-            NoCoalesce = 0x0020, // TOUCHEVENTF_NOCOALESCE
-            Palm = 0x0080 // TOUCHEVENTF_PALM
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
-        public struct TouchInput
-        {
-            public int x, y;
-            public IntPtr hSource;
-            public int dwID;
-            public TouchEvents dwFlags;
-            public TouchEventMask dwMask;
-            public int dwTime;
-            public IntPtr dwExtraInfo;
-            public int cxContact;
-            public int cyContact;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
-        private struct Points
-        {
-            public short x, y;
-        }
-
-        [DllImport("user32")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern void CloseTouchInputHandle(IntPtr lParam);
     }
 }
