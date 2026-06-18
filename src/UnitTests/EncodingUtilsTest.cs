@@ -29,10 +29,10 @@ public class EncodingUtilsTest
     }
 
     [Fact]
-    public void TestBase32Encode() => new byte[] {65, 66}.Base32Encode().Should().Be("IFBA");
+    public void TestBase32Encode() => "AB"u8.ToArray().Base32Encode().Should().Be("IFBA");
 
     [Fact]
-    public void TestBase16Encode() => new byte[] {65, 66}.Base16Encode().Should().Be("4142");
+    public void TestBase16Encode() => "AB"u8.ToArray().Base16Encode().Should().Be("4142");
 
     [Fact]
     public void TestBase16Decode() => "4142".Base16Decode().Should().Equal(65, 66);
