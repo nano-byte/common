@@ -41,7 +41,7 @@ public class WaitTaskTest
             }
         }, TestContext.Current.CancellationToken);
 
-        // Start and then cancel the download
+        // Start and then cancel the task
         Thread.Sleep(100);
         cancellationTokenSource.Cancel();
         await waitTask;
@@ -67,7 +67,7 @@ public class WaitTaskTest
             }
         }, TestContext.Current.CancellationToken);
 
-        // Start and then cancel the download
+        // Start and then cancel the task
         Thread.Sleep(100);
         cancellationTokenSource.Cancel();
         await waitTask;

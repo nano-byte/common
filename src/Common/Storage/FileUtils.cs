@@ -880,7 +880,7 @@ public static class FileUtils
     /// Marks a file as Unix-executable or not Unix-executable. Only works on Unixoid systems!
     /// </summary>
     /// <param name="path">The file to mark as executable or not executable.</param>
-    /// <param name="executable"><c>true</c> to mark the file as executable, <c>true</c> to mark it as not executable.</param>
+    /// <param name="executable"><c>true</c> to mark the file as executable, <c>false</c> to mark it as not executable.</param>
     /// <exception cref="FileNotFoundException"><paramref name="path"/> points to a file that does not exist or cannot be accessed.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to change the file's properties.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a non-Unixoid system.</exception>

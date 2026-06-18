@@ -130,7 +130,7 @@ public static class UnixUtils
     /// Replaces the currently running process with a new one.
     /// </summary>
     /// <param name="path">The path or file name (resolved via <c>PATH</c> if it contains no slash) of the executable to run.</param>
-    /// <param name="arguments">The command-line arguments to pass to the executable .</param>
+    /// <param name="arguments">The command-line arguments to pass to the executable.</param>
     /// <remarks>Inherits the current process' environment variables and working directory. Does not return on success; set any desired environment variables and <see cref="Environment.CurrentDirectory"/> beforehand.</remarks>
     /// <exception cref="IOException">The call failed (e.g., the executable was not found).</exception>
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -346,7 +346,7 @@ public static class UnixUtils
     /// Marks a file as Unix-executable or not Unix-executable.
     /// </summary>
     /// <param name="path">The file to mark as executable or not executable.</param>
-    /// <param name="executable"><c>true</c> to mark the file as executable, <c>true</c> to mark it as not executable.</param>
+    /// <param name="executable"><c>true</c> to mark the file as executable, <c>false</c> to mark it as not executable.</param>
     /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
     /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
     public static void SetExecutable([Localizable(false)] string path, bool executable)

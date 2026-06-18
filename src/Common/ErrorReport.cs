@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace NanoByte.Common;
 
 /// <summary>
-/// Wraps information about an crash in a serializer-friendly format.
+/// Wraps information about a crash in a serializer-friendly format.
 /// </summary>
 // Note: Must be public, not internal, so XML Serialization will work
 [XmlRoot("error-report"), XmlType("error-report")]
