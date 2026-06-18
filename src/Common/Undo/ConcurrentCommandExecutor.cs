@@ -15,7 +15,11 @@ public class ConcurrentCommandExecutor : ICommandExecutor
         _inner = inner;
     }
 
-    private readonly object _lock = new();
+#if NET9_0_OR_GREATER
+    private static readonly Lock _lock = new();
+#else
+    private static readonly object _lock = new();
+#endif
 
     /// <inheritdoc/>
     public void Execute(IUndoCommand command)

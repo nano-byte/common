@@ -12,7 +12,12 @@ namespace NanoByte.Common.Streams;
 /// <remarks>Useful for processing <see cref="Process.StandardOutput"/> and <see cref="Process.StandardError"/> without risking deadlocks.</remarks>
 public class StreamConsumer
 {
-    private readonly object _lock = new();
+#if NET9_0_OR_GREATER
+    private static readonly Lock _lock = new();
+#else
+    private static readonly object _lock = new();
+#endif
+
     private readonly Queue<string> _queue = [];
     private readonly StreamReader _reader;
     private readonly Thread _thread;

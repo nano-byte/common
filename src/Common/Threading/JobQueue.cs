@@ -9,7 +9,12 @@ namespace NanoByte.Common.Threading;
 /// <param name="cancellationToken">Used to stop processing jobs.</param>
 public class JobQueue(CancellationToken cancellationToken = default)
 {
-    private readonly object _lock = new();
+#if NET9_0_OR_GREATER
+    private static readonly Lock _lock = new();
+#else
+    private static readonly object _lock = new();
+#endif
+
     private readonly Queue<Action> _jobs = [];
     private bool _threadRunning;
 
