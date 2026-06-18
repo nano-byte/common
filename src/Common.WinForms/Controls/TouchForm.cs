@@ -10,18 +10,24 @@ using System.Security.Permissions;
 namespace NanoByte.Common.Controls;
 
 /// <summary>
-/// Represents a window that reacts to touch input on Windows 7 or newer.
+/// Represents a window that reacts to touch gestures on Windows 7 or newer.
 /// </summary>
 public class TouchForm : Form, ITouchControl
 {
     /// <inheritdoc/>
-    public event EventHandler<TouchEventArgs>? TouchDown;
+    public event EventHandler<PanGestureEventArgs>? Pan;
 
     /// <inheritdoc/>
-    public event EventHandler<TouchEventArgs>? TouchUp;
+    public event EventHandler<ZoomGestureEventArgs>? Zoom;
 
     /// <inheritdoc/>
-    public event EventHandler<TouchEventArgs>? TouchMove;
+    public event EventHandler<RotateGestureEventArgs>? Rotate;
+
+    /// <inheritdoc/>
+    public event EventHandler<TapGestureEventArgs>? Tap;
+
+    /// <inheritdoc/>
+    public event EventHandler<PressAndTapGestureEventArgs>? PressAndTap;
 
     protected override CreateParams CreateParams
     {
@@ -39,7 +45,7 @@ public class TouchForm : Form, ITouchControl
     protected override void CreateHandle()
     {
         base.CreateHandle();
-        WinFormsUtils.RegisterTouchWindow(this);
+        WinFormsUtils.RegisterGestureWindow(this);
     }
 
 #if NETFRAMEWORK
@@ -47,7 +53,9 @@ public class TouchForm : Form, ITouchControl
 #endif
     protected override void WndProc(ref Message m)
     {
-        WinFormsUtils.HandleTouchMessage(ref m, this, TouchDown, TouchMove, TouchUp);
+        bool handled = WinFormsUtils.HandleGestureMessage(ref m, this, Pan, Zoom, Rotate, Tap, PressAndTap);
         base.WndProc(ref m);
+        if (handled)
+            m.Result = new IntPtr(1);
     }
 }
