@@ -99,8 +99,13 @@ public sealed partial class ErrorReportForm : Form
         components ??= new Container();
         components.Add(webClient);
 
+        var tempFile = new TemporaryFile("error-report");
+        File.WriteAllText(tempFile, ErrorReport.Generate(_exception, commentBox.Text).ToXmlStringAnonymized());
+
         webClient.UploadFileCompleted += (_, uploadEventArgs) =>
         {
+            tempFile.Dispose();
+
             Cursor = Cursors.Default;
             if (uploadEventArgs.Error == null)
             {
@@ -114,9 +119,6 @@ public sealed partial class ErrorReportForm : Form
                 commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
             }
         };
-
-        using var tempFile = new TemporaryFile("error-report");
-        File.WriteAllText(tempFile, ErrorReport.Generate(_exception, commentBox.Text).ToXmlStringAnonymized());
         webClient.UploadFileAsync(_uploadUri, tempFile);
     }
 #else
