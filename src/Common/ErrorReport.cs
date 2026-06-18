@@ -24,13 +24,13 @@ public class ErrorReport
     /// Information about the current application.
     /// </summary>
     [XmlElement("application")]
-    public AppInfo Application { get; set; }
+    public required AppInfo Application { get; set; }
 
     /// <summary>
     /// Information about the current operating system.
     /// </summary>
     [XmlElement("os")]
-    public OSInfo OS { get; set; }
+    public required OSInfo OS { get; set; }
 
     /// <summary>
     /// Information about the exception that occurred.
