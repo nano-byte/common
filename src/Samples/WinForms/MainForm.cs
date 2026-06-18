@@ -11,6 +11,8 @@ public class MainForm : Form
 {
     public MainForm()
     {
+        ClientSize = new(345, 280);
+
         var progressBar1 = new TaskProgressBar {Location = new(10, 10)};
         var progressBar2 = new TaskProgressBar {Location = new(10, 60)};
 
@@ -26,7 +28,20 @@ public class MainForm : Form
             OutputGridBox.Show(this, "Test", ["Test 1", "Test 2"]);
         };
 
-        var errorButton = new Button {Text = "Error", Location = new(170, 100)};
+        var treeButton = new Button {Text = "Tree", Location = new(170, 100)};
+        treeButton.Click += delegate
+        {
+            var data = new NamedCollection<TreeEntry>
+            {
+                new() {Name = "Fruit|Apple"},
+                new() {Name = "Fruit|Banana"},
+                new() {Name = "Vegetable|Carrot"},
+                new() {Name = "Vegetable|Potato", HighlightColor = Color.Green}
+            };
+            OutputTreeBox.Show(this, "Test", data);
+        };
+
+        var errorButton = new Button {Text = "Error", Location = new(250, 100)};
         errorButton.Click += delegate
         {
             var rtf = new RtfBuilder();
@@ -95,7 +110,7 @@ public class MainForm : Form
             }
         };
 
-        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton, taskButton]);
+        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, treeButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton, taskButton]);
 
         Shown += async delegate
         {
@@ -116,5 +131,11 @@ public class MainForm : Form
             }
             progressBar2.Report(new TaskSnapshot(TaskState.Complete));
         };
+    }
+
+    private sealed class TreeEntry : INamed, IHighlightColor
+    {
+        public string Name { get; set; } = "";
+        public Color HighlightColor { get; init; }
     }
 }
