@@ -55,7 +55,7 @@ public class ForEachTaskTest
     [Fact]
     public void TestRollbackCancellation()
     {
-        var cts = new CancellationTokenSource();
+        using var cts = new CancellationTokenSource();
 
         var applyCalledFor = new List<int>();
         var rollbackCalledFor = new List<int>();

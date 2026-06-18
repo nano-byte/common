@@ -56,7 +56,7 @@ public class DownloadFileTest : IDisposable
         _server.Slow = true;
         var download = new DownloadFile(_server.FileUri, stream => stream.ReadAll());
         bool exceptionThrown = false;
-        var cancellationTokenSource = new CancellationTokenSource();
+        using var cancellationTokenSource = new CancellationTokenSource();
         var downloadTask = Task.Run(() =>
         {
             try

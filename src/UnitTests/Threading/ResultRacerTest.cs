@@ -20,11 +20,12 @@ public class ResultRacerTest
     [Fact(Skip = "Slow")]
     public void SyncCancellation()
     {
+        using var alreadyCancelled = new CancellationTokenSource(millisecondsDelay: 0);
         var racer = ResultRacer.For([1], (i, _) =>
         {
             Thread.Sleep(100);
             return i;
-        }, new CancellationTokenSource(0).Token);
+        }, alreadyCancelled.Token);
         racer.Invoking(x => x.GetResult())
              .Should().Throw<OperationCanceledException>();
     }
@@ -43,11 +44,12 @@ public class ResultRacerTest
     [Fact(Skip = "Slow")]
     public async Task AsyncCancellation()
     {
+        using var alreadyCancelled = new CancellationTokenSource(millisecondsDelay: 0);
         var racer = ResultRacer.For([1], async (i, cancellationToken) =>
         {
             await Task.Delay(100, cancellationToken);
             return i;
-        }, new CancellationTokenSource(0).Token);
+        }, alreadyCancelled.Token);
         await racer.Awaiting(x => x.GetResultAsync())
                    .Should().ThrowAsync<OperationCanceledException>();
     }

@@ -548,10 +548,6 @@ public static partial class WindowsUtils
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
     public static long GetFileID([Localizable(false)] string path)
     {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        #endregion
-
         using var handle = NativeMethods.CreateFile(
             path ?? throw new ArgumentNullException(nameof(path)),
             FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);

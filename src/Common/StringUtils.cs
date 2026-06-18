@@ -298,8 +298,11 @@ public static class StringUtils
     [Pure]
     public static string GeneratePassword(int length)
     {
-        var generator = RandomNumberGenerator.Create();
-        byte[] array = new byte[(int)Math.Round(length * 3 / 4f)];
+#if !NET20 && !NET40
+        using
+#endif
+            var generator = RandomNumberGenerator.Create();
+        byte[] array = new byte[(int)Math.Round(length * 0.75f)];
         generator.GetBytes(array);
 
         // Use base64 encoding without '=' padding and with '-' instead of 'l'

@@ -39,7 +39,7 @@ public sealed class AsyncFormWrapper<T> : IDisposable
                 try
                 {
                     var form = init();
-                    var _ = form.Handle; // Force creation of handle without showing the form
+                    _ = form.Handle; // Force creation of handle without showing the form
                     formSource.SetResult(form);
                 }
                 catch (Exception e)

@@ -47,6 +47,6 @@ public static class EnumExtensions
     [Pure]
     public static TAttribute? GetEnumAttribute<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TAttribute>(this Enum target) where TAttribute : Attribute
         => target.GetType()
-                 .GetField((target ?? throw new ArgumentNullException(nameof(target))).ToString())
+                 .GetField(target.ToString())
                 ?.GetCustomAttribute<TAttribute>();
 }

@@ -304,8 +304,7 @@ public static class MathUtils
         double sum = 0;
         for (int i = 0; i < kernel.Length; i++)
         {
-            // ReSharper disable once PossibleLossOfFraction
-            double x = i - kernelSize / 2;
+            double x = i - kernelSize / 2.0;
             sum += kernel[i] = Exp(-x * x / (2 * sigma * sigma));
         }
 

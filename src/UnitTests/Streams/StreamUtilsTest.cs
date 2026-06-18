@@ -13,28 +13,30 @@ public class StreamUtilsTest
     [Fact]
     public void TestReadArray()
     {
-        new MemoryStream([1, 2, 3, 4, 5]).Read(3).Should().Equal(1, 2, 3);
+        using var stream = new MemoryStream([1, 2, 3, 4, 5]);
+        stream.Read(3).Should().Equal(1, 2, 3);
     }
 
     [Fact]
     public void TestReadSegment()
     {
         var segment = new ArraySegment<byte>(new byte[5], 1, 3);
-        _ = new MemoryStream([1, 2, 3, 4, 5]).Read(segment);
+        using var stream = new MemoryStream([1, 2, 3, 4, 5]);
+        _ = stream.Read(segment);
         segment.Should().Equal(1, 2, 3);
     }
 
     [Fact]
     public void TestReadAll()
     {
-        var stream = new MemoryStream([1, 2, 3]);
+        using var stream = new MemoryStream([1, 2, 3]);
         stream.ReadAll().Should().Equal(1, 2, 3);
     }
 
     [Fact]
     public void TestSkipSeekable()
     {
-        var stream = new MemoryStream([1, 2, 3, 4]);
+        using var stream = new MemoryStream([1, 2, 3, 4]);
         stream.Skip(2);
         stream.Read(2).Should().Equal(3, 4);
     }
@@ -42,7 +44,7 @@ public class StreamUtilsTest
     [Fact]
     public void TestSkipNonSeekable()
     {
-        var stream = new NonSeekableStream(new MemoryStream([1, 2, 3, 4]));
+        using var stream = new NonSeekableStream(new MemoryStream([1, 2, 3, 4]));
         stream.Skip(2);
         stream.Read(2).Should().Equal(3, 4);
     }
@@ -50,7 +52,7 @@ public class StreamUtilsTest
     [Fact]
     public static void TestWriteArray()
     {
-        var stream = new MemoryStream();
+        using var stream = new MemoryStream();
         stream.Write(1, 2, 3);
         stream.ReadAll().Should().Equal(1, 2, 3);
     }
@@ -58,7 +60,7 @@ public class StreamUtilsTest
     [Fact]
     public static void TestWriteSegment()
     {
-        var stream = new MemoryStream();
+        using var stream = new MemoryStream();
         stream.Write(new ArraySegment<byte>([1, 2, 3], 1, 2));
         stream.ReadAll().Should().Equal(2, 3);
     }
@@ -66,7 +68,7 @@ public class StreamUtilsTest
     [Fact]
     public void TestAsArrayCopy()
     {
-        var stream = new MemoryStream();
+        using var stream = new MemoryStream();
         stream.Write(1, 2, 3);
         stream.AsArray().Should().Equal(1, 2, 3);
     }
@@ -75,19 +77,19 @@ public class StreamUtilsTest
     public void TestAsArrayNoCopy()
     {
         byte[] buffer = [1, 2, 3];
-        var stream = new MemoryStream(buffer, 0, buffer.Length, true, true);
+        using var stream = new MemoryStream(buffer, 0, buffer.Length, true, true);
         stream.AsArray().Should().BeSameAs(buffer);
     }
 
     [Fact]
     public void TestToMemory()
     {
-        var stream = new MemoryStream();
-        stream.Write(1,2,3);
+        using var stream = new MemoryStream();
+        stream.Write(1, 2, 3);
 
-        stream = stream.ToMemory();
-        stream.AsArray().Should().Equal(1, 2, 3);
-        stream.Capacity.Should().Be(3);
+        using var copy = stream.ToMemory();
+        copy.AsArray().Should().Equal(1, 2, 3);
+        copy.Capacity.Should().Be(3);
     }
 
     [Fact]

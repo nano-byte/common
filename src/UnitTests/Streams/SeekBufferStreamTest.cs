@@ -13,7 +13,7 @@ public class SeekBufferStreamTest
     [Fact]
     public void SeekBackwards()
     {
-        var stream = new SeekBufferStream(new MemoryStream(_data));
+        using var stream = new SeekBufferStream(new MemoryStream(_data));
 
         stream.Read(4).Should().Equal(1, 2, 3, 4);
         stream.Seek(-2, SeekOrigin.Current);
@@ -23,7 +23,7 @@ public class SeekBufferStreamTest
     [Fact]
     public void SeekForwardsAndBackwards()
     {
-        var stream = new SeekBufferStream(new MemoryStream(_data));
+        using var stream = new SeekBufferStream(new MemoryStream(_data));
 
         stream.Seek(2, SeekOrigin.Current);
         stream.Read(2).Should().Equal(3, 4);
@@ -34,7 +34,7 @@ public class SeekBufferStreamTest
     [Fact]
     public void SmallBuffer()
     {
-        var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
+        using var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
 
         stream.Read(4).Should().Equal(1, 2, 3, 4);
         stream.Seek(-2, SeekOrigin.Current);
@@ -44,7 +44,7 @@ public class SeekBufferStreamTest
     [Fact]
     public void CannotSeekBackwardsTooFar()
     {
-        var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
+        using var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
 
         stream.Read(4);
         stream.Seek(-4, SeekOrigin.Current);
@@ -55,7 +55,7 @@ public class SeekBufferStreamTest
     [Fact]
     public void CanSeekForwardsBeyondBuffer()
     {
-        var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
+        using var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
 
         stream.Seek(3, SeekOrigin.Current);
         stream.Read(2).Should().Equal(4, 5);
@@ -64,7 +64,7 @@ public class SeekBufferStreamTest
     [Fact]
     public void CanSeekForwardsWithZeroBuffer()
     {
-        var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 0);
+        using var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 0);
 
         stream.Seek(3, SeekOrigin.Current);
         stream.Read(2).Should().Equal(4, 5);

@@ -70,15 +70,14 @@ public static class EncodingUtils
 
         while (i < data.Length)
         {
-            // ReSharper disable ConditionIsAlwaysTrueOrFalse
-            int currentByte = (data[i] >= 0) ? data[i] : (data[i] + 256);
+            int currentByte = data[i];
             int digit;
 
             // Is the current digit going to span a byte boundary?
             if (index > (NormalByteSize - Base32ByteSize))
             {
                 int nextByte = ((i + 1) < data.Length)
-                    ? ((data[i + 1] >= 0) ? data[i + 1] : (data[i + 1] + 256))
+                    ? data[i + 1]
                     : 0;
 
                 digit = currentByte & (0xFF >> index);
@@ -94,7 +93,6 @@ public static class EncodingUtils
                 if (index == 0)
                     i++;
             }
-            // ReSharper restore ConditionIsAlwaysTrueOrFalse
             result.Append(_base32Alphabet[digit]);
         }
 

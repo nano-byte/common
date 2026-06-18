@@ -11,7 +11,8 @@ public class EncodingUtilsTest
     public void TestHash()
     {
         const string sha1ForEmptyString = "da39a3ee5e6b4b0d3255bfef95601890afd80709";
-        "".Hash(SHA1.Create()).Should().Be(sha1ForEmptyString);
+        using var sha1 = SHA1.Create();
+        "".Hash(sha1).Should().Be(sha1ForEmptyString);
     }
 
     [Fact]

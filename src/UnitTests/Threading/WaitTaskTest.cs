@@ -28,7 +28,7 @@ public class WaitTaskTest
         using var waitHandle = new ManualResetEvent(false);
         var task = new WaitTask("Test task", waitHandle);
         bool exceptionThrown = false;
-        var cancellationTokenSource = new CancellationTokenSource();
+        using var cancellationTokenSource = new CancellationTokenSource();
         var waitTask = Task.Run(() =>
         {
             try
@@ -53,25 +53,12 @@ public class WaitTaskTest
     public async Task TestCancelNoHandle()
     {
         var task = new WaitTask("Test task");
-        bool exceptionThrown = false;
-        var cancellationTokenSource = new CancellationTokenSource();
-        var waitTask = Task.Run(() =>
-        {
-            try
-            {
-                task.Run(cancellationTokenSource.Token);
-            }
-            catch (OperationCanceledException)
-            {
-                exceptionThrown = true;
-            }
-        }, TestContext.Current.CancellationToken);
+        using var cancellationTokenSource = new CancellationTokenSource();
+        var waitTask = Task.Run(() => task.Run(cancellationTokenSource.Token), TestContext.Current.CancellationToken);
 
         // Start and then cancel the task
         Thread.Sleep(100);
         cancellationTokenSource.Cancel();
-        await waitTask;
-
-        exceptionThrown.Should().BeTrue(because: task.State.ToString());
+        await Assert.ThrowsAsync<OperationCanceledException>(() => waitTask);
     }
 }
