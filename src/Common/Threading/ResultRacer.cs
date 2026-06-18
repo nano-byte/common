@@ -11,7 +11,7 @@ namespace NanoByte.Common.Threading;
 /// </summary>
 /// <param name="cancellationToken">Used to cancel all pending operations.</param>
 /// <typeparam name="T">The type of the result.</typeparam>
-public class ResultRacer<T>(CancellationToken cancellationToken = default)
+public sealed class ResultRacer<T>(CancellationToken cancellationToken = default)
     where T : notnull
 {
     private readonly TaskCompletionSource<T> _completion = new();

@@ -14,7 +14,7 @@ namespace NanoByte.Common;
 /// <param name="getValue">A delegate that returns the current value.</param>
 /// <param name="setValue">A delegate that sets the value.</param>
 /// <typeparam name="T">The type of value the property contains.</typeparam>
-public class PropertyPointer<T>(Func<T> getValue, Action<T> setValue) : MarshalByRefObject
+public sealed class PropertyPointer<T>(Func<T> getValue, Action<T> setValue) : MarshalByRefObject
 {
     /// <summary>
     /// Transparent access to the wrapper value.

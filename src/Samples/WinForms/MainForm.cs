@@ -7,7 +7,7 @@ using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Samples.WinForms;
 
-public class MainForm : Form
+public sealed class MainForm : Form
 {
     public MainForm()
     {

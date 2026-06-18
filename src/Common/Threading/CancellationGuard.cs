@@ -21,9 +21,9 @@ namespace NanoByte.Common.Threading;
 /// </example>
 [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "IDisposable is only implemented here to support using() blocks.")]
 [MustDisposeResource]
-public class CancellationGuard : IDisposable
+public sealed class CancellationGuard : IDisposable
 {
-    private CancellationTokenRegistration _registration;
+    private readonly CancellationTokenRegistration _registration;
 
     private readonly TaskCompletionSource<bool> _tcs = new();
 

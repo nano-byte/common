@@ -9,7 +9,7 @@ namespace NanoByte.Common.Values;
 /// <param name="keySelector">A function mapping objects to their respective equality keys.</param>
 /// <typeparam name="T">The type of objects to compare.</typeparam>
 /// <typeparam name="TKey">The type of the key to use to determine equality.</typeparam>
-public class KeyEqualityComparer<T, TKey>(Func<T, TKey> keySelector) : IEqualityComparer<T>
+public sealed class KeyEqualityComparer<T, TKey>(Func<T, TKey> keySelector) : IEqualityComparer<T>
     where T : notnull
     where TKey : notnull
 {

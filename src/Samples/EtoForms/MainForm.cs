@@ -8,7 +8,7 @@ using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Samples.EtoForms;
 
-public class MainForm : Form
+public sealed class MainForm : Form
 {
     public MainForm()
     {
