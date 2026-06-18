@@ -9,7 +9,7 @@ namespace NanoByte.Common.Net;
 /// <summary>
 /// Represents data loaded from a .netrc file as a map from host names to credentials.
 /// </summary>
-public class Netrc : Dictionary<string, NetworkCredential>
+public sealed class Netrc : Dictionary<string, NetworkCredential>
 {
     /// <summary>
     /// The default path for the <c>.netrc</c> file. Usually in the home directory. Can be overriden via <c>NETRC</c> environment variable.

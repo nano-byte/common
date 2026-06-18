@@ -6,7 +6,7 @@ namespace NanoByte.Common.Undo;
 /// <summary>
 /// Tracks values in <see cref="PropertyGrid"/>s in order to be able to generate <see cref="MultiPropertyChangedCommand"/>s after a property was changed.
 /// </summary>
-public class MultiPropertyTracker
+public sealed class MultiPropertyTracker
 {
     /// <summary>The property grid being tracked.</summary>
     private readonly PropertyGrid _propertyGrid;

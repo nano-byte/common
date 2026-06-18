@@ -9,7 +9,7 @@ namespace NanoByte.Common.Info;
 /// Wraps information about an exception in a serializer-friendly format.
 /// </summary>
 [XmlType("exception")]
-public class ExceptionInfo
+public sealed class ExceptionInfo
 {
     /// <summary>
     /// The type of exception.

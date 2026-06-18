@@ -7,7 +7,7 @@ namespace NanoByte.Common.Threading;
 /// Runs jobs on a single background thread that is started and stopped on demand.
 /// </summary>
 /// <param name="cancellationToken">Used to stop processing jobs.</param>
-public class JobQueue(CancellationToken cancellationToken = default)
+public sealed class JobQueue(CancellationToken cancellationToken = default)
 {
 #if NET9_0_OR_GREATER
     private static readonly Lock _lock = new();

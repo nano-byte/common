@@ -18,7 +18,7 @@ namespace NanoByte.Common;
 /// </summary>
 // Note: Must be public, not internal, so XML Serialization will work
 [XmlRoot("error-report"), XmlType("error-report")]
-public class ErrorReport
+public sealed class ErrorReport
 {
     /// <summary>
     /// Information about the current application.
