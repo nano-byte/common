@@ -53,7 +53,7 @@ public class SeekBufferStreamTest
     }
 
     [Fact]
-    public void CanSekForwardsBeyondBuffer()
+    public void CanSeekForwardsBeyondBuffer()
     {
         var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 2);
 
@@ -62,7 +62,7 @@ public class SeekBufferStreamTest
     }
 
     [Fact]
-    public void CanSekForwardsWithZeroBuffer()
+    public void CanSeekForwardsWithZeroBuffer()
     {
         var stream = new SeekBufferStream(new MemoryStream(_data), bufferSize: 0);
 
