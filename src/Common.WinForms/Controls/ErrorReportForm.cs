@@ -71,7 +71,7 @@ public sealed partial class ErrorReportForm : Form
             var exception = e.ExceptionObject as Exception ?? new Exception("Unknown error");
             if (ErrorReport.ShouldReport(exception)) Report(exception, uploadUri);
             else ErrorBox.Show(null, exception);
-            Process.GetCurrentProcess().Kill();
+            Environment.Exit(-1);
         };
     }
 
