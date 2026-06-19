@@ -110,7 +110,13 @@ public sealed class MainForm : Form
             }
         };
 
-        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, treeButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton, taskButton]);
+        var touchButton = new Button {Text = "Touch gestures", Location = new(10, 250), Width = 150};
+        touchButton.Click += delegate
+        {
+            new TouchSampleForm().Show(this);
+        };
+
+        Controls.AddRange([progressBar1, progressBar2, outputButton, outputGridButton, treeButton, errorButton, dropDownButton, messageBoxesButton, asyncFormButton, taskButton, touchButton]);
 
         Shown += async delegate
         {

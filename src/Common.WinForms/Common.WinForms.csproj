@@ -51,4 +51,8 @@
     <None Include="..\..\lib\TaskDialog.*" Pack="true" PackagePath="lib/net472" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net20' Or '$(TargetFramework)'=='net40' Or '$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net462'">
+    <Compile Remove="Controls\Touch\**" />
+  </ItemGroup>
+
 </Project>
