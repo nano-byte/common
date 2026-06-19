@@ -92,7 +92,11 @@ public static class PropertyPointer
     /// <exception cref="ArgumentException">The expression does not point to a property with a setter.</exception>
     public static Action<T> ToSetValue<T>(this Expression<Func<T>> expression)
     {
-        var memberExpression = expression.Body as MemberExpression;
+        Expression body = expression.Body;
+        while (body is UnaryExpression {NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked} unaryExpression)
+            body = unaryExpression.Operand;
+
+        var memberExpression = body as MemberExpression;
         var parameter = Expression.Parameter(typeof(T));
 
         return (memberExpression?.Member switch
@@ -100,7 +104,7 @@ public static class PropertyPointer
             PropertyInfo propertyInfo => Expression.Lambda<Action<T>>(
                 Expression.Call(
                     memberExpression.Expression,
-                    propertyInfo.GetSetMethod() ?? throw new ArgumentException($"Missing setter on {propertyInfo.Name}."),
+                    propertyInfo.GetSetMethod() ?? throw new ArgumentException($"Missing setter on {propertyInfo.DeclaringType?.Name}.{propertyInfo.Name}."),
                     parameter),
                 parameter),
             FieldInfo _ => Expression.Lambda<Action<T>>(Expression.Assign(memberExpression, parameter), parameter),
