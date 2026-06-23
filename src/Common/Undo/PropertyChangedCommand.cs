@@ -13,12 +13,22 @@ namespace NanoByte.Common.Undo;
 public class PropertyChangedCommand(object target, PropertyDescriptor property, object? oldValue, object? newValue) : PreExecutedCommand
 {
     /// <summary>
+    /// The object the property belongs to.
+    /// </summary>
+    public object Target { get; } = target;
+
+    /// <summary>
+    /// The property that was changed.
+    /// </summary>
+    public PropertyDescriptor Property { get; } = property;
+
+    /// <summary>
     /// Set the changed property value again.
     /// </summary>
-    protected override void OnRedo() => property.SetValue(target, newValue);
+    protected override void OnRedo() => Property.SetValue(Target, newValue);
 
     /// <summary>
     /// Restore the original property value.
     /// </summary>
-    protected override void OnUndo() => property.SetValue(target, oldValue);
+    protected override void OnUndo() => Property.SetValue(Target, oldValue);
 }

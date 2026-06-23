@@ -9,9 +9,16 @@ namespace NanoByte.Common.Undo;
 /// <param name="commands">The commands to be contained inside the transaction.</param>
 public class PreExecutedCompositeCommand(IEnumerable<IUndoCommand> commands) : PreExecutedCommand
 {
-    private readonly List<IUndoCommand> _commands = commands.ToList(); // Defensive copy
-
-    // Defensive copy
+    /// <summary>
+    /// The commands contained inside the transaction.
+    /// </summary>
+    public
+#if NET20 || NET40
+        IList<IUndoCommand>
+#else
+        IReadOnlyList<IUndoCommand>
+#endif
+        Commands { get; } = commands.ToList(); // Defensive copy
 
     /// <summary>
     /// Executes all the contained <see cref="IUndoCommand"/>s in order.
@@ -21,13 +28,13 @@ public class PreExecutedCompositeCommand(IEnumerable<IUndoCommand> commands) : P
         int countExecute = 0;
         try
         { // Try to execute all commands
-            for (countExecute = 0; countExecute < _commands.Count; countExecute++)
-                _commands[countExecute].Execute();
+            for (countExecute = 0; countExecute < Commands.Count; countExecute++)
+                Commands[countExecute].Execute();
         }
         catch
         { // Rollback before reporting exception
             for (int countUndo = countExecute - 1; countUndo >= 0; countUndo--)
-                _commands[countUndo].Undo();
+                Commands[countUndo].Undo();
             throw;
         }
     }
@@ -40,13 +47,13 @@ public class PreExecutedCompositeCommand(IEnumerable<IUndoCommand> commands) : P
         int countUndo = 0;
         try
         { // Try to undo all commands
-            for (countUndo = _commands.Count - 1; countUndo >= 0; countUndo--)
-                _commands[countUndo].Undo();
+            for (countUndo = Commands.Count - 1; countUndo >= 0; countUndo--)
+                Commands[countUndo].Undo();
         }
         catch
         { // Rollback before reporting exception
-            for (int countExecute = countUndo + 1; countExecute < _commands.Count; countExecute++)
-                _commands[countExecute].Execute();
+            for (int countExecute = countUndo + 1; countExecute < Commands.Count; countExecute++)
+                Commands[countExecute].Execute();
             throw;
         }
     }

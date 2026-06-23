@@ -9,10 +9,24 @@ namespace NanoByte.Common.Undo;
 [RequiresUnreferencedCode("Performs reflection to get and set property values.")]
 public class MultiPropertyChangedCommand : PreExecutedCommand
 {
-    private readonly object[] _targets;
-    private readonly PropertyDescriptor _property;
     private readonly object?[] _oldValues;
     private readonly object? _newValue;
+
+    /// <summary>
+    /// The objects the property belongs to.
+    /// </summary>
+    public
+#if NET20 || NET40
+        IList<object>
+#else
+        IReadOnlyList<object>
+#endif
+        Targets { get; }
+
+    /// <summary>
+    /// The property that was changed.
+    /// </summary>
+    public PropertyDescriptor Property { get; }
 
     /// <summary>
     /// Initializes the command after the properties were first changed.
@@ -23,8 +37,8 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
     /// <param name="newValue">The property's current value.</param>
     public MultiPropertyChangedCommand(object[] targets, PropertyDescriptor property, object?[] oldValues, object? newValue)
     {
-        _targets = targets ?? throw new ArgumentNullException(nameof(targets));
-        _property = property ?? throw new ArgumentNullException(nameof(property));
+        Targets = targets ?? throw new ArgumentNullException(nameof(targets));
+        Property = property ?? throw new ArgumentNullException(nameof(property));
         _oldValues = oldValues ?? throw new ArgumentNullException(nameof(oldValues));
         if (targets.Length != oldValues.Length) throw new ArgumentException(Resources.TargetsOldValuesLength, nameof(targets));
         _newValue = newValue;
@@ -35,9 +49,9 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
     /// </summary>
     protected override void OnRedo()
     {
-        foreach (var target in _targets)
+        foreach (var target in Targets)
             // Use reflection to get the specific property for each object and set the new value everywhere
-            target.GetType().GetProperty(_property.Name)!.SetValue(target, _newValue, null);
+            target.GetType().GetProperty(Property.Name)!.SetValue(target, _newValue, null);
     }
 
     /// <summary>
@@ -45,8 +59,8 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
     /// </summary>
     protected override void OnUndo()
     {
-        for (int i = 0; i < _targets.Length; i++)
+        for (int i = 0; i < Targets.Count; i++)
             // Use reflection to get the specific property for each object and set the corresponding old value for each
-            _targets[i].GetType().GetProperty(_property.Name)!.SetValue(_targets[i], _oldValues[i], null);
+            Targets[i].GetType().GetProperty(Property.Name)!.SetValue(Targets[i], _oldValues[i], null);
     }
 }

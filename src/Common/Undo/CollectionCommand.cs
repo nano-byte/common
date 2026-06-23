@@ -15,7 +15,7 @@ public abstract class CollectionCommand<T>(ICollection<T> collection, T element)
     /// <summary>
     /// The collection to be modified.
     /// </summary>
-    protected readonly ICollection<T> Collection = collection;
+    public ICollection<T> Collection { get; } = collection;
 
     /// <summary>
     /// The element to be added or removed from <see cref="Collection"/>.
