@@ -27,6 +27,6 @@ function Run-MSBuild {
 
 # Build
 if ($env:CI) { $ci = "/p:ContinuousIntegrationBuild=True" }
-Run-MSBuild /v:Quiet /t:Restore /t:Build /p:Configuration=Release /p:Version=$Version $ci
+Run-MSBuild /v:Quiet /restore /t:Build /p:Configuration=Release /p:Version=$Version $ci
 
 popd
