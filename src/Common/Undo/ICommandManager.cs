@@ -14,8 +14,9 @@ public interface ICommandManager<T> : ICommandExecutor
 
     /// <summary>
     /// Is raised after <see cref="Target"/> has been updated.
+    /// Passes the command that was executed to update the target.
     /// </summary>
-    event Action? TargetUpdated;
+    event Action<IUndoCommand>? TargetUpdated;
 
     /// <summary>
     /// Indicates whether there currently are operations that can be <see cref="Undo"/>ne.

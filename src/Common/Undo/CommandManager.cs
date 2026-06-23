@@ -22,7 +22,7 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
     public T? Target { get; set; } = target ?? throw new ArgumentNullException(nameof(target));
 
     /// <inheritdoc/>
-    public event Action? TargetUpdated;
+    public event Action<IUndoCommand>? TargetUpdated;
 
     /// <summary>
     /// The path of the file the <see cref="Target"/> was loaded from. <c>null</c> if none.
@@ -70,7 +70,7 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
         // Only enable the buttons that still have a use
         SetUndoEnabled(true);
         SetRedoEnabled(false);
-        TargetUpdated?.Invoke();
+        TargetUpdated?.Invoke(command);
     }
 
     /// <inheritdoc/>
@@ -87,7 +87,7 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
         if (_undoStack.Count == 0) SetUndoEnabled(false);
         SetRedoEnabled(true);
 
-        TargetUpdated?.Invoke();
+        TargetUpdated?.Invoke(lastCommand);
     }
 
     /// <inheritdoc/>
@@ -104,7 +104,7 @@ public class CommandManager<T>(T target, string? path = null) : ICommandManager<
         SetUndoEnabled(true);
         SetRedoEnabled(_redoStack.Count > 0);
 
-        TargetUpdated?.Invoke();
+        TargetUpdated?.Invoke(lastCommand);
     }
 
     /// <summary>
