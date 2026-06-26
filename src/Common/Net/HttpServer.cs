@@ -1,11 +1,10 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using NanoByte.Common.Native;
+using NanoByte.Common.Threading;
 
 namespace NanoByte.Common.Net;
 
@@ -83,23 +82,31 @@ public abstract class HttpServer : IDisposable
     /// To be called by derived constructor when setup is complete.
     /// </summary>
     protected void StartHandlingRequests()
-        => Task.Factory.StartNew(async () =>
+    {
+        ThreadUtils.StartBackground(() =>
         {
             try
             {
                 while (_listener.IsListening)
                 {
-                    var context = await _listener.GetContextAsync();
-                    _ = Task.Factory.StartNew(() =>
+                    var context = _listener.GetContext();
+                    ThreadUtils.StartBackground(() =>
                     {
-                        HandleRequest(context);
-                        context.Response.Close();
-                    }, TaskCreationOptions.LongRunning);
+                        try
+                        {
+                            HandleRequest(context);
+                        }
+                        finally
+                        {
+                            context.Response.Close();
+                        }
+                    }, name: $"{nameof(HttpServer)}.{nameof(HandleRequest)}");
                 }
             }
-            catch (HttpListenerException)
+            catch (Exception ex) when (ex is HttpListenerException or ObjectDisposedException or InvalidOperationException)
             {} // Shutdown
-        }, CancellationToken.None, TaskCreationOptions.HideScheduler, TaskScheduler.Default);
+        }, name: $"{nameof(HttpServer)}.Loop");
+    }
 
     /// <summary>
     /// Handles a single HTTP request.
@@ -111,4 +118,3 @@ public abstract class HttpServer : IDisposable
     /// </summary>
     public virtual void Dispose() => _listener.Close();
 }
-#endif
