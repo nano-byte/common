@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL tidak dapat dikanonisasikan karena hal itu berpotensi mengakibatkan hilangnya informasi.</value>
+    <value>DACL tidak dapat dikanonikalisasi karena hal tersebut berpotensi mengakibatkan hilangnya informasi.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' keluar dengan kode keluar {1}.</value>
+    <value>'{0}' telah berakhir dengan kode keluar {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Perintah ini tidak dapat dijalankan lagi sampai perintah undo telah dijalankan.</value>
+    <value>Perintah ini tidak dapat dijalankan kembali sampai perintah undo telah dijalankan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Mencoba lagi dalam {0} milidetik karena:</value>
+    <value>Mencoba kembali dalam {0} milidetik karena:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Mencoba membaca dari posisi {0}. Ini berjarak {1} byte dari posisi aliran dasar {2}, tetapi buffer pencarian hanya dapat menampung selisih sebesar {3} byte.</value>
+    <value>Mencoba membaca dari posisi {0}. Posisi ini berjarak {1} byte dari posisi aliran dasar {2}, tetapi buffer pencarian hanya dapat menampung selisih sebesar {3} byte.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -299,7 +299,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>File assembly bernama "{0}" tidak dapat ditemukan.</value>
+    <value>Rangkaian bernama "{0}" tidak dapat ditemukan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Subsistem Unix gagal memproses permintaan. Anda mungkin tidak memiliki hak akses yang cukup.</value>
+    <value>Subsistem Unix gagal memproses permintaan tersebut. Mungkin Anda tidak memiliki hak akses yang cukup.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

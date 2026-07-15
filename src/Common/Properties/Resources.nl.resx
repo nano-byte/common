@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet worden gekanoniseerd, aangezien dit mogelijk zou leiden tot informatieverlies.</value>
+    <value>De DACL kan niet worden gecanoniseerd, aangezien dit mogelijk tot informatieverlies zou leiden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Kan registersubsleutel '{0}' in '{1}' niet openen.</value>
+    <value>Het openen van registersubsleutel '{0}' in '{1}' is mislukt.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -151,7 +151,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Het is niet gelukt om '{0}' te starten.</value>
+    <value>Het starten van '{0}' is mislukt.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Een proces is afgesloten met een onverwachte exitcode.</value>
+    <value>Een proces is beëindigd met een onverwachte exitcode.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Dit commando kan pas opnieuw worden uitgevoerd nadat het commando 'ongedaan maken' is uitgevoerd.</value>
+    <value>Deze opdracht kan pas opnieuw worden uitgevoerd nadat de opdracht 'ongedaan maken' is uitgevoerd.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -303,7 +303,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Kan {0} bytes niet uit de stream lezen.</value>
+    <value>{0} bytes kunnen niet uit de stream worden gelezen.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Het Unix-subsysteem kon het verzoek niet verwerken. Mogelijk beschikt u over onvoldoende rechten.</value>
+    <value>Het Unix-subsysteem kon het verzoek niet verwerken. Mogelijk beschikt u niet over voldoende rechten.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

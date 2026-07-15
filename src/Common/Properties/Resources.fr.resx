@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Échec de l'ouverture de la sous-clé de registre «{0} » dans «{1} ».</value>
+    <value>Impossible d'ouvrir la sous-clé de registre «{0} » dans «{1} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est arrêté avec un code de sortie inattendu.</value>
+    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande d'annulation n'a pas été exécutée.</value>
+    <value>Cette commande ne peut pas être exécutée à nouveau tant que la commande « Annuler » n'a pas été exécutée.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Tentative de lecture à partir de la position {0}. Cette position se trouve à une distance de {1} octets de la position du flux sous-jacent {2}, mais le tampon de recherche ne peut prendre en charge qu'une différence de {3} octets.</value>
+    <value>Tentative de lecture à la position {0}. Cette position se trouve à {1} octets de la position du flux sous-jacent {2}, mais le tampon de recherche ne peut prendre en charge qu’une différence de {3} octets.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La longueur des cibles doit être égale à la longueur des anciennes valeurs</value>
+    <value>La longueur des cibles doit être égale à la longueur des anciennes valeurs.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">

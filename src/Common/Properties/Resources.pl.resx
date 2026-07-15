@@ -147,7 +147,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Nie udało się cofnąć operacji „{0} ”.</value>
+    <value>Nie udało się cofnąć zmiany „{0} ”.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Ta metoda jest dostępna tylko w systemie Windows.</value>
+    <value>Ta metoda jest dostępna wyłącznie w systemie Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>„{0} ” zakończył działanie z kodem wyjścia {1}.</value>
+    <value>Program „{0} ” zakończył działanie z kodem wyjścia {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>To polecenie nie może zostać wykonane ponownie, dopóki nie zostanie wykonane polecenie cofania.</value>
+    <value>To polecenie nie może zostać wykonane ponownie, dopóki nie zostanie wykonane polecenie cofnięcia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Próbowano odczytać z pozycji {0}. Jest to o {1} bajtów dalej od pozycji strumienia bazowego {2}, ale bufor wyszukiwania może pomieścić różnicę tylko {3} bajtów.</value>
+    <value>Próbowano odczytać dane z pozycji {0}. Odległość ta wynosi {1} bajtów od pozycji w strumieniu bazowym {2}, ale bufor wyszukiwania może pomieścić różnicę wynoszącą jedynie {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Twoja wersja platformy .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania treści przez HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
+    <value>Twoja wersja platformy .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania treści przez protokół HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>To polecenie cofania nie może zostać wykonane, dopóki nie zostanie wykonane właściwe polecenie.</value>
+    <value>To polecenie cofania nie może zostać wykonane, dopóki nie zostanie wykonane bieżące polecenie.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
