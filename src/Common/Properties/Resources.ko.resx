@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>이 컬렉션은 자체에 추가될 수 없습니다.</value>
+    <value>이 컬렉션은 그 자체에 추가될 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'를 열 수 없습니다.</value>
+    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'을(를) 열 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -171,7 +171,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>해당 키는 이미 사전에 존재했습니다.</value>
+    <value>해당 키는 이미 사전에 등록되어 있었습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
@@ -179,11 +179,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>컬렉션의 최대 요소 수를 초과했습니다.</value>
+    <value>컬렉션에 포함될 수 있는 요소의 최대 수를 초과했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}'에 대한 동작이 등록되어 있지 않습니다.</value>
+    <value>'{0}'에 대해 등록된 동작이 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>값 초기화</value>
+    <value>값 재설정</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>위치 {0} 에서 읽기를 시도했습니다. 이는 기본 스트림 위치 {2} 에서 {1} 바이트 떨어져 있지만, 탐색 버퍼는 {3} 바이트의 차이만 수용할 수 있습니다.</value>
+    <value>{0} 위치에서 읽기를 시도했습니다. 이 위치는 기본 스트림 위치 {2} 에서 {1} 바이트 떨어져 있지만, 탐색 버퍼는 {3} 바이트의 차이만 수용할 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>소스와 대상이 동일합니다.</value>
+    <value>출처와 대상은 동일합니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -295,11 +295,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>사용 중인 .NET 버전은 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows Update를 실행하여 필요한 패치를 설치하십시오.</value>
+    <value>사용 중인 .NET 버전은 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows 업데이트를 실행하여 필요한 패치를 설치하십시오.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}"라는 어셈블리를 찾을 수 없습니다.</value>
+    <value>"{0}"라는 이름의 어셈블리를 찾을 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -307,11 +307,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>실제 명령이 실행되기 전까지는 이 실행 취소 명령을 수행할 수 없습니다.</value>
+    <value>이 실행 취소 명령은 해당 명령이 실제로 실행되기 전까지는 수행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>유닉스 서브시스템에서 요청을 처리하지 못했습니다. 권한이 부족할 수 있습니다.</value>
+    <value>유닉스 하위 시스템에서 요청을 처리하지 못했습니다. 권한이 부족할 수 있습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

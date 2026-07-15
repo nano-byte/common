@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nu poate fi canonizat, deoarece acest lucru ar putea duce la o pierdere de informații.</value>
+    <value>DACL-ul nu poate fi canonizat, deoarece acest lucru ar putea duce la o pierdere de informații.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -123,7 +123,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Dacă doriți, puteți utiliza acest câmp pentru a furniza informații suplimentare despre problemă, cum ar fi o descriere a ceea ce făceați când s-a produs blocarea.</value>
+    <value>Dacă doriți, puteți utiliza acest câmp pentru a furniza informații suplimentare despre problemă, cum ar fi o descriere a ceea ce făceați în momentul în care s-a produs blocarea.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -175,7 +175,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>Lansarea „{0} ” necesită drepturi de administrator.</value>
+    <value>Lansarea aplicației „{0} ” necesită drepturi de administrator.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>Configurația sistemului nu poate fi editată în modul portabil.</value>
+    <value>Configurația sistemului nu poate fi modificată în modul portabil.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>„{0} ” s-a închis cu codul de ieșire {1}.</value>
+    <value>„{0} ” s-a încheiat cu codul de ieșire {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>S-a încercat citirea de la poziția {0}. Aceasta se află la o distanță de {1} octeți față de poziția fluxului subiacent {2}, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
+    <value>S-a încercat citirea de la poziția {0}. Aceasta se află la o distanță de {1} octeți față de poziția fluxului de bază {2}, dar bufferul de căutare poate acomoda doar o diferență de {3} octeți.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate provoca erori de conexiune la descărcarea de conținut prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
+    <value>Versiunea dvs. de .NET nu acceptă TLS 1.2. Acest lucru poate provoca erori de conexiune la descărcarea conținutului prin HTTPS. Vă rugăm să rulați Windows Update pentru a instala patch-urile necesare.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
@@ -315,7 +315,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nume utilizator:</value>
+    <value>Nume de utilizator:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Yes" xml:space="preserve">

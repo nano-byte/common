@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>该DACL无法进行规范化，因为这可能会导致信息丢失。</value>
+    <value>DACL 无法进行规范化，因为这可能会导致信息丢失。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -143,11 +143,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>无法在“{1} ”中打开注册表子键“{0} ”。</value>
+    <value>无法在“{1} ”中打开注册表子项“{0} ”。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>无法回滚 '{0}'。</value>
+    <value>无法回滚“{0} ”。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>目标的长度必须等于 oldValues 的长度</value>
+    <value>目标长度必须等于 oldValues 的长度</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">

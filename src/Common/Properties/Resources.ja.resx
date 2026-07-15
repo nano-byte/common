@@ -107,7 +107,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>目的のディレクトリはすでに存在します。</value>
+    <value>保存先ディレクトリはすでに存在します。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>ポータブルモードではシステム設定を編集できません。</value>
+    <value>ポータブルモードでは、システム設定を編集することはできません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>この方法は Windows でのみ利用可能です。</value>
+    <value>このメソッドは Windows でのみ利用可能です。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' は終了コード{1} で終了しました。</value>
+    <value>'{0}' が終了コード{1} で終了しました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>「元に戻す」コマンドを実行するまで、このコマンドを再度実行することはできません。</value>
+    <value>「元に戻す」コマンドを実行するまでは、このコマンドを再度実行することはできません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>位置{0} からの読み取りを試みました。これは、基になるストリームの位置{2} から{1} バイト離れていますが、シークバッファが許容できる差は{3} バイトのみです。</value>
+    <value>位置{0} からの読み取りを試みました。これは、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファが許容できる差は{3} バイトのみです。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>ターゲットの長さは oldValues の長さと等しくなければなりません。</value>
+    <value>ターゲットの長さは、oldValuesの長さと等しくなければなりません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>この元に戻すコマンドは、実際のコマンドが実行されるまで実行できません。</value>
+    <value>この「元に戻す」コマンドは、実際のコマンドが実行されるまでは実行できません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

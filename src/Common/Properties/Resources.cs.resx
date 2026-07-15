@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>Kolekci nelze přidat do sebe.</value>
+    <value>Kolekci nelze přidat do sebe samé.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -147,11 +147,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Nepodařilo se vrátit zpět '{0}'.</value>
+    <value>Nepodařilo se vrátit zpět operaci „{0} “.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Nepodařilo se spustit „{0} “.</value>
+    <value>Nepodařilo se spustit program „{0} “.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -171,7 +171,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Klíč již byl ve slovníku.</value>
+    <value>Klíč již byl ve slovníku uveden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Tato metoda je k dispozici pouze ve Windows.</value>
+    <value>Tato metoda je k dispozici pouze v systému Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Opakování pokusu za {0} milisekund z důvodu:</value>
+    <value>Opakování pokusu za {0}. milisekund z důvodu:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Pokus o čtení z pozice {0}. To je o {1} bajtů dále od pozice v podkladovém proudu {2}, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
+    <value>Pokus o čtení z pozice {0}. Tato pozice se nachází o {1} bajtů dále od pozice {2} v podkladovém proudu, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Délka cílů musí být rovna délce oldValues</value>
+    <value>Délka cílů musí být stejná jako délka oldValues</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -299,11 +299,11 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Sestava s názvem „{0} “ nebyla nalezena.</value>
+    <value>Nebylo možné najít sestavu s názvem „{0} “.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Nelze přečíst {0} bajtů ze streamu.</value>
+    <value>Nelze načíst {0} bajtů ze streamu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">

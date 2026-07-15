@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL не может быть канонизирован, так как это может привести к потере информации.</value>
+    <value>DACL не может быть канонизирован, поскольку это может привести к потере информации.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>В портативном режиме конфигурацию системы редактировать нельзя.</value>
+    <value>В портативном режиме настройки системы редактировать нельзя.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' завершилась с кодом завершения {1}.</value>
+    <value>'{0}' завершил работу с кодом завершения {1}.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Эта команда не может быть выполнена повторно, пока не будет выполнена команда отмены.</value>
+    <value>Эта команда не может быть выполнена повторно до тех пор, пока не будет выполнена команда «Отменить».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Попытка чтения из позиции {0}. Это на {1} байт дальше от позиции базового потока {2}, но буфер поиска может вместить разницу только в {3} байт.</value>
+    <value>Произошла попытка чтения из позиции {0}. Это на {1} байт дальше от позиции в базовом потоке {2}, но буфер поиска может вместить разницу только в {3} байт.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Источник и место назначения совпадают.</value>
+    <value>Источник и назначение совпадают.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -295,11 +295,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Ваша версия .NET не поддерживает TLS 1.2. Это может привести к ошибкам подключения при загрузке контента через HTTPS. Запустите Windows Update, чтобы установить необходимые исправления.</value>
+    <value>Ваша версия .NET не поддерживает TLS 1.2. Это может привести к ошибкам подключения при загрузке контента по протоколу HTTPS. Запустите Windows Update, чтобы установить необходимые обновления.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Не удалось найти сборку с именем «{0} ».</value>
+    <value>Не удалось найти модуль с именем «{0} ».</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Эта команда отмены не может быть выполнена до тех пор, пока не будет выполнена фактическая команда.</value>
+    <value>Эта команда отмены не может быть выполнена до тех пор, пока не будет выполнена соответствующая команда.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
