@@ -8,14 +8,17 @@ namespace NanoByte.Common.Net;
 
 public class HttpServerTest
 {
+    private static readonly TimeSpan _timeout = TimeSpan.FromSeconds(10);
+
     private sealed class TestServer : HttpServer
     {
         private readonly Action<HttpListenerContext> _handleRequest;
 
-        public TestServer(Action<HttpListenerContext> handleRequest)
+        public TestServer(Action<HttpListenerContext> handleRequest, int maxConcurrentRequests = 64)
             : base(localOnly: true)
         {
             _handleRequest = handleRequest;
+            MaxConcurrentRequests = maxConcurrentRequests;
             StartHandlingRequests();
         }
 
@@ -74,4 +77,45 @@ public class HttpServerTest
         readToEnd.Should().Throw<IOException>("the client must not mistake a partial response for a complete one");
     }
 
+    [Fact]
+    public async Task RejectsRequestsExceedingMaxConcurrentRequests()
+    {
+        var cancellationToken = TestContext.Current.CancellationToken;
+
+        using var handling = new ManualResetEventSlim();
+        using var release = new ManualResetEventSlim();
+
+        using var server = new TestServer(maxConcurrentRequests: 1, handleRequest: _ =>
+        {
+            handling.Set();
+            release.Wait(_timeout, cancellationToken);
+        });
+
+        // ReSharper disable once ShortLivedHttpClient
+        using var client = new HttpClient();
+
+        var occupySlot = Task.Run(() => client.Send(new(HttpMethod.Get, server.Uri), cancellationToken), cancellationToken);
+        handling.Wait(_timeout, cancellationToken).Should().BeTrue("the first request should be picked up for handling");
+
+        using var rejected = client.Send(new(HttpMethod.Get, server.Uri), cancellationToken);
+        rejected.StatusCode.Should().Be(HttpStatusCode.ServiceUnavailable);
+
+        release.Set();
+        using var first = await occupySlot;
+        first.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public void HandlesRequestsAgainAfterReachingMaxConcurrentRequests()
+    {
+        using var server = new TestServer(maxConcurrentRequests: 1, handleRequest: _ => {});
+
+        // ReSharper disable once ShortLivedHttpClient
+        using var client = new HttpClient();
+        for (int i = 0; i < 3; i++)
+        {
+            using var response = client.Send(new(HttpMethod.Get, server.Uri), TestContext.Current.CancellationToken);
+            response.StatusCode.Should().Be(HttpStatusCode.OK, "the slot should be released after each request");
+        }
+    }
 }

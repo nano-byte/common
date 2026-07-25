@@ -16,6 +16,7 @@ namespace NanoByte.Common.Net;
 public abstract class HttpServer : IDisposable
 {
     private readonly HttpListener _listener;
+    private int _activeRequests;
 
     /// <summary>
     /// The TCP port the server is listening on.
@@ -27,6 +28,11 @@ public abstract class HttpServer : IDisposable
     /// </summary>
     /// <remarks>Becomes <c>false</c> after <see cref="Dispose"/> or if the server stopped due to an unrecoverable failure.</remarks>
     public bool IsListening => _listener.IsListening;
+
+    /// <summary>
+    /// The maximum number of requests to handle at the same time. Additional requests are rejected with <see cref="HttpStatusCode.ServiceUnavailable"/>.
+    /// </summary>
+    public int MaxConcurrentRequests { get; set; } = 64;
 
     /// <summary>
     /// Gets ready to serve HTTP requests.
@@ -161,15 +167,33 @@ public abstract class HttpServer : IDisposable
     /// </summary>
     private void DispatchRequest(HttpListenerContext context)
     {
+        if (Interlocked.Increment(ref _activeRequests) > MaxConcurrentRequests)
+        {
+            Interlocked.Decrement(ref _activeRequests);
+            CompleteResponse(context, HttpStatusCode.ServiceUnavailable);
+            return;
+        }
+
         try
         {
-            ThreadUtils.StartBackground(() => ProcessRequest(context), name: $"{nameof(HttpServer)}.{nameof(HandleRequest)}");
+            ThreadUtils.StartBackground(() =>
+            {
+                try
+                {
+                    ProcessRequest(context);
+                }
+                finally
+                {
+                    Interlocked.Decrement(ref _activeRequests);
+                }
+            }, name: $"{nameof(HttpServer)}.{nameof(HandleRequest)}");
         }
         #region Error handling
         catch (Exception ex)
         {
+            Interlocked.Decrement(ref _activeRequests);
             Log.Error("Unable to start thread for handling HTTP request", ex);
-            RejectRequest(context);
+            CompleteResponse(context, HttpStatusCode.ServiceUnavailable);
         }
         #endregion
     }
