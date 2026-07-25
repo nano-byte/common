@@ -75,10 +75,14 @@ public abstract class HttpServer : IDisposable
         // Use separate port ranges for local-only and public to avoid conflicting http.sys registrations
         int minPort = localOnly ? 50000 : 55000;
         int maxPort = localOnly ? 54999 : 59999;
+        int range = maxPort - minPort + 1;
+
+        int offset = RandomShared.Instance.Next(range);
 
         Exception? lastException = null;
-        for (ushort p = (ushort)minPort; p <= maxPort; p++)
+        for (int i = 0; i < range; i++)
         {
+            ushort p = (ushort)(minPort + (offset + i) % range);
             try
             {
                 var listener = BuildListener(p, localOnly);
