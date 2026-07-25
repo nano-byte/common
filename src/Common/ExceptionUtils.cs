@@ -147,7 +147,6 @@ public static class ExceptionUtils
         if (action == null) throw new ArgumentNullException(nameof(action));
         #endregion
 
-        var random = GetRandom();
         for (int i = 0; i < maxRetries; i++)
         {
             try
@@ -157,7 +156,7 @@ public static class ExceptionUtils
             }
             catch (TException ex)
             {
-                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                int delay = RandomShared.Instance.Next(50, 1000 * (1 << (i + 1)));
                 Log.Info(string.Format(Resources.RetryDelay, delay), ex);
                 Thread.Sleep(delay);
             }
@@ -181,7 +180,6 @@ public static class ExceptionUtils
         if (function == null) throw new ArgumentNullException(nameof(function));
         #endregion
 
-        var random = GetRandom();
         for (int i = 0; i < maxRetries; i++)
         {
             try
@@ -190,7 +188,7 @@ public static class ExceptionUtils
             }
             catch (TException ex)
             {
-                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                int delay = RandomShared.Instance.Next(50, 1000 * (1 << (i + 1)));
                 Log.Info(string.Format(Resources.RetryDelay, delay), ex);
                 Thread.Sleep(delay);
             }
@@ -246,7 +244,6 @@ public static class ExceptionUtils
         if (action == null) throw new ArgumentNullException(nameof(action));
         #endregion
 
-        var random = GetRandom();
         for (int i = 0; i < maxRetries; i++)
         {
             try
@@ -256,7 +253,7 @@ public static class ExceptionUtils
             }
             catch (TException ex)
             {
-                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                int delay = RandomShared.Instance.Next(50, 1000 * (1 << (i + 1)));
                 Log.Info(string.Format(Resources.RetryDelay, delay), ex);
                 await Task.Delay(delay);
             }
@@ -280,7 +277,6 @@ public static class ExceptionUtils
         if (function == null) throw new ArgumentNullException(nameof(function));
         #endregion
 
-        var random = GetRandom();
         for (int i = 0; i < maxRetries; i++)
         {
             try
@@ -289,7 +285,7 @@ public static class ExceptionUtils
             }
             catch (TException ex)
             {
-                int delay = random.Next(50, 1000 * (1 << (i + 1)));
+                int delay = RandomShared.Instance.Next(50, 1000 * (1 << (i + 1)));
                 Log.Info(string.Format(Resources.RetryDelay, delay), ex);
                 await Task.Delay(delay);
             }
@@ -298,24 +294,4 @@ public static class ExceptionUtils
         return await function();
     }
 #endif
-
-    /// <summary>
-    /// Uses process ID as a random seed to ensure we get different values than other competing processes on the same machine.
-    /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Generic exception catch only used to ensure safe random seeding.")]
-    private static Random GetRandom()
-    {
-        try
-        {
-#if NETFRAMEWORK
-            return new Random(Process.GetCurrentProcess().Id);
-#else
-            return new Random(Environment.ProcessId);
-#endif
-        }
-        catch (Exception)
-        {
-            return new Random();
-        }
-    }
 }
