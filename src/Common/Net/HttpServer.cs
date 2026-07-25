@@ -180,17 +180,7 @@ public abstract class HttpServer : IDisposable
 
         try
         {
-            ThreadUtils.StartBackground(() =>
-            {
-                try
-                {
-                    ProcessRequest(context);
-                }
-                finally
-                {
-                    Interlocked.Decrement(ref _activeRequests);
-                }
-            }, name: $"{nameof(HttpServer)}.{nameof(HandleRequest)}");
+            ThreadUtils.StartBackground(() => ProcessRequest(context), name: $"{nameof(HttpServer)}.{nameof(HandleRequest)}");
         }
         #region Error handling
         catch (Exception ex)
@@ -230,6 +220,7 @@ public abstract class HttpServer : IDisposable
         #endregion
         finally
         {
+            Interlocked.Decrement(ref _activeRequests);
             CompleteResponse(context, errorStatus);
         }
     }
