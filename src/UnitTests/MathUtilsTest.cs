@@ -115,7 +115,7 @@ public class MathUtilsTest
             double value = i / 100.0;
             double eased = easingFunc(value);
 
-            eased.Should().BeGreaterOrEqualTo(last);
+            eased.Should().BeGreaterThanOrEqualTo(last);
             last = eased;
         }
     }

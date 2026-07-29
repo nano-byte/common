@@ -13,10 +13,6 @@
       "automergeType": "branch"
     },
     {
-      "matchPackageNames": ["FluentAssertions"],
-      "allowedVersions": "<8"
-    },
-    {
       "matchPackagePatterns": ["docfx", "SourceLink"],
       "matchPackageNames": ["System.ValueTuple", "Tmds.DBus", "JetBrains.Annotations"],
       "automerge": true,

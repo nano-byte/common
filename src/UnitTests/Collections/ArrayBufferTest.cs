@@ -14,7 +14,7 @@ public class ArrayBufferTest
     {
         using var buffer = new ArrayBuffer<int>(10);
         buffer.Length.Should().Be(10);
-        buffer.Array.Length.Should().BeGreaterOrEqualTo(10);
+        buffer.Array.Length.Should().BeGreaterThanOrEqualTo(10);
     }
 
     [Fact]

@@ -1,7 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using FluentAssertions.Execution;
+using AwesomeAssertions.Execution;
 
 namespace NanoByte.Common.Dispatch;
 
