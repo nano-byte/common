@@ -13,6 +13,7 @@
     <DeterministicSourcePaths>False</DeterministicSourcePaths>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\sgKey.snk</AssemblyOriginatorKeyFile>
+    <VSTestLogger>trx%3bLogFileName=$(TargetFramework).trx</VSTestLogger>
   </PropertyGroup>
   <PropertyGroup Condition="$(TargetFramework)!='net48'">
     <!-- Run nullability analysis only on annotated frameworks -->
