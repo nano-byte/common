@@ -223,17 +223,32 @@ public static class XmlStorage
         return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
     }
 
+    private static XmlAttributeOverrides? _overrides;
+
     /// <summary>
     /// Global overrides for XML serialization.
     /// </summary>
     /// <remarks>
-    /// Changing this value or its properties is not thread-safe.
+    /// Changing this value is not thread-safe. Should be set before using any of the methods on this class.
+    /// Mutating an already-assigned instance has no effect; assign a new instance instead.
     /// When set to a non-null value, pre-generated XML serialization assemblies (sgen) are not used.
     /// </remarks>
-    public static XmlAttributeOverrides? Overrides { get; set; }
+    public static XmlAttributeOverrides? Overrides
+    {
+        get => _overrides;
+        set
+        {
+            _serializersWithOverrides.Clear();
+            _overrides = value;
+        }
+    }
+
+    private static readonly TransparentCache<Type, XmlSerializer> _serializersWithOverrides = new(type => new(type, _overrides));
 
     private static XmlSerializer GetSerializer(Type type)
         => Overrides == null
-            ? ExceptionUtils.Retry<COMException, XmlSerializer>(() => new XmlSerializer(type))
-            : new(type, Overrides);
+            // XmlSerializer tries to load pre-compiled serializer (which might fail intermittently) and internally caches generated code
+            ? ExceptionUtils.Retry<COMException, XmlSerializer>(() => new(type))
+            // XmlSerializer does not cache serializers when overrides are specified, so we cache ourselves
+            : _serializersWithOverrides[type];
 }
