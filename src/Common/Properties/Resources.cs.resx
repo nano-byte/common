@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Pokus o čtení z pozice {0}. Tato pozice se nachází o {1} bajtů dále od pozice {2} v podkladovém proudu, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
+    <value>Pokus o čtení z pozice {0}. Tato pozice se nachází o {1} bajtů dále od pozice v podkladovém proudu {2}, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Subsystém Unix nedokázal zpracovat požadavek. Možná nemáte dostatečná oprávnění.</value>
+    <value>Subsystému Unix se nepodařilo zpracovat požadavek. Možná nemáte dostatečná oprávnění.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

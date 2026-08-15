@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>位置{0} からの読み取りを試みました。これは、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファが許容できる差は{3} バイトのみです。</value>
+    <value>位置{0} からの読み取りを試みました。これは、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファが収容できる差は{3} バイトのみです。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

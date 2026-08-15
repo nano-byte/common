@@ -259,7 +259,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>Источник и назначение совпадают.</value>
+    <value>Источник и место назначения совпадают.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Эта команда отмены не может быть выполнена до тех пор, пока не будет выполнена соответствующая команда.</value>
+    <value>Эта команда «Отменить» не может быть выполнена до тех пор, пока не будет выполнена соответствующая команда.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
