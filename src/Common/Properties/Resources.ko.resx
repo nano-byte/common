@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>이 컬렉션은 그 자체에 추가될 수 없습니다.</value>
+    <value>컬렉션은 그 자체에 추가될 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -143,11 +143,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'을(를) 열 수 없습니다.</value>
+    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'를 열 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>'{0}' 롤백에 실패했습니다.</value>
+    <value>'{0}'의 롤백에 실패했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -183,7 +183,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
-    <value>'{0}'에 대해 등록된 동작이 없습니다.</value>
+    <value>'{0}'에 대한 동작이 등록되어 있지 않습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="No" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>실행 취소 명령을 수행하기 전까지는 이 명령을 다시 실행할 수 없습니다.</value>
+    <value>'실행 취소' 명령을 실행하기 전까지는 이 명령을 다시 실행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>이 실행 취소 명령은 해당 명령이 실제로 실행되기 전까지는 수행할 수 없습니다.</value>
+    <value>실제 명령이 실행되기 전까지는 이 실행 취소 명령을 수행할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

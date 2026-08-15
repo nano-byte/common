@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>O subsistema Unix não conseguiu processar o pedido. Poderá não dispor de direitos suficientes.</value>
+    <value>O subsistema Unix não conseguiu processar o pedido. É possível que não tenha direitos suficientes.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

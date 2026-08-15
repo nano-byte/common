@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Un processus s'est arrêté avec un code de sortie inattendu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">

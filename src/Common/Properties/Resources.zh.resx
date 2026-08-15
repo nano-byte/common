@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL 无法进行规范化，因为这可能会导致信息丢失。</value>
+    <value>该DACL无法进行规范化处理，因为这可能会导致信息丢失。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>目标长度必须等于 oldValues 的长度</value>
+    <value>目标的长度必须等于 oldValues 的长度</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -307,7 +307,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>在实际命令执行之前，无法执行此撤销命令。</value>
+    <value>在实际命令执行完成之前，无法执行此“撤销”命令。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

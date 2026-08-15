@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet worden gecanoniseerd, aangezien dit mogelijk tot informatieverlies zou leiden.</value>
+    <value>De DACL kan niet worden gekanoniseerd, aangezien dit mogelijk tot informatieverlies zou leiden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>Het openen van registersubsleutel '{0}' in '{1}' is mislukt.</value>
+    <value>Het is niet gelukt om de registersubsleutel '{0}' in '{1}' te openen.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Deze methode is alleen beschikbaar in Windows.</value>
+    <value>Deze methode is alleen beschikbaar op Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
