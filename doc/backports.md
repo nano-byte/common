@@ -62,3 +62,7 @@ The following types were introduced in .NET 6.0 and are backported to .NET Frame
 
 - [SupportedOSPlatformGuardAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.supportedosplatformguardattribute)
 - [UnsupportedOSPlatformGuardAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformguardattribute)
+
+## Data annotations
+
+[RangeAttribute](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.rangeattribute) was introduced in .NET Framework 3.5 and is backported to .NET Framework 2.0.
