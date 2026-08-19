@@ -292,6 +292,27 @@ public static class StringUtils
         };
 
     /// <summary>
+    /// Turns an English singular noun into its plural form using common heuristics.
+    /// </summary>
+    /// <param name="value">The singular noun to pluralize.</param>
+    [Pure]
+    public static string Pluralize(this string value)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
+
+        string lower = value.ToLowerInvariant();
+
+        if (lower.EndsWith("y") && value.Length > 1 && !"aeiou".Contains(lower[^2]))
+            return value[..^1] + "ies";
+
+        if (lower.EndsWith("s") || lower.EndsWith("x") || lower.EndsWith("z")
+         || lower.EndsWith("ch") || lower.EndsWith("sh"))
+            return value + "es";
+
+        return value + "s";
+    }
+
+    /// <summary>
     /// Returns a string filled with random human-readable ASCII characters based on a cryptographic random number generator.
     /// </summary>
     /// <param name="length">The length of the string to be generated.</param>

@@ -102,6 +102,19 @@ public class StringUtilsTest
         "abc".TrimOverflow(2).Should().Be("ab...");
     }
 
+    [Theory]
+    [InlineData("house", "houses")]
+    [InlineData("class", "classes")]
+    [InlineData("economy", "economies")]
+    [InlineData("box", "boxes")]
+    [InlineData("buzz", "buzzes")]
+    [InlineData("watch", "watches")]
+    [InlineData("dish", "dishes")]
+    [InlineData("day", "days")]
+    [InlineData("key", "keys")]
+    public void TestPluralize(string singular, string plural)
+        => singular.Pluralize().Should().Be(plural);
+
     [Fact]
     public void TestGeneratePassword()
     {
