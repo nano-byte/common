@@ -34,7 +34,7 @@ public sealed class Netrc : Dictionary<string, NetworkCredential>
 
         void AddCredential()
         {
-            if (machine != null && login != null && password != null)
+            if (machine != null && login != null && password != null && !result.ContainsKey(machine))
                 result.Add(machine, new NetworkCredential(login, password));
         }
 
