@@ -11,11 +11,23 @@ namespace NanoByte.Common.Threading;
 /// </summary>
 /// <param name="cancellationToken">Used to cancel all pending operations.</param>
 /// <typeparam name="T">The type of the result.</typeparam>
-public sealed class ResultRacer<T>(CancellationToken cancellationToken = default)
+[MustDisposeResource]
+public sealed class ResultRacer<T>(CancellationToken cancellationToken = default) : IDisposable
     where T : notnull
 {
     private readonly TaskCompletionSource<T> _completion = new();
     private readonly CancellationTokenSource _competitionCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        try
+        {
+            _competitionCancellation.Cancel();
+        }
+        catch (ObjectDisposedException) {}
+        _competitionCancellation.Dispose();
+    }
 
     /// <summary>
     /// Trys to set a result, racing against other calls of this method.
@@ -35,7 +47,7 @@ public sealed class ResultRacer<T>(CancellationToken cancellationToken = default
                 _completion.TrySetResult(result);
             }
         }
-        catch (OperationCanceledException) {}
+        catch (Exception ex) when (ex is OperationCanceledException or ObjectDisposedException) {}
         catch (Exception ex)
         {
             _competitionCancellation.Cancel(); // Cancel all competing runs
@@ -61,7 +73,7 @@ public sealed class ResultRacer<T>(CancellationToken cancellationToken = default
                 _completion.TrySetResult(result);
             }
         }
-        catch (OperationCanceledException) {}
+        catch (Exception ex) when (ex is OperationCanceledException or ObjectDisposedException) {}
         catch (Exception ex)
         {
             _competitionCancellation.Cancel(); // Cancel all competing runs
@@ -103,6 +115,7 @@ public static class ResultRacer
     /// Exceptions (except <see cref="OperationCanceledException"/>) are passed through to <see cref="ResultRacer{TResult}.GetResult"/> and <see cref="ResultRacer{TResult}.GetResultAsync"/>.
     /// </param>
     /// <param name="cancellationToken">Used to cancel all pending operations.</param>
+    [MustDisposeResource]
     public static ResultRacer<TResult> For<TInput, TResult>(IEnumerable<TInput> input, Func<TInput, CancellationToken, TResult?> factory, CancellationToken cancellationToken = default)
         where TResult : notnull
     {
@@ -124,6 +137,7 @@ public static class ResultRacer
     /// Exceptions (except <see cref="OperationCanceledException"/>) are passed through to <see cref="ResultRacer{TResult}.GetResult"/> and <see cref="ResultRacer{TResult}.GetResultAsync"/>.
     /// </param>
     /// <param name="cancellationToken">Used to cancel all pending operations.</param>
+    [MustDisposeResource]
     public static ResultRacer<TResult> For<TInput, TResult>(IEnumerable<TInput> input, Func<TInput, CancellationToken, Task<TResult?>> factory, CancellationToken cancellationToken = default)
         where TResult : notnull
     {
