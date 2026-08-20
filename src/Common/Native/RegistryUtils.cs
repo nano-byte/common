@@ -175,7 +175,7 @@ public static partial class RegistryUtils
     /// <summary>
     /// Deletes a value from one of the SOFTWARE keys in the registry.
     /// </summary>
-    /// <remarks>Does not throw an exception for missing keys or values.</remarks>
+    /// <remarks>Does not throw an exception for missing or inaccessible keys or values.</remarks>
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to delete.</param>
     /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if in a 64-bit process); <c>false</c> to delete from HCKU/SOFTWARE.</param>
@@ -199,8 +199,17 @@ public static partial class RegistryUtils
 
     private static void DeleteValue(RegistryKey root, string subkeyName, string valueName)
     {
-        using var subkey = root.TryOpenSubKey(subkeyName, writable: true);
-        subkey?.DeleteValue(valueName, throwOnMissingValue: false);
+        try
+        {
+            using var subkey = root.TryOpenSubKey(subkeyName, writable: true);
+            subkey?.DeleteValue(valueName, throwOnMissingValue: false);
+        }
+        #region Error handling
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
+        {
+            Log.Warn($"Failed to delete {root}\\{subkeyName}\\{valueName}", ex);
+        }
+        #endregion
     }
     #endregion
 
