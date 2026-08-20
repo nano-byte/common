@@ -278,7 +278,7 @@ public static class FileUtils
                 if (followDirSymlinks || !directory.IsSymlink(out _))
                 {
                     foreach (var childElement in directory.GetFileSystemInfos())
-                        Walk(childElement, dirAction, fileAction);
+                        Walk(childElement, dirAction, fileAction, followDirSymlinks);
                 }
                 break;
         }
