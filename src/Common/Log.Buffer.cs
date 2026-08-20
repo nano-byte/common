@@ -19,9 +19,9 @@ partial class Log
 
         lock (_lock)
         {
-            return _bufferRollover
-                ? Join(_bufferIndex, _buffer.Length - _bufferIndex) + Join(0, _bufferIndex)
-                : Join(0, _bufferIndex);
+            if (!_bufferRollover) return Join(0, _bufferIndex);
+            if (_bufferIndex == 0) return Join(0, _buffer.Length);
+            return Join(_bufferIndex, _buffer.Length - _bufferIndex) + Environment.NewLine + Join(0, _bufferIndex);
         }
     }
 
