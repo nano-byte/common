@@ -44,10 +44,7 @@ partial class Log
     /// </summary>
     private static void ResetBuffer()
     {
-        lock (_buffer)
-        {
-            _bufferIndex = 0;
-            _bufferRollover = false;
-        }
+        _bufferIndex = 0;
+        _bufferRollover = false;
     }
 }
