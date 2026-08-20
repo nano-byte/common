@@ -134,7 +134,7 @@ public static partial class RegistryUtils
     /// </summary>
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to read.</param>
-    /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to read from HCKU/SOFTWARE.</param>
+    /// <param name="machineWide"><c>true</c> to read from HKLM/SOFTWARE (falling back to HKLM/SOFTWARE/Wow6432Node); <c>false</c> to read from HCKU/SOFTWARE.</param>
     [Pure]
     public static string? GetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, bool machineWide)
     {
@@ -154,7 +154,7 @@ public static partial class RegistryUtils
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to write.</param>
     /// <param name="value">The value to write.</param>
-    /// <param name="machineWide"><c>true</c> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to write to HCKU/SOFTWARE.</param>
+    /// <param name="machineWide"><c>true</c> to write to HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if in a 64-bit process); <c>false</c> to write to HCKU/SOFTWARE.</param>
     /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
     public static void SetSoftwareString([Localizable(false)] string subkeyName, [Localizable(false)] string? valueName, [Localizable(false)] string value, bool machineWide = false)
     {
@@ -178,7 +178,7 @@ public static partial class RegistryUtils
     /// <remarks>Does not throw an exception for missing keys or values.</remarks>
     /// <param name="subkeyName">The path of the key relative to the SOFTWARE key.</param>
     /// <param name="valueName">The name of the value to delete.</param>
-    /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if on 64-bit Windows); <c>false</c> to delete from HCKU/SOFTWARE.</param>
+    /// <param name="machineWide"><c>true</c> to delete from HKLM/SOFTWARE (and HKLM/SOFTWARE/Wow6432Node if in a 64-bit process); <c>false</c> to delete from HCKU/SOFTWARE.</param>
     public static void DeleteSoftwareValue([Localizable(false)] string subkeyName, [Localizable(false)] string valueName, bool machineWide)
     {
         #region Sanity checks
@@ -210,7 +210,7 @@ public static partial class RegistryUtils
     /// </summary>
     /// <param name="key">The root key to look within.</param>
     /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
-    /// <returns>A list of value names; an empty array if the key does not exist.</returns>
+    /// <returns>A list of value names; an empty array if the key does not exist or is not accessible.</returns>
     [Pure]
     public static string[] GetValueNames(this RegistryKey key, [Localizable(false)] string subkeyName)
     {
@@ -238,7 +238,7 @@ public static partial class RegistryUtils
     /// </summary>
     /// <param name="key">The root key to look within.</param>
     /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
-    /// <returns>A list of key names; an empty array if the key does not exist.</returns>
+    /// <returns>A list of key names; an empty array if the key does not exist or is not accessible.</returns>
     [Pure]
     public static string[] GetSubKeyNames([Localizable(false)] RegistryKey key, [Localizable(false)] string subkeyName)
     {
@@ -410,8 +410,9 @@ public static partial class RegistryUtils
     /// Returns the last write time of the registry key.
     /// </summary>
     /// <param name="key">The key to get the last write time for.</param>
-    /// <exception cref="IOException">The key does not exist.</exception>
+    /// <exception cref="IOException">There was an IO problem reading the key.</exception>
     /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
+    /// <exception cref="Win32Exception">Reading the key information failed.</exception>
     public static DateTime GetLastWriteTime(this RegistryKey key)
     {
         int ret = NativeMethods.RegQueryInfoKey(key.Handle, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, out long ftLastWriteTime);
