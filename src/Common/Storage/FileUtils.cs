@@ -461,7 +461,7 @@ public static class FileUtils
             try
             {
                 directory.Walk(
-                    dir => dir.Attributes = FileAttributes.Normal,
+                    dir => dir.Attributes &= ~FileAttributes.ReadOnly,
                     file => file.IsReadOnly = false);
             }
             catch (ArgumentException)
