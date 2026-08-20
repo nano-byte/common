@@ -175,34 +175,38 @@ public sealed partial class FilteredTreeView<T> : UserControl where T : INamed
     {
         // Suppress events to prevent infinite loops
         _suppressEvents = true;
-
-        treeView.Nodes.Clear();
-        if (_nodes != null)
+        try
         {
-            foreach (T entry in _nodes)
+            treeView.Nodes.Clear();
+            if (_nodes != null)
             {
-                // The currently selected entry and checked entries are always visible
-                // Note: Compare name to handle cloned entries
-                if ((_selectedEntry != null && entry.Name == _selectedEntry.Name) || _checkedEntries.Contains(entry))
+                foreach (T entry in _nodes)
                 {
-                    _selectedEntry = entry; // Fix problems that might arise from using clones
-                    treeView.SelectedNode = AddTreeNode(entry);
+                    // The currently selected entry and checked entries are always visible
+                    // Note: Compare name to handle cloned entries
+                    if ((_selectedEntry != null && entry.Name == _selectedEntry.Name) || _checkedEntries.Contains(entry))
+                    {
+                        _selectedEntry = entry; // Fix problems that might arise from using clones
+                        treeView.SelectedNode = AddTreeNode(entry);
+                    }
+                    // List all nodes if there is no filter
+                    else if (string.IsNullOrEmpty(textSearch.Text))
+                        AddTreeNode(entry);
+                    // Only list nodes that match the filter
+                    else if (entry.Name.ContainsIgnoreCase(textSearch.Text))
+                        AddTreeNode(entry);
                 }
-                // List all nodes if there is no filter
-                else if (string.IsNullOrEmpty(textSearch.Text))
-                    AddTreeNode(entry);
-                // Only list nodes that match the filter
-                else if (entry.Name.ContainsIgnoreCase(textSearch.Text))
-                    AddTreeNode(entry);
+
+                // Automatically expand nodes based on the filtering
+                if (!string.IsNullOrEmpty(textSearch.Text))
+                    ExpandNodes(treeView.Nodes, fullNameExpand: true);
             }
-
-            // Automatically expand nodes based on the filtering
-            if (!string.IsNullOrEmpty(textSearch.Text))
-                ExpandNodes(treeView.Nodes, fullNameExpand: true);
         }
-
-        // Restore events at the end
-        _suppressEvents = false;
+        finally
+        {
+            // Restore events at the end
+            _suppressEvents = false;
+        }
     }
     #endregion
 

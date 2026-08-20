@@ -209,40 +209,44 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
     {
         // Suppress events to prevent infinite loops
         _suppressEvents = true;
-
-        var root = new TreeGridItemCollection();
-        _lookup.Clear();
-        Node? selectedNode = null;
-
-        if (_nodes != null)
+        try
         {
-            foreach (T entry in _nodes)
+            var root = new TreeGridItemCollection();
+            _lookup.Clear();
+            Node? selectedNode = null;
+
+            if (_nodes != null)
             {
-                // The currently selected entry and checked entries are always visible
-                // Note: Compare name to handle cloned entries
-                if ((_selectedEntry != null && entry.Name == _selectedEntry.Name) || _checkedEntries.Contains(entry))
+                foreach (T entry in _nodes)
                 {
-                    _selectedEntry = entry; // Fix problems that might arise from using clones
-                    selectedNode = AddTreeNode(root, entry);
+                    // The currently selected entry and checked entries are always visible
+                    // Note: Compare name to handle cloned entries
+                    if ((_selectedEntry != null && entry.Name == _selectedEntry.Name) || _checkedEntries.Contains(entry))
+                    {
+                        _selectedEntry = entry; // Fix problems that might arise from using clones
+                        selectedNode = AddTreeNode(root, entry);
+                    }
+                    // List all nodes if there is no filter
+                    else if (string.IsNullOrEmpty(_searchBox.Text))
+                        AddTreeNode(root, entry);
+                    // Only list nodes that match the filter
+                    else if (entry.Name.ContainsIgnoreCase(_searchBox.Text))
+                        AddTreeNode(root, entry);
                 }
-                // List all nodes if there is no filter
-                else if (string.IsNullOrEmpty(_searchBox.Text))
-                    AddTreeNode(root, entry);
-                // Only list nodes that match the filter
-                else if (entry.Name.ContainsIgnoreCase(_searchBox.Text))
-                    AddTreeNode(root, entry);
+
+                // Automatically expand nodes based on the filtering
+                if (!string.IsNullOrEmpty(_searchBox.Text))
+                    ExpandNodes(root, fullNameExpand: true);
             }
 
-            // Automatically expand nodes based on the filtering
-            if (!string.IsNullOrEmpty(_searchBox.Text))
-                ExpandNodes(root, fullNameExpand: true);
+            _treeView.DataStore = root;
+            if (selectedNode != null) _treeView.SelectedItem = selectedNode;
         }
-
-        _treeView.DataStore = root;
-        if (selectedNode != null) _treeView.SelectedItem = selectedNode;
-
-        // Restore events at the end
-        _suppressEvents = false;
+        finally
+        {
+            // Restore events at the end
+            _suppressEvents = false;
+        }
     }
     #endregion
 
