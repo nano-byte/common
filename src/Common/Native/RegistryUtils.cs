@@ -345,6 +345,11 @@ public static partial class RegistryUtils
     /// <returns><c>true</c> if the key was deleted or didn't exist; <c>false</c> if the deletion failed.</returns>
     public static bool TryDeleteSubKey(this RegistryKey key, [Localizable(false)] string subkeyName)
     {
+        #region Sanity checks
+        if (key == null) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+        #endregion
+
         try
         {
             key.DeleteSubKeyTree(subkeyName
@@ -355,11 +360,13 @@ public static partial class RegistryUtils
             return true;
         }
         #region Error handling
+#if NET20
         catch (ArgumentException)
         {
             // Key does not exist
             return true;
         }
+#endif
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to delete {key}\\{subkeyName}", ex);
