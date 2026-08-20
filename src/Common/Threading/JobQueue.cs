@@ -42,7 +42,7 @@ public sealed class JobQueue(CancellationToken cancellationToken = default)
             Action job;
             lock (_lock)
             {
-                if (_jobs.Count == 0)
+                if (_jobs.Count == 0 || cancellationToken.IsCancellationRequested)
                 {
                     _threadRunning = false;
                     return;
@@ -55,7 +55,11 @@ public sealed class JobQueue(CancellationToken cancellationToken = default)
             using (new CancellationGuard(cancellationToken))
 #endif
             {
-                if (cancellationToken.IsCancellationRequested) return;
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    lock (_lock) _threadRunning = false;
+                    return;
+                }
                 job();
             }
         }
