@@ -303,9 +303,8 @@ public static partial class RegistryUtils
     /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
     [MustDisposeResource]
     public static RegistryKey OpenSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
-        => ExceptionUtils.Retry<IOException, RegistryKey>(
-            () => key.TryOpenSubKey(subkeyName, writable)
-               ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key)));
+        => ExceptionUtils.Retry<IOException, RegistryKey?>(() => key.TryOpenSubKey(subkeyName, writable))
+        ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
 
     /// <summary>
     /// Creates a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
@@ -325,9 +324,9 @@ public static partial class RegistryUtils
 
         try
         {
-            return ExceptionUtils.Retry<IOException, RegistryKey>(
-                () => ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.CreateSubKey(subkeyName))
-                   ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key)));
+            return ExceptionUtils.Retry<IOException, RegistryKey?>(() =>
+                ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.CreateSubKey(subkeyName)))
+                ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
         }
         #region Error handling
         catch (SecurityException ex)
