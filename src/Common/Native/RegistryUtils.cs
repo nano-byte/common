@@ -141,8 +141,8 @@ public static partial class RegistryUtils
         #endregion
 
         return machineWide
-            ? GetString(HklmSoftwareKey + subkeyName, valueName,
-                GetString(HklmWowSoftwareKey + subkeyName, valueName))
+            ? GetString(HklmSoftwareKey + subkeyName, valueName)
+           ?? GetString(HklmWowSoftwareKey + subkeyName, valueName)
             : GetString(HkcuSoftwareKey + subkeyName, valueName);
     }
 
@@ -205,7 +205,7 @@ public static partial class RegistryUtils
         #region Error handling
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
-            Log.Warn($"Failed to delete {root}\\{subkeyName}\\{valueName}", ex);
+            Log.Warn($"Failed to delete {root.Name}\\{subkeyName}\\{valueName}", ex);
         }
         #endregion
     }
@@ -234,7 +234,7 @@ public static partial class RegistryUtils
         #region Error handling
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
-            Log.Warn($"Failed to get registry value names from {key.Name}", ex);
+            Log.Warn($"Failed to get registry value names from {key.Name}\\{subkeyName}", ex);
             return [];
         }
         #endregion
@@ -247,7 +247,7 @@ public static partial class RegistryUtils
     /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
     /// <returns>A list of key names; an empty array if the key does not exist or is not accessible.</returns>
     [Pure]
-    public static string[] GetSubKeyNames([Localizable(false)] RegistryKey key, [Localizable(false)] string subkeyName)
+    public static string[] GetSubKeyNames(this RegistryKey key, [Localizable(false)] string subkeyName)
     {
         #region Sanity checks
         if (key == null) throw new ArgumentNullException(nameof(key));
@@ -262,7 +262,7 @@ public static partial class RegistryUtils
         #region Error handling
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
-            Log.Warn($"Failed to get registry sub key names from {key.Name}", ex);
+            Log.Warn($"Failed to get registry sub key names from {key.Name}\\{subkeyName}", ex);
             return [];
         }
         #endregion
@@ -376,7 +376,7 @@ public static partial class RegistryUtils
 #endif
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
-            Log.Warn($"Failed to delete {key}\\{subkeyName}", ex);
+            Log.Warn($"Failed to delete {key.Name}\\{subkeyName}", ex);
             return false;
         }
         #endregion
@@ -408,7 +408,7 @@ public static partial class RegistryUtils
             else
             {
                 x64 = false;
-                return Registry.LocalMachine.OpenSubKeyChecked($@"WOW6432Node\{subkeyName}");
+                return Registry.LocalMachine.OpenSubKeyChecked($@"Wow6432Node\{subkeyName}");
             }
         }
         else
