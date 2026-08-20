@@ -9,9 +9,9 @@ namespace NanoByte.Common.Undo;
 public class ConcurrentCommandExecutor(ICommandExecutor inner) : ICommandExecutor
 {
 #if NET9_0_OR_GREATER
-    private static readonly Lock _lock = new();
+    private readonly Lock _lock = new();
 #else
-    private static readonly object _lock = new();
+    private readonly object _lock = new();
 #endif
 
     /// <inheritdoc/>
