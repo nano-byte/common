@@ -50,7 +50,7 @@ public class NamedCollection<T>() : KeyedCollection<string, T>(StringComparer.Or
 
         if (!Contains(element)) throw new KeyNotFoundException();
         if (element.Name == newName) return;
-        if (Contains(newName)) throw new InvalidOperationException(Resources.KeyAlreadyPresent);
+        if (!StringUtils.EqualsIgnoreCase(element.Name, newName) && Contains(newName)) throw new InvalidOperationException(Resources.KeyAlreadyPresent);
 
         ChangeItemKey(element, newName);
         element.Name = newName;
