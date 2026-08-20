@@ -19,8 +19,7 @@ public static partial class RegistryUtils
     /// </summary>
     /// <param name="keyName">The full path of the key to read from.</param>
     /// <param name="valueName">The name of the value to read.</param>
-    /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
-    /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
+    /// <param name="defaultValue">The default value to return if the key or value does not exist or is not accessible.</param>
     [Pure]
     public static int GetDword([Localizable(false)] string keyName, [Localizable(false)] string? valueName, int defaultValue = 0)
     {
@@ -33,7 +32,7 @@ public static partial class RegistryUtils
             return ExceptionUtils.Retry<SecurityException, int>(() => Registry.GetValue(keyName, valueName, defaultValue) as int? ?? defaultValue);
         }
         #region Error handling
-        catch (SecurityException ex)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to read registry DWORD value from {keyName}\\{valueName}", ex);
             return defaultValue;
@@ -74,8 +73,7 @@ public static partial class RegistryUtils
     /// </summary>
     /// <param name="keyName">The full path of the key to read from.</param>
     /// <param name="valueName">The name of the value to read.</param>
-    /// <param name="defaultValue">The default value to return if the key or value does not exist.</param>
-    /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
+    /// <param name="defaultValue">The default value to return if the key or value does not exist or is not accessible.</param>
     [Pure]
     [return: NotNullIfNotNull("defaultValue")]
     public static string? GetString([Localizable(false)] string keyName, [Localizable(false)] string? valueName, [Localizable(false)] string? defaultValue = null)
@@ -89,7 +87,7 @@ public static partial class RegistryUtils
             return ExceptionUtils.Retry<SecurityException, string?>(() => Registry.GetValue(keyName, valueName, defaultValue) as string ?? defaultValue);
         }
         #region Error handling
-        catch (SecurityException ex)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to read registry string value from {keyName}\\{valueName}", ex);
             return defaultValue;
