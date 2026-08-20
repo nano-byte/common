@@ -77,6 +77,6 @@ public sealed class AtomicWrite : IDisposable
 
     [MustDisposeResource]
     internal static IDisposable Lock(string path)
-        => new MutexLock("atomic-file-" + path.GetHashCode());
+        => new MutexLock("atomic-file-" + path.GetStableHashCode());
 }
 

@@ -329,4 +329,24 @@ public static class StringUtils
         // Use base64 encoding without '=' padding and with '-' instead of 'l'
         return Convert.ToBase64String(array)[..length].Replace('l', '-');
     }
+
+    /// <summary>
+    /// Returns a hash code for a string that is stable across processes.
+    /// </summary>
+    [Pure]
+    public static int GetStableHashCode(this string value)
+    {
+#if NETFRAMEWORK
+        return value.GetHashCode();
+#else
+        // .GetHashCode() is not stable across processes outside of .NET Framework
+        uint hash = 2166136261;
+        foreach (char c in value)
+        {
+            hash ^= c;
+            hash *= 16777619;
+        }
+        return unchecked((int)hash);
+#endif
+    }
 }
