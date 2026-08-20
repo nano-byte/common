@@ -1,6 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Security;
+
 namespace NanoByte.Common.Storage;
 
 /// <summary>
@@ -42,7 +44,7 @@ public static class Paths
             return Path.GetFullPath(path);
         }
         #region Error handling
-        catch (Exception ex) when (ex is ArgumentException or NotSupportedException)
+        catch (Exception ex) when (ex is ArgumentException or NotSupportedException or SecurityException)
         {
             // Wrap exception since only certain exception types are allowed
             throw new IOException(ex.Message, ex);

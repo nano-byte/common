@@ -1,6 +1,7 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Security;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Storage;
@@ -40,6 +41,11 @@ public abstract class ReadDirectoryBase([Localizable(false)] string path) : Task
         {
             // Wrap exception since only certain exception types are allowed
             throw new IOException(ex.Message, ex);
+        }
+        catch (SecurityException ex)
+        {
+            // Wrap exception since only certain exception types are allowed
+            throw new UnauthorizedAccessException(ex.Message, ex);
         }
         #endregion
         UnitsTotal = files.Sum(file => file.Length);
