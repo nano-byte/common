@@ -86,6 +86,7 @@ public class DictionaryExtensionsTest
     {
         new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode().Should().Be(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
         new Dictionary<int, string>().GetUnsequencedHashCode().Should().Be(new Dictionary<int, string>().GetUnsequencedHashCode());
+        new Dictionary<int, string> {[3] = "C", [2] = "B", [1] = "A"}.GetUnsequencedHashCode().Should().Be(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
         new Dictionary<int, string> {[1] = "X", [2] = "Y", [3] = "Z"}.GetUnsequencedHashCode().Should().NotBe(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
         new Dictionary<int, string> {[1] = "A", [2] = "B"}.GetUnsequencedHashCode().Should().NotBe(new Dictionary<int, string> {[1] = "A", [2] = "B", [3] = "C"}.GetUnsequencedHashCode());
     }

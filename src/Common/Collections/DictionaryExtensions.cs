@@ -237,13 +237,16 @@ public static class DictionaryExtensions
         if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
         #endregion
 
-        var hash = new HashCode();
+        valueComparer ??= EqualityComparer<TValue>.Default;
+        int result = 397;
         foreach (var (key, value) in dictionary)
         {
+            var hash = new HashCode();
             hash.Add(key);
             hash.Add(value, valueComparer);
+            result ^= hash.ToHashCode();
         }
-        return hash.ToHashCode();
+        return result;
     }
 
     /// <summary>
