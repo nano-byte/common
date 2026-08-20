@@ -26,8 +26,7 @@ public static class StreamUtils
     /// </summary>
     /// <param name="stream">The stream to read from.</param>
     /// <param name="buffer">The buffer to read the bytes into.</param>
-    /// <returns>The bytes read from the stream.</returns>
-    /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
+    /// <returns>The number of bytes read from the stream. May be less than the size of the <paramref name="buffer"/>.</returns>
     public static int Read(this Stream stream, ArraySegment<byte> buffer)
     {
         #region Sanity checks
@@ -202,7 +201,7 @@ public static class StreamUtils
     /// Copies the entire content of a stream to a <see cref="MemoryStream"/>. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
     /// </summary>
     /// <param name="stream">The stream to read from.</param>
-    /// <returns>A new stream or the original <paramref name="stream"/> if it was already a <see cref="MemoryStream"/>.</returns>
+    /// <returns>A new stream. Shares the underlying array with <paramref name="stream"/> if possible.</returns>
     public static MemoryStream ToMemory(this Stream stream)
     {
         #region Sanity checks
