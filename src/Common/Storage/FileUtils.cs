@@ -152,12 +152,19 @@ public static class FileUtils
         var referenceTime = new DateTime(2000, 1, 1, 0, 0, 1); // 1 second past mid-night on 1st of January 2000
         string tempFile = Paths.Combine(path, Path.GetRandomFileName());
 
-        File.WriteAllText(tempFile, @"a");
-        File.SetLastWriteTimeUtc(tempFile, referenceTime);
-        var resultTime = File.GetLastWriteTimeUtc(tempFile);
-        File.Delete(tempFile);
+        DateTime resultTime;
+        try
+        {
+            File.WriteAllText(tempFile, @"a");
+            File.SetLastWriteTimeUtc(tempFile, referenceTime);
+            resultTime = File.GetLastWriteTimeUtc(tempFile);
+        }
+        finally
+        {
+            if (File.Exists(tempFile)) File.Delete(tempFile);
+        }
 
-        return Math.Abs((resultTime - referenceTime).Seconds);
+        return (int)Math.Ceiling(Math.Abs((resultTime - referenceTime).TotalSeconds));
     }
     #endregion
 
