@@ -25,8 +25,14 @@ public sealed class SeekBufferStream(Stream underlyingStream, int bufferSize = S
     /// <inheritdoc/>
     protected override void Dispose(bool disposing)
     {
-        if (disposing)
-            _buffer.Dispose();
+        try
+        {
+            if (disposing) _buffer.Dispose();
+        }
+        finally
+        {
+            base.Dispose(disposing);
+        }
     }
 
     /// <inheritdoc/>
@@ -102,7 +108,7 @@ public sealed class SeekBufferStream(Stream underlyingStream, int bufferSize = S
             if (buffer.Length > MaxRead) buffer = buffer[..MaxRead];
             read = await UnderlyingStream.ReadAsync(buffer, cancellationToken);
             _underlyingPosition += read;
-            WriteToBuffer(buffer.Span);
+            WriteToBuffer(buffer.Span[..read]);
         }
 
         Position += read;
