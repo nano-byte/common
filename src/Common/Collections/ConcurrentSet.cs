@@ -80,11 +80,11 @@ public class ConcurrentSet<T> : ICollection<T>
 
     /// <inheritdoc/>
     [MustDisposeResource]
-    IEnumerator<T> IEnumerable<T>.GetEnumerator() => _dictionary.Keys.GetEnumerator();
+    public IEnumerator<T> GetEnumerator() => _dictionary.Keys.GetEnumerator();
 
     /// <inheritdoc/>
     [MustDisposeResource]
-    public IEnumerator GetEnumerator() => ((IEnumerable)_dictionary).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc/>
     public void Add(T item) => _dictionary.TryAdd(item ?? throw new ArgumentNullException(nameof(item)), false);
