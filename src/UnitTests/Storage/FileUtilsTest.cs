@@ -56,6 +56,14 @@ public class FileUtilsTest
         => FileUtils.PathEquals("abc", "xyz").Should().BeFalse();
 
     [Fact]
+    public void TestPathEqualsUnnormalizable()
+        => FileUtils.PathEquals("", "").Should().BeTrue();
+
+    [Fact]
+    public void TestPathEqualsUnnormalizableFalse()
+        => FileUtils.PathEquals("", "abc").Should().BeFalse();
+
+    [Fact]
     public void TestToNativePath()
         => "a/b".ToNativePath()
                 .Should().Be(Path.Combine("a", "b"));

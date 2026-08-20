@@ -23,12 +23,20 @@ public static class FileUtils
     [Pure]
     public static bool PathEquals(string? path1, string? path2)
     {
-        try
+        static string? Normalize(string? path)
         {
-            path1 = path1?.To(Paths.Absolute).TrimEnd(Path.DirectorySeparatorChar);
-            path2 = path2?.To(Paths.Absolute).TrimEnd(Path.DirectorySeparatorChar);
+            try
+            {
+                return path?.To(Paths.Absolute).TrimEnd(Path.DirectorySeparatorChar);
+            }
+            catch (IOException)
+            {
+                return path;
+            }
         }
-        catch (ArgumentException) {}
+
+        path1 = Normalize(path1);
+        path2 = Normalize(path2);
 
         return WindowsUtils.IsWindows || UnixUtils.IsMacOSX
             ? StringUtils.EqualsIgnoreCase(path1, path2)
