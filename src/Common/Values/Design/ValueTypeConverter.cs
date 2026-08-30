@@ -33,7 +33,7 @@ public abstract class ValueTypeConverter<T> : TypeConverter where T : struct
 
     /// <inheritdoc/>
     public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType) =>
-        destinationType == typeof(InstanceDescriptor) || base.CanConvertFrom(context, destinationType!);
+        destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType!);
 
     /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
