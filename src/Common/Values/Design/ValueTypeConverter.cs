@@ -50,7 +50,9 @@ public abstract class ValueTypeConverter<T> : TypeConverter where T : struct
             return new InstanceDescriptor(GetConstructor(), GetArguments((T)value!));
 
         if (destinationType == typeof(string))
-            return string.Join(GetElementSeparator(culture), GetValues((T)value!, context, culture));
+            return string.Join(
+                GetElementSeparator(culture) + " ",
+                GetValues((T)value!, context, culture));
 
         return base.ConvertTo(context, culture, value, destinationType);
     }
@@ -68,8 +70,18 @@ public abstract class ValueTypeConverter<T> : TypeConverter where T : struct
         sValue = sValue.Trim();
         if (sValue.Length == 0) return null;
 
-        var arguments = sValue.Split(GetElementSeparator(culture)[0]);
-        if (arguments.Length != NoArguments) return null;
+        var separator = GetElementSeparator(culture);
+        if (separator.Length == 0)
+            throw new InvalidOperationException("The element separator must not be empty.");
+
+        var arguments = sValue
+            .Split(new[] { separator }, StringSplitOptions.None)
+            .Select(x => x.Trim())
+            .ToArray();
+
+        if (arguments.Length != NoArguments)
+            return null;
+
         return GetObject(arguments, culture);
     }
     #endregion
