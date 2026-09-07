@@ -66,12 +66,17 @@ public static partial class Log
         string logLine = GetLogLine(severity, message, exception);
 
         System.Diagnostics.Debug.Write(logLine);
+
+        LogEntryEventHandler? handler;
         lock (_lock)
         {
             AddToBuffer(logLine);
             WriteToFile(logLine);
-            _handlers.LastOrDefault()?.Invoke(severity, message, exception);
+            handler = _handlers.LastOrDefault();
         }
+
+        // Invoked outside of the lock, so that a handler that blocks cannot stall every other thread that logs
+        handler?.Invoke(severity, message, exception);
     }
 
     /// <summary>
