@@ -21,6 +21,7 @@ partial class Log
     /// Only the newest (last) registered handler is invoked.
     /// <see cref="Console"/> output is used as a fallback if no handlers are registered.
     /// </summary>
+    /// <remarks>Handlers must be thread-safe, and may still be invoked while or shortly after being removed.</remarks>
     [SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
     public static event LogEntryEventHandler? Handler
     {
