@@ -6,14 +6,28 @@ namespace NanoByte.Common.EtoControls;
 /// <summary>
 /// Builds a formatted string with colored paragraphs for display in a <see cref="RichTextArea"/>.
 /// </summary>
+/// <remarks>This class is thread-safe.</remarks>
 public sealed class FormattedTextBuilder
 {
     private readonly List<(LogSeverity Severity, string Message)> _entries = [];
 
+#if NET9_0_OR_GREATER
+    private readonly Lock _lock = new();
+#else
+    private readonly object _lock = new();
+#endif
+
     /// <summary>
     /// Indicates whether no entries have been appended yet.
     /// </summary>
-    public bool IsEmpty => _entries.Count == 0;
+    public bool IsEmpty
+    {
+        get
+        {
+            lock (_lock)
+                return _entries.Count == 0;
+        }
+    }
 
     /// <summary>
     /// Appends a log entry as a new line.
@@ -26,7 +40,14 @@ public sealed class FormattedTextBuilder
         if (message == null) throw new ArgumentNullException(nameof(message));
         #endregion
 
-        _entries.Add((severity, message));
+        lock (_lock)
+            _entries.Add((severity, message));
+    }
+
+    private (LogSeverity Severity, string Message)[] GetEntries()
+    {
+        lock (_lock)
+            return _entries.ToArray();
     }
 
     /// <summary>
@@ -37,7 +58,7 @@ public sealed class FormattedTextBuilder
         var textArea = new RichTextArea {ReadOnly = true};
 
         int position = 0;
-        foreach ((var severity, string message) in _entries)
+        foreach ((var severity, string message) in GetEntries())
         {
             textArea.Append(message + "\n", scrollToCursor: false);
             if (GetColor(severity) is {} color)
@@ -65,5 +86,5 @@ public sealed class FormattedTextBuilder
     /// <summary>
     /// Returns all aggregated entries as a single string.
     /// </summary>
-    public override string ToString() => string.Join(Environment.NewLine, _entries.Select(x => x.Message));
+    public override string ToString() => string.Join(Environment.NewLine, GetEntries().Select(x => x.Message));
 }
