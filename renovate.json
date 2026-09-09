@@ -20,7 +20,7 @@
     },
     {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
-      "matchPackageNames": ["System.Resources.Extensions"],
+      "matchPackageNames": ["System.Resources.Extensions", "System.Drawing.Common"],
       "groupName": "Microsoft Extensions",
       "automerge": true,
       "automergeType": "branch",
