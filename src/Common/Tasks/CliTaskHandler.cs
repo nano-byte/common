@@ -61,25 +61,35 @@ public class CliTaskHandler : TaskHandlerBase
         e.Cancel = true;
     }
 
+#if NET9_0_OR_GREATER
+    private static readonly Lock _consoleLock = new();
+#else
+    private static readonly object _consoleLock = new();
+#endif
+
     /// <summary>
     /// Prints <see cref="Log"/> entries to the <see cref="Console"/>.
     /// </summary>
     protected override void DisplayLogEntry(LogSeverity severity, string message)
     {
-        try
+        lock (_consoleLock)
         {
-            Console.ForegroundColor = GetLogColor(severity);
-        }
-        catch (Exception ex) when (ex is InvalidOperationException or IOException)
-        {}
+            try
+            {
+                Console.ForegroundColor = GetLogColor(severity);
+            }
+            catch (Exception ex) when (ex is InvalidOperationException or IOException)
+            {}
 
-        Console.Error.WriteLine(message);
-        try
-        {
-            Console.ResetColor();
+            Console.Error.WriteLine(message);
+
+            try
+            {
+                Console.ResetColor();
+            }
+            catch (Exception ex) when (ex is InvalidOperationException or IOException)
+            {}
         }
-        catch (Exception ex) when (ex is InvalidOperationException or IOException)
-        {}
     }
 
     /// <summary>
