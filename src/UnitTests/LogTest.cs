@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using NanoByte.Common.Info;
 
@@ -21,8 +22,9 @@ public class LogTest
     [Fact]
     public void TestHandler()
     {
-        var events = new List<(LogSeverity, string?, Exception?)>();
-        void Handler(LogSeverity severity, string? message, Exception? exception) => events.Add((severity, message, exception));
+        // Log is global, so tests running in parallel may invoke the handler on other threads
+        var events = new ConcurrentQueue<(LogSeverity, string?, Exception?)>();
+        void Handler(LogSeverity severity, string? message, Exception? exception) => events.Enqueue((severity, message, exception));
 
         Log.Handler += Handler;
         try
