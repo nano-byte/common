@@ -171,7 +171,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>Kata kunci tersebut sudah ada di kamus.</value>
+    <value>Kata kunci tersebut sudah ada dalam kamus.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
@@ -227,7 +227,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Perintah ini tidak dapat dijalankan kembali sampai perintah undo telah dijalankan.</value>
+    <value>Perintah ini tidak dapat dijalankan kembali sampai perintah "Undo" telah dijalankan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
@@ -299,7 +299,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>File assembly bernama "{0}" tidak dapat ditemukan.</value>
+    <value>Assembly bernama "{0}" tidak dapat ditemukan.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
-    <value>Subsistem Unix gagal memproses permintaan tersebut. Mungkin Anda tidak memiliki hak akses yang cukup.</value>
+    <value>Subsistem Unix gagal memproses permintaan tersebut. Anda mungkin tidak memiliki hak akses yang cukup.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UserName" xml:space="preserve">

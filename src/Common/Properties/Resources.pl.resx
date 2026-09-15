@@ -219,7 +219,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Proces zakończył się z nieoczekiwanym kodem wyjścia.</value>
+    <value>Proces zakończył się z nieoczekiwanym kodem zakończenia.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Długość wartości docelowych musi być równa długości wartości starych (oldValues).</value>
+    <value>Długość docelowych wartości musi być równa długości wartości starych (oldValues).</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Twoja wersja platformy .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania treści przez protokół HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
+    <value>Twoja wersja platformy .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania treści przez HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">

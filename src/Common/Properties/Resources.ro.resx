@@ -239,7 +239,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Se reîncearcă în {0} milisecunde din cauza:</value>
+    <value>Se va reîncerca în {0} milisecunde din cauza:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">

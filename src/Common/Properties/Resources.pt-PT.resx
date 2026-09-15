@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>O DACL não pode ser canonicizado, uma vez que isso poderia resultar numa perda de informação.</value>
+    <value>O DACL não pode ser canonizado, uma vez que isso poderia resultar numa perda de informação.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Repor valor</value>
+    <value>Redefinir valor</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Nova tentativa da {0} milissegundos devido a:</value>
+    <value>Nova tentativa daqui a {0} milissegundos devido a:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>A sua versão do .NET não suporta o TLS 1.2. Isto pode causar erros de ligação ao descarregar conteúdos através de HTTPS. Por favor, execute o Windows Update para instalar as correções necessárias.</value>
+    <value>A sua versão do .NET não suporta o TLS 1.2. Isto pode causar erros de ligação ao descarregar conteúdos através de HTTPS. Por favor, execute o Windows Update para instalar as correcções necessárias.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
