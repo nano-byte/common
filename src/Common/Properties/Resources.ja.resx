@@ -87,7 +87,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>コレクションはそれ自体に追加することはできません。</value>
+    <value>コレクションは、それ自体に追加することはできません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
@@ -107,7 +107,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>保存先ディレクトリはすでに存在します。</value>
+    <value>指定されたディレクトリはすでに存在します。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
@@ -215,7 +215,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>'{0}' が終了コード{1} で終了しました。</value>
+    <value>'{0}' は、終了コード{1} で終了しました。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>位置{0} からの読み取りを試みました。これは、基となるストリームの位置{2} から{1} バイト離れていますが、シークバッファが収容できる差は{3} バイトのみです。</value>
+    <value>位置{0} からの読み取りを試みました。これは、基になるストリームの位置{2} から{1} バイト離れていますが、シークバッファが許容できる差は{3} バイトのみです。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>ターゲットの長さは、oldValuesの長さと等しくなければなりません。</value>
+    <value>ターゲットの長さは、oldValues の長さと等しくなければなりません。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">

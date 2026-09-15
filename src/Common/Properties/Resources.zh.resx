@@ -91,7 +91,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>该DACL无法进行规范化处理，因为这可能会导致信息丢失。</value>
+    <value>DACL 无法进行规范化处理，因为这可能会导致信息丢失。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -171,7 +171,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="KeyAlreadyPresent" xml:space="preserve">
-    <value>该键已在字典中存在。</value>
+    <value>该密钥已在字典中存在。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
