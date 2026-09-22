@@ -175,8 +175,14 @@ public sealed partial class FilteredTreeView<T> : UserControl where T : INamed
     {
         // Suppress events to prevent infinite loops
         _suppressEvents = true;
+        treeView.BeginUpdate();
         try
         {
+            // Remember the view state so that rebuilding the tree does not disturb the user
+            var expandedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            GetExpandedKeys(treeView.Nodes, expandedKeys);
+            string? topKey = treeView.TopNode?.Name;
+
             treeView.Nodes.Clear();
             if (_nodes != null)
             {
@@ -197,14 +203,23 @@ public sealed partial class FilteredTreeView<T> : UserControl where T : INamed
                         AddTreeNode(entry);
                 }
 
+                RestoreExpandedKeys(treeView.Nodes, expandedKeys);
+
                 // Automatically expand nodes based on the filtering
                 if (!string.IsNullOrEmpty(textSearch.Text))
                     ExpandNodes(treeView.Nodes, fullNameExpand: true);
+
+                if (topKey != null)
+                {
+                    var topNodes = treeView.Nodes.Find(topKey, searchAllChildren: true);
+                    if (topNodes.Length != 0) treeView.TopNode = topNodes[0];
+                }
             }
         }
         finally
         {
             // Restore events at the end
+            treeView.EndUpdate();
             _suppressEvents = false;
         }
     }
@@ -278,6 +293,38 @@ public sealed partial class FilteredTreeView<T> : UserControl where T : INamed
                 ExpandNodes(node.Nodes, fullNameExpand: false);
             }
             else ExpandNodes(node.Nodes, fullNameExpand: fullNameExpand);
+        }
+    }
+
+    /// <summary>
+    /// Collects the keys of all expanded nodes.
+    /// </summary>
+    /// <param name="subTree">The current <see cref="TreeNodeCollection"/> used in recursion</param>
+    /// <param name="keys">The collection to add the keys to.</param>
+    private static void GetExpandedKeys(TreeNodeCollection subTree, ICollection<string> keys)
+    {
+        foreach (var node in subTree.OfType<TreeNode>())
+        {
+            if (!node.IsExpanded) continue;
+
+            keys.Add(node.Name);
+            GetExpandedKeys(node.Nodes, keys);
+        }
+    }
+
+    /// <summary>
+    /// Expands all nodes whose keys were collected by <see cref="GetExpandedKeys"/>.
+    /// </summary>
+    /// <param name="subTree">The current <see cref="TreeNodeCollection"/> used in recursion</param>
+    /// <param name="keys">The keys of the nodes to expand.</param>
+    private static void RestoreExpandedKeys(TreeNodeCollection subTree, ICollection<string> keys)
+    {
+        foreach (var node in subTree.OfType<TreeNode>())
+        {
+            if (!keys.Contains(node.Name)) continue;
+
+            node.Expand();
+            RestoreExpandedKeys(node.Nodes, keys);
         }
     }
     #endregion
