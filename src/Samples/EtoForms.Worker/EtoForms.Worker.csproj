@@ -29,16 +29,16 @@
     <ProjectReference Include="..\..\Common.EtoForms\Common.EtoForms.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(OS)'=='Windows_NT'">
-    <PackageReference Include="Eto.Platform.Windows" Version="2.11.0" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.12.0" />
     <Using Remove="System.Drawing" />
     <Using Remove="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-    <PackageReference Include="Eto.Platform.Mac64" Version="2.11.0" />
+    <PackageReference Include="Eto.Platform.Mac64" Version="2.12.0" />
     <Content Include="Icon.icns" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
-    <PackageReference Include="Eto.Platform.Gtk" Version="2.11.0" />
+    <PackageReference Include="Eto.Platform.Gtk" Version="2.12.0" />
   </ItemGroup>
 
 </Project>
