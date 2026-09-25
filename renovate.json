@@ -35,6 +35,12 @@
       "matchPackageNames": ["System.Resources.Extensions", "System.Memory", "System.ValueTuple", "System.Drawing.Common"],
       "matchUpdateTypes": ["major", "minor"],
       "enabled": false
+    },
+    {
+      "matchPackagePatterns": ["^Eto\\."],
+      "groupName": "Eto.Forms",
+      "automerge": true,
+      "automergeType": "branch"
     }
   ]
 }
