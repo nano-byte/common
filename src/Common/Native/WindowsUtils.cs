@@ -538,6 +538,38 @@ public static partial class WindowsUtils
             throw BuildException(Marshal.GetLastWin32Error());
     }
 
+#if !NET20 && !NET40
+    /// <summary>
+    /// Looks up a directory entry the way Windows resolves names: case-insensitively and including 8.3 short names. Does not follow links.
+    /// </summary>
+    /// <param name="fullPath">The fully qualified, normalized path of the entry. Must not contain wildcards.</param>
+    /// <returns>The long name as stored on disk and the attributes; <c>null</c> if the entry does not exist.</returns>
+    /// <exception cref="IOException">The lookup failed.</exception>
+    public static (string Name, FileAttributes Attributes)? TryGetDirectoryEntry([Localizable(false)] string fullPath)
+    {
+        if (string.IsNullOrEmpty(fullPath)) throw new ArgumentNullException(nameof(fullPath));
+
+        var handle = NativeMethods.FindFirstFileExW(ToExtendedPath(fullPath), NativeMethods.FindExInfoBasic, out var data, NativeMethods.FindExSearchNameMatch, IntPtr.Zero, 0);
+        if (handle == NativeMethods.InvalidHandleValue)
+        {
+            int error = Marshal.GetLastWin32Error();
+            if (error is NativeMethods.ErrorFileNotFound or NativeMethods.ErrorPathNotFound) return null;
+            throw new IOException(new Win32Exception(error).Message + " " + fullPath);
+        }
+
+        NativeMethods.FindClose(handle);
+        return (data.cFileName, data.dwFileAttributes);
+    }
+#endif
+
+    /// <summary>
+    /// Adds the <c>\\?\</c> prefix, so lookups work beyond <c>MAX_PATH</c> and Windows does not normalize the path again.
+    /// </summary>
+    private static string ToExtendedPath(string fullPath)
+        => fullPath.StartsWith(@"\\?\") ? fullPath
+            : fullPath.StartsWith(@"\\") ? @"\\?\UNC\" + fullPath[2..]
+            : @"\\?\" + fullPath;
+
     /// <summary>
     /// Returns the file ID of a file.
     /// </summary>

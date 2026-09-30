@@ -70,6 +70,34 @@ public class WindowsUtilsTest
     }
 
     [Fact]
+    public void TestTryGetDirectoryEntryExisting()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string path = Path.Combine(tempDir, "MixedCase.txt");
+        File.WriteAllText(path, "test");
+
+        var entry = WindowsUtils.TryGetDirectoryEntry(path.ToUpperInvariant());
+        entry.Should().NotBeNull();
+        entry.Value.Name.Should().Be("MixedCase.txt");
+        entry.Value.Attributes.Should().NotHaveFlag(FileAttributes.Directory);
+    }
+
+    [Fact]
+    public void TestTryGetDirectoryEntryDirectory()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        WindowsUtils.TryGetDirectoryEntry(tempDir)!.Value.Attributes.Should().HaveFlag(FileAttributes.Directory);
+    }
+
+    [Fact]
+    public void TestTryGetDirectoryEntryMissing()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        WindowsUtils.TryGetDirectoryEntry(Path.Combine(tempDir, "missing")).Should().BeNull();
+        WindowsUtils.TryGetDirectoryEntry(Path.Combine(tempDir, "missing", "nested")).Should().BeNull();
+    }
+
+    [Fact]
     public void TestIsNotSymlink()
     {
         using var tempFile = new TemporaryFile("unit-tests");
