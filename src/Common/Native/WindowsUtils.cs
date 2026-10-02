@@ -512,9 +512,19 @@ public static partial class WindowsUtils
             return false;
         }
 
-        target = new string(buffer.PathBuffer, buffer.SubstituteNameOffset / 2, buffer.SubstituteNameLength / 2);
+        target = buffer.PrintNameLength > 0
+            ? new string(buffer.PathBuffer, buffer.PrintNameOffset / 2, buffer.PrintNameLength / 2)
+            : FromNtPath(new string(buffer.PathBuffer, buffer.SubstituteNameOffset / 2, buffer.SubstituteNameLength / 2));
         return true;
     }
+
+    /// <summary>
+    /// Converts an NT path (e.g., <c>\??\C:\dir</c> or <c>\??\UNC\server\share</c>) to a Win32 path. Returns other paths unchanged.
+    /// </summary>
+    private static string FromNtPath(string path)
+        => path.StartsWith(@"\??\UNC\") ? @"\\" + path[@"\??\UNC\".Length..]
+            : path.StartsWith(@"\??\") ? path[@"\??\".Length..]
+            : path;
 
     /// <summary>
     /// Creates a hard link between two files.

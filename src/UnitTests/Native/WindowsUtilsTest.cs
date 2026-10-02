@@ -69,6 +69,28 @@ public class WindowsUtilsTest
         target.Should().Be("target");
     }
 
+    [Theory]
+    [InlineData(@"C:\Windows")]
+    [InlineData(@"\\server\share\dir")]
+    [InlineData(@"relative\path")]
+    public void TestIsSymlinkReturnsTargetAsSpecified(string target)
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string sourcePath = Path.Combine(tempDir, "symlink");
+
+        try
+        {
+            FileUtils.CreateSymlink(sourcePath, target);
+        }
+        catch (IOException) when (!WindowsUtils.IsAdministrator)
+        {
+            throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
+        }
+
+        WindowsUtils.IsSymlink(sourcePath, out string? actualTarget).Should().BeTrue();
+        actualTarget.Should().Be(target, because: "absolute targets should not be returned in NT path syntax (e.g., \\??\\C:\\)");
+    }
+
     [Fact]
     public void TestTryGetDirectoryEntryExisting()
     {
