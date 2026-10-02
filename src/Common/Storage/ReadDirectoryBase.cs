@@ -71,6 +71,9 @@ public abstract class ReadDirectoryBase([Localizable(false)] string path) : Task
 
     private static FileInfo? TryFindHardlink(FileInfo file, IDictionary<long, FileInfo> fileIDs)
     {
+        // Getting the file ID of a symlink would follow it and return the ID of its target (or fail if it points to a directory)
+        if (file.Attributes.HasFlag(FileAttributes.ReparsePoint)) return null;
+
         long fileID;
         try
         {
