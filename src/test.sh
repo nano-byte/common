@@ -9,5 +9,5 @@ else
     dotnet="../0install.sh run --version 10.0..!10.1 https://apps.0install.net/dotnet/sdk.xml"
 fi
 
-# Unit tests (without .NET Framework)
+echo "Run unit tests (without .NET Framework)"
 $dotnet test --no-build --configuration Release --framework net10.0

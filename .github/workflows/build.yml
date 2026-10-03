@@ -2,8 +2,16 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  windows:
-    runs-on: windows-2025-vs2026
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-2025-vs2026
+            build: .\build.ps1
+          - os: ubuntu-latest
+            build: ./build.sh
+    runs-on: ${{matrix.os}}
+
     steps:
       # Prepare
       - uses: actions/checkout@v7
@@ -18,18 +26,18 @@ jobs:
 
       # Build
       - name: Build
-        run: .\build.ps1 ${{steps.gitversion.outputs.nuGetVersion}}${{github.ref_type != 'tag' && format('-{0}', steps.gitversion.outputs.shortSha) || ''}}
+        run: ${{matrix.build}} ${{steps.gitversion.outputs.nuGetVersion}}${{github.ref_type != 'tag' && format('-{0}', steps.gitversion.outputs.shortSha) || ''}}
       - name: Report test results
         if: always()
         uses: dorny/test-reporter@v3
         with:
-          name: windows - Test Report
+          name: ${{runner.os}} - Test Report
           reporter: dotnet-trx
           path: src/UnitTests/TestResults/*.trx
 
       # Release
       - name: Get tag message
-        if: github.ref_type == 'tag'
+        if: runner.os == 'Windows' && github.ref_type == 'tag'
         id: tag_message
         run: |
           "message<<EOF" >> $env:GITHUB_OUTPUT
@@ -37,7 +45,7 @@ jobs:
           git tag --format="%(contents)" -l ${{github.ref_name}} >> $env:GITHUB_OUTPUT
           "EOF" >> $env:GITHUB_OUTPUT
       - name: Create GitHub Release
-        if: github.ref_type == 'tag'
+        if: runner.os == 'Windows' && github.ref_type == 'tag'
         uses: softprops/action-gh-release@v3
         with:
           body: |
@@ -47,7 +55,7 @@ jobs:
 
       # Publish
       - name: Publish documentation
-        if: github.ref_type == 'tag'
+        if: runner.os == 'Windows' && github.ref_type == 'tag'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{github.token}}
@@ -55,36 +63,8 @@ jobs:
           publish_dir: artifacts/Documentation
           cname: common.nano-byte.net
       - name: Publish packages (GitHub)
-        if: github.event_name == 'push' && !startsWith(github.ref_name, 'renovate/')
+        if: runner.os == 'Windows' && github.event_name == 'push' && !startsWith(github.ref_name, 'renovate/')
         run: dotnet nuget push artifacts\Release\*.nupkg --source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json --api-key ${{github.token}} --no-symbols --skip-duplicate
       - name: Publish packages (NuGet.org)
-        if: github.ref_type == 'tag'
+        if: runner.os == 'Windows' && github.ref_type == 'tag'
         run: dotnet nuget push artifacts\Release\*.nupkg --source nuget.org --api-key ${{secrets.NUGET_API_KEY}}
-
-  linux:
-    runs-on: ubuntu-latest
-    steps:
-      # Prepare
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          show-progress: false
-      - uses: gittools/actions/gitversion/setup@v3.2.1
-        with:
-          versionSpec: '5.12.x'
-      - uses: gittools/actions/gitversion/execute@v3.2.1
-        id: gitversion
-      - uses: actions/setup-dotnet@v6
-        with:
-          dotnet-version: '10.0.x'
-
-      # Build
-      - name: Build
-        run: ./build.sh ${{steps.gitversion.outputs.nuGetVersion}}${{github.ref_type != 'tag' && format('-{0}', steps.gitversion.outputs.shortSha) || ''}}
-      - name: Report test results
-        if: always()
-        uses: dorny/test-reporter@v3
-        with:
-          name: linux - Test Report
-          reporter: dotnet-trx
-          path: src/UnitTests/TestResults/*.trx
