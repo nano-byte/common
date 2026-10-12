@@ -38,10 +38,11 @@ partial class WinFormsUtils
         public struct WinMessage
         {
             public IntPtr hWnd;
+            public uint message;
             public IntPtr wParam;
             public IntPtr lParam;
             public uint time;
-            public Point p;
+            public Point pt;
         }
 
         [DllImport("user32")]
