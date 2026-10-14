@@ -17,11 +17,23 @@ namespace NanoByte.Common.Native;
 /// <summary>
 /// Provides helper methods related to operating system functionality across multiple platforms.
 /// </summary>
-public static class OSUtils
+public static partial class OSUtils
 {
+    private const string
+        EnvVariableLongStylePattern = @"\${([^{}]+)}",
+        EnvVariableShortStylePattern = @"\$([^{}\$\s\\/-]+)";
+#if NET
+    [GeneratedRegex(EnvVariableLongStylePattern)]
+    private static partial Regex EnvVariableLongStyleRegex();
+    [GeneratedRegex(EnvVariableShortStylePattern)]
+    private static partial Regex EnvVariableShortStyleRegex();
+#else
     private static readonly Regex
-        _envVariableLongStyle = new(@"\${([^{}]+)}"),
-        _envVariableShortStyle = new(@"\$([^{}\$\s\\/-]+)");
+        _envVariableLongStyleRegex = new(EnvVariableLongStylePattern),
+        _envVariableShortStyleRegex = new(EnvVariableShortStylePattern);
+    private static Regex EnvVariableLongStyleRegex() => _envVariableLongStyleRegex;
+    private static Regex EnvVariableShortStyleRegex() => _envVariableShortStyleRegex;
+#endif
 
     /// <summary>
     /// Expands/substitutes any Unix-style environment variables in the string.
@@ -34,7 +46,7 @@ public static class OSUtils
         if (value == null) throw new ArgumentNullException(nameof(value));
         if (variables == null) throw new ArgumentNullException(nameof(variables));
 
-        string intermediate = _envVariableLongStyle.Replace(value, x =>
+        string intermediate = EnvVariableLongStyleRegex().Replace(value, x =>
         {
             if (x.Index >= 1 && value[x.Index - 1] == '$') // Treat $$ as escaping
                 return "{" + x.Groups[1].Value + "}";
@@ -59,7 +71,7 @@ public static class OSUtils
             }
         });
 
-        return _envVariableShortStyle.Replace(intermediate, x =>
+        return EnvVariableShortStyleRegex().Replace(intermediate, x =>
         {
             if (x.Index >= 1 && value[x.Index - 1] == '$') // Treat $$ as escaping
                 return x.Groups[1].Value;
