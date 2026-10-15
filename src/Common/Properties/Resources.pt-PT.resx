@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>O DACL não pode ser canonizado, uma vez que isso poderia resultar numa perda de informação.</value>
+    <value>O DACL não pode ser canonicizado, uma vez que isso poderia resultar numa perda de informação.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -179,7 +179,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>O número máximo de elementos na coleção foi excedido.</value>
+    <value>Foi excedido o número máximo de elementos na coleção.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
