@@ -151,7 +151,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Nepodařilo se spustit program „{0} “.</value>
+    <value>Nepodařilo se spustit „{0} “.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Pokus o čtení z pozice {0}. Tato pozice se nachází o {1} bajtů dále než pozice v podkladovém proudu {2}, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
+    <value>Pokus o čtení z pozice {0}. Tato pozice je vzdálena {1} bajtů od pozice v podkladovém proudu {2}, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Vaše verze .NET nepodporuje TLS 1.2. To může způsobit chyby připojení při stahování obsahu přes HTTPS. Spusťte prosím Windows Update a nainstalujte potřebné opravy.</value>
+    <value>Vaše verze .NET nepodporuje protokol TLS 1.2. To může způsobit chyby připojení při stahování obsahu přes HTTPS. Spusťte prosím službu Windows Update a nainstalujte potřebné opravy.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">

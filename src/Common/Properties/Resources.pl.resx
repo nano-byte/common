@@ -147,7 +147,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Nie udało się cofnąć zmiany „{0} ”.</value>
+    <value>Nie udało się cofnąć operacji „{0} ”.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -251,7 +251,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Próbowano odczytać dane z pozycji {0}. Odległość ta wynosi {1} bajtów od pozycji w strumieniu bazowym {2}, ale bufor wyszukiwania może pomieścić różnicę wynoszącą jedynie {3} bajtów.</value>
+    <value>Próbowano odczytać dane z pozycji {0}. Odległość ta wynosi {1} bajtów od pozycji w strumieniu bazowym {2}, jednak bufor wyszukiwania może pomieścić różnicę wynoszącą jedynie {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
@@ -287,7 +287,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Długość docelowych wartości musi być równa długości wartości starych (oldValues).</value>
+    <value>Długość wartości docelowych musi być równa długości wartości starych (oldValues).</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
@@ -295,7 +295,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>Twoja wersja platformy .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania treści przez HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
+    <value>Twoja wersja platformy .NET nie obsługuje protokołu TLS 1.2. Może to powodować błędy połączenia podczas pobierania treści przez protokół HTTPS. Uruchom usługę Windows Update, aby zainstalować niezbędne poprawki.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">

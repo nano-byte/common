@@ -143,7 +143,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'을(를) 열 수 없습니다.</value>
+    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'를 열 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
@@ -151,7 +151,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>'{0}'을(를) 시작하지 못했습니다.</value>
+    <value>'{0}'을(를) 시작할 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
@@ -179,7 +179,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>컬렉션에 포함될 수 있는 요소의 최대 수를 초과했습니다.</value>
+    <value>컬렉션에 포함될 수 있는 요소의 최대 개수를 초과했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>값 초기화</value>
+    <value>값 재설정</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
@@ -299,7 +299,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>"{0}"라는 어셈블리를 찾을 수 없습니다.</value>
+    <value>"{0}"라는 이름의 어셈블리를 찾을 수 없습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">

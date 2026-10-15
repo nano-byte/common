@@ -91,7 +91,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet worden gecanoniseerd, aangezien dit mogelijk zou leiden tot informatieverlies.</value>
+    <value>De DACL kan niet worden gecanoniseerd, aangezien dit mogelijk tot informatieverlies zou leiden.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
@@ -199,7 +199,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>Deze methode is alleen beschikbaar in Windows.</value>
+    <value>Deze methode is alleen beschikbaar op Windows.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -219,7 +219,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Een proces is afgesloten met een onverwachte afsluitcode.</value>
+    <value>Een proces is beëindigd met een onverwachte exitcode.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
@@ -239,7 +239,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Opnieuw proberen over {0} e milliseconden vanwege:</value>
+    <value>Opnieuw proberen binnen {0} milliseconden vanwege:</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="Search" xml:space="preserve">
