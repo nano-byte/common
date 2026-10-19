@@ -91,8 +91,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nie może zostać kanonizowany, ponieważ mogłoby to potencjalnie spowodować utratę informacji.</value>
-    <comment>Automatically translated.</comment>
+    <value>Listy DACL nie można przekształcić do postaci kanonicznej, ponieważ mogłoby to spowodować utratę informacji.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>&amp;Komentarz:</value>
@@ -219,8 +219,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Proces zakończył się z nieoczekiwanym kodem zakończenia.</value>
-    <comment>Automatically translated.</comment>
+    <value>Proces zakończył działanie z nieoczekiwanym kodem wyjścia.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Trwa odczyt pliku {0}</value>
@@ -231,8 +231,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Zresetuj wartość</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Resetuj wartość</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Restartowanie aplikacji</value>
@@ -243,8 +243,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Wyszukiwanie</value>
-    <comment>Automatically translated.</comment>
+    <value>Szukaj</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="SearchingFileReferences" xml:space="preserve">
     <value>Wyszukiwanie odniesień do otwartych plików</value>
@@ -287,8 +287,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>Długość wartości docelowych musi być równa długości wartości starych (oldValues).</value>
-    <comment>Automatically translated.</comment>
+    <value>Długość targets musi być równa długości oldValues</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Szczegóły techniczne:</value>
@@ -307,8 +307,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>To polecenie cofania nie może zostać wykonane, dopóki nie zostanie wykonane bieżące polecenie.</value>
-    <comment>Automatically translated.</comment>
+    <value>To polecenie cofania nie może zostać wykonane, dopóki nie zostanie wykonane właściwe polecenie.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
     <value>Podsystem Unix nie zdołał przetworzyć żądania. Być może nie masz wystarczających uprawnień.</value>

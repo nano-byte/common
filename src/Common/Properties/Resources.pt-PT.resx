@@ -91,8 +91,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>O DACL não pode ser canonicizado, uma vez que isso poderia resultar numa perda de informação.</value>
-    <comment>Automatically translated.</comment>
+    <value>A DACL não pode ser canonicalizada, uma vez que isso poderia resultar numa perda de informação.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>&amp;Comentário:</value>
@@ -151,8 +151,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
-    <value>Não foi possível iniciar o «{0} ».</value>
-    <comment>Automatically translated.</comment>
+    <value>Não foi possível iniciar «{0}».</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
     <value>O ficheiro que deveria ter sido transferido de {0} não tem o tamanho esperado. Deveria ter {1} bytes, mas tem {2} bytes.</value>
@@ -175,8 +175,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>A execução do «{0} » requer privilégios de administrador.</value>
-    <comment>Automatically translated.</comment>
+    <value>A execução de «{0}» requer privilégios de administrador.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>Foi excedido o número máximo de elementos na coleção.</value>
@@ -231,8 +231,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Redefinir valor</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Redefinir valor</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>A reiniciar aplicações</value>
@@ -287,16 +287,16 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>O comprimento dos alvos deve ser igual ao comprimento dos valores antigos</value>
-    <comment>Automatically translated.</comment>
+    <value>O comprimento de targets deve ser igual ao comprimento de oldValues</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Detalhes técnicos:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>A sua versão do .NET não suporta o TLS 1.2. Isto pode causar erros de ligação ao descarregar conteúdos através de HTTPS. Por favor, execute o Windows Update para instalar as correcções necessárias.</value>
-    <comment>Automatically translated.</comment>
+    <value>A sua versão do .NET não suporta o TLS 1.2. Isto pode causar erros de ligação ao transferir conteúdos através de HTTPS. Por favor, execute o Windows Update para instalar as correções necessárias.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Não foi possível localizar o assembly denominado "{0}".</value>

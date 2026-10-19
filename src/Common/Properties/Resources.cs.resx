@@ -91,8 +91,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>DACL nelze kanonizovat, protože by to mohlo vést ke ztrátě informací.</value>
-    <comment>Automatically translated.</comment>
+    <value>DACL nelze převést do kanonického tvaru, protože by to mohlo vést ke ztrátě informací.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>&amp;Komentář:</value>
@@ -123,7 +123,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Pokud chcete, můžete do tohoto pole zadat další informace o problému, např. co jste během pádu systému dělali.</value>
+    <value>Pokud chcete, můžete do tohoto pole zadat další informace o problému, např. co jste dělali, když došlo k pádu aplikace.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -159,11 +159,11 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
-    <value>Soubor „{0}" se nepodařilo najít.</value>
+    <value>Soubor „{0}“ se nepodařilo najít.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidConfigDir" xml:space="preserve">
-    <value>Konfigurační adresář „{0}" je pravděpodobně neplatný.</value>
+    <value>Konfigurační adresář „{0}“ je pravděpodobně neplatný.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="InvalidCredentials" xml:space="preserve">
@@ -211,12 +211,12 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProblemLoading" xml:space="preserve">
-    <value>Došlo k problému při nahrávání „{0}".</value>
+    <value>Došlo k problému při načítání „{0}“.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCode" xml:space="preserve">
-    <value>Funkce „{0} “ byla ukončena s kódem ukončení {1}.</value>
-    <comment>Automatically translated.</comment>
+    <value>Proces „{0}“ byl ukončen s kódem ukončení {1}.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
     <value>Proces byl ukončen s neočekávaným kódem ukončení.</value>
@@ -231,16 +231,16 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Obnovit hodnotu</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Obnovit hodnotu</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Restartování aplikací</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="RetryDelay" xml:space="preserve">
-    <value>Opakování pokusu za {0}. milisekund z důvodu:</value>
-    <comment>Automatically translated.</comment>
+    <value>Nový pokus za {0} milisekund z důvodu:</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Hledat</value>
@@ -271,7 +271,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateHeader" xml:space="preserve">
-    <value>Načítám záhlaví</value>
+    <value>Načítání záhlaví</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="StateIOError" xml:space="preserve">
@@ -307,8 +307,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Tento příkaz pro vrácení zpět nelze provést, dokud nebude proveden aktuální příkaz.</value>
-    <comment>Automatically translated.</comment>
+    <value>Tento příkaz pro vrácení zpět nelze provést, dokud nebude proveden samotný příkaz.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">
     <value>Subsystém Unix nedokázal zpracovat požadavek. Možná nemáte dostatečná oprávnění.</value>

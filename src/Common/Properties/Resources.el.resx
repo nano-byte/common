@@ -123,7 +123,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportComment" xml:space="preserve">
-    <value>Αν επιθυμείτε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για την παροχή πρόσθετων πληροφοριών σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η συντριβή.</value>
+    <value>Αν επιθυμείτε, μπορείτε να χρησιμοποιήσετε αυτό το πεδίο για την παροχή πρόσθετων πληροφοριών σχετικά με το πρόβλημα, όπως μια περιγραφή του τι κάνατε όταν συνέβη η κατάρρευση.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="ErrorReportInfo" xml:space="preserve">
@@ -155,7 +155,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotExpectedSize" xml:space="preserve">
-    <value>Το αρχείο που επρόκειτο να μεταφορτωθεί από {0} δεν έχει το αναμενόμενο μέγεθος. Υποτίθεται ότι είναι {1} bytes, αλλά στην πραγματικότητα είναι {2} bytes.</value>
+    <value>Το αρχείο που επρόκειτο να ληφθεί από {0} δεν έχει το αναμενόμενο μέγεθος. Έπρεπε να είναι {1} bytes, αλλά στην πραγματικότητα ήταν {2} bytes.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
@@ -251,8 +251,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Προσπάθησε να διαβάσει από τη θέση {0}. Αυτή απέχει {1} bytes από την υποκείμενη θέση ροής {2}, αλλά ο buffer αναζήτησης μπορεί να φιλοξενήσει μόνο μια διαφορά {3} bytes.</value>
-    <comment>Automatically translated.</comment>
+    <value>Έγινε προσπάθεια ανάγνωσης από τη θέση {0}. Αυτή απέχει {1} bytes από τη θέση {2} της υποκείμενης ροής, αλλά ο buffer αναζήτησης μπορεί να καλύψει διαφορά μόνο {3} bytes.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
     <value>Κλείσιμο εφαρμογών</value>
@@ -307,7 +307,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>Αυτή η εντολή δεν μπορεί να εκτελεστεί ξανά έως ότου η εντολή της αναίρεσης έχει εκτελεστεί.</value>
+    <value>Αυτή η εντολή αναίρεσης δεν μπορεί να εκτελεστεί πριν εκτελεστεί η αρχική εντολή.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

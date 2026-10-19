@@ -147,7 +147,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
-    <value>Konnte '{0}' nicht rückgängig machen.</value>
+    <value>'{0}' konnte nicht rückgängig gemacht werden.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToStart" xml:space="preserve">
@@ -303,7 +303,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
-    <value>Es war nicht möglich {0} Bytes aus dem Stream zu lesen.</value>
+    <value>Es war nicht möglich, {0} Bytes aus dem Stream zu lesen.</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">

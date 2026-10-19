@@ -107,8 +107,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="DestinationDirExist" xml:space="preserve">
-    <value>指定されたディレクトリはすでに存在します。</value>
-    <comment>Automatically translated.</comment>
+    <value>コピー先のディレクトリはすでに存在します。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>{0}をダウンロード中</value>
@@ -259,8 +259,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>送信元と送信先は同じです。</value>
-    <comment>Automatically translated.</comment>
+    <value>コピー元とコピー先が同じです。</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
     <value>完了</value>

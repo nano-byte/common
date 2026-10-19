@@ -91,8 +91,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
-    <value>De DACL kan niet worden gecanoniseerd, aangezien dit mogelijk tot informatieverlies zou leiden.</value>
-    <comment>Automatically translated.</comment>
+    <value>De DACL kan niet naar een canonieke vorm worden omgezet, aangezien dit mogelijk tot informatieverlies zou leiden.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>&amp;Opmerking:</value>
@@ -231,8 +231,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Waarde resetten</value>
-    <comment>Automatically translated.</comment>
+    <value>Waarde &amp;resetten</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Toepassingen worden opnieuw opgestart</value>
@@ -299,8 +299,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
-    <value>Het onderdeel met de naam "{0}" kon niet worden gevonden.</value>
-    <comment>Automatically translated.</comment>
+    <value>De assembly met de naam "{0}" kon niet worden gevonden.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToReadBytesFromStream" xml:space="preserve">
     <value>{0} bytes kunnen niet uit de stream worden gelezen.</value>

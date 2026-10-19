@@ -87,8 +87,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="CannotAddCollectionToSelf" xml:space="preserve">
-    <value>La collezione non può essere aggiunta a se stessa.</value>
-    <comment>Automatically translated.</comment>
+    <value>La raccolta non può essere aggiunta a se stessa.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="CannotCanonicalizeDacl" xml:space="preserve">
     <value>Il DACL non può essere canonicalizzato poiché ciò comporterebbe potenzialmente una perdita di informazioni.</value>
@@ -219,8 +219,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processo si è terminato con un codice di uscita imprevisto.</value>
-    <comment>Automatically translated.</comment>
+    <value>Un processo è terminato con un codice di uscita imprevisto.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">
     <value>Lettura del file {0} in corso</value>
@@ -231,8 +231,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>Reimposta valore</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;Reimposta valore</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>Riavvio delle applicazioni in corso</value>
@@ -287,16 +287,16 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="TargetsOldValuesLength" xml:space="preserve">
-    <value>La lunghezza dei valori di destinazione deve essere uguale alla lunghezza dei valori precedenti</value>
-    <comment>Automatically translated.</comment>
+    <value>La lunghezza di targets deve essere uguale alla lunghezza di oldValues</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Dettagli tecnici:</value>
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>La versione di .NET in uso non supporta TLS 1.2. Ciò potrebbe causare errori di connessione durante il download di contenuti tramite HTTPS. Eseguire Windows Update per installare le patch necessarie.</value>
-    <comment>Automatically translated.</comment>
+    <value>La versione di .NET in uso non supporta TLS 1.2. Ciò potrebbe causare errori di connessione durante il download di contenuti tramite HTTPS. Esegui Windows Update per installare le patch necessarie.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>Impossibile individuare l'assembly denominato "{0}".</value>

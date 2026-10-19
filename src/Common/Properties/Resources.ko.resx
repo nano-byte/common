@@ -143,8 +143,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToOpenRegistrySubkey" xml:space="preserve">
-    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'를 열 수 없습니다.</value>
-    <comment>Automatically translated.</comment>
+    <value>'{1}'에 있는 레지스트리 하위 키 '{0}'을(를) 열 수 없습니다.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="FailedToRollback" xml:space="preserve">
     <value>'{0}'의 롤백에 실패했습니다.</value>
@@ -175,8 +175,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="LaunchNeedsAdmin" xml:space="preserve">
-    <value>'{0}'을 실행하려면 관리자 권한이 필요합니다.</value>
-    <comment>Automatically translated.</comment>
+    <value>'{0}'을(를) 실행하려면 관리자 권한이 필요합니다.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
     <value>컬렉션에 포함될 수 있는 요소의 최대 개수를 초과했습니다.</value>
@@ -199,8 +199,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="OnlyAvailableOnWindows" xml:space="preserve">
-    <value>이 방법은 Windows에서만 사용할 수 있습니다.</value>
-    <comment>Automatically translated.</comment>
+    <value>이 메서드는 Windows에서만 사용할 수 있습니다.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="Password" xml:space="preserve">
     <value>비밀번호:</value>
@@ -231,8 +231,8 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
-    <value>값 재설정</value>
-    <comment>Automatically translated.</comment>
+    <value>&amp;값 재설정</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="RestartingApps" xml:space="preserve">
     <value>애플리케이션 다시 시작 중</value>
@@ -259,8 +259,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SourceDestinationEqual" xml:space="preserve">
-    <value>출처와 대상은 동일합니다.</value>
-    <comment>Automatically translated.</comment>
+    <value>원본과 대상이 같습니다.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="StateComplete" xml:space="preserve">
     <value>완료</value>
@@ -295,8 +295,8 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="Tls12SupportMissing" xml:space="preserve">
-    <value>사용 중인 .NET 버전은 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows 업데이트를 실행하여 필요한 패치를 설치하십시오.</value>
-    <comment>Automatically translated.</comment>
+    <value>사용 중인 .NET 버전은 TLS 1.2를 지원하지 않습니다. 이로 인해 HTTPS를 통해 콘텐츠를 다운로드할 때 연결 오류가 발생할 수 있습니다. Windows 업데이트를 실행하여 필요한 패치를 설치하세요.</value>
+    <comment>Manually overriden.</comment>
   </data>
   <data name="UnableToLocateAssembly" xml:space="preserve">
     <value>"{0}"라는 이름의 어셈블리를 찾을 수 없습니다.</value>
