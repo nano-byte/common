@@ -47,10 +47,10 @@ public static class ErrorBox
             {
                 Title = Application.Instance.Name,
                 Padding = 10,
-                Width = 500,
-                Height = log is {IsEmpty: false} ? 400 : -1,
                 Content = layout
             };
+            if (log is {IsEmpty: false}) dialog.Size = new(500, 400);
+            else dialog.FitContentHeight(500);
 
             var closeButton = new Button {Text = Resources.OK};
             closeButton.Click += delegate { dialog.Close(); };
