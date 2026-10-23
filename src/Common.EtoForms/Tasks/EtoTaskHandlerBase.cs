@@ -87,7 +87,7 @@ public abstract class EtoTaskHandlerBase : TaskHandlerBase
         if (data == null) throw new ArgumentNullException(nameof(data));
         #endregion
 
-        Application.Instance.Invoke(() => OutputGridBox.Show(null, title, data));
+        Application.Instance.Invoke(() => OutputTreeBox.Show(null, title, data));
     }
 
     /// <inheritdoc/>

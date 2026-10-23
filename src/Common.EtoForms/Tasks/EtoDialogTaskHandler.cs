@@ -86,7 +86,7 @@ public class EtoDialogTaskHandler(Control? owner = null) : EtoTaskHandlerBase
         if (data == null) throw new ArgumentNullException(nameof(data));
         #endregion
 
-        Application.Instance.Invoke(() => OutputGridBox.Show(owner, title, data));
+        Application.Instance.Invoke(() => OutputTreeBox.Show(owner, title, data));
     }
 
     /// <inheritdoc/>
