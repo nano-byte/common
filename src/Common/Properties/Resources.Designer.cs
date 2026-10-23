@@ -154,6 +154,15 @@ namespace NanoByte.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        public static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The destination directory already exists..
         /// </summary>
         public static string DestinationDirExist {

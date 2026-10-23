@@ -14,4 +14,12 @@ Use <xref:NanoByte.Common.EtoControls.Msg> to show simple message boxes and <xre
 
 <xref:NanoByte.Common.EtoControls.TaskControl>, <xref:NanoByte.Common.EtoControls.TaskProgressBar> and <xref:NanoByte.Common.EtoControls.TaskLabel> display the progress of <xref:NanoByte.Common.Tasks.ITask>s.
 
+<xref:NanoByte.Common.EtoControls.PropertyEditor> displays and edits the properties of an object, similar to the Windows Forms PropertyGrid.
+
+<xref:NanoByte.Common.EtoControls.TimeSpanControl> and <xref:NanoByte.Common.EtoControls.UriTextBox> provide input for <xref:System.TimeSpan>s and <xref:System.Uri>s.
+
+## Windows
+
+<xref:NanoByte.Common.EtoControls.WindowExtensions> centers windows without an owner on the screen and provides Windows-specific helpers for taskbar app IDs, preventing taskbar pinning and UAC shield icons on buttons. The Windows-specific helpers do nothing on other platforms.
+
 ## API

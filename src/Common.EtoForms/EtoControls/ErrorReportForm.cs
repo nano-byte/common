@@ -58,6 +58,9 @@ public sealed class ErrorReportForm : Dialog
         NegativeButtons.Add(_cancelButton);
         DefaultButton = _reportButton;
         AbortButton = _cancelButton;
+
+        this.CenterOnScreenIfOwnerless();
+        this.PreventPinning();
     }
 
     private static readonly object _monitoringLock = new();
