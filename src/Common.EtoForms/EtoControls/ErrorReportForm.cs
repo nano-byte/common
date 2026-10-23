@@ -43,11 +43,11 @@ public sealed class ErrorReportForm : Dialog
             Spacing = 8,
             Items =
             {
-                new Label {Text = Resources.ErrorReportInfo, Wrap = WrapMode.Word},
+                new Label {Text = Resources.ErrorReportInfo, Wrap = WrapMode.Word}.ReflowOnResize(),
                 new Label {Text = Resources.TechnicalDetails, Font = SystemFonts.Bold()},
                 new StackLayoutItem(new TextArea {ReadOnly = true, Wrap = false, Text = exception.ToString()}, expand: true),
                 new Label {Text = Resources.Comment, Font = SystemFonts.Bold()},
-                new Label {Text = Resources.ErrorReportComment, Wrap = WrapMode.Word},
+                new Label {Text = Resources.ErrorReportComment, Wrap = WrapMode.Word}.ReflowOnResize(),
                 new StackLayoutItem(_commentBox, expand: true)
             }
         };

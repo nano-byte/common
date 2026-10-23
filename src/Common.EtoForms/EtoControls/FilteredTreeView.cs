@@ -148,7 +148,9 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
         _searchBox = new SearchBox {PlaceholderText = Resources.Search};
         _searchBox.TextChanged += (_, _) => UpdateList();
 
-        _treeView = new TreeGridView {ShowHeader = false};
+        // Small preferred size, since the grid otherwise asks for the width of its longest entry and the height of all rows, growing its window
+        // It still fills the space it is given
+        _treeView = new TreeGridView {ShowHeader = false, Size = new(100, 100)};
         _treeView.SelectedItemChanged += OnSelectedItemChanged;
         _treeView.Activated += (_, _) => OnSelectionConfirmed();
         _treeView.CellEdited += OnCellEdited;

@@ -43,7 +43,6 @@ public static class InputBox
         {
             Title = title,
             Padding = 10,
-            Width = 400,
             Content = new StackLayout
             {
                 Orientation = Orientation.Vertical,
@@ -70,6 +69,7 @@ public static class InputBox
         dialog.NegativeButtons.Add(cancelButton);
         dialog.DefaultButton = okButton;
         dialog.AbortButton = cancelButton;
+        dialog.FitContentHeight(400);
         dialog.CenterOnScreenIfOwnerless();
         dialog.PreventPinning();
 
