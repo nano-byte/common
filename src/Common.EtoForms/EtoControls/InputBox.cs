@@ -70,6 +70,8 @@ public static class InputBox
         dialog.NegativeButtons.Add(cancelButton);
         dialog.DefaultButton = okButton;
         dialog.AbortButton = cancelButton;
+        dialog.CenterOnScreenIfOwnerless();
+        dialog.PreventPinning();
 
         return owner == null ? dialog.ShowModal() : dialog.ShowModal(owner);
     }

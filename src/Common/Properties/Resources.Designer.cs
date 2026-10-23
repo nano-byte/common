@@ -152,7 +152,16 @@ namespace NanoByte.Common.Properties {
                 return ResourceManager.GetString("CopyToClipboard", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        public static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to The destination directory already exists..
         /// </summary>

@@ -65,6 +65,9 @@ internal sealed class TaskRunDialog : Dialog
 
         Shown += delegate { taskThread.Start(); };
         Closing += OnClosing;
+
+        this.CenterOnScreenIfOwnerless();
+        this.PreventPinning();
     }
 
     private void CloseInternal()

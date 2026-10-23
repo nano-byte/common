@@ -22,6 +22,7 @@
     <PackageReference Include="Eto.Forms" Version="2.13.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+    <Reference Include="System.ComponentModel.DataAnnotations" Pack="False" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
 

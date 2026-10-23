@@ -57,6 +57,8 @@ public static class ErrorBox
             dialog.PositiveButtons.Add(closeButton);
             dialog.DefaultButton = closeButton;
             dialog.AbortButton = closeButton;
+            dialog.CenterOnScreenIfOwnerless();
+            dialog.PreventPinning();
 
             if (owner == null) dialog.ShowModal();
             else dialog.ShowModal(owner);

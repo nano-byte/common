@@ -153,6 +153,9 @@
   <data name="CopyToClipboard" xml:space="preserve">
     <value>&amp;Copy to clipboard</value>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>days</value>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>The destination directory already exists.</value>
   </data>
