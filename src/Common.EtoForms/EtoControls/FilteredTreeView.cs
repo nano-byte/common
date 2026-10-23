@@ -284,7 +284,7 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
 
         // Create node for actual entry using last part as visible text
         var finalNode = new Node {Key = entry.Name, Text = nameSplit[^1], Entry = entry, ParentNode = parentNode};
-        if (_checkedEntries.Contains(entry)) finalNode.Checked = true;
+        if (_checkedEntries.Contains(entry)) finalNode.Checked = finalNode.AppliedCheck = true;
         subTree.Add(finalNode);
         _lookup[entry.Name] = finalNode;
         return finalNode;
@@ -332,10 +332,19 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
     {
         if (e.Item is not Node node) return;
 
+        // Edits also end when the user merely moves to another cell, without changing the check state
+        bool value = node.Checked ?? false;
+        if (value == node.AppliedCheck) return;
+
         // Checking a parent will check all its children
-        ApplyCheck(node, node.Checked ?? false);
-        _treeView.ReloadItem(node);
-        OnCheckedEntriesChanged();
+        ApplyCheck(node, value);
+
+        // Defer, since the grid may still be in the middle of changing the current cell, which does not allow reentrant calls (e.g., ReloadItem() reselecting rows)
+        Application.Instance.AsyncInvoke(() =>
+        {
+            if (node.Children.Count != 0) _treeView.ReloadItem(node);
+            OnCheckedEntriesChanged();
+        });
     }
 
     /// <summary>
@@ -344,6 +353,7 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
     private void ApplyCheck(Node node, bool value)
     {
         node.Checked = value;
+        node.AppliedCheck = value;
 
         // Maintain a list of currently checked bottom-level entries
         if (node.Entry != null)
@@ -418,6 +428,9 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
 
         /// <summary>Whether this node's check box is checked.</summary>
         public bool? Checked { get; set; }
+
+        /// <summary>The check state last applied to this node and its descendants; used to detect actual changes to <see cref="Checked"/>.</summary>
+        public bool AppliedCheck { get; set; }
 
         /// <summary>The parent node; <c>null</c> for top-level nodes.</summary>
         public Node? ParentNode { get; init; }
