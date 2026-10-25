@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Runtime.Versioning;
+using System.Text;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Native;
@@ -42,7 +43,8 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     #endregion
 
     #region Session
-    private readonly IntPtr _sessionHandle;
+    private readonly uint _sessionHandle;
+    private readonly bool _sessionStarted;
 
     /// <summary>
     /// Starts a new Restart Manager session.
@@ -54,8 +56,9 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     {
         if (!WindowsUtils.IsWindowsVista) throw new PlatformNotSupportedException();
 
-        int ret = NativeMethods.RmStartSession(out _sessionHandle, 0, Guid.NewGuid().ToString());
+        int ret = NativeMethods.RmStartSession(out _sessionHandle, 0, new StringBuilder(NativeMethods.CCH_RM_SESSION_KEY + 1));
         if (ret != 0) throw BuildException(ret);
+        _sessionStarted = true;
     }
 
     /// <summary>
@@ -75,7 +78,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
 
     private void DisposeNative()
     {
-        if (_sessionHandle == default) return; // Might be unset due to exception thrown in constructor
+        if (!_sessionStarted) return; // Might be unset due to exception thrown in constructor
 
         int ret = NativeMethods.RmEndSession(_sessionHandle);
         if (ret != 0) Log.Debug("Failed to end Windows Restart Manager session", BuildException(ret));

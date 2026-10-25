@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Text;
 using NanoByte.Common.Tasks;
 using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
@@ -14,11 +15,13 @@ namespace NanoByte.Common.Native
         [SuppressMessage("ReSharper", "InconsistentNaming"), SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
         private static class NativeMethods
         {
+            public const int CCH_RM_SESSION_KEY = 32;
+
             [DllImport("rstrtmgr", CharSet = CharSet.Unicode)]
-            public static extern int RmStartSession(out IntPtr pSessionHandle, int dwSessionFlags, string strSessionKey);
+            public static extern int RmStartSession(out uint pSessionHandle, int dwSessionFlags, [Out] StringBuilder strSessionKey);
 
             [DllImport("rstrtmgr")]
-            public static extern int RmEndSession(IntPtr pSessionHandle);
+            public static extern int RmEndSession(uint pSessionHandle);
 
             [StructLayout(LayoutKind.Sequential)]
             public struct RM_UNIQUE_PROCESS
@@ -28,7 +31,7 @@ namespace NanoByte.Common.Native
             }
 
             [DllImport("rstrtmgr", CharSet = CharSet.Unicode)]
-            public static extern int RmRegisterResources(IntPtr pSessionHandle, uint nFiles, string[] rgsFilenames, uint nApplications, RM_UNIQUE_PROCESS[] rgApplications, uint nServices, string[] rgsServiceNames);
+            public static extern int RmRegisterResources(uint pSessionHandle, uint nFiles, string[] rgsFilenames, uint nApplications, RM_UNIQUE_PROCESS[] rgApplications, uint nServices, string[] rgsServiceNames);
 
             public enum RM_APP_TYPE : uint
             {
@@ -89,7 +92,7 @@ namespace NanoByte.Common.Native
             }
 
             [DllImport("rstrtmgr")]
-            public static extern int RmGetList(IntPtr dwSessionHandle, out uint pnProcInfoNeeded, ref uint pnProcInfo, [In, Out] RM_PROCESS_INFO[] rgAffectedApps, out RM_REBOOT_REASON lpdwRebootReasons);
+            public static extern int RmGetList(uint dwSessionHandle, out uint pnProcInfoNeeded, ref uint pnProcInfo, [In, Out] RM_PROCESS_INFO[] rgAffectedApps, out RM_REBOOT_REASON lpdwRebootReasons);
 
             [Flags]
             public enum RM_SHUTDOWN_TYPE : uint
@@ -99,13 +102,13 @@ namespace NanoByte.Common.Native
             }
 
             [DllImport("rstrtmgr")]
-            public static extern int RmShutdown(IntPtr pSessionHandle, RM_SHUTDOWN_TYPE lActionFlags, PercentProgressCallback fnStatus);
+            public static extern int RmShutdown(uint pSessionHandle, RM_SHUTDOWN_TYPE lActionFlags, PercentProgressCallback fnStatus);
 
             [DllImport("rstrtmgr")]
-            public static extern int RmRestart(IntPtr pSessionHandle, int dwRestartFlags, PercentProgressCallback fnStatus);
+            public static extern int RmRestart(uint pSessionHandle, int dwRestartFlags, PercentProgressCallback fnStatus);
 
             [DllImport("rstrtmgr")]
-            public static extern int RmCancelCurrentTask(IntPtr pSessionHandle);
+            public static extern int RmCancelCurrentTask(uint pSessionHandle);
         }
     }
 }

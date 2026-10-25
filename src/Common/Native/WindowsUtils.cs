@@ -209,13 +209,19 @@ public static partial class WindowsUtils
     /// <summary>
     /// Determines the path of the executable the current process was launched from.
     /// </summary>
+    /// <exception cref="Win32Exception">The path could not be determined.</exception>
     public static string CurrentProcessPath
     {
         get
         {
-            var fileName = new StringBuilder(255);
-            SafeNativeMethods.GetModuleFileName(IntPtr.Zero, fileName, fileName.Capacity);
-            return fileName.ToString();
+            // Grow buffer until path is no longer truncated
+            for (int capacity = 260; ; capacity *= 2)
+            {
+                var fileName = new StringBuilder(capacity);
+                uint length = SafeNativeMethods.GetModuleFileName(IntPtr.Zero, fileName, fileName.Capacity);
+                if (length == 0) throw BuildException(Marshal.GetLastWin32Error());
+                if (length < fileName.Capacity) return fileName.ToString();
+            }
         }
     }
     #endregion

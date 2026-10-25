@@ -37,13 +37,18 @@ namespace NanoByte.Common.Native
         private static class NativeMethods
         {
             [DllImport("advapi32", SetLastError = true, CharSet = CharSet.Unicode)]
+            [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool CredEnumerate(string filter, int flag, out int count, out IntPtr credentials);
 
+            [DllImport("advapi32")]
+            public static extern void CredFree(IntPtr buffer);
+
+            // Password is passed as char[] rather than StringBuilder so the buffer is pinned instead of copied and can be cleared afterwards
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
-            public static extern int CredUIPromptForCredentials(ref CredUIInfo uiInfo, string targetName, IntPtr reserved1, int iError, StringBuilder userName, int maxUserName, StringBuilder password, int maxPassword, [MarshalAs(UnmanagedType.Bool)] ref bool pfSave, WindowsCredentialsFlags flags);
+            public static extern int CredUIPromptForCredentials(ref CredUIInfo uiInfo, string targetName, IntPtr reserved1, int iError, StringBuilder userName, int maxUserName, [In, Out] char[] password, int maxPassword, [MarshalAs(UnmanagedType.Bool)] ref bool pfSave, WindowsCredentialsFlags flags);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
-            public static extern int CredUICmdLinePromptForCredentials(string targetName, IntPtr reserved1, int iError, StringBuilder userName, int maxUserName, StringBuilder password, int maxPassword, [MarshalAs(UnmanagedType.Bool)] ref bool pfSave, WindowsCredentialsFlags flags);
+            public static extern int CredUICmdLinePromptForCredentials(string targetName, IntPtr reserved1, int iError, StringBuilder userName, int maxUserName, [In, Out] char[] password, int maxPassword, [MarshalAs(UnmanagedType.Bool)] ref bool pfSave, WindowsCredentialsFlags flags);
         }
     }
 }
