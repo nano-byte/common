@@ -36,7 +36,7 @@ static partial class WindowsUtils
     {
         public const uint SHCNE_ASSOCCHANGED = 0x08000000, SHCNF_IDLIST = 0;
 
-        [DllImport("shell32", SetLastError = true)]
+        [DllImport("shell32")]
         public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
         public const uint WM_SETTINGCHANGE = 0x001A;
@@ -61,8 +61,8 @@ static partial class WindowsUtils
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam);
 
-        [DllImport("shell32", SetLastError = true)]
-        public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
+        [DllImport("shell32")]
+        public static extern int SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appID);
 
         [DllImport("kernel32", SetLastError = true)]
         public static extern bool AttachConsole(uint dwProcessId);

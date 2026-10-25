@@ -172,7 +172,7 @@ public static partial class OSUtils
     private static IDisposable? KeepAwakeWindows(NativeMethods.ExecutionState state)
     {
         var previous = NativeMethods.SetThreadExecutionState(NativeMethods.ExecutionState.Continuous | state);
-        return Marshal.GetLastWin32Error() == 0 ? new Disposable(() => NativeMethods.SetThreadExecutionState(previous)) : null;
+        return previous != 0 ? new Disposable(() => NativeMethods.SetThreadExecutionState(previous)) : null;
     }
 
     private static class NativeMethods
@@ -185,7 +185,7 @@ public static partial class OSUtils
             DisplayRequired = 0x00000002
         }
 
-        [DllImport("kernel32", SetLastError = true)]
+        [DllImport("kernel32")]
         public static extern ExecutionState SetThreadExecutionState(ExecutionState esFlags);
     }
 

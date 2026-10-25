@@ -624,7 +624,9 @@ public static partial class WindowsUtils
         #endregion
 
         if (!IsWindows7) return;
-        NativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
+
+        int ret = NativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
+        if (ret != 0) Log.Warn($"Failed to set application user model ID: {appID}", Marshal.GetExceptionForHR(ret));
     }
 
     /// <summary>

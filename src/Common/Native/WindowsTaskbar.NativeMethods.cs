@@ -144,7 +144,7 @@ static partial class WindowsTaskbar
         void SetTabProperties(IntPtr hwndTab, StpFlag stpFlags);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Local")]
     private struct ThumbnailButton
     {
@@ -271,7 +271,7 @@ static partial class WindowsTaskbar
         void SetHotKey(short wHotKey);
         void GetShowCmd(out uint iShowCmd);
         void SetShowCmd(uint iShowCmd);
-        void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] out StringBuilder pszIconPath, int cchIconPath, out int iIcon);
+        void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath, int cchIconPath, out int iIcon);
         void SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string pszIconPath, int iIcon);
         void SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string pszPathRel, uint dwReserved);
         void Resolve(IntPtr hwnd, uint fFlags);
