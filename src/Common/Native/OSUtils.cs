@@ -2,9 +2,10 @@
 // Licensed under the MIT License
 
 using System.Collections.Specialized;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
+using Windows.Win32;
+using Windows.Win32.System.Power;
 
 #if NET
 using System.Threading.Tasks;
@@ -116,7 +117,7 @@ public static partial class OSUtils
     {
         try
         {
-            if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.SystemRequired);
+            if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(EXECUTION_STATE.ES_SYSTEM_REQUIRED);
 
 #if NET
             if (UnixUtils.IsLinux && Guards.NotTrimmed)
@@ -146,7 +147,7 @@ public static partial class OSUtils
     {
         try
         {
-            if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(NativeMethods.ExecutionState.DisplayRequired);
+            if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(EXECUTION_STATE.ES_DISPLAY_REQUIRED);
 
 #if NET
             if (UnixUtils.IsLinux && Guards.NotTrimmed)
@@ -168,25 +169,12 @@ public static partial class OSUtils
     }
 
     [SupportedOSPlatform("windows")]
+    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows builds")]
     [MustDisposeResource]
-    private static IDisposable? KeepAwakeWindows(NativeMethods.ExecutionState state)
+    private static IDisposable? KeepAwakeWindows(EXECUTION_STATE state)
     {
-        var previous = NativeMethods.SetThreadExecutionState(NativeMethods.ExecutionState.Continuous | state);
-        return previous != 0 ? new Disposable(() => NativeMethods.SetThreadExecutionState(previous)) : null;
-    }
-
-    private static class NativeMethods
-    {
-        [Flags]
-        public enum ExecutionState : uint
-        {
-            Continuous = 0x80000000,
-            SystemRequired = 0x00000001,
-            DisplayRequired = 0x00000002
-        }
-
-        [DllImport("kernel32")]
-        public static extern ExecutionState SetThreadExecutionState(ExecutionState esFlags);
+        var previous = PInvoke.SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | state);
+        return previous != 0 ? new Disposable(() => PInvoke.SetThreadExecutionState(previous)) : null;
     }
 
 #if NET

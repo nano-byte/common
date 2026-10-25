@@ -1,12 +1,15 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using Windows.Win32;
+using Windows.Win32.Foundation;
+
 namespace NanoByte.Common.Native;
 
 /// <summary>
 /// Provides helper methods and API calls specific to the <see cref="System.Windows.Forms"/> UI toolkit.
 /// </summary>
-public static partial class WinFormsUtils
+public static class WinFormsUtils
 {
     /// <summary>
     /// Centers a window on its parent/owner. Call this from the <see cref="Form.Load"/> event handler.
@@ -35,7 +38,7 @@ public static partial class WinFormsUtils
         #endregion
 
         if (!WindowsUtils.IsWindows) return;
-        NativeMethods.SetForegroundWindow(form.Handle);
+        PInvoke.SetForegroundWindow((HWND)form.Handle);
     }
 
     /// <summary>
@@ -53,13 +56,13 @@ public static partial class WinFormsUtils
         {
             if (args.Button == MouseButtons.Left)
             {
-                NativeMethods.ReleaseCapture();
+                PInvoke.ReleaseCapture();
 
                 var target = control;
                 while (target.Parent != null)
                     target = target.Parent;
 
-                NativeMethods.SendMessage(target.Handle, NativeMethods.MessageButtonDown, new IntPtr(NativeMethods.Caption), IntPtr.Zero);
+                PInvoke.SendMessage((HWND)target.Handle, PInvoke.WM_NCLBUTTONDOWN, PInvoke.HTCAPTION, default);
             }
         };
     }
@@ -68,18 +71,16 @@ public static partial class WinFormsUtils
     /// Adds a UAC shield icon to a button. Does nothing if not running Windows Vista or newer.
     /// </summary>
     /// <remarks>This is purely cosmetic. UAC elevation is a separate concern.</remarks>
-    [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons."), SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Native API only applies to buttons.")]
     public static void AddShieldIcon(this Button button)
     {
         #region Sanity checks
         if (button == null) throw new ArgumentNullException(nameof(button));
         #endregion
 
-        const int BCM_FIRST = 0x1600, BCM_SETSHIELD = 0x000C;
-
         if (!WindowsUtils.IsWindowsVista) return;
         button.FlatStyle = FlatStyle.System;
-        NativeMethods.SendMessage(button.Handle, BCM_FIRST + BCM_SETSHIELD, IntPtr.Zero, new IntPtr(1));
+        PInvoke.SendMessage((HWND)button.Handle, PInvoke.BCM_SETSHIELD, default, 1);
     }
 
     /// <summary>
@@ -89,7 +90,7 @@ public static partial class WinFormsUtils
     public static bool IsKeyDown(Keys key)
     {
         if (!WindowsUtils.IsWindows) return false;
-        return (SafeNativeMethods.GetAsyncKeyState((uint)key) & 0x8000) != 0;
+        return (PInvoke.GetAsyncKeyState((int)key) & 0x8000) != 0;
     }
 
     /// <summary>
@@ -102,7 +103,7 @@ public static partial class WinFormsUtils
         get
         {
             if (!WindowsUtils.IsWindows) return true;
-            return !NativeMethods.PeekMessage(out _, IntPtr.Zero, 0, 0, 0);
+            return !PInvoke.PeekMessage(out _, default, 0, 0, 0);
         }
     }
 
@@ -110,7 +111,7 @@ public static partial class WinFormsUtils
     /// Text-box caret blink time in seconds.
     /// </summary>
     public static float CaretBlinkTime => WindowsUtils.IsWindows
-        ? SafeNativeMethods.GetCaretBlinkTime() / 1000f
+        ? PInvoke.GetCaretBlinkTime() / 1000f
         : 0.5f;
 
     /// <summary>
@@ -122,7 +123,7 @@ public static partial class WinFormsUtils
     public static IntPtr SetCapture(IntPtr handle)
     {
         if (!WindowsUtils.IsWindows) return IntPtr.Zero;
-        return NativeMethods.SetCapture(handle);
+        return PInvoke.SetCapture((HWND)handle);
     }
 
     /// <summary>
@@ -133,6 +134,6 @@ public static partial class WinFormsUtils
     public static bool ReleaseCapture()
     {
         if (!WindowsUtils.IsWindows) return false;
-        return NativeMethods.ReleaseCapture();
+        return PInvoke.ReleaseCapture();
     }
 }

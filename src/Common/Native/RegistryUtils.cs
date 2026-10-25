@@ -4,6 +4,8 @@
 using System.Runtime.Versioning;
 using System.Security;
 using Microsoft.Win32;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace NanoByte.Common.Native;
 
@@ -11,7 +13,8 @@ namespace NanoByte.Common.Native;
 /// Provides utility and extension methods for <see cref="Registry"/> access.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public static partial class RegistryUtils
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows builds")]
+public static class RegistryUtils
 {
     #region DWORD
     /// <summary>
@@ -411,9 +414,10 @@ public static partial class RegistryUtils
     /// <exception cref="Win32Exception">Reading the key information failed.</exception>
     public static DateTime GetLastWriteTime(this RegistryKey key)
     {
-        int ret = NativeMethods.RegQueryInfoKey(key.Handle, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, out long ftLastWriteTime);
-        if (ret != 0) throw WindowsUtils.BuildException(ret);
-        return DateTime.FromFileTime(ftLastWriteTime);
+        uint classLength = 0;
+        var ret = PInvoke.RegQueryInfoKey(key.Handle, default, ref classLength, out _, out _, out _, out _, out _, out _, out _, out var lastWriteTime);
+        if (ret != WIN32_ERROR.NO_ERROR) throw WindowsUtils.BuildException((int)ret);
+        return DateTime.FromFileTime(((long)lastWriteTime.dwHighDateTime << 32) | (uint)lastWriteTime.dwLowDateTime);
     }
     #endregion
 }

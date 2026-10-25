@@ -1,0 +1,86 @@
+// NetUtils
+GetNetworkConnectivityHint
+InternetGetConnectedState
+
+// OSUtils
+SetThreadExecutionState
+
+// RegistryUtils
+RegQueryInfoKey
+
+// WindowsCredentials
+CredEnumerate
+CredFree
+CredUICmdLinePromptForCredentials
+CredUIPromptForCredentials
+
+// WindowsMutex
+CloseHandle
+CreateMutex
+OpenMutexW
+SYNCHRONIZATION_ACCESS_RIGHTS
+
+// WindowsRestartManager
+CCH_RM_SESSION_KEY
+RM_REBOOT_REASON
+RM_SHUTDOWN_TYPE
+RmCancelCurrentTask
+RmEndSession
+RmGetList
+RmRegisterResources
+RmRestart
+RmShutdown
+RmStartSession
+
+// WindowsTaskbar
+CoCreateInstance
+TaskbarList
+ITaskbarList4
+DestinationList
+ICustomDestinationList
+EnumerableObjectCollection
+IObjectCollection
+ShellLink
+IShellLinkW
+IPropertyStore
+SHGetPropertyStoreForWindow
+PropVariantClear
+PKEY_AppUserModel_ID
+PKEY_AppUserModel_RelaunchCommand
+PKEY_AppUserModel_RelaunchIconResource
+PKEY_AppUserModel_RelaunchDisplayNameResource
+PKEY_AppUserModel_PreventPinning
+PKEY_Title
+
+// WindowsUtils
+ATTACH_PARENT_PROCESS
+AttachConsole
+CommandLineToArgvW
+CreateFile
+CreateHardLink
+CreateSymbolicLink
+DeviceIoControl
+FILE_ACCESS_RIGHTS
+FindClose
+FindFirstFileEx
+FSCTL_GET_REPARSE_POINT
+GetFileInformationByHandle
+GetFileSize
+GetModuleFileName
+HWND_BROADCAST
+IO_REPARSE_TAG_SYMLINK
+LocalFree
+MAXIMUM_REPARSE_DATA_BUFFER_SIZE
+MoveFileEx
+PostMessage
+QueryPerformanceCounter
+QueryPerformanceFrequency
+ReadFile
+RegisterApplicationRestart
+RegisterWindowMessage
+SendMessageTimeout
+SetCurrentProcessExplicitAppUserModelID
+SHChangeNotify
+UnregisterApplicationRestart
+WM_SETTINGCHANGE
+WriteFile

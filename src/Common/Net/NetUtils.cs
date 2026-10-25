@@ -4,9 +4,10 @@
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Security;
-using System.Runtime.InteropServices;
-using System.Security;
 using NanoByte.Common.Native;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.Networking.WinSock;
 
 #if NET
 using System.Net.Http;
@@ -128,12 +129,12 @@ public static class NetUtils
     {
         try
         {
-            if (WindowsUtils.IsWindows102004 && SafeNativeMethods.GetNetworkConnectivityHint(out var connectivity) == 0)
+            if (WindowsUtils.IsWindows102004 && PInvoke.GetNetworkConnectivityHint(out var connectivity) == WIN32_ERROR.NO_ERROR)
             {
-                if (connectivity.ConnectivityLevel is SafeNativeMethods.NetworkConnectivityLevel.None or SafeNativeMethods.NetworkConnectivityLevel.ConstrainedInternetAccess)
+                if (connectivity.ConnectivityLevel is NL_NETWORK_CONNECTIVITY_LEVEL_HINT.NetworkConnectivityLevelHintNone or NL_NETWORK_CONNECTIVITY_LEVEL_HINT.NetworkConnectivityLevelHintConstrainedInternetAccess)
                     return Connectivity.None;
 
-                if (connectivity.ConnectivityCost is SafeNativeMethods.NetworkConnectivityCost.Fixed or SafeNativeMethods.NetworkConnectivityCost.Variable
+                if (connectivity.ConnectivityCost is NL_NETWORK_CONNECTIVITY_COST_HINT.NetworkConnectivityCostHintFixed or NL_NETWORK_CONNECTIVITY_COST_HINT.NetworkConnectivityCostHintVariable
                  || connectivity.Roaming
                  || connectivity.OverDataLimit)
                     return Connectivity.Metered;
@@ -142,7 +143,9 @@ public static class NetUtils
             }
 
             if (WindowsUtils.IsWindowsNT)
-                return SafeNativeMethods.InternetGetConnectedState(out _, 0) ? Connectivity.Normal : Connectivity.None;
+#pragma warning disable CA1416 // CsWin32 annotates exact Windows builds
+                return PInvoke.InternetGetConnectedState(out _) ? Connectivity.Normal : Connectivity.None;
+#pragma warning restore CA1416
 
 #if NET
             if (UnixUtils.IsLinux && Guards.NotTrimmed)
@@ -164,46 +167,6 @@ public static class NetUtils
             return Connectivity.Normal;
         }
         #endregion
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    private static class SafeNativeMethods
-    {
-        [DllImport("wininet", SetLastError = true)]
-        public static extern bool InternetGetConnectedState(out int lpdwFlags, int dwReserved);
-
-        [DllImport("iphlpapi", SetLastError = false)]
-        public static extern uint GetNetworkConnectivityHint(out NetworkConnectivityHint connectivityHint);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct NetworkConnectivityHint
-        {
-            public NetworkConnectivityLevel ConnectivityLevel;
-            public NetworkConnectivityCost ConnectivityCost;
-            [MarshalAs(UnmanagedType.U1)] public bool ApproachingDataLimit;
-            [MarshalAs(UnmanagedType.U1)] public bool OverDataLimit;
-            [MarshalAs(UnmanagedType.U1)] public bool Roaming;
-        }
-
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
-		public enum NetworkConnectivityCost
-		{
-            Unknown,
-			Unrestricted,
-			Fixed,
-			Variable
-		}
-
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
-		public enum NetworkConnectivityLevel
-		{
-			Unknown,
-			None,
-			LocalAccess,
-			InternetAccess,
-			ConstrainedInternetAccess,
-			Hidden
-		}
     }
 
 #if NET

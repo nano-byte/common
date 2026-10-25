@@ -6,6 +6,11 @@ using System.Runtime.Versioning;
 using System.Security.Principal;
 using System.Text;
 using NanoByte.Common.Storage;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.Storage.FileSystem;
+using Windows.Win32.UI.Shell;
+using Windows.Win32.UI.WindowsAndMessaging;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
@@ -17,6 +22,7 @@ namespace NanoByte.Common.Native;
 /// Provides helper methods and API calls specific to the Windows platform.
 /// </summary>
 [SupportedOSPlatform("windows")]
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows builds, versions are checked at runtime with IsWindows*")]
 public static partial class WindowsUtils
 {
     #region Win32 Error Codes
@@ -209,18 +215,17 @@ public static partial class WindowsUtils
     /// <summary>
     /// Determines the path of the executable the current process was launched from.
     /// </summary>
-    /// <exception cref="Win32Exception">The path could not be determined.</exception>
-    public static string CurrentProcessPath
+    public static unsafe string CurrentProcessPath
     {
         get
         {
-            // Grow buffer until path is no longer truncated
-            for (int capacity = 260; ; capacity *= 2)
+            for (uint size = 260; ; size *= 2)
             {
-                var fileName = new StringBuilder(capacity);
-                uint length = SafeNativeMethods.GetModuleFileName(IntPtr.Zero, fileName, fileName.Capacity);
-                if (length == 0) throw BuildException(Marshal.GetLastWin32Error());
-                if (length < fileName.Capacity) return fileName.ToString();
+                fixed (char* buffer = new char[size])
+                {
+                    uint length = PInvoke.GetModuleFileName(default, buffer, size);
+                    if (length < size) return new string(buffer, 0, (int)length);
+                }
             }
         }
     }
@@ -271,25 +276,25 @@ public static partial class WindowsUtils
     /// An array of individual arguments.
     /// Will return the entire command-line as one argument when not running on Windows or if splitting failed for some other reason.
     /// </returns>
-    public static string[] SplitArgs(string? commandLine)
+    public static unsafe string[] SplitArgs(string? commandLine)
     {
         if (string.IsNullOrEmpty(commandLine)) return [];
         if (!IsWindows) return [commandLine];
 
-        var ptrToSplitArgs = SafeNativeMethods.CommandLineToArgvW(commandLine, out int numberOfArgs);
-        if (ptrToSplitArgs == IntPtr.Zero) return [commandLine];
+        var splitArgsPtr = PInvoke.CommandLineToArgv(commandLine, out int numberOfArgs);
+        if (splitArgsPtr == null) return [commandLine];
 
         try
         {
             // Copy result to managed array
             var splitArgs = new string[numberOfArgs];
             for (int i = 0; i < numberOfArgs; i++)
-                splitArgs[i] = Marshal.PtrToStringUni(Marshal.ReadIntPtr(ptrToSplitArgs, i * IntPtr.Size))!;
+                splitArgs[i] = splitArgsPtr[i].ToString();
             return splitArgs;
         }
         finally
         {
-            NativeMethods.LocalFree(ptrToSplitArgs);
+            PInvoke.LocalFree((HLOCAL)splitArgsPtr);
         }
     }
 
@@ -297,7 +302,7 @@ public static partial class WindowsUtils
     /// Tries to attach to a command-line console owned by the parent process.
     /// </summary>
     /// <returns><c>true</c> if the console was successfully attached; <c>false</c> if the parent process did not own a console.</returns>
-    public static bool AttachConsole() => IsWindowsNT && NativeMethods.AttachConsole(uint.MaxValue);
+    public static bool AttachConsole() => IsWindowsNT && PInvoke.AttachConsole(PInvoke.ATTACH_PARENT_PROCESS);
     #endregion
 
     #region Performance counter
@@ -314,9 +319,9 @@ public static partial class WindowsUtils
             if (IsWindowsNT)
             {
                 if (_performanceFrequency == 0)
-                    SafeNativeMethods.QueryPerformanceFrequency(out _performanceFrequency);
+                    PInvoke.QueryPerformanceFrequency(out _performanceFrequency);
 
-                SafeNativeMethods.QueryPerformanceCounter(out long time);
+                PInvoke.QueryPerformanceCounter(out long time);
                 return time / (double)_performanceFrequency;
             }
             else return TickCount / 1000f;
@@ -384,14 +389,13 @@ public static partial class WindowsUtils
 
         if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = NativeMethods.CreateFile(path, FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Normal, IntPtr.Zero);
+        using var handle = PInvoke.CreateFile(path, (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL, null);
         if (handle.IsInvalid) return null;
 
-        uint size = NativeMethods.GetFileSize(handle, IntPtr.Zero);
+        uint size = PInvoke.GetFileSize(handle);
         byte[] buffer = new byte[size];
-        uint read = uint.MinValue;
         var lpOverlapped = new NativeOverlapped();
-        return NativeMethods.ReadFile(handle, buffer, size, ref read, ref lpOverlapped) ? buffer : null;
+        return PInvoke.ReadFile(handle, buffer, out _, ref lpOverlapped) ? buffer : null;
     }
 
     /// <summary>
@@ -413,12 +417,11 @@ public static partial class WindowsUtils
 
         if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = NativeMethods.CreateFile(path, FileAccess.Write, FileShare.Write, IntPtr.Zero, FileMode.Create, 0, IntPtr.Zero);
+        using var handle = PInvoke.CreateFile(path, (uint)FILE_ACCESS_RIGHTS.FILE_WRITE_DATA, FILE_SHARE_MODE.FILE_SHARE_WRITE, null, FILE_CREATION_DISPOSITION.CREATE_ALWAYS, 0, null);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
-        uint bytesWritten = 0;
         var lpOverlapped = new NativeOverlapped();
-        if (!NativeMethods.WriteFile(handle, data, (uint)data.Length, ref bytesWritten, ref lpOverlapped))
+        if (!PInvoke.WriteFile(handle, data, out _, ref lpOverlapped))
             throw BuildException(Marshal.GetLastWin32Error());
     }
 
@@ -441,13 +444,13 @@ public static partial class WindowsUtils
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
         var flags = IsWindows10Redstone
-            ? NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
-            : NativeMethods.CreateSymbolicLinkFlags.NONE;
+            ? SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
+            : 0;
 
         if (Directory.Exists(Combine(GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath)))
-            flags |= NativeMethods.CreateSymbolicLinkFlags.SYMBOLIC_LINK_FLAG_DIRECTORY;
+            flags |= SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_DIRECTORY;
 
-        if (!NativeMethods.CreateSymbolicLink(sourcePath, targetPath, flags))
+        if (!PInvoke.CreateSymbolicLink(sourcePath, targetPath, flags))
             throw BuildException(Marshal.GetLastWin32Error());
     }
 
@@ -475,7 +478,7 @@ public static partial class WindowsUtils
     /// <exception cref="Win32Exception">Getting link information failed.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
     [SupportedOSPlatformGuard("windows6.0")]
-    public static bool IsSymlink(
+    public static unsafe bool IsSymlink(
         [Localizable(false)] string path,
         [MaybeNullWhen(false)] out string target)
     {
@@ -485,11 +488,11 @@ public static partial class WindowsUtils
 
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = NativeMethods.CreateFile(GetFullPath(path), 0, 0, IntPtr.Zero, FileMode.Open, NativeMethods.FILE_FLAG_OPEN_REPARSE_POINT | NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero);
+        using var handle = PInvoke.CreateFile(GetFullPath(path), 0, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS, null);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
-
-        if (!NativeMethods.DeviceIoControl(handle, NativeMethods.FSCTL_GET_REPARSE_POINT, IntPtr.Zero, 0, out var buffer, Marshal.SizeOf(new NativeMethods.REPARSE_DATA_BUFFER()), out _, IntPtr.Zero))
+        var buffer = new byte[PInvoke.MAXIMUM_REPARSE_DATA_BUFFER_SIZE];
+        if (!PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_GET_REPARSE_POINT, default, buffer, out _, null))
         {
             int error = Marshal.GetLastWin32Error();
             if (error == Win32ErrorNotAReparsePoint)
@@ -500,15 +503,21 @@ public static partial class WindowsUtils
             else throw BuildException(error);
         }
 
-        if (buffer.ReparseTag != NativeMethods.IO_REPARSE_TAG_SYMLINK)
+        // REPARSE_DATA_BUFFER with SymbolicLinkReparseBuffer, offsets and lengths are in bytes relative to PathBuffer
+        if (BitConverter.ToUInt32(buffer, 0) != PInvoke.IO_REPARSE_TAG_SYMLINK)
         {
             target = null;
             return false;
         }
+        int substituteNameOffset = BitConverter.ToUInt16(buffer, 8),
+            substituteNameLength = BitConverter.ToUInt16(buffer, 10),
+            printNameOffset = BitConverter.ToUInt16(buffer, 12),
+            printNameLength = BitConverter.ToUInt16(buffer, 14);
+        const int pathBufferOffset = 20;
 
-        target = buffer.PrintNameLength > 0
-            ? new string(buffer.PathBuffer, buffer.PrintNameOffset / 2, buffer.PrintNameLength / 2)
-            : FromNtPath(new string(buffer.PathBuffer, buffer.SubstituteNameOffset / 2, buffer.SubstituteNameLength / 2));
+        target = printNameLength > 0
+            ? Encoding.Unicode.GetString(buffer, pathBufferOffset + printNameOffset, printNameLength)
+            : FromNtPath(Encoding.Unicode.GetString(buffer, pathBufferOffset + substituteNameOffset, substituteNameLength));
         return true;
     }
 
@@ -538,7 +547,7 @@ public static partial class WindowsUtils
         #endregion
 
         if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
-        if (!NativeMethods.CreateHardLink(sourcePath, targetPath, IntPtr.Zero))
+        if (!PInvoke.CreateHardLink(sourcePath, targetPath))
             throw BuildException(Marshal.GetLastWin32Error());
     }
 
@@ -548,20 +557,20 @@ public static partial class WindowsUtils
     /// <param name="fullPath">The fully qualified, normalized path of the entry. Must not contain wildcards.</param>
     /// <returns>The long name as stored on disk and the attributes; <c>null</c> if the entry does not exist.</returns>
     /// <exception cref="IOException">The lookup failed.</exception>
-    public static (string Name, FileAttributes Attributes)? TryGetDirectoryEntry([Localizable(false)] string fullPath)
+    public static unsafe (string Name, FileAttributes Attributes)? TryGetDirectoryEntry([Localizable(false)] string fullPath)
     {
         if (string.IsNullOrEmpty(fullPath)) throw new ArgumentNullException(nameof(fullPath));
 
-        var handle = NativeMethods.FindFirstFileExW(ToExtendedPath(fullPath), NativeMethods.FindExInfoBasic, out var data, NativeMethods.FindExSearchNameMatch, IntPtr.Zero, 0);
-        if (handle == NativeMethods.InvalidHandleValue)
+        WIN32_FIND_DATAW data;
+        using var handle = PInvoke.FindFirstFileEx(ToExtendedPath(fullPath), FINDEX_INFO_LEVELS.FindExInfoBasic, &data, FINDEX_SEARCH_OPS.FindExSearchNameMatch, 0);
+        if (handle.IsInvalid)
         {
             int error = Marshal.GetLastWin32Error();
-            if (error is NativeMethods.ErrorFileNotFound or NativeMethods.ErrorPathNotFound) return null;
+            if (error is (int)WIN32_ERROR.ERROR_FILE_NOT_FOUND or (int)WIN32_ERROR.ERROR_PATH_NOT_FOUND) return null;
             throw new IOException(new Win32Exception(error).Message + " " + fullPath);
         }
 
-        NativeMethods.FindClose(handle);
-        return (data.cFileName, data.dwFileAttributes);
+        return (data.cFileName.ToString(), (FileAttributes)data.dwFileAttributes);
     }
 
     /// <summary>
@@ -582,20 +591,20 @@ public static partial class WindowsUtils
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
     public static long GetFileID([Localizable(false)] string path)
     {
-        using var handle = NativeMethods.CreateFile(
+        using var handle = PInvoke.CreateFile(
             path ?? throw new ArgumentNullException(nameof(path)),
-            FileAccess.Read, FileShare.Read, IntPtr.Zero, FileMode.Open, FileAttributes.Archive, IntPtr.Zero);
+            (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE, null);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
-        if (!NativeMethods.GetFileInformationByHandle(handle, out var fileInfo))
+        if (!PInvoke.GetFileInformationByHandle(handle, out var fileInfo))
             throw BuildException(Marshal.GetLastWin32Error());
 
-        if (fileInfo.FileIndexLow is 0 or uint.MaxValue && fileInfo.FileIndexHigh is 0 or uint.MaxValue)
+        if (fileInfo.nFileIndexLow is 0 or uint.MaxValue && fileInfo.nFileIndexHigh is 0 or uint.MaxValue)
             throw new IOException($"The file system cannot provide a unique ID for '{path}'.");
 
         unchecked
         {
-            return fileInfo.FileIndexLow + ((long)fileInfo.FileIndexHigh << 32);
+            return fileInfo.nFileIndexLow + ((long)fileInfo.nFileIndexHigh << 32);
         }
     }
 
@@ -611,7 +620,7 @@ public static partial class WindowsUtils
         if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
         #endregion
 
-        if (!NativeMethods.MoveFileEx(sourcePath, destinationPath, NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING | NativeMethods.MoveFileFlags.MOVEFILE_DELAY_UNTIL_REBOOT))
+        if (!PInvoke.MoveFileEx(sourcePath, destinationPath, MOVE_FILE_FLAGS.MOVEFILE_REPLACE_EXISTING | MOVE_FILE_FLAGS.MOVEFILE_DELAY_UNTIL_REBOOT))
             throw BuildException(Marshal.GetLastWin32Error());
     }
     #endregion
@@ -631,8 +640,8 @@ public static partial class WindowsUtils
 
         if (!IsWindows7) return;
 
-        int ret = NativeMethods.SetCurrentProcessExplicitAppUserModelID(appID);
-        if (ret != 0) Log.Warn($"Failed to set application user model ID: {appID}", Marshal.GetExceptionForHR(ret));
+        var ret = PInvoke.SetCurrentProcessExplicitAppUserModelID(appID);
+        if (ret.Failed) Log.Warn($"Failed to set application user model ID: {appID}", Marshal.GetExceptionForHR(ret));
     }
 
     /// <summary>
@@ -640,22 +649,23 @@ public static partial class WindowsUtils
     /// </summary>
     /// <remarks>This should be called immediately after the changes in order to trigger a refresh of the Explorer UI.</remarks>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public static void NotifyAssocChanged()
+    public static unsafe void NotifyAssocChanged()
     {
         if (!IsWindows) return;
 
-        NativeMethods.SHChangeNotify(NativeMethods.SHCNE_ASSOCCHANGED, NativeMethods.SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+        PInvoke.SHChangeNotify(SHCNE_ID.SHCNE_ASSOCCHANGED, SHCNF_FLAGS.SHCNF_IDLIST, null, null);
     }
 
     /// <summary>
     /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
     /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public static void NotifyEnvironmentChanged()
+    public static unsafe void NotifyEnvironmentChanged()
     {
         if (!IsWindows) return;
 
-        NativeMethods.SendMessageTimeout(NativeMethods.HWND_BROADCAST, NativeMethods.WM_SETTINGCHANGE, IntPtr.Zero, "Environment", NativeMethods.SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 5000, out _);
+        fixed (char* area = "Environment")
+            PInvoke.SendMessageTimeout(HWND.HWND_BROADCAST, PInvoke.WM_SETTINGCHANGE, default, (nint)area, SEND_MESSAGE_TIMEOUT_FLAGS.SMTO_ABORTIFHUNG, 5000, out _);
     }
     #endregion
 
@@ -665,7 +675,7 @@ public static partial class WindowsUtils
     /// </summary>
     /// <param name="message">A unique string used to identify the message type session-wide.</param>
     /// <returns>A unique ID number used to identify the message type session-wide.</returns>
-    public static int RegisterWindowMessage([Localizable(false)] string message) => IsWindows ? NativeMethods.RegisterWindowMessage(message) : 0;
+    public static int RegisterWindowMessage([Localizable(false)] string message) => IsWindows ? (int)PInvoke.RegisterWindowMessage(message) : 0;
 
     /// <summary>
     /// Sends a message of a specific type to all windows in the current session.
@@ -675,7 +685,7 @@ public static partial class WindowsUtils
     {
         if (!IsWindows) return;
 
-        NativeMethods.PostMessage(NativeMethods.HWND_BROADCAST, messageID, IntPtr.Zero, IntPtr.Zero);
+        PInvoke.PostMessage(HWND.HWND_BROADCAST, (uint)messageID, default, default);
     }
     #endregion
 
@@ -692,8 +702,8 @@ public static partial class WindowsUtils
 
         if (!IsWindowsVista) return;
 
-        int ret = NativeMethods.RegisterApplicationRestart(arguments, NativeMethods.RestartFlags.NONE);
-        if (ret != 0) Log.Warn($"Failed to register application for restart with arguments: {arguments}");
+        var ret = PInvoke.RegisterApplicationRestart(arguments, 0);
+        if (ret.Failed) Log.Warn($"Failed to register application for restart with arguments: {arguments}");
     }
 
     /// <summary>
@@ -703,7 +713,7 @@ public static partial class WindowsUtils
     {
         if (!IsWindowsVista) return;
 
-        NativeMethods.UnregisterApplicationRestart();
+        PInvoke.UnregisterApplicationRestart();
     }
     #endregion
 }

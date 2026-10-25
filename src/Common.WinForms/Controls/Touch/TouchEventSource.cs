@@ -3,24 +3,34 @@
 
 using System.Runtime.InteropServices;
 using NanoByte.Common.Native;
+using Windows.Win32;
+using Windows.Win32.UI.InteractionContext;
+using Windows.Win32.UI.Input.Pointer;
 
 namespace NanoByte.Common.Controls.Touch;
 
 /// <summary>
 /// Translates Windows pointer input on a <see cref="Control"/> into high-level touch gestures. Single finger taps are still reported as mouse click events.
 /// </summary>
-public sealed partial class TouchEventSource : IDisposable
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows versions, version is checked at runtime with IsWindows8")]
+public sealed class TouchEventSource : IDisposable
 {
     private const int WM_POINTERUPDATE = 0x0245, WM_POINTERDOWN = 0x0246, WM_POINTERUP = 0x0247, WM_POINTERCAPTURECHANGED = 0x024C;
 
+    /// <summary>Value for <see cref="INTERACTION_CONTEXT_PROPERTY.INTERACTION_CONTEXT_PROPERTY_MEASUREMENT_UNITS"/>.</summary>
+    private const uint MeasurementUnitsScreen = 1;
+
     private readonly Control _control;
     private readonly bool _enabled;
-    private readonly IntPtr _context;
+    private readonly HINTERACTIONCONTEXT _context;
     private readonly System.Windows.Forms.Timer? _inertiaTimer;
+
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    private delegate void InteractionOutputCallback(IntPtr clientData, IntPtr output);
 
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     // Keep the delegate referenced in a field so the GC cannot collect it while native code still holds the function pointer
-    private readonly NativeMethods.InteractionOutputCallback? _outputCallback;
+    private readonly InteractionOutputCallback? _outputCallback;
 
     private int _activeContacts;
     private bool _manipulationActive;
@@ -45,41 +55,40 @@ public sealed partial class TouchEventSource : IDisposable
     /// Sets up gesture recognition for a control.
     /// </summary>
     /// <param name="control">The control to receive pointer input from. Pass its messages to <see cref="ProcessMessage"/>.</param>
-    public TouchEventSource(Control control)
+    public unsafe TouchEventSource(Control control)
     {
         _control = control ?? throw new ArgumentNullException(nameof(control));
         if (!WindowsUtils.IsWindows8) return;
 
-        if (NativeMethods.CreateInteractionContext(out _context) != 0) return;
+        HINTERACTIONCONTEXT context;
+        if (PInvoke.CreateInteractionContext(&context).Failed) return;
+        _context = context;
         _enabled = true;
 
         // Operate in screen pixels rather than the default HIMETRIC units
-        NativeMethods.SetPropertyInteractionContext(_context, NativeMethods.InteractionContextProperty.MeasurementUnits, NativeMethods.MeasurementUnitsScreen);
+        PInvoke.SetPropertyInteractionContext(_context, INTERACTION_CONTEXT_PROPERTY.INTERACTION_CONTEXT_PROPERTY_MEASUREMENT_UNITS, MeasurementUnitsScreen);
 
         ConfigureInteractions();
 
         // Keep the delegate referenced in a field so the GC cannot collect it while native code still holds the function pointer
         _outputCallback = OnOutput;
-        NativeMethods.RegisterOutputCallbackInteractionContext(_context, _outputCallback, IntPtr.Zero);
+        PInvoke.RegisterOutputCallbackInteractionContext(_context, (delegate* unmanaged[Stdcall]<void*, INTERACTION_CONTEXT_OUTPUT*, void>)(void*)Marshal.GetFunctionPointerForDelegate(_outputCallback), null);
 
         _inertiaTimer = new System.Windows.Forms.Timer {Interval = 16};
         _inertiaTimer.Tick += InertiaTick;
     }
 
-    private void ConfigureInteractions()
+    private unsafe void ConfigureInteractions()
     {
-        var configuration = new NativeMethods.InteractionContextConfiguration[]
+        var configuration = new INTERACTION_CONTEXT_CONFIGURATION
         {
-            new()
-            {
-                interactionId = NativeMethods.InteractionId.Manipulation,
-                enable = NativeMethods.ConfigManipulation
-                       | NativeMethods.ConfigManipulationTranslationX | NativeMethods.ConfigManipulationTranslationY
-                       | NativeMethods.ConfigManipulationScaling | NativeMethods.ConfigManipulationRotation
-                       | NativeMethods.ConfigManipulationTranslationInertia | NativeMethods.ConfigManipulationScalingInertia | NativeMethods.ConfigManipulationRotationInertia
-            }
+            interactionId = INTERACTION_ID.INTERACTION_ID_MANIPULATION,
+            enable = INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION
+                   | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_X | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_Y
+                   | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_SCALING | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_ROTATION
+                   | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_INERTIA | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_SCALING_INERTIA | INTERACTION_CONFIGURATION_FLAGS.INTERACTION_CONFIGURATION_FLAG_MANIPULATION_ROTATION_INERTIA
         };
-        NativeMethods.SetInteractionConfigurationInteractionContext(_context, (uint)configuration.Length, configuration);
+        PInvoke.SetInteractionConfigurationInteractionContext(_context, 1, &configuration);
     }
 
     /// <summary>
@@ -103,7 +112,7 @@ public sealed partial class TouchEventSource : IDisposable
         switch (m.Msg)
         {
             case WM_POINTERDOWN:
-                NativeMethods.AddPointerInteractionContext(_context, pointerId);
+                PInvoke.AddPointerInteractionContext(_context, pointerId);
                 _activeContacts++;
                 ProcessFrames(pointerId);
                 return _manipulationActive;
@@ -114,15 +123,15 @@ public sealed partial class TouchEventSource : IDisposable
 
             case WM_POINTERUP:
                 ProcessFrames(pointerId); // May synchronously raise ManipulationCompleted if there is no inertia
-                NativeMethods.RemovePointerInteractionContext(_context, pointerId);
+                PInvoke.RemovePointerInteractionContext(_context, pointerId);
                 if (_activeContacts > 0) _activeContacts--;
                 // If the manipulation is still active after the last contact was lifted, inertia is pending.
                 if (_activeContacts == 0 && _manipulationActive) _inertiaTimer?.Start();
                 return _manipulationActive;
 
             case WM_POINTERCAPTURECHANGED:
-                NativeMethods.StopInteractionContext(_context);
-                NativeMethods.RemovePointerInteractionContext(_context, pointerId);
+                PInvoke.StopInteractionContext(_context);
+                PInvoke.RemovePointerInteractionContext(_context, pointerId);
                 _activeContacts = 0;
                 return true;
 
@@ -131,47 +140,50 @@ public sealed partial class TouchEventSource : IDisposable
         }
     }
 
-    private void ProcessFrames(uint pointerId)
+    private unsafe void ProcessFrames(uint pointerId)
     {
         uint entriesCount = 0, pointerCount = 0;
-        if (!NativeMethods.GetPointerFrameInfoHistory(pointerId, ref entriesCount, ref pointerCount, null)) return;
+        if (!PInvoke.GetPointerFrameInfoHistory(pointerId, &entriesCount, &pointerCount, null)) return;
         if (entriesCount == 0 || pointerCount == 0) return;
 
-        var pointerInfo = new NativeMethods.PointerInfo[entriesCount * pointerCount];
-        if (!NativeMethods.GetPointerFrameInfoHistory(pointerId, ref entriesCount, ref pointerCount, pointerInfo)) return;
+        var pointerInfo = new POINTER_INFO[entriesCount * pointerCount];
+        fixed (POINTER_INFO* pointerInfoPtr = pointerInfo)
+        {
+            if (!PInvoke.GetPointerFrameInfoHistory(pointerId, &entriesCount, &pointerCount, pointerInfoPtr)) return;
 
-        NativeMethods.ProcessPointerFramesInteractionContext(_context, entriesCount, pointerCount, pointerInfo);
+            PInvoke.ProcessPointerFramesInteractionContext(_context, entriesCount, pointerCount, pointerInfoPtr);
+        }
     }
 
     private void InertiaTick(object? sender, EventArgs e)
     {
         if (_disposed) return;
-        NativeMethods.ProcessInertiaInteractionContext(_context);
+        PInvoke.ProcessInertiaInteractionContext(_context);
         if (!_manipulationActive) _inertiaTimer?.Stop();
     }
 
-    private void OnOutput(IntPtr clientData, IntPtr outputPtr)
+    private unsafe void OnOutput(IntPtr clientData, IntPtr outputPtr)
     {
-        var output = Marshal.PtrToStructure<NativeMethods.InteractionContextOutput>(outputPtr);
-        var origin = _control.PointToClient(new Point((int)output.x, (int)output.y));
+        var output = (INTERACTION_CONTEXT_OUTPUT*)outputPtr;
+        var origin = _control.PointToClient(new Point((int)output->x, (int)output->y));
 
-        switch (output.interactionId)
+        switch (output->interactionId)
         {
-            case NativeMethods.InteractionId.Manipulation:
-                var m = output.manipulation;
+            case INTERACTION_ID.INTERACTION_ID_MANIPULATION:
+                var m = output->arguments.manipulation;
                 var args = new ManipulationEventArgs(
                     origin,
                     delta: new(m.delta.translationX, m.delta.translationY, m.delta.scale, m.delta.expansion, m.delta.rotation),
                     cumulative: new(m.cumulative.translationX, m.cumulative.translationY, m.cumulative.scale, m.cumulative.expansion, m.cumulative.rotation),
                     velocity: new(m.velocity.velocityX, m.velocity.velocityY, m.velocity.velocityExpansion, m.velocity.velocityAngular),
-                    isInertial: (output.interactionFlags & NativeMethods.InteractionFlags.Inertia) != 0);
+                    isInertial: (output->interactionFlags & INTERACTION_FLAGS.INTERACTION_FLAG_INERTIA) != 0);
 
-                if ((output.interactionFlags & NativeMethods.InteractionFlags.Begin) != 0)
+                if ((output->interactionFlags & INTERACTION_FLAGS.INTERACTION_FLAG_BEGIN) != 0)
                 {
                     _manipulationActive = true;
                     ManipulationStarted?.Invoke(_control, args);
                 }
-                else if ((output.interactionFlags & NativeMethods.InteractionFlags.End) != 0)
+                else if ((output->interactionFlags & INTERACTION_FLAGS.INTERACTION_FLAG_END) != 0)
                 {
                     _manipulationActive = false;
                     _inertiaTimer?.Stop();
@@ -190,6 +202,6 @@ public sealed partial class TouchEventSource : IDisposable
 
         _inertiaTimer?.Stop();
         _inertiaTimer?.Dispose();
-        if (_enabled) NativeMethods.DestroyInteractionContext(_context);
+        if (_enabled) PInvoke.DestroyInteractionContext(_context);
     }
 }

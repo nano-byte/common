@@ -1,0 +1,26 @@
+// TouchEventSource
+AddPointerInteractionContext
+CreateInteractionContext
+DestroyInteractionContext
+GetPointerFrameInfoHistory
+INTERACTION_CONFIGURATION_FLAGS
+INTERACTION_CONTEXT_OUTPUT
+ProcessInertiaInteractionContext
+ProcessPointerFramesInteractionContext
+RegisterOutputCallbackInteractionContext
+RemovePointerInteractionContext
+SetInteractionConfigurationInteractionContext
+SetPropertyInteractionContext
+StopInteractionContext
+
+// WinFormsUtils
+BCM_SETSHIELD
+GetAsyncKeyState
+GetCaretBlinkTime
+HTCAPTION
+PeekMessage
+ReleaseCapture
+SendMessage
+SetCapture
+SetForegroundWindow
+WM_NCLBUTTONDOWN

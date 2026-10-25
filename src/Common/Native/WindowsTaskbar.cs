@@ -3,6 +3,16 @@
 
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.System.Com;
+using Windows.Win32.System.Com.StructuredStorage;
+using Windows.Win32.System.Variant;
+using Windows.Win32.UI.Shell;
+using Windows.Win32.UI.Shell.Common;
+using Windows.Win32.UI.Shell.PropertiesSystem;
+using Windows.Win32.UI.WindowsAndMessaging;
+using CShellLink = Windows.Win32.UI.Shell.ShellLink;
 
 namespace NanoByte.Common.Native;
 
@@ -10,9 +20,7 @@ namespace NanoByte.Common.Native;
 /// Provides helper methods and API calls specific to the Windows 7 or newer taskbar.
 /// </summary>
 [SupportedOSPlatform("windows6.1")]
-[RequiresUnreferencedCode("Uses COM interop.")]
-[SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global"), SuppressMessage("ReSharper", "UnusedMember.Local"), SuppressMessage("ReSharper", "EmptyGeneralCatchClause")]
-public static partial class WindowsTaskbar
+public static class WindowsTaskbar
 {
     /// <summary>
     /// Represents the thumbnail progress bar state.
@@ -110,19 +118,54 @@ public static partial class WindowsTaskbar
     }
 
     /// <summary>
+    /// The taskbar list for the current thread.
+    /// Interface pointers are not marshaled between COM apartments, so each thread needs its own instance.
+    /// </summary>
+    [ThreadStatic]
+    private static unsafe ITaskbarList4* _taskbarList;
+
+    [ThreadStatic]
+    private static bool _taskbarListFailed;
+
+    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
+    private static unsafe ITaskbarList4* GetTaskbarList()
+    {
+        if (_taskbarList == null && !_taskbarListFailed && WindowsUtils.IsWindows7)
+        {
+            ITaskbarList4* taskbarList = null;
+            try
+            {
+                TaskbarList.CreateInstance(out taskbarList).ThrowOnFailure();
+                taskbarList->HrInit();
+                _taskbarList = taskbarList;
+            }
+            #region Error handling
+            catch (Exception ex)
+            {
+                if (taskbarList != null) taskbarList->Release();
+                _taskbarListFailed = true;
+                Log.Warn("Failed to initialize Windows Taskbar access", ex);
+            }
+            #endregion
+        }
+
+        return _taskbarList;
+    }
+
+    /// <summary>
     /// Sets the state of the taskbar progress indicator.
     /// </summary>
     /// <param name="handle">The handle of the window whose taskbar button contains the progress indicator.</param>
     /// <param name="state">The state of the progress indicator.</param>
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-    public static void SetProgressState(IntPtr handle, ProgressBarState state)
+    public static unsafe void SetProgressState(IntPtr handle, ProgressBarState state)
     {
-        if (_taskbarList == null) return;
+        var taskbarList = GetTaskbarList();
+        if (taskbarList == null) return;
 
         try
         {
-            lock (_taskbarList)
-                _taskbarList.SetProgressState(handle, state);
+            taskbarList->SetProgressState((HWND)handle, (TBPFLAG)state);
         }
         #region Error handling
         catch (Exception ex)
@@ -139,14 +182,14 @@ public static partial class WindowsTaskbar
     /// <param name="currentValue">The current value of the progress indicator.</param>
     /// <param name="maximumValue">The value <paramref name="currentValue"/> will have when the operation is complete.</param>
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-    public static void SetProgressValue(IntPtr handle, int currentValue, int maximumValue)
+    public static unsafe void SetProgressValue(IntPtr handle, int currentValue, int maximumValue)
     {
-        if (_taskbarList == null) return;
+        var taskbarList = GetTaskbarList();
+        if (taskbarList == null) return;
 
         try
         {
-            lock (_taskbarList)
-                _taskbarList.SetProgressValue(handle, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
+            taskbarList->SetProgressValue((HWND)handle, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
         }
         #region Error handling
         catch (Exception ex)
@@ -166,7 +209,7 @@ public static partial class WindowsTaskbar
     /// <param name="relaunchName">The user-friendly name to associate with <paramref name="relaunchCommand"/>; can be <c>null</c>.</param>
     /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-    public static void SetWindowAppID(IntPtr hwnd, [Localizable(false)] string appID, [Localizable(false)] string? relaunchCommand = null, [Localizable(false)] string? relaunchIcon = null, [Localizable(true)] string? relaunchName = null)
+    public static unsafe void SetWindowAppID(IntPtr hwnd, [Localizable(false)] string appID, [Localizable(false)] string? relaunchCommand = null, [Localizable(false)] string? relaunchIcon = null, [Localizable(true)] string? relaunchName = null)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
@@ -174,17 +217,15 @@ public static partial class WindowsTaskbar
 
         if (!WindowsUtils.IsWindows7) return;
 
+        IPropertyStore* propertyStore = null;
         try
         {
-            var propertyStore = GetWindowPropertyStore(hwnd);
+            PInvoke.SHGetPropertyStoreForWindow((HWND)hwnd, out propertyStore).ThrowOnFailure();
 
-            var stringFormat = new Guid("{9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3}");
-            SetPropertyValue(propertyStore, new PropertyKey(stringFormat, 5), appID);
-            if (!string.IsNullOrEmpty(relaunchCommand)) SetPropertyValue(propertyStore, new PropertyKey(stringFormat, 2), relaunchCommand);
-            if (!string.IsNullOrEmpty(relaunchIcon)) SetPropertyValue(propertyStore, new PropertyKey(stringFormat, 3), relaunchIcon);
-            if (!string.IsNullOrEmpty(relaunchName)) SetPropertyValue(propertyStore, new PropertyKey(stringFormat, 4), relaunchName);
-
-            Marshal.ReleaseComObject(propertyStore);
+            SetPropertyValue(propertyStore, PInvoke.PKEY_AppUserModel_ID, appID);
+            if (!string.IsNullOrEmpty(relaunchCommand)) SetPropertyValue(propertyStore, PInvoke.PKEY_AppUserModel_RelaunchCommand, relaunchCommand!);
+            if (!string.IsNullOrEmpty(relaunchIcon)) SetPropertyValue(propertyStore, PInvoke.PKEY_AppUserModel_RelaunchIconResource, relaunchIcon!);
+            if (!string.IsNullOrEmpty(relaunchName)) SetPropertyValue(propertyStore, PInvoke.PKEY_AppUserModel_RelaunchDisplayNameResource, relaunchName!);
         }
         #region Error handling
         catch (Exception ex)
@@ -192,6 +233,10 @@ public static partial class WindowsTaskbar
             Log.Warn("Failed to window application user model ID", ex);
         }
         #endregion
+        finally
+        {
+            if (propertyStore != null) propertyStore->Release();
+        }
     }
 
     /// <summary>
@@ -200,7 +245,7 @@ public static partial class WindowsTaskbar
     /// <param name="appID">The application ID of the jumplist to add the task to.</param>
     /// <param name="links">The links to add to the jumplist.</param>
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-    public static void AddTaskLinks([Localizable(false)] string appID, IEnumerable<ShellLink> links)
+    public static unsafe void AddTaskLinks([Localizable(false)] string appID, IEnumerable<ShellLink> links)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(appID)) throw new ArgumentNullException(nameof(appID));
@@ -209,20 +254,32 @@ public static partial class WindowsTaskbar
 
         if (!WindowsUtils.IsWindows7) return;
 
+        ICustomDestinationList* destinationList = null;
+        IObjectArray* removedDestinations = null;
+        IObjectCollection* taskContent = null;
         try
         {
-            var customDestinationList = (ICustomDestinationList)new CDestinationList();
-            customDestinationList.SetAppID(appID);
+            DestinationList.CreateInstance(out destinationList).ThrowOnFailure();
+            destinationList->SetAppID(appID);
+            destinationList->BeginList(out _, out removedDestinations);
 
-            var objectArray = new Guid("92CA9DCD-5622-4BBA-A805-5E9F541BD8C9");
-            customDestinationList.BeginList(out _, ref objectArray, out _);
-
-            var taskContent = (IObjectCollection)new CEnumerableObjectCollection();
+            EnumerableObjectCollection.CreateInstance(out taskContent).ThrowOnFailure();
             foreach (var shellLink in links)
-                taskContent.AddObject(ConvertShellLink(shellLink));
+            {
+                var nativeShellLink = ConvertShellLink(shellLink);
+                try
+                {
+                    taskContent->AddObject((IUnknown*)nativeShellLink);
+                }
+                finally
+                {
+                    nativeShellLink->Release();
+                }
+            }
 
-            customDestinationList.AddUserTasks((IObjectArray)taskContent);
-            customDestinationList.CommitList();
+            // IObjectCollection inherits from IObjectArray
+            destinationList->AddUserTasks((IObjectArray*)taskContent);
+            destinationList->CommitList();
         }
         #region Error handling
         catch (Exception ex)
@@ -230,6 +287,12 @@ public static partial class WindowsTaskbar
             Log.Warn("Failed to add links to taskbar jumplist", ex);
         }
         #endregion
+        finally
+        {
+            if (taskContent != null) taskContent->Release();
+            if (removedDestinations != null) removedDestinations->Release();
+            if (destinationList != null) destinationList->Release();
+        }
     }
 
     /// <summary>
@@ -237,18 +300,15 @@ public static partial class WindowsTaskbar
     /// </summary>
     /// <param name="hwnd">A handle to the window to prevent from being pinned.</param>
     [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "COM calls throw unpredictable exceptions and this methods successful execution is not critical.")]
-    public static void PreventPinning(IntPtr hwnd)
+    public static unsafe void PreventPinning(IntPtr hwnd)
     {
         if (!WindowsUtils.IsWindows7) return;
 
+        IPropertyStore* propertyStore = null;
         try
         {
-            var propertyStore = GetWindowPropertyStore(hwnd);
-
-            var preventPinningProperty = new PropertyKey(new("9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3"), 9);
-            SetPropertyValue(propertyStore, preventPinningProperty, "1");
-
-            Marshal.ReleaseComObject(propertyStore);
+            PInvoke.SHGetPropertyStoreForWindow((HWND)hwnd, out propertyStore).ThrowOnFailure();
+            SetPropertyValue(propertyStore, PInvoke.PKEY_AppUserModel_PreventPinning, "1");
         }
         #region Error handling
         catch (Exception ex)
@@ -256,50 +316,62 @@ public static partial class WindowsTaskbar
             Log.Warn("Failed to prevent pinning a window", ex);
         }
         #endregion
+        finally
+        {
+            if (propertyStore != null) propertyStore->Release();
+        }
     }
 
     /// <summary>
     /// Converts a managed shell link structure to a COM object.
     /// </summary>
-    private static IShellLinkW ConvertShellLink(ShellLink shellLink)
+    /// <returns>A COM object the caller must release.</returns>
+    private static unsafe IShellLinkW* ConvertShellLink(ShellLink shellLink)
     {
-        var nativeShellLink = (IShellLinkW)new CShellLink();
-        var nativePropertyStore = (IPropertyStore)nativeShellLink;
+        CShellLink.CreateInstance(out IShellLinkW* nativeShellLink).ThrowOnFailure();
+        IPropertyStore* propertyStore = null;
+        try
+        {
+            nativeShellLink->SetPath(shellLink.Path);
+            if (!string.IsNullOrEmpty(shellLink.Arguments)) nativeShellLink->SetArguments(shellLink.Arguments!);
+            if (!string.IsNullOrEmpty(shellLink.IconPath)) nativeShellLink->SetIconLocation(shellLink.IconPath, shellLink.IconIndex);
+            nativeShellLink->SetShowCmd(SHOW_WINDOW_CMD.SW_SHOWNORMAL);
 
-        nativeShellLink.SetPath(shellLink.Path);
-        if (!string.IsNullOrEmpty(shellLink.Arguments)) nativeShellLink.SetArguments(shellLink.Arguments);
-        if (!string.IsNullOrEmpty(shellLink.IconPath)) nativeShellLink.SetIconLocation(shellLink.IconPath, shellLink.IconIndex);
+            nativeShellLink->QueryInterface(out propertyStore).ThrowOnFailure();
+            SetPropertyValue(propertyStore, PInvoke.PKEY_Title, shellLink.Title);
+            propertyStore->Commit();
 
-        nativeShellLink.SetShowCmd(1); // Normal window state
-
-        SetPropertyValue(nativePropertyStore, new PropertyKey(new("F29F85E0-4FF9-1068-AB91-08002B27B3D9"), 2), shellLink.Title);
-        nativePropertyStore.Commit();
-
-        return nativeShellLink;
+            return nativeShellLink;
+        }
+        catch
+        {
+            nativeShellLink->Release();
+            throw;
+        }
+        finally
+        {
+            if (propertyStore != null) propertyStore->Release();
+        }
     }
 
     /// <summary>
-    /// Retrieves the property store for a window.
-    /// </summary>
-    /// <param name="hwnd">A handle to the window to retrieve the property store for.</param>
-    private static IPropertyStore GetWindowPropertyStore(IntPtr hwnd)
-    {
-        var guid = new Guid(PropertyStoreGuid);
-        if (Marshal.GetExceptionForHR(NativeMethods.SHGetPropertyStoreForWindow(hwnd, ref guid, out var propStore)) is {} exception)
-            throw exception;
-        return propStore;
-    }
-
-    /// <summary>
-    /// Sets a property value.
+    /// Sets a string property value.
     /// </summary>
     /// <param name="propertyStore">The property store to set the property in.</param>
-    /// <param name="property">The property to set.</param>
+    /// <param name="key">The property to set.</param>
     /// <param name="value">The value to set the property to.</param>
-    private static void SetPropertyValue(IPropertyStore propertyStore, PropertyKey property, string value)
+    private static unsafe void SetPropertyValue(IPropertyStore* propertyStore, in PROPERTYKEY key, string value)
     {
-        var variant = new PropertyVariant(value);
-        propertyStore.SetValue(ref property, ref variant);
-        variant.Dispose();
+        var variant = new PROPVARIANT();
+        variant.vt = VARENUM.VT_LPWSTR;
+        variant.pwszVal = (char*)Marshal.StringToCoTaskMemUni(value);
+        try
+        {
+            propertyStore->SetValue(key, variant);
+        }
+        finally
+        {
+            PInvoke.PropVariantClear(ref variant);
+        }
     }
 }

@@ -3,6 +3,9 @@
 
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.System.Threading;
 
 namespace NanoByte.Common.Native;
 
@@ -10,10 +13,9 @@ namespace NanoByte.Common.Native;
 /// Provides Windows-specific API calls for cross-process Mutexes.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public static partial class WindowsMutex
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows builds, versions are checked at runtime with IsWindows*")]
+public static class WindowsMutex
 {
-    private const uint Synchronize = 0x00100000;
-
     /// <summary>
     /// Creates a new (or opens an existing) mutex.
     /// </summary>
@@ -22,12 +24,14 @@ public static partial class WindowsMutex
     /// <returns>The handle for the mutex. Can be used in <see cref="Close"/>. Will automatically be released once the process terminates.</returns>
     /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-    public static IntPtr Create([Localizable(false)] string name, out bool alreadyExists)
+    public static unsafe IntPtr Create([Localizable(false)] string name, out bool alreadyExists)
     {
         if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
         // Create new or open existing mutex
-        var handle = NativeMethods.CreateMutex(IntPtr.Zero, false, name ?? throw new ArgumentNullException(nameof(name)));
+        HANDLE handle;
+        fixed (char* namePtr = name ?? throw new ArgumentNullException(nameof(name)))
+            handle = PInvoke.CreateMutex(null, false, namePtr);
 
         int error = Marshal.GetLastWin32Error();
         switch (error)
@@ -52,14 +56,16 @@ public static partial class WindowsMutex
     /// <returns><c>true</c> if an existing mutex was found; <c>false</c> if none existed.</returns>
     /// <exception cref="Win32Exception">The native subsystem reported a problem.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows.</exception>
-    public static bool Probe([Localizable(false)] string name)
+    public static unsafe bool Probe([Localizable(false)] string name)
     {
         if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
         // Try to open existing mutex
-        var handle = NativeMethods.OpenMutex(Synchronize, false, name ?? throw new ArgumentNullException(nameof(name)));
+        HANDLE handle;
+        fixed (char* namePtr = name ?? throw new ArgumentNullException(nameof(name)))
+            handle = PInvoke.OpenMutex(SYNCHRONIZATION_ACCESS_RIGHTS.SYNCHRONIZATION_SYNCHRONIZE, false, namePtr);
 
-        if (handle == IntPtr.Zero)
+        if (handle == default)
         {
             return Marshal.GetLastWin32Error() switch
             {
@@ -69,7 +75,7 @@ public static partial class WindowsMutex
         }
 
         // Existing mutex opened, close handle again
-        NativeMethods.CloseHandle(handle);
+        PInvoke.CloseHandle(handle);
         return true;
     }
 
@@ -82,6 +88,6 @@ public static partial class WindowsMutex
     {
         if (!WindowsUtils.IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        NativeMethods.CloseHandle(handle);
+        PInvoke.CloseHandle((HANDLE)handle);
     }
 }

@@ -1,9 +1,12 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Text;
 using NanoByte.Common.Tasks;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.System.RestartManager;
 
 namespace NanoByte.Common.Native;
 
@@ -14,7 +17,8 @@ namespace NanoByte.Common.Native;
 /// See https://msdn.microsoft.com/en-us/library/windows/desktop/cc948910
 /// </remarks>
 [SupportedOSPlatform("windows6.0")]
-public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposable
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows builds, versions are checked at runtime with IsWindows*")]
+public sealed class WindowsRestartManager : MarshalByRefObject, IDisposable
 {
     #region Win32 Error Codes
     private const int Win32ErrorFailNoactionReboot = 350;
@@ -44,7 +48,6 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
 
     #region Session
     private readonly uint _sessionHandle;
-    private readonly bool _sessionStarted;
 
     /// <summary>
     /// Starts a new Restart Manager session.
@@ -56,9 +59,9 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     {
         if (!WindowsUtils.IsWindowsVista) throw new PlatformNotSupportedException();
 
-        int ret = NativeMethods.RmStartSession(out _sessionHandle, 0, new StringBuilder(NativeMethods.CCH_RM_SESSION_KEY + 1));
-        if (ret != 0) throw BuildException(ret);
-        _sessionStarted = true;
+        Span<char> sessionKey = stackalloc char[(int)PInvoke.CCH_RM_SESSION_KEY + 1];
+        var ret = PInvoke.RmStartSession(out _sessionHandle, sessionKey);
+        if (ret != WIN32_ERROR.NO_ERROR) throw BuildException((int)ret);
     }
 
     /// <summary>
@@ -78,13 +81,13 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
 
     private void DisposeNative()
     {
-        if (!_sessionStarted) return; // Might be unset due to exception thrown in constructor
+        if (_sessionHandle == default) return; // Might be unset due to exception thrown in constructor
 
-        int ret = NativeMethods.RmEndSession(_sessionHandle);
-        if (ret != 0) Log.Debug("Failed to end Windows Restart Manager session", BuildException(ret));
+        var ret = PInvoke.RmEndSession(_sessionHandle);
+        if (ret != WIN32_ERROR.NO_ERROR) Log.Debug("Failed to end Windows Restart Manager session", BuildException((int)ret));
     }
 
-    private void CancellationCallback() => NativeMethods.RmCancelCurrentTask(_sessionHandle);
+    private void CancellationCallback() => PInvoke.RmCancelCurrentTask(_sessionHandle);
     #endregion
 
     #region Resources
@@ -99,8 +102,8 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
         if (files == null) throw new ArgumentNullException(nameof(files));
         #endregion
 
-        int ret = NativeMethods.RmRegisterResources(_sessionHandle, (uint)files.Length, files, 0, [], 0, []);
-        if (ret != 0) throw BuildException(ret);
+        var ret = PInvoke.RmRegisterResources(_sessionHandle, files, default, default);
+        if (ret != WIN32_ERROR.NO_ERROR) throw BuildException((int)ret);
     }
     #endregion
 
@@ -122,7 +125,7 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
 
             string[] names = new string[arrayLength];
             for (int i = 0; i < arrayLength; i++)
-                names[i] = apps[i].strAppName;
+                names[i] = apps[i].strAppName.ToString();
             return names;
         }
     }
@@ -136,30 +139,31 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
     {
         var apps = ListAppsInternal(out uint arrayLength, out var rebootReasons);
 
-        permissionDenied = rebootReasons == NativeMethods.RM_REBOOT_REASON.RmRebootReasonPermissionDenied;
+        permissionDenied = rebootReasons == RM_REBOOT_REASON.RmRebootReasonPermissionDenied;
 
         var names = new List<string>();
         for (int i = 0; i < arrayLength; i++)
         {
-            if (apps[i].AppStatus == NativeMethods.RM_APP_STATUS.RmStatusErrorOnStop || apps[i].AppStatus == NativeMethods.RM_APP_STATUS.RmStatusErrorOnRestart)
-                names.Add(apps[i].strAppName);
+            if (apps[i].AppStatus is RM_APP_STATUS.RmStatusErrorOnStop or RM_APP_STATUS.RmStatusErrorOnRestart)
+                names.Add(apps[i].strAppName.ToString());
         }
         return names;
     }
 
-    private NativeMethods.RM_PROCESS_INFO[] ListAppsInternal(out uint arrayLength, out NativeMethods.RM_REBOOT_REASON rebootReasons)
+    private RM_PROCESS_INFO[] ListAppsInternal(out uint arrayLength, out RM_REBOOT_REASON rebootReasons)
     {
-        int ret;
+        WIN32_ERROR ret;
         uint arrayLengthNeeded = 1;
-        NativeMethods.RM_PROCESS_INFO[] processInfo;
+        RM_PROCESS_INFO[] processInfo;
         do
         {
             arrayLength = arrayLengthNeeded;
-            processInfo = new NativeMethods.RM_PROCESS_INFO[arrayLength];
-            ret = NativeMethods.RmGetList(_sessionHandle, out arrayLengthNeeded, ref arrayLength, processInfo, out rebootReasons);
-        } while (ret == WindowsUtils.Win32ErrorMoreData);
+            processInfo = new RM_PROCESS_INFO[arrayLength];
+            ret = PInvoke.RmGetList(_sessionHandle, out arrayLengthNeeded, ref arrayLength, processInfo, out uint reasons);
+            rebootReasons = (RM_REBOOT_REASON)reasons;
+        } while (ret == WIN32_ERROR.ERROR_MORE_DATA);
 
-        if (ret != 0) throw BuildException(ret);
+        if (ret != WIN32_ERROR.NO_ERROR) throw BuildException((int)ret);
 
         return processInfo;
     }
@@ -182,12 +186,14 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
         handler.RunTask(new PercentageTask(Resources.ShuttingDownApps, ShutdownAppsWork, CancellationCallback));
     }
 
-    private void ShutdownAppsWork(PercentProgressCallback progressCallback)
+    private unsafe void ShutdownAppsWork(PercentProgressCallback progressCallback)
     {
         void Shutdown(bool force)
         {
-            int ret = NativeMethods.RmShutdown(_sessionHandle, force ? NativeMethods.RM_SHUTDOWN_TYPE.RmForceShutdown : 0, progressCallback);
-            if (ret != 0) throw BuildException(ret);
+            WriteStatusCallback callback = percent => progressCallback((int)percent);
+            var ret = PInvoke.RmShutdown(_sessionHandle, (uint)(force ? RM_SHUTDOWN_TYPE.RmForceShutdown : 0), ToFunctionPointer(callback));
+            GC.KeepAlive(callback);
+            if (ret != WIN32_ERROR.NO_ERROR) throw BuildException((int)ret);
         }
 
         try
@@ -217,10 +223,24 @@ public sealed partial class WindowsRestartManager : MarshalByRefObject, IDisposa
         handler.RunTask(new PercentageTask(Resources.RestartingApps, RestartAppsWork, CancellationCallback));
     }
 
-    private void RestartAppsWork(PercentProgressCallback progressCallback)
+    private unsafe void RestartAppsWork(PercentProgressCallback progressCallback)
     {
-        int ret = NativeMethods.RmRestart(_sessionHandle, 0, progressCallback);
-        if (ret != 0) throw BuildException(ret);
+        WriteStatusCallback callback = percent => progressCallback((int)percent);
+        var ret = PInvoke.RmRestart(_sessionHandle, ToFunctionPointer(callback));
+        GC.KeepAlive(callback);
+        if (ret != WIN32_ERROR.NO_ERROR) throw BuildException((int)ret);
     }
+    #endregion
+
+    #region Callback
+    /// <summary>RM_WRITE_STATUS_CALLBACK</summary>
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    private delegate void WriteStatusCallback(uint percentComplete);
+
+    /// <summary>
+    /// Gets a native function pointer for a callback. The caller must keep <paramref name="callback"/> alive until native code stops using the pointer.
+    /// </summary>
+    private static unsafe delegate* unmanaged[Stdcall]<uint, void> ToFunctionPointer(WriteStatusCallback callback)
+        => (delegate* unmanaged[Stdcall]<uint, void>)(void*)Marshal.GetFunctionPointerForDelegate(callback);
     #endregion
 }

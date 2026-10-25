@@ -1,8 +1,9 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Runtime.InteropServices;
 using NanoByte.Common.Native;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace NanoByte.Common.EtoControls;
 
@@ -100,14 +101,11 @@ public static class WindowExtensions
     /// This is purely cosmetic. UAC elevation is a separate concern.
     /// Does nothing on platforms other than Windows Vista or newer or with Eto.Forms backends that do not use native Win32 buttons.
     /// </remarks>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static void AddShieldIcon(this Button button)
     {
         #region Sanity checks
         if (button == null) throw new ArgumentNullException(nameof(button));
         #endregion
-
-        const int BCM_FIRST = 0x1600, BCM_SETSHIELD = 0x000C;
 
         button.WhenLoaded(() =>
         {
@@ -118,7 +116,7 @@ public static class WindowExtensions
                 flatStyle.SetValue(button.ControlObject, Enum.Parse(flatStyle.PropertyType, "System"));
 
             if (button.NativeHandle != IntPtr.Zero)
-                NativeMethods.SendMessage(button.NativeHandle, BCM_FIRST + BCM_SETSHIELD, IntPtr.Zero, new IntPtr(1));
+                PInvoke.SendMessage((HWND)button.NativeHandle, PInvoke.BCM_SETSHIELD, default, 1);
         });
     }
 
@@ -129,11 +127,5 @@ public static class WindowExtensions
     {
         if (control.Loaded) action();
         else control.Load += delegate { action(); };
-    }
-
-    private static class NativeMethods
-    {
-        [DllImport("user32")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
     }
 }
