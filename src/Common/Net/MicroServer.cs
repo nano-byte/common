@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Net;
 using NanoByte.Common.Streams;
 
@@ -78,4 +77,3 @@ public sealed class MicroServer : HttpServer
         }
     }
 }
-#endif

@@ -1,9 +1,7 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Threading.Tasks;
-#endif
 
 namespace NanoByte.Common.Streams;
 
@@ -22,7 +20,6 @@ public sealed class ShadowingStream(Stream underlyingStream, Stream shadowStream
         return read;
     }
 
-#if !NET20 && !NET40
     /// <inheritdoc/>
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
@@ -30,7 +27,6 @@ public sealed class ShadowingStream(Stream underlyingStream, Stream shadowStream
         await shadowStream.WriteAsync(buffer, offset, read, cancellationToken);
         return read;
     }
-#endif
 
 #if NET
     /// <inheritdoc/>

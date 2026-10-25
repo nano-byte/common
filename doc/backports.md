@@ -8,42 +8,13 @@ Newer versions of .NET often introduce features that can be backported to earlie
 
 ## Language features
 
-[LINQ](https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/linq/) was introduced in .NET Framework 3.5 and is backported to .NET Framework 2.0 (by embedding [LinqBridge](http://www.albahari.com/nutshell/linqbridge.aspx)).
-
 [Nullable reference types](https://docs.microsoft.com/dotnet/csharp/nullable-references), [Ranges](https://docs.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges) and [Records](https://docs.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-9.0/records) were introduced in .NET (Core) and are backported to .NET Framework.
 
 [Required members](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-11.0/required-members) were introduced in .NET 7.0 and are backported to .NET 6.0 and .NET Framework.
 
-## Collections
-
-The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:
-
-- [HashSet<T>](https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1)
-- [SortedSet<T>](https://learn.microsoft.com/dotnet/api/system.collections.generic.sortedset-1)
-
-## Cancellation
-
-The following types were introduced in .NET Framework 4.0 and are backported to .NET Framework 2.0:
-
-- [CancellationToken](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken)
-- [CancellationTokenSource](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource)
-- [CancellationTokenRegistration](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokenregistration)
-
-## Progress
-
-The following types were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
-
-- [IProgress<T>](https://learn.microsoft.com/dotnet/api/system.iprogress-1)
-- [Progress<T>](https://learn.microsoft.com/dotnet/api/system.progress-1)
-
 ## Utils
 
 [HashCode](https://learn.microsoft.com/dotnet/api/system.hashcode) was introduced in .NET Core 2.1 / .NET Standard 2.1 and is backported to .NET Framework.
-
-The following [CustomAttributeExtensions](https://learn.microsoft.com/dotnet/api/system.reflection.customattributeextensions) methods were introduced in .NET Framework 4.5 and are backported to .NET Framework 2.0 and 4.0:
-
-- `.GetCustomAttribute<T>()`
-- `.GetCustomAttributes<T>()`
 
 ## Platform attributes
 
@@ -62,7 +33,3 @@ The following types were introduced in .NET 6.0 and are backported to .NET Frame
 
 - [SupportedOSPlatformGuardAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.supportedosplatformguardattribute)
 - [UnsupportedOSPlatformGuardAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.versioning.unsupportedosplatformguardattribute)
-
-## Data annotations
-
-[RangeAttribute](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.rangeattribute) was introduced in .NET Framework 3.5 and is backported to .NET Framework 2.0.

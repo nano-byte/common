@@ -1,10 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20
 using System.Linq.Expressions;
 using System.Reflection;
-#endif
 
 namespace NanoByte.Common;
 
@@ -66,7 +64,6 @@ public static class PropertyPointer
     public static PropertyPointer<T?> ForNullable<T>(Func<T?> getValue, Action<T?> setValue)
         => new(getValue, setValue);
 
-#if !NET20
     /// <summary>
     /// Creates a property pointer.
     /// </summary>
@@ -111,5 +108,4 @@ public static class PropertyPointer
             _ => throw new ArgumentException("The expression must point to a property or field.", nameof(expression))
         }).Compile();
     }
-#endif
 }

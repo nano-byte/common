@@ -1,4 +1,4 @@
-#if NET20 || NET40 || NET45
+#if NET45
 
 // Taken and adapted from Microsoft.Bcl.HashCode NuGet package
 

@@ -96,8 +96,6 @@ public static partial class WindowsUtils
     public static bool IsWindows
 #if NET
         => OperatingSystem.IsWindows();
-#elif NET20 || NET40
-        => Environment.OSVersion.Platform is PlatformID.Win32Windows or PlatformID.Win32NT;
 #else
         => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #endif
@@ -107,11 +105,7 @@ public static partial class WindowsUtils
     /// </summary>
     [SupportedOSPlatformGuard("windows")]
     public static bool IsWindowsNT
-#if NET20 || NET40
-        => Environment.OSVersion.Platform is PlatformID.Win32NT;
-#else
         => IsWindows;
-#endif
 
     [SupportedOSPlatformGuard("windows")]
     private static bool IsWindowsNTVersion(Version version)
@@ -334,11 +328,7 @@ public static partial class WindowsUtils
     {
         try
         {
-            if (Environment.GetFolderPath(folder
-#if !NET20 || NET40
-                    , SpecialFolderOption.DoNotVerify
-#endif
-                ).EmptyAsNull() is {} path)
+            if (Environment.GetFolderPath(folder, SpecialFolderOption.DoNotVerify).EmptyAsNull() is {} path)
                 return path;
         }
         #region Error handling
@@ -352,7 +342,6 @@ public static partial class WindowsUtils
         return folder switch
         {
             ProgramFiles => GetEnvironmentVariable("ProgramFiles") ?? @"C:\Program Files",
-#if !NET20 || NET40
             ProgramFilesX86 => Is64BitProcess
                 ? GetEnvironmentVariable("ProgramFiles(x86)") ?? @"C:\Program Files (x86)"
                 : GetFolderPath(ProgramFiles),
@@ -363,7 +352,6 @@ public static partial class WindowsUtils
             CommonPrograms => Combine(GetFolderPath(CommonStartMenu), "Programs"),
             CommonStartup => Combine(GetFolderPath(CommonPrograms), "Startup"),
             UserProfile => Locations.HomeDir,
-#endif
             DesktopDirectory or Desktop => Combine(Locations.HomeDir, "Desktop"),
             LocalApplicationData => GetEnvironmentVariable("LOCALAPPDATA") ?? Combine(Locations.HomeDir, @"AppData\Local"),
             ApplicationData => GetEnvironmentVariable("APPDATA") ?? Combine(Locations.HomeDir, @"AppData\Roaming"),
@@ -548,7 +536,6 @@ public static partial class WindowsUtils
             throw BuildException(Marshal.GetLastWin32Error());
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Looks up a directory entry the way Windows resolves names: case-insensitively and including 8.3 short names. Does not follow links.
     /// </summary>
@@ -570,7 +557,6 @@ public static partial class WindowsUtils
         NativeMethods.FindClose(handle);
         return (data.cFileName, data.dwFileAttributes);
     }
-#endif
 
     /// <summary>
     /// Adds the <c>\\?\</c> prefix, so lookups work beyond <c>MAX_PATH</c> and Windows does not normalize the path again.

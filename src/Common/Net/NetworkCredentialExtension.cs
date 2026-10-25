@@ -1,7 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Net;
 using System.Net.Http.Headers;
 
@@ -18,4 +17,3 @@ public static class NetworkCredentialExtension
     public static AuthenticationHeaderValue ToBasicAuth(this NetworkCredential credential)
         => new("Basic", (credential.UserName + ":" + credential.Password).Base64Utf8Encode());
 }
-#endif

@@ -2,11 +2,8 @@
 // Licensed under the MIT License
 
 using System.Net;
-
-#if !NET20 && !NET40
 using System.Threading.Tasks;
 using NanoByte.Common.Threading;
-#endif
 
 namespace NanoByte.Common.Tasks;
 
@@ -28,7 +25,6 @@ public sealed class ActionTask([Localizable(true)] string name, Action<Cancellat
         CanCancel = false;
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// A task that executes an async <see cref="Task"/> that can be canceled. Only completion is reported, no intermediate progress.
     /// </summary>
@@ -48,7 +44,6 @@ public sealed class ActionTask([Localizable(true)] string name, Action<Cancellat
     {
         CanCancel = false;
     }
-#endif
 
     /// <inheritdoc/>
     public override string Name { get; } = name ?? throw new ArgumentNullException(nameof(name));

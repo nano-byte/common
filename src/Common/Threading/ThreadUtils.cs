@@ -2,11 +2,8 @@
 // Licensed under the MIT License
 
 using System.Runtime.Versioning;
-using NanoByte.Common.Native;
-
-#if !NET20 && !NET40
 using System.Threading.Tasks;
-#endif
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Threading;
 
@@ -127,7 +124,6 @@ public static class ThreadUtils
         return result;
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Runs an asynchronous task and blocks until it completes.
     /// Avoids deadlocks by ignoring the <see cref="SynchronizationContext"/>.
@@ -180,5 +176,4 @@ public static class ThreadUtils
             SynchronizationContext.SetSynchronizationContext(synchronizationContext);
         }
     }
-#endif
 }

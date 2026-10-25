@@ -15,13 +15,7 @@ public class MultiPropertyChangedCommand : PreExecutedCommand
     /// <summary>
     /// The objects the property belongs to.
     /// </summary>
-    public
-#if NET20 || NET40
-        IList<object>
-#else
-        IReadOnlyList<object>
-#endif
-        Targets { get; }
+    public IReadOnlyList<object> Targets { get; }
 
     /// <summary>
     /// The property that was changed.

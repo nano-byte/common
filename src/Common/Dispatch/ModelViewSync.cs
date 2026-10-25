@@ -114,11 +114,7 @@ public sealed class ModelViewSync<TModel, TView>(MonitoredCollection<TModel> mod
         if (create == null) throw new ArgumentNullException(nameof(create));
         #endregion
 
-#if NET20
-        _createDispatcher.Add<TSpecificModel>(element => create(element).OfType<TView>());
-#else
         _createDispatcher.Add(create);
-#endif
 
         if (update != null)
         {

@@ -4,11 +4,6 @@
 using System.Diagnostics;
 using NanoByte.Common.Native;
 
-#if NET20 || NET40
-using System.Net;
-using NanoByte.Common.Storage;
-#endif
-
 namespace NanoByte.Common.Controls;
 
 /// <summary>
@@ -88,40 +83,6 @@ public sealed partial class ErrorReportForm : Form
         else Application.Run(form);
     }
 
-#if NET20 || NET40
-    private void buttonReport_Click(object? sender, EventArgs e)
-    {
-        Cursor = Cursors.WaitCursor;
-        commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = false;
-
-        // Create WebClient for upload and register as component for automatic disposal
-        var webClient = new WebClient();
-        components ??= new Container();
-        components.Add(webClient);
-
-        var tempFile = new TemporaryFile("error-report");
-        File.WriteAllText(tempFile, ErrorReport.Generate(_exception, commentBox.Text).ToXmlStringAnonymized());
-
-        webClient.UploadFileCompleted += (_, uploadEventArgs) =>
-        {
-            tempFile.Dispose();
-
-            Cursor = Cursors.Default;
-            if (uploadEventArgs.Error == null)
-            {
-                string message = EncodingUtils.Utf8.GetString(uploadEventArgs.Result);
-                Msg.Inform(this, message.EmptyAsNull() ?? Resources.ErrorReportSent, MsgSeverity.Info);
-                Close();
-            }
-            else
-            {
-                Msg.Inform(this, uploadEventArgs.Error.Message, MsgSeverity.Error);
-                commentBox.Enabled = detailsBox.Enabled = buttonReport.Enabled = buttonCancel.Enabled = true;
-            }
-        };
-        webClient.UploadFileAsync(_uploadUri, tempFile);
-    }
-#else
     private async void buttonReport_Click(object? sender, EventArgs e)
     {
         Cursor = Cursors.WaitCursor;
@@ -141,7 +102,6 @@ public sealed partial class ErrorReportForm : Form
             Cursor = Cursors.Default;
         }
     }
-#endif
 
     private void buttonCancel_Click(object? sender, EventArgs e) => Close();
 }

@@ -5,7 +5,7 @@
     <AssemblyName>NanoByte.Common</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Utility classes and data structures with an emphasis on integration with native Windows and Linux features, network and disk IO, advanced collections and undo/redo logic.</Description>
-    <TargetFrameworks>net20;net40;net45;net462;net472;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net45;net462;net472;net8.0;net9.0;net10.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <NoWarn>$(NoWarn);SYSLIB0014;NU5104</NoWarn><!-- deprecated WebClient, pre-release version of Mono.Posix -->
   </PropertyGroup>
@@ -38,10 +38,8 @@
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net40' Or '$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net462' Or '$(TargetFramework)'=='net472'">
-    <Reference Include="System.ComponentModel.DataAnnotations" Pack="False" />
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45' Or '$(TargetFramework)'=='net462' Or '$(TargetFramework)'=='net472'">
+    <Reference Include="System.ComponentModel.DataAnnotations" Pack="False" />
     <Reference Include="System.Net.Http" Pack="False" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">

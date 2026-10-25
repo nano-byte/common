@@ -3,10 +3,6 @@
 
 using NanoByte.Common.Native;
 
-#if NET20
-using NanoByte.Common.Tasks;
-#endif
-
 namespace NanoByte.Common.Threading;
 
 /// <summary>

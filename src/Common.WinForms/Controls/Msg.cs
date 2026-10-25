@@ -118,9 +118,6 @@ public static class Msg
 
     private static DialogResult? ShowTaskDialog(IWin32Window? owner, string text, MsgSeverity severity, string? yes = null, string? no = null, string? ok = null, string? cancel = null, bool canCancel = false)
     {
-#if NET20 || NET40
-        return null;
-#else
         if (!WindowsUtils.IsWindowsVista) return null;
 
         var icon = severity switch
@@ -213,7 +210,6 @@ public static class Msg
             return null;
         }
         #endregion
-#endif
 #endif
     }
 }

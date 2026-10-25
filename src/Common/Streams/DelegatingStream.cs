@@ -1,9 +1,7 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Threading.Tasks;
-#endif
 
 namespace NanoByte.Common.Streams;
 
@@ -57,7 +55,6 @@ public abstract class DelegatingStream(Stream underlyingStream) : Stream
     /// <inheritdoc/>
     public override void Write(byte[] buffer, int offset, int count) => UnderlyingStream.Write(buffer, offset, count);
 
-#if !NET20 && !NET40
     /// <inheritdoc/>
     public override Task FlushAsync(CancellationToken cancellationToken) => UnderlyingStream.FlushAsync(cancellationToken);
 
@@ -66,7 +63,6 @@ public abstract class DelegatingStream(Stream underlyingStream) : Stream
 
     /// <inheritdoc/>
     public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => UnderlyingStream.WriteAsync(buffer, offset, count, cancellationToken);
-#endif
 
 #if NET
     /// <inheritdoc/>

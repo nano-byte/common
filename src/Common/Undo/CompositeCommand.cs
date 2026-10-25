@@ -12,13 +12,7 @@ public class CompositeCommand(params IUndoCommand[] commands) : SimpleCommand
     /// <summary>
     /// The commands contained inside the transaction.
     /// </summary>
-    public
-#if NET20 || NET40
-        IList<IUndoCommand>
-#else
-        IReadOnlyList<IUndoCommand>
-#endif
-        Commands { get; } = commands.ToArray(); // Defensive copy
+    public IReadOnlyList<IUndoCommand> Commands { get; } = commands.ToArray(); // Defensive copy
 
     /// <summary>
     /// Executes all the contained <see cref="IUndoCommand"/>s in order.

@@ -1,11 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Xml.Serialization;
-
-#if !NET20 && !NET40
 using System.Runtime.InteropServices;
-#endif
+using System.Xml.Serialization;
 
 namespace NanoByte.Common.Info;
 
@@ -33,7 +30,6 @@ public struct OSInfo
     [XmlAttribute("dotnet-version")]
     public string DotNetVersion;
 
-#if !NET20 && !NET40
     /// <summary>
     /// The processor architecture of the operating system.
     /// </summary>
@@ -45,7 +41,6 @@ public struct OSInfo
     /// </summary>
     [XmlAttribute("process-architecture")]
     public Architecture ProcessArchitecture { get; set; }
-#endif
 
     /// <summary>
     /// Information about the current operating system.
@@ -61,9 +56,7 @@ public struct OSInfo
 #endif
         Version = Environment.OSVersion.Version.ToString(),
         DotNetVersion = Environment.Version.ToString(),
-#if !NET20 && !NET40
         OSArchitecture = RuntimeInformation.OSArchitecture,
         ProcessArchitecture = RuntimeInformation.ProcessArchitecture,
-#endif
     };
 }

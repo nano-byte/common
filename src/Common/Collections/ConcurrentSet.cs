@@ -1,6 +1,4 @@
-﻿#if !NET20
-
-// Copyright Bastian Eicher
+﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
 using System.Collections;
@@ -107,5 +105,3 @@ public class ConcurrentSet<T> : ICollection<T>
     /// <inheritdoc/>
     public bool IsReadOnly => false;
 }
-
-#endif

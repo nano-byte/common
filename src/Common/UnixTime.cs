@@ -21,18 +21,14 @@ public readonly record struct UnixTime(long Seconds) : ISerializable, IComparabl
     /// <summary>
     /// Converts a number of <paramref name="seconds"/> to a Unix timestamp.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static implicit operator UnixTime(long seconds)
         => new(seconds);
 
     /// <summary>
     /// Converts a Unix <paramref name="timestamp"/> to a number of seconds.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static implicit operator long(UnixTime timestamp)
         => timestamp.Seconds;
 
@@ -41,9 +37,7 @@ public readonly record struct UnixTime(long Seconds) : ISerializable, IComparabl
     /// <summary>
     /// Converts a <paramref name="dateTime"/> to a Unix timestamp.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static implicit operator UnixTime(DateTime dateTime)
     {
         if (dateTime.Kind == DateTimeKind.Local) dateTime = dateTime.ToUniversalTime();
@@ -53,27 +47,21 @@ public readonly record struct UnixTime(long Seconds) : ISerializable, IComparabl
     /// <summary>
     /// Converts a Unix <paramref name="timestamp"/> to a <see cref="DateTime"/>.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static implicit operator DateTime(UnixTime timestamp)
         => new((timestamp + EpochTicks) * TimeSpan.TicksPerSecond, DateTimeKind.Utc);
 
     /// <summary>
     /// Converts a number of <paramref name="dateTime"/> to a Unix timestamp.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static implicit operator UnixTime(DateTimeOffset dateTime)
         => dateTime.UtcDateTime;
 
     /// <summary>
     /// Converts a Unix <paramref name="timestamp"/> to a <see cref="DateTimeOffset"/>.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static implicit operator DateTimeOffset(UnixTime timestamp)
         => new(timestamp);
 

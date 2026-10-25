@@ -1,9 +1,7 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Threading.Tasks;
-#endif
 
 namespace NanoByte.Common.Streams;
 
@@ -39,7 +37,6 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
         Report(count);
     }
 
-#if !NET20 && !NET40
     /// <inheritdoc/>
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken ct)
     {
@@ -57,7 +54,6 @@ public sealed class ProgressStream(Stream underlyingStream, IProgress<long>? pro
 
     private CancellationTokenSource CombineTokens(CancellationToken otherToken)
         => CancellationTokenSource.CreateLinkedTokenSource(otherToken, cancellationToken);
-#endif
 
 #if NET
     /// <inheritdoc/>

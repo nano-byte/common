@@ -18,11 +18,7 @@ public static class Paths
     {
         try
         {
-#if NET20
-            return (paths.Length == 0) ? "" : paths.Aggregate(Path.Combine);
-#else
             return Path.Combine(paths);
-#endif
         }
         #region Error handling
         catch (ArgumentException ex)

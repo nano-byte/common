@@ -1,8 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20
-
 #if NETFRAMEWORK
 using System.Runtime.Remoting;
 #endif
@@ -186,4 +184,3 @@ public sealed class AsyncFormWrapper<T> : IDisposable
     /// <inheritdoc/>
     public void Dispose() => Close();
 }
-#endif

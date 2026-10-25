@@ -1,7 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Threading.Tasks;
 
 namespace NanoByte.Common.Streams;
@@ -175,4 +174,3 @@ public sealed class SeekBufferStream(Stream underlyingStream, int bufferSize = S
         _nextWriteIndex = (_nextWriteIndex + data.Length).Modulo(_buffer.Length);
     }
 }
-#endif

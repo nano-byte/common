@@ -1,7 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 namespace NanoByte.Common.Threading;
 
 public class ResultRacerTest
@@ -54,4 +53,3 @@ public class ResultRacerTest
                    .Should().ThrowAsync<OperationCanceledException>();
     }
 }
-#endif

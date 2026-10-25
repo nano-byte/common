@@ -65,7 +65,6 @@ namespace System
         /// <summary>Create a Range object starting from first element to the end.</summary>
         public static Range All => new Range(Index.Start, Index.End);
 
-#if !NET20 && !NET40
         /// <summary>Calculate the start offset and length of range object using a collection length.</summary>
         /// <param name="length">The length of the collection that the range will be used with. length has to be a positive value.</param>
         /// <remarks>
@@ -97,7 +96,6 @@ namespace System
 
             return (start, end - start);
         }
-#endif
     }
 }
 #else

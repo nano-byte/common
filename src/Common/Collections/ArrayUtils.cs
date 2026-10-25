@@ -100,7 +100,7 @@ public static class ArrayUtils
     public static T[] AsArray<T>(this ArraySegment<T> segment)
     {
         if (segment.Array == null)
-#if NET20 || NET40 || NET45
+#if NET45
             return new T[0];
 #else
             return [];

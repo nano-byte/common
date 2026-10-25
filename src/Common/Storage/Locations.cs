@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using NanoByte.Common.Native;
 
-#if NET20 || NET40 || NET45
+#if NET45
 using System.Reflection;
 #endif
 
@@ -37,7 +37,7 @@ public static partial class Locations
 
     private static string GetInstallBase()
     {
-#if NET20 || NET40 || NET45
+#if NET45
         string? codeBase = null;
         try
         {
@@ -56,7 +56,7 @@ public static partial class Locations
 #endif
     }
 
-#if NET20 || NET40 || NET45
+#if NET45
     [ThreadStatic]
     private static string? _redirectBase;
     private static string? RedirectBase { get => _redirectBase; set => _redirectBase = value; }

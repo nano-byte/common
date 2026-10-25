@@ -1,9 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Runtime.CompilerServices;
-#endif
 
 namespace NanoByte.Common;
 
@@ -27,9 +25,7 @@ public static class UpdateUtils
     /// Uri? uri = nullableString == null ? null : new Uri(nullableString);
     /// </code>
     /// </example>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static TOut To<TIn, TOut>(this TIn value, [InstantHandle] Func<TIn, TOut> action)
         where TIn : notnull
         => (action ?? throw new ArgumentNullException(nameof(action))).Invoke(value);
@@ -41,9 +37,7 @@ public static class UpdateUtils
     /// <param name="value">The new value.</param>
     /// <param name="original">The original value to update.</param>
     /// <param name="updated">Gets set to <c>true</c> if value is different from original.</param>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static void To<T>(this T value, ref T original, ref bool updated)
     {
         // If the values already match, nothing needs to be done
@@ -62,9 +56,7 @@ public static class UpdateUtils
     /// <param name="original">The original value to update.</param>
     /// <param name="updated1">Gets set to <c>true</c> if value is different from original.</param>
     /// <param name="updated2">Gets set to <c>true</c> if value is different from original.</param>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static void To<T>(this T value, ref T original, ref bool updated1, ref bool updated2)
     {
         // If the values already match, nothing needs to be done
@@ -82,9 +74,7 @@ public static class UpdateUtils
     /// <param name="value">The new value.</param>
     /// <param name="original">The original value to update.</param>
     /// <param name="updated">Gets called if value is different from original.</param>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static void To<T>(this T value, ref T original, [InstantHandle] Action updated)
     {
         #region Sanity checks
@@ -119,9 +109,7 @@ public static class UpdateUtils
     /// <typeparam name="T">The type of objects to swap.</typeparam>
     /// <param name="value1">The first field which will afterwards carry the content of <paramref name="value2"/>.</param>
     /// <param name="value2">The first field which will afterwards carry the content of <paramref name="value1"/>.</param>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static void Swap<T>(ref T value1, ref T value2)
     {
         var tempValue = value1;

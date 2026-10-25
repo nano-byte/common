@@ -163,9 +163,7 @@ public static partial class RegistryUtils
         if (machineWide)
         {
             SetString(HklmSoftwareKey + subkeyName, valueName, value);
-#if !NET20 && !NET40
             if (Environment.Is64BitProcess) SetString(HklmWowSoftwareKey + subkeyName, valueName, value);
-#endif
         }
         else SetString(HkcuSoftwareKey + subkeyName, valueName, value);
     }
@@ -187,9 +185,7 @@ public static partial class RegistryUtils
         if (machineWide)
         {
             DeleteValue(Registry.LocalMachine, $@"SOFTWARE\{subkeyName}", valueName);
-#if !NET20 && !NET40
             if (Environment.Is64BitProcess) DeleteValue(Registry.LocalMachine, $@"SOFTWARE\Wow6432Node\{subkeyName}", valueName);
-#endif
         }
         else
             DeleteValue(Registry.CurrentUser, $@"SOFTWARE\{subkeyName}", valueName);
@@ -359,21 +355,10 @@ public static partial class RegistryUtils
 
         try
         {
-            key.DeleteSubKeyTree(subkeyName
-#if !NET20
-                , throwOnMissingSubKey: false
-#endif
-            );
+            key.DeleteSubKeyTree(subkeyName, throwOnMissingSubKey: false);
             return true;
         }
         #region Error handling
-#if NET20
-        catch (ArgumentException)
-        {
-            // Key does not exist
-            return true;
-        }
-#endif
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
         {
             Log.Warn($"Failed to delete {key.Name}\\{subkeyName}", ex);
@@ -397,7 +382,6 @@ public static partial class RegistryUtils
         if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
         #endregion
 
-#if !NET20 && !NET40
         if (Environment.Is64BitProcess)
         {
             if (Registry.LocalMachine.TryOpenSubKey(subkeyName) is {} result)
@@ -412,14 +396,12 @@ public static partial class RegistryUtils
             }
         }
         else
-#endif
         {
             x64 = false;
             return Registry.LocalMachine.OpenSubKeyChecked(subkeyName);
         }
     }
 
-#if !NET20
     /// <summary>
     /// Returns the last write time of the registry key.
     /// </summary>
@@ -433,6 +415,5 @@ public static partial class RegistryUtils
         if (ret != 0) throw WindowsUtils.BuildException(ret);
         return DateTime.FromFileTime(ftLastWriteTime);
     }
-#endif
     #endregion
 }

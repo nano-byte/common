@@ -22,10 +22,7 @@ public static class RandomShared
 
     private static int GetSeed()
     {
-#if !NET20
-        using
-#endif
-            var rng = System.Security.Cryptography.RandomNumberGenerator.Create();
+        using var rng = System.Security.Cryptography.RandomNumberGenerator.Create();
         byte[] bytes = new byte[4];
         rng.GetBytes(bytes);
         return BitConverter.ToInt32(bytes, 0);

@@ -1,9 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Threading.Tasks;
-#endif
 
 namespace NanoByte.Common.Collections;
 
@@ -37,14 +35,7 @@ public static class DictionaryExtensions
     /// <param name="key">The key to look for in the <paramref name="dictionary"/>.</param>
     /// <returns>The existing element or the default value of <typeparamref name="TValue"/>.</returns>
     [Pure]
-    public static TValue? GetValueOrDefault<TKey, TValue>(
-#if NET20 || NET40
-        this IDictionary<TKey, TValue> dictionary,
-
-#else
-        this IReadOnlyDictionary<TKey, TValue> dictionary,
-#endif
-        TKey key)
+    public static TValue? GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
         => dictionary.GetValueOrDefault(key, default!);
 
     /// <summary>
@@ -55,15 +46,7 @@ public static class DictionaryExtensions
     /// <param name="defaultValue">The default value to return if the element is missing.</param>
     /// <returns>The existing element or <paramref name="defaultValue"/>.</returns>
     [Pure]
-    public static TValue GetValueOrDefault<TKey, TValue>(
-#if NET20 || NET40
-        this IDictionary<TKey, TValue> dictionary,
-
-#else
-        this IReadOnlyDictionary<TKey, TValue> dictionary,
-#endif
-        TKey key,
-        TValue defaultValue)
+    public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
     {
         #region Sanity checks
         if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
@@ -111,7 +94,6 @@ public static class DictionaryExtensions
         return dictionary.GetOrAdd(key, () => new TValue());
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Returns an existing element with a specific key from a dictionary or creates and adds a new element using a callback if it is missing.
     /// </summary>
@@ -142,7 +124,6 @@ public static class DictionaryExtensions
         dictionary.Add(key, newValue);
         return newValue;
     }
-#endif
 
     /// <summary>
     /// Attempts to add the specified key and value to the dictionary.

@@ -10,7 +10,7 @@ using Mono.Unix;
 using Mono.Unix.Native;
 #endif
 
-#if !NET20 && !NET40 && !NET
+#if !NET
 using System.Runtime.InteropServices;
 #endif
 
@@ -39,8 +39,6 @@ public static class UnixUtils
     public static bool IsLinux
 #if NET
             => OperatingSystem.IsLinux();
-#elif NET20 || NET40
-            => Environment.OSVersion.Platform == PlatformID.Unix && OSName == "Linux";
 #else
         => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 #endif
@@ -52,8 +50,6 @@ public static class UnixUtils
     public static bool IsFreeBSD
 #if NET
             => OperatingSystem.IsFreeBSD();
-#elif NET20 || NET40
-            => Environment.OSVersion.Platform == PlatformID.Unix && OSName == "FreeBSD";
 #else
         => false;
 #endif
@@ -65,8 +61,6 @@ public static class UnixUtils
     public static bool IsMacOSX
 #if NET
             => OperatingSystem.IsMacOS();
-#elif NET20 || NET40
-            => Environment.OSVersion.Platform == PlatformID.Unix && OSName == "Darwin";
 #else
         => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #endif

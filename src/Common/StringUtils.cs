@@ -1,15 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-using System.Security.Cryptography;
-
-#if NET20
-using System.Text;
-#endif
-
-#if !NET20 && !NET40
 using System.Runtime.CompilerServices;
-#endif
+using System.Security.Cryptography;
 
 namespace NanoByte.Common;
 
@@ -22,9 +15,7 @@ public static class StringUtils
     /// Compares strings using case-insensitive comparison.
     /// </summary>
     [Pure]
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static bool EqualsIgnoreCase(string? s1, string? s2)
         => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
 
@@ -32,9 +23,7 @@ public static class StringUtils
     /// Compares chars using case-insensitive comparison.
     /// </summary>
     [Pure]
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static bool EqualsIgnoreCase(char c1, char c2)
         => char.ToLowerInvariant(c1) == char.ToLowerInvariant(c2);
 
@@ -42,9 +31,7 @@ public static class StringUtils
     /// Compares strings using case-sensitive, ordinal comparison and considering <c>null</c> and <see cref="string.Empty"/> equal.
     /// </summary>
     [Pure]
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static bool EqualsEmptyNull(string? s1, string? s2)
         => string.IsNullOrEmpty(s1) && string.IsNullOrEmpty(s2)
         || s1 == s2;
@@ -105,9 +92,7 @@ public static class StringUtils
     /// Determines whether a string starts with <paramref name="searchFor"/> with case-insensitive comparison.
     /// </summary>
     [Pure]
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static bool StartsWithIgnoreCase(this string value, string searchFor)
         => value.StartsWith(searchFor, StringComparison.OrdinalIgnoreCase);
 
@@ -115,9 +100,7 @@ public static class StringUtils
     /// Determines whether a string ends with <paramref name="searchFor"/> with case-insensitive comparison.
     /// </summary>
     [Pure]
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static bool EndsWithIgnoreCase(this string value, string searchFor)
         => value.EndsWith(searchFor, StringComparison.OrdinalIgnoreCase);
 
@@ -134,9 +117,7 @@ public static class StringUtils
     /// <summary>
     /// Cuts off strings longer than <paramref name="maxLength"/> and replaces the rest with ellipsis (...).
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     public static string TrimOverflow(this string value, int maxLength)
         => (value.Length <= maxLength)
             ? value
@@ -171,24 +152,7 @@ public static class StringUtils
     /// <param name="parts">The strings to be combined.</param>
     [Pure]
     public static string Join(string separator, [InstantHandle] IEnumerable<string> parts)
-#if NET20
-    {
-        var output = new StringBuilder();
-        bool first = true;
-        foreach (string part in parts)
-        {
-            // No separator before first or after last part
-            if (first) first = false;
-            else output.Append(separator);
-
-            output.Append(part);
-        }
-
-        return output.ToString();
-    }
-#else
         => string.Join(separator, parts);
-#endif
 
     /// <summary>
     /// Get everything to the left of the first occurrence of a character.
@@ -319,10 +283,7 @@ public static class StringUtils
     [Pure]
     public static string GeneratePassword(int length)
     {
-#if !NET20 && !NET40
-        using
-#endif
-            var generator = RandomNumberGenerator.Create();
+        using var generator = RandomNumberGenerator.Create();
         byte[] array = new byte[(int)Math.Round(length * 0.75f)];
         generator.GetBytes(array);
 

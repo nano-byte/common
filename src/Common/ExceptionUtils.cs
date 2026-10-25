@@ -1,14 +1,8 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
-using System.Threading.Tasks;
 using System.Runtime.ExceptionServices;
-#else
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security;
-#endif
+using System.Threading.Tasks;
 
 #if NETFRAMEWORK
 using System.Diagnostics;
@@ -51,29 +45,10 @@ public static class ExceptionUtils
         if (exception == null) throw new ArgumentNullException(nameof(exception));
         #endregion
 
-#if !NET20 && !NET40
         ExceptionDispatchInfo.Capture(exception).Throw();
         return exception;
-#else
-        var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
-        var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
-        exception.GetObjectData(serializationInfo, streamingContext);
-
-        try
-        {
-            var objectManager = new ObjectManager(null, streamingContext);
-            objectManager.RegisterObject(exception, 1, serializationInfo);
-            objectManager.DoFixups();
-        }
-        // Ignore if preserving stack trace is not possible
-        catch (Exception ex) when (ex is SecurityException or SerializationException or TargetInvocationException)
-        {}
-
-        throw exception;
-#endif
     }
 
-#if !NET20
     /// <summary>
     /// Rethrows the first of the <see cref="AggregateException.InnerExceptions"/> and logs all others.
     /// </summary>
@@ -98,7 +73,6 @@ public static class ExceptionUtils
 
         throw first.Rethrow();
     }
-#endif
 
     /// <summary>
     /// Applies an operation for the first possible element of a collection.
@@ -197,7 +171,6 @@ public static class ExceptionUtils
         return function();
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Applies an operation for the first possible element of a collection.
     /// If the operation succeeds the remaining elements are ignored. If the operation fails it is repeated for the next element.
@@ -293,5 +266,4 @@ public static class ExceptionUtils
 
         return await function();
     }
-#endif
 }

@@ -1,7 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Threading.Tasks;
 
 namespace NanoByte.Common.Threading;
@@ -147,4 +146,3 @@ public static class ResultRacer
         return racer;
     }
 }
-#endif

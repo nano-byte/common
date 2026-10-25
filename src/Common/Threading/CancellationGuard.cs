@@ -1,7 +1,6 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20
 using System.Threading.Tasks;
 
 namespace NanoByte.Common.Threading;
@@ -57,4 +56,3 @@ public sealed class CancellationGuard : IDisposable
         _registration.Dispose();
     }
 }
-#endif

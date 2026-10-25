@@ -7,11 +7,7 @@ namespace NanoByte.Common.Tasks;
 /// <summary>
 /// A task the provides a result.
 /// </summary>
-public interface IResultTask<
-#if !NET20
-    out
-#endif
-    T> : ITask
+public interface IResultTask<out T> : ITask
 {
     /// <summary>
     /// The result of the task.

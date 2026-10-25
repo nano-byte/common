@@ -1,9 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20
 using System.Linq.Expressions;
-#endif
 
 namespace NanoByte.Common.Undo;
 
@@ -71,7 +69,6 @@ public static class SetValueCommand
     public static SetValueCommand<T?> ForNullable<T>(Func<T?> getValue, Action<T?> setValue, T? newValue)
         => new(PropertyPointer.ForNullable(getValue, setValue), newValue);
 
-#if !NET20
     /// <summary>
     /// Creates a new command for setting a value.
     /// </summary>
@@ -90,5 +87,4 @@ public static class SetValueCommand
     /// <param name="newValue">The new value to be set.</param>
     public static SetValueCommand<T?> ForNullable<T>(Expression<Func<T?>> expression, T? newValue)
         => new(PropertyPointer.ForNullable(expression), newValue);
-#endif
 }

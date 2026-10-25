@@ -112,11 +112,9 @@ public class CliTaskHandler : TaskHandlerBase
                 ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
                 : null);
 
-#if !NET20 && !NET40
     /// <inheritdoc/>
     protected override bool IsInteractive
         => base.IsInteractive && !Console.IsErrorRedirected && !Console.IsInputRedirected;
-#endif
 
     /// <inheritdoc/>
     public override void RunTask(ITask task)

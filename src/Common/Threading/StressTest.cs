@@ -1,7 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20
 using System.Collections.Concurrent;
 
 namespace NanoByte.Common.Threading;
@@ -39,4 +38,3 @@ public static class StressTest
         if (!exceptions.IsEmpty) throw new AggregateException(exceptions);
     }
 }
-#endif

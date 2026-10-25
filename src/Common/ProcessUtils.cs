@@ -305,7 +305,6 @@ public static class ProcessUtils
         return new(fileName, arguments) {UseShellExecute = false};
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Deconstructs a <see cref="ProcessStartInfo"/> like a tuple.
     /// </summary>
@@ -315,5 +314,4 @@ public static class ProcessUtils
         fileName = startInfo.FileName;
         arguments = startInfo.Arguments;
     }
-#endif
 }

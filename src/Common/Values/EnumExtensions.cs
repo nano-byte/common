@@ -16,15 +16,7 @@ public static class EnumExtensions
     [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
     [Pure]
     public static bool HasFlag(this Enum enumRef, Enum flag)
-    {
-#if NET20
-            long enumValue = Convert.ToInt64(enumRef);
-            long flagVal = Convert.ToInt64(flag);
-            return (enumValue & flagVal) == flagVal;
-#else
-        return enumRef.HasFlag(flag);
-#endif
-    }
+        => enumRef.HasFlag(flag);
 
     /// <summary>
     /// Checks whether a flag is set.

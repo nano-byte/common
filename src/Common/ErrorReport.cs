@@ -1,15 +1,12 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using NanoByte.Common.Info;
 using NanoByte.Common.Storage;
-
-#if !NET20 && !NET40
-using System.Net.Http;
-using System.Threading.Tasks;
-#endif
 
 namespace NanoByte.Common;
 
@@ -87,7 +84,6 @@ public sealed class ErrorReport
             : serialized;
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Sends the error report to a remote server.
     /// </summary>
@@ -104,5 +100,4 @@ public sealed class ErrorReport
 
         return await response.Content.ReadAsStringAsync();
     }
-#endif
 }

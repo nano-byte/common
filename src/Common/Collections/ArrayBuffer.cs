@@ -1,7 +1,6 @@
 ﻿// Copyright Bastian Eicher
 // Licensed under the MIT License
 
-#if !NET20 && !NET40
 using System.Buffers;
 
 namespace NanoByte.Common.Collections;
@@ -53,4 +52,3 @@ public sealed class ArrayBuffer<T>(int length) : IDisposable
     public Span<T> Span
         => new(Array, 0, Length);
 }
-#endif

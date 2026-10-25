@@ -124,9 +124,6 @@ public static class StreamUtils
             return;
         }
 
-#if NET20 || NET40
-        stream.Read(count);
-#else
         var pool = System.Buffers.ArrayPool<byte>.Shared;
         byte[] buffer = pool.Rent(Math.Min(count, 64));
         try
@@ -143,7 +140,6 @@ public static class StreamUtils
         {
             pool.Return(buffer);
         }
-#endif
     }
 
     /// <summary>
@@ -189,7 +185,7 @@ public static class StreamUtils
         if (stream == null) throw new ArgumentNullException(nameof(stream));
         #endregion
 
-#if !NET20 && !NET40 && !NET45
+#if !NET45
         if (stream is MemoryStream memory && memory.TryGetBuffer(out var segment))
             return segment.AsArray();
 #endif
@@ -227,18 +223,7 @@ public static class StreamUtils
 
         if (source.CanSeek) source.Position = 0;
 
-#if NET20
-        var buffer = new byte[81920];
-        int read;
-        long sum = 0;
-        do
-        {
-            sum += read = source.Read(buffer, 0, buffer.Length);
-            destination.Write(buffer, 0, read);
-        } while (read != 0);
-#else
         source.CopyTo(destination);
-#endif
     }
 
     /// <summary>
@@ -257,7 +242,6 @@ public static class StreamUtils
         stream.CopyToEx(fileStream);
     }
 
-#if !NET20 && !NET40
     /// <summary>
     /// Adds seek buffering to a stream unless it already <see cref="Stream.CanSeek"/>.
     /// </summary>
@@ -272,7 +256,6 @@ public static class StreamUtils
 
         return stream.CanSeek ? stream : new SeekBufferStream(stream, bufferSize);
     }
-#endif
 
     /// <summary>
     /// Overrides the value returned by <see cref="Stream.Length"/>.

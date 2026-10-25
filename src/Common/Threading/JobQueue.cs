@@ -51,9 +51,7 @@ public sealed class JobQueue(CancellationToken cancellationToken = default)
                 job = _jobs.Dequeue();
             }
 
-#if !NET20
             using (new CancellationGuard(cancellationToken))
-#endif
             {
                 if (cancellationToken.IsCancellationRequested)
                 {

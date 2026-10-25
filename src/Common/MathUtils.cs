@@ -2,12 +2,9 @@
 // Licensed under the MIT License
 
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using static System.Math;
 using static NanoByte.Common.EasingFunction;
-
-#if !NET20 && !NET40
-using System.Runtime.CompilerServices;
-#endif
 
 namespace NanoByte.Common;
 
@@ -170,9 +167,7 @@ public static class MathUtils
     /// <summary>
     /// Compares two floating-point values for equality, allowing for a certain <paramref name="tolerance"/>.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     [Pure]
     public static bool EqualsTolerance(this float a, float b, float tolerance = 0.00001f)
         => Abs(a - b) <= tolerance;
@@ -180,9 +175,7 @@ public static class MathUtils
     /// <summary>
     /// Compares two floating-point values for equality, allowing for a certain <paramref name="tolerance"/>.
     /// </summary>
-#if !NET20 && !NET40
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
     [Pure]
     public static bool EqualsTolerance(this double a, double b, double tolerance = 0.00001)
         => Abs(a - b) <= tolerance;

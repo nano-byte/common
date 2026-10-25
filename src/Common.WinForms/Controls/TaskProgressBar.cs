@@ -1,14 +1,11 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Collections.Concurrent;
 using NanoByte.Common.Native;
 using NanoByte.Common.Tasks;
 using static NanoByte.Common.Tasks.TaskState;
 using static NanoByte.Common.Native.WindowsTaskbar.ProgressBarState;
-
-#if !NET20
-using System.Collections.Concurrent;
-#endif
 
 namespace NanoByte.Common.Controls;
 
@@ -64,10 +61,6 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
         #endregion
     }
 
-#if NET20
-    private void UpdateTaskbar(WindowsTaskbar.ProgressBarState state)
-    {}
-#else
     private IntPtr? _formHandle;
     private static readonly ConcurrentDictionary<IntPtr, TaskProgressBar> _taskbarOwners = [];
 
@@ -85,5 +78,4 @@ public sealed class TaskProgressBar : ProgressBar, IProgress<TaskSnapshot>
         if (state is NoProgress or Error)
             _taskbarOwners.TryRemove(formHandle, out _);
     }
-#endif
 }

@@ -14,12 +14,10 @@ public class RegistryUtilsTest
         Assert.SkipUnless(WindowsUtils.IsWindows, "Can only test registry functions on Windows or newer");
     }
 
-#if !NET20
     [Fact]
     public void TestGetLastWriteTime()
     {
         Registry.CurrentUser.GetLastWriteTime()
                 .Should().BeAfter(new DateTime(2000, 1, 1));
     }
-#endif
 }

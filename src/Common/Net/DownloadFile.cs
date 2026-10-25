@@ -2,15 +2,13 @@
 // Licensed under the MIT License
 
 using System.Net;
+using System.Net.Http;
 using NanoByte.Common.Info;
 using NanoByte.Common.Streams;
 using NanoByte.Common.Tasks;
 using NanoByte.Common.Threading;
 #if NETFRAMEWORK
 using System.Configuration;
-#endif
-#if !NET20 && !NET40
-using System.Net.Http;
 #endif
 
 namespace NanoByte.Common.Net;
@@ -82,7 +80,6 @@ public class DownloadFile : TaskBase
     /// </summary>
     private NetworkCredential? _credentials;
 
-#if !NET20 && !NET40
     private static readonly HttpClient _httpClient = new(
 #if NETFRAMEWORK
         new HttpClientHandler
@@ -98,7 +95,6 @@ public class DownloadFile : TaskBase
     {
         Timeout = Timeout.InfiniteTimeSpan
     };
-#endif
 
     /// <inheritdoc/>
     protected override void Execute()
@@ -107,18 +103,6 @@ public class DownloadFile : TaskBase
         try
         {
             State = TaskState.Header;
-#if NET20 || NET40
-            var request = WebRequest.Create(Source);
-            if (request is HttpWebRequest httpRequest)
-            {
-                httpRequest.UserAgent = AppInfo.Current.NameVersion;
-                httpRequest.Credentials = _credentials;
-                if (NoCache) httpRequest.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
-            }
-            var responseHandler = request.BeginGetResponse(null!, null!);
-            responseHandler.AsyncWaitHandle.WaitOne(CancellationToken);
-            using var response = request.EndGetResponse(responseHandler);
-#else
             using var response = _httpClient.Send(new(HttpMethod.Get, Source)
             {
                 Headers =
@@ -130,7 +114,6 @@ public class DownloadFile : TaskBase
             }, HttpCompletionOption.ResponseHeadersRead, CancellationToken);
             statusCode = response.StatusCode;
             response.EnsureSuccessStatusCode();
-#endif
 
             CancellationToken.ThrowIfCancellationRequested();
             HandleHeaders(response);
@@ -138,29 +121,18 @@ public class DownloadFile : TaskBase
             State = TaskState.Data;
             ContentStarted = true;
             using var stream = new ProgressStream(
-#if NET20 || NET40
-                // ReSharper disable once AssignNullToNotNullAttribute
-                response.GetResponseStream(),
-#else
                 response.Content.ReadAsStream(CancellationToken),
-#endif
                 new SynchronousProgress<long>(x => UnitsProcessed = x),
                 CancellationToken);
             if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
             _callback(stream);
         }
         #region Error handling
-#if NET20 || NET40
-        catch (WebException webException)
-        {
-            statusCode = (webException.Response as HttpWebResponse)?.StatusCode;
-#else
         catch (Exception ex) when (ex.IsHttpRequestException())
         {
 #if NETFRAMEWORK
             var webException = ex.InnerException as WebException;
             statusCode ??= (webException?.Response as HttpWebResponse)?.StatusCode;
-#endif
 #endif
 
             if (RetryWithCredentials(statusCode))
@@ -172,9 +144,7 @@ public class DownloadFile : TaskBase
 
             // Wrap exception to add context and since only certain exception types are allowed
             throw new WebException(string.Format(Resources.FailedToDownload, Source),
-#if NET20 || NET40
-                webException, webException.Status, webException.Response);
-#elif NETFRAMEWORK
+#if NETFRAMEWORK
                 (Exception?)webException ?? ex, webException?.Status ?? default, webException?.Response);
 #else
                 ex);
@@ -220,17 +190,10 @@ public class DownloadFile : TaskBase
         }
     }
 
-#if NET20 || NET40
-    private void HandleHeaders(WebResponse response)
-    {
-        Source = response.ResponseUri;
-        if (response.ContentLength is var contentLength and not -1)
-#else
     private void HandleHeaders(HttpResponseMessage response)
     {
         if (response.RequestMessage?.RequestUri is {} source) Source = source;
         if (response.Content.Headers.ContentLength is {} contentLength)
-#endif
         {
             if (UnitsTotal == -1)
                 UnitsTotal = contentLength;
