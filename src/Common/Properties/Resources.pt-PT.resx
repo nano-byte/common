@@ -106,6 +106,10 @@
     <value>&amp;Copiar para a área de transferência</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>dias</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>O diretório de destino já existe.</value>
     <comment>Automatically translated.</comment>

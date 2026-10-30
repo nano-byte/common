@@ -106,6 +106,10 @@
     <value>&amp;Kopiëren naar klembord</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>dagen</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>De doelmap bestaat al.</value>
     <comment>Automatically translated.</comment>

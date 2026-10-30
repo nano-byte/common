@@ -106,6 +106,10 @@
     <value>In die Zwischenablage &amp;kopieren</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>Tage</value>
+    <comment>Manually overriden.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Das Zielverzeichnis existiert bereits.</value>
     <comment>Manually overriden.</comment>
