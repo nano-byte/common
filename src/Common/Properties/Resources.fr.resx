@@ -106,6 +106,10 @@
     <value>&amp;Copier dans le presse-papiers</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>jours</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Le répertoire de destination existe déjà.</value>
     <comment>Manually overriden.</comment>
@@ -219,7 +223,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="ProcessExitCodeUnexpected" xml:space="preserve">
-    <value>Un processus s'est terminé avec un code de sortie inattendu.</value>
+    <value>Un processus s'est arrêté avec un code de sortie inattendu.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ReadingFile" xml:space="preserve">

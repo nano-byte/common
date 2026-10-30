@@ -106,6 +106,10 @@
     <value>&amp;Copiere în clipboard</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>zile</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Directorul destinație există deja.</value>
     <comment>Manually overriden.</comment>

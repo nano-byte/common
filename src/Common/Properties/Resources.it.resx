@@ -106,6 +106,10 @@
     <value>&amp;Copia negli appunti</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>giorni</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>La directory di destinazione esiste già.</value>
     <comment>Automatically translated.</comment>
@@ -191,7 +195,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>In modalità portatile non è possibile modificare la configurazione di sistema.</value>
+    <value>La configurazione del sistema non può essere modificata in modalità portatile.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">

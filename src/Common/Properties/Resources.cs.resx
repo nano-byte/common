@@ -106,6 +106,10 @@
     <value>&amp;Zkopírovat do schránky</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>dny</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Cílový adresář již existuje.</value>
     <comment>Automatically translated.</comment>
@@ -251,7 +255,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Pokus o čtení z pozice {0}. Tato pozice je vzdálena {1} bajtů od pozice v podkladovém proudu {2}, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
+    <value>Pokus o čtení z pozice {0}. Tato pozice se nachází o {1} bajtů dále od pozice {2} v podkladovém proudu, ale vyrovnávací paměť pro vyhledávání může pojmout pouze rozdíl {3} bajtů.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">

@@ -106,6 +106,10 @@
     <value>&amp;复制到剪贴板</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>天</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>目标目录已存在。</value>
     <comment>Automatically translated.</comment>

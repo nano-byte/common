@@ -106,6 +106,10 @@
     <value>&amp;Kopiuj do schowka</value>
     <comment>Manually overriden.</comment>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>dni</value>
+    <comment>Automatically translated.</comment>
+  </data>
   <data name="DestinationDirExist" xml:space="preserve">
     <value>Katalog docelowy już istnieje.</value>
     <comment>Automatically translated.</comment>
@@ -251,7 +255,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="SeekOffsetTooLarge" xml:space="preserve">
-    <value>Próbowano odczytać dane z pozycji {0}. Odległość ta wynosi {1} bajtów od pozycji w strumieniu bazowym {2}, jednak bufor wyszukiwania może pomieścić różnicę wynoszącą jedynie {3} bajtów.</value>
+    <value>Próbowano odczytać dane z pozycji {0}. Odległość ta wynosi {1} bajtów od pozycji w strumieniu bazowym {2}, ale bufor wyszukiwania może pomieścić różnicę wynoszącą jedynie {3} bajtów.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ShuttingDownApps" xml:space="preserve">
