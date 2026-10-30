@@ -117,6 +117,43 @@ public class FileUtilsTest
     }
 
     [Fact]
+    public void TestDetectNameAliasingWindows()
+    {
+        Assert.SkipUnless(WindowsUtils.IsWindows, "NTFS is case-insensitive by default");
+
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        FileUtils.DetectNameAliasing(tempDir).Should().HaveFlag(NameAliasing.Case);
+    }
+
+    [Fact]
+    public void TestDetectNameAliasingLinux()
+    {
+        Assert.SkipUnless(UnixUtils.IsLinux, "Typical Linux file systems (e.g., ext4 without casefolding) resolve names exactly");
+
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        FileUtils.DetectNameAliasing(tempDir).Should().Be(NameAliasing.None);
+    }
+
+    [Fact]
+    public void TestDetectNameAliasingCleansUp()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        File.WriteAllText(Path.Combine(tempDir, "existing"), "");
+
+        FileUtils.DetectNameAliasing(tempDir);
+
+        Directory.GetFileSystemEntries(tempDir).Should().Equal(Path.Combine(tempDir, "existing"));
+    }
+
+    [Fact]
+    public void TestDetectNameAliasingMissingDirectory()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        Path.Combine(tempDir, "missing").Invoking(x => FileUtils.DetectNameAliasing(x))
+                                        .Should().Throw<DirectoryNotFoundException>();
+    }
+
+    [Fact]
     public void TestTouchNew()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");

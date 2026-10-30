@@ -176,6 +176,71 @@ public static class FileUtils
     }
     #endregion
 
+    #region Name aliasing
+    /// <summary>
+    /// Determines how the filesystem underlying a specific directory resolves names by creating a uniquely named temporary file in it.
+    /// </summary>
+    /// <param name="path">The path of the directory to check. Settings like Linux casefolding can differ between directories on the same volume, so check the actual directory rather than the volume root.</param>
+    /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
+    /// <exception cref="IOException">Writing to the directory fails.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to write to the directory.</exception>
+    public static NameAliasing DetectNameAliasing([Localizable(false)] string path)
+    {
+        #region Sanity checks
+        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+        #endregion
+
+        if (!Directory.Exists(path)) throw new DirectoryNotFoundException(string.Format(Resources.FileNotFound, path));
+
+        // Lower-case ASCII letters to test case folding and a precomposed character (NFC) to test normalization
+        string asciiPart = NameAliasingProbePrefix + Guid.NewGuid().ToString("N");
+        string name = asciiPart + "-é";
+
+        File.WriteAllText(Paths.Combine(path, name), "");
+        try
+        {
+            var aliasing = NameAliasing.None;
+            if (File.Exists(Paths.Combine(path, asciiPart.ToUpperInvariant() + "-é"))) aliasing |= NameAliasing.Case;
+            if (File.Exists(Paths.Combine(path, asciiPart + "-é"))) aliasing |= NameAliasing.Normalization;
+
+            // Some file systems (e.g., HFS+) rewrite names on creation instead of just resolving them loosely
+            if (!Array.Exists(FindNameAliasingProbes(path, asciiPart), x => Path.GetFileName(x) == name))
+                aliasing |= NameAliasing.Normalization;
+
+            return aliasing;
+        }
+        finally
+        {
+            foreach (string entry in FindNameAliasingProbes(path, asciiPart))
+            {
+                try
+                {
+                    File.Delete(entry);
+                }
+                #region Error handling
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+                {
+                    Log.Warn($"Unable to delete temporary file '{entry}'", ex);
+                }
+                #endregion
+            }
+        }
+    }
+
+    /// <summary>
+    /// The prefix of the temporary file created by <see cref="DetectNameAliasing"/>.
+    /// </summary>
+    private const string NameAliasingProbePrefix = ".name_aliasing_probe_";
+
+    /// <summary>
+    /// Lists the entries in <paramref name="path"/> created by a <see cref="DetectNameAliasing"/> probe with the given unique <paramref name="asciiPart"/>, whatever the file system did to the rest of the name.
+    /// </summary>
+    private static string[] FindNameAliasingProbes(string path, string asciiPart)
+        => Array.FindAll(
+            Directory.GetFileSystemEntries(path, NameAliasingProbePrefix + "*"),
+            x => Path.GetFileName(x).StartsWith(asciiPart, StringComparison.OrdinalIgnoreCase));
+    #endregion
+
     #region Replace
     /// <summary>
     /// Replaces one file with another. Rolls back in case of problems. If the destination file does not exist yet, this acts like a simple rename.
