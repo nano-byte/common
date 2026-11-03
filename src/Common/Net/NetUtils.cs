@@ -11,8 +11,8 @@ using Windows.Win32.Networking.WinSock;
 
 #if NET
 using System.Net.Http;
-using System.Threading.Tasks;
-using Tmds.DBus;
+using NanoByte.Common.Native.DBus;
+using Tmds.DBus.Protocol;
 #endif
 
 namespace NanoByte.Common.Net;
@@ -148,12 +148,12 @@ public static class NetUtils
 #pragma warning restore CA1416
 
 #if NET
-            if (UnixUtils.IsLinux && Guards.NotTrimmed)
+            if (UnixUtils.IsLinux)
             {
-                var networkManager = Connection.System.CreateProxy<INetworkManager>("org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager");
-                if (networkManager.GetAsync<uint>("Connectivity").Result is INetworkManager.ConnectivityNone or INetworkManager.ConnectivityPortal)
+                var networkManager = new NetworkManager(DBusConnection.System, "org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager");
+                if (networkManager.GetConnectivityAsync().Result is NetworkManager.ConnectivityNone or NetworkManager.ConnectivityPortal)
                     return Connectivity.None;
-                if (networkManager.GetAsync<uint>("Metered").Result is INetworkManager.MeteredYes or INetworkManager.MeteredGuessYes)
+                if (networkManager.GetMeteredAsync().Result is NetworkManager.MeteredYes or NetworkManager.MeteredGuessYes)
                     return Connectivity.Metered;
             }
 #endif
@@ -168,16 +168,4 @@ public static class NetUtils
         }
         #endregion
     }
-
-#if NET
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), SuppressMessage("ReSharper", "UnusedMember.Local")]
-    [DBusInterface("org.freedesktop.NetworkManager")]
-    internal interface INetworkManager : IDBusObject
-    {
-        const uint ConnectivityUnknown = 0, ConnectivityNone = 1, ConnectivityPortal = 2, ConnectivityLimited = 3, ConnectivityFull = 4;
-        const uint MeteredUnknown = 0, MeteredYes = 1, MeteredNo = 2, MeteredGuessYes = 3, MeteredGuessNo = 4;
-
-        Task<T> GetAsync<T>(string prop);
-    }
-#endif
 }

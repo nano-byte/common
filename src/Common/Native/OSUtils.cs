@@ -8,9 +8,9 @@ using Windows.Win32;
 using Windows.Win32.System.Power;
 
 #if NET
-using System.Threading.Tasks;
 using NanoByte.Common.Info;
-using Tmds.DBus;
+using NanoByte.Common.Native.DBus;
+using Tmds.DBus.Protocol;
 #endif
 
 namespace NanoByte.Common.Native;
@@ -120,9 +120,9 @@ public static partial class OSUtils
             if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(EXECUTION_STATE.ES_SYSTEM_REQUIRED);
 
 #if NET
-            if (UnixUtils.IsLinux && Guards.NotTrimmed)
+            if (UnixUtils.IsLinux)
             {
-                var login = Connection.System.CreateProxy<IManager>("org.freedesktop.login1", "/org/freedesktop/login1");
+                var login = new Manager(DBusConnection.System, "org.freedesktop.login1", "/org/freedesktop/login1");
                 return login.InhibitAsync("idle", AppInfo.Current.Name ?? "App", reason, "block").Result;
             }
 #endif
@@ -150,9 +150,9 @@ public static partial class OSUtils
             if (WindowsUtils.IsWindowsNT) return KeepAwakeWindows(EXECUTION_STATE.ES_DISPLAY_REQUIRED);
 
 #if NET
-            if (UnixUtils.IsLinux && Guards.NotTrimmed)
+            if (UnixUtils.IsLinux)
             {
-                var screenSaver = Connection.Session.CreateProxy<IScreenSaver>("org.freedesktop.ScreenSaver", "/org/freedesktop/ScreenSaver");
+                var screenSaver = new ScreenSaver(DBusConnection.Session, "org.freedesktop.ScreenSaver", "/org/freedesktop/ScreenSaver");
                 uint cookie = screenSaver.InhibitAsync(AppInfo.Current.Name ?? "App", reason).Result;
                 return new Disposable(() => screenSaver.UnInhibitAsync(cookie));
             }
@@ -177,20 +177,4 @@ public static partial class OSUtils
         return previous != 0 ? new Disposable(() => PInvoke.SetThreadExecutionState(previous)) : null;
     }
 
-#if NET
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), SuppressMessage("ReSharper", "InconsistentNaming")]
-    [DBusInterface("org.freedesktop.login1.Manager")]
-    internal interface IManager : IDBusObject
-    {
-        Task<CloseSafeHandle> InhibitAsync(string What, string Who, string Why, string Mode);
-    }
-
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), SuppressMessage("ReSharper", "InconsistentNaming")]
-    [DBusInterface("org.freedesktop.ScreenSaver")]
-    internal interface IScreenSaver : IDBusObject
-    {
-        Task<uint> InhibitAsync(string ApplicationName, string ReasonForInhibit);
-        Task UnInhibitAsync(uint Cookie);
-    }
-#endif
 }

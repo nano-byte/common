@@ -20,9 +20,15 @@
     },
     {
       "matchPackagePatterns": ["docfx", "SourceLink"],
-      "matchPackageNames": ["System.ValueTuple", "Tmds.DBus", "JetBrains.Annotations", "CsWin32"],
+      "matchPackageNames": ["System.ValueTuple", "JetBrains.Annotations", "CsWin32"],
       "automerge": true,
       "automergeType": "branch"
+    },
+    {
+      "matchPackagePatterns": ["^Tmds\\.DBus"],
+      "groupName": "Tmds.DBus",
+      "automerge": true,
+      "automergeType": "branch",
     },
     {
       "matchPackagePatterns": ["^Microsoft\\.Extensions"],
