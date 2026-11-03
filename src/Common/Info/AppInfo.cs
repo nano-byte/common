@@ -76,6 +76,7 @@ public struct AppInfo
     /// </summary>
     public static AppInfo CurrentLibrary
     {
+        [RequiresDynamicCode("Not supported in Native AOT. Use AppInfo.Load(typeof(X).Assembly) instead.")]
         [MethodImpl(MethodImplOptions.NoInlining)]
         get => Load(Assembly.GetCallingAssembly());
     }
