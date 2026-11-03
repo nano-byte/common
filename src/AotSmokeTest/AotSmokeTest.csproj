@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build config -->
+  <PropertyGroup>
+    <AssemblyName>NanoByte.Common.AotSmokeTest</AssemblyName>
+    <RootNamespace>NanoByte.Common</RootNamespace>
+    <Description>Checks that NanoByte.Common works when published with Native AOT.</Description>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <IsPackable>False</IsPackable>
+    <DeterministicSourcePaths>False</DeterministicSourcePaths>
+  </PropertyGroup>
+
+  <!-- Native AOT -->
+  <PropertyGroup>
+    <PublishAot>True</PublishAot>
+    <UseCurrentRuntimeIdentifier>True</UseCurrentRuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Analyze all code in the libraries, not just the parts used by this test -->
+    <TrimmerRootAssembly Include="NanoByte.Common" />
+    <TrimmerRootAssembly Include="NanoByte.Common.AnsiCli" />
+  </ItemGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\Common.AnsiCli\Common.AnsiCli.csproj" />
+  </ItemGroup>
+
+</Project>

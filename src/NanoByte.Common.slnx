@@ -14,4 +14,5 @@
   <Project Path="Common.EtoForms/Common.EtoForms.csproj" />
   <Project Path="Common.WinForms/Common.WinForms.csproj" />
   <Project Path="UnitTests/UnitTests.csproj" />
+  <Project Path="AotSmokeTest/AotSmokeTest.csproj" />
 </Solution>

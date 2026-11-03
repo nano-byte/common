@@ -33,6 +33,9 @@ jobs:
       # Build
       - name: Build
         run: ${{matrix.build}} ${{steps.gitversion.outputs.nuGetVersion}}${{github.ref_type != 'tag' && format('-{0}', steps.gitversion.outputs.shortSha) || ''}}
+      - name: Native AOT smoke test
+        if: runner.os == 'Linux'
+        run: src/aot-test.sh ${{steps.gitversion.outputs.nuGetVersion}}${{github.ref_type != 'tag' && format('-{0}', steps.gitversion.outputs.shortSha) || ''}}
       - name: Report test results
         if: always()
         uses: dorny/test-reporter@v3
