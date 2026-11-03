@@ -4,20 +4,16 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 
-#if NET
-using System.Diagnostics;
-using Mono.Unix;
-using Mono.Unix.Native;
-#endif
-
-#if !NET
 using System.Runtime.InteropServices;
+
+#if NET
+using System.Text.RegularExpressions;
 #endif
 
 namespace NanoByte.Common.Native;
 
 /// <summary>
-/// Provides helper methods for Unix-specific features of the Mono library.
+/// Provides helper methods for Unix-specific features.
 /// </summary>
 /// <remarks>
 /// Make sure to check <see cref="IsUnix"/> before calling any methods in this class to avoid exceptions.
@@ -82,8 +78,8 @@ public static class UnixUtils
         get
         {
 #if NET
-                Syscall.uname(out var buffer);
-                return buffer.sysname ?? "unknown";
+                string sysName = LibC.Uname().SysName;
+                return string.IsNullOrEmpty(sysName) ? "unknown" : sysName;
 #else
             throw new PlatformNotSupportedException();
 #endif
@@ -99,17 +95,17 @@ public static class UnixUtils
         get
         {
 #if NET
-                Syscall.uname(out var buffer);
-                string? cpuType = buffer.machine;
+                string cpuType = LibC.Uname().Machine;
 
                 // Normalize names
-                return buffer.machine switch
+                return cpuType switch
                 {
                     "x86" => "i386",
                     "amd64" => "x86_64",
                     "Power Macintosh" => "ppc",
                     "i86pc" => "i686",
-                    _ => cpuType ?? "unknown"
+                    "" => "unknown",
+                    _ => cpuType
                 };
 #else
             throw new PlatformNotSupportedException();
@@ -127,22 +123,33 @@ public static class UnixUtils
     /// <param name="arguments">The command-line arguments to pass to the executable.</param>
     /// <remarks>Inherits the current process' environment variables and working directory. Does not return on success; set any desired environment variables and <see cref="Environment.CurrentDirectory"/> beforehand.</remarks>
     /// <exception cref="IOException">The call failed (e.g., the executable was not found).</exception>
+    /// <exception cref="UnauthorizedAccessException">The executable could not be run because of insufficient rights.</exception>
     [MethodImpl(MethodImplOptions.NoInlining)]
     [DoesNotReturn]
-    public static void Exec([Localizable(false)] string path, [Localizable(false)] params string[] arguments)
+    public static unsafe void Exec([Localizable(false)] string path, [Localizable(false)] params string[] arguments)
     {
             if (path == null) throw new ArgumentNullException(nameof(path));
+            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
 
             // argv must be null-terminated
-            string?[] argv = new string?[arguments.Length + 2];
-            argv[0] = path;
-            Array.Copy(arguments, 0, argv, 1, arguments.Length);
-            argv[^1] = null;
+            var argv = new nint[arguments.Length + 2];
+            Exception error;
+            try
+            {
+                argv[0] = Marshal.StringToCoTaskMemUTF8(path);
+                for (int i = 0; i < arguments.Length; i++)
+                    argv[i + 1] = Marshal.StringToCoTaskMemUTF8(arguments[i]);
 
-            if (Syscall.execvp(path, argv!) == -1)
-                throw new UnixIOException(Stdlib.GetLastError());
-
-            throw new UnreachableException();
+                fixed (nint* argvPtr = argv)
+                    LibC.execvp(path, argvPtr); // Only returns on error
+                error = LibC.GetLastError(path);
+            }
+            finally
+            {
+                foreach (nint arg in argv)
+                    Marshal.FreeCoTaskMem(arg);
+            }
+            throw error;
     }
 #endif
     #endregion
@@ -153,13 +160,14 @@ public static class UnixUtils
     /// </summary>
     /// <param name="sourcePath">The path of the link to create.</param>
     /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void CreateSymlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
 #if NET
-            => new UnixSymbolicLinkInfo(sourcePath ?? throw new ArgumentNullException(nameof(sourcePath)))
-               .CreateSymbolicLinkTo(targetPath ?? throw new ArgumentNullException(nameof(targetPath)));
+            => File.CreateSymbolicLink(
+                sourcePath ?? throw new ArgumentNullException(nameof(sourcePath)),
+                targetPath ?? throw new ArgumentNullException(nameof(targetPath)));
 #else
         => throw new PlatformNotSupportedException();
 #endif
@@ -169,27 +177,31 @@ public static class UnixUtils
     /// </summary>
     /// <param name="sourcePath">The path of the link to create.</param>
     /// <param name="targetPath">The absolute path of the existing file to point to.</param>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void CreateHardlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
+    {
 #if NET
-            => new UnixFileInfo(targetPath ?? throw new ArgumentNullException(nameof(targetPath)))
-               .CreateLink(sourcePath ?? throw new ArgumentNullException(nameof(sourcePath)));
+            if (LibC.link(
+                    targetPath ?? throw new ArgumentNullException(nameof(targetPath)),
+                    sourcePath ?? throw new ArgumentNullException(nameof(sourcePath))) != 0)
+                throw LibC.GetLastError(targetPath);
 #else
-        => throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException();
 #endif
+    }
 
     /// <summary>
     /// Returns the Inode ID of a file.
     /// </summary>
     /// <param name="path">The path of the file.</param>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static long GetInode([Localizable(false)] string path)
 #if NET
-            => UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path))).Inode;
+            => (long)LibC.LStat(path ?? throw new ArgumentNullException(nameof(path))).Inode;
 #else
         => throw new PlatformNotSupportedException();
 #endif
@@ -204,10 +216,10 @@ public static class UnixUtils
     public static void Rename([Localizable(false)] string source, [Localizable(false)] string destination)
     {
 #if NET
-            if (Stdlib.rename(
+            if (LibC.rename(
                     source ?? throw new ArgumentNullException(nameof(source)),
                     destination ?? throw new ArgumentNullException(nameof(destination))) != 0)
-                throw new UnixIOException(Stdlib.GetLastError());
+                throw LibC.GetLastError(source);
 #else
         throw new PlatformNotSupportedException();
 #endif
@@ -219,12 +231,12 @@ public static class UnixUtils
     /// Checks whether a file is a regular file (i.e. not a device file, symbolic link, etc.).
     /// </summary>
     /// <returns><c>true</c> if <paramref name="path"/> points to a regular file; <c>false</c> otherwise.</returns>
-    /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     public static bool IsRegularFile([Localizable(false)] string path)
 #if NET
-            => UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path))).IsRegularFile;
+            => (LibC.LStat(path ?? throw new ArgumentNullException(nameof(path))).Mode & LibC.S_IFMT) == LibC.S_IFREG;
 #else
         => throw new PlatformNotSupportedException();
 #endif
@@ -234,12 +246,12 @@ public static class UnixUtils
     /// </summary>
     /// <param name="path">The path of the file to check.</param>
     /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
-    /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     public static bool IsSymlink([Localizable(false)] string path)
 #if NET
-            => UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path))).IsSymbolicLink;
+            => (LibC.LStat(path ?? throw new ArgumentNullException(nameof(path))).Mode & LibC.S_IFMT) == LibC.S_IFLNK;
 #else
         => throw new PlatformNotSupportedException();
 #endif
@@ -250,8 +262,8 @@ public static class UnixUtils
     /// <param name="path">The path of the file to check.</param>
     /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
     /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     public static bool IsSymlink(
         [Localizable(false)] string path,
         [MaybeNullWhen(false)] out string target)
@@ -259,8 +271,7 @@ public static class UnixUtils
 #if NET
             if (IsSymlink(path ?? throw new ArgumentNullException(nameof(path))))
             {
-                var symlinkInfo = new UnixSymbolicLinkInfo(path);
-                target = symlinkInfo.ContentsPath;
+                target = new FileInfo(path).LinkTarget!;
                 return true;
             }
             else
@@ -277,20 +288,34 @@ public static class UnixUtils
     #region Permissions
 #if NET
         /// <summary>A combination of bit flags to grant everyone writing permissions.</summary>
-        private const FileAccessPermissions AllWritePermission = FileAccessPermissions.UserWrite | FileAccessPermissions.GroupWrite | FileAccessPermissions.OtherWrite;
+        private const uint AllWritePermission = 0b010_010_010;
+
+        /// <summary>The bit flag for granting the owner writing permissions.</summary>
+        private const uint UserWritePermission = 0b010_000_000;
+
+        /// <summary>A bit mask for all permission bits (including setuid, setgid and sticky) in a file mode.</summary>
+        private const uint AllPermissions = 0xFFF;
+
+        private static uint GetPermissions(string path)
+            => LibC.LStat(path).Mode & AllPermissions;
+
+        private static void SetPermissions(string path, uint permissions)
+        {
+            if (LibC.chmod(path, permissions) != 0) throw LibC.GetLastError(path);
+        }
 #endif
 
     /// <summary>
     /// Removes write permissions for everyone on a filesystem object (file or directory).
     /// </summary>
     /// <param name="path">The filesystem object (file or directory) to make read-only.</param>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     public static void MakeReadOnly([Localizable(false)] string path)
     {
 #if NET
-            var fileSysInfo = UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path)));
-            fileSysInfo.FileAccessPermissions &= ~AllWritePermission;
+            if (path == null) throw new ArgumentNullException(nameof(path));
+            SetPermissions(path, GetPermissions(path) & ~AllWritePermission);
 #else
         throw new PlatformNotSupportedException();
 #endif
@@ -300,13 +325,13 @@ public static class UnixUtils
     /// Sets write permissions for the owner on a filesystem object (file or directory).
     /// </summary>
     /// <param name="path">The filesystem object (file or directory) to make writable by the owner.</param>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     public static void MakeWritable([Localizable(false)] string path)
     {
 #if NET
-            var fileSysInfo = UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path)));
-            fileSysInfo.FileAccessPermissions |= FileAccessPermissions.UserWrite;
+            if (path == null) throw new ArgumentNullException(nameof(path));
+            SetPermissions(path, GetPermissions(path) | UserWritePermission);
 #else
         throw new PlatformNotSupportedException();
 #endif
@@ -314,7 +339,7 @@ public static class UnixUtils
 
 #if NET
         /// <summary>A combination of bit flags to grant everyone executing permissions.</summary>
-        private const FileAccessPermissions AllExecutePermission = FileAccessPermissions.UserExecute | FileAccessPermissions.GroupExecute | FileAccessPermissions.OtherExecute;
+        private const uint AllExecutePermission = 0b001_001_001;
 #endif
 
     /// <summary>
@@ -322,15 +347,14 @@ public static class UnixUtils
     /// </summary>
     /// <param name="path">The file to check for executable rights.</param>
     /// <returns><c>true</c> if <paramref name="path"/> points to an executable; <c>false</c> otherwise.</returns>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
     public static bool IsExecutable([Localizable(false)] string path)
     {
 #if NET
             // Check if any execution rights are set
-            var fileInfo = UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path)));
-            return (fileInfo.FileAccessPermissions & AllExecutePermission) > 0;
+            return (GetPermissions(path ?? throw new ArgumentNullException(nameof(path))) & AllExecutePermission) != 0;
 #else
         throw new PlatformNotSupportedException();
 #endif
@@ -341,14 +365,16 @@ public static class UnixUtils
     /// </summary>
     /// <param name="path">The file to mark as executable or not executable.</param>
     /// <param name="executable"><c>true</c> to mark the file as executable, <c>false</c> to mark it as not executable.</param>
-    /// <exception cref="InvalidOperationException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
     public static void SetExecutable([Localizable(false)] string path, bool executable)
     {
 #if NET
-            var fileInfo = UnixFileSystemInfo.GetFileSystemEntry(path ?? throw new ArgumentNullException(nameof(path)));
-            if (executable) fileInfo.FileAccessPermissions |= AllExecutePermission; // Set all execution rights
-            else fileInfo.FileAccessPermissions &= ~AllExecutePermission; // Unset all execution rights
+            if (path == null) throw new ArgumentNullException(nameof(path));
+            uint permissions = GetPermissions(path);
+            SetPermissions(path, executable
+                ? permissions | AllExecutePermission // Set all execution rights
+                : permissions & ~AllExecutePermission); // Unset all execution rights
 #else
         throw new PlatformNotSupportedException();
 #endif
@@ -361,19 +387,27 @@ public static class UnixUtils
     /// </summary>
     /// <param name="path">The path of the file to read the attribute from.</param>
     /// <param name="name">The name of the attribute to read.</param>
-    /// <returns>The contents of the attribute as a byte array; <c>null</c> if there was a problem reading the file.</returns>
+    /// <returns>The contents of the attribute as a byte array; <c>null</c> if there was a problem reading the file or extended attributes are not supported on this platform.</returns>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static byte[]? GetXattr([Localizable(false)] string path, [Localizable(false)] string name)
+    {
 #if NET
-            => Syscall.getxattr(
-                   path ?? throw new ArgumentNullException(nameof(path)),
-                   name ?? throw new ArgumentNullException(nameof(name)),
-                   out var data) == -1
-                ? null
-                : data;
+            if (path == null) throw new ArgumentNullException(nameof(path));
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (!IsLinux && !IsMacOSX) return null;
+
+            // Query size first
+            nint size = LibC.GetXattr(path, name, Span<byte>.Empty);
+            if (size < 0) return null;
+
+            var data = new byte[size];
+            size = LibC.GetXattr(path, name, data);
+            if (size < 0) return null;
+            return size == data.Length ? data : data[..(int)size];
 #else
-        => throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException();
 #endif
+    }
 
     /// <summary>
     /// Sets an extended file attribute.
@@ -381,16 +415,20 @@ public static class UnixUtils
     /// <param name="path">The path of the file to set the attribute for.</param>
     /// <param name="name">The name of the attribute to set.</param>
     /// <param name="data">The data to write to the attribute.</param>
-    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request (e.g. because of insufficient rights).</exception>
+    /// <exception cref="IOException">The underlying Unix subsystem failed to process the request.</exception>
+    /// <exception cref="UnauthorizedAccessException">The underlying Unix subsystem denied the request because of insufficient rights.</exception>
+    /// <exception cref="PlatformNotSupportedException">Extended attributes are not supported on this platform.</exception>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void SetXattr([Localizable(false)] string path, [Localizable(false)] string name, byte[] data)
     {
 #if NET
-            if (Syscall.setxattr(
-                    path ?? throw new ArgumentNullException(nameof(path)),
-                    name ?? throw new ArgumentNullException(nameof(name)),
-                    data) == -1)
-                throw new UnixIOException(Stdlib.GetLastError());
+            if (path == null) throw new ArgumentNullException(nameof(path));
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            if (!IsLinux && !IsMacOSX) throw new PlatformNotSupportedException();
+
+            if (LibC.SetXattr(path, name, data) != 0)
+                throw LibC.GetLastError(path);
 #else
         throw new PlatformNotSupportedException();
 #endif
@@ -418,13 +456,59 @@ public static class UnixUtils
             string fileSystem = _stat.RunAndCapture("--file-system", "--printf", "%T", path).TrimEnd('\n');
             if (fileSystem == "fuseblk")
             { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system
-                if (Syscall.getfsfile(_stat.RunAndCapture("--printf", "%m", path).TrimEnd('\n')) is {} fstabData)
-                    return fstabData.fs_vfstype;
+                if (GetFstabFileSystem(_stat.RunAndCapture("--printf", "%m", path).TrimEnd('\n')) is {} fstabFileSystem)
+                    return fstabFileSystem;
             }
             return fileSystem;
 #else
         throw new PlatformNotSupportedException();
 #endif
     }
+
+#if NET
+    /// <summary>
+    /// Looks up the file system type of a mount point in <c>/etc/fstab</c>.
+    /// </summary>
+    private static string? GetFstabFileSystem(string mountPoint)
+    {
+        try
+        {
+            using var reader = File.OpenText("/etc/fstab");
+            return GetFstabFileSystem(reader, mountPoint);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Looks up the file system type of a mount point in fstab-formatted data.
+    /// </summary>
+    /// <param name="reader">The fstab data to parse.</param>
+    /// <param name="mountPoint">The mount point to look for.</param>
+    /// <returns>The file system type (third field) of the first matching entry; <c>null</c> if there is none.</returns>
+    internal static string? GetFstabFileSystem(TextReader reader, string mountPoint)
+    {
+        while (reader.ReadLine() is {} line)
+        {
+            line = line.Trim();
+            if (line.Length == 0 || line.StartsWith('#')) continue;
+
+            var fields = line.Split([' ', '\t'], StringSplitOptions.RemoveEmptyEntries);
+            if (fields.Length >= 3 && UnescapeFstab(fields[1]) == mountPoint)
+                return UnescapeFstab(fields[2]);
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Decodes octal escape sequences (e.g., <c>\040</c> for space) used in fstab fields.
+    /// </summary>
+    private static string UnescapeFstab(string value)
+        => value.Contains('\\')
+            ? Regex.Replace(value, @"\\([0-7]{3})", match => ((char)Convert.ToInt32(match.Groups[1].Value, 8)).ToString())
+            : value;
+#endif
     #endregion
 }
