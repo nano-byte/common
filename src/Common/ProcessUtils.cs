@@ -257,7 +257,160 @@ public static class ProcessUtils
     }
 
     /// <summary>
-    /// Converts a start into a command-line with proper escaping.
+    /// Splits a string of arguments, without a leading program name, into individual arguments using the rules of the current platform.
+    /// </summary>
+    /// <param name="arguments">The arguments to be split.</param>
+    /// <returns>An array of individual arguments.</returns>
+    [Pure]
+    public static string[] SplitArguments(string? arguments)
+        => WindowsUtils.IsWindows
+            ? WindowsUtils.SplitArgs($"_ {arguments}").Skip(1).ToArray() // Placeholder, because the first token follows different rules as a program name
+            : SplitArgumentsPosix(arguments);
+
+    /// <summary>
+    /// Splits a command-line into individual arguments using POSIX shell quoting rules. Does not perform any expansions. An unclosed quotation mark ends with the string, like on Windows.
+    /// </summary>
+    [Pure]
+    internal static string[] SplitArgumentsPosix(string? commandLine)
+    {
+        if (string.IsNullOrEmpty(commandLine)) return [];
+
+        var args = new List<string>();
+        var current = new StringBuilder();
+        bool inArg = false;
+        char? quote = null;
+
+        for (int i = 0; i < commandLine.Length; i++)
+        {
+            char c = commandLine[i];
+            if (quote == '\'')
+            {
+                if (c == '\'') quote = null;
+                else current.Append(c);
+            }
+            else if (c == '\\' && i + 1 < commandLine.Length)
+            {
+                char next = commandLine[++i];
+                if (next == '\n') continue; // Line continuation
+                if (quote == '"' && next is not ('"' or '\\' or '$' or '`')) current.Append(c);
+                current.Append(next);
+                inArg = true;
+            }
+            else if (c == '"' && quote == '"') quote = null;
+            else if (c is '"' or '\'' && quote == null)
+            {
+                quote = c;
+                inArg = true;
+            }
+            else if (c is ' ' or '\t' or '\n' && quote == null)
+            {
+                if (inArg) args.Add(current.ToString());
+                current.Clear();
+                inArg = false;
+            }
+            else
+            {
+                current.Append(c);
+                inArg = true;
+            }
+        }
+
+        if (inArg) args.Add(current.ToString());
+        return args.ToArray();
+    }
+
+    /// <summary>
+    /// Splits <see cref="ProcessStartInfo.Arguments"/> into individual arguments the same way .NET does when starting a process on Unix-like systems.
+    /// </summary>
+    [Pure]
+    internal static string[] SplitStartInfoArguments(string arguments)
+    {
+        var args = new List<string>();
+        var current = new StringBuilder();
+        bool inArg = false, inQuotes = false;
+
+        for (int i = 0; i < arguments.Length; i++)
+        {
+            char c = arguments[i];
+            if (c == '\\')
+            {
+                int backslashCount = 1;
+                while (i + 1 < arguments.Length && arguments[i + 1] == '\\')
+                {
+                    backslashCount++;
+                    i++;
+                }
+
+                bool beforeQuote = i + 1 < arguments.Length && arguments[i + 1] == '"';
+                current.Append('\\', beforeQuote ? backslashCount / 2 : backslashCount);
+                if (beforeQuote && backslashCount % 2 != 0)
+                {
+                    current.Append('"');
+                    i++;
+                }
+                inArg = true;
+            }
+            else if (c == '"')
+            {
+                if (inQuotes && i + 1 < arguments.Length && arguments[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++;
+                }
+                else inQuotes = !inQuotes;
+                inArg = true;
+            }
+            else if (c is ' ' or '\t' && !inQuotes)
+            {
+                if (inArg) args.Add(current.ToString());
+                current.Clear();
+                inArg = false;
+            }
+            else
+            {
+                current.Append(c);
+                inArg = true;
+            }
+        }
+
+        if (inArg) args.Add(current.ToString());
+        return args.ToArray();
+    }
+
+    /// <summary>
+    /// Escapes a string for use as an argument on a POSIX shell command-line, making sure it is encapsulated within <c>"</c> unless it consists solely of characters without a special meaning.
+    /// </summary>
+    [Pure]
+    private static string EscapeArgumentPosix(string value)
+    {
+        if (value.Length != 0 && value.All(IsShellSafe))
+            return value;
+
+        var result = new StringBuilder("\"", value.Length + 2);
+        foreach (char c in value)
+        {
+            if (c is '"' or '\\' or '$' or '`') result.Append('\\');
+            result.Append(c);
+        }
+        return result.Append('"').ToString();
+    }
+
+    /// <summary>
+    /// Determines whether a character has no special meaning for a POSIX shell, regardless of its position within a word.
+    /// </summary>
+    [Pure]
+    private static bool IsShellSafe(char c)
+        => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z' or >= '0' and <= '9' or '_' or '@' or '%' or '+' or '=' or ':' or ',' or '.' or '/' or '-';
+
+    /// <summary>
+    /// Converts a start info into a command-line using POSIX shell quoting rules.
+    /// </summary>
+    [Pure]
+    internal static string ToCommandLinePosix(ProcessStartInfo startInfo)
+        => StringUtils.Join(" ", SplitStartInfoArguments(startInfo.Arguments).Prepend(startInfo.FileName).Select(EscapeArgumentPosix));
+
+    /// <summary>
+    /// Converts a start info into a command-line with proper escaping for the current platform, which <see cref="FromCommandLine"/> can convert back.
     /// </summary>
     [Pure]
     public static string ToCommandLine(this ProcessStartInfo startInfo)
@@ -266,11 +419,13 @@ public static class ProcessUtils
         if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
         #endregion
 
-        return $"{startInfo.FileName.EscapeArgument()} {startInfo.Arguments}";
+        return WindowsUtils.IsWindows
+            ? $"{startInfo.FileName.EscapeArgument()} {startInfo.Arguments}"
+            : ToCommandLinePosix(startInfo);
     }
 
     /// <summary>
-    /// Converts a command-line into a start info.
+    /// Converts a command-line into a start info using the rules of the current platform.
     /// </summary>
     [Pure]
     public static ProcessStartInfo FromCommandLine(string commandLine)
@@ -279,31 +434,17 @@ public static class ProcessUtils
         if (commandLine == null) throw new ArgumentNullException(nameof(commandLine));
         #endregion
 
-        string fileName;
-        string arguments;
-        if (WindowsUtils.IsWindows)
-        {
-            string[] parts = WindowsUtils.SplitArgs(commandLine);
-            fileName = parts[0];
-            arguments = parts.Skip(1).JoinEscapeArguments();
-        }
-        else
-        {
-            if (commandLine.StartsWith("\""))
-            {
-                string trimmedCommandLine = commandLine[1..];
-                fileName = trimmedCommandLine.GetLeftPartAtFirstOccurrence("\" ");
-                arguments = trimmedCommandLine.GetRightPartAtFirstOccurrence("\" ");
-            }
-            else
-            {
-                string[] parts = commandLine.Split([' '], count: 2);
-                fileName = parts[0];
-                arguments = parts.Length == 2 ? parts[1] : "";
-            }
-        }
-        return new(fileName, arguments) {UseShellExecute = false};
+        return FromCommandLineParts(WindowsUtils.IsWindows
+            ? WindowsUtils.SplitArgs(commandLine)
+            : SplitArgumentsPosix(commandLine));
     }
+
+    /// <summary>
+    /// Converts a command-line that has been split into individual parts into a start info.
+    /// </summary>
+    [Pure]
+    internal static ProcessStartInfo FromCommandLineParts(string[] parts)
+        => new(parts.FirstOrDefault() ?? "", parts.Skip(1).JoinEscapeArguments()) {UseShellExecute = false};
 
     /// <summary>
     /// Deconstructs a <see cref="ProcessStartInfo"/> like a tuple.
