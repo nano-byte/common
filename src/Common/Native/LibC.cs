@@ -18,6 +18,9 @@ internal static unsafe partial class LibC
     #region errno
     private const int EPERM = 1, ENOENT = 2, EACCES = 13, ENOTDIR = 20; // Identical on Linux, MacOS X and FreeBSD
 
+    /// <summary><c>errno</c> value for an operation that would have to block, e.g., a non-blocking attempt to get a lock held by someone else.</summary>
+    public static int EWOULDBLOCK => OperatingSystem.IsLinux() ? 11 : 35; // 35 on MacOS X and FreeBSD
+
     /// <summary>
     /// Creates an exception for the <c>errno</c> value set by the last P/Invoke call.
     /// </summary>
