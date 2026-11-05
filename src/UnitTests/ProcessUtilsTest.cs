@@ -49,6 +49,216 @@ public class ProcessUtilsTest
 #endif
     }
 
+    /// <summary>
+    /// Runs <paramref name="action"/> with <see cref="Locations.InstallBase"/> pointing to an empty temp directory.
+    /// </summary>
+    private static void WithInstallBase(Action<string> action)
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string originalInstallBase = Locations.InstallBase;
+        try
+        {
+            Locations.OverrideInstallBase(tempDir);
+            action(tempDir);
+        }
+        finally
+        {
+            Locations.OverrideInstallBase(originalInstallBase);
+        }
+    }
+
+    private static string CreateDll(string directory)
+    {
+        string path = Path.Combine(directory, "my assembly.dll");
+        FileUtils.Touch(path);
+        return path;
+    }
+
+    private static string CreateNative(string directory)
+    {
+#if NET
+        string path = Path.Combine(directory, WindowsUtils.IsWindows ? "my assembly.exe" : "my assembly");
+        FileUtils.Touch(path);
+        if (UnixUtils.IsUnix) FileUtils.SetExecutable(path, true);
+#else
+        string path = Path.Combine(directory, "my assembly.exe");
+        FileUtils.Touch(path);
+#endif
+        return path;
+    }
+
+    private static void AssertLaunchesNative(ProcessStartInfo startInfo, string nativePath)
+    {
+#if !NET
+        if (!WindowsUtils.IsWindows)
+        {
+            startInfo.FileName.Should().EndWith("mono");
+            startInfo.Arguments.Should().Be($"{nativePath.EscapeArgument()} my args");
+            return;
+        }
+#endif
+        startInfo.FileName.Should().Be(nativePath);
+        startInfo.Arguments.Should().Be("my args");
+    }
+
+#if NET
+    private static readonly string _hostFileName = WindowsUtils.IsWindows ? "dotnet.exe" : "dotnet";
+
+    /// <summary>
+    /// Whether the tests were started via <c>dotnet NanoByte.Common.UnitTests.dll</c> rather than via the apphost.
+    /// </summary>
+    private static readonly bool _runningInHost = Path.GetFileName(Environment.ProcessPath) == _hostFileName;
+
+    /// <summary>
+    /// Creates a fake <c>dotnet</c> host and points <c>DOTNET_ROOT</c> at it while running <paramref name="action"/>.
+    /// </summary>
+    /// <param name="action">Receives the path of the host <see cref="ProcessUtils.Assembly(string,string[])"/> should pick for a DLL.</param>
+    private static void WithDotNetRoot(Action<string> action)
+    {
+        using var dotnetRoot = new TemporaryDirectory("unit-tests");
+        string fakeHostPath = Path.Combine(dotnetRoot, _hostFileName);
+        FileUtils.Touch(fakeHostPath);
+
+        string? originalValue = Environment.GetEnvironmentVariable("DOTNET_ROOT");
+        try
+        {
+            Environment.SetEnvironmentVariable("DOTNET_ROOT", dotnetRoot);
+            action(_runningInHost ? Environment.ProcessPath! : fakeHostPath);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("DOTNET_ROOT", originalValue);
+        }
+    }
+#endif
+
+    [Fact]
+    public void AssemblyWithDllAndNative()
+        => WithInstallBase(dir =>
+        {
+            string dllPath = CreateDll(dir);
+            string nativePath = CreateNative(dir);
+
+            var startInfo = ProcessUtils.Assembly("my assembly", "my", "args");
+
+#if NET
+            if (_runningInHost)
+            {
+                startInfo.FileName.Should().Be(Environment.ProcessPath);
+                startInfo.Arguments.Should().Be($"{dllPath.EscapeArgument()} my args");
+            }
+            else AssertLaunchesNative(startInfo, nativePath);
+#else
+            AssertLaunchesNative(startInfo, nativePath);
+#endif
+        });
+
+    [Fact]
+    public void AssemblyWithNativeOnly()
+        => WithInstallBase(dir =>
+        {
+            string nativePath = CreateNative(dir);
+
+            AssertLaunchesNative(ProcessUtils.Assembly("my assembly", "my", "args"), nativePath);
+        });
+
+    [Fact]
+    public void AssemblyWithDllOnly()
+        => WithInstallBase(dir =>
+        {
+            string dllPath = CreateDll(dir);
+
+#if NET
+            WithDotNetRoot(expectedHost =>
+            {
+                var startInfo = ProcessUtils.Assembly("my assembly", "my", "args");
+
+                startInfo.FileName.Should().Be(expectedHost);
+                startInfo.Arguments.Should().Be($"{dllPath.EscapeArgument()} my args");
+            });
+#else
+            Action action = () => ProcessUtils.Assembly("my assembly", "my", "args");
+            action.Should().Throw<FileNotFoundException>(because: $"{dllPath} cannot be launched on .NET Framework");
+#endif
+        });
+
+    [Fact]
+    public void AssemblyNotFound()
+        => WithInstallBase(dir =>
+        {
+            Action action = () => ProcessUtils.Assembly("my assembly", "my", "args");
+
+            action.Should().Throw<FileNotFoundException>()
+                  .Which.FileName.Should().Be(Path.Combine(dir,
+#if NET
+                       "my assembly"
+#else
+                       "my assembly.exe"
+#endif
+                   ));
+        });
+
+#if NET
+    [Fact]
+    public void AssemblyContinuesSearchIfDotNetRootHasNoHost()
+    {
+        Assert.SkipWhen(_runningInHost, "The host of the current process is used instead of searching for one");
+
+        WithInstallBase(dir =>
+        {
+            CreateDll(dir);
+            string decoyPath = Path.Combine(dir, _hostFileName);
+            FileUtils.Touch(decoyPath);
+
+            using var emptyRoot = new TemporaryDirectory("unit-tests");
+            string? originalValue = Environment.GetEnvironmentVariable("DOTNET_ROOT");
+            try
+            {
+                Environment.SetEnvironmentVariable("DOTNET_ROOT", emptyRoot);
+                ProcessUtils.Assembly("my assembly").FileName.Should().Be(decoyPath);
+            }
+            finally
+            {
+                Environment.SetEnvironmentVariable("DOTNET_ROOT", originalValue);
+            }
+        });
+    }
+
+    [Fact]
+    public void AssemblyDoesNotPreferNonExecutableNative()
+    {
+        Assert.SkipUnless(UnixUtils.IsUnix, reason: "Only Unixoid systems have an executable flag");
+
+        WithInstallBase(dir =>
+        {
+            string dllPath = CreateDll(dir);
+            FileUtils.SetExecutable(CreateNative(dir), false);
+
+            WithDotNetRoot(expectedHost =>
+            {
+                var startInfo = ProcessUtils.Assembly("my assembly", "my", "args");
+
+                startInfo.FileName.Should().Be(expectedHost);
+                startInfo.Arguments.Should().Be($"{dllPath.EscapeArgument()} my args");
+            });
+        });
+    }
+
+    [Fact]
+    public void AssemblyKeepsNonExecutableNativeWithoutDll()
+    {
+        Assert.SkipUnless(UnixUtils.IsUnix, reason: "Only Unixoid systems have an executable flag");
+
+        WithInstallBase(dir =>
+        {
+            string nativePath = CreateNative(dir);
+            FileUtils.SetExecutable(nativePath, false);
+
+            ProcessUtils.Assembly("my assembly").FileName.Should().Be(nativePath, because: "launching it reports the real problem (permission denied)");
+        });
+    }
+#endif
+
     [Theory]
     [InlineData(new[] {"part1"}, "part1")]
     [InlineData(new[] {"part1", "part2"}, "part1 part2")]

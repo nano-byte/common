@@ -111,7 +111,7 @@ public static class ProcessUtils
     /// </summary>
     /// <param name="name">The name of the assembly to launch (without the file extension).</param>
     /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
-    /// <exception cref="FileNotFoundException">The specified assembly could not be found.</exception>
+    /// <exception cref="FileNotFoundException">The specified assembly or the <c>dotnet</c> host needed to launch it could not be found.</exception>
     [Pure]
     public static ProcessStartInfo Assembly(string name, IEnumerable<string> arguments)
     {
@@ -120,37 +120,63 @@ public static class ProcessUtils
         if (arguments == null) throw new ArgumentNullException(nameof(arguments));
         #endregion
 
-        string executablePath = Paths.Combine(Locations.InstallBase,
-#if NETFRAMEWORK
-            $"{name}.exe"
+#if NET
+        string basePath = Paths.Combine(Locations.InstallBase, name);
+        string dllPath = $"{basePath}.dll";
+        string nativePath = WindowsUtils.IsWindows ? $"{basePath}.exe" : basePath;
+
+        bool nativeExists = File.Exists(nativePath);
+        bool nativeRunnable = WindowsUtils.IsWindows ? nativeExists : FileUtils.IsExecutable(nativePath);
+
+        string? processPath = Environment.ProcessPath;
+        string? hostPath = string.Equals(Path.GetFileName(processPath), DotNetHostFileName, WindowsUtils.IsWindows ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)
+            ? processPath
+            : null;
+
+        string executablePath;
+        if (File.Exists(dllPath) && (hostPath != null || !nativeRunnable))
+        {
+            executablePath = hostPath ?? FindDotNetHost();
+            arguments = [dllPath, ..arguments];
+        }
+        else if (nativeExists) executablePath = nativePath;
+        else throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, name), basePath);
 #else
-            $"{name}.dll"
-#endif
-        );
+        string executablePath = Paths.Combine(Locations.InstallBase, $"{name}.exe");
         if (!File.Exists(executablePath)) throw new FileNotFoundException(string.Format(Resources.UnableToLocateAssembly, name), executablePath);
 
-#if NETFRAMEWORK
         if (!WindowsUtils.IsWindows)
         {
             arguments = [executablePath, ..arguments];
             executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
             if (!executablePath.EndsWith("mono")) executablePath = "mono";
         }
-#else
-        arguments = [executablePath, ..arguments];
-        executablePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
-        if (!executablePath.EndsWith(WindowsUtils.IsWindows ? "\\dotnet.exe" : "/dotnet")) executablePath = "dotnet";
 #endif
 
         return new ProcessStartInfo(executablePath, arguments.JoinEscapeArguments()) {UseShellExecute = false};
     }
+
+#if NET
+    private static string DotNetHostFileName => WindowsUtils.IsWindows ? "dotnet.exe" : "dotnet";
+
+    private static string FindDotNetHost()
+    {
+        if (Environment.GetEnvironmentVariable("DOTNET_ROOT") is {Length: > 0} root)
+        {
+            string path = Paths.Combine(root, DotNetHostFileName);
+            if (File.Exists(path)) return path;
+        }
+
+        return Locations.GetInstalledFilePath(DotNetHostFileName);
+    }
+#endif
 
     /// <summary>
     /// Creates a <see cref="ProcessStartInfo"/> for launching an assembly located in <see cref="Locations.InstallBase"/>.
     /// </summary>
     /// <param name="name">The name of the assembly to launch (without the file extension).</param>
     /// <param name="arguments">The command-line arguments to pass to the assembly.</param>
-    /// <exception cref="FileNotFoundException">The specified assembly could not be found.</exception>
+    /// <exception cref="FileNotFoundException">The specified assembly or the <c>dotnet</c> host needed to launch it could not be found.</exception>
     [Pure]
     public static ProcessStartInfo Assembly(string name, params string[] arguments)
         => Assembly(name, arguments.AsEnumerable());
