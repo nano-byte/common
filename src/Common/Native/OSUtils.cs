@@ -20,6 +20,16 @@ namespace NanoByte.Common.Native;
 /// </summary>
 public static partial class OSUtils
 {
+    /// <summary>
+    /// Indicates whether the current user is an administrator on Windows or root on Unix.
+    /// </summary>
+    public static bool IsAdmin
+#if NET
+        => Environment.IsPrivilegedProcess;
+#else
+        => WindowsUtils.IsAdministrator;
+#endif
+
     private const string
         EnvVariableLongStylePattern = @"\${([^{}]+)}",
         EnvVariableShortStylePattern = @"\$([^{}\$\s\\/-]+)";
