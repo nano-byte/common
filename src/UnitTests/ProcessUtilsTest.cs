@@ -147,7 +147,13 @@ public class ProcessUtilsTest
     [InlineData("executable", "*.txt #x ~/x $(id)", "executable \"*.txt\" \"#x\" \"~/x\" \"\\$(id)\"")]
     [InlineData("/opt/a&b/app", "", "\"/opt/a&b/app\"")]
     [InlineData("executable", "\"a\u00A0b\"", "executable \"a\u00A0b\"")]
+    [InlineData("executable", "\"a\u3000b\"", "executable \"a\u3000b\"")]
+    [InlineData("/home/m\u00FCller/app", "\u00FCber", "/home/m\u00FCller/app \u00FCber")]
+    [InlineData("/home/\u7530\u4E2D/app", "\U0001F600", "/home/\u7530\u4E2D/app \U0001F600")]
+    [InlineData("/home/m\u00FCller/my app", "", "\"/home/m\u00FCller/my app\"")]
     [InlineData("executable", "--flag=a,b:c/d.e_f@g%h+i-j", "executable --flag=a,b:c/d.e_f@g%h+i-j")]
+    [InlineData("a=b", "--flag", "\"a=b\" --flag")]
+    [InlineData("/opt/a=b/app", "c=d", "\"/opt/a=b/app\" c=d")]
     public void TestToCommandLinePosix(string executable, string args, string commandLine)
         => ProcessUtils.ToCommandLinePosix(new(executable, args)).Should().Be(commandLine);
 
@@ -201,6 +207,8 @@ public class ProcessUtilsTest
     [InlineData("/opt/a&b/app", "\"a;b c\" *.txt")]
     [InlineData("/usr/bin/echo", "\"a b\"")]
     [InlineData("/usr/bin/echo", "\"a\\\nb\"")]
+    [InlineData("/home/m\u00FCller/app", "\u00FCber \"a\u00A0b\"")]
+    [InlineData("a=b", "c=d")]
     public void TestCommandLineRoundTrip(string fileName, string arguments)
     {
         var startInfo = new ProcessStartInfo(fileName, arguments);

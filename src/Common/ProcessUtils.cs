@@ -261,6 +261,10 @@ public static class ProcessUtils
     /// </summary>
     /// <param name="arguments">The arguments to be split.</param>
     /// <returns>An array of individual arguments.</returns>
+    /// <remarks>
+    /// On Windows this follows the rules of <c>CommandLineToArgvW</c>.
+    /// On other platforms this follows POSIX shell quoting rules, without performing any expansions, so <c>\</c> and <c>'</c> have a special meaning there.
+    /// </remarks>
     [Pure]
     public static string[] SplitArguments(string? arguments)
         => WindowsUtils.IsWindows
@@ -382,10 +386,16 @@ public static class ProcessUtils
     /// </summary>
     [Pure]
     private static string EscapeArgumentPosix(string value)
-    {
-        if (value.Length != 0 && value.All(IsShellSafe))
-            return value;
+        => value.Length != 0 && value.All(IsShellSafe)
+            ? value
+            : QuotePosix(value);
 
+    /// <summary>
+    /// Encapsulates a string within <c>"</c> for use on a POSIX shell command-line.
+    /// </summary>
+    [Pure]
+    private static string QuotePosix(string value)
+    {
         var result = new StringBuilder("\"", value.Length + 2);
         foreach (char c in value)
         {
@@ -400,14 +410,20 @@ public static class ProcessUtils
     /// </summary>
     [Pure]
     private static bool IsShellSafe(char c)
-        => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z' or >= '0' and <= '9' or '_' or '@' or '%' or '+' or '=' or ':' or ',' or '.' or '/' or '-';
+        => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z' or >= '0' and <= '9' or '_' or '@' or '%' or '+' or '=' or ':' or ',' or '.' or '/' or '-'
+        || (c > '\x7F' && !char.IsWhiteSpace(c));
 
     /// <summary>
     /// Converts a start info into a command-line using POSIX shell quoting rules.
     /// </summary>
     [Pure]
     internal static string ToCommandLinePosix(ProcessStartInfo startInfo)
-        => StringUtils.Join(" ", SplitStartInfoArguments(startInfo.Arguments).Prepend(startInfo.FileName).Select(EscapeArgumentPosix));
+    {
+        string fileName = startInfo.FileName.Contains('=')
+            ? QuotePosix(startInfo.FileName) // Would otherwise be treated as a variable assignment
+            : EscapeArgumentPosix(startInfo.FileName);
+        return StringUtils.Join(" ", SplitStartInfoArguments(startInfo.Arguments).Select(EscapeArgumentPosix).ToArray().Prepend(fileName));
+    }
 
     /// <summary>
     /// Converts a start info into a command-line with proper escaping for the current platform, which <see cref="FromCommandLine"/> can convert back.
