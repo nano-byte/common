@@ -15,6 +15,7 @@ public sealed partial class OutputGridBox : Form
         InitializeComponent();
         Font = DefaultFonts.Modern;
         HandleCreated += delegate { WindowsTaskbar.PreventPinning(Handle); };
+        dataGrid.DisableSorting();
     }
 
     private void Form_KeyDown(object sender, KeyEventArgs e)

@@ -80,4 +80,20 @@ public static class ControlExtensions
     /// <param name="control">The control to get the scaling factor from.</param>
     public static Size ApplyScale(this Size size, ContainerControl control)
         => size.MultiplyAndRound(control.GetScaleFactor());
+
+    /// <summary>
+    /// Disables sorting for all current and future columns of a data grid.
+    /// </summary>
+    /// <remarks>Use this for grids bound to data sources that do not support sorting. Otherwise, the F3 key tries to sort anyway and throws an exception.</remarks>
+    public static void DisableSorting(this DataGridView dataGrid)
+    {
+        #region Sanity checks
+        if (dataGrid == null) throw new ArgumentNullException(nameof(dataGrid));
+        #endregion
+
+        foreach (DataGridViewColumn column in dataGrid.Columns)
+            column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+        dataGrid.ColumnAdded += (_, e) => e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+    }
 }
