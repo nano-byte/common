@@ -1,6 +1,7 @@
 // Copyright Bastian Eicher
 // Licensed under the MIT License
 
+using System.Diagnostics;
 using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Threading;
@@ -26,7 +27,7 @@ public static class WaitHandleExtensions
             // Wait operations on multiple wait handles including a named synchronization primitive are only supported on Windows
             if (!WindowsUtils.IsWindows && handle is Mutex)
             {
-                handle.WaitOne(millisecondsTimeout);
+                WaitOnePolling(handle, cancellationToken, millisecondsTimeout);
                 return;
             }
 
@@ -48,6 +49,27 @@ public static class WaitHandleExtensions
         {
             Log.Warn("Wait handle was abandoned by another instance");
             // Abandoned mutexes get acquired despite exception
+        }
+    }
+
+    /// <summary>
+    /// Waits for a handle in short intervals, checking for cancellation in between. Prefers acquiring the handle over canceling, like <see cref="WaitHandle.WaitAny(WaitHandle[],int,bool)"/>.
+    /// </summary>
+    private static void WaitOnePolling(WaitHandle handle, CancellationToken cancellationToken, int millisecondsTimeout)
+    {
+        const int pollInterval = 100;
+        var stopwatch = Stopwatch.StartNew();
+
+        while (true)
+        {
+            int remaining = millisecondsTimeout == Timeout.Infinite
+                ? pollInterval
+                : Math.Max(millisecondsTimeout - (int)stopwatch.ElapsedMilliseconds, 0);
+
+            if (handle.WaitOne(Math.Min(remaining, pollInterval))) return;
+
+            if (cancellationToken.IsCancellationRequested) throw new OperationCanceledException();
+            if (millisecondsTimeout != Timeout.Infinite && stopwatch.ElapsedMilliseconds >= millisecondsTimeout) throw new TimeoutException();
         }
     }
 }
