@@ -26,7 +26,7 @@ public static class WindowsCredentials
     /// </summary>
     /// <param name="target">A string uniquely identifying the target the credentials are intended for.</param>
     /// <exception cref="PlatformNotSupportedException">The current platform does not support the Credentials API. Needs Windows XP or newer.</exception>
-    public static unsafe bool IsCredentialStored(string target)
+    public static bool IsCredentialStored(string target)
     {
         #region Sanity checks
         if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
@@ -35,7 +35,7 @@ public static class WindowsCredentials
         if (!WindowsUtils.IsWindowsXP) throw new PlatformNotSupportedException();
 
         if (!PInvoke.CredEnumerate(target, out uint count, out var credentials)) return false;
-        PInvoke.CredFree(credentials);
+        credentials.Dispose();
 
         return (count > 0);
     }
