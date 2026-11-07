@@ -278,6 +278,27 @@ public class ProcessUtilsTest
         => unescaped.EscapeArgument().Should().Be(escaped, because);
 
     [Theory]
+    [InlineData(new[] {"/path/to/app", "--arg", "a,b", "1.0+x@y:z%"}, "/path/to/app --arg a,b 1.0+x@y:z%")]
+    [InlineData(new[] {"/my dir/app", ""}, "\"/my dir/app\" \"\"")]
+    [InlineData(new[] {"a=b", "c=d"}, "\"a=b\" c=d")]
+    public void TestJoinEscapeArgumentsPosix(string[] parts, string result)
+        => parts.JoinEscapeArgumentsPosix().Should().Be(result);
+
+    [Theory]
+    [InlineData("", "\"\"", "Empty strings need to be quoted in order not to vanish")]
+    [InlineData("test", "test", "Simple strings shouldn't be modified")]
+    [InlineData("--flag=a,b:c/d.e_f@g%h+i-j", "--flag=a,b:c/d.e_f@g%h+i-j", "Punctuation without special meaning shouldn't be modified")]
+    [InlineData("/home/m\u00FCller/\u7530\u4E2D\U0001F600", "/home/m\u00FCller/\u7530\u4E2D\U0001F600", "Non-ASCII characters have no special meaning")]
+    [InlineData("test1 test2", "\"test1 test2\"", "Strings with whitespaces should be encapsulated")]
+    [InlineData("a\u3000b", "\"a\u3000b\"", "Non-ASCII whitespace should be encapsulated")]
+    [InlineData("it's", "\"it's\"", "Single quotes should be encapsulated")]
+    [InlineData("back\\slash \"quoted\"", "\"back\\\\slash \\\"quoted\\\"\"", "Backslashes and quotation marks should be escaped")]
+    [InlineData("$HOME `x` $(y)", "\"\\$HOME \\`x\\` \\$(y)\"", "Variables and command substitutions should not be expanded")]
+    [InlineData("* ~ # ; &", "\"* ~ # ; &\"", "Globs, home directory, comments and operators should not be interpreted")]
+    public void TestEscapeArgumentPosix(string unescaped, string escaped, string because)
+        => unescaped.EscapeArgumentPosix().Should().Be(escaped, because);
+
+    [Theory]
     [InlineData(null, new string[0])]
     [InlineData("", new string[0])]
     [InlineData("--foo --bar", new[] {"--foo", "--bar"})]

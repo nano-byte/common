@@ -408,10 +408,19 @@ public static class ProcessUtils
     }
 
     /// <summary>
+    /// Combines multiple strings into one for use as a command-line in a POSIX shell using <see cref="EscapeArgumentPosix"/>.
+    /// </summary>
+    /// <param name="parts">The strings to be combined. The first one is the command to run.</param>
+    [Pure]
+    public static string JoinEscapeArgumentsPosix(this IEnumerable<string> parts)
+        => StringUtils.Join(" ", parts.Select((part, index) => index == 0 && part.Contains('=') ? QuotePosix(part) : part.EscapeArgumentPosix()));
+
+    /// <summary>
     /// Escapes a string for use as an argument on a POSIX shell command-line, making sure it is encapsulated within <c>"</c> unless it consists solely of characters without a special meaning.
     /// </summary>
+    /// <remarks>The result is a single shell word, which can be concatenated with other words without whitespace in between. Not suitable for the first word of a command-line, see <see cref="JoinEscapeArgumentsPosix"/>.</remarks>
     [Pure]
-    private static string EscapeArgumentPosix(string value)
+    public static string EscapeArgumentPosix(this string value)
         => value.Length != 0 && value.All(IsShellSafe)
             ? value
             : QuotePosix(value);
@@ -444,12 +453,7 @@ public static class ProcessUtils
     /// </summary>
     [Pure]
     internal static string ToCommandLinePosix(ProcessStartInfo startInfo)
-    {
-        string fileName = startInfo.FileName.Contains('=')
-            ? QuotePosix(startInfo.FileName) // Would otherwise be treated as a variable assignment
-            : EscapeArgumentPosix(startInfo.FileName);
-        return StringUtils.Join(" ", SplitStartInfoArguments(startInfo.Arguments).Select(EscapeArgumentPosix).ToArray().Prepend(fileName));
-    }
+        => SplitStartInfoArguments(startInfo.Arguments).Prepend(startInfo.FileName).JoinEscapeArgumentsPosix();
 
     /// <summary>
     /// Converts a start info into a command-line with proper escaping for the current platform, which <see cref="FromCommandLine"/> can convert back.
