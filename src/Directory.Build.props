@@ -23,6 +23,7 @@
     <Authors>Bastian Eicher</Authors>
     <Copyright>Copyright Bastian Eicher et al.</Copyright>
     <RepositoryUrl>https://github.com/nano-byte/common</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/nano-byte/common/releases/tag/$(Version)</PackageReleaseNotes>
     <PackageProjectUrl>https://common.nano-byte.net/</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
