@@ -27,54 +27,6 @@ public static class WindowsUtils
 {
     #region Win32 Error Codes
     /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that a file was not found.
-    /// </summary>
-    internal const int Win32ErrorFileNotFound = 2;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that access to a resource was denied.
-    /// </summary>
-    internal const int Win32ErrorAccessDenied = 5;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that write access to a resource failed.
-    /// </summary>
-    internal const int Win32ErrorWriteFault = 29;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation timed out.
-    /// </summary>
-    internal const int Win32ErrorSemTimeout = 121;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an element (e.g. a file) already exists.
-    /// </summary>
-    internal const int Win32ErrorAlreadyExists = 183;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that more data is available and the query should be repeated with a larger output buffer/array.
-    /// </summary>
-    internal const int Win32ErrorMoreData = 234;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that the requested application needs UAC elevation.
-    /// </summary>
-    [SupportedOSPlatformGuard("windows")]
-    internal const int Win32ErrorRequestedOperationRequiresElevation = 740;
-
-    /// <summary>
-    /// The <see cref="Win32Exception.NativeErrorCode"/> value indicating that an operation was cancelled by the user.
-    /// </summary>
-    [SupportedOSPlatformGuard("windows")]
-    [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Cancelled", Justification = "Naming matches the Win32 docs")]
-    internal const int Win32ErrorCancelled = 1223;
-
-    /// <summary>
-    /// The file or directory is not a reparse point.
-    /// </summary>
-    internal const int Win32ErrorNotAReparsePoint = 4390;
-
-    /// <summary>
     /// Builds a suitable <see cref="Exception"/> for a given <see cref="Win32Exception.NativeErrorCode"/>.
     /// </summary>
     internal static Exception BuildException(int error)
@@ -82,13 +34,12 @@ public static class WindowsUtils
         var ex = new Win32Exception(error);
         return error switch
         {
-            Win32ErrorAlreadyExists => new IOException(ex.Message, ex),
-            Win32ErrorWriteFault => new IOException(ex.Message, ex),
-            Win32ErrorFileNotFound => new FileNotFoundException(ex.Message, ex),
-            Win32ErrorAccessDenied => new UnauthorizedAccessException(ex.Message, ex),
-            Win32ErrorRequestedOperationRequiresElevation => new NotAdminException(ex.Message, ex),
-            Win32ErrorSemTimeout => new TimeoutException(),
-            Win32ErrorCancelled => new OperationCanceledException(),
+            (int)WIN32_ERROR.ERROR_ALREADY_EXISTS or (int)WIN32_ERROR.ERROR_WRITE_FAULT => new IOException(ex.Message, ex),
+            (int)WIN32_ERROR.ERROR_FILE_NOT_FOUND => new FileNotFoundException(ex.Message, ex),
+            (int)WIN32_ERROR.ERROR_ACCESS_DENIED => new UnauthorizedAccessException(ex.Message, ex),
+            (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED => new NotAdminException(ex.Message, ex),
+            (int)WIN32_ERROR.ERROR_SEM_TIMEOUT => new TimeoutException(),
+            (int)WIN32_ERROR.ERROR_CANCELLED => new OperationCanceledException(),
             _ => ex
         };
     }
@@ -495,7 +446,7 @@ public static class WindowsUtils
         if (!PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_GET_REPARSE_POINT, default, buffer, out _, null))
         {
             int error = Marshal.GetLastWin32Error();
-            if (error == Win32ErrorNotAReparsePoint)
+            if (error == (int)WIN32_ERROR.ERROR_NOT_A_REPARSE_POINT)
             {
                 target = null;
                 return false;
