@@ -21,10 +21,6 @@ namespace NanoByte.Common.Native;
 public sealed class WindowsRestartManager : MarshalByRefObject, IDisposable
 {
     #region Win32 Error Codes
-    private const int Win32ErrorFailNoactionReboot = 350;
-    private const int Win32ErrorFailShutdown = 351;
-    private const int Win32ErrorFailRestart = 352;
-
     /// <summary>
     /// Builds a suitable <see cref="Exception"/> for a given <see cref="Win32Exception.NativeErrorCode"/>.
     /// </summary>
@@ -32,9 +28,9 @@ public sealed class WindowsRestartManager : MarshalByRefObject, IDisposable
     {
         switch (error)
         {
-            case Win32ErrorFailNoactionReboot:
-            case Win32ErrorFailShutdown:
-            case Win32ErrorFailRestart:
+            case (int)WIN32_ERROR.ERROR_FAIL_NOACTION_REBOOT:
+            case (int)WIN32_ERROR.ERROR_FAIL_SHUTDOWN:
+            case (int)WIN32_ERROR.ERROR_FAIL_RESTART:
                 string message = new Win32Exception(error).Message + Environment.NewLine + StringUtils.Join(Environment.NewLine, ListAppProblems(out bool permissionDenied));
 
                 if (permissionDenied) return new UnauthorizedAccessException(message);

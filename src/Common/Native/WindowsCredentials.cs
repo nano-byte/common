@@ -124,7 +124,7 @@ public static class WindowsCredentials
         {
             case 0:
                 break;
-            case WindowsUtils.Win32ErrorCancelled:
+            case (int)WIN32_ERROR.ERROR_CANCELLED:
                 throw new OperationCanceledException();
             case ErrorNoSuchLogonSession:
                 throw new NotSupportedException();

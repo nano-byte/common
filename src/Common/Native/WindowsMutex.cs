@@ -40,7 +40,7 @@ public static class WindowsMutex
                 alreadyExists = false;
                 return handle;
 
-            case WindowsUtils.Win32ErrorAlreadyExists:
+            case (int)WIN32_ERROR.ERROR_ALREADY_EXISTS:
                 alreadyExists = true;
                 return handle;
 
@@ -69,7 +69,7 @@ public static class WindowsMutex
         {
             return Marshal.GetLastWin32Error() switch
             {
-                WindowsUtils.Win32ErrorFileNotFound => false, // No existing mutex found
+                (int)WIN32_ERROR.ERROR_FILE_NOT_FOUND => false, // No existing mutex found
                 var code => throw new Win32Exception(code)
             };
         }

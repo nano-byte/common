@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Text;
+using Windows.Win32.Foundation;
 using NanoByte.Common.Native;
 using NanoByte.Common.Storage;
 
@@ -37,8 +38,8 @@ public static class ProcessUtils
         {
             throw ex.NativeErrorCode switch
             {
-                WindowsUtils.Win32ErrorCancelled => new OperationCanceledException(),
-                WindowsUtils.Win32ErrorRequestedOperationRequiresElevation => new NotAdminException(string.Format(Resources.LaunchNeedsAdmin, startInfo.FileName)),
+                (int)WIN32_ERROR.ERROR_CANCELLED => new OperationCanceledException(),
+                (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED => new NotAdminException(string.Format(Resources.LaunchNeedsAdmin, startInfo.FileName)),
                 _ => new IOException(ex.Message, ex)
             };
         }
