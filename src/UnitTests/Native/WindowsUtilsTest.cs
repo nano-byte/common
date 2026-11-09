@@ -38,7 +38,7 @@ public class WindowsUtilsTest
         {
             FileUtils.CreateSymlink(sourcePath, "target");
         }
-        catch (IOException) when (!WindowsUtils.IsAdministrator)
+        catch (NotAdminException)
         {
             throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
         }
@@ -59,7 +59,7 @@ public class WindowsUtilsTest
         {
             FileUtils.CreateSymlink(sourcePath, "target");
         }
-        catch (IOException) when (!WindowsUtils.IsAdministrator)
+        catch (NotAdminException)
         {
             throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
         }
@@ -82,7 +82,7 @@ public class WindowsUtilsTest
         {
             FileUtils.CreateSymlink(sourcePath, target);
         }
-        catch (IOException) when (!WindowsUtils.IsAdministrator)
+        catch (NotAdminException)
         {
             throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
         }

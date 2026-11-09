@@ -613,6 +613,7 @@ public static class FileUtils
     /// <param name="sourcePath">The path of the link to create.</param>
     /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
     /// <exception cref="IOException">Creating the symbolic link failed.</exception>
+    /// <exception cref="NotAdminException">You lack the privilege for creating symbolic links.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a system with no symbolic link support.</exception>
     public static void CreateSymlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)

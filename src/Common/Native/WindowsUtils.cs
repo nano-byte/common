@@ -37,7 +37,7 @@ public static class WindowsUtils
             (int)WIN32_ERROR.ERROR_ALREADY_EXISTS or (int)WIN32_ERROR.ERROR_WRITE_FAULT => new IOException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_FILE_NOT_FOUND => new FileNotFoundException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_ACCESS_DENIED => new UnauthorizedAccessException(ex.Message, ex),
-            (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED => new NotAdminException(ex.Message, ex),
+            (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED or (int)WIN32_ERROR.ERROR_PRIVILEGE_NOT_HELD => new NotAdminException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_SEM_TIMEOUT => new TimeoutException(),
             (int)WIN32_ERROR.ERROR_CANCELLED => new OperationCanceledException(),
             _ => ex
@@ -382,6 +382,7 @@ public static class WindowsUtils
     /// <param name="sourcePath">The path of the link to create.</param>
     /// <param name="targetPath">The path of the existing file or directory to point to (relative to <paramref name="sourcePath"/>).</param>
     /// <exception cref="IOException">There was an IO problem creating the symlink.</exception>
+    /// <exception cref="NotAdminException">You lack the privilege for creating symbolic links.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
     /// <exception cref="Win32Exception">The symbolic link creation failed.</exception>
     /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
