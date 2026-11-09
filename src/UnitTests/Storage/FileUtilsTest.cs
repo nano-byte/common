@@ -235,8 +235,7 @@ public class FileUtilsTest
         string filePath = Path.Combine(subDirPath, "file");
         File.WriteAllText(filePath, "");
         string symlinkPath = Path.Combine(tempDir, "symlink");
-        if (UnixUtils.IsUnix) UnixUtils.CreateSymlink(symlinkPath, ".");
-        else Directory.CreateDirectory(symlinkPath);
+        FileUtils.CreateDirectoryLink(symlinkPath, "."); // Walk must not recurse into this cycle
 
         // Set up delegate mocks
         var dirCallbackMock = new Mock<IActionSimulator<string>>(MockBehavior.Strict);
@@ -319,6 +318,24 @@ public class FileUtilsTest
         FileUtils.EnableWriteProtection(tempDir);
         Assert.Throws<UnauthorizedAccessException>(() => File.Delete(Path.Combine(tempDir, "file")));
         FileUtils.DisableWriteProtection(tempDir);
+    }
+
+    [Fact]
+    public void TestCreateDirectoryLink()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string targetPath = Path.Combine(tempDir, "target");
+        Directory.CreateDirectory(targetPath);
+        File.WriteAllText(Path.Combine(targetPath, "file"), "data");
+        string sourcePath = Path.Combine(tempDir, "link");
+
+        FileUtils.CreateDirectoryLink(sourcePath, "target");
+
+        Directory.Exists(sourcePath).Should().BeTrue(because: "Link should look like directory");
+        File.ReadAllText(Path.Combine(sourcePath, "file")).Should().Be("data");
+        FileUtils.GetFilesRecursive(tempDir).Should().BeEquivalentTo([Path.Combine(targetPath, "file")], because: "should not recurse into link");
+        new DirectoryInfo(sourcePath).IsDirectoryLink().Should().BeTrue();
+        new DirectoryInfo(targetPath).IsDirectoryLink().Should().BeFalse();
     }
 
     [Fact]

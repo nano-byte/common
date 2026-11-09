@@ -340,7 +340,7 @@ public static class FileUtils
     /// <param name="element">The directory (or single file) to walk.</param>
     /// <param name="dirAction">The action to perform for every found directory (including the starting <paramref name="element"/>); can be <c>null</c>.</param>
     /// <param name="fileAction">The action to perform for every found file; can be <c>null</c>.</param>
-    /// <param name="followDirSymlinks">If <c>true</c> recurse into directory symlinks; if <c>false</c> only execute <paramref name="dirAction"/> for directory symlinks but do not recurse.</param>
+    /// <param name="followDirSymlinks">If <c>true</c> recurse into directory symlinks or junctions; if <c>false</c> only execute <paramref name="dirAction"/> for them but do not recurse.</param>
     public static void Walk(this FileSystemInfo element, [InstantHandle] Action<DirectoryInfo>? dirAction = null, [InstantHandle] Action<FileInfo>? fileAction = null, bool followDirSymlinks = false)
     {
         #region Sanity checks
@@ -355,7 +355,7 @@ public static class FileUtils
 
             case DirectoryInfo directory:
                 dirAction?.Invoke(directory);
-                if (followDirSymlinks || !directory.IsSymlink(out _))
+                if (followDirSymlinks || !directory.IsDirectoryLink())
                 {
                     foreach (var childElement in directory.GetFileSystemInfos())
                         Walk(childElement, dirAction, fileAction, followDirSymlinks);
@@ -655,6 +655,69 @@ public static class FileUtils
             #endregion
         }
         else throw new PlatformNotSupportedException();
+    }
+
+    /// <summary>
+    /// Creates a new link to a directory.
+    /// Uses a symbolic link where possible and falls back to an NTFS junction on Windows if the privileges for creating symbolic links are missing.
+    /// </summary>
+    /// <param name="sourcePath">The path of the link to create.</param>
+    /// <param name="targetPath">The path of the existing directory to point to (relative to <paramref name="sourcePath"/>). Junctions store this as an absolute path.</param>
+    /// <exception cref="IOException">Creating the link failed.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the link.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a system with no directory link support.</exception>
+    public static void CreateDirectoryLink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
+    {
+        try
+        {
+            CreateSymlink(sourcePath, targetPath);
+        }
+        catch (NotAdminException) when (WindowsUtils.IsWindowsNT)
+        {
+            Log.Info($"Unable to create symbolic link, creating junction instead: {sourcePath}");
+
+            try
+            {
+                WindowsUtils.CreateJunction(sourcePath, targetPath);
+            }
+            #region Error handling
+            catch (Win32Exception ex)
+            {
+                // Wrap exception since only certain exception types are allowed
+                throw new IOException(ex.Message, ex);
+            }
+            #endregion
+        }
+    }
+
+    /// <summary>
+    /// Checks whether a directory is a link to another directory, i.e., a symbolic link or an NTFS junction.
+    /// </summary>
+    /// <param name="directory">The directory to check.</param>
+    /// <returns><c>true</c> if <paramref name="directory"/> is a symbolic link or junction; <c>false</c> otherwise.</returns>
+    /// <remarks>Use <see cref="IsSymlink(string)"/> instead if you need to distinguish symbolic links from junctions, e.g., to recreate them.</remarks>
+    /// <exception cref="IOException">There was an IO problem reading the directory.</exception>
+    /// <exception cref="UnauthorizedAccessException">Read access to the directory was denied.</exception>
+    public static bool IsDirectoryLink(this DirectoryInfo directory)
+    {
+        #region Sanity checks
+        if (directory == null) throw new ArgumentNullException(nameof(directory));
+        #endregion
+
+        if (directory.IsSymlink(out _)) return true;
+        if (!WindowsUtils.IsWindowsNT) return false;
+
+        try
+        {
+            return WindowsUtils.IsJunction(directory.FullName);
+        }
+        #region Error handling
+        catch (Win32Exception ex)
+        {
+            // Wrap exception since only certain exception types are allowed
+            throw new IOException(ex.Message, ex);
+        }
+        #endregion
     }
 
     /// <summary>
