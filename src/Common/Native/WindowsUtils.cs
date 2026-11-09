@@ -440,37 +440,158 @@ public static class WindowsUtils
 
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
+        if (ReadReparsePoint(path) is {} buffer && BitConverter.ToUInt32(buffer, 0) == PInvoke.IO_REPARSE_TAG_SYMLINK)
+        {
+            target = GetReparseTarget(buffer, pathBufferOffset: 20);
+            return true;
+        }
+
+        target = null;
+        return false;
+    }
+
+    /// <summary>
+    /// Checks whether a directory is an NTFS junction (directory mount point). Does not match volume mount points.
+    /// </summary>
+    /// <param name="path">The path of the directory to check.</param>
+    /// <returns><c>true</c> if <paramref name="path"/> points to a junction; <c>false</c> otherwise.</returns>
+    /// <exception cref="IOException">There was an IO problem getting junction information.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get junction information.</exception>
+    /// <exception cref="Win32Exception">Getting junction information failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+    public static bool IsJunction([Localizable(false)] string path)
+        => IsJunction(path, out _);
+
+    /// <summary>
+    /// Checks whether a directory is an NTFS junction (directory mount point). Does not match volume mount points.
+    /// </summary>
+    /// <param name="path">The path of the directory to check.</param>
+    /// <param name="target">Returns the absolute path the junction points to.</param>
+    /// <returns><c>true</c> if <paramref name="path"/> points to a junction; <c>false</c> otherwise.</returns>
+    /// <exception cref="IOException">There was an IO problem getting junction information.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get junction information.</exception>
+    /// <exception cref="Win32Exception">Getting junction information failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+    public static bool IsJunction(
+        [Localizable(false)] string path,
+        [MaybeNullWhen(false)] out string target)
+    {
+        #region Sanity checks
+        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+        #endregion
+
+        if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+        if (ReadReparsePoint(path) is {} buffer && BitConverter.ToUInt32(buffer, 0) == PInvoke.IO_REPARSE_TAG_MOUNT_POINT)
+        {
+            // Volume mount points share the reparse tag with junctions but point to a volume GUID path
+            string substituteName = GetSubstituteName(buffer, pathBufferOffset: 16);
+            if (!substituteName.StartsWith(@"\??\Volume{", StringComparison.OrdinalIgnoreCase))
+            {
+                target = GetReparseTarget(buffer, pathBufferOffset: 16);
+                return true;
+            }
+        }
+
+        target = null;
+        return false;
+    }
+
+    /// <summary>
+    /// Reads the raw <c>REPARSE_DATA_BUFFER</c> of a file or directory.
+    /// </summary>
+    /// <returns>The buffer; <c>null</c> if <paramref name="path"/> is not a reparse point.</returns>
+    private static unsafe byte[]? ReadReparsePoint(string path)
+    {
         using var handle = PInvoke.CreateFile(GetFullPath(path), 0, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS, null);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
         var buffer = new byte[PInvoke.MAXIMUM_REPARSE_DATA_BUFFER_SIZE];
-        if (!PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_GET_REPARSE_POINT, default, buffer, out _, null))
-        {
-            int error = Marshal.GetLastWin32Error();
-            if (error == (int)WIN32_ERROR.ERROR_NOT_A_REPARSE_POINT)
-            {
-                target = null;
-                return false;
-            }
-            else throw BuildException(error);
-        }
+        if (PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_GET_REPARSE_POINT, default, buffer, out _, null)) return buffer;
 
-        // REPARSE_DATA_BUFFER with SymbolicLinkReparseBuffer, offsets and lengths are in bytes relative to PathBuffer
-        if (BitConverter.ToUInt32(buffer, 0) != PInvoke.IO_REPARSE_TAG_SYMLINK)
-        {
-            target = null;
-            return false;
-        }
-        int substituteNameOffset = BitConverter.ToUInt16(buffer, 8),
-            substituteNameLength = BitConverter.ToUInt16(buffer, 10),
-            printNameOffset = BitConverter.ToUInt16(buffer, 12),
+        int error = Marshal.GetLastWin32Error();
+        if (error == (int)WIN32_ERROR.ERROR_NOT_A_REPARSE_POINT) return null;
+        throw BuildException(error);
+    }
+
+    // Offsets and lengths in REPARSE_DATA_BUFFER are in bytes relative to PathBuffer
+    private static string GetSubstituteName(byte[] buffer, int pathBufferOffset)
+        => Encoding.Unicode.GetString(buffer, pathBufferOffset + BitConverter.ToUInt16(buffer, 8), BitConverter.ToUInt16(buffer, 10));
+
+    private static string GetReparseTarget(byte[] buffer, int pathBufferOffset)
+    {
+        int printNameOffset = BitConverter.ToUInt16(buffer, 12),
             printNameLength = BitConverter.ToUInt16(buffer, 14);
-        const int pathBufferOffset = 20;
-
-        target = printNameLength > 0
+        return printNameLength > 0
             ? Encoding.Unicode.GetString(buffer, pathBufferOffset + printNameOffset, printNameLength)
-            : FromNtPath(Encoding.Unicode.GetString(buffer, pathBufferOffset + substituteNameOffset, substituteNameLength));
-        return true;
+            : FromNtPath(GetSubstituteName(buffer, pathBufferOffset));
+    }
+
+    /// <summary>
+    /// Creates an NTFS junction (directory mount point). Unlike symbolic links, this does not require any special privileges.
+    /// </summary>
+    /// <param name="sourcePath">The path of the junction to create. Must not exist yet.</param>
+    /// <param name="targetPath">The path of the directory to point to (relative to <paramref name="sourcePath"/>). Is stored as an absolute path. Must be on a local volume.</param>
+    /// <exception cref="IOException">There was an IO problem creating the junction or <paramref name="targetPath"/> is a network path.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the junction.</exception>
+    /// <exception cref="Win32Exception">The junction creation failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+    public static unsafe void CreateJunction([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
+    {
+        #region Sanity checks
+        if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+        if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
+        #endregion
+
+        if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+        string fullSourcePath = GetFullPath(sourcePath);
+        string fullTargetPath = GetFullPath(Combine(GetDirectoryName(fullSourcePath) ?? Directory.GetCurrentDirectory(), targetPath));
+        if (fullTargetPath.StartsWith(@"\\")) throw new IOException($"Junctions cannot point to network paths: {fullTargetPath}");
+        if (Directory.Exists(fullSourcePath) || File.Exists(fullSourcePath)) throw BuildException((int)WIN32_ERROR.ERROR_ALREADY_EXISTS);
+
+        var buffer = BuildMountPointBuffer(substituteName: @"\??\" + fullTargetPath, printName: fullTargetPath);
+
+        Directory.CreateDirectory(fullSourcePath);
+        try
+        {
+            using var handle = PInvoke.CreateFile(fullSourcePath, (uint)FILE_ACCESS_RIGHTS.FILE_GENERIC_WRITE, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS, null);
+            if (handle.IsInvalid || !PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_SET_REPARSE_POINT, buffer, default, out _, null))
+                throw BuildException(Marshal.GetLastWin32Error());
+        }
+        catch
+        {
+            Directory.Delete(fullSourcePath);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Builds a <c>REPARSE_DATA_BUFFER</c> with a <c>MountPointReparseBuffer</c>.
+    /// </summary>
+    private static byte[] BuildMountPointBuffer(string substituteName, string printName)
+    {
+        byte[] substituteNameBytes = Encoding.Unicode.GetBytes(substituteName),
+               printNameBytes = Encoding.Unicode.GetBytes(printName);
+        const int headerLength = 8, mountPointHeaderLength = 8, nullTerminatorLength = 2;
+        int pathBufferLength = substituteNameBytes.Length + nullTerminatorLength + printNameBytes.Length + nullTerminatorLength;
+
+        var buffer = new byte[headerLength + mountPointHeaderLength + pathBufferLength];
+        if (buffer.Length > PInvoke.MAXIMUM_REPARSE_DATA_BUFFER_SIZE) throw new PathTooLongException(printName);
+
+        using var writer = new BinaryWriter(new MemoryStream(buffer));
+        writer.Write(PInvoke.IO_REPARSE_TAG_MOUNT_POINT);
+        writer.Write((ushort)(mountPointHeaderLength + pathBufferLength)); // ReparseDataLength
+        writer.Write((ushort)0); // Reserved
+        writer.Write((ushort)0); // SubstituteNameOffset
+        writer.Write((ushort)substituteNameBytes.Length);
+        writer.Write((ushort)(substituteNameBytes.Length + nullTerminatorLength)); // PrintNameOffset
+        writer.Write((ushort)printNameBytes.Length);
+        writer.Write(substituteNameBytes);
+        writer.Write((ushort)0);
+        writer.Write(printNameBytes);
+        writer.Write((ushort)0);
+        return buffer;
     }
 
     /// <summary>

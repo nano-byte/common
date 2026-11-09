@@ -69,6 +69,43 @@ public class WindowsUtilsTest
         target.Should().Be("target");
     }
 
+    [Fact]
+    public void TestCreateJunction()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string targetPath = Path.Combine(tempDir, "target");
+        Directory.CreateDirectory(targetPath);
+        File.WriteAllText(Path.Combine(targetPath, "file"), "data");
+        string sourcePath = Path.Combine(tempDir, "junction");
+
+        WindowsUtils.CreateJunction(sourcePath, "target");
+
+        Directory.Exists(sourcePath).Should().BeTrue(because: "Junction should look like directory");
+        File.ReadAllText(Path.Combine(sourcePath, "file")).Should().Be("data");
+        WindowsUtils.IsJunction(sourcePath, out string? target).Should().BeTrue();
+        target.Should().Be(targetPath, because: "junctions store absolute paths");
+        WindowsUtils.IsSymlink(sourcePath).Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestCreateJunctionExisting()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        Directory.CreateDirectory(Path.Combine(tempDir, "target"));
+        string sourcePath = Path.Combine(tempDir, "junction");
+        Directory.CreateDirectory(sourcePath);
+
+        Assert.Throws<IOException>(() => WindowsUtils.CreateJunction(sourcePath, "target"));
+        WindowsUtils.IsJunction(sourcePath).Should().BeFalse(because: "existing directory should be left untouched");
+    }
+
+    [Fact]
+    public void TestIsNotJunction()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        WindowsUtils.IsJunction(tempDir).Should().BeFalse();
+    }
+
     [Theory]
     [InlineData(@"C:\Windows")]
     [InlineData(@"\\server\share\dir")]
