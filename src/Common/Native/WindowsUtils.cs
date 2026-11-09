@@ -23,7 +23,7 @@ namespace NanoByte.Common.Native;
 /// </summary>
 [SupportedOSPlatform("windows")]
 [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "CsWin32 annotates exact Windows builds, versions are checked at runtime with IsWindows*")]
-public static partial class WindowsUtils
+public static class WindowsUtils
 {
     #region Win32 Error Codes
     /// <summary>
@@ -660,7 +660,7 @@ public static partial class WindowsUtils
     /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
     /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public static unsafe void NotifyEnvironmentChanged()
+    public static void NotifyEnvironmentChanged()
     {
         if (!IsWindows) return;
 

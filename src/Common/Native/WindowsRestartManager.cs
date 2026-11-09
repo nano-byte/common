@@ -240,7 +240,7 @@ public sealed class WindowsRestartManager : MarshalByRefObject, IDisposable
     /// <summary>
     /// Gets a native function pointer for a callback. The caller must keep <paramref name="callback"/> alive until native code stops using the pointer.
     /// </summary>
-    private static unsafe delegate* unmanaged[Stdcall]<uint, void> ToFunctionPointer(WriteStatusCallback callback)
+    private static delegate* unmanaged[Stdcall]<uint, void> ToFunctionPointer(WriteStatusCallback callback)
         => (delegate* unmanaged[Stdcall]<uint, void>)(void*)Marshal.GetFunctionPointerForDelegate(callback);
     #endregion
 }
