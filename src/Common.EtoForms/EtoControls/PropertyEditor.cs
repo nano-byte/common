@@ -25,7 +25,7 @@ public sealed class PropertyEditor : Scrollable
     /// <summary>
     /// Occurs when the user changed a property value.
     /// </summary>
-    public event EventHandler? PropertyValueChanged;
+    public event EventHandler<PropertyValueChangedEventArgs>? PropertyValueChanged;
 
     /// <summary>
     /// Creates a new property editor.
@@ -106,9 +106,10 @@ public sealed class PropertyEditor : Scrollable
         var resetItem = new ButtonMenuItem {Text = Resources.ResetValue};
         resetItem.Click += delegate
         {
+            object? oldValue = property.GetValue(_selectedObject!);
             property.ResetValue(_selectedObject!);
             RefreshValues();
-            PropertyValueChanged?.Invoke(this, EventArgs.Empty);
+            PropertyValueChanged?.Invoke(this, new(property, oldValue, property.GetValue(_selectedObject!)));
         };
         return new ContextMenu(resetItem);
     }
@@ -226,6 +227,7 @@ public sealed class PropertyEditor : Scrollable
     {
         if (_refreshing) return;
 
+        object? oldValue = property.GetValue(_selectedObject!);
         try
         {
             property.SetValue(_selectedObject!, value);
@@ -239,7 +241,7 @@ public sealed class PropertyEditor : Scrollable
         }
         #endregion
 
-        PropertyValueChanged?.Invoke(this, EventArgs.Empty);
+        PropertyValueChanged?.Invoke(this, new(property, oldValue, value));
     }
 
     /// <summary>
