@@ -452,15 +452,15 @@ public static class FileUtils
         if (objectSecurity.AreAccessRulesCanonical) return;
 
         var securityDescriptor = new RawSecurityDescriptor(objectSecurity.GetSecurityDescriptorSddlForm(AccessControlSections.Access));
-        var denied = new List<CommonAce>();
-        var deniedObject = new List<CommonAce>();
-        var allowed = new List<CommonAce>();
-        var allowedObject = new List<CommonAce>();
-        var inherited = new List<CommonAce>();
+        var denied = new List<GenericAce>();
+        var deniedObject = new List<GenericAce>();
+        var allowed = new List<GenericAce>();
+        var allowedObject = new List<GenericAce>();
+        var inherited = new List<GenericAce>();
         var discretionaryAcl = securityDescriptor.DiscretionaryAcl;
         if (discretionaryAcl == null) return;
 
-        foreach (var ace in discretionaryAcl.Cast<CommonAce>())
+        foreach (GenericAce ace in discretionaryAcl)
         {
             if (ace.AceFlags.HasFlag(AceFlags.Inherited)) inherited.Add(ace);
             else
