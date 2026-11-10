@@ -106,12 +106,26 @@ internal static unsafe partial class LibC
     [LibraryImport(Lib, EntryPoint = "lstat", SetLastError = true, StringMarshalling = StringMarshalling.Utf8)]
     private static partial int lstat(string path, byte* buf);
 
+    [LibraryImport(Lib, EntryPoint = "stat$INODE64", SetLastError = true, StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int stat_macos_x64(string path, byte* buf);
+
+    [LibraryImport(Lib, EntryPoint = "stat", SetLastError = true, StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int stat(string path, byte* buf);
+
     /// <summary>
     /// Gets the inode number and mode of a file without following symbolic links.
     /// </summary>
     /// <exception cref="IOException">The file could not be accessed.</exception>
     /// <exception cref="UnauthorizedAccessException">Access to the file was denied.</exception>
     public static (ulong Inode, uint Mode) LStat(string path)
+        => Stat(path, followSymlinks: false);
+
+    /// <summary>
+    /// Gets the inode number and mode of a file.
+    /// </summary>
+    /// <exception cref="IOException">The file could not be accessed.</exception>
+    /// <exception cref="UnauthorizedAccessException">Access to the file was denied.</exception>
+    public static (ulong Inode, uint Mode) Stat(string path, bool followSymlinks = true)
     {
         // struct stat differs between operating systems and architectures, so only read the fields we need from a sufficiently large buffer
         var buffer = stackalloc byte[512];
@@ -121,20 +135,22 @@ internal static unsafe partial class LibC
             // struct statx has the same layout on all architectures
             const int AT_FDCWD = -100, AT_SYMLINK_NOFOLLOW = 0x100;
             const uint STATX_TYPE = 0x1, STATX_MODE = 0x2, STATX_INO = 0x100;
-            if (statx_linux(AT_FDCWD, path, AT_SYMLINK_NOFOLLOW, STATX_TYPE | STATX_MODE | STATX_INO, buffer) != 0) throw GetLastError(path);
+            if (statx_linux(AT_FDCWD, path, followSymlinks ? 0 : AT_SYMLINK_NOFOLLOW, STATX_TYPE | STATX_MODE | STATX_INO, buffer) != 0) throw GetLastError(path);
             return (Inode: *(ulong*)(buffer + 32), Mode: *(ushort*)(buffer + 28));
         }
         else if (OperatingSystem.IsMacOS())
         {
             // struct stat with 64-bit inodes: int32 st_dev, uint16 st_mode, uint16 st_nlink, uint64 st_ino
-            int result = RuntimeInformation.ProcessArchitecture == Architecture.X64 ? lstat_macos_x64(path, buffer) : lstat(path, buffer);
+            int result = RuntimeInformation.ProcessArchitecture == Architecture.X64
+                ? (followSymlinks ? stat_macos_x64(path, buffer) : lstat_macos_x64(path, buffer))
+                : (followSymlinks ? stat(path, buffer) : lstat(path, buffer));
             if (result != 0) throw GetLastError(path);
             return (Inode: *(ulong*)(buffer + 8), Mode: *(ushort*)(buffer + 4));
         }
         else if (OperatingSystem.IsFreeBSD())
         {
             // struct stat (FreeBSD 12+): uint64 st_dev, uint64 st_ino, uint64 st_nlink, uint16 st_mode
-            if (lstat(path, buffer) != 0) throw GetLastError(path);
+            if ((followSymlinks ? stat(path, buffer) : lstat(path, buffer)) != 0) throw GetLastError(path);
             return (Inode: *(ulong*)(buffer + 8), Mode: *(ushort*)(buffer + 24));
         }
         else throw new PlatformNotSupportedException();

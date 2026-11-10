@@ -297,7 +297,7 @@ public static class UnixUtils
         private const uint AllPermissions = 0xFFF;
 
         private static uint GetPermissions(string path)
-            => LibC.LStat(path).Mode & AllPermissions;
+            => LibC.Stat(path).Mode & AllPermissions;
 
         private static void SetPermissions(string path, uint permissions)
         {
