@@ -756,13 +756,13 @@ public static class WindowsUtils
     {
         using var handle = PInvoke.CreateFile(
             path ?? throw new ArgumentNullException(nameof(path)),
-            (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE);
+            0 /* no read access required */, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
         if (!PInvoke.GetFileInformationByHandle(handle, out var fileInfo))
             throw BuildException(Marshal.GetLastWin32Error());
 
-        if (fileInfo.nFileIndexLow is 0 or uint.MaxValue && fileInfo.nFileIndexHigh is 0 or uint.MaxValue)
+        if ((fileInfo.nFileIndexLow, fileInfo.nFileIndexHigh) is (0, 0) or (uint.MaxValue, uint.MaxValue))
             throw new IOException($"The file system cannot provide a unique ID for '{path}'.");
 
         unchecked
