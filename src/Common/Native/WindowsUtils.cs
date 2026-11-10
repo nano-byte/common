@@ -528,8 +528,8 @@ public static class WindowsUtils
     /// Adds the <c>\\?\</c> prefix, so lookups work beyond <c>MAX_PATH</c> and Windows does not normalize the path again.
     /// </summary>
     private static string ToExtendedPath(string fullPath)
-        => fullPath.StartsWith(@"\\?\") ? fullPath
-            : fullPath.StartsWith(@"\\") ? @"\\?\UNC\" + fullPath[2..]
+        => fullPath.StartsWith(@"\\?\", StringComparison.Ordinal) ? fullPath
+            : fullPath.StartsWith(@"\\", StringComparison.Ordinal) ? @"\\?\UNC\" + fullPath[2..]
             : @"\\?\" + fullPath;
 
     /// <summary>
