@@ -484,6 +484,69 @@ public static class WindowsUtils
     }
 
     /// <summary>
+    /// Checks whether a directory is an NTFS junction (directory mount point). Does not match volume mount points.
+    /// </summary>
+    /// <param name="path">The path of the directory to check.</param>
+    /// <returns><c>true</c> if <paramref name="path"/> points to a junction; <c>false</c> otherwise.</returns>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
+    /// <exception cref="IOException">There was an IO problem getting junction information.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get junction information.</exception>
+    /// <exception cref="Win32Exception">Getting junction information failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+    public static bool IsJunction([Localizable(false)] string path)
+        => IsJunction(path, out _);
+
+    /// <summary>
+    /// Checks whether a directory is an NTFS junction (directory mount point). Does not match volume mount points.
+    /// </summary>
+    /// <param name="path">The path of the directory to check.</param>
+    /// <param name="target">Returns the absolute path the junction points to.</param>
+    /// <returns><c>true</c> if <paramref name="path"/> points to a junction; <c>false</c> otherwise.</returns>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
+    /// <exception cref="IOException">There was an IO problem getting junction information.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get junction information.</exception>
+    /// <exception cref="Win32Exception">Getting junction information failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+    public static bool IsJunction(
+        [Localizable(false)] string path,
+        [MaybeNullWhen(false)] out string target)
+    {
+        #region Sanity checks
+        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+        #endregion
+
+        if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+        if (ReadReparsePoint(path) is {} buffer && IsJunctionBuffer(buffer))
+        {
+            target = GetReparseTarget(buffer, pathBufferOffset: 16);
+            return true;
+        }
+
+        target = null;
+        return false;
+    }
+
+    /// <summary>
+    /// Checks whether a directory is a symbolic link or an NTFS junction.
+    /// </summary>
+    /// <param name="path">The path of the directory to check.</param>
+    /// <exception cref="IOException">There was an IO problem getting link information.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
+    /// <exception cref="Win32Exception">Getting link information failed.</exception>
+    internal static bool IsDirectoryLink([Localizable(false)] string path)
+        => ReadReparsePoint(path) is {} buffer
+        && (BitConverter.ToUInt32(buffer, 0) == PInvoke.IO_REPARSE_TAG_SYMLINK || IsJunctionBuffer(buffer));
+
+    /// <summary>
+    /// Checks whether a <c>REPARSE_DATA_BUFFER</c> describes a junction rather than, e.g., a volume mount point.
+    /// </summary>
+    private static bool IsJunctionBuffer(byte[] buffer)
+        => BitConverter.ToUInt32(buffer, 0) == PInvoke.IO_REPARSE_TAG_MOUNT_POINT
+           // Volume mount points share the reparse tag with junctions but point to a volume GUID path
+        && !GetSubstituteName(buffer, pathBufferOffset: 16).StartsWith(@"\??\Volume{", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
     /// Reads the raw <c>REPARSE_DATA_BUFFER</c> of a file or directory.
     /// </summary>
     /// <returns>The buffer; <c>null</c> if <paramref name="path"/> is not a reparse point.</returns>
@@ -507,6 +570,112 @@ public static class WindowsUtils
     // The print name is only meant for display and may differ from the path the file system actually follows
     private static string GetReparseTarget(byte[] buffer, int pathBufferOffset)
         => FromNtPath(GetSubstituteName(buffer, pathBufferOffset));
+
+    /// <summary>
+    /// Creates an NTFS junction (directory mount point). Unlike symbolic links, this does not require any special privileges.
+    /// </summary>
+    /// <param name="sourcePath">The path of the junction to create. Must not exist yet. The parent directory must already exist.</param>
+    /// <param name="targetPath">The path of the directory to point to (relative to <paramref name="sourcePath"/>). Is stored as an absolute path. Must be on a local drive. Does not need to exist.</param>
+    /// <exception cref="IOException">There was an IO problem creating the junction or <paramref name="targetPath"/> is not on a local drive (e.g., a network path or mapped network drive) or is a file.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the junction.</exception>
+    /// <exception cref="Win32Exception">The junction creation failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT.</exception>
+    public static unsafe void CreateJunction([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
+    {
+        #region Sanity checks
+        if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+        if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
+        #endregion
+
+        if (!IsWindowsNT) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
+
+        string fullSourcePath = GetFullPath(sourcePath);
+        string fullTargetPath = ResolveJunctionTarget(fullSourcePath, targetPath);
+        if (!IsLocalDrivePath(fullTargetPath)) throw new IOException($"Junctions can only point to directories on local drives: {fullTargetPath}");
+        if (File.Exists(fullTargetPath)) throw new IOException($"Junctions cannot point to files: {fullTargetPath}");
+
+        var buffer = BuildMountPointBuffer(substituteName: @"\??\" + fullTargetPath, printName: fullTargetPath);
+
+        // Unlike Directory.CreateDirectory() this fails if the directory already exists and does not create missing parent directories
+        if (!PInvoke.CreateDirectory(fullSourcePath, null))
+            throw BuildException(Marshal.GetLastWin32Error());
+
+        try
+        {
+            using var handle = PInvoke.CreateFile(fullSourcePath, (uint)FILE_ACCESS_RIGHTS.FILE_GENERIC_WRITE, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS);
+            if (handle.IsInvalid || !PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_SET_REPARSE_POINT, buffer, default, out _, null))
+                throw BuildException(Marshal.GetLastWin32Error());
+        }
+        catch
+        {
+            try
+            {
+                Directory.Delete(fullSourcePath);
+            }
+            #region Error handling
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                Log.Warn($"Unable to remove directory left over from failed junction creation: {fullSourcePath}", ex);
+            }
+            #endregion
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Determines whether <see cref="CreateJunction"/> can create a junction pointing to a specific target. Does not check whether the target exists.
+    /// </summary>
+    /// <param name="sourcePath">The path of the junction to create.</param>
+    /// <param name="targetPath">The path of the directory to point to (relative to <paramref name="sourcePath"/>).</param>
+    internal static bool SupportsJunctionTo([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath)
+        => IsLocalDrivePath(ResolveJunctionTarget(GetFullPath(sourcePath), targetPath));
+
+    private static string ResolveJunctionTarget(string fullSourcePath, string targetPath)
+    {
+        string path = GetFullPath(Combine(GetLinkBaseDirectory(fullSourcePath), targetPath));
+
+        // Extended-length paths to drives (e.g., \\?\C:\dir) can be stored like regular paths
+        return path.StartsWith(@"\\?\", StringComparison.Ordinal) && path.Length >= 6 && path[5] == ':'
+            ? path[4..]
+            : path;
+    }
+
+    /// <summary>
+    /// Determines whether a path starts with a drive letter that is not mapped to a network share.
+    /// </summary>
+    private static bool IsLocalDrivePath(string fullPath)
+        => !fullPath.StartsWith(@"\\", StringComparison.Ordinal) // UNC and device paths
+        && GetPathRoot(fullPath) is {Length: > 0} root
+        && new DriveInfo(root).DriveType != DriveType.Network;
+
+    /// <summary>
+    /// Builds a <c>REPARSE_DATA_BUFFER</c> with a <c>MountPointReparseBuffer</c>.
+    /// </summary>
+    private static byte[] BuildMountPointBuffer(string substituteName, string printName)
+    {
+        byte[] substituteNameBytes = Encoding.Unicode.GetBytes(substituteName),
+               printNameBytes = Encoding.Unicode.GetBytes(printName);
+        const int headerLength = 8, mountPointHeaderLength = 8, nullTerminatorLength = 2;
+        int pathBufferLength = substituteNameBytes.Length + nullTerminatorLength + printNameBytes.Length + nullTerminatorLength;
+
+        int bufferLength = headerLength + mountPointHeaderLength + pathBufferLength;
+        if (bufferLength > PInvoke.MAXIMUM_REPARSE_DATA_BUFFER_SIZE) throw new PathTooLongException(printName);
+        var buffer = new byte[bufferLength];
+
+        using var writer = new BinaryWriter(new MemoryStream(buffer));
+        writer.Write(PInvoke.IO_REPARSE_TAG_MOUNT_POINT);
+        writer.Write((ushort)(mountPointHeaderLength + pathBufferLength)); // ReparseDataLength
+        writer.Write((ushort)0); // Reserved
+        writer.Write((ushort)0); // SubstituteNameOffset
+        writer.Write((ushort)substituteNameBytes.Length);
+        writer.Write((ushort)(substituteNameBytes.Length + nullTerminatorLength)); // PrintNameOffset
+        writer.Write((ushort)printNameBytes.Length);
+        writer.Write(substituteNameBytes);
+        writer.Write((ushort)0);
+        writer.Write(printNameBytes);
+        writer.Write((ushort)0);
+        return buffer;
+    }
 
     /// <summary>
     /// Converts an NT path (e.g., <c>\??\C:\dir</c> or <c>\??\UNC\server\share</c>) to a Win32 path. Returns other paths unchanged.

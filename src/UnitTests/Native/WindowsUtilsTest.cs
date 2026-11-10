@@ -69,6 +69,102 @@ public class WindowsUtilsTest
         target.Should().Be("target");
     }
 
+    [Fact]
+    public void TestCreateJunction()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string targetPath = Path.Combine(tempDir, "target");
+        Directory.CreateDirectory(targetPath);
+        File.WriteAllText(Path.Combine(targetPath, "file"), "data");
+        string sourcePath = Path.Combine(tempDir, "junction");
+
+        WindowsUtils.CreateJunction(sourcePath, "target");
+
+        Directory.Exists(sourcePath).Should().BeTrue(because: "Junction should look like directory");
+        File.ReadAllText(Path.Combine(sourcePath, "file")).Should().Be("data");
+        WindowsUtils.IsJunction(sourcePath, out string? target).Should().BeTrue();
+        target.Should().Be(targetPath, because: "junctions store absolute paths");
+        WindowsUtils.IsSymlink(sourcePath).Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestCreateJunctionTrailingSeparator()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string targetPath = Path.Combine(tempDir, "target");
+        Directory.CreateDirectory(targetPath);
+        string sourcePath = Path.Combine(tempDir, "junction");
+
+        WindowsUtils.CreateJunction(sourcePath + Path.DirectorySeparatorChar, "target");
+
+        WindowsUtils.IsJunction(sourcePath, out string? target).Should().BeTrue();
+        target.Should().Be(targetPath, because: "relative targets should be resolved against the directory containing the junction");
+    }
+
+    [Fact]
+    public void TestCreateJunctionExisting()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        Directory.CreateDirectory(Path.Combine(tempDir, "target"));
+        string sourcePath = Path.Combine(tempDir, "junction");
+        Directory.CreateDirectory(sourcePath);
+
+        Assert.Throws<IOException>(() => WindowsUtils.CreateJunction(sourcePath, "target"));
+        WindowsUtils.IsJunction(sourcePath).Should().BeFalse(because: "existing directory should be left untouched");
+    }
+
+    [Fact]
+    public void TestCreateJunctionMissingParent()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        Directory.CreateDirectory(Path.Combine(tempDir, "target"));
+
+        Assert.Throws<DirectoryNotFoundException>(() => WindowsUtils.CreateJunction(Path.Combine(tempDir, "missing", "junction"), Path.Combine(tempDir, "target")));
+        Directory.Exists(Path.Combine(tempDir, "missing")).Should().BeFalse(because: "should not create parent directories");
+    }
+
+    [Fact]
+    public void TestCreateJunctionExtendedPath()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string targetPath = Path.Combine(tempDir, "target");
+        Directory.CreateDirectory(targetPath);
+        string sourcePath = Path.Combine(tempDir, "junction");
+
+        WindowsUtils.CreateJunction(sourcePath, @"\\?\" + targetPath);
+
+        WindowsUtils.IsJunction(sourcePath, out string? target).Should().BeTrue();
+        target.Should().Be(targetPath);
+    }
+
+    [Fact]
+    public void TestCreateJunctionToNetworkPath()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string sourcePath = Path.Combine(tempDir, "junction");
+
+        Assert.Throws<IOException>(() => WindowsUtils.CreateJunction(sourcePath, @"\\server\share\dir"));
+        Directory.Exists(sourcePath).Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestCreateJunctionToFile()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        File.WriteAllText(Path.Combine(tempDir, "target"), "data");
+        string sourcePath = Path.Combine(tempDir, "junction");
+
+        Assert.Throws<IOException>(() => WindowsUtils.CreateJunction(sourcePath, "target"));
+        Directory.Exists(sourcePath).Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestIsNotJunction()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        WindowsUtils.IsJunction(tempDir).Should().BeFalse();
+    }
+
     [Theory]
     [InlineData(@"C:\Windows")]
     [InlineData(@"\\server\share\dir")]
@@ -136,6 +232,19 @@ public class WindowsUtilsTest
         using var tempDir = new TemporaryDirectory("unit-tests");
         WindowsUtils.TryGetDirectoryEntry(Path.Combine(tempDir, "missing")).Should().BeNull();
         WindowsUtils.TryGetDirectoryEntry(Path.Combine(tempDir, "missing", "nested")).Should().BeNull();
+    }
+
+    [Fact]
+    public void TestIsSymlinkOrJunctionMissing()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string missing = Path.Combine(tempDir, "missing");
+        string missingNested = Path.Combine(missing, "nested");
+
+        Assert.Throws<FileNotFoundException>(() => WindowsUtils.IsSymlink(missing));
+        Assert.Throws<FileNotFoundException>(() => WindowsUtils.IsJunction(missing));
+        Assert.Throws<DirectoryNotFoundException>(() => WindowsUtils.IsSymlink(missingNested));
+        Assert.Throws<DirectoryNotFoundException>(() => WindowsUtils.IsJunction(missingNested));
     }
 
     [Fact]

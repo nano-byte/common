@@ -56,6 +56,7 @@ PKEY_Title
 ATTACH_PARENT_PROCESS
 AttachConsole
 CommandLineToArgvW
+CreateDirectory
 CreateFile
 CreateHardLink
 CreateSymbolicLink
@@ -64,10 +65,12 @@ FILE_ACCESS_RIGHTS
 FindClose
 FindFirstFileEx
 FSCTL_GET_REPARSE_POINT
+FSCTL_SET_REPARSE_POINT
 GetFileInformationByHandle
 GetFileSize
 GetModuleFileName
 HWND_BROADCAST
+IO_REPARSE_TAG_MOUNT_POINT
 IO_REPARSE_TAG_SYMLINK
 LocalFree
 MAXIMUM_REPARSE_DATA_BUFFER_SIZE
