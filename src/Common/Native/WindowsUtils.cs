@@ -36,6 +36,7 @@ public static class WindowsUtils
         {
             (int)WIN32_ERROR.ERROR_ALREADY_EXISTS or (int)WIN32_ERROR.ERROR_WRITE_FAULT => new IOException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_FILE_NOT_FOUND => new FileNotFoundException(ex.Message, ex),
+            (int)WIN32_ERROR.ERROR_PATH_NOT_FOUND => new DirectoryNotFoundException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_ACCESS_DENIED => new UnauthorizedAccessException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED or (int)WIN32_ERROR.ERROR_PRIVILEGE_NOT_HELD => new NotAdminException(ex.Message, ex),
             (int)WIN32_ERROR.ERROR_SEM_TIMEOUT => new TimeoutException(),
@@ -393,11 +394,37 @@ public static class WindowsUtils
         if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
         #endregion
 
+        CreateSymlink(sourcePath, targetPath,
+            directory: Directory.Exists(Combine(GetLinkBaseDirectory(sourcePath), targetPath)));
+    }
+
+    /// <summary>
+    /// Returns the directory relative link targets are resolved against.
+    /// </summary>
+    private static string GetLinkBaseDirectory(string sourcePath)
+        => GetDirectoryName(sourcePath.TrimEnd(DirectorySeparatorChar, AltDirectorySeparatorChar)) ?? Directory.GetCurrentDirectory();
+
+    /// <summary>
+    /// Creates a symbolic link for a file or directory.
+    /// </summary>
+    /// <param name="sourcePath">The path of the link to create.</param>
+    /// <param name="targetPath">The path of the file or directory to point to (relative to <paramref name="sourcePath"/>). Does not need to exist.</param>
+    /// <param name="directory"><c>true</c> to create a directory symbolic link; <c>false</c> to create a file symbolic link.</param>
+    /// <exception cref="IOException">There was an IO problem creating the symlink.</exception>
+    /// <exception cref="NotAdminException">You lack the privilege for creating symbolic links.</exception>
+    /// <exception cref="UnauthorizedAccessException">You have insufficient rights to create the symbolic link.</exception>
+    /// <exception cref="Win32Exception">The symbolic link creation failed.</exception>
+    /// <exception cref="PlatformNotSupportedException">This method is called on a platform other than Windows NT 6.0 (Vista) or newer.</exception>
+    public static void CreateSymlink([Localizable(false)] string sourcePath, [Localizable(false)] string targetPath, bool directory)
+    {
+        #region Sanity checks
+        if (string.IsNullOrEmpty(sourcePath)) throw new ArgumentNullException(nameof(sourcePath));
+        if (string.IsNullOrEmpty(targetPath)) throw new ArgumentNullException(nameof(targetPath));
+        #endregion
+
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        SYMBOLIC_LINK_FLAGS flags = 0;
-        if (Directory.Exists(Combine(GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath)))
-            flags |= SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_DIRECTORY;
+        var flags = directory ? SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_DIRECTORY : 0;
 
         if (IsWindows10)
         {
@@ -416,7 +443,7 @@ public static class WindowsUtils
     /// </summary>
     /// <param name="path">The path of the file to check.</param>
     /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
-    /// <remarks>Will return <c>false</c> for non-existing files.</remarks>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
     /// <exception cref="IOException">There was an IO problem getting link information.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
     /// <exception cref="Win32Exception">Getting link information failed.</exception>
@@ -430,6 +457,7 @@ public static class WindowsUtils
     /// <param name="path">The path of the file to check.</param>
     /// <param name="target">Returns the target the symbolic link points to if it exists.</param>
     /// <returns><c>true</c> if <paramref name="path"/> points to a symbolic link; <c>false</c> otherwise.</returns>
+    /// <exception cref="FileNotFoundException"><paramref name="path"/> does not exist.</exception>
     /// <exception cref="IOException">There was an IO problem getting link information.</exception>
     /// <exception cref="UnauthorizedAccessException">You have insufficient rights to get link information.</exception>
     /// <exception cref="Win32Exception">Getting link information failed.</exception>
@@ -445,46 +473,55 @@ public static class WindowsUtils
 
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = PInvoke.CreateFile(GetFullPath(path), 0, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS, null);
+        if (ReadReparsePoint(path) is {} buffer && BitConverter.ToUInt32(buffer, 0) == PInvoke.IO_REPARSE_TAG_SYMLINK)
+        {
+            target = GetReparseTarget(buffer, pathBufferOffset: 20);
+            return true;
+        }
+
+        target = null;
+        return false;
+    }
+
+    /// <summary>
+    /// Reads the raw <c>REPARSE_DATA_BUFFER</c> of a file or directory.
+    /// </summary>
+    /// <returns>The buffer; <c>null</c> if <paramref name="path"/> is not a reparse point.</returns>
+    private static unsafe byte[]? ReadReparsePoint(string path)
+    {
+        using var handle = PInvoke.CreateFile(GetFullPath(path), 0, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
         var buffer = new byte[PInvoke.MAXIMUM_REPARSE_DATA_BUFFER_SIZE];
-        if (!PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_GET_REPARSE_POINT, default, buffer, out _, null))
-        {
-            int error = Marshal.GetLastWin32Error();
-            if (error == (int)WIN32_ERROR.ERROR_NOT_A_REPARSE_POINT)
-            {
-                target = null;
-                return false;
-            }
-            else throw BuildException(error);
-        }
+        if (PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_GET_REPARSE_POINT, default, buffer, out _, null)) return buffer;
 
-        // REPARSE_DATA_BUFFER with SymbolicLinkReparseBuffer, offsets and lengths are in bytes relative to PathBuffer
-        if (BitConverter.ToUInt32(buffer, 0) != PInvoke.IO_REPARSE_TAG_SYMLINK)
-        {
-            target = null;
-            return false;
-        }
-        int substituteNameOffset = BitConverter.ToUInt16(buffer, 8),
-            substituteNameLength = BitConverter.ToUInt16(buffer, 10),
-            printNameOffset = BitConverter.ToUInt16(buffer, 12),
-            printNameLength = BitConverter.ToUInt16(buffer, 14);
-        const int pathBufferOffset = 20;
-
-        target = printNameLength > 0
-            ? Encoding.Unicode.GetString(buffer, pathBufferOffset + printNameOffset, printNameLength)
-            : FromNtPath(Encoding.Unicode.GetString(buffer, pathBufferOffset + substituteNameOffset, substituteNameLength));
-        return true;
+        int error = Marshal.GetLastWin32Error();
+        if (error == (int)WIN32_ERROR.ERROR_NOT_A_REPARSE_POINT) return null;
+        throw BuildException(error);
     }
+
+    // Offsets and lengths in REPARSE_DATA_BUFFER are in bytes relative to PathBuffer
+    private static string GetSubstituteName(byte[] buffer, int pathBufferOffset)
+        => Encoding.Unicode.GetString(buffer, pathBufferOffset + BitConverter.ToUInt16(buffer, 8), BitConverter.ToUInt16(buffer, 10));
+
+    // The print name is only meant for display and may differ from the path the file system actually follows
+    private static string GetReparseTarget(byte[] buffer, int pathBufferOffset)
+        => FromNtPath(GetSubstituteName(buffer, pathBufferOffset));
 
     /// <summary>
     /// Converts an NT path (e.g., <c>\??\C:\dir</c> or <c>\??\UNC\server\share</c>) to a Win32 path. Returns other paths unchanged.
     /// </summary>
     private static string FromNtPath(string path)
-        => path.StartsWith(@"\??\UNC\") ? @"\\" + path[@"\??\UNC\".Length..]
-            : path.StartsWith(@"\??\") ? path[@"\??\".Length..]
-            : path;
+    {
+        const string prefix = @"\??\", uncPrefix = @"\??\UNC\";
+        if (!path.StartsWith(prefix, StringComparison.Ordinal)) return path;
+        if (path.StartsWith(uncPrefix, StringComparison.OrdinalIgnoreCase)) return @"\\" + path[uncPrefix.Length..];
+
+        string rest = path[prefix.Length..];
+        return rest.Length >= 2 && rest[1] == ':'
+            ? rest
+            : @"\\?\" + rest; // Devices without a drive letter
+    }
 
     /// <summary>
     /// Creates a hard link between two files.

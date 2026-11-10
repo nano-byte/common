@@ -92,6 +92,25 @@ public class WindowsUtilsTest
     }
 
     [Fact]
+    public void TestIsSymlinkReturnsNormalizedAbsoluteTarget()
+    {
+        using var tempDir = new TemporaryDirectory("unit-tests");
+        string sourcePath = Path.Combine(tempDir, "symlink");
+
+        try
+        {
+            FileUtils.CreateSymlink(sourcePath, @"C:\Windows\System32\..");
+        }
+        catch (NotAdminException)
+        {
+            throw new Exception($"{Xunit.v3.DynamicSkipToken.Value}Cannot test NTFS symlinks due to insufficient privileges");
+        }
+
+        WindowsUtils.IsSymlink(sourcePath, out string? actualTarget).Should().BeTrue();
+        actualTarget.Should().Be(@"C:\Windows", because: "should return the path the file system follows rather than the display name");
+    }
+
+    [Fact]
     public void TestTryGetDirectoryEntryExisting()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");
