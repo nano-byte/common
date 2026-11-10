@@ -194,14 +194,14 @@ public static class FileUtils
 
         // Lower-case ASCII letters to test case folding and a precomposed character (NFC) to test normalization
         string asciiPart = NameAliasingProbePrefix + Guid.NewGuid().ToString("N");
-        string name = asciiPart + "-é";
+        string name = asciiPart + "-\u00E9";
 
         File.WriteAllText(Paths.Combine(path, name), "");
         try
         {
             var aliasing = NameAliasing.None;
-            if (File.Exists(Paths.Combine(path, asciiPart.ToUpperInvariant() + "-é"))) aliasing |= NameAliasing.Case;
-            if (File.Exists(Paths.Combine(path, asciiPart + "-é"))) aliasing |= NameAliasing.Normalization;
+            if (File.Exists(Paths.Combine(path, asciiPart.ToUpperInvariant() + "-\u00E9"))) aliasing |= NameAliasing.Case;
+            if (File.Exists(Paths.Combine(path, asciiPart + "-e\u0301"))) aliasing |= NameAliasing.Normalization;
 
             // Some file systems (e.g., HFS+) rewrite names on creation instead of just resolving them loosely
             if (!Array.Exists(FindNameAliasingProbes(path, asciiPart), x => Path.GetFileName(x) == name))
