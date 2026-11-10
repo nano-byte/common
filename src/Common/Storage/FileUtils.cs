@@ -318,7 +318,7 @@ public static class FileUtils
     /// </summary>
     /// <param name="file">The file to read from.</param>
     /// <param name="encoding">The text encoding to use for reading.</param>
-    /// <returns>The first line of text in the file; <c>null</c> if decoding does not work on the contents.</returns>
+    /// <returns>The first line of text in the file; <c>null</c> if the file is empty.</returns>
     /// <exception cref="IOException">A problem occurred while reading the file.</exception>
     /// <exception cref="UnauthorizedAccessException">Read access to the file is not permitted.</exception>
     public static string? ReadFirstLine(this FileInfo file, Encoding encoding)
@@ -1072,8 +1072,7 @@ public static class FileUtils
     /// <returns><c>true</c> if <paramref name="path"/> points to directory on a Unixoid filesystem; <c>false</c> otherwise.</returns>
     /// <remarks>
     /// Will always return <c>false</c> on non-Unixoid systems.
-    /// Only requires read access on Linux to determine file system.
-    /// Requires write access on other Unixes (e.g. MacOS X).
+    /// May create a temporary file in the directory to probe for executable bit support. Assumes a Unixoid filesystem if this fails.
     /// </remarks>
     /// <exception cref="DirectoryNotFoundException">The specified directory doesn't exist.</exception>
     /// <exception cref="IOException">Checking the directory failed.</exception>
