@@ -114,6 +114,7 @@ public class FileUtilsTest
         File.WriteAllText(Path.Combine(tempDir, "test"), "");
         FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "test")).Should().BeTrue();
         FileUtils.ExistsCaseSensitive(Path.Combine(tempDir, "Test")).Should().BeFalse();
+        FileUtils.ExistsCaseSensitive(tempDir + "/test").Should().BeTrue(because: "Non-normalized paths should be supported");
     }
 
     [Fact]

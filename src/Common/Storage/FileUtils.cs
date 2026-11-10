@@ -106,7 +106,7 @@ public static class FileUtils
 
         return File.Exists(path)
                // Make sure the file found is a string-exact match
-            && Directory.GetFiles(Paths.Parent(path), Paths.FileName(path)).Contains(path);
+            && Directory.GetFiles(Paths.Parent(path), Paths.FileName(path)).Any(x => Path.GetFileName(x) == Paths.FileName(path));
     }
     #endregion
 
