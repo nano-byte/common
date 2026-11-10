@@ -340,7 +340,7 @@ public static class WindowsUtils
 
         if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = PInvoke.CreateFile(path, (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL, null);
+        using var handle = PInvoke.CreateFile(path, (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL);
         if (handle.IsInvalid) return null;
 
         uint size = PInvoke.GetFileSize(handle);
@@ -368,7 +368,7 @@ public static class WindowsUtils
 
         if (!IsWindows) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        using var handle = PInvoke.CreateFile(path, (uint)FILE_ACCESS_RIGHTS.FILE_WRITE_DATA, FILE_SHARE_MODE.FILE_SHARE_WRITE, null, FILE_CREATION_DISPOSITION.CREATE_ALWAYS, 0, null);
+        using var handle = PInvoke.CreateFile(path, (uint)FILE_ACCESS_RIGHTS.FILE_WRITE_DATA, FILE_SHARE_MODE.FILE_SHARE_WRITE, null, FILE_CREATION_DISPOSITION.CREATE_ALWAYS, 0);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
         var lpOverlapped = new NativeOverlapped();
@@ -503,7 +503,7 @@ public static class WindowsUtils
     /// <returns>The buffer; <c>null</c> if <paramref name="path"/> is not a reparse point.</returns>
     private static unsafe byte[]? ReadReparsePoint(string path)
     {
-        using var handle = PInvoke.CreateFile(GetFullPath(path), 0, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS, null);
+        using var handle = PInvoke.CreateFile(GetFullPath(path), 0, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
         var buffer = new byte[PInvoke.MAXIMUM_REPARSE_DATA_BUFFER_SIZE];
@@ -555,7 +555,7 @@ public static class WindowsUtils
         Directory.CreateDirectory(fullSourcePath);
         try
         {
-            using var handle = PInvoke.CreateFile(fullSourcePath, (uint)FILE_ACCESS_RIGHTS.FILE_GENERIC_WRITE, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS, null);
+            using var handle = PInvoke.CreateFile(fullSourcePath, (uint)FILE_ACCESS_RIGHTS.FILE_GENERIC_WRITE, 0, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_BACKUP_SEMANTICS);
             if (handle.IsInvalid || !PInvoke.DeviceIoControl(handle, PInvoke.FSCTL_SET_REPARSE_POINT, buffer, default, out _, null))
                 throw BuildException(Marshal.GetLastWin32Error());
         }
@@ -666,7 +666,7 @@ public static class WindowsUtils
     {
         using var handle = PInvoke.CreateFile(
             path ?? throw new ArgumentNullException(nameof(path)),
-            (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE, null);
+            (uint)FILE_ACCESS_RIGHTS.FILE_READ_DATA, FILE_SHARE_MODE.FILE_SHARE_READ, null, FILE_CREATION_DISPOSITION.OPEN_EXISTING, FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_ARCHIVE);
         if (handle.IsInvalid) throw BuildException(Marshal.GetLastWin32Error());
 
         if (!PInvoke.GetFileInformationByHandle(handle, out var fileInfo))
