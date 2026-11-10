@@ -453,10 +453,10 @@ public static class UnixUtils
         if (!IsLinux) return null;
 
 #if NET
-            string fileSystem = _stat.RunAndCapture("--file-system", "--printf", "%T", path).TrimEnd('\n');
+            string fileSystem = _stat.RunAndCapture("--file-system", "--printf", "%T", "--", path).TrimEnd('\n');
             if (fileSystem == "fuseblk")
             { // FUSE mounts need to be looked up in /etc/fstab to determine actual file system
-                if (GetFstabFileSystem(_stat.RunAndCapture("--printf", "%m", path).TrimEnd('\n')) is {} fstabFileSystem)
+                if (GetFstabFileSystem(_stat.RunAndCapture("--printf", "%m", "--", path).TrimEnd('\n')) is {} fstabFileSystem)
                     return fstabFileSystem;
             }
             return fileSystem;
