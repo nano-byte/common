@@ -395,12 +395,17 @@ public static class WindowsUtils
 
         if (!IsWindowsVista) throw new PlatformNotSupportedException(Resources.OnlyAvailableOnWindows);
 
-        var flags = IsWindows10Redstone
-            ? SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE
-            : 0;
-
+        SYMBOLIC_LINK_FLAGS flags = 0;
         if (Directory.Exists(Combine(GetDirectoryName(sourcePath) ?? Directory.GetCurrentDirectory(), targetPath)))
             flags |= SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_DIRECTORY;
+
+        if (IsWindows10)
+        {
+            // Use unpriveliged symlink creation if supported
+            if (PInvoke.CreateSymbolicLink(sourcePath, targetPath, flags | SYMBOLIC_LINK_FLAGS.SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE)) return;
+            int error = Marshal.GetLastWin32Error();
+            if (error != (int)WIN32_ERROR.ERROR_INVALID_PARAMETER) throw BuildException(error);
+        }
 
         if (!PInvoke.CreateSymbolicLink(sourcePath, targetPath, flags))
             throw BuildException(Marshal.GetLastWin32Error());
