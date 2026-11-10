@@ -794,7 +794,6 @@ public static class WindowsUtils
     /// </summary>
     /// <param name="appID">The application ID to set.</param>
     /// <remarks>The application ID is used to group related windows in the taskbar.</remarks>
-    [SupportedOSPlatformGuard("windows6.1")]
     public static void SetCurrentProcessAppID(string appID)
     {
         #region Sanity checks
