@@ -4,13 +4,13 @@ pushd $PSScriptRoot
 
 function Find-MSBuild {
     if (Test-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe") {
-        $vsDir = . "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -products * -property installationPath -format value -version 18.0
+        $vsDir = . "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -products * -property installationPath -format value -version 18.12
         if ($vsDir) { return "$vsDir\MSBuild\Current\Bin\amd64\MSBuild.exe" }
     }
 }
 
 function Run-DotNet {
-    ..\0install.ps1 run --batch --version 10.0..!10.1 https://apps.0install.net/dotnet/sdk.xml @args
+    ..\0install.ps1 run --batch --version 11.0..!11.1 https://apps.0install.net/dotnet/sdk.xml @args
     if ($LASTEXITCODE -ne 0) {throw "Exit Code: $LASTEXITCODE"}
 }
 
