@@ -5,11 +5,11 @@
     <AssemblyName>NanoByte.Common.EtoForms</AssemblyName>
     <RootNamespace>NanoByte.Common</RootNamespace>
     <Description>Builds upon NanoByte.Common and adds cross-platform Eto.Forms controls with an emphasis on progress reporting.</Description>
-    <TargetFrameworks>net472;net8.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net472;net10.0</TargetFrameworks>
     <OutputPath>..\..\artifacts\$(Configuration)\</OutputPath>
     <SignAssembly>False</SignAssembly>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0' Or '$(TargetFramework)'=='net9.0' Or '$(TargetFramework)'=='net10.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net10.0'">
     <!-- Run nullability analysis only on annotated frameworks -->
     <Nullable>enable</Nullable>
   </PropertyGroup>
