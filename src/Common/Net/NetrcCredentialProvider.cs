@@ -11,12 +11,12 @@ namespace NanoByte.Common.Net;
 /// <param name="innerProvider">The provider to fall back to if no suitable credentials can be found in <see cref="Netrc"/>.</param>
 public class NetrcCredentialProvider(ICredentialProvider? innerProvider = null) : ICredentialProvider
 {
-    private readonly Netrc _netrc = Netrc.LoadSafe();
+    private readonly Lazy<Netrc> _netrc = new(Netrc.LoadSafe);
 
     /// <inheritdoc/>
     public NetworkCredential? GetCredential(Uri uri, bool previousIncorrect = false)
     {
-        if (_netrc.TryGetValue(uri.Host, out var value))
+        if (_netrc.Value.TryGetValue(uri.Host, out var value))
         {
             if (previousIncorrect)
             {
