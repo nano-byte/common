@@ -124,7 +124,7 @@ public static class ListExtensions
     [Pure]
     public static IReadOnlyList<T> GetAddedElements<T>(this IReadOnlyList<T>? newList, IReadOnlyList<T>? oldList, IComparer<T> comparer)
     {
-        if (newList == null) return new T[0];
+        if (newList == null) return [];
         if (oldList == null) return newList;
 
         var added = new LinkedList<T>();
