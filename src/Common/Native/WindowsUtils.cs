@@ -822,7 +822,7 @@ public static class WindowsUtils
     /// Informs all GUI applications that changes where made to the environment variables (e.g. PATH) and that they should re-pull them.
     /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public static void NotifyEnvironmentChanged()
+    public static unsafe void NotifyEnvironmentChanged()
     {
         if (!IsWindows) return;
 

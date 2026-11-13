@@ -122,7 +122,7 @@ public static class WindowsTaskbar
     /// Interface pointers are not marshaled between COM apartments, so each thread needs its own instance.
     /// </summary>
     [ThreadStatic]
-    private static ITaskbarList4* _taskbarList;
+    private static unsafe ITaskbarList4* _taskbarList;
 
     [ThreadStatic]
     private static bool _taskbarListFailed;
