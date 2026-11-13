@@ -3,16 +3,12 @@
     {
       "src": [
         {
-          "src": "../src",
-          "files": ["*/*.csproj"],
-          "exclude": ["UnitTests/*", "AotSmokeTest/*", "Samples/*"]
+          "src": "../artifacts/Release/net472",
+          "files": ["NanoByte.Common*.dll"]
         }
       ],
       "dest": "api",
-      "filter": "filterConfig.yml",
-      "properties": {
-        "TargetFramework": "net472"
-      }
+      "filter": "filterConfig.yml"
     }
   ],
   "build": {
