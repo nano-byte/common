@@ -11,45 +11,49 @@ namespace NanoByte.Common.Controls;
 public static class ControlExtensions
 {
 #if NETFRAMEWORK
-    /// <summary>
-    /// Executes the given <paramref name="action"/> on the thread that owns this control and returns immediately.
-    /// </summary>
-    public static void BeginInvoke(this Control control, Action action)
+    extension(Control control)
     {
-        #region Sanity checks
-        if (control == null) throw new ArgumentNullException(nameof(control));
-        if (action == null) throw new ArgumentNullException(nameof(action));
-        #endregion
+        /// <summary>
+        /// Executes the given <paramref name="action"/> on the thread that owns this control and returns immediately.
+        /// </summary>
+        public void BeginInvoke(Action action)
+        {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+            #endregion
 
-        control.BeginInvoke(action);
+            control.BeginInvoke(action);
+        }
+
+        /// <summary>
+        /// Executes the given <paramref name="action"/> on the thread that owns this control and blocks until it is complete.
+        /// </summary>
+        public void Invoke(Action action)
+        {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+            #endregion
+
+            control.Invoke(action);
+        }
+
+        /// <summary>
+        /// Executes the given <paramref name="action"/> on the thread that owns this control and blocks until it is complete.
+        /// </summary>
+        /// <returns>The return value of the <paramref name="action"/>.</returns>
+        public T Invoke<T>(Func<T> action)
+        {
+            #region Sanity checks
+            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+            #endregion
+
+            return (T)control.Invoke(action);
+        }
     }
 
-    /// <summary>
-    /// Executes the given <paramref name="action"/> on the thread that owns this control and blocks until it is complete.
-    /// </summary>
-    public static void Invoke(this Control control, Action action)
-    {
-        #region Sanity checks
-        if (control == null) throw new ArgumentNullException(nameof(control));
-        if (action == null) throw new ArgumentNullException(nameof(action));
-        #endregion
-
-        control.Invoke(action);
-    }
-
-    /// <summary>
-    /// Executes the given <paramref name="action"/> on the thread that owns this control and blocks until it is complete.
-    /// </summary>
-    /// <returns>The return value of the <paramref name="action"/>.</returns>
-    public static T Invoke<T>(this Control control, Func<T> action)
-    {
-        #region Sanity checks
-        if (control == null) throw new ArgumentNullException(nameof(control));
-        if (action == null) throw new ArgumentNullException(nameof(action));
-        #endregion
-
-        return (T)control.Invoke(action);
-    }
 #endif
 
     /// <summary>

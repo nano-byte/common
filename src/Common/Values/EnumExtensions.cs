@@ -10,13 +10,25 @@ namespace NanoByte.Common.Values;
 /// </summary>
 public static class EnumExtensions
 {
-    /// <summary>
-    /// Checks whether a flag is set.
-    /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
-    [Pure]
-    public static bool HasFlag(this Enum enumRef, Enum flag)
-        => enumRef.HasFlag(flag);
+    extension(Enum value)
+    {
+        /// <summary>
+        /// Checks whether a flag is set.
+        /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
+        [Pure]
+        public bool HasFlag(Enum flag)
+            => value.HasFlag(flag);
+
+        /// <summary>
+        /// Gets the first <typeparamref name="TAttribute"/> attribute set on the <paramref name="value"/> enum value.
+        /// </summary>
+        [Pure]
+        public TAttribute? GetEnumAttribute<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TAttribute>() where TAttribute : Attribute
+            => value.GetType()
+                    .GetField(value.ToString())
+                   ?.GetCustomAttribute<TAttribute>();
+    }
 
     /// <summary>
     /// Checks whether a flag is set.
@@ -32,13 +44,4 @@ public static class EnumExtensions
     [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag"), SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag")]
     [Pure]
     public static bool HasFlag(this int enumRef, int flag) => (enumRef & flag) == flag;
-
-    /// <summary>
-    /// Gets the first <typeparamref name="TAttribute"/> attribute set on the <paramref name="target"/> enum value.
-    /// </summary>
-    [Pure]
-    public static TAttribute? GetEnumAttribute<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TAttribute>(this Enum target) where TAttribute : Attribute
-        => target.GetType()
-                 .GetField(target.ToString())
-                ?.GetCustomAttribute<TAttribute>();
 }

@@ -65,37 +65,36 @@ public static class BinaryStorage
         }
     }
 
-    /// <summary>
-    /// Saves an object in a binary stream.
-    /// </summary>
     /// <typeparam name="T">The type of object to be saved in a binary stream.</typeparam>
     /// <param name="data">The object to be stored.</param>
-    /// <param name="stream">The binary file to be written.</param>
-    public static void SaveBinary<T>(this T data, Stream stream)
-        where T : notnull
-        => _serializer.Serialize(stream ?? throw new ArgumentNullException(nameof(stream)), data);
-
-    /// <summary>
-    /// Saves an object in a binary file.
-    /// </summary>
-    /// <remarks>This method performs an atomic write operation when possible.</remarks>
-    /// <typeparam name="T">The type of object to be saved in a binary stream.</typeparam>
-    /// <param name="data">The object to be stored.</param>
-    /// <param name="path">The binary file to be written.</param>
-    /// <exception cref="IOException">A problem occurred while writing the file.</exception>
-    /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-    /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
-    public static void SaveBinary<T>(this T data, [Localizable(false)] string path)
-        where T : notnull
+    extension<T>(T data) where T : notnull
     {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        #endregion
+        /// <summary>
+        /// Saves an object in a binary stream.
+        /// </summary>
+        /// <param name="stream">The binary file to be written.</param>
+        public void SaveBinary(Stream stream)
+            => _serializer.Serialize(stream ?? throw new ArgumentNullException(nameof(stream)), data);
 
-        using var atomic = new AtomicWrite(path);
-        using var fileStream = File.Create(atomic.WritePath);
-        SaveBinary(data, fileStream);
-        atomic.Commit();
+        /// <summary>
+        /// Saves an object in a binary file.
+        /// </summary>
+        /// <remarks>This method performs an atomic write operation when possible.</remarks>
+        /// <param name="path">The binary file to be written.</param>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
+        public void SaveBinary([Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
+
+            using var atomic = new AtomicWrite(path);
+            using var fileStream = File.Create(atomic.WritePath);
+            SaveBinary(data, fileStream);
+            atomic.Commit();
+        }
     }
 }
 #endif

@@ -43,21 +43,24 @@ public static class FileUtils
             : path1 == path2;
     }
 
-    /// <summary>
-    /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
-    /// </summary>
-    [Pure]
-    [return: NotNullIfNotNull("value")]
-    public static string? ToNativePath(this string? value)
-        => value?.Replace('/', Path.DirectorySeparatorChar);
+    extension(string? value)
+    {
+        /// <summary>
+        /// Replaces Unix-style directory slashes with <see cref="Path.DirectorySeparatorChar"/>.
+        /// </summary>
+        [Pure]
+        [return: NotNullIfNotNull("value")]
+        public string? ToNativePath()
+            => value?.Replace('/', Path.DirectorySeparatorChar);
 
-    /// <summary>
-    /// Replaces <see cref="Path.DirectorySeparatorChar"/> with Unix-style directory slashes.
-    /// </summary>
-    [Pure]
-    [return: NotNullIfNotNull("value")]
-    public static string? ToUnixPath(this string? value)
-        => value?.Replace(Path.DirectorySeparatorChar, '/');
+        /// <summary>
+        /// Replaces <see cref="Path.DirectorySeparatorChar"/> with Unix-style directory slashes.
+        /// </summary>
+        [Pure]
+        [return: NotNullIfNotNull("value")]
+        public string? ToUnixPath()
+            => value?.Replace(Path.DirectorySeparatorChar, '/');
+    }
 
     /// <summary>
     /// Determines whether a path might escape its parent directory (by being absolute or using ..).
@@ -550,58 +553,61 @@ public static class FileUtils
     }
 
     #region Helpers
-    [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
-    private static void ToggleWriteProtectionUnix(this DirectoryInfo directory, bool enable)
+    extension(DirectoryInfo directory)
     {
-        try
+        [SupportedOSPlatform("linux"), SupportedOSPlatform("freebsd"), SupportedOSPlatform("macos")]
+        private void ToggleWriteProtectionUnix(bool enable)
         {
-            directory.Walk(
-                dir =>
-                {
-                    if (UnixUtils.IsSymlink(dir.FullName)) return; // Cannot set permissions on symlinks
-                    if (enable) UnixUtils.MakeReadOnly(dir.FullName);
-                    else UnixUtils.MakeWritable(dir.FullName);
-                },
-                file =>
-                {
-                    if (UnixUtils.IsSymlink(file.FullName)) return; // Cannot set permissions on symlinks
-                    if (enable) UnixUtils.MakeReadOnly(file.FullName);
-                    else UnixUtils.MakeWritable(file.FullName);
-                });
+            try
+            {
+                directory.Walk(
+                    dir =>
+                    {
+                        if (UnixUtils.IsSymlink(dir.FullName)) return; // Cannot set permissions on symlinks
+                        if (enable) UnixUtils.MakeReadOnly(dir.FullName);
+                        else UnixUtils.MakeWritable(dir.FullName);
+                    },
+                    file =>
+                    {
+                        if (UnixUtils.IsSymlink(file.FullName)) return; // Cannot set permissions on symlinks
+                        if (enable) UnixUtils.MakeReadOnly(file.FullName);
+                        else UnixUtils.MakeWritable(file.FullName);
+                    });
+            }
+            #region Error handling
+            catch (InvalidOperationException ex)
+            {
+                throw new IOException(Resources.UnixSubsystemFail, ex);
+            }
+            catch (IOException ex)
+            {
+                throw new IOException(Resources.UnixSubsystemFail, ex);
+            }
+            #endregion
         }
-        #region Error handling
-        catch (InvalidOperationException ex)
-        {
-            throw new IOException(Resources.UnixSubsystemFail, ex);
-        }
-        catch (IOException ex)
-        {
-            throw new IOException(Resources.UnixSubsystemFail, ex);
-        }
-        #endregion
-    }
 
-    [SupportedOSPlatform("windows")]
-    private static void ToggleWriteProtectionWinNT(this DirectoryInfo directory, bool enable)
-    {
-        try
+        [SupportedOSPlatform("windows")]
+        private void ToggleWriteProtectionWinNT(bool enable)
         {
-            var denyEveryoneWrite = new FileSystemAccessRule(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
+            try
+            {
+                var denyEveryoneWrite = new FileSystemAccessRule(new SecurityIdentifier("S-1-1-0" /*Everyone*/), FileSystemRights.Write | FileSystemRights.Delete | FileSystemRights.DeleteSubdirectoriesAndFiles, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
 
-            var acl = directory.GetAccessControl();
-            acl.CanonicalizeAcl();
-            if (enable) acl.AddAccessRule(denyEveryoneWrite);
-            else acl.RemoveAccessRule(denyEveryoneWrite);
+                var acl = directory.GetAccessControl();
+                acl.CanonicalizeAcl();
+                if (enable) acl.AddAccessRule(denyEveryoneWrite);
+                else acl.RemoveAccessRule(denyEveryoneWrite);
 
-            directory.SetAccessControl(acl);
+                directory.SetAccessControl(acl);
+            }
+            #region Error handling
+            catch (Exception ex) when (ex is ArgumentException or IndexOutOfRangeException or IdentityNotMappedException or InvalidOperationException or NotImplementedException)
+            {
+                // Wrap exception since only certain exception types are allowed
+                throw new IOException($"Failed to {(enable ? "enable" : "disable")} write protection for: {directory.FullName}", ex);
+            }
+            #endregion
         }
-        #region Error handling
-        catch (Exception ex) when (ex is ArgumentException or IndexOutOfRangeException or IdentityNotMappedException or InvalidOperationException or NotImplementedException)
-        {
-            // Wrap exception since only certain exception types are allowed
-            throw new IOException($"Failed to {(enable ? "enable" : "disable")} write protection for: {directory.FullName}", ex);
-        }
-        #endregion
     }
     #endregion
     #endregion

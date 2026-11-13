@@ -211,163 +211,179 @@ public static class RegistryUtils
     #endregion
 
     #region Enumeration
-    /// <summary>
-    /// Retrieves the names of all values within a specific subkey of a registry root.
-    /// </summary>
-    /// <param name="key">The root key to look within.</param>
-    /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
-    /// <returns>A list of value names; an empty array if the key does not exist or is not accessible.</returns>
-    [Pure]
-    public static string[] GetValueNames(this RegistryKey key, [Localizable(false)] string subkeyName)
+    /// <param name="root">The root key to look within.</param>
+    extension(RegistryKey root)
     {
-        #region Sanity checks
-        if (key == null) throw new ArgumentNullException(nameof(key));
-        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
-        #endregion
+        /// <summary>
+        /// Retrieves the names of all values within a specific subkey of a registry root.
+        /// </summary>
+        /// <param name="subkeyName">The path of the subkey below <paramref name="root"/>.</param>
+        /// <returns>A list of value names; an empty array if the key does not exist or is not accessible.</returns>
+        [Pure]
+        public string[] GetValueNames([Localizable(false)] string subkeyName)
+        {
+            #region Sanity checks
+            if (root == null) throw new ArgumentNullException(nameof(root));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+            #endregion
 
-        try
-        {
-            using var subkey = key.TryOpenSubKey(subkeyName);
-            return subkey?.GetValueNames() ?? [];
+            try
+            {
+                using var subkey = root.TryOpenSubKey(subkeyName);
+                return subkey?.GetValueNames() ?? [];
+            }
+            #region Error handling
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
+            {
+                Log.Warn($"Failed to get registry value names from {root.Name}\\{subkeyName}", ex);
+                return [];
+            }
+            #endregion
         }
-        #region Error handling
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
-        {
-            Log.Warn($"Failed to get registry value names from {key.Name}\\{subkeyName}", ex);
-            return [];
-        }
-        #endregion
-    }
 
-    /// <summary>
-    /// Retrieves the names of all subkeys within a specific subkey of a registry root.
-    /// </summary>
-    /// <param name="key">The root key to look within.</param>
-    /// <param name="subkeyName">The path of the subkey below <paramref name="key"/>.</param>
-    /// <returns>A list of key names; an empty array if the key does not exist or is not accessible.</returns>
-    [Pure]
-    public static string[] GetSubKeyNames(this RegistryKey key, [Localizable(false)] string subkeyName)
-    {
-        #region Sanity checks
-        if (key == null) throw new ArgumentNullException(nameof(key));
-        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
-        #endregion
+        /// <summary>
+        /// Retrieves the names of all subkeys within a specific subkey of a registry root.
+        /// </summary>
+        /// <param name="subkeyName">The path of the subkey below <paramref name="root"/>.</param>
+        /// <returns>A list of key names; an empty array if the key does not exist or is not accessible.</returns>
+        [Pure]
+        public string[] GetSubKeyNames([Localizable(false)] string subkeyName)
+        {
+            #region Sanity checks
+            if (root == null) throw new ArgumentNullException(nameof(root));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+            #endregion
 
-        try
-        {
-            using var subkey = key.TryOpenSubKey(subkeyName);
-            return subkey?.GetSubKeyNames() ?? [];
+            try
+            {
+                using var subkey = root.TryOpenSubKey(subkeyName);
+                return subkey?.GetSubKeyNames() ?? [];
+            }
+            #region Error handling
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
+            {
+                Log.Warn($"Failed to get registry sub key names from {root.Name}\\{subkeyName}", ex);
+                return [];
+            }
+            #endregion
         }
-        #region Error handling
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
-        {
-            Log.Warn($"Failed to get registry sub key names from {key.Name}\\{subkeyName}", ex);
-            return [];
-        }
-        #endregion
     }
     #endregion
 
     #region Keys
-    /// <summary>
-    /// Trys to open a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
-    /// </summary>
     /// <param name="key">The key to open a subkey in.</param>
-    /// <param name="subkeyName">The name of the subkey to open.</param>
-    /// <param name="writable"><c>true</c> for write-access to the key.</param>
-    /// <returns>The opened subkey; <c>null</c> if it does not exist.</returns>
-    /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
-    [MustDisposeResource]
-    public static RegistryKey? TryOpenSubKey(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
+    extension(RegistryKey key)
     {
-        #region Sanity checks
-        if (key == null) throw new ArgumentNullException(nameof(key));
-        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
-        #endregion
-
-        try
+        /// <summary>
+        /// Trys to open a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
+        /// </summary>
+        /// <param name="subkeyName">The name of the subkey to open.</param>
+        /// <param name="writable"><c>true</c> for write-access to the key.</param>
+        /// <returns>The opened subkey; <c>null</c> if it does not exist.</returns>
+        /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
+        [MustDisposeResource]
+        public RegistryKey? TryOpenSubKey([Localizable(false)] string subkeyName, bool writable = false)
         {
-            return ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.OpenSubKey(subkeyName, writable));
-        }
-        #region Error handling
-        catch (SecurityException ex)
-        {
-            // Wrap exception since only certain exception types are allowed
-            throw new UnauthorizedAccessException(ex.Message, ex);
-        }
-        #endregion
-    }
+            #region Sanity checks
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+            #endregion
 
-    /// <summary>
-    /// Opens a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
-    /// </summary>
-    /// <param name="key">The key to open a subkey in.</param>
-    /// <param name="subkeyName">The name of the subkey to open.</param>
-    /// <param name="writable"><c>true</c> for write-access to the key.</param>
-    /// <returns>The opened subkey.</returns>
-    /// <exception cref="IOException">The key does not exist.</exception>
-    /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
-    [MustDisposeResource]
-    public static RegistryKey OpenSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName, bool writable = false)
-        => ExceptionUtils.Retry<IOException, RegistryKey?>(() => key.TryOpenSubKey(subkeyName, writable))
-        ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
-
-    /// <summary>
-    /// Creates a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
-    /// </summary>
-    /// <param name="key">The key to create a subkey in.</param>
-    /// <param name="subkeyName">The name of the subkey to create.</param>
-    /// <returns>The newly created subkey.</returns>
-    /// <exception cref="IOException">Failed to create the key.</exception>
-    /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
-    [MustDisposeResource]
-    public static RegistryKey CreateSubKeyChecked(this RegistryKey key, [Localizable(false)] string subkeyName)
-    {
-        #region Sanity checks
-        if (key == null) throw new ArgumentNullException(nameof(key));
-        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
-        #endregion
-
-        try
-        {
-            return ExceptionUtils.Retry<IOException, RegistryKey?>(() =>
-                ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.CreateSubKey(subkeyName)))
-                ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
+            try
+            {
+                return ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.OpenSubKey(subkeyName, writable));
+            }
+            #region Error handling
+            catch (SecurityException ex)
+            {
+                // Wrap exception since only certain exception types are allowed
+                throw new UnauthorizedAccessException(ex.Message, ex);
+            }
+            #endregion
         }
-        #region Error handling
-        catch (SecurityException ex)
-        {
-            // Wrap exception since only certain exception types are allowed
-            throw new UnauthorizedAccessException(ex.Message, ex);
-        }
-        #endregion
-    }
 
-    /// <summary>
-    /// Recursively deletes a registry key. Does not throw exceptions.
-    /// </summary>
-    /// <param name="key">The key to containing the subkey to delete.</param>
-    /// <param name="subkeyName">The name of the subkey to delete.</param>
-    /// <returns><c>true</c> if the key was deleted or didn't exist; <c>false</c> if the deletion failed.</returns>
-    public static bool TryDeleteSubKey(this RegistryKey key, [Localizable(false)] string subkeyName)
-    {
-        #region Sanity checks
-        if (key == null) throw new ArgumentNullException(nameof(key));
-        if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
-        #endregion
+        /// <summary>
+        /// Opens a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
+        /// </summary>
+        /// <param name="subkeyName">The name of the subkey to open.</param>
+        /// <param name="writable"><c>true</c> for write-access to the key.</param>
+        /// <returns>The opened subkey.</returns>
+        /// <exception cref="IOException">The key does not exist.</exception>
+        /// <exception cref="UnauthorizedAccessException">The requested access to the key is not permitted.</exception>
+        [MustDisposeResource]
+        public RegistryKey OpenSubKeyChecked([Localizable(false)] string subkeyName, bool writable = false)
+            => ExceptionUtils.Retry<IOException, RegistryKey?>(() => key.TryOpenSubKey(subkeyName, writable))
+            ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
 
-        try
+        /// <summary>
+        /// Creates a registry key with retries and mapping <see cref="SecurityException"/>s to <see cref="UnauthorizedAccessException"/>s.
+        /// </summary>
+        /// <param name="subkeyName">The name of the subkey to create.</param>
+        /// <returns>The newly created subkey.</returns>
+        /// <exception cref="IOException">Failed to create the key.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the key is not permitted.</exception>
+        [MustDisposeResource]
+        public RegistryKey CreateSubKeyChecked([Localizable(false)] string subkeyName)
         {
-            key.DeleteSubKeyTree(subkeyName, throwOnMissingSubKey: false);
-            return true;
+            #region Sanity checks
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+            #endregion
+
+            try
+            {
+                return ExceptionUtils.Retry<IOException, RegistryKey?>(() =>
+                           ExceptionUtils.Retry<SecurityException, RegistryKey?>(() => key.CreateSubKey(subkeyName)))
+                    ?? throw new IOException(string.Format(Resources.FailedToOpenRegistrySubkey, subkeyName, key));
+            }
+            #region Error handling
+            catch (SecurityException ex)
+            {
+                // Wrap exception since only certain exception types are allowed
+                throw new UnauthorizedAccessException(ex.Message, ex);
+            }
+            #endregion
         }
-        #region Error handling
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
+
+        /// <summary>
+        /// Recursively deletes a registry key. Does not throw exceptions.
+        /// </summary>
+        /// <param name="subkeyName">The name of the subkey to delete.</param>
+        /// <returns><c>true</c> if the key was deleted or didn't exist; <c>false</c> if the deletion failed.</returns>
+        public bool TryDeleteSubKey([Localizable(false)] string subkeyName)
         {
-            Log.Warn($"Failed to delete {key.Name}\\{subkeyName}", ex);
-            return false;
+            #region Sanity checks
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(subkeyName)) throw new ArgumentNullException(nameof(subkeyName));
+            #endregion
+
+            try
+            {
+                key.DeleteSubKeyTree(subkeyName, throwOnMissingSubKey: false);
+                return true;
+            }
+            #region Error handling
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
+            {
+                Log.Warn($"Failed to delete {key.Name}\\{subkeyName}", ex);
+                return false;
+            }
+            #endregion
         }
-        #endregion
+
+        /// <summary>
+        /// Returns the last write time of the registry key.
+        /// </summary>
+        /// <exception cref="IOException">There was an IO problem reading the key.</exception>
+        /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
+        /// <exception cref="Win32Exception">Reading the key information failed.</exception>
+        public DateTime GetLastWriteTime()
+        {
+            uint classLength = 0;
+            var ret = PInvoke.RegQueryInfoKey(key.Handle, default, ref classLength, out _, out _, out _, out _, out _, out _, out _, out var lastWriteTime);
+            if (ret != WIN32_ERROR.NO_ERROR) throw WindowsUtils.BuildException((int)ret);
+            return DateTime.FromFileTime(((long)lastWriteTime.dwHighDateTime << 32) | (uint)lastWriteTime.dwLowDateTime);
+        }
     }
 
     /// <summary>
@@ -403,21 +419,6 @@ public static class RegistryUtils
             x64 = false;
             return Registry.LocalMachine.OpenSubKeyChecked(subkeyName);
         }
-    }
-
-    /// <summary>
-    /// Returns the last write time of the registry key.
-    /// </summary>
-    /// <param name="key">The key to get the last write time for.</param>
-    /// <exception cref="IOException">There was an IO problem reading the key.</exception>
-    /// <exception cref="UnauthorizedAccessException">Read access to the key is not permitted.</exception>
-    /// <exception cref="Win32Exception">Reading the key information failed.</exception>
-    public static DateTime GetLastWriteTime(this RegistryKey key)
-    {
-        uint classLength = 0;
-        var ret = PInvoke.RegQueryInfoKey(key.Handle, default, ref classLength, out _, out _, out _, out _, out _, out _, out _, out var lastWriteTime);
-        if (ret != WIN32_ERROR.NO_ERROR) throw WindowsUtils.BuildException((int)ret);
-        return DateTime.FromFileTime(((long)lastWriteTime.dwHighDateTime << 32) | (uint)lastWriteTime.dwLowDateTime);
     }
     #endregion
 }

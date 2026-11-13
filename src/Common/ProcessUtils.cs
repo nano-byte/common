@@ -15,33 +15,89 @@ namespace NanoByte.Common;
 /// </summary>
 public static class ProcessUtils
 {
-    /// <summary>
-    /// Starts a new <see cref="Process"/> and runs it in parallel with this one. Handles and wraps <see cref="Win32Exception"/>s.
-    /// </summary>
-    /// <returns>The newly launched process.</returns>
-    /// <exception cref="IOException">There was a problem launching the executable.</exception>
-    /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
-    /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
-    /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-    public static Process Start(this ProcessStartInfo startInfo)
+    extension(ProcessStartInfo startInfo)
     {
-        #region Sanity checks
-        if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
-        #endregion
+        /// <summary>
+        /// Starts a new <see cref="Process"/> and runs it in parallel with this one. Handles and wraps <see cref="Win32Exception"/>s.
+        /// </summary>
+        /// <returns>The newly launched process.</returns>
+        /// <exception cref="IOException">There was a problem launching the executable.</exception>
+        /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
+        /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
+        /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
+        public Process Start()
+        {
+            #region Sanity checks
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
+            #endregion
 
-        Log.Debug($"Launching process: {startInfo.ToCommandLine()}");
-        try
-        {
-            return Process.Start(startInfo) ?? throw new IOException(string.Format(Resources.FailedToStart, startInfo.FileName));
-        }
-        catch (Win32Exception ex)
-        {
-            throw ex.NativeErrorCode switch
+            Log.Debug($"Launching process: {startInfo.ToCommandLine()}");
+            try
             {
-                (int)WIN32_ERROR.ERROR_CANCELLED => new OperationCanceledException(),
-                (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED => new NotAdminException(string.Format(Resources.LaunchNeedsAdmin, startInfo.FileName)),
-                _ => new IOException(ex.Message, ex)
-            };
+                return Process.Start(startInfo) ?? throw new IOException(string.Format(Resources.FailedToStart, startInfo.FileName));
+            }
+            catch (Win32Exception ex)
+            {
+                throw ex.NativeErrorCode switch
+                {
+                    (int)WIN32_ERROR.ERROR_CANCELLED => new OperationCanceledException(),
+                    (int)WIN32_ERROR.ERROR_ELEVATION_REQUIRED => new NotAdminException(string.Format(Resources.LaunchNeedsAdmin, startInfo.FileName)),
+                    _ => new IOException(ex.Message, ex)
+                };
+            }
+        }
+
+        /// <summary>
+        /// Starts a new <see cref="Process"/> and waits for it to complete. Handles and wraps <see cref="Win32Exception"/>s.
+        /// </summary>
+        /// <returns>The exit code of the process.</returns>
+        /// <exception cref="IOException">There was a problem launching the executable.</exception>
+        /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
+        /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
+        /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
+        public int Run()
+            => Start(startInfo ?? throw new ArgumentNullException(nameof(startInfo))).WaitForExitCode();
+
+        /// <summary>
+        /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows using UAC.
+        /// </summary>
+        /// <exception cref="PlatformNotSupportedException">The current operating system does not support UAC or it is disabled.</exception>
+        public ProcessStartInfo AsAdmin()
+        {
+            #region Sanity checks
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
+            #endregion
+
+            if (!WindowsUtils.HasUac) throw new PlatformNotSupportedException("The current operating system does not support UAC or it is disabled.");
+
+            startInfo.Verb = "runas";
+            startInfo.UseShellExecute = true;
+            return startInfo;
+        }
+
+        /// <summary>
+        /// Converts a start info into a command-line with proper escaping for the current platform, which <see cref="FromCommandLine"/> can convert back.
+        /// </summary>
+        [Pure]
+        public string ToCommandLine()
+        {
+            #region Sanity checks
+            if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
+            #endregion
+
+            return WindowsUtils.IsWindows
+                ? $"{startInfo.FileName.EscapeArgument()} {startInfo.Arguments}"
+                : ToCommandLinePosix(startInfo);
+        }
+
+        /// <summary>
+        /// Deconstructs a <see cref="ProcessStartInfo"/> like a tuple.
+        /// </summary>
+        [Pure]
+        public void Deconstruct(out string fileName, out string arguments)
+        {
+            fileName = startInfo.FileName;
+            arguments = startInfo.Arguments;
         }
     }
 
@@ -71,40 +127,32 @@ public static class ProcessUtils
     public static Process Start(string fileName, params string[] arguments)
         => Start(fileName, arguments.AsEnumerable());
 
-    /// <summary>
-    /// Starts a new <see cref="Process"/> and waits for it to complete. Handles and wraps <see cref="Win32Exception"/>s.
-    /// </summary>
-    /// <returns>The exit code of the process.</returns>
-    /// <exception cref="IOException">There was a problem launching the executable.</exception>
-    /// <exception cref="FileNotFoundException">The executable file could not be found.</exception>
-    /// <exception cref="NotAdminException">The target process requires elevation but the UAC prompt could not be displayed because <see cref="ProcessStartInfo.UseShellExecute"/> is <c>false</c>.</exception>
-    /// <exception cref="OperationCanceledException">The user was asked for intervention by the OS (e.g. a UAC prompt) and the user cancelled.</exception>
-    public static int Run(this ProcessStartInfo startInfo)
-        => Start(startInfo ?? throw new ArgumentNullException(nameof(startInfo))).WaitForExitCode();
-
-    /// <summary>
-    /// Waits for a running <see cref="Process"/> to complete.
-    /// </summary>
-    /// <returns>The exit code of the process.</returns>
-    public static int WaitForExitCode(this Process process)
+    extension(Process process)
     {
-        #region Sanity checks
-        if (process == null) throw new ArgumentNullException(nameof(process));
-        #endregion
+        /// <summary>
+        /// Waits for a running <see cref="Process"/> to complete.
+        /// </summary>
+        /// <returns>The exit code of the process.</returns>
+        public int WaitForExitCode()
+        {
+            #region Sanity checks
+            if (process == null) throw new ArgumentNullException(nameof(process));
+            #endregion
 
-        process.WaitForExit();
-        Log.Debug($"Process {process.Id} finished with exit code {process.ExitCode}: {process.StartInfo.ToCommandLine()}");
-        return process.ExitCode;
-    }
+            process.WaitForExit();
+            Log.Debug($"Process {process.Id} finished with exit code {process.ExitCode}: {process.StartInfo.ToCommandLine()}");
+            return process.ExitCode;
+        }
 
-    /// <summary>
-    /// Waits for a running <see cref="Process"/> to complete with an exit code of zero.
-    /// </summary>
-    /// <exception cref="ExitCodeException">The process exited with a non-zero <see cref="Process.ExitCode"/>.</exception>
-    public static void WaitForSuccess(this Process process)
-    {
-        if (process.WaitForExitCode() != 0)
-            throw new ExitCodeException(process);
+        /// <summary>
+        /// Waits for a running <see cref="Process"/> to complete with an exit code of zero.
+        /// </summary>
+        /// <exception cref="ExitCodeException">The process exited with a non-zero <see cref="Process.ExitCode"/>.</exception>
+        public void WaitForSuccess()
+        {
+            if (process.WaitForExitCode() != 0)
+                throw new ExitCodeException(process);
+        }
     }
 
     /// <summary>
@@ -158,6 +206,7 @@ public static class ProcessUtils
     }
 
 #if NET
+
     private static string DotNetHostFileName => WindowsUtils.IsWindows ? "dotnet.exe" : "dotnet";
 
     private static string FindDotNetHost()
@@ -172,6 +221,7 @@ public static class ProcessUtils
     }
 #endif
 
+
     /// <summary>
     /// Creates a <see cref="ProcessStartInfo"/> for launching an assembly located in <see cref="Locations.InstallBase"/>.
     /// </summary>
@@ -181,23 +231,6 @@ public static class ProcessUtils
     [Pure]
     public static ProcessStartInfo Assembly(string name, params string[] arguments)
         => Assembly(name, arguments.AsEnumerable());
-
-    /// <summary>
-    /// Modifies a <see cref="ProcessStartInfo"/> to request elevation to Administrator on Windows using UAC.
-    /// </summary>
-    /// <exception cref="PlatformNotSupportedException">The current operating system does not support UAC or it is disabled.</exception>
-    public static ProcessStartInfo AsAdmin(this ProcessStartInfo startInfo)
-    {
-        #region Sanity checks
-        if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
-        #endregion
-
-        if (!WindowsUtils.HasUac) throw new PlatformNotSupportedException("The current operating system does not support UAC or it is disabled.");
-
-        startInfo.Verb = "runas";
-        startInfo.UseShellExecute = true;
-        return startInfo;
-    }
 
     /// <summary>
     /// Workaround for environment variable problems, like variable names that differ only in casing when running on Windows.
@@ -457,21 +490,6 @@ public static class ProcessUtils
         => SplitStartInfoArguments(startInfo.Arguments).Prepend(startInfo.FileName).JoinEscapeArgumentsPosix();
 
     /// <summary>
-    /// Converts a start info into a command-line with proper escaping for the current platform, which <see cref="FromCommandLine"/> can convert back.
-    /// </summary>
-    [Pure]
-    public static string ToCommandLine(this ProcessStartInfo startInfo)
-    {
-        #region Sanity checks
-        if (startInfo == null) throw new ArgumentNullException(nameof(startInfo));
-        #endregion
-
-        return WindowsUtils.IsWindows
-            ? $"{startInfo.FileName.EscapeArgument()} {startInfo.Arguments}"
-            : ToCommandLinePosix(startInfo);
-    }
-
-    /// <summary>
     /// Converts a command-line into a start info using the rules of the current platform.
     /// </summary>
     [Pure]
@@ -492,14 +510,4 @@ public static class ProcessUtils
     [Pure]
     internal static ProcessStartInfo FromCommandLineParts(string[] parts)
         => new(parts.FirstOrDefault() ?? "", parts.Skip(1).JoinEscapeArguments()) {UseShellExecute = false};
-
-    /// <summary>
-    /// Deconstructs a <see cref="ProcessStartInfo"/> like a tuple.
-    /// </summary>
-    [Pure]
-    public static void Deconstruct(this ProcessStartInfo startInfo, out string fileName, out string arguments)
-    {
-        fileName = startInfo.FileName;
-        arguments = startInfo.Arguments;
-    }
 }

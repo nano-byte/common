@@ -211,95 +211,93 @@ public static class JsonStorage
 #endif
     }
 
-    /// <summary>
-    /// Saves an object in an JSON stream.
-    /// </summary>
     /// <typeparam name="T">The type of object to be saved in an JSON stream.</typeparam>
     /// <param name="data">The object to be stored.</param>
-    /// <param name="stream">The stream to write the encoded JSON data to.</param>
-    [RequiresUnreferencedCode(UnreferencedCodeMessage)]
-    [RequiresDynamicCode(DynamicCodeMessage)]
-    public static void SaveJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, Stream stream)
-        where T : notnull
+    extension<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(T data) where T : notnull
     {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// Saves an object in an JSON stream.
+        /// </summary>
+        /// <param name="stream">The stream to write the encoded JSON data to.</param>
+        [RequiresUnreferencedCode(UnreferencedCodeMessage)]
+        [RequiresDynamicCode(DynamicCodeMessage)]
+        public void SaveJson(Stream stream)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
 #if NET
-        // Serialize the runtime type (like Newtonsoft.Json) rather than just the declared type
-        JsonSerializer.Serialize(stream, data, data.GetType(), GetOptions());
+            // Serialize the runtime type (like Newtonsoft.Json) rather than just the declared type
+            JsonSerializer.Serialize(stream, data, data.GetType(), GetOptions());
 #else
-        var writer = new StreamWriter(stream, EncodingUtils.Utf8);
-        new JsonSerializer().Serialize(writer, data);
-        writer.Flush();
+            var writer = new StreamWriter(stream, EncodingUtils.Utf8);
+            new JsonSerializer().Serialize(writer, data);
+            writer.Flush();
 #endif
+        }
+
+        /// <summary>
+        /// Saves an object in an JSON file.
+        /// </summary>
+        /// <remarks>This method performs an atomic write operation when possible.</remarks>
+        /// <param name="path">The path of the file to write.</param>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
+        [RequiresUnreferencedCode(UnreferencedCodeMessage)]
+        [RequiresDynamicCode(DynamicCodeMessage)]
+        public void SaveJson([Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
+
+            using var atomic = new AtomicWrite(path);
+            using (var fileStream = File.Create(atomic.WritePath))
+                data.SaveJson(fileStream);
+            atomic.Commit();
+        }
+
+        /// <summary>
+        /// Returns an object as an JSON string.
+        /// </summary>
+        /// <returns>A string containing the JSON code.</returns>
+        [RequiresUnreferencedCode(UnreferencedCodeMessage)]
+        [RequiresDynamicCode(DynamicCodeMessage)]
+        public string ToJsonString()
+        {
+            using var stream = new MemoryStream();
+            data.SaveJson(stream);
+            return stream.ReadToString();
+        }
     }
 
-    /// <summary>
-    /// Saves an object in an JSON file.
-    /// </summary>
-    /// <remarks>This method performs an atomic write operation when possible.</remarks>
-    /// <typeparam name="T">The type of object to be saved in an JSON stream.</typeparam>
-    /// <param name="data">The object to be stored.</param>
-    /// <param name="path">The path of the file to write.</param>
-    /// <exception cref="IOException">A problem occurred while writing the file.</exception>
-    /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-    /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
-    [RequiresUnreferencedCode(UnreferencedCodeMessage)]
-    [RequiresDynamicCode(DynamicCodeMessage)]
-    public static void SaveJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string path)
-        where T : notnull
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        #endregion
-
-        using var atomic = new AtomicWrite(path);
-        using (var fileStream = File.Create(atomic.WritePath))
-            data.SaveJson(fileStream);
-        atomic.Commit();
-    }
-
-    /// <summary>
-    /// Returns an object as an JSON string.
-    /// </summary>
-    /// <typeparam name="T">The type of object to be saved in an JSON string.</typeparam>
-    /// <param name="data">The object to be stored.</param>
-    /// <returns>A string containing the JSON code.</returns>
-    [RequiresUnreferencedCode(UnreferencedCodeMessage)]
-    [RequiresDynamicCode(DynamicCodeMessage)]
-    public static string ToJsonString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data)
-        where T : notnull
-    {
-        using var stream = new MemoryStream();
-        data.SaveJson(stream);
-        return stream.ReadToString();
-    }
-
-    /// <summary>
-    /// Reparses an object previously deserialized from JSON into a different representation.
-    /// </summary>
-    /// <typeparam name="T">The type of object the data shall be converted into.</typeparam>
     /// <param name="data">The object to be parsed again.</param>
-    /// <returns>The deserialized object.</returns>
-    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
-    [RequiresUnreferencedCode(UnreferencedCodeMessage)]
-    [RequiresDynamicCode(DynamicCodeMessage)]
-    public static T ReparseAsJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this object data)
-        => FromJsonString<T>(data.ToJsonString());
+    extension(object data)
+    {
+        /// <summary>
+        /// Reparses an object previously deserialized from JSON into a different representation.
+        /// </summary>
+        /// <typeparam name="T">The type of object the data shall be converted into.</typeparam>
+        /// <returns>The deserialized object.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is used to determine the type of returned object")]
+        [RequiresUnreferencedCode(UnreferencedCodeMessage)]
+        [RequiresDynamicCode(DynamicCodeMessage)]
+        public T ReparseAsJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+            => FromJsonString<T>(data.ToJsonString());
 
-    /// <summary>
-    /// Reparses an object previously deserialized from JSON into a different representation using an anonymous type as the target.
-    /// </summary>
-    /// <typeparam name="T">The type of object the data shall be converted into.</typeparam>
-    /// <param name="data">The object to be parsed again.</param>
-    /// <param name="anonymousType">An instance of the anonymous type to parse to.</param>
-    /// <returns>The deserialized object.</returns>
-    [RequiresUnreferencedCode(UnreferencedCodeMessage)]
-    [RequiresDynamicCode(DynamicCodeMessage)]
-    public static T ReparseAsJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this object data, T anonymousType)
-        => FromJsonString(data.ToJsonString(), anonymousType);
+        /// <summary>
+        /// Reparses an object previously deserialized from JSON into a different representation using an anonymous type as the target.
+        /// </summary>
+        /// <typeparam name="T">The type of object the data shall be converted into.</typeparam>
+        /// <param name="anonymousType">An instance of the anonymous type to parse to.</param>
+        /// <returns>The deserialized object.</returns>
+        [RequiresUnreferencedCode(UnreferencedCodeMessage)]
+        [RequiresDynamicCode(DynamicCodeMessage)]
+        public T ReparseAsJson<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(T anonymousType)
+            => FromJsonString(data.ToJsonString(), anonymousType);
+    }
 
 #if NET
     /// <summary>
@@ -374,57 +372,53 @@ public static class JsonStorage
         return Deserialize(() => JsonSerializer.Deserialize(data, typeInfo));
     }
 
-    /// <summary>
-    /// Saves an object in a JSON stream using System.Text.Json.
-    /// </summary>
     /// <typeparam name="T">The type of object to be saved in a JSON stream.</typeparam>
     /// <param name="data">The object to be stored.</param>
-    /// <param name="stream">The stream to write the encoded JSON data to.</param>
-    /// <param name="typeInfo">Metadata about the type to convert, usually generated by a <see cref="JsonSerializerContext"/>.</param>
-    public static void SaveJson<T>(this T data, Stream stream, JsonTypeInfo<T> typeInfo)
-        where T : notnull
+    extension<T>(T data) where T : notnull
     {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        if (typeInfo == null) throw new ArgumentNullException(nameof(typeInfo));
-        #endregion
+        /// <summary>
+        /// Saves an object in a JSON stream using System.Text.Json.
+        /// </summary>
+        /// <param name="stream">The stream to write the encoded JSON data to.</param>
+        /// <param name="typeInfo">Metadata about the type to convert, usually generated by a <see cref="JsonSerializerContext"/>.</param>
+        public void SaveJson(Stream stream, JsonTypeInfo<T> typeInfo)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (typeInfo == null) throw new ArgumentNullException(nameof(typeInfo));
+            #endregion
 
-        JsonSerializer.Serialize(stream, data, typeInfo);
+            JsonSerializer.Serialize(stream, data, typeInfo);
+        }
+
+        /// <summary>
+        /// Saves an object in a JSON file using System.Text.Json.
+        /// </summary>
+        /// <param name="path">The path of the file to write.</param>
+        /// <param name="typeInfo">Metadata about the type to convert, usually generated by a <see cref="JsonSerializerContext"/>.</param>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
+        public void SaveJson([Localizable(false)] string path, JsonTypeInfo<T> typeInfo)
+        {
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (typeInfo == null) throw new ArgumentNullException(nameof(typeInfo));
+            #endregion
+
+            using var atomic = new AtomicWrite(path);
+            using (var fileStream = File.Create(atomic.WritePath))
+                data.SaveJson(fileStream, typeInfo);
+            atomic.Commit();
+        }
+
+        /// <summary>
+        /// Returns an object as a JSON string using System.Text.Json.
+        /// </summary>
+        /// <param name="typeInfo">Metadata about the type to convert, usually generated by a <see cref="JsonSerializerContext"/>.</param>
+        /// <returns>A string containing the JSON code.</returns>
+        public string ToJsonString(JsonTypeInfo<T> typeInfo)
+            => JsonSerializer.Serialize(data, typeInfo ?? throw new ArgumentNullException(nameof(typeInfo)));
     }
-
-    /// <summary>
-    /// Saves an object in a JSON file using System.Text.Json.
-    /// </summary>
-    /// <typeparam name="T">The type of object to be saved in a JSON file.</typeparam>
-    /// <param name="data">The object to be stored.</param>
-    /// <param name="path">The path of the file to write.</param>
-    /// <param name="typeInfo">Metadata about the type to convert, usually generated by a <see cref="JsonSerializerContext"/>.</param>
-    /// <exception cref="IOException">A problem occurred while writing the file.</exception>
-    /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-    /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
-    public static void SaveJson<T>(this T data, [Localizable(false)] string path, JsonTypeInfo<T> typeInfo)
-        where T : notnull
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        if (typeInfo == null) throw new ArgumentNullException(nameof(typeInfo));
-        #endregion
-
-        using var atomic = new AtomicWrite(path);
-        using (var fileStream = File.Create(atomic.WritePath))
-            data.SaveJson(fileStream, typeInfo);
-        atomic.Commit();
-    }
-
-    /// <summary>
-    /// Returns an object as a JSON string using System.Text.Json.
-    /// </summary>
-    /// <typeparam name="T">The type of object to be saved in a JSON string.</typeparam>
-    /// <param name="data">The object to be stored.</param>
-    /// <param name="typeInfo">Metadata about the type to convert, usually generated by a <see cref="JsonSerializerContext"/>.</param>
-    /// <returns>A string containing the JSON code.</returns>
-    public static string ToJsonString<T>(this T data, JsonTypeInfo<T> typeInfo)
-        where T : notnull
-        => JsonSerializer.Serialize(data, typeInfo ?? throw new ArgumentNullException(nameof(typeInfo)));
 #endif
 }
