@@ -19,37 +19,40 @@ public static class TimeSpanUtils
         => TimeSpan.FromSeconds(seconds);
 #endif
 
-    /// <summary>
-    /// Multiplies the timespan by a factor.
-    /// </summary>
-    [Pure]
-    public static TimeSpan Multiply(this TimeSpan timeSpan, double factor)
+    extension(TimeSpan timeSpan)
+    {
+        /// <summary>
+        /// Multiplies the timespan by a factor.
+        /// </summary>
+        [Pure]
+        public TimeSpan Multiply(double factor)
 #if NETFRAMEWORK
         => TimeSpan.FromTicks((long)(timeSpan.Ticks * factor));
 #else
-        => timeSpan * factor;
+            => timeSpan * factor;
 #endif
 
-    /// <summary>
-    /// Divides the timespan by a factor.
-    /// </summary>
-    [Pure]
-    public static TimeSpan Divide(this TimeSpan timeSpan, double factor)
+        /// <summary>
+        /// Divides the timespan by a factor.
+        /// </summary>
+        [Pure]
+        public TimeSpan Divide(double factor)
 #if NETFRAMEWORK
-        => TimeSpan.FromTicks((long)(timeSpan.Ticks / factor));
+            => TimeSpan.FromTicks((long)(timeSpan.Ticks / factor));
 #else
-        => timeSpan / factor;
+            => timeSpan / factor;
 #endif
 
-    /// <summary>
-    /// Divides two timespans, returning the quotient.
-    /// </summary>
-    [Pure]
-    public static double Divide(this TimeSpan timeSpan, TimeSpan other)
+        /// <summary>
+        /// Divides two timespans, returning the quotient.
+        /// </summary>
+        [Pure]
+        public double Divide(TimeSpan other)
 #if NETFRAMEWORK
-        => timeSpan.Ticks / (double)other.Ticks;
+            => timeSpan.Ticks / (double)other.Ticks;
 #else
-        => timeSpan / other;
+            => timeSpan / other;
 #endif
+    }
 }
 

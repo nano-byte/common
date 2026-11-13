@@ -15,38 +15,41 @@ namespace NanoByte.Common;
 /// </summary>
 public static class ExceptionUtils
 {
-    /// <summary>
-    /// Recursively follows the <see cref="Exception.InnerException"/>s and combines all their <see cref="Exception.Message"/>s, removing duplicates.
-    /// </summary>
-    [Pure]
-    public static string GetMessageWithInner(this Exception exception)
+    extension(Exception exception)
     {
-        IEnumerable<string> Messages()
+        /// <summary>
+        /// Recursively follows the <see cref="Exception.InnerException"/>s and combines all their <see cref="Exception.Message"/>s, removing duplicates.
+        /// </summary>
+        [Pure]
+        public string GetMessageWithInner()
         {
-            var ex = exception;
-            do
+            IEnumerable<string> Messages()
             {
-                yield return ex.Message;
-                ex = ex.InnerException;
-            } while (ex != null);
+                var ex = exception;
+                do
+                {
+                    yield return ex.Message;
+                    ex = ex.InnerException;
+                } while (ex != null);
+            }
+
+            return StringUtils.Join(Environment.NewLine, Messages().Distinct());
         }
 
-        return StringUtils.Join(Environment.NewLine, Messages().Distinct());
-    }
+        /// <summary>
+        /// Rethrows an <paramref name="exception"/> while preserving its original stack trace.
+        /// </summary>
+        /// <returns>This method never returns. You can "throw" the return value to satisfy the compiler's flow analysis if necessary.</returns>
+        [DoesNotReturn]
+        public Exception Rethrow()
+        {
+            #region Sanity checks
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            #endregion
 
-    /// <summary>
-    /// Rethrows an <paramref name="exception"/> while preserving its original stack trace.
-    /// </summary>
-    /// <returns>This method never returns. You can "throw" the return value to satisfy the compiler's flow analysis if necessary.</returns>
-    [DoesNotReturn]
-    public static Exception Rethrow(this Exception exception)
-    {
-        #region Sanity checks
-        if (exception == null) throw new ArgumentNullException(nameof(exception));
-        #endregion
-
-        ExceptionDispatchInfo.Capture(exception).Throw();
-        return exception;
+            ExceptionDispatchInfo.Capture(exception).Throw();
+            return exception;
+        }
     }
 
     /// <summary>

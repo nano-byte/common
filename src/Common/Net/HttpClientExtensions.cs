@@ -15,27 +15,30 @@ namespace NanoByte.Common.Net;
 /// </summary>
 public static class HttpClientExtensions
 {
-    /// <summary>
-    /// Sends an HTTP request and waits for the result is synchronously.
-    /// </summary>
-    /// <exception cref="HttpRequestException">The request failed due to a network, DNS or certificate issue.</exception>
-    public static HttpResponseMessage Send(this HttpClient client, HttpRequestMessage request, CancellationToken cancellationToken = default)
+    extension(HttpClient client)
+    {
+        /// <summary>
+        /// Sends an HTTP request and waits for the result is synchronously.
+        /// </summary>
+        /// <exception cref="HttpRequestException">The request failed due to a network, DNS or certificate issue.</exception>
+        public HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken = default)
 #if NETFRAMEWORK
-        => ThreadUtils.RunTask(() => client.SendAsync(request, cancellationToken));
+            => ThreadUtils.RunTask(() => client.SendAsync(request, cancellationToken));
 #else
-        => client.Send(request, cancellationToken);
+            => client.Send(request, cancellationToken);
 #endif
 
-    /// <summary>
-    /// Sends an HTTP request and waits for the result is synchronously.
-    /// </summary>
-    /// <exception cref="HttpRequestException">The request failed due to a network, DNS or certificate issue.</exception>
-    public static HttpResponseMessage Send(this HttpClient client, HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Sends an HTTP request and waits for the result is synchronously.
+        /// </summary>
+        /// <exception cref="HttpRequestException">The request failed due to a network, DNS or certificate issue.</exception>
+        public HttpResponseMessage Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken = default)
 #if NETFRAMEWORK
-        => ThreadUtils.RunTask(() => client.SendAsync(request, completionOption, cancellationToken));
+            => ThreadUtils.RunTask(() => client.SendAsync(request, completionOption, cancellationToken));
 #else
-        => client.Send(request, completionOption, cancellationToken);
+            => client.Send(request, completionOption, cancellationToken);
 #endif
+    }
 
     /// <summary>
     /// Reads the content as a stream.
@@ -47,16 +50,19 @@ public static class HttpClientExtensions
         => content.ReadAsStream(cancellationToken);
 #endif
 
-    /// <summary>
-    /// Determines whether an exception is an <see cref="HttpRequestException"/>, even if there are assembly version mismatches.
-    /// </summary>
-    public static bool IsHttpRequestException(this Exception exception)
-        => exception is HttpRequestException || exception.GetType().Name == nameof(HttpRequestException);
+    extension(Exception exception)
+    {
+        /// <summary>
+        /// Determines whether an exception is an <see cref="HttpRequestException"/>, even if there are assembly version mismatches.
+        /// </summary>
+        public bool IsHttpRequestException()
+            => exception is HttpRequestException || exception.GetType().Name == nameof(HttpRequestException);
 
-    /// <summary>
-    /// Unwraps a <see cref="WebException"/> if it is the <see cref="Exception.InnerException"/>; otherwise wraps the exception in a <see cref="WebException"/>.
-    /// </summary>
-    public static WebException AsWebException(this Exception exception)
-        => exception.InnerException as WebException
-        ?? new WebException(exception.Message, exception.InnerException);
+        /// <summary>
+        /// Unwraps a <see cref="WebException"/> if it is the <see cref="Exception.InnerException"/>; otherwise wraps the exception in a <see cref="WebException"/>.
+        /// </summary>
+        public WebException AsWebException()
+            => exception.InnerException as WebException
+            ?? new WebException(exception.Message, exception.InnerException);
+    }
 }

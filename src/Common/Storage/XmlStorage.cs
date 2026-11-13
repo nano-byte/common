@@ -117,59 +117,104 @@ public static class XmlStorage
         return LoadXml<T>(stream);
     }
 
-    /// <summary>
-    /// Saves an object in an XML stream ending with a line break.
-    /// </summary>
+    /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
     /// <param name="data">The object to be stored.</param>
-    /// <param name="stream">The stream to write the encoded XML data to.</param>
-    /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
-    public static void SaveXml<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, Stream stream, [Localizable(false)] string? stylesheet = null) where T : notnull
+    extension<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(T data) where T : notnull
     {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
-
-        var type = data.GetType();
-
-        using var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
+        /// <summary>
+        /// Saves an object in an XML stream ending with a line break.
+        /// </summary>
+        /// <param name="stream">The stream to write the encoded XML data to.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
+        [RequiresDynamicCode("XML serialization requires runtime code generation.")]
+        public void SaveXml(Stream stream, [Localizable(false)] string? stylesheet = null)
         {
-            CloseOutput = false,
-            Encoding = EncodingUtils.Utf8,
-            Indent = true,
-            IndentChars = "  ",
-            NewLineChars = "\n"
-        });
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
-        try
-        {
-            // Add stylesheet processor instruction
-            if (!string.IsNullOrEmpty(stylesheet))
+            var type = data.GetType();
+
+            using var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
             {
-                xmlWriter.WriteProcessingInstruction("xml-stylesheet", $"""
-                    type="text/xsl" href="{stylesheet}"
-                    """);
-            }
+                CloseOutput = false,
+                Encoding = EncodingUtils.Utf8,
+                Indent = true,
+                IndentChars = "  ",
+                NewLineChars = "\n"
+            });
 
-            var serializer = GetSerializer(type);
-            var qualifiedNames = GetQualifiedNames(type);
-            if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
-            else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
-
-            // End file with line break
-            xmlWriter.Flush();
-            if (xmlWriter.Settings != null)
+            try
             {
-                byte[] newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
-                stream.Write(newLine, 0, newLine.Length);
+                // Add stylesheet processor instruction
+                if (!string.IsNullOrEmpty(stylesheet))
+                {
+                    xmlWriter.WriteProcessingInstruction("xml-stylesheet", $"""
+                                                                            type="text/xsl" href="{stylesheet}"
+                                                                            """);
+                }
+
+                var serializer = GetSerializer(type);
+                var qualifiedNames = GetQualifiedNames(type);
+                if (qualifiedNames.Length == 0) serializer.Serialize(xmlWriter, data);
+                else serializer.Serialize(xmlWriter, data, new XmlSerializerNamespaces(qualifiedNames));
+
+                // End file with line break
+                xmlWriter.Flush();
+                if (xmlWriter.Settings != null)
+                {
+                    byte[] newLine = xmlWriter.Settings.Encoding.GetBytes(xmlWriter.Settings.NewLineChars);
+                    stream.Write(newLine, 0, newLine.Length);
+                }
             }
+            #region Error handling
+            catch (InvalidOperationException ex) when (ex.InnerException is IOException or UnauthorizedAccessException)
+            {
+                // Unwrap exceptions commonly thrown by stream/file access
+                throw ex.InnerException.Rethrow();
+            }
+            #endregion
         }
-        #region Error handling
-        catch (InvalidOperationException ex) when (ex.InnerException is IOException or UnauthorizedAccessException)
+
+        /// <summary>
+        /// Saves an object in an XML file ending with a line break.
+        /// </summary>
+        /// <remarks>This method performs an atomic write operation when possible.</remarks>
+        /// <param name="path">The path of the file to write.</param>
+        /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
+        /// <exception cref="IOException">A problem occurred while writing the file.</exception>
+        /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
+        /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
+        [RequiresDynamicCode("XML serialization requires runtime code generation.")]
+        public void SaveXml([Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
         {
-            // Unwrap exceptions commonly thrown by stream/file access
-            throw ex.InnerException.Rethrow();
+            #region Sanity checks
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
+
+            using var atomic = new AtomicWrite(path);
+            using (var fileStream = File.Create(atomic.WritePath))
+                data.SaveXml(fileStream, stylesheet);
+            atomic.Commit();
         }
-        #endregion
+
+        /// <summary>
+        /// Returns an object as an XML string ending with a line break.
+        /// </summary>
+        /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
+        /// <returns>A string containing the XML code.</returns>
+        [RequiresDynamicCode("XML serialization requires runtime code generation.")]
+        public string ToXmlString([Localizable(false)] string? stylesheet = null)
+        {
+            using var stream = new MemoryStream();
+            data.SaveXml(stream, stylesheet);
+            string result = stream.ReadToString();
+
+            // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-disk
+            const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+            const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
+            return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
+        }
     }
 
     private static XmlQualifiedName[] GetQualifiedNames(Type type)
@@ -179,48 +224,6 @@ public static class XmlStorage
         return type.GetCustomAttribute<XmlRootAttribute>() is {} rootAttribute
             ? [..qualifiedNames, new XmlQualifiedName("", rootAttribute.Namespace)]
             : qualifiedNames.ToArray();
-    }
-
-    /// <summary>
-    /// Saves an object in an XML file ending with a line break.
-    /// </summary>
-    /// <remarks>This method performs an atomic write operation when possible.</remarks>
-    /// <typeparam name="T">The type of object to be saved in an XML stream.</typeparam>
-    /// <param name="data">The object to be stored.</param>
-    /// <param name="path">The path of the file to write.</param>
-    /// <param name="stylesheet">The path of an XSL stylesheet for <typeparamref name="T"/>; can be <c>null</c>.</param>
-    /// <exception cref="IOException">A problem occurred while writing the file.</exception>
-    /// <exception cref="UnauthorizedAccessException">Write access to the file is not permitted.</exception>
-    /// <remarks>Uses <see cref="AtomicWrite"/> internally.</remarks>
-    public static void SaveXml<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string path, [Localizable(false)] string? stylesheet = null)
-        where T : notnull
-    {
-        #region Sanity checks
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        #endregion
-
-        using var atomic = new AtomicWrite(path);
-        using (var fileStream = File.Create(atomic.WritePath))
-            data.SaveXml(fileStream, stylesheet);
-        atomic.Commit();
-    }
-
-    /// <summary>
-    /// Returns an object as an XML string ending with a line break.
-    /// </summary>
-    /// <param name="data">The object to be stored.</param>
-    /// <param name="stylesheet">The path of an XSL stylesheet; can be <c>null</c>.</param>
-    /// <returns>A string containing the XML code.</returns>
-    public static string ToXmlString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(this T data, [Localizable(false)] string? stylesheet = null) where T : notnull
-    {
-        using var stream = new MemoryStream();
-        data.SaveXml(stream, stylesheet);
-        string result = stream.ReadToString();
-
-        // Remove encoding="utf-8" because we don't know how the string will actually be encoded on-disk
-        const string prefixWithEncoding = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-        const string prefixWithoutEncoding = "<?xml version=\"1.0\"?>";
-        return prefixWithoutEncoding + result[prefixWithEncoding.Length..];
     }
 
     private static XmlAttributeOverrides? _overrides;

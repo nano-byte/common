@@ -8,30 +8,57 @@ namespace NanoByte.Common.Collections;
 /// </summary>
 public static class ArrayUtils
 {
-    /// <summary>
-    /// Appends an element to an array.
-    /// </summary>
-    [Pure]
-    public static T[] Append<T>(this T[] array, T element)
+    extension<T>(T[] array)
     {
-        #region Sanity checks
-        if (array == null) throw new ArgumentNullException(nameof(array));
-        #endregion
+        /// <summary>
+        /// Appends an element to an array.
+        /// </summary>
+        [Pure]
+        public T[] Append(T element)
+        {
+            #region Sanity checks
+            if (array == null) throw new ArgumentNullException(nameof(array));
+            #endregion
 
-        return [..array, element];
-    }
+            return [.. array, element];
+        }
 
-    /// <summary>
-    /// Prepends an element to an array.
-    /// </summary>
-    [Pure]
-    public static T[] Prepend<T>(this T[] array, T element)
-    {
-        #region Sanity checks
-        if (array == null) throw new ArgumentNullException(nameof(array));
-        #endregion
+        /// <summary>
+        /// Prepends an element to an array.
+        /// </summary>
+        [Pure]
+        public T[] Prepend(T element)
+        {
+            #region Sanity checks
+            if (array == null) throw new ArgumentNullException(nameof(array));
+            #endregion
 
-        return [element, ..array];
+            return [element, .. array];
+        }
+
+        /// <summary>
+        /// Determines whether two arrays contain the same elements in the same order.
+        /// </summary>
+        /// <param name="other">The other array to compare with.</param>
+        /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
+        [Pure]
+        public bool SequencedEquals(T[] other, IEqualityComparer<T>? comparer = null)
+        {
+            #region Sanity checks
+            if (array == null) throw new ArgumentNullException(nameof(array));
+            if (other == null) throw new ArgumentNullException(nameof(other));
+            #endregion
+
+            if (array.Length != other.Length) return false;
+            comparer ??= EqualityComparer<T>.Default;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (!comparer.Equals(array[i], other[i]))
+                    return false;
+            }
+            return true;
+        }
     }
 
     /// <summary>
@@ -67,31 +94,6 @@ public static class ArrayUtils
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// Determines whether two arrays contain the same elements in the same order.
-    /// </summary>
-    /// <param name="first">The first of the two collections to compare.</param>
-    /// <param name="second">The first of the two collections to compare.</param>
-    /// <param name="comparer">Controls how to compare elements; leave <c>null</c> for default comparer.</param>
-    [Pure]
-    public static bool SequencedEquals<T>(this T[] first, T[] second, IEqualityComparer<T>? comparer = null)
-    {
-        #region Sanity checks
-        if (first == null) throw new ArgumentNullException(nameof(first));
-        if (second == null) throw new ArgumentNullException(nameof(second));
-        #endregion
-
-        if (first.Length != second.Length) return false;
-        comparer ??= EqualityComparer<T>.Default;
-
-        for (int i = 0; i < first.Length; i++)
-        {
-            if (!comparer.Equals(first[i], second[i]))
-                return false;
-        }
-        return true;
     }
 
     /// <summary>

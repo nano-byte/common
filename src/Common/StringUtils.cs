@@ -37,74 +37,6 @@ public static class StringUtils
         || s1 == s2;
 
     /// <summary>
-    /// Determines whether a string contains <paramref name="searchFor"/> using case-insensitive comparison.
-    /// </summary>
-    /// <param name="value">The string to search.</param>
-    /// <param name="searchFor">The string to search for in <paramref name="value"/>.</param>
-    [Pure]
-    public static bool ContainsIgnoreCase(this string value, string searchFor)
-        => value.ToUpperInvariant().Contains(searchFor.ToUpperInvariant());
-
-    /// <summary>
-    /// Determines whether a string contains any whitespace characters.
-    /// </summary>
-    [Pure]
-    public static bool ContainsWhitespace(this string value)
-        => value.Any(char.IsWhiteSpace);
-
-    /// <summary>
-    /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes after.
-    /// </summary>
-    [Pure]
-    public static bool StartsWith(this string value, string searchFor, [MaybeNullWhen(false)] out string rest)
-    {
-        if (value.StartsWith(searchFor))
-        {
-            rest = value[searchFor.Length..];
-            return true;
-        }
-        else
-        {
-            rest = null;
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes before.
-    /// </summary>
-    [Pure]
-    public static bool EndsWith(this string value, string searchFor, [MaybeNullWhen(false)] out string rest)
-    {
-        if (value.EndsWith(searchFor))
-        {
-            rest = value[..^searchFor.Length];
-            return true;
-        }
-        else
-        {
-            rest = null;
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Determines whether a string starts with <paramref name="searchFor"/> with case-insensitive comparison.
-    /// </summary>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool StartsWithIgnoreCase(this string value, string searchFor)
-        => value.StartsWith(searchFor, StringComparison.OrdinalIgnoreCase);
-
-    /// <summary>
-    /// Determines whether a string ends with <paramref name="searchFor"/> with case-insensitive comparison.
-    /// </summary>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool EndsWithIgnoreCase(this string value, string searchFor)
-        => value.EndsWith(searchFor, StringComparison.OrdinalIgnoreCase);
-
-    /// <summary>
     /// Removes all occurrences of a specific set of characters from a string.
     /// </summary>
     [Pure]
@@ -115,37 +47,6 @@ public static class StringUtils
             : new string(value.Except(characters.Contains).ToArray());
 
     /// <summary>
-    /// Cuts off strings longer than <paramref name="maxLength"/> and replaces the rest with ellipsis (...).
-    /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string TrimOverflow(this string value, int maxLength)
-        => (value.Length <= maxLength)
-            ? value
-            : value[..maxLength] + "...";
-
-    /// <summary>
-    /// Splits a multiline string to several strings and returns the result as a string array.
-    /// </summary>
-    [Pure]
-    public static IEnumerable<string> SplitMultilineText(this string value)
-    {
-        string[] split1 = value.Split('\n');
-        string[] split2 = value.Split('\r');
-        string[] split = split1.Length >= split2.Length ? split1 : split2;
-
-        foreach (string line in split)
-        {
-            // Never add any \r or \n to the single lines
-            if (line.EndsWithIgnoreCase("\r") || line.EndsWithIgnoreCase("\n"))
-                yield return line[..^1];
-            else if (line.StartsWithIgnoreCase("\n") || line.StartsWithIgnoreCase("\r"))
-                yield return line[1..];
-            else
-                yield return line;
-        }
-    }
-
-    /// <summary>
     /// Combines multiple strings into one, placing a <paramref name="separator"/> between the <paramref name="parts"/>.
     /// </summary>
     /// <param name="separator">The separator characters to place between the <paramref name="parts"/>.</param>
@@ -154,84 +55,226 @@ public static class StringUtils
     public static string Join(string separator, [InstantHandle] IEnumerable<string> parts)
         => string.Join(separator, parts);
 
-    /// <summary>
-    /// Get everything to the left of the first occurrence of a character.
-    /// </summary>
-    [Pure]
-    public static string GetLeftPartAtFirstOccurrence(this string value, char searchFor)
+    /// <param name="value">The string to operate on.</param>
+    extension(string value)
     {
-        int index = value.IndexOf(searchFor);
-        return (index == -1) ? value : value[..index];
-    }
+        /// <summary>
+        /// Determines whether a string contains <paramref name="searchFor"/> using case-insensitive comparison.
+        /// </summary>
+        /// <param name="searchFor">The string to search for in <paramref name="value"/>.</param>
+        [Pure]
+        public bool ContainsIgnoreCase(string searchFor)
+            => value.ToUpperInvariant().Contains(searchFor.ToUpperInvariant());
 
-    /// <summary>
-    /// Get everything to the right of the first occurrence of a character.
-    /// </summary>
-    [Pure]
-    public static string GetRightPartAtFirstOccurrence(this string value, char searchFor)
-    {
-        int index = value.IndexOf(searchFor);
-        return (index == -1) ? "" : value[(index + 1)..];
-    }
+        /// <summary>
+        /// Determines whether a string contains any whitespace characters.
+        /// </summary>
+        [Pure]
+        public bool ContainsWhitespace()
+            => value.Any(char.IsWhiteSpace);
 
-    /// <summary>
-    /// Get everything to the left of the last occurrence of a character.
-    /// </summary>
-    [Pure]
-    public static string GetLeftPartAtLastOccurrence(this string value, char searchFor)
-    {
-        int index = value.LastIndexOf(searchFor);
-        return (index == -1) ? value : value[..index];
-    }
+        /// <summary>
+        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes after.
+        /// </summary>
+        [Pure]
+        public bool StartsWith(string searchFor, [MaybeNullWhen(false)] out string rest)
+        {
+            if (value.StartsWith(searchFor))
+            {
+                rest = value[searchFor.Length..];
+                return true;
+            }
+            else
+            {
+                rest = null;
+                return false;
+            }
+        }
 
-    /// <summary>
-    /// Get everything to the right of the last occurrence of a character.
-    /// </summary>
-    [Pure]
-    public static string GetRightPartAtLastOccurrence(this string value, char searchFor)
-    {
-        int index = value.LastIndexOf(searchFor);
-        return (index == -1) ? value : value[(index + 1)..];
-    }
+        /// <summary>
+        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes before.
+        /// </summary>
+        [Pure]
+        public bool EndsWith(string searchFor, [MaybeNullWhen(false)] out string rest)
+        {
+            if (value.EndsWith(searchFor))
+            {
+                rest = value[..^searchFor.Length];
+                return true;
+            }
+            else
+            {
+                rest = null;
+                return false;
+            }
+        }
 
-    /// <summary>
-    /// Get everything to the left of the first occurrence of a string.
-    /// </summary>
-    [Pure]
-    public static string GetLeftPartAtFirstOccurrence(this string value, string searchFor)
-    {
-        int index = value.IndexOf(searchFor, StringComparison.Ordinal);
-        return (index == -1) ? value : value[..index];
-    }
+        /// <summary>
+        /// Determines whether a string starts with <paramref name="searchFor"/> with case-insensitive comparison.
+        /// </summary>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool StartsWithIgnoreCase(string searchFor)
+            => value.StartsWith(searchFor, StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>
-    /// Get everything to the right of the first occurrence of a string.
-    /// </summary>
-    [Pure]
-    public static string GetRightPartAtFirstOccurrence(this string value, string searchFor)
-    {
-        int index = value.IndexOf(searchFor, StringComparison.Ordinal);
-        return (index == -1) ? "" : value[(index + searchFor.Length)..];
-    }
+        /// <summary>
+        /// Determines whether a string ends with <paramref name="searchFor"/> with case-insensitive comparison.
+        /// </summary>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool EndsWithIgnoreCase(string searchFor)
+            => value.EndsWith(searchFor, StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>
-    /// Get everything to the left of the last occurrence of a string.
-    /// </summary>
-    [Pure]
-    public static string GetLeftPartAtLastOccurrence(this string value, string searchFor)
-    {
-        int index = value.LastIndexOf(searchFor, StringComparison.Ordinal);
-        return (index == -1) ? value : value[..index];
-    }
+        /// <summary>
+        /// Cuts off strings longer than <paramref name="maxLength"/> and replaces the rest with ellipsis (...).
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public string TrimOverflow(int maxLength)
+            => (value.Length <= maxLength)
+                ? value
+                : value[..maxLength] + "...";
 
-    /// <summary>
-    /// Get everything to the right of the last occurrence of a string.
-    /// </summary>
-    [Pure]
-    public static string GetRightPartAtLastOccurrence(this string value, string searchFor)
-    {
-        int index = value.LastIndexOf(searchFor, StringComparison.Ordinal);
-        return (index == -1) ? "" : value[(index + searchFor.Length)..];
+        /// <summary>
+        /// Splits a multiline string to several strings and returns the result as a string array.
+        /// </summary>
+        [Pure]
+        public IEnumerable<string> SplitMultilineText()
+        {
+            string[] split1 = value.Split('\n');
+            string[] split2 = value.Split('\r');
+            string[] split = split1.Length >= split2.Length ? split1 : split2;
+
+            foreach (string line in split)
+            {
+                // Never add any \r or \n to the single lines
+                if (line.EndsWithIgnoreCase("\r") || line.EndsWithIgnoreCase("\n"))
+                    yield return line[..^1];
+                else if (line.StartsWithIgnoreCase("\n") || line.StartsWithIgnoreCase("\r"))
+                    yield return line[1..];
+                else
+                    yield return line;
+            }
+        }
+
+        /// <summary>
+        /// Get everything to the left of the first occurrence of a character.
+        /// </summary>
+        [Pure]
+        public string GetLeftPartAtFirstOccurrence(char searchFor)
+        {
+            int index = value.IndexOf(searchFor);
+            return (index == -1) ? value : value[..index];
+        }
+
+        /// <summary>
+        /// Get everything to the right of the first occurrence of a character.
+        /// </summary>
+        [Pure]
+        public string GetRightPartAtFirstOccurrence(char searchFor)
+        {
+            int index = value.IndexOf(searchFor);
+            return (index == -1) ? "" : value[(index + 1)..];
+        }
+
+        /// <summary>
+        /// Get everything to the left of the last occurrence of a character.
+        /// </summary>
+        [Pure]
+        public string GetLeftPartAtLastOccurrence(char searchFor)
+        {
+            int index = value.LastIndexOf(searchFor);
+            return (index == -1) ? value : value[..index];
+        }
+
+        /// <summary>
+        /// Get everything to the right of the last occurrence of a character.
+        /// </summary>
+        [Pure]
+        public string GetRightPartAtLastOccurrence(char searchFor)
+        {
+            int index = value.LastIndexOf(searchFor);
+            return (index == -1) ? value : value[(index + 1)..];
+        }
+
+        /// <summary>
+        /// Get everything to the left of the first occurrence of a string.
+        /// </summary>
+        [Pure]
+        public string GetLeftPartAtFirstOccurrence(string searchFor)
+        {
+            int index = value.IndexOf(searchFor, StringComparison.Ordinal);
+            return (index == -1) ? value : value[..index];
+        }
+
+        /// <summary>
+        /// Get everything to the right of the first occurrence of a string.
+        /// </summary>
+        [Pure]
+        public string GetRightPartAtFirstOccurrence(string searchFor)
+        {
+            int index = value.IndexOf(searchFor, StringComparison.Ordinal);
+            return (index == -1) ? "" : value[(index + searchFor.Length)..];
+        }
+
+        /// <summary>
+        /// Get everything to the left of the last occurrence of a string.
+        /// </summary>
+        [Pure]
+        public string GetLeftPartAtLastOccurrence(string searchFor)
+        {
+            int index = value.LastIndexOf(searchFor, StringComparison.Ordinal);
+            return (index == -1) ? value : value[..index];
+        }
+
+        /// <summary>
+        /// Get everything to the right of the last occurrence of a string.
+        /// </summary>
+        [Pure]
+        public string GetRightPartAtLastOccurrence(string searchFor)
+        {
+            int index = value.LastIndexOf(searchFor, StringComparison.Ordinal);
+            return (index == -1) ? "" : value[(index + searchFor.Length)..];
+        }
+
+        /// <summary>
+        /// Turns an English singular noun into its plural form using common heuristics.
+        /// </summary>
+        [Pure]
+        public string Pluralize()
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+
+            string lower = value.ToLowerInvariant();
+
+            if (lower.EndsWith("y") && value.Length > 1 && !"aeiou".Contains(lower[^2]))
+                return value[..^1] + "ies";
+
+            if (lower.EndsWith("s") || lower.EndsWith("x") || lower.EndsWith("z")
+             || lower.EndsWith("ch") || lower.EndsWith("sh"))
+                return value + "es";
+
+            return value + "s";
+        }
+
+        /// <summary>
+        /// Returns a hash code for a string that is stable across processes.
+        /// </summary>
+        [Pure]
+        public int GetStableHashCode()
+        {
+#if NETFRAMEWORK
+            return value.GetHashCode();
+#else
+            // .GetHashCode() is not stable across processes outside of .NET Framework
+            uint hash = 2166136261;
+            foreach (char c in value)
+            {
+                hash ^= c;
+                hash *= 16777619;
+            }
+            return unchecked((int)hash);
+#endif
+        }
     }
 
     /// <summary>
@@ -256,27 +299,6 @@ public static class StringUtils
         };
 
     /// <summary>
-    /// Turns an English singular noun into its plural form using common heuristics.
-    /// </summary>
-    /// <param name="value">The singular noun to pluralize.</param>
-    [Pure]
-    public static string Pluralize(this string value)
-    {
-        if (string.IsNullOrEmpty(value)) return value;
-
-        string lower = value.ToLowerInvariant();
-
-        if (lower.EndsWith("y") && value.Length > 1 && !"aeiou".Contains(lower[^2]))
-            return value[..^1] + "ies";
-
-        if (lower.EndsWith("s") || lower.EndsWith("x") || lower.EndsWith("z")
-         || lower.EndsWith("ch") || lower.EndsWith("sh"))
-            return value + "es";
-
-        return value + "s";
-    }
-
-    /// <summary>
     /// Returns a string filled with random human-readable ASCII characters based on a cryptographic random number generator.
     /// </summary>
     /// <param name="length">The length of the string to be generated.</param>
@@ -289,25 +311,5 @@ public static class StringUtils
 
         // Use base64 encoding without '=' padding and with '-' instead of 'l'
         return Convert.ToBase64String(array)[..length].Replace('l', '-');
-    }
-
-    /// <summary>
-    /// Returns a hash code for a string that is stable across processes.
-    /// </summary>
-    [Pure]
-    public static int GetStableHashCode(this string value)
-    {
-#if NETFRAMEWORK
-        return value.GetHashCode();
-#else
-        // .GetHashCode() is not stable across processes outside of .NET Framework
-        uint hash = 2166136261;
-        foreach (char c in value)
-        {
-            hash ^= c;
-            hash *= 16777619;
-        }
-        return unchecked((int)hash);
-#endif
     }
 }

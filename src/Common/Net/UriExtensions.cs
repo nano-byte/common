@@ -8,67 +8,70 @@ namespace NanoByte.Common.Net;
 /// </summary>
 public static class UriExtensions
 {
-    /// <summary>
-    /// An alternate version of <see cref="Uri.ToString"/> that produces results escaped according to RFC 2396.
-    /// </summary>
-    [Pure]
-    public static string ToStringRfc(this Uri uri)
+    extension(Uri uri)
     {
-        #region Sanity checks
-        if (uri == null) throw new ArgumentNullException(nameof(uri));
-        #endregion
+        /// <summary>
+        /// An alternate version of <see cref="Uri.ToString"/> that produces results escaped according to RFC 2396.
+        /// </summary>
+        [Pure]
+        public string ToStringRfc()
+        {
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+            #endregion
 
-        return (uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString)
-              .Replace("%7B", "{").Replace("%7D", "}"); // Leave { and } unescaped for templating support
+            return (uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.OriginalString)
+                  .Replace("%7B", "{").Replace("%7D", "}"); // Leave { and } unescaped for templating support
+        }
+
+        /// <summary>
+        /// Adds a trailing slash to the URI if it does not already have one.
+        /// </summary>
+        [Pure]
+        public Uri EnsureTrailingSlash()
+        {
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+            #endregion
+
+            string escapedString = uri.ToStringRfc();
+            return escapedString.EndsWith("/")
+                ? uri
+                : new Uri($"{escapedString}/", uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
+        }
+
+        /// <summary>
+        /// Reparses a URI (generated via conversion) to ensure it is a valid absolute URI.
+        /// </summary>
+        [Pure]
+        public Uri ReparseAsAbsolute()
+        {
+            #region Sanity checks
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+            #endregion
+
+            return new Uri(uri.OriginalString, UriKind.Absolute);
+        }
+
+        /// <summary>
+        /// Extracts the file-name portion of an URI and ensures it is a valid file-name on the local OS.
+        /// </summary>
+        [Pure]
+        public string GetLocalFileName()
+        {
+            string uriLocalPath = uri.LocalPath.RemoveCharacters(Path.GetInvalidPathChars());
+            return Path.GetFileName(uriLocalPath).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
+                ?? Path.GetFileName(Path.GetDirectoryName(uriLocalPath)!).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
+                ?? "file.ext";
+        }
+
+        /// <summary>
+        /// Removes everything except the schema, host and port from the URI. Returns the original URI if it is not an absolute URI.
+        /// </summary>
+        [Pure]
+        public Uri GetRoot()
+            => uri is {IsAbsoluteUri: true, IsFile: false, IsUnc: false}
+                ? new UriBuilder {Scheme = uri.Scheme, Host = uri.Host, Port = uri.Port}.Uri
+                : uri;
     }
-
-    /// <summary>
-    /// Adds a trailing slash to the URI if it does not already have one.
-    /// </summary>
-    [Pure]
-    public static Uri EnsureTrailingSlash(this Uri uri)
-    {
-        #region Sanity checks
-        if (uri == null) throw new ArgumentNullException(nameof(uri));
-        #endregion
-
-        string escapedString = uri.ToStringRfc();
-        return escapedString.EndsWith("/")
-            ? uri
-            : new Uri($"{escapedString}/", uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative);
-    }
-
-    /// <summary>
-    /// Reparses a URI (generated via conversion) to ensure it is a valid absolute URI.
-    /// </summary>
-    [Pure]
-    public static Uri ReparseAsAbsolute(this Uri uri)
-    {
-        #region Sanity checks
-        if (uri == null) throw new ArgumentNullException(nameof(uri));
-        #endregion
-
-        return new Uri(uri.OriginalString, UriKind.Absolute);
-    }
-
-    /// <summary>
-    /// Extracts the file-name portion of an URI and ensures it is a valid file-name on the local OS.
-    /// </summary>
-    [Pure]
-    public static string GetLocalFileName(this Uri uri)
-    {
-        string uriLocalPath = uri.LocalPath.RemoveCharacters(Path.GetInvalidPathChars());
-        return Path.GetFileName(uriLocalPath).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
-            ?? Path.GetFileName(Path.GetDirectoryName(uriLocalPath)!).RemoveCharacters(Path.GetInvalidFileNameChars()).EmptyAsNull()
-            ?? "file.ext";
-    }
-
-    /// <summary>
-    /// Removes everything except the schema, host and port from the URI. Returns the original URI if it is not an absolute URI.
-    /// </summary>
-    [Pure]
-    public static Uri GetRoot(this Uri uri)
-        => uri is {IsAbsoluteUri: true, IsFile: false, IsUnc: false}
-            ? new UriBuilder {Scheme = uri.Scheme, Host = uri.Host, Port = uri.Port}.Uri
-            : uri;
 }

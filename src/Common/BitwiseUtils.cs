@@ -71,21 +71,23 @@ public static class BitwiseUtils
         }
     }
 
-    /// <summary>
-    /// Extracts the high-order nibble (first 4 bits) of a byte.
-    /// </summary>
     /// <param name="b">The byte to extract from.</param>
-    /// <returns>The high-order nibble as an integer.</returns>
-    [Pure]
-    public static int HiNibble(this byte b) => b >> 4;
+    extension(byte b)
+    {
+        /// <summary>
+        /// Extracts the high-order nibble (first 4 bits) of a byte.
+        /// </summary>
+        /// <returns>The high-order nibble as an integer.</returns>
+        [Pure]
+        public int HiNibble() => b >> 4;
 
-    /// <summary>
-    /// Extracts the low-order nibble (last 4 bits) of a byte.
-    /// </summary>
-    /// <param name="b">The byte to extract from.</param>
-    /// <returns>The low-order nibble as an integer.</returns>
-    [Pure]
-    public static int LoNibble(this byte b) => b & 15;
+        /// <summary>
+        /// Extracts the low-order nibble (last 4 bits) of a byte.
+        /// </summary>
+        /// <returns>The low-order nibble as an integer.</returns>
+        [Pure]
+        public int LoNibble() => b & 15;
+    }
 
     /// <summary>
     /// Combines a high nibble and a low nibble (4 bits) into a single byte.

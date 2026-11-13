@@ -11,280 +11,271 @@ namespace NanoByte.Common.Streams;
 /// </summary>
 public static class StreamUtils
 {
-    /// <summary>
-    /// Reads a fixed number of bytes from a stream starting from the current offset.
-    /// </summary>
     /// <param name="stream">The stream to read from.</param>
-    /// <param name="count">The number of bytes to read.</param>
-    /// <returns>The bytes read from the stream.</returns>
-    /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
-    public static byte[] Read(this Stream stream, int count)
-        => stream.TryRead(count) ?? throw new IOException(string.Format(Resources.UnableToReadBytesFromStream, count));
-
-    /// <summary>
-    /// Reads a sequence of bytes from the stream.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <param name="buffer">The buffer to read the bytes into.</param>
-    /// <returns>The number of bytes read from the stream. May be less than the size of the <paramref name="buffer"/>.</returns>
-    public static int Read(this Stream stream, ArraySegment<byte> buffer)
+    extension(Stream stream)
     {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// Reads a fixed number of bytes from a stream starting from the current offset.
+        /// </summary>
+        /// <param name="count">The number of bytes to read.</param>
+        /// <returns>The bytes read from the stream.</returns>
+        /// <exception cref="IOException">The desired number of bytes could not be read from the stream.</exception>
+        public byte[] Read(int count)
+            => stream.TryRead(count) ?? throw new IOException(string.Format(Resources.UnableToReadBytesFromStream, count));
 
-        if (buffer.Array == null) return 0;
-        return stream.Read(buffer.Array!, buffer.Offset, buffer.Count);
-    }
-
-    /// <summary>
-    /// Reads a fixed number of bytes from a stream starting from the current offset.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <param name="count">The number of bytes to read.</param>
-    /// <returns>The bytes read from the stream; <c>null</c> if the desired number of bytes could not be read from the stream.</returns>
-    public static byte[]? TryRead(this Stream stream, int count)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
-
-        byte[] buffer = new byte[count];
-        int offset = 0;
-
-        while (offset < count)
+        /// <summary>
+        /// Reads a sequence of bytes from the stream.
+        /// </summary>
+        /// <param name="buffer">The buffer to read the bytes into.</param>
+        /// <returns>The number of bytes read from the stream. May be less than the size of the <paramref name="buffer"/>.</returns>
+        public int Read(ArraySegment<byte> buffer)
         {
-            int read = stream.Read(buffer, offset, count - offset);
-            if (read == 0) return null;
-            offset += read;
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            if (buffer.Array == null) return 0;
+            return stream.Read(buffer.Array!, buffer.Offset, buffer.Count);
         }
 
-        return buffer;
-    }
-
-    /// <summary>
-    /// Reads the entire content of a stream. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <returns>The entire content of the stream.</returns>
-    public static ArraySegment<byte> ReadAll(this Stream stream)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
-
-        if (stream.CanSeek) stream.Position = 0;
-
-        long GetLength()
+        /// <summary>
+        /// Reads a fixed number of bytes from a stream starting from the current offset.
+        /// </summary>
+        /// <param name="count">The number of bytes to read.</param>
+        /// <returns>The bytes read from the stream; <c>null</c> if the desired number of bytes could not be read from the stream.</returns>
+        public byte[]? TryRead(int count)
         {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            byte[] buffer = new byte[count];
+            int offset = 0;
+
+            while (offset < count)
+            {
+                int read = stream.Read(buffer, offset, count - offset);
+                if (read == 0) return null;
+                offset += read;
+            }
+
+            return buffer;
+        }
+
+        /// <summary>
+        /// Reads the entire content of a stream. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <returns>The entire content of the stream.</returns>
+        public ArraySegment<byte> ReadAll()
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
+
+            if (stream.CanSeek) stream.Position = 0;
+
+            long GetLength()
+            {
+                try
+                {
+                    return stream.Length > 0 ? stream.Length : 64;
+                }
+                catch (Exception)
+                {
+                    return 64;
+                }
+            }
+
+            byte[] buffer = new byte[GetLength()];
+            int count = 0;
+            while (true)
+            {
+                if (buffer.Length == count)
+                {
+                    byte[] newBuffer = new byte[buffer.Length * 2];
+                    Array.Copy(buffer, newBuffer, count);
+                    buffer = newBuffer;
+                }
+
+                int read = stream.Read(buffer, count, buffer.Length - count);
+                count += read;
+                if (read == 0) return new ArraySegment<byte>(buffer, 0, count);
+            }
+        }
+
+        /// <summary>
+        /// Skips a number of bytes in the stream.
+        /// Uses <see cref="Stream.Seek"/> if supported, <see cref="Stream.Read(byte[],int,int)"/> otherwise.
+        /// </summary>
+        /// <param name="count">The number of bytes to skip.</param>
+        /// <exception cref="IOException">The desired number of bytes could not be skipped in the stream.</exception>
+        public void Skip(int count)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), "Must not be negative.");
+            #endregion
+
+            if (stream.CanSeek)
+            {
+                stream.Seek(count, SeekOrigin.Current);
+                return;
+            }
+
+            var pool = System.Buffers.ArrayPool<byte>.Shared;
+            byte[] buffer = pool.Rent(Math.Min(count, 64));
             try
             {
-                return stream.Length > 0 ? stream.Length : 64;
+                int toRead = count;
+                while (toRead > 0)
+                {
+                    int read = stream.Read(buffer, 0, Math.Min(toRead, buffer.Length));
+                    if (read == 0) throw new IOException(string.Format(Resources.UnableToReadBytesFromStream, count));
+                    toRead -= read;
+                }
             }
-            catch (Exception)
+            finally
             {
-                return 64;
+                pool.Return(buffer);
             }
         }
 
-        byte[] buffer = new byte[GetLength()];
-        int count = 0;
-        while (true)
+        /// <summary>
+        /// Writes the entire contents of an array to a stream.
+        /// </summary>
+        /// <param name="data">The array containing the bytes to write.</param>
+        public void Write(params byte[] data)
         {
-            if (buffer.Length == count)
-            {
-                byte[] newBuffer = new byte[buffer.Length * 2];
-                Array.Copy(buffer, newBuffer, count);
-                buffer = newBuffer;
-            }
-
-            int read = stream.Read(buffer, count, buffer.Length - count);
-            count += read;
-            if (read == 0) return new ArraySegment<byte>(buffer, 0, count);
-        }
-    }
-
-    /// <summary>
-    /// Skips a number of bytes in the stream.
-    /// Uses <see cref="Stream.Seek"/> if supported, <see cref="Stream.Read(byte[],int,int)"/> otherwise.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <param name="count">The number of bytes to skip.</param>
-    /// <exception cref="IOException">The desired number of bytes could not be skipped in the stream.</exception>
-    public static void Skip(this Stream stream, int count)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), "Must not be negative.");
-        #endregion
-
-        if (stream.CanSeek)
-        {
-            stream.Seek(count, SeekOrigin.Current);
-            return;
-        }
-
-        var pool = System.Buffers.ArrayPool<byte>.Shared;
-        byte[] buffer = pool.Rent(Math.Min(count, 64));
-        try
-        {
-            int toRead = count;
-            while (toRead > 0)
-            {
-                int read = stream.Read(buffer, 0, Math.Min(toRead, buffer.Length));
-                if (read == 0) throw new IOException(string.Format(Resources.UnableToReadBytesFromStream, count));
-                toRead -= read;
-            }
-        }
-        finally
-        {
-            pool.Return(buffer);
-        }
-    }
-
-    /// <summary>
-    /// Writes the entire contents of an array to a stream.
-    /// </summary>
-    /// <param name="stream">The stream to write to.</param>
-    /// <param name="data">The array containing the bytes to write.</param>
-    public static void Write(this Stream stream, params byte[] data)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        if (data == null) throw new ArgumentNullException(nameof(data));
-        #endregion
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            #endregion
 
 #if NETFRAMEWORK
         stream.Write(data, 0, data.Length);
 #else
-        stream.Write(data);
+            stream.Write(data);
 #endif
-    }
+        }
 
-    /// <summary>
-    /// Writes the entire contents of a buffer to a stream.
-    /// </summary>
-    /// <param name="stream">The stream to write to.</param>
-    /// <param name="buffer">The buffer containing the bytes to write.</param>
-    public static void Write(this Stream stream, ArraySegment<byte> buffer)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// Writes the entire contents of a buffer to a stream.
+        /// </summary>
+        /// <param name="buffer">The buffer containing the bytes to write.</param>
+        public void Write(ArraySegment<byte> buffer)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
-        if (buffer.Array == null) return;
-        stream.Write(buffer.Array, buffer.Offset, buffer.Count);
-    }
+            if (buffer.Array == null) return;
+            stream.Write(buffer.Array, buffer.Offset, buffer.Count);
+        }
 
-    /// <summary>
-    /// The entire content of a stream as an array. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>. Avoids copying the underlying array if possible.
-    /// </summary>
-    public static byte[] AsArray(this Stream stream)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// The entire content of a stream as an array. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>. Avoids copying the underlying array if possible.
+        /// </summary>
+        public byte[] AsArray()
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
 #if !NET45
-        if (stream is MemoryStream memory && memory.TryGetBuffer(out var segment))
-            return segment.AsArray();
+            if (stream is MemoryStream memory && memory.TryGetBuffer(out var segment))
+                return segment.AsArray();
 #endif
 
-        return stream.ReadAll().AsArray();
-    }
+            return stream.ReadAll().AsArray();
+        }
 
-    /// <summary>
-    /// Copies the entire content of a stream to a <see cref="MemoryStream"/>. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <returns>A new stream. Shares the underlying array with <paramref name="stream"/> if possible.</returns>
-    public static MemoryStream ToMemory(this Stream stream)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// Copies the entire content of a stream to a <see cref="MemoryStream"/>. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <returns>A new stream. Shares the underlying array with <paramref name="stream"/> if possible.</returns>
+        public MemoryStream ToMemory()
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
-        var read = stream.ReadAll();
-        return new MemoryStream(read.Array!, read.Offset, read.Count, true, true);
-    }
+            var read = stream.ReadAll();
+            return new MemoryStream(read.Array!, read.Offset, read.Count, true, true);
+        }
 
-    /// <summary>
-    /// Copies the content of one stream to another. Seeks to the beginning of the <paramref name="source"/> stream if <see cref="Stream.CanSeek"/>.
-    /// </summary>
-    /// <param name="source">The source stream to copy from.</param>
-    /// <param name="destination">The destination stream to copy to.</param>
-    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-    public static void CopyToEx(this Stream source, Stream destination)
-    {
-        #region Sanity checks
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (destination == null) throw new ArgumentNullException(nameof(destination));
-        #endregion
+        /// <summary>
+        /// Copies the content of one stream to another. Seeks to the beginning of the <paramref name="stream"/> stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="destination">The destination stream to copy to.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        public void CopyToEx(Stream destination)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            #endregion
 
-        if (source.CanSeek) source.Position = 0;
+            if (stream.CanSeek) stream.Position = 0;
 
-        source.CopyTo(destination);
-    }
+            stream.CopyTo(destination);
+        }
 
-    /// <summary>
-    /// Writes the entire content of a stream to a file. Seeks to the beginning of the <paramref name="stream"/> if <see cref="Stream.CanSeek"/>.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <param name="path">The path of the file to write.</param>
-    public static void CopyToFile(this Stream stream, [Localizable(false)] string path)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-        #endregion
+        /// <summary>
+        /// Writes the entire content of a stream to a file. Seeks to the beginning of the <paramref name="stream"/> if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="path">The path of the file to write.</param>
+        public void CopyToFile([Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            #endregion
 
-        using var fileStream = File.Create(path);
-        stream.CopyToEx(fileStream);
-    }
+            using var fileStream = File.Create(path);
+            stream.CopyToEx(fileStream);
+        }
 
-    /// <summary>
-    /// Adds seek buffering to a stream unless it already <see cref="Stream.CanSeek"/>.
-    /// </summary>
-    /// <param name="stream">The stream.</param>
-    /// <param name="bufferSize">The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</param>
-    [Pure]
-    public static Stream WithSeekBuffer(this Stream stream, int bufferSize = SeekBufferStream.DefaultBufferSize)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// Adds seek buffering to a stream unless it already <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="bufferSize">The maximum number of bytes to buffer for seeking backwards. Set this to 0 to allow forward but no backward seeking.</param>
+        [Pure]
+        public Stream WithSeekBuffer(int bufferSize = SeekBufferStream.DefaultBufferSize)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
-        return stream.CanSeek ? stream : new SeekBufferStream(stream, bufferSize);
-    }
+            return stream.CanSeek ? stream : new SeekBufferStream(stream, bufferSize);
+        }
 
-    /// <summary>
-    /// Overrides the value returned by <see cref="Stream.Length"/>.
-    /// </summary>
-    /// <param name="stream">The stream.</param>
-    /// <param name="length">The value to return for <see cref="Stream.Length"/>.</param>
-    [Pure]
-    public static Stream WithLength(this Stream stream, long length)
-    {
-        var result = new ProgressStream(stream);
-        result.SetLength(length);
-        return result;
-    }
+        /// <summary>
+        /// Overrides the value returned by <see cref="Stream.Length"/>.
+        /// </summary>
+        /// <param name="length">The value to return for <see cref="Stream.Length"/>.</param>
+        [Pure]
+        public Stream WithLength(long length)
+        {
+            var result = new ProgressStream(stream);
+            result.SetLength(length);
+            return result;
+        }
 
-    /// <summary>
-    /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
-    /// </summary>
-    /// <param name="stream">The stream to read from.</param>
-    /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
-    /// <returns>A entire content of the stream.</returns>
-    public static string ReadToString(this Stream stream, Encoding? encoding = null)
-    {
-        #region Sanity checks
-        if (stream == null) throw new ArgumentNullException(nameof(stream));
-        #endregion
+        /// <summary>
+        /// Reads the entire content of a stream as string data. Seeks to the beginning of the stream if <see cref="Stream.CanSeek"/>.
+        /// </summary>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
+        /// <returns>A entire content of the stream.</returns>
+        public string ReadToString(Encoding? encoding = null)
+        {
+            #region Sanity checks
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            #endregion
 
-        if (stream.CanSeek) stream.Position = 0;
-        var reader = new StreamReader(stream, encoding ?? EncodingUtils.Utf8);
-        return reader.ReadToEnd();
+            if (stream.CanSeek) stream.Position = 0;
+            var reader = new StreamReader(stream, encoding ?? EncodingUtils.Utf8);
+            return reader.ReadToEnd();
+        }
     }
 
     /// <summary>
@@ -319,69 +310,69 @@ public static class StreamUtils
             segment.Count,
             writable);
 
-    /// <summary>
-    /// Returns an embedded resource as a stream.
-    /// </summary>
     /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
-    /// <param name="name">The name of the embedded resource.</param>
-    /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-    [Pure]
-    public static Stream GetEmbeddedStream(this Type type, [Localizable(false)] string name)
+    extension(Type type)
     {
-        #region Sanity checks
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-        #endregion
+        /// <summary>
+        /// Returns an embedded resource as a stream.
+        /// </summary>
+        /// <param name="name">The name of the embedded resource.</param>
+        /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [Pure]
+        public Stream GetEmbeddedStream([Localizable(false)] string name)
+        {
+            #region Sanity checks
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            #endregion
 
-        var stream = Assembly.GetAssembly(type)?.GetManifestResourceStream(type, name);
-        if (stream == null) throw new ArgumentException($"Embedded resource '{name}' not found.", nameof(name));
-        return stream;
-    }
+            var stream = Assembly.GetAssembly(type)?.GetManifestResourceStream(type, name);
+            if (stream == null) throw new ArgumentException($"Embedded resource '{name}' not found.", nameof(name));
+            return stream;
+        }
 
-    /// <summary>
-    /// Returns an embedded resource as a byte array.
-    /// </summary>
-    /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
-    /// <param name="name">The name of the embedded resource.</param>
-    /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-    [Pure]
-    public static byte[] GetEmbeddedBytes(this Type type, [Localizable(false)] string name)
-        => type.GetEmbeddedStream(name).AsArray();
+        /// <summary>
+        /// Returns an embedded resource as a byte array.
+        /// </summary>
+        /// <param name="name">The name of the embedded resource.</param>
+        /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [Pure]
+        public byte[] GetEmbeddedBytes([Localizable(false)] string name)
+            => type.GetEmbeddedStream(name).AsArray();
 
-    /// <summary>
-    /// Returns an embedded resource as a string.
-    /// </summary>
-    /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
-    /// <param name="name">The name of the embedded resource.</param>
-    /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
-    /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-    [Pure]
-    public static string GetEmbeddedString(this Type type, [Localizable(false)] string name, Encoding? encoding = null)
-    {
-        #region Sanity checks
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-        #endregion
+        /// <summary>
+        /// Returns an embedded resource as a string.
+        /// </summary>
+        /// <param name="name">The name of the embedded resource.</param>
+        /// <param name="encoding">The encoding of the string; leave <c>null</c> to default to <see cref="EncodingUtils.Utf8"/>.</param>
+        /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        [Pure]
+        public string GetEmbeddedString([Localizable(false)] string name, Encoding? encoding = null)
+        {
+            #region Sanity checks
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            #endregion
 
-        using var stream = type.GetEmbeddedStream(name);
-        return stream.ReadToString(encoding);
-    }
+            using var stream = type.GetEmbeddedStream(name);
+            return stream.ReadToString(encoding);
+        }
 
-    /// <summary>
-    /// Copies an embedded resource to a file.
-    /// </summary>
-    /// <param name="type">A type that is located in the same namespace as the embedded resource.</param>
-    /// <param name="name">The name of the embedded resource.</param>
-    /// <param name="path">The path of the file to write.</param>
-    /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
-    public static void CopyEmbeddedToFile(this Type type, [Localizable(false)] string name, [Localizable(false)] string path)
-    {
-        #region Sanity checks
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-        #endregion
+        /// <summary>
+        /// Copies an embedded resource to a file.
+        /// </summary>
+        /// <param name="name">The name of the embedded resource.</param>
+        /// <param name="path">The path of the file to write.</param>
+        /// <exception cref="ArgumentException">The specified embedded resource does not exist.</exception>
+        public void CopyEmbeddedToFile([Localizable(false)] string name, [Localizable(false)] string path)
+        {
+            #region Sanity checks
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            #endregion
 
-        using var stream = type.GetEmbeddedStream(name);
-        stream.CopyToFile(path);
+            using var stream = type.GetEmbeddedStream(name);
+            stream.CopyToFile(path);
+        }
     }
 }

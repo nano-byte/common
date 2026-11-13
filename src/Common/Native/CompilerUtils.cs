@@ -16,61 +16,63 @@ namespace NanoByte.Common.Native
     [SupportedOSPlatform("windows")]
     public static class CompilerUtils
     {
-        /// <summary>
-        /// Compiles a string of C# code using the newest C# compiler available on the system.
-        /// </summary>
         /// <param name="compilerParameters">The compiler configuration (e.g. output file path).</param>
-        /// <param name="code">The C# code to compile.</param>
-        /// <param name="manifest">The contents of the Win32 manifest to apply to the output file. Will only be applied if a C# 3.0 or newer compiler is available.</param>
-        public static void CompileCSharp(this CompilerParameters compilerParameters, [Localizable(false)] string code, [Localizable(false)] string manifest)
+        extension(CompilerParameters compilerParameters)
         {
-            #region Sanity checks
-            if (compilerParameters == null) throw new ArgumentNullException(nameof(compilerParameters));
-            if (string.IsNullOrEmpty(code)) throw new ArgumentNullException(nameof(code));
-            if (manifest == null) throw new ArgumentNullException(nameof(manifest));
-            #endregion
-
-            // Make sure the containing directory exists
-            string directory = Paths.Parent(compilerParameters.OutputAssembly);
-            if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
-
-            using (new WorkingDirectory(Environment.SystemDirectory)) // Prevent DLLs in current working directory from influencing build
+            /// <summary>
+            /// Compiles a string of C# code using the newest C# compiler available on the system.
+            /// </summary>
+            /// <param name="code">The C# code to compile.</param>
+            /// <param name="manifest">The contents of the Win32 manifest to apply to the output file. Will only be applied if a C# 3.0 or newer compiler is available.</param>
+            public void CompileCSharp([Localizable(false)] string code, [Localizable(false)] string manifest)
             {
-                using var manifestFile = new TemporaryFile("0install");
-                File.WriteAllText(manifestFile, manifest);
+                #region Sanity checks
+                if (compilerParameters == null) throw new ArgumentNullException(nameof(compilerParameters));
+                if (string.IsNullOrEmpty(code)) throw new ArgumentNullException(nameof(code));
+                if (manifest == null) throw new ArgumentNullException(nameof(manifest));
+                #endregion
 
-                var compiler = GetCSharpCompiler(compilerParameters, manifestFile);
-                var compilerResults = compiler.CompileAssemblyFromSource(compilerParameters, code);
+                // Make sure the containing directory exists
+                string directory = Paths.Parent(compilerParameters.OutputAssembly);
+                if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
-                if (compilerResults.Errors.HasErrors)
+                using (new WorkingDirectory(Environment.SystemDirectory)) // Prevent DLLs in current working directory from influencing build
                 {
-                    var error = compilerResults.Errors[0];
-                    if (error.ErrorNumber == "CS0016") throw new IOException(error.ErrorText);
-                    else throw new InvalidOperationException($"Compilation error {error.ErrorNumber} in line {error.Line}{Environment.NewLine}{error.ErrorText}");
+                    using var manifestFile = new TemporaryFile("0install");
+                    File.WriteAllText(manifestFile, manifest);
+
+                    var compiler = GetCSharpCompiler(compilerParameters, manifestFile);
+                    var compilerResults = compiler.CompileAssemblyFromSource(compilerParameters, code);
+
+                    if (compilerResults.Errors.HasErrors)
+                    {
+                        var error = compilerResults.Errors[0];
+                        if (error.ErrorNumber == "CS0016") throw new IOException(error.ErrorText);
+                        else throw new InvalidOperationException($"Compilation error {error.ErrorNumber} in line {error.Line}{Environment.NewLine}{error.ErrorText}");
+                    }
                 }
             }
-        }
 
-        /// <summary>
-        /// Detects the best possible C# compiler version and instantiates it.
-        /// </summary>
-        /// <param name="compilerParameters">The compiler parameters to be used. Version-specific options may be set.</param>
-        /// <param name="manifestFilePath">The path of an assembly file to be added to compiled binaries if possible.</param>
-        private static CodeDomProvider GetCSharpCompiler(this CompilerParameters compilerParameters, string manifestFilePath)
-        {
-            if (Environment.Version.Major == 4)
-            { // C# 4.0/5.0 (.NET 4.0/4.5)
-                compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
-                return new CSharpCodeProvider();
-            }
-            else if (File.Exists(Paths.Combine(WindowsUtils.GetNetFxDirectory(WindowsUtils.NetFx35), "csc.exe")))
-            { // C# 3.0 (.NET 3.5)
-                compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
-                return NewCSharpCodeProvider(WindowsUtils.NetFx35);
-            }
-            else
-            { // C# 2.0 (.NET 2.0/3.0)
-                return new CSharpCodeProvider();
+            /// <summary>
+            /// Detects the best possible C# compiler version and instantiates it.
+            /// </summary>
+            /// <param name="manifestFilePath">The path of an assembly file to be added to compiled binaries if possible.</param>
+            private CodeDomProvider GetCSharpCompiler(string manifestFilePath)
+            {
+                if (Environment.Version.Major == 4)
+                { // C# 4.0/5.0 (.NET 4.0/4.5)
+                    compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
+                    return new CSharpCodeProvider();
+                }
+                else if (File.Exists(Paths.Combine(WindowsUtils.GetNetFxDirectory(WindowsUtils.NetFx35), "csc.exe")))
+                { // C# 3.0 (.NET 3.5)
+                    compilerParameters.CompilerOptions += $" /win32manifest:{manifestFilePath.EscapeArgument()}";
+                    return NewCSharpCodeProvider(WindowsUtils.NetFx35);
+                }
+                else
+                { // C# 2.0 (.NET 2.0/3.0)
+                    return new CSharpCodeProvider();
+                }
             }
         }
 
