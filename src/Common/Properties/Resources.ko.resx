@@ -183,7 +183,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>컬렉션에 포함될 수 있는 요소의 최대 개수를 초과했습니다.</value>
+    <value>컬렉션에 포함될 수 있는 요소의 최대 수를 초과했습니다.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">

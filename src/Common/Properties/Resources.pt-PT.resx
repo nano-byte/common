@@ -183,7 +183,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="MaxElementsExceeded" xml:space="preserve">
-    <value>Foi excedido o número máximo de elementos na coleção.</value>
+    <value>O número máximo de elementos na coleção foi excedido.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="MissingDispatchAction" xml:space="preserve">
