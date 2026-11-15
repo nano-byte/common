@@ -311,7 +311,7 @@
     <comment>Automatically translated.</comment>
   </data>
   <data name="UndoNotAvailable" xml:space="preserve">
-    <value>在实际命令执行完成之前，无法执行此撤销命令。</value>
+    <value>在实际命令执行之前，无法执行此“撤销”命令。</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="UnixSubsystemFail" xml:space="preserve">

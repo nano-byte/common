@@ -195,7 +195,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="NoSystemConfigInPortableMode" xml:space="preserve">
-    <value>La configurazione del sistema non può essere modificata in modalità portatile.</value>
+    <value>In modalità portatile non è possibile modificare la configurazione del sistema.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>Manually overriden.</comment>
   </data>
   <data name="RedoNotAvailable" xml:space="preserve">
-    <value>Questo comando non può essere eseguito nuovamente finché non è stato eseguito il comando "Annulla".</value>
+    <value>Questo comando non può essere eseguito nuovamente finché non è stato eseguito il comando di annullamento.</value>
     <comment>Automatically translated.</comment>
   </data>
   <data name="ResetValue" xml:space="preserve">
