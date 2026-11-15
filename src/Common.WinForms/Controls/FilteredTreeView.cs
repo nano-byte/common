@@ -75,9 +75,9 @@ public sealed partial class FilteredTreeView<T> : UserControl where T : INamed
         set
         {
             // Keep track of any changes within the collection
-            if (_nodes != null) _nodes.CollectionChanged -= UpdateList;
+            _nodes?.CollectionChanged -= UpdateList;
             _nodes = value;
-            if (_nodes != null) _nodes.CollectionChanged += UpdateList;
+            _nodes?.CollectionChanged += UpdateList;
 
             _checkedEntries.Clear();
             UpdateList();
