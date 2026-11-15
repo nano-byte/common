@@ -48,7 +48,6 @@ public class DropDownButton : Button
 
     private bool _isDropDownMenuVisible;
 
-    private bool _showSplit;
     private bool _skipNextOpen;
     private ContextMenuStrip? _dropDownMenuStrip;
     private PushButtonState _state;
@@ -100,20 +99,20 @@ public class DropDownButton : Button
     [Description("""Splits the button into a conventional "button" part and a "drop down" part rather than treating the entire button as a "drop down" button.""")]
     public bool ShowSplit
     {
-        get => _showSplit;
+        get;
         set
         {
-            if (value != _showSplit)
+            if (value != field)
             {
-                _showSplit = value;
+                field = value;
                 Invalidate();
             }
         }
     }
 
-    private bool IsSplitLineVisible => _showSplit && (State == PushButtonState.Hot || State == PushButtonState.Pressed || !Application.RenderWithVisualStyles);
+    private bool IsSplitLineVisible => ShowSplit && (State == PushButtonState.Hot || State == PushButtonState.Pressed || !Application.RenderWithVisualStyles);
 
-    private Rectangle EffectiveDropDownRectangle => _showSplit ? _dropDownRectangle : ClientRectangle;
+    private Rectangle EffectiveDropDownRectangle => ShowSplit ? _dropDownRectangle : ClientRectangle;
 
     private PushButtonState State
     {
@@ -233,7 +232,7 @@ public class DropDownButton : Button
         {
             SetButtonDrawState();
 
-            if (_showSplit && ClientRectangle.Contains(mevent.Location) && !_dropDownRectangle.Contains(mevent.Location))
+            if (ShowSplit && ClientRectangle.Contains(mevent.Location) && !_dropDownRectangle.Contains(mevent.Location))
                 OnClick(new EventArgs());
         }
     }
@@ -269,10 +268,10 @@ public class DropDownButton : Button
         var focusRect =
             new Rectangle(internalBorder - 1,
                 internalBorder - 1,
-                bounds.Width - (_showSplit ? _dropDownRectangle.Width : 2) - internalBorder,
+                bounds.Width - (ShowSplit ? _dropDownRectangle.Width : 2) - internalBorder,
                 bounds.Height - (internalBorder * 2) + 2);
 
-        if (RightToLeft == RightToLeft.Yes && _showSplit)
+        if (RightToLeft == RightToLeft.Yes && ShowSplit)
         {
             _dropDownRectangle.X = bounds.Left + 1;
             focusRect.X = _dropDownRectangle.Right;
