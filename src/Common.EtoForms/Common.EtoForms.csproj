@@ -26,6 +26,11 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
 
+  <!-- Embedded resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\Common.WinForms\Resources\Error.png" LogicalName="NanoByte.Common.EtoControls.Error.png" />
+  </ItemGroup>
+
   <!-- Global usings -->
   <ItemGroup>
     <Using Include="Eto.Forms" />
