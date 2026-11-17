@@ -35,7 +35,7 @@ public sealed partial class InputBox : Form
         using var inputBox = new InputBox
         {
             Text = title,
-            labelPrompt = {Text = prompt.Replace("\n", Environment.NewLine)},
+            labelPrompt = {Text = prompt.ToNativeNewLine()},
             textInput = {Text = defaultText, UseSystemPasswordChar = password},
             ShowInTaskbar = (owner == null)
         };

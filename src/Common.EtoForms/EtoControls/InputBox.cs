@@ -48,7 +48,7 @@ public static class InputBox
                 Orientation = Orientation.Vertical,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
                 Spacing = 8,
-                Items = {new Label {Text = prompt.Replace("\n", Environment.NewLine)}, input}
+                Items = {new Label {Text = prompt.ToNativeNewLine()}, input}
             }
         };
 

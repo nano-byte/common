@@ -34,7 +34,7 @@ public sealed partial class OutputBox : Form
         {
             Text = Application.ProductName,
             labelTitle = {Text = title},
-            textMessage = {Text = message.Replace("\n", Environment.NewLine)},
+            textMessage = {Text = message.ToNativeNewLine().TrimEnd(Environment.NewLine.ToCharArray())},
             ShowInTaskbar = owner == null
         };
         // ReSharper disable once AccessToDisposedClosure

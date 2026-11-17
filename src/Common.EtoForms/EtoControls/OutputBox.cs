@@ -24,7 +24,7 @@ public static class OutputBox
         var textArea = new TextArea
         {
             ReadOnly = true,
-            Text = message.Replace("\r\n", "\n").Replace("\n", Environment.NewLine)
+            Text = message.ToNativeNewLine().TrimEnd(Environment.NewLine.ToCharArray())
         };
         textArea.Load += delegate { textArea.CaretIndex = 0; }; // Scroll to top
 

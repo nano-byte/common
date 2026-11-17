@@ -65,7 +65,7 @@ public abstract class EtoTaskHandlerBase : TaskHandlerBase
         if (message == null) throw new ArgumentNullException(nameof(message));
         #endregion
 
-        Application.Instance.Invoke(() => OutputBox.Show(null, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
+        Application.Instance.Invoke(() => OutputBox.Show(null, title, message));
     }
 
     /// <inheritdoc/>

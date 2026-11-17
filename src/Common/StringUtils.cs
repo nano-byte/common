@@ -237,6 +237,18 @@ public static class StringUtils
         }
 
         /// <summary>
+        /// Converts a string from Windows (CRLF) to Unix (LF) newline format.
+        /// </summary>
+        [Pure]
+        public string ToUnixNewLine() => value.Replace("\r\n", "\n");
+
+        /// <summary>
+        /// Converts a string from Windows (CRLF) or Unix (LF) newline format to the native newline format of the current operating system.
+        /// </summary>
+        [Pure]
+        public string ToNativeNewLine() => value.ToUnixNewLine().Replace("\n", Environment.NewLine);
+
+        /// <summary>
         /// Turns an English singular noun into its plural form using common heuristics.
         /// </summary>
         [Pure]

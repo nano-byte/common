@@ -77,7 +77,7 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
         if (message == null) throw new ArgumentNullException(nameof(message));
         #endregion
 
-        ThreadUtils.RunSta(() => OutputBox.Show(null, title, message.TrimEnd(Environment.NewLine.ToCharArray())));
+        ThreadUtils.RunSta(() => OutputBox.Show(null, title, message));
     }
 
     /// <inheritdoc/>
