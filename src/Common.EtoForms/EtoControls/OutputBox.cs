@@ -31,7 +31,8 @@ public static class OutputBox
             {
                 ReadOnly = true,
                 Text = message.Replace("\n", Environment.NewLine)
-            }
+            },
+            ShowInTaskbar = owner == null
         };
 
         var closeButton = new Button {Text = Resources.OK};

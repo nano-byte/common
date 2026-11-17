@@ -47,7 +47,8 @@ public static class ErrorBox
             {
                 Title = Application.Instance.Name,
                 Padding = 10,
-                Content = layout
+                Content = layout,
+                ShowInTaskbar = owner == null
             };
             if (log is {IsEmpty: false}) dialog.Size = new(500, 400);
             else dialog.FitContentHeight(500);

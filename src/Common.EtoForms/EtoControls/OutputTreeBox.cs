@@ -31,6 +31,7 @@ public static class OutputTreeBox
             Padding = 10,
             Width = 400,
             Height = 400,
+            ShowInTaskbar = owner == null,
             Content = new FilteredTreeView<T>
             {
                 CheckBoxes = false,

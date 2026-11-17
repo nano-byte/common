@@ -36,7 +36,8 @@ public static class OutputGridBox
             Title = title,
             Width = 600,
             Height = 400,
-            Content = grid
+            Content = grid,
+            ShowInTaskbar = owner == null
         };
 
         var closeButton = new Button {Text = Resources.OK};
