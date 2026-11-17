@@ -21,17 +21,20 @@ public static class OutputBox
         if (message == null) throw new ArgumentNullException(nameof(message));
         #endregion
 
+        var textArea = new TextArea
+        {
+            ReadOnly = true,
+            Text = message.Replace("\r\n", "\n").Replace("\n", Environment.NewLine)
+        };
+        textArea.Load += delegate { textArea.CaretIndex = 0; }; // Scroll to top
+
         using var dialog = new Dialog
         {
             Title = title,
             Padding = 10,
             Width = 600,
             Height = 400,
-            Content = new TextArea
-            {
-                ReadOnly = true,
-                Text = message.Replace("\n", Environment.NewLine)
-            },
+            Content = textArea,
             ShowInTaskbar = owner == null
         };
 
