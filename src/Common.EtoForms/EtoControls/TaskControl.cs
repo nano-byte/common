@@ -10,7 +10,7 @@ namespace NanoByte.Common.EtoControls;
 /// </summary>
 public sealed class TaskControl : Panel, IProgress<TaskSnapshot>
 {
-    private readonly Label _operationLabel = new();
+    private readonly Label _operationLabel = new() {Wrap = WrapMode.None};
     private readonly TaskProgressBar _progressBar = new();
     private readonly TaskLabel _progressLabel = new();
 
@@ -20,22 +20,71 @@ public sealed class TaskControl : Panel, IProgress<TaskSnapshot>
     [Description("The name of the task being tracked.")]
     public string TaskName
     {
-        get => _operationLabel.Text;
-        set => _operationLabel.Text = value;
-    }
+        get;
+        set
+        {
+            field = value ?? "";
+            _operationLabel.ToolTip = field;
+            UpdateOperationLabel();
+        }
+    } = "";
 
     /// <summary>
     /// Creates a new task tracking control.
     /// </summary>
     public TaskControl()
     {
-        Content = new StackLayout
+        // Fixed minimal size, so long task names are cut off instead of widening the surrounding layout
+        _operationLabel.Size = new(1, (int)Math.Ceiling(_operationLabel.Font.LineHeight) + 2);
+        _operationLabel.LoadComplete += delegate { UpdateOperationLabel(); };
+        _operationLabel.SizeChanged += delegate { UpdateOperationLabelDeferred(); };
+
+        Content = new TableLayout
         {
-            Orientation = Orientation.Vertical,
-            HorizontalContentAlignment = HorizontalAlignment.Stretch,
-            Spacing = 3,
-            Items = {_operationLabel, _progressBar, _progressLabel}
+            Spacing = new(0, 3),
+            Rows = {_operationLabel, _progressBar, _progressLabel, null}
         };
+    }
+
+    private bool _updatePending;
+
+    /// <summary>
+    /// Calls <see cref="UpdateOperationLabel"/> once the current layout pass is complete.
+    /// </summary>
+    private void UpdateOperationLabelDeferred()
+    {
+        if (_updatePending) return;
+        _updatePending = true;
+        Application.Instance.AsyncInvoke(() =>
+        {
+            _updatePending = false;
+            UpdateOperationLabel();
+        });
+    }
+
+    /// <summary>
+    /// Displays <see cref="TaskName"/>, shortened with "…" if it does not fit the available width.
+    /// </summary>
+    private void UpdateOperationLabel()
+    {
+        string text = TaskName;
+        float width = _operationLabel.Width - 2; // Small margin to account for differences between text measuring and rendering
+        var font = _operationLabel.Font;
+
+        if (_operationLabel.Loaded && width > 0 && text.Length != 0 && font.MeasureString(text).Width > width)
+        {
+            // Binary search for the longest prefix that fits together with the ellipsis
+            int min = 0, max = text.Length;
+            while (min < max)
+            {
+                int mid = (min + max + 1) / 2;
+                if (font.MeasureString(text.Substring(0, mid) + "…").Width <= width) min = mid;
+                else max = mid - 1;
+            }
+            text = text.Substring(0, min) + "…";
+        }
+
+        if (_operationLabel.Text != text) _operationLabel.Text = text;
     }
 
     /// <inheritdoc/>
