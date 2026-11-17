@@ -45,7 +45,7 @@ public static class ErrorBox
 
             using var dialog = new Dialog
             {
-                Title = Application.Instance.Name,
+                Title = AppName,
                 Padding = 10,
                 Content = layout,
                 ShowInTaskbar = owner == null
@@ -74,4 +74,12 @@ public static class ErrorBox
         }
         #endregion
     }
+
+    /// <summary>
+    /// The name of the application, for use as a window title.
+    /// </summary>
+    private static string? AppName
+        => string.IsNullOrEmpty(Application.Instance.Name)
+            ? AppInfo.Current.ProductName ?? AppInfo.Current.Name
+            : Application.Instance.Name;
 }
