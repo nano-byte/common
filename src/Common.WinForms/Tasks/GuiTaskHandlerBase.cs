@@ -36,6 +36,7 @@ public abstract class GuiTaskHandlerBase : TaskHandlerBase
         };
 
     /// <inheritdoc/>
+    [SuppressMessage("WinForms", "WFO2000", Justification = "Intentionally creates a new instance per task so changes to IsInteractive and .netrc are picked up")]
     protected override ICredentialProvider CredentialProvider
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
