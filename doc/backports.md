@@ -10,7 +10,11 @@ Newer versions of .NET often introduce features that can be backported to earlie
 
 [Nullable reference types](https://docs.microsoft.com/dotnet/csharp/nullable-references), [Ranges](https://docs.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges) and [Records](https://docs.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-9.0/records) were introduced in .NET (Core) and are backported to .NET Framework.
 
-[Required members](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-11.0/required-members) were introduced in .NET 7.0 and are backported to .NET 6.0 and .NET Framework.
+[Required members](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/csharp-11.0/required-members) were introduced in .NET 7.0 and are backported to .NET Framework.
+
+[Unions](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/unions) ([UnionAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.unionattribute) and [IUnion](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.iunion)) were introduced in .NET 11.0 and are backported to .NET 10.0 and .NET Framework.
+
+[Closed class hierarchies](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/closed-hierarchies) ([IsClosedTypeAttribute](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.isclosedtypeattribute)) were introduced in .NET 11.0 and are backported to .NET 10.0 and .NET Framework.
 
 ## Utils
 
