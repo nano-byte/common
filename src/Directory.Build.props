@@ -11,11 +11,14 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)sgKey.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks><!-- Required by CsWin32 -->
     <NoWarn>$(NoWarn);1591;NU1901;NU1902;NU1903;NU1904</NoWarn><!-- Missing XML comments + NuGet advisories -->
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)'=='Full'">
+    <!-- Only full MSBuild produces complete packages suitable for publishing -->
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <!-- NuGet Metadata -->
