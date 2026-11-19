@@ -84,4 +84,4 @@ jobs:
           user: ${{secrets.NUGET_USER}}
       - name: Publish packages (NuGet.org)
         if: runner.os == 'Windows' && github.ref_type == 'tag'
-        run: dotnet nuget push artifacts\Release\*.nupkg --source nuget.org --api-key ${{steps.nuget_login.outputs.NUGET_API_KEY}}
+        run: dotnet nuget push artifacts\Release\*.nupkg --source nuget.org --api-key ${{steps.nuget_login.outputs.NUGET_API_KEY}} --skip-duplicate
