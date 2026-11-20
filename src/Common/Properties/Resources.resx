@@ -121,7 +121,7 @@
     <value>Back</value>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>{0:0.00} bytes</value>
+    <value>{0} bytes</value>
   </data>
   <data name="BytesGibi" xml:space="preserve">
     <value>{0:0.00} GiB</value>
