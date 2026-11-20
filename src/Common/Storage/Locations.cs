@@ -24,8 +24,8 @@ public static partial class Locations
     /// The directory the application binaries are located in.
     /// </summary>
     /// <remarks>
-    /// Uses the location of the NanoByte.Common DLL, not the calling EXE. Walks up one directory level if placed within a dir called "lib".
-    /// Works with ngened and shadow copied assemblies. Does not work with GACed assemblies.
+    ///   <para>On .NET this is instead the directory containing the application's main assembly (and native launcher, if any). For single-file apps this is the directory containing the executable, or the extraction directory if all content is self-extracted.</para>
+    ///   <para>On .NET Framework this is the location of the NanoByte.Common DLL, not the calling EXE. Works with ngened and shadow copied assemblies. Does not work with GACed assemblies.</para>
     /// </remarks>
     public static string InstallBase { get; private set; } = GetInstallBase();
 
