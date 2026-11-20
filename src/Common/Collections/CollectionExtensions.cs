@@ -30,25 +30,6 @@ public static class CollectionExtensions
         }
 
         /// <summary>
-        /// Adds multiple elements to the collection.
-        /// </summary>
-        public void Add<TElement>([InstantHandle] IEnumerable<TElement> elements)
-            where TElement : T
-        {
-            #region Sanity checks
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (elements == null) throw new ArgumentNullException(nameof(elements));
-            #endregion
-
-            if (collection is List<TElement> list) list.AddRange(elements);
-            else
-            {
-                foreach (var element in elements)
-                    collection.Add(element);
-            }
-        }
-
-        /// <summary>
         /// Removes multiple elements from the collection.
         /// </summary>
         /// <returns><c>true</c> if any elements where removed.</returns>
@@ -85,6 +66,26 @@ public static class CollectionExtensions
                 removedAny = true;
             }
             return removedAny;
+        }
+    }
+
+    // Not in extension block, as a workaround for https://github.com/dotnet/roslyn/issues/86547
+    /// <summary>
+    /// Adds multiple elements to the collection.
+    /// </summary>
+    public static void Add<T, TElement>(this ICollection<T> collection, [InstantHandle] IEnumerable<TElement> elements)
+        where TElement : T
+    {
+        #region Sanity checks
+        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (elements == null) throw new ArgumentNullException(nameof(elements));
+        #endregion
+
+        if (collection is List<TElement> list) list.AddRange(elements);
+        else
+        {
+            foreach (var element in elements)
+                collection.Add(element);
         }
     }
 }
