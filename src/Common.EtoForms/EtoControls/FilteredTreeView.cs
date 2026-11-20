@@ -160,6 +160,7 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
 
         Content = new TableLayout
         {
+            Spacing = new(0, 2),
             Rows =
             {
                 new TableRow(_searchBox),
