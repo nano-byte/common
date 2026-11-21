@@ -37,7 +37,16 @@ public class LogTest
             Log.Handler -= Handler;
         }
     }
+}
 
+/// <summary>
+/// Contains unit tests for <see cref="Log.ReadLastErrorFrom"/>.
+/// </summary>
+/// <remarks>Not run in parallel with other tests, since they might log errors to the same log file in between.</remarks>
+[CollectionDefinition(nameof(LogReadLastErrorFromTest), DisableParallelization = true)]
+[Collection(nameof(LogReadLastErrorFromTest))]
+public class LogReadLastErrorFromTest
+{
     [Fact]
     public void TestReadLastErrorFrom()
     {
