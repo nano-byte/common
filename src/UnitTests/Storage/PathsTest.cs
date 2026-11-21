@@ -61,6 +61,71 @@ public class PathsTest
     }
 #endif
 
+    [Theory]
+    [InlineData('/')]
+    [InlineData('\\')]
+    [InlineData(':')]
+    [InlineData('*')]
+    [InlineData('|')]
+    [InlineData('\n')]
+    [InlineData('\0')]
+    public void TestIsNonPortableFileNameChar(char c)
+        => Paths.IsNonPortableFileNameChar(c).Should().BeTrue();
+
+    [Theory]
+    [InlineData('a')]
+    [InlineData('-')]
+    [InlineData('.')]
+    [InlineData(' ')]
+    [InlineData('é')]
+    public void TestIsValidFileNameChar(char c)
+        => Paths.IsNonPortableFileNameChar(c).Should().BeFalse();
+
+    [Theory]
+    [InlineData("NUL")]
+    [InlineData("con")]
+    [InlineData("COM1.log")]
+    [InlineData("lpt²")]
+    [InlineData("AUX .txt")]
+    public void TestIsReservedDeviceName(string fileName)
+        => Paths.IsReservedDeviceName(fileName).Should().BeTrue();
+
+    [Theory]
+    [InlineData("console")]
+    [InlineData("auxiliary.c")]
+    [InlineData("COM10")]
+    [InlineData("my-nul")]
+    public void TestIsNotReservedDeviceName(string fileName)
+        => Paths.IsReservedDeviceName(fileName).Should().BeFalse();
+
+    [Theory]
+    [InlineData("hello")]
+    [InlineData("my file.txt")]
+    [InlineData("café")]
+    [InlineData(".hidden")]
+    [InlineData("-x")]
+    [InlineData("a=b;c'd")]
+    [InlineData("console")]
+    public void TestIsPortableFileName(string fileName)
+        => Paths.IsPortableFileName(fileName).Should().BeTrue();
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(".")]
+    [InlineData("..")]
+    [InlineData("foo.")]
+    [InlineData("foo ")]
+    [InlineData("a/b")]
+    [InlineData(@"a\b")]
+    [InlineData("a:b")]
+    [InlineData("a\"b")]
+    [InlineData("a\nb")]
+    [InlineData("NUL")]
+    [InlineData("COM1.txt")]
+    public void TestIsNotPortableFileName(string? fileName)
+        => Paths.IsPortableFileName(fileName).Should().BeFalse();
+
     [Fact]
     public void TestGetFilesAbsolute()
     {

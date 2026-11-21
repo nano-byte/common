@@ -107,6 +107,39 @@ public static class Paths
     }
 
     /// <summary>
+    /// Indicates whether <paramref name="c"/> cannot be used in file names on at least one common platform (Windows, Linux, macOS).
+    /// </summary>
+    /// <remarks>Unlike <see cref="Path.GetInvalidFileNameChars"/> this does not depend on the current platform.</remarks>
+    public static bool IsNonPortableFileNameChar(char c)
+        => c is '/' or '\\' or ':' or '"' or '*' or '?' or '<' or '>' or '|' || char.IsControl(c);
+
+    private static readonly HashSet<string> _windowsDeviceNames = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$", "CLOCK$",
+        "COM0", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "COM¹", "COM²", "COM³",
+        "LPT0", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9", "LPT¹", "LPT²", "LPT³"
+    };
+
+    /// <summary>
+    /// Indicates whether <paramref name="fileName"/> refers to a device on Windows (e.g., <c>NUL</c> or <c>COM1</c>).
+    /// </summary>
+    /// <param name="fileName">A file name without any directory part.</param>
+    /// <remarks>Performs the same checks when run on non-Windows platforms.</remarks>
+    public static bool IsReservedDeviceName(string? fileName)
+        => fileName != null
+        && _windowsDeviceNames.Contains(fileName.GetLeftPartAtFirstOccurrence('.').TrimEnd(' '));
+
+    /// <summary>
+    /// Indicates whether <paramref name="fileName"/> can be used as a file name on all common platforms (Windows, Linux, macOS).
+    /// </summary>
+    /// <param name="fileName">A file name without any directory part.</param>
+    public static bool IsPortableFileName([NotNullWhen(true)] string? fileName)
+        => !string.IsNullOrEmpty(fileName)
+        && fileName[^1] is not ('.' or ' ')
+        && !fileName.Any(IsNonPortableFileNameChar)
+        && !IsReservedDeviceName(fileName);
+
+    /// <summary>
     /// Resolves paths to absolute file paths with wildcard support.
     /// </summary>
     /// <param name="paths">The paths to resolve.</param>
