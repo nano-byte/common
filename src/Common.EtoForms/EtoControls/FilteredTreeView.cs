@@ -179,6 +179,10 @@ public sealed class FilteredTreeView<T> : Panel where T : INamed
 
         if (_checkBoxes)
         {
+            // Workaround for Eto.WinForms bug
+            if (Eto.Platform.Instance.IsWinForms)
+                _treeView.Columns.Add(new GridColumn {AutoSize = true, DataCell = new TextBoxCell()});
+
             _treeView.Columns.Add(new GridColumn
             {
                 Editable = true,
