@@ -40,7 +40,8 @@ internal sealed class TaskRunDialog : Dialog
         Width = 400;
 
         var progressBar = new TaskProgressBar();
-        var progressLabel = new TaskLabel();
+        var progressLabel = new TaskLabel {Wrap = WrapMode.None};
+        progressLabel.Height = (int)Math.Ceiling(progressLabel.Font.LineHeight) + 2; // Reserve space for one line of text
         Content = new StackLayout
         {
             Orientation = Orientation.Vertical,
