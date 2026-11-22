@@ -115,6 +115,28 @@ public class LocationsTest
     }
 
     [Fact]
+    public void SearchPath()
+    {
+        string? originalPath = Environment.GetEnvironmentVariable("PATH");
+        using var tempDir1Obj = new TemporaryDirectory("locations-test");
+        using var tempDir2Obj = new TemporaryDirectory("locations-test");
+        string tempDir1 = tempDir1Obj.Path, tempDir2 = tempDir2Obj.Path;
+        try
+        {
+            Environment.SetEnvironmentVariable("PATH", tempDir1 + Path.PathSeparator + Path.PathSeparator + tempDir2 + Path.DirectorySeparatorChar);
+
+            Locations.GetSearchPath().Should().Equal(tempDir1, tempDir2 + Path.DirectorySeparatorChar);
+            Locations.IsInSearchPath(tempDir1).Should().BeTrue();
+            Locations.IsInSearchPath(tempDir2).Should().BeTrue(because: "trailing separators should be ignored");
+            Locations.IsInSearchPath(Path.Combine(tempDir1, "sub")).Should().BeFalse();
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("PATH", originalPath);
+        }
+    }
+
+    [Fact]
     public void GetSaveConfigPathNormalMode()
     {
         string path = Locations.GetSaveConfigPath("test-app", isFile: true, "subdir", "test.conf");

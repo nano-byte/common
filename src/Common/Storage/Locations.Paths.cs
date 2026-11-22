@@ -247,7 +247,7 @@ partial class Locations
 #else
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.EmptyAsNull()),
 #endif
-                ..(Environment.GetEnvironmentVariable("PATH") ?? "").Split([Path.PathSeparator], StringSplitOptions.RemoveEmptyEntries)
+                ..GetSearchPath()
             ];
             return directories
                   .WhereNotNull()
