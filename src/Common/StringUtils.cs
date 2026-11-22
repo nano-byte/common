@@ -74,12 +74,12 @@ public static class StringUtils
             => value.Any(char.IsWhiteSpace);
 
         /// <summary>
-        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes after.
+        /// Determines whether a string starts with <paramref name="searchFor"/> with case-sensitive, ordinal comparison and, if so, returns the <paramref name="rest"/> that comes after.
         /// </summary>
         [Pure]
         public bool StartsWith(string searchFor, [MaybeNullWhen(false)] out string rest)
         {
-            if (value.StartsWith(searchFor))
+            if (value.StartsWithOrdinal(searchFor))
             {
                 rest = value[searchFor.Length..];
                 return true;
@@ -92,12 +92,12 @@ public static class StringUtils
         }
 
         /// <summary>
-        /// Determines whether a string starts with <paramref name="searchFor"/> and, if so, returns the <paramref name="rest"/> that comes before.
+        /// Determines whether a string starts with <paramref name="searchFor"/> with case-sensitive, ordinal comparison and, if so, returns the <paramref name="rest"/> that comes before.
         /// </summary>
         [Pure]
         public bool EndsWith(string searchFor, [MaybeNullWhen(false)] out string rest)
         {
-            if (value.EndsWith(searchFor))
+            if (value.EndsWithOrdinal(searchFor))
             {
                 rest = value[..^searchFor.Length];
                 return true;
@@ -108,6 +108,22 @@ public static class StringUtils
                 return false;
             }
         }
+
+        /// <summary>
+        /// Determines whether a string starts with <paramref name="searchFor"/> with case-sensitive, ordinal comparison.
+        /// </summary>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool StartsWithOrdinal(string searchFor)
+            => value.StartsWith(searchFor, StringComparison.Ordinal);
+
+        /// <summary>
+        /// Determines whether a string ends with <paramref name="searchFor"/> with case-sensitive, ordinal comparison.
+        /// </summary>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool EndsWithOrdinal(string searchFor)
+            => value.EndsWith(searchFor, StringComparison.Ordinal);
 
         /// <summary>
         /// Determines whether a string starts with <paramref name="searchFor"/> with case-insensitive comparison.
