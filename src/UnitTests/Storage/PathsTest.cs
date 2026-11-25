@@ -127,6 +127,99 @@ public class PathsTest
         => Paths.IsPortableFileName(fileName).Should().BeFalse();
 
     [Fact]
+    public void TestAreEqualAbsolutePath()
+    {
+        string path = WindowsUtils.IsWindows ? @"C:\some\path" : "/some/path";
+        Paths.AreEqual(path, path).Should().BeTrue();
+    }
+
+    [Fact]
+    public void TestAreEqualRelativePath()
+        => Paths.AreEqual("abc", Path.Combine("xyz", "..", "abc")).Should().BeTrue();
+
+    [Fact]
+    public void TestAreEqualWorkingDirectory()
+        => Paths.AreEqual("abc", Path.Combine(Directory.GetCurrentDirectory(), "abc")).Should().BeTrue();
+
+    [Fact]
+    public void TestAreEqualDirectorySeparator()
+        => Paths.AreEqual("abc/def", Path.Combine("abc", "def")).Should().BeTrue();
+
+    [Fact]
+    public void TestAreEqualTrailingSLash()
+        => Paths.AreEqual(
+                         WindowsUtils.IsWindows ? @"C:\some\path" : "/some/path",
+                         WindowsUtils.IsWindows ? @"C:\some\path\" : "/some/path/")
+                    .Should().BeTrue();
+
+    [Fact]
+    public void TestAreEqualCaseSensitive()
+    {
+        Assert.SkipWhen(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Windows and macOS use case-insensitive paths");
+        Paths.AreEqual("abc", "ABC").Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestAreEqualCaseInsensitive()
+    {
+        Assert.SkipUnless(WindowsUtils.IsWindows || UnixUtils.IsMacOSX, "Only Windows and macOS use case-insensitive paths");
+        Paths.AreEqual("abc", "ABC").Should().BeTrue();
+    }
+
+    [Fact]
+    public void TestAreEqualFalse()
+        => Paths.AreEqual("abc", "xyz").Should().BeFalse();
+
+    [Fact]
+    public void TestAreEqualUnnormalizable()
+        => Paths.AreEqual("", "").Should().BeTrue();
+
+    [Fact]
+    public void TestAreEqualUnnormalizableFalse()
+        => Paths.AreEqual("", "abc").Should().BeFalse();
+
+    [Fact]
+    public void TestToNative()
+        => Paths.ToNative("a/b")
+                .Should().Be(Path.Combine("a", "b"));
+
+    [Fact]
+    public void TestToUnix()
+        => Paths.ToUnix(Path.Combine("a", "b"))
+                .Should().Be("a/b");
+
+    [Fact]
+    public void TestIsBreakout()
+    {
+        Paths.IsBreakout(WindowsUtils.IsWindows ? @"C:\test" : "/test").Should().BeTrue(because: "Should detect absolute paths");
+
+        foreach (string path in new[] {"..", "/..", "../", "/../", "a/../b", "../a", "a/.."})
+            Paths.IsBreakout(path).Should().BeTrue(because: "Should detect parent directory references");
+
+        foreach (string path in new[] {"..a", "a/..a", "a..", "a/a.."})
+            Paths.IsBreakout(path).Should().BeFalse(because: "Should not trip on '..' as a part of file/directory names");
+
+        Paths.IsBreakout("").Should().BeFalse();
+    }
+
+    [Fact]
+    public void TestRelativeTo()
+    {
+        if (WindowsUtils.IsWindows)
+        {
+            new FileInfo(@"C:\test\a\b").RelativeTo(new DirectoryInfo(@"C:\test")).Should().Be(@"a\b");
+            new FileInfo(@"C:\test\a\b").RelativeTo(new FileInfo(@"C:\file")).Should().Be(@"test\a\b");
+            new DirectoryInfo(@"C:\test1").RelativeTo(new DirectoryInfo(@"C:\test2")).Should().Be(@"..\test1");
+        }
+        else
+        {
+            new FileInfo("/test/a/b").RelativeTo(new DirectoryInfo("/test")).Should().Be("a/b");
+            new FileInfo("/test/a/b").RelativeTo(new FileInfo("/file")).Should().Be("test/a/b");
+            new DirectoryInfo("/test1").RelativeTo(new DirectoryInfo("/test2")).Should().Be("../test1");
+        }
+    }
+
+    [Fact]
     public void TestGetFilesAbsolute()
     {
         using var tempDir = new TemporaryDirectory("unit-tests");

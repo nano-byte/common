@@ -86,7 +86,6 @@ partial class Locations
     /// </summary>
     /// <param name="dirPath">The path of the directory to look for.</param>
     /// <param name="target">Where to read the <c>PATH</c> environment variable from. <see cref="EnvironmentVariableTarget.User"/> and <see cref="EnvironmentVariableTarget.Machine"/> are only supported on Windows.</param>
-    /// <remarks>Compares paths using <see cref="FileUtils.PathEquals"/>.</remarks>
     [Pure]
     public static bool IsInSearchPath([Localizable(false)] string dirPath, EnvironmentVariableTarget target = EnvironmentVariableTarget.Process)
     {
@@ -94,7 +93,7 @@ partial class Locations
         if (string.IsNullOrEmpty(dirPath)) throw new ArgumentNullException(nameof(dirPath));
         #endregion
 
-        return GetSearchPath(target).Any(entry => FileUtils.PathEquals(entry, dirPath));
+        return GetSearchPath(target).Any(entry => Paths.AreEqual(entry, dirPath));
     }
 
     private static string GetDir(string envVar, string posixPath, Environment.SpecialFolder windowsFolder)
