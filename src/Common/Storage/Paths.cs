@@ -186,20 +186,23 @@ public static class Paths
     /// <summary>
     /// Determines whether a path might escape its parent directory (by being absolute or using ..).
     /// </summary>
+    /// <remarks>
+    /// Does not depend on the current platform. Both / and \ are treated as directory separators.
+    /// This only inspects the path string. It does not detect symlinks.
+    /// </remarks>
     [Pure]
     public static bool IsBreakout([Localizable(false)] string? path)
     {
         if (string.IsNullOrEmpty(path)) return false;
 
-        try
-        {
-            path = ToNative(path);
-            return Path.IsPathRooted(path) || path.Split(Path.DirectorySeparatorChar).Contains("..");
-        }
-        catch (ArgumentException)
-        {
-            return true;
-        }
+        // Null chars may cause the path to be truncated by native APIs
+        if (path[0] is '/' or '\\' || path.Contains('\0')) return true;
+
+        static bool HasDriveLetter(string segment)
+            => segment.Length >= 2 && segment[1] == ':' && (segment[0] is >= 'a' and <= 'z' or >= 'A' and <= 'Z');
+
+        // Check all segments for drive letters, because they would cause a breakout if the path is combined one segment at a time
+        return path.Split('/', '\\').Any(segment => segment == ".." || HasDriveLetter(segment));
     }
 
     /// <summary>

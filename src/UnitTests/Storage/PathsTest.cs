@@ -188,19 +188,64 @@ public class PathsTest
         => Paths.ToUnix(Path.Combine("a", "b"))
                 .Should().Be("a/b");
 
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/test")]
+    [InlineData(@"\test")]
+    [InlineData(@"C:\test")]
+    [InlineData("c:/test")]
+    [InlineData("C:test")]
+    [InlineData("C:")]
+    [InlineData(@"\\server\share")]
+    [InlineData("//server/share")]
+    [InlineData(@"\\?\C:\test")]
+    public void TestIsBreakoutAbsolute(string path)
+        => Paths.IsBreakout(path).Should().BeTrue(because: "Should detect absolute paths for all platforms");
+
+    [Theory]
+    [InlineData("..")]
+    [InlineData("/..")]
+    [InlineData("../")]
+    [InlineData("/../")]
+    [InlineData("a/../b")]
+    [InlineData("../a")]
+    [InlineData("a/..")]
+    [InlineData(@"..\")]
+    [InlineData(@"..\a")]
+    [InlineData(@"a\..")]
+    [InlineData(@"a\..\..\b")]
+    [InlineData(@"a/b\..\c")]
+    public void TestIsBreakoutParentReference(string path)
+        => Paths.IsBreakout(path).Should().BeTrue(because: "Should detect parent directory references for all platforms");
+
+    [Theory]
+    [InlineData("a/C:/b")]
+    [InlineData(@"a\C:\b")]
+    [InlineData("a/C:")]
+    public void TestIsBreakoutNestedDriveLetter(string path)
+        => Paths.IsBreakout(path).Should().BeTrue(because: "Should detect drive letters in the middle of the path");
+
     [Fact]
-    public void TestIsBreakout()
-    {
-        Paths.IsBreakout(WindowsUtils.IsWindows ? @"C:\test" : "/test").Should().BeTrue(because: "Should detect absolute paths");
+    public void TestIsBreakoutNullChar()
+        => Paths.IsBreakout("a\0b").Should().BeTrue();
 
-        foreach (string path in new[] {"..", "/..", "../", "/../", "a/../b", "../a", "a/.."})
-            Paths.IsBreakout(path).Should().BeTrue(because: "Should detect parent directory references");
-
-        foreach (string path in new[] {"..a", "a/..a", "a..", "a/a.."})
-            Paths.IsBreakout(path).Should().BeFalse(because: "Should not trip on '..' as a part of file/directory names");
-
-        Paths.IsBreakout("").Should().BeFalse();
-    }
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(".")]
+    [InlineData("./a")]
+    [InlineData("a")]
+    [InlineData("a/b")]
+    [InlineData(@"a\b")]
+    [InlineData("a/./b")]
+    [InlineData("..a")]
+    [InlineData("a/..a")]
+    [InlineData("a..")]
+    [InlineData("a/a..")]
+    [InlineData("a|b")]
+    [InlineData("ab:c")]
+    public void TestIsNotBreakout(string? path)
+        => Paths.IsBreakout(path).Should().BeFalse();
 
     [Fact]
     public void TestRelativeTo()
