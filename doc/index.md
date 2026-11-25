@@ -8,7 +8,7 @@ This website documents the [API](xref:NanoByte.Common) of the NanoByte.Common Nu
 
 **[NanoByte.Common](https://www.nuget.org/packages/NanoByte.Common/)** provides various utility classes and data structures with an emphasis on:
 
-- integration with [native Windows and Linux features](xref:NanoByte.Common.Native),
+- integration with [native Windows, macOS and Linux features](xref:NanoByte.Common.Native),
 - [network](xref:NanoByte.Common.Net) and [disk](xref:NanoByte.Common.Storage) IO,
 - [advanced collections](xref:NanoByte.Common.Collections) and
 - [undo/redo logic](xref:NanoByte.Common.Undo).

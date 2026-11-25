@@ -2,7 +2,7 @@
 
 **NanoByte.Common** provides various utility classes and data structures with an emphasis on:
 
-- integration with native Windows and Linux features,
+- integration with native Windows, macOS and Linux features,
 - network and disk IO,
 - advanced collections and
 - undo/redo logic.
