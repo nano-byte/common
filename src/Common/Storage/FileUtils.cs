@@ -69,8 +69,16 @@ public static class FileUtils
     public static bool IsBreakoutPath([Localizable(false)] string? path)
     {
         if (string.IsNullOrEmpty(path)) return false;
-        path = path.ToNativePath();
-        return Path.IsPathRooted(path) || path.Split(Path.DirectorySeparatorChar).Contains("..");
+
+        try
+        {
+            path = path.ToNativePath();
+            return Path.IsPathRooted(path) || path.Split(Path.DirectorySeparatorChar).Contains("..");
+        }
+        catch (ArgumentException)
+        {
+            return true;
+        }
     }
 
     /// <summary>
