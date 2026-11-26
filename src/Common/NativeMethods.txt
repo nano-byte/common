@@ -69,6 +69,8 @@ FSCTL_SET_REPARSE_POINT
 GetFileInformationByHandle
 GetFileSize
 GetModuleFileName
+GetModuleHandle
+GetProcAddress
 HWND_BROADCAST
 IO_REPARSE_TAG_MOUNT_POINT
 IO_REPARSE_TAG_SYMLINK

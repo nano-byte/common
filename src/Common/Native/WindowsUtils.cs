@@ -165,6 +165,30 @@ public static class WindowsUtils
     }
 
     /// <summary>
+    /// Indicates whether the current process is running in Wine rather than on actual Windows.
+    /// </summary>
+    public static bool IsWine { get; } = DetectWine();
+
+    private static unsafe bool DetectWine()
+    {
+        if (!IsWindows) return false;
+        try
+        {
+            HMODULE ntdll;
+            fixed (char* moduleName = "ntdll.dll")
+                ntdll = PInvoke.GetModuleHandle(new PCWSTR(moduleName));
+            if (ntdll.IsNull) return false;
+
+            fixed (byte* procName = "wine_get_version\0"u8)
+                return !PInvoke.GetProcAddress(ntdll, new PCSTR(procName)).IsNull;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
     /// Determines the path of the executable the current process was launched from.
     /// </summary>
     public static unsafe string CurrentProcessPath
