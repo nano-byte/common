@@ -228,7 +228,7 @@ public static class Msg
             return (DialogResult)result;
         }
         #region Error handling
-        catch (Exception ex) when (ex is COMException or BadImageFormatException or EntryPointNotFoundException)
+        catch (Exception ex) when (ex is COMException or BadImageFormatException or EntryPointNotFoundException or ArgumentException or InvalidOperationException)
         {
             Log.Info("Failed to show TaskDialog, falling back to MessageBox", ex);
             return null;
