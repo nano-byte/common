@@ -112,8 +112,13 @@ public static class Msg
             _ => MessageBoxIcon.Information
         };
 
+        // Default to the negative option ("No" or "Cancel") for warnings and errors
+        var defaultButton = (severity >= MsgSeverity.Warn && buttons != MessageBoxButtons.OK)
+            ? MessageBoxDefaultButton.Button2
+            : MessageBoxDefaultButton.Button1;
+
         // Display MessageDialog
-        return MessageBox.Show(owner, text, Application.ProductName, buttons, icon, MessageBoxDefaultButton.Button1, localizedOptions);
+        return MessageBox.Show(owner, text, Application.ProductName, buttons, icon, defaultButton, localizedOptions);
     }
 
     private static DialogResult? ShowTaskDialog(IWin32Window? owner, string text, MsgSeverity severity, string? yes = null, string? no = null, string? ok = null, string? cancel = null, bool canCancel = false)
@@ -208,8 +213,8 @@ public static class Msg
             taskDialog.UseCommandLinks = true;
             taskDialog.Buttons = buttons.ToArray();
         }
-        if (severity >= MsgSeverity.Warn)
-            taskDialog.DefaultButton = (int)(string.IsNullOrEmpty(no) ? DialogResult.No : DialogResult.Cancel);
+        if (severity >= MsgSeverity.Warn && (canCancel || !string.IsNullOrEmpty(no)))
+            taskDialog.DefaultButton = (int)(string.IsNullOrEmpty(no) ? DialogResult.Cancel : DialogResult.No);
 
         try
         {
