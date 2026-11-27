@@ -60,8 +60,24 @@ public static class Msg
             _ => MessageBoxType.Information
         };
 
+        // Default to the negative option for warnings and errors, otherwise to the positive option
+        var defaultButton = (severity >= MsgSeverity.Warn)
+            ? buttons switch
+            {
+                MessageBoxButtons.OKCancel => MessageBoxDefaultButton.Cancel,
+                MessageBoxButtons.YesNo or MessageBoxButtons.YesNoCancel => MessageBoxDefaultButton.No,
+                _ => MessageBoxDefaultButton.OK
+            }
+            : buttons switch
+            {
+                MessageBoxButtons.YesNo or MessageBoxButtons.YesNoCancel => MessageBoxDefaultButton.Yes,
+                _ => MessageBoxDefaultButton.OK
+            };
+
+        string? caption = Application.Instance?.Name;
+
         return owner == null
-            ? MessageBox.Show(text, buttons, type)
-            : MessageBox.Show(owner, text, buttons, type);
+            ? MessageBox.Show(text, caption, buttons, type, defaultButton)
+            : MessageBox.Show(owner, text, caption, buttons, type, defaultButton);
     }
 }
