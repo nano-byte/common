@@ -2,10 +2,10 @@
 // Licensed under the MIT License
 
 using System.Globalization;
+using System.Runtime.InteropServices;
 using NanoByte.Common.Native;
 
 #if NET45 || NET462 || NET472
-using System.Runtime.InteropServices;
 using TaskDialog;
 #endif
 
@@ -150,28 +150,41 @@ public static class Msg
         TryAddButton(DialogResult.OK, ok);
 
 #if NET
+        if (canCancel)
+        {
+            if (string.IsNullOrEmpty(cancel)) buttons.Add(TaskDialogButton.Cancel);
+            else TryAddButton(DialogResult.Cancel, cancel);
+        }
+
         var taskDialog = new TaskDialogPage
         {
             Caption = Application.ProductName,
             Icon = icon,
             Heading = heading,
-            Text = details
+            Text = details,
+            AllowCancel = canCancel
         };
-
         taskDialog.Buttons.AddRange(buttons);
-        if (canCancel)
-        {
-            taskDialog.AllowCancel = true;
-            if (string.IsNullOrEmpty(ok)) buttons.Add(TaskDialogButton.Cancel);
-            else TryAddButton(DialogResult.Cancel, cancel);
-        }
         if (severity >= MsgSeverity.Warn)
-            taskDialog.DefaultButton = buttons.Skip(1).FirstOrDefault(); // "No" or "Cancel"
+        {
+            taskDialog.DefaultButton = buttons.FirstOrDefault(x => x.Tag is DialogResult.No)
+                                    ?? buttons.FirstOrDefault(x => x.Tag is DialogResult.Cancel or null); // Standard Cancel button has no tag
+        }
 
-        var pushedButton = (owner == null)
-            ? TaskDialog.ShowDialog(taskDialog)
-            : TaskDialog.ShowDialog(owner, taskDialog);
-        return pushedButton.Tag is DialogResult tag ? tag : DialogResult.Cancel;
+        try
+        {
+            var pushedButton = (owner == null)
+                ? TaskDialog.ShowDialog(taskDialog)
+                : TaskDialog.ShowDialog(owner, taskDialog);
+            return pushedButton.Tag is DialogResult tag ? tag : DialogResult.Cancel;
+        }
+        #region Error handling
+        catch (Exception ex) when (ex is COMException or BadImageFormatException or EntryPointNotFoundException or ArgumentException or InvalidOperationException)
+        {
+            Log.Info("Failed to show TaskDialog, falling back to MessageBox", ex);
+            return null;
+        }
+        #endregion
 #else
         var taskDialog = new TaskDialog.TaskDialog
         {
