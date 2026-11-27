@@ -171,7 +171,8 @@ public static class Msg
             Icon = icon,
             Heading = heading,
             Text = details,
-            AllowCancel = canCancel
+            AllowCancel = canCancel,
+            RightToLeftLayout = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft
         };
         taskDialog.Buttons.AddRange(buttons);
         if (severity >= MsgSeverity.Warn)
@@ -201,7 +202,8 @@ public static class Msg
             WindowTitle = Application.ProductName,
             MainIcon = icon,
             MainInstruction = heading,
-            Content = details
+            Content = details,
+            RightToLeftLayout = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft
         };
 
         if (canCancel)
