@@ -24,6 +24,10 @@ public static class Msg
     /// <param name="severity">How severe/important the message is.</param>
     public static void Inform(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity)
     {
+        #region Sanity checks
+        if (text == null) throw new ArgumentNullException(nameof(text));
+        #endregion
+
         if (ShowTaskDialog(owner, text, severity) == null)
             ShowMessageBox(owner, text, severity, MessageBoxButtons.OK);
     }
