@@ -48,7 +48,7 @@ public static class Msg
         if (text == null) throw new ArgumentNullException(nameof(text));
         #endregion
 
-        var result = ShowTaskDialog(owner, text, severity, ok: okCaption ?? "OK", cancel: cancelCaption, canCancel: true)
+        var result = ShowTaskDialog(owner, text, severity, ok: okCaption ?? Resources.OK, cancel: cancelCaption, canCancel: true)
                   ?? ShowMessageBox(owner, text, severity, MessageBoxButtons.OKCancel);
         return result == DialogResult.OK;
     }
