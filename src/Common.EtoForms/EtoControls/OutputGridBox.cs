@@ -34,22 +34,14 @@ public static class OutputGridBox
         using var dialog = new Dialog
         {
             Title = title,
-            Width = 600,
-            Height = 400,
-            Content = grid,
-            ShowInTaskbar = owner == null
+            Padding = 10,
+            Resizable = true,
+            Content = grid
         };
+        dialog.AddCloseButton();
+        dialog.SetInitialClientSize(BoxLayout.TextSize(columns: 100, lines: 22));
 
-        var closeButton = new Button {Text = Resources.OK};
-        closeButton.Click += delegate { dialog.Close(); };
-        dialog.PositiveButtons.Add(closeButton);
-        dialog.DefaultButton = closeButton;
-        dialog.AbortButton = closeButton;
-        dialog.CenterOnScreenIfOwnerless();
-        dialog.PreventPinning();
-
-        if (owner == null) dialog.ShowModal();
-        else dialog.ShowModal(owner);
+        dialog.ShowBox(owner);
     }
 
     private static void AddColumns<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(GridView grid)

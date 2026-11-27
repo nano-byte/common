@@ -28,6 +28,7 @@
 
   <!-- Embedded resources -->
   <ItemGroup>
+    <EmbeddedResource Include="..\Common.WinForms\Resources\Info.png" LogicalName="NanoByte.Common.EtoControls.Info.png" />
     <EmbeddedResource Include="..\Common.WinForms\Resources\Error.png" LogicalName="NanoByte.Common.EtoControls.Error.png" />
   </ItemGroup>
 

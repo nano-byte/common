@@ -29,9 +29,7 @@ public static class OutputTreeBox
         {
             Title = title,
             Padding = 10,
-            Width = 400,
-            Height = 400,
-            ShowInTaskbar = owner == null,
+            Resizable = true,
             Content = new FilteredTreeView<T>
             {
                 CheckBoxes = false,
@@ -39,16 +37,9 @@ public static class OutputTreeBox
                 Separator = separator
             }
         };
+        dialog.AddCloseButton();
+        dialog.SetInitialClientSize(BoxLayout.TextSize(columns: 65, lines: 22));
 
-        var closeButton = new Button {Text = Resources.OK};
-        closeButton.Click += delegate { dialog.Close(); };
-        dialog.PositiveButtons.Add(closeButton);
-        dialog.DefaultButton = closeButton;
-        dialog.AbortButton = closeButton;
-        dialog.CenterOnScreenIfOwnerless();
-        dialog.PreventPinning();
-
-        if (owner == null) dialog.ShowModal();
-        else dialog.ShowModal(owner);
+        dialog.ShowBox(owner);
     }
 }

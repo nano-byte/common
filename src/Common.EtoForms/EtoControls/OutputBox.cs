@@ -12,7 +12,7 @@ public static class OutputBox
     /// Displays an output box with some text.
     /// </summary>
     /// <param name="owner">The parent window the displayed window is modal to; can be <c>null</c>.</param>
-    /// <param name="title">The window title to use.</param>
+    /// <param name="title">The text to display above the <paramref name="message"/>.</param>
     /// <param name="message">The selectable multi-line text to display to the user.</param>
     public static void Show(Control? owner, [Localizable(true)] string title, [Localizable(true)] string message)
     {
@@ -24,29 +24,32 @@ public static class OutputBox
         var textArea = new TextArea
         {
             ReadOnly = true,
+            Wrap = true,
+            Font = BoxLayout.BodyFont,
             Text = message.ToNativeNewLine().TrimEnd(Environment.NewLine.ToCharArray())
         };
         textArea.Load += delegate { textArea.CaretIndex = 0; }; // Scroll to top
 
         using var dialog = new Dialog
         {
-            Title = title,
+            Title = BoxLayout.AppName,
             Padding = 10,
-            Width = 600,
-            Height = 400,
-            Content = textArea,
-            ShowInTaskbar = owner == null
+            Resizable = true,
+            Content = new StackLayout
+            {
+                Orientation = Orientation.Vertical,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                Spacing = 8,
+                Items =
+                {
+                    BoxLayout.HeaderRow("Info", title, out _),
+                    new StackLayoutItem(textArea, expand: true)
+                }
+            }
         };
+        dialog.AddCloseButton();
+        dialog.SetInitialClientSize(BoxLayout.TextSize(columns: 80, lines: 20));
 
-        var closeButton = new Button {Text = Resources.OK};
-        closeButton.Click += delegate { dialog.Close(); };
-        dialog.PositiveButtons.Add(closeButton);
-        dialog.DefaultButton = closeButton;
-        dialog.AbortButton = closeButton;
-        dialog.CenterOnScreenIfOwnerless();
-        dialog.PreventPinning();
-
-        if (owner == null) dialog.ShowModal();
-        else dialog.ShowModal(owner);
+        dialog.ShowBox(owner);
     }
 }
