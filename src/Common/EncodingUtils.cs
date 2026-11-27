@@ -32,8 +32,32 @@ public static class EncodingUtils
             if (algorithm == null) throw new ArgumentNullException(nameof(algorithm));
             #endregion
 
-            var hash = algorithm.ComputeHash(Utf8.GetBytes(value));
+            byte[] hash = algorithm.ComputeHash(Utf8.GetBytes(value));
+
+#if NET
+            return Convert.ToHexStringLower(hash);
+#else
             return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+#endif
+        }
+
+        /// <summary>
+        /// Computes the hash value of a string encoded as UTF-8 using SHA-256.
+        /// </summary>
+        /// <returns>A hexadecimal string representation of the hash value.</returns>
+        [Pure]
+        public string HashSha256()
+        {
+            #region Sanity checks
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            #endregion
+
+#if NET
+            return Convert.ToHexStringLower(SHA256.HashData(Utf8.GetBytes(value)));
+#else
+            using var algorithm = SHA256.Create();
+            return value.Hash(algorithm);
+#endif
         }
 
         /// <summary>
