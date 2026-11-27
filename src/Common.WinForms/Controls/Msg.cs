@@ -37,7 +37,7 @@ public static class Msg
     /// <param name="okCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.OK"/> option; <c>null</c> for default.</param>
     /// <param name="cancelCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Cancel"/> option; <c>null</c> for default.</param>
     /// <returns><c>true</c> if <paramref name="okCaption"/> was selected, <c>false</c> if <paramref name="cancelCaption"/> was selected.</returns>
-    /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="okCaption"/> and <paramref name="cancelCaption"/> are not display to the user, so don't rely on them!</remarks>
+    /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="okCaption"/> and <paramref name="cancelCaption"/> are not displayed to the user, so don't rely on them!</remarks>
     public static bool OkCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? okCaption = null, [Localizable(true)] string? cancelCaption = null)
     {
         #region Sanity checks
@@ -58,7 +58,7 @@ public static class Msg
     /// <param name="yesCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.Yes"/> option; <c>null</c> for default.</param>
     /// <param name="noCaption">The title and a short description (separated by a linebreak) of the <see cref="DialogResult.No"/> option; <c>null</c> for default.</param>
     /// <returns><c>true</c> if <paramref name="yesCaption"/> was chosen, <c>false</c> if <paramref name="noCaption"/> was chosen.</returns>
-    /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
+    /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not displayed to the user, so don't rely on them!</remarks>
     public static bool YesNo(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? yesCaption = null, [Localizable(true)] string? noCaption = null)
     {
         #region Sanity checks
@@ -81,7 +81,7 @@ public static class Msg
     /// <returns><see cref="DialogResult.Yes"/> if <paramref name="yesCaption"/> was chosen,
     /// <see cref="DialogResult.No"/> if <paramref name="noCaption"/> was chosen,
     /// <see cref="DialogResult.Cancel"/> otherwise.</returns>
-    /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not display to the user, so don't rely on them!</remarks>
+    /// <remarks>If a <see cref="MessageBox"/> is used, <paramref name="yesCaption"/> and <paramref name="noCaption"/> are not displayed to the user, so don't rely on them!</remarks>
     public static DialogResult YesNoCancel(IWin32Window? owner, [Localizable(true)] string text, MsgSeverity severity, [Localizable(true)] string? yesCaption = null, [Localizable(true)] string? noCaption = null)
     {
         #region Sanity checks
