@@ -35,6 +35,6 @@ The following static classes provide shorthand load/save methods for the common 
 
 - <xref:NanoByte.Common.Storage.XmlStorage> for XML
 - <xref:NanoByte.Common.Storage.JsonStorage> for JSON
-- <xref:NanoByte.Common.Storage.BinaryStorage> for .NET Framework `BinaryFormatter`
+- `BinaryStorage` for `BinaryFormatter` (.NET Framework only, deprecated)
 
 ## API

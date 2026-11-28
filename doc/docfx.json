@@ -3,8 +3,12 @@
     {
       "src": [
         {
-          "src": "../artifacts/Release/net472",
+          "src": "../artifacts/Release/net11.0",
           "files": ["NanoByte.Common*.dll"]
+        },
+        {
+          "src": "../artifacts/Release/net11.0-windows",
+          "files": ["NanoByte.Common.WinForms.dll"]
         }
       ],
       "dest": "api",
