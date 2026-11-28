@@ -110,7 +110,7 @@ public class CliTaskHandler : TaskHandlerBase
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
                 ? IsInteractive ? new WindowsCliCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
-                : null);
+                : KeyringCredentialProvider.ForCurrentOS(interactive: IsInteractive));
 
     /// <inheritdoc/>
     protected override bool IsInteractive

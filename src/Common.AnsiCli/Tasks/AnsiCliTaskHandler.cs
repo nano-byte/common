@@ -24,9 +24,9 @@ public class AnsiCliTaskHandler : CliTaskHandler
                 ? IsInteractive
                     ? new WindowsCliCredentialProvider(beforePrompt: RemoveProgressBar)
                     : new WindowsNonInteractiveCredentialProvider()
-                : IsInteractive
-                    ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar)
-                    : null);
+                : KeyringCredentialProvider.ForCurrentOS(
+                    IsInteractive ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar) : null,
+                    interactive: IsInteractive));
 
 #if NET9_0_OR_GREATER
     private static readonly Lock _progressContextLock = new();

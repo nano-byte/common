@@ -29,7 +29,7 @@ public abstract class EtoTaskHandlerBase : TaskHandlerBase
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
                 ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
-                : null);
+                : KeyringCredentialProvider.ForCurrentOS(interactive: IsInteractive));
 
     /// <inheritdoc/>
     protected override bool IsInteractive
