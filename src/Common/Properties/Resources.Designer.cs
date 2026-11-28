@@ -440,7 +440,16 @@ namespace NanoByte.Common.Properties {
                 return ResourceManager.GetString("RedoNotAvailable", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Remember credentials.
+        /// </summary>
+        public static string RememberCredentials {
+            get {
+                return ResourceManager.GetString("RememberCredentials", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &amp;Reset value.
         /// </summary>

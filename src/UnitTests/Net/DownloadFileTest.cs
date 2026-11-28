@@ -90,4 +90,61 @@ public class DownloadFileTest : IDisposable
         var download = new DownloadFile(_server.FileUri, stream => stream.ReadAll(), bytesTotal: 1024);
         download.Invoking(x => x.Run(TestContext.Current.CancellationToken)).Should().Throw<WebException>();
     }
+
+    [Fact]
+    public void TestCredentials()
+    {
+        using var server = new BasicAuthServer("user", "correct");
+        var provider = new MockCredentialProvider(new("user", "wrong"), new("user", "correct"));
+
+        var download = new DownloadFile(server.Uri, stream => stream.ReadAll());
+        download.Run(TestContext.Current.CancellationToken, provider);
+
+        download.State.Should().Be(TaskState.Complete);
+        provider.PreviousIncorrect.Should().Equal(false, true);
+        provider.Accepted.Should().ContainSingle().Which.Password.Should().Be("correct");
+    }
+
+    private sealed class MockCredentialProvider(params NetworkCredential[] credentials) : ICredentialProvider, ICredentialFeedback
+    {
+        private int _index;
+        public readonly List<bool> PreviousIncorrect = [];
+        public readonly List<NetworkCredential> Accepted = [];
+
+        public NetworkCredential GetCredential(Uri uri, bool previousIncorrect = false)
+        {
+            PreviousIncorrect.Add(previousIncorrect);
+            return credentials[_index++];
+        }
+
+        void ICredentialFeedback.Accepted(Uri uri, NetworkCredential credential) => Accepted.Add(credential);
+    }
+
+    private sealed class BasicAuthServer : HttpServer
+    {
+        private readonly string _expectedAuth;
+
+        public Uri Uri => new($"http://localhost:{Port}/file");
+
+        public BasicAuthServer(string userName, string password) : base(localOnly: true)
+        {
+            _expectedAuth = "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{userName}:{password}"));
+            StartHandlingRequests();
+        }
+
+        protected override void HandleRequest(HttpListenerContext context)
+        {
+            if (context.Request.Headers["Authorization"] == _expectedAuth)
+            {
+                var content = GetTestFileStream();
+                context.Response.ContentLength64 = content.Length;
+                content.CopyToEx(context.Response.OutputStream);
+            }
+            else
+            {
+                context.Response.AddHeader("WWW-Authenticate", "Basic realm=\"test\"");
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            }
+        }
+    }
 }

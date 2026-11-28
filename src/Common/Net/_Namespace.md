@@ -21,4 +21,6 @@ summary: Network communication and credential handling.
 
 <xref:NanoByte.Common.Net.KeyringCredentialProvider.ForCurrentOS*> picks the right keyring provider for the current Unix-like operating system.
 
+Providers can implement <xref:NanoByte.Common.Net.ICredentialFeedback> to learn when the credentials they returned were accepted by the server. <xref:NanoByte.Common.Net.DownloadFile> reports this. Keyring providers use it to save <xref:NanoByte.Common.Net.PromptedCredential>s that the user asked to remember in a prompt.
+
 ## API

@@ -25,7 +25,7 @@ public class AnsiCliTaskHandler : CliTaskHandler
                     ? new WindowsCliCredentialProvider(beforePrompt: RemoveProgressBar)
                     : new WindowsNonInteractiveCredentialProvider()
                 : KeyringCredentialProvider.ForCurrentOS(
-                    IsInteractive ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar) : null,
+                    IsInteractive ? new AnsiCliCredentialProvider(beforePrompt: RemoveProgressBar, offerRemember: KeyringCredentialProvider.IsSupported) : null,
                     interactive: IsInteractive));
 
 #if NET9_0_OR_GREATER

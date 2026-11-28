@@ -9,7 +9,7 @@ namespace NanoByte.Common.Net;
 /// Gets credentials from <see cref="Netrc"/> if possible. Falls back to another provider otherwise.
 /// </summary>
 /// <param name="innerProvider">The provider to fall back to if no suitable credentials can be found in <see cref="Netrc"/>.</param>
-public class NetrcCredentialProvider(ICredentialProvider? innerProvider = null) : ICredentialProvider
+public class NetrcCredentialProvider(ICredentialProvider? innerProvider = null) : ICredentialProvider, ICredentialFeedback
 {
     private readonly Lazy<Netrc> _netrc = new(Netrc.LoadSafe);
 
@@ -55,4 +55,8 @@ public class NetrcCredentialProvider(ICredentialProvider? innerProvider = null) 
 
         return innerProvider?.GetCredential(uri, previousIncorrect);
     }
+
+    /// <inheritdoc/>
+    public void Accepted(Uri uri, NetworkCredential credential)
+        => (innerProvider as ICredentialFeedback)?.Accepted(uri, credential);
 }

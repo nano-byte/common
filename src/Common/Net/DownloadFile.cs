@@ -80,6 +80,11 @@ public class DownloadFile : TaskBase
     /// </summary>
     private NetworkCredential? _credentials;
 
+    /// <summary>
+    /// The proxy server and the credentials this task set for it, if any.
+    /// </summary>
+    private (Uri Proxy, NetworkCredential Credentials)? _proxyCredentials;
+
     private static readonly HttpClient _httpClient = new(
 #if NETFRAMEWORK
         new HttpClientHandler
@@ -116,6 +121,7 @@ public class DownloadFile : TaskBase
             response.EnsureSuccessStatusCode();
 
             CancellationToken.ThrowIfCancellationRequested();
+            var credentialSource = Source;
             HandleHeaders(response);
 
             State = TaskState.Data;
@@ -126,6 +132,10 @@ public class DownloadFile : TaskBase
                 CancellationToken);
             if (UnitsTotal > 0) stream.SetLength(UnitsTotal);
             _callback(stream);
+
+            // Report only after downloading, since saving credentials may involve user interaction
+            ReportAcceptedProxyCredentials();
+            if (_credentials != null) (CredentialProvider as ICredentialFeedback)?.Accepted(credentialSource, _credentials);
         }
         #region Error handling
         catch (Exception ex) when (ex.IsHttpRequestException())
@@ -175,19 +185,32 @@ public class DownloadFile : TaskBase
                 _credentials = CredentialProvider.GetCredential(Source, previousIncorrect: _credentials != null);
                 return _credentials != null;
 
-#if NETFRAMEWORK
-            case HttpStatusCode.ProxyAuthenticationRequired when WebRequest.DefaultWebProxy?.GetProxy(Source) is {} proxy:
-                WebRequest.DefaultWebProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: WebRequest.DefaultWebProxy.HasCustomCredentials());
-                return WebRequest.DefaultWebProxy.Credentials != null;
-#else
-            case HttpStatusCode.ProxyAuthenticationRequired when HttpClient.DefaultProxy.GetProxy(Source) is {} proxy:
-                HttpClient.DefaultProxy.Credentials = CredentialProvider.GetCredential(proxy, previousIncorrect: HttpClient.DefaultProxy.HasCustomCredentials());
-                return HttpClient.DefaultProxy.Credentials != null;
-#endif
+            case HttpStatusCode.ProxyAuthenticationRequired when DefaultProxy is {} defaultProxy && defaultProxy.GetProxy(Source) is {} proxy:
+                var proxyCredentials = CredentialProvider.GetCredential(proxy, previousIncorrect: defaultProxy.HasCustomCredentials());
+                defaultProxy.Credentials = proxyCredentials;
+                _proxyCredentials = proxyCredentials == null ? null : (proxy, proxyCredentials);
+                return proxyCredentials != null;
 
             default:
                 return false;
         }
+    }
+
+    private static IWebProxy? DefaultProxy
+#if NETFRAMEWORK
+        => WebRequest.DefaultWebProxy;
+#else
+        => HttpClient.DefaultProxy;
+#endif
+
+    /// <summary>
+    /// Informs the credential provider that the proxy accepted the credentials this task set for it.
+    /// </summary>
+    private void ReportAcceptedProxyCredentials()
+    {
+        if (_proxyCredentials is not var (proxy, proxyCredentials)) return;
+        _proxyCredentials = null; // Only report once
+        (CredentialProvider as ICredentialFeedback)?.Accepted(proxy, proxyCredentials);
     }
 
     private void HandleHeaders(HttpResponseMessage response)

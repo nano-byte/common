@@ -36,7 +36,10 @@ public class LinuxCredentialProvider(ICredentialProvider? innerProvider = null, 
         || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WAYLAND_DISPLAY"));
 
     private const string BusName = "org.freedesktop.secrets";
-    private static readonly ObjectPath _servicePath = "/org/freedesktop/secrets", _noPrompt = "/";
+    private static readonly ObjectPath
+        _servicePath = "/org/freedesktop/secrets",
+        _defaultCollectionPath = "/org/freedesktop/secrets/aliases/default",
+        _noPrompt = "/";
 
     /// <inheritdoc/>
     protected override string KeyringName => "Secret Service";
@@ -95,6 +98,82 @@ public class LinuxCredentialProvider(ICredentialProvider? innerProvider = null, 
         => attributes.TryGetValue("port", out string? port)
             ? port == uri.Port.ToString(CultureInfo.InvariantCulture)
             : uri.IsDefaultPort;
+
+    /// <inheritdoc/>
+    protected override void Store(Uri uri, NetworkCredential credential)
+        => StoreAsync(uri, credential).GetAwaiter().GetResult();
+
+    private async Task StoreAsync(Uri uri, NetworkCredential credential)
+    {
+        var connection = DBusConnection.Session;
+        var service = new Service(connection, BusName, _servicePath);
+        var collection = new Collection(connection, BusName, _defaultCollectionPath);
+
+        if (_interactive && !await UnlockAsync(connection, service, _defaultCollectionPath).ConfigureAwait(false))
+            throw new OperationCanceledException("User refused to unlock the keyring");
+
+        var attributes = new Dict<string, string>
+        {
+            ["xdg:schema"] = "org.gnome.keyring.NetworkPassword",
+            ["server"] = uri.Host,
+            ["protocol"] = uri.Scheme,
+            ["user"] = credential.UserName
+        };
+        if (!uri.IsDefaultPort) attributes["port"] = uri.Port.ToString(CultureInfo.InvariantCulture);
+        var properties = new Dictionary<string, VariantValue>
+        {
+            ["org.freedesktop.Secret.Item.Label"] = VariantValue.String(uri.GetRoot().ToStringRfc()),
+            ["org.freedesktop.Secret.Item.Attributes"] = attributes
+        };
+
+        var (_, sessionPath) = await service.OpenSessionAsync("plain", VariantValue.String("")).ConfigureAwait(false);
+        try
+        {
+            var secret = (sessionPath, Array.Empty<byte>(), Encoding.UTF8.GetBytes(credential.Password), "text/plain; charset=utf8");
+            var (itemPath, promptPath) = await collection.CreateItemAsync(properties, secret, replace: true).ConfigureAwait(false);
+            if (itemPath == _noPrompt)
+            {
+                if (promptPath == _noPrompt || !_interactive) throw new InvalidOperationException("The keyring is locked");
+                if (!await RunPromptAsync(connection, promptPath).ConfigureAwait(false))
+                    throw new OperationCanceledException("User refused to save to the keyring");
+            }
+        }
+        finally
+        {
+            await new Session(connection, BusName, sessionPath).CloseAsync().ConfigureAwait(false);
+        }
+    }
+
+    /// <inheritdoc/>
+    protected override void Delete(Uri uri, string userName)
+        => DeleteAsync(uri, userName).GetAwaiter().GetResult();
+
+    private async Task DeleteAsync(Uri uri, string userName)
+    {
+        var connection = DBusConnection.Session;
+        var service = new Service(connection, BusName, _servicePath);
+
+        var attributes = GetSearchAttributes(uri);
+        attributes["user"] = userName;
+        var (unlocked, locked) = await service.SearchItemsAsync(attributes).ConfigureAwait(false);
+        foreach (var path in unlocked.Concat(locked))
+        {
+            var item = new Item(connection, BusName, path);
+            if (!PortMatches(await item.GetAttributesAsync().ConfigureAwait(false), uri)) continue;
+
+            // Locked items cannot be deleted, see org.freedesktop.Secret.Error.IsLocked
+            if (locked.Contains(path))
+            {
+                if (!_interactive) throw new InvalidOperationException("The keyring is locked");
+                if (!await UnlockAsync(connection, service, path).ConfigureAwait(false))
+                    throw new OperationCanceledException("User refused to unlock the keyring");
+            }
+
+            var promptPath = await item.DeleteAsync().ConfigureAwait(false);
+            if (promptPath != _noPrompt && (!_interactive || !await RunPromptAsync(connection, promptPath).ConfigureAwait(false)))
+                throw new OperationCanceledException("User refused to remove the item from the keyring");
+        }
+    }
 
     /// <summary>
     /// Unlocks an item or collection, asking the user via a prompt provided by the keyring if necessary.

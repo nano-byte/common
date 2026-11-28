@@ -249,6 +249,9 @@
   <data name="RedoNotAvailable" xml:space="preserve">
     <value>This command cannot be performed again until the undo command has been performed.</value>
   </data>
+  <data name="RememberCredentials" xml:space="preserve">
+    <value>Remember credentials</value>
+  </data>
   <data name="ResetValue" xml:space="preserve">
     <value>&amp;Reset value</value>
   </data>

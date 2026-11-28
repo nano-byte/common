@@ -4,6 +4,7 @@
 
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Text;
 
 namespace NanoByte.Common.Native;
 
@@ -17,7 +18,7 @@ internal static unsafe partial class MacOSKeychain
         CoreFoundationLib = "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation",
         SecurityLib = "/System/Library/Frameworks/Security.framework/Security";
 
-    private const int errSecSuccess = 0, errSecItemNotFound = -25300, errSecInteractionNotAllowed = -25308, errSecUserCanceled = -128, errSecAuthFailed = -25293;
+    private const int errSecSuccess = 0, errSecItemNotFound = -25300, errSecDuplicateItem = -25299, errSecInteractionNotAllowed = -25308, errSecUserCanceled = -128, errSecAuthFailed = -25293;
     private const int kCFNumberSInt32Type = 3;
 
     /// <summary>
@@ -25,103 +26,176 @@ internal static unsafe partial class MacOSKeychain
     /// </summary>
     /// <param name="server">The host name of the server.</param>
     /// <param name="scheme">The URI scheme used to access the server. Only <c>http</c> and <c>https</c> are used to narrow the search.</param>
-    /// <param name="port">The port used to access the server; <c>null</c> for any port.</param>
+    /// <param name="port">The port used to access the server; <c>0</c> to match only items stored without a port.</param>
     /// <param name="allowUserInteraction">Allow the Keychain to ask the user for permission or to unlock it.</param>
     /// <returns>The account name and password; <c>null</c> if no matching item was found or the user denied access.</returns>
     /// <exception cref="IOException">The Keychain reported an unexpected error.</exception>
-    public static (string Account, string Password)? FindInternetPassword(string server, string scheme, int? port, bool allowUserInteraction)
+    public static (string Account, string Password)? FindInternetPassword(string server, string scheme, int port, bool allowUserInteraction)
     {
-        var cf = NativeLibrary.Load(CoreFoundationLib);
-        var sec = NativeLibrary.Load(SecurityLib);
-        nint Symbol(nint lib, string name) => *(nint*)NativeLibrary.GetExport(lib, name);
+        using var scope = new CFScope();
+        var query = scope.CreateQuery(server, scheme, port);
+        CFDictionarySetValue(query, scope.Sec("kSecMatchLimit"), scope.Sec("kSecMatchLimitOne"));
+        CFDictionarySetValue(query, scope.Sec("kSecReturnAttributes"), scope.CF("kCFBooleanTrue"));
+        CFDictionarySetValue(query, scope.Sec("kSecReturnData"), scope.CF("kCFBooleanTrue"));
+        if (!allowUserInteraction)
+            CFDictionarySetValue(query, scope.Sec("kSecUseAuthenticationUI"), scope.Sec("kSecUseAuthenticationUIFail"));
 
-        var query = CFDictionaryCreateMutable(0, 0, NativeLibrary.GetExport(cf, "kCFTypeDictionaryKeyCallBacks"), NativeLibrary.GetExport(cf, "kCFTypeDictionaryValueCallBacks"));
-        var toRelease = new List<nint> {query};
-        try
+        nint result = 0;
+        int status;
+        using (SuppressUserInteraction(allowUserInteraction))
+            status = SecItemCopyMatching(query, &result);
+        switch (status)
         {
-            nint Owned(nint value)
-            {
-                toRelease.Add(value);
-                return value;
-            }
-
-            nint kCFBooleanTrue = Symbol(cf, "kCFBooleanTrue");
-            CFDictionarySetValue(query, Symbol(sec, "kSecClass"), Symbol(sec, "kSecClassInternetPassword"));
-            CFDictionarySetValue(query, Symbol(sec, "kSecAttrServer"), Owned(CreateString(server)));
-            switch (scheme)
-            {
-                case "https":
-                    CFDictionarySetValue(query, Symbol(sec, "kSecAttrProtocol"), Symbol(sec, "kSecAttrProtocolHTTPS"));
-                    break;
-                case "http":
-                    CFDictionarySetValue(query, Symbol(sec, "kSecAttrProtocol"), Symbol(sec, "kSecAttrProtocolHTTP"));
-                    break;
-            }
-            if (port is {} portValue)
-            {
-                int value = portValue;
-                CFDictionarySetValue(query, Symbol(sec, "kSecAttrPort"), Owned(CFNumberCreate(0, kCFNumberSInt32Type, &value)));
-            }
-            CFDictionarySetValue(query, Symbol(sec, "kSecMatchLimit"), Symbol(sec, "kSecMatchLimitOne"));
-            CFDictionarySetValue(query, Symbol(sec, "kSecReturnAttributes"), kCFBooleanTrue);
-            CFDictionarySetValue(query, Symbol(sec, "kSecReturnData"), kCFBooleanTrue);
-            if (!allowUserInteraction)
-                CFDictionarySetValue(query, Symbol(sec, "kSecUseAuthenticationUI"), Symbol(sec, "kSecUseAuthenticationUIFail"));
-
-            int status = CopyMatching(query, allowUserInteraction, out nint result);
-            switch (status)
-            {
-                case errSecSuccess:
-                    toRelease.Add(result);
-                    break;
-                case errSecItemNotFound:
-                    return null;
-                case errSecInteractionNotAllowed or errSecUserCanceled or errSecAuthFailed:
-                    Log.Debug($"Access to Keychain item for {server} denied (OSStatus {status})");
-                    return null;
-                default:
-                    throw new IOException($"Keychain error (OSStatus {status})");
-            }
-
-            nint account = CFDictionaryGetValue(result, Symbol(sec, "kSecAttrAccount"));
-            nint data = CFDictionaryGetValue(result, Symbol(sec, "kSecValueData"));
-            if (account == 0 || data == 0) return null;
-
-            return (ReadString(account), System.Text.Encoding.UTF8.GetString(new ReadOnlySpan<byte>(CFDataGetBytePtr(data), (int)CFDataGetLength(data))));
+            case errSecSuccess:
+                scope.Own(result);
+                break;
+            case errSecItemNotFound:
+                return null;
+            case errSecInteractionNotAllowed or errSecUserCanceled or errSecAuthFailed:
+                Log.Debug($"Access to Keychain item for {server} denied (OSStatus {status})");
+                return null;
+            default:
+                throw new IOException($"Keychain error (OSStatus {status})");
         }
-        finally
-        {
-            foreach (var handle in toRelease)
-                CFRelease(handle);
-        }
+
+        nint account = CFDictionaryGetValue(result, scope.Sec("kSecAttrAccount"));
+        nint data = CFDictionaryGetValue(result, scope.Sec("kSecValueData"));
+        if (account == 0 || data == 0) return null;
+
+        return (ReadString(account), Encoding.UTF8.GetString(new ReadOnlySpan<byte>(CFDataGetBytePtr(data), (int)CFDataGetLength(data))));
     }
 
     /// <summary>
-    /// Calls <c>SecItemCopyMatching</c>, temporarily disabling user interaction for legacy file-based keychains if requested.
+    /// Stores an internet password in the Keychain, replacing the password of an existing item for the same account.
     /// </summary>
-    private static int CopyMatching(nint query, bool allowUserInteraction, out nint result)
+    /// <param name="server">The host name of the server.</param>
+    /// <param name="scheme">The URI scheme used to access the server.</param>
+    /// <param name="port">The port used to access the server; <c>0</c> for items stored without a port.</param>
+    /// <param name="account">The user name.</param>
+    /// <param name="password">The password.</param>
+    /// <param name="label">A human-readable label for the item.</param>
+    /// <param name="allowUserInteraction">Allow the Keychain to ask the user for permission or to unlock it.</param>
+    /// <exception cref="IOException">The Keychain reported an error.</exception>
+    public static void AddInternetPassword(string server, string scheme, int port, string account, string password, string label, bool allowUserInteraction)
     {
-        nint value = 0;
-        if (allowUserInteraction)
+        using var scope = new CFScope();
+        var passwordBytes = Encoding.UTF8.GetBytes(password);
+        nint passwordData;
+        fixed (byte* ptr = passwordBytes)
+            passwordData = scope.Own(CFDataCreate(0, ptr, passwordBytes.Length));
+
+        var item = scope.CreateQuery(server, scheme, port);
+        CFDictionarySetValue(item, scope.Sec("kSecAttrAccount"), scope.Own(CreateString(account)));
+        CFDictionarySetValue(item, scope.Sec("kSecAttrLabel"), scope.Own(CreateString(label)));
+        CFDictionarySetValue(item, scope.Sec("kSecValueData"), passwordData);
+
+        int status;
+        using (SuppressUserInteraction(allowUserInteraction))
+            status = SecItemAdd(item, null);
+        if (status == errSecDuplicateItem)
         {
-            int status = SecItemCopyMatching(query, &value);
-            result = value;
-            return status;
+            var query = scope.CreateQuery(server, scheme, port);
+            CFDictionarySetValue(query, scope.Sec("kSecAttrAccount"), scope.Own(CreateString(account)));
+            var update = scope.CreateDictionary();
+            CFDictionarySetValue(update, scope.Sec("kSecValueData"), passwordData);
+            using (SuppressUserInteraction(allowUserInteraction))
+                status = SecItemUpdate(query, update);
+        }
+        if (status != errSecSuccess) throw new IOException($"Keychain error (OSStatus {status})");
+    }
+
+    /// <summary>
+    /// Removes internet passwords for a specific account from the Keychain.
+    /// </summary>
+    /// <param name="server">The host name of the server.</param>
+    /// <param name="scheme">The URI scheme used to access the server.</param>
+    /// <param name="port">The port used to access the server; <c>0</c> for items stored without a port.</param>
+    /// <param name="account">The user name.</param>
+    /// <param name="allowUserInteraction">Allow the Keychain to ask the user for permission or to unlock it.</param>
+    /// <exception cref="IOException">The Keychain reported an error.</exception>
+    public static void DeleteInternetPassword(string server, string scheme, int port, string account, bool allowUserInteraction)
+    {
+        using var scope = new CFScope();
+        var query = scope.CreateQuery(server, scheme, port);
+        CFDictionarySetValue(query, scope.Sec("kSecAttrAccount"), scope.Own(CreateString(account)));
+
+        int status;
+        using (SuppressUserInteraction(allowUserInteraction))
+            status = SecItemDelete(query);
+        if (status is not (errSecSuccess or errSecItemNotFound)) throw new IOException($"Keychain error (OSStatus {status})");
+    }
+
+    /// <summary>
+    /// Temporarily disables user interaction for legacy file-based keychains, unless <paramref name="allowUserInteraction"/> is set.
+    /// </summary>
+    /// <returns>Call <see cref="IDisposable.Dispose"/> to restore the original state.</returns>
+    /// <remarks>
+    /// <c>kSecUseAuthenticationUI</c> does not cover access control prompts of legacy keychains.
+    /// The setting is process-wide, so other Keychain accesses running concurrently on other threads are also unable to prompt while it is in effect.
+    /// Keep the scope as short as possible, i.e., only around a single Security framework call.
+    /// </remarks>
+    [MustDisposeResource]
+    private static IDisposable? SuppressUserInteraction(bool allowUserInteraction)
+    {
+        if (allowUserInteraction) return null;
+
+        byte previous;
+        if (SecKeychainGetUserInteractionAllowed(&previous) != errSecSuccess || previous == 0) return null;
+
+        SecKeychainSetUserInteractionAllowed(0);
+        byte restore = previous; // Cannot capture variable whose address was taken
+        return new Disposable(() => SecKeychainSetUserInteractionAllowed(restore));
+    }
+
+    /// <summary>
+    /// Resolves CoreFoundation and Security framework constants and releases owned CoreFoundation objects when disposed.
+    /// </summary>
+    private sealed class CFScope : IDisposable
+    {
+        private static readonly nint _cf = NativeLibrary.Load(CoreFoundationLib), _sec = NativeLibrary.Load(SecurityLib);
+        private readonly List<nint> _owned = [];
+
+        /// <summary>Gets the value of a CoreFoundation constant.</summary>
+        public nint CF(string name) => *(nint*)NativeLibrary.GetExport(_cf, name);
+
+        /// <summary>Gets the value of a Security framework constant.</summary>
+        public nint Sec(string name) => *(nint*)NativeLibrary.GetExport(_sec, name);
+
+        /// <summary>Releases the object when this scope is disposed.</summary>
+        public nint Own(nint value)
+        {
+            if (value != 0) _owned.Add(value);
+            return value;
         }
 
-        // kSecUseAuthenticationUI does not cover access control prompts of legacy keychains
-        byte previous;
-        bool restore = SecKeychainGetUserInteractionAllowed(&previous) == errSecSuccess && previous != 0;
-        if (restore) SecKeychainSetUserInteractionAllowed(0);
-        try
+        /// <summary>Creates an empty mutable dictionary that retains its keys and values.</summary>
+        public nint CreateDictionary()
+            => Own(CFDictionaryCreateMutable(0, 0, NativeLibrary.GetExport(_cf, "kCFTypeDictionaryKeyCallBacks"), NativeLibrary.GetExport(_cf, "kCFTypeDictionaryValueCallBacks")));
+
+        /// <summary>Creates a dictionary identifying internet passwords for a specific server.</summary>
+        public nint CreateQuery(string server, string scheme, int port)
         {
-            int status = SecItemCopyMatching(query, &value);
-            result = value;
-            return status;
+            var query = CreateDictionary();
+            CFDictionarySetValue(query, Sec("kSecClass"), Sec("kSecClassInternetPassword"));
+            CFDictionarySetValue(query, Sec("kSecAttrServer"), Own(CreateString(server)));
+            switch (scheme)
+            {
+                case "https":
+                    CFDictionarySetValue(query, Sec("kSecAttrProtocol"), Sec("kSecAttrProtocolHTTPS"));
+                    break;
+                case "http":
+                    CFDictionarySetValue(query, Sec("kSecAttrProtocol"), Sec("kSecAttrProtocolHTTP"));
+                    break;
+            }
+            // Always set the port, since leaving it out would match items for any port
+            CFDictionarySetValue(query, Sec("kSecAttrPort"), Own(CFNumberCreate(0, kCFNumberSInt32Type, &port)));
+            return query;
         }
-        finally
+
+        public void Dispose()
         {
-            if (restore) SecKeychainSetUserInteractionAllowed(1);
+            foreach (var handle in _owned)
+                CFRelease(handle);
         }
     }
 
@@ -169,6 +243,9 @@ internal static unsafe partial class MacOSKeychain
     private static partial nint CFNumberCreate(nint allocator, int type, void* valuePtr);
 
     [LibraryImport(CoreFoundationLib)]
+    private static partial nint CFDataCreate(nint allocator, byte* bytes, nint length);
+
+    [LibraryImport(CoreFoundationLib)]
     private static partial nint CFDataGetLength(nint data);
 
     [LibraryImport(CoreFoundationLib)]
@@ -181,6 +258,15 @@ internal static unsafe partial class MacOSKeychain
     #region Security
     [LibraryImport(SecurityLib)]
     private static partial int SecItemCopyMatching(nint query, nint* result);
+
+    [LibraryImport(SecurityLib)]
+    private static partial int SecItemAdd(nint attributes, nint* result);
+
+    [LibraryImport(SecurityLib)]
+    private static partial int SecItemUpdate(nint query, nint attributesToUpdate);
+
+    [LibraryImport(SecurityLib)]
+    private static partial int SecItemDelete(nint query);
 
     [LibraryImport(SecurityLib)]
     private static partial int SecKeychainGetUserInteractionAllowed(byte* state);
