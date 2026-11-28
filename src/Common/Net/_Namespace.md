@@ -16,6 +16,7 @@ summary: Network communication and credential handling.
 - <xref:NanoByte.Common.Net.WindowsCliCredentialProvider> prompts the user on the console using the Windows Credential Manager UI.
 - <xref:NanoByte.Common.Net.WindowsGuiCredentialProvider> prompts the user with a graphical credential dialog.
 - <xref:NanoByte.Common.Net.WindowsNonInteractiveCredentialProvider> reads stored credentials from the Windows Credential Manager without prompting.
+- <xref:NanoByte.Common.Net.LinuxCredentialProvider> reads stored credentials from the Linux keyring (e.g., GNOME Keyring or KWallet) via the Secret Service API.
 
 <xref:NanoByte.Common.Net.KeyringCredentialProvider.ForCurrentOS*> picks the right keyring provider for the current Unix-like operating system.
 

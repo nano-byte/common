@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Net;
+using NanoByte.Common.Native;
 
 namespace NanoByte.Common.Net;
 
@@ -93,6 +94,9 @@ public abstract class KeyringCredentialProvider(ICredentialProvider? innerProvid
     /// <remarks>Windows is not handled here, since the Windows Credential Manager can also prompt for credentials. See <see cref="WindowsCredentialProvider"/>.</remarks>
     public static ICredentialProvider? ForCurrentOS(ICredentialProvider? innerProvider = null, bool interactive = false)
     {
+#if NET
+        if (UnixUtils.IsLinux) return new LinuxCredentialProvider(innerProvider, interactive);
+#endif
         return innerProvider;
     }
 
