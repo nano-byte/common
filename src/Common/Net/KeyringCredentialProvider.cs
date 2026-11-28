@@ -96,6 +96,7 @@ public abstract class KeyringCredentialProvider(ICredentialProvider? innerProvid
     {
 #if NET
         if (UnixUtils.IsLinux) return new LinuxCredentialProvider(innerProvider, interactive);
+        if (UnixUtils.IsMacOSX) return new MacOSCredentialProvider(innerProvider, interactive);
 #endif
         return innerProvider;
     }
