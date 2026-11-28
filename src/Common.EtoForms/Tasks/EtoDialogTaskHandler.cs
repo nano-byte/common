@@ -23,7 +23,7 @@ public class EtoDialogTaskHandler(Control? owner = null) : EtoTaskHandlerBase
         Exception? ex = null;
         Application.Instance.Invoke(() =>
         {
-            using var dialog = new TaskRunDialog(task, CredentialProvider, CancellationTokenSource);
+            using var dialog = new TaskRunDialog(task, GetCredentialProvider, CancellationTokenSource);
             if (owner == null) dialog.ShowModal();
             else dialog.ShowModal(owner);
             ex = dialog.Exception;

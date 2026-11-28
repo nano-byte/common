@@ -26,10 +26,20 @@ public abstract class EtoTaskHandlerBase : TaskHandlerBase
 
     /// <inheritdoc/>
     protected override ICredentialProvider CredentialProvider
+        => GetCredentialProvider(owner: null);
+
+    /// <summary>
+    /// Creates a credential provider that shows its dialogs modal to a specific <paramref name="owner"/>.
+    /// </summary>
+    /// <param name="owner">The parent window for credential dialogs; <c>null</c> to show them parentless.</param>
+    /// <remarks>Avoid calling this on the UI thread, since checking whether a keyring is available may block.</remarks>
+    protected ICredentialProvider GetCredentialProvider(Control? owner)
         => new NetrcCredentialProvider(
             WindowsUtils.IsWindowsNT
                 ? IsInteractive ? new WindowsGuiCredentialProvider() : new WindowsNonInteractiveCredentialProvider()
-                : KeyringCredentialProvider.ForCurrentOS(interactive: IsInteractive));
+                : KeyringCredentialProvider.ForCurrentOS(
+                    IsInteractive ? new EtoCredentialProvider(owner, offerRemember: KeyringCredentialProvider.IsSupported) : null,
+                    interactive: IsInteractive));
 
     /// <inheritdoc/>
     protected override bool IsInteractive

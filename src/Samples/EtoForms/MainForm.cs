@@ -4,6 +4,7 @@
 using Eto.Drawing;
 using Eto.Forms;
 using NanoByte.Common.EtoControls;
+using NanoByte.Common.Net;
 using NanoByte.Common.Tasks;
 
 namespace NanoByte.Common.Samples.EtoForms;
@@ -70,6 +71,25 @@ public sealed class MainForm : Form
             if (text != null) Msg.Inform(this, $"You entered: {text}", MsgSeverity.Info);
         };
 
+        var credentialsButton = new Button {Text = "Credentials"};
+        credentialsButton.Click += delegate
+        {
+            var provider = new EtoCredentialProvider(this, offerRemember: true);
+            var uri = new Uri("https://example.com/");
+            try
+            {
+                var credential = provider.GetCredential(uri);
+                while (credential.Password != "secret")
+                    credential = provider.GetCredential(uri, previousIncorrect: true);
+                bool remember = credential is PromptedCredential {Remember: true};
+                Msg.Inform(this, $"Logged in as: {credential.UserName}\nRemember: {remember}", MsgSeverity.Info);
+            }
+            catch (OperationCanceledException)
+            {
+                Msg.Inform(this, "Login canceled", MsgSeverity.Warn);
+            }
+        };
+
         var taskButton = new Button {Text = "Run task in dialog"};
         taskButton.Click += delegate
         {
@@ -107,6 +127,7 @@ public sealed class MainForm : Form
                 treeButton,
                 errorButton,
                 inputButton,
+                credentialsButton,
                 taskButton
             }
         };

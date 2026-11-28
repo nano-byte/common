@@ -11,7 +11,7 @@ namespace NanoByte.Common.Tasks;
 internal sealed class TaskRunDialog : Dialog
 {
     private readonly ITask _task;
-    private readonly ICredentialProvider? _credentialProvider;
+    private readonly Func<Control, ICredentialProvider?> _credentialProviderFactory;
     private readonly CancellationTokenSource _cancellationTokenSource;
     private readonly Progress<TaskSnapshot> _progress = new();
     private readonly Button _cancelButton;
@@ -26,12 +26,12 @@ internal sealed class TaskRunDialog : Dialog
     /// Creates a new task tracking dialog.
     /// </summary>
     /// <param name="task">The trackable task to execute and display.</param>
-    /// <param name="credentialProvider">Object used to retrieve credentials for specific <see cref="Uri"/>s on demand; can be <c>null</c>.</param>
+    /// <param name="credentialProviderFactory">Creates an object used to retrieve credentials for specific <see cref="Uri"/>s on demand, with this dialog as the owner for credential dialogs; may return <c>null</c>. Called on a background thread.</param>
     /// <param name="cancellationTokenSource">Used to signal if the user pressed the Cancel button.</param>
-    public TaskRunDialog(ITask task, ICredentialProvider? credentialProvider, CancellationTokenSource cancellationTokenSource)
+    public TaskRunDialog(ITask task, Func<Control, ICredentialProvider?> credentialProviderFactory, CancellationTokenSource cancellationTokenSource)
     {
         _task = task ?? throw new ArgumentNullException(nameof(task));
-        _credentialProvider = credentialProvider;
+        _credentialProviderFactory = credentialProviderFactory ?? throw new ArgumentNullException(nameof(credentialProviderFactory));
         _cancellationTokenSource = cancellationTokenSource;
         var taskThread = new Thread(RunTask);
 
@@ -82,7 +82,7 @@ internal sealed class TaskRunDialog : Dialog
     {
         try
         {
-            _task.Run(_cancellationTokenSource.Token, _credentialProvider, _progress);
+            _task.Run(_cancellationTokenSource.Token, _credentialProviderFactory(this), _progress);
         }
         catch (Exception ex)
         {
